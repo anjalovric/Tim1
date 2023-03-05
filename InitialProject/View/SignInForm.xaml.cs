@@ -1,6 +1,7 @@
 ﻿using InitialProject.Forms;
 using InitialProject.Model;
 using InitialProject.Repository;
+using InitialProject.View;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -16,6 +17,8 @@ namespace InitialProject
         private readonly UserRepository _repository;
 
         private string _username;
+       
+
         public string Username
         {
             get => _username;
@@ -28,6 +31,7 @@ namespace InitialProject
                 }
             }
         }
+       
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -50,9 +54,30 @@ namespace InitialProject
             {
                 if(user.Password == txtPassword.Password)
                 {
-                    CommentsOverview commentsOverview = new CommentsOverview(user);
-                    commentsOverview.Show();
-                    Close();
+                    if(user.Role==Model.Role.OWNER)
+                    {
+                        OwnerOverview ownerOverview = new OwnerOverview();
+                        ownerOverview.Show();
+                        Close();
+                    }else if(user.Role == Model.Role.GUIDE)
+                    {
+                        GuidesOverview guideOverview = new GuidesOverview();
+                        guideOverview.Show();
+                        Close();
+                    }
+                    else if (user.Role == Model.Role.GUEST1)
+                    {
+                        Guest1Overview guest1Overview = new Guest1Overview();
+                        guest1Overview.Show(); 
+                        Close();
+                    }
+                    else if (user.Role == Model.Role.GUEST2)
+                    {
+                        Guest2Overview guest2Overview = new Guest2Overview();
+                        guest2Overview.Show();
+                        Close();
+                    }
+
                 } 
                 else
                 {
