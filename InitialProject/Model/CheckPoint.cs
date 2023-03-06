@@ -15,17 +15,34 @@ namespace InitialProject.Model
 
         public bool Checked { get; set; }
 
+        public int TourId { get; set; } 
+
+        public int Order { get; set; }
+
         public CheckPoint() { }
+
+        public CheckPoint( string name, bool @checked, int tourId, int order)
+        {
+            Name = name;
+            Checked = @checked;
+            TourId = tourId;
+            Order = order;
+        }
+
+        
         public void FromCSV(string[] values)
         {
             Id = Convert.ToInt32(values[0]);
             Name = values[1];
             Checked = Convert.ToBoolean(values[2]);
+            TourId = Convert.ToInt32(values[3]);
+            Order = Convert.ToInt32(values[4]);
+
         }
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), Name, Checked.ToString() };
+            string[] csvValues = { Id.ToString(), Name, Checked.ToString(),TourId.ToString(),Order.ToString()};
             return csvValues;
         }
     }

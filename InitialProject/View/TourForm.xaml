@@ -14,6 +14,12 @@
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
@@ -22,13 +28,25 @@
             <Label Grid.Row="0" Grid.Column="0">Name:</Label>
             <Label Grid.Row="1" Grid.Column="0">Maximum number of guests</Label>
             <Label Grid.Row="2" Grid.Column="0">Duration of tour in hours</Label>
-            <Label Grid.Row="3" Grid.Column="0">If tour has started check point</Label>
-
-            <TextBox x:Name="TourName" Grid.Row="0" Grid.Column="1" Text="{Binding Path=Tour.Name,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}"></TextBox>
-            <TextBox x:Name="MaxGuests" Grid.Row="1" Grid.Column="1" Text="{Binding Path=Tour.MaxGuests,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}"></TextBox>
-            <TextBox x:Name="Duration" Grid.Row="2" Grid.Column="1" Text="{Binding Path=Tour.Duration,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}"></TextBox>
-            <CheckBox x:Name="StartedTour" Grid.Row="3" Grid.Column="1"></CheckBox>
-            <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Click="Button_Click">Potvrdi</Button>
+            <Label Grid.Row="3" Grid.Column="0">City</Label>
+            <Label Grid.Row="4" Grid.Column="0">Country</Label>
+            <Label Grid.Row="5" Grid.Column="0">Start</Label>
+            <Label Grid.Row="6" Grid.Column="0">Description</Label>
+            <Label Grid.Row="7" Grid.Column="0">Language</Label>
+            <Label Grid.Row="8" Grid.Column="0">Add a checkpoint</Label>
+            <Label Grid.Row="9" Grid.Column="0">Add an image</Label>
+            <TextBox x:Name="TourNameTB" Grid.Row="0" Grid.Column="1" Text="{Binding Path=NameT,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <TextBox x:Name="MaxGuestsTB" Grid.Row="1" Grid.Column="1" Text="{Binding Path=MaxGuests,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <TextBox x:Name="DurationTB" Grid.Row="2" Grid.Column="1" Text="{Binding Path=Duration,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <TextBox x:Name="CityTB" Grid.Row="3" Grid.Column="1" Text="{Binding Path=City,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <TextBox x:Name="CountryTB" Grid.Row="4" Grid.Column="1" Text="{Binding Path=Country,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <DatePicker x:Name="StartTB" Grid.Row="5" Grid.Column="1" Text="{Binding Path=Start,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}"></DatePicker>
+            <TextBox x:Name="DescriptionTB" Grid.Row="6" Grid.Column="1" Text="{Binding Path=Description,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <TextBox x:Name="LanguageTB" Grid.Row="7" Grid.Column="1" Text="{Binding Path=LanguageT,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <Button x:Name="CheckPointTB" Grid.Row="8" Grid.Column="1">New</Button>
+            <Button Grid.Row="9" Grid.Column="1">New</Button>
+            <Button Grid.Row="10" Grid.Column="0"  Click="Button_Click">OK</Button>
+            <Button Grid.Row="10" Grid.Column="1">Cancel</Button>
         </Grid>
         
     </Grid>
