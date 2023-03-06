@@ -8,5 +8,6 @@
         Title="GuideOverview" Height="450" Width="800">
     <Grid>
         <Button Margin="100,200,500,150" Click="Button_Click">NewTour</Button>
+        <DataGrid  Margin="38,46,38,239" ItemsSource="{Binding Path=Tours,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=Selected,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"></DataGrid>
     </Grid>
 </Window>

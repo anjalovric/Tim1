@@ -2,7 +2,6 @@
 using InitialProject.Repository;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -16,46 +15,54 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Xml.Linq;
 
 namespace InitialProject.View
 {
     /// <summary>
-    /// Interaction logic for GuidesOverview.xaml
+    /// Interaction logic for TourImageForm.xaml
     /// </summary>
-    public partial class GuidesOverview : Window,INotifyPropertyChanged
+    public partial class TourImageForm : Window, INotifyPropertyChanged
     {
-        public ObservableCollection<Tour> Tours { get; set; }
-        public Tour _selected;
-        private TourRepository _tourRepository;
-        public Tour Selected
+        TourImageRepository _tourImageRepository;
+        private string _url;
+        public string Url
         {
-            get { return _selected; }
+            get => _url;
             set
             {
-                if (value != _selected)
-                    _selected = value;
-                OnPropertyChanged();
+                if (value != _url)
+                {
+                    _url = value;
+                    OnPropertyChanged();
+                }
             }
         }
-        public GuidesOverview()
+        public TourImageForm(TourImageRepository tourImageRepository)
         {
             InitializeComponent();
             DataContext = this;
-            _tourRepository = new TourRepository();
-            Tours = new ObservableCollection<Tour>(_tourRepository.GetByStart(DateTime.Now));
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            TourForm tourForm = new TourForm();
-            tourForm.Show();
-            Close();
+            _tourImageRepository = tourImageRepository;
         }
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void AddTourImage(object sender, RoutedEventArgs e)
+        {
+            TourImage newImage = new TourImage();
+            newImage.Url = Url;
+            newImage.TourId = -1;
+            TourImage savedImage = _tourImageRepository.Save(newImage);
+            this.Close();
+        }
+
+        private void CancelTourImage(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

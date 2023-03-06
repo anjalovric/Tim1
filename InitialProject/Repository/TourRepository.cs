@@ -65,7 +65,18 @@ namespace InitialProject.Repository
             _serializer.ToCSV(FilePath, _tours);
             return tour;
         }
+        public List<Tour> GetByStart(DateTime dateTime)
+        {
+            _tours = _serializer.FromCSV(FilePath);
+            List<Tour> list = new List<Tour>();
+            foreach (Tour tour in _tours)
+            {
+                if(tour.Start==dateTime)
+                    list.Add(tour);
+            }
 
+            return list;
+        }
        
     }
 }

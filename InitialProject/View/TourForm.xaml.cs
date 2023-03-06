@@ -29,7 +29,10 @@ namespace InitialProject.View
 
         private readonly TourRepository _tourRepository;
         private readonly LocationRepository _locationRepository;
+        private readonly CheckPointRepository _checkPointRepository;
+        private readonly TourImageRepository _tourImageRepository;
 
+        private int _tourId;
         private string _name;
         public string NameT
         {
@@ -143,9 +146,10 @@ namespace InitialProject.View
             DataContext = this;
             _tourRepository=new TourRepository();
             _locationRepository=new LocationRepository();
+            _checkPointRepository = new CheckPointRepository();
+            _tourImageRepository=new TourImageRepository();
 
-
-    }
+        }
 
     public event PropertyChangedEventHandler PropertyChanged;
 
@@ -156,14 +160,71 @@ namespace InitialProject.View
 
         
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void AddTour(object sender, RoutedEventArgs e)
         {
             Location newLocation = new Location(_city,_country);
             Location savedLocation = _locationRepository.Save(newLocation);
             
             Tour newTour = new Tour(NameT,_maxGuests,_duration,newLocation,_start,false,_description,LanguageT);
             Tour savedTour=_tourRepository.Save(newTour);
+            _tourId = savedTour.Id;
+            
+            List<CheckPoint> checkPoints = _checkPointRepository.GetAll();
+            foreach (CheckPoint checkPoint in checkPoints)
+            {
+                if(checkPoint.TourId == -1)
+                {
+                    checkPoint.TourId = _tourId;
+                    _checkPointRepository.Update(checkPoint);
+                }
+            }
+
+            List<TourImage> tourImages = _tourImageRepository.GetAll();
+            foreach(TourImage image in tourImages)
+            {
+                if (image.TourId == -1)
+                {
+                    image.TourId = _tourId;
+                    _tourImageRepository.Update(image);
+                }
+            }
+
             Close();
+        }
+
+        private void AddCheckPoint(object sender, RoutedEventArgs e)
+        {
+            CheckPointForm form = new CheckPointForm(_checkPointRepository);
+            form.Show();
+            
+        }
+
+        private void CancelTour(object sender, RoutedEventArgs e)
+        {
+            List<CheckPoint> checkPoints = _checkPointRepository.GetAll();
+            foreach (CheckPoint checkPoint in checkPoints)
+            {
+                if (checkPoint.TourId == -1)
+                {
+                    _checkPointRepository.Delete(checkPoint);
+                }
+            }
+
+            List<TourImage> tourImages = _tourImageRepository.GetAll();
+            foreach (TourImage image in tourImages)
+            {
+                if (image.TourId == -1)
+                { 
+                    _tourImageRepository.Delete(image);
+                }
+            }
+            this.Close();
+        }
+
+        private void AddTourImage(object sender, RoutedEventArgs e)
+        {
+            TourImageForm tourImageForm = new TourImageForm(_tourImageRepository);
+            tourImageForm.Show();
         }
     }
 }

@@ -36,6 +36,7 @@ namespace InitialProject.Repository
             return checkPoint;
         }
 
+
         public int NextId()
         {
             _checkPoints = _serializer.FromCSV(FilePath);
@@ -53,7 +54,6 @@ namespace InitialProject.Repository
             _checkPoints.Remove(founded);
             _serializer.ToCSV(FilePath, _checkPoints);
         }
-
         public CheckPoint Update(CheckPoint checkPoint)
         {
             _checkPoints = _serializer.FromCSV(FilePath);

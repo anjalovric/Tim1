@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="TourForm" Height="450" Width="800">
     <Grid>
-        <Grid>
+        <Grid Margin="25">
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
@@ -43,10 +43,10 @@
             <DatePicker x:Name="StartTB" Grid.Row="5" Grid.Column="1" Text="{Binding Path=Start,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}"></DatePicker>
             <TextBox x:Name="DescriptionTB" Grid.Row="6" Grid.Column="1" Text="{Binding Path=Description,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}"></TextBox>
             <TextBox x:Name="LanguageTB" Grid.Row="7" Grid.Column="1" Text="{Binding Path=LanguageT,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}"></TextBox>
-            <Button x:Name="CheckPointTB" Grid.Row="8" Grid.Column="1">New</Button>
-            <Button Grid.Row="9" Grid.Column="1">New</Button>
-            <Button Grid.Row="10" Grid.Column="0"  Click="Button_Click">OK</Button>
-            <Button Grid.Row="10" Grid.Column="1">Cancel</Button>
+            <Button x:Name="CheckPointTB" Grid.Row="8" Grid.Column="1" Click="AddCheckPoint">New</Button>
+            <Button Grid.Row="9" Grid.Column="1" Click="AddTourImage">New</Button>
+            <Button Grid.Row="10" Grid.Column="0"  Click="AddTour">OK</Button>
+            <Button Grid.Row="10" Grid.Column="1" Click="CancelTour">Cancel</Button>
         </Grid>
         
     </Grid>
