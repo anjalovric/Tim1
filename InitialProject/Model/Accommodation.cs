@@ -18,7 +18,16 @@ namespace InitialProject.Model
         public int MinDaysForReservation { get; set; }
         public int MinDaysToCancel { get; set; }
 
-
+        public Accommodation() { }
+        public Accommodation(string name, Location location, AccommodationType type, int capacity, int minDaysForReservation, int minDaysToCancel)
+        {
+            Name = name;
+            Location = location;
+            Type = type;
+            Capacity = capacity;
+            MinDaysForReservation = minDaysForReservation;
+            MinDaysToCancel = minDaysToCancel;
+        }
 
         public void FromCSV(string[] values)
         {

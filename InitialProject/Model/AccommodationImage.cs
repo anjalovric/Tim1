@@ -14,6 +14,8 @@ namespace InitialProject.Model
 
         public Accommodation Accommodation { get; set; }
 
+        public AccommodationImage() { }
+
         public void FromCSV(string[] values)
         {
             Id = Convert.ToInt32(values[0]);
