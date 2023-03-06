@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using InitialProject.View.Owner;
 
 namespace InitialProject.View
 {
@@ -22,6 +23,12 @@ namespace InitialProject.View
         public OwnerOverview()
         {
             InitializeComponent();
+        }
+
+        private void AddAccommodationClick(object sender, RoutedEventArgs e)
+        {
+            AccommodationForm accommodationForm = new AccommodationForm();
+            accommodationForm.Show();
         }
     }
 }
