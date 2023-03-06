@@ -23,5 +23,7 @@ namespace InitialProject.View
         {
             InitializeComponent();
         }
+
+        
     }
 }
