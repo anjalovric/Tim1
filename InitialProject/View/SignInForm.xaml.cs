@@ -31,7 +31,7 @@ namespace InitialProject
                 }
             }
         }
-       
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -75,8 +75,8 @@ namespace InitialProject
                     {
                         Guest2Overview guest2Overview = new Guest2Overview();
                         guest2Overview.Show();
-                        Close();
-                    }
+                    Close();
+                } 
 
                 } 
                 else
