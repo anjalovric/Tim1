@@ -15,18 +15,22 @@
         <Label Content="Country:" HorizontalAlignment="Left" Margin="84,169,0,0" VerticalAlignment="Top" Width="93" FontSize="14"/>
         <TextBox HorizontalAlignment="Left" Margin="202,169,0,0" TextWrapping="Wrap" Text="{Binding Path=location.Country}" VerticalAlignment="Top" Width="221" Height="29"/>
         <Label Content="Type:" HorizontalAlignment="Left" Margin="84,218,0,0" VerticalAlignment="Top" Width="93" FontSize="14"/>
-        <ComboBox HorizontalAlignment="Left" Height="32" Margin="202,216,0,0" VerticalAlignment="Top" Width="221"/>
+        <ComboBox ItemsSource="{Binding Path=accommodationTypes}" DisplayMemberPath="Name" SelectedItem="{Binding Path=accommodation.Type}" HorizontalAlignment="Left" Height="32" Margin="202,216,0,0" VerticalAlignment="Top" Width="221"/>
         <Label Content="Min Days for Reservation:" HorizontalAlignment="Left" Margin="10,330,0,0" VerticalAlignment="Top" Width="167" FontSize="14" Height="43"/>
         <TextBox HorizontalAlignment="Left" Margin="202,330,0,0" TextWrapping="Wrap" Text="{Binding Path=accommodation.MinDaysForReservation}" VerticalAlignment="Top" Width="221" Height="29"/>
         <Label Content="Days Before to Cancel:" HorizontalAlignment="Left" Margin="26,0,0,0" VerticalAlignment="Center" Width="151" FontSize="14"/>
         <TextBox HorizontalAlignment="Left" Margin="202,0,0,0" TextWrapping="Wrap" Text="{Binding Path=accommodation.MinDaysToCancel}" VerticalAlignment="Center" Width="221" Height="29"/>
-        <Label Content="Add New Image:" HorizontalAlignment="Left" Margin="59,492,0,0" VerticalAlignment="Top" Width="118" FontSize="14"/>
-        <Button Content="NewImage" HorizontalAlignment="Left" Height="29" Margin="202,492,0,0" VerticalAlignment="Top" Width="221"/>
-        <Button Content="OK" HorizontalAlignment="Left" Height="21" Margin="415,737,0,0" VerticalAlignment="Top" Width="106" Click="OK_Click"/>
-        <Button Content="Cancel" HorizontalAlignment="Left" Height="21" Margin="550,737,0,0" VerticalAlignment="Top" Width="106" Click="Cancel_Click"/>
+        <Label Content="Add New Image:" HorizontalAlignment="Left" Margin="59,446,0,0" VerticalAlignment="Top" Width="118" FontSize="14"/>
+        <Button Content="Add" HorizontalAlignment="Left" Height="29" Margin="457,447,0,0" VerticalAlignment="Top" Width="110" Click="NewImage_Click"/>
+        <Button Content="OK" HorizontalAlignment="Left" Height="22" Margin="417,726,0,0" VerticalAlignment="Top" Width="106" Click="OK_Click"/>
+        <Button Content="Cancel" HorizontalAlignment="Left" Height="21" Margin="550,727,0,0" VerticalAlignment="Top" Width="106" Click="Cancel_Click"/>
         <Button Content="New Type" HorizontalAlignment="Left" Margin="475,223,0,0" VerticalAlignment="Top" Width="150"/>
         <Label Content="Capacity:" HorizontalAlignment="Left" Margin="84,270,0,0" VerticalAlignment="Top" Width="93" FontSize="14"/>
-        <TextBox HorizontalAlignment="Left" Margin="202,270,0,0" TextWrapping="Wrap" Text="{Binding accommodation.Capacity}" VerticalAlignment="Top" Width="221" Height="29"/>
+        <TextBox HorizontalAlignment="Left" Margin="202,270,0,0" TextWrapping="Wrap" Text="{Binding Path=accommodation.Capacity}" VerticalAlignment="Top" Width="221" Height="29"/>
+        <TextBox Name="TextBoxUrl" HorizontalAlignment="Left" Margin="202,446,0,0" TextWrapping="Wrap" Text="{Binding Path=Url}" VerticalAlignment="Top" Width="221" Height="29"/>
+        <ListView ItemsSource="{Binding Path=Images}" DisplayMemberPath="Url" Margin="140,502,230,107">
+            
+        </ListView>
 
     </Grid>
 </Window>
