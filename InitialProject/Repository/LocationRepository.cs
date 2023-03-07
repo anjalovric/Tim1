@@ -65,5 +65,13 @@ namespace InitialProject.Repository
             _serializer.ToCSV(FilePath, _locations);
             return location;
         }
+
+        public int Add(Location location)
+        {
+            location.Id = NextId();
+            _locations.Add(location);
+            _serializer.ToCSV(FilePath, _locations);
+            return location.Id;
+        }
     }
 }

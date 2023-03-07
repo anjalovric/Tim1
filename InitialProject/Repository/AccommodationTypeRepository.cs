@@ -19,8 +19,13 @@ namespace InitialProject.Repository
         public AccommodationTypeRepository()
         {
             _serializer = new Serializer<AccommodationType>();
+            _accommodationTypes = new List<AccommodationType>();
             _accommodationTypes = _serializer.FromCSV(FilePath);
         }
 
+        public List<AccommodationType> GetAll()
+        {
+            return _accommodationTypes;
+        }
     }
 }
