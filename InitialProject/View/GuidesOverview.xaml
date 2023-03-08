@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
-        Title="GuideOverview" Height="450" Width="800">
+        Title="GuideOverview" Height="450" Width="800" WindowStartupLocation="CenterScreen">
     <Grid>
         <Button Margin="100,200,500,150" Click="Button_Click">NewTour</Button>
-        <DataGrid  Margin="38,46,38,239" ItemsSource="{Binding Path=Tours,UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" SelectedItem="{Binding Path=Selected,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True">
+        <DataGrid  Margin="38,46,38,239" ItemsSource="{Binding Path=Tours,UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" SelectedItem="{Binding Path=Selected}" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="100"/>
                 <DataGridTextColumn Header="Duration" Binding="{Binding Duration}" Width="100"/>
@@ -19,5 +19,6 @@
                 <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="141.2"/>
             </DataGrid.Columns>
         </DataGrid>
+        <Button Content="Start tour" HorizontalAlignment="Left" Height="31" Margin="530,264,0,0" VerticalAlignment="Top" Width="137" Click="StartTour"/>
     </Grid>
 </Window>
