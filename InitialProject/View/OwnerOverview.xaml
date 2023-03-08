@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
-        Title="OwnerOverview" Height="600" Width="800">
+        Title="OwnerOverview" Height="600" Width="800" WindowStartupLocation="CenterScreen">
     <Grid>
         <Button Content="New Accommodation" HorizontalAlignment="Left" Margin="65,48,0,0" VerticalAlignment="Top" Width="141" Click="AddAccommodationClick" Background="#FF645BF0"/>
         <DataGrid ItemsSource="{Binding accommodations}" AutoGenerateColumns="False" Margin="65,90,65,277" IsReadOnly="True">
@@ -21,11 +21,11 @@
         <Label Content="Guests to Review" HorizontalAlignment="Left" Margin="50,329,0,0" VerticalAlignment="Top" Width="156"/>
         <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" AutoGenerateColumns="False" Margin="50,360,301,35">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Last Name" />
-                <DataGridTextColumn Header="First Name" />
-                <DataGridTextColumn Header="Username" />
-                <DataGridTextColumn Header="Accommodation" />
-                <DataGridTextColumn Header="Days Left to Review" />
+                <DataGridTextColumn Header="Last Name" IsReadOnly="True"/>
+                <DataGridTextColumn Header="First Name" IsReadOnly="True" />
+                <DataGridTextColumn Header="Username" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Accommodation" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Days Left to Review" IsReadOnly="True"/>
                 <DataGridTemplateColumn  Width="35">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
