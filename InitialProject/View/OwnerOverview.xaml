@@ -5,9 +5,36 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
-        Title="OwnerOverview" Height="450" Width="800">
+        Title="OwnerOverview" Height="600" Width="800">
     <Grid>
-        <Button Content="New Accommodation" HorizontalAlignment="Left" Margin="130,49,0,0" VerticalAlignment="Top" Width="141" Click="AddAccommodationClick"/>
+        <Button Content="New Accommodation" HorizontalAlignment="Left" Margin="65,48,0,0" VerticalAlignment="Top" Width="141" Click="AddAccommodationClick" Background="#FF645BF0"/>
+        <DataGrid ItemsSource="{Binding accommodations}" AutoGenerateColumns="False" Margin="65,90,65,277" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="130"/>
+                <DataGridTextColumn Header="Location" Binding="{Binding Location}" Width="180"/>
+                <DataGridTextColumn Header="Type" Binding="{Binding Type}" Width="100"/>
+                <DataGridTextColumn Header="Capacity" Binding="{Binding Capacity}" Width="100"/>
+                <DataGridTextColumn Header="Min Days for Reservation" Binding="{Binding MinDaysForReservation}" Width="130"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="Sign out" HorizontalAlignment="Left" Margin="694,38,0,0" VerticalAlignment="Top" Width="76" Click="SignOut_Click"/>
+        <Label Content="Guests to Review" HorizontalAlignment="Left" Margin="50,329,0,0" VerticalAlignment="Top" Width="156"/>
+        <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" AutoGenerateColumns="False" Margin="50,360,301,35">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Last Name" />
+                <DataGridTextColumn Header="First Name" />
+                <DataGridTextColumn Header="Username" />
+                <DataGridTextColumn Header="Accommodation" />
+                <DataGridTextColumn Header="Days Left to Review" />
+                <DataGridTemplateColumn  Width="35">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Review" Click="Review_Click"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
 
     </Grid>
 </Window>

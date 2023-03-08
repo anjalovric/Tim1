@@ -31,14 +31,16 @@ namespace InitialProject.View.Owner
         public ObservableCollection<AccommodationImage> Images { get; set; }
         public string Url { get; set; }
         private AccommodationImageRepository accommodationImageRepository;
+        private ObservableCollection<Accommodation> accommodations;
         
 
-        public AccommodationForm()
+        public AccommodationForm(ObservableCollection<Accommodation> oldAccommodations)
         {
             InitializeComponent();
             this.DataContext = this;
             accommodationRepository = new AccommodationRepository();
             accommodation = new Accommodation();
+            accommodations = oldAccommodations;
             accommodationTypeRepository = new AccommodationTypeRepository();
             accommodationTypes = accommodationTypeRepository.GetAll();
             locationRepository = new LocationRepository();
@@ -53,6 +55,7 @@ namespace InitialProject.View.Owner
             accommodation.Id = accommodationRepository.NextId();
             locationRepository.Add(location);
             accommodation.Location = location;
+            accommodations.Add(accommodation); 
             accommodationRepository.Add(accommodation);
             AddImages();
             

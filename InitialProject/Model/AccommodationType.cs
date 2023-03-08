@@ -29,5 +29,10 @@ namespace InitialProject.Model
             string[] csvValues = { Id.ToString(), Name.ToString() };
             return csvValues;
         }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }
