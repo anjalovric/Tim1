@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
-        Title="CheckPointForm" Height="300" Width="600">
+        Title="CheckPointForm" Height="250" Width="600">
     <Grid>
-        <Grid Margin="50">
+        <Grid Margin="50,50,50,50" RenderTransformOrigin="0.498,0.205">
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
+                
 
 
             </Grid.RowDefinitions>
@@ -20,15 +20,15 @@
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Label Grid.Row="0" Grid.Column="0">Name:</Label>
-            <Label Grid.Row="1" Grid.Column="0">Order:</Label>
+            
        
-            <TextBox x:Name="CheckPointName" Grid.Row="0" Grid.Column="1" Text="{Binding Path=NameT,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}"></TextBox>
-            <TextBox x:Name="OrderOfTour" Grid.Row="1" Grid.Column="1" Text="{Binding Path=Order,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}"></TextBox>
-            
-      
-            
-            <Button Grid.Row="2" Grid.Column="0"  Click="AddCheckPoint">OK</Button>
-            <Button Grid.Row="2" Grid.Column="1" Click="CancelCheckPoint">Cancel</Button>
+            <TextBox x:Name="CheckPointName" Grid.Row="0" Grid.Column="1" Text="{Binding Path=NameT,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}"/>
+
+
+
+
+            <Button Grid.Row="2" Grid.Column="0"  Click="AddCheckPoint" Height="40" Width="100">OK</Button>
+            <Button Grid.Row="2" Grid.Column="1" Click="CancelCheckPoint" Height="40" Width="100">Cancel</Button>
         </Grid>
 
     </Grid>

@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
-        Title="TourImageForm" Height="250" Width="500">
+        Title="TourImageForm" Height="260" Width="500">
     <Grid>
-        <Grid Margin="80">
+        <Grid Margin="50">
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
@@ -24,8 +24,8 @@
             <TextBox x:Name="TourImageUrl" Grid.Row="0" Grid.Column="1" Text="{Binding Path=Url,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}"></TextBox>
 
 
-            <Button Grid.Row="1" Grid.Column="0" Click="AddTourImage"  >OK</Button>
-            <Button Grid.Row="1" Grid.Column="1" Click="CancelTourImage" >Cancel</Button>
+            <Button Grid.Row="1" Grid.Column="0" Click="AddTourImage" Height="30" Width="100" >OK</Button>
+            <Button Grid.Row="1" Grid.Column="1" Click="CancelTourImage"  Height="30" Width="100"  >Cancel</Button>
         </Grid>
 
     </Grid>

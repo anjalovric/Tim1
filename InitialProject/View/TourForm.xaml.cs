@@ -3,6 +3,7 @@ using InitialProject.Model;
 using InitialProject.Repository;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -31,6 +32,9 @@ namespace InitialProject.View
         private readonly LocationRepository _locationRepository;
         private readonly CheckPointRepository _checkPointRepository;
         private readonly TourImageRepository _tourImageRepository;
+
+        public ObservableCollection<CheckPoint> TourPoints { get; set; }
+        public ObservableCollection<TourImage> TourImages { get; set; }
 
         private int _tourId;
         private string _name;
@@ -148,6 +152,8 @@ namespace InitialProject.View
             _locationRepository=new LocationRepository();
             _checkPointRepository = new CheckPointRepository();
             _tourImageRepository=new TourImageRepository();
+            TourPoints = new ObservableCollection<CheckPoint>();
+            TourImages = new ObservableCollection<TourImage>();
 
         }
 
@@ -170,12 +176,15 @@ namespace InitialProject.View
             _tourId = savedTour.Id;
             
             List<CheckPoint> checkPoints = _checkPointRepository.GetAll();
+            int i = 1;
             foreach (CheckPoint checkPoint in checkPoints)
             {
                 if(checkPoint.TourId == -1)
                 {
                     checkPoint.TourId = _tourId;
+                    checkPoint.Order = i;
                     _checkPointRepository.Update(checkPoint);
+                    i++;
                 }
             }
 
@@ -188,13 +197,13 @@ namespace InitialProject.View
                     _tourImageRepository.Update(image);
                 }
             }
-
+           
             Close();
         }
 
         private void AddCheckPoint(object sender, RoutedEventArgs e)
         {
-            CheckPointForm form = new CheckPointForm(_checkPointRepository);
+            CheckPointForm form = new CheckPointForm(_checkPointRepository,TourPoints);
             form.Show();
             
         }
@@ -223,7 +232,7 @@ namespace InitialProject.View
 
         private void AddTourImage(object sender, RoutedEventArgs e)
         {
-            TourImageForm tourImageForm = new TourImageForm(_tourImageRepository);
+            TourImageForm tourImageForm = new TourImageForm(_tourImageRepository,TourImages);
             tourImageForm.Show();
         }
     }

@@ -36,5 +36,9 @@ namespace InitialProject.Model
             string[] csvValues = { Id.ToString(), City, Country };
             return csvValues;
         }
+        public override string ToString()
+        {
+            return City + "," + Country;
+        }
     }
 }

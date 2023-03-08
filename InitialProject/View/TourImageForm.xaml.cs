@@ -2,6 +2,7 @@
 using InitialProject.Repository;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -26,6 +27,7 @@ namespace InitialProject.View
     {
         TourImageRepository _tourImageRepository;
         private string _url;
+        public ObservableCollection<TourImage> _tourImages;
         public string Url
         {
             get => _url;
@@ -38,11 +40,12 @@ namespace InitialProject.View
                 }
             }
         }
-        public TourImageForm(TourImageRepository tourImageRepository)
+        public TourImageForm(TourImageRepository tourImageRepository,ObservableCollection<TourImage> tourImages)
         {
             InitializeComponent();
             DataContext = this;
             _tourImageRepository = tourImageRepository;
+            _tourImages = tourImages;
         }
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -57,6 +60,7 @@ namespace InitialProject.View
             newImage.Url = Url;
             newImage.TourId = -1;
             TourImage savedImage = _tourImageRepository.Save(newImage);
+            _tourImages.Add(savedImage);
             this.Close();
         }
 

@@ -2,6 +2,7 @@
 using InitialProject.Repository;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -24,6 +25,7 @@ namespace InitialProject.View
     public partial class CheckPointForm : Window, INotifyPropertyChanged
     {
         private readonly CheckPointRepository _checkPointRepository;
+        public ObservableCollection<CheckPoint> _checkPoints;
 
         private string _name;
         public string NameT
@@ -38,26 +40,13 @@ namespace InitialProject.View
                 }
             }
         }
-        private int _order;
-
-        public int Order
-        {
-            get => _order;
-            set
-            {
-                if (value != _order)
-                {
-                    _order = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-        public CheckPointForm(CheckPointRepository checkPointRepository)
+       
+        public CheckPointForm(CheckPointRepository checkPointRepository,ObservableCollection<CheckPoint> tourPoints)
         {
             InitializeComponent();
             DataContext = this;
             _checkPointRepository = checkPointRepository;
-            
+            _checkPoints=tourPoints;
 
         }
         public event PropertyChangedEventHandler PropertyChanged;
@@ -71,9 +60,10 @@ namespace InitialProject.View
         {
             CheckPoint newCheckPoint = new CheckPoint();
             newCheckPoint.Name = NameT;
-            newCheckPoint.Order = Order;
+            newCheckPoint.Order = -1;
             newCheckPoint.TourId = -1;
             CheckPoint savedCheckPoint = _checkPointRepository.Save(newCheckPoint);
+            _checkPoints.Add(savedCheckPoint);
             this.Close();
         }
 
