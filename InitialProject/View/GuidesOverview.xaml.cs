@@ -49,13 +49,20 @@ namespace InitialProject.View
         {
             TourForm tourForm = new TourForm();
             tourForm.Show();
-            Close();
+
         }
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void StartTour(object sender, RoutedEventArgs e)
+        {
+            TourCheckPoints checkPoints = new TourCheckPoints(Selected);    
+            checkPoints.Show();
+            
         }
     }
 }

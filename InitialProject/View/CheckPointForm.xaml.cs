@@ -26,7 +26,8 @@ namespace InitialProject.View
     {
         private readonly CheckPointRepository _checkPointRepository;
         public ObservableCollection<CheckPoint> _checkPoints;
-
+        public int _pointCounter;
+        public Button _button;
         private string _name;
         public string NameT
         {
@@ -41,12 +42,13 @@ namespace InitialProject.View
             }
         }
        
-        public CheckPointForm(CheckPointRepository checkPointRepository,ObservableCollection<CheckPoint> tourPoints)
+        public CheckPointForm(CheckPointRepository checkPointRepository,ObservableCollection<CheckPoint> tourPoints,Button addTour)
         {
             InitializeComponent();
             DataContext = this;
             _checkPointRepository = checkPointRepository;
             _checkPoints=tourPoints;
+            _button = addTour;
 
         }
         public event PropertyChangedEventHandler PropertyChanged;
@@ -58,12 +60,20 @@ namespace InitialProject.View
 
         private void AddCheckPoint(object sender, RoutedEventArgs e)
         {
+            
             CheckPoint newCheckPoint = new CheckPoint();
             newCheckPoint.Name = NameT;
             newCheckPoint.Order = -1;
             newCheckPoint.TourId = -1;
+            newCheckPoint.Checked = false;
             CheckPoint savedCheckPoint = _checkPointRepository.Save(newCheckPoint);
             _checkPoints.Add(savedCheckPoint);
+            List<CheckPoint> tourCheckPoints= new List<CheckPoint>();
+            foreach (CheckPoint checkPoint in _checkPoints)
+                if(checkPoint.TourId==-1)
+                    tourCheckPoints.Add(checkPoint);
+            if(tourCheckPoints.Count>=2)
+                _button.IsEnabled = true;
             this.Close();
         }
 

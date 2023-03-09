@@ -25,8 +25,10 @@ namespace InitialProject.Repository
             
             _serializer = new Serializer<Tour>();
             _serializerLocation = new Serializer<Location>();
+
             _tours = _serializer.FromCSV(FilePath);
             SetLocations();
+
         }
         
         public List<Tour> GetAll()

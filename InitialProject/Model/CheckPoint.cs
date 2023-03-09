@@ -1,7 +1,9 @@
 ﻿using InitialProject.Serializer;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using static System.Net.Mime.MediaTypeNames;
@@ -11,7 +13,8 @@ namespace InitialProject.Model
     public class CheckPoint : ISerializable
     {
         public int Id { get; set; } 
-        public string Name { get; set; }
+
+        public string Name { get; set; }    
 
         public bool Checked { get; set; }
 
@@ -45,5 +48,6 @@ namespace InitialProject.Model
             string[] csvValues = { Id.ToString(), Name, Checked.ToString(),TourId.ToString(),Order.ToString()};
             return csvValues;
         }
+        
     }
 }
