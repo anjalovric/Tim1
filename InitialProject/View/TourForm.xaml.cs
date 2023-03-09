@@ -32,7 +32,7 @@ namespace InitialProject.View
         private readonly LocationRepository _locationRepository;
         private readonly CheckPointRepository _checkPointRepository;
         private readonly TourImageRepository _tourImageRepository;
-
+        public int pointCounter = 0;
         public ObservableCollection<CheckPoint> TourPoints { get; set; }
         public ObservableCollection<TourImage> TourImages { get; set; }
 
@@ -154,6 +154,9 @@ namespace InitialProject.View
             _tourImageRepository=new TourImageRepository();
             TourPoints = new ObservableCollection<CheckPoint>();
             TourImages = new ObservableCollection<TourImage>();
+            AddNewTour.IsEnabled= false;
+
+             
 
         }
 
@@ -197,15 +200,14 @@ namespace InitialProject.View
                     _tourImageRepository.Update(image);
                 }
             }
-           
             Close();
         }
 
         private void AddCheckPoint(object sender, RoutedEventArgs e)
         {
-            CheckPointForm form = new CheckPointForm(_checkPointRepository,TourPoints);
+            CheckPointForm form = new CheckPointForm(_checkPointRepository,TourPoints,this.AddNewTour);
             form.Show();
-            
+
         }
 
         private void CancelTour(object sender, RoutedEventArgs e)
@@ -227,6 +229,7 @@ namespace InitialProject.View
                     _tourImageRepository.Delete(image);
                 }
             }
+            
             this.Close();
         }
 
@@ -235,5 +238,6 @@ namespace InitialProject.View
             TourImageForm tourImageForm = new TourImageForm(_tourImageRepository,TourImages);
             tourImageForm.Show();
         }
+
     }
 }

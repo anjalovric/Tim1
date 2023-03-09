@@ -18,13 +18,12 @@ namespace InitialProject.Repository
 
         private List<Tour> _tours;
         private List<Location> _locations;
-
+        
         public TourRepository()
         {
             _serializer = new Serializer<Tour>();
             _serializerLocation = new Serializer<Location>();
-            _tours = _serializer.FromCSV(FilePath);
-            
+            _tours = _serializer.FromCSV(FilePath);          
         }
 
         public List<Tour> GetAll()
