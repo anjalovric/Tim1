@@ -8,7 +8,7 @@
         Title="Guest2Overview" Height="450" Width="800">
     <Grid Background="{DynamicResource {x:Static SystemColors.GradientInactiveCaptionBrushKey}}">
 
-        <DataGrid ItemsSource="{Binding Tours,UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" VerticalAlignment="Top" HorizontalAlignment="Center" Height="225" Width="584" Margin="0,177,0,0">
+        <DataGrid ItemsSource="{Binding Tours,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" AutoGenerateColumns="False" VerticalAlignment="Top" HorizontalAlignment="Center" Height="225" Width="584" Margin="0,177,0,0">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Location" Width="1*" Binding="{Binding Location}"/>
                 <DataGridTextColumn Header="Duration" Width="1*" Binding="{Binding Duration}"/>
@@ -38,9 +38,9 @@
         <Button Content="Sign out" HorizontalAlignment="Left" Margin="723,28,0,0" VerticalAlignment="Top" FontWeight="Bold" FontFamily="Arial Black" Background="#FFF1F1B7" Click="SignOut_Click"/>
         <Button x:Name="decrementCapacityNumber" Content="-" HorizontalAlignment="Left" Margin="538,90,0,0" VerticalAlignment="Top" Width="20" Click="decrementCapacityNumber_Click"/>
         <Button x:Name="incrementCapacityNumber" Content="+" HorizontalAlignment="Left" Margin="672,90,0,0" VerticalAlignment="Top" Width="20" Click="incrementCapacityNumber_Click"/>
-        <Button HorizontalAlignment="Left" Margin="732,73,0,0" VerticalAlignment="Top" Height="39" Click="Search_Click">
+        <Button HorizontalAlignment="Left" Margin="732,73,0,0" VerticalAlignment="Top" Height="39">
 
-            <MenuItem Width="28"  Height="30" HorizontalAlignment="Center" VerticalAlignment="Top" RenderTransformOrigin="0.789,0.488">
+            <MenuItem Width="28"  Height="42" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.789,0.488" Click="Search_Click">
 
                 <MenuItem.Icon>
                     <Image Source="/Resources/Images/search.png" HorizontalAlignment="Center" VerticalAlignment="Center" Height="26" Width="18" RenderTransformOrigin="1.135,0.613"/>
@@ -48,6 +48,7 @@
 
             </MenuItem>
         </Button>
+        <Button Content="Details" HorizontalAlignment="Left" Margin="732,375,0,0" VerticalAlignment="Top" Height="27" Width="49"/>
 
 
 
