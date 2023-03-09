@@ -3,6 +3,7 @@ using InitialProject.Serializer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -21,15 +22,33 @@ namespace InitialProject.Repository
         
         public TourRepository()
         {
+            
             _serializer = new Serializer<Tour>();
             _serializerLocation = new Serializer<Location>();
-            _tours = _serializer.FromCSV(FilePath);          
-        }
 
+            _tours = _serializer.FromCSV(FilePath);
+            SetLocations();
+
+        }
+        
         public List<Tour> GetAll()
         {
-            return _serializer.FromCSV(FilePath);
+            return _tours;
         }
+
+        public void SetLocations()
+        {
+            Serializer<Location> _serializerLocation = new Serializer<Location>();
+            List<Location> locations = _serializerLocation.FromCSV("../../../Resources/Data/locations.csv");
+            foreach (Tour tour in _tours)
+            {
+                if (locations.Find(n => n.Id == tour.Location.Id) != null)
+                {
+                    tour.Location = locations.Find(n => n.Id == tour.Location.Id);
+                }
+            }
+        }
+       
 
         public Tour Save(Tour tour)
         {
