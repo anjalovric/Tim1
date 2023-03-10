@@ -41,6 +41,10 @@ namespace InitialProject.Repository
             return image.Id;
         }
 
-        
+        public List<AccommodationImage> GetAll()
+        {
+            return _accommodationImages;
+        }
+
     }
 }

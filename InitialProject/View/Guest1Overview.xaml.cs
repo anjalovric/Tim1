@@ -28,7 +28,10 @@ namespace InitialProject.View
     /// </summary>
     public partial class Guest1Overview : Window
     {
-        
+        private AccommodationImageRepository accommodationImageRepository;
+        private List<AccommodationImage> accommodationImages;
+
+
         private AccommodationRepository accommodationRepository;
         
         private ObservableCollection<Accommodation> accommodations;
@@ -51,7 +54,9 @@ namespace InitialProject.View
             DataContext = this;
             accommodationRepository = new AccommodationRepository();
             Accommodations = new ObservableCollection<Accommodation>(accommodationRepository.GetAll());
-            
+            accommodationImageRepository = new AccommodationImageRepository();
+            accommodationImages = new List<AccommodationImage>(accommodationImageRepository.GetAll());
+
 
         }
 
@@ -169,6 +174,41 @@ namespace InitialProject.View
             numberOfDays.Text = changedDaysNumber.ToString();
         }
 
-       
+        private void ViewPhotos(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                DataGridCellInfo photosViewCell = AccommodationListDataGrid.CurrentCell;
+                Accommodation currentAccommodation = (Accommodation)AccommodationListDataGrid.CurrentItem;
+
+
+                List<string> imagesUrl = new List<string>();
+
+                foreach (AccommodationImage image in accommodationImages)
+                {
+                    if (image.Accommodation.Id == currentAccommodation.Id)
+                    {
+                        imagesUrl.Add(image.Url);
+                    }
+                }
+
+                if (imagesUrl.Count == 0)
+                {
+                    MessageBox.Show("There are currently no images for the selected accommodation.");
+                }
+                else
+                {
+                    AccommodationPhotosView photosView = new AccommodationPhotosView(imagesUrl);
+                    photosView.Show();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+            }
+        }
+
+
     }
 }
