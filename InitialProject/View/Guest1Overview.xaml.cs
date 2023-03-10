@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Data;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -19,6 +20,7 @@ using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.View.Owner;
 
+
 namespace InitialProject.View
 {
     /// <summary>
@@ -26,6 +28,9 @@ namespace InitialProject.View
     /// </summary>
     public partial class Guest1Overview : Window
     {
+        
+        private AccommodationRepository accommodationRepository;
+        
         private ObservableCollection<Accommodation> accommodations;
         public ObservableCollection<Accommodation> Accommodations 
         { 
@@ -39,13 +44,15 @@ namespace InitialProject.View
                 
         }
       
-        private AccommodationRepository accommodationRepository;
+        
         public Guest1Overview()
         {
             InitializeComponent();
             DataContext = this;
             accommodationRepository = new AccommodationRepository();
             Accommodations = new ObservableCollection<Accommodation>(accommodationRepository.GetAll());
+            
+
         }
 
         
@@ -161,5 +168,7 @@ namespace InitialProject.View
             changedDaysNumber = Convert.ToInt32(numberOfDays.Text) + 1;
             numberOfDays.Text = changedDaysNumber.ToString();
         }
+
+       
     }
 }
