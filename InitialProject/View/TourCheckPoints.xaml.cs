@@ -30,8 +30,9 @@ namespace InitialProject.View
 
         private CheckPointRepository _pointsRepository;
         private TourRepository _tourRepository;
+        private TourInstanceRepository _tourInstanceRepository;
 
-        private Tour _selected;
+        private TourInstance _selected;
 
         private int counter = 1;
 
@@ -43,19 +44,21 @@ namespace InitialProject.View
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public TourCheckPoints(Tour selected)
+        public TourCheckPoints(TourInstance selected)
         {
             InitializeComponent();
             DataContext = this;
             _pointsRepository = new CheckPointRepository();
+            _tourInstanceRepository= new TourInstanceRepository();
             AllPoints = new ObservableCollection<CheckPoint>();
             CurrentPoint = new ObservableCollection<CheckPoint>();
             List<CheckPoint> points = _pointsRepository.GetAll();
+
             if (selected != null)
             {
                 foreach (CheckPoint point in points)
                 {
-                    if (point.TourId == selected.Id)
+                    if (point.TourId == selected.Tour.Id)
                     {
                         AllPoints.Add(point);
                     }
@@ -75,8 +78,8 @@ namespace InitialProject.View
         private void FinishTour(object sender, RoutedEventArgs e)
         {
             _selected.Finished = true;
-            List<Tour> tours = _tourRepository.GetAll();
-            foreach (Tour tour in tours)
+            
+            foreach (TourInstance tour in _tourInstanceRepository.GetAll())
                 if (tour.Id == _selected.Id)
                     tour.Finished = true;
         }
