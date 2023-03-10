@@ -52,6 +52,7 @@ namespace InitialProject.Repository
 
         public Tour Save(Tour tour)
         {
+
             tour.Id = NextId();
             _tours = _serializer.FromCSV(FilePath);
             _tours.Add(tour);
@@ -87,7 +88,7 @@ namespace InitialProject.Repository
             _serializer.ToCSV(FilePath, _tours);
             return tour;
         }
-        public List<Tour> GetByStart(DateTime date)
+        /*public List<Tour> GetByStart(DateTime date)
         {
 
             var day = date.Month;
@@ -118,7 +119,7 @@ namespace InitialProject.Repository
                 }
             }
             return list;
-        }
+        }*/
        
     }
 }

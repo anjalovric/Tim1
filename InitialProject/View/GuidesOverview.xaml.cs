@@ -24,10 +24,11 @@ namespace InitialProject.View
     /// </summary>
     public partial class GuidesOverview : Window,INotifyPropertyChanged
     {
-        public ObservableCollection<Tour> Tours { get; set; }
-        public Tour _selected;
+        public ObservableCollection<TourInstance> Tours { get; set; }
+        public TourInstance _selected;
         private TourRepository _tourRepository;
-        public Tour Selected
+        private TourInstanceRepository _tourInstanceRepository;
+        public TourInstance Selected
         {
             get { return _selected; }
             set
@@ -42,7 +43,8 @@ namespace InitialProject.View
             InitializeComponent();
             DataContext = this;
             _tourRepository = new TourRepository();
-            Tours = new ObservableCollection<Tour>(_tourRepository.GetByStart(DateTime.Now));
+            _tourInstanceRepository = new TourInstanceRepository();
+            Tours = new ObservableCollection<TourInstance>(_tourInstanceRepository.GetByStart(DateTime.Now));
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
