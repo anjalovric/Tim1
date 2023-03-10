@@ -57,18 +57,25 @@
 
         </Button>
 
-        <DataGrid x:Name="AccommodationListDataGrid" ItemsSource="{Binding Path=Accommodations,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" AutoGenerateColumns="False" Grid.ColumnSpan="3" IsReadOnly="True" VerticalAlignment="Center" HorizontalAlignment="Left" Height="211" Width="637" Margin="30,0,0,0">
+        <DataGrid x:Name="AccommodationListDataGrid" ItemsSource="{Binding Path=Accommodations,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" AutoGenerateColumns="False" Grid.ColumnSpan="3" IsReadOnly="True" VerticalAlignment="Center" HorizontalAlignment="Left" Height="211" Width="667" Margin="30,0,0,0">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Width="1*" Binding="{Binding Name}"/>
                 <DataGridTextColumn Header="Location" Width="2*" Binding="{Binding Location}"/>
                 <DataGridTextColumn Header="Type" Width="1*" Binding="{Binding Type}" />
                 <DataGridTextColumn Header="Capacity" Width="1.2*" Binding="{Binding Capacity}"/>
-                <DataGridTextColumn Header="Min days for reservation" Width="2.2*" Binding="{Binding MinDaysForReservation}"/>
-                <DataGridTextColumn Header="Min days to cancel" Width="1.7*" Binding="{Binding MinDaysToCancel}"/>
-                <DataGridTemplateColumn x:Name="photosView" Header="Photos" Width="0.75*">
+                <DataGridTextColumn Header="Min days for reservation" Width="2.7*" Binding="{Binding MinDaysForReservation}"/>
+                <DataGridTextColumn Header="Min days to cancel" Width="2.1*" Binding="{Binding MinDaysToCancel}"/>
+                <DataGridTemplateColumn x:Name="photosView" Header="Photos" Width="0.9*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button Name="photosViewButton" Content="View" Click="ViewPhotos"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn x:Name="reservation" Header="Reservation"  Width="1.38*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Name="reservationButton" Content="RESERVE" TextElement.FontWeight="ExtraBold" Click="Reserve"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

@@ -178,7 +178,6 @@ namespace InitialProject.View
         {
             try
             {
-                DataGridCellInfo photosViewCell = AccommodationListDataGrid.CurrentCell;
                 Accommodation currentAccommodation = (Accommodation)AccommodationListDataGrid.CurrentItem;
 
 
@@ -207,6 +206,11 @@ namespace InitialProject.View
             {
                 MessageBox.Show(ex.Message.ToString());
             }
+        }
+
+        private void Reserve(object sender, RoutedEventArgs e)
+        {
+            
         }
 
 
