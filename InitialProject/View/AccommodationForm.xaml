@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View.Owner"
         mc:Ignorable="d"
-        Title="AccommodationForm" Height="800" Width="700">
+        Title="AccommodationForm" Height="800" Width="700" WindowStartupLocation="CenterScreen">
     <Grid>
         <Label Content="Name:" HorizontalAlignment="Left" Margin="84,69,0,0" VerticalAlignment="Top" Width="93" FontSize="14"/>
         <TextBox HorizontalAlignment="Left" Margin="202,69,0,0" TextWrapping="Wrap" Text="{Binding Path=accommodation.Name}" VerticalAlignment="Top" Width="221" Height="29"/>

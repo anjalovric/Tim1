@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
         Title="AccommodationPhotosView" Height="450" Width="800" WindowStartupLocation="CenterScreen">
-    <Grid>
+    <Grid Background="AntiqueWhite">
         <ListBox x:Name="imagesList" Width="500" Height="450" VerticalAlignment="Center" HorizontalAlignment="Center"></ListBox>
         
     </Grid>

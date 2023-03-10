@@ -63,8 +63,8 @@
                 <DataGridTextColumn Header="Location" Width="2*" Binding="{Binding Location}"/>
                 <DataGridTextColumn Header="Type" Width="1*" Binding="{Binding Type}" />
                 <DataGridTextColumn Header="Capacity" Width="1.2*" Binding="{Binding Capacity}"/>
-                <DataGridTextColumn Header="Min days for reservation" Width="2.1*" Binding="{Binding MinDaysForReservation}"/>
-                <DataGridTextColumn Header="Min days to cancel" Width="1.65*" Binding="{Binding MinDaysToCancel}"/>
+                <DataGridTextColumn Header="Min days for reservation" Width="2.2*" Binding="{Binding MinDaysForReservation}"/>
+                <DataGridTextColumn Header="Min days to cancel" Width="1.7*" Binding="{Binding MinDaysToCancel}"/>
                 <DataGridTemplateColumn x:Name="photosView" Header="Photos" Width="0.75*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
