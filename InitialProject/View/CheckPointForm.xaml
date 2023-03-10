@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
-        Title="CheckPointForm" Height="250" Width="600">
+        Title="CheckPointForm" Height="250" Width="600" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid Margin="50,50,50,50" RenderTransformOrigin="0.498,0.205">
             <Grid.RowDefinitions>
