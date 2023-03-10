@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using InitialProject.Model;
+using InitialProject.Repository;
 
 namespace InitialProject.View
 {
@@ -25,7 +26,9 @@ namespace InitialProject.View
         TimeSpan difference { get; set; }
 
        
-        private Accommodation currentAccommodation { get; set; }
+        public Accommodation currentAccommodation { get; set; }
+        public List<AccommodationReservation> reservations { get; set; }
+        private AccommodationReservationRepository accommodationReservationRepository;
         
         
 
@@ -34,6 +37,10 @@ namespace InitialProject.View
             InitializeComponent();
             this.DataContext = this;
             this.currentAccommodation = currentAccommodation;
+            accommodationReservationRepository = new AccommodationReservationRepository();
+            this.reservations = new List<AccommodationReservation>(accommodationReservationRepository.GetAll());
+
+
         }
 
         private void DecrementDaysNumber(object sender, RoutedEventArgs e)
@@ -55,20 +62,69 @@ namespace InitialProject.View
 
         private void Confirm_Click(object sender, RoutedEventArgs e)
         {
-            TimeSpan difference;
             difference = EndDate.Subtract(StartDate);
             int daysNumberFromCalendar = Convert.ToInt32(difference.TotalDays);
 
-            if(daysNumberFromCalendar < currentAccommodation.MinDaysForReservation || Convert.ToInt32(numberOfDays.Text) < currentAccommodation.MinDaysForReservation)
+            if (StartDate >= EndDate || daysNumberFromCalendar < Convert.ToInt32(numberOfDays.Text) || StartDate<DateTime.Now || StartDate==null || EndDate==null)
+            {
+                MessageBox.Show("Non valid input, please enter values again!");
+
+            }
+            else if (daysNumberFromCalendar < currentAccommodation.MinDaysForReservation || Convert.ToInt32(numberOfDays.Text) < currentAccommodation.MinDaysForReservation)
             {
                 MessageBox.Show("The minimum number of days for booking this accommodation is " + currentAccommodation.MinDaysForReservation.ToString());
             }
+            
             else
             {
-                
+                if(IsReservedAtCertainTime(currentAccommodation.Id))
+                {
+
+                }
             }
 
 
+        }
+
+        public bool IsReservedAtCertainTime(int currentAccommodationId)
+        {
+            DateTime start = StartDate;
+            DateTime end = EndDate;
+            List<DateTime> freeDays = new List<DateTime>();
+            bool isDayFree = true;
+
+            for(int i=0; i<difference.TotalDays; i++)
+            {
+                foreach(AccommodationReservation reservation in reservations)
+                {
+                    if(currentAccommodationId==reservation.AccommodationId)
+                    {
+                        if(start>=reservation.ComingDate && start<=reservation.LeavingDate)
+                        {
+                            start.AddDays(1);
+                            isDayFree = false;
+                            break;
+                        }
+                    }
+                }
+
+                //if a day is free
+                if(isDayFree)
+                {
+                    freeDays.Add(start);
+                    start.AddDays(1); 
+                }
+
+                isDayFree = true;   //for next day
+
+            }
+
+            if (freeDays.Count>= Convert.ToInt32(numberOfDays.Text))
+            {
+                freeDays.Sort();
+
+            }
+            return false;
         }
 
         private void CalendarStartDate_GotMouseCapture(object sender, MouseEventArgs e)
