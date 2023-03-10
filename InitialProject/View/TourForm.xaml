@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="TourForm" Height="790" Width="700" WindowStartupLocation="CenterScreen">
     <Grid Margin="0,10,0,0">
-        <Grid Height="600">
+        <Grid Height="630">
             <Grid.RowDefinitions>
                 <RowDefinition Height="57*"></RowDefinition>
                 <RowDefinition Height="57*"></RowDefinition>
@@ -43,7 +43,7 @@
             <Button x:Name="CheckPointTB" Grid.Row="9" Grid.Column="0" Click="AddCheckPoint" Margin="125,10,125,10">Add checkpoint</Button>
             <Button Grid.Row="9" Grid.Column="1" Click="AddTourImage" Margin="125,10,125,10">Add tour image</Button>
             <Button x:Name="AddNewTour" Height="30" Click="AddTour" Margin="125,141,125,-46" Grid.Row="10">Add Tour</Button>
-            <Button x:Name="Cancel" Height="30" Click="CancelTour" Margin="304,141,296,-46" Grid.Row="10" Grid.ColumnSpan="2" >Cancel</Button>
+            <Button x:Name="Cancel" Height="30" Click="CancelTour" Margin="125,144,125,-43" Grid.Row="10" Grid.Column="1" >Cancel</Button>
             <DataGrid IsReadOnly="True" Grid.Row="10" Grid.Column="0" ItemsSource="{Binding Path=TourPoints,UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" Margin="0,9,0,0">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="CheckPointName" Binding="{Binding Name}" Width="334"></DataGridTextColumn>
@@ -54,21 +54,12 @@
                     <DataGridTextColumn Header="TourImageUrl" Binding="{Binding Url}" Width="334"></DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
-            <Label Content="Add date and time for this tour" HorizontalAlignment="Left" Margin="10,36,0,0" Grid.Row="7" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="205" Height="27" Grid.RowSpan="2">
-                <Label.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform Angle="-0.104"/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </Label.RenderTransform>
-            </Label>
-            <ListBox Grid.Row="7" ItemsSource="{Binding Path=Instances}" Margin="60,24,60,24" Grid.RowSpan="2" Grid.Column="1"/>
-
+            <Label Content="Add date and time for this tour"  Grid.Row="7" VerticalAlignment="Top" Height="30" Grid.Column="0" Margin="74,7,74,0"/>
+            <ListBox Grid.Row="7" ItemsSource="{Binding Path=Instances}" Margin="0,10,0,10" Grid.Column="1" Grid.RowSpan="2"/>
+            <Button x:Name="NewDate" Content="+" Grid.Row="8" HorizontalAlignment="Center" Width="100"  Click="NewInstance" Height="30" Margin="0,0,0,20"/>
         </Grid>
         <Label Content="                      FORM OF TOUR:" HorizontalAlignment="Left" Margin="201,9,0,0" VerticalAlignment="Top" Width="223"/>
-        <Button x:Name="NewDate" Content="+" Height="30" Width="54" HorizontalAlignment="Left" Margin="312,444,0,290"   Click="NewInstance"/>
+
 
     </Grid>
 </Window>
