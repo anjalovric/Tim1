@@ -2,6 +2,7 @@
 using InitialProject.Repository;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -24,8 +25,22 @@ namespace InitialProject.View
     public partial class NewTourInstanceDate : Window, INotifyPropertyChanged
     {
         private readonly TourInstanceRepository _tourInstanceRepository;
-        public string InstanceStartHour { get; set; }
+        private string _startHour;
+        public string InstanceStartHour 
+        {
+            get => _startHour;
+            set
+            {
+                if (value != _startHour)
+                {
+                    _startHour = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         private DateTime _start;
+        private TourInstance newInstance;
+        private ObservableCollection<TourInstance> tourInstances;
 
         public DateTime InstanceStartDate {
             get => _start;
@@ -39,18 +54,23 @@ namespace InitialProject.View
             }
         }
         private Tour _currentTour;
-        public NewTourInstanceDate(Tour tour)
+        public NewTourInstanceDate(Tour tour, ObservableCollection<TourInstance> instances)
         {
             InitializeComponent();
             DataContext = this;
-            _tourInstanceRepository = new TourInstanceRepository();
+           // _tourInstanceRepository = new TourInstanceRepository();
             _currentTour = tour;
+            newInstance = new TourInstance();
+            tourInstances = instances;
         }
 
         private void OK_Click(object sender, RoutedEventArgs e)
         {
-            TourInstance newTourInstance = new TourInstance(_currentTour, _start, InstanceStartHour);
-            TourInstance saved = _tourInstanceRepository.Save(newTourInstance);
+            //TourInstance newTourInstance = new TourInstance(_currentTour, _start, InstanceStartHour);
+            //TourInstance saved = _tourInstanceRepository.Save(newTourInstance);
+            newInstance.StartDate = InstanceStartDate;
+            newInstance.StartClock = InstanceStartHour;
+            tourInstances.Add(newInstance);
             this.Close();
         }
 
