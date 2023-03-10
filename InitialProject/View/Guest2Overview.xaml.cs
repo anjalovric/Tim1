@@ -1,5 +1,6 @@
 ﻿using InitialProject.Model;
 using InitialProject.Repository;
+using InitialProject.Serializer;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -36,15 +37,41 @@ namespace InitialProject.View
                 OnPropertyChanged("Tours");
             }
         }
+        private ObservableCollection<TourInstance> TourInstances;
         private ObservableCollection<Tour> tours { get; set; }  
         public Tour _selected;
         private TourRepository _tourRepository;
+        private TourInstanceRepository _tourInstanceRepository;
         public Guest2Overview()
         {
             InitializeComponent();
             DataContext = this;
             _tourRepository = new TourRepository();
-            Tours = new ObservableCollection<Tour>(_tourRepository.GetAll());
+            _tourInstanceRepository = new TourInstanceRepository();
+            TourInstances = new ObservableCollection<TourInstance>(_tourInstanceRepository.GetAll());
+            Tours = new ObservableCollection<Tour>();
+            GetAllTours();
+            SetLocations();
+        }
+        private ObservableCollection<Tour> GetAllTours()
+        {
+            foreach (TourInstance tourInstance in TourInstances)
+            {
+                Tours.Add(tourInstance.Tour);
+            }
+            return Tours;
+        }
+        public void SetLocations()
+        {
+            Serializer<Location> _serializerLocation = new Serializer<Location>();
+            List<Location> locations = _serializerLocation.FromCSV("../../../Resources/Data/locations.csv");
+            foreach (Tour tour in Tours)
+            {
+                if (locations.Find(n => n.Id == tour.Location.Id) != null)
+                {
+                    tour.Location = locations.Find(n => n.Id == tour.Location.Id);
+                }
+            }
         }
         private void SignOut_Click(object sender, RoutedEventArgs e)
         {
@@ -57,7 +84,11 @@ namespace InitialProject.View
 
         private void Search_Click(object sender, RoutedEventArgs e)
         {
-            List<Tour> listTours = _tourRepository.GetAll();
+            List<Tour> listTours = new List<Tour>();
+            foreach (TourInstance tourInstance in TourInstances)
+            {
+                listTours.Add(tourInstance.Tour);
+            }
             Tours.Clear();
             foreach (Tour tour in listTours)
             {

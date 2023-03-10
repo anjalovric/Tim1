@@ -31,9 +31,9 @@ namespace InitialProject.Repository
 
             _tourInstances = _serializer.FromCSV(FilePath);
             SetTours();
-
+           
         }
-
+        
         public List<TourInstance> GetAll()
         {
             return _tourInstances;
