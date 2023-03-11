@@ -8,12 +8,19 @@
         Title="Guest2Overview" Height="450" Width="800">
     <Grid Background="{DynamicResource {x:Static SystemColors.GradientInactiveCaptionBrushKey}}">
 
-        <DataGrid ItemsSource="{Binding Tours,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" AutoGenerateColumns="False" VerticalAlignment="Top" HorizontalAlignment="Center" Height="225" Width="584" Margin="0,177,0,0">
+        <DataGrid x:Name="TourListDataGrid" ItemsSource="{Binding Path=TourInstances,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=Selected}" IsReadOnly="True" AutoGenerateColumns="False" VerticalAlignment="Top" HorizontalAlignment="Center" Height="225" Width="584" Margin="0,177,0,0">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Location" Width="1*" Binding="{Binding Location}"/>
-                <DataGridTextColumn Header="Duration" Width="1*" Binding="{Binding Duration}"/>
-                <DataGridTextColumn Header="Language" Width="1*" Binding="{Binding Language}"/>
-                <DataGridTextColumn  Width="1*" Header="Capacity" Binding="{Binding MaxGuests}"/>
+                <DataGridTextColumn Header="Location" Width="1*" Binding="{Binding Tour.Location}"/>
+                <DataGridTextColumn Header="Duration" Width="1*" Binding="{Binding Tour.Duration}"/>
+                <DataGridTextColumn Header="Language" Width="1*" Binding="{Binding Tour.Language}"/>
+                <DataGridTextColumn  Width="1*" Header="Capacity" Binding="{Binding Tour.MaxGuests}"/>
+                <DataGridTemplateColumn x:Name="reservation" Header="Reservation"  Width="1.2*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Name="reservationButton" Content="RESERVE" TextElement.FontWeight="ExtraBold" Click="Reserve"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
 
 
@@ -38,16 +45,10 @@
         <Button Content="Sign out" HorizontalAlignment="Left" Margin="723,28,0,0" VerticalAlignment="Top" FontWeight="Bold" FontFamily="Arial Black" Background="#FFF1F1B7" Click="SignOut_Click"/>
         <Button x:Name="decrementCapacityNumber" Content="-" HorizontalAlignment="Left" Margin="538,90,0,0" VerticalAlignment="Top" Width="20" Click="decrementCapacityNumber_Click"/>
         <Button x:Name="incrementCapacityNumber" Content="+" HorizontalAlignment="Left" Margin="672,90,0,0" VerticalAlignment="Top" Width="20" Click="incrementCapacityNumber_Click"/>
-        <Button HorizontalAlignment="Left" Margin="732,73,0,0" VerticalAlignment="Top" Height="39">
+        <Button Content="Search" FontWeight="Bold" HorizontalAlignment="Left" Margin="732,87,0,0" VerticalAlignment="Top" Height="22" Click="Search_Click"/>
 
-            <MenuItem Width="28"  Height="42" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.789,0.488" Click="Search_Click">
 
-                <MenuItem.Icon>
-                    <Image Source="/Resources/Images/search.png" HorizontalAlignment="Center" VerticalAlignment="Center" Height="26" Width="18" RenderTransformOrigin="1.135,0.613"/>
-                </MenuItem.Icon>
 
-            </MenuItem>
-        </Button>
         <Button Content="Details" HorizontalAlignment="Left" Margin="732,375,0,0" VerticalAlignment="Top" Height="27" Width="49"/>
 
 
