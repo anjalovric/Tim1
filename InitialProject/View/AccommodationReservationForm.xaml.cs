@@ -227,24 +227,6 @@ namespace InitialProject.View
 
 
 
-
-    private void CalendarStartDate_GotMouseCapture(object sender, MouseEventArgs e)
-    {
-        UIElement originalElement = e.OriginalSource as UIElement;
-        if (originalElement != null)
-        {
-            originalElement.ReleaseMouseCapture();
-        }
-    }
-    private void CalendarEndDate_GotMouseCapture(object sender, MouseEventArgs e)
-    {
-        UIElement originalElement = e.OriginalSource as UIElement;
-        if (originalElement != null)
-        {
-            originalElement.ReleaseMouseCapture();
-        }
-    }
-
     private void Cancel_Click(object sender, RoutedEventArgs e)
     {
         this.Close();
