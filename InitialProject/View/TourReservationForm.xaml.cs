@@ -41,21 +41,26 @@ namespace InitialProject.View
             CurrentTour = currentTour;
             _tourReservations = _serializerTourReservations.FromCSV(FilePath);
             _tourReservationRepository = new TourReservationRepository();
-            foreach(TourReservation tourReservation in _tourReservations)
+            GetCurrentGuestsNumber();   
+        }
+        public int GetCurrentGuestsNumber()
+        {
+            foreach (TourReservation tourReservation in _tourReservations)
             {
-                if (tourReservation.TourId == CurrentTour.Id && _tourInstance.Id==tourReservation.TourInstanceId)
+                if (tourReservation.TourId == CurrentTour.Id && _tourInstance.Id == tourReservation.TourInstanceId)
                 {
-                    CurrentGuestsNumber= tourReservation.CurrentGuestsNumber;
+                    CurrentGuestsNumber = tourReservation.CurrentGuestsNumber;
                 }
                 else
                 {
-                    CurrentGuestsNumber = tourInstance.Tour.MaxGuests;
+                    CurrentGuestsNumber = _tourInstance.Tour.MaxGuests;
                 }
             }
             if (_tourReservations.Count == 0)
             {
-                CurrentGuestsNumber = tourInstance.Tour.MaxGuests;
+                CurrentGuestsNumber = _tourInstance.Tour.MaxGuests;
             }
+            return CurrentGuestsNumber;
         }
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -79,17 +84,21 @@ namespace InitialProject.View
                 capacityNumber.Text = changedGuestsNumber.ToString();
             }
         }
+        
         private void Confirm_Click(object sender, RoutedEventArgs e)
         {
             GuestsNumber = CurrentGuestsNumber - Convert.ToInt32(capacityNumber.Text);
             if (CurrentGuestsNumber == 0)
             {
                 MessageBox.Show("There is no enough places for choosen number of people. Tour is completed.");
+                AvailableTours availableTours = new AvailableTours(_tourInstance,CurrentTour);
+                availableTours.Show();
+                this.Close();
                 return;
             }
             if (GuestsNumber < 0 && CurrentGuestsNumber!=0)
             {
-                MessageBox.Show("There is no enough places for choosen number of people. Available number of places is ");
+                MessageBox.Show("There is no enough places for choosen number of people. Available number of places for guest is "+CurrentGuestsNumber+".");
                 return;
             }
             foreach(TourReservation tourReservation in _tourReservations)
