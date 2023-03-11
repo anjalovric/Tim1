@@ -46,7 +46,7 @@
 
 
 
-        <Button Content="OK" TextElement.FontWeight="Bold" HorizontalAlignment="Left" Margin="198,415,0,0" VerticalAlignment="Top" Width="68" Click="Confirm_Click" Height="27"/>
+        <Button Content="Find" TextElement.FontWeight="Bold" HorizontalAlignment="Left" Margin="198,415,0,0" VerticalAlignment="Top" Width="68" Click="Confirm_Click" Height="27"/>
         <Button Content="Cancel" TextElement.FontWeight="Bold" HorizontalAlignment="Right" Margin="0,415,198,0" VerticalAlignment="Top" Width="68" Click="Cancel_Click" Height="27"/>
 
     </Grid>
