@@ -59,13 +59,26 @@ namespace InitialProject.View
         {
             foreach (TourInstance tourInstance in TourInstances)
             {
-                if (tourInstance.Id != _tourInstance.Id && tourInstance.Tour.Id==_tourInstance.Tour.Id)
+                if (tourInstance.Id != _tourInstance.Id)
                 {
-                    Tours.Add(tourInstance.Tour);
+                    SetLocationTourInstance(tourInstance);
+                    if(tourInstance.Tour.Location.City==_tourInstance.Tour.Location.City && tourInstance.Tour.Location.Country==_tourInstance.Tour.Location.Country)
+                        Tours.Add(tourInstance.Tour);
                 }
                 
             }
             return Tours;
+        }
+        private TourInstance SetLocationTourInstance(TourInstance tourInstance)
+        {
+            TourInstance TourInstance = tourInstance;
+            Serializer<Location> _serializerLocation = new Serializer<Location>();
+            List<Location> locations = _serializerLocation.FromCSV("../../../Resources/Data/locations.csv");
+            if (locations.Find(n => n.Id == TourInstance.Tour.Location.Id) != null)
+            {
+                TourInstance.Tour.Location = locations.Find(n => n.Id == TourInstance.Tour.Location.Id);
+            }
+            return TourInstance;
         }
         private ObservableCollection<Tour> GetAllToursInstances()
         {
