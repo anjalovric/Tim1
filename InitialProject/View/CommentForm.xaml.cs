@@ -82,7 +82,7 @@ namespace InitialProject.Forms
                 Comment updatedComment = _repository.Update(SelectedComment);
                 if (updatedComment != null)
                 {
-                    // Update observable collection
+                    //Update observable collection
                     int index = CommentsOverview.Comments.IndexOf(SelectedComment);
                     CommentsOverview.Comments.Remove(SelectedComment);
                     CommentsOverview.Comments.Insert(index, updatedComment);
@@ -90,9 +90,9 @@ namespace InitialProject.Forms
             } 
             else
             {
-               // Comment newComment = new Comment(DateTime.Now, Text, LoggedInUser);
-              //  Comment savedComment = _repository.Save(newComment);
-                //CommentsOverview.Comments.Add(savedComment);
+               Comment newComment = new Comment(DateTime.Now, Text, LoggedInUser);
+               Comment savedComment = _repository.Save(newComment);
+               CommentsOverview.Comments.Add(savedComment);
             }
             
             Close();

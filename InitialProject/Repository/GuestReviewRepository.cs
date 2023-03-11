@@ -21,7 +21,6 @@ namespace InitialProject.Repository
             _serializer = new Serializer<ReviewOfGuest>();
             _reviews = _serializer.FromCSV(FilePath);
             AddGuest();
-            AddComment();
         }
 
         private void AddGuest()
@@ -30,15 +29,6 @@ namespace InitialProject.Repository
             foreach(ReviewOfGuest review in _reviews)
             {
                 review.Guest = guest1Repository.GetAll().Find(n => n.Id == review.Guest.Id);
-            }
-        }
-
-        private void AddComment()
-        {
-            CommentRepository commentRepository = new CommentRepository();
-            foreach (ReviewOfGuest review in _reviews)
-            {
-                review.Comment = commentRepository.GetAll().Find(n => n.Id == review.Comment.Id);
             }
         }
         public int NextId()

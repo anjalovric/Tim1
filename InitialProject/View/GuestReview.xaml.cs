@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -25,7 +26,7 @@ namespace InitialProject.View
     {
         public Guest1 guest { get; set; }
         private ReviewOfGuest review;
-        public string CommentText { get; set; }
+        public ObservableCollection<Guest1> guests { get; set; }
         public ReviewOfGuest Review
         {
             get => review;
@@ -39,13 +40,14 @@ namespace InitialProject.View
             }
         }
         public event PropertyChangedEventHandler? PropertyChanged;
-        public GuestReview(Guest1 guestToReview)
+        public GuestReview(Guest1 guestToReview, ObservableCollection<Guest1> allGuests)
         {
             InitializeComponent();
             DataContext = this;
             guest = guestToReview;
             review = new ReviewOfGuest();
             review.Guest = guest;
+            guests = allGuests;
         }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -54,15 +56,9 @@ namespace InitialProject.View
         }
         private void OkButton_Click(object sender, RoutedEventArgs e)
         {
-            Comment comment = new Comment();
-            CommentRepository commentRepository = new CommentRepository();
-            comment.Text = CommentText;
-            comment.Guest = guest;
-            comment.CreationTime = DateTime.Now;
-            comment = commentRepository.Save(comment);
-            Review.Comment = comment;
             GuestReviewRepository guestReviewRepository = new GuestReviewRepository();
             guestReviewRepository.Save(Review);
+            guests.Remove(guest);
             this.Close();
         }
 

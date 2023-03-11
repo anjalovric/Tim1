@@ -74,11 +74,11 @@ namespace InitialProject.View
 
         private void Review_Click(object sender, RoutedEventArgs e)
         {
-            GuestReview guestReview = new GuestReview(SelectedGuest);
+            GuestReview guestReview = new GuestReview(SelectedGuest, guests);
             guestReview.Show();
         }
 
-        private void ReviewButton_Click(object sender, RoutedEventArgs e)
+        private void ReviewOverview_Click(object sender, RoutedEventArgs e)
         {
             GuestReviewsOverview guestReviewsOverview = new GuestReviewsOverview();
             guestReviewsOverview.Show();

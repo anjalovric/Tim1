@@ -34,7 +34,7 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Name="ReviewButton" Content="Open all reviews" HorizontalAlignment="Left" Margin="548,362,0,0" VerticalAlignment="Top" Height="22" Width="162" Click="ReviewButton_Click"/>
+        <Button Name="ReviewButton" Content="Open all reviews" HorizontalAlignment="Left" Margin="548,362,0,0" VerticalAlignment="Top" Height="22" Width="162" Click="ReviewOverview_Click"/>
 
     </Grid>
 </Window>

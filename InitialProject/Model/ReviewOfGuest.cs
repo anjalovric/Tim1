@@ -13,25 +13,23 @@ namespace InitialProject.Model
         public Guest1 Guest { get; set; }
         public int Cleanliness { get; set; }
         public int RulesFollowing { get; set; }
-        public Comment Comment { get; set; }
+        public string Comment { get; set; }
 
         public ReviewOfGuest()
         {
             Guest = new Guest1();
-            Comment = new Comment();
         }
 
-        public ReviewOfGuest(int cleanliness, int rulesFollowing, Comment comment)
+        public ReviewOfGuest(int cleanliness, int rulesFollowing)
         {
             Cleanliness = cleanliness;
             RulesFollowing = rulesFollowing;
-            Comment = comment;
             Guest = new Guest1();
         }
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), Guest.Id.ToString(), Cleanliness.ToString(), RulesFollowing.ToString(), Comment.Id.ToString() };
+            string[] csvValues = { Id.ToString(), Guest.Id.ToString(), Cleanliness.ToString(), RulesFollowing.ToString(), Comment};
             return csvValues;
         }
 
@@ -41,7 +39,7 @@ namespace InitialProject.Model
             Guest.Id = Convert.ToInt32(values[1]);
             Cleanliness = Convert.ToInt32(values[2]);
             RulesFollowing = Convert.ToInt32(values[3]);
-            Comment.Id = Convert.ToInt32(values[4]);
+            Comment = values[4];
         }
     }
 }
