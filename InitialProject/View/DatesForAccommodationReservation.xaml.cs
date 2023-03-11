@@ -70,6 +70,9 @@ namespace InitialProject.View
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        
+        private void CancelChoosingDate(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

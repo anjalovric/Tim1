@@ -58,6 +58,7 @@ namespace InitialProject.View
             accommodationImages = new List<AccommodationImage>(accommodationImageRepository.GetAll());
 
 
+
         }
 
         

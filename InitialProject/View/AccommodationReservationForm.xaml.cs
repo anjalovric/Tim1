@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -93,16 +94,8 @@ namespace InitialProject.View
 
             else
             {
-               /* if (reservations.Count == 0)
-                {
-                    AccommodationReservation reservation = new AccommodationReservation(0, currentAccommodation, StartDate, EndDate);
-                    accommodationReservationRepository.Add(reservation);
-                    this.Close();       //napisati rezerv uspjesno dodata, ili tako nesto
-                }*/
                     reservations=accommodationReservationRepository.GetAll();
                     FindAvailableDates(currentAccommodation.Id);
-                
-
             }
 
 
@@ -171,7 +164,6 @@ namespace InitialProject.View
             if (dateTimes.Count > 0)
             {
                 DatesForAccommodationReservation datesListWindow = new DatesForAccommodationReservation(currentAccommodation,accommodationReservationRepository);
-                bool isConsecutive = true;
                 foreach (List<DateTime> dates in dateTimes)
                 {
                     if (AreDatesConsecutive(dates))
@@ -191,12 +183,45 @@ namespace InitialProject.View
 
             else
             {
-                MessageBox.Show("No free days."); 
+                FindAvailableDatesOutRange();
             }
         }
 
         public void FindAvailableDatesOutRange()
         {
+            List<DateTime> freeDays = new List<DateTime>();
+            List<DateTime> freeDaysHelp = new List<DateTime>();
+            List<List<DateTime>> dateTimes = new List<List<DateTime>>();
+            //pronalazim odakle poceti traziti?
+            DateTime start = EndDate;
+            while (IsDayAvailable(currentAccommodation.Id, start))
+            {
+                start = start.AddDays(-1);
+            }
+
+            start = start.AddDays(1);
+            
+            //sad trazim 3 slobodna niza
+            while(dateTimes.Count < 3)
+            {
+                if (IsDayAvailable(currentAccommodation.Id, start))
+                {
+                    AddAvailableDateToList(start, ref freeDays, ref freeDaysHelp, ref dateTimes);  //potrebno isprazniti liste negdje
+                }
+                start = start.AddDays(1);
+            }
+
+            DatesForAccommodationReservation datesListWindow = new DatesForAccommodationReservation(currentAccommodation, accommodationReservationRepository);
+            foreach (List<DateTime> dates in dateTimes)
+            {
+                if (AreDatesConsecutive(dates))
+                {
+                    DateTime startDate = dates[0];
+                    DateTime endDate = dates[Convert.ToInt32(numberOfDays.Text) - 1];
+                    datesListWindow.AddNewDateRange(startDate, endDate);
+                }
+            }
+            datesListWindow.Show();
 
         }
 
@@ -224,6 +249,17 @@ namespace InitialProject.View
     {
         this.Close();
     }
-}   
+
+        protected override void OnPreviewMouseUp(MouseButtonEventArgs e)
+        {
+            base.OnPreviewMouseUp(e);
+            if (Mouse.Captured is CalendarItem)
+            {
+                Mouse.Capture(null);
+            }
+        }
+
+
+    }   
 }
 
