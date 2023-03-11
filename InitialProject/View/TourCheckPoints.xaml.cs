@@ -34,6 +34,7 @@ namespace InitialProject.View
         private TourReservationRepository tourReservationRepository;
         private AlertGuest2Repository alertGuest2Repository;
 
+
         private TourInstance _selected;
 
         private int counter = 1;
@@ -52,6 +53,8 @@ namespace InitialProject.View
             DataContext = this;
             _pointsRepository = new CheckPointRepository();
             _tourInstanceRepository= new TourInstanceRepository();
+            tourReservationRepository = new TourReservationRepository();
+            alertGuest2Repository = new AlertGuest2Repository();
             AllPoints = new ObservableCollection<CheckPoint>();
             CurrentPoint = new ObservableCollection<CheckPoint>();
             List<CheckPoint> points = _pointsRepository.GetAll();
@@ -75,6 +78,8 @@ namespace InitialProject.View
             }
            
             CurrentPoint.Add(AllPoints.ToList().Find(n=>n.Order==counter));
+            AddAlerts(CurrentPoint[0].Id);
+
         }
 
         private void FinishTour(object sender, RoutedEventArgs e)
@@ -94,11 +99,38 @@ namespace InitialProject.View
             CurrentPoint.Remove(points.Find(n => n.Order == counter));
             counter++;
             CurrentPoint.Add(points.Find(n => n.Order == counter));
-            if (counter==AllPoints.ToList().Count)
+            if (counter == AllPoints.ToList().Count)
+            {
                 this.Next.IsEnabled = false;
+                _selected.Finished = false;
+                Finish.IsEnabled = false;
+                MessageBox.Show("This tour instance is finished");
+            }
+            AddAlerts(CurrentPoint[0].Id);
 
         }
 
+        private void AddAlerts(int currentPointId)
+        {
+            List<TourReservation> tourReservations= tourReservationRepository.GetAll();
+            List<TourReservation> availableReservations = new List<TourReservation>();
+            foreach(TourReservation tour in tourReservations)
+            {
+                if (tour.TourInstanceId == _selected.Id)
+                {
+                    availableReservations.Add(tour);
+                }
+            }
+            foreach(TourReservation tour in availableReservations)
+            {
+                AlertGuest2 alertGuest2 = new AlertGuest2();
+                alertGuest2.Availability = false;
+                alertGuest2.ReservationId = tour.Id;
+                alertGuest2.Guest2Id = tour.GuestId;
+                alertGuest2.CheckPointId = currentPointId;
+                AlertGuest2 savedAlert=alertGuest2Repository.Save(alertGuest2);
 
+            }
+        }
     }
 }
