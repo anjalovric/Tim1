@@ -31,6 +31,8 @@ namespace InitialProject.View
         private CheckPointRepository _pointsRepository;
         private TourRepository _tourRepository;
         private TourInstanceRepository _tourInstanceRepository;
+        private TourReservationRepository tourReservationRepository;
+        private AlertGuest2Repository alertGuest2Repository;
 
         private TourInstance _selected;
 
@@ -84,7 +86,7 @@ namespace InitialProject.View
                     tour.Finished = true;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Next_Click(object sender, RoutedEventArgs e)
         {
             List<CheckPoint> points = AllPoints.ToList();
             CheckPoint checkPoint = points.Find(n => n.Order == counter);
@@ -94,6 +96,9 @@ namespace InitialProject.View
             CurrentPoint.Add(points.Find(n => n.Order == counter));
             if (counter==AllPoints.ToList().Count)
                 this.Next.IsEnabled = false;
+
         }
+
+
     }
 }

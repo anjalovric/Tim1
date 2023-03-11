@@ -33,7 +33,7 @@ namespace InitialProject.Model
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), TourId.ToString(),TourInstanceId.ToString(),CurrentGuestsNumber.ToString()};
+            string[] csvValues = { Id.ToString(), TourId.ToString(),TourInstanceId.ToString(),CurrentGuestsNumber.ToString(),GuestId.ToString()};
             return csvValues;
         }
     }
