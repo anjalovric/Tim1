@@ -68,8 +68,8 @@ namespace InitialProject.View
             {
                 foreach(AlertGuest2 alert in alerts)
                 {
-                    AlertGuestForm alertGuestForm = new AlertGuestForm();
-                    if(GuestId==alert.Guest2Id)
+                    AlertGuestForm alertGuestForm = new AlertGuestForm(alert.Id);
+                    if(GuestId==alert.Guest2Id && alert.Availability==false)
                         alertGuestForm.Show();
                 }
             }

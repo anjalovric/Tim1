@@ -7,10 +7,10 @@
         mc:Ignorable="d"
         Title="AlertGuestForm" Height="450" Width="800">
     <Grid>
-        <Label Content="Are you sure you want to be present on the tour?" HorizontalAlignment="Left" Margin="222,178,0,0" VerticalAlignment="Top" Height="39"/>
-        <Button Content="YES" Margin="451,250,291,152" TextElement.FontWeight="Bold"/>
-        <Button Content="NO" Margin="554,250,188,152" TextElement.FontWeight="Bold"/>
-        <Border BorderBrush="Black" BorderThickness="1" Margin="76,91,76,91"/>
+        <Label Content="Are you sure you want to be present on the tour?" HorizontalAlignment="Left" Margin="222,148,0,0" VerticalAlignment="Top" Height="29"/>
+        <Button Content="YES" Margin="451,182,291,217" TextElement.FontWeight="Bold" Click="Confirm_Click"/>
+        <Button Content="NO" Margin="554,182,188,217" TextElement.FontWeight="Bold" Click="Cancel_Click"/>
+       
 
 
 
