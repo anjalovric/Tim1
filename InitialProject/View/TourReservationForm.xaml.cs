@@ -28,11 +28,12 @@ namespace InitialProject.View
         private int CurrentGuestsNumber;
         private int GuestsNumber;
         private Tour CurrentTour;
+        private int GuestId;
         private TourInstance _tourInstance;
         private TourReservationRepository _tourReservationRepository;
         private List<TourReservation> _tourReservations;
         private readonly Serializer<TourReservation> _serializerTourReservations;
-        public TourReservationForm(Tour currentTour,TourInstance tourInstance)
+        public TourReservationForm(Tour currentTour,TourInstance tourInstance,int guestId)
         {
             InitializeComponent();
             DataContext = this;
@@ -41,7 +42,8 @@ namespace InitialProject.View
             CurrentTour = currentTour;
             _tourReservations = _serializerTourReservations.FromCSV(FilePath);
             _tourReservationRepository = new TourReservationRepository();
-            GetCurrentGuestsNumber();   
+            GetCurrentGuestsNumber();
+            GuestId = guestId;
         }
         public int GetCurrentGuestsNumber()
         {
@@ -108,7 +110,7 @@ namespace InitialProject.View
                     _tourReservationRepository.Delete(tourReservation);
                 }
             }
-            TourReservation newTourReservation = new TourReservation(CurrentTour.Id,_tourInstance.Id,GuestsNumber);
+            TourReservation newTourReservation = new TourReservation(CurrentTour.Id,_tourInstance.Id,GuestsNumber,GuestId);
             _tourReservationRepository.Save(newTourReservation);
             this.Close();
         }
