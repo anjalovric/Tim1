@@ -7,12 +7,12 @@
         mc:Ignorable="d"
         Title="AvailableTours" Height="450" Width="800">
     <Grid>
-        <DataGrid x:Name="TourListDataGrid" ItemsSource="{Binding Tours,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" AutoGenerateColumns="False" VerticalAlignment="Top" HorizontalAlignment="Center" Height="360" Width="584" Margin="0,42,0,0">
+        <DataGrid x:Name="TourListDataGrid" ItemsSource="{Binding TourInstances,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" AutoGenerateColumns="False" VerticalAlignment="Top" HorizontalAlignment="Center" Height="360" Width="584" Margin="0,42,0,0">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Location" Width="1*" Binding="{Binding Location}"/>
-                <DataGridTextColumn Header="Duration" Width="1*" Binding="{Binding Duration}"/>
-                <DataGridTextColumn Header="Language" Width="1*" Binding="{Binding Language}"/>
-                <DataGridTextColumn  Width="1*" Header="Capacity" Binding="{Binding MaxGuests}"/>
+                <DataGridTextColumn Header="Location" Width="1*" Binding="{Binding Tour.Location}"/>
+                <DataGridTextColumn Header="Duration" Width="1*" Binding="{Binding Tour.Duration}"/>
+                <DataGridTextColumn Header="Language" Width="1*" Binding="{Binding Tour.Language}"/>
+                <DataGridTextColumn  Width="1*" Header="Capacity" Binding="{Binding Tour.MaxGuests}"/>
                 <DataGridTemplateColumn x:Name="reservation" Header="Reservation"  Width="1.2*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -24,5 +24,6 @@
 
 
         </DataGrid>
+        <Button Content="Cancel" HorizontalAlignment="Left" Margin="725,382,0,0" VerticalAlignment="Top" Click="Cancel_Click"/>
     </Grid>
 </Window>

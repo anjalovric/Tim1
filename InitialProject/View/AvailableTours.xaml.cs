@@ -26,64 +26,74 @@ namespace InitialProject.View
     /// </summary>
     public partial class AvailableTours : Window
     {
-        public ObservableCollection<Tour> Tours
-        {
-            get { return tours; }
-            set
-            {
-                if (value != tours)
-                    tours = value;
-                OnPropertyChanged("Tours");
-            }
-        }
-        private ObservableCollection<TourInstance> TourInstances;
-        private ObservableCollection<Tour> tours { get; set; }
-        public Tour _tour;
+        private ObservableCollection<TourInstance> listTourInstances;
+        public ObservableCollection<TourInstance> TourInstances { get; set; }
+        private ObservableCollection<TourReservation> TourReservations;
         public TourInstance _tourInstance;
-        private TourRepository _tourRepository;
         private TourInstanceRepository _tourInstanceRepository;
-        public AvailableTours(TourInstance tourInstance,Tour tour)
+        public TourReservation _tourReservation;
+        public TourReservationRepository _tourReservationRepository;
+        public AvailableTours(TourInstance tourInstance)
         {
             InitializeComponent();
             DataContext = this;
-            _tourInstance = tourInstance;
-            _tour = tour;
-            _tourRepository = new TourRepository();
             _tourInstanceRepository = new TourInstanceRepository();
-            TourInstances = new ObservableCollection<TourInstance>(_tourInstanceRepository.GetAll());
-            Tours = new ObservableCollection<Tour>();
-            GetAllTours();
+            _tourReservationRepository = new TourReservationRepository();
+            listTourInstances = new ObservableCollection<TourInstance>(_tourInstanceRepository.GetAll());
+            _tourInstance = tourInstance;
+            SetLocations();
+            TourReservations = new ObservableCollection<TourReservation>(_tourReservationRepository.GetAll());
+            TourInstances = new ObservableCollection<TourInstance>();
+            GetTourInstances();
             SetLocations();
         }
-        private ObservableCollection<Tour> GetAllTours()
+        public void GetTourInstances()
         {
-            foreach (TourInstance tourInstance in TourInstances)
+            foreach(TourInstance tourInstance in listTourInstances)
             {
-                if (tourInstance.Id != _tourInstance.Id && tourInstance.Tour.Id==_tourInstance.Tour.Id)
+                if(tourInstance.Tour.Location.City==_tourInstance.Tour.Location.City && tourInstance.Tour.Location.Country == _tourInstance.Tour.Location.Country && tourInstance.Id!=_tourInstance.Id)
                 {
-                    Tours.Add(tourInstance.Tour);
+                    if (!isFilled(tourInstance))
+                    {
+                        TourInstances.Add(tourInstance);
+                    }
                 }
-                
             }
-            return Tours;
         }
-        private ObservableCollection<Tour> GetAllToursInstances()
+        public Boolean isFilled(TourInstance tourInstance)
         {
-            foreach (TourInstance tourInstance in TourInstances)
+            foreach(TourReservation tourReservation in TourReservations)
             {
-                Tours.Add(tourInstance.Tour);
+                if(tourReservation.TourInstanceId==tourInstance.Id && tourReservation.CurrentGuestsNumber == 0)
+                {
+                    return true;
+                }
             }
-            return Tours;
+            return false;
         }
         public void SetLocations()
         {
             Serializer<Location> _serializerLocation = new Serializer<Location>();
             List<Location> locations = _serializerLocation.FromCSV("../../../Resources/Data/locations.csv");
-            foreach (Tour tour in Tours)
+            Serializer<Tour> _serializerTour = new Serializer<Tour>();
+            List<Tour> tours = _serializerTour.FromCSV("../../../Resources/Data/tours.csv");
+            foreach (Location location in locations)
             {
-                if (locations.Find(n => n.Id == tour.Location.Id) != null)
+                foreach (Tour tour in tours)
                 {
-                    tour.Location = locations.Find(n => n.Id == tour.Location.Id);
+                    if (location.Id == tour.Location.Id)
+                        tour.Location = location;
+                }
+            }
+
+            foreach (TourInstance tourInstance in listTourInstances)
+            {
+                foreach (Tour tour in tours)
+                {
+                    if (tour.Id == tourInstance.Tour.Id)
+                    {
+                        tourInstance.Tour = tour;
+                    }
                 }
             }
         }
@@ -93,20 +103,23 @@ namespace InitialProject.View
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
         private void Reserve(object sender, RoutedEventArgs e)
         {
-            /*Tour currentTour = (Tour)TourListDataGrid.CurrentItem;
-            TourInstance currentTourInstance = new TourInstance();
-            foreach(TourInstance tourInstance in TourInstances)
+            TourInstance currentTourInstance = (TourInstance)TourListDataGrid.CurrentItem;
+            foreach (TourInstance tourInstance in TourInstances)
             {
-                if(tourInstance.Tour.Id==currentTour.Id && tourInstance.Id == 5)
-                {
-                    currentTourInstance=tourInstance;
+                if(tourInstance.Id==currentTourInstance.Id)
+                { 
+                    currentTourInstance = tourInstance;
                 }
             }
-            TourReservationForm tourReservationForm = new TourReservationForm(currentTour, currentTourInstance);
-            tourReservationForm.Show();*/
+            TourReservationForm tourReservationForm = new TourReservationForm(currentTourInstance, 3);
+            tourReservationForm.Show();
+        }
+
+        private void Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }
