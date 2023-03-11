@@ -25,42 +25,47 @@ namespace InitialProject.View
     public partial class TourReservationForm : Window, INotifyPropertyChanged
     {
         private const string FilePath = "../../../Resources/Data/tourReservations.csv";
+        private const string filePath = "../../../Resources/Data/tourInstances.csv";
         private int CurrentGuestsNumber;
         private int GuestsNumber;
-        private Tour CurrentTour;
+        //private Tour CurrentTour;
+        //private TourInstance _tourInstance;
         private int GuestId;
-        private TourInstance _tourInstance;
+        private TourInstance CurrentTourInstance;
         private TourReservationRepository _tourReservationRepository;
         private List<TourReservation> _tourReservations;
         private readonly Serializer<TourReservation> _serializerTourReservations;
-        public TourReservationForm(Tour currentTour,TourInstance tourInstance,int guestId)
+        private List<TourInstance> _tourInstances;
+        private readonly Serializer<TourInstance> _serializerTourInstances;
+        public TourReservationForm(TourInstance currentTourInstance,int guestId)
         {
             InitializeComponent();
             DataContext = this;
-            _tourInstance = tourInstance;
+            //_tourInstance = tourInstance;
             _serializerTourReservations = new Serializer<TourReservation>();
-            CurrentTour = currentTour;
+            _serializerTourInstances = new Serializer<TourInstance>();
+            CurrentTourInstance = currentTourInstance;
             _tourReservations = _serializerTourReservations.FromCSV(FilePath);
+            _tourInstances=_serializerTourInstances.FromCSV(filePath);
             _tourReservationRepository = new TourReservationRepository();
             GetCurrentGuestsNumber();
             GuestId = guestId;
         }
         public int GetCurrentGuestsNumber()
         {
+            int reservationsNumber = 0;
             foreach (TourReservation tourReservation in _tourReservations)
             {
-                if (tourReservation.TourId == CurrentTour.Id && _tourInstance.Id == tourReservation.TourInstanceId)
+                if (CurrentTourInstance.Id == tourReservation.TourInstanceId)
                 {
                     CurrentGuestsNumber = tourReservation.CurrentGuestsNumber;
+                    continue;
                 }
-                else
-                {
-                    CurrentGuestsNumber = _tourInstance.Tour.MaxGuests;
-                }
+                reservationsNumber++;
             }
-            if (_tourReservations.Count == 0)
+            if (_tourReservations.Count == 0 || reservationsNumber==_tourReservations.Count)
             {
-                CurrentGuestsNumber = _tourInstance.Tour.MaxGuests;
+                CurrentGuestsNumber = CurrentTourInstance.Tour.MaxGuests;
             }
             return CurrentGuestsNumber;
         }
@@ -93,7 +98,7 @@ namespace InitialProject.View
             if (CurrentGuestsNumber == 0)
             {
                 MessageBox.Show("There is no enough places for choosen number of people. Tour is completed.");
-                AvailableTours availableTours = new AvailableTours(_tourInstance,CurrentTour);
+                AvailableTours availableTours = new AvailableTours(CurrentTourInstance);
                 availableTours.Show();
                 this.Close();
                 return;
@@ -105,13 +110,13 @@ namespace InitialProject.View
             }
             foreach(TourReservation tourReservation in _tourReservations)
             {
-                if (CurrentTour.Id == tourReservation.TourId && _tourInstance.Id==tourReservation.TourInstanceId)
+                if (CurrentTourInstance.Id==tourReservation.TourInstanceId)
                 {
                     _tourReservationRepository.Delete(tourReservation);
                 }
             }
 
-            TourReservation newTourReservation = new TourReservation(CurrentTour.Id,_tourInstance.Id,GuestsNumber,GuestId);
+            TourReservation newTourReservation = new TourReservation(CurrentTourInstance.Id,GuestsNumber,GuestId);
 
             //TourReservation newTourReservation = new TourReservation(CurrentTour.Id,_tourInstance.Id,GuestsNumber,0);
 

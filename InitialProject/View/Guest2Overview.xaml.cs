@@ -27,21 +27,20 @@ namespace InitialProject.View
     /// </summary>
     public partial class Guest2Overview : Window
     {
-        public ObservableCollection<Tour> Tours
-        {
-            get { return tours; }
-            set
-            {
-                if(value!=tours)
-                    tours = value;
-                OnPropertyChanged("Tours");
-            }
-        }
         private const string FilePath = "../../../Resources/Data/alertsGuest2.csv";
         private const string filePath = "../../../Resources/Data/users.csv";
-        private ObservableCollection<TourInstance> TourInstances;
-        private ObservableCollection<Tour> tours { get; set; }  
-        public Tour _selected;
+        public ObservableCollection<TourInstance> TourInstances { get; set; }
+        public TourInstance _selected;
+        public TourInstance Selected
+        {
+            get { return _selected; }
+            set
+            {
+                if (value != _selected)
+                    _selected = value;
+                OnPropertyChanged("Selected");
+            }
+        }
         private TourRepository _tourRepository;
         private TourInstanceRepository _tourInstanceRepository;
         private Serializer<AlertGuest2> _alertGuestSerializer;
@@ -58,39 +57,43 @@ namespace InitialProject.View
             _tourRepository = new TourRepository();
             _tourInstanceRepository = new TourInstanceRepository();
             TourInstances = new ObservableCollection<TourInstance>(_tourInstanceRepository.GetAll());
-            Tours = new ObservableCollection<Tour>();
-            GetAllTours();
             SetLocations();
             users = _userSerializer.FromCSV(filePath);
-            alerts=_alertGuestSerializer.FromCSV(FilePath);
+            alerts = _alertGuestSerializer.FromCSV(FilePath);
             GuestId = GetGuest2Id();
             if (alerts.Count() != 0)
             {
-                foreach(AlertGuest2 alert in alerts)
+                foreach (AlertGuest2 alert in alerts)
                 {
                     AlertGuestForm alertGuestForm = new AlertGuestForm(alert.Id);
-                    if(GuestId==alert.Guest2Id && alert.Availability==false)
+                    if (GuestId == alert.Guest2Id && alert.Availability == false)
                         alertGuestForm.Show();
                 }
             }
-        }
-        private ObservableCollection<Tour> GetAllTours()
-        {
-            foreach (TourInstance tourInstance in TourInstances)
-            {
-                Tours.Add(tourInstance.Tour);
-            }
-            return Tours;
         }
         public void SetLocations()
         {
             Serializer<Location> _serializerLocation = new Serializer<Location>();
             List<Location> locations = _serializerLocation.FromCSV("../../../Resources/Data/locations.csv");
-            foreach (Tour tour in Tours)
+            Serializer<Tour> _serializerTour = new Serializer<Tour>();
+            List<Tour> tours = _serializerTour.FromCSV("../../../Resources/Data/tours.csv");
+            foreach (Location location in locations)
             {
-                if (locations.Find(n => n.Id == tour.Location.Id) != null)
+                foreach (Tour tour in tours)
                 {
-                    tour.Location = locations.Find(n => n.Id == tour.Location.Id);
+                    if (location.Id == tour.Location.Id)
+                        tour.Location = location;
+                }
+            }
+
+            foreach (TourInstance tourInstance in TourInstances)
+            {
+                foreach (Tour tour in tours)
+                {
+                    if (tour.Id == tourInstance.Tour.Id)
+                    {
+                        tourInstance.Tour = tour;
+                    }
                 }
             }
         }
@@ -105,60 +108,53 @@ namespace InitialProject.View
 
         private void Search_Click(object sender, RoutedEventArgs e)
         {
-            List<Tour> listTours = new List<Tour>();
-            foreach (TourInstance tourInstance in TourInstances)
+            List<TourInstance> listTours = _tourInstanceRepository.GetAll();
+            TourInstances.Clear();
+            foreach (TourInstance tourInstance in listTours)
             {
-                listTours.Add(tourInstance.Tour);
+                TourInstances.Add(tourInstance);
             }
-            Tours.Clear();
-            foreach (Tour tour in listTours)
+            foreach (TourInstance tourInstance in listTours)
             {
-                Tours.Add(tour);
-            }
-            foreach (Tour tour in listTours)
-            {
-                if (tour.Location.City != null)
+                if (tourInstance.Tour.Location.City != null)
                 {
-                    if (!tour.Location.City.ToLower().Contains(cityInput.Text.ToLower()))
+                    if (!tourInstance.Tour.Location.City.ToLower().Contains(cityInput.Text.ToLower()))
                     {
-                        Tours.Remove(tour);
+                        TourInstances.Remove(tourInstance);
                     }
                 }
-                if (tour.Location.Country != null)
+                if (tourInstance.Tour.Location.Country != null)
                 {
-                    if (!tour.Location.Country.ToLower().Contains(countryInput.Text.ToLower()))
+                    if (!tourInstance.Tour.Location.Country.ToLower().Contains(countryInput.Text.ToLower()))
                     {
-                        Tours.Remove(tour);
+                        TourInstances.Remove(tourInstance);
                     }
                 }
-                if (tour.Duration != null)
+                if (tourInstance.Tour.Duration != null)
                 {
                     if (durationInput.Text != "")
                     {
-                        if (tour.Duration < Convert.ToDouble(durationInput.Text))
+                        if (tourInstance.Tour.Duration < Convert.ToDouble(durationInput.Text))
                         {
-                            Tours.Remove(tour);
+                            TourInstances.Remove(tourInstance);
                         }
                     }
                 }
-                if (tour.Language != null)
+                if (tourInstance.Tour.Language != null)
                 {
-                    if (!tour.Language.ToLower().Contains(languageInput.Text.ToLower()))
+                    if (!tourInstance.Tour.Language.ToLower().Contains(languageInput.Text.ToLower()))
                     {
-                        Tours.Remove(tour);
+                        TourInstances.Remove(tourInstance);
                     }
                 }
-                if (tour.MaxGuests != null)
+                if (tourInstance.Tour.MaxGuests != null)
                 {
-                    if (Convert.ToInt32(capacityNumber.Text) > tour.MaxGuests)
+                    if (Convert.ToInt32(capacityNumber.Text) > tourInstance.Tour.MaxGuests)
                     {
-                        Tours.Remove(tour);
+                        TourInstances.Remove(tourInstance);
                     }
                     
                 }
-                
-
-
             }
         }
         public event PropertyChangedEventHandler PropertyChanged;
@@ -197,17 +193,17 @@ namespace InitialProject.View
         }
         private void Reserve(object sender, RoutedEventArgs e)
         {
-            Tour currentTour = (Tour)TourListDataGrid.CurrentItem;
-            TourInstance currentTourInstance=new TourInstance();
+            //Tour currentTour = (Tour)TourListDataGrid.CurrentItem;
+            TourInstance currentTourInstance = (TourInstance)TourListDataGrid.CurrentItem;
             foreach(TourInstance tourInstance in TourInstances)
             {
-                if (tourInstance.Tour.Id == currentTour.Id && (TourListDataGrid.SelectedIndex+1)==tourInstance.Id)
+                if (tourInstance.Id==currentTourInstance.Id)
                 {
                     currentTourInstance = tourInstance;
                 }
             }
            
-            TourReservationForm tourReservationForm = new TourReservationForm(currentTour,currentTourInstance,GuestId);
+            TourReservationForm tourReservationForm = new TourReservationForm(currentTourInstance,GuestId);
             tourReservationForm.Show();
         }
     }

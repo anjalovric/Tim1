@@ -9,15 +9,13 @@ namespace InitialProject.Model
     public class TourReservation:ISerializable
     {
         public int Id { get; set; } 
-        public int TourId { get; set; }
         public int TourInstanceId { get; set; }
         public int CurrentGuestsNumber { get; set; }
         public int GuestId { get; set; }
         public TourReservation() { }
 
-        public TourReservation(int tourId,int tourInstanceId, int currentGuestsNumber, int guestId)
+        public TourReservation(int tourInstanceId, int currentGuestsNumber, int guestId)
         {
-            TourId = tourId;
             TourInstanceId = tourInstanceId;
             CurrentGuestsNumber = currentGuestsNumber;
             GuestId = guestId;
@@ -25,15 +23,14 @@ namespace InitialProject.Model
         public void FromCSV(string[] values)
         {
             Id = Convert.ToInt32(values[0]);
-            TourId = Convert.ToInt32(values[1]);
-            TourInstanceId = Convert.ToInt32(values[2]);
-            CurrentGuestsNumber = Convert.ToInt32(values[3]);
-            GuestId = Convert.ToInt32(values[4]);
+            TourInstanceId = Convert.ToInt32(values[1]);
+            CurrentGuestsNumber = Convert.ToInt32(values[2]);
+            GuestId = Convert.ToInt32(values[3]);
         }
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), TourId.ToString(),TourInstanceId.ToString(),CurrentGuestsNumber.ToString(),GuestId.ToString()};
+            string[] csvValues = { Id.ToString(),TourInstanceId.ToString(),CurrentGuestsNumber.ToString(),GuestId.ToString()};
             return csvValues;
         }
     }
