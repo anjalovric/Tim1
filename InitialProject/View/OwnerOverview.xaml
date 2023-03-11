@@ -19,13 +19,12 @@
         </DataGrid>
         <Button Content="Sign out" HorizontalAlignment="Left" Margin="694,38,0,0" VerticalAlignment="Top" Width="76" Click="SignOut_Click"/>
         <Label Content="Guests to Review" HorizontalAlignment="Left" Margin="50,329,0,0" VerticalAlignment="Top" Width="156"/>
-        <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" AutoGenerateColumns="False" Margin="50,360,301,35">
+        <DataGrid ItemsSource="{Binding Path= guests}" AutoGenerateColumns="False" Margin="50,360,301,35" IsReadOnly="True" SelectedItem="{Binding SelectedGuest, UpdateSourceTrigger=PropertyChanged}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Last Name" IsReadOnly="True"/>
-                <DataGridTextColumn Header="First Name" IsReadOnly="True" />
-                <DataGridTextColumn Header="Username" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Accommodation" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Days Left to Review" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Last Name" Binding="{Binding LastName}"/>
+                <DataGridTextColumn Header="First Name" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Username" Binding="{Binding Username}"/>
+                <DataGridTextColumn Header="Days Left to Review"/>
                 <DataGridTemplateColumn  Width="35">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -35,6 +34,7 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
+        <Button Name="ReviewButton" Content="Open all reviews" HorizontalAlignment="Left" Margin="548,362,0,0" VerticalAlignment="Top" Height="22" Width="162" Click="ReviewButton_Click"/>
 
     </Grid>
 </Window>

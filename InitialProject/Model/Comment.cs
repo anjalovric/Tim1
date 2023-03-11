@@ -8,20 +8,20 @@ namespace InitialProject.Model
         public int Id { get; set; }
         public DateTime CreationTime { get; set; }
         public string Text { get; set; }
-        public User User { get; set; }
+        public Guest1 Guest { get; set; }
 
         public Comment() { }
 
-        public Comment(DateTime creationTime, string text, User user)
+        public Comment(DateTime creationTime, string text, Guest1 guest)
         {
             CreationTime = creationTime;
             Text = text;
-            User = user;
+            Guest = guest;
         }
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), CreationTime.ToString(), Text, User.Id.ToString() };
+            string[] csvValues = { Id.ToString(), CreationTime.ToString(), Text, Guest.Id.ToString() };
             return csvValues;
         }
 
@@ -30,7 +30,12 @@ namespace InitialProject.Model
             Id = Convert.ToInt32(values[0]);
             CreationTime = Convert.ToDateTime(values[1]);
             Text = values[2];
-            User = new User() { Id = Convert.ToInt32(values[3]) };
+            Guest = new Guest1() { Id = Convert.ToInt32(values[3]) };
+        }
+
+        public override string ToString()
+        {
+            return Text;
         }
     }
 }

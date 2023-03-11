@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -11,17 +13,88 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using InitialProject.Model;
+using InitialProject.Repository;
 
 namespace InitialProject.View
 {
     /// <summary>
     /// Interaction logic for GuestReview.xaml
     /// </summary>
-    public partial class GuestReview : Window
+    public partial class GuestReview : Window, INotifyPropertyChanged
     {
-        public GuestReview()
+        public Guest1 guest { get; set; }
+        private ReviewOfGuest review;
+        public string CommentText { get; set; }
+        public ReviewOfGuest Review
+        {
+            get => review;
+            set
+            {
+                if (value != review)
+                {
+                    review = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public event PropertyChangedEventHandler? PropertyChanged;
+        public GuestReview(Guest1 guestToReview)
         {
             InitializeComponent();
+            DataContext = this;
+            guest = guestToReview;
+            review = new ReviewOfGuest();
+            review.Guest = guest;
         }
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        private void OkButton_Click(object sender, RoutedEventArgs e)
+        {
+            Comment comment = new Comment();
+            CommentRepository commentRepository = new CommentRepository();
+            comment.Text = CommentText;
+            comment.Guest = guest;
+            comment.CreationTime = DateTime.Now;
+            comment = commentRepository.Save(comment);
+            Review.Comment = comment;
+            GuestReviewRepository guestReviewRepository = new GuestReviewRepository();
+            guestReviewRepository.Save(Review);
+            this.Close();
+        }
+
+        private void Cleanliness_Checked(object sender, RoutedEventArgs e)
+        {
+            if ((bool)Cleanliness1.IsChecked)
+                Review.Cleanliness = 1;
+            else if ((bool)Cleanliness2.IsChecked)
+                Review.Cleanliness = 2;
+            else if ((bool)Cleanliness3.IsChecked)
+                Review.Cleanliness = 3;
+            else if ((bool)Cleanliness4.IsChecked)
+                Review.Cleanliness = 4;
+            else if ((bool)Cleanliness5.IsChecked)
+                Review.Cleanliness = 5;
+
+        }
+
+        private void RulesFollowing_Checked(object sender, RoutedEventArgs e)
+        {
+            if ((bool)RulesFollowing1.IsChecked)
+                Review.RulesFollowing = 1;
+            else if ((bool)RulesFollowing2.IsChecked)
+                Review.RulesFollowing = 2;
+            else if ((bool)RulesFollowing3.IsChecked)
+                Review.RulesFollowing = 3;
+            else if ((bool)RulesFollowing4.IsChecked)
+                Review.RulesFollowing = 4;
+            else if ((bool)RulesFollowing5.IsChecked)
+                Review.RulesFollowing = 5;
+        }
+
+
     }
 }

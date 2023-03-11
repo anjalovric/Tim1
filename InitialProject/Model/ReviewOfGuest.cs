@@ -7,7 +7,7 @@ using InitialProject.Serializer;
 
 namespace InitialProject.Model
 {
-    public class GuestReview : ISerializable
+    public class ReviewOfGuest : ISerializable
     {
         public int Id { get; set; }
         public Guest1 Guest { get; set; }
@@ -15,13 +15,18 @@ namespace InitialProject.Model
         public int RulesFollowing { get; set; }
         public Comment Comment { get; set; }
 
-        public GuestReview(){}
+        public ReviewOfGuest()
+        {
+            Guest = new Guest1();
+            Comment = new Comment();
+        }
 
-        public GuestReview(int cleanliness, int rulesFollowing, Comment comment)
+        public ReviewOfGuest(int cleanliness, int rulesFollowing, Comment comment)
         {
             Cleanliness = cleanliness;
             RulesFollowing = rulesFollowing;
             Comment = comment;
+            Guest = new Guest1();
         }
 
         public string[] ToCSV()

@@ -90,9 +90,9 @@ namespace InitialProject.Forms
             } 
             else
             {
-                Comment newComment = new Comment(DateTime.Now, Text, LoggedInUser);
-                Comment savedComment = _repository.Save(newComment);
-                CommentsOverview.Comments.Add(savedComment);
+               // Comment newComment = new Comment(DateTime.Now, Text, LoggedInUser);
+              //  Comment savedComment = _repository.Save(newComment);
+                //CommentsOverview.Comments.Add(savedComment);
             }
             
             Close();

@@ -12,14 +12,34 @@ namespace InitialProject.Repository
     {
         private const string FilePath = "../../../Resources/Data/guestReviews.csv";
 
-        private readonly Serializer<GuestReview> _serializer;
+        private readonly Serializer<ReviewOfGuest> _serializer;
 
-        private List<GuestReview> _reviews;
+        private List<ReviewOfGuest> _reviews;
 
         public GuestReviewRepository()
         {
-            _serializer = new Serializer<GuestReview>();
+            _serializer = new Serializer<ReviewOfGuest>();
             _reviews = _serializer.FromCSV(FilePath);
+            AddGuest();
+            AddComment();
+        }
+
+        private void AddGuest()
+        {
+            Guest1Repository guest1Repository = new Guest1Repository();
+            foreach(ReviewOfGuest review in _reviews)
+            {
+                review.Guest = guest1Repository.GetAll().Find(n => n.Id == review.Guest.Id);
+            }
+        }
+
+        private void AddComment()
+        {
+            CommentRepository commentRepository = new CommentRepository();
+            foreach (ReviewOfGuest review in _reviews)
+            {
+                review.Comment = commentRepository.GetAll().Find(n => n.Id == review.Comment.Id);
+            }
         }
         public int NextId()
         {
@@ -29,6 +49,23 @@ namespace InitialProject.Repository
                 return 1;
             }
             return _reviews.Max(c => c.Id) + 1;
+        }
+
+        public bool HasReview(Guest1 guest)
+        {
+            return _reviews.Find(n => n.Guest.Id == guest.Id) != null;
+        }
+
+        public void Save(ReviewOfGuest review)
+        {
+            review.Id = NextId();
+            _reviews.Add(review);
+            _serializer.ToCSV(FilePath, _reviews);
+        }
+
+        public List<ReviewOfGuest> GetAll()
+        {
+            return _reviews;
         }
     }
 }
