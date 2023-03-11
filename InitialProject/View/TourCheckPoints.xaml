@@ -26,9 +26,9 @@
                 <DataGridTextColumn Header="Checked" Binding="{Binding Checked}" Width="66"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Height="30" Width="75" Margin="330,300,89,118" Click="FinishTour" >Finish tour</Button>
-        <Button Height="30" Width="75" Margin="170,300,216,118">Count guests</Button>
-        <Button x:Name="Next" Height="30" Width="75" Margin="20,300,358,118" Click="Button_Click" >Next point</Button>
+        <Button x:Name="Finish" Height="30" Width="75" Margin="330,300,89,118" Click="FinishTour" >Finish tour</Button>
+
+        <Button x:Name="Next" Height="30" Width="75" Margin="20,300,358,118" Click="Next_Click" >Next point</Button>
 
     </Grid>
 </Window>

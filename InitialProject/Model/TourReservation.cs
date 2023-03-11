@@ -12,13 +12,15 @@ namespace InitialProject.Model
         public int TourId { get; set; }
         public int TourInstanceId { get; set; }
         public int CurrentGuestsNumber { get; set; }
+        public int GuestId { get; set; }
         public TourReservation() { }
 
-        public TourReservation(int tourId,int tourInstanceId, int currentGuestsNumber)
+        public TourReservation(int tourId,int tourInstanceId, int currentGuestsNumber, int guestId)
         {
             TourId = tourId;
             TourInstanceId = tourInstanceId;
             CurrentGuestsNumber = currentGuestsNumber;
+            GuestId = guestId;
         }
         public void FromCSV(string[] values)
         {
@@ -26,11 +28,12 @@ namespace InitialProject.Model
             TourId = Convert.ToInt32(values[1]);
             TourInstanceId = Convert.ToInt32(values[2]);
             CurrentGuestsNumber = Convert.ToInt32(values[3]);
+            GuestId = Convert.ToInt32(values[4]);
         }
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), TourId.ToString(),TourInstanceId.ToString(),CurrentGuestsNumber.ToString()};
+            string[] csvValues = { Id.ToString(), TourId.ToString(),TourInstanceId.ToString(),CurrentGuestsNumber.ToString(),GuestId.ToString()};
             return csvValues;
         }
     }

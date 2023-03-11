@@ -36,6 +36,8 @@ namespace InitialProject.View
         public int pointCounter = 0;
         public ObservableCollection<CheckPoint> TourPoints { get; set; }
         public ObservableCollection<TourImage> TourImages { get; set; }
+        public ObservableCollection<TourInstance> Instances { get; set; }  
+        public ObservableCollection<TourInstance> TodayInstances { get; set; }
 
         public Tour saved;
         private int _tourId;
@@ -159,7 +161,7 @@ namespace InitialProject.View
                 }
             }
         }
-        public TourForm()
+        public TourForm(ObservableCollection<TourInstance> todayInstances)
         {
             InitializeComponent();
             DataContext = this;
@@ -170,8 +172,10 @@ namespace InitialProject.View
             _tourInstanceRepository=new TourInstanceRepository();
             TourPoints = new ObservableCollection<CheckPoint>();
             TourImages = new ObservableCollection<TourImage>();
+            Instances = new ObservableCollection<TourInstance>();
+            TodayInstances = todayInstances;
             AddNewTour.IsEnabled= false;
-            NewDate.IsEnabled= false;
+           // NewDate.IsEnabled= false;
              
 
         }
@@ -187,31 +191,48 @@ namespace InitialProject.View
 
         private void AddTour(object sender, RoutedEventArgs e)
         {
-            Location newLocation = new Location(_city,_country);
+            Location newLocation = new Location(_city, _country);
             Location savedLocation = _locationRepository.Save(newLocation);
-            
-            Tour newTour = new Tour(NameT,_maxGuests,_duration,newLocation,_description,LanguageT);
-            Tour savedTour=_tourRepository.Save(newTour);
+
+            Tour newTour = new Tour(NameT, _maxGuests, _duration, newLocation, _description, LanguageT);
+            Tour savedTour = _tourRepository.Save(newTour);
             _tourId = savedTour.Id;
             saved = savedTour;
-            TourInstance newTourInstance = new TourInstance(savedTour, Start, Hours);
-            TourInstance savedTourInstance=_tourInstanceRepository.Save(newTourInstance);
-            
-            List<CheckPoint> checkPoints = _checkPointRepository.GetAll();
-            int i = 1;
-            foreach (CheckPoint checkPoint in checkPoints)
-            {
-                if(checkPoint.TourId == -1)
-                {
-                    checkPoint.TourId = _tourId;
-                    checkPoint.Order = i;
-                    _checkPointRepository.Update(checkPoint);
-                    i++;
-                }
-            }
+            //TourInstance newTourInstance = new TourInstance(savedTour, Start, Hours);
+            //TourInstance savedTourInstance = _tourInstanceRepository.Save(newTourInstance);
 
+            UpdateCheckPoints();
+            AddImages();
+            SaveInstances(savedTour);
+            this.Close();
+            //AddNewTour.IsEnabled = false;
+           // Cancel.IsEnabled = false;
+            // NewDate.IsEnabled = true;
+            
+        }
+
+        private void SaveInstances(Tour savedTour)
+        {
+            TourInstanceRepository tourInstanceRepository = new TourInstanceRepository();
+            foreach(TourInstance instance in Instances)
+            {
+                instance.Tour = savedTour;
+                tourInstanceRepository.Save(instance);
+                DisplayIfToday(instance);
+            }
+        }
+
+        private void DisplayIfToday(TourInstance instance)
+        {
+            if (instance.StartDate.Equals(DateTime.Today))
+            {
+                TodayInstances.Add(instance);
+            }
+        }
+        private void AddImages()
+        {
             List<TourImage> tourImages = _tourImageRepository.GetAll();
-            foreach(TourImage image in tourImages)
+            foreach (TourImage image in tourImages)
             {
                 if (image.TourId == -1)
                 {
@@ -219,9 +240,22 @@ namespace InitialProject.View
                     _tourImageRepository.Update(image);
                 }
             }
-            AddNewTour.IsEnabled = false;
-            Cancel.IsEnabled = false;
-            NewDate.IsEnabled = true;
+        }
+
+        private void UpdateCheckPoints()
+        {
+            List<CheckPoint> checkPoints = _checkPointRepository.GetAll();
+            int i = 1;
+            foreach (CheckPoint checkPoint in checkPoints)
+            {
+                if (checkPoint.TourId == -1)
+                {
+                    checkPoint.TourId = _tourId;
+                    checkPoint.Order = i;
+                    _checkPointRepository.Update(checkPoint);
+                    i++;
+                }
+            }
         }
 
         private void AddCheckPoint(object sender, RoutedEventArgs e)
@@ -262,8 +296,9 @@ namespace InitialProject.View
 
         private void NewInstance(object sender, RoutedEventArgs e)
         {
-            NewTourInstanceDate newTourInstance = new NewTourInstanceDate(saved);
+            NewTourInstanceDate newTourInstance = new NewTourInstanceDate(saved, Instances);
             newTourInstance.Show();
         }
+
     }
 }

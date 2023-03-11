@@ -49,7 +49,7 @@ namespace InitialProject.View
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            TourForm tourForm = new TourForm();
+            TourForm tourForm = new TourForm(Tours);
             tourForm.Show();
 
         }

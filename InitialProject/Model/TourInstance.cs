@@ -48,5 +48,10 @@ namespace InitialProject.Model
             StartClock = startClock;
             Finished = false;
         }
+
+        public override string ToString()
+        {
+            return StartDate.ToShortDateString() + " " + StartClock.ToString();
+        }
     }
 }

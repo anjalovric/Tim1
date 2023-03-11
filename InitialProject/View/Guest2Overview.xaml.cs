@@ -37,21 +37,42 @@ namespace InitialProject.View
                 OnPropertyChanged("Tours");
             }
         }
+        private const string FilePath = "../../../Resources/Data/alertsGuest2.csv";
+        private const string filePath = "../../../Resources/Data/users.csv";
         private ObservableCollection<TourInstance> TourInstances;
         private ObservableCollection<Tour> tours { get; set; }  
         public Tour _selected;
         private TourRepository _tourRepository;
         private TourInstanceRepository _tourInstanceRepository;
+        private Serializer<AlertGuest2> _alertGuestSerializer;
+        private Serializer<User> _userSerializer;
+        private List<AlertGuest2> alerts;
+        private List<User> users;
+        private int GuestId;
         public Guest2Overview()
         {
             InitializeComponent();
             DataContext = this;
+            _alertGuestSerializer = new Serializer<AlertGuest2>();
+            _userSerializer = new Serializer<User>();
             _tourRepository = new TourRepository();
             _tourInstanceRepository = new TourInstanceRepository();
             TourInstances = new ObservableCollection<TourInstance>(_tourInstanceRepository.GetAll());
             Tours = new ObservableCollection<Tour>();
             GetAllTours();
             SetLocations();
+            users = _userSerializer.FromCSV(filePath);
+            alerts=_alertGuestSerializer.FromCSV(FilePath);
+            GuestId = GetGuest2Id();
+            if (alerts.Count() != 0)
+            {
+                foreach(AlertGuest2 alert in alerts)
+                {
+                    AlertGuestForm alertGuestForm = new AlertGuestForm(alert.Id);
+                    if(GuestId==alert.Guest2Id && alert.Availability==false)
+                        alertGuestForm.Show();
+                }
+            }
         }
         private ObservableCollection<Tour> GetAllTours()
         {
@@ -163,6 +184,17 @@ namespace InitialProject.View
                 capacityNumber.Text = changedCapacityNumber.ToString();
             }
         }
+        private int GetGuest2Id() //ovo ce morati drugacije kada budemo imali vise gostiju
+        {
+            foreach(User user in users)
+            {
+                if (user.Role.ToString()=="GUEST2")
+                {
+                    return user.Id;
+                }
+            }
+            return 0;
+        }
         private void Reserve(object sender, RoutedEventArgs e)
         {
             Tour currentTour = (Tour)TourListDataGrid.CurrentItem;
@@ -174,7 +206,8 @@ namespace InitialProject.View
                     currentTourInstance = tourInstance;
                 }
             }
-            TourReservationForm tourReservationForm = new TourReservationForm(currentTour,currentTourInstance);
+           
+            TourReservationForm tourReservationForm = new TourReservationForm(currentTour,currentTourInstance,GuestId);
             tourReservationForm.Show();
         }
     }
