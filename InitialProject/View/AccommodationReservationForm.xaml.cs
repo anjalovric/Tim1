@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -33,15 +34,19 @@ namespace InitialProject.View
 
 
 
-        public AccommodationReservationForm(Accommodation currentAccommodation)
+        public AccommodationReservationForm(Accommodation currentAccommodation, ref AccommodationRepository accommodationRepository)
         {
             InitializeComponent();
             this.DataContext = this;
             this.currentAccommodation = currentAccommodation;
             accommodationReservationRepository = new AccommodationReservationRepository();
             this.reservations = new List<AccommodationReservation>(accommodationReservationRepository.GetAll());
+            foreach(AccommodationReservation reservation in reservations)
+            {
+                reservation.currentAccommodation = accommodationRepository.GetAll().Find(accommodationInstance => accommodationInstance.Id == reservation.currentAccommodation.Id);
 
-
+            }
+            
         }
 
         private void DecrementDaysNumber(object sender, RoutedEventArgs e)
@@ -88,23 +93,15 @@ namespace InitialProject.View
 
             else
             {
-                if (reservations.Count == 0)
+               /* if (reservations.Count == 0)
                 {
-                    AccommodationReservation reservation = new AccommodationReservation(0, currentAccommodation.Id, StartDate, EndDate);
+                    AccommodationReservation reservation = new AccommodationReservation(0, currentAccommodation, StartDate, EndDate);
                     accommodationReservationRepository.Add(reservation);
                     this.Close();       //napisati rezerv uspjesno dodata, ili tako nesto
-                }
-                FindAvailableDatesInRange(currentAccommodation.Id);
+                }*/
+                    reservations=accommodationReservationRepository.GetAll();
+                    FindAvailableDates(currentAccommodation.Id);
                 
-                if (reservations.Count == 1)
-                {
-                    AccommodationReservation reservation = new AccommodationReservation(0, currentAccommodation.Id, StartDate, EndDate);
-                    accommodationReservationRepository.Add(reservation);
-
-
-                    this.Close();
-                }
-
 
             }
 
@@ -115,7 +112,7 @@ namespace InitialProject.View
         {
             foreach (AccommodationReservation reservation in reservations)
             {
-                if (currentAccommodationId == reservation.AccommodationId)
+                if (currentAccommodationId == reservation.currentAccommodation.Id)
                 {
                     if (date >= reservation.ComingDate && date <= reservation.LeavingDate)
                     {
@@ -125,7 +122,7 @@ namespace InitialProject.View
             }
             return true;
         }
-
+        
         public void AddAvailableDateToList(DateTime date, ref List<DateTime> freeDays, ref List<DateTime> freeDaysHelp, ref List<List<DateTime>> dateTimes)
         {
             freeDays.Add(date);
@@ -153,7 +150,7 @@ namespace InitialProject.View
             return true;
         }
 
-        public void FindAvailableDatesInRange(int currentAccommodationId)
+        public void FindAvailableDates(int currentAccommodationId)
         {
             DateTime start = StartDate;
             DateTime end = EndDate;
@@ -173,7 +170,7 @@ namespace InitialProject.View
 
             if (dateTimes.Count > 0)
             {
-                DatesForAccommodationReservation datesListWindow = new DatesForAccommodationReservation();
+                DatesForAccommodationReservation datesListWindow = new DatesForAccommodationReservation(currentAccommodation,accommodationReservationRepository);
                 bool isConsecutive = true;
                 foreach (List<DateTime> dates in dateTimes)
                 {

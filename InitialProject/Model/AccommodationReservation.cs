@@ -12,16 +12,18 @@ namespace InitialProject.Model
     {
         public int Id { get; set; }
         public int GuestId { get; set; }
-        public int AccommodationId { get; set; }
+        public Accommodation currentAccommodation { get; set; }
 
         public DateTime ComingDate  { get; set; }
         public DateTime LeavingDate { get; set; }
 
-        public AccommodationReservation() { }
-        public AccommodationReservation(int guestId, int accommodationId, DateTime comingDate, DateTime leavingDate)
+        public AccommodationReservation() { 
+            currentAccommodation=new Accommodation();
+        }
+        public AccommodationReservation(int guestId, Accommodation currentAccommodation, DateTime comingDate, DateTime leavingDate)
         {
             GuestId = guestId;
-            AccommodationId = accommodationId;
+            this.currentAccommodation = currentAccommodation;
             ComingDate = comingDate;
             LeavingDate = leavingDate;
         }
@@ -30,7 +32,7 @@ namespace InitialProject.Model
         {
             Id = Convert.ToInt32(values[0]);
             GuestId = Convert.ToInt32(values[1]);
-            AccommodationId = Convert.ToInt32(values[2]);
+            currentAccommodation.Id = Convert.ToInt32(values[2]);
             ComingDate = Convert.ToDateTime(values[3]);
             LeavingDate = Convert.ToDateTime(values[4]);
 
@@ -39,7 +41,7 @@ namespace InitialProject.Model
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), GuestId.ToString(), AccommodationId.ToString(), ComingDate.ToString(), LeavingDate.ToString()};
+            string[] csvValues = { Id.ToString(), GuestId.ToString(), currentAccommodation.Id.ToString(), ComingDate.ToString(), LeavingDate.ToString()};
             return csvValues;
         }
     }

@@ -30,7 +30,7 @@
             </Label.RenderTransform>
         </Label>
 
-        <TextBox x:Name="numberOfDays" Text="1" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="123" TextAlignment="Center" Height="30" Background="#FFDFDCDC" FontSize="16" Margin="526,0,0,404"/>
+        <TextBlock x:Name="numberOfDays" Text="1" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="123" TextAlignment="Center" Height="30" Background="#FFDFDCDC" FontSize="16" Margin="526,0,0,404"/>
         <Button x:Name="incrementNumberOfDays" Click="IncrementDaysNumber"  Content="+" TextElement.FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="30" Margin="661,0,0,404" Width="37" Background="#FFDDDDDD"/>
         <Button x:Name="decrementNumberOfDays" Click="DecrementDaysNumber" Content="-" TextElement.FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="30" Width="37" Margin="476,0,0,404"/>
         <Label Content="Number of days to stay:" Margin="443,10,208,447" RenderTransformOrigin="0.5,0.5" TextElement.FontWeight="DemiBold">
@@ -46,7 +46,7 @@
 
 
 
-        <Button Content="Find" TextElement.FontWeight="Bold" HorizontalAlignment="Left" Margin="198,415,0,0" VerticalAlignment="Top" Width="68" Click="Confirm_Click" Height="27"/>
+        <Button Content="OK" TextElement.FontWeight="Bold" HorizontalAlignment="Left" Margin="198,415,0,0" VerticalAlignment="Top" Width="68" Click="Confirm_Click" Height="27"/>
         <Button Content="Cancel" TextElement.FontWeight="Bold" HorizontalAlignment="Right" Margin="0,415,198,0" VerticalAlignment="Top" Width="68" Click="Cancel_Click" Height="27"/>
 
     </Grid>

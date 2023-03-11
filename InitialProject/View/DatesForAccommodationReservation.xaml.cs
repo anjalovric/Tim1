@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using InitialProject.Model;
+using InitialProject.Repository;
 
 namespace InitialProject.View
 {
@@ -24,13 +25,38 @@ namespace InitialProject.View
     public partial class DatesForAccommodationReservation : Window
     {
         public ObservableCollection<FreeDatesForAccommodationReservation> freeDatesForAccommodations { get; set; }
-       
-        public DatesForAccommodationReservation()
+        Accommodation currentAccommodation;
+        private AccommodationReservationRepository accommodationReservationRepository;
+        private FreeDatesForAccommodationReservation selectedDateRange;
+        public FreeDatesForAccommodationReservation SelectedDateRange
+        {
+            get { return selectedDateRange; }
+            set
+            {
+                if (selectedDateRange != value)
+                {
+                    selectedDateRange = value;
+                    this.OnPropertyChanged("SelectedDateRange");
+                }
+            }
+        }
+
+        public DatesForAccommodationReservation(Accommodation currentAccommodation, AccommodationReservationRepository accommodationReservationRepository)
         {
             InitializeComponent();
             this.DataContext = this;
+            this.currentAccommodation = currentAccommodation;
             freeDatesForAccommodations = new ObservableCollection<FreeDatesForAccommodationReservation>();
+            this.accommodationReservationRepository = accommodationReservationRepository;
             
+        }
+
+        private void ChooseDateButtonClick(object sender, RoutedEventArgs e)
+        {
+            AccommodationGuestsNumberInput guestsNumber = new AccommodationGuestsNumberInput(currentAccommodation, selectedDateRange, accommodationReservationRepository);
+            guestsNumber.Owner = this;
+            guestsNumber.Show();
+          
         }
         public void AddNewDateRange(DateTime startDate, DateTime endDate)
         {
@@ -43,5 +69,7 @@ namespace InitialProject.View
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        
     }
 }
