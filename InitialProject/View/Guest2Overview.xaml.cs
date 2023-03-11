@@ -163,5 +163,19 @@ namespace InitialProject.View
                 capacityNumber.Text = changedCapacityNumber.ToString();
             }
         }
+        private void Reserve(object sender, RoutedEventArgs e)
+        {
+            Tour currentTour = (Tour)TourListDataGrid.CurrentItem;
+            TourInstance currentTourInstance=new TourInstance();
+            foreach(TourInstance tourInstance in TourInstances)
+            {
+                if (tourInstance.Tour.Id == currentTour.Id && (TourListDataGrid.SelectedIndex+1)==tourInstance.Id)
+                {
+                    currentTourInstance = tourInstance;
+                }
+            }
+            TourReservationForm tourReservationForm = new TourReservationForm(currentTour,currentTourInstance);
+            tourReservationForm.Show();
+        }
     }
 }
