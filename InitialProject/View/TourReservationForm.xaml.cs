@@ -108,7 +108,7 @@ namespace InitialProject.View
                     _tourReservationRepository.Delete(tourReservation);
                 }
             }
-            TourReservation newTourReservation = new TourReservation(CurrentTour.Id,_tourInstance.Id,GuestsNumber);
+            TourReservation newTourReservation = new TourReservation(CurrentTour.Id,_tourInstance.Id,GuestsNumber,0);
             _tourReservationRepository.Save(newTourReservation);
             this.Close();
         }
