@@ -24,7 +24,6 @@
                 <DataGridTextColumn Header="Last Name" Binding="{Binding LastName}"/>
                 <DataGridTextColumn Header="First Name" Binding="{Binding Name}"/>
                 <DataGridTextColumn Header="Username" Binding="{Binding Username}"/>
-                <DataGridTextColumn Header="Days Left to Review"/>
                 <DataGridTemplateColumn  Width="35">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -35,6 +34,5 @@
             </DataGrid.Columns>
         </DataGrid>
         <Button Name="ReviewButton" Content="Open all reviews" HorizontalAlignment="Left" Margin="548,362,0,0" VerticalAlignment="Top" Height="22" Width="162" Click="ReviewOverview_Click"/>
-
     </Grid>
 </Window>
