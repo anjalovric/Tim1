@@ -175,7 +175,7 @@ namespace InitialProject.View
             Instances = new ObservableCollection<TourInstance>();
             TodayInstances = todayInstances;
             AddNewTour.IsEnabled= false;
-           // NewDate.IsEnabled= false;
+           
              
 
         }

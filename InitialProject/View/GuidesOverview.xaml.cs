@@ -28,6 +28,7 @@ namespace InitialProject.View
         public TourInstance _selected;
         private TourRepository _tourRepository;
         private TourInstanceRepository _tourInstanceRepository;
+
         public TourInstance Selected
         {
             get { return _selected; }
@@ -45,6 +46,8 @@ namespace InitialProject.View
             _tourRepository = new TourRepository();
             _tourInstanceRepository = new TourInstanceRepository();
             Tours = new ObservableCollection<TourInstance>(_tourInstanceRepository.GetByStart(DateTime.Now));
+            string todayDate = DateTime.Now.Date.ToString();
+            
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -62,9 +65,18 @@ namespace InitialProject.View
 
         private void StartTour(object sender, RoutedEventArgs e)
         {
-            TourCheckPoints checkPoints = new TourCheckPoints(Selected);    
+
+            TourCheckPoints checkPoints = new TourCheckPoints(Selected,Tours);    
             checkPoints.Show();
             
         }
+
+        private void SignOutClick(object sender, RoutedEventArgs e)
+        {
+            SignInForm signInForm = new SignInForm();
+            signInForm.Show();
+            this.Close();
+        }
+
     }
 }
