@@ -19,13 +19,11 @@
         </DataGrid>
         <Button Content="Sign out" HorizontalAlignment="Left" Margin="694,38,0,0" VerticalAlignment="Top" Width="76" Click="SignOut_Click"/>
         <Label Content="Guests to Review" HorizontalAlignment="Left" Margin="50,329,0,0" VerticalAlignment="Top" Width="156"/>
-        <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" AutoGenerateColumns="False" Margin="50,360,301,35">
+        <DataGrid ItemsSource="{Binding Path= guests}" AutoGenerateColumns="False" Margin="50,360,301,35" IsReadOnly="True" SelectedItem="{Binding SelectedGuest, UpdateSourceTrigger=PropertyChanged}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Last Name" />
-                <DataGridTextColumn Header="First Name" />
-                <DataGridTextColumn Header="Username" />
-                <DataGridTextColumn Header="Accommodation" />
-                <DataGridTextColumn Header="Days Left to Review" />
+                <DataGridTextColumn Header="Last Name" Binding="{Binding LastName}"/>
+                <DataGridTextColumn Header="First Name" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Username" Binding="{Binding Username}"/>
                 <DataGridTemplateColumn  Width="35">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -35,6 +33,6 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-
+        <Button Name="ReviewButton" Content="Open all reviews" HorizontalAlignment="Left" Margin="548,362,0,0" VerticalAlignment="Top" Height="22" Width="162" Click="ReviewOverview_Click"/>
     </Grid>
 </Window>

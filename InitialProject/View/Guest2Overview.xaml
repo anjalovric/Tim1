@@ -21,6 +21,13 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
+                <DataGridTemplateColumn x:Name="detailsView" Header="Details" Width="0.9*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Name="detailsButton" Content="View" Click="ViewDetails"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
 
 
@@ -46,10 +53,6 @@
         <Button x:Name="decrementCapacityNumber" Content="-" HorizontalAlignment="Left" Margin="538,90,0,0" VerticalAlignment="Top" Width="20" Click="decrementCapacityNumber_Click"/>
         <Button x:Name="incrementCapacityNumber" Content="+" HorizontalAlignment="Left" Margin="672,90,0,0" VerticalAlignment="Top" Width="20" Click="incrementCapacityNumber_Click"/>
         <Button Content="Search" FontWeight="Bold" HorizontalAlignment="Left" Margin="732,87,0,0" VerticalAlignment="Top" Height="22" Click="Search_Click"/>
-
-
-
-        <Button Content="Details" HorizontalAlignment="Left" Margin="732,375,0,0" VerticalAlignment="Top" Height="27" Width="49"/>
 
 
 
