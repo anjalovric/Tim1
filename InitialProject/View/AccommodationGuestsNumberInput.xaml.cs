@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -25,13 +26,15 @@ namespace InitialProject.View
         public Accommodation currentAccommodation { get; set; }
         public FreeDatesForAccommodationReservation selectedDateRange { get; set; }
         private AccommodationReservationRepository accommodationReservationRepository;
-        public AccommodationGuestsNumberInput(Accommodation currentAccommodation, FreeDatesForAccommodationReservation selectedDateRange, AccommodationReservationRepository accommodationReservationRepository)
+        public ObservableCollection<FreeDatesForAccommodationReservation> freeDatesForAccommodations { get; set; }
+        public AccommodationGuestsNumberInput(Accommodation currentAccommodation, FreeDatesForAccommodationReservation selectedDateRange, AccommodationReservationRepository accommodationReservationRepository, ObservableCollection<FreeDatesForAccommodationReservation> freeDatesForAccommodations)
         {
             InitializeComponent();
             this.DataContext = this;
             this.currentAccommodation = currentAccommodation;
             this.selectedDateRange = selectedDateRange;
             this.accommodationReservationRepository = accommodationReservationRepository;
+            this.freeDatesForAccommodations = freeDatesForAccommodations;
         }
 
         private void Confirm_Click(object sender, RoutedEventArgs e)
@@ -47,14 +50,47 @@ namespace InitialProject.View
                 {
                     AccommodationReservation newReservation = new AccommodationReservation(0, currentAccommodation, selectedDateRange.Start, selectedDateRange.End);
                     accommodationReservationRepository.Add(newReservation);
+                    /* int count = freeDatesForAccommodations.Count;
+                     List<FreeDatesForAccommodationReservation> help = new List<FreeDatesForAccommodationReservation>(freeDatesForAccommodations);
+
+                     List<DateTime> selectedRangeList = new List<DateTime>();
+                     for (var dt = selectedDateRange.Start; dt <= selectedDateRange.End; dt = dt.AddDays(1))
+                     {
+                         selectedRangeList.Add(dt);
+                     }
+                     foreach (FreeDatesForAccommodationReservation date in help)
+                     {
+                         for (var dt1 = date.Start; dt1 <= date.End; dt1 = dt1.AddDays(1))
+                         {
+                             foreach (DateTime dt in selectedRangeList)
+                             {
+                                 if(dt.Equals(dt1))
+                                 {
+                                     if(freeDatesForAccommodations.Contains(date))
+                                         freeDatesForAccommodations.Remove(date);
+
+                                 }
+                             }
+                         }
+                     }*/
+
+                    foreach (Window window in Application.Current.Windows)
+                    {
+                        if (window.GetType() == typeof(AccommodationReservationForm))
+                        {
+                            (window as AccommodationReservationForm).FindAvailableDates(currentAccommodation.Id);
+                        }
+                    }
                     this.Close();
                     this.Owner.Close();
+                    
                     
                     
                 }
                 else if(result == MessageBoxResult.No)
                 {
                     this.Close();
+                    this.Owner.Activate();
                 }
             }
         }
