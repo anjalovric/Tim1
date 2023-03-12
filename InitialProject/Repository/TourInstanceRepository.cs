@@ -97,9 +97,27 @@ namespace InitialProject.Repository
             List<TourInstance> list = new List<TourInstance>();
             foreach (TourInstance tour in _tourInstances)
 
-                if(tour.StartDate.Date==today.Date) 
-                { 
-                    list.Add(tour);
+                if(tour.StartDate.Date==today.Date && tour.Finished==false) 
+                {   
+                    string h = tour.StartClock.Split(':')[0];
+                    string m = tour.StartClock.Split(":")[1];
+                    string s = tour.StartClock.Split(":")[2];
+
+        
+                    string time=today.TimeOfDay.ToString();
+                    string hour = time.Split(":")[0];
+                    string minute = time.Split(":")[1];
+                    string second = time.Split(":")[2];
+                    if(Convert.ToInt32(h)> Convert.ToInt32(hour))
+                    {
+                        list.Add(tour);
+                    }else if(Convert.ToInt32(h)== Convert.ToInt32(hour) && Convert.ToInt32(m)>Convert.ToInt32(minute))
+                    {
+                        list.Add(tour);
+                    }else if(Convert.ToInt32(h)== Convert.ToInt32(hour) && Convert.ToInt32(m)== Convert.ToInt32(minute) && Convert.ToInt32(s) > Convert.ToInt32(second))
+                    {
+                        list.Add(tour);
+                    }
                 }
             Serializer<Tour> _serializerTour = new Serializer<Tour>();
             List<Tour> tours = _serializerTour.FromCSV("../../../Resources/Data/tours.csv");
