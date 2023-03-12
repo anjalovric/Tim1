@@ -22,6 +22,5 @@
             </DataGrid.Columns>
         </DataGrid>
         <Button Height="32" Width="60" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="22,0,0,10" TextElement.FontSize="15" TextElement.FontWeight="SemiBold" Click="CancelChoosingDate">Cancel</Button>
-
     </Grid>
 </Window>

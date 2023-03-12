@@ -37,7 +37,6 @@ namespace InitialProject.View
             alerts = _serializer.FromCSV(FilePath);
             _alertGuest2Repository=new AlertGuest2Repository();
         }
-
         private void Confirm_Click(object sender, RoutedEventArgs e)
         {
             foreach(AlertGuest2 alertGuest2 in alerts)
@@ -50,10 +49,8 @@ namespace InitialProject.View
             }
             this.Close();
         }
-
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
-
             this.Close();
         }
     }
