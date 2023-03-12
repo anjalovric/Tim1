@@ -30,6 +30,7 @@ namespace InitialProject.View
         private const string FilePath = "../../../Resources/Data/alertsGuest2.csv";
         private const string filePath = "../../../Resources/Data/users.csv";
         public ObservableCollection<TourInstance> TourInstances { get; set; }
+        private ObservableCollection<TourImage> TourImages;
         public TourInstance _selected;
         public TourInstance Selected
         {
@@ -43,6 +44,7 @@ namespace InitialProject.View
         }
         private TourRepository _tourRepository;
         private TourInstanceRepository _tourInstanceRepository;
+        private TourImageRepository _tourImageRepository;
         private Serializer<AlertGuest2> _alertGuestSerializer;
         private Serializer<User> _userSerializer;
         private List<AlertGuest2> alerts;
@@ -57,6 +59,8 @@ namespace InitialProject.View
             _tourRepository = new TourRepository();
             _tourInstanceRepository = new TourInstanceRepository();
             TourInstances = new ObservableCollection<TourInstance>(_tourInstanceRepository.GetAll());
+            _tourImageRepository = new TourImageRepository();
+            TourImages=new ObservableCollection<TourImage>(_tourImageRepository.GetAll());
             SetLocations();
             users = _userSerializer.FromCSV(filePath);
             alerts = _alertGuestSerializer.FromCSV(FilePath);
@@ -85,7 +89,6 @@ namespace InitialProject.View
                         tour.Location = location;
                 }
             }
-
             foreach (TourInstance tourInstance in TourInstances)
             {
                 foreach (Tour tour in tours)
@@ -105,7 +108,6 @@ namespace InitialProject.View
             this.Close();
 
         }
-
         private void Search_Click(object sender, RoutedEventArgs e)
         {
             List<TourInstance> listTours = _tourInstanceRepository.GetAll();
@@ -193,7 +195,6 @@ namespace InitialProject.View
         }
         private void Reserve(object sender, RoutedEventArgs e)
         {
-            //Tour currentTour = (Tour)TourListDataGrid.CurrentItem;
             TourInstance currentTourInstance = (TourInstance)TourListDataGrid.CurrentItem;
             foreach(TourInstance tourInstance in TourInstances)
             {
@@ -202,9 +203,31 @@ namespace InitialProject.View
                     currentTourInstance = tourInstance;
                 }
             }
-           
             TourReservationForm tourReservationForm = new TourReservationForm(currentTourInstance,GuestId);
             tourReservationForm.Show();
         }
+        private void ViewDetails(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                TourInstance currentTourInstance = (TourInstance)TourListDataGrid.CurrentItem;
+                List<string> imagesUrl = new List<string>();
+
+                foreach (TourImage image in TourImages)
+                {
+                    if (image.TourId== currentTourInstance.Tour.Id)
+                    {
+                        imagesUrl.Add(image.Url);
+                    }
+                }
+                TourDetails detailsView = new TourDetails(imagesUrl,currentTourInstance);
+                detailsView.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+            }
+        }
+
     }
 }
