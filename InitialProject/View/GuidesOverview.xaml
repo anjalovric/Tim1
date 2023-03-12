@@ -9,16 +9,17 @@
         Title="GuideOverview" Height="500" Width="850" WindowStartupLocation="CenterScreen">
     <Grid Margin="0,0,0,-6">
 
-        <DataGrid ItemsSource="{Binding Path=Tours,UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" SelectedItem="{Binding Path=Selected}" IsReadOnly="True" Margin="34,101,59,211">
+        <DataGrid CanUserResizeColumns="False" CanUserResizeRows="False" CanUserReorderColumns="False" ItemsSource="{Binding Path=Tours,UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" SelectedItem="{Binding Path=Selected}" IsReadOnly="True" Margin="34,101,59,211">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding Tour.Name}" Width="100"/>
                 <DataGridTextColumn Header="Duration" Binding="{Binding Tour.Duration}" Width="100"/>
                 <DataGridTextColumn Header="Location" Binding="{Binding Tour.Location}" Width="100"/>
                 <DataGridTextColumn Header="MaxOfGuests" Binding="{Binding Tour.MaxGuests}" Width="100"/>
                 <DataGridTextColumn Header="StartDate" Binding="{Binding StartDate}" Width="60"/>
+                <DataGridTextColumn Header="StartHour" Binding="{Binding StartClock}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Language" Binding="{Binding Tour.Language}" Width="100"/>
                 <DataGridTextColumn Header="Description" Binding="{Binding Tour.Description}" Width="90"/>
-                <DataGridTextColumn Header="StartHour" Binding="{Binding StartClock}"></DataGridTextColumn>
+
             </DataGrid.Columns>
         </DataGrid>
         <Button x:Name="StartButton" Content="START" HorizontalAlignment="Left" Height="30" Margin="265,313,0,0" VerticalAlignment="Top" Width="80" Click="StartTour"/>
