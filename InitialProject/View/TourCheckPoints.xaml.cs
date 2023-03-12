@@ -81,11 +81,14 @@ namespace InitialProject.View
 
                 _selected = selected;
             }
-           
-            CurrentPoint.Add(AllPoints.ToList().Find(n=>n.Order==counter));
-            AddAlerts(CurrentPoint[0].Id,callId);
-            CountGuests(CurrentPoint[0].Id,callId);
-            Tours = tours;
+
+            if (AllPoints.Count!=0)
+            {
+                CurrentPoint.Add(AllPoints.ToList().Find(n => n.Order == counter));
+                AddAlerts(CurrentPoint[0].Id, callId);
+                CountGuests(CurrentPoint[0].Id, callId);
+                Tours = tours;
+            }
         }
 
         private void FinishTour(object sender, RoutedEventArgs e)

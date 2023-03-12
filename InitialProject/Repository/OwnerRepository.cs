@@ -21,5 +21,10 @@ namespace InitialProject.Repository
             _serializer = new Serializer<Owner>();
             _owners = _serializer.FromCSV(FilePath);
         }
+
+        public List<Owner> GetAll()
+        {
+            return _owners;
+        }
     }
 }

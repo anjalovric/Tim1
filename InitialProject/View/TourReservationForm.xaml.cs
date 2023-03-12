@@ -28,8 +28,6 @@ namespace InitialProject.View
         private const string filePath = "../../../Resources/Data/tourInstances.csv";
         private int CurrentGuestsNumber;
         private int GuestsNumber;
-        //private Tour CurrentTour;
-        //private TourInstance _tourInstance;
         private int GuestId;
         private TourInstance CurrentTourInstance;
         private TourReservationRepository _tourReservationRepository;
@@ -41,7 +39,6 @@ namespace InitialProject.View
         {
             InitializeComponent();
             DataContext = this;
-            //_tourInstance = tourInstance;
             _serializerTourReservations = new Serializer<TourReservation>();
             _serializerTourInstances = new Serializer<TourInstance>();
             CurrentTourInstance = currentTourInstance;
@@ -81,7 +78,6 @@ namespace InitialProject.View
             changedGuestsNumber = Convert.ToInt32(capacityNumber.Text) + 1;
             capacityNumber.Text = changedGuestsNumber.ToString();
         }
-
         private void decrementGuestsNumber_Click(object sender, RoutedEventArgs e)
         {
             int changedGuestsNumber;
@@ -91,7 +87,6 @@ namespace InitialProject.View
                 capacityNumber.Text = changedGuestsNumber.ToString();
             }
         }
-        
         private void Confirm_Click(object sender, RoutedEventArgs e)
         {
             GuestsNumber = CurrentGuestsNumber - Convert.ToInt32(capacityNumber.Text);
@@ -117,13 +112,9 @@ namespace InitialProject.View
             }
 
             TourReservation newTourReservation = new TourReservation(CurrentTourInstance.Id,GuestsNumber,GuestId);
-
-            //TourReservation newTourReservation = new TourReservation(CurrentTour.Id,_tourInstance.Id,GuestsNumber,0);
-
             _tourReservationRepository.Save(newTourReservation);
             this.Close();
         }
-
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
             this.Close();

@@ -36,6 +36,7 @@ namespace InitialProject.View
             {
                 if (value != _selected)
                     _selected = value;
+                StartButton.IsEnabled= true;
                 OnPropertyChanged();
             }
         }
@@ -46,7 +47,9 @@ namespace InitialProject.View
             _tourRepository = new TourRepository();
             _tourInstanceRepository = new TourInstanceRepository();
             Tours = new ObservableCollection<TourInstance>(_tourInstanceRepository.GetByStart(DateTime.Now));
-            string todayDate = DateTime.Now.Date.ToString();
+            if(Selected ==null)
+                StartButton.IsEnabled=false;
+            //string todayDate = DateTime.Now.Date.ToString();
             
         }
 
@@ -65,9 +68,11 @@ namespace InitialProject.View
 
         private void StartTour(object sender, RoutedEventArgs e)
         {
-
-            TourCheckPoints checkPoints = new TourCheckPoints(Selected,Tours);    
-            checkPoints.Show();
+            if (Selected != null)
+            {
+                TourCheckPoints checkPoints = new TourCheckPoints(Selected, Tours);
+                checkPoints.Show();
+            }
             
         }
 

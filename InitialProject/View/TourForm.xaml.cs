@@ -226,7 +226,30 @@ namespace InitialProject.View
         {
             if (instance.StartDate.Equals(DateTime.Today))
             {
-                TodayInstances.Add(instance);
+                if (instance.Finished == false)
+                {
+                    string h = instance.StartClock.Split(':')[0];
+                    string m = instance.StartClock.Split(":")[1];
+                    string s = instance.StartClock.Split(":")[2];
+
+
+                    string time = DateTime.Today.TimeOfDay.ToString();
+                    string hour = time.Split(":")[0];
+                    string minute = time.Split(":")[1];
+                    string second = time.Split(":")[2];
+                    if (Convert.ToInt32(h) > Convert.ToInt32(hour))
+                    {
+                        TodayInstances.Add(instance);
+                    }
+                    else if (Convert.ToInt32(h) == Convert.ToInt32(hour) && Convert.ToInt32(m) > Convert.ToInt32(minute))
+                    {
+                        TodayInstances.Add(instance);
+                    }
+                    else if (Convert.ToInt32(h) == Convert.ToInt32(hour) && Convert.ToInt32(m) == Convert.ToInt32(minute) && Convert.ToInt32(s) > Convert.ToInt32(second))
+                    {
+                        TodayInstances.Add(instance);
+                    }
+                }
             }
         }
         private void AddImages()
