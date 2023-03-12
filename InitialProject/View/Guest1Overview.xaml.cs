@@ -58,6 +58,7 @@ namespace InitialProject.View
             accommodationImages = new List<AccommodationImage>(accommodationImageRepository.GetAll());
 
 
+
         }
 
         
@@ -211,7 +212,7 @@ namespace InitialProject.View
         private void Reserve(object sender, RoutedEventArgs e)
         {
             Accommodation currentAccommodation = (Accommodation)AccommodationListDataGrid.CurrentItem;
-            AccommodationReservationForm accommodationReservationForm = new AccommodationReservationForm(currentAccommodation);
+            AccommodationReservationForm accommodationReservationForm = new AccommodationReservationForm(currentAccommodation, ref accommodationRepository);
             accommodationReservationForm.Show();
         }
 
