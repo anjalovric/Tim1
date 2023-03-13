@@ -8,6 +8,7 @@ using System.Data;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -85,10 +86,13 @@ namespace InitialProject.View
             Accommodations = new ObservableCollection<Accommodation>(accommodationRepository.GetAll());
             accommodationImageRepository = new AccommodationImageRepository();
             accommodationImages = new List<AccommodationImage>(accommodationImageRepository.GetAll());
+<<<<<<< HEAD
             locationRepository = new LocationRepository();
             Countries = new ObservableCollection<string>(locationRepository.GetAllCountries());
             CitiesByCountry = new ObservableCollection<string>();
             cityInput.IsEnabled = false;
+=======
+>>>>>>> 06322cee8aa8f989db735bf81986ab51a00c671a
         }
 
         
@@ -133,25 +137,26 @@ namespace InitialProject.View
                 {
                     if (apartment.IsChecked==false)
                     {
-                        if(accommodation.Type.Name == "apartment")
+                        if(accommodation.Type.Name.ToLower() == "apartment")
                             Accommodations.Remove(accommodation);
                     }
                     if (house.IsChecked==false)
                     {
-                        if (accommodation.Type.Name == "house")
+                        if (accommodation.Type.Name.ToLower() == "house")
                             Accommodations.Remove(accommodation);
                     }
                     if (cottage.IsChecked==false)
                     {
-                        if (accommodation.Type.Name == "cottage")
+                        if (accommodation.Type.Name.ToLower() == "cottage")
                             Accommodations.Remove(accommodation);
                     }
                 }
-                if(Convert.ToInt32(numberOfGuests.Text) > accommodation.Capacity)
+
+                if(!(numberOfGuests.Text=="") && Convert.ToInt32(numberOfGuests.Text) > accommodation.Capacity)
                 {
                     Accommodations.Remove(accommodation);
                 }
-                if (Convert.ToInt32(numberOfDays.Text) < accommodation.MinDaysForReservation)
+                if (!(numberOfDays.Text == "") && Convert.ToInt32(numberOfDays.Text) < accommodation.MinDaysForReservation)
                 {
                     Accommodations.Remove(accommodation);
                 }
@@ -182,7 +187,7 @@ namespace InitialProject.View
         private void DecrementGuestsNumber(object sender, RoutedEventArgs e)
         {
             int changedGuestsNumber;
-            if(Convert.ToInt32(numberOfGuests.Text)>1)
+            if(numberOfGuests.Text!="" && Convert.ToInt32(numberOfGuests.Text)>1)
             {
                 changedGuestsNumber = Convert.ToInt32(numberOfGuests.Text) - 1;
                 numberOfGuests.Text = changedGuestsNumber.ToString();
@@ -193,15 +198,23 @@ namespace InitialProject.View
         private void IncrementGuestsNumber(object sender, RoutedEventArgs e)
         {
             int changedGuestsNumber;
-            changedGuestsNumber = Convert.ToInt32(numberOfGuests.Text) + 1;
-            numberOfGuests.Text = changedGuestsNumber.ToString();
+            if(numberOfGuests.Text=="")
+            {
+                numberOfGuests.Text = "1";
+            }
+            else
+            {
+                changedGuestsNumber = Convert.ToInt32(numberOfGuests.Text) + 1;
+                numberOfGuests.Text = changedGuestsNumber.ToString();
+            }
+            
             
         }
 
         private void DecrementDaysNumber(object sender, RoutedEventArgs e)
         {
             int changedDaysNumber;
-            if (Convert.ToInt32(numberOfDays.Text) > 1)
+            if (numberOfDays.Text != "" && Convert.ToInt32(numberOfDays.Text) > 1)
             {
                 changedDaysNumber = Convert.ToInt32(numberOfDays.Text) - 1;
                 numberOfDays.Text = changedDaysNumber.ToString();
@@ -211,8 +224,16 @@ namespace InitialProject.View
         private void IncrementDaysNumber(object sender, RoutedEventArgs e)
         {
             int changedDaysNumber;
-            changedDaysNumber = Convert.ToInt32(numberOfDays.Text) + 1;
-            numberOfDays.Text = changedDaysNumber.ToString();
+            if(numberOfDays.Text=="")
+            {
+                numberOfDays.Text = "1";
+            }
+            else
+            {
+                changedDaysNumber = Convert.ToInt32(numberOfDays.Text) + 1;
+                numberOfDays.Text = changedDaysNumber.ToString();
+            }
+            
         }
 
         private void ViewPhotos(object sender, RoutedEventArgs e)
@@ -256,6 +277,7 @@ namespace InitialProject.View
             accommodationReservationForm.Show();
         }
 
+<<<<<<< HEAD
         private void countryInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (countryInput.SelectedItem != null)
@@ -268,5 +290,10 @@ namespace InitialProject.View
                 cityInput.IsEnabled = true;
             }
         }
+=======
+       
+
+
+>>>>>>> 06322cee8aa8f989db735bf81986ab51a00c671a
     }
 }

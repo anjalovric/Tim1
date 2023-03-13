@@ -10,6 +10,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Security.Policy;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -31,6 +32,7 @@ namespace InitialProject.View
         private const string filePath = "../../../Resources/Data/users.csv";
         public ObservableCollection<TourInstance> TourInstances { get; set; }
         private ObservableCollection<TourImage> TourImages;
+        private ObservableCollection<TourReservation> TourReservations;
         public TourInstance _selected;
         public TourInstance Selected
         {
@@ -45,6 +47,7 @@ namespace InitialProject.View
         private TourRepository _tourRepository;
         private TourInstanceRepository _tourInstanceRepository;
         private TourImageRepository _tourImageRepository;
+        private TourReservationRepository _tourReservationRepository;
         private Serializer<AlertGuest2> _alertGuestSerializer;
         private Serializer<User> _userSerializer;
         private List<AlertGuest2> alerts;
@@ -74,7 +77,9 @@ namespace InitialProject.View
             _userSerializer = new Serializer<User>();
             _tourRepository = new TourRepository();
             _tourInstanceRepository = new TourInstanceRepository();
+            _tourReservationRepository = new TourReservationRepository();
             TourInstances = new ObservableCollection<TourInstance>(_tourInstanceRepository.GetAll());
+            TourReservations = new ObservableCollection<TourReservation>(_tourReservationRepository.GetAll());
             _tourImageRepository = new TourImageRepository();
             TourImages=new ObservableCollection<TourImage>(_tourImageRepository.GetAll());
             locationRepository = new LocationRepository();
@@ -88,13 +93,17 @@ namespace InitialProject.View
                 foreach (AlertGuest2 alert in alerts)
                 {
                     AlertGuestForm alertGuestForm = new AlertGuestForm(alert.Id);
-                    if (GuestId == alert.Guest2Id && alert.Availability == false)
+                    if (GuestId == alert.Guest2Id && alert.Informed == false)
                         alertGuestForm.Show();
                 }
             }
+<<<<<<< HEAD
             Countries = new ObservableCollection<string>(locationRepository.GetAllCountries());
             CitiesByCountry = new ObservableCollection<string>();
             cityInput.IsEnabled = false;
+=======
+            
+>>>>>>> 06322cee8aa8f989db735bf81986ab51a00c671a
         }
         public void SetLocations()
         {
@@ -121,62 +130,98 @@ namespace InitialProject.View
                 }
             }
         }
-        private void SignOut_Click(object sender, RoutedEventArgs e)
+        private bool IsDurationValid()
         {
-
-            SignInForm signInForm = new SignInForm();
-            signInForm.Show();
-            this.Close();
-
+            var content = durationInput.Text;
+            var regex = "^(0|([1-9][0-9]*))(\\.[0-9]+)?$";
+            var regexZero = "(0\\.0)$";
+            var regexzero = "0$";
+            Match match = Regex.Match(content, regex, RegexOptions.IgnoreCase);
+            Match matchZero = Regex.Match(content, regexZero, RegexOptions.IgnoreCase);
+            Match matchzero = Regex.Match(content, regexzero, RegexOptions.IgnoreCase);
+            bool isValid = false;
+            if (!match.Success)
+            {
+                durationInput.BorderBrush = Brushes.Red;
+                DurationLabel.Content = "This field should be positive double number";
+                durationInput.BorderThickness = new Thickness(1);
+            }
+            else if (matchZero.Success || matchzero.Success)
+            {
+                durationInput.BorderBrush = Brushes.Red;
+                DurationLabel.Content = "This field should be positive double number";
+                durationInput.BorderThickness = new Thickness(1);
+            }
+            else if (match.Success && (!matchZero.Success) && (!matchzero.Success))
+            {
+                isValid = true;
+                durationInput.BorderBrush = Brushes.Green;
+                DurationLabel.Content = string.Empty;
+            }
+            return isValid;
         }
         private void Search_Click(object sender, RoutedEventArgs e)
         {
-            List<TourInstance> listTours = _tourInstanceRepository.GetAll();
-            TourInstances.Clear();
-            foreach (TourInstance tourInstance in listTours)
+            if (IsDurationValid())
             {
-                TourInstances.Add(tourInstance);
-            }
-            foreach (TourInstance tourInstance in listTours)
-            {
-                if (tourInstance.Tour.Location.City != null)
+                List<TourInstance> listTours = _tourInstanceRepository.GetAll();
+                TourInstances.Clear();
+                foreach (TourInstance tourInstance in listTours)
                 {
+<<<<<<< HEAD
                     if (!tourInstance.Tour.Location.City.ToLower().Contains(Location.City.ToLower()))
                     {
                         TourInstances.Remove(tourInstance);
                     }
+=======
+                    TourInstances.Add(tourInstance);
+>>>>>>> 06322cee8aa8f989db735bf81986ab51a00c671a
                 }
-                if (tourInstance.Tour.Location.Country != null)
+                foreach (TourInstance tourInstance in listTours)
                 {
+<<<<<<< HEAD
                     if (!tourInstance.Tour.Location.Country.ToLower().Contains(Location.Country.ToLower()))
+=======
+                    if (tourInstance.Tour.Location.City != null)
+>>>>>>> 06322cee8aa8f989db735bf81986ab51a00c671a
                     {
-                        TourInstances.Remove(tourInstance);
-                    }
-                }
-                if (tourInstance.Tour.Duration != null)
-                {
-                    if (durationInput.Text != "")
-                    {
-                        if (tourInstance.Tour.Duration < Convert.ToDouble(durationInput.Text))
+                        if (!tourInstance.Tour.Location.City.ToLower().Contains(cityInput.Text.ToLower()))
                         {
                             TourInstances.Remove(tourInstance);
                         }
                     }
-                }
-                if (tourInstance.Tour.Language != null)
-                {
-                    if (!tourInstance.Tour.Language.ToLower().Contains(languageInput.Text.ToLower()))
+                    if (tourInstance.Tour.Location.Country != null)
                     {
-                        TourInstances.Remove(tourInstance);
+                        if (!tourInstance.Tour.Location.Country.ToLower().Contains(countryInput.Text.ToLower()))
+                        {
+                            TourInstances.Remove(tourInstance);
+                        }
                     }
-                }
-                if (tourInstance.Tour.MaxGuests != null)
-                {
-                    if (Convert.ToInt32(capacityNumber.Text) > tourInstance.Tour.MaxGuests)
+                    if (tourInstance.Tour.Duration != null)
                     {
-                        TourInstances.Remove(tourInstance);
+                        if (durationInput.Text != "")
+                        {
+                            if (tourInstance.Tour.Duration < Convert.ToDouble(durationInput.Text))
+                            {
+                                TourInstances.Remove(tourInstance);
+                            }
+                        }
                     }
-                    
+                    if (tourInstance.Tour.Language != null)
+                    {
+                        if (!tourInstance.Tour.Language.ToLower().Contains(languageInput.Text.ToLower()))
+                        {
+                            TourInstances.Remove(tourInstance);
+                        }
+                    }
+                    if (tourInstance.Tour.MaxGuests != null)
+                    {
+                        if (Convert.ToInt32(capacityNumber.Text) > tourInstance.Tour.MaxGuests)
+                        {
+                            TourInstances.Remove(tourInstance);
+                        }
+
+                    }
                 }
             }
         }
@@ -224,7 +269,7 @@ namespace InitialProject.View
                     currentTourInstance = tourInstance;
                 }
             }
-            TourReservationForm tourReservationForm = new TourReservationForm(currentTourInstance,GuestId);
+            TourReservationForm tourReservationForm = new TourReservationForm(currentTourInstance,GuestId,TourInstances,_tourInstanceRepository,Label,Restart);
             tourReservationForm.Show();
         }
         private void ViewDetails(object sender, RoutedEventArgs e)
@@ -250,6 +295,7 @@ namespace InitialProject.View
             }
         }
 
+<<<<<<< HEAD
         private void countryInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (countryInput.SelectedItem != null)
@@ -262,5 +308,24 @@ namespace InitialProject.View
                 cityInput.IsEnabled = true;
             }
         }
+=======
+        private void Restart_Click(object sender, RoutedEventArgs e)
+        {
+            List<TourInstance> listTours = _tourInstanceRepository.GetAll();
+            TourInstances.Clear();
+            foreach (TourInstance tourInstance in listTours)
+            {
+                TourInstances.Add(tourInstance);
+            }
+        }
+        private void SignOut_Click(object sender, RoutedEventArgs e)
+        {
+
+            SignInForm signInForm = new SignInForm();
+            signInForm.Show();
+            this.Close();
+
+        }
+>>>>>>> 06322cee8aa8f989db735bf81986ab51a00c671a
     }
 }
