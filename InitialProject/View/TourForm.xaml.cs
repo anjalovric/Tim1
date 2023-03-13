@@ -40,6 +40,8 @@ namespace InitialProject.View
         public ObservableCollection<TourImage> TourImages { get; set; }
         public ObservableCollection<TourInstance> Instances { get; set; }
         public ObservableCollection<TourInstance> TodayInstances { get; set; }
+        public ObservableCollection<string> Countries { get; set; }
+        public ObservableCollection<string> CitiesByCountry { get; set; }
 
         public Tour saved;
         private int _tourId;
@@ -176,8 +178,9 @@ namespace InitialProject.View
             TourImages = new ObservableCollection<TourImage>();
             Instances = new ObservableCollection<TourInstance>();
             TodayInstances = todayInstances;
-
-
+            Countries = new ObservableCollection<string>(_locationRepository.GetAllCountries());
+            CitiesByCountry = new ObservableCollection<string>(_locationRepository.GetAllCountries());
+            ComboBoxCity.IsEnabled = false;
 
         }
 
@@ -195,9 +198,8 @@ namespace InitialProject.View
             if (IsValid())
             {
 
-                Location newLocation = new Location(_city, _country);
-                Location savedLocation = _locationRepository.Save(newLocation);
-
+                Location newLocation = _locationRepository.GetLocation(Country, City);
+                
                 Tour newTour = new Tour(NameT, Convert.ToInt32(_maxGuests), Convert.ToDouble(_duration), newLocation, _description, LanguageT);
                 Tour savedTour = _tourRepository.Save(newTour);
                 _tourId = savedTour.Id;
@@ -316,61 +318,13 @@ namespace InitialProject.View
 
         private bool IsCityValid()
         {
-            var content = CityTB.Text;
-            var regex = @"[A-Za-z]+(\\ [A-Za-z]+)*$";
-            Match match = Regex.Match(content, regex, RegexOptions.IgnoreCase);
-            bool isValid = false;
-            if (CityTB.Text.Trim().Equals(""))
-            {
-                isValid = false;
-                CityTB.BorderBrush = Brushes.Red;
-                CityTB.BorderThickness = new Thickness(1);
-                CityLabel.Content = "This field can't be empty";
-            }
-            else if (!match.Success)
-            {
-                isValid = false;
-                CityTB.BorderBrush = Brushes.Red;
-                CityTB.BorderThickness = new Thickness(1);
-                CityLabel.Content = "Only can contains letters and one space between words";
-            }
-            else
-            {
-                isValid = true;
-                CityTB.BorderBrush = Brushes.Green;
-                CityLabel.Content = string.Empty;
-            }
-            return isValid;
+            return ComboBoxCity.SelectedItem != null;
         }
 
 
         private bool IsCountryValid()
         {
-            var content = CountryTB.Text;
-            var regex = @"[A-Za-z]+(\\ [A-Za-z]+)*$";
-            Match match = Regex.Match(content, regex, RegexOptions.IgnoreCase);
-            bool isValid = false;
-            if (CountryTB.Text.Trim().Equals(""))
-            {
-                isValid = false;
-                CountryTB.BorderBrush = Brushes.Red;
-                CountryTB.BorderThickness = new Thickness(1);
-                CountryLabel.Content = "This field can't be empty";
-            }
-            else if (!match.Success)
-            {
-                isValid = false;
-                CountryTB.BorderBrush = Brushes.Red;
-                CountryTB.BorderThickness = new Thickness(1);
-                CountryLabel.Content = "Only can contains letters and one space between words";
-            }
-            else
-            {
-                isValid = true;
-                CountryTB.BorderBrush = Brushes.Green;
-                CountryLabel.Content = string.Empty;
-            }
-            return isValid;
+            return ComboBoxCountry.SelectedItem != null;
         }
 
 
@@ -595,5 +549,17 @@ namespace InitialProject.View
             newTourInstance.Show();
         }
 
+        private void ComboBoxCountry_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (ComboBoxCountry.SelectedItem != null)
+            {
+                CitiesByCountry.Clear();
+                foreach (string city in _locationRepository.GetCitiesByCountry((string)ComboBoxCountry.SelectedItem))
+                {
+                    CitiesByCountry.Add(city);
+                }
+                ComboBoxCity.IsEnabled = true;
+            }
+        }
     }
 }
