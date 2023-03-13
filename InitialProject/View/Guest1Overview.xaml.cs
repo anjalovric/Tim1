@@ -86,13 +86,11 @@ namespace InitialProject.View
             Accommodations = new ObservableCollection<Accommodation>(accommodationRepository.GetAll());
             accommodationImageRepository = new AccommodationImageRepository();
             accommodationImages = new List<AccommodationImage>(accommodationImageRepository.GetAll());
-<<<<<<< HEAD
+
             locationRepository = new LocationRepository();
             Countries = new ObservableCollection<string>(locationRepository.GetAllCountries());
             CitiesByCountry = new ObservableCollection<string>();
             cityInput.IsEnabled = false;
-=======
->>>>>>> 06322cee8aa8f989db735bf81986ab51a00c671a
         }
 
         
@@ -277,7 +275,7 @@ namespace InitialProject.View
             accommodationReservationForm.Show();
         }
 
-<<<<<<< HEAD
+
         private void countryInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (countryInput.SelectedItem != null)
@@ -290,10 +288,5 @@ namespace InitialProject.View
                 cityInput.IsEnabled = true;
             }
         }
-=======
-       
-
-
->>>>>>> 06322cee8aa8f989db735bf81986ab51a00c671a
     }
 }

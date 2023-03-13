@@ -97,13 +97,11 @@ namespace InitialProject.View
                         alertGuestForm.Show();
                 }
             }
-<<<<<<< HEAD
+
             Countries = new ObservableCollection<string>(locationRepository.GetAllCountries());
             CitiesByCountry = new ObservableCollection<string>();
             cityInput.IsEnabled = false;
-=======
-            
->>>>>>> 06322cee8aa8f989db735bf81986ab51a00c671a
+
         }
         public void SetLocations()
         {
@@ -168,22 +166,22 @@ namespace InitialProject.View
                 TourInstances.Clear();
                 foreach (TourInstance tourInstance in listTours)
                 {
-<<<<<<< HEAD
+
                     if (!tourInstance.Tour.Location.City.ToLower().Contains(Location.City.ToLower()))
                     {
                         TourInstances.Remove(tourInstance);
                     }
-=======
+
                     TourInstances.Add(tourInstance);
->>>>>>> 06322cee8aa8f989db735bf81986ab51a00c671a
+
                 }
                 foreach (TourInstance tourInstance in listTours)
                 {
-<<<<<<< HEAD
+
                     if (!tourInstance.Tour.Location.Country.ToLower().Contains(Location.Country.ToLower()))
-=======
+
                     if (tourInstance.Tour.Location.City != null)
->>>>>>> 06322cee8aa8f989db735bf81986ab51a00c671a
+
                     {
                         if (!tourInstance.Tour.Location.City.ToLower().Contains(cityInput.Text.ToLower()))
                         {
@@ -295,7 +293,7 @@ namespace InitialProject.View
             }
         }
 
-<<<<<<< HEAD
+
         private void countryInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (countryInput.SelectedItem != null)
@@ -308,7 +306,7 @@ namespace InitialProject.View
                 cityInput.IsEnabled = true;
             }
         }
-=======
+
         private void Restart_Click(object sender, RoutedEventArgs e)
         {
             List<TourInstance> listTours = _tourInstanceRepository.GetAll();
@@ -326,6 +324,6 @@ namespace InitialProject.View
             this.Close();
 
         }
->>>>>>> 06322cee8aa8f989db735bf81986ab51a00c671a
+
     }
 }
