@@ -2,11 +2,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -35,6 +37,10 @@ namespace InitialProject.View
         private AccommodationRepository accommodationRepository;
         
         private ObservableCollection<Accommodation> accommodations;
+        public ObservableCollection<string> Countries { get; set; }
+        public ObservableCollection<string> CitiesByCountry { get; set; }
+        private LocationRepository locationRepository;
+        private Location location;
         public ObservableCollection<Accommodation> Accommodations 
         { 
             get { return accommodations; } 
@@ -46,8 +52,19 @@ namespace InitialProject.View
             }
                 
         }
-      
-        
+        public Location Location
+        {
+            get { return location; }
+            set
+            {
+                if (value != location)
+                {
+                    location = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         public Guest1Overview()
         {
             InitializeComponent();
@@ -57,8 +74,11 @@ namespace InitialProject.View
             accommodationImageRepository = new AccommodationImageRepository();
             accommodationImages = new List<AccommodationImage>(accommodationImageRepository.GetAll());
 
-
-
+            locationRepository = new LocationRepository();
+            location = new Location();
+            Countries = new ObservableCollection<string>(locationRepository.GetAllCountries());
+            CitiesByCountry = new ObservableCollection<string>();
+            cityInput.IsEnabled = false;
         }
 
         
@@ -80,6 +100,7 @@ namespace InitialProject.View
                 {
                     Accommodations.Add(accommodation);
                 }
+            SetLocations(listAccommodation);
 
 
             
@@ -90,11 +111,11 @@ namespace InitialProject.View
                 {
                     Accommodations.Remove(accommodation);
                 }
-                if (!accommodation.Location.City.ToLower().Contains(cityInput.Text.ToLower()))
+                if (Location.City != null && !accommodation.Location.City.ToLower().Contains(Location.City.ToLower()))
                 {
                     Accommodations.Remove(accommodation);
                 }
-                if (!accommodation.Location.Country.ToLower().Contains(countryInput.Text.ToLower()))
+                if (Location.Country != null && !accommodation.Location.Country.ToLower().Contains(Location.Country.ToLower()))
                 {
                     Accommodations.Remove(accommodation);
                 }
@@ -102,25 +123,26 @@ namespace InitialProject.View
                 {
                     if (apartment.IsChecked==false)
                     {
-                        if(accommodation.Type.Name == "apartment")
+                        if(accommodation.Type.Name.ToLower() == "apartment")
                             Accommodations.Remove(accommodation);
                     }
                     if (house.IsChecked==false)
                     {
-                        if (accommodation.Type.Name == "house")
+                        if (accommodation.Type.Name.ToLower() == "house")
                             Accommodations.Remove(accommodation);
                     }
                     if (cottage.IsChecked==false)
                     {
-                        if (accommodation.Type.Name == "cottage")
+                        if (accommodation.Type.Name.ToLower() == "cottage")
                             Accommodations.Remove(accommodation);
                     }
                 }
-                if(Convert.ToInt32(numberOfGuests.Text) > accommodation.Capacity)
+
+                if(!(numberOfGuests.Text=="") && Convert.ToInt32(numberOfGuests.Text) > accommodation.Capacity)
                 {
                     Accommodations.Remove(accommodation);
                 }
-                if (Convert.ToInt32(numberOfDays.Text) < accommodation.MinDaysForReservation)
+                if (!(numberOfDays.Text == "") && Convert.ToInt32(numberOfDays.Text) < accommodation.MinDaysForReservation)
                 {
                     Accommodations.Remove(accommodation);
                 }
@@ -132,6 +154,15 @@ namespace InitialProject.View
             
 
         }
+        private void SetLocations(List<Accommodation> accommodations)
+        {
+            List<Location> locations = locationRepository.GetAll();
+            foreach(Accommodation accommodation in accommodations)
+            {
+                accommodation.Location = locations.Find(n => n.Id == accommodation.Location.Id);
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -142,7 +173,7 @@ namespace InitialProject.View
         private void DecrementGuestsNumber(object sender, RoutedEventArgs e)
         {
             int changedGuestsNumber;
-            if(Convert.ToInt32(numberOfGuests.Text)>1)
+            if(numberOfGuests.Text!="" && Convert.ToInt32(numberOfGuests.Text)>1)
             {
                 changedGuestsNumber = Convert.ToInt32(numberOfGuests.Text) - 1;
                 numberOfGuests.Text = changedGuestsNumber.ToString();
@@ -153,15 +184,23 @@ namespace InitialProject.View
         private void IncrementGuestsNumber(object sender, RoutedEventArgs e)
         {
             int changedGuestsNumber;
-            changedGuestsNumber = Convert.ToInt32(numberOfGuests.Text) + 1;
-            numberOfGuests.Text = changedGuestsNumber.ToString();
+            if(numberOfGuests.Text=="")
+            {
+                numberOfGuests.Text = "1";
+            }
+            else
+            {
+                changedGuestsNumber = Convert.ToInt32(numberOfGuests.Text) + 1;
+                numberOfGuests.Text = changedGuestsNumber.ToString();
+            }
+            
             
         }
 
         private void DecrementDaysNumber(object sender, RoutedEventArgs e)
         {
             int changedDaysNumber;
-            if (Convert.ToInt32(numberOfDays.Text) > 1)
+            if (numberOfDays.Text != "" && Convert.ToInt32(numberOfDays.Text) > 1)
             {
                 changedDaysNumber = Convert.ToInt32(numberOfDays.Text) - 1;
                 numberOfDays.Text = changedDaysNumber.ToString();
@@ -171,8 +210,16 @@ namespace InitialProject.View
         private void IncrementDaysNumber(object sender, RoutedEventArgs e)
         {
             int changedDaysNumber;
-            changedDaysNumber = Convert.ToInt32(numberOfDays.Text) + 1;
-            numberOfDays.Text = changedDaysNumber.ToString();
+            if(numberOfDays.Text=="")
+            {
+                numberOfDays.Text = "1";
+            }
+            else
+            {
+                changedDaysNumber = Convert.ToInt32(numberOfDays.Text) + 1;
+                numberOfDays.Text = changedDaysNumber.ToString();
+            }
+            
         }
 
         private void ViewPhotos(object sender, RoutedEventArgs e)
@@ -217,5 +264,17 @@ namespace InitialProject.View
         }
 
 
+        private void countryInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (countryInput.SelectedItem != null)
+            {
+                CitiesByCountry.Clear();
+                foreach (string city in locationRepository.GetCitiesByCountry((string)countryInput.SelectedItem))
+                {
+                    CitiesByCountry.Add(city);
+                }
+                cityInput.IsEnabled = true;
+            }
+        }
     }
 }

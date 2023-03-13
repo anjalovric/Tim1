@@ -42,6 +42,7 @@ namespace InitialProject.View
             if(Convert.ToInt32(numberOfGuests.Text) > currentAccommodation.Capacity)
             {
                 MessageBox.Show("Maximum number of guests for this accommodation is " + currentAccommodation.Capacity.ToString()+ ".");
+                
             }
             else
             {

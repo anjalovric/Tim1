@@ -52,7 +52,7 @@ namespace InitialProject.View.Owner
             Images = new ObservableCollection<AccommodationImage>();
             accommodationImageRepository = new AccommodationImageRepository();
             Countries = new ObservableCollection<string>(locationRepository.GetAllCountries());
-            CitiesByCountry = new ObservableCollection<string>(locationRepository.GetAllCountries());
+            CitiesByCountry = new ObservableCollection<string>();
             ComboBoxCity.IsEnabled = false;
         }
 

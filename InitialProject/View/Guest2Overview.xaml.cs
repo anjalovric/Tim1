@@ -53,6 +53,22 @@ namespace InitialProject.View
         private List<AlertGuest2> alerts;
         private List<User> users;
         private int GuestId;
+        private LocationRepository locationRepository;
+        private Location location;
+        public ObservableCollection<string> Countries { get; set; }
+        public ObservableCollection<string> CitiesByCountry { get; set; }
+        public Location Location
+        {
+            get { return location; }
+            set
+            {
+                if (value != location)
+                {
+                    location = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         public Guest2Overview()
         {
             InitializeComponent();
@@ -66,6 +82,8 @@ namespace InitialProject.View
             TourReservations = new ObservableCollection<TourReservation>(_tourReservationRepository.GetAll());
             _tourImageRepository = new TourImageRepository();
             TourImages=new ObservableCollection<TourImage>(_tourImageRepository.GetAll());
+            locationRepository = new LocationRepository();
+            Location = new Location();
             SetLocations();
             users = _userSerializer.FromCSV(filePath);
             alerts = _alertGuestSerializer.FromCSV(FilePath);
@@ -79,7 +97,11 @@ namespace InitialProject.View
                         alertGuestForm.Show();
                 }
             }
-            
+
+            Countries = new ObservableCollection<string>(locationRepository.GetAllCountries());
+            CitiesByCountry = new ObservableCollection<string>();
+            cityInput.IsEnabled = false;
+
         }
         public void SetLocations()
         {
@@ -144,11 +166,22 @@ namespace InitialProject.View
                 TourInstances.Clear();
                 foreach (TourInstance tourInstance in listTours)
                 {
+
+                    if (!tourInstance.Tour.Location.City.ToLower().Contains(Location.City.ToLower()))
+                    {
+                        TourInstances.Remove(tourInstance);
+                    }
+
                     TourInstances.Add(tourInstance);
+
                 }
                 foreach (TourInstance tourInstance in listTours)
                 {
+
+                    if (!tourInstance.Tour.Location.Country.ToLower().Contains(Location.Country.ToLower()))
+
                     if (tourInstance.Tour.Location.City != null)
+
                     {
                         if (!tourInstance.Tour.Location.City.ToLower().Contains(cityInput.Text.ToLower()))
                         {
@@ -260,6 +293,20 @@ namespace InitialProject.View
             }
         }
 
+
+        private void countryInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (countryInput.SelectedItem != null)
+            {
+                CitiesByCountry.Clear();
+                foreach (string city in locationRepository.GetCitiesByCountry((string)countryInput.SelectedItem))
+                {
+                    CitiesByCountry.Add(city);
+                }
+                cityInput.IsEnabled = true;
+            }
+        }
+
         private void Restart_Click(object sender, RoutedEventArgs e)
         {
             List<TourInstance> listTours = _tourInstanceRepository.GetAll();
@@ -277,5 +324,6 @@ namespace InitialProject.View
             this.Close();
 
         }
+
     }
 }
