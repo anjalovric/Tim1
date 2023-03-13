@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -20,18 +22,20 @@ namespace InitialProject.View.Owner
     /// <summary>
     /// Interaction logic for AccommodationForm.xaml
     /// </summary>
-    public partial class AccommodationForm : Window
+    public partial class AccommodationForm : Window, INotifyPropertyChanged
     {
         private AccommodationRepository accommodationRepository;
         public Accommodation accommodation { get; set; }
         private AccommodationTypeRepository accommodationTypeRepository;
         public List<AccommodationType> accommodationTypes { get; set; }
         private LocationRepository locationRepository;
-        public Location location { get; set; }
+        private Location location;
         public ObservableCollection<AccommodationImage> Images { get; set; }
         public string Url { get; set; }
         private AccommodationImageRepository accommodationImageRepository;
         private ObservableCollection<Accommodation> accommodations;
+        public ObservableCollection<string> Countries { get; set; }
+        public ObservableCollection<string> CitiesByCountry { get; set; }  
         
 
         public AccommodationForm(ObservableCollection<Accommodation> oldAccommodations)
@@ -47,14 +51,33 @@ namespace InitialProject.View.Owner
             location = new Location();
             Images = new ObservableCollection<AccommodationImage>();
             accommodationImageRepository = new AccommodationImageRepository();
-
+            Countries = new ObservableCollection<string>(locationRepository.GetAllCountries());
+            CitiesByCountry = new ObservableCollection<string>(locationRepository.GetAllCountries());
+            ComboBoxCity.IsEnabled = false;
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public Location Location
+        {
+            get { return location; }
+            set
+            {
+                if (value != location)
+                {
+                    location = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         private void OK_Click(object sender, RoutedEventArgs e)
         {
             accommodation.Id = accommodationRepository.NextId();
-            locationRepository.Add(location);
-            accommodation.Location = location;
+            accommodation.Location = locationRepository.GetLocation(Location.Country, Location.City);
             accommodations.Add(accommodation); 
             accommodationRepository.Add(accommodation);
             AddImages();
@@ -82,6 +105,19 @@ namespace InitialProject.View.Owner
             image.Id = -1;
             Images.Add(image);
             TextBoxUrl.Clear();
+        }
+
+        private void ComboBoxCountry_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(ComboBoxCountry.SelectedItem != null)
+            {
+                CitiesByCountry.Clear();
+                foreach(string city in locationRepository.GetCitiesByCountry((string)ComboBoxCountry.SelectedItem))
+                {
+                    CitiesByCountry.Add(city);
+                }
+                ComboBoxCity.IsEnabled = true;
+            }
         }
     }
 }

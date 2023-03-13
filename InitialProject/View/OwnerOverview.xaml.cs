@@ -57,6 +57,7 @@ namespace InitialProject.View
             AccommodationReservationRepository reservationRepository = new AccommodationReservationRepository();
             accommodations = new ObservableCollection<Accommodation>(accommodationRepository.GetAll());
             guests = new ObservableCollection<Guest1>(reservationRepository.GetAllGuestsToReview());
+            MakeAlert();
         }
 
         private void AddAccommodationClick(object sender, RoutedEventArgs e)
@@ -84,5 +85,18 @@ namespace InitialProject.View
             guestReviewsOverview.Show();
 
         }
+
+        private void MakeAlert()
+        {
+            foreach(Guest1 guest in guests)
+            {
+                Label guestLabel = new Label();
+                guestLabel.Background = Brushes.CadetBlue;
+                guestLabel.Content = "You have not reviewed " + guest.Name + " " + guest.LastName;
+                NotificationStack.Children.Add(guestLabel);
+                NotificationStack.Background = Brushes.LightGreen;
+            }
+        }
+
     }
 }

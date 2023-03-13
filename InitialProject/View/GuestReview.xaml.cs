@@ -26,6 +26,8 @@ namespace InitialProject.View
     {
         public Guest1 guest { get; set; }
         private ReviewOfGuest review;
+        private bool cleanlinessIsChecked;
+        private bool followingRulesIsChecked;
         public ObservableCollection<Guest1> guests { get; set; }
         public ReviewOfGuest Review
         {
@@ -48,6 +50,9 @@ namespace InitialProject.View
             review = new ReviewOfGuest();
             review.Guest = guest;
             guests = allGuests;
+            OkButton.IsEnabled = false;
+            cleanlinessIsChecked = false;
+            followingRulesIsChecked = false;
         }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -74,7 +79,9 @@ namespace InitialProject.View
                 Review.Cleanliness = 4;
             else if ((bool)Cleanliness5.IsChecked)
                 Review.Cleanliness = 5;
-
+            
+            cleanlinessIsChecked=true;
+            EnableOkButton();
         }
 
         private void RulesFollowing_Checked(object sender, RoutedEventArgs e)
@@ -89,8 +96,22 @@ namespace InitialProject.View
                 Review.RulesFollowing = 4;
             else if ((bool)RulesFollowing5.IsChecked)
                 Review.RulesFollowing = 5;
+
+            followingRulesIsChecked = true;
+            EnableOkButton();
         }
 
+        private void Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
 
+        private void EnableOkButton()
+        {
+            if(cleanlinessIsChecked && followingRulesIsChecked)
+            {
+                OkButton.IsEnabled = true;
+            }
+        }
     }
 }
