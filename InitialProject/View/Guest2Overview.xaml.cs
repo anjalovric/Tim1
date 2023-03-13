@@ -156,6 +156,10 @@ namespace InitialProject.View
                 durationInput.BorderBrush = Brushes.Green;
                 DurationLabel.Content = string.Empty;
             }
+            if (durationInput.Text == "")
+            {
+                isValid = true;
+            }
             return isValid;
         }
         private void Search_Click(object sender, RoutedEventArgs e)
@@ -180,14 +184,14 @@ namespace InitialProject.View
 
                     if (!tourInstance.Tour.Location.Country.ToLower().Contains(Location.Country.ToLower()))
 
-                    if (tourInstance.Tour.Location.City != null)
+                        if (tourInstance.Tour.Location.City != null)
 
-                    {
-                        if (!tourInstance.Tour.Location.City.ToLower().Contains(cityInput.Text.ToLower()))
                         {
-                            TourInstances.Remove(tourInstance);
+                            if (!tourInstance.Tour.Location.City.ToLower().Contains(cityInput.Text.ToLower()))
+                            {
+                                TourInstances.Remove(tourInstance);
+                            }
                         }
-                    }
                     if (tourInstance.Tour.Location.Country != null)
                     {
                         if (!tourInstance.Tour.Location.Country.ToLower().Contains(countryInput.Text.ToLower()))
