@@ -111,11 +111,11 @@ namespace InitialProject.View
                 {
                     Accommodations.Remove(accommodation);
                 }
-                if (Location.City != null && !accommodation.Location.City.ToLower().Contains(Location.City.ToLower()))
+                if (Location.City != null && !accommodation.Location.City.ToLower().Equals(Location.City.ToLower()))
                 {
                     Accommodations.Remove(accommodation);
                 }
-                if (Location.Country != null && !accommodation.Location.Country.ToLower().Contains(Location.Country.ToLower()))
+                if (Location.Country != null && !accommodation.Location.Country.ToLower().Equals(Location.Country.ToLower()))
                 {
                     Accommodations.Remove(accommodation);
                 }
