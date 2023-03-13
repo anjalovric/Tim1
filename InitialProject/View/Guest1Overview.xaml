@@ -7,6 +7,7 @@
         
         mc:Ignorable="d"
         Title="Guest1Overview" Height="570" Width="800" WindowStartupLocation="CenterScreen">
+    
     <Grid Background="AntiqueWhite">
         <Grid.RowDefinitions>
             <RowDefinition Height="4*" />
@@ -41,7 +42,7 @@
         <CheckBox x:Name="house" Grid.Row="2" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Content="House" Margin="0,22,0,0"></CheckBox>
         <CheckBox x:Name="cottage" Grid.Row="2" Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Cottage" Margin="0,0,0,3" Width="68" Height="16"/>
 
-        <TextBlock x:Name="numberOfDays" Grid.Row="2" Grid.Column="1" Text="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="123" TextAlignment="Center" Height="30" Background="#FFDFDCDC" FontSize="16" />
+        <TextBox x:Name="numberOfDays" Grid.Row="2" Grid.Column="1" Text="" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="123" TextAlignment="Center" Height="30" Background="#FFDFDCDC" FontSize="16" />
         <Button x:Name="incrementNumberOfDays" Click="IncrementDaysNumber" Content="+" TextElement.FontSize="15" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="30" Margin="200,0,0,0" Width="38" Background="#FFDDDDDD">
 
         </Button>
@@ -49,7 +50,7 @@
 
         </Button>
 
-        <TextBlock x:Name="numberOfGuests" Grid.Row="2"  Grid.Column="2" Text="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="123" TextAlignment="Center" Height="30" Background="#FFDFDCDC" FontSize="16"/>
+        <TextBox x:Name="numberOfGuests" Grid.Row="2"  Grid.Column="2" Text="" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="123" TextAlignment="Center" Height="30" Background="#FFDFDCDC" FontSize="16"/>
         <Button x:Name="incrementNumberOfGuests" Click="IncrementGuestsNumber"  Content="+" TextElement.FontSize="15" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="30" Margin="200,0,0,0" Width="38" Background="#FFDDDDDD">
 
         </Button>
