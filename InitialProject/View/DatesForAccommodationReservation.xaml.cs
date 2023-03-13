@@ -53,7 +53,7 @@ namespace InitialProject.View
 
         private void ChooseDateButtonClick(object sender, RoutedEventArgs e)
         {
-            AccommodationGuestsNumberInput guestsNumber = new AccommodationGuestsNumberInput(currentAccommodation, selectedDateRange, accommodationReservationRepository);
+            AccommodationGuestsNumberInput guestsNumber = new AccommodationGuestsNumberInput(currentAccommodation, selectedDateRange, accommodationReservationRepository, freeDatesForAccommodations);
             guestsNumber.Owner = this;
             guestsNumber.Show();
           

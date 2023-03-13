@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,6 +18,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Xml;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace InitialProject.View
@@ -24,9 +26,9 @@ namespace InitialProject.View
     /// <summary>
     /// Interaction logic for TourForm.xaml
     /// </summary>
-    public partial class TourForm : Window,INotifyPropertyChanged
+    public partial class TourForm : Window, INotifyPropertyChanged
     {
-        
+
 
         private readonly TourRepository _tourRepository;
         private readonly LocationRepository _locationRepository;
@@ -36,7 +38,7 @@ namespace InitialProject.View
         public int pointCounter = 0;
         public ObservableCollection<CheckPoint> TourPoints { get; set; }
         public ObservableCollection<TourImage> TourImages { get; set; }
-        public ObservableCollection<TourInstance> Instances { get; set; }  
+        public ObservableCollection<TourInstance> Instances { get; set; }
         public ObservableCollection<TourInstance> TodayInstances { get; set; }
 
         public Tour saved;
@@ -119,9 +121,9 @@ namespace InitialProject.View
                 }
             }
         }
-        private double _duration;
+        private string _duration;
 
-        public double Duration
+        public string Duration
         {
             get => _duration;
             set
@@ -134,9 +136,9 @@ namespace InitialProject.View
             }
         }
 
-        private int _maxGuests;
+        private string _maxGuests;
 
-        public int MaxGuests
+        public string MaxGuests
         {
             get => _maxGuests;
             set
@@ -165,52 +167,322 @@ namespace InitialProject.View
         {
             InitializeComponent();
             DataContext = this;
-            _tourRepository=new TourRepository();
-            _locationRepository=new LocationRepository();
+            _tourRepository = new TourRepository();
+            _locationRepository = new LocationRepository();
             _checkPointRepository = new CheckPointRepository();
-            _tourImageRepository=new TourImageRepository();
-            _tourInstanceRepository=new TourInstanceRepository();
+            _tourImageRepository = new TourImageRepository();
+            _tourInstanceRepository = new TourInstanceRepository();
             TourPoints = new ObservableCollection<CheckPoint>();
             TourImages = new ObservableCollection<TourImage>();
             Instances = new ObservableCollection<TourInstance>();
             TodayInstances = todayInstances;
-            AddNewTour.IsEnabled= false;
-           
-             
+
+
 
         }
 
-    public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));  
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        
+
 
         private void AddTour(object sender, RoutedEventArgs e)
         {
-            Location newLocation = new Location(_city, _country);
-            Location savedLocation = _locationRepository.Save(newLocation);
+            if (IsValid())
+            {
 
-            Tour newTour = new Tour(NameT, _maxGuests, _duration, newLocation, _description, LanguageT);
-            Tour savedTour = _tourRepository.Save(newTour);
-            _tourId = savedTour.Id;
-            saved = savedTour;
-            //TourInstance newTourInstance = new TourInstance(savedTour, Start, Hours);
-            //TourInstance savedTourInstance = _tourInstanceRepository.Save(newTourInstance);
+                Location newLocation = new Location(_city, _country);
+                Location savedLocation = _locationRepository.Save(newLocation);
 
-            UpdateCheckPoints();
-            AddImages();
-            SaveInstances(savedTour);
-            this.Close();
-            //AddNewTour.IsEnabled = false;
-           // Cancel.IsEnabled = false;
-            // NewDate.IsEnabled = true;
-            
+                Tour newTour = new Tour(NameT, Convert.ToInt32(_maxGuests), Convert.ToDouble(_duration), newLocation, _description, LanguageT);
+                Tour savedTour = _tourRepository.Save(newTour);
+                _tourId = savedTour.Id;
+                saved = savedTour;
+                //TourInstance newTourInstance = new TourInstance(savedTour, Start, Hours);
+                //TourInstance savedTourInstance = _tourInstanceRepository.Save(newTourInstance);
+
+                UpdateCheckPoints();
+                AddImages();
+                SaveInstances(savedTour);
+                this.Close();
+            }
+
+        }
+        private bool IsValid()
+        {
+            return IsNameValid() && IsMaximuGuestsNumberValid() && IsDurationValid() && IsCityValid() && IsCountryValid() && IsLanguageValid()
+                   && IsDescriptionValid() && IsCheckPointsValid() && IsImagesValid() && IsDateTimeValid();
+
+        }
+        private bool IsNameValid()
+        {
+            var content = TourNameTB.Text;
+            var regex = @"[A-Za-z]+(\\ [A-Za-z]+)*$";
+            Match match = Regex.Match(content, regex, RegexOptions.IgnoreCase);
+            bool isValid = false;
+            if (TourNameTB.Text.Trim().Equals(""))
+            {
+                isValid = false;
+                TourNameTB.BorderBrush = Brushes.Red;
+                TourNameTB.BorderThickness = new Thickness(1);
+                NameLabel.Content = "This field can't be empty";
+            }
+            else if (!match.Success)
+            {
+                isValid = false;
+                TourNameTB.BorderBrush = Brushes.Red;
+                TourNameTB.BorderThickness = new Thickness(1);
+                NameLabel.Content = "Invalid name";
+            }
+            else
+            {
+                isValid = true;
+                TourNameTB.BorderBrush = Brushes.Green;
+                NameLabel.Content = string.Empty;
+            }
+            return isValid;
+        }
+        private bool IsMaximuGuestsNumberValid()
+        {
+            var content = MaxGuestsTB.Text;
+            var regex = @"^[1-9]\d*$";
+            Match match = Regex.Match(content, regex, RegexOptions.IgnoreCase);
+            bool isValid = false;
+            if (MaxGuestsTB.Text.Trim().Equals(""))
+            {
+                isValid = false;
+                MaxGuestsTB.BorderBrush = Brushes.Red;
+                MaxGuestsTB.BorderThickness = new Thickness(1);
+                NameLabel.Content = "This field can't be empty";
+            }
+            else if (!match.Success)
+            {
+                MaxGuestLabel.Content = "This field should be positive number";
+                MaxGuestsTB.BorderBrush = Brushes.Red;
+                MaxGuestsTB.BorderThickness = new Thickness(1);
+            }
+            else
+            {
+                isValid = true;
+                MaxGuestsTB.BorderBrush = Brushes.Green;
+                MaxGuestLabel.Content = string.Empty;
+            }
+            return isValid;
         }
 
+        private bool IsDurationValid()
+        {
+            var content = DurationTB.Text;
+            var regex = "^(0|([1-9][0-9]*))(\\.[0-9]+)?$";
+            var regexZero = "(0\\.0)$";
+            var regexzero = "0$";
+            Match match = Regex.Match(content, regex, RegexOptions.IgnoreCase);
+            Match matchZero = Regex.Match(content, regexZero, RegexOptions.IgnoreCase);
+            Match matchzero = Regex.Match(content, regexzero, RegexOptions.IgnoreCase);
+            bool isValid = false;
+            if (DurationTB.Text.Trim().Equals(""))
+            {
+                isValid = false;
+                DurationTB.BorderBrush = Brushes.Red;
+                DurationTB.BorderThickness = new Thickness(1);
+                DurationLabel.Content = "This field can't be empty";
+            }
+            else if (!match.Success)
+            { 
+                DurationTB.BorderBrush = Brushes.Red;
+                DurationLabel.Content = "This field should be positive double number";
+                DurationTB.BorderThickness = new Thickness(1);
+            }
+            else if(matchZero.Success || matchzero.Success)
+            {
+                DurationTB.BorderBrush = Brushes.Red;
+                DurationLabel.Content = "This field should be positive double number";
+                DurationTB.BorderThickness = new Thickness(1);
+            }
+            else if(match.Success && (!matchZero.Success) && (!matchzero.Success))
+            {
+                isValid = true;
+                DurationTB.BorderBrush = Brushes.Green;
+                DurationLabel.Content = string.Empty;
+            }
+            return isValid;
+        }
+
+
+
+        private bool IsCityValid()
+        {
+            var content = CityTB.Text;
+            var regex = @"[A-Za-z]+(\\ [A-Za-z]+)*$";
+            Match match = Regex.Match(content, regex, RegexOptions.IgnoreCase);
+            bool isValid = false;
+            if (CityTB.Text.Trim().Equals(""))
+            {
+                isValid = false;
+                CityTB.BorderBrush = Brushes.Red;
+                CityTB.BorderThickness = new Thickness(1);
+                CityLabel.Content = "This field can't be empty";
+            }
+            else if (!match.Success)
+            {
+                isValid = false;
+                CityTB.BorderBrush = Brushes.Red;
+                CityTB.BorderThickness = new Thickness(1);
+                CityLabel.Content = "Only can contains letters and one space between words";
+            }
+            else
+            {
+                isValid = true;
+                CityTB.BorderBrush = Brushes.Green;
+                CityLabel.Content = string.Empty;
+            }
+            return isValid;
+        }
+
+
+        private bool IsCountryValid()
+        {
+            var content = CountryTB.Text;
+            var regex = @"[A-Za-z]+(\\ [A-Za-z]+)*$";
+            Match match = Regex.Match(content, regex, RegexOptions.IgnoreCase);
+            bool isValid = false;
+            if (CountryTB.Text.Trim().Equals(""))
+            {
+                isValid = false;
+                CountryTB.BorderBrush = Brushes.Red;
+                CountryTB.BorderThickness = new Thickness(1);
+                CountryLabel.Content = "This field can't be empty";
+            }
+            else if (!match.Success)
+            {
+                isValid = false;
+                CountryTB.BorderBrush = Brushes.Red;
+                CountryTB.BorderThickness = new Thickness(1);
+                CountryLabel.Content = "Only can contains letters and one space between words";
+            }
+            else
+            {
+                isValid = true;
+                CountryTB.BorderBrush = Brushes.Green;
+                CountryLabel.Content = string.Empty;
+            }
+            return isValid;
+        }
+
+
+        private bool IsLanguageValid()
+        {
+            var content = LanguageTB.Text;
+            var regex = @"[A-Za-z]+(\\ [A-Za-z]+)*$";
+            Match match = Regex.Match(content, regex, RegexOptions.IgnoreCase);
+            bool isValid = false;
+            if (LanguageTB.Text.Trim().Equals(""))
+            {
+                isValid = false;
+                LanguageTB.BorderBrush = Brushes.Red;
+                LanguageTB.BorderThickness = new Thickness(1);
+                LanguageLabel.Content = "This field can't be empty";
+            }
+            else if (!match.Success)
+            {
+                isValid = false;
+                LanguageTB.BorderBrush = Brushes.Red;
+                LanguageTB.BorderThickness = new Thickness(1);
+                LanguageLabel.Content = "Only can contains letters and one space between words";
+            }
+            else
+            {
+                isValid = true;
+                LanguageTB.BorderBrush = Brushes.Green;
+                LanguageLabel.Content = string.Empty;
+            }
+            return isValid;
+        }
+
+
+        private bool IsDescriptionValid()
+        {
+            var content = DescriptionTB.Text;
+            var regex = @"[A-Za-z]([A-Za-z0-9]|.)*(\\ [A-Za-z0-9]+)*$";
+            Match match = Regex.Match(content, regex, RegexOptions.IgnoreCase);
+            bool isValid = false;
+            if (DescriptionTB.Text.Trim().Equals(""))
+            {
+                isValid = false;
+                DescriptionTB.BorderBrush = Brushes.Red;
+                DescriptionTB.BorderThickness = new Thickness(1);
+                DescriptionLabel.Content = "This field can't be empty";
+            }
+            else if (!match.Success)
+            {
+                isValid = false;
+                DescriptionTB.BorderBrush = Brushes.Red;
+                DescriptionTB.BorderThickness = new Thickness(1);
+                DescriptionLabel.Content = "Invalid description";
+            }
+            else
+            {
+                isValid = true;
+                DescriptionTB.BorderBrush = Brushes.Green;
+                DescriptionLabel.Content = string.Empty;
+            }
+            return isValid;
+
+        }
+
+        private bool IsCheckPointsValid()
+        {
+            if (TourPoints.Count >= 2)
+            {
+                PointsGrid.BorderBrush = Brushes.Green;
+                PointLabel.Content = string.Empty;
+                return true;
+            }
+            else
+            {
+                PointsGrid.BorderBrush = Brushes.Red;
+                PointsGrid.BorderThickness = new Thickness(1);
+                PointLabel.Content = "There must be at least 2 checkpoints";
+                return false;
+            }
+        }
+
+        private bool IsImagesValid()
+        {
+            if (TourImages.Count >= 1)
+            {
+                ImagesGrid.BorderBrush = Brushes.Green;
+                ImageLabel.Content = string.Empty;
+                return true;
+            }
+            else
+            {
+                ImagesGrid.BorderBrush = Brushes.Red;
+                ImageLabel.Content = "There should be at least 1 tour image";
+                return false;
+            }
+        }
+        
+
+        private bool IsDateTimeValid()
+        {
+            if (Instances.Count == 0)
+            {
+                DateTimeBox.BorderBrush = Brushes.Red;
+                DateTimeLabel.Content = "This field can't be empty";
+                return false;
+            }
+            else
+            {
+                DateTimeBox.BorderBrush = Brushes.Green;
+                DateTimeLabel.Content = string.Empty;
+                return true;
+            }
+        }
         private void SaveInstances(Tour savedTour)
         {
             TourInstanceRepository tourInstanceRepository = new TourInstanceRepository();
@@ -236,7 +508,7 @@ namespace InitialProject.View
                     string time = DateTime.Today.TimeOfDay.ToString();
                     string hour = time.Split(":")[0];
                     string minute = time.Split(":")[1];
-                    string second = time.Split(":")[2];
+                    string second = DateTime.Now.Second.ToString();
                     if (Convert.ToInt32(h) > Convert.ToInt32(hour))
                     {
                         TodayInstances.Add(instance);

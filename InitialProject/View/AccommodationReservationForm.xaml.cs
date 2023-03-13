@@ -69,7 +69,7 @@ namespace InitialProject.View
 
         public bool IsValidDateInput()
         {
-            return (StartDate >= EndDate || Convert.ToInt32(difference.TotalDays) < Convert.ToInt32(numberOfDays.Text) || StartDate < DateTime.Now || StartDate == null || EndDate == null);
+            return (StartDate >= EndDate || Convert.ToInt32(difference.TotalDays) < (Convert.ToInt32(numberOfDays.Text)-1) || StartDate.Date < DateTime.Now.Date || StartDate == null || EndDate == null);
         }
 
         public bool IsEnteredCorrectDateRange()
@@ -131,6 +131,22 @@ namespace InitialProject.View
             }
         }
 
+        public void AddAvailableDateOutRangeToList(DateTime date, ref List<DateTime> freeDays, ref List<DateTime> freeDaysHelp, ref List<List<DateTime>> dateTimes)
+        {
+            freeDays.Add(date);
+            freeDaysHelp.Add(date);
+            freeDays.Sort();
+            freeDaysHelp.Sort();
+            if (freeDays.Count == Convert.ToInt32(numberOfDays.Text))
+            {
+                if(AreDatesConsecutive(freeDays))
+                    dateTimes.Add(freeDaysHelp);
+                freeDays.Remove(freeDays[0]);
+                freeDaysHelp = new List<DateTime>(freeDays);
+
+            }
+        }
+
         public bool AreDatesConsecutive(List<DateTime> dates)
         {
             for (int i = 0; i < Convert.ToInt32(numberOfDays.Text) - 1; i++)
@@ -145,6 +161,7 @@ namespace InitialProject.View
 
         public void FindAvailableDates(int currentAccommodationId)
         {
+            reservations = accommodationReservationRepository.GetAll();
             DateTime start = StartDate;
             DateTime end = EndDate;
             bool freeDateRangeExists = false;    //ptretvoriti u metodu dio vezan za ovo
@@ -164,6 +181,7 @@ namespace InitialProject.View
             if (dateTimes.Count > 0)
             {
                 DatesForAccommodationReservation datesListWindow = new DatesForAccommodationReservation(currentAccommodation,accommodationReservationRepository);
+                
                 foreach (List<DateTime> dates in dateTimes)
                 {
                     if (AreDatesConsecutive(dates))
@@ -206,7 +224,7 @@ namespace InitialProject.View
             {
                 if (IsDayAvailable(currentAccommodation.Id, start))
                 {
-                    AddAvailableDateToList(start, ref freeDays, ref freeDaysHelp, ref dateTimes);  //potrebno isprazniti liste negdje
+                    AddAvailableDateOutRangeToList(start, ref freeDays, ref freeDaysHelp, ref dateTimes);  //potrebno isprazniti liste negdje
                 }
                 start = start.AddDays(1);
             }
