@@ -37,7 +37,7 @@ namespace InitialProject.View
         private TourReservationRepository tourReservationRepository;
         private AlertGuest2Repository alertGuest2Repository;
 
-        private int callId = 0;
+        //private int callId = 0;
 
         private TourInstance _selected;
 
@@ -85,8 +85,8 @@ namespace InitialProject.View
             if (AllPoints.Count!=0)
             {
                 CurrentPoint.Add(AllPoints.ToList().Find(n => n.Order == counter));
-                AddAlerts(CurrentPoint[0].Id, callId);
-                CountGuests(CurrentPoint[0].Id, callId);
+                AddAlerts(CurrentPoint[0].Id, _selected.Id);
+                CountGuests(CurrentPoint[0].Id, _selected.Id);
                 Tours = tours;
             }
         }
@@ -164,8 +164,8 @@ namespace InitialProject.View
                 AllPoints.Add(points[i]);
             }
 
-            AddAlerts(CurrentPoint[0].Id,callId);
-            CountGuests(CurrentPoint[0].Id,callId);
+            AddAlerts(CurrentPoint[0].Id,_selected.Id);
+            CountGuests(CurrentPoint[0].Id,_selected.Id);
         }
 
         private void AddAlerts(int currentPointId,int _callId)
@@ -186,9 +186,10 @@ namespace InitialProject.View
                 alertGuest2.ReservationId = tour.Id;
                 alertGuest2.Guest2Id = tour.GuestId;
                 alertGuest2.CheckPointId = currentPointId;
-                alertGuest2.InstanceId = _callId;
+                alertGuest2.InstanceId = _selected.Id;
+                alertGuest2.Informed = false;
                 AlertGuest2 savedAlert=alertGuest2Repository.Save(alertGuest2);
-                callId++;
+                //callId++;
 
             }
         }
@@ -196,12 +197,16 @@ namespace InitialProject.View
         {
             int counter = 0;
             List<AlertGuest2> allAlerts= alertGuest2Repository.GetAll();
-            List<AlertGuest2> tourInstanceAlerts= new List<AlertGuest2>();
+            //List<AlertGuest2> tourInstanceAlerts= new List<AlertGuest2>();
+           // List<TourInstance> instances=_tourInstanceRepository.GetAll();
             foreach(AlertGuest2 alert in allAlerts)
             {
                 if (alert.CheckPointId == currentPointId && alert.Availability && alert.InstanceId==instanceId)
                 {
                     counter++;
+                    //TourInstance tourInstance = instances.Find(n => n.Id == instanceId);
+  
+
                 }
             }
             count.Clear();

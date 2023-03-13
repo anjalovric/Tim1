@@ -257,7 +257,7 @@ namespace InitialProject.View
                 isValid = false;
                 MaxGuestsTB.BorderBrush = Brushes.Red;
                 MaxGuestsTB.BorderThickness = new Thickness(1);
-                NameLabel.Content = "This field can't be empty";
+                MaxGuestLabel.Content = "This field can't be empty";
             }
             else if (!match.Success)
             {

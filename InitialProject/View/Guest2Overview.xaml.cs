@@ -70,7 +70,7 @@ namespace InitialProject.View
                 foreach (AlertGuest2 alert in alerts)
                 {
                     AlertGuestForm alertGuestForm = new AlertGuestForm(alert.Id);
-                    if (GuestId == alert.Guest2Id && alert.Availability == false)
+                    if (GuestId == alert.Guest2Id && alert.Informed == false)
                         alertGuestForm.Show();
                 }
             }
