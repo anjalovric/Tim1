@@ -40,8 +40,7 @@ namespace InitialProject.View
         public ObservableCollection<string> Countries { get; set; }
         public ObservableCollection<string> CitiesByCountry { get; set; }
         private LocationRepository locationRepository;
-        private string city;
-        private string country;
+        private Location location;
         public ObservableCollection<Accommodation> Accommodations 
         { 
             get { return accommodations; } 
@@ -53,31 +52,19 @@ namespace InitialProject.View
             }
                 
         }
-        public string LocationCity
+        public Location Location
         {
-            get { return city; }
+            get { return location; }
             set
             {
-                if (!value.Equals(city))
+                if (value != location)
                 {
-                    city = value;
+                    location = value;
                     OnPropertyChanged();
                 }
             }
         }
 
-        public string LocationCountry
-        {
-            get { return country; }
-            set
-            {
-                if (!value.Equals(country))
-                {
-                    country = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
         public Guest1Overview()
         {
             InitializeComponent();
@@ -88,6 +75,7 @@ namespace InitialProject.View
             accommodationImages = new List<AccommodationImage>(accommodationImageRepository.GetAll());
 
             locationRepository = new LocationRepository();
+            location = new Location();
             Countries = new ObservableCollection<string>(locationRepository.GetAllCountries());
             CitiesByCountry = new ObservableCollection<string>();
             cityInput.IsEnabled = false;
@@ -123,11 +111,11 @@ namespace InitialProject.View
                 {
                     Accommodations.Remove(accommodation);
                 }
-                if (LocationCity != null && !accommodation.Location.City.ToLower().Contains(LocationCity.ToLower()))
+                if (Location.City != null && !accommodation.Location.City.ToLower().Contains(Location.City.ToLower()))
                 {
                     Accommodations.Remove(accommodation);
                 }
-                if (LocationCountry != null && !accommodation.Location.Country.ToLower().Contains(LocationCountry.ToLower()))
+                if (Location.Country != null && !accommodation.Location.Country.ToLower().Contains(Location.Country.ToLower()))
                 {
                     Accommodations.Remove(accommodation);
                 }
