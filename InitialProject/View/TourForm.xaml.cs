@@ -179,7 +179,7 @@ namespace InitialProject.View
             Instances = new ObservableCollection<TourInstance>();
             TodayInstances = todayInstances;
             Countries = new ObservableCollection<string>(_locationRepository.GetAllCountries());
-            CitiesByCountry = new ObservableCollection<string>(_locationRepository.GetAllCountries());
+            CitiesByCountry = new ObservableCollection<string>();
             ComboBoxCity.IsEnabled = false;
 
         }

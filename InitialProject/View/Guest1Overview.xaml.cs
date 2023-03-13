@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
@@ -35,6 +36,11 @@ namespace InitialProject.View
         private AccommodationRepository accommodationRepository;
         
         private ObservableCollection<Accommodation> accommodations;
+        public ObservableCollection<string> Countries { get; set; }
+        public ObservableCollection<string> CitiesByCountry { get; set; }
+        private LocationRepository locationRepository;
+        private string city;
+        private string country;
         public ObservableCollection<Accommodation> Accommodations 
         { 
             get { return accommodations; } 
@@ -46,8 +52,31 @@ namespace InitialProject.View
             }
                 
         }
-      
-        
+        public string LocationCity
+        {
+            get { return city; }
+            set
+            {
+                if (!value.Equals(city))
+                {
+                    city = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public string LocationCountry
+        {
+            get { return country; }
+            set
+            {
+                if (!value.Equals(country))
+                {
+                    country = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         public Guest1Overview()
         {
             InitializeComponent();
@@ -56,9 +85,10 @@ namespace InitialProject.View
             Accommodations = new ObservableCollection<Accommodation>(accommodationRepository.GetAll());
             accommodationImageRepository = new AccommodationImageRepository();
             accommodationImages = new List<AccommodationImage>(accommodationImageRepository.GetAll());
-
-
-
+            locationRepository = new LocationRepository();
+            Countries = new ObservableCollection<string>(locationRepository.GetAllCountries());
+            CitiesByCountry = new ObservableCollection<string>();
+            cityInput.IsEnabled = false;
         }
 
         
@@ -80,6 +110,7 @@ namespace InitialProject.View
                 {
                     Accommodations.Add(accommodation);
                 }
+            SetLocations(listAccommodation);
 
 
             
@@ -90,11 +121,11 @@ namespace InitialProject.View
                 {
                     Accommodations.Remove(accommodation);
                 }
-                if (!accommodation.Location.City.ToLower().Contains(cityInput.Text.ToLower()))
+                if (LocationCity != null && !accommodation.Location.City.ToLower().Contains(LocationCity.ToLower()))
                 {
                     Accommodations.Remove(accommodation);
                 }
-                if (!accommodation.Location.Country.ToLower().Contains(countryInput.Text.ToLower()))
+                if (LocationCountry != null && !accommodation.Location.Country.ToLower().Contains(LocationCountry.ToLower()))
                 {
                     Accommodations.Remove(accommodation);
                 }
@@ -132,6 +163,15 @@ namespace InitialProject.View
             
 
         }
+        private void SetLocations(List<Accommodation> accommodations)
+        {
+            List<Location> locations = locationRepository.GetAll();
+            foreach(Accommodation accommodation in accommodations)
+            {
+                accommodation.Location = locations.Find(n => n.Id == accommodation.Location.Id);
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -216,6 +256,17 @@ namespace InitialProject.View
             accommodationReservationForm.Show();
         }
 
-
+        private void countryInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (countryInput.SelectedItem != null)
+            {
+                CitiesByCountry.Clear();
+                foreach (string city in locationRepository.GetCitiesByCountry((string)countryInput.SelectedItem))
+                {
+                    CitiesByCountry.Add(city);
+                }
+                cityInput.IsEnabled = true;
+            }
+        }
     }
 }
