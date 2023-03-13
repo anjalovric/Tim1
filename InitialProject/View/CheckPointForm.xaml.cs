@@ -60,26 +60,46 @@ namespace InitialProject.View
 
         private void AddCheckPoint(object sender, RoutedEventArgs e)
         {
-            
-            CheckPoint newCheckPoint = new CheckPoint();
-            newCheckPoint.Name = NameT;
-            newCheckPoint.Order = -1;
-            newCheckPoint.TourId = -1;
-            newCheckPoint.Checked = false;
-            CheckPoint savedCheckPoint = _checkPointRepository.Save(newCheckPoint);
-            _checkPoints.Add(savedCheckPoint);
-            List<CheckPoint> tourCheckPoints= new List<CheckPoint>();
-            foreach (CheckPoint checkPoint in _checkPoints)
-                if(checkPoint.TourId==-1)
-                    tourCheckPoints.Add(checkPoint);
-            if(tourCheckPoints.Count>=2)
-                _button.IsEnabled = true;
-            this.Close();
+            if (Validate())
+            {
+                CheckPoint newCheckPoint = new CheckPoint();
+                newCheckPoint.Name = NameT;
+                newCheckPoint.Order = -1;
+                newCheckPoint.TourId = -1;
+                newCheckPoint.Checked = false;
+                CheckPoint savedCheckPoint = _checkPointRepository.Save(newCheckPoint);
+                _checkPoints.Add(savedCheckPoint);
+                List<CheckPoint> tourCheckPoints = new List<CheckPoint>();
+                foreach (CheckPoint checkPoint in _checkPoints)
+                    if (checkPoint.TourId == -1)
+                        tourCheckPoints.Add(checkPoint);
+                if (tourCheckPoints.Count >= 2)
+                    _button.IsEnabled = true;
+                this.Close();
+            }
         }
 
         private void CancelCheckPoint(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+        private bool Validate()
+        {
+            bool isValid = false;
+            if (CheckPointName.Text.Trim().Equals(""))
+            {
+                isValid = false;
+                CheckPointName.BorderBrush = Brushes.Red;
+                CheckPointName.BorderThickness = new Thickness(1);
+                NameLabel.Content = "This field can't be empty";
+            }
+            else
+            {
+                isValid = true;
+                CheckPointName.BorderBrush = Brushes.Green;
+                NameLabel.Content = string.Empty;
+            }
+            return isValid;
         }
     }
 }

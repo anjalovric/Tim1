@@ -20,11 +20,13 @@ namespace InitialProject.Model
         public bool Availability { get; set; }
         public int InstanceId { get; set; }
 
+        public bool Informed { get; set; }
+
         public AlertGuest2() { }
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), ReservationId.ToString(), Guest2Id.ToString(), CheckPointId.ToString(),Availability.ToString(),InstanceId.ToString() };
+           string[] csvValues = { Id.ToString(), ReservationId.ToString(), Guest2Id.ToString(), CheckPointId.ToString(),Availability.ToString(),InstanceId.ToString(),Informed.ToString() };
             return csvValues;
         }
 
@@ -36,6 +38,7 @@ namespace InitialProject.Model
             CheckPointId = Convert.ToInt32((string)values[3]);
             Availability = Convert.ToBoolean((string)values[4]);
             InstanceId = Convert.ToInt32((string)values[5]);
+            Informed = Convert.ToBoolean((string)values[6]);
 
         }
     }

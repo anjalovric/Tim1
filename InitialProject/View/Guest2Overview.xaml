@@ -53,6 +53,12 @@
         <Button x:Name="decrementCapacityNumber" Content="-" HorizontalAlignment="Left" Margin="538,90,0,0" VerticalAlignment="Top" Width="20" Click="decrementCapacityNumber_Click"/>
         <Button x:Name="incrementCapacityNumber" Content="+" HorizontalAlignment="Left" Margin="672,90,0,0" VerticalAlignment="Top" Width="20" Click="incrementCapacityNumber_Click"/>
         <Button Content="Search" FontWeight="Bold" HorizontalAlignment="Left" Margin="732,87,0,0" VerticalAlignment="Top" Height="22" Click="Search_Click"/>
+        <Label x:Name="Label" Content="Showing all tours: " HorizontalAlignment="Left" Margin="108,132,0,0" VerticalAlignment="Top" Height="24"/>
+        <Button x:Name="Restart" Content="Restart" HorizontalAlignment="Left" Margin="652,136,0,0" VerticalAlignment="Top" Visibility="Hidden" TextElement.FontWeight="Bold" Click="Restart_Click"/>
+        <Label x:Name="DurationLabel" HorizontalAlignment="Left" Margin="271,116,0,0" VerticalAlignment="Top"/>
+
+
+
 
 
 

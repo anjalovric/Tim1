@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -34,14 +35,22 @@ namespace InitialProject.View
         private List<TourReservation> _tourReservations;
         private readonly Serializer<TourReservation> _serializerTourReservations;
         private List<TourInstance> _tourInstances;
+        private TourInstanceRepository _tourInstanceRepository;
         private readonly Serializer<TourInstance> _serializerTourInstances;
-        public TourReservationForm(TourInstance currentTourInstance,int guestId)
+        public ObservableCollection<TourInstance> TourInstances { get; set; }
+        public Label Label { get; set; }
+        private Button Restart;
+        public TourReservationForm(TourInstance currentTourInstance,int guestId,ObservableCollection<TourInstance> TourInstance,TourInstanceRepository tourInstanceRepository,Label label,Button restart)
         {
             InitializeComponent();
             DataContext = this;
             _serializerTourReservations = new Serializer<TourReservation>();
             _serializerTourInstances = new Serializer<TourInstance>();
             CurrentTourInstance = currentTourInstance;
+            this.TourInstances = TourInstance;
+            this.Restart = restart;
+            this.Label = label;
+            this._tourInstanceRepository = tourInstanceRepository;
             _tourReservations = _serializerTourReservations.FromCSV(FilePath);
             _tourInstances=_serializerTourInstances.FromCSV(filePath);
             _tourReservationRepository = new TourReservationRepository();
@@ -87,33 +96,72 @@ namespace InitialProject.View
                 capacityNumber.Text = changedGuestsNumber.ToString();
             }
         }
+        public void FindAvailableTours()
+        {
+            Boolean existed = false;
+            List<TourInstance> listTours = _tourInstanceRepository.GetAll();
+            TourInstances.Clear();
+            foreach (TourInstance tourInstance in listTours)
+            {
+                foreach (TourReservation tourReservation in _tourReservations)
+                {
+                    if (tourReservation.TourInstanceId == tourInstance.Id && tourInstance.Id != CurrentTourInstance.Id && tourInstance.Tour.Location.City == CurrentTourInstance.Tour.Location.City && tourInstance.Tour.Location.Country == CurrentTourInstance.Tour.Location.Country && tourReservation.CurrentGuestsNumber > 0)
+                    {
+                        TourInstances.Add(tourInstance);
+                        existed = true;
+                    }
+                }
+                if (!existed && CurrentTourInstance.Id != tourInstance.Id && tourInstance.Tour.Location.City == CurrentTourInstance.Tour.Location.City && tourInstance.Tour.Location.Country == CurrentTourInstance.Tour.Location.Country)
+                {
+                    TourInstances.Add(tourInstance);
+                }
+            }
+        }
         private void Confirm_Click(object sender, RoutedEventArgs e)
         {
             GuestsNumber = CurrentGuestsNumber - Convert.ToInt32(capacityNumber.Text);
             if (CurrentGuestsNumber == 0)
             {
                 MessageBox.Show("There is no enough places for choosen number of people. Tour is completed.");
-                AvailableTours availableTours = new AvailableTours(CurrentTourInstance);
-                availableTours.Show();
+                FindAvailableTours();
+                Label.Content = "Showing available tours: ";
+                Restart.Visibility = Visibility.Visible;
                 this.Close();
                 return;
             }
-            if (GuestsNumber < 0 && CurrentGuestsNumber!=0)
+            else if (GuestsNumber < 0 && CurrentGuestsNumber != 0)
             {
-                MessageBox.Show("There is no enough places for choosen number of people. Available number of places for guest is "+CurrentGuestsNumber+".");
+                MessageBox.Show("There is no enough places for choosen number of people. Available number of places for guest is " + CurrentGuestsNumber + ".");
                 return;
             }
-            foreach(TourReservation tourReservation in _tourReservations)
+            else if (_tourReservations.Count == 0)
             {
-                if (CurrentTourInstance.Id==tourReservation.TourInstanceId)
+                TourReservation newTourReservation = new TourReservation(CurrentTourInstance.Id, GuestsNumber, GuestId);
+                _tourReservationRepository.Save(newTourReservation);
+            }
+            ChangeTourReservation();
+            this.Close();
+        }
+        private void ChangeTourReservation()
+        {
+            Boolean changed = false;
+            foreach (TourReservation tourReservation in _tourReservations)
+            {
+                if (CurrentTourInstance.Id == tourReservation.TourInstanceId)
                 {
-                    _tourReservationRepository.Delete(tourReservation);
+                    _tourReservationRepository.Update(tourReservation, GuestsNumber);
+                    changed = true;
+                }
+                else if (changed)
+                {
+                    break;
                 }
             }
-
-            TourReservation newTourReservation = new TourReservation(CurrentTourInstance.Id,GuestsNumber,GuestId);
-            _tourReservationRepository.Save(newTourReservation);
-            this.Close();
+            if (!changed)
+            {
+                TourReservation newTourReservation = new TourReservation(CurrentTourInstance.Id, GuestsNumber, GuestId);
+                _tourReservationRepository.Save(newTourReservation);
+            }
         }
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
