@@ -10,10 +10,8 @@
         <Label Content="Name:" HorizontalAlignment="Left" Margin="84,69,0,0" VerticalAlignment="Top" Width="93" FontSize="14"/>
         <TextBox HorizontalAlignment="Left" Margin="202,69,0,0" TextWrapping="Wrap" Text="{Binding Path=accommodation.Name}" VerticalAlignment="Top" Width="221" Height="29"/>
         <Label Content="Enter New Accommodation" HorizontalAlignment="Left" Margin="59,29,0,0" VerticalAlignment="Top" Width="232" FontWeight="Bold" Height="35" FontSize="16"/>
-        <Label Content="City:" HorizontalAlignment="Left" Margin="84,118,0,0" VerticalAlignment="Top" Width="93" FontSize="14"/>
-        <TextBox HorizontalAlignment="Left" Margin="202,118,0,0" TextWrapping="Wrap" Text="{Binding Path=location.City}" VerticalAlignment="Top" Width="221" Height="29"/>
-        <Label Content="Country:" HorizontalAlignment="Left" Margin="84,169,0,0" VerticalAlignment="Top" Width="93" FontSize="14"/>
-        <TextBox HorizontalAlignment="Left" Margin="202,169,0,0" TextWrapping="Wrap" Text="{Binding Path=location.Country}" VerticalAlignment="Top" Width="221" Height="29"/>
+        <Label Content="City:" HorizontalAlignment="Left" Margin="84,167,0,0" VerticalAlignment="Top" Width="93" FontSize="14" RenderTransformOrigin="-0.009,2.783"/>
+        <Label Content="Country:" HorizontalAlignment="Left" Margin="83,114,0,0" VerticalAlignment="Top" Width="92" FontSize="14" RenderTransformOrigin="0.696,0.435"/>
         <Label Content="Type:" HorizontalAlignment="Left" Margin="84,218,0,0" VerticalAlignment="Top" Width="93" FontSize="14"/>
         <ComboBox ItemsSource="{Binding Path=accommodationTypes}" DisplayMemberPath="Name" SelectedItem="{Binding Path=accommodation.Type}" HorizontalAlignment="Left" Height="32" Margin="202,216,0,0" VerticalAlignment="Top" Width="221"/>
         <Label Content="Min Days for Reservation:" HorizontalAlignment="Left" Margin="10,330,0,0" VerticalAlignment="Top" Width="167" FontSize="14" Height="43"/>
@@ -24,13 +22,14 @@
         <Button Content="Add" HorizontalAlignment="Left" Height="29" Margin="457,447,0,0" VerticalAlignment="Top" Width="110" Click="NewImage_Click"/>
         <Button Content="OK" HorizontalAlignment="Left" Height="22" Margin="417,726,0,0" VerticalAlignment="Top" Width="106" Click="OK_Click"/>
         <Button Content="Cancel" HorizontalAlignment="Left" Height="21" Margin="550,727,0,0" VerticalAlignment="Top" Width="106" Click="Cancel_Click"/>
-        <Button Content="New Type" HorizontalAlignment="Left" Margin="475,223,0,0" VerticalAlignment="Top" Width="150"/>
         <Label Content="Capacity:" HorizontalAlignment="Left" Margin="84,270,0,0" VerticalAlignment="Top" Width="93" FontSize="14"/>
         <TextBox HorizontalAlignment="Left" Margin="202,270,0,0" TextWrapping="Wrap" Text="{Binding Path=accommodation.Capacity}" VerticalAlignment="Top" Width="221" Height="29"/>
         <TextBox Name="TextBoxUrl" HorizontalAlignment="Left" Margin="202,446,0,0" TextWrapping="Wrap" Text="{Binding Path=Url}" VerticalAlignment="Top" Width="221" Height="29"/>
         <ListView ItemsSource="{Binding Path=Images}" DisplayMemberPath="Url" Margin="140,502,230,107">
-            
+
         </ListView>
+        <ComboBox Name="ComboBoxCountry" ItemsSource="{Binding Countries}" SelectedItem="{Binding Location.Country}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" HorizontalAlignment="Left" Height="32" Margin="202,118,0,0" VerticalAlignment="Top" Width="221" SelectionChanged="ComboBoxCountry_SelectionChanged" />
+        <ComboBox Name="ComboBoxCity" ItemsSource="{Binding CitiesByCountry}" SelectedItem="{Binding Location.City}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" HorizontalAlignment="Left" Height="32" Margin="202,167,0,0" VerticalAlignment="Top" Width="221"/>
 
     </Grid>
 </Window>
