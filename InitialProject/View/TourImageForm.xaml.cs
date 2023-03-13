@@ -56,17 +56,38 @@ namespace InitialProject.View
 
         private void AddTourImage(object sender, RoutedEventArgs e)
         {
-            TourImage newImage = new TourImage();
-            newImage.Url = Url;
-            newImage.TourId = -1;
-            TourImage savedImage = _tourImageRepository.Save(newImage);
-            _tourImages.Add(savedImage);
-            this.Close();
+            if (Validate())
+            {
+                TourImage newImage = new TourImage();
+                newImage.Url = Url;
+                newImage.TourId = -1;
+                TourImage savedImage = _tourImageRepository.Save(newImage);
+                _tourImages.Add(savedImage);
+                this.Close();
+            }
+
         }
 
         private void CancelTourImage(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+        private bool Validate()
+        {
+            bool isValid=false;
+            if (TourImageUrl.Text.Trim().Equals(""))
+            {
+                isValid = false;
+                TourImageUrl.BorderBrush = Brushes.Red;
+                TourImageUrl.BorderThickness=new Thickness(1);
+                ImageLabel.Content = "This field can't be empty";
+            }else
+            {
+                isValid = true;
+                TourImageUrl.BorderBrush = Brushes.Green;
+                ImageLabel.Content = string.Empty;
+            }
+            return isValid;
         }
     }
 }

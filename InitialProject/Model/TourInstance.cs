@@ -21,6 +21,7 @@ namespace InitialProject.Model
         public string StartClock { get; set; }
         public bool Finished { get; set; }
 
+
         public void FromCSV(string[] values)
         {
             Id = Convert.ToInt32(values[0]);
@@ -39,6 +40,7 @@ namespace InitialProject.Model
         public TourInstance() 
         {
             Finished = false;
+            
         }
 
         public TourInstance( Tour tour, DateTime startDate, string startClock)
@@ -47,7 +49,9 @@ namespace InitialProject.Model
             StartDate = startDate;
             StartClock = startClock;
             Finished = false;
+           
         }
+
 
         public override string ToString()
         {

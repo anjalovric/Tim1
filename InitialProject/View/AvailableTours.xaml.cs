@@ -113,8 +113,8 @@ namespace InitialProject.View
                     currentTourInstance = tourInstance;
                 }
             }
-            TourReservationForm tourReservationForm = new TourReservationForm(currentTourInstance, 3);
-            tourReservationForm.Show();
+            //TourReservationForm tourReservationForm = new TourReservationForm(currentTourInstance, 3);
+            //tourReservationForm.Show();
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)

@@ -107,7 +107,7 @@ namespace InitialProject.Repository
                     string time=today.TimeOfDay.ToString();
                     string hour = time.Split(":")[0];
                     string minute = time.Split(":")[1];
-                    string second = time.Split(":")[2];
+                    string second = DateTime.Now.Second.ToString();
                     if(Convert.ToInt32(h)> Convert.ToInt32(hour))
                     {
                         list.Add(tour);
