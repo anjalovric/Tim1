@@ -49,7 +49,7 @@ namespace InitialProject.View
             Tours = new ObservableCollection<TourInstance>(_tourInstanceRepository.GetByStart(DateTime.Now));
             if(Selected ==null)
                 StartButton.IsEnabled=false;
-            //string todayDate = DateTime.Now.Date.ToString();
+            
             
         }
 
@@ -83,5 +83,10 @@ namespace InitialProject.View
             this.Close();
         }
 
+        private void History_Click(object sender, RoutedEventArgs e)
+        {
+            HistoryView historyView = new HistoryView();
+            historyView.Show();
+        }
     }
 }

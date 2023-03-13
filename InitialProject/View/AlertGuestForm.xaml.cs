@@ -28,14 +28,33 @@ namespace InitialProject.View
 
         private List<AlertGuest2> alerts;
         private AlertGuest2Repository _alertGuest2Repository;
+        private CheckPointRepository _checkPointRepository;
+        private TourRepository _tourRepository;
+        private TourInstanceRepository _tourInstanceRepository;
         private int AlertId;
         public AlertGuestForm(int alertId)
         {
             InitializeComponent();
             AlertId = alertId;
+            DataContext = this;
+            _alertGuest2Repository = new AlertGuest2Repository();
+            _checkPointRepository = new CheckPointRepository();
+            _tourRepository = new TourRepository();
+            _tourInstanceRepository = new TourInstanceRepository();
+
             _serializer = new Serializer<AlertGuest2>();
             alerts = _serializer.FromCSV(FilePath);
-            _alertGuest2Repository=new AlertGuest2Repository();
+
+            CreateLabelContent();
+            
+        }
+        private void CreateLabelContent()
+        {
+            int pointId = _alertGuest2Repository.GetAll().Find(n => n.Id == AlertId).CheckPointId;
+            int instanceId = _alertGuest2Repository.GetAll().Find(n => n.Id == AlertId).InstanceId;
+            Tour thisTour = _tourInstanceRepository.GetAll().Find(n => n.Id == instanceId).Tour;
+            PointLabel.Content = "Are you present on point " + _checkPointRepository.GetAll().Find(n => n.Id == pointId).Name + " on tour " +
+                                thisTour.Name + " ?";
         }
         private void Confirm_Click(object sender, RoutedEventArgs e)
         {
@@ -44,6 +63,7 @@ namespace InitialProject.View
                 if (alertGuest2.Availability == false && alertGuest2.Id==AlertId)
                 {
                     alertGuest2.Availability = true;
+                    alertGuest2.Informed = true;
                     _alertGuest2Repository.Update(alertGuest2);
                 }
             }
@@ -51,6 +71,15 @@ namespace InitialProject.View
         }
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
+            foreach (AlertGuest2 alertGuest2 in alerts)
+            {
+                if (alertGuest2.Availability == false && alertGuest2.Id == AlertId)
+                {
+                   
+                    alertGuest2.Informed = true;
+                    _alertGuest2Repository.Update(alertGuest2);
+                }
+            }
             this.Close();
         }
     }

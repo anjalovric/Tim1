@@ -2,6 +2,7 @@
 using InitialProject.Serializer;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,8 +19,7 @@ namespace InitialProject.Repository
 
         public LocationRepository()
         {
-            _serializer = new Serializer<Location>();
-            
+            _serializer = new Serializer<Location>();       
             _locations = _serializer.FromCSV(FilePath);
         }
 
@@ -72,6 +72,42 @@ namespace InitialProject.Repository
             _locations.Add(location);
             _serializer.ToCSV(FilePath, _locations);
             return location.Id;
+        }
+
+        public ObservableCollection<string> GetCitiesByCountry(string country)
+        {
+            ObservableCollection<string> cities = new ObservableCollection<string>();
+            foreach(Location location in _locations)
+            {
+                if(location.Country.Equals(country))
+                {
+                    if(!cities.Contains(location.City))
+                    {
+                        cities.Add(location.City);
+                    }
+                }
+            }
+            return cities;
+        }
+
+        public List<string> GetAllCountries()
+        {
+            List<string> countries = new List<string>();
+            foreach(Location location in _locations)
+            {
+                if(!countries.Contains(location.Country))
+                {
+                    countries.Add(location.Country);
+                }
+            }
+            return countries;
+        }
+
+        public Location GetLocation(string country, string city)
+        {
+            Location location = new Location();
+            location = _locations.Find(n => n.City.Equals(city) && n.Country.Equals(country));
+            return location;
         }
     }
 }
