@@ -52,11 +52,14 @@ namespace InitialProject.Repository
             foreach(Guest1 guest in userRepository.GetAllGuests1())
             {
                 AccommodationReservation reservation = _accommodationReservations.Find(n => n.GuestId == guest.Id);
-                bool hasReservation = reservation != null;
-                bool stayedLessThan5DaysAgo = (reservation.LeavingDate.Date < DateTime.Now.Date) && (DateTime.Now.Date - reservation.LeavingDate.Date).TotalDays < 5 ;
-                bool alreadyReviewed = guestReviewRepository.HasReview(guest);
-                if (hasReservation && stayedLessThan5DaysAgo && !alreadyReviewed)
-                    guests.Add(guest);
+                if (reservation != null)
+                {
+                    bool hasReservation = reservation != null;
+                    bool stayedLessThan5DaysAgo = (reservation.LeavingDate.Date < DateTime.Now.Date) && (DateTime.Now.Date - reservation.LeavingDate.Date).TotalDays < 5;
+                    bool alreadyReviewed = guestReviewRepository.HasReview(guest);
+                    if (hasReservation && stayedLessThan5DaysAgo && !alreadyReviewed)
+                        guests.Add(guest);
+                }
             }
             return guests;
        }

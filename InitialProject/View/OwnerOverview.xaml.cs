@@ -98,9 +98,5 @@ namespace InitialProject.View
             }
         }
 
-        private void Xbutton_Click(object sender, RoutedEventArgs e)
-        {
-            
-        }
     }
 }
