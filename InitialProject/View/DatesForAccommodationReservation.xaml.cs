@@ -60,6 +60,8 @@ namespace InitialProject.View
         }
         public void AddNewDateRange(DateTime startDate, DateTime endDate)
         {
+            endDate = endDate.AddHours(23);
+            endDate = endDate.AddMinutes(59);
             freeDatesForAccommodations.Add(new FreeDatesForAccommodationReservation(startDate, endDate));
         }
 

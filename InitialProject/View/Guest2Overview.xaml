@@ -34,17 +34,17 @@
         </DataGrid>
 
         <TextBlock HorizontalAlignment="Left" Margin="38,28,0,0" TextWrapping="Wrap" Text="TOURS" VerticalAlignment="Top" FontFamily="Algerian" FontSize="24" FontWeight="Bold"/>
-        <TextBox x:Name="cityInput" HorizontalAlignment="Left" Margin="38,94,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
+        <ComboBox x:Name="cityInput" ItemsSource="{Binding CitiesByCountry}" SelectedItem="{Binding Location.City}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" HorizontalAlignment="Left" Margin="145,88,0,0" VerticalAlignment="Top" Width="90"/>
         <TextBox x:Name="durationInput" HorizontalAlignment="Left" Margin="271,93,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
         <TextBox x:Name="languageInput" HorizontalAlignment="Left" Margin="400,93,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
         <TextBlock x:Name="capacityNumber" Text="1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="88" TextAlignment="Center" Height="15" Background="#FFDFDCDC" Margin="569,94,0,0" />
 
-        <Label Content="City" HorizontalAlignment="Left" Margin="38,60,0,0" VerticalAlignment="Top"/>
+        <Label Content="City" HorizontalAlignment="Left" Margin="145,60,0,0" VerticalAlignment="Top"/>
         <Label Content="Duration" HorizontalAlignment="Left" Margin="271,60,0,0" VerticalAlignment="Top"/>
         <Label Content="Language" HorizontalAlignment="Left" Margin="400,60,0,0" VerticalAlignment="Top"/>
         <Label Content="Capacity" HorizontalAlignment="Left" Margin="569,60,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="countryInput" HorizontalAlignment="Left" Margin="145,94,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
-        <Label Content="Country" HorizontalAlignment="Left" Margin="145,60,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="countryInput" ItemsSource="{Binding Countries}" SelectedItem="{Binding Location.Country}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" HorizontalAlignment="Left" Margin="22,86,0,0" VerticalAlignment="Top" Width="90" SelectionChanged="countryInput_SelectionChanged"/>
+        <Label Content="Country" HorizontalAlignment="Left" Margin="23,55,0,0" VerticalAlignment="Top"/>
 
 
 
@@ -53,6 +53,12 @@
         <Button x:Name="decrementCapacityNumber" Content="-" HorizontalAlignment="Left" Margin="538,90,0,0" VerticalAlignment="Top" Width="20" Click="decrementCapacityNumber_Click"/>
         <Button x:Name="incrementCapacityNumber" Content="+" HorizontalAlignment="Left" Margin="672,90,0,0" VerticalAlignment="Top" Width="20" Click="incrementCapacityNumber_Click"/>
         <Button Content="Search" FontWeight="Bold" HorizontalAlignment="Left" Margin="732,87,0,0" VerticalAlignment="Top" Height="22" Click="Search_Click"/>
+        <Label x:Name="Label" Content="Showing all tours: " HorizontalAlignment="Left" Margin="108,132,0,0" VerticalAlignment="Top" Height="24"/>
+        <Button x:Name="Restart" Content="Restart" HorizontalAlignment="Left" Margin="652,136,0,0" VerticalAlignment="Top" Visibility="Hidden" TextElement.FontWeight="Bold" Click="Restart_Click"/>
+        <Label x:Name="DurationLabel" HorizontalAlignment="Left" Margin="271,116,0,0" VerticalAlignment="Top"/>
+
+
+
 
 
 
