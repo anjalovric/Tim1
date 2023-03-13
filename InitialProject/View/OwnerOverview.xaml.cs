@@ -97,7 +97,7 @@ namespace InitialProject.View
         }
         private void AddAccommodationClick(object sender, RoutedEventArgs e)
         {
-            AccommodationForm accommodationForm = new AccommodationForm(accommodations);
+            AccommodationForm accommodationForm = new AccommodationForm(accommodations, WindowOwner);
             accommodationForm.Show();
         }
 

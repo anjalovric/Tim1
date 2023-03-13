@@ -24,7 +24,7 @@
                 <DataGridTextColumn Header="Last Name" Binding="{Binding LastName}"/>
                 <DataGridTextColumn Header="First Name" Binding="{Binding Name}"/>
                 <DataGridTextColumn Header="Username" Binding="{Binding Username}"/>
-                <DataGridTemplateColumn  Width="35">
+                <DataGridTemplateColumn  Width="45">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button Content="Review" Click="Review_Click"/>
