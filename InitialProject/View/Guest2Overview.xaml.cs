@@ -88,6 +88,7 @@ namespace InitialProject.View
             users = _userSerializer.FromCSV(filePath);
             alerts = _alertGuestSerializer.FromCSV(FilePath);
             GuestId = GetGuest2Id();
+            
             if (alerts.Count() != 0)
             {
                 foreach (AlertGuest2 alert in alerts)
