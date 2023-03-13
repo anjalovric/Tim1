@@ -56,7 +56,7 @@ namespace InitialProject
                 {
                     if(user.Role==Model.Role.OWNER)
                     {
-                        OwnerOverview ownerOverview = new OwnerOverview();
+                        OwnerOverview ownerOverview = new OwnerOverview(user);
                         ownerOverview.Show();
                         Close();
                     }else if(user.Role == Model.Role.GUIDE)
