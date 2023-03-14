@@ -68,7 +68,7 @@ namespace InitialProject.View
             {
                 if (window.GetType() == typeof(AccommodationReservationForm))
                 {
-                    (window as AccommodationReservationForm).FindAvailableDates(currentAccommodation.Id);
+                    (window as AccommodationReservationForm).SuggestAvailableDates(currentAccommodation.Id);
                 }
             }
         }
