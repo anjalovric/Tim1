@@ -49,7 +49,7 @@ namespace InitialProject.View
                 MessageBoxResult result = ConfirmReservation();
                 if(result == MessageBoxResult.Yes)
                 {
-                    AccommodationReservation newReservation = new AccommodationReservation(0, currentAccommodation, selectedDateRange.Start, selectedDateRange.End);
+                    AccommodationReservation newReservation = new AccommodationReservation(1, currentAccommodation, selectedDateRange.Start, selectedDateRange.End);
                     accommodationReservationRepository.Add(newReservation);
                     /* int count = freeDatesForAccommodations.Count;
                      List<FreeDatesForAccommodationReservation> help = new List<FreeDatesForAccommodationReservation>(freeDatesForAccommodations);

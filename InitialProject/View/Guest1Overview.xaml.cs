@@ -20,6 +20,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using InitialProject.Model;
 using InitialProject.Repository;
+using InitialProject.Serializer;
 using InitialProject.View.Owner;
 
 
@@ -41,6 +42,8 @@ namespace InitialProject.View
         public ObservableCollection<string> CitiesByCountry { get; set; }
         private LocationRepository locationRepository;
         private Location location;
+        private AccommodationType accommodationType;
+        private AccommodationTypeRepository accommodationTypeRepository;
         public ObservableCollection<Accommodation> Accommodations 
         { 
             get { return accommodations; } 
@@ -71,14 +74,21 @@ namespace InitialProject.View
             DataContext = this;
             accommodationRepository = new AccommodationRepository();
             Accommodations = new ObservableCollection<Accommodation>(accommodationRepository.GetAll());
+            
             accommodationImageRepository = new AccommodationImageRepository();
             accommodationImages = new List<AccommodationImage>(accommodationImageRepository.GetAll());
 
             locationRepository = new LocationRepository();
             location = new Location();
+            accommodationType = new AccommodationType();
+            accommodationTypeRepository = new AccommodationTypeRepository();
             Countries = new ObservableCollection<string>(locationRepository.GetAllCountries());
             CitiesByCountry = new ObservableCollection<string>();
             cityInput.IsEnabled = false;
+
+            SetLocationsForAccommodationView(Accommodations);
+            SetTypeForAccommodationView(Accommodations);
+            
         }
 
         
@@ -100,7 +110,8 @@ namespace InitialProject.View
                 {
                     Accommodations.Add(accommodation);
                 }
-            SetLocations(listAccommodation);
+           // SetLocations(listAccommodation);
+            //SetType(listAccommodation);
 
 
             
@@ -137,8 +148,26 @@ namespace InitialProject.View
                             Accommodations.Remove(accommodation);
                     }
                 }
+                for(int i = 0; i < numberOfGuests.Text.Length; i++)
+                {
+                    if(numberOfGuests.Text[i]<'0' || numberOfGuests.Text[i]>'9')
+                    {
+                        MessageBox.Show("Field 'Number of guests' must be numeric and bigger than 0.");
+                        numberOfGuests.Text = "";
+                        return;
+                    }
+                }
+                for (int i = 0; i < numberOfDays.Text.Length; i++)
+                {
+                    if (numberOfDays.Text[i] < '0' || numberOfDays.Text[i] > '9')
+                    {
+                        MessageBox.Show("Field 'Number of days' must be numeric and bigger than 0.");
+                        numberOfDays.Text = "";
+                        return;
+                    }
+                }
 
-                if(!(numberOfGuests.Text=="") && Convert.ToInt32(numberOfGuests.Text) > accommodation.Capacity)
+                if (!(numberOfGuests.Text=="") && Convert.ToInt32(numberOfGuests.Text) > accommodation.Capacity)
                 {
                     Accommodations.Remove(accommodation);
                 }
@@ -160,6 +189,39 @@ namespace InitialProject.View
             foreach(Accommodation accommodation in accommodations)
             {
                 accommodation.Location = locations.Find(n => n.Id == accommodation.Location.Id);
+            }
+        }
+
+        private void SetLocationsForAccommodationView(ObservableCollection<Accommodation> Accommodations)
+        {
+            List<Location> locations = locationRepository.GetAll();
+            foreach (Accommodation accommodation in Accommodations)
+            {
+                accommodation.Location = locations.Find(n => n.Id == accommodation.Location.Id);
+            }
+        }
+
+        public void SetType(List<Accommodation> accommodations)
+        {
+            List<AccommodationType> types = accommodationTypeRepository.GetAll();
+            foreach (Accommodation accommodation in accommodations)
+            {
+                if (types.Find(n => n.Id == accommodation.Type.Id) != null)
+                {
+                    accommodation.Type = types.Find(n => n.Id == accommodation.Type.Id);
+                }
+            }
+        }
+
+        public void SetTypeForAccommodationView(ObservableCollection<Accommodation> Accommodations)
+        {
+            List<AccommodationType> types = accommodationTypeRepository.GetAll();
+            foreach (Accommodation accommodation in Accommodations)
+            {
+                if (types.Find(n => n.Id == accommodation.Type.Id) != null)
+                {
+                    accommodation.Type = types.Find(n => n.Id == accommodation.Type.Id);
+                }
             }
         }
 
@@ -275,6 +337,13 @@ namespace InitialProject.View
                 }
                 cityInput.IsEnabled = true;
             }
+        }
+
+        private void ShowAll_Click(object sender, RoutedEventArgs e)
+        {
+            Accommodations.Clear();
+            foreach (Accommodation accommodation in accommodationRepository.GetAll())
+                Accommodations.Add(accommodation);
         }
     }
 }

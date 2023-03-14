@@ -69,12 +69,12 @@ namespace InitialProject.View
 
         public bool IsValidDateInput()
         {
-            return (StartDate >= EndDate || Convert.ToInt32(difference.TotalDays) < (Convert.ToInt32(numberOfDays.Text)-1) || StartDate.Date < DateTime.Now.Date || StartDate == null || EndDate == null);
+            return (StartDate <= EndDate && Convert.ToInt32(difference.TotalDays) >= (Convert.ToInt32(numberOfDays.Text)-1) && StartDate.Date > DateTime.Now && StartDate != null && EndDate != null);
         }
 
         public bool IsEnteredCorrectDateRange()
         {
-            return (Convert.ToInt32(difference.TotalDays) < currentAccommodation.MinDaysForReservation || Convert.ToInt32(numberOfDays.Text) < currentAccommodation.MinDaysForReservation);
+            return ((Convert.ToInt32(difference.TotalDays)+1) >= currentAccommodation.MinDaysForReservation && Convert.ToInt32(numberOfDays.Text) >= currentAccommodation.MinDaysForReservation);
         }
 
         private void Confirm_Click(object sender, RoutedEventArgs e)
@@ -82,12 +82,12 @@ namespace InitialProject.View
             difference = EndDate.Subtract(StartDate);
             int daysNumberFromCalendar = Convert.ToInt32(difference.TotalDays);
 
-            if (IsValidDateInput())
+            if (!IsValidDateInput())
             {
                 MessageBox.Show("Non valid input, please enter values again!");
 
             }
-            else if (IsEnteredCorrectDateRange())
+            else if (!IsEnteredCorrectDateRange())
             {
                 MessageBox.Show("The minimum number of days for booking this accommodation is " + currentAccommodation.MinDaysForReservation.ToString());
             }

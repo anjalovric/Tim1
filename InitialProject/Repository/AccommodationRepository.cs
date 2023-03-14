@@ -20,8 +20,8 @@ namespace InitialProject.Repository
         {
             _serializer = new Serializer<Accommodation>();
             _accommodations = _serializer.FromCSV(FilePath);
-            SetLocations();
-            SetType();
+            //SetLocations();
+            //SetType();
 
         }
         public int NextId()
@@ -45,7 +45,7 @@ namespace InitialProject.Repository
             return _accommodations;
         }
 
-        public void SetLocations()
+      /*  public void SetLocations()
         {
             Serializer<Location> _serializerLocation = new Serializer<Location>();
             List<Location> locations = _serializerLocation.FromCSV("../../../Resources/Data/locations.csv");
@@ -57,8 +57,8 @@ namespace InitialProject.Repository
                 }
             }
         }
-
-        public void SetType()
+      */
+       /* public void SetType()
         {
             Serializer<AccommodationType> _serializerType = new Serializer<AccommodationType>();
             List<AccommodationType> types = _serializerType.FromCSV("../../../Resources/Data/accommodationTypes.csv");
@@ -69,6 +69,6 @@ namespace InitialProject.Repository
                     accommodation.Type = types.Find(n => n.Id == accommodation.Type.Id);
                 }
             }
-        }
+        }*/
     }
 }
