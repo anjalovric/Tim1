@@ -102,83 +102,69 @@ namespace InitialProject.View
 
         private void searchNameButton(object sender, RoutedEventArgs e)
         {
-            
-            List<Accommodation> listAccommodation = accommodationRepository.GetAll();
-            Accommodations.Clear();
-            
-                foreach(Accommodation accommodation in listAccommodation)
+            if (IsNumberOfDaysValid() && IsNumberOfGuestsValid())
+            {
+
+                List<Accommodation> listAccommodation = accommodationRepository.GetAll();
+                Accommodations.Clear();
+
+                foreach (Accommodation accommodation in listAccommodation)
                 {
                     Accommodations.Add(accommodation);
                 }
-           // SetLocations(listAccommodation);
-            //SetType(listAccommodation);
+                // SetLocations(listAccommodation);
+                //SetType(listAccommodation);
 
 
-            
 
-            foreach (Accommodation accommodation in listAccommodation)
-            {
-                if(!accommodation.Name.ToLower().Contains(nameInput.Text.ToLower()))
+
+                foreach (Accommodation accommodation in listAccommodation)
                 {
-                    Accommodations.Remove(accommodation);
-                }
-                if (Location.City != null && !accommodation.Location.City.ToLower().Equals(Location.City.ToLower()))
-                {
-                    Accommodations.Remove(accommodation);
-                }
-                if (Location.Country != null && !accommodation.Location.Country.ToLower().Equals(Location.Country.ToLower()))
-                {
-                    Accommodations.Remove(accommodation);
-                }
-                if(apartment.IsChecked==true || house.IsChecked==true || cottage.IsChecked==true)
-                {
-                    if (apartment.IsChecked==false)
+                    if (!accommodation.Name.ToLower().Contains(nameInput.Text.ToLower()))
                     {
-                        if(accommodation.Type.Name.ToLower() == "apartment")
-                            Accommodations.Remove(accommodation);
+                        Accommodations.Remove(accommodation);
                     }
-                    if (house.IsChecked==false)
+                    if (Location.City != null && !accommodation.Location.City.ToLower().Equals(Location.City.ToLower()))
                     {
-                        if (accommodation.Type.Name.ToLower() == "house")
-                            Accommodations.Remove(accommodation);
+                        Accommodations.Remove(accommodation);
                     }
-                    if (cottage.IsChecked==false)
+                    if (Location.Country != null && !accommodation.Location.Country.ToLower().Equals(Location.Country.ToLower()))
                     {
-                        if (accommodation.Type.Name.ToLower() == "cottage")
-                            Accommodations.Remove(accommodation);
+                        Accommodations.Remove(accommodation);
                     }
-                }
-                for(int i = 0; i < numberOfGuests.Text.Length; i++)
-                {
-                    if(numberOfGuests.Text[i]<'0' || numberOfGuests.Text[i]>'9')
+                    if (apartment.IsChecked == true || house.IsChecked == true || cottage.IsChecked == true)
                     {
-                        MessageBox.Show("Field 'Number of guests' must be numeric and bigger than 0.");
-                        numberOfGuests.Text = "";
-                        return;
+                        if (apartment.IsChecked == false)
+                        {
+                            if (accommodation.Type.Name.ToLower() == "apartment")
+                                Accommodations.Remove(accommodation);
+                        }
+                        if (house.IsChecked == false)
+                        {
+                            if (accommodation.Type.Name.ToLower() == "house")
+                                Accommodations.Remove(accommodation);
+                        }
+                        if (cottage.IsChecked == false)
+                        {
+                            if (accommodation.Type.Name.ToLower() == "cottage")
+                                Accommodations.Remove(accommodation);
+                        }
                     }
-                }
-                for (int i = 0; i < numberOfDays.Text.Length; i++)
-                {
-                    if (numberOfDays.Text[i] < '0' || numberOfDays.Text[i] > '9')
+                   
+
+                    if (!(numberOfGuests.Text == "") && Convert.ToInt32(numberOfGuests.Text) > accommodation.Capacity)
                     {
-                        MessageBox.Show("Field 'Number of days' must be numeric and bigger than 0.");
-                        numberOfDays.Text = "";
-                        return;
+                        Accommodations.Remove(accommodation);
                     }
+                    if (!(numberOfDays.Text == "") && Convert.ToInt32(numberOfDays.Text) < accommodation.MinDaysForReservation)
+                    {
+                        Accommodations.Remove(accommodation);
+                    }
+
+
+
+
                 }
-
-                if (!(numberOfGuests.Text=="") && Convert.ToInt32(numberOfGuests.Text) > accommodation.Capacity)
-                {
-                    Accommodations.Remove(accommodation);
-                }
-                if (!(numberOfDays.Text == "") && Convert.ToInt32(numberOfDays.Text) < accommodation.MinDaysForReservation)
-                {
-                    Accommodations.Remove(accommodation);
-                }
-
-
-
-
             }
             
 
@@ -344,6 +330,61 @@ namespace InitialProject.View
             Accommodations.Clear();
             foreach (Accommodation accommodation in accommodationRepository.GetAll())
                 Accommodations.Add(accommodation);
+            nameInput.Text = "";
+            countryInput.SelectedItem = null;
+            cityInput.SelectedItem = null;
+            cityInput.IsEnabled = false;
+            apartment.IsChecked = false;
+            house.IsChecked = false;
+            cottage.IsChecked = false;
+            numberOfDays.Text = "";
+            numberOfGuests.Text = "";
+            
+
+        }
+
+        private bool IsNumberOfDaysValid()
+        {
+            var content = numberOfDays.Text;
+            var regex = "^([1-9][0-9]*)$";
+            Match match = Regex.Match(content, regex, RegexOptions.IgnoreCase);
+            bool isValid = false;
+            if (!match.Success && numberOfDays.Text!="")
+            {
+                numberOfDays.BorderBrush = Brushes.Red;
+                numberOfDaysLabel.Content = "This field should be positive integer number";
+                numberOfDays.BorderThickness = new Thickness(1);
+            }
+            
+            else
+            {
+                isValid = true;
+                numberOfDays.BorderBrush = Brushes.Green;
+                numberOfDaysLabel.Content = string.Empty;
+            }
+            return isValid;
+        }
+
+        private bool IsNumberOfGuestsValid()
+        {
+            var content = numberOfGuests.Text;
+            var regex = "^([1-9][0-9]*)$";
+            Match match = Regex.Match(content, regex, RegexOptions.IgnoreCase);
+            bool isValid = false;
+            if (!match.Success && numberOfGuests.Text != "")
+            {
+                numberOfGuests.BorderBrush = Brushes.Red;
+                numberOfGuestsLabel.Content = "This field should be positive integer number";
+                numberOfGuests.BorderThickness = new Thickness(1);
+            }
+
+            else
+            {
+                isValid = true;
+                numberOfGuests.BorderBrush = Brushes.Green;
+                numberOfGuestsLabel.Content = string.Empty;
+            }
+            return isValid;
         }
     }
 }

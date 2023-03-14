@@ -85,10 +85,13 @@
 
 
         </DataGrid>
-        <Button x:Name="searchName" Content="Search" Margin="165,16,29,0" Height="38" Click="searchNameButton" Grid.Column="2" Grid.Row="3" FontWeight="Bold" VerticalAlignment="Top"/>
+        <Button x:Name="searchName" Content="Search" Margin="184,59,10,0" Height="38" Click="searchNameButton" Grid.Column="2" Grid.Row="3" FontWeight="Bold" VerticalAlignment="Top"/>
         <Button Margin="178,10,10,14" FontSize="16" Grid.Column="2" Click="SignOut_Click">Sign out</Button>
 
         <Button Width="Auto" FontWeight="Bold" Margin="30,11,157,287" Grid.Row="3" Click="ShowAll_Click">Show all</Button>
+
+        <Label x:Name="numberOfDaysLabel" HorizontalAlignment="Center" Width="246" Height="29" Margin="0,4,0,0" VerticalAlignment="Top" Grid.Row="3" Grid.Column="1"/>
+        <Label x:Name="numberOfGuestsLabel" HorizontalAlignment="Center" Width="247" Height="28" Margin="0,5,0,0" VerticalAlignment="Top" Grid.Row="3" Grid.Column="2"/>
 
     </Grid>
 </Window>
