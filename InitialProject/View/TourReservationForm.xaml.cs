@@ -39,8 +39,8 @@ namespace InitialProject.View
         private readonly Serializer<TourInstance> _serializerTourInstances;
         public ObservableCollection<TourInstance> TourInstances { get; set; }
         public Label Label { get; set; }
-        private Button Restart;
-        public TourReservationForm(TourInstance currentTourInstance,int guestId,ObservableCollection<TourInstance> TourInstance,TourInstanceRepository tourInstanceRepository,Label label,Button restart)
+       
+        public TourReservationForm(TourInstance currentTourInstance,int guestId,ObservableCollection<TourInstance> TourInstance,TourInstanceRepository tourInstanceRepository,Label label)
         {
             InitializeComponent();
             DataContext = this;
@@ -48,7 +48,6 @@ namespace InitialProject.View
             _serializerTourInstances = new Serializer<TourInstance>();
             CurrentTourInstance = currentTourInstance;
             this.TourInstances = TourInstance;
-            this.Restart = restart;
             this.Label = label;
             this._tourInstanceRepository = tourInstanceRepository;
             _tourReservations = _serializerTourReservations.FromCSV(FilePath);
@@ -125,7 +124,6 @@ namespace InitialProject.View
                 MessageBox.Show("There is no enough places for choosen number of people. Tour is completed.");
                 FindAvailableTours();
                 Label.Content = "Showing available tours: ";
-                Restart.Visibility = Visibility.Visible;
                 this.Close();
                 return;
             }
