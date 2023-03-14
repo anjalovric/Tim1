@@ -76,6 +76,7 @@ namespace InitialProject.View
                     (window as AccommodationReservationForm).GetAvailableDates(currentAccommodation.Id);
                 }
             }
+           
         }
 
         private MessageBoxResult ConfirmReservation()
