@@ -48,7 +48,6 @@ namespace InitialProject.View
             this.currentAccommodation = currentAccommodation;
             freeDatesForAccommodations = new ObservableCollection<FreeDatesForAccommodationReservation>();
             this.accommodationReservationRepository = accommodationReservationRepository;
-            
         }
 
         private void ChooseDateButtonClick(object sender, RoutedEventArgs e)
@@ -56,7 +55,6 @@ namespace InitialProject.View
             AccommodationGuestsNumberInput guestsNumber = new AccommodationGuestsNumberInput(currentAccommodation, selectedDateRange, accommodationReservationRepository, freeDatesForAccommodations);
             guestsNumber.Owner = this;
             guestsNumber.Show();
-          
         }
         public void AddNewDateRange(DateTime startDate, DateTime endDate)
         {

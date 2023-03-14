@@ -35,7 +35,6 @@ namespace InitialProject.View
         {
             InitializeComponent();
             this.DataContext = this;
-
             foreach (string url in imagesUrl)
             { 
                 Image img = new Image();
@@ -47,7 +46,6 @@ namespace InitialProject.View
                 setPhotoDimensions(ref img);
                 imagesList.Items.Add(img);
             }
-
         }
 
         private void setPhotoDimensions(ref Image img)
