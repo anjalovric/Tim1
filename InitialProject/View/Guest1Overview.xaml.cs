@@ -79,8 +79,8 @@ namespace InitialProject.View
             Countries = new ObservableCollection<string>(locationRepository.GetAllCountries());
             CitiesByCountry = new ObservableCollection<string>();
             cityInput.IsEnabled = false;
-            SetLocations(Accommodations);
-            SetTypes(Accommodations);    
+            SetLocations();
+            SetTypes();    
         }
 
         
@@ -149,7 +149,7 @@ namespace InitialProject.View
         }
         
 
-        private void SetLocations(ObservableCollection<Accommodation> Accommodations)
+        private void SetLocations()
         {
             List<Location> locations = locationRepository.GetAll();
             foreach (Accommodation accommodation in Accommodations)
@@ -160,7 +160,7 @@ namespace InitialProject.View
 
        
 
-        public void SetTypes(ObservableCollection<Accommodation> Accommodations)
+        public void SetTypes()
         {
             List<AccommodationType> types = accommodationTypeRepository.GetAll();
             foreach (Accommodation accommodation in Accommodations)
@@ -231,28 +231,33 @@ namespace InitialProject.View
         {
             try
             {
-                Accommodation currentAccommodation = (Accommodation)AccommodationListDataGrid.CurrentItem;
-                List<string> imagesUrl = new List<string>();
-                foreach (AccommodationImage image in accommodationImages)
-                {
-                    if (image.Accommodation.Id == currentAccommodation.Id)
-                    {
-                        imagesUrl.Add(image.Url);
-                    }
-                }
-                if (imagesUrl.Count == 0)
+                List<string> imagesUrls = new List<string>();
+                FindPhotosUrls(imagesUrls);
+                if (imagesUrls.Count == 0)
                 {
                     MessageBox.Show("There are currently no images for the selected accommodation.");
                 }
                 else
                 {
-                    AccommodationPhotosView photosView = new AccommodationPhotosView(imagesUrl);
+                    AccommodationPhotosView photosView = new AccommodationPhotosView(imagesUrls);
                     photosView.Show();
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message.ToString());
+            }
+        }
+
+        private void FindPhotosUrls(List<string> imagesUrls)
+        {
+            Accommodation currentAccommodation = (Accommodation)AccommodationListDataGrid.CurrentItem;
+            foreach (AccommodationImage image in accommodationImages)
+            {
+                if (image.Accommodation.Id == currentAccommodation.Id)
+                {
+                    imagesUrls.Add(image.Url);
+                }
             }
         }
 

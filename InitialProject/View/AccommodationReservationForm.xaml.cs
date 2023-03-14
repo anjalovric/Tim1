@@ -30,6 +30,7 @@ namespace InitialProject.View
         public Accommodation currentAccommodation { get; set; }
         public List<AccommodationReservation> reservations { get; set; }
         private AccommodationReservationRepository accommodationReservationRepository;
+        private AccommodationRepository accommodationRepository;
 
         List<DateTime> availableDates;
         List<DateTime> availableDatesHelp;
@@ -41,14 +42,20 @@ namespace InitialProject.View
             this.DataContext = this;
             this.currentAccommodation = currentAccommodation;
             accommodationReservationRepository = new AccommodationReservationRepository();
+            this.accommodationRepository = accommodationRepository;
             this.reservations = new List<AccommodationReservation>(accommodationReservationRepository.GetAll());
-            foreach(AccommodationReservation reservation in reservations)
-            {
-                reservation.currentAccommodation = accommodationRepository.GetAll().Find(accommodationInstance => accommodationInstance.Id == reservation.currentAccommodation.Id);
-            }
+            setAccommodation();
             availableDates = new List<DateTime>();
             availableDatesHelp = new List<DateTime>();
             availableDateRanges = new List<List<DateTime>>();
+        }
+
+        private void setAccommodation()
+        {
+            foreach (AccommodationReservation reservation in reservations)
+            {
+                reservation.Accommodation = accommodationRepository.GetAll().Find(accommodationInstance => accommodationInstance.Id == reservation.Accommodation.Id);
+            }
         }
 
         private void DecrementDaysNumber(object sender, RoutedEventArgs e)
@@ -93,7 +100,7 @@ namespace InitialProject.View
             }
             else
             {//
-                    SuggestAvailableDates(currentAccommodation.Id);
+                GetAvailableDates(currentAccommodation.Id);
             }
         }
 
@@ -101,7 +108,7 @@ namespace InitialProject.View
         {
             foreach (AccommodationReservation reservation in reservations)
             {
-                if (currentAccommodationId == reservation.currentAccommodation.Id)
+                if (currentAccommodationId == reservation.Accommodation.Id)
                 {
                     if (date >= reservation.ComingDate && date <= reservation.LeavingDate)
                     {
@@ -153,37 +160,33 @@ namespace InitialProject.View
             return true;
         }
 
-        public void SuggestAvailableDates(int currentAccommodationId)
+        public void GetAvailableDates(int currentAccommodationId)
         {
             reservations = accommodationReservationRepository.GetAll();
-            DateTime start = StartDate;
-            DateTime end = EndDate;
             availableDates = new List<DateTime>();
             availableDatesHelp = new List<DateTime>();
             availableDateRanges = new List<List<DateTime>>();
+            FillDateRangesList(currentAccommodationId);
+            DatesForAccommodationReservation datesListWindow = new DatesForAccommodationReservation(currentAccommodation, accommodationReservationRepository);
+            if (availableDateRanges.Count > 0 && AvailableDateRangeExists(ref datesListWindow))
+                datesListWindow.Show();
+            else
+            { 
+                FindAvailableDatesOutRange();
+                DisplayAvailableDatesOutRange();
+            }
+                
+        }
+
+        public void FillDateRangesList(int currentAccommodationId)
+        {
+            DateTime start = StartDate;
             for (int i = 0; i <= difference.TotalDays; i++)
             {
                 if (IsDateAvailable(currentAccommodationId, start))
                     AddAvailableDateToList(start);
                 start = start.AddDays(1);
             }
-            if (availableDateRanges.Count > 0)
-            {
-                DatesForAccommodationReservation datesListWindow = new DatesForAccommodationReservation(currentAccommodation,accommodationReservationRepository);
-                if (AvailableDateRangeExists(ref datesListWindow))
-                    datesListWindow.Show();
-                else
-                {
-                    FindAvailableDatesOutRange();
-                    DisplayAvailableDatesOutRange();
-                }     
-            }
-            else
-            {
-                FindAvailableDatesOutRange();
-                DisplayAvailableDatesOutRange();
-            }
-                
         }
 
         public bool AvailableDateRangeExists(ref DatesForAccommodationReservation datesListWindow)
@@ -212,11 +215,16 @@ namespace InitialProject.View
                 start = start.AddDays(-1);
 
             start = start.AddDays(1);
-            while(availableDateRanges.Count < 3)
+            FillDatesOutRangeList(ref start);
+        }
+
+        public void FillDatesOutRangeList(ref DateTime start)
+        {
+            while (availableDateRanges.Count < 3)
             {
                 if (IsDateAvailable(currentAccommodation.Id, start))
                 {
-                    AddAvailableDateOutRangeToList(start);  
+                    AddAvailableDateOutRangeToList(start);
                 }
                 start = start.AddDays(1);
             }

@@ -48,8 +48,7 @@ namespace InitialProject.View
                 MessageBoxResult result = ConfirmReservation();
                 if(result == MessageBoxResult.Yes)
                 {
-                    AccommodationReservation newReservation = new AccommodationReservation(1, currentAccommodation, selectedDateRange.Start, selectedDateRange.End);
-                    accommodationReservationRepository.Add(newReservation);
+                    makeNewReservation();
                     UpdateAvailableDates();
                     this.Close();
                     this.Owner.Close();    
@@ -62,13 +61,19 @@ namespace InitialProject.View
             }
         }
 
+        private void makeNewReservation()
+        {
+            AccommodationReservation newReservation = new AccommodationReservation(1, currentAccommodation, selectedDateRange.Start, selectedDateRange.End);
+            accommodationReservationRepository.Add(newReservation);
+        }
+
         private void UpdateAvailableDates()
         {
             foreach (Window window in Application.Current.Windows)
             {
                 if (window.GetType() == typeof(AccommodationReservationForm))
                 {
-                    (window as AccommodationReservationForm).SuggestAvailableDates(currentAccommodation.Id);
+                    (window as AccommodationReservationForm).GetAvailableDates(currentAccommodation.Id);
                 }
             }
         }
