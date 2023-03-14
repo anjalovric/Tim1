@@ -31,9 +31,9 @@ namespace InitialProject.View
         public List<AccommodationReservation> reservations { get; set; }
         private AccommodationReservationRepository accommodationReservationRepository;
 
-        List<DateTime> freeDays;
-        List<DateTime> freeDaysHelp;
-        List<List<DateTime>> dateTimes;
+        List<DateTime> availableDates;
+        List<DateTime> availableDatesHelp;
+        List<List<DateTime>> availableDateRanges;
         
         public AccommodationReservationForm(Accommodation currentAccommodation, ref AccommodationRepository accommodationRepository)
         {
@@ -46,9 +46,9 @@ namespace InitialProject.View
             {
                 reservation.currentAccommodation = accommodationRepository.GetAll().Find(accommodationInstance => accommodationInstance.Id == reservation.currentAccommodation.Id);
             }
-            freeDays = new List<DateTime>();
-            freeDaysHelp = new List<DateTime>();
-            dateTimes = new List<List<DateTime>>();
+            availableDates = new List<DateTime>();
+            availableDatesHelp = new List<DateTime>();
+            availableDateRanges = new List<List<DateTime>>();
         }
 
         private void DecrementDaysNumber(object sender, RoutedEventArgs e)
@@ -114,30 +114,30 @@ namespace InitialProject.View
         
         public void AddAvailableDateToList(DateTime date)
         {
-            freeDays.Add(date);
-            freeDaysHelp.Add(date);
-            freeDays.Sort();
-            freeDaysHelp.Sort();
-            if (freeDays.Count == Convert.ToInt32(numberOfDays.Text))
+            availableDates.Add(date);
+            availableDatesHelp.Add(date);
+            availableDates.Sort();
+            availableDatesHelp.Sort();
+            if (availableDates.Count == Convert.ToInt32(numberOfDays.Text))
             {
-                dateTimes.Add(freeDaysHelp);
-                freeDays.Remove(freeDays[0]);
-                freeDaysHelp = new List<DateTime>(freeDays);
+                availableDateRanges.Add(availableDatesHelp);
+                availableDates.Remove(availableDates[0]);
+                availableDatesHelp = new List<DateTime>(availableDates);
             }
         }
 
         public void AddAvailableDateOutRangeToList(DateTime date)
         {
-            freeDays.Add(date);
-            freeDaysHelp.Add(date);
-            freeDays.Sort();
-            freeDaysHelp.Sort();
-            if (freeDays.Count == Convert.ToInt32(numberOfDays.Text))
+            availableDates.Add(date);
+            availableDatesHelp.Add(date);
+            availableDates.Sort();
+            availableDatesHelp.Sort();
+            if (availableDates.Count == Convert.ToInt32(numberOfDays.Text))
             {
-                if(AreAvailableDatesConsecutive(freeDays))
-                    dateTimes.Add(freeDaysHelp);
-                freeDays.Remove(freeDays[0]);
-                freeDaysHelp = new List<DateTime>(freeDays);
+                if(AreAvailableDatesConsecutive(availableDates))
+                    availableDateRanges.Add(availableDatesHelp);
+                availableDates.Remove(availableDates[0]);
+                availableDatesHelp = new List<DateTime>(availableDates);
             }
         }
 
@@ -158,16 +158,16 @@ namespace InitialProject.View
             reservations = accommodationReservationRepository.GetAll();
             DateTime start = StartDate;
             DateTime end = EndDate;
-            freeDays = new List<DateTime>();
-            freeDaysHelp = new List<DateTime>();
-            dateTimes = new List<List<DateTime>>();
+            availableDates = new List<DateTime>();
+            availableDatesHelp = new List<DateTime>();
+            availableDateRanges = new List<List<DateTime>>();
             for (int i = 0; i <= difference.TotalDays; i++)
             {
                 if (IsDateAvailable(currentAccommodationId, start))
                     AddAvailableDateToList(start);
                 start = start.AddDays(1);
             }
-            if (dateTimes.Count > 0)
+            if (availableDateRanges.Count > 0)
             {
                 DatesForAccommodationReservation datesListWindow = new DatesForAccommodationReservation(currentAccommodation,accommodationReservationRepository);
                 if (AvailableDateRangeExists(ref datesListWindow))
@@ -189,7 +189,7 @@ namespace InitialProject.View
         public bool AvailableDateRangeExists(ref DatesForAccommodationReservation datesListWindow)
         {
             bool exists = false;
-            foreach (List<DateTime> dates in dateTimes)
+            foreach (List<DateTime> dates in availableDateRanges)
             {
                 if (AreAvailableDatesConsecutive(dates))
                 {
@@ -204,15 +204,15 @@ namespace InitialProject.View
 
         public void FindAvailableDatesOutRange()
         {
-            freeDays = new List<DateTime>();
-            freeDaysHelp = new List<DateTime>();
-            dateTimes = new List<List<DateTime>>();
+            availableDates = new List<DateTime>();
+            availableDatesHelp = new List<DateTime>();
+            availableDateRanges = new List<List<DateTime>>();
             DateTime start = EndDate;
             while (IsDateAvailable(currentAccommodation.Id, start))
                 start = start.AddDays(-1);
 
             start = start.AddDays(1);
-            while(dateTimes.Count < 3)
+            while(availableDateRanges.Count < 3)
             {
                 if (IsDateAvailable(currentAccommodation.Id, start))
                 {
@@ -225,7 +225,7 @@ namespace InitialProject.View
         public void DisplayAvailableDatesOutRange()
         {
             DatesForAccommodationReservation datesListWindow = new DatesForAccommodationReservation(currentAccommodation, accommodationReservationRepository);
-            foreach (List<DateTime> dates in dateTimes)
+            foreach (List<DateTime> dates in availableDateRanges)
             {
                 DateTime startDate = dates[0];
                 DateTime endDate = dates[Convert.ToInt32(numberOfDays.Text) - 1];

@@ -24,17 +24,17 @@ namespace InitialProject.View
     public partial class AccommodationGuestsNumberInput : Window
     {
         public Accommodation currentAccommodation { get; set; }
-        public FreeDatesForAccommodationReservation selectedDateRange { get; set; }
+        public AvailableDatesForAccommodationReservation selectedDateRange { get; set; }
         private AccommodationReservationRepository accommodationReservationRepository;
-        public ObservableCollection<FreeDatesForAccommodationReservation> freeDatesForAccommodations { get; set; }
-        public AccommodationGuestsNumberInput(Accommodation currentAccommodation, FreeDatesForAccommodationReservation selectedDateRange, AccommodationReservationRepository accommodationReservationRepository, ObservableCollection<FreeDatesForAccommodationReservation> freeDatesForAccommodations)
+        public ObservableCollection<AvailableDatesForAccommodationReservation> availableDatesForAccommodations { get; set; }
+        public AccommodationGuestsNumberInput(Accommodation currentAccommodation, AvailableDatesForAccommodationReservation selectedDateRange, AccommodationReservationRepository accommodationReservationRepository, ObservableCollection<AvailableDatesForAccommodationReservation> availableDatesForAccommodations)
         {
             InitializeComponent();
             this.DataContext = this;
             this.currentAccommodation = currentAccommodation;
             this.selectedDateRange = selectedDateRange;
             this.accommodationReservationRepository = accommodationReservationRepository;
-            this.freeDatesForAccommodations = freeDatesForAccommodations;
+            this.availableDatesForAccommodations = availableDatesForAccommodations;
         }
 
         private void ConfirmReservation_Click(object sender, RoutedEventArgs e)
