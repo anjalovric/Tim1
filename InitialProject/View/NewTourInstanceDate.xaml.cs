@@ -59,7 +59,6 @@ namespace InitialProject.View
         {
             InitializeComponent();
             DataContext = this;
-           // _tourInstanceRepository = new TourInstanceRepository();
             _currentTour = tour;
             newInstance = new TourInstance();
             tourInstances = instances;
@@ -70,8 +69,6 @@ namespace InitialProject.View
         {
             if (IsDateValid() && IsTimeValid())
             {
-                //TourInstance newTourInstance = new TourInstance(_currentTour, _start, InstanceStartHour);
-                //TourInstance saved = _tourInstanceRepository.Save(newTourInstance);
                 newInstance.StartDate = InstanceStartDate;
                 newInstance.StartClock = InstanceStartHour;
                 tourInstances.Add(newInstance);
@@ -109,67 +106,61 @@ namespace InitialProject.View
         private bool IsTimeValid()
         {
             var content = InstanceStartHourTB.Text;
-            var regex = "[0-2][0-9]\\:[0-5][0-9]\\:[0-5][0-9]$";
+            var regex = "(([0-1][0-9])|(2[0-3]))\\:[0-5][0-9]\\:[0-5][0-9]$";
             Match match = Regex.Match(content, regex, RegexOptions.IgnoreCase);
             bool isValid = false;
             if (!match.Success)
             {
                 HourLabel.Content = "Invalid format!Time format should be hh:mm:ss";
-                isValid = false;
             }
-            else if (match.Success && IsDateValid())
+            else if(match.Success && InstanceStartDate.Date>DateTime.Now.Date)
+            {
+                isValid = true;
+            }
+            else if (match.Success && InstanceStartDate.Date==DateTime.Now.Date)
             {
                 string times = match.ToString();
-                string hours = times.Split(':')[0];
-                string minutes = times.Split(":")[1];
-                string seconds = times.Split(":")[2];
-                int hour = Convert.ToInt32(hours);
-                int minute = Convert.ToInt32(minutes);
-                int second = Convert.ToInt32(seconds);
+                
+                int hour = Convert.ToInt32(times.Split(':')[0]);
+                int minute = Convert.ToInt32(times.Split(':')[1]);
+                int second = Convert.ToInt32(times.Split(':')[2]);
 
-
-                string time = DateTime.Now.TimeOfDay.ToString();
-                string h = time.Split(":")[0];
-                string m = time.Split(":")[1];
-                string s = DateTime.Now.Second.ToString();
-                if (hour < Convert.ToInt32(h))
+                if (hour < Convert.ToInt32(DateTime.Now.Hour.ToString()))
                 {
                     HourLabel.Content = "Can't choose time for past";
                     InstanceStartHourTB.BorderBrush = Brushes.Red;
                     isValid = false;
                 }
-                else if(hour> Convert.ToInt32(h))
+                else if(hour> Convert.ToInt32(DateTime.Now.Hour.ToString()))
                 {
                     InstanceStartHourTB.BorderBrush = Brushes.Green;
                     HourLabel.Content=string.Empty;
                     isValid = true;
                 }
-                else if (hour == Convert.ToInt32(h) && minute < Convert.ToInt32(m))
+                else if (hour == Convert.ToInt32(DateTime.Now.Hour.ToString()) && minute < Convert.ToInt32(DateTime.Now.Minute.ToString()))
                 {
                     InstanceStartHourTB.BorderBrush = Brushes.Red;
                     HourLabel.Content = "Can't choose time for past";
-                    isValid = false;
                 }
-                else if (hour == Convert.ToInt32(h) && minute > Convert.ToInt32(m))
+                else if (hour == Convert.ToInt32(DateTime.Now.Hour.ToString()) && minute > Convert.ToInt32(DateTime.Now.Minute.ToString()))
                 {
                     InstanceStartHourTB.BorderBrush = Brushes.Green;
                     HourLabel.Content =string.Empty;
                     isValid =true;
                 }
-                else if (hour == Convert.ToInt32(h) && minute == Convert.ToInt32(m) && second < Convert.ToInt32(s)){
+                else if (hour == Convert.ToInt32(DateTime.Now.Hour.ToString()) && minute == Convert.ToInt32(DateTime.Now.Minute.ToString()) && second < Convert.ToInt32(DateTime.Now.Second.ToString()))
+                {
                     InstanceStartHourTB.BorderBrush = Brushes.Red;
                     HourLabel.Content = "Can't choose time for past";
-                    isValid = false;
                 }
-                else if (hour == Convert.ToInt32(h) && minute == Convert.ToInt32(m) && second > Convert.ToInt32(s))
+                else if (hour == Convert.ToInt32(DateTime.Now.Hour.ToString()) && minute == Convert.ToInt32(DateTime.Now.Minute.ToString()) && second > Convert.ToInt32(DateTime.Now.Second.ToString()))
                 {
                     InstanceStartHourTB.BorderBrush = Brushes.Green;
                     HourLabel.Content = string.Empty;
                     isValid = true;
                 }
             }
-        return isValid;
-        
+            return isValid;
         }
     }
 }

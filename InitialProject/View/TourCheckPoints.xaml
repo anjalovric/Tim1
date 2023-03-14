@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
-        Title="TourCheckPoints" Height="650" Width="550">
+        Title="TourCheckPoints" Height="650" Width="550" WindowStartupLocation="CenterScreen">
 
     <Grid Margin="0,0,0,-16">
         <Label Margin="0,20,0,522" >
@@ -26,12 +26,12 @@
                 <DataGridTextColumn Header="Checked" Binding="{Binding Checked}" Width="66"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="Finish" Height="30" Width="75" Margin="202,503,233,51" Click="FinishTour" >Finish tour</Button>
+        <Button x:Name="Finish" Height="30" Width="75" Margin="222,518,253,102" Click="FinishTour" >Finish tour</Button>
 
         <Button x:Name="Next" Height="30" Width="75" Margin="381,302,54,252" Click="Next_Click" >Next point</Button>
-        <Label Margin="0,404,419,216" Height="30">Number of guests:</Label>
-        <ListBox ItemsSource="{Binding Path=count}" Margin="179,373,0,186" Height="30" Width="150" HorizontalAlignment="Left" />
-        <Label Content="Number of guests:" Margin="0,373,0,186" Height="30" Width="150" HorizontalAlignment="Left"></Label>
-        <Label x:Name="FinishMessage" HorizontalAlignment="Left" Margin="179,477,0,0" VerticalAlignment="Top" Width="150"/>
+
+
+
+        <Label x:Name="FinishMessage" FontStretch="ExtraExpanded" FontSize="25" HorizontalAlignment="Center" Margin="0,439,0,0" VerticalAlignment="Top" Width="401" Height="48"/>
     </Grid>
 </Window>
