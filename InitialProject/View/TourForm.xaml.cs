@@ -279,19 +279,18 @@ namespace InitialProject.View
         private bool IsDurationValid()
         {
             var content = DurationTB.Text;
-            var regex = "^(0|([1-9][0-9]*))(\\.[0-9]+)?$";
-            var regexZero = "(0\\.0)$";
-            var regexzero = "0$";
+            var regex = "(([1-9][0-9]*)(\\.[0-9]+)?)|(0\\.[0-9]+)$";
+            var regexMinus = "-";
+            
             Match match = Regex.Match(content, regex, RegexOptions.IgnoreCase);
-            Match matchZero = Regex.Match(content, regexZero, RegexOptions.IgnoreCase);
-            Match matchzero = Regex.Match(content, regexzero, RegexOptions.IgnoreCase);
+            Match matchMinus=Regex.Match(content,regexMinus, RegexOptions.IgnoreCase);
             bool isValid = false;
             if (DurationTB.Text.Trim().Equals(""))
             {
-                isValid = false;
                 DurationTB.BorderBrush = Brushes.Red;
                 DurationTB.BorderThickness = new Thickness(1);
                 DurationLabel.Content = "This field can't be empty";
+                return false;
             }
             else if (!match.Success)
             { 
@@ -299,32 +298,55 @@ namespace InitialProject.View
                 DurationLabel.Content = "This field should be positive double number";
                 DurationTB.BorderThickness = new Thickness(1);
             }
-            else if(matchZero.Success || matchzero.Success)
+            else if (Convert.ToDouble(match.ToString())==0.0 || Convert.ToString(match).Equals('0') || matchMinus.Success)
             {
                 DurationTB.BorderBrush = Brushes.Red;
-                DurationLabel.Content = "This field should be positive double number";
+                DurationLabel.Content = "Invalid number";
                 DurationTB.BorderThickness = new Thickness(1);
+                return false;
             }
-            else if(match.Success && (!matchZero.Success) && (!matchzero.Success))
+            else if(match.Success)
             {
-                isValid = true;
                 DurationTB.BorderBrush = Brushes.Green;
                 DurationLabel.Content = string.Empty;
+                return true;
             }
-            return isValid;
+            return false;
         }
 
 
 
         private bool IsCityValid()
         {
-            return ComboBoxCity.SelectedItem != null;
+            if (ComboBoxCity.SelectedItem == null)
+            {
+                ComboBoxCity.BorderBrush = Brushes.Red;
+                CityLabel.Content = "Can't be empty";
+                return false;
+            }
+            else
+            {
+                ComboBoxCity.BorderBrush=Brushes.Green;
+                CityLabel.Content = string.Empty;
+                return true;
+            }
         }
 
 
         private bool IsCountryValid()
         {
-            return ComboBoxCountry.SelectedItem != null;
+            if (ComboBoxCountry.SelectedItem == null)
+            {
+                ComboBoxCountry.BorderBrush = Brushes.Red;
+                CountryLabel.Content = "Can't be empty";
+                return false;
+            }
+            else
+            {
+                ComboBoxCountry.BorderBrush = Brushes.Green;
+                CountryLabel.Content = string.Empty;
+                return true;
+            }
         }
 
 

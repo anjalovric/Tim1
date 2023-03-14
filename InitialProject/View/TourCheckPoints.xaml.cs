@@ -86,7 +86,7 @@ namespace InitialProject.View
             {
                 CurrentPoint.Add(AllPoints.ToList().Find(n => n.Order == counter));
                 AddAlerts(CurrentPoint[0].Id, _selected.Id);
-                CountGuests(CurrentPoint[0].Id, _selected.Id);
+                //CountGuests(CurrentPoint[0].Id, _selected.Id);
                 Tours = tours;
             }
         }
@@ -109,7 +109,7 @@ namespace InitialProject.View
             CurrentPoint[0].Checked = true;
             Tours.Remove(_selected);
             Finish.IsEnabled = false;
-            FinishMessage.Content = "This tour is finished";
+            FinishMessage.Content = "         This tour is finished";
             
         }
 
@@ -165,7 +165,7 @@ namespace InitialProject.View
             }
 
             AddAlerts(CurrentPoint[0].Id,_selected.Id);
-            CountGuests(CurrentPoint[0].Id,_selected.Id);
+            //CountGuests(CurrentPoint[0].Id,_selected.Id);
         }
 
         private void AddAlerts(int currentPointId,int _callId)
@@ -189,23 +189,21 @@ namespace InitialProject.View
                 alertGuest2.InstanceId = _selected.Id;
                 alertGuest2.Informed = false;
                 AlertGuest2 savedAlert=alertGuest2Repository.Save(alertGuest2);
-                //callId++;
+                ;
 
             }
         }
-        private void CountGuests(int currentPointId, int instanceId)
+      /*  private void CountGuests(int currentPointId, int instanceId)
         {
             int counter = 0;
             List<AlertGuest2> allAlerts= alertGuest2Repository.GetAll();
-            //List<AlertGuest2> tourInstanceAlerts= new List<AlertGuest2>();
-           // List<TourInstance> instances=_tourInstanceRepository.GetAll();
+            
             foreach(AlertGuest2 alert in allAlerts)
             {
                 if (alert.CheckPointId == currentPointId && alert.Availability && alert.InstanceId==instanceId)
                 {
                     counter++;
-                    //TourInstance tourInstance = instances.Find(n => n.Id == instanceId);
-  
+                    
 
                 }
             }
@@ -213,6 +211,6 @@ namespace InitialProject.View
             count.Add(counter);
         }
 
-
+        */
     }
 }
