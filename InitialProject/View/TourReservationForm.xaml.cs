@@ -25,18 +25,14 @@ namespace InitialProject.View
     /// </summary>
     public partial class TourReservationForm : Window, INotifyPropertyChanged
     {
-        private const string FilePath = "../../../Resources/Data/tourReservations.csv";
-        private const string filePath = "../../../Resources/Data/tourInstances.csv";
         private int CurrentGuestsNumber;
         private int GuestsNumber;
         private int GuestId;
         private TourInstance CurrentTourInstance;
         private TourReservationRepository _tourReservationRepository;
         private List<TourReservation> _tourReservations;
-        private readonly Serializer<TourReservation> _serializerTourReservations;
         private List<TourInstance> _tourInstances;
         private TourInstanceRepository _tourInstanceRepository;
-        private readonly Serializer<TourInstance> _serializerTourInstances;
         public ObservableCollection<TourInstance> TourInstances { get; set; }
         public Label Label { get; set; }
        
@@ -44,19 +40,17 @@ namespace InitialProject.View
         {
             InitializeComponent();
             DataContext = this;
-            _serializerTourReservations = new Serializer<TourReservation>();
-            _serializerTourInstances = new Serializer<TourInstance>();
             CurrentTourInstance = currentTourInstance;
             this.TourInstances = TourInstance;
             this.Label = label;
             this._tourInstanceRepository = tourInstanceRepository;
-            _tourReservations = _serializerTourReservations.FromCSV(FilePath);
-            _tourInstances=_serializerTourInstances.FromCSV(filePath);
+            _tourInstances = _tourInstanceRepository.GetAll();
             _tourReservationRepository = new TourReservationRepository();
+            _tourReservations = _tourReservationRepository.GetAll();
             GetCurrentGuestsNumber();
             GuestId = guestId;
         }
-        public int GetCurrentGuestsNumber()
+        private int GetReservationsNumber()
         {
             int reservationsNumber = 0;
             foreach (TourReservation tourReservation in _tourReservations)
@@ -68,7 +62,11 @@ namespace InitialProject.View
                 }
                 reservationsNumber++;
             }
-            if (_tourReservations.Count == 0 || reservationsNumber==_tourReservations.Count)
+            return reservationsNumber;
+        }
+        public int GetCurrentGuestsNumber()
+        {
+            if (_tourReservations.Count == 0 || GetReservationsNumber()==_tourReservations.Count)
             {
                 CurrentGuestsNumber = CurrentTourInstance.Tour.MaxGuests;
             }
