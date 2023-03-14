@@ -84,7 +84,7 @@ namespace InitialProject.View
             TourImages=new ObservableCollection<TourImage>(_tourImageRepository.GetAll());
             locationRepository = new LocationRepository();
             Location = new Location();
-            SetLocations();
+            SetLocations(TourInstances);
             users = _userSerializer.FromCSV(filePath);
             alerts = _alertGuestSerializer.FromCSV(FilePath);
             GuestId = GetGuest2Id();
@@ -104,12 +104,21 @@ namespace InitialProject.View
             cityInput.IsEnabled = false;
 
         }
-        public void SetLocations()
+        private void SetLocationsForAccommodationView(ObservableCollection<Accommodation> Accommodations)
+        {
+            List<Location> locations = locationRepository.GetAll();
+            foreach (Accommodation accommodation in Accommodations)
+            {
+                accommodation.Location = locations.Find(n => n.Id == accommodation.Location.Id);
+            }
+        }
+        public void SetLocations(ObservableCollection<TourInstance> TourInstances)
         {
             Serializer<Location> _serializerLocation = new Serializer<Location>();
             List<Location> locations = _serializerLocation.FromCSV("../../../Resources/Data/locations.csv");
             Serializer<Tour> _serializerTour = new Serializer<Tour>();
             List<Tour> tours = _serializerTour.FromCSV("../../../Resources/Data/tours.csv");
+
             foreach (Location location in locations)
             {
                 foreach (Tour tour in tours)
@@ -172,58 +181,32 @@ namespace InitialProject.View
                 foreach (TourInstance tourInstance in listTours)
                 {
 
-                    if (!tourInstance.Tour.Location.City.ToLower().Contains(Location.City.ToLower()))
-                    {
-                        TourInstances.Remove(tourInstance);
-                    }
-
                     TourInstances.Add(tourInstance);
 
                 }
                 foreach (TourInstance tourInstance in listTours)
                 {
 
-                    if (!tourInstance.Tour.Location.Country.ToLower().Contains(Location.Country.ToLower()))
-
-                        if (tourInstance.Tour.Location.City != null)
-
-                        {
-                            if (!tourInstance.Tour.Location.City.ToLower().Contains(cityInput.Text.ToLower()))
-                            {
-                                TourInstances.Remove(tourInstance);
-                            }
-                        }
-                    if (tourInstance.Tour.Location.Country != null)
+                    if (Location.City != null && !tourInstance.Tour.Location.City.ToLower().Equals(Location.City.ToLower()))
                     {
-                        if (!tourInstance.Tour.Location.Country.ToLower().Contains(countryInput.Text.ToLower()))
-                        {
-                            TourInstances.Remove(tourInstance);
-                        }
+                        TourInstances.Remove(tourInstance);
                     }
-                    if (tourInstance.Tour.Duration != null)
+                    if (Location.Country != null && !tourInstance.Tour.Location.Country.ToLower().Equals(Location.Country.ToLower()))
                     {
-                        if (durationInput.Text != "")
-                        {
-                            if (tourInstance.Tour.Duration < Convert.ToDouble(durationInput.Text))
-                            {
-                                TourInstances.Remove(tourInstance);
-                            }
-                        }
+                        TourInstances.Remove(tourInstance);
                     }
-                    if (tourInstance.Tour.Language != null)
+                    if (tourInstance.Tour.Duration != null && durationInput.Text!="" && tourInstance.Tour.Duration < Convert.ToDouble(durationInput.Text))
                     {
-                        if (!tourInstance.Tour.Language.ToLower().Contains(languageInput.Text.ToLower()))
-                        {
-                            TourInstances.Remove(tourInstance);
-                        }
-                    }
-                    if (tourInstance.Tour.MaxGuests != null)
-                    {
-                        if (Convert.ToInt32(capacityNumber.Text) > tourInstance.Tour.MaxGuests)
-                        {
-                            TourInstances.Remove(tourInstance);
-                        }
 
+                        TourInstances.Remove(tourInstance);
+                    }
+                    if (tourInstance.Tour.Language != null && !tourInstance.Tour.Language.ToLower().Contains(languageInput.Text.ToLower()))
+                    {
+                        TourInstances.Remove(tourInstance);
+                    }
+                    if (tourInstance.Tour.MaxGuests != null && Convert.ToInt32(capacityNumber.Text) > tourInstance.Tour.MaxGuests)
+                    {
+                        TourInstances.Remove(tourInstance);
                     }
                 }
             }
@@ -272,7 +255,7 @@ namespace InitialProject.View
                     currentTourInstance = tourInstance;
                 }
             }
-            TourReservationForm tourReservationForm = new TourReservationForm(currentTourInstance,GuestId,TourInstances,_tourInstanceRepository,Label,Restart);
+            TourReservationForm tourReservationForm = new TourReservationForm(currentTourInstance,GuestId,TourInstances,_tourInstanceRepository,Label);
             tourReservationForm.Show();
         }
         private void ViewDetails(object sender, RoutedEventArgs e)
@@ -320,6 +303,12 @@ namespace InitialProject.View
             {
                 TourInstances.Add(tourInstance);
             }
+            countryInput.SelectedValue = null;
+            cityInput.SelectedValue = null;
+            cityInput.IsEnabled=false;
+            durationInput.Text = "";
+            languageInput.Text = "";
+            capacityNumber.Text = "1";
         }
         private void SignOut_Click(object sender, RoutedEventArgs e)
         {
