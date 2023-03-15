@@ -28,8 +28,6 @@ namespace InitialProject.View
     /// </summary>
     public partial class Guest2Overview : Window
     {
-        private const string FilePath = "../../../Resources/Data/alertsGuest2.csv";
-        private const string filePath = "../../../Resources/Data/users.csv";
         public ObservableCollection<TourInstance> TourInstances { get; set; }
         private ObservableCollection<TourImage> TourImages;
         private ObservableCollection<TourReservation> TourReservations;
@@ -48,11 +46,8 @@ namespace InitialProject.View
         private TourInstanceRepository _tourInstanceRepository;
         private TourImageRepository _tourImageRepository;
         private TourReservationRepository _tourReservationRepository;
-        private Serializer<AlertGuest2> _alertGuestSerializer;
-        private Serializer<User> _userSerializer;
+        private AlertGuest2Repository _alertGuest2Repository;
         private List<AlertGuest2> alerts;
-        private List<User> users;
-        private int GuestId;
         private LocationRepository locationRepository;
         private Location location;
         public ObservableCollection<string> Countries { get; set; }
@@ -73,11 +68,10 @@ namespace InitialProject.View
         {
             InitializeComponent();
             DataContext = this;
-            _alertGuestSerializer = new Serializer<AlertGuest2>();
-            _userSerializer = new Serializer<User>();
             _tourRepository = new TourRepository();
             _tourInstanceRepository = new TourInstanceRepository();
             _tourReservationRepository = new TourReservationRepository();
+            _alertGuest2Repository = new AlertGuest2Repository();
             TourInstances = new ObservableCollection<TourInstance>(_tourInstanceRepository.GetAll());
             TourReservations = new ObservableCollection<TourReservation>(_tourReservationRepository.GetAll());
             _tourImageRepository = new TourImageRepository();
@@ -85,30 +79,30 @@ namespace InitialProject.View
             locationRepository = new LocationRepository();
             Location = new Location();
             SetLocations();
-            users = _userSerializer.FromCSV(filePath);
-            alerts = _alertGuestSerializer.FromCSV(FilePath);
-            GuestId = GetGuest2Id();
+            SetTours(TourInstances);
+            ShowAlertGuestForm();
+            Countries = new ObservableCollection<string>(locationRepository.GetAllCountries());
+            CitiesByCountry = new ObservableCollection<string>();
+            cityInput.IsEnabled = false;
+        }
+        private void ShowAlertGuestForm()
+        {
+            alerts = _alertGuest2Repository.GetAll();
             if (alerts.Count() != 0)
             {
                 foreach (AlertGuest2 alert in alerts)
                 {
                     AlertGuestForm alertGuestForm = new AlertGuestForm(alert.Id);
-                    if (GuestId == alert.Guest2Id && alert.Informed == false)
+                    if (3 == alert.Guest2Id && alert.Informed == false)
                         alertGuestForm.Show();
                 }
             }
-
-            Countries = new ObservableCollection<string>(locationRepository.GetAllCountries());
-            CitiesByCountry = new ObservableCollection<string>();
-            cityInput.IsEnabled = false;
-
         }
         public void SetLocations()
         {
-            Serializer<Location> _serializerLocation = new Serializer<Location>();
-            List<Location> locations = _serializerLocation.FromCSV("../../../Resources/Data/locations.csv");
-            Serializer<Tour> _serializerTour = new Serializer<Tour>();
-            List<Tour> tours = _serializerTour.FromCSV("../../../Resources/Data/tours.csv");
+            List<Location> locations = locationRepository.GetAll();
+            List<Tour> tours = _tourRepository.GetAll();
+
             foreach (Location location in locations)
             {
                 foreach (Tour tour in tours)
@@ -117,6 +111,10 @@ namespace InitialProject.View
                         tour.Location = location;
                 }
             }
+        }
+        public void SetTours(ObservableCollection<TourInstance> TourInstances)
+        {
+            List<Tour> tours = _tourRepository.GetAll();
             foreach (TourInstance tourInstance in TourInstances)
             {
                 foreach (Tour tour in tours)
@@ -156,6 +154,10 @@ namespace InitialProject.View
                 durationInput.BorderBrush = Brushes.Green;
                 DurationLabel.Content = string.Empty;
             }
+            if (durationInput.Text == "")
+            {
+                isValid = true;
+            }
             return isValid;
         }
         private void Search_Click(object sender, RoutedEventArgs e)
@@ -167,58 +169,32 @@ namespace InitialProject.View
                 foreach (TourInstance tourInstance in listTours)
                 {
 
-                    if (!tourInstance.Tour.Location.City.ToLower().Contains(Location.City.ToLower()))
-                    {
-                        TourInstances.Remove(tourInstance);
-                    }
-
                     TourInstances.Add(tourInstance);
 
                 }
                 foreach (TourInstance tourInstance in listTours)
                 {
 
-                    if (!tourInstance.Tour.Location.Country.ToLower().Contains(Location.Country.ToLower()))
+                    if (Location.City != null && !tourInstance.Tour.Location.City.ToLower().Equals(Location.City.ToLower()))
+                    {
+                        TourInstances.Remove(tourInstance);
+                    }
+                    if (Location.Country != null && !tourInstance.Tour.Location.Country.ToLower().Equals(Location.Country.ToLower()))
+                    {
+                        TourInstances.Remove(tourInstance);
+                    }
+                    if (tourInstance.Tour.Duration != null && durationInput.Text!="" && tourInstance.Tour.Duration < Convert.ToDouble(durationInput.Text))
+                    {
 
-                    if (tourInstance.Tour.Location.City != null)
-
-                    {
-                        if (!tourInstance.Tour.Location.City.ToLower().Contains(cityInput.Text.ToLower()))
-                        {
-                            TourInstances.Remove(tourInstance);
-                        }
+                        TourInstances.Remove(tourInstance);
                     }
-                    if (tourInstance.Tour.Location.Country != null)
+                    if (tourInstance.Tour.Language != null && !tourInstance.Tour.Language.ToLower().Contains(languageInput.Text.ToLower()))
                     {
-                        if (!tourInstance.Tour.Location.Country.ToLower().Contains(countryInput.Text.ToLower()))
-                        {
-                            TourInstances.Remove(tourInstance);
-                        }
+                        TourInstances.Remove(tourInstance);
                     }
-                    if (tourInstance.Tour.Duration != null)
+                    if (tourInstance.Tour.MaxGuests != null && Convert.ToInt32(capacityNumber.Text) > tourInstance.Tour.MaxGuests)
                     {
-                        if (durationInput.Text != "")
-                        {
-                            if (tourInstance.Tour.Duration < Convert.ToDouble(durationInput.Text))
-                            {
-                                TourInstances.Remove(tourInstance);
-                            }
-                        }
-                    }
-                    if (tourInstance.Tour.Language != null)
-                    {
-                        if (!tourInstance.Tour.Language.ToLower().Contains(languageInput.Text.ToLower()))
-                        {
-                            TourInstances.Remove(tourInstance);
-                        }
-                    }
-                    if (tourInstance.Tour.MaxGuests != null)
-                    {
-                        if (Convert.ToInt32(capacityNumber.Text) > tourInstance.Tour.MaxGuests)
-                        {
-                            TourInstances.Remove(tourInstance);
-                        }
-
+                        TourInstances.Remove(tourInstance);
                     }
                 }
             }
@@ -246,17 +222,6 @@ namespace InitialProject.View
                 capacityNumber.Text = changedCapacityNumber.ToString();
             }
         }
-        private int GetGuest2Id() //ovo ce morati drugacije kada budemo imali vise gostiju
-        {
-            foreach(User user in users)
-            {
-                if (user.Role.ToString()=="GUEST2")
-                {
-                    return user.Id;
-                }
-            }
-            return 0;
-        }
         private void Reserve(object sender, RoutedEventArgs e)
         {
             TourInstance currentTourInstance = (TourInstance)TourListDataGrid.CurrentItem;
@@ -267,24 +232,17 @@ namespace InitialProject.View
                     currentTourInstance = tourInstance;
                 }
             }
-            TourReservationForm tourReservationForm = new TourReservationForm(currentTourInstance,GuestId,TourInstances,_tourInstanceRepository,Label,Restart);
+            TourReservationForm tourReservationForm = new TourReservationForm(currentTourInstance,3,TourInstances,_tourInstanceRepository,Label);
             tourReservationForm.Show();
         }
         private void ViewDetails(object sender, RoutedEventArgs e)
         {
+            TourInstance currentTourInstance = (TourInstance)TourListDataGrid.CurrentItem;
             try
             {
-                TourInstance currentTourInstance = (TourInstance)TourListDataGrid.CurrentItem;
-                List<string> imagesUrl = new List<string>();
-
-                foreach (TourImage image in TourImages)
-                {
-                    if (image.TourId== currentTourInstance.Tour.Id)
-                    {
-                        imagesUrl.Add(image.Url);
-                    }
-                }
-                TourDetails detailsView = new TourDetails(imagesUrl,currentTourInstance);
+                List<string> imagesUrls = new List<string>();
+                GetImagesUrls(imagesUrls,currentTourInstance);
+                TourDetails detailsView = new TourDetails(imagesUrls,currentTourInstance);
                 detailsView.Show();
             }
             catch (Exception ex)
@@ -292,7 +250,16 @@ namespace InitialProject.View
                 MessageBox.Show(ex.Message.ToString());
             }
         }
-
+        private void GetImagesUrls(List<string> imagesUrls,TourInstance currentTourInstance)
+        {
+            foreach (TourImage image in TourImages)
+            {
+                if (image.TourId == currentTourInstance.Tour.Id)
+                {
+                    imagesUrls.Add(image.Url);
+                }
+            }
+        }
 
         private void countryInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -306,7 +273,6 @@ namespace InitialProject.View
                 cityInput.IsEnabled = true;
             }
         }
-
         private void Restart_Click(object sender, RoutedEventArgs e)
         {
             List<TourInstance> listTours = _tourInstanceRepository.GetAll();
@@ -315,10 +281,20 @@ namespace InitialProject.View
             {
                 TourInstances.Add(tourInstance);
             }
+            Label.Content = "Showing all tours:";
+            ResetAllFields();
+        }
+        private void ResetAllFields()
+        {
+            countryInput.SelectedValue = null;
+            cityInput.SelectedValue = null;
+            cityInput.IsEnabled = false;
+            durationInput.Text = "";
+            languageInput.Text = "";
+            capacityNumber.Text = "1";
         }
         private void SignOut_Click(object sender, RoutedEventArgs e)
         {
-
             SignInForm signInForm = new SignInForm();
             signInForm.Show();
             this.Close();

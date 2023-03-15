@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Model
 {
-    public class FreeDatesForAccommodationReservation
+    public class AvailableDatesForAccommodationReservation
     {
         public DateTime Start { get; set; }
         public DateTime End { get; set; }
 
-        public FreeDatesForAccommodationReservation(DateTime start, DateTime end)        {
+        public AvailableDatesForAccommodationReservation(DateTime start, DateTime end)        {
             Start = start;
             End = end;
         }
