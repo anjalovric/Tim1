@@ -28,7 +28,7 @@ namespace InitialProject.View
         public TourInstance _selected;
         private TourRepository _tourRepository;
         private TourInstanceRepository _tourInstanceRepository;
-
+        private User loggedInUser;
         public TourInstance Selected
         {
             get { return _selected; }
@@ -40,7 +40,7 @@ namespace InitialProject.View
                 OnPropertyChanged();
             }
         }
-        public GuidesOverview()
+        public GuidesOverview(User user)
         {
             InitializeComponent();
             DataContext = this;
@@ -49,13 +49,13 @@ namespace InitialProject.View
             Tours = new ObservableCollection<TourInstance>(_tourInstanceRepository.GetByStart(DateTime.Now));
             if(Selected ==null)
                 StartButton.IsEnabled=false;
-            
+            loggedInUser = user;
             
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            TourForm tourForm = new TourForm(Tours);
+            TourForm tourForm = new TourForm(Tours,loggedInUser);
             tourForm.Show();
 
         }

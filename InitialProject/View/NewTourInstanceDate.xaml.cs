@@ -26,7 +26,9 @@ namespace InitialProject.View
     public partial class NewTourInstanceDate : Window, INotifyPropertyChanged
     {
         private readonly TourInstanceRepository _tourInstanceRepository;
+        private readonly GuideRepository guideRepository;
         private string _startHour;
+        private Guide currentGuide;
         public string InstanceStartHour 
         {
             get => _startHour;
@@ -55,14 +57,17 @@ namespace InitialProject.View
             }
         }
         private Tour _currentTour;
-        public NewTourInstanceDate(Tour tour, ObservableCollection<TourInstance> instances)
+        public NewTourInstanceDate(Tour tour, ObservableCollection<TourInstance> instances,User user)
         {
             InitializeComponent();
             DataContext = this;
             _currentTour = tour;
             newInstance = new TourInstance();
             tourInstances = instances;
+            guideRepository = new GuideRepository();
+            _tourInstanceRepository = new TourInstanceRepository();
             HourLabel.Content = "Time format should be hh:mm:ss";
+            currentGuide = guideRepository.GetByUsername(user.Username);
         }
 
         private void OK_Click(object sender, RoutedEventArgs e)
@@ -71,10 +76,12 @@ namespace InitialProject.View
             {
                 newInstance.StartDate = InstanceStartDate;
                 newInstance.StartClock = InstanceStartHour;
+                newInstance.Guide = currentGuide;
                 tourInstances.Add(newInstance);
                 this.Close();
             }
         }
+
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {

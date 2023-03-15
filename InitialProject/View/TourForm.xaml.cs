@@ -46,6 +46,7 @@ namespace InitialProject.View
         public Tour saved;
         private int _tourId;
         private string _hour;
+        private User loggedInUser;
         public string Hours
         {
             get => _hour;
@@ -165,7 +166,7 @@ namespace InitialProject.View
                 }
             }
         }
-        public TourForm(ObservableCollection<TourInstance> todayInstances)
+        public TourForm(ObservableCollection<TourInstance> todayInstances,User user)
         {
             InitializeComponent();
             DataContext = this;
@@ -181,6 +182,7 @@ namespace InitialProject.View
             Countries = new ObservableCollection<string>(_locationRepository.GetAllCountries());
             CitiesByCountry = new ObservableCollection<string>();
             ComboBoxCity.IsEnabled = false;
+            loggedInUser = user;
 
         }
 
@@ -216,8 +218,9 @@ namespace InitialProject.View
         }
         private bool IsValid()
         {
-            return IsNameValid() && IsMaximuGuestsNumberValid() && IsDurationValid() && IsCityValid() && IsCountryValid() && IsLanguageValid()
-                   && IsDescriptionValid() && IsCheckPointsValid() && IsImagesValid() && IsDateTimeValid();
+            return IsNameValid() && IsMaximuGuestsNumberValid() && IsDurationValid()  && IsCountryValid() && IsCityValid() && IsDescriptionValid() 
+                    && IsLanguageValid() && IsDateTimeValid()
+                    && IsCheckPointsValid() && IsImagesValid() ;
 
         }
         private bool IsNameValid()
@@ -320,12 +323,14 @@ namespace InitialProject.View
         {
             if (ComboBoxCity.SelectedItem == null)
             {
+                ComboBoxCity.BorderThickness = new Thickness(1);
                 ComboBoxCity.BorderBrush = Brushes.Red;
                 CityLabel.Content = "Can't be empty";
                 return false;
             }
             else
             {
+                ComboBoxCity.BorderThickness= new Thickness(1);
                 ComboBoxCity.BorderBrush=Brushes.Green;
                 CityLabel.Content = string.Empty;
                 return true;
@@ -337,12 +342,14 @@ namespace InitialProject.View
         {
             if (ComboBoxCountry.SelectedItem == null)
             {
+                ComboBoxCountry.BorderThickness = new Thickness(1);
                 ComboBoxCountry.BorderBrush = Brushes.Red;
                 CountryLabel.Content = "Can't be empty";
                 return false;
             }
             else
-            {
+            {   
+                ComboBoxCountry.BorderThickness = new Thickness(1);
                 ComboBoxCountry.BorderBrush = Brushes.Green;
                 CountryLabel.Content = string.Empty;
                 return true;
@@ -567,7 +574,7 @@ namespace InitialProject.View
 
         private void NewInstance(object sender, RoutedEventArgs e)
         {
-            NewTourInstanceDate newTourInstance = new NewTourInstanceDate(saved, Instances);
+            NewTourInstanceDate newTourInstance = new NewTourInstanceDate(saved, Instances,loggedInUser);
             newTourInstance.Show();
         }
 

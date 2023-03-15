@@ -24,31 +24,30 @@ namespace InitialProject.View
     /// </summary>
     public partial class CheckPointForm : Window, INotifyPropertyChanged
     {
-        private readonly CheckPointRepository _checkPointRepository;
-        public ObservableCollection<CheckPoint> _checkPoints;
-        public int _pointCounter;
-        public Button _button;
-        private string _name;
+        private readonly CheckPointRepository checkPointRepository;
+        public ObservableCollection<CheckPoint> checkPoints;
+        public int pointCounter;
+     
+        private string name;
         public string NameT
         {
-            get => _name;
+            get => name;
             set
             {
-                if (value != _name)
+                if (value != name)
                 {
-                    _name = value;
+                    name = value;
                     OnPropertyChanged();
                 }
             }
         }
        
-        public CheckPointForm(CheckPointRepository checkPointRepository,ObservableCollection<CheckPoint> tourPoints,Button addTour)
+        public CheckPointForm(CheckPointRepository _checkPointRepository,ObservableCollection<CheckPoint> tourPoints,Button addTour)
         {
             InitializeComponent();
             DataContext = this;
-            _checkPointRepository = checkPointRepository;
-            _checkPoints=tourPoints;
-            _button = addTour;
+            checkPointRepository = new CheckPointRepository();
+            checkPoints=tourPoints;
 
         }
         public event PropertyChangedEventHandler PropertyChanged;
@@ -62,19 +61,14 @@ namespace InitialProject.View
         {
             if (Validate())
             {
-                CheckPoint newCheckPoint = new CheckPoint();
-                newCheckPoint.Name = NameT;
-                newCheckPoint.Order = -1;
-                newCheckPoint.TourId = -1;
-                newCheckPoint.Checked = false;
-                CheckPoint savedCheckPoint = _checkPointRepository.Save(newCheckPoint);
-                _checkPoints.Add(savedCheckPoint);
-                List<CheckPoint> tourCheckPoints = new List<CheckPoint>();
-                foreach (CheckPoint checkPoint in _checkPoints)
+                CheckPoint newCheckPoint = new CheckPoint(NameT,false,-1,-1);
+                CheckPoint savedCheckPoint = checkPointRepository.Save(newCheckPoint);
+                checkPoints.Add(savedCheckPoint);
+               /* List<CheckPoint> tourCheckPoints = new List<CheckPoint>();
+                foreach (CheckPoint checkPoint in checkPoints)
                     if (checkPoint.TourId == -1)
-                        tourCheckPoints.Add(checkPoint);
-                if (tourCheckPoints.Count >= 2)
-                    _button.IsEnabled = true;
+                        tourCheckPoints.Add(checkPoint);*/
+                
                 this.Close();
             }
         }
@@ -88,7 +82,6 @@ namespace InitialProject.View
             bool isValid = false;
             if (CheckPointName.Text.Trim().Equals(""))
             {
-                isValid = false;
                 CheckPointName.BorderBrush = Brushes.Red;
                 CheckPointName.BorderThickness = new Thickness(1);
                 NameLabel.Content = "This field can't be empty";
