@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Printing;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,20 +27,15 @@ namespace InitialProject.View
     {
         public ObservableCollection<CheckPoint> AllPoints { get; set; }
         public ObservableCollection<CheckPoint> CurrentPoint { get; set; }
-
-        public ObservableCollection<int> count { get; set; }
         public ObservableCollection<TourInstance> Tours { get; set; }
 
 
-        private CheckPointRepository _pointsRepository;
-        private TourRepository _tourRepository;
-        private TourInstanceRepository _tourInstanceRepository;
+        private CheckPointRepository pointsRepository;
+        private TourRepository tourRepository;
+        private TourInstanceRepository tourInstanceRepository;
         private TourReservationRepository tourReservationRepository;
         private AlertGuest2Repository alertGuest2Repository;
-
-        //private int callId = 0;
-
-        private TourInstance _selected;
+        private TourInstance selected;
 
         private int counter = 1;
 
@@ -51,134 +47,143 @@ namespace InitialProject.View
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public TourCheckPoints(TourInstance selected,ObservableCollection<TourInstance>tours)
+        public TourCheckPoints(TourInstance selectedInstance,ObservableCollection<TourInstance>tours)
         {
             InitializeComponent();
             DataContext = this;
-            _pointsRepository = new CheckPointRepository();
-            _tourInstanceRepository= new TourInstanceRepository();
+            pointsRepository = new CheckPointRepository();
+            tourInstanceRepository= new TourInstanceRepository();
             tourReservationRepository = new TourReservationRepository();
             alertGuest2Repository = new AlertGuest2Repository();
             AllPoints = new ObservableCollection<CheckPoint>();
             CurrentPoint = new ObservableCollection<CheckPoint>();
-            count= new ObservableCollection<int>();
-            List<CheckPoint> points = _pointsRepository.GetAll();
-            
-            if (selected != null)
+            Tours = tours;
+            selected = selectedInstance;
+
+            FindPointsForSelectedInstance(selected);
+            CheckFirstPoint();
+            SetFirstCheckPoint();
+           
+        }
+
+        private void SetFirstCheckPoint()
+        {
+            if (AllPoints.Count != 0)
+            {
+                CurrentPoint.Add(AllPoints.ToList().Find(n => n.Order == counter));
+                AddAlerts(CurrentPoint[0].Id, selected.Id);
+            }
+        }
+        private void FindPointsForSelectedInstance(TourInstance selectedInstance)
+        {
+            List<CheckPoint> points = pointsRepository.GetAll();
+
+            if (selectedInstance != null)
             {
                 foreach (CheckPoint point in points)
                 {
-                    if (point.TourId == selected.Tour.Id)
+                    if (point.TourId == selectedInstance.Tour.Id)
                     {
                         AllPoints.Add(point);
                     }
                 }
-                foreach (CheckPoint point in AllPoints)
-                {
-                    if (point.Order == 1)
-                        point.Checked = true;
-                }
-
-                _selected = selected;
-            }
-
-            if (AllPoints.Count!=0)
-            {
-                CurrentPoint.Add(AllPoints.ToList().Find(n => n.Order == counter));
-                AddAlerts(CurrentPoint[0].Id, _selected.Id);
-                //CountGuests(CurrentPoint[0].Id, _selected.Id);
-                Tours = tours;
             }
         }
 
+        private void CheckFirstPoint()
+        {
+            foreach (CheckPoint point in AllPoints)
+            {
+                if (point.Order == 1)
+                    point.Checked = true;
+            }
+        }
         private void FinishTour(object sender, RoutedEventArgs e)
         {
-            _selected.Finished = true;
-            List<TourInstance>tours=_tourInstanceRepository.GetAll();
-            _tourInstanceRepository.Update(_selected);
-
-            int pointsSize=AllPoints.Count;
-            List<CheckPoint> points=AllPoints.ToList();
-            AllPoints.Clear();
-            for(int i=0;i<pointsSize;i++)
-            {
-                points[i].Checked = true;
-                AllPoints.Add(points[i]);
-       
-            }
-            CurrentPoint[0].Checked = true;
-            Tours.Remove(_selected);
-            Finish.IsEnabled = false;
-            FinishMessage.Content = "         This tour is finished";
+            FinishInstance();
             
         }
 
-        private void Next_Click(object sender, RoutedEventArgs e)
+        private void FinishInstance()
+        {
+            selected.Finished = true;
+            tourInstanceRepository.Update(selected);
+
+            CheckAllPoints();
+            CurrentPoint[0].Checked = true;
+
+            Tours.Remove(selected);
+            Finish.IsEnabled = false;
+            FinishMessage.Content = "This tour is finished";
+        }
+        private void CheckAllPoints()
+        {
+            int pointSize=AllPoints.Count;
+            List<CheckPoint> points = AllPoints.ToList();
+            AllPoints.Clear();
+            for (int i = 0; i < pointSize; i++)
+            {
+                points[i].Checked = true;
+                AllPoints.Add(points[i]);
+
+            }
+        }
+
+        private void ChangeListsToNextState()
         {
             List<CheckPoint> points = AllPoints.ToList();
 
-            foreach(CheckPoint checkPoint in AllPoints)
+            foreach (CheckPoint checkPoint in AllPoints)
             {
                 if (checkPoint.Order == counter)
                     checkPoint.Checked = true;
             }
+
             CurrentPoint.Remove(points.Find(n => n.Order == counter));
+            int nextOrder = counter + 1;
+            CurrentPoint.Add(points.Find(n => n.Order == nextOrder));
+        }
+        private void Next_Click(object sender, RoutedEventArgs e)
+        {
+            ChangeListsToNextState();
+            
             counter++;
-            CurrentPoint.Add(points.Find(n => n.Order == counter));
+
             if (counter == AllPoints.ToList().Count)
             {
-                FinishMessage.Content = "This tour is finished";
                 this.Next.IsEnabled = false;
-                _selected.Finished = true;
-                List<TourInstance> tours = _tourInstanceRepository.GetAll();
-                _tourInstanceRepository.Update(_selected);
-
-
-                int size = AllPoints.Count;
-                List<CheckPoint> list = AllPoints.ToList();
-                AllPoints.Clear();
-                for (int i = 0; i < size; i++)
-                {
-                    list[i].Checked = true;
-                    AllPoints.Add(list[i]);
-
-                }
-
-                Finish.IsEnabled = false;
-               
-                Tours.Remove(_selected);
+                FinishInstance();
+                
             }
 
-            int pointsSize = AllPoints.Count;
-            List<CheckPoint> pointList = AllPoints.ToList();
+           UpdateAllPointsListToNextPoint();
+
+           AddAlerts(CurrentPoint[0].Id,selected.Id);
+           
+        }
+
+        private void UpdateAllPointsListToNextPoint()
+        {
+            int pointSize=AllPoints.Count;
+            List<CheckPoint> points= AllPoints.ToList();
             AllPoints.Clear();
-            for (int i = 0; i < counter; i++)
+            for(int i = 0; i < counter; i++)
             {
-                points[i].Checked = true;
+                points[i].Checked= true;
                 AllPoints.Add(points[i]);
-
             }
-            for(int i=counter;i < pointsSize; i++)
+            for(int i = counter; i < pointSize; i++)
             {
                 points[i].Checked = false;
                 AllPoints.Add(points[i]);
             }
-
-            AddAlerts(CurrentPoint[0].Id,_selected.Id);
-            //CountGuests(CurrentPoint[0].Id,_selected.Id);
         }
+
 
         private void AddAlerts(int currentPointId,int _callId)
         {
-            List<TourReservation> tourReservations= tourReservationRepository.GetAll();
-            List<TourReservation> availableReservations = new List<TourReservation>();
-            foreach(TourReservation tour in tourReservations)
-            {
-                if (tour.TourInstanceId == _selected.Id)
-                {
-                    availableReservations.Add(tour);
-                }
-            }
+            List<TourReservation> availableReservations = GetReservationsForTour();
+
             foreach(TourReservation tour in availableReservations)
             {
                 AlertGuest2 alertGuest2 = new AlertGuest2();
@@ -186,31 +191,26 @@ namespace InitialProject.View
                 alertGuest2.ReservationId = tour.Id;
                 alertGuest2.Guest2Id = tour.GuestId;
                 alertGuest2.CheckPointId = currentPointId;
-                alertGuest2.InstanceId = _selected.Id;
+                alertGuest2.InstanceId = selected.Id;
                 alertGuest2.Informed = false;
                 AlertGuest2 savedAlert=alertGuest2Repository.Save(alertGuest2);
-                ;
+                
 
             }
         }
-      /*  private void CountGuests(int currentPointId, int instanceId)
+        private List<TourReservation> GetReservationsForTour()
         {
-            int counter = 0;
-            List<AlertGuest2> allAlerts= alertGuest2Repository.GetAll();
-            
-            foreach(AlertGuest2 alert in allAlerts)
+            List<TourReservation> tourReservations = tourReservationRepository.GetAll();
+            List<TourReservation> availableReservations = new List<TourReservation>();
+            foreach (TourReservation reservation in tourReservations)
             {
-                if (alert.CheckPointId == currentPointId && alert.Availability && alert.InstanceId==instanceId)
+                if (reservation.TourInstanceId == selected.Id)
                 {
-                    counter++;
-                    
-
+                    availableReservations.Add(reservation);
                 }
             }
-            count.Clear();
-            count.Add(counter);
-        }
 
-        */
+            return availableReservations;
+        }
     }
 }

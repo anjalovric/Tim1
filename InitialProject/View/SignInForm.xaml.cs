@@ -61,7 +61,7 @@ namespace InitialProject
                         Close();
                     }else if(user.Role == Model.Role.GUIDE)
                     {
-                        GuidesOverview guideOverview = new GuidesOverview();
+                        GuidesOverview guideOverview = new GuidesOverview(user);
                         guideOverview.Show();
                         Close();
                     }

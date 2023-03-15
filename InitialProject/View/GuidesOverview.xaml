@@ -23,7 +23,7 @@
             </DataGrid.Columns>
         </DataGrid>
         <Button x:Name="StartButton" Content="START" HorizontalAlignment="Left" Height="30" Margin="265,313,0,0" VerticalAlignment="Top" Width="80" Click="StartTour"/>
-        <Button  Height="30" Width="80" Click="Button_Click" Margin="265,354,0,0" HorizontalAlignment="Left"  VerticalAlignment="Top">
+        <Button  Height="30" Width="80" Click="CreateNewTour" Margin="265,354,0,0" HorizontalAlignment="Left"  VerticalAlignment="Top">
             NEW
         </Button>
         <Button Content="Sign out" HorizontalAlignment="Left" Margin="699,33,0,0" VerticalAlignment="Top" Height="20" Width="63" Click="SignOutClick"/>

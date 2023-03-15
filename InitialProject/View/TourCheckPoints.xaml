@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
-        Title="TourCheckPoints" Height="650" Width="550" WindowStartupLocation="CenterScreen">
+        Title="TourCheckPoints" Height="750" Width="650" WindowStartupLocation="CenterScreen">
 
     <Grid Margin="0,0,0,-16">
         <Label Margin="0,20,0,522" >
@@ -32,6 +32,6 @@
 
 
 
-        <Label x:Name="FinishMessage" FontStretch="ExtraExpanded" FontSize="25" HorizontalAlignment="Center" Margin="0,439,0,0" VerticalAlignment="Top" Width="401" Height="48"/>
+        <Label x:Name="FinishMessage" HorizontalAlignment="Left"  Margin="214,461,0,0" VerticalAlignment="Top" Width="192" Height="48"/>
     </Grid>
 </Window>

@@ -25,27 +25,27 @@ namespace InitialProject.View
     /// </summary>
     public partial class TourImageForm : Window, INotifyPropertyChanged
     {
-        TourImageRepository _tourImageRepository;
-        private string _url;
-        public ObservableCollection<TourImage> _tourImages;
+        private TourImageRepository tourImageRepository;
+        private string url;
+        public ObservableCollection<TourImage> tourImages;
         public string Url
         {
-            get => _url;
+            get => url;
             set
             {
-                if (value != _url)
+                if (value != url)
                 {
-                    _url = value;
+                    url = value;
                     OnPropertyChanged();
                 }
             }
         }
-        public TourImageForm(TourImageRepository tourImageRepository,ObservableCollection<TourImage> tourImages)
+        public TourImageForm(TourImageRepository imageRepository,ObservableCollection<TourImage> images)
         {
             InitializeComponent();
             DataContext = this;
-            _tourImageRepository = tourImageRepository;
-            _tourImages = tourImages;
+            tourImageRepository = imageRepository;
+            tourImages = images;
         }
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -61,8 +61,8 @@ namespace InitialProject.View
                 TourImage newImage = new TourImage();
                 newImage.Url = Url;
                 newImage.TourId = -1;
-                TourImage savedImage = _tourImageRepository.Save(newImage);
-                _tourImages.Add(savedImage);
+                TourImage savedImage = tourImageRepository.Save(newImage);
+                tourImages.Add(savedImage);
                 this.Close();
             }
 
@@ -77,7 +77,6 @@ namespace InitialProject.View
             bool isValid=false;
             if (TourImageUrl.Text.Trim().Equals(""))
             {
-                isValid = false;
                 TourImageUrl.BorderBrush = Brushes.Red;
                 TourImageUrl.BorderThickness=new Thickness(1);
                 ImageLabel.Content = "This field can't be empty";

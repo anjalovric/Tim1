@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.Metrics;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -35,14 +36,18 @@ namespace InitialProject.View
             alertGuest2Repository = new AlertGuest2Repository();
             pointRepository = new CheckPointRepository();
             guest2Repository = new Guest2Repository();
+            ComposeReport();
 
+        }
+
+        private void ComposeReport()
+        {
             foreach (CheckPoint point in GetInstancePoints())
             {
                 CountGuestsOnPoint(point.Id);
                 ShowGuestsOnPoint(point.Id);
             }
         }
-
         private List<CheckPoint> GetInstancePoints()
         {
             List <CheckPoint> tourPoints = new List<CheckPoint>();
@@ -68,9 +73,14 @@ namespace InitialProject.View
 
                 }
             }
-            
+
+            WriteGuestsCountOnPoint(counter,currentPointId);
+        }
+
+        private void WriteGuestsCountOnPoint(int count,int currentPointId)
+        {
             Label pointOrder = new Label();
-            pointOrder.Content = "Number of guests on point: " + pointRepository.GetAll().Find(n => n.Id == currentPointId).Order + ". " + pointRepository.GetAll().Find(n => n.Id == currentPointId).Name + ": " + counter.ToString();
+            pointOrder.Content = "Number of guests on point: " + pointRepository.GetAll().Find(n => n.Id == currentPointId).Order + ". " + pointRepository.GetAll().Find(n => n.Id == currentPointId).Name + ": " + count.ToString();
             PointStack.Children.Add(pointOrder);
         }
 
@@ -83,11 +93,16 @@ namespace InitialProject.View
                 if (alert.CheckPointId == currentPointId && alert.Availability && alert.InstanceId == selectedInstance.Id)
                 {
                     Guest2 presentGuest = guest2Repository.GetAll().Find(n => n.Id == alert.Guest2Id);
-                    Label presentGuestOnPoint = new Label();
-                    presentGuestOnPoint.Content = "       On point was : " + presentGuest.Name + " " + presentGuest.LastName +", username: " +presentGuest.Username;
-                    PointStack.Children.Add(presentGuestOnPoint);
+                    WriteGuestOnPoint(presentGuest);
                 }
             }
+        }
+
+        private void WriteGuestOnPoint(Guest2 presentGuest)
+        {
+            Label presentGuestOnPoint = new Label();
+            presentGuestOnPoint.Content = "       On point was : " + presentGuest.Name + " " + presentGuest.LastName + ", username: " + presentGuest.Username;
+            PointStack.Children.Add(presentGuestOnPoint);
         }
     }
 }

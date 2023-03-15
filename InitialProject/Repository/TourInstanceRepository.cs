@@ -11,26 +11,23 @@ namespace InitialProject.Repository
     public class TourInstanceRepository
     {
         private const string FilePath = "../../../Resources/Data/tourInstances.csv";
-        private const string FilePathTour = "../../../Resources/Data/tours.csv";
-        private const string FilePathLocation= "../../../Resources/Data/locations.csv";
+       
 
         private readonly Serializer<TourInstance> _serializer;
-        private readonly Serializer<Tour> _serializerTour;
-        private readonly Serializer<Location> _serializerLocation;
+     
 
-        private List<Tour> _tours;
+        
         private List<TourInstance> _tourInstances;
-        private List<Location> _locations;
+       
 
         public TourInstanceRepository()
         {
 
             _serializer = new Serializer<TourInstance>();
-            _serializerTour = new Serializer<Tour>();
-            _serializerLocation= new Serializer<Location>();
+            
 
             _tourInstances = _serializer.FromCSV(FilePath);
-            SetTours();
+            
            
         }
         
@@ -39,18 +36,7 @@ namespace InitialProject.Repository
             return _tourInstances;
         }
 
-        public void SetTours()
-        {
-            Serializer<Tour> _serializerTour = new Serializer<Tour>();
-            List<Tour> tours = _serializerTour.FromCSV("../../../Resources/Data/tours.csv");
-            foreach (TourInstance tourInstance in _tourInstances)
-            {
-                if (tours.Find(n => n.Id == tourInstance.Tour.Id) != null)
-                {
-                    tourInstance.Tour = tours.Find(n => n.Id == tourInstance.Tour.Id);
-                }
-            }
-        }
+
 
 
         public TourInstance Save(TourInstance tour)
@@ -90,60 +76,31 @@ namespace InitialProject.Repository
             _serializer.ToCSV(FilePath, _tourInstances);
             return tour;
         }
-        public List<TourInstance> GetByStart(DateTime today)
+        public List<TourInstance> GetByStart()
         {
 
             _tourInstances = _serializer.FromCSV(FilePath);
             List<TourInstance> list = new List<TourInstance>();
             foreach (TourInstance tour in _tourInstances)
 
-                if(tour.StartDate.Date==today.Date && tour.Finished==false) 
+                if(tour.StartDate.Date==DateTime.Now.Date && tour.Finished==false) 
                 {   
                     string h = tour.StartClock.Split(':')[0];
                     string m = tour.StartClock.Split(":")[1];
                     string s = tour.StartClock.Split(":")[2];
 
-        
-                    string time=today.TimeOfDay.ToString();
-                    string hour = time.Split(":")[0];
-                    string minute = time.Split(":")[1];
-                    string second = DateTime.Now.Second.ToString();
-                    if(Convert.ToInt32(h)> Convert.ToInt32(hour))
+
+                    if(Convert.ToInt32(h)> DateTime.Now.Hour)
                     {
                         list.Add(tour);
-                    }else if(Convert.ToInt32(h)== Convert.ToInt32(hour) && Convert.ToInt32(m)>Convert.ToInt32(minute))
+                    }else if(Convert.ToInt32(h)==DateTime.Now.Hour && Convert.ToInt32(m)>DateTime.Now.Minute)
                     {
                         list.Add(tour);
-                    }else if(Convert.ToInt32(h)== Convert.ToInt32(hour) && Convert.ToInt32(m)== Convert.ToInt32(minute) && Convert.ToInt32(s) > Convert.ToInt32(second))
+                    }else if(Convert.ToInt32(h)==DateTime.Now.Hour && Convert.ToInt32(m)==DateTime.Now.Minute && Convert.ToInt32(s) >DateTime.Now.Second)
                     {
                         list.Add(tour);
                     }
                 }
-            Serializer<Tour> _serializerTour = new Serializer<Tour>();
-            List<Tour> tours = _serializerTour.FromCSV("../../../Resources/Data/tours.csv");
-
-            _locations = _serializerLocation.FromCSV(FilePathLocation);
-
-            foreach (Location location in _locations)
-            {
-                foreach (Tour tour in tours)
-                {
-                    if (location.Id == tour.Location.Id)
-                        tour.Location = location;
-                }
-            }
-
-            foreach (TourInstance tourInstance in _tourInstances)
-            {
-                foreach (Tour tour in tours)
-                {
-                    if(tour.Id == tourInstance.Tour.Id)
-                    {
-                        tourInstance.Tour = tour;
-                    }
-                }
-            }
-
 
 
             return list;
