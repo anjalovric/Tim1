@@ -24,69 +24,34 @@ namespace InitialProject.View
     public partial class AccommodationGuestsNumberInput : Window
     {
         public Accommodation currentAccommodation { get; set; }
-        public FreeDatesForAccommodationReservation selectedDateRange { get; set; }
+        public AvailableDatesForAccommodationReservation selectedDateRange { get; set; }
         private AccommodationReservationRepository accommodationReservationRepository;
-        public ObservableCollection<FreeDatesForAccommodationReservation> freeDatesForAccommodations { get; set; }
-        public AccommodationGuestsNumberInput(Accommodation currentAccommodation, FreeDatesForAccommodationReservation selectedDateRange, AccommodationReservationRepository accommodationReservationRepository, ObservableCollection<FreeDatesForAccommodationReservation> freeDatesForAccommodations)
+        public ObservableCollection<AvailableDatesForAccommodationReservation> availableDatesForAccommodations { get; set; }
+        public AccommodationGuestsNumberInput(Accommodation currentAccommodation, AvailableDatesForAccommodationReservation selectedDateRange, AccommodationReservationRepository accommodationReservationRepository, ObservableCollection<AvailableDatesForAccommodationReservation> availableDatesForAccommodations)
         {
             InitializeComponent();
             this.DataContext = this;
             this.currentAccommodation = currentAccommodation;
             this.selectedDateRange = selectedDateRange;
             this.accommodationReservationRepository = accommodationReservationRepository;
-            this.freeDatesForAccommodations = freeDatesForAccommodations;
+            this.availableDatesForAccommodations = availableDatesForAccommodations;
         }
 
-        private void Confirm_Click(object sender, RoutedEventArgs e)
+        private void ConfirmReservation_Click(object sender, RoutedEventArgs e)
         {
             if(Convert.ToInt32(numberOfGuests.Text) > currentAccommodation.Capacity)
             {
-                MessageBox.Show("Maximum number of guests for this accommodation is " + currentAccommodation.Capacity.ToString()+ ".");
-                
+                MessageBox.Show("Maximum number of guests for this accommodation is " + currentAccommodation.Capacity.ToString()+ ".");  
             }
             else
             {
                 MessageBoxResult result = ConfirmReservation();
                 if(result == MessageBoxResult.Yes)
                 {
-                    AccommodationReservation newReservation = new AccommodationReservation(0, currentAccommodation, selectedDateRange.Start, selectedDateRange.End);
-                    accommodationReservationRepository.Add(newReservation);
-                    /* int count = freeDatesForAccommodations.Count;
-                     List<FreeDatesForAccommodationReservation> help = new List<FreeDatesForAccommodationReservation>(freeDatesForAccommodations);
-
-                     List<DateTime> selectedRangeList = new List<DateTime>();
-                     for (var dt = selectedDateRange.Start; dt <= selectedDateRange.End; dt = dt.AddDays(1))
-                     {
-                         selectedRangeList.Add(dt);
-                     }
-                     foreach (FreeDatesForAccommodationReservation date in help)
-                     {
-                         for (var dt1 = date.Start; dt1 <= date.End; dt1 = dt1.AddDays(1))
-                         {
-                             foreach (DateTime dt in selectedRangeList)
-                             {
-                                 if(dt.Equals(dt1))
-                                 {
-                                     if(freeDatesForAccommodations.Contains(date))
-                                         freeDatesForAccommodations.Remove(date);
-
-                                 }
-                             }
-                         }
-                     }*/
-
-                    foreach (Window window in Application.Current.Windows)
-                    {
-                        if (window.GetType() == typeof(AccommodationReservationForm))
-                        {
-                            (window as AccommodationReservationForm).FindAvailableDates(currentAccommodation.Id);
-                        }
-                    }
+                    makeNewReservation();
+                    UpdateAvailableDates();
                     this.Close();
-                    this.Owner.Close();
-                    
-                    
-                    
+                    this.Owner.Close();    
                 }
                 else if(result == MessageBoxResult.No)
                 {
@@ -94,6 +59,24 @@ namespace InitialProject.View
                     this.Owner.Activate();
                 }
             }
+        }
+
+        private void makeNewReservation()
+        {
+            AccommodationReservation newReservation = new AccommodationReservation(1, currentAccommodation, selectedDateRange.Start, selectedDateRange.End);
+            accommodationReservationRepository.Add(newReservation);
+        }
+
+        private void UpdateAvailableDates()
+        {
+            foreach (Window window in Application.Current.Windows)
+            {
+                if (window.GetType() == typeof(AccommodationReservationForm))
+                {
+                    (window as AccommodationReservationForm).GetAvailableDates(currentAccommodation.Id);
+                }
+            }
+           
         }
 
         private MessageBoxResult ConfirmReservation()
@@ -105,13 +88,10 @@ namespace InitialProject.View
             MessageBoxResult result = MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
             return result;
         }
-
-
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
-
         private void DecrementGuestsNumber(object sender, RoutedEventArgs e)
         {
             int changedGuestsNumber;
@@ -120,19 +100,12 @@ namespace InitialProject.View
                 changedGuestsNumber = Convert.ToInt32(numberOfGuests.Text) - 1;
                 numberOfGuests.Text = changedGuestsNumber.ToString();
             }
-
         }
-
         private void IncrementGuestsNumber(object sender, RoutedEventArgs e)
         {
             int changedGuestsNumber;
             changedGuestsNumber = Convert.ToInt32(numberOfGuests.Text) + 1;
             numberOfGuests.Text = changedGuestsNumber.ToString();
-
-        }
-
-        
-
-       
+        }  
     }
 }

@@ -105,7 +105,7 @@ namespace InitialProject.View
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void ViewDetails(object sender, RoutedEventArgs e)
         {
             CheckPointDetails checkPointDetails = new CheckPointDetails(Selected);
             checkPointDetails.Show();

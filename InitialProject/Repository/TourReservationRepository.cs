@@ -52,7 +52,6 @@ namespace InitialProject.Repository
         {
             _tourReservations = _serializer.FromCSV(FilePath);
             TourReservation current = _tourReservations.Find(c => c.Id == tourReservation.Id);
-            //_tourReservations.Remove(current);
             current.Id = tourReservation.Id;
             current.CurrentGuestsNumber = guestsNumber;
             current.TourInstanceId = tourReservation.TourInstanceId;

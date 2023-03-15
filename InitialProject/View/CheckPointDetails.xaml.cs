@@ -36,6 +36,7 @@ namespace InitialProject.View
             alertGuest2Repository = new AlertGuest2Repository();
             pointRepository = new CheckPointRepository();
             guest2Repository = new Guest2Repository();
+            ComposeReport();
 
         }
 

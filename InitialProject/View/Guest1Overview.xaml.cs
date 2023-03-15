@@ -20,6 +20,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using InitialProject.Model;
 using InitialProject.Repository;
+using InitialProject.Serializer;
 using InitialProject.View.Owner;
 
 
@@ -32,15 +33,14 @@ namespace InitialProject.View
     {
         private AccommodationImageRepository accommodationImageRepository;
         private List<AccommodationImage> accommodationImages;
-
-
         private AccommodationRepository accommodationRepository;
-        
         private ObservableCollection<Accommodation> accommodations;
         public ObservableCollection<string> Countries { get; set; }
         public ObservableCollection<string> CitiesByCountry { get; set; }
         private LocationRepository locationRepository;
         private Location location;
+        private AccommodationType accommodationType;
+        private AccommodationTypeRepository accommodationTypeRepository;
         public ObservableCollection<Accommodation> Accommodations 
         { 
             get { return accommodations; } 
@@ -64,21 +64,23 @@ namespace InitialProject.View
                 }
             }
         }
-
         public Guest1Overview()
         {
             InitializeComponent();
             DataContext = this;
             accommodationRepository = new AccommodationRepository();
-            Accommodations = new ObservableCollection<Accommodation>(accommodationRepository.GetAll());
+            Accommodations = new ObservableCollection<Accommodation>(accommodationRepository.GetAll());  
             accommodationImageRepository = new AccommodationImageRepository();
             accommodationImages = new List<AccommodationImage>(accommodationImageRepository.GetAll());
-
             locationRepository = new LocationRepository();
             location = new Location();
+            accommodationType = new AccommodationType();
+            accommodationTypeRepository = new AccommodationTypeRepository();
             Countries = new ObservableCollection<string>(locationRepository.GetAllCountries());
             CitiesByCountry = new ObservableCollection<string>();
             cityInput.IsEnabled = false;
+            SetLocations();
+            SetTypes();    
         }
 
         
@@ -90,76 +92,83 @@ namespace InitialProject.View
             this.Close();
         }
 
-        private void searchNameButton(object sender, RoutedEventArgs e)
+        private void Search_Click(object sender, RoutedEventArgs e)
         {
-            
-            List<Accommodation> listAccommodation = accommodationRepository.GetAll();
-            Accommodations.Clear();
-            
-                foreach(Accommodation accommodation in listAccommodation)
+            if (IsNumberOfDaysValid() && IsNumberOfGuestsValid())
+            {
+                List<Accommodation> listAccommodation = accommodationRepository.GetAll();
+                Accommodations.Clear();
+                foreach (Accommodation accommodation in listAccommodation)
                 {
                     Accommodations.Add(accommodation);
                 }
-            SetLocations(listAccommodation);
-
-
-            
-
-            foreach (Accommodation accommodation in listAccommodation)
-            {
-                if(!accommodation.Name.ToLower().Contains(nameInput.Text.ToLower()))
+                foreach (Accommodation accommodation in listAccommodation)
                 {
-                    Accommodations.Remove(accommodation);
-                }
-                if (Location.City != null && !accommodation.Location.City.ToLower().Contains(Location.City.ToLower()))
-                {
-                    Accommodations.Remove(accommodation);
-                }
-                if (Location.Country != null && !accommodation.Location.Country.ToLower().Contains(Location.Country.ToLower()))
-                {
-                    Accommodations.Remove(accommodation);
-                }
-                if(apartment.IsChecked==true || house.IsChecked==true || cottage.IsChecked==true)
-                {
-                    if (apartment.IsChecked==false)
+                    if (!accommodation.Name.ToLower().Contains(nameInput.Text.ToLower()))
                     {
-                        if(accommodation.Type.Name.ToLower() == "apartment")
-                            Accommodations.Remove(accommodation);
+                        Accommodations.Remove(accommodation);
                     }
-                    if (house.IsChecked==false)
+                    if (Location.City != null && !accommodation.Location.City.ToLower().Equals(Location.City.ToLower()))
                     {
-                        if (accommodation.Type.Name.ToLower() == "house")
-                            Accommodations.Remove(accommodation);
+                        Accommodations.Remove(accommodation);
                     }
-                    if (cottage.IsChecked==false)
+                    if (Location.Country != null && !accommodation.Location.Country.ToLower().Equals(Location.Country.ToLower()))
                     {
-                        if (accommodation.Type.Name.ToLower() == "cottage")
-                            Accommodations.Remove(accommodation);
+                        Accommodations.Remove(accommodation);
+                    }
+                    if (apartment.IsChecked == true || house.IsChecked == true || cottage.IsChecked == true)
+                    {
+                        if (apartment.IsChecked == false)
+                        {
+                            if (accommodation.Type.Name.ToLower() == "apartment")
+                                Accommodations.Remove(accommodation);
+                        }
+                        if (house.IsChecked == false)
+                        {
+                            if (accommodation.Type.Name.ToLower() == "house")
+                                Accommodations.Remove(accommodation);
+                        }
+                        if (cottage.IsChecked == false)
+                        {
+                            if (accommodation.Type.Name.ToLower() == "cottage")
+                                Accommodations.Remove(accommodation);
+                        }
+                    }
+                   
+
+                    if (!(numberOfGuests.Text == "") && Convert.ToInt32(numberOfGuests.Text) > accommodation.Capacity)
+                    {
+                        Accommodations.Remove(accommodation);
+                    }
+                    if (!(numberOfDays.Text == "") && Convert.ToInt32(numberOfDays.Text) < accommodation.MinDaysForReservation)
+                    {
+                        Accommodations.Remove(accommodation);
                     }
                 }
-
-                if(!(numberOfGuests.Text=="") && Convert.ToInt32(numberOfGuests.Text) > accommodation.Capacity)
-                {
-                    Accommodations.Remove(accommodation);
-                }
-                if (!(numberOfDays.Text == "") && Convert.ToInt32(numberOfDays.Text) < accommodation.MinDaysForReservation)
-                {
-                    Accommodations.Remove(accommodation);
-                }
-
-
-
-
             }
-            
-
         }
-        private void SetLocations(List<Accommodation> accommodations)
+        
+
+        private void SetLocations()
         {
             List<Location> locations = locationRepository.GetAll();
-            foreach(Accommodation accommodation in accommodations)
+            foreach (Accommodation accommodation in Accommodations)
             {
                 accommodation.Location = locations.Find(n => n.Id == accommodation.Location.Id);
+            }
+        }
+
+       
+
+        public void SetTypes()
+        {
+            List<AccommodationType> types = accommodationTypeRepository.GetAll();
+            foreach (Accommodation accommodation in Accommodations)
+            {
+                if (types.Find(n => n.Id == accommodation.Type.Id) != null)
+                {
+                    accommodation.Type = types.Find(n => n.Id == accommodation.Type.Id);
+                }
             }
         }
 
@@ -178,7 +187,6 @@ namespace InitialProject.View
                 changedGuestsNumber = Convert.ToInt32(numberOfGuests.Text) - 1;
                 numberOfGuests.Text = changedGuestsNumber.ToString();
             }
-            
         }
 
         private void IncrementGuestsNumber(object sender, RoutedEventArgs e)
@@ -192,9 +200,7 @@ namespace InitialProject.View
             {
                 changedGuestsNumber = Convert.ToInt32(numberOfGuests.Text) + 1;
                 numberOfGuests.Text = changedGuestsNumber.ToString();
-            }
-            
-            
+            }    
         }
 
         private void DecrementDaysNumber(object sender, RoutedEventArgs e)
@@ -218,41 +224,40 @@ namespace InitialProject.View
             {
                 changedDaysNumber = Convert.ToInt32(numberOfDays.Text) + 1;
                 numberOfDays.Text = changedDaysNumber.ToString();
-            }
-            
+            } 
         }
 
         private void ViewPhotos(object sender, RoutedEventArgs e)
         {
             try
             {
-                Accommodation currentAccommodation = (Accommodation)AccommodationListDataGrid.CurrentItem;
-
-
-                List<string> imagesUrl = new List<string>();
-
-                foreach (AccommodationImage image in accommodationImages)
-                {
-                    if (image.Accommodation.Id == currentAccommodation.Id)
-                    {
-                        imagesUrl.Add(image.Url);
-                    }
-                }
-
-                if (imagesUrl.Count == 0)
+                List<string> imagesUrls = new List<string>();
+                FindPhotosUrls(imagesUrls);
+                if (imagesUrls.Count == 0)
                 {
                     MessageBox.Show("There are currently no images for the selected accommodation.");
                 }
                 else
                 {
-                    AccommodationPhotosView photosView = new AccommodationPhotosView(imagesUrl);
+                    AccommodationPhotosView photosView = new AccommodationPhotosView(imagesUrls);
                     photosView.Show();
                 }
-
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message.ToString());
+            }
+        }
+
+        private void FindPhotosUrls(List<string> imagesUrls)
+        {
+            Accommodation currentAccommodation = (Accommodation)AccommodationListDataGrid.CurrentItem;
+            foreach (AccommodationImage image in accommodationImages)
+            {
+                if (image.Accommodation.Id == currentAccommodation.Id)
+                {
+                    imagesUrls.Add(image.Url);
+                }
             }
         }
 
@@ -275,6 +280,69 @@ namespace InitialProject.View
                 }
                 cityInput.IsEnabled = true;
             }
+        }
+
+        private void ShowAll_Click(object sender, RoutedEventArgs e)
+        {
+            Accommodations.Clear();
+            foreach (Accommodation accommodation in accommodationRepository.GetAll())
+                Accommodations.Add(accommodation);
+            ResetAllSearchingFields();
+        }
+
+        private void ResetAllSearchingFields()
+        {
+            nameInput.Text = "";
+            countryInput.SelectedItem = null;
+            cityInput.SelectedItem = null;
+            cityInput.IsEnabled = false;
+            apartment.IsChecked = false;
+            house.IsChecked = false;
+            cottage.IsChecked = false;
+            numberOfDays.Text = "";
+            numberOfGuests.Text = "";
+        }
+
+        private bool IsNumberOfDaysValid()
+        {
+            var content = numberOfDays.Text;
+            var regex = "^([1-9][0-9]*)$";
+            Match match = Regex.Match(content, regex, RegexOptions.IgnoreCase);
+            bool isValid = false;
+            if (!match.Success && numberOfDays.Text!="")
+            {
+                numberOfDays.BorderBrush = Brushes.Red;
+                numberOfDaysLabel.Content = "This field should be positive integer number";
+                numberOfDays.BorderThickness = new Thickness(1);
+            }
+            else
+            {
+                isValid = true;
+                numberOfDays.BorderBrush = Brushes.Green;
+                numberOfDaysLabel.Content = string.Empty;
+            }
+            return isValid;
+        }
+
+        private bool IsNumberOfGuestsValid()
+        {
+            var content = numberOfGuests.Text;
+            var regex = "^([1-9][0-9]*)$";
+            Match match = Regex.Match(content, regex, RegexOptions.IgnoreCase);
+            bool isValid = false;
+            if (!match.Success && numberOfGuests.Text != "")
+            {
+                numberOfGuests.BorderBrush = Brushes.Red;
+                numberOfGuestsLabel.Content = "This field should be positive integer number";
+                numberOfGuests.BorderThickness = new Thickness(1);
+            }
+            else
+            {
+                isValid = true;
+                numberOfGuests.BorderBrush = Brushes.Green;
+                numberOfGuestsLabel.Content = string.Empty;
+            }
+            return isValid;
         }
     }
 }

@@ -24,11 +24,11 @@ namespace InitialProject.View
     /// </summary>
     public partial class DatesForAccommodationReservation : Window
     {
-        public ObservableCollection<FreeDatesForAccommodationReservation> freeDatesForAccommodations { get; set; }
+        public ObservableCollection<AvailableDatesForAccommodationReservation> availableDatesForAccommodations { get; set; }
         Accommodation currentAccommodation;
         private AccommodationReservationRepository accommodationReservationRepository;
-        private FreeDatesForAccommodationReservation selectedDateRange;
-        public FreeDatesForAccommodationReservation SelectedDateRange
+        private AvailableDatesForAccommodationReservation selectedDateRange;
+        public AvailableDatesForAccommodationReservation SelectedDateRange
         {
             get { return selectedDateRange; }
             set
@@ -46,23 +46,21 @@ namespace InitialProject.View
             InitializeComponent();
             this.DataContext = this;
             this.currentAccommodation = currentAccommodation;
-            freeDatesForAccommodations = new ObservableCollection<FreeDatesForAccommodationReservation>();
+            availableDatesForAccommodations = new ObservableCollection<AvailableDatesForAccommodationReservation>();
             this.accommodationReservationRepository = accommodationReservationRepository;
-            
         }
 
         private void ChooseDateButtonClick(object sender, RoutedEventArgs e)
         {
-            AccommodationGuestsNumberInput guestsNumber = new AccommodationGuestsNumberInput(currentAccommodation, selectedDateRange, accommodationReservationRepository, freeDatesForAccommodations);
+            AccommodationGuestsNumberInput guestsNumber = new AccommodationGuestsNumberInput(currentAccommodation, selectedDateRange, accommodationReservationRepository, availableDatesForAccommodations);
             guestsNumber.Owner = this;
             guestsNumber.Show();
-          
         }
         public void AddNewDateRange(DateTime startDate, DateTime endDate)
         {
             endDate = endDate.AddHours(23);
             endDate = endDate.AddMinutes(59);
-            freeDatesForAccommodations.Add(new FreeDatesForAccommodationReservation(startDate, endDate));
+            availableDatesForAccommodations.Add(new AvailableDatesForAccommodationReservation(startDate, endDate));
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

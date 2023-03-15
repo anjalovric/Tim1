@@ -42,7 +42,7 @@ namespace InitialProject.View
             }
         }
        
-        public CheckPointForm(CheckPointRepository _checkPointRepository,ObservableCollection<CheckPoint> tourPoints,Button addTour)
+        public CheckPointForm(CheckPointRepository _checkPointRepository,ObservableCollection<CheckPoint> tourPoints)
         {
             InitializeComponent();
             DataContext = this;

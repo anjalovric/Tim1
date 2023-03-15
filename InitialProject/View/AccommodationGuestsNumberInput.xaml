@@ -12,7 +12,7 @@
 
         <TextBlock x:Name="numberOfGuests" Text="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="118" TextAlignment="Center" Height="45" Background="#FFDFDCDC" FontSize="16" TextElement.FontSize="27"/>
         <Button x:Name="incrementNumberOfGuests" Click="IncrementGuestsNumber"  Content="+" TextElement.FontSize="15" HorizontalAlignment="Right" VerticalAlignment="Center" Height="45"  Width="38" Background="#FFDDDDDD" Margin="0,0,50,0"/>
-        <Button Content="OK" TextElement.FontWeight="Bold" HorizontalAlignment="Left" Margin="55,0,0,30" VerticalAlignment="Bottom" Width="68" Click="Confirm_Click" Height="27"/>
+        <Button Content="OK" TextElement.FontWeight="Bold" HorizontalAlignment="Left" Margin="55,0,0,30" VerticalAlignment="Bottom" Width="68" Click="ConfirmReservation_Click" Height="27"/>
         <Button Content="Cancel" TextElement.FontWeight="Bold" HorizontalAlignment="Right" Margin="0,0,55,30" VerticalAlignment="Bottom" Width="68" Click="Cancel_Click" Height="27"/>
 
     </Grid>

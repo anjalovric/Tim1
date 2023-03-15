@@ -12,22 +12,22 @@ namespace InitialProject.Repository
     public class TourRepository
     {
         private const string FilePath = "../../../Resources/Data/tours.csv";
-        private const string FilePathLocation= "../../../Resources/Data/locations.csv";
+        
 
         private readonly Serializer<Tour> _serializer;
-        private readonly Serializer<Location> _serializerLocation;
+        
 
         private List<Tour> _tours;
-        private List<Location> _locations;
+       
         
         public TourRepository()
         {
             
             _serializer = new Serializer<Tour>();
-            _serializerLocation = new Serializer<Location>();
+           
 
             _tours = _serializer.FromCSV(FilePath);
-            SetLocations();
+          
 
         }
         
@@ -36,18 +36,7 @@ namespace InitialProject.Repository
             return _tours;
         }
 
-        public void SetLocations()
-        {
-            Serializer<Location> _serializerLocation = new Serializer<Location>();
-            List<Location> locations = _serializerLocation.FromCSV("../../../Resources/Data/locations.csv");
-            foreach (Tour tour in _tours)
-            {
-                if (locations.Find(n => n.Id == tour.Location.Id) != null)
-                {
-                    tour.Location = locations.Find(n => n.Id == tour.Location.Id);
-                }
-            }
-        }
+
        
 
         public Tour Save(Tour tour)
@@ -88,38 +77,8 @@ namespace InitialProject.Repository
             _serializer.ToCSV(FilePath, _tours);
             return tour;
         }
-        /*public List<Tour> GetByStart(DateTime date)
-        {
-
-            var day = date.Month;
-            var month = date.Day;
-            var year = date.Year;
-            _tours = _serializer.FromCSV(FilePath);
-            List<Tour> list = new List<Tour>();
-            foreach (Tour tour in _tours)
-            {
-                var tourDay = tour.Start.Day;
-                var tourMonth = tour.Start.Month;
-                var tourYear = tour.Start.Year;
-                if(tourDay == day && month==tourMonth && year==tourYear) 
-                { 
-                    list.Add(tour);
-                }
-            }
-           
-
-            _locations = _serializerLocation.FromCSV(FilePathLocation);
-
-            foreach (Location location in _locations)
-            {
-                foreach (Tour tour in _tours)
-                {
-                    if (location.Id == tour.Location.Id)
-                        tour.Location = location;
-                }
-            }
-            return list;
-        }*/
+      
+   
        
     }
 }
