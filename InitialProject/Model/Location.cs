@@ -11,9 +11,7 @@ namespace InitialProject.Model
     public class Location : ISerializable
     {
         public int Id { get; set; }
-
         public string City { get; set; }
-
         public string Country { get; set; }
 
         public Location() { }
@@ -36,6 +34,7 @@ namespace InitialProject.Model
             string[] csvValues = { Id.ToString(), City, Country };
             return csvValues;
         }
+
         public override string ToString()
         {
             return City + "," + Country;

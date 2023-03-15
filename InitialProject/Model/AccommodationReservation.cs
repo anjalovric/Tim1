@@ -14,8 +14,10 @@ namespace InitialProject.Model
         public int GuestId { get; set; }
         public Accommodation Accommodation { get; set; }
 
+
         public DateTime Arrival  { get; set; }
         public DateTime Departure { get; set; }
+
 
         public AccommodationReservation() {
             Accommodation = new Accommodation();

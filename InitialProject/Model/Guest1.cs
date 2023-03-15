@@ -14,8 +14,6 @@ namespace InitialProject.Model
             public string LastName { get; set; }
             public string Username { get; set; }
 
-            
-
             public Guest1() { }
             public Guest1(string name, string lastName)
             {

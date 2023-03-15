@@ -44,6 +44,7 @@ namespace InitialProject.Repository
             _serializer.ToCSV(FilePath, _accommodationReservations);
         }
 
+
        public List<Guest1> GetAllGuestsToReview()
        {
             List<Guest1> guests = new List<Guest1>();
@@ -63,6 +64,8 @@ namespace InitialProject.Repository
             }
             return guests;
        }
+
+
 
     }
 }

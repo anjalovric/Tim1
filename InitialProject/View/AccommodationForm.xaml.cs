@@ -2,18 +2,10 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using InitialProject.Model;
 using InitialProject.Repository;
 
@@ -25,20 +17,21 @@ namespace InitialProject.View.Owner
     public partial class AccommodationForm : Window, INotifyPropertyChanged
     {
         private AccommodationRepository accommodationRepository;
-        public Accommodation accommodation { get; set; }
+        private Accommodation accommodation;
         private AccommodationTypeRepository accommodationTypeRepository;
-        public List<AccommodationType> accommodationTypes { get; set; }
         private LocationRepository locationRepository;
         private Location location;
-        public ObservableCollection<AccommodationImage> Images { get; set; }
-        public string Url { get; set; }
         private AccommodationImageRepository accommodationImageRepository;
         private ObservableCollection<Accommodation> accommodations;
+        public List<AccommodationType> AccommodationTypes { get; set; }
+        public ObservableCollection<AccommodationImage> Images { get; set; }
+        public string Url { get; set; }
         public ObservableCollection<string> Countries { get; set; }
         public ObservableCollection<string> CitiesByCountry { get; set; }  
+        public Model.Owner Owner { get; set; }
         
 
-        public AccommodationForm(ObservableCollection<Accommodation> oldAccommodations)
+        public AccommodationForm(ObservableCollection<Accommodation> oldAccommodations, Model.Owner owner)
         {
             InitializeComponent();
             this.DataContext = this;
@@ -46,9 +39,10 @@ namespace InitialProject.View.Owner
             accommodation = new Accommodation();
             accommodations = oldAccommodations;
             accommodationTypeRepository = new AccommodationTypeRepository();
-            accommodationTypes = accommodationTypeRepository.GetAll();
+            AccommodationTypes = accommodationTypeRepository.GetAll();
             locationRepository = new LocationRepository();
             location = new Location();
+            Owner = owner;
             Images = new ObservableCollection<AccommodationImage>();
             accommodationImageRepository = new AccommodationImageRepository();
             Countries = new ObservableCollection<string>(locationRepository.GetAllCountries());
@@ -74,18 +68,39 @@ namespace InitialProject.View.Owner
                 }
             }
         }
-        private void OK_Click(object sender, RoutedEventArgs e)
+
+        public Accommodation Accommodation
         {
-            accommodation.Id = accommodationRepository.NextId();
-            accommodation.Location = locationRepository.GetLocation(Location.Country, Location.City);
-            accommodations.Add(accommodation); 
-            accommodationRepository.Add(accommodation);
-            AddImages();
-            
-            this.Close();
+            get { return accommodation; }
+            set
+            {
+                if (value != accommodation)
+                {
+                    accommodation = value;
+                    OnPropertyChanged();
+                }
+            }
         }
 
-        private void AddImages()
+        private void OKButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (IsValid())
+            {
+                accommodation.Id = accommodationRepository.NextId();
+                accommodation.Location = locationRepository.GetLocation(Location.Country, Location.City);
+                accommodation.Owner = Owner;
+                accommodations.Add(accommodation);
+                accommodationRepository.Add(accommodation);
+                SaveImages();
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("All fields must be valid", "Error input", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void SaveImages()
         {
             foreach (AccommodationImage image in Images)
             {
@@ -93,12 +108,13 @@ namespace InitialProject.View.Owner
                 image.Id = accommodationImageRepository.Add(image.Url, image.Accommodation);
             }
         }
-        private void Cancel_Click(object sender, RoutedEventArgs e)
+
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
 
-        private void NewImage_Click(object sender, RoutedEventArgs e)
+        private void NewImageButton_Click(object sender, RoutedEventArgs e)
         {
             AccommodationImage image = new AccommodationImage();
             image.Url = Url;
@@ -118,6 +134,79 @@ namespace InitialProject.View.Owner
                 }
                 ComboBoxCity.IsEnabled = true;
             }
+        }
+
+        private bool IsValid()
+        {
+            bool isValid = true;
+            if (NameTextBox.Text.Equals(""))
+            {
+                isValid = false;
+                NameValidation.Content = "This field is required";
+                NameTextBox.BorderBrush = Brushes.Red;
+            }
+            if(ComboBoxCountry.SelectedItem == null)
+            {
+                isValid = false;
+                CountryValidation.Content = "This field is required";
+                ComboBoxCountry.BorderBrush = Brushes.Red;
+            }
+            if (ComboBoxCity.SelectedItem == null)
+            {
+                isValid = false;
+                CityValidation.Content = "This field is required";
+                ComboBoxCity.BorderBrush = Brushes.Red;
+            }
+            if (ComboBoxType.SelectedItem == null)
+            {
+                isValid = false;
+                TypeValidation.Content = "This field is required";
+                ComboBoxType.BorderBrush = Brushes.Red;
+            }
+            if(CapacityTextBox.Text.Equals(""))
+            {
+                isValid = false;
+                CapacityValidation.Content = "This field is required";
+                CapacityTextBox.BorderBrush = Brushes.Red;
+            }
+            else if(Convert.ToInt32(CapacityTextBox.Text) <= 0)
+            {
+                isValid = false;
+                CapacityValidation.Content = "At least one guest is required";
+                CapacityTextBox.BorderBrush = Brushes.Red;
+            }
+            if (MinDaysForReservationTextBox.Text.Equals(""))
+            {
+                isValid = false;
+                MinDaysForReservationValidation.Content = "This field is required";
+                MinDaysForReservationTextBox.BorderBrush = Brushes.Red;
+            }
+            else if (Convert.ToInt32(MinDaysForReservationTextBox.Text) <= 0)
+            {
+                isValid = false;
+                MinDaysForReservationValidation.Content = "At least one day is required";
+                MinDaysForReservationTextBox.BorderBrush = Brushes.Red;
+            }
+            if (DaysBeforeToCancelTextBox.Text.Equals(""))
+            {
+                isValid = false;
+                DaysBeforeToCancelValidation.Content = "This field is required";
+                DaysBeforeToCancelTextBox.BorderBrush = Brushes.Red;
+            }
+            else if (Convert.ToInt32(DaysBeforeToCancelTextBox.Text) < 0)
+            {
+                isValid = false;
+                DaysBeforeToCancelValidation.Content = "Please enter valid number";
+                DaysBeforeToCancelTextBox.BorderBrush = Brushes.Red;
+            }
+            if (Images.Count == 0)
+            {
+                isValid = false;
+                ImageValidation.Content = "At least one picture is required";
+                TextBoxUrl.BorderBrush = Brushes.Red;
+            }
+
+            return isValid;
         }
     }
 }
