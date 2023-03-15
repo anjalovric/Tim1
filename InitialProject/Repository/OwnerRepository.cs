@@ -26,5 +26,15 @@ namespace InitialProject.Repository
         {
             return _owners;
         }
+
+        public Owner GetByUsername(string username)
+        {
+            return _owners.Find(n => n.Username.Equals(username));
+        }
+
+        public Owner GetById(int id)
+        {
+            return _owners.Find(n => n.Id == id);
+        }
     }
 }

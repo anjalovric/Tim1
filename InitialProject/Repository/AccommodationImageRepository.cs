@@ -46,5 +46,16 @@ namespace InitialProject.Repository
             return _accommodationImages;
         }
 
+        public List<string> GetUrlByAccommodationId(int id)
+        {
+            List<string> images = new List<string>();
+            foreach (AccommodationImage image in _accommodationImages)
+            {
+                if (image.Accommodation.Id == id)
+                    images.Add(image.Url);
+            }
+            return images;
+        }
+
     }
 }

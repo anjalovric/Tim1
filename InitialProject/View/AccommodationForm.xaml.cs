@@ -25,7 +25,7 @@ namespace InitialProject.View.Owner
     public partial class AccommodationForm : Window, INotifyPropertyChanged
     {
         private AccommodationRepository accommodationRepository;
-        public Accommodation accommodation { get; set; }
+        private Accommodation accommodation;
         private AccommodationTypeRepository accommodationTypeRepository;
         public List<AccommodationType> accommodationTypes { get; set; }
         private LocationRepository locationRepository;
@@ -36,9 +36,10 @@ namespace InitialProject.View.Owner
         private ObservableCollection<Accommodation> accommodations;
         public ObservableCollection<string> Countries { get; set; }
         public ObservableCollection<string> CitiesByCountry { get; set; }  
+        public Model.Owner Owner { get; set; }
         
 
-        public AccommodationForm(ObservableCollection<Accommodation> oldAccommodations)
+        public AccommodationForm(ObservableCollection<Accommodation> oldAccommodations, Model.Owner owner)
         {
             InitializeComponent();
             this.DataContext = this;
@@ -49,6 +50,7 @@ namespace InitialProject.View.Owner
             accommodationTypes = accommodationTypeRepository.GetAll();
             locationRepository = new LocationRepository();
             location = new Location();
+            Owner = owner;
             Images = new ObservableCollection<AccommodationImage>();
             accommodationImageRepository = new AccommodationImageRepository();
             Countries = new ObservableCollection<string>(locationRepository.GetAllCountries());
@@ -74,15 +76,35 @@ namespace InitialProject.View.Owner
                 }
             }
         }
+
+        public Accommodation Accommodation
+        {
+            get { return accommodation; }
+            set
+            {
+                if (value != accommodation)
+                {
+                    accommodation = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         private void OK_Click(object sender, RoutedEventArgs e)
         {
-            accommodation.Id = accommodationRepository.NextId();
-            accommodation.Location = locationRepository.GetLocation(Location.Country, Location.City);
-            accommodations.Add(accommodation); 
-            accommodationRepository.Add(accommodation);
-            AddImages();
-            
-            this.Close();
+            if (IsValid())
+            {
+                accommodation.Id = accommodationRepository.NextId();
+                accommodation.Location = locationRepository.GetLocation(Location.Country, Location.City);
+                accommodation.Owner = Owner;
+                accommodations.Add(accommodation);
+                accommodationRepository.Add(accommodation);
+                AddImages();
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("All fields must be valid", "Error input", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void AddImages()
@@ -118,6 +140,79 @@ namespace InitialProject.View.Owner
                 }
                 ComboBoxCity.IsEnabled = true;
             }
+        }
+
+        private bool IsValid()
+        {
+            bool isValid = true;
+            if (NameTextBox.Text.Equals(""))
+            {
+                isValid = false;
+                NameValidation.Content = "This field is required";
+                NameTextBox.BorderBrush = Brushes.Red;
+            }
+            if(ComboBoxCountry.SelectedItem == null)
+            {
+                isValid = false;
+                CountryValidation.Content = "This field is required";
+                ComboBoxCountry.BorderBrush = Brushes.Red;
+            }
+            if (ComboBoxCity.SelectedItem == null)
+            {
+                isValid = false;
+                CityValidation.Content = "This field is required";
+                ComboBoxCity.BorderBrush = Brushes.Red;
+            }
+            if (ComboBoxType.SelectedItem == null)
+            {
+                isValid = false;
+                TypeValidation.Content = "This field is required";
+                ComboBoxType.BorderBrush = Brushes.Red;
+            }
+            if(CapacityTextBox.Text.Equals(""))
+            {
+                isValid = false;
+                CapacityValidation.Content = "This field is required";
+                CapacityTextBox.BorderBrush = Brushes.Red;
+            }
+            else if(Convert.ToInt32(CapacityTextBox.Text) <= 0)
+            {
+                isValid = false;
+                CapacityValidation.Content = "At least one guest is required";
+                CapacityTextBox.BorderBrush = Brushes.Red;
+            }
+            if (MinDaysForReservationTextBox.Text.Equals(""))
+            {
+                isValid = false;
+                MinDaysForReservationValidation.Content = "This field is required";
+                MinDaysForReservationTextBox.BorderBrush = Brushes.Red;
+            }
+            else if (Convert.ToInt32(MinDaysForReservationTextBox.Text) <= 0)
+            {
+                isValid = false;
+                MinDaysForReservationValidation.Content = "At least one day is required";
+                MinDaysForReservationTextBox.BorderBrush = Brushes.Red;
+            }
+            if (DaysBeforeToCancelTextBox.Text.Equals(""))
+            {
+                isValid = false;
+                DaysBeforeToCancelValidation.Content = "This field is required";
+                DaysBeforeToCancelTextBox.BorderBrush = Brushes.Red;
+            }
+            else if (Convert.ToInt32(DaysBeforeToCancelTextBox.Text) < 0)
+            {
+                isValid = false;
+                DaysBeforeToCancelValidation.Content = "Please enter valid number";
+                DaysBeforeToCancelTextBox.BorderBrush = Brushes.Red;
+            }
+            if (Images.Count == 0)
+            {
+                isValid = false;
+                ImageValidation.Content = "At least one picture is required";
+                TextBoxUrl.BorderBrush = Brushes.Red;
+            }
+
+            return isValid;
         }
     }
 }
