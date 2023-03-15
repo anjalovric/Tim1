@@ -22,12 +22,12 @@ namespace InitialProject.Model
         public AccommodationReservation() {
             Accommodation = new Accommodation();
         }
-        public AccommodationReservation(int guestId, Accommodation currentAccommodation, DateTime arrivalDate, DateTime departureDate)
+        public AccommodationReservation(int guestId, Accommodation currentAccommodation, DateTime arrival, DateTime departure)
         {
             GuestId = guestId;
             this.Accommodation = currentAccommodation;
-            Arrival = arrivalDate;
-            Departure = departureDate;
+            Arrival = arrival;
+            Departure = departure;
         }
 
         public void FromCSV(string[] values)
