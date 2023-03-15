@@ -105,9 +105,7 @@ namespace InitialProject.Repository
 
         public Location GetLocation(string country, string city)
         {
-            Location location = new Location();
-            location = _locations.Find(n => n.City.Equals(city) && n.Country.Equals(country));
-            return location;
+           return _locations.Find(n => n.City.Equals(city) && n.Country.Equals(country));
         }
     }
 }

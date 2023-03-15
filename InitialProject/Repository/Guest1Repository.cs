@@ -26,6 +26,7 @@ namespace InitialProject.Repository
         {
             return _guests;
         }
+
         public Guest1 GetByUsername(string userName)
         {
             return _guests.Find(n => n.Username.Equals(userName));

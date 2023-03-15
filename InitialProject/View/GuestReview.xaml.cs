@@ -2,18 +2,8 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using InitialProject.Model;
 using InitialProject.Repository;
 
@@ -22,14 +12,14 @@ namespace InitialProject.View
     /// <summary>
     /// Interaction logic for GuestReview.xaml
     /// </summary>
-    public partial class GuestReview : Window, INotifyPropertyChanged
+    public partial class GuestReviewWindow : Window, INotifyPropertyChanged
     {
-        public Guest1 guest { get; set; }
-        private ReviewOfGuest review;
+        private GuestReview review;
         private bool cleanlinessIsChecked;
         private bool followingRulesIsChecked;
+        public Guest1 guest { get; set; }
         public ObservableCollection<Guest1> guests { get; set; }
-        public ReviewOfGuest Review
+        public GuestReview Review
         {
             get => review;
             set
@@ -41,29 +31,34 @@ namespace InitialProject.View
                 }
             }
         }
+
         public event PropertyChangedEventHandler? PropertyChanged;
-        public GuestReview(Guest1 guestToReview, ObservableCollection<Guest1> allGuests)
+        public GuestReviewWindow(Guest1 guestToReview, ObservableCollection<Guest1> allGuests, Model.Owner owner)
         {
             InitializeComponent();
             DataContext = this;
             guest = guestToReview;
-            review = new ReviewOfGuest();
+            review = new GuestReview();
             review.Guest = guest;
             guests = allGuests;
             OkButton.IsEnabled = false;
             cleanlinessIsChecked = false;
             followingRulesIsChecked = false;
+            Review.Owner = owner;
         }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
         private void OkButton_Click(object sender, RoutedEventArgs e)
         {
             GuestReviewRepository guestReviewRepository = new GuestReviewRepository();
             guestReviewRepository.Save(Review);
             guests.Remove(guest);
+            OwnerOverview ownerOverview = Owner as OwnerOverview;
+            ownerOverview.RefreshAlerts();
             this.Close();
         }
 
@@ -101,7 +96,7 @@ namespace InitialProject.View
             EnableOkButton();
         }
 
-        private void Cancel_Click(object sender, RoutedEventArgs e)
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
