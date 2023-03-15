@@ -30,17 +30,20 @@ namespace InitialProject.View
     /// Interaction logic for Guest1Overview.xaml
     /// </summary>
     public partial class Guest1Overview : Window
-    {
-        private AccommodationImageRepository accommodationImageRepository;
-        private List<AccommodationImage> accommodationImages;
-        private AccommodationRepository accommodationRepository;
-        private ObservableCollection<Accommodation> accommodations;
+    {     
         public ObservableCollection<string> Countries { get; set; }
         public ObservableCollection<string> CitiesByCountry { get; set; }
         private LocationRepository locationRepository;
         private Location location;
+
         private AccommodationType accommodationType;
         private AccommodationTypeRepository accommodationTypeRepository;
+
+        private List<AccommodationImage> accommodationImages;
+        private AccommodationImageRepository accommodationImageRepository;
+
+        private AccommodationRepository accommodationRepository;
+        private ObservableCollection<Accommodation> accommodations;
         public ObservableCollection<Accommodation> Accommodations 
         { 
             get { return accommodations; } 
@@ -68,19 +71,23 @@ namespace InitialProject.View
         {
             InitializeComponent();
             DataContext = this;
+
             accommodationRepository = new AccommodationRepository();
-            Accommodations = new ObservableCollection<Accommodation>(accommodationRepository.GetAll());  
+            Accommodations = new ObservableCollection<Accommodation>(accommodationRepository.GetAll());
+
             accommodationImageRepository = new AccommodationImageRepository();
             accommodationImages = new List<AccommodationImage>(accommodationImageRepository.GetAll());
-            locationRepository = new LocationRepository();
-            location = new Location();
+
             accommodationType = new AccommodationType();
             accommodationTypeRepository = new AccommodationTypeRepository();
+            SetTypes();
+
+            locationRepository = new LocationRepository();
+            location = new Location();
             Countries = new ObservableCollection<string>(locationRepository.GetAllCountries());
             CitiesByCountry = new ObservableCollection<string>();
             cityInput.IsEnabled = false;
             SetLocations();
-            SetTypes();    
         }
 
         
@@ -90,6 +97,40 @@ namespace InitialProject.View
             SignInForm signInForm = new SignInForm();
             signInForm.Show();
             this.Close();
+        }
+
+        private void countryInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (countryInput.SelectedItem != null)
+            {
+                CitiesByCountry.Clear();
+                foreach (string city in locationRepository.GetCitiesByCountry((string)countryInput.SelectedItem))
+                {
+                    CitiesByCountry.Add(city);
+                }
+                cityInput.IsEnabled = true;
+            }
+        }
+
+        private void SetLocations()
+        {
+            List<Location> locations = locationRepository.GetAll();
+            foreach (Accommodation accommodation in Accommodations)
+            {
+                accommodation.Location = locations.Find(n => n.Id == accommodation.Location.Id);
+            }
+        }
+
+        private void SetTypes()
+        {
+            List<AccommodationType> types = accommodationTypeRepository.GetAll();
+            foreach (Accommodation accommodation in Accommodations)
+            {
+                if (types.Find(n => n.Id == accommodation.Type.Id) != null)
+                {
+                    accommodation.Type = types.Find(n => n.Id == accommodation.Type.Id);
+                }
+            }
         }
 
         private void Search_Click(object sender, RoutedEventArgs e)
@@ -147,36 +188,27 @@ namespace InitialProject.View
                 }
             }
         }
-        
 
-        private void SetLocations()
+        private void ShowAll_Click(object sender, RoutedEventArgs e)
         {
-            List<Location> locations = locationRepository.GetAll();
-            foreach (Accommodation accommodation in Accommodations)
-            {
-                accommodation.Location = locations.Find(n => n.Id == accommodation.Location.Id);
-            }
+            Accommodations.Clear();
+            foreach (Accommodation accommodation in accommodationRepository.GetAll())
+                Accommodations.Add(accommodation);
+
+            ResetAllSearchingFields();
         }
 
-       
-
-        public void SetTypes()
+        private void ResetAllSearchingFields()
         {
-            List<AccommodationType> types = accommodationTypeRepository.GetAll();
-            foreach (Accommodation accommodation in Accommodations)
-            {
-                if (types.Find(n => n.Id == accommodation.Type.Id) != null)
-                {
-                    accommodation.Type = types.Find(n => n.Id == accommodation.Type.Id);
-                }
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            nameInput.Text = "";
+            countryInput.SelectedItem = null;
+            cityInput.SelectedItem = null;
+            cityInput.IsEnabled = false;
+            apartment.IsChecked = false;
+            house.IsChecked = false;
+            cottage.IsChecked = false;
+            numberOfDays.Text = "";
+            numberOfGuests.Text = "";
         }
 
         private void DecrementGuestsNumber(object sender, RoutedEventArgs e)
@@ -269,40 +301,6 @@ namespace InitialProject.View
         }
 
 
-        private void countryInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (countryInput.SelectedItem != null)
-            {
-                CitiesByCountry.Clear();
-                foreach (string city in locationRepository.GetCitiesByCountry((string)countryInput.SelectedItem))
-                {
-                    CitiesByCountry.Add(city);
-                }
-                cityInput.IsEnabled = true;
-            }
-        }
-
-        private void ShowAll_Click(object sender, RoutedEventArgs e)
-        {
-            Accommodations.Clear();
-            foreach (Accommodation accommodation in accommodationRepository.GetAll())
-                Accommodations.Add(accommodation);
-            ResetAllSearchingFields();
-        }
-
-        private void ResetAllSearchingFields()
-        {
-            nameInput.Text = "";
-            countryInput.SelectedItem = null;
-            cityInput.SelectedItem = null;
-            cityInput.IsEnabled = false;
-            apartment.IsChecked = false;
-            house.IsChecked = false;
-            cottage.IsChecked = false;
-            numberOfDays.Text = "";
-            numberOfGuests.Text = "";
-        }
-
         private bool IsNumberOfDaysValid()
         {
             var content = numberOfDays.Text;
@@ -343,6 +341,13 @@ namespace InitialProject.View
                 numberOfGuestsLabel.Content = string.Empty;
             }
             return isValid;
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

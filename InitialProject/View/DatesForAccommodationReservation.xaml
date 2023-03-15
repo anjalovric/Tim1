@@ -10,8 +10,8 @@
         <Label Content="Select desired date:" HorizontalAlignment="Center" Margin="0,20,0,0" TextElement.FontFamily="Candara" TextElement.FontWeight="Heavy"  TextElement.FontSize="20"></Label>
         <DataGrid x:Name="AvailableDates" SelectedItem="{Binding SelectedDateRange, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" ItemsSource="{Binding Path=availableDatesForAccommodations,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"  AutoGenerateColumns="False" Grid.ColumnSpan="3" IsReadOnly="True" VerticalAlignment="Center" HorizontalAlignment="Center" Height="211" Width="391">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="START DATE" Width="1*" Binding="{Binding Start, Mode=OneWay}"/>
-                <DataGridTextColumn Header="END DATE" Width="1*" Binding="{Binding End, Mode=OneWay}"/>
+                <DataGridTextColumn Header="ARRIVAL DATE" Width="1*" Binding="{Binding Arrival, Mode=OneWay}"/>
+                <DataGridTextColumn Header="DEPARTURE DATE" Width="1*" Binding="{Binding Departure, Mode=OneWay}"/>
                 <DataGridTemplateColumn x:Name="SelectDate" Header="Choose date" Width="0.52*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

@@ -24,9 +24,10 @@ namespace InitialProject.View
     /// </summary>
     public partial class DatesForAccommodationReservation : Window
     {
-        public ObservableCollection<AvailableDatesForAccommodationReservation> availableDatesForAccommodations { get; set; }
-        Accommodation currentAccommodation;
+        private Accommodation currentAccommodation;
         private AccommodationReservationRepository accommodationReservationRepository;
+
+        public ObservableCollection<AvailableDatesForAccommodationReservation> availableDatesForAccommodations { get; set; }
         private AvailableDatesForAccommodationReservation selectedDateRange;
         public AvailableDatesForAccommodationReservation SelectedDateRange
         {
@@ -45,6 +46,7 @@ namespace InitialProject.View
         {
             InitializeComponent();
             this.DataContext = this;
+
             this.currentAccommodation = currentAccommodation;
             availableDatesForAccommodations = new ObservableCollection<AvailableDatesForAccommodationReservation>();
             this.accommodationReservationRepository = accommodationReservationRepository;
@@ -56,11 +58,16 @@ namespace InitialProject.View
             guestsNumber.Owner = this;
             guestsNumber.Show();
         }
-        public void AddNewDateRange(DateTime startDate, DateTime endDate)
+        public void AddNewDateRange(DateTime arrivalDate, DateTime departureDate)
         {
-            endDate = endDate.AddHours(23);
-            endDate = endDate.AddMinutes(59);
-            availableDatesForAccommodations.Add(new AvailableDatesForAccommodationReservation(startDate, endDate));
+            departureDate = departureDate.AddHours(23);
+            departureDate = departureDate.AddMinutes(59);
+            availableDatesForAccommodations.Add(new AvailableDatesForAccommodationReservation(arrivalDate, departureDate));
+        }
+
+        private void CancelChoosingDate(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -68,11 +75,6 @@ namespace InitialProject.View
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        private void CancelChoosingDate(object sender, RoutedEventArgs e)
-        {
-            this.Close();
         }
     }
 }

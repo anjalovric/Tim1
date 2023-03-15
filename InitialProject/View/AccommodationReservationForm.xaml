@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="AccommodationReservationForm" Height="501" Width="420" WindowStartupLocation="CenterScreen">
     <Grid>
-        <Label Content="Start date:" Margin="65,20,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" TextElement.FontWeight="DemiBold">
+        <Label Content="Arrival date:" Margin="65,20,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" TextElement.FontWeight="DemiBold">
             <Label.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -17,9 +17,9 @@
                 </TransformGroup>
             </Label.RenderTransform>
         </Label>
-        <Calendar x:Name="CalendarStart" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,50,0,0" SelectedDate="{Binding Path=StartDate, Mode=TwoWay}"></Calendar>
-        <Calendar x:Name="CalendarEnd" SelectedDate="{Binding Path=EndDate, Mode=TwoWay}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,50,10,0"></Calendar>
-        <Label Content="End date:" Margin="0,20,65,0" VerticalAlignment="Top" HorizontalAlignment="Right" RenderTransformOrigin="0.5,0.5" TextElement.FontWeight="DemiBold">
+        <Calendar x:Name="CalendarStart" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,50,0,0" SelectedDate="{Binding Path=ArrivalDate, Mode=TwoWay}"></Calendar>
+        <Calendar x:Name="CalendarEnd" SelectedDate="{Binding Path=DepartureDate, Mode=TwoWay}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,50,10,0"></Calendar>
+        <Label Content="Departure date:" Margin="0,20,65,0" VerticalAlignment="Top" HorizontalAlignment="Right" RenderTransformOrigin="0.5,0.5" TextElement.FontWeight="DemiBold">
             <Label.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
