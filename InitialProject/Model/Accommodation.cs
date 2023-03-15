@@ -10,7 +10,6 @@ namespace InitialProject.Model
     public class Accommodation : ISerializable
     {
         public int Id { get; set; }
-
         public string Name { get; set; }
         public Location Location { get; set; }
         public AccommodationType Type { get; set; }
@@ -20,6 +19,7 @@ namespace InitialProject.Model
         public Owner Owner { get; set; }
 
         public Accommodation() { }
+
         public Accommodation(string name, Location location, AccommodationType type, int capacity, int minDaysForReservation, int minDaysToCancel, Owner owner)
         {
             Name = name;
@@ -44,9 +44,7 @@ namespace InitialProject.Model
             Type.Id = Convert.ToInt32(values[6]);
             Owner = new Owner();
             Owner.Id = Convert.ToInt32(values[7]);
-
         }
-
         public string[] ToCSV()
         {
             string[] csvValues = { Id.ToString(), Name, Capacity.ToString(), MinDaysForReservation.ToString(), MinDaysToCancel.ToString(), Location.Id.ToString(), Type.Id.ToString(), Owner.Id.ToString() };

@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="GuestReviewsOverview" Height="450" Width="800" WindowStartupLocation="CenterScreen">
     <Grid>
-        <DataGrid ItemsSource="{Binding Path=reviews}" Margin="50,62,50,90" IsReadOnly="True" AutoGenerateColumns="False">
+        <DataGrid ItemsSource="{Binding Path=Reviews}" Margin="50,62,50,90" IsReadOnly="True" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding Guest.Name}" Width="80"/>
                 <DataGridTextColumn Header="LastName" Binding="{Binding Guest.LastName}" Width="80"/>
@@ -16,7 +16,7 @@
                 <DataGridTextColumn Header="Comment" Binding="{Binding Comment}" Width="300"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="OK" HorizontalAlignment="Left" Margin="631,374,0,0" VerticalAlignment="Top" Height="25" Width="94" Click="OK_Click"/>
+        <Button Content="OK" HorizontalAlignment="Left" Margin="631,374,0,0" VerticalAlignment="Top" Height="25" Width="94" Click="OKButton_Click"/>
 
     </Grid>
 </Window>

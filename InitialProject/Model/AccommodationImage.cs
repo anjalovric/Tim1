@@ -11,7 +11,6 @@ namespace InitialProject.Model
     {
         public int Id { get; set; }
         public string Url { get; set; }
-
         public Accommodation Accommodation { get; set; }
 
         public AccommodationImage() { }
@@ -23,7 +22,6 @@ namespace InitialProject.Model
             Accommodation = new Accommodation();
             Accommodation.Id = Convert.ToInt32(values[2]);
         }
-
         public string[] ToCSV()
         {
             string[] csvValues = { Id.ToString(), Url, Accommodation.Id.ToString() };

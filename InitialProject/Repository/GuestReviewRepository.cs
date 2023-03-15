@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using InitialProject.Model;
 using InitialProject.Serializer;
 
@@ -12,15 +10,16 @@ namespace InitialProject.Repository
     {
         private const string FilePath = "../../../Resources/Data/guestReviews.csv";
 
-        private readonly Serializer<ReviewOfGuest> _serializer;
+        private readonly Serializer<GuestReview> _serializer;
 
-        private List<ReviewOfGuest> _reviews;
+        private List<GuestReview> _reviews;
 
         public GuestReviewRepository()
         {
-            _serializer = new Serializer<ReviewOfGuest>();
+            _serializer = new Serializer<GuestReview>();
             _reviews = _serializer.FromCSV(FilePath);
         }
+
         public int NextId()
         {
             _reviews = _serializer.FromCSV(FilePath);
@@ -36,16 +35,22 @@ namespace InitialProject.Repository
             return _reviews.Find(n => n.Guest.Id == guest.Id) != null;
         }
 
-        public void Save(ReviewOfGuest review)
+        public void Save(GuestReview review)
         {
             review.Id = NextId();
             _reviews.Add(review);
             _serializer.ToCSV(FilePath, _reviews);
         }
 
-        public List<ReviewOfGuest> GetAll()
+        public List<GuestReview> GetAllByOwnerId(int id)
         {
-            return _reviews;
+            List<GuestReview> reviews = new List<GuestReview>();
+            foreach(GuestReview review in _reviews)
+            {
+                if (review.Owner.Id == id)
+                    reviews.Add(review);
+            }
+            return reviews;
         }
     }
 }

@@ -13,7 +13,6 @@ namespace InitialProject.Model
         public int Id { get; set; }
         public int GuestId { get; set; }
         public Accommodation Accommodation { get; set; }
-
         public DateTime ComingDate  { get; set; }
         public DateTime LeavingDate { get; set; }
 

@@ -2,21 +2,12 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using InitialProject.Model;
 using InitialProject.Repository;
-using InitialProject.Serializer;
 using InitialProject.View.Owner;
 
 namespace InitialProject.View
@@ -58,14 +49,14 @@ namespace InitialProject.View
             WindowOwner = new Model.Owner();
             GetOwnerByUser(user);
             accommodations = new ObservableCollection<Accommodation>(GetAllByOwner());
-            SetLocations();
-            SetTypes();
+            SetAccommodationsLocation();
+            SetAccommodationsType();
             guests = new ObservableCollection<Guest1>();
-            GetAllGuestsToReview();
-            MakeAlert();
+            GetAllGuestsForReview();
+            MakeAlerts();
         }
 
-        private void GetAllGuestsToReview()
+        private void GetAllGuestsForReview()
         {
             AccommodationReservationRepository reservationRepository = new AccommodationReservationRepository();
             List<AccommodationReservation> reservations = reservationRepository.GetAll();
@@ -98,33 +89,34 @@ namespace InitialProject.View
                 GetOwner(reservation);
             }
         }
-        private void AddAccommodationClick(object sender, RoutedEventArgs e)
+
+        private void AddAccommodationButton_Click(object sender, RoutedEventArgs e)
         {
             AccommodationForm accommodationForm = new AccommodationForm(accommodations, WindowOwner);
             accommodationForm.Show();
         }
 
-        private void SignOut_Click(object sender, RoutedEventArgs e)
+        private void SignOutButton_Click(object sender, RoutedEventArgs e)
         {
             SignInForm signInForm = new SignInForm();
             signInForm.Show();
             this.Close();
         }
 
-        private void Review_Click(object sender, RoutedEventArgs e)
+        private void ReviewButton_Click(object sender, RoutedEventArgs e)
         {
-            GuestReview guestReview = new GuestReview(SelectedGuest, guests);
+            GuestReviewWindow guestReview = new GuestReviewWindow(SelectedGuest, guests, WindowOwner);
+            guestReview.Owner = this;
             guestReview.Show();
         }
 
-        private void ReviewOverview_Click(object sender, RoutedEventArgs e)
+        private void ReviewOverviewButton_Click(object sender, RoutedEventArgs e)
         {
-            GuestReviewsOverview guestReviewsOverview = new GuestReviewsOverview();
+            GuestReviewsOverview guestReviewsOverview = new GuestReviewsOverview(WindowOwner);
             guestReviewsOverview.Show();
-
         }
 
-        private void MakeAlert()
+        private void MakeAlerts()
         {
             foreach(Guest1 guest in guests)
             {
@@ -134,6 +126,12 @@ namespace InitialProject.View
                 NotificationStack.Children.Add(guestLabel);
                 NotificationStack.Background = Brushes.LightGreen;
             }
+        }
+
+        public void RefreshAlerts()
+        {
+            NotificationStack.Children.Clear();
+            MakeAlerts();
         }
 
         private void GetOwnerByUser(User user)
@@ -161,6 +159,7 @@ namespace InitialProject.View
             }
             return result;
         }
+
         private void PicturesButton_Click(object sender, RoutedEventArgs e)
         {
             AccommodationImageRepository accommodationImageRepository = new AccommodationImageRepository();
@@ -176,7 +175,8 @@ namespace InitialProject.View
                 MessageBox.Show("No available pictures", "No Picture", MessageBoxButton.OK);
             }
         }
-        public void SetLocations()
+
+        public void SetAccommodationsLocation()
         {
             LocationRepository locationRepository = new LocationRepository();
             List<Location> locations = locationRepository.GetAll();
@@ -188,7 +188,8 @@ namespace InitialProject.View
                 }
             }
         }
-        public void SetTypes()
+
+        public void SetAccommodationsType()
         {
             AccommodationTypeRepository typeRepository = new AccommodationTypeRepository();
             List<AccommodationType> types = typeRepository.GetAll();

@@ -22,6 +22,7 @@ namespace InitialProject.Repository
             _accommodations = _serializer.FromCSV(FilePath);
 
         }
+
         public int NextId()
         {
             _accommodations = _serializer.FromCSV(FilePath);
@@ -31,6 +32,7 @@ namespace InitialProject.Repository
             }
             return _accommodations.Max(c => c.Id) + 1;
         }
+
         public void Add(Accommodation accommodation)
         {
             accommodation.Id = NextId();

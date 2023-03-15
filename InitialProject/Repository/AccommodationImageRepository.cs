@@ -21,6 +21,7 @@ namespace InitialProject.Repository
             _serializer = new Serializer<AccommodationImage>();
             _accommodationImages = _serializer.FromCSV(FilePath);
         }
+
         public int NextId()
         {
             _accommodationImages = _serializer.FromCSV(FilePath);
@@ -30,6 +31,7 @@ namespace InitialProject.Repository
             }
             return _accommodationImages.Max(c => c.Id) + 1;
         }
+
         public int Add(string url, Accommodation accommodation)
         {
             AccommodationImage image = new AccommodationImage();

@@ -13,15 +13,16 @@ namespace InitialProject.Model
         public string Name { get; set; }
         public string LastName { get; set; }
         public string Username { get; set; }
-
         public List<Accommodation> Accommodations { get; set; }
 
         public Owner() { }
+
         public Owner(string name, string lastName)
         {
             Name = name;
             LastName = lastName;
         }
+
         public void FromCSV(string[] values)
         {
             Id = Convert.ToInt32(values[0]);

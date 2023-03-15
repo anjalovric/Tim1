@@ -2,18 +2,10 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using InitialProject.Model;
 using InitialProject.Repository;
 
@@ -27,13 +19,13 @@ namespace InitialProject.View.Owner
         private AccommodationRepository accommodationRepository;
         private Accommodation accommodation;
         private AccommodationTypeRepository accommodationTypeRepository;
-        public List<AccommodationType> accommodationTypes { get; set; }
         private LocationRepository locationRepository;
         private Location location;
-        public ObservableCollection<AccommodationImage> Images { get; set; }
-        public string Url { get; set; }
         private AccommodationImageRepository accommodationImageRepository;
         private ObservableCollection<Accommodation> accommodations;
+        public List<AccommodationType> AccommodationTypes { get; set; }
+        public ObservableCollection<AccommodationImage> Images { get; set; }
+        public string Url { get; set; }
         public ObservableCollection<string> Countries { get; set; }
         public ObservableCollection<string> CitiesByCountry { get; set; }  
         public Model.Owner Owner { get; set; }
@@ -47,7 +39,7 @@ namespace InitialProject.View.Owner
             accommodation = new Accommodation();
             accommodations = oldAccommodations;
             accommodationTypeRepository = new AccommodationTypeRepository();
-            accommodationTypes = accommodationTypeRepository.GetAll();
+            AccommodationTypes = accommodationTypeRepository.GetAll();
             locationRepository = new LocationRepository();
             location = new Location();
             Owner = owner;
@@ -89,7 +81,8 @@ namespace InitialProject.View.Owner
                 }
             }
         }
-        private void OK_Click(object sender, RoutedEventArgs e)
+
+        private void OKButton_Click(object sender, RoutedEventArgs e)
         {
             if (IsValid())
             {
@@ -98,7 +91,7 @@ namespace InitialProject.View.Owner
                 accommodation.Owner = Owner;
                 accommodations.Add(accommodation);
                 accommodationRepository.Add(accommodation);
-                AddImages();
+                SaveImages();
                 this.Close();
             }
             else
@@ -107,7 +100,7 @@ namespace InitialProject.View.Owner
             }
         }
 
-        private void AddImages()
+        private void SaveImages()
         {
             foreach (AccommodationImage image in Images)
             {
@@ -115,12 +108,13 @@ namespace InitialProject.View.Owner
                 image.Id = accommodationImageRepository.Add(image.Url, image.Accommodation);
             }
         }
-        private void Cancel_Click(object sender, RoutedEventArgs e)
+
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
 
-        private void NewImage_Click(object sender, RoutedEventArgs e)
+        private void NewImageButton_Click(object sender, RoutedEventArgs e)
         {
             AccommodationImage image = new AccommodationImage();
             image.Url = Url;
