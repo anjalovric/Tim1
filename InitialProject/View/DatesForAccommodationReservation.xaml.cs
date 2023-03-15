@@ -58,11 +58,11 @@ namespace InitialProject.View
             guestsNumber.Owner = this;
             guestsNumber.Show();
         }
-        public void AddNewDateRange(DateTime arrivalDate, DateTime departureDate)
+        public void AddNewDateRange(DateTime arrival, DateTime departure)
         {
-            departureDate = departureDate.AddHours(23);
-            departureDate = departureDate.AddMinutes(59);
-            availableDatesForAccommodations.Add(new AvailableDatesForAccommodationReservation(arrivalDate, departureDate));
+            departure = departure.AddHours(23);
+            departure = departure.AddMinutes(59);
+            availableDatesForAccommodations.Add(new AvailableDatesForAccommodationReservation(arrival, departure));
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)

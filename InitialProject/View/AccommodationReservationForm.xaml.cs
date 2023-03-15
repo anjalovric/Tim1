@@ -24,17 +24,17 @@ namespace InitialProject.View
     /// </summary>
     public partial class AccommodationReservationForm : Window
     {
-        public DateTime ArrivalDate { get; set; }
-        public DateTime DepartureDate { get; set; }
+        public DateTime Arrival { get; set; }
+        public DateTime Departure { get; set; }
         public TimeSpan lengthOfStay { get; set; }
         public Accommodation currentAccommodation { get; set; }
         private AccommodationRepository accommodationRepository;
         public List<AccommodationReservation> reservations { get; set; }
         private AccommodationReservationRepository accommodationReservationRepository;
 
-        List<DateTime> availableDates;
-        List<DateTime> availableDatesHelp;
-        List<List<DateTime>> availableDateRanges;
+        private List<DateTime> availableDates;
+        private List<DateTime> availableDatesHelp;
+        private List<List<DateTime>> availableDateRanges;
         
         public AccommodationReservationForm(Accommodation currentAccommodation, ref AccommodationRepository accommodationRepository)
         {
@@ -79,7 +79,7 @@ namespace InitialProject.View
 
         private bool IsValidDateInput()
         {
-            return (ArrivalDate <= DepartureDate && Convert.ToInt32(lengthOfStay.TotalDays) >= (Convert.ToInt32(numberOfDays.Text) - 1) && ArrivalDate.Date > DateTime.Now && ArrivalDate != null && DepartureDate != null);
+            return (Arrival <= Departure && Convert.ToInt32(lengthOfStay.TotalDays) >= (Convert.ToInt32(numberOfDays.Text) - 1) && Arrival.Date > DateTime.Now && Arrival != null && Departure != null);
         }
 
         private bool IsEnteredCorrectDateRange()
@@ -88,7 +88,7 @@ namespace InitialProject.View
         }
         private void OkButton_Click(object sender, RoutedEventArgs e)
         {
-            lengthOfStay = DepartureDate.Subtract(ArrivalDate);
+            lengthOfStay = Departure.Subtract(Arrival);
             int daysNumberFromCalendar = Convert.ToInt32(lengthOfStay.TotalDays);
 
             if (!IsValidDateInput())
@@ -111,7 +111,7 @@ namespace InitialProject.View
             {
                 if (currentAccommodationId == reservation.Accommodation.Id)
                 {
-                    if (date >= reservation.ArrivalDate && date <= reservation.DepartureDate)
+                    if (date >= reservation.Arrival && date <= reservation.Departure)
                     {
                         return false;
                     }
@@ -179,7 +179,7 @@ namespace InitialProject.View
 
         private void FillDateRangesList(int currentAccommodationId)
         {
-            DateTime start = ArrivalDate;
+            DateTime start = Arrival;
             for (int i = 0; i <= lengthOfStay.TotalDays; i++)
             {
                 if (IsDateAvailable(currentAccommodationId, start))
@@ -196,9 +196,9 @@ namespace InitialProject.View
                 if (AreAvailableDatesConsecutive(dates))
                 {
                     existed = true;
-                    DateTime arrivalDate = dates[0];
-                    DateTime departureDate = dates[Convert.ToInt32(numberOfDays.Text) - 1];
-                    datesListWindow.AddNewDateRange(arrivalDate, departureDate);
+                    DateTime arrival = dates[0];
+                    DateTime departure = dates[Convert.ToInt32(numberOfDays.Text) - 1];
+                    datesListWindow.AddNewDateRange(arrival, departure);
                 }
             }
             return existed;
@@ -209,7 +209,7 @@ namespace InitialProject.View
             availableDates = new List<DateTime>();
             availableDatesHelp = new List<DateTime>();
             availableDateRanges = new List<List<DateTime>>();
-            DateTime start = DepartureDate;
+            DateTime start = Departure;
             while (IsDateAvailable(currentAccommodation.Id, start))
                 start = start.AddDays(-1);
 
@@ -234,9 +234,9 @@ namespace InitialProject.View
             DatesForAccommodationReservation datesListWindow = new DatesForAccommodationReservation(currentAccommodation, accommodationReservationRepository);
             foreach (List<DateTime> dates in availableDateRanges)
             {
-                DateTime arrivalDate = dates[0];
-                DateTime departureDate = dates[Convert.ToInt32(numberOfDays.Text) - 1];
-                datesListWindow.AddNewDateRange(arrivalDate, departureDate);
+                DateTime arrival = dates[0];
+                DateTime departure = dates[Convert.ToInt32(numberOfDays.Text) - 1];
+                datesListWindow.AddNewDateRange(arrival, departure);
             }
             datesListWindow.Show();
         }

@@ -55,7 +55,7 @@ namespace InitialProject.Repository
                 if (reservation != null)
                 {
                     bool hasReservation = reservation != null;
-                    bool stayedLessThan5DaysAgo = (reservation.DepartureDate.Date < DateTime.Now.Date) && (DateTime.Now.Date - reservation.DepartureDate.Date).TotalDays < 5;
+                    bool stayedLessThan5DaysAgo = (reservation.Departure.Date < DateTime.Now.Date) && (DateTime.Now.Date - reservation.Departure.Date).TotalDays < 5;
                     bool alreadyReviewed = guestReviewRepository.HasReview(guest);
                     if (hasReservation && stayedLessThan5DaysAgo && !alreadyReviewed)
                         guests.Add(guest);

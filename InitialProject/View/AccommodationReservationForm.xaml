@@ -17,8 +17,8 @@
                 </TransformGroup>
             </Label.RenderTransform>
         </Label>
-        <Calendar x:Name="CalendarStart" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,50,0,0" SelectedDate="{Binding Path=ArrivalDate, Mode=TwoWay}"></Calendar>
-        <Calendar x:Name="CalendarEnd" SelectedDate="{Binding Path=DepartureDate, Mode=TwoWay}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,50,10,0"></Calendar>
+        <Calendar x:Name="CalendarStart" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,50,0,0" SelectedDate="{Binding Path=Arrival, Mode=TwoWay}"></Calendar>
+        <Calendar x:Name="CalendarEnd" SelectedDate="{Binding Path=Departure, Mode=TwoWay}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,50,10,0"></Calendar>
         <Label Content="Departure date:" Margin="0,20,65,0" VerticalAlignment="Top" HorizontalAlignment="Right" RenderTransformOrigin="0.5,0.5" TextElement.FontWeight="DemiBold">
             <Label.RenderTransform>
                 <TransformGroup>
