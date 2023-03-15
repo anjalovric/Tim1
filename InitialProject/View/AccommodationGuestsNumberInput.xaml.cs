@@ -38,7 +38,7 @@ namespace InitialProject.View
             this.availableDatesForAccommodations = availableDatesForAccommodations;
         }
 
-        private void ConfirmReservation_Click(object sender, RoutedEventArgs e)
+        private void ConfirmReservationButton_Click(object sender, RoutedEventArgs e)
         {
             if(Convert.ToInt32(numberOfGuests.Text) > currentAccommodation.Capacity)
             {
@@ -95,7 +95,7 @@ namespace InitialProject.View
            
         }
 
-        private void DecrementGuestsNumber(object sender, RoutedEventArgs e)
+        private void DecrementGuestsNumberButton_Click(object sender, RoutedEventArgs e)
         {
             int changedGuestsNumber;
             if (Convert.ToInt32(numberOfGuests.Text) > 1)
@@ -104,14 +104,14 @@ namespace InitialProject.View
                 numberOfGuests.Text = changedGuestsNumber.ToString();
             }
         }
-        private void IncrementGuestsNumber(object sender, RoutedEventArgs e)
+        private void IncrementGuestsNumberButton_Click(object sender, RoutedEventArgs e)
         {
             int changedGuestsNumber;
             changedGuestsNumber = Convert.ToInt32(numberOfGuests.Text) + 1;
             numberOfGuests.Text = changedGuestsNumber.ToString();
         }
 
-        private void Cancel_Click(object sender, RoutedEventArgs e)
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }

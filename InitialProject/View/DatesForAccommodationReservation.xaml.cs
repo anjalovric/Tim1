@@ -52,7 +52,7 @@ namespace InitialProject.View
             this.accommodationReservationRepository = accommodationReservationRepository;
         }
 
-        private void ChooseDateButtonClick(object sender, RoutedEventArgs e)
+        private void ChooseDateButton_Click(object sender, RoutedEventArgs e)
         {
             AccommodationGuestsNumberInput guestsNumber = new AccommodationGuestsNumberInput(currentAccommodation, selectedDateRange, accommodationReservationRepository, availableDatesForAccommodations);
             guestsNumber.Owner = this;
@@ -65,7 +65,7 @@ namespace InitialProject.View
             availableDatesForAccommodations.Add(new AvailableDatesForAccommodationReservation(arrivalDate, departureDate));
         }
 
-        private void CancelChoosingDate(object sender, RoutedEventArgs e)
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }

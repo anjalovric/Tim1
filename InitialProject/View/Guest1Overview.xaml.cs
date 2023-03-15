@@ -133,7 +133,7 @@ namespace InitialProject.View
             }
         }
 
-        private void Search_Click(object sender, RoutedEventArgs e)
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
             if (IsNumberOfDaysValid() && IsNumberOfGuestsValid())
             {
@@ -189,7 +189,7 @@ namespace InitialProject.View
             }
         }
 
-        private void ShowAll_Click(object sender, RoutedEventArgs e)
+        private void ShowAllButton_Click(object sender, RoutedEventArgs e)
         {
             Accommodations.Clear();
             foreach (Accommodation accommodation in accommodationRepository.GetAll())
@@ -211,7 +211,7 @@ namespace InitialProject.View
             numberOfGuests.Text = "";
         }
 
-        private void DecrementGuestsNumber(object sender, RoutedEventArgs e)
+        private void DecrementGuestsNumberButton_Click(object sender, RoutedEventArgs e)
         {
             int changedGuestsNumber;
             if(numberOfGuests.Text!="" && Convert.ToInt32(numberOfGuests.Text)>1)
@@ -221,7 +221,7 @@ namespace InitialProject.View
             }
         }
 
-        private void IncrementGuestsNumber(object sender, RoutedEventArgs e)
+        private void IncrementGuestsNumberButton_Click(object sender, RoutedEventArgs e)
         {
             int changedGuestsNumber;
             if(numberOfGuests.Text=="")
@@ -235,7 +235,7 @@ namespace InitialProject.View
             }    
         }
 
-        private void DecrementDaysNumber(object sender, RoutedEventArgs e)
+        private void DecrementDaysNumberButton_Click(object sender, RoutedEventArgs e)
         {
             int changedDaysNumber;
             if (numberOfDays.Text != "" && Convert.ToInt32(numberOfDays.Text) > 1)
@@ -245,7 +245,7 @@ namespace InitialProject.View
             }
         }
 
-        private void IncrementDaysNumber(object sender, RoutedEventArgs e)
+        private void IncrementDaysNumberButton_Click(object sender, RoutedEventArgs e)
         {
             int changedDaysNumber;
             if(numberOfDays.Text=="")
@@ -259,7 +259,7 @@ namespace InitialProject.View
             } 
         }
 
-        private void ViewPhotos(object sender, RoutedEventArgs e)
+        private void ViewPhotosButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -293,7 +293,7 @@ namespace InitialProject.View
             }
         }
 
-        private void Reserve(object sender, RoutedEventArgs e)
+        private void ReserveButton_Click(object sender, RoutedEventArgs e)
         {
             Accommodation currentAccommodation = (Accommodation)AccommodationListDataGrid.CurrentItem;
             AccommodationReservationForm accommodationReservationForm = new AccommodationReservationForm(currentAccommodation, ref accommodationRepository);

@@ -60,7 +60,7 @@ namespace InitialProject.View
             }
         }
 
-        private void DecrementDaysNumber(object sender, RoutedEventArgs e)
+        private void DecrementDaysNumberButton_Click(object sender, RoutedEventArgs e)
         {
             int changedDaysNumber;
             if (Convert.ToInt32(numberOfDays.Text) > 1)
@@ -70,7 +70,7 @@ namespace InitialProject.View
             }
         }
 
-        private void IncrementDaysNumber(object sender, RoutedEventArgs e)
+        private void IncrementDaysNumberButton_Click(object sender, RoutedEventArgs e)
         {
             int changedDaysNumber;
             changedDaysNumber = Convert.ToInt32(numberOfDays.Text) + 1;
@@ -86,7 +86,7 @@ namespace InitialProject.View
         {
             return ((Convert.ToInt32(lengthOfStay.TotalDays) + 1) >= currentAccommodation.MinDaysForReservation && Convert.ToInt32(numberOfDays.Text) >= currentAccommodation.MinDaysForReservation);
         }
-        private void Confirm_Click(object sender, RoutedEventArgs e)
+        private void OkButton_Click(object sender, RoutedEventArgs e)
         {
             lengthOfStay = DepartureDate.Subtract(ArrivalDate);
             int daysNumberFromCalendar = Convert.ToInt32(lengthOfStay.TotalDays);
@@ -241,7 +241,7 @@ namespace InitialProject.View
             datesListWindow.Show();
         }
 
-        private void Cancel_Click(object sender, RoutedEventArgs e)
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
