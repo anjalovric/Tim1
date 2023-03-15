@@ -5,10 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
-        Title="Guest2Overview" Height="450" Width="800">
-    <Grid Background="{DynamicResource {x:Static SystemColors.GradientInactiveCaptionBrushKey}}">
-
-        <DataGrid x:Name="TourListDataGrid" ItemsSource="{Binding Path=TourInstances,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=Selected}" IsReadOnly="True" AutoGenerateColumns="False" VerticalAlignment="Top" HorizontalAlignment="Center" Height="225" Width="584" Margin="0,177,0,0">
+        Title="Guest2Overview" Height="470" Width="820" WindowStartupLocation="CenterScreen">
+    <Grid Background="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}">
+        <StackPanel Width="230" Orientation="Vertical" HorizontalAlignment="Left" Background="#FFFBFBFB">
+            <Menu Height="450" Margin="0,40,0,0" Background="#FFFBFBFB">
+                <Menu.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <VirtualizingStackPanel Orientation="Vertical"/>
+                    </ItemsPanelTemplate>
+                </Menu.ItemsPanel>
+                <MenuItem Header="Prikaz" FontWeight="Bold" Height="40" Click="Restart_Click"/>
+                <MenuItem Header="Statistika" FontWeight="Bold" Height="40"/>
+                <MenuItem Header="Obavjestenja" FontWeight="Bold" Height="40"/>
+                <MenuItem Header="Moji zahtjevi" FontWeight="Bold" Height="40"/>
+                <MenuItem Header="Vauceri" FontWeight="Bold" Height="40"/>
+                <MenuItem Header="Ocijenite turu" FontWeight="Bold" Height="40"/>
+                <MenuItem Header="Odjavite se" FontWeight="Bold" Height="40" Click="SignOut_Click"/>
+            </Menu>
+        </StackPanel>
+        <DataGrid x:Name="TourListDataGrid" ItemsSource="{Binding Path=TourInstances,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=Selected}" IsReadOnly="True" AutoGenerateColumns="False" VerticalAlignment="Top" HorizontalAlignment="Left" Height="225" Width="505" Margin="235,187,0,0">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Location" Width="1*" Binding="{Binding Tour.Location}"/>
                 <DataGridTextColumn Header="Duration" Width="1*" Binding="{Binding Tour.Duration}"/>
@@ -32,29 +47,22 @@
 
 
         </DataGrid>
+        <ComboBox x:Name="cityInput" ItemsSource="{Binding CitiesByCountry}" SelectedItem="{Binding Location.City}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" HorizontalAlignment="Left" Margin="321,90,0,0" VerticalAlignment="Top" Width="61"/>
+        <TextBox x:Name="durationInput" HorizontalAlignment="Left" Margin="411,91,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="61" Height="22" RenderTransformOrigin="0.496,0.294"/>
+        <TextBox x:Name="languageInput" HorizontalAlignment="Left" Margin="500,91,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="61" Height="22"/>
+        <TextBlock x:Name="capacityNumber" Text="1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="61" TextAlignment="Center" Height="22" Background="#FFDFDCDC" Margin="625,90,0,0" />
 
-        <TextBlock HorizontalAlignment="Left" Margin="38,28,0,0" TextWrapping="Wrap" Text="TOURS" VerticalAlignment="Top" FontFamily="Algerian" FontSize="24" FontWeight="Bold"/>
-        <ComboBox x:Name="cityInput" ItemsSource="{Binding CitiesByCountry}" SelectedItem="{Binding Location.City}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" HorizontalAlignment="Left" Margin="145,88,0,0" VerticalAlignment="Top" Width="90"/>
-        <TextBox x:Name="durationInput" HorizontalAlignment="Left" Margin="271,93,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
-        <TextBox x:Name="languageInput" HorizontalAlignment="Left" Margin="400,93,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
-        <TextBlock x:Name="capacityNumber" Text="1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="88" TextAlignment="Center" Height="15" Background="#FFDFDCDC" Margin="569,94,0,0" />
-
-        <Label Content="City" HorizontalAlignment="Left" Margin="145,60,0,0" VerticalAlignment="Top"/>
-        <Label Content="Duration" HorizontalAlignment="Left" Margin="271,60,0,0" VerticalAlignment="Top"/>
-        <Label Content="Language" HorizontalAlignment="Left" Margin="400,60,0,0" VerticalAlignment="Top"/>
-        <Label Content="Capacity" HorizontalAlignment="Left" Margin="569,60,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="countryInput" ItemsSource="{Binding Countries}" SelectedItem="{Binding Location.Country}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" HorizontalAlignment="Left" Margin="22,86,0,0" VerticalAlignment="Top" Width="90" SelectionChanged="countryInput_SelectionChanged"/>
-        <Label Content="Country" HorizontalAlignment="Left" Margin="23,55,0,0" VerticalAlignment="Top"/>
-
-
-
-
-        <Button Content="Sign out" HorizontalAlignment="Left" Margin="723,28,0,0" VerticalAlignment="Top" FontWeight="Bold" FontFamily="Arial Black" Background="#FFF1F1B7" Click="SignOut_Click"/>
-        <Button x:Name="decrementCapacityNumber" Content="-" HorizontalAlignment="Left" Margin="538,90,0,0" VerticalAlignment="Top" Width="20" Click="decrementCapacityNumber_Click"/>
-        <Button x:Name="incrementCapacityNumber" Content="+" HorizontalAlignment="Left" Margin="672,90,0,0" VerticalAlignment="Top" Width="20" Click="incrementCapacityNumber_Click"/>
-        <Button Content="Search" FontWeight="Bold" HorizontalAlignment="Left" Margin="732,87,0,0" VerticalAlignment="Top" Height="22" Click="Search_Click"/>
-        <Label x:Name="Label" Content="Showing all tours: " HorizontalAlignment="Left" Margin="108,132,0,0" VerticalAlignment="Top" Height="24"/>
-        <Button x:Name="Restart" Content="Restart" HorizontalAlignment="Left" Margin="652,136,0,0" VerticalAlignment="Top" TextElement.FontWeight="Bold" Click="Restart_Click"/>
+        <Label Content="City" HorizontalAlignment="Left" Margin="321,60,0,0" VerticalAlignment="Top" RenderTransformOrigin="5.351,0.387"/>
+        <Label Content="Duration" HorizontalAlignment="Left" Margin="411,60,0,0" VerticalAlignment="Top"/>
+        <Label Content="Language" HorizontalAlignment="Left" Margin="499,60,0,0" VerticalAlignment="Top"/>
+        <Label Content="Capacity" HorizontalAlignment="Left" Margin="625,55,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="countryInput" ItemsSource="{Binding Countries}" SelectedItem="{Binding Location.Country}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" HorizontalAlignment="Left" Margin="235,90,0,0" VerticalAlignment="Top" Width="61" SelectionChanged="countryInput_SelectionChanged"/>
+        <Label Content="Country" HorizontalAlignment="Left" Margin="235,60,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="decrementCapacityNumber" Content="-" HorizontalAlignment="Left" Margin="584,91,0,0" VerticalAlignment="Top" Width="20" Click="decrementCapacityNumber_Click" Height="21.96"/>
+        <Button x:Name="incrementCapacityNumber" Content="+" HorizontalAlignment="Left" Margin="703,91,0,0" VerticalAlignment="Top" Width="20" Click="incrementCapacityNumber_Click" RenderTransformOrigin="-1.284,0.612" Height="21.96"/>
+        <Button Content="Search" FontWeight="Bold" HorizontalAlignment="Left" Margin="735,90,0,0" VerticalAlignment="Top" Height="22" Click="Search_Click" Width="61"/>
+        <Label x:Name="Label" Content="Showing all tours: " HorizontalAlignment="Left" Margin="235,146,0,0" VerticalAlignment="Top" Height="24"/>
+        <Button x:Name="Restart" Content="Restart" HorizontalAlignment="Left" Margin="752,392,0,0" VerticalAlignment="Top" TextElement.FontWeight="Bold" Click="Restart_Click"/>
         <Label x:Name="DurationLabel" HorizontalAlignment="Left" Margin="271,116,0,0" VerticalAlignment="Top"/>
 
 
