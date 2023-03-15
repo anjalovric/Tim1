@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using InitialProject.Model;
 using InitialProject.Repository;
+using InitialProject.Serializer;
 using InitialProject.View.Owner;
 
 namespace InitialProject.View
@@ -57,6 +58,8 @@ namespace InitialProject.View
             WindowOwner = new Model.Owner();
             GetOwnerByUser(user);
             accommodations = new ObservableCollection<Accommodation>(GetAllByOwner());
+            SetLocations();
+            SetTypes();
             guests = new ObservableCollection<Guest1>();
             GetAllGuestsToReview();
             MakeAlert();
@@ -76,10 +79,10 @@ namespace InitialProject.View
                 if (reservation != null)
                 {
                     bool hasReservation = reservation != null;
-                    bool stayedLessThan5DaysAgo = (reservation.LeavingDate.Date < DateTime.Now.Date) && (DateTime.Now.Date - reservation.LeavingDate.Date).TotalDays < 5;
+                    bool stayedLessThan5DaysAgo = (reservation.LeavingDate.Date < DateTime.Now.Date) && (DateTime.Now.Date - reservation.LeavingDate.Date).TotalDays <= 5;
                     bool alreadyReviewed = guestReviewRepository.HasReview(guest);
-                    bool isThisOwner = reservation.currentAccommodation.Owner.Id == WindowOwner.Id;
-                    if (hasReservation && stayedLessThan5DaysAgo && !alreadyReviewed)
+                    bool isThisOwner = reservation.Accommodation.Owner.Id == WindowOwner.Id;
+                    if (hasReservation && stayedLessThan5DaysAgo && !alreadyReviewed && isThisOwner)
                         guests.Add(guest);
                 }
             }
@@ -91,7 +94,7 @@ namespace InitialProject.View
             List<Accommodation> accommodations = new List<Accommodation>(accommodationRepository.GetAll());
             foreach (AccommodationReservation reservation in reservations)
             {
-                reservation.currentAccommodation = accommodations.Find(n => n.Id == reservation.currentAccommodation.Id);
+                reservation.Accommodation = accommodations.Find(n => n.Id == reservation.Accommodation.Id);
                 GetOwner(reservation);
             }
         }
@@ -127,7 +130,7 @@ namespace InitialProject.View
             {
                 Label guestLabel = new Label();
                 guestLabel.Background = Brushes.CadetBlue;
-                guestLabel.Content = "You have not reviewed " + guest.Name + " " + guest.LastName;
+                guestLabel.Content = "You have not rated " + guest.Name + " " + guest.LastName;
                 NotificationStack.Children.Add(guestLabel);
                 NotificationStack.Background = Brushes.LightGreen;
             }
@@ -142,7 +145,7 @@ namespace InitialProject.View
         private void GetOwner(AccommodationReservation reservation)
         {
             OwnerRepository ownerRepository = new OwnerRepository();
-            reservation.currentAccommodation.Owner = ownerRepository.GetById(reservation.currentAccommodation.Owner.Id);
+            reservation.Accommodation.Owner = ownerRepository.GetById(reservation.Accommodation.Owner.Id);
         }
 
         private List<Accommodation> GetAllByOwner()
@@ -171,6 +174,30 @@ namespace InitialProject.View
             else
             {
                 MessageBox.Show("No available pictures", "No Picture", MessageBoxButton.OK);
+            }
+        }
+        public void SetLocations()
+        {
+            LocationRepository locationRepository = new LocationRepository();
+            List<Location> locations = locationRepository.GetAll();
+            foreach (Accommodation accommodation in accommodations)
+            {
+                if (locations.Find(n => n.Id == accommodation.Location.Id) != null)
+                {
+                    accommodation.Location = locations.Find(n => n.Id == accommodation.Location.Id);
+                }
+            }
+        }
+        public void SetTypes()
+        {
+            AccommodationTypeRepository typeRepository = new AccommodationTypeRepository();
+            List<AccommodationType> types = typeRepository.GetAll();
+            foreach (Accommodation accommodation in accommodations)
+            {
+                if (types.Find(n => n.Id == accommodation.Type.Id) != null)
+                {
+                    accommodation.Type = types.Find(n => n.Id == accommodation.Type.Id);
+                }
             }
         }
     }

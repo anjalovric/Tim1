@@ -40,8 +40,9 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Name="ReviewButton" Content="Open all reviews" HorizontalAlignment="Left" Margin="471,329,0,0" VerticalAlignment="Top" Height="22" Width="162" Click="ReviewOverview_Click"/>
+        <Button Name="ReviewButton" Content="Open all reviews" HorizontalAlignment="Left" Margin="337,326,0,0" VerticalAlignment="Top" Height="22" Width="162" Click="ReviewOverview_Click"/>
         <StackPanel Name="NotificationStack" Margin="533,370,30,44">
         </StackPanel>
+        <Label Content="Reminders" HorizontalAlignment="Left" Margin="562,329,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
     </Grid>
 </Window>

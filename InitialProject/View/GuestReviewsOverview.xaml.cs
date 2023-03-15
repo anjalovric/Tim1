@@ -29,11 +29,25 @@ namespace InitialProject.View
             DataContext = this;
             GuestReviewRepository guestReviewRepository = new GuestReviewRepository();
             reviews = new ObservableCollection<ReviewOfGuest>(guestReviewRepository.GetAll());
+            AddGuestsToReviews();
         }
 
         private void OK_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
+
+        private void AddGuestsToReviews()
+        {
+            Guest1Repository guest1Repository = new Guest1Repository();
+            Guest1 guest = new Guest1();
+            foreach (ReviewOfGuest review in reviews)
+            {
+                guest = guest1Repository.GetAll().Find(n => n.Id == review.Guest.Id);
+                if(guest != null)
+                    review.Guest = guest;
+            }
+        }
+
     }
 }

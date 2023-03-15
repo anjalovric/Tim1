@@ -20,16 +20,6 @@ namespace InitialProject.Repository
         {
             _serializer = new Serializer<ReviewOfGuest>();
             _reviews = _serializer.FromCSV(FilePath);
-            AddGuest();
-        }
-
-        private void AddGuest()
-        {
-            Guest1Repository guest1Repository = new Guest1Repository();
-            foreach(ReviewOfGuest review in _reviews)
-            {
-                review.Guest = guest1Repository.GetAll().Find(n => n.Id == review.Guest.Id);
-            }
         }
         public int NextId()
         {

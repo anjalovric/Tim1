@@ -24,17 +24,5 @@ namespace InitialProject.Repository
             _users = _serializer.FromCSV(FilePath);
             return _users.FirstOrDefault(u => u.Username == username);
         }
-
-        public List<Guest1> GetAllGuests1()
-        {
-            Guest1Repository guest1Repository = new Guest1Repository();
-            List<Guest1> result = new List<Guest1>();
-            foreach(User user in _users)
-            {
-                if (user.Role == Role.GUEST1)
-                    result.Add(guest1Repository.GetByUsername(user.Username));
-            }
-            return result;
-        }
     }
 }
