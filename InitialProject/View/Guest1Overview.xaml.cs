@@ -99,7 +99,7 @@ namespace InitialProject.View
             this.Close();
         }
 
-        private void countryInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void CountryInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (countryInput.SelectedItem != null)
             {
@@ -137,55 +137,83 @@ namespace InitialProject.View
         {
             if (IsNumberOfDaysValid() && IsNumberOfGuestsValid())
             {
-                List<Accommodation> listAccommodation = accommodationRepository.GetAll();
+                List<Accommodation> storedAccommodation = accommodationRepository.GetAll();
                 Accommodations.Clear();
-                foreach (Accommodation accommodation in listAccommodation)
+                foreach (Accommodation accommodation in storedAccommodation)
                 {
                     Accommodations.Add(accommodation);
                 }
-                foreach (Accommodation accommodation in listAccommodation)
+                foreach (Accommodation accommodation in storedAccommodation)
                 {
-                    if (!accommodation.Name.ToLower().Contains(nameInput.Text.ToLower()))
-                    {
-                        Accommodations.Remove(accommodation);
-                    }
-                    if (Location.City != null && !accommodation.Location.City.ToLower().Equals(Location.City.ToLower()))
-                    {
-                        Accommodations.Remove(accommodation);
-                    }
-                    if (Location.Country != null && !accommodation.Location.Country.ToLower().Equals(Location.Country.ToLower()))
-                    {
-                        Accommodations.Remove(accommodation);
-                    }
-                    if (apartment.IsChecked == true || house.IsChecked == true || cottage.IsChecked == true)
-                    {
-                        if (apartment.IsChecked == false)
-                        {
-                            if (accommodation.Type.Name.ToLower() == "apartment")
-                                Accommodations.Remove(accommodation);
-                        }
-                        if (house.IsChecked == false)
-                        {
-                            if (accommodation.Type.Name.ToLower() == "house")
-                                Accommodations.Remove(accommodation);
-                        }
-                        if (cottage.IsChecked == false)
-                        {
-                            if (accommodation.Type.Name.ToLower() == "cottage")
-                                Accommodations.Remove(accommodation);
-                        }
-                    }
-                   
+                    SearchName(accommodation);
+                    SearchCity(accommodation);
+                    SearchCountry(accommodation);
 
-                    if (!(numberOfGuests.Text == "") && Convert.ToInt32(numberOfGuests.Text) > accommodation.Capacity)
-                    {
-                        Accommodations.Remove(accommodation);
-                    }
-                    if (!(numberOfDays.Text == "") && Convert.ToInt32(numberOfDays.Text) < accommodation.MinDaysForReservation)
-                    {
-                        Accommodations.Remove(accommodation);
-                    }
+                    SearchType(accommodation);
+                    SearchNumberOfGuests(accommodation);
+                    SearchNumberOfDays(accommodation);
                 }
+            }
+        }
+
+        private void SearchName(Accommodation accommodation)
+        {
+            if (!accommodation.Name.ToLower().Contains(nameInput.Text.ToLower()))
+            {
+                Accommodations.Remove(accommodation);
+            }
+        }
+        private void SearchCity(Accommodation accommodation)
+        {
+            if (Location.City != null && !accommodation.Location.City.ToLower().Equals(Location.City.ToLower()))
+            {
+                Accommodations.Remove(accommodation);
+            }
+        }
+
+        private void SearchCountry(Accommodation accommodation)
+        {
+            if (Location.Country != null && !accommodation.Location.Country.ToLower().Equals(Location.Country.ToLower()))
+            {
+                Accommodations.Remove(accommodation);
+            }
+        }
+
+        private void SearchType(Accommodation accommodation)
+        {
+            if (apartment.IsChecked == true || house.IsChecked == true || cottage.IsChecked == true)
+            {
+                if (apartment.IsChecked == false)
+                {
+                    if (accommodation.Type.Name.ToLower() == "apartment")
+                        Accommodations.Remove(accommodation);
+                }
+                if (house.IsChecked == false)
+                {
+                    if (accommodation.Type.Name.ToLower() == "house")
+                        Accommodations.Remove(accommodation);
+                }
+                if (cottage.IsChecked == false)
+                {
+                    if (accommodation.Type.Name.ToLower() == "cottage")
+                        Accommodations.Remove(accommodation);
+                }
+            }
+        }
+
+        private void SearchNumberOfGuests(Accommodation accommodation)
+        {
+            if (!(numberOfGuests.Text == "") && Convert.ToInt32(numberOfGuests.Text) > accommodation.Capacity)
+            {
+                Accommodations.Remove(accommodation);
+            }
+        }
+
+        private void SearchNumberOfDays(Accommodation accommodation)
+        {
+            if (!(numberOfDays.Text == "") && Convert.ToInt32(numberOfDays.Text) < accommodation.MinDaysForReservation)
+            {
+                Accommodations.Remove(accommodation);
             }
         }
 

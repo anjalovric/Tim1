@@ -166,9 +166,9 @@ namespace InitialProject.View
             availableDateRanges = new List<List<DateTime>>();
             FillDateRangesList(currentAccommodationId);
 
-            DatesForAccommodationReservation datesListWindow = new DatesForAccommodationReservation(currentAccommodation, accommodationReservationRepository);
-            if (availableDateRanges.Count > 0 && AvailableDateRangeExists(ref datesListWindow))
-                datesListWindow.Show();
+            DatesForAccommodationReservation suggestedDates = new DatesForAccommodationReservation(currentAccommodation, accommodationReservationRepository);
+            if (availableDateRanges.Count > 0 && AvailableDateRangeExists(ref suggestedDates))
+                suggestedDates.Show();
             else
             { 
                 FindAvailableDatesOutRange();
@@ -188,7 +188,7 @@ namespace InitialProject.View
             }
         }
 
-        private bool AvailableDateRangeExists(ref DatesForAccommodationReservation datesListWindow)
+        private bool AvailableDateRangeExists(ref DatesForAccommodationReservation suggestedDates)
         {
             bool existed = false;
             foreach (List<DateTime> dates in availableDateRanges)
@@ -198,7 +198,7 @@ namespace InitialProject.View
                     existed = true;
                     DateTime arrival = dates[0];
                     DateTime departure = dates[Convert.ToInt32(numberOfDays.Text) - 1];
-                    datesListWindow.AddNewDateRange(arrival, departure);
+                    suggestedDates.AddNewDateRange(arrival, departure);
                 }
             }
             return existed;
@@ -231,14 +231,14 @@ namespace InitialProject.View
 
         private void DisplayAvailableDatesOutRange()
         {
-            DatesForAccommodationReservation datesListWindow = new DatesForAccommodationReservation(currentAccommodation, accommodationReservationRepository);
+            DatesForAccommodationReservation suggestedDates = new DatesForAccommodationReservation(currentAccommodation, accommodationReservationRepository);
             foreach (List<DateTime> dates in availableDateRanges)
             {
                 DateTime arrival = dates[0];
                 DateTime departure = dates[Convert.ToInt32(numberOfDays.Text) - 1];
-                datesListWindow.AddNewDateRange(arrival, departure);
+                suggestedDates.AddNewDateRange(arrival, departure);
             }
-            datesListWindow.Show();
+            suggestedDates.Show();
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)

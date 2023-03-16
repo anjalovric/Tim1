@@ -35,7 +35,7 @@
 
 
         <TextBox x:Name="nameInput"  Grid.Row="1" Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="220" Height="40" FontSize="18" />
-        <ComboBox x:Name="countryInput" ItemsSource="{Binding Countries}" SelectedItem="{Binding Location.Country}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="220" Height="40" FontSize="18" SelectionChanged="countryInput_SelectionChanged"/>
+        <ComboBox x:Name="countryInput" ItemsSource="{Binding Countries}" SelectedItem="{Binding Location.Country}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="220" Height="40" FontSize="18" SelectionChanged="CountryInput_SelectionChanged"/>
         <ComboBox x:Name="cityInput" ItemsSource="{Binding CitiesByCountry}" SelectedItem="{Binding Location.City}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="220" Height="40" Margin="266,0,0,0" Grid.ColumnSpan="2" FontSize="18"/>
 
         <CheckBox x:Name="apartment"  Grid.Row="2" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Content="Apartment" Margin="0,3,0,0"></CheckBox>
