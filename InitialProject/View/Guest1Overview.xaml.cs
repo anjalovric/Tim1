@@ -80,14 +80,14 @@ namespace InitialProject.View
 
             accommodationType = new AccommodationType();
             accommodationTypeRepository = new AccommodationTypeRepository();
-            SetTypes();
+            SetAccommodationTypes();
 
             locationRepository = new LocationRepository();
             location = new Location();
             Countries = new ObservableCollection<string>(locationRepository.GetAllCountries());
             CitiesByCountry = new ObservableCollection<string>();
             cityInput.IsEnabled = false;
-            SetLocations();
+            SetAccommodationLocations();
         }
 
         
@@ -112,7 +112,7 @@ namespace InitialProject.View
             }
         }
 
-        private void SetLocations()
+        private void SetAccommodationLocations()
         {
             List<Location> locations = locationRepository.GetAll();
             foreach (Accommodation accommodation in Accommodations)
@@ -121,7 +121,7 @@ namespace InitialProject.View
             }
         }
 
-        private void SetTypes()
+        private void SetAccommodationTypes()
         {
             List<AccommodationType> types = accommodationTypeRepository.GetAll();
             foreach (Accommodation accommodation in Accommodations)
@@ -181,7 +181,7 @@ namespace InitialProject.View
 
         private void SearchType(Accommodation accommodation)
         {
-            if (apartment.IsChecked == true || house.IsChecked == true || cottage.IsChecked == true)
+            if (apartment.IsChecked==true || house.IsChecked == true || cottage.IsChecked == true)
             {
                 if (apartment.IsChecked == false)
                 {
