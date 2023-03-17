@@ -57,29 +57,26 @@ namespace InitialProject.View
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private void AddCheckPoint(object sender, RoutedEventArgs e)
+        private void OK_Click(object sender, RoutedEventArgs e)
         {
-            if (Validate())
+            if (IsValid())
             {
                 CheckPoint newCheckPoint = new CheckPoint(NameT,false,-1,-1);
                 CheckPoint savedCheckPoint = checkPointRepository.Save(newCheckPoint);
                 checkPoints.Add(savedCheckPoint);
-               /* List<CheckPoint> tourCheckPoints = new List<CheckPoint>();
-                foreach (CheckPoint checkPoint in checkPoints)
-                    if (checkPoint.TourId == -1)
-                        tourCheckPoints.Add(checkPoint);*/
+
                 
                 this.Close();
             }
         }
 
-        private void CancelCheckPoint(object sender, RoutedEventArgs e)
+        private void Cancel_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
-        private bool Validate()
+        private bool IsValid()
         {
-            bool isValid = false;
+            bool valid = false;
             if (CheckPointName.Text.Trim().Equals(""))
             {
                 CheckPointName.BorderBrush = Brushes.Red;
@@ -88,11 +85,11 @@ namespace InitialProject.View
             }
             else
             {
-                isValid = true;
+                valid = true;
                 CheckPointName.BorderBrush = Brushes.Green;
                 NameLabel.Content = string.Empty;
             }
-            return isValid;
+            return valid;
         }
     }
 }

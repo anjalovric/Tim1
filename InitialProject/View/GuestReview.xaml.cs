@@ -17,8 +17,7 @@ namespace InitialProject.View
         private GuestReview review;
         private bool cleanlinessIsChecked;
         private bool followingRulesIsChecked;
-        public Guest1 guest { get; set; }
-        public ObservableCollection<Guest1> guests { get; set; }
+        public ObservableCollection<AccommodationReservation> ReservationsToReview { get; set; }
         public GuestReview Review
         {
             get => review;
@@ -33,18 +32,16 @@ namespace InitialProject.View
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
-        public GuestReviewWindow(Guest1 guestToReview, ObservableCollection<Guest1> allGuests, Model.Owner owner)
+        public GuestReviewWindow(AccommodationReservation reservationToReview, ObservableCollection<AccommodationReservation> allReservationsToReview)
         {
             InitializeComponent();
             DataContext = this;
-            guest = guestToReview;
             review = new GuestReview();
-            review.Guest = guest;
-            guests = allGuests;
+            review.Reservation = reservationToReview;
+            ReservationsToReview = allReservationsToReview;
             OkButton.IsEnabled = false;
             cleanlinessIsChecked = false;
             followingRulesIsChecked = false;
-            Review.Owner = owner;
         }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -56,7 +53,7 @@ namespace InitialProject.View
         {
             GuestReviewRepository guestReviewRepository = new GuestReviewRepository();
             guestReviewRepository.Save(Review);
-            guests.Remove(guest);
+            ReservationsToReview.Remove(Review.Reservation);
             OwnerOverview ownerOverview = Owner as OwnerOverview;
             ownerOverview.RefreshAlerts();
             this.Close();
@@ -74,8 +71,8 @@ namespace InitialProject.View
                 Review.Cleanliness = 4;
             else if ((bool)Cleanliness5.IsChecked)
                 Review.Cleanliness = 5;
-            
-            cleanlinessIsChecked=true;
+
+            cleanlinessIsChecked = true;
             EnableOkButton();
         }
 
@@ -103,10 +100,11 @@ namespace InitialProject.View
 
         private void EnableOkButton()
         {
-            if(cleanlinessIsChecked && followingRulesIsChecked)
+            if (cleanlinessIsChecked && followingRulesIsChecked)
             {
                 OkButton.IsEnabled = true;
             }
         }
     }
 }
+

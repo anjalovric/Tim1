@@ -9,11 +9,14 @@
     <Grid>
         <DataGrid ItemsSource="{Binding Path=Reviews}" Margin="50,62,50,90" IsReadOnly="True" AutoGenerateColumns="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Binding="{Binding Guest.Name}" Width="80"/>
-                <DataGridTextColumn Header="LastName" Binding="{Binding Guest.LastName}" Width="80"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding Reservation.Guest.Name}" Width="80"/>
+                <DataGridTextColumn Header="LastName" Binding="{Binding Reservation.Guest.LastName}" Width="80"/>
                 <DataGridTextColumn Header="Cleanliness" Binding="{Binding Cleanliness}" Width="80"/>
                 <DataGridTextColumn Header="Following rules" Binding="{Binding RulesFollowing}" Width="95"/>
                 <DataGridTextColumn Header="Comment" Binding="{Binding Comment}" Width="300"/>
+                <DataGridTextColumn Header="Reservation Start" Binding="{Binding Reservation.Arrival}" Width="80"/>
+                <DataGridTextColumn Header="Reservation End" Binding="{Binding Reservation.Departure}" Width="80"/>
+                <DataGridTextColumn Header="Accommodation" Binding="{Binding Reservation.Accommodation.Name}" Width="80"/>
             </DataGrid.Columns>
         </DataGrid>
         <Button Content="OK" HorizontalAlignment="Left" Margin="631,374,0,0" VerticalAlignment="Top" Height="25" Width="94" Click="OKButton_Click"/>

@@ -27,8 +27,8 @@
 
 
 
-            <Button Grid.Row="2" Grid.Column="0"  Click="AddCheckPoint" Height="40" Width="100">OK</Button>
-            <Button Grid.Row="2" Grid.Column="1" Click="CancelCheckPoint" Height="40" Width="100">Cancel</Button>
+            <Button Grid.Row="2" Grid.Column="0"  Click="OK_Click" Height="40" Width="100">OK</Button>
+            <Button Grid.Row="2" Grid.Column="1" Click="Cancel_Click" Height="40" Width="100">Cancel</Button>
         </Grid>
         <Label x:Name="NameLabel" FontSize="10" HorizontalAlignment="Left" Height="23" Margin="300,22,0,0" VerticalAlignment="Top" Width="250"/>
 

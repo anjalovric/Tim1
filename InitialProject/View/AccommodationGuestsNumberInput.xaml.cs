@@ -40,9 +40,9 @@ namespace InitialProject.View
 
         private void ConfirmReservationButton_Click(object sender, RoutedEventArgs e)
         {
-            if(Convert.ToInt32(numberOfGuests.Text) > currentAccommodation.Capacity)
+            if (Convert.ToInt32(numberOfGuests.Text) > currentAccommodation.Capacity)
             {
-                MessageBox.Show("Maximum number of guests for this accommodation is " + currentAccommodation.Capacity.ToString()+ ".");  
+                MessageBox.Show("Maximum number of guests for this accommodation is " + currentAccommodation.Capacity.ToString() + ".");
             }
             else
             {
@@ -52,7 +52,9 @@ namespace InitialProject.View
 
         private void MakeNewReservation()
         {
-            AccommodationReservation newReservation = new AccommodationReservation(1, currentAccommodation, selectedDateRange.Arrival, selectedDateRange.Departure);
+            Guest1 guest = new Guest1("Anja", "Ducic");
+            guest.Id = 1;
+            AccommodationReservation newReservation = new AccommodationReservation(guest, currentAccommodation, selectedDateRange.Arrival, selectedDateRange.Departure);
             accommodationReservationRepository.Add(newReservation);
         }
 
@@ -81,7 +83,6 @@ namespace InitialProject.View
                 this.Owner.Close();
             }
         }
-        
 
 
         private void DecrementGuestsNumberButton_Click(object sender, RoutedEventArgs e)

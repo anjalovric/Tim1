@@ -54,9 +54,9 @@ namespace InitialProject.View
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private void AddTourImage(object sender, RoutedEventArgs e)
+        private void AddTourImage_Click(object sender, RoutedEventArgs e)
         {
-            if (Validate())
+            if (IsValid())
             {
                 TourImage newImage = new TourImage();
                 newImage.Url = Url;
@@ -68,13 +68,13 @@ namespace InitialProject.View
 
         }
 
-        private void CancelTourImage(object sender, RoutedEventArgs e)
+        private void CancelTourImage_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
-        private bool Validate()
+        private bool IsValid()
         {
-            bool isValid=false;
+            bool valid=false;
             if (TourImageUrl.Text.Trim().Equals(""))
             {
                 TourImageUrl.BorderBrush = Brushes.Red;
@@ -82,11 +82,11 @@ namespace InitialProject.View
                 ImageLabel.Content = "This field can't be empty";
             }else
             {
-                isValid = true;
+                valid = true;
                 TourImageUrl.BorderBrush = Brushes.Green;
                 ImageLabel.Content = string.Empty;
             }
-            return isValid;
+            return valid;
         }
     }
 }

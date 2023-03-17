@@ -13,8 +13,8 @@
         <Label Content="Last Name:" HorizontalAlignment="Left" Margin="49,123,0,0" VerticalAlignment="Top" Height="25" Width="98"/>
         <Label Content="Guest Info" HorizontalAlignment="Left" Margin="49,25,0,0" VerticalAlignment="Top" Height="33" Width="98" FontSize="18" FontWeight="Bold" RenderTransformOrigin="-0.038,-3.471"/>
         <Label Content="Review of the Guest" HorizontalAlignment="Left" Margin="400,25,0,0" VerticalAlignment="Top" Height="33" Width="194" FontSize="18" FontWeight="Bold" RenderTransformOrigin="-0.038,-3.471"/>
-        <TextBox HorizontalAlignment="Left" Margin="147,73,0,0" TextWrapping="Wrap" Text="{Binding Path= guest.Name, Mode=OneWay}" IsReadOnly="True" VerticalAlignment="Top" Width="138" Height="37"/>
-        <TextBox HorizontalAlignment="Left" Margin="147,123,0,0" TextWrapping="Wrap" Text="{Binding Path= guest.LastName, Mode=OneWay}" IsReadOnly="True" VerticalAlignment="Top" Width="138" Height="37"/>
+        <TextBox HorizontalAlignment="Left" Margin="147,73,0,0" TextWrapping="Wrap" Text="{Binding Path= Review.Reservation.Guest.Name, Mode=OneWay}" IsReadOnly="True" VerticalAlignment="Top" Width="138" Height="37"/>
+        <TextBox HorizontalAlignment="Left" Margin="147,123,0,0" TextWrapping="Wrap" Text="{Binding Path= Review.Reservation.Guest.LastName, Mode=OneWay}" IsReadOnly="True" VerticalAlignment="Top" Width="138" Height="37"/>
         <Label Content="Cleanliness:" HorizontalAlignment="Center" Margin="0,93,0,0" VerticalAlignment="Top" Width="143" FontSize="16"/>
         <Label Content="Rules Following:" HorizontalAlignment="Center" Margin="0,131,0,0" VerticalAlignment="Top" Width="144" FontSize="16"/>
         <Label Content="Additional Comment:" HorizontalAlignment="Left" Margin="328,185,0,0" VerticalAlignment="Top" Width="158" FontSize="16"/>

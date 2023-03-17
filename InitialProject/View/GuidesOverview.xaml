@@ -22,11 +22,11 @@
 
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="StartButton" Content="START" HorizontalAlignment="Left" Height="30" Margin="265,313,0,0" VerticalAlignment="Top" Width="80" Click="StartTour"/>
-        <Button  Height="30" Width="80" Click="CreateNewTour" Margin="265,354,0,0" HorizontalAlignment="Left"  VerticalAlignment="Top">
+        <Button x:Name="StartButton" Content="START" HorizontalAlignment="Left" Height="30" Margin="265,313,0,0" VerticalAlignment="Top" Width="80" Click="StartTour_Click"/>
+        <Button  Height="30" Width="80" Click="CreateNewTour_Click" Margin="265,354,0,0" HorizontalAlignment="Left"  VerticalAlignment="Top">
             NEW
         </Button>
-        <Button Content="Sign out" HorizontalAlignment="Left" Margin="699,33,0,0" VerticalAlignment="Top" Height="20" Width="63" Click="SignOutClick"/>
+        <Button Content="Sign out" HorizontalAlignment="Left" Margin="699,33,0,0" VerticalAlignment="Top" Height="20" Width="63" Click="SignOut_Click"/>
         <Label Content="List of tours which are starting today:" FontSize="15" HorizontalAlignment="Left" Margin="87,35,0,0" VerticalAlignment="Top" Width="295"/>
         <Label Content="Press button START to start choosen tour" HorizontalAlignment="Left" Margin="39,315,0,0" VerticalAlignment="Top" Height="40" Width="258"/>
         <Label Content="Press button NEW to create new tour" HorizontalAlignment="Left" Height="35" Margin="39,366,0,0" VerticalAlignment="Top" Width="215"/>

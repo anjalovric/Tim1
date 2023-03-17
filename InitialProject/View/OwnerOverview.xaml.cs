@@ -17,21 +17,21 @@ namespace InitialProject.View
     /// </summary>
     public partial class OwnerOverview : Window, INotifyPropertyChanged
     {
-        public ObservableCollection<Accommodation> accommodations { get; set; }
-        public ObservableCollection<Guest1> guests { get; set; }
-        private Guest1 selectedGuest;
+        public ObservableCollection<Accommodation> Accommodations { get; set; }
+        public ObservableCollection<AccommodationReservation> ReservationsToReview { get; set; }
+        private AccommodationReservation selectedReservation;
         public Model.Owner WindowOwner { get; set; }
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        public Guest1 SelectedGuest
+        public AccommodationReservation SelectedReservation
         {
-            get => selectedGuest;
+            get => selectedReservation;
             set
             {
-                if (value != selectedGuest)
+                if (value != selectedReservation)
                 {
-                    selectedGuest = value;
+                    selectedReservation = value;
                     OnPropertyChanged();
                 }
             }
@@ -48,34 +48,29 @@ namespace InitialProject.View
             DataContext = this;
             WindowOwner = new Model.Owner();
             GetOwnerByUser(user);
-            accommodations = new ObservableCollection<Accommodation>(GetAllByOwner());
+            Accommodations = new ObservableCollection<Accommodation>(GetAllByOwner());
             SetAccommodationsLocation();
             SetAccommodationsType();
-            guests = new ObservableCollection<Guest1>();
-            GetAllGuestsForReview();
+            ReservationsToReview = new ObservableCollection<AccommodationReservation>();
+            GetAllReservationsForReview();
+            SetGuestToReservation();
             MakeAlerts();
         }
 
-        private void GetAllGuestsForReview()
+        private void GetAllReservationsForReview()
         {
             AccommodationReservationRepository reservationRepository = new AccommodationReservationRepository();
             List<AccommodationReservation> reservations = reservationRepository.GetAll();
-            Guest1Repository guest1Repository = new Guest1Repository();
             GuestReviewRepository guestReviewRepository = new GuestReviewRepository();
             AddAccommodationToReservation(reservations);
             
-            foreach (Guest1 guest in guest1Repository.GetAll())
+            foreach (AccommodationReservation reservation in reservationRepository.GetAll())
             {
-                AccommodationReservation reservation = reservations.Find(n => n.GuestId == guest.Id);
-                if (reservation != null)
-                {
-                    bool hasReservation = reservation != null;
                     bool stayedLessThan5DaysAgo = (reservation.Departure.Date < DateTime.Now.Date) && (DateTime.Now.Date - reservation.Departure.Date).TotalDays <= 5;
-                    bool alreadyReviewed = guestReviewRepository.HasReview(guest);
+                    bool alreadyReviewed = guestReviewRepository.HasReview(reservation);
                     bool isThisOwner = reservation.Accommodation.Owner.Id == WindowOwner.Id;
-                    if (hasReservation && stayedLessThan5DaysAgo && !alreadyReviewed && isThisOwner)
-                        guests.Add(guest);
-                }
+                    if (stayedLessThan5DaysAgo && !alreadyReviewed && isThisOwner)
+                    ReservationsToReview.Add(reservation);
             }
         }
 
@@ -86,13 +81,13 @@ namespace InitialProject.View
             foreach (AccommodationReservation reservation in reservations)
             {
                 reservation.Accommodation = accommodations.Find(n => n.Id == reservation.Accommodation.Id);
-                GetOwner(reservation);
+                SetOwner(reservation);
             }
         }
 
         private void AddAccommodationButton_Click(object sender, RoutedEventArgs e)
         {
-            AccommodationForm accommodationForm = new AccommodationForm(accommodations, WindowOwner);
+            AccommodationForm accommodationForm = new AccommodationForm(Accommodations, WindowOwner);
             accommodationForm.Show();
         }
 
@@ -105,7 +100,7 @@ namespace InitialProject.View
 
         private void ReviewButton_Click(object sender, RoutedEventArgs e)
         {
-            GuestReviewWindow guestReview = new GuestReviewWindow(SelectedGuest, guests, WindowOwner);
+            GuestReviewWindow guestReview = new GuestReviewWindow(SelectedReservation, ReservationsToReview);
             guestReview.Owner = this;
             guestReview.Show();
         }
@@ -118,11 +113,11 @@ namespace InitialProject.View
 
         private void MakeAlerts()
         {
-            foreach(Guest1 guest in guests)
+            foreach(AccommodationReservation reservation in ReservationsToReview)
             {
                 Label guestLabel = new Label();
                 guestLabel.Background = Brushes.CadetBlue;
-                guestLabel.Content = "You have not rated " + guest.Name + " " + guest.LastName;
+                guestLabel.Content = "You have not rated " + reservation.Guest.Name + " " + reservation.Guest.LastName;
                 NotificationStack.Children.Add(guestLabel);
                 NotificationStack.Background = Brushes.LightGreen;
             }
@@ -140,7 +135,7 @@ namespace InitialProject.View
             WindowOwner = ownerRepository.GetByUsername(user.Username);
         }
 
-        private void GetOwner(AccommodationReservation reservation)
+        private void SetOwner(AccommodationReservation reservation)
         {
             OwnerRepository ownerRepository = new OwnerRepository();
             reservation.Accommodation.Owner = ownerRepository.GetById(reservation.Accommodation.Owner.Id);
@@ -176,11 +171,11 @@ namespace InitialProject.View
             }
         }
 
-        public void SetAccommodationsLocation()
+        private void SetAccommodationsLocation()
         {
             LocationRepository locationRepository = new LocationRepository();
             List<Location> locations = locationRepository.GetAll();
-            foreach (Accommodation accommodation in accommodations)
+            foreach (Accommodation accommodation in Accommodations)
             {
                 if (locations.Find(n => n.Id == accommodation.Location.Id) != null)
                 {
@@ -189,16 +184,26 @@ namespace InitialProject.View
             }
         }
 
-        public void SetAccommodationsType()
+        private void SetAccommodationsType()
         {
             AccommodationTypeRepository typeRepository = new AccommodationTypeRepository();
             List<AccommodationType> types = typeRepository.GetAll();
-            foreach (Accommodation accommodation in accommodations)
+            foreach (Accommodation accommodation in Accommodations)
             {
                 if (types.Find(n => n.Id == accommodation.Type.Id) != null)
                 {
                     accommodation.Type = types.Find(n => n.Id == accommodation.Type.Id);
                 }
+            }
+        }
+
+        private void SetGuestToReservation()
+        {
+            Guest1Repository guest1Repository = new Guest1Repository();
+            List<Guest1> allGuests = new List<Guest1>(guest1Repository.GetAll());
+            foreach(AccommodationReservation reservation in ReservationsToReview)
+            {
+                reservation.Guest = allGuests.Find(n => n.Id == reservation.Guest.Id);
             }
         }
     }

@@ -115,7 +115,7 @@ namespace InitialProject.View
             var content = InstanceStartHourTB.Text;
             var regex = "(([0-1][0-9])|(2[0-3]))\\:[0-5][0-9]\\:[0-5][0-9]$";
             Match match = Regex.Match(content, regex, RegexOptions.IgnoreCase);
-            bool isValid = false;
+            bool valid = false;
 
             if (!match.Success)
             {
@@ -123,51 +123,47 @@ namespace InitialProject.View
             }
             else if(match.Success && InstanceStartDate.Date>DateTime.Now.Date)
             {
-                isValid = true;
+                valid = true;
             }
             else if (match.Success && InstanceStartDate.Date==DateTime.Now.Date)
             {
                 string times = match.ToString();
                 
-                int hour = Convert.ToInt32(times.Split(':')[0]);
-                int minute = Convert.ToInt32(times.Split(':')[1]);
-                int second = Convert.ToInt32(times.Split(':')[2]);
-
-                if (hour < DateTime.Now.Hour)
-                {
-                    HourLabel.Content = "Can't choose time for past";
-                    InstanceStartHourTB.BorderBrush = Brushes.Red;
-                }
-                else if(hour> DateTime.Now.Hour)
-                {
-                    InstanceStartHourTB.BorderBrush = Brushes.Green;
-                    HourLabel.Content=string.Empty;
-                    isValid = true;
-                }
-                else if (hour == DateTime.Now.Hour && minute < DateTime.Now.Minute)
-                {
-                    InstanceStartHourTB.BorderBrush = Brushes.Red;
-                    HourLabel.Content = "Can't choose time for past";
-                }
-                else if (hour == DateTime.Now.Hour && minute > DateTime.Now.Minute)
-                {
-                    InstanceStartHourTB.BorderBrush = Brushes.Green;
-                    HourLabel.Content =string.Empty;
-                    isValid =true;
-                }
-                else if (hour == DateTime.Now.Hour && minute == DateTime.Now.Minute && second < DateTime.Now.Second)
-                {
-                    InstanceStartHourTB.BorderBrush = Brushes.Red;
-                    HourLabel.Content = "Can't choose time for past";
-                }
-                else if (hour == DateTime.Now.Hour && minute == DateTime.Now.Minute && second > DateTime.Now.Second)
-                {
-                    InstanceStartHourTB.BorderBrush = Brushes.Green;
-                    HourLabel.Content = string.Empty;
-                    isValid = true;
-                }
+                valid =IsTodayTimeValid(times);
             }
-            return isValid;
+            return valid;
+        }
+
+        private bool IsTodayTimeValid(string times)
+        {
+            bool valid = false;
+            int hour = Convert.ToInt32(times.Split(':')[0]);
+            int minute = Convert.ToInt32(times.Split(':')[1]);
+            int second = Convert.ToInt32(times.Split(':')[2]);
+
+            if (IsTodayTimeFromPast(hour,minute,second))
+            {
+                HourLabel.Content = "Can't choose time for past";
+                InstanceStartHourTB.BorderBrush = Brushes.Red;
+            }
+            else if (IsTodayTimeFromFuture(hour,minute,second))
+            {
+                InstanceStartHourTB.BorderBrush = Brushes.Green;
+                HourLabel.Content = string.Empty;
+                valid = true;
+            }
+            
+            return valid;
+        }
+
+        private bool IsTodayTimeFromPast(int hour, int minute,int second)
+        {
+            return ((hour < DateTime.Now.Hour) || (hour == DateTime.Now.Hour && minute < DateTime.Now.Minute) || (hour == DateTime.Now.Hour && minute == DateTime.Now.Minute && second < DateTime.Now.Second));
+        }
+
+        private bool IsTodayTimeFromFuture(int hour, int minute, int second)
+        {
+            return ((hour > DateTime.Now.Hour) || (hour == DateTime.Now.Hour && minute > DateTime.Now.Minute) || (hour == DateTime.Now.Hour && minute == DateTime.Now.Minute && second > DateTime.Now.Second));
         }
     }
 }
