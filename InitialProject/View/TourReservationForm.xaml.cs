@@ -98,11 +98,11 @@ namespace InitialProject.View
         public void FindAvailableTours()
         {
             Boolean existed = false;
-            ObservableCollection<TourInstance> ListTourInstances= new ObservableCollection<TourInstance>(tourInstanceRepository.GetAll());
+            ObservableCollection<TourInstance> storedTourInstances= new ObservableCollection<TourInstance>(tourInstanceRepository.GetAll());
             Guest2Overview.SetLocations();
-            Guest2Overview.SetTours(ListTourInstances);
+            Guest2Overview.SetTours(storedTourInstances);
             TourInstances.Clear();
-            foreach (TourInstance tourInstance in ListTourInstances)
+            foreach (TourInstance tourInstance in storedTourInstances)
             {
                 foreach (TourReservation tourReservation in tourReservations)
                 {

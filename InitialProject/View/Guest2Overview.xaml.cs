@@ -146,14 +146,7 @@ namespace InitialProject.View
             Match match = Regex.Match(content, regex, RegexOptions.IgnoreCase);
             Match matchZero = Regex.Match(content, regexZero, RegexOptions.IgnoreCase);
             Match matchzero = Regex.Match(content, regexzero, RegexOptions.IgnoreCase);
-            bool isValid = false;
-            if (!match.Success)
-            {
-                durationInput.BorderBrush = Brushes.Red;
-                DurationLabel.Content = "This field should be positive double number";
-                durationInput.BorderThickness = new Thickness(1);
-            }
-            else if (matchZero.Success || matchzero.Success)
+            if (!match.Success || matchZero.Success || matchzero.Success)
             {
                 durationInput.BorderBrush = Brushes.Red;
                 DurationLabel.Content = "This field should be positive double number";
@@ -161,15 +154,15 @@ namespace InitialProject.View
             }
             else if (match.Success && (!matchZero.Success) && (!matchzero.Success))
             {
-                isValid = true;
                 durationInput.BorderBrush = Brushes.Green;
                 DurationLabel.Content = string.Empty;
+                return true;
             }
             if (durationInput.Text == "")
             {
-                isValid = true;
+                return true;
             }
-            return isValid;
+            return false;
         }
         private void SearchCity(TourInstance tourInstance)
         {
@@ -210,16 +203,16 @@ namespace InitialProject.View
         {
             if (IsDurationValid())
             {
-                ObservableCollection<TourInstance> listTourInstances = new ObservableCollection<TourInstance>(tourInstanceRepository.GetAll());
+                ObservableCollection<TourInstance> storedTourInstances = new ObservableCollection<TourInstance>(tourInstanceRepository.GetAll()); 
                 SetLocations();
-                SetTours(listTourInstances);
+                SetTours(storedTourInstances);
                 TourInstances.Clear();
-                foreach (TourInstance tourInstance in listTourInstances)
+                foreach (TourInstance tourInstance in storedTourInstances)
                 {
-                    if(tourInstance.Finished==false)
+                    if(!tourInstance.Finished)
                         TourInstances.Add(tourInstance);
                 }
-                foreach (TourInstance tourInstance in listTourInstances)
+                foreach (TourInstance tourInstance in storedTourInstances)
                 {
                     SearchCity(tourInstance);
                     SearchCountry(tourInstance);
@@ -236,14 +229,14 @@ namespace InitialProject.View
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private void incrementCapacityNumber_Click(object sender, RoutedEventArgs e)
+        private void IncrementCapacityNumber_Click(object sender, RoutedEventArgs e)
         {
             int changedCapacityNumber;
             changedCapacityNumber = Convert.ToInt32(capacityNumber.Text) + 1;
             capacityNumber.Text = changedCapacityNumber.ToString();
         }
 
-        private void decrementCapacityNumber_Click(object sender, RoutedEventArgs e)
+        private void DecrementCapacityNumber_Click(object sender, RoutedEventArgs e)
         {
             int changedCapacityNumber;
             if (Convert.ToInt32(capacityNumber.Text) > 1)
@@ -291,7 +284,7 @@ namespace InitialProject.View
             }
         }
 
-        private void countryInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void CountryInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (countryInput.SelectedItem != null)
             {
@@ -309,7 +302,7 @@ namespace InitialProject.View
             TourInstances.Clear();
             foreach (TourInstance tourInstance in tourInstances)
             {
-                if(tourInstance.Finished==false)
+                if(!tourInstance.Finished)
                     TourInstances.Add(tourInstance);
             }
             Label.Content = "Showing all tours:";
@@ -329,8 +322,6 @@ namespace InitialProject.View
             SignInForm signInForm = new SignInForm();
             signInForm.Show();
             this.Close();
-
         }
-
     }
 }
