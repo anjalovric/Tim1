@@ -35,11 +35,11 @@ namespace InitialProject.Model
         public void FromCSV(string[] values)
         {
             Id = Convert.ToInt32(values[0]);
-            Cleanliness = Convert.ToInt32(values[2]);
-            RulesFollowing = Convert.ToInt32(values[3]);
-            Comment = values[4];
+            Cleanliness = Convert.ToInt32(values[1]);
+            RulesFollowing = Convert.ToInt32(values[2]);
+            Comment = values[3];
             Reservation = new AccommodationReservation();
-            Reservation.Id = Convert.ToInt32(values[5]);
+            Reservation.Id = Convert.ToInt32(values[4]);
         }
     }
 }

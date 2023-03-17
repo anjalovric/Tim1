@@ -42,15 +42,9 @@ namespace InitialProject.Repository
             _serializer.ToCSV(FilePath, _reviews);
         }
 
-        public List<GuestReview> GetAllByOwnerId(int id)
+        public List<GuestReview> GetAll()
         {
-            List<GuestReview> reviews = new List<GuestReview>();
-            foreach(GuestReview review in _reviews)
-            {
-                if (review.Reservation.Accommodation.Owner.Id == id)
-                    reviews.Add(review);
-            }
-            return reviews;
+            return _reviews;
         }
     }
 }

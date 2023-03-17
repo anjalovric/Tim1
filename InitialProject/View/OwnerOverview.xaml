@@ -31,7 +31,9 @@
                 <DataGridTextColumn Header="Last Name" Binding="{Binding Guest.LastName}"/>
                 <DataGridTextColumn Header="First Name" Binding="{Binding Guest.Name}"/>
                 <DataGridTextColumn Header="Username" Binding="{Binding Guest.Username}"/>
-                <DataGridTextColumn Header="Reservation Start Date" Binding="{Binding ComingDate}"/>
+                <DataGridTextColumn Header="Reservation Start Date" Binding="{Binding Arrival}"/>
+                <DataGridTextColumn Header="Reservation End Date" Binding="{Binding Departure}"/>
+                <DataGridTextColumn Header="Accommodation" Binding="{Binding Accommodation.Name}"/>
                 <DataGridTemplateColumn  Width="45">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
