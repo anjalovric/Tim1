@@ -71,29 +71,18 @@ namespace InitialProject.View
             if (result == MessageBoxResult.Yes)
             {
                 MakeNewReservation();
-                UpdateAvailableDates();
                 this.Close();
                 this.Owner.Close();
+                this.Owner.Owner.Close();
             }
             else if (result == MessageBoxResult.No)
             {
                 this.Close();
-                this.Owner.Activate();
+                this.Owner.Close();
             }
         }
         
 
-        private void UpdateAvailableDates()
-        {
-            foreach (Window window in Application.Current.Windows)
-            {
-                if (window.GetType() == typeof(AccommodationReservationForm))
-                {
-                    (window as AccommodationReservationForm).GetAvailableDates(currentAccommodation.Id);
-                }
-            }
-           
-        }
 
         private void DecrementGuestsNumberButton_Click(object sender, RoutedEventArgs e)
         {

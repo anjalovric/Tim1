@@ -167,6 +167,7 @@ namespace InitialProject.View
             FillDateRangesList(currentAccommodationId);
 
             DatesForAccommodationReservation suggestedDates = new DatesForAccommodationReservation(currentAccommodation, accommodationReservationRepository);
+            suggestedDates.Owner = this;
             if (availableDateRanges.Count > 0 && AvailableDateRangeExists(ref suggestedDates))
                 suggestedDates.Show();
             else
@@ -232,6 +233,7 @@ namespace InitialProject.View
         private void DisplayAvailableDatesOutRange()
         {
             DatesForAccommodationReservation suggestedDates = new DatesForAccommodationReservation(currentAccommodation, accommodationReservationRepository);
+            suggestedDates.Owner = this;
             foreach (List<DateTime> dates in availableDateRanges)
             {
                 DateTime arrival = dates[0];
