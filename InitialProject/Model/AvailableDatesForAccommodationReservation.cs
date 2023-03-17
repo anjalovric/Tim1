@@ -8,12 +8,12 @@ namespace InitialProject.Model
 {
     public class AvailableDatesForAccommodationReservation
     {
-        public DateTime Start { get; set; }
-        public DateTime End { get; set; }
+        public DateTime Arrival { get; set; }
+        public DateTime Departure { get; set; }
 
-        public AvailableDatesForAccommodationReservation(DateTime start, DateTime end)        {
-            Start = start;
-            End = end;
+        public AvailableDatesForAccommodationReservation(DateTime arrival, DateTime departure)        {
+            Arrival = arrival;
+            Departure = departure;
         }
 
     }

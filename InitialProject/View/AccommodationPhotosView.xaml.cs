@@ -37,23 +37,23 @@ namespace InitialProject.View
             this.DataContext = this;
             foreach (string url in imagesUrl)
             { 
-                Image img = new Image();
+                Image image = new Image();
                 var bitmapImage = new BitmapImage();
                 bitmapImage.BeginInit();
                 bitmapImage.UriSource = new Uri(url); ;
                 bitmapImage.EndInit();
-                img.Source = bitmapImage;
-                setPhotoDimensions(ref img);
-                imagesList.Items.Add(img);
+                image.Source = bitmapImage;
+                setPhotoDimensions(ref image);
+                imagesList.Items.Add(image);
             }
         }
 
-        private void setPhotoDimensions(ref Image img)
+        private void setPhotoDimensions(ref Image image)
         {
-            img.Width = imagesList.Width;
-            img.Height = imagesList.Height;
-            img.VerticalAlignment = VerticalAlignment.Center;
-            img.HorizontalAlignment = HorizontalAlignment.Center;
+            image.Width = imagesList.Width;
+            image.Height = imagesList.Height;
+            image.VerticalAlignment = VerticalAlignment.Center;
+            image.HorizontalAlignment = HorizontalAlignment.Center;
         }
     }
 }

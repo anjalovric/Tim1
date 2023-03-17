@@ -30,17 +30,20 @@ namespace InitialProject.View
     /// Interaction logic for Guest1Overview.xaml
     /// </summary>
     public partial class Guest1Overview : Window
-    {
-        private AccommodationImageRepository accommodationImageRepository;
-        private List<AccommodationImage> accommodationImages;
-        private AccommodationRepository accommodationRepository;
-        private ObservableCollection<Accommodation> accommodations;
+    {     
         public ObservableCollection<string> Countries { get; set; }
         public ObservableCollection<string> CitiesByCountry { get; set; }
         private LocationRepository locationRepository;
         private Location location;
+
         private AccommodationType accommodationType;
         private AccommodationTypeRepository accommodationTypeRepository;
+
+        private List<AccommodationImage> accommodationImages;
+        private AccommodationImageRepository accommodationImageRepository;
+
+        private AccommodationRepository accommodationRepository;
+        private ObservableCollection<Accommodation> accommodations;
         public ObservableCollection<Accommodation> Accommodations 
         { 
             get { return accommodations; } 
@@ -68,19 +71,23 @@ namespace InitialProject.View
         {
             InitializeComponent();
             DataContext = this;
+
             accommodationRepository = new AccommodationRepository();
-            Accommodations = new ObservableCollection<Accommodation>(accommodationRepository.GetAll());  
+            Accommodations = new ObservableCollection<Accommodation>(accommodationRepository.GetAll());
+
             accommodationImageRepository = new AccommodationImageRepository();
             accommodationImages = new List<AccommodationImage>(accommodationImageRepository.GetAll());
-            locationRepository = new LocationRepository();
-            location = new Location();
+
             accommodationType = new AccommodationType();
             accommodationTypeRepository = new AccommodationTypeRepository();
+            SetAccommodationTypes();
+
+            locationRepository = new LocationRepository();
+            location = new Location();
             Countries = new ObservableCollection<string>(locationRepository.GetAllCountries());
             CitiesByCountry = new ObservableCollection<string>();
             cityInput.IsEnabled = false;
-            SetLocations();
-            SetTypes();    
+            SetAccommodationLocations();
         }
 
         
@@ -92,64 +99,20 @@ namespace InitialProject.View
             this.Close();
         }
 
-        private void Search_Click(object sender, RoutedEventArgs e)
+        private void CountryInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (IsNumberOfDaysValid() && IsNumberOfGuestsValid())
+            if (countryInput.SelectedItem != null)
             {
-                List<Accommodation> listAccommodation = accommodationRepository.GetAll();
-                Accommodations.Clear();
-                foreach (Accommodation accommodation in listAccommodation)
+                CitiesByCountry.Clear();
+                foreach (string city in locationRepository.GetCitiesByCountry((string)countryInput.SelectedItem))
                 {
-                    Accommodations.Add(accommodation);
+                    CitiesByCountry.Add(city);
                 }
-                foreach (Accommodation accommodation in listAccommodation)
-                {
-                    if (!accommodation.Name.ToLower().Contains(nameInput.Text.ToLower()))
-                    {
-                        Accommodations.Remove(accommodation);
-                    }
-                    if (Location.City != null && !accommodation.Location.City.ToLower().Equals(Location.City.ToLower()))
-                    {
-                        Accommodations.Remove(accommodation);
-                    }
-                    if (Location.Country != null && !accommodation.Location.Country.ToLower().Equals(Location.Country.ToLower()))
-                    {
-                        Accommodations.Remove(accommodation);
-                    }
-                    if (apartment.IsChecked == true || house.IsChecked == true || cottage.IsChecked == true)
-                    {
-                        if (apartment.IsChecked == false)
-                        {
-                            if (accommodation.Type.Name.ToLower() == "apartment")
-                                Accommodations.Remove(accommodation);
-                        }
-                        if (house.IsChecked == false)
-                        {
-                            if (accommodation.Type.Name.ToLower() == "house")
-                                Accommodations.Remove(accommodation);
-                        }
-                        if (cottage.IsChecked == false)
-                        {
-                            if (accommodation.Type.Name.ToLower() == "cottage")
-                                Accommodations.Remove(accommodation);
-                        }
-                    }
-                   
-
-                    if (!(numberOfGuests.Text == "") && Convert.ToInt32(numberOfGuests.Text) > accommodation.Capacity)
-                    {
-                        Accommodations.Remove(accommodation);
-                    }
-                    if (!(numberOfDays.Text == "") && Convert.ToInt32(numberOfDays.Text) < accommodation.MinDaysForReservation)
-                    {
-                        Accommodations.Remove(accommodation);
-                    }
-                }
+                cityInput.IsEnabled = true;
             }
         }
-        
 
-        private void SetLocations()
+        private void SetAccommodationLocations()
         {
             List<Location> locations = locationRepository.GetAll();
             foreach (Accommodation accommodation in Accommodations)
@@ -158,9 +121,7 @@ namespace InitialProject.View
             }
         }
 
-       
-
-        public void SetTypes()
+        private void SetAccommodationTypes()
         {
             List<AccommodationType> types = accommodationTypeRepository.GetAll();
             foreach (Accommodation accommodation in Accommodations)
@@ -172,14 +133,113 @@ namespace InitialProject.View
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            if (IsNumberOfDaysValid() && IsNumberOfGuestsValid())
+            {
+                List<Accommodation> storedAccommodation = accommodationRepository.GetAll();
+                Accommodations.Clear();
+                foreach (Accommodation accommodation in storedAccommodation)
+                {
+                    Accommodations.Add(accommodation);
+                }
+                foreach (Accommodation accommodation in storedAccommodation)
+                {
+                    SearchName(accommodation);
+                    SearchCity(accommodation);
+                    SearchCountry(accommodation);
+
+                    SearchType(accommodation);
+                    SearchNumberOfGuests(accommodation);
+                    SearchNumberOfDays(accommodation);
+                }
+            }
         }
 
-        private void DecrementGuestsNumber(object sender, RoutedEventArgs e)
+        private void SearchName(Accommodation accommodation)
+        {
+            if (!accommodation.Name.ToLower().Contains(nameInput.Text.ToLower()))
+            {
+                Accommodations.Remove(accommodation);
+            }
+        }
+        private void SearchCity(Accommodation accommodation)
+        {
+            if (Location.City != null && !accommodation.Location.City.ToLower().Equals(Location.City.ToLower()))
+            {
+                Accommodations.Remove(accommodation);
+            }
+        }
+
+        private void SearchCountry(Accommodation accommodation)
+        {
+            if (Location.Country != null && !accommodation.Location.Country.ToLower().Equals(Location.Country.ToLower()))
+            {
+                Accommodations.Remove(accommodation);
+            }
+        }
+
+        private void SearchType(Accommodation accommodation)
+        {
+            if (apartment.IsChecked==true || house.IsChecked == true || cottage.IsChecked == true)
+            {
+                if (apartment.IsChecked == false)
+                {
+                    if (accommodation.Type.Name.ToLower() == "apartment")
+                        Accommodations.Remove(accommodation);
+                }
+                if (house.IsChecked == false)
+                {
+                    if (accommodation.Type.Name.ToLower() == "house")
+                        Accommodations.Remove(accommodation);
+                }
+                if (cottage.IsChecked == false)
+                {
+                    if (accommodation.Type.Name.ToLower() == "cottage")
+                        Accommodations.Remove(accommodation);
+                }
+            }
+        }
+
+        private void SearchNumberOfGuests(Accommodation accommodation)
+        {
+            if (!(numberOfGuests.Text == "") && Convert.ToInt32(numberOfGuests.Text) > accommodation.Capacity)
+            {
+                Accommodations.Remove(accommodation);
+            }
+        }
+
+        private void SearchNumberOfDays(Accommodation accommodation)
+        {
+            if (!(numberOfDays.Text == "") && Convert.ToInt32(numberOfDays.Text) < accommodation.MinDaysForReservation)
+            {
+                Accommodations.Remove(accommodation);
+            }
+        }
+
+        private void ShowAllButton_Click(object sender, RoutedEventArgs e)
+        {
+            Accommodations.Clear();
+            foreach (Accommodation accommodation in accommodationRepository.GetAll())
+                Accommodations.Add(accommodation);
+
+            ResetAllSearchingFields();
+        }
+
+        private void ResetAllSearchingFields()
+        {
+            nameInput.Text = "";
+            countryInput.SelectedItem = null;
+            cityInput.SelectedItem = null;
+            cityInput.IsEnabled = false;
+            apartment.IsChecked = false;
+            house.IsChecked = false;
+            cottage.IsChecked = false;
+            numberOfDays.Text = "";
+            numberOfGuests.Text = "";
+        }
+
+        private void DecrementGuestsNumberButton_Click(object sender, RoutedEventArgs e)
         {
             int changedGuestsNumber;
             if(numberOfGuests.Text!="" && Convert.ToInt32(numberOfGuests.Text)>1)
@@ -189,7 +249,7 @@ namespace InitialProject.View
             }
         }
 
-        private void IncrementGuestsNumber(object sender, RoutedEventArgs e)
+        private void IncrementGuestsNumberButton_Click(object sender, RoutedEventArgs e)
         {
             int changedGuestsNumber;
             if(numberOfGuests.Text=="")
@@ -203,7 +263,7 @@ namespace InitialProject.View
             }    
         }
 
-        private void DecrementDaysNumber(object sender, RoutedEventArgs e)
+        private void DecrementDaysNumberButton_Click(object sender, RoutedEventArgs e)
         {
             int changedDaysNumber;
             if (numberOfDays.Text != "" && Convert.ToInt32(numberOfDays.Text) > 1)
@@ -213,7 +273,7 @@ namespace InitialProject.View
             }
         }
 
-        private void IncrementDaysNumber(object sender, RoutedEventArgs e)
+        private void IncrementDaysNumberButton_Click(object sender, RoutedEventArgs e)
         {
             int changedDaysNumber;
             if(numberOfDays.Text=="")
@@ -227,7 +287,7 @@ namespace InitialProject.View
             } 
         }
 
-        private void ViewPhotos(object sender, RoutedEventArgs e)
+        private void ViewPhotosButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -261,47 +321,13 @@ namespace InitialProject.View
             }
         }
 
-        private void Reserve(object sender, RoutedEventArgs e)
+        private void ReserveButton_Click(object sender, RoutedEventArgs e)
         {
             Accommodation currentAccommodation = (Accommodation)AccommodationListDataGrid.CurrentItem;
             AccommodationReservationForm accommodationReservationForm = new AccommodationReservationForm(currentAccommodation, ref accommodationRepository);
             accommodationReservationForm.Show();
         }
 
-
-        private void countryInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (countryInput.SelectedItem != null)
-            {
-                CitiesByCountry.Clear();
-                foreach (string city in locationRepository.GetCitiesByCountry((string)countryInput.SelectedItem))
-                {
-                    CitiesByCountry.Add(city);
-                }
-                cityInput.IsEnabled = true;
-            }
-        }
-
-        private void ShowAll_Click(object sender, RoutedEventArgs e)
-        {
-            Accommodations.Clear();
-            foreach (Accommodation accommodation in accommodationRepository.GetAll())
-                Accommodations.Add(accommodation);
-            ResetAllSearchingFields();
-        }
-
-        private void ResetAllSearchingFields()
-        {
-            nameInput.Text = "";
-            countryInput.SelectedItem = null;
-            cityInput.SelectedItem = null;
-            cityInput.IsEnabled = false;
-            apartment.IsChecked = false;
-            house.IsChecked = false;
-            cottage.IsChecked = false;
-            numberOfDays.Text = "";
-            numberOfGuests.Text = "";
-        }
 
         private bool IsNumberOfDaysValid()
         {
@@ -343,6 +369,13 @@ namespace InitialProject.View
                 numberOfGuestsLabel.Content = string.Empty;
             }
             return isValid;
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

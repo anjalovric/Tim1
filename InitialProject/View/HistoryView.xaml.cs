@@ -57,14 +57,14 @@ namespace InitialProject.View
             Instances = new ObservableCollection<TourInstance>();
 
 
-            MakeLocationTourConnection();
-            MakeTourTourInstanceConnection();
+            SetLocationToTour();
+            SetTourToTourInstance();
 
-            GetPastInsatnces();
+            GetFinishedInsatnces();
 
 
         }
-        private void GetPastInsatnces()
+        private void GetFinishedInsatnces()
         {
             List<TourInstance> instances = tourInstanceRepository.GetAll();
             foreach (TourInstance instance in instances)
@@ -75,7 +75,7 @@ namespace InitialProject.View
                 }
             }
         }
-        private void MakeLocationTourConnection()
+        private void SetLocationToTour()
         {
             List<Location> locations = locationRepository.GetAll();
             List<Tour> tours =tourRepository.GetAll();
@@ -90,7 +90,7 @@ namespace InitialProject.View
             }
         }
 
-        private void MakeTourTourInstanceConnection()
+        private void SetTourToTourInstance()
         {
             List<TourInstance> instances = tourInstanceRepository.GetAll();
             List<Tour> tours = tourRepository.GetAll();

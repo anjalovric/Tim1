@@ -30,11 +30,11 @@ namespace InitialProject.View
     {
 
 
-        private readonly TourRepository tourRepository;
-        private readonly LocationRepository locationRepository;
-        private readonly CheckPointRepository checkPointRepository;
-        private readonly TourImageRepository tourImageRepository;
-        private readonly TourInstanceRepository tourInstanceRepository;
+        private  TourRepository tourRepository;
+        private  LocationRepository locationRepository;
+        private  CheckPointRepository checkPointRepository;
+        private  TourImageRepository tourImageRepository;
+        private  TourInstanceRepository tourInstanceRepository;
         public int pointCounter = 0;
         public ObservableCollection<CheckPoint> TourPoints { get; set; }
         public ObservableCollection<TourImage> TourImages { get; set; }
@@ -195,7 +195,7 @@ namespace InitialProject.View
 
 
 
-        private void AddTourClick(object sender, RoutedEventArgs e)
+        private void AddTour_Click(object sender, RoutedEventArgs e)
         {
             if (IsValid())
             {
@@ -216,9 +216,9 @@ namespace InitialProject.View
         }
         private bool IsValid()
         {
-            return IsNameValid() && IsMaximuGuestsNumberValid() && IsDurationValid()  && IsCountryValid() && IsCityValid() && IsDescriptionValid() 
-                    && IsLanguageValid() && IsDateTimeValid()
-                    && IsCheckPointsValid() && IsImagesValid() ;
+            return IsNameValid() & IsMaximuGuestsNumberValid() & IsDurationValid()  & IsCountryValid() & IsCityValid() & IsDescriptionValid() 
+                    & IsLanguageValid() & IsDateTimeValid()
+                    & IsCheckPointsValid() & IsImagesValid() ;
 
         }
         private bool IsNameValid()
@@ -226,7 +226,7 @@ namespace InitialProject.View
             var content = TourNameTB.Text;
             var regex = @"[A-Za-z]+(\\ [A-Za-z]+)*$";
             Match match = Regex.Match(content, regex, RegexOptions.IgnoreCase);
-            bool isValid = false;
+            bool valid = false;
             if (TourNameTB.Text.Trim().Equals(""))
             {
                
@@ -243,18 +243,18 @@ namespace InitialProject.View
             }
             else
             {
-                isValid = true;
+                valid = true;
                 TourNameTB.BorderBrush = Brushes.Green;
                 NameLabel.Content = string.Empty;
             }
-            return isValid;
+            return valid;
         }
         private bool IsMaximuGuestsNumberValid()
         {
             var content = MaxGuestsTB.Text;
             var regex = @"^[1-9]\d*$";
             Match match = Regex.Match(content, regex, RegexOptions.IgnoreCase);
-            bool isValid = false;
+            bool valid = false;
             if (MaxGuestsTB.Text.Trim().Equals(""))
             {
 
@@ -270,11 +270,11 @@ namespace InitialProject.View
             }
             else
             {
-                isValid = true;
+                valid = true;
                 MaxGuestsTB.BorderBrush = Brushes.Green;
                 MaxGuestLabel.Content = string.Empty;
             }
-            return isValid;
+            return valid;
         }
 
         private bool IsDurationValid()
@@ -285,7 +285,7 @@ namespace InitialProject.View
             
             Match match = Regex.Match(content, regex, RegexOptions.IgnoreCase);
             Match matchMinus=Regex.Match(content,regexMinus, RegexOptions.IgnoreCase);
-            bool isValid = false;
+
             if (DurationTB.Text.Trim().Equals(""))
             {
                 DurationTB.BorderBrush = Brushes.Red;
@@ -293,20 +293,14 @@ namespace InitialProject.View
                 DurationLabel.Content = "This field can't be empty";
                 return false;
             }
-            else if (!match.Success)
-            { 
-                DurationTB.BorderBrush = Brushes.Red;
-                DurationLabel.Content = "This field should be positive double number";
-                DurationTB.BorderThickness = new Thickness(1);
-            }
-            else if (Convert.ToDouble(match.ToString())==0.0 || Convert.ToString(match).Equals('0') || matchMinus.Success)
+            else if (!match.Success || Convert.ToDouble(match.ToString()) == 0.0 || Convert.ToString(match).Equals('0') || matchMinus.Success)
             {
                 DurationTB.BorderBrush = Brushes.Red;
                 DurationLabel.Content = "Invalid number";
                 DurationTB.BorderThickness = new Thickness(1);
                 return false;
             }
-            else if(match.Success)
+            else if (match.Success)
             {
                 DurationTB.BorderBrush = Brushes.Green;
                 DurationLabel.Content = string.Empty;
@@ -360,7 +354,7 @@ namespace InitialProject.View
             var content = LanguageTB.Text;
             var regex = @"[A-Za-z]+(\\ [A-Za-z]+)*$";
             Match match = Regex.Match(content, regex, RegexOptions.IgnoreCase);
-            bool isValid = false;
+            bool valid = false;
             if (LanguageTB.Text.Trim().Equals(""))
             {
              
@@ -377,11 +371,11 @@ namespace InitialProject.View
             }
             else
             {
-                isValid = true;
+                valid = true;
                 LanguageTB.BorderBrush = Brushes.Green;
                 LanguageLabel.Content = string.Empty;
             }
-            return isValid;
+            return valid;
         }
 
 
@@ -390,7 +384,7 @@ namespace InitialProject.View
             var content = DescriptionTB.Text;
             var regex = @"[A-Za-z]([A-Za-z0-9]|.)*(\\ [A-Za-z0-9]+)*$";
             Match match = Regex.Match(content, regex, RegexOptions.IgnoreCase);
-            bool isValid = false;
+            bool valid = false;
             if (DescriptionTB.Text.Trim().Equals(""))
             {
                 
@@ -407,11 +401,11 @@ namespace InitialProject.View
             }
             else
             {
-                isValid = true;
+                valid = true;
                 DescriptionTB.BorderBrush = Brushes.Green;
                 DescriptionLabel.Content = string.Empty;
             }
-            return isValid;
+            return valid;
 
         }
 
@@ -485,21 +479,20 @@ namespace InitialProject.View
                     string min = instance.StartClock.Split(":")[1];
                     string sec = instance.StartClock.Split(":")[2];
 
-                    if (Convert.ToInt32(hour) > DateTime.Now.Hour)
+                    if (IsTimeFromFuture(hour, min, sec))
                     {
                         TodayInstances.Add(instance);
                     }
-                    else if (Convert.ToInt32(hour) == DateTime.Now.Hour && Convert.ToInt32(min) > DateTime.Now.Minute)
-                    {
-                        TodayInstances.Add(instance);
-                    }
-                    else if (Convert.ToInt32(hour) == DateTime.Now.Hour && Convert.ToInt32(min) == DateTime.Now.Minute && Convert.ToInt32(sec) > DateTime.Now.Second)
-                    {
-                        TodayInstances.Add(instance);
-                    }
+
                 }
             }
         }
+
+        private bool IsTimeFromFuture(string hour,string min, string sec)
+        {
+            return ((Convert.ToInt32(hour) > DateTime.Now.Hour) || (Convert.ToInt32(hour) == DateTime.Now.Hour && Convert.ToInt32(min) > DateTime.Now.Minute) || (Convert.ToInt32(hour) == DateTime.Now.Hour && Convert.ToInt32(min) == DateTime.Now.Minute && Convert.ToInt32(sec) > DateTime.Now.Second));
+        }
+ 
         private void AddImages()
         {
             List<TourImage> tourImages = tourImageRepository.GetAll();
@@ -529,14 +522,14 @@ namespace InitialProject.View
             }
         }
 
-        private void AddCheckPointClick(object sender, RoutedEventArgs e)
+        private void AddCheckPoint_Click(object sender, RoutedEventArgs e)
         {
             CheckPointForm form = new CheckPointForm(checkPointRepository,TourPoints);
             form.Show();
 
         }
 
-        private void CancelTourClick(object sender, RoutedEventArgs e)
+        private void CancelTour_Click(object sender, RoutedEventArgs e)
         {
             List<CheckPoint> checkPoints = checkPointRepository.GetAll();
             foreach (CheckPoint checkPoint in checkPoints)
@@ -559,13 +552,13 @@ namespace InitialProject.View
             this.Close();
         }
 
-        private void AddTourImageClick(object sender, RoutedEventArgs e)
+        private void AddTourImage_Click(object sender, RoutedEventArgs e)
         {
             TourImageForm tourImageForm = new TourImageForm(tourImageRepository,TourImages);
             tourImageForm.Show();
         }
 
-        private void NewInstanceClick(object sender, RoutedEventArgs e)
+        private void NewInstance_Click(object sender, RoutedEventArgs e)
         {
             NewTourInstanceDate newTourInstance = new NewTourInstanceDate(Instances,loggedInUser);
             newTourInstance.Show();

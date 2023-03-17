@@ -50,8 +50,8 @@ namespace InitialProject.View
             locationRepository = new LocationRepository();
 
             Tours = new ObservableCollection<TourInstance>(tourInstanceRepository.GetByStart());
-            MakeLocationTourConnection();
-            MakeTourTourInstanceConnection();
+            SetLocationToTour();
+            SetTourToTourInstance();
             loggedInUser = user;
 
             if (Selected ==null)
@@ -60,7 +60,7 @@ namespace InitialProject.View
             
         }
 
-        private void MakeLocationTourConnection()
+        private void SetLocationToTour()
         {
             List<Location> locations = locationRepository.GetAll();
             List<Tour> tours = tourRepository.GetAll();
@@ -74,7 +74,7 @@ namespace InitialProject.View
             }
         }
 
-        private void MakeTourTourInstanceConnection()
+        private void SetTourToTourInstance()
         {
             List<TourInstance> tourInstances=tourInstanceRepository.GetAll();
             List<Tour> tours = tourRepository.GetAll();
@@ -89,7 +89,7 @@ namespace InitialProject.View
                 }
             }
         }
-        private void CreateNewTour(object sender, RoutedEventArgs e)
+        private void CreateNewTour_Click(object sender, RoutedEventArgs e)
         {
             TourForm tourForm = new TourForm(Tours,loggedInUser);
             tourForm.Show();
@@ -102,7 +102,7 @@ namespace InitialProject.View
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private void StartTour(object sender, RoutedEventArgs e)
+        private void StartTour_Click(object sender, RoutedEventArgs e)
         {
             if (Selected != null)
             {
@@ -112,7 +112,7 @@ namespace InitialProject.View
             
         }
 
-        private void SignOutClick(object sender, RoutedEventArgs e)
+        private void SignOut_Click(object sender, RoutedEventArgs e)
         {
             SignInForm signInForm = new SignInForm();
             signInForm.Show();

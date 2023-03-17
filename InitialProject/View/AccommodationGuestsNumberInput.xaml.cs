@@ -24,47 +24,64 @@ namespace InitialProject.View
     public partial class AccommodationGuestsNumberInput : Window
     {
         public Accommodation currentAccommodation { get; set; }
-        public AvailableDatesForAccommodationReservation selectedDateRange { get; set; }
         private AccommodationReservationRepository accommodationReservationRepository;
+
+        private AvailableDatesForAccommodationReservation selectedDateRange;
         public ObservableCollection<AvailableDatesForAccommodationReservation> availableDatesForAccommodations { get; set; }
         public AccommodationGuestsNumberInput(Accommodation currentAccommodation, AvailableDatesForAccommodationReservation selectedDateRange, AccommodationReservationRepository accommodationReservationRepository, ObservableCollection<AvailableDatesForAccommodationReservation> availableDatesForAccommodations)
         {
             InitializeComponent();
             this.DataContext = this;
             this.currentAccommodation = currentAccommodation;
-            this.selectedDateRange = selectedDateRange;
             this.accommodationReservationRepository = accommodationReservationRepository;
+            this.selectedDateRange = selectedDateRange;
             this.availableDatesForAccommodations = availableDatesForAccommodations;
         }
 
-        private void ConfirmReservation_Click(object sender, RoutedEventArgs e)
+        private void ConfirmReservationButton_Click(object sender, RoutedEventArgs e)
         {
-            if(Convert.ToInt32(numberOfGuests.Text) > currentAccommodation.Capacity)
+            if (Convert.ToInt32(numberOfGuests.Text) > currentAccommodation.Capacity)
             {
-                MessageBox.Show("Maximum number of guests for this accommodation is " + currentAccommodation.Capacity.ToString()+ ".");  
+                MessageBox.Show("Maximum number of guests for this accommodation is " + currentAccommodation.Capacity.ToString() + ".");
             }
             else
             {
-                MessageBoxResult result = ConfirmReservation();
-                if(result == MessageBoxResult.Yes)
-                {
-                    makeNewReservation();
-                    UpdateAvailableDates();
-                    this.Close();
-                    this.Owner.Close();    
-                }
-                else if(result == MessageBoxResult.No)
-                {
-                    this.Close();
-                    this.Owner.Activate();
-                }
+                ContinueReservation();
             }
         }
 
-        private void makeNewReservation()
+        private void MakeNewReservation()
         {
-            AccommodationReservation newReservation = new AccommodationReservation(1, currentAccommodation, selectedDateRange.Start, selectedDateRange.End);
+            Guest1 guest = new Guest1("Anja", "Ducic");
+            guest.Id = 1;
+            AccommodationReservation newReservation = new AccommodationReservation(guest, currentAccommodation, selectedDateRange.Arrival, selectedDateRange.Departure);
             accommodationReservationRepository.Add(newReservation);
+        }
+
+        private MessageBoxResult ConfirmReservation()
+        {
+            string sMessageBoxText = $"Do you want to make a reservation?\n";
+            string sCaption = "Confirm reservation";
+            MessageBoxButton btnMessageBox = MessageBoxButton.YesNo;
+            MessageBoxImage icnMessageBox = MessageBoxImage.Question;
+            MessageBoxResult result = MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
+            return result;
+        }
+        private void ContinueReservation()
+        {
+            MessageBoxResult result = ConfirmReservation();
+            if (result == MessageBoxResult.Yes)
+            {
+                MakeNewReservation();
+                UpdateAvailableDates();
+                this.Close();
+                this.Owner.Close();
+            }
+            else if (result == MessageBoxResult.No)
+            {
+                this.Close();
+                this.Owner.Activate();
+            }
         }
 
         private void UpdateAvailableDates()
@@ -79,20 +96,7 @@ namespace InitialProject.View
            
         }
 
-        private MessageBoxResult ConfirmReservation()
-        {
-            string sMessageBoxText = $"Do you want to make a reservation?\n";
-            string sCaption = "Confirm reservation";
-            MessageBoxButton btnMessageBox = MessageBoxButton.YesNo;
-            MessageBoxImage icnMessageBox = MessageBoxImage.Question;
-            MessageBoxResult result = MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
-            return result;
-        }
-        private void Cancel_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
-        private void DecrementGuestsNumber(object sender, RoutedEventArgs e)
+        private void DecrementGuestsNumberButton_Click(object sender, RoutedEventArgs e)
         {
             int changedGuestsNumber;
             if (Convert.ToInt32(numberOfGuests.Text) > 1)
@@ -101,11 +105,17 @@ namespace InitialProject.View
                 numberOfGuests.Text = changedGuestsNumber.ToString();
             }
         }
-        private void IncrementGuestsNumber(object sender, RoutedEventArgs e)
+        private void IncrementGuestsNumberButton_Click(object sender, RoutedEventArgs e)
         {
             int changedGuestsNumber;
             changedGuestsNumber = Convert.ToInt32(numberOfGuests.Text) + 1;
             numberOfGuests.Text = changedGuestsNumber.ToString();
-        }  
+        }
+
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+          
     }
 }
