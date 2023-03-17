@@ -30,9 +30,9 @@ namespace InitialProject.Repository
             return _reviews.Max(c => c.Id) + 1;
         }
 
-        public bool HasReview(Guest1 guest)
+        public bool HasReview(AccommodationReservation reservation)
         {
-            return _reviews.Find(n => n.Guest.Id == guest.Id) != null;
+            return _reviews.Find(n => n.Reservation.Id == reservation.Id) != null;
         }
 
         public void Save(GuestReview review)
@@ -47,7 +47,7 @@ namespace InitialProject.Repository
             List<GuestReview> reviews = new List<GuestReview>();
             foreach(GuestReview review in _reviews)
             {
-                if (review.Owner.Id == id)
+                if (review.Reservation.Accommodation.Owner.Id == id)
                     reviews.Add(review);
             }
             return reviews;

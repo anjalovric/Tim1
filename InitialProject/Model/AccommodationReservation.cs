@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 using InitialProject.Serializer;
 
 namespace InitialProject.Model
@@ -11,17 +7,18 @@ namespace InitialProject.Model
     public class AccommodationReservation : ISerializable
     {
         public int Id { get; set; }
-        public int GuestId { get; set; }
+        public Guest1 Guest { get; set; }
         public Accommodation Accommodation { get; set; }
         public DateTime ComingDate  { get; set; }
         public DateTime LeavingDate { get; set; }
 
         public AccommodationReservation() {
+            Guest = new Guest1();
             Accommodation = new Accommodation();
         }
-        public AccommodationReservation(int guestId, Accommodation currentAccommodation, DateTime comingDate, DateTime leavingDate)
+        public AccommodationReservation(Guest1 guest, Accommodation currentAccommodation, DateTime comingDate, DateTime leavingDate)
         {
-            GuestId = guestId;
+            Guest = guest;
             this.Accommodation = currentAccommodation;
             ComingDate = comingDate;
             LeavingDate = leavingDate;
@@ -30,7 +27,8 @@ namespace InitialProject.Model
         public void FromCSV(string[] values)
         {
             Id = Convert.ToInt32(values[0]);
-            GuestId = Convert.ToInt32(values[1]);
+            Guest = new Guest1();
+            Guest.Id = Convert.ToInt32(values[1]);
             Accommodation.Id = Convert.ToInt32(values[2]);
             ComingDate = Convert.ToDateTime(values[3]);
             LeavingDate = Convert.ToDateTime(values[4]);
@@ -40,7 +38,7 @@ namespace InitialProject.Model
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), GuestId.ToString(), Accommodation.Id.ToString(), ComingDate.ToString(), LeavingDate.ToString()};
+            string[] csvValues = { Id.ToString(), Guest.Id.ToString(), Accommodation.Id.ToString(), ComingDate.ToString(), LeavingDate.ToString()};
             return csvValues;
         }
     }

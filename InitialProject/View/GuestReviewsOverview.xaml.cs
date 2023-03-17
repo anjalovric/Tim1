@@ -35,9 +35,9 @@ namespace InitialProject.View
             Guest1 guest = new Guest1();
             foreach (GuestReview review in Reviews)
             {
-                guest = guest1Repository.GetAll().Find(n => n.Id == review.Guest.Id);
+                guest = guest1Repository.GetAll().Find(n => n.Id == review.Reservation.Guest.Id);
                 if(guest != null)
-                    review.Guest = guest;
+                    review.Reservation.Guest = guest;
             }
         }
 

@@ -63,7 +63,9 @@ namespace InitialProject.View
 
         private void makeNewReservation()
         {
-            AccommodationReservation newReservation = new AccommodationReservation(1, currentAccommodation, selectedDateRange.Start, selectedDateRange.End);
+            Guest1 guest = new Guest1("Anja", "Ducic");
+            guest.Id = 1;
+            AccommodationReservation newReservation = new AccommodationReservation(guest, currentAccommodation, selectedDateRange.Start, selectedDateRange.End);
             accommodationReservationRepository.Add(newReservation);
         }
 
