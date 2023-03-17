@@ -66,7 +66,7 @@ namespace InitialProject.View
             
             foreach (AccommodationReservation reservation in reservationRepository.GetAll())
             {
-                    bool stayedLessThan5DaysAgo = (reservation.LeavingDate.Date < DateTime.Now.Date) && (DateTime.Now.Date - reservation.LeavingDate.Date).TotalDays <= 5;
+                    bool stayedLessThan5DaysAgo = (reservation.Arrival.Date < DateTime.Now.Date) && (DateTime.Now.Date - reservation.Departure.Date).TotalDays <= 5;
                     bool alreadyReviewed = guestReviewRepository.HasReview(reservation);
                     bool isThisOwner = reservation.Accommodation.Owner.Id == WindowOwner.Id;
                     if (stayedLessThan5DaysAgo && !alreadyReviewed && isThisOwner)

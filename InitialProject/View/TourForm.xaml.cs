@@ -30,11 +30,11 @@ namespace InitialProject.View
     {
 
 
-        private readonly TourRepository _tourRepository;
-        private readonly LocationRepository _locationRepository;
-        private readonly CheckPointRepository _checkPointRepository;
-        private readonly TourImageRepository _tourImageRepository;
-        private readonly TourInstanceRepository _tourInstanceRepository;
+        private readonly TourRepository tourRepository;
+        private readonly LocationRepository locationRepository;
+        private readonly CheckPointRepository checkPointRepository;
+        private readonly TourImageRepository tourImageRepository;
+        private readonly TourInstanceRepository tourInstanceRepository;
         public int pointCounter = 0;
         public ObservableCollection<CheckPoint> TourPoints { get; set; }
         public ObservableCollection<TourImage> TourImages { get; set; }
@@ -44,143 +44,145 @@ namespace InitialProject.View
         public ObservableCollection<string> CitiesByCountry { get; set; }
 
         public Tour saved;
-        private int _tourId;
-        private string _hour;
+        private int tourId;
+        private string hour;
+        private User loggedInUser;
         public string Hours
         {
-            get => _hour;
+            get => hour;
             set
             {
-                if (value != _hour)
+                if (value != hour)
                 {
-                    _hour = value;
+                    hour = value;
                     OnPropertyChanged();
                 }
             }
         }
-        private string _name;
+        private string name;
         public string NameT
         {
-            get => _name;
+            get => name;
             set
             {
-                if (value != _name)
+                if (value != name)
                 {
-                    _name = value;
+                    name = value;
                     OnPropertyChanged();
                 }
             }
         }
-        private string _city;
+        private string city;
         public string City
         {
-            get => _city;
+            get => city;
             set
             {
-                if (value != _city)
+                if (value != city)
                 {
-                    _city = value;
+                    city = value;
                     OnPropertyChanged();
                 }
             }
         }
-        private string _country;
+        private string country;
         public string Country
         {
-            get => _country;
+            get => country;
             set
             {
-                if (value != _country)
+                if (value != country)
                 {
-                    _country = value;
+                    country = value;
                     OnPropertyChanged();
                 }
             }
         }
-        private string _description;
+        private string description;
         public string Description
         {
-            get => _description;
+            get => description;
             set
             {
-                if (value != _description)
+                if (value != description)
                 {
-                    _description = value;
+                    description = value;
                     OnPropertyChanged();
                 }
             }
         }
-        private string _language;
+        private string language;
         public string LanguageT
         {
-            get => _language;
+            get => language;
             set
             {
-                if (value != _language)
+                if (value != language)
                 {
-                    _language = value;
+                    language = value;
                     OnPropertyChanged();
                 }
             }
         }
-        private string _duration;
+        private string duration;
 
         public string Duration
         {
-            get => _duration;
+            get => duration;
             set
             {
-                if (value != _duration)
+                if (value != duration)
                 {
-                    _duration = value;
+                    duration = value;
                     OnPropertyChanged();
                 }
             }
         }
 
-        private string _maxGuests;
+        private string maxGuests;
 
         public string MaxGuests
         {
-            get => _maxGuests;
+            get => maxGuests;
             set
             {
-                if (value != _maxGuests)
+                if (value != maxGuests)
                 {
-                    _maxGuests = value;
+                   maxGuests = value;
                     OnPropertyChanged();
                 }
             }
         }
-        private DateTime _start;
+        private DateTime start;
         public DateTime Start
         {
-            get => _start;
+            get => start;
             set
             {
-                if (value != _start)
+                if (value != start)
                 {
-                    _start = value;
+                    start = value;
                     OnPropertyChanged();
                 }
             }
         }
-        public TourForm(ObservableCollection<TourInstance> todayInstances)
+        public TourForm(ObservableCollection<TourInstance> todayInstances,User user)
         {
             InitializeComponent();
             DataContext = this;
-            _tourRepository = new TourRepository();
-            _locationRepository = new LocationRepository();
-            _checkPointRepository = new CheckPointRepository();
-            _tourImageRepository = new TourImageRepository();
-            _tourInstanceRepository = new TourInstanceRepository();
+            tourRepository = new TourRepository();
+            locationRepository = new LocationRepository();
+            checkPointRepository = new CheckPointRepository();
+            tourImageRepository = new TourImageRepository();
+            tourInstanceRepository = new TourInstanceRepository();
             TourPoints = new ObservableCollection<CheckPoint>();
             TourImages = new ObservableCollection<TourImage>();
             Instances = new ObservableCollection<TourInstance>();
             TodayInstances = todayInstances;
-            Countries = new ObservableCollection<string>(_locationRepository.GetAllCountries());
+            Countries = new ObservableCollection<string>(locationRepository.GetAllCountries());
             CitiesByCountry = new ObservableCollection<string>();
             ComboBoxCity.IsEnabled = false;
+            loggedInUser = user;
 
         }
 
@@ -193,20 +195,18 @@ namespace InitialProject.View
 
 
 
-        private void AddTour(object sender, RoutedEventArgs e)
+        private void AddTourClick(object sender, RoutedEventArgs e)
         {
             if (IsValid())
             {
 
-                Location newLocation = _locationRepository.GetLocation(Country, City);
+                Location newLocation = locationRepository.GetLocation(Country, City);
                 
-                Tour newTour = new Tour(NameT, Convert.ToInt32(_maxGuests), Convert.ToDouble(_duration), newLocation, _description, LanguageT);
-                Tour savedTour = _tourRepository.Save(newTour);
-                _tourId = savedTour.Id;
+                Tour newTour = new Tour(NameT, Convert.ToInt32(maxGuests), Convert.ToDouble(duration), newLocation, description, LanguageT);
+                Tour savedTour = tourRepository.Save(newTour);
+                tourId = savedTour.Id;
                 saved = savedTour;
-                //TourInstance newTourInstance = new TourInstance(savedTour, Start, Hours);
-                //TourInstance savedTourInstance = _tourInstanceRepository.Save(newTourInstance);
-
+               
                 UpdateCheckPoints();
                 AddImages();
                 SaveInstances(savedTour);
@@ -216,8 +216,9 @@ namespace InitialProject.View
         }
         private bool IsValid()
         {
-            return IsNameValid() && IsMaximuGuestsNumberValid() && IsDurationValid() && IsCityValid() && IsCountryValid() && IsLanguageValid()
-                   && IsDescriptionValid() && IsCheckPointsValid() && IsImagesValid() && IsDateTimeValid();
+            return IsNameValid() && IsMaximuGuestsNumberValid() && IsDurationValid()  && IsCountryValid() && IsCityValid() && IsDescriptionValid() 
+                    && IsLanguageValid() && IsDateTimeValid()
+                    && IsCheckPointsValid() && IsImagesValid() ;
 
         }
         private bool IsNameValid()
@@ -228,14 +229,14 @@ namespace InitialProject.View
             bool isValid = false;
             if (TourNameTB.Text.Trim().Equals(""))
             {
-                isValid = false;
+               
                 TourNameTB.BorderBrush = Brushes.Red;
                 TourNameTB.BorderThickness = new Thickness(1);
                 NameLabel.Content = "This field can't be empty";
             }
             else if (!match.Success)
             {
-                isValid = false;
+                
                 TourNameTB.BorderBrush = Brushes.Red;
                 TourNameTB.BorderThickness = new Thickness(1);
                 NameLabel.Content = "Invalid name";
@@ -256,7 +257,7 @@ namespace InitialProject.View
             bool isValid = false;
             if (MaxGuestsTB.Text.Trim().Equals(""))
             {
-                isValid = false;
+
                 MaxGuestsTB.BorderBrush = Brushes.Red;
                 MaxGuestsTB.BorderThickness = new Thickness(1);
                 MaxGuestLabel.Content = "This field can't be empty";
@@ -320,12 +321,14 @@ namespace InitialProject.View
         {
             if (ComboBoxCity.SelectedItem == null)
             {
+                ComboBoxCity.BorderThickness = new Thickness(1);
                 ComboBoxCity.BorderBrush = Brushes.Red;
                 CityLabel.Content = "Can't be empty";
                 return false;
             }
             else
             {
+                ComboBoxCity.BorderThickness= new Thickness(1);
                 ComboBoxCity.BorderBrush=Brushes.Green;
                 CityLabel.Content = string.Empty;
                 return true;
@@ -337,12 +340,14 @@ namespace InitialProject.View
         {
             if (ComboBoxCountry.SelectedItem == null)
             {
+                ComboBoxCountry.BorderThickness = new Thickness(1);
                 ComboBoxCountry.BorderBrush = Brushes.Red;
                 CountryLabel.Content = "Can't be empty";
                 return false;
             }
             else
-            {
+            {   
+                ComboBoxCountry.BorderThickness = new Thickness(1);
                 ComboBoxCountry.BorderBrush = Brushes.Green;
                 CountryLabel.Content = string.Empty;
                 return true;
@@ -358,14 +363,14 @@ namespace InitialProject.View
             bool isValid = false;
             if (LanguageTB.Text.Trim().Equals(""))
             {
-                isValid = false;
+             
                 LanguageTB.BorderBrush = Brushes.Red;
                 LanguageTB.BorderThickness = new Thickness(1);
                 LanguageLabel.Content = "This field can't be empty";
             }
             else if (!match.Success)
             {
-                isValid = false;
+                
                 LanguageTB.BorderBrush = Brushes.Red;
                 LanguageTB.BorderThickness = new Thickness(1);
                 LanguageLabel.Content = "Only can contains letters and one space between words";
@@ -388,14 +393,14 @@ namespace InitialProject.View
             bool isValid = false;
             if (DescriptionTB.Text.Trim().Equals(""))
             {
-                isValid = false;
+                
                 DescriptionTB.BorderBrush = Brushes.Red;
                 DescriptionTB.BorderThickness = new Thickness(1);
                 DescriptionLabel.Content = "This field can't be empty";
             }
             else if (!match.Success)
             {
-                isValid = false;
+               
                 DescriptionTB.BorderBrush = Brushes.Red;
                 DescriptionTB.BorderThickness = new Thickness(1);
                 DescriptionLabel.Content = "Invalid description";
@@ -476,24 +481,19 @@ namespace InitialProject.View
             {
                 if (instance.Finished == false)
                 {
-                    string h = instance.StartClock.Split(':')[0];
-                    string m = instance.StartClock.Split(":")[1];
-                    string s = instance.StartClock.Split(":")[2];
+                    string hour = instance.StartClock.Split(':')[0];
+                    string min = instance.StartClock.Split(":")[1];
+                    string sec = instance.StartClock.Split(":")[2];
 
-
-                    string time = DateTime.Today.TimeOfDay.ToString();
-                    string hour = time.Split(":")[0];
-                    string minute = time.Split(":")[1];
-                    string second = DateTime.Now.Second.ToString();
-                    if (Convert.ToInt32(h) > Convert.ToInt32(hour))
+                    if (Convert.ToInt32(hour) > DateTime.Now.Hour)
                     {
                         TodayInstances.Add(instance);
                     }
-                    else if (Convert.ToInt32(h) == Convert.ToInt32(hour) && Convert.ToInt32(m) > Convert.ToInt32(minute))
+                    else if (Convert.ToInt32(hour) == DateTime.Now.Hour && Convert.ToInt32(min) > DateTime.Now.Minute)
                     {
                         TodayInstances.Add(instance);
                     }
-                    else if (Convert.ToInt32(h) == Convert.ToInt32(hour) && Convert.ToInt32(m) == Convert.ToInt32(minute) && Convert.ToInt32(s) > Convert.ToInt32(second))
+                    else if (Convert.ToInt32(hour) == DateTime.Now.Hour && Convert.ToInt32(min) == DateTime.Now.Minute && Convert.ToInt32(sec) > DateTime.Now.Second)
                     {
                         TodayInstances.Add(instance);
                     }
@@ -502,72 +502,72 @@ namespace InitialProject.View
         }
         private void AddImages()
         {
-            List<TourImage> tourImages = _tourImageRepository.GetAll();
+            List<TourImage> tourImages = tourImageRepository.GetAll();
             foreach (TourImage image in tourImages)
             {
                 if (image.TourId == -1)
                 {
-                    image.TourId = _tourId;
-                    _tourImageRepository.Update(image);
+                    image.TourId = tourId;
+                    tourImageRepository.Update(image);
                 }
             }
         }
 
         private void UpdateCheckPoints()
         {
-            List<CheckPoint> checkPoints = _checkPointRepository.GetAll();
+            List<CheckPoint> checkPoints = checkPointRepository.GetAll();
             int i = 1;
             foreach (CheckPoint checkPoint in checkPoints)
             {
                 if (checkPoint.TourId == -1)
                 {
-                    checkPoint.TourId = _tourId;
+                    checkPoint.TourId = tourId;
                     checkPoint.Order = i;
-                    _checkPointRepository.Update(checkPoint);
+                    checkPointRepository.Update(checkPoint);
                     i++;
                 }
             }
         }
 
-        private void AddCheckPoint(object sender, RoutedEventArgs e)
+        private void AddCheckPointClick(object sender, RoutedEventArgs e)
         {
-            CheckPointForm form = new CheckPointForm(_checkPointRepository,TourPoints,this.AddNewTour);
+            CheckPointForm form = new CheckPointForm(checkPointRepository,TourPoints);
             form.Show();
 
         }
 
-        private void CancelTour(object sender, RoutedEventArgs e)
+        private void CancelTourClick(object sender, RoutedEventArgs e)
         {
-            List<CheckPoint> checkPoints = _checkPointRepository.GetAll();
+            List<CheckPoint> checkPoints = checkPointRepository.GetAll();
             foreach (CheckPoint checkPoint in checkPoints)
             {
                 if (checkPoint.TourId == -1)
                 {
-                    _checkPointRepository.Delete(checkPoint);
+                    checkPointRepository.Delete(checkPoint);
                 }
             }
 
-            List<TourImage> tourImages = _tourImageRepository.GetAll();
+            List<TourImage> tourImages = tourImageRepository.GetAll();
             foreach (TourImage image in tourImages)
             {
                 if (image.TourId == -1)
                 { 
-                    _tourImageRepository.Delete(image);
+                    tourImageRepository.Delete(image);
                 }
             }
             
             this.Close();
         }
 
-        private void AddTourImage(object sender, RoutedEventArgs e)
+        private void AddTourImageClick(object sender, RoutedEventArgs e)
         {
-            TourImageForm tourImageForm = new TourImageForm(_tourImageRepository,TourImages);
+            TourImageForm tourImageForm = new TourImageForm(tourImageRepository,TourImages);
             tourImageForm.Show();
         }
 
-        private void NewInstance(object sender, RoutedEventArgs e)
+        private void NewInstanceClick(object sender, RoutedEventArgs e)
         {
-            NewTourInstanceDate newTourInstance = new NewTourInstanceDate(saved, Instances);
+            NewTourInstanceDate newTourInstance = new NewTourInstanceDate(Instances,loggedInUser);
             newTourInstance.Show();
         }
 
@@ -576,7 +576,7 @@ namespace InitialProject.View
             if (ComboBoxCountry.SelectedItem != null)
             {
                 CitiesByCountry.Clear();
-                foreach (string city in _locationRepository.GetCitiesByCountry((string)ComboBoxCountry.SelectedItem))
+                foreach (string city in locationRepository.GetCitiesByCountry((string)ComboBoxCountry.SelectedItem))
                 {
                     CitiesByCountry.Add(city);
                 }

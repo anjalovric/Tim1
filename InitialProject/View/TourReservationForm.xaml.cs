@@ -29,10 +29,11 @@ namespace InitialProject.View
         private int GuestsNumber;
         private int GuestId;
         private TourInstance CurrentTourInstance;
-        private TourReservationRepository _tourReservationRepository;
-        private List<TourReservation> _tourReservations;
-        private List<TourInstance> _tourInstances;
-        private TourInstanceRepository _tourInstanceRepository;
+        private TourReservationRepository tourReservationRepository;
+        private List<TourReservation> tourReservations;
+        private List<TourInstance> tourInstances;
+        private TourInstanceRepository tourInstanceRepository;
+        private Guest2Overview Guest2Overview;
         public ObservableCollection<TourInstance> TourInstances { get; set; }
         public Label Label { get; set; }
        
@@ -43,17 +44,18 @@ namespace InitialProject.View
             CurrentTourInstance = currentTourInstance;
             this.TourInstances = TourInstance;
             this.Label = label;
-            this._tourInstanceRepository = tourInstanceRepository;
-            _tourInstances = _tourInstanceRepository.GetAll();
-            _tourReservationRepository = new TourReservationRepository();
-            _tourReservations = _tourReservationRepository.GetAll();
+            this.tourInstanceRepository = tourInstanceRepository;
+            tourInstances = tourInstanceRepository.GetAll();
+            tourReservationRepository = new TourReservationRepository();
+            tourReservations = tourReservationRepository.GetAll();
+            Guest2Overview = new Guest2Overview();
             GetCurrentGuestsNumber();
             GuestId = guestId;
         }
         private int GetReservationsNumber()
         {
             int reservationsNumber = 0;
-            foreach (TourReservation tourReservation in _tourReservations)
+            foreach (TourReservation tourReservation in tourReservations)
             {
                 if (CurrentTourInstance.Id == tourReservation.TourInstanceId)
                 {
@@ -66,7 +68,7 @@ namespace InitialProject.View
         }
         public int GetCurrentGuestsNumber()
         {
-            if (_tourReservations.Count == 0 || GetReservationsNumber()==_tourReservations.Count)
+            if (tourReservations.Count == 0 || GetReservationsNumber()==tourReservations.Count)
             {
                 CurrentGuestsNumber = CurrentTourInstance.Tour.MaxGuests;
             }
@@ -96,19 +98,21 @@ namespace InitialProject.View
         public void FindAvailableTours()
         {
             Boolean existed = false;
-            List<TourInstance> listTours = _tourInstanceRepository.GetAll();
+            ObservableCollection<TourInstance> ListTourInstances= new ObservableCollection<TourInstance>(tourInstanceRepository.GetAll());
+            Guest2Overview.SetLocations();
+            Guest2Overview.SetTours(ListTourInstances);
             TourInstances.Clear();
-            foreach (TourInstance tourInstance in listTours)
+            foreach (TourInstance tourInstance in ListTourInstances)
             {
-                foreach (TourReservation tourReservation in _tourReservations)
+                foreach (TourReservation tourReservation in tourReservations)
                 {
-                    if (tourReservation.TourInstanceId == tourInstance.Id && tourInstance.Id != CurrentTourInstance.Id && tourInstance.Tour.Location.City == CurrentTourInstance.Tour.Location.City && tourInstance.Tour.Location.Country == CurrentTourInstance.Tour.Location.Country && tourReservation.CurrentGuestsNumber > 0)
+                    if (tourReservation.TourInstanceId == tourInstance.Id && tourInstance.Id != CurrentTourInstance.Id && tourInstance.Tour.Location.City == CurrentTourInstance.Tour.Location.City && tourInstance.Tour.Location.Country == CurrentTourInstance.Tour.Location.Country && tourReservation.CurrentGuestsNumber > 0 && tourInstance.Finished==false)
                     {
                         TourInstances.Add(tourInstance);
                         existed = true;
                     }
                 }
-                if (!existed && CurrentTourInstance.Id != tourInstance.Id && tourInstance.Tour.Location.City == CurrentTourInstance.Tour.Location.City && tourInstance.Tour.Location.Country == CurrentTourInstance.Tour.Location.Country)
+                if (tourInstance.Finished==false && !existed && CurrentTourInstance.Id != tourInstance.Id && tourInstance.Tour.Location.City == CurrentTourInstance.Tour.Location.City && tourInstance.Tour.Location.Country == CurrentTourInstance.Tour.Location.Country)
                 {
                     TourInstances.Add(tourInstance);
                 }
@@ -130,10 +134,10 @@ namespace InitialProject.View
                 MessageBox.Show("There is no enough places for choosen number of people. Available number of places for guest is " + CurrentGuestsNumber + ".");
                 return;
             }
-            else if (_tourReservations.Count == 0)
+            else if (tourReservations.Count == 0)
             {
                 TourReservation newTourReservation = new TourReservation(CurrentTourInstance.Id, GuestsNumber, GuestId);
-                _tourReservationRepository.Save(newTourReservation);
+                tourReservationRepository.Save(newTourReservation);
             }
             ChangeTourReservation();
             this.Close();
@@ -141,11 +145,11 @@ namespace InitialProject.View
         private void ChangeTourReservation()
         {
             Boolean changed = false;
-            foreach (TourReservation tourReservation in _tourReservations)
+            foreach (TourReservation tourReservation in tourReservations)
             {
                 if (CurrentTourInstance.Id == tourReservation.TourInstanceId)
                 {
-                    _tourReservationRepository.Update(tourReservation, GuestsNumber);
+                    tourReservationRepository.Update(tourReservation, GuestsNumber);
                     changed = true;
                 }
                 else if (changed)
@@ -156,7 +160,7 @@ namespace InitialProject.View
             if (!changed)
             {
                 TourReservation newTourReservation = new TourReservation(CurrentTourInstance.Id, GuestsNumber, GuestId);
-                _tourReservationRepository.Save(newTourReservation);
+                tourReservationRepository.Save(newTourReservation);
             }
         }
         private void Cancel_Click(object sender, RoutedEventArgs e)

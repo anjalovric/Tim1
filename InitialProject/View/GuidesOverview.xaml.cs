@@ -25,37 +25,73 @@ namespace InitialProject.View
     public partial class GuidesOverview : Window,INotifyPropertyChanged
     {
         public ObservableCollection<TourInstance> Tours { get; set; }
-        public TourInstance _selected;
-        private TourRepository _tourRepository;
-        private TourInstanceRepository _tourInstanceRepository;
-
+        private TourRepository tourRepository;
+        private TourInstanceRepository tourInstanceRepository;
+        private LocationRepository locationRepository;
+        private User loggedInUser;
+        private TourInstance selected;
         public TourInstance Selected
         {
-            get { return _selected; }
+            get { return selected; }
             set
             {
-                if (value != _selected)
-                    _selected = value;
+                if (value != selected)
+                   selected = value;
                 StartButton.IsEnabled= true;
                 OnPropertyChanged();
             }
         }
-        public GuidesOverview()
+        public GuidesOverview(User user)
         {
             InitializeComponent();
             DataContext = this;
-            _tourRepository = new TourRepository();
-            _tourInstanceRepository = new TourInstanceRepository();
-            Tours = new ObservableCollection<TourInstance>(_tourInstanceRepository.GetByStart(DateTime.Now));
-            if(Selected ==null)
+            tourRepository = new TourRepository();
+            tourInstanceRepository = new TourInstanceRepository();
+            locationRepository = new LocationRepository();
+
+            Tours = new ObservableCollection<TourInstance>(tourInstanceRepository.GetByStart());
+            MakeLocationTourConnection();
+            MakeTourTourInstanceConnection();
+            loggedInUser = user;
+
+            if (Selected ==null)
                 StartButton.IsEnabled=false;
             
             
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void MakeLocationTourConnection()
         {
-            TourForm tourForm = new TourForm(Tours);
+            List<Location> locations = locationRepository.GetAll();
+            List<Tour> tours = tourRepository.GetAll();
+            foreach (Location location in locations)
+            {
+                foreach (Tour tour in tours)
+                {
+                    if (location.Id == tour.Location.Id)
+                        tour.Location = location;
+                }
+            }
+        }
+
+        private void MakeTourTourInstanceConnection()
+        {
+            List<TourInstance> tourInstances=tourInstanceRepository.GetAll();
+            List<Tour> tours = tourRepository.GetAll();
+            foreach (TourInstance tourInstance in tourInstances)
+            {
+                foreach (Tour tour in tours)
+                {
+                    if (tour.Id == tourInstance.Tour.Id)
+                    {
+                        tourInstance.Tour = tour;
+                    }
+                }
+            }
+        }
+        private void CreateNewTour(object sender, RoutedEventArgs e)
+        {
+            TourForm tourForm = new TourForm(Tours,loggedInUser);
             tourForm.Show();
 
         }

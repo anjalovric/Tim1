@@ -35,7 +35,7 @@
 
 
         <TextBox x:Name="nameInput"  Grid.Row="1" Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="220" Height="40" FontSize="18" />
-        <ComboBox x:Name="countryInput" ItemsSource="{Binding Countries}" SelectedItem="{Binding Location.Country}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="220" Height="40" FontSize="18" SelectionChanged="countryInput_SelectionChanged"/>
+        <ComboBox x:Name="countryInput" ItemsSource="{Binding Countries}" SelectedItem="{Binding Location.Country}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="220" Height="40" FontSize="18" SelectionChanged="CountryInput_SelectionChanged"/>
         <ComboBox x:Name="cityInput" ItemsSource="{Binding CitiesByCountry}" SelectedItem="{Binding Location.City}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="220" Height="40" Margin="266,0,0,0" Grid.ColumnSpan="2" FontSize="18"/>
 
         <CheckBox x:Name="apartment"  Grid.Row="2" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Content="Apartment" Margin="0,3,0,0"></CheckBox>
@@ -43,18 +43,18 @@
         <CheckBox x:Name="cottage" Grid.Row="2" Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Cottage" Margin="0,0,0,3" Width="68" Height="16"/>
 
         <TextBox x:Name="numberOfDays" Grid.Row="2" Grid.Column="1" Text="" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="123" TextAlignment="Center" Height="30" Background="#FFDFDCDC" FontSize="16" />
-        <Button x:Name="incrementNumberOfDays" Click="IncrementDaysNumber" Content="+" TextElement.FontSize="15" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="30" Margin="200,0,0,0" Width="38" Background="#FFDDDDDD">
+        <Button x:Name="incrementNumberOfDays" Click="IncrementDaysNumberButton_Click" Content="+" TextElement.FontSize="15" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="30" Margin="200,0,0,0" Width="38" Background="#FFDDDDDD">
 
         </Button>
-        <Button x:Name="decrementNumberOfDays" Click="DecrementDaysNumber"  Content="-" TextElement.FontSize="15" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="30" Width="38" Margin="28,0,0,0">
+        <Button x:Name="decrementNumberOfDays" Click="DecrementDaysNumberButton_Click"  Content="-" TextElement.FontSize="15" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="30" Width="38" Margin="28,0,0,0">
 
         </Button>
 
         <TextBox x:Name="numberOfGuests" Grid.Row="2"  Grid.Column="2" Text="" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="123" TextAlignment="Center" Height="30" Background="#FFDFDCDC" FontSize="16"/>
-        <Button x:Name="incrementNumberOfGuests" Click="IncrementGuestsNumber"  Content="+" TextElement.FontSize="15" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="30" Margin="200,0,0,0" Width="38" Background="#FFDDDDDD">
+        <Button x:Name="incrementNumberOfGuests" Click="IncrementGuestsNumberButton_Click"  Content="+" TextElement.FontSize="15" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="30" Margin="200,0,0,0" Width="38" Background="#FFDDDDDD">
 
         </Button>
-        <Button x:Name="decrementNumberOfGuests" Click="DecrementGuestsNumber" Content="-" TextElement.FontSize="15" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="30" Width="38" Margin="28,0,0,0">
+        <Button x:Name="decrementNumberOfGuests" Click="DecrementGuestsNumberButton_Click" Content="-" TextElement.FontSize="15" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="30" Width="38" Margin="28,0,0,0">
 
         </Button>
 
@@ -69,14 +69,14 @@
                 <DataGridTemplateColumn x:Name="photosView" Header="Photos" Width="0.9*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Name="photosViewButton" Content="View" Click="ViewPhotos"/>
+                            <Button Name="photosViewButton" Content="View" Click="ViewPhotosButton_Click"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTemplateColumn x:Name="reservation" Header="Reservation"  Width="1.38*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Name="reservationButton" Content="RESERVE" TextElement.FontWeight="ExtraBold" Click="Reserve"/>
+                            <Button Name="reservationButton" Content="RESERVE" TextElement.FontWeight="ExtraBold" Click="ReserveButton_Click"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -85,10 +85,10 @@
 
 
         </DataGrid>
-        <Button x:Name="Search" Content="Search" Margin="184,59,10,0" Height="38" Click="Search_Click" Grid.Column="2" Grid.Row="3" FontWeight="Bold" VerticalAlignment="Top"/>
+        <Button x:Name="Search" Content="Search" Margin="184,59,10,0" Height="38" Click="SearchButton_Click" Grid.Column="2" Grid.Row="3" FontWeight="Bold" VerticalAlignment="Top"/>
         <Button Margin="178,10,10,14" FontSize="16" Grid.Column="2" Click="SignOut_Click">Sign out</Button>
 
-        <Button Width="Auto" FontWeight="Bold" Margin="30,11,157,287" Grid.Row="3" Click="ShowAll_Click">Show all</Button>
+        <Button Width="Auto" FontWeight="Bold" Margin="30,11,157,287" Grid.Row="3" Click="ShowAllButton_Click">Show all</Button>
 
         <Label x:Name="numberOfDaysLabel" HorizontalAlignment="Center" Width="246" Height="29" Margin="0,4,0,0" VerticalAlignment="Top" Grid.Row="3" Grid.Column="1"/>
         <Label x:Name="numberOfGuestsLabel" HorizontalAlignment="Center" Width="247" Height="28" Margin="0,5,0,0" VerticalAlignment="Top" Grid.Row="3" Grid.Column="2"/>

@@ -25,44 +25,49 @@ namespace InitialProject.View
     /// </summary>
     public partial class NewTourInstanceDate : Window, INotifyPropertyChanged
     {
-        private readonly TourInstanceRepository _tourInstanceRepository;
-        private string _startHour;
-        public string InstanceStartHour 
-        {
-            get => _startHour;
-            set
-            {
-                if (value != _startHour)
-                {
-                    _startHour = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-        private DateTime _start;
+        
+        private readonly GuideRepository guideRepository;
+        private Guide currentGuide;
         private TourInstance newInstance;
         private ObservableCollection<TourInstance> tourInstances;
 
-        public DateTime InstanceStartDate {
-            get => _start;
+
+        private string startTime;
+        public string InstanceStartHour 
+        {
+            get => startTime;
             set
             {
-                if (value != _start)
+                if (value != startTime)
                 {
-                    _start = value;
+                    startTime = value;
                     OnPropertyChanged();
                 }
             }
         }
-        private Tour _currentTour;
-        public NewTourInstanceDate(Tour tour, ObservableCollection<TourInstance> instances)
+
+        private DateTime startDate;
+        public DateTime InstanceStartDate {
+            get => startDate;
+            set
+            {
+                if (value != startDate)
+                {
+                    startDate = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        
+        public NewTourInstanceDate( ObservableCollection<TourInstance> instances,User user)
         {
             InitializeComponent();
             DataContext = this;
-            _currentTour = tour;
             newInstance = new TourInstance();
             tourInstances = instances;
-            HourLabel.Content = "Time format should be hh:mm:ss";
+            guideRepository = new GuideRepository();
+            
+            currentGuide = guideRepository.GetByUsername(user.Username);
         }
 
         private void OK_Click(object sender, RoutedEventArgs e)
@@ -71,10 +76,12 @@ namespace InitialProject.View
             {
                 newInstance.StartDate = InstanceStartDate;
                 newInstance.StartClock = InstanceStartHour;
+                newInstance.Guide = currentGuide;
                 tourInstances.Add(newInstance);
                 this.Close();
             }
         }
+
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
@@ -109,6 +116,7 @@ namespace InitialProject.View
             var regex = "(([0-1][0-9])|(2[0-3]))\\:[0-5][0-9]\\:[0-5][0-9]$";
             Match match = Regex.Match(content, regex, RegexOptions.IgnoreCase);
             bool isValid = false;
+
             if (!match.Success)
             {
                 HourLabel.Content = "Invalid format!Time format should be hh:mm:ss";
@@ -125,35 +133,34 @@ namespace InitialProject.View
                 int minute = Convert.ToInt32(times.Split(':')[1]);
                 int second = Convert.ToInt32(times.Split(':')[2]);
 
-                if (hour < Convert.ToInt32(DateTime.Now.Hour.ToString()))
+                if (hour < DateTime.Now.Hour)
                 {
                     HourLabel.Content = "Can't choose time for past";
                     InstanceStartHourTB.BorderBrush = Brushes.Red;
-                    isValid = false;
                 }
-                else if(hour> Convert.ToInt32(DateTime.Now.Hour.ToString()))
+                else if(hour> DateTime.Now.Hour)
                 {
                     InstanceStartHourTB.BorderBrush = Brushes.Green;
                     HourLabel.Content=string.Empty;
                     isValid = true;
                 }
-                else if (hour == Convert.ToInt32(DateTime.Now.Hour.ToString()) && minute < Convert.ToInt32(DateTime.Now.Minute.ToString()))
+                else if (hour == DateTime.Now.Hour && minute < DateTime.Now.Minute)
                 {
                     InstanceStartHourTB.BorderBrush = Brushes.Red;
                     HourLabel.Content = "Can't choose time for past";
                 }
-                else if (hour == Convert.ToInt32(DateTime.Now.Hour.ToString()) && minute > Convert.ToInt32(DateTime.Now.Minute.ToString()))
+                else if (hour == DateTime.Now.Hour && minute > DateTime.Now.Minute)
                 {
                     InstanceStartHourTB.BorderBrush = Brushes.Green;
                     HourLabel.Content =string.Empty;
                     isValid =true;
                 }
-                else if (hour == Convert.ToInt32(DateTime.Now.Hour.ToString()) && minute == Convert.ToInt32(DateTime.Now.Minute.ToString()) && second < Convert.ToInt32(DateTime.Now.Second.ToString()))
+                else if (hour == DateTime.Now.Hour && minute == DateTime.Now.Minute && second < DateTime.Now.Second)
                 {
                     InstanceStartHourTB.BorderBrush = Brushes.Red;
                     HourLabel.Content = "Can't choose time for past";
                 }
-                else if (hour == Convert.ToInt32(DateTime.Now.Hour.ToString()) && minute == Convert.ToInt32(DateTime.Now.Minute.ToString()) && second > Convert.ToInt32(DateTime.Now.Second.ToString()))
+                else if (hour == DateTime.Now.Hour && minute == DateTime.Now.Minute && second > DateTime.Now.Second)
                 {
                     InstanceStartHourTB.BorderBrush = Brushes.Green;
                     HourLabel.Content = string.Empty;
