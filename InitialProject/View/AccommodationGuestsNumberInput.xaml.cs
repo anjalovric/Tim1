@@ -50,10 +50,16 @@ namespace InitialProject.View
             }
         }
 
-        private void MakeNewReservation()
+        private Guest1 MakeNewGuest()
         {
             Guest1 guest = new Guest1("Anja", "Ducic");
             guest.Id = 1;
+            return guest;
+        }
+
+        private void MakeNewReservation()
+        {
+            Guest1 guest = MakeNewGuest();
             AccommodationReservation newReservation = new AccommodationReservation(guest, currentAccommodation, selectedDateRange.Arrival, selectedDateRange.Departure);
             accommodationReservationRepository.Add(newReservation);
         }

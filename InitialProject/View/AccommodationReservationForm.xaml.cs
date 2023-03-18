@@ -45,14 +45,14 @@ namespace InitialProject.View
             accommodationReservationRepository = new AccommodationReservationRepository();
             this.accommodationRepository = accommodationRepository;
             this.reservations = new List<AccommodationReservation>(accommodationReservationRepository.GetAll());
-            setAccommodation();
+            SetAccommodation();
 
             availableDates = new List<DateTime>();
             availableDatesHelp = new List<DateTime>();
             availableDateRanges = new List<List<DateTime>>();
         }
 
-        private void setAccommodation()
+        private void SetAccommodation()
         {
             foreach (AccommodationReservation reservation in reservations)
             {
