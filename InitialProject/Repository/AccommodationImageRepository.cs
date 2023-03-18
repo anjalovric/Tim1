@@ -32,11 +32,8 @@ namespace InitialProject.Repository
             return _accommodationImages.Max(c => c.Id) + 1;
         }
 
-        public int Add(string url, Accommodation accommodation)
+        public int Add(AccommodationImage image)
         {
-            AccommodationImage image = new AccommodationImage();
-            image.Accommodation = accommodation;
-            image.Url = url;
             image.Id = NextId();
             _accommodationImages.Add(image);
             _serializer.ToCSV(FilePath, _accommodationImages);

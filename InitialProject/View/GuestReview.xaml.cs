@@ -37,8 +37,10 @@ namespace InitialProject.View
             InitializeComponent();
             DataContext = this;
             review = new GuestReview();
+
             review.Reservation = reservationToReview;
             ReservationsToReview = allReservationsToReview;
+
             OkButton.IsEnabled = false;
             cleanlinessIsChecked = false;
             followingRulesIsChecked = false;
@@ -51,12 +53,22 @@ namespace InitialProject.View
 
         private void OkButton_Click(object sender, RoutedEventArgs e)
         {
-            GuestReviewRepository guestReviewRepository = new GuestReviewRepository();
-            guestReviewRepository.Save(Review);
+            SaveGuestReview();
+            RefreshReservationsForView();
+            this.Close();
+        }
+
+        private void RefreshReservationsForView()
+        {
             ReservationsToReview.Remove(Review.Reservation);
             OwnerOverview ownerOverview = Owner as OwnerOverview;
             ownerOverview.RefreshAlerts();
-            this.Close();
+        }
+
+        private void SaveGuestReview()
+        {
+            GuestReviewRepository guestReviewRepository = new GuestReviewRepository();
+            guestReviewRepository.Save(Review);
         }
 
         private void Cleanliness_Checked(object sender, RoutedEventArgs e)

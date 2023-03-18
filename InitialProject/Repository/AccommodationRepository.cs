@@ -20,7 +20,6 @@ namespace InitialProject.Repository
         {
             _serializer = new Serializer<Accommodation>();
             _accommodations = _serializer.FromCSV(FilePath);
-
         }
 
         public int NextId()

@@ -200,7 +200,7 @@ namespace InitialProject.View
             if (IsValid())
             {
 
-                Location newLocation = locationRepository.GetLocation(Country, City);
+                Location newLocation = locationRepository.GetByCityAndCountry(Country, City);
                 
                 Tour newTour = new Tour(NameT, Convert.ToInt32(maxGuests), Convert.ToDouble(duration), newLocation, description, LanguageT);
                 Tour savedTour = tourRepository.Save(newTour);
