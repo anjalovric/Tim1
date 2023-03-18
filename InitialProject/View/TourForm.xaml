@@ -39,10 +39,10 @@
             <ComboBox x:Name="ComboBoxCity" ItemsSource="{Binding CitiesByCountry}" SelectedItem="{Binding City}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" Grid.Row="4" Grid.Column="1" Margin="0,10,0,10"/>
             <TextBox x:Name="DescriptionTB" Grid.Row="5" Grid.Column="1" Text="{Binding Path=Description,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}" Margin="0,10,0,10"/>
             <TextBox x:Name="LanguageTB" Grid.Row="6" Grid.Column="1" Text="{Binding Path=LanguageT,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}" Margin="0,10,0,10"/>
-            <Button x:Name="CheckPointTB" Grid.Row="9" Grid.Column="0" Click="AddCheckPointClick" Margin="125,10,125,10">Add checkpoint</Button>
-            <Button Grid.Row="9" Grid.Column="1" Click="AddTourImageClick" Margin="125,10,125,10">Add tour image</Button>
-            <Button x:Name="AddNewTour" Height="30" Click="AddTourClick" Margin="125,141,125,-46" Grid.Row="10">Add Tour</Button>
-            <Button x:Name="Cancel" Height="30" Click="CancelTourClick" Margin="125,144,125,-43" Grid.Row="10" Grid.Column="1" >Cancel</Button>
+            <Button x:Name="CheckPointTB" Grid.Row="9" Grid.Column="0" Click="AddCheckPoint_Click" Margin="125,10,125,10">Add checkpoint</Button>
+            <Button Grid.Row="9" Grid.Column="1" Click="AddTourImage_Click" Margin="125,10,125,10">Add tour image</Button>
+            <Button x:Name="AddNewTour" Height="30" Click="AddTour_Click" Margin="125,141,125,-46" Grid.Row="10">Add Tour</Button>
+            <Button x:Name="Cancel" Height="30" Click="CancelTour_Click" Margin="125,144,125,-43" Grid.Row="10" Grid.Column="1" >Cancel</Button>
             <DataGrid x:Name="PointsGrid" IsReadOnly="True" Grid.Row="10" Grid.Column="0" ItemsSource="{Binding Path=TourPoints,UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" Margin="0,9,0,0">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="CheckPointName" Binding="{Binding Name}" Width="334"></DataGridTextColumn>
@@ -55,7 +55,7 @@
             </DataGrid>
             <Label Content="Add date and time for this tour"  Grid.Row="7" VerticalAlignment="Top" Height="30" Grid.Column="0" Margin="74,7,74,0"/>
             <ListBox x:Name="DateTimeBox" Grid.Row="7" ItemsSource="{Binding Path=Instances}" Margin="0,10,0,10" Grid.Column="1" Grid.RowSpan="2"/>
-            <Button x:Name="NewDate" Content="+" Grid.Row="8" HorizontalAlignment="Center" Width="100"  Click="NewInstanceClick" Height="30" Margin="0,0,0,20"/>
+            <Button x:Name="NewDate" Content="+" Grid.Row="8" HorizontalAlignment="Center" Width="100"  Click="NewInstance_Click" Height="30" Margin="0,0,0,20"/>
             <Label x:Name="NameLabel" Grid.Column="1"  FontSize="9" HorizontalAlignment="Left" Height="20" VerticalAlignment="Center" Width="192" Grid.RowSpan="2"/>
             <Label Grid.Column="1" x:Name="MaxGuestLabel" FontSize="9" HorizontalAlignment="Left" Height="20" Grid.RowSpan="2" Grid.Row="1" VerticalAlignment="Center" Width="192"/>
             <Label Grid.Column="1" x:Name="DurationLabel" FontSize="9" HorizontalAlignment="Left" Height="20" Grid.RowSpan="2" Grid.Row="2" VerticalAlignment="Center" Width="192"/>

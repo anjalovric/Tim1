@@ -37,7 +37,7 @@ namespace InitialProject.View
         private AlertGuest2Repository alertGuest2Repository;
         private TourInstance selected;
 
-        private int counter = 1;
+        private int orderCounter = 1;
 
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -70,7 +70,7 @@ namespace InitialProject.View
         {
             if (AllPoints.Count != 0)
             {
-                CurrentPoint.Add(AllPoints.ToList().Find(n => n.Order == counter));
+                CurrentPoint.Add(AllPoints.ToList().Find(n => n.Order == orderCounter));
                 AddAlerts(CurrentPoint[0].Id, selected.Id);
             }
         }
@@ -98,7 +98,7 @@ namespace InitialProject.View
                     point.Checked = true;
             }
         }
-        private void FinishTour(object sender, RoutedEventArgs e)
+        private void FinishTour_Click(object sender, RoutedEventArgs e)
         {
             FinishInstance();
             
@@ -129,27 +129,21 @@ namespace InitialProject.View
             }
         }
 
-        private void ChangeListsToNextState()
+        private void ChangeCurrentPointToNextState()
         {
-            List<CheckPoint> points = AllPoints.ToList();
+           List<CheckPoint> points = AllPoints.ToList();
 
-            foreach (CheckPoint checkPoint in AllPoints)
-            {
-                if (checkPoint.Order == counter)
-                    checkPoint.Checked = true;
-            }
-
-            CurrentPoint.Remove(points.Find(n => n.Order == counter));
-            int nextOrder = counter + 1;
+            CurrentPoint.Remove(points.Find(n => n.Order == orderCounter));
+            int nextOrder = orderCounter + 1;
             CurrentPoint.Add(points.Find(n => n.Order == nextOrder));
         }
         private void Next_Click(object sender, RoutedEventArgs e)
         {
-            ChangeListsToNextState();
+            ChangeCurrentPointToNextState();
             
-            counter++;
+            orderCounter++;
 
-            if (counter == AllPoints.ToList().Count)
+            if (orderCounter == AllPoints.ToList().Count)
             {
                 this.Next.IsEnabled = false;
                 FinishInstance();
@@ -167,12 +161,12 @@ namespace InitialProject.View
             int pointSize=AllPoints.Count;
             List<CheckPoint> points= AllPoints.ToList();
             AllPoints.Clear();
-            for(int i = 0; i < counter; i++)
+            for(int i = 0; i < orderCounter; i++)
             {
                 points[i].Checked= true;
                 AllPoints.Add(points[i]);
             }
-            for(int i = counter; i < pointSize; i++)
+            for(int i = orderCounter; i < pointSize; i++)
             {
                 points[i].Checked = false;
                 AllPoints.Add(points[i]);

@@ -50,10 +50,16 @@ namespace InitialProject.View
             }
         }
 
-        private void MakeNewReservation()
+        private Guest1 MakeNewGuest()
         {
             Guest1 guest = new Guest1("Anja", "Ducic");
             guest.Id = 1;
+            return guest;
+        }
+
+        private void MakeNewReservation()
+        {
+            Guest1 guest = MakeNewGuest();
             AccommodationReservation newReservation = new AccommodationReservation(guest, currentAccommodation, selectedDateRange.Arrival, selectedDateRange.Departure);
             accommodationReservationRepository.Add(newReservation);
         }
@@ -73,28 +79,17 @@ namespace InitialProject.View
             if (result == MessageBoxResult.Yes)
             {
                 MakeNewReservation();
-                UpdateAvailableDates();
                 this.Close();
                 this.Owner.Close();
+                this.Owner.Owner.Close();
             }
             else if (result == MessageBoxResult.No)
             {
                 this.Close();
-                this.Owner.Activate();
+                this.Owner.Close();
             }
         }
 
-        private void UpdateAvailableDates()
-        {
-            foreach (Window window in Application.Current.Windows)
-            {
-                if (window.GetType() == typeof(AccommodationReservationForm))
-                {
-                    (window as AccommodationReservationForm).GetAvailableDates(currentAccommodation.Id);
-                }
-            }
-           
-        }
 
         private void DecrementGuestsNumberButton_Click(object sender, RoutedEventArgs e)
         {
