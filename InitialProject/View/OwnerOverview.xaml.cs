@@ -19,8 +19,8 @@ namespace InitialProject.View
     {
         public ObservableCollection<Accommodation> Accommodations { get; set; }
         public ObservableCollection<AccommodationReservation> ReservationsToReview { get; set; }
-        private AccommodationReservation selectedReservation;
         public Model.Owner WindowOwner { get; set; }
+        private AccommodationReservation selectedReservation;
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -46,15 +46,30 @@ namespace InitialProject.View
         {
             InitializeComponent();
             DataContext = this;
+
             WindowOwner = new Model.Owner();
             GetOwnerByUser(user);
-            Accommodations = new ObservableCollection<Accommodation>(GetAllByOwner());
-            SetAccommodationsLocation();
-            SetAccommodationsType();
+
+            MakeAccommodationsForView();
+            MakeReservationsToReview();
+            MakeAlerts();
+        }
+
+        private void MakeReservationsToReview()
+        {
             ReservationsToReview = new ObservableCollection<AccommodationReservation>();
             GetAllReservationsForReview();
             SetGuestToReservation();
-            MakeAlerts();
+        }
+
+        private void MakeAccommodationsForView()
+        {
+            Accommodations = new ObservableCollection<Accommodation>(GetAllByOwner());
+            if(Accommodations.Count > 0)
+            {
+                SetAccommodationsLocation();
+                SetAccommodationsType();
+            }
         }
 
         private void GetAllReservationsForReview()
@@ -62,15 +77,20 @@ namespace InitialProject.View
             AccommodationReservationRepository reservationRepository = new AccommodationReservationRepository();
             List<AccommodationReservation> reservations = reservationRepository.GetAll();
             GuestReviewRepository guestReviewRepository = new GuestReviewRepository();
-            AddAccommodationToReservation(reservations);
-            
-            foreach (AccommodationReservation reservation in reservationRepository.GetAll())
+
+            if(reservations.Count > 0)
             {
+                AddAccommodationToReservation(reservations);
+
+                foreach (AccommodationReservation reservation in reservationRepository.GetAll())
+                {
                     bool stayedLessThan5DaysAgo = (reservation.Departure.Date < DateTime.Now.Date) && (DateTime.Now.Date - reservation.Departure.Date).TotalDays <= 5;
                     bool alreadyReviewed = guestReviewRepository.HasReview(reservation);
                     bool isThisOwner = reservation.Accommodation.Owner.Id == WindowOwner.Id;
+                    
                     if (stayedLessThan5DaysAgo && !alreadyReviewed && isThisOwner)
-                    ReservationsToReview.Add(reservation);
+                        ReservationsToReview.Add(reservation);
+                }
             }
         }
 
@@ -78,10 +98,15 @@ namespace InitialProject.View
         {
             AccommodationRepository accommodationRepository = new AccommodationRepository();
             List<Accommodation> accommodations = new List<Accommodation>(accommodationRepository.GetAll());
+
             foreach (AccommodationReservation reservation in reservations)
             {
-                reservation.Accommodation = accommodations.Find(n => n.Id == reservation.Accommodation.Id);
-                SetOwner(reservation);
+                Accommodation reservationAccommodation = accommodations.Find(n => n.Id == reservation.Accommodation.Id);
+                if (reservationAccommodation != null)
+                {
+                    reservation.Accommodation = reservationAccommodation;
+                    SetOwnerToAccommodation(reservation);
+                }
             }
         }
 
@@ -135,7 +160,7 @@ namespace InitialProject.View
             WindowOwner = ownerRepository.GetByUsername(user.Username);
         }
 
-        private void SetOwner(AccommodationReservation reservation)
+        private void SetOwnerToAccommodation(AccommodationReservation reservation)
         {
             OwnerRepository ownerRepository = new OwnerRepository();
             reservation.Accommodation.Owner = ownerRepository.GetById(reservation.Accommodation.Owner.Id);
@@ -143,43 +168,54 @@ namespace InitialProject.View
 
         private List<Accommodation> GetAllByOwner()
         {
-            List<Accommodation> result = new List<Accommodation>();
+            List<Accommodation> accommodationsByOwner = new List<Accommodation>();
             AccommodationRepository accommodationRepository = new AccommodationRepository();
+
             foreach (Accommodation accommodation in accommodationRepository.GetAll())
             {
                 if (accommodation.Owner.Id == WindowOwner.Id)
                 {
-                    result.Add(accommodation);
+                    accommodationsByOwner.Add(accommodation);
                 }
             }
-            return result;
+            return accommodationsByOwner;
         }
 
         private void PicturesButton_Click(object sender, RoutedEventArgs e)
         {
-            AccommodationImageRepository accommodationImageRepository = new AccommodationImageRepository();
-            Accommodation selectedAccommodation = AccommodationDataGrid.SelectedItem as Accommodation;
-            List<string> images = new List<string>(accommodationImageRepository.GetUrlByAccommodationId(selectedAccommodation.Id));
-            if (images.Count > 0)
+             AccommodationImageRepository accommodationImageRepository = new AccommodationImageRepository();
+             Accommodation selectedAccommodation = AccommodationDataGrid.SelectedItem as Accommodation;
+
+            try
             {
-                AccommodationPhotosView accommodationPhotosView = new AccommodationPhotosView(images);
-                accommodationPhotosView.Show();
-            }
-            else
+                List<string> images = new List<string>(accommodationImageRepository.GetUrlByAccommodationId(selectedAccommodation.Id));
+                if (images.Count > 0)
+                {
+                    AccommodationPhotosView accommodationPhotosView = new AccommodationPhotosView(images);
+                    accommodationPhotosView.Show();
+                }
+                else
+                {
+                    MessageBox.Show("No available pictures", "No Picture", MessageBoxButton.OK);
+                }
+            }catch(Exception exception)
             {
-                MessageBox.Show("No available pictures", "No Picture", MessageBoxButton.OK);
+                MessageBox.Show(exception.Message.ToString());
             }
+
         }
 
         private void SetAccommodationsLocation()
         {
             LocationRepository locationRepository = new LocationRepository();
-            List<Location> locations = locationRepository.GetAll();
+            List<Location> allLocations = locationRepository.GetAll();
+
             foreach (Accommodation accommodation in Accommodations)
             {
-                if (locations.Find(n => n.Id == accommodation.Location.Id) != null)
+                Location accommodationLocation = allLocations.Find(n => n.Id == accommodation.Location.Id);
+                if (accommodationLocation != null)
                 {
-                    accommodation.Location = locations.Find(n => n.Id == accommodation.Location.Id);
+                    accommodation.Location = accommodationLocation;
                 }
             }
         }
@@ -188,11 +224,13 @@ namespace InitialProject.View
         {
             AccommodationTypeRepository typeRepository = new AccommodationTypeRepository();
             List<AccommodationType> types = typeRepository.GetAll();
+
             foreach (Accommodation accommodation in Accommodations)
             {
-                if (types.Find(n => n.Id == accommodation.Type.Id) != null)
+                AccommodationType type = types.Find(n => n.Id == accommodation.Type.Id);
+                if (type != null)
                 {
-                    accommodation.Type = types.Find(n => n.Id == accommodation.Type.Id);
+                    accommodation.Type = type;
                 }
             }
         }
@@ -201,9 +239,14 @@ namespace InitialProject.View
         {
             Guest1Repository guest1Repository = new Guest1Repository();
             List<Guest1> allGuests = new List<Guest1>(guest1Repository.GetAll());
+
             foreach(AccommodationReservation reservation in ReservationsToReview)
             {
-                reservation.Guest = allGuests.Find(n => n.Id == reservation.Guest.Id);
+                Guest1 reservationGuest = allGuests.Find(n => n.Id == reservation.Guest.Id);
+                if (reservationGuest != null)
+                {
+                    reservation.Guest = reservationGuest;
+                }
             }
         }
     }

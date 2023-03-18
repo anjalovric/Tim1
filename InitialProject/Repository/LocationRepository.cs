@@ -103,7 +103,7 @@ namespace InitialProject.Repository
             return countries;
         }
 
-        public Location GetLocation(string country, string city)
+        public Location GetByCityAndCountry(string country, string city)
         {
            return _locations.Find(n => n.City.Equals(city) && n.Country.Equals(country));
         }

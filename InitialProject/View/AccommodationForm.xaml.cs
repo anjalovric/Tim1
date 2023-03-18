@@ -36,15 +36,15 @@ namespace InitialProject.View.Owner
             InitializeComponent();
             this.DataContext = this;
             accommodationRepository = new AccommodationRepository();
-            accommodation = new Accommodation();
-            accommodations = oldAccommodations;
+            accommodationImageRepository = new AccommodationImageRepository();
             accommodationTypeRepository = new AccommodationTypeRepository();
+            accommodation = new Accommodation();
+            accommodations = oldAccommodations;                                  //for owner overview list
             AccommodationTypes = accommodationTypeRepository.GetAll();
             locationRepository = new LocationRepository();
             location = new Location();
             Owner = owner;
             Images = new ObservableCollection<AccommodationImage>();
-            accommodationImageRepository = new AccommodationImageRepository();
             Countries = new ObservableCollection<string>(locationRepository.GetAllCountries());
             CitiesByCountry = new ObservableCollection<string>();
             ComboBoxCity.IsEnabled = false;
@@ -86,12 +86,7 @@ namespace InitialProject.View.Owner
         {
             if (IsValid())
             {
-                accommodation.Id = accommodationRepository.NextId();
-                accommodation.Location = locationRepository.GetLocation(Location.Country, Location.City);
-                accommodation.Owner = Owner;
-                accommodations.Add(accommodation);
-                accommodationRepository.Add(accommodation);
-                SaveImages();
+                MakeAndSaveAccommodation();
                 this.Close();
             }
             else
@@ -100,12 +95,22 @@ namespace InitialProject.View.Owner
             }
         }
 
+        private void MakeAndSaveAccommodation()
+        {
+            accommodation.Id = accommodationRepository.NextId();
+            accommodation.Location = locationRepository.GetByCityAndCountry(Location.Country, Location.City);
+            accommodation.Owner = Owner;
+            accommodations.Add(accommodation);
+            accommodationRepository.Add(accommodation);
+            SaveImages();
+        }
+
         private void SaveImages()
         {
             foreach (AccommodationImage image in Images)
             {
                 image.Accommodation = accommodation;
-                image.Id = accommodationImageRepository.Add(image.Url, image.Accommodation);
+                image.Id = accommodationImageRepository.Add(image);
             }
         }
 
@@ -116,11 +121,16 @@ namespace InitialProject.View.Owner
 
         private void NewImageButton_Click(object sender, RoutedEventArgs e)
         {
+            MakeAndAddImages();
+            TextBoxUrl.Clear();
+        }
+
+        private void MakeAndAddImages()
+        {
             AccommodationImage image = new AccommodationImage();
             image.Url = Url;
             image.Id = -1;
             Images.Add(image);
-            TextBoxUrl.Clear();
         }
 
         private void ComboBoxCountry_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -139,54 +149,32 @@ namespace InitialProject.View.Owner
         private bool IsValid()
         {
             bool isValid = true;
-            if (NameTextBox.Text.Equals(""))
+            isValid &= IsNameValid();
+            isValid &= IsCountryValid();
+            isValid &= IsCityValid();
+            isValid &= IsTypeValid();
+            isValid &= IsCapacityValid();
+            isValid &= IsMinDaysValid();
+            isValid &= IsDaysToCancelValid();
+            isValid &= IsImageNumberValid();
+
+            return isValid;
+        }
+
+        private bool IsImageNumberValid()
+        {
+            if (Images.Count == 0)
             {
-                isValid = false;
-                NameValidation.Content = "This field is required";
-                NameTextBox.BorderBrush = Brushes.Red;
+                ImageValidation.Content = "At least one picture is required";
+                TextBoxUrl.BorderBrush = Brushes.Red;
+                return false;
             }
-            if(ComboBoxCountry.SelectedItem == null)
-            {
-                isValid = false;
-                CountryValidation.Content = "This field is required";
-                ComboBoxCountry.BorderBrush = Brushes.Red;
-            }
-            if (ComboBoxCity.SelectedItem == null)
-            {
-                isValid = false;
-                CityValidation.Content = "This field is required";
-                ComboBoxCity.BorderBrush = Brushes.Red;
-            }
-            if (ComboBoxType.SelectedItem == null)
-            {
-                isValid = false;
-                TypeValidation.Content = "This field is required";
-                ComboBoxType.BorderBrush = Brushes.Red;
-            }
-            if(CapacityTextBox.Text.Equals(""))
-            {
-                isValid = false;
-                CapacityValidation.Content = "This field is required";
-                CapacityTextBox.BorderBrush = Brushes.Red;
-            }
-            else if(Convert.ToInt32(CapacityTextBox.Text) <= 0)
-            {
-                isValid = false;
-                CapacityValidation.Content = "At least one guest is required";
-                CapacityTextBox.BorderBrush = Brushes.Red;
-            }
-            if (MinDaysForReservationTextBox.Text.Equals(""))
-            {
-                isValid = false;
-                MinDaysForReservationValidation.Content = "This field is required";
-                MinDaysForReservationTextBox.BorderBrush = Brushes.Red;
-            }
-            else if (Convert.ToInt32(MinDaysForReservationTextBox.Text) <= 0)
-            {
-                isValid = false;
-                MinDaysForReservationValidation.Content = "At least one day is required";
-                MinDaysForReservationTextBox.BorderBrush = Brushes.Red;
-            }
+            return true;
+        }
+
+        private bool IsDaysToCancelValid()
+        {
+            bool isValid = true;
             if (DaysBeforeToCancelTextBox.Text.Equals(""))
             {
                 isValid = false;
@@ -199,14 +187,89 @@ namespace InitialProject.View.Owner
                 DaysBeforeToCancelValidation.Content = "Please enter valid number";
                 DaysBeforeToCancelTextBox.BorderBrush = Brushes.Red;
             }
-            if (Images.Count == 0)
+            return isValid;
+        }
+
+        private bool IsMinDaysValid()
+        {
+            bool isValid = true;
+            if (MinDaysForReservationTextBox.Text.Equals(""))
             {
                 isValid = false;
-                ImageValidation.Content = "At least one picture is required";
-                TextBoxUrl.BorderBrush = Brushes.Red;
+                MinDaysForReservationValidation.Content = "This field is required";
+                MinDaysForReservationTextBox.BorderBrush = Brushes.Red;
+            }
+            else if (Convert.ToInt32(MinDaysForReservationTextBox.Text) <= 0)
+            {
+                isValid = false;
+                MinDaysForReservationValidation.Content = "At least one day is required";
+                MinDaysForReservationTextBox.BorderBrush = Brushes.Red;
+            }
+            return isValid;
+        }
+
+        private bool IsCapacityValid()
+        {
+            bool isValid = true;
+            if (CapacityTextBox.Text.Equals(""))
+            {
+                isValid = false;
+                CapacityValidation.Content = "This field is required";
+                CapacityTextBox.BorderBrush = Brushes.Red;
+            }
+            else if (Convert.ToInt32(CapacityTextBox.Text) <= 0)
+            {
+                isValid = false;
+                CapacityValidation.Content = "At least one guest is required";
+                CapacityTextBox.BorderBrush = Brushes.Red;
+            }
+            return isValid;
+        }
+
+        private bool IsTypeValid()
+        {
+            if (ComboBoxType.SelectedItem == null)
+            {
+                TypeValidation.Content = "This field is required";
+                ComboBoxType.BorderBrush = Brushes.Red;
+                return false;
             }
 
-            return isValid;
+            return true;
+        }
+
+        private bool IsCityValid()
+        {
+            if (ComboBoxCity.SelectedItem == null)
+            {
+                CityValidation.Content = "This field is required";
+                ComboBoxCity.BorderBrush = Brushes.Red;
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool IsCountryValid()
+        {
+            if (ComboBoxCountry.SelectedItem == null)
+            {
+                CountryValidation.Content = "This field is required";
+                ComboBoxCountry.BorderBrush = Brushes.Red;
+                return false;
+            }
+            return true;
+        }
+
+        private bool IsNameValid()
+        {
+            if (NameTextBox.Text.Equals(""))
+            {
+                NameValidation.Content = "This field is required";
+                NameTextBox.BorderBrush = Brushes.Red;
+                return false;
+            }
+            return true;
         }
     }
 }
