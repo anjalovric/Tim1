@@ -17,10 +17,12 @@ namespace InitialProject.View
     /// </summary>
     public partial class OwnerOverview : Window, INotifyPropertyChanged
     {
+        private AccommodationReservation selectedReservation;
+        private AccommodationRepository accommodationRepository;
+        private OwnerRepository ownerRepository;
         public ObservableCollection<Accommodation> Accommodations { get; set; }
         public ObservableCollection<AccommodationReservation> ReservationsToReview { get; set; }
         public Model.Owner WindowOwner { get; set; }
-        private AccommodationReservation selectedReservation;
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -46,7 +48,9 @@ namespace InitialProject.View
         {
             InitializeComponent();
             DataContext = this;
-
+            
+            accommodationRepository = new AccommodationRepository();
+            ownerRepository = new OwnerRepository();
             WindowOwner = new Model.Owner();
             GetOwnerByUser(user);
 
@@ -96,7 +100,6 @@ namespace InitialProject.View
 
         private void AddAccommodationToReservation(List<AccommodationReservation> reservations)
         {
-            AccommodationRepository accommodationRepository = new AccommodationRepository();
             List<Accommodation> accommodations = new List<Accommodation>(accommodationRepository.GetAll());
 
             foreach (AccommodationReservation reservation in reservations)
@@ -156,20 +159,17 @@ namespace InitialProject.View
 
         private void GetOwnerByUser(User user)
         {
-            OwnerRepository ownerRepository = new OwnerRepository();
             WindowOwner = ownerRepository.GetByUsername(user.Username);
         }
 
         private void SetOwnerToAccommodation(AccommodationReservation reservation)
         {
-            OwnerRepository ownerRepository = new OwnerRepository();
             reservation.Accommodation.Owner = ownerRepository.GetById(reservation.Accommodation.Owner.Id);
         }
 
         private List<Accommodation> GetAllByOwner()
         {
             List<Accommodation> accommodationsByOwner = new List<Accommodation>();
-            AccommodationRepository accommodationRepository = new AccommodationRepository();
 
             foreach (Accommodation accommodation in accommodationRepository.GetAll())
             {

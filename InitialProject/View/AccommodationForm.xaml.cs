@@ -234,7 +234,6 @@ namespace InitialProject.View.Owner
                 ComboBoxType.BorderBrush = Brushes.Red;
                 return false;
             }
-
             return true;
         }
 
@@ -246,7 +245,6 @@ namespace InitialProject.View.Owner
                 ComboBoxCity.BorderBrush = Brushes.Red;
                 return false;
             }
-
             return true;
         }
 

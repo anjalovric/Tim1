@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using InitialProject.Serializer;
 
 namespace InitialProject.Model
@@ -13,7 +9,6 @@ namespace InitialProject.Model
         public string Name { get; set; }
         public string LastName { get; set; }
         public string Username { get; set; }
-        public List<Accommodation> Accommodations { get; set; }
 
         public Owner() { }
 
