@@ -48,6 +48,7 @@ namespace InitialProject.Repository
         public List<string> GetUrlByAccommodationId(int id)
         {
             List<string> images = new List<string>();
+
             foreach (AccommodationImage image in _accommodationImages)
             {
                 if (image.Accommodation.Id == id)
