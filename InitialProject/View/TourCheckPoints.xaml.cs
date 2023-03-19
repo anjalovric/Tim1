@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Printing;
 using System.Runtime.CompilerServices;
@@ -103,6 +104,7 @@ namespace InitialProject.View
             FinishInstance();
             
         }
+
 
         private void FinishInstance()
         {

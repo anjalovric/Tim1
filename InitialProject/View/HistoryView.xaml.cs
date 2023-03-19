@@ -105,10 +105,17 @@ namespace InitialProject.View
             }
         }
 
-        private void ViewDetails(object sender, RoutedEventArgs e)
+        private void ViewDetails_Click(object sender, RoutedEventArgs e)
         {
-            CheckPointDetails checkPointDetails = new CheckPointDetails(Selected);
-            checkPointDetails.Show();
+            if (Selected == null)
+            {
+                MessageBox.Show("Select tour insatnce first");
+            }
+            else
+            {
+                CheckPointDetails checkPointDetails = new CheckPointDetails(Selected);
+                checkPointDetails.Show();
+            }
         }
 
     }
