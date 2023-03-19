@@ -293,15 +293,9 @@ namespace InitialProject.View
             {
                 List<string> imagesUrls = new List<string>();
                 FindPhotosUrls(imagesUrls);
-                if (imagesUrls.Count == 0)
-                {
-                    MessageBox.Show("There are currently no images for the selected accommodation.");
-                }
-                else
-                {
-                    AccommodationPhotosView photosView = new AccommodationPhotosView(imagesUrls);
-                    photosView.Show();
-                }
+                AccommodationPhotosView photosView = new AccommodationPhotosView(imagesUrls);
+                photosView.Show();
+                
             }
             catch (Exception ex)
             {

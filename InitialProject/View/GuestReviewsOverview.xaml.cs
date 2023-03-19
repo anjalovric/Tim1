@@ -13,6 +13,8 @@ namespace InitialProject.View
     public partial class GuestReviewsOverview : Window
     {
         private Model.Owner owner;
+        private Guest1Repository guest1Repository;
+        private GuestReviewRepository guestReviewRepository;
         public ObservableCollection<GuestReview> Reviews { get; set; }
 
         public GuestReviewsOverview(Model.Owner owner)
@@ -21,6 +23,8 @@ namespace InitialProject.View
             DataContext = this;
             this.owner = owner;
 
+            guest1Repository = new Guest1Repository();
+            guestReviewRepository = new GuestReviewRepository();
             MakeReviewsForView();
         }
 
@@ -40,7 +44,6 @@ namespace InitialProject.View
 
         private void AddGuestsToReviews()
         {
-            Guest1Repository guest1Repository = new Guest1Repository();
             Guest1 guest = new Guest1();
 
             foreach (GuestReview review in Reviews)
@@ -53,7 +56,6 @@ namespace InitialProject.View
 
         private List<GuestReview> GetAllByOwner()
         {
-            GuestReviewRepository guestReviewRepository = new GuestReviewRepository();
             List<GuestReview> allReviews = new List<GuestReview>(guestReviewRepository.GetAll());
             SetReservationToReview(allReviews);
             List<GuestReview> reviewsByOwner = new List<GuestReview>();
@@ -117,7 +119,6 @@ namespace InitialProject.View
 
         private void SetGuestToReview(List<GuestReview> guestReviews)
         {
-            Guest1Repository guest1Repository = new Guest1Repository();
             List<Guest1> guests = guest1Repository.GetAll();
 
             foreach(GuestReview review in guestReviews)
