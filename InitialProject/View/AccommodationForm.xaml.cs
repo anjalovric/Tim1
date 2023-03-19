@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Reflection.Metadata;
 using System.Runtime.CompilerServices;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -177,13 +179,15 @@ namespace InitialProject.View.Owner
         private bool IsDaysToCancelValid()
         {
             bool isValid = true;
+            var regex = @"^[0-9]\d*$";
+            Match match = Regex.Match(DaysBeforeToCancelTextBox.Text, regex, RegexOptions.IgnoreCase);
             if (DaysBeforeToCancelTextBox.Text.Equals(""))
             {
                 isValid = false;
                 DaysBeforeToCancelValidation.Content = "This field is required";
                 DaysBeforeToCancelTextBox.BorderBrush = Brushes.Red;
             }
-            else if (Convert.ToInt32(DaysBeforeToCancelTextBox.Text) < 0)
+            else if (!match.Success)
             {
                 isValid = false;
                 DaysBeforeToCancelValidation.Content = "Please enter valid number";
@@ -200,13 +204,15 @@ namespace InitialProject.View.Owner
         private bool IsMinDaysValid()
         {
             bool isValid = true;
+            var regex = @"^[1-9]\d*$";
+            Match match = Regex.Match(MinDaysForReservationTextBox.Text, regex, RegexOptions.IgnoreCase);
             if (MinDaysForReservationTextBox.Text.Equals(""))
             {
                 isValid = false;
                 MinDaysForReservationValidation.Content = "This field is required";
                 MinDaysForReservationTextBox.BorderBrush = Brushes.Red;
             }
-            else if (Convert.ToInt32(MinDaysForReservationTextBox.Text) <= 0)
+            else if (!match.Success)
             {
                 isValid = false;
                 MinDaysForReservationValidation.Content = "At least one day is required";
@@ -223,13 +229,15 @@ namespace InitialProject.View.Owner
         private bool IsCapacityValid()
         {
             bool isValid = true;
+            var regex = @"^[1-9]\d*$";
+            Match match = Regex.Match(CapacityTextBox.Text, regex, RegexOptions.IgnoreCase);
             if (CapacityTextBox.Text.Equals(""))
             {
                 isValid = false;
                 CapacityValidation.Content = "This field is required";
                 CapacityTextBox.BorderBrush = Brushes.Red;
             }
-            else if (Convert.ToInt32(CapacityTextBox.Text) <= 0)
+            else if (!match.Success)
             {
                 isValid = false;
                 CapacityValidation.Content = "At least one guest is required";
