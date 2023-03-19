@@ -50,6 +50,7 @@ namespace InitialProject.View.Owner
             Countries = new ObservableCollection<string>(locationRepository.GetAllCountries());
             CitiesByCountry = new ObservableCollection<string>();
             ComboBoxCity.IsEnabled = false;
+            Accommodation.MinDaysToCancel = 1;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
