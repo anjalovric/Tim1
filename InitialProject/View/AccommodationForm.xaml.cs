@@ -169,6 +169,8 @@ namespace InitialProject.View.Owner
                 TextBoxUrl.BorderBrush = Brushes.Red;
                 return false;
             }
+            ImageValidation.Content = "";
+            TextBoxUrl.BorderBrush = Brushes.Gray;
             return true;
         }
 
@@ -186,6 +188,11 @@ namespace InitialProject.View.Owner
                 isValid = false;
                 DaysBeforeToCancelValidation.Content = "Please enter valid number";
                 DaysBeforeToCancelTextBox.BorderBrush = Brushes.Red;
+            }
+            else
+            {
+                DaysBeforeToCancelValidation.Content = "";
+                DaysBeforeToCancelTextBox.BorderBrush = Brushes.Gray;
             }
             return isValid;
         }
@@ -205,6 +212,11 @@ namespace InitialProject.View.Owner
                 MinDaysForReservationValidation.Content = "At least one day is required";
                 MinDaysForReservationTextBox.BorderBrush = Brushes.Red;
             }
+            else
+            {
+                MinDaysForReservationValidation.Content = "";
+                MinDaysForReservationTextBox.BorderBrush = Brushes.Gray;
+            }
             return isValid;
         }
 
@@ -223,6 +235,11 @@ namespace InitialProject.View.Owner
                 CapacityValidation.Content = "At least one guest is required";
                 CapacityTextBox.BorderBrush = Brushes.Red;
             }
+            else
+            {
+                CapacityValidation.Content = "";
+                CapacityTextBox.BorderBrush = Brushes.Gray;
+            }
             return isValid;
         }
 
@@ -234,6 +251,8 @@ namespace InitialProject.View.Owner
                 ComboBoxType.BorderBrush = Brushes.Red;
                 return false;
             }
+            TypeValidation.Content = "";
+            ComboBoxType.BorderBrush = Brushes.Gray;
             return true;
         }
 
@@ -245,6 +264,8 @@ namespace InitialProject.View.Owner
                 ComboBoxCity.BorderBrush = Brushes.Red;
                 return false;
             }
+            CityValidation.Content = "";
+            ComboBoxCity.BorderBrush = Brushes.Gray;
             return true;
         }
 
@@ -256,6 +277,8 @@ namespace InitialProject.View.Owner
                 ComboBoxCountry.BorderBrush = Brushes.Red;
                 return false;
             }
+            CountryValidation.Content = "";
+            ComboBoxCountry.BorderBrush = Brushes.Gray;
             return true;
         }
 
@@ -267,6 +290,8 @@ namespace InitialProject.View.Owner
                 NameTextBox.BorderBrush = Brushes.Red;
                 return false;
             }
+            NameValidation.Content = "";
+            NameTextBox.BorderBrush = Brushes.Gray;
             return true;
         }
     }
