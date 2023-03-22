@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Security.Policy;
@@ -140,19 +141,18 @@ namespace InitialProject.View
         private bool IsDurationValid()
         {
             var content = durationInput.Text;
-            var regex = "^(0|([1-9][0-9]*))(\\.[0-9]+)?$";
-            var regexZero = "(0\\.0)$";
-            var regexzero = "0$";
+            var regex = "(([1-9][0-9]*)(\\.[0-9]+)?)|(0\\.[0-9]+)$";
+            var regexMinus = "-";
             Match match = Regex.Match(content, regex, RegexOptions.IgnoreCase);
-            Match matchZero = Regex.Match(content, regexZero, RegexOptions.IgnoreCase);
-            Match matchzero = Regex.Match(content, regexzero, RegexOptions.IgnoreCase);
-            if (!match.Success || matchZero.Success || matchzero.Success)
+            Match matchMinus = Regex.Match(content, regexMinus, RegexOptions.IgnoreCase);
+            if (!match.Success || Convert.ToDouble(match.ToString()) == 0.0 || Convert.ToString(match).Equals('0') || matchMinus.Success)
             {
                 durationInput.BorderBrush = Brushes.Red;
-                DurationLabel.Content = "This field should be positive double number";
+                DurationLabel.Content = "Invalid number";
                 durationInput.BorderThickness = new Thickness(1);
+                return false;
             }
-            else if (match.Success && (!matchZero.Success) && (!matchzero.Success))
+            else if (match.Success)
             {
                 durationInput.BorderBrush = Brushes.Green;
                 DurationLabel.Content = string.Empty;
