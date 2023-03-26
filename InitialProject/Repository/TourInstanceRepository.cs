@@ -106,5 +106,34 @@ namespace InitialProject.Repository
             return list;
     
         }
+
+
+
+        public List<TourInstance> GetInstancesLaterThan48hFromNow()
+        {
+
+            _tourInstances = _serializer.FromCSV(FilePath);
+            List<TourInstance> list = new List<TourInstance>();
+            foreach (TourInstance tour in _tourInstances)
+            {
+                if (tour.Finished == false && tour.StartDate>DateTime.Now.Date)
+                {
+                    var prevDate = Convert.ToDateTime(tour.StartDate.ToString().Split(" ")[0] +" "+ tour.StartClock);
+                    var today = DateTime.Now;
+                    var diffOfDates = today - prevDate;
+
+                    if (diffOfDates.Days < -2 )
+                        list.Add(tour);
+                    else if (diffOfDates.Days == -2 && diffOfDates.Hours<0 )
+                        list.Add (tour);
+                    else if(diffOfDates.Days == -2 && diffOfDates.Hours==0 && diffOfDates.Minutes<0 )
+                        list.Add (tour);
+            }
+
+            }
+            return list;
+
+        }
+        
     }
 }
