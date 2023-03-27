@@ -33,7 +33,7 @@ namespace InitialProject.View
         private List<TourReservation> tourReservations;
         private List<TourInstance> tourInstances;
         private TourInstanceRepository tourInstanceRepository;
-        private Guest2Overview Guest2Overview;
+        private ShowTours ShowTours;
         public ObservableCollection<TourInstance> TourInstances { get; set; }
         public Label Label { get; set; }
        
@@ -48,7 +48,7 @@ namespace InitialProject.View
             tourInstances = tourInstanceRepository.GetAll();
             tourReservationRepository = new TourReservationRepository();
             tourReservations = tourReservationRepository.GetAll();
-            Guest2Overview = new Guest2Overview();
+            ShowTours = new ShowTours();
             GetCurrentGuestsNumber();
             GuestId = guestId;
         }
@@ -99,8 +99,8 @@ namespace InitialProject.View
         {
             Boolean existed = false;
             ObservableCollection<TourInstance> storedTourInstances= new ObservableCollection<TourInstance>(tourInstanceRepository.GetAll());
-            Guest2Overview.SetLocations();
-            Guest2Overview.SetTours(storedTourInstances);
+            ShowTours.SetLocations();
+            ShowTours.SetTours(storedTourInstances);
             TourInstances.Clear();
             foreach (TourInstance tourInstance in storedTourInstances)
             {
