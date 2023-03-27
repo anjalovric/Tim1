@@ -5,71 +5,67 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
-        Title="Guest2Overview" Height="470" Width="820" WindowStartupLocation="CenterScreen">
-    <Grid Background="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}">
-        <StackPanel Width="230" Orientation="Vertical" HorizontalAlignment="Left" Background="#FFFBFBFB">
-            <Menu Height="450" Margin="0,40,0,0" Background="#FFFBFBFB">
-                <Menu.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <VirtualizingStackPanel Orientation="Vertical"/>
-                    </ItemsPanelTemplate>
-                </Menu.ItemsPanel>
-                <MenuItem Header="Prikaz" FontWeight="Bold" Height="40" Click="Restart_Click"/>
-                <MenuItem Header="Statistika" FontWeight="Bold" Height="40"/>
-                <MenuItem Header="Obavjestenja" FontWeight="Bold" Height="40"/>
-                <MenuItem Header="Moji zahtjevi" FontWeight="Bold" Height="40"/>
-                <MenuItem Header="Vauceri" FontWeight="Bold" Height="40"/>
-                <MenuItem Header="Ocijenite turu" FontWeight="Bold" Height="40"/>
-                <MenuItem Header="Odjavite se" FontWeight="Bold" Height="40" Click="SignOut_Click"/>
-            </Menu>
+        Title="Guest2Overview" Height="768" Width="1024" WindowStartupLocation="CenterScreen" WindowState="Maximized">
+    <Grid Background="#FFF3EEEE">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="100*"/>
+
+
+        </Grid.ColumnDefinitions>
+        <StackPanel Width="240" Orientation="Vertical" HorizontalAlignment="Left" Background="#FFD0C4C4" Grid.ColumnSpan="2">
+            <Image Source="/Resources/Images/add.png" Width="100" Height="180" />
+            <ListView Background="#FFD0C4C4" VerticalContentAlignment="Bottom" BorderBrush="#FFD0C4C4">
+                <ListViewItem Height="30" FontSize="14" FontFamily="Century Gothic" Foreground="Black" HorizontalAlignment="Left">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Resources/Images/profile.png" Height="20" Width="40"/>
+                        <TextBlock Text="Profile" Height="18"/>
+                    </StackPanel>
+                </ListViewItem>
+                <ListViewItem Height="40" FontSize="14" FontFamily="Century Gothic" Foreground="Black" HorizontalAlignment="Left" MouseDoubleClick="Restart_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Resources/Images/home.png" Height="20" Width="40"/>
+                        <TextBlock Text="Show" Height="18"/>
+                    </StackPanel>
+                </ListViewItem>
+                <ListViewItem Height="40" FontSize="14" FontFamily="Century Gothic" Foreground="Black" HorizontalAlignment="Left">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Resources/Images/icons8-christmas-star-96.png" Height="25" Width="40"/>
+                        <TextBlock Text="Grade tours and guide" Height="18"/>
+                    </StackPanel>
+                </ListViewItem>
+                <ListViewItem Height="40" FontSize="14" FontFamily="Century Gothic" Foreground="Black" HorizontalAlignment="Left">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Resources/Images/bell.png" Height="25" Width="40"/>
+                        <TextBlock Text="Notifications" Height="18"/>
+                    </StackPanel>
+                </ListViewItem>
+                <ListViewItem Height="40" FontSize="14" FontFamily="Century Gothic" Foreground="Black" HorizontalAlignment="Left">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Resources/Images/tasks.png" Height="25" Width="40"/>
+                        <TextBlock Text="My requests" Height="18"/>
+                    </StackPanel>
+                </ListViewItem>
+                <ListViewItem Height="40" FontSize="14" FontFamily="Century Gothic" Foreground="Black" HorizontalAlignment="Left">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Resources/Images/voucher.png" Height="25" Width="40"/>
+                        <TextBlock Text="Vouchers" Height="18"/>
+                    </StackPanel>
+                </ListViewItem>
+                <ListViewItem Height="40" FontSize="14" FontFamily="Century Gothic" Foreground="Black" HorizontalAlignment="Left">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Resources/Images/help.png" Height="25" Width="40"/>
+                        <TextBlock Text="Help" Height="18"/>
+                    </StackPanel>
+                </ListViewItem>
+                <ListViewItem Height="40" FontSize="14" FontFamily="Century Gothic" Foreground="Black" HorizontalAlignment="Left" MouseDoubleClick="SignOut_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Resources/Images/signout.png" Height="25" Width="40"/>
+                        <TextBlock Text="Sign out" Height="18"/>
+                    </StackPanel>
+                </ListViewItem>
+            </ListView>
         </StackPanel>
-        <DataGrid x:Name="TourListDataGrid" ItemsSource="{Binding Path=TourInstances,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=Selected}" IsReadOnly="True" AutoGenerateColumns="False" VerticalAlignment="Top" HorizontalAlignment="Left" Height="225" Width="505" Margin="235,187,0,0">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Location" Width="1*" Binding="{Binding Tour.Location}"/>
-                <DataGridTextColumn Header="Duration" Width="1*" Binding="{Binding Tour.Duration}"/>
-                <DataGridTextColumn Header="Language" Width="1*" Binding="{Binding Tour.Language}"/>
-                <DataGridTextColumn  Width="1*" Header="Capacity" Binding="{Binding Tour.MaxGuests}"/>
-                <DataGridTemplateColumn x:Name="reservation" Header="Reservation"  Width="1.2*">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Name="reservationButton" Content="RESERVE" TextElement.FontWeight="ExtraBold" Click="Reserve"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn x:Name="detailsView" Header="Details" Width="0.9*">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Name="detailsButton" Content="View" Click="ViewDetails"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-
-
-        </DataGrid>
-        <ComboBox x:Name="cityInput" ItemsSource="{Binding CitiesByCountry}" SelectedItem="{Binding Location.City}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" HorizontalAlignment="Left" Margin="321,90,0,0" VerticalAlignment="Top" Width="61"/>
-        <TextBox x:Name="durationInput" HorizontalAlignment="Left" Margin="411,91,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="61" Height="22" RenderTransformOrigin="0.496,0.294"/>
-        <TextBox x:Name="languageInput" HorizontalAlignment="Left" Margin="500,91,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="61" Height="22"/>
-        <TextBlock x:Name="capacityNumber" Text="1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="61" TextAlignment="Center" Height="22" Background="#FFDFDCDC" Margin="625,90,0,0" />
-
-        <Label Content="City" HorizontalAlignment="Left" Margin="321,60,0,0" VerticalAlignment="Top" RenderTransformOrigin="5.351,0.387"/>
-        <Label Content="Duration" HorizontalAlignment="Left" Margin="411,60,0,0" VerticalAlignment="Top"/>
-        <Label Content="Language" HorizontalAlignment="Left" Margin="499,60,0,0" VerticalAlignment="Top"/>
-        <Label Content="Capacity" HorizontalAlignment="Left" Margin="625,55,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="countryInput" ItemsSource="{Binding Countries}" SelectedItem="{Binding Location.Country}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" HorizontalAlignment="Left" Margin="235,90,0,0" VerticalAlignment="Top" Width="61" SelectionChanged="CountryInput_SelectionChanged"/>
-        <Label Content="Country" HorizontalAlignment="Left" Margin="235,60,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="decrementCapacityNumber" Content="-" HorizontalAlignment="Left" Margin="584,91,0,0" VerticalAlignment="Top" Width="20" Click="DecrementCapacityNumber_Click" Height="21.96"/>
-        <Button x:Name="incrementCapacityNumber" Content="+" HorizontalAlignment="Left" Margin="703,91,0,0" VerticalAlignment="Top" Width="20" Click="IncrementCapacityNumber_Click" RenderTransformOrigin="-1.284,0.612" Height="21.96"/>
-        <Button Content="Search" FontWeight="Bold" HorizontalAlignment="Left" Margin="735,90,0,0" VerticalAlignment="Top" Height="22" Click="Search_Click" Width="61"/>
-        <Label x:Name="Label" Content="Showing all tours: " HorizontalAlignment="Left" Margin="235,146,0,0" VerticalAlignment="Top" Height="24"/>
-        <Button x:Name="Restart" Content="Restart" HorizontalAlignment="Left" Margin="752,392,0,0" VerticalAlignment="Top" TextElement.FontWeight="Bold" Click="Restart_Click"/>
-        <Label x:Name="DurationLabel" HorizontalAlignment="Left" Margin="271,116,0,0" VerticalAlignment="Top"/>
-
-
-
-
-
-
-
+        <ContentControl x:Name="CC" Grid.ColumnSpan="2" Margin="10,0,0,0" Background="#FFF3EEEE"/>
     </Grid>
 </Window>

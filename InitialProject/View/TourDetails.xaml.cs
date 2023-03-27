@@ -45,5 +45,10 @@ namespace InitialProject.View
             img.VerticalAlignment = VerticalAlignment.Center;
             img.HorizontalAlignment = HorizontalAlignment.Center;
         }
+
+        private void Back_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }
