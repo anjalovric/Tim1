@@ -55,8 +55,8 @@ namespace InitialProject.View
                 }
             }
         }
-
-        public TourReservationForm(TourInstance currentTourInstance,int guestId,ObservableCollection<TourInstance> TourInstance,TourInstanceRepository tourInstanceRepository,Label label)
+        private Guest2 guest2;
+        public TourReservationForm(TourInstance currentTourInstance,Guest2 guest2,ObservableCollection<TourInstance> TourInstance,TourInstanceRepository tourInstanceRepository,Label label)
         {
             InitializeComponent();
             DataContext = this;
@@ -67,9 +67,10 @@ namespace InitialProject.View
             tourInstances = tourInstanceRepository.GetAll();
             tourReservationRepository = new TourReservationRepository();
             tourReservations = tourReservationRepository.GetAll();
-            ShowTours = new ShowTours();
+            ShowTours = new ShowTours(guest2);
             GetCurrentGuestsNumber();
-            GuestId = guestId;
+            this.guest2 = guest2;
+            GuestId = guest2.Id;
         }
         private int GetReservationsNumber()
         {

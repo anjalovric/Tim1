@@ -29,15 +29,20 @@ namespace InitialProject.View
     /// </summary>
     public partial class Guest2Overview : Window
     {
-       
-        public Guest2Overview()
+        public Model.Guest2 WindowGuest2 { get; set; }
+        private Guest2 guest2;
+        private Guest2Repository guest2Repository;
+        public Guest2Overview(User user)
         {
             InitializeComponent();
-            CC.Content = new ShowTours();
+            guest2Repository = new Guest2Repository();
+            guest2 = new Model.Guest2();
+            GetGuest2ByUser(user);
+            CC.Content = new ShowTours(guest2);
         }
         private void Restart_Click(object sender, RoutedEventArgs e)
         {
-            CC.Content = new ShowTours();
+            CC.Content = new ShowTours(guest2);
 
         }
 
@@ -47,6 +52,15 @@ namespace InitialProject.View
             signInForm.Show();
             this.Close();
 
+        }
+        private void ShowFinished_Click(object sender, RoutedEventArgs e)
+        {
+            CC.Content = new FinishedTourInstances(guest2);
+
+        }
+        private void GetGuest2ByUser(User user)
+        {
+            guest2 = guest2Repository.GetByUsername(user.Username);
         }
 
     }

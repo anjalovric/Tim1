@@ -28,7 +28,7 @@
                         <TextBlock Text="Show" Height="18"/>
                     </StackPanel>
                 </ListViewItem>
-                <ListViewItem Height="40" FontSize="14" FontFamily="Century Gothic" Foreground="Black" HorizontalAlignment="Left">
+                <ListViewItem Height="40" FontSize="14" FontFamily="Century Gothic" Foreground="Black" HorizontalAlignment="Left" MouseDoubleClick="ShowFinished_Click">
                     <StackPanel Orientation="Horizontal">
                         <Image Source="/Resources/Images/icons8-christmas-star-96.png" Height="25" Width="40"/>
                         <TextBlock Text="Grade tours and guide" Height="18"/>
