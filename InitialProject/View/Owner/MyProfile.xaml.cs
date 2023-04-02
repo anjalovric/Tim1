@@ -1,17 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using InitialProject.Model;
+using InitialProject.Service;
 
 namespace InitialProject.View.Owner
 {
@@ -20,9 +16,23 @@ namespace InitialProject.View.Owner
     /// </summary>
     public partial class MyProfile : Page
     {
-        public MyProfile()
+        public Model.Owner ProfileOwner { get; set; }
+        private OwnerReviewService ownerReviewService;
+        public ObservableCollection<OwnerReview> OwnerReviews { get; set; }
+        public MyProfile(User user)
         {
             InitializeComponent();
+            DataContext = this;
+            MakeOwner(user);
+            ownerReviewService = new OwnerReviewService();
+            OwnerReviews = new ObservableCollection<OwnerReview>(ownerReviewService.GetAllToDisplay(ProfileOwner));
+        }
+
+        private void MakeOwner(User user)
+        {
+            ProfileOwner = new Model.Owner();
+            OwnerService ownerService = new OwnerService();
+            ProfileOwner = ownerService.GetByUsername(user.Username);
         }
     }
 }

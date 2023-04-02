@@ -5,23 +5,54 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:InitialProject.View.Owner"
       mc:Ignorable="d" 
-      d:DesignHeight="750" d:DesignWidth="430"
-      Title="MyProfile" WindowWidth="430" WindowHeight="750" Background="White">
+      d:DesignHeight="630" d:DesignWidth="430"
+      Title="MyProfile" Background="White">
+    <Page.Resources>
+        <DataTemplate x:Key="ownerReviews">
+            <Border BorderBrush="Black" BorderThickness="0.5" Margin="0,0,0,0" >
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150*"/>
+                    <ColumnDefinition Width="110"/>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="40"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="20"/>
+                </Grid.RowDefinitions>
+                
+                 <TextBlock Text="{Binding Path=Reservation.Guest}" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2"/>
+                <TextBlock Text="Cleanliness" Grid.Column="1" Grid.Row="0" ></TextBlock>
+                <TextBlock Text="Owner's correctness" Grid.Column="1" Grid.Row="1"></TextBlock>
+                <TextBlock Text="{Binding Path=Cleanliness}" Grid.Column="2" Grid.Row="0"></TextBlock>
+                <TextBlock Text="{Binding Path=Correctness}" Grid.Column="2" Grid.Row="1" ></TextBlock>
+                <Button Content="View"  Grid.Column="3" Grid.Row="0" Grid.RowSpan="2" Height="16" HorizontalContentAlignment="Center"></Button>
+            </Grid>
+            </Border>
+            
+        </DataTemplate>
+    </Page.Resources>
 
     <Grid>
-        <Rectangle HorizontalAlignment="Center" Height="107" Margin="0,80,0,0" Stroke="Black" VerticalAlignment="Top" Width="370"/>
-        <ScrollViewer Margin="30,236,30,154"/>
-        <Image HorizontalAlignment="Left" Height="83" Margin="53,92,0,0" VerticalAlignment="Top" Width="85"/>
-        <Label Content="Full name:" Margin="162,80,199,642" Height="25"/>
-        <Label Content="Age:" Margin="162,108,199,614" Height="25"/>
-        <Label Content="Email:" Margin="162,136,199,586" Height="25"/>
-        <Label Content="Title:" Margin="162,159,199,563" Height="25"/>
-        <Label Content="Full name:" Margin="248,82,30,643" Height="25"/>
-        <Label Content="Full name:" Margin="248,110,30,615" Height="25"/>
-        <Label Content="Full name:" Margin="248,138,30,587" Height="25"/>
-        <Label Content="Full name:" Margin="248,161,30,564" Height="25"/>
-        <Button Content="Button" HorizontalAlignment="Center" Margin="0,647,0,0" VerticalAlignment="Top" Width="370" Height="43"/>
+        <Border HorizontalAlignment="Center" Height="125" BorderBrush="Black" BorderThickness="1" VerticalAlignment="Top" Width="410">
+            <Grid Margin="0,0,0,0">
+                <Image HorizontalAlignment="Left" Height="83"  VerticalAlignment="Top" Width="85" Margin="18,10,0,0"/>
+                <Label Content="Full name:" Height="25" Margin="129,0,55,80"/>
+                <Label Content="Age:"  Height="25" Margin="129,30,36,50"/>
+                <Label Content="Email:" Height="25" Margin="129,52,10,27"/>
+                <Label Content="Title:"  Height="25" Margin="129,82,45,-2"/>
+                <Label Content="{Binding ProfileOwner, UpdateSourceTrigger=PropertyChanged}" Margin="248,0,30,80" Height="25"/>
+                <Label Content="{Binding ProfileOwner.Age, UpdateSourceTrigger=PropertyChanged}" Margin="242,30,36,50" Height="25"/>
+                <Label Content="{Binding ProfileOwner.Email, UpdateSourceTrigger=PropertyChanged}" Margin="248,57,30,23" Height="25"/>
+                <Label Content="{Binding ProfileOwner.IsSuperOwner, UpdateSourceTrigger=PropertyChanged}" Margin="248,75,30,564" Height="25"/>
 
+            </Grid>
+        </Border>
+        <ListBox Margin="10,175,10,154" ItemsSource="{Binding Path=OwnerReviews}" ItemTemplate="{StaticResource ownerReviews}" HorizontalContentAlignment="Stretch">
 
+        </ListBox>
+
+        <Button Content="Button" HorizontalAlignment="Center" Margin="0,539,0,0" VerticalAlignment="Top" Width="370" Height="43"/>
     </Grid>
 </Page>
