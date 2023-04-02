@@ -124,5 +124,11 @@ namespace InitialProject.View
             HistoryView historyView = new HistoryView();
             historyView.Show();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            CancelTour cancelTour = new CancelTour(loggedInUser);
+            cancelTour.Show();
+        }
     }
 }

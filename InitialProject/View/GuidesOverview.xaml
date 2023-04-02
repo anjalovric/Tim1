@@ -33,6 +33,7 @@
         <TextBlock Margin="418,43,296,410" Text="{Binding Source={x:Static sys:DateTime.Now},
                   StringFormat='{}{0:dd-MMM-yyyy hh:mm:ss}'}"/>
         <Button Content="History" HorizontalAlignment="Left" Height="41" Margin="508,328,0,0" VerticalAlignment="Top" Width="101" Click="History_Click"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="638,328,0,0" VerticalAlignment="Top" Width="101" Height="41" Click="Button_Click"/>
 
     </Grid>
 </Window>

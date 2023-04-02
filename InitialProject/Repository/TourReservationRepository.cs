@@ -69,5 +69,22 @@ namespace InitialProject.Repository
         {
             return _tourReservations;
         }
+
+        public List<TourReservation> GetReservationsForTourInstance(int tourInstanceId)
+        {
+            _tourReservations = _serializer.FromCSV(FilePath);
+            List<TourReservation> list = new List<TourReservation>();
+            foreach (TourReservation tour in _tourReservations)
+            {
+                if(tour.TourInstanceId==tourInstanceId)
+                    list.Add(tour);
+            }
+            return list;
+        }
+
+        public TourReservation GetReservationById(int tourReservationId)
+        {
+            return _tourReservations.Find(n => n.Id == tourReservationId);
+        }
     }
 }

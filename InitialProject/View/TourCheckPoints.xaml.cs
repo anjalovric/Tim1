@@ -1,5 +1,6 @@
 ﻿using InitialProject.Model;
 using InitialProject.Repository;
+using InitialProject.Service;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -29,6 +30,8 @@ namespace InitialProject.View
         public ObservableCollection<CheckPoint> AllPoints { get; set; }
         public ObservableCollection<CheckPoint> CurrentPoint { get; set; }
         public ObservableCollection<TourInstance> Tours { get; set; }
+
+        private TourDetailsService tourDetailsService;
 
 
         private CheckPointRepository pointsRepository;
@@ -60,6 +63,8 @@ namespace InitialProject.View
             CurrentPoint = new ObservableCollection<CheckPoint>();
             Tours = tours;
             selected = selectedInstance;
+
+            tourDetailsService = new TourDetailsService();
 
             FindPointsForSelectedInstance(selected);
             CheckFirstPoint();
@@ -109,9 +114,10 @@ namespace InitialProject.View
         private void FinishInstance()
         {
             selected.Finished = true;
+            selected.Attendance=tourDetailsService.MakeAttendancePrecentage(selected.Id);
             tourInstanceRepository.Update(selected);
 
-            CheckAllPoints();
+            //CheckAllPoints();
             CurrentPoint[0].Checked = true;
 
             Tours.Remove(selected);

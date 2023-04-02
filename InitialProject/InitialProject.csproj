@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+<<<<<<< HEAD
     <None Remove="Resources\Images\accommodation.jpg" />
     <None Remove="Resources\Images\account.png" />
     <None Remove="Resources\Images\add.png" />
@@ -19,6 +20,19 @@
     <None Remove="Resources\Images\minus.png" />
     <None Remove="Resources\Images\plus.png" />
     <None Remove="Resources\Images\profile.jpg" />
+=======
+    <None Remove="Resources\Images\accommodation.png" />
+    <None Remove="Resources\Images\add.png" />
+    <None Remove="Resources\Images\back_arrow.png" />
+    <None Remove="Resources\Images\burger_menu.png" />
+    <None Remove="Resources\Images\delete.png" />
+    <None Remove="Resources\Images\edit.png" />
+    <None Remove="Resources\Images\home.png" />
+    <None Remove="Resources\Images\minus.png" />
+    <None Remove="Resources\Images\plus.png" />
+    <None Remove="Resources\Images\profile.png" />
+    <None Remove="Resources\Images\question_mark.png" />
+>>>>>>> develop
     <None Remove="Resources\Images\search.png" />
     <None Remove="Resources\Images\sent.png" />
     <None Remove="Resources\Images\signout.png" />
@@ -26,7 +40,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Resources\Images\accommodation.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Images\add.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\back_arrow.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\burger_menu.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\delete.png">
@@ -35,8 +58,17 @@
     <Content Include="Resources\Images\edit.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Images\home.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Images\minus.png" />
     <Content Include="Resources\Images\plus.png" />
+    <Content Include="Resources\Images\profile.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\question_mark.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Images\view.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

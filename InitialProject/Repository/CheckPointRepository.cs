@@ -65,5 +65,10 @@ namespace InitialProject.Repository
             return checkPoint;
         }
 
+        public CheckPoint GetById(int id)
+        {
+            return _checkPoints.Find(n => n.Id == id);
+        }
+
     }
 }

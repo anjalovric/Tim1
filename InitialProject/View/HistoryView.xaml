@@ -5,19 +5,29 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
-        Title="HistoryView" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+        Title="HistoryView" Height="550" Width="1000" WindowStartupLocation="CenterScreen">
     <Grid>
-        <DataGrid SelectedItem="{Binding Path=Selected}" HorizontalAlignment="Left" Height="342" Margin="80,39,0,0" VerticalAlignment="Top" Width="340" IsReadOnly="True" ItemsSource="{Binding Path=Instances}" AutoGenerateColumns="False">
+        <DataGrid x:Name="TourListDataGrid" SelectedItem="{Binding Path=Selected}" HorizontalAlignment="Left" Height="342" Margin="124,130,0,0" VerticalAlignment="Top" Width="555" IsReadOnly="True" ItemsSource="{Binding Path=Instances}" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding Tour.Name}" Width="92"></DataGridTextColumn>
                 <DataGridTextColumn Header="Location" Binding="{Binding Tour.Location}" Width="100"></DataGridTextColumn>
                 <DataGridTextColumn Header="StartClock" Binding="{Binding StartClock}" Width="80"></DataGridTextColumn>
                 <DataGridTextColumn Header="StartDate" Binding="{Binding StartDate}" Width="60"></DataGridTextColumn>
-
+                <DataGridTextColumn Header="Duration" Binding="{Binding Tour.Duration}" Width="60"></DataGridTextColumn>
+                <DataGridTextColumn Header="Description" Binding="{Binding Tour.Description}" Width="75"></DataGridTextColumn>
+                <DataGridTemplateColumn x:Name="cancelation" Header="Details"  Width="1.2*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Name="cancelButton" Content="DETAILS" TextElement.FontWeight="ExtraBold" Click="ViewDetails_Click"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
 
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="View details" HorizontalAlignment="Left" Height="27" Margin="489,167,0,0" VerticalAlignment="Top" Width="121" Click="ViewDetails_Click"/>
+        <Button Content="View general most visited" HorizontalAlignment="Left" Margin="747,156,0,0" VerticalAlignment="Top" Height="77" Width="203" Click="MostVisited_Click"/>
+        <Button Content="View most visited for chosen year" HorizontalAlignment="Left" Margin="747,374,0,0" VerticalAlignment="Top" Height="76" Width="203" Click="MostVisitedForYear_Click"/>
+        <TextBox x:Name="ChosenYear" Margin="747,339,50,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="203" Text="{Binding Path=Year,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}" Height="30"/>
 
     </Grid>
 </Window>

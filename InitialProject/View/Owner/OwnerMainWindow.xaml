@@ -1,0 +1,50 @@
+﻿<Window x:Class="InitialProject.View.Owner.OwnerMainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InitialProject.View.Owner"
+        mc:Ignorable="d"
+        Title="OwnerMainWindow" Height="750" Width="430">
+    <Grid>
+        <Menu Margin="0,0,0,680" Background="Gray">
+            <MenuItem Height="40" Width="100" Name="BurgerMenu">
+                <MenuItem.Icon>
+                    <Image Source="/Resources/Images/burger_menu.png" HorizontalAlignment="Center" VerticalAlignment="Stretch"/>
+                </MenuItem.Icon>
+            </MenuItem>
+        </Menu>
+        <Frame Name="FrameForPages" Margin="0,60,0,60">
+            
+        </Frame>
+        <Menu Margin="0,680,0,0" Background="LightGray" BorderBrush="Gray">
+            <MenuItem Width="83" Height="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                <MenuItem.Icon>
+                    <Image Source="/Resources/Images/back_arrow.png"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem  Width="83" Height="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                <MenuItem.Icon>
+                    <Image Source="/Resources/Images/accommodation.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem  Width="83" Height="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                <MenuItem.Icon>
+                    <Image Source="/Resources/Images/home.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem  Width="83" Height="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                <MenuItem.Icon>
+                    <Image Source="/Resources/Images/question_mark.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem  Width="83" Height="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                <MenuItem.Icon>
+                    <Image Source="/Resources/Images/profile.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+           
+
+        </Menu>
+    </Grid>
+</Window>
