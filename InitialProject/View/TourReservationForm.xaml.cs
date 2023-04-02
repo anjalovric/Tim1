@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Net.Cache;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,10 +34,28 @@ namespace InitialProject.View
         private List<TourReservation> tourReservations;
         private List<TourInstance> tourInstances;
         private TourInstanceRepository tourInstanceRepository;
+
         private ShowTours ShowTours;
+
+        private Guest2Overview Guest2Overview;
+        private Boolean withVoucher = true;
+
         public ObservableCollection<TourInstance> TourInstances { get; set; }
         public Label Label { get; set; }
-       
+        private string age;
+        public string Age
+        {
+            get => age;
+            set
+            {
+                if (value != age)
+                {
+                    age = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         public TourReservationForm(TourInstance currentTourInstance,int guestId,ObservableCollection<TourInstance> TourInstance,TourInstanceRepository tourInstanceRepository,Label label)
         {
             InitializeComponent();
@@ -136,7 +155,7 @@ namespace InitialProject.View
             }
             else if (tourReservations.Count == 0)
             {
-                TourReservation newTourReservation = new TourReservation(CurrentTourInstance.Id, GuestsNumber, GuestId);
+                TourReservation newTourReservation = new TourReservation(CurrentTourInstance.Id, GuestsNumber, GuestId,Convert.ToDouble(Age),Convert.ToInt32(capacityNumber.Text),withVoucher);
                 tourReservationRepository.Save(newTourReservation);
             }
             ChangeTourReservation();
@@ -159,7 +178,7 @@ namespace InitialProject.View
             }
             if (!changed)
             {
-                TourReservation newTourReservation = new TourReservation(CurrentTourInstance.Id, GuestsNumber, GuestId);
+                TourReservation newTourReservation = new TourReservation(CurrentTourInstance.Id, GuestsNumber, GuestId, Convert.ToDouble(Age),Convert.ToInt32(capacityNumber.Text),withVoucher);
                 tourReservationRepository.Save(newTourReservation);
             }
         }

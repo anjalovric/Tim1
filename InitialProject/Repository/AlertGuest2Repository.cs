@@ -63,5 +63,18 @@ namespace InitialProject.Repository
             _serializer.ToCSV(FilePath, alerts);
         }
 
+        public List<AlertGuest2> GetByInstanceIdAndGuestId(int instanceId,int guestId)
+        {
+            List<AlertGuest2> lista= new List<AlertGuest2>();
+            foreach(AlertGuest2 alert in alerts)
+            {
+                if(alert.InstanceId==instanceId && alert.Guest2Id == guestId)
+                {
+                    lista.Add(alert);
+                }
+            }
+            return lista;
+        }
+
     }
 }

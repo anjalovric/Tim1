@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
+
         Title="TourReservationForm" Height="500" Width="1024" WindowStartupLocation="CenterScreen">
     <Grid Background="#FFF3EEEE">
         <TextBlock x:Name="capacityNumber" Text="1" HorizontalAlignment="Center" VerticalAlignment="Top" Width="272" TextAlignment="Center" Height="18" Background="#FFDFDCDC" Margin="0,268,0,0"/>
@@ -18,6 +19,11 @@
         <Label Content="Number of guests" HorizontalAlignment="Left" Margin="190,263,0,0" VerticalAlignment="Top"/>
         <TextBox TextWrapping="Wrap" Margin="327,122,328,604"/>
         <TextBox TextWrapping="Wrap" Margin="327,193,328,533"/>
+
+        
+        
+        <TextBox HorizontalAlignment="Left" Margin="318,209,0,0" TextWrapping="Wrap" Text="{Binding Path=Age,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120" Height="31"/>
+
 
     </Grid>
 </Window>
