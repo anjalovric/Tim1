@@ -17,6 +17,7 @@ namespace InitialProject.Model
 
 
 
+
         public Guest2() { }
         public Guest2(string name, string lastName)
         {
@@ -29,11 +30,12 @@ namespace InitialProject.Model
             Name = values[1];
             LastName = values[2];
             Username = values[3];
+
         }
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), Name, LastName, Username };
+            string[] csvValues = { Id.ToString(), Name, LastName, Username};
             return csvValues;
         }
     }

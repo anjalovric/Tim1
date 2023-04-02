@@ -1,5 +1,6 @@
 ﻿using InitialProject.Model;
 using InitialProject.Repository;
+using InitialProject.Service;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -24,12 +25,11 @@ namespace InitialProject.View
     /// </summary>
     public partial class HistoryView : Window, INotifyPropertyChanged
     {
+        public int Year { get; set; }
         public ObservableCollection<TourInstance> Instances { get; set; }
-        private TourInstanceRepository tourInstanceRepository;
-        private LocationRepository locationRepository;
-        private TourRepository tourRepository;
 
         private TourInstance selected;
+        private TourHistoryService historyService;
         public TourInstance Selected
         {
             get { return selected; }
@@ -51,72 +51,42 @@ namespace InitialProject.View
         {
             InitializeComponent();
             DataContext = this;
-            tourInstanceRepository = new TourInstanceRepository();
-            locationRepository = new LocationRepository();
-            tourRepository = new TourRepository();
+
             Instances = new ObservableCollection<TourInstance>();
 
+            historyService = new TourHistoryService();
 
-            SetLocationToTour();
-            SetTourToTourInstance();
-
-            GetFinishedInsatnces();
+            historyService.SetLocationToTour();
+            historyService.SetTourToTourInstance();
+            historyService.GetFinishedInsatnces(Instances);
+            
 
 
         }
-        private void GetFinishedInsatnces()
-        {
-            List<TourInstance> instances = tourInstanceRepository.GetAll();
-            foreach (TourInstance instance in instances)
-            {
-                if (instance.Finished)
-                {
-                    Instances.Add(instance);
-                }
-            }
-        }
-        private void SetLocationToTour()
-        {
-            List<Location> locations = locationRepository.GetAll();
-            List<Tour> tours =tourRepository.GetAll();
-
-            foreach(Tour tour in tours)
-            {
-                foreach (Location location in locations)
-                {
-                    if(location.Id == tour.Location.Id)
-                        tour.Location = location;
-                }
-            }
-        }
-
-        private void SetTourToTourInstance()
-        {
-            List<TourInstance> instances = tourInstanceRepository.GetAll();
-            List<Tour> tours = tourRepository.GetAll();
-
-            foreach (TourInstance instance in instances)
-            {
-                foreach (Tour tour in tours)
-                {
-                    if (tour.Id == instance.Tour.Id)
-                        instance.Tour = tour;
-                }
-            }
-        }
-
         private void ViewDetails_Click(object sender, RoutedEventArgs e)
         {
-            if (Selected == null)
-            {
-                MessageBox.Show("Select tour insatnce first");
-            }
-            else
-            {
-                CheckPointDetails checkPointDetails = new CheckPointDetails(Selected);
+            TourInstance currentTourInstance = (TourInstance)TourListDataGrid.CurrentItem;
+            CheckPointDetails checkPointDetails = new CheckPointDetails(currentTourInstance);
                 checkPointDetails.Show();
-            }
+            
         }
 
+        private void MostVisited_Click(object sender, RoutedEventArgs e)
+        {
+            CheckPointDetails checkPointDetails = new CheckPointDetails(historyService.FindMostVisited());
+            checkPointDetails.Show();
+        }
+
+
+        private void MostVisitedForYear_Click(object sender, RoutedEventArgs e)
+        {
+
+            if (Year > 0)
+            {
+                CheckPointDetails checkPointDetails = new CheckPointDetails(historyService.FindMostVisitedForChosenYear(Year));
+                checkPointDetails.Show();
+                ChosenYear.Text = null;
+            }
+        }
     }
 }

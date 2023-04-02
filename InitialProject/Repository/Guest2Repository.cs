@@ -30,5 +30,9 @@ namespace InitialProject.Repository
         {
             return _guests.Find(n => n.Username.Equals(userName));
         }
+        public Guest2 GetById(int id)
+        {
+            return _guests.Find(n => n.Id==id);
+        }
     }
 }
