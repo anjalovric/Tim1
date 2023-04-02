@@ -1,0 +1,131 @@
+﻿<Page x:Class="InitialProject.View.Guest1SearchAccommodation"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InitialProject.View"
+        mc:Ignorable="d"
+        Title="Home" Height="696" Width="1024">
+    <Page.Resources>
+        <DataTemplate x:Key="accommodationTemplate" x:Name="accommodationCard">
+            <Border BorderBrush="Black" BorderThickness="1" Background="White" Margin="1" HorizontalAlignment="Center" Width="915" Height="120">
+                <Grid HorizontalAlignment="Center" Grid.ColumnSpan="3" Height="111" Width="915" VerticalAlignment="Center">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="170*"></ColumnDefinition>
+                        <ColumnDefinition Width="125*"></ColumnDefinition>
+                        <ColumnDefinition Width="126*"></ColumnDefinition>
+                        <ColumnDefinition Width="92*"></ColumnDefinition>
+                        <ColumnDefinition Width="107*"></ColumnDefinition>
+                        <ColumnDefinition Width="72*"></ColumnDefinition>
+                        <ColumnDefinition Width="162*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Image x:Name="accommodationImage" Width="111" HorizontalAlignment="Left"/>
+                    <Label Content="Name:" Padding="0,0,0,0" HorizontalAlignment="Left" FontSize="18" Width="67" VerticalAlignment="Center" VerticalContentAlignment="Center" Grid.Row="0" Grid.Column="1"/>
+                    <Label Content="Type:" FontSize="18" Padding="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" VerticalContentAlignment="Center" Width="67"  Grid.Row="0" Grid.Column="2"/>
+                    <Label Content="City:" Padding="0,0,0,0" FontSize="18" VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Left"  Grid.Row="0" Grid.Column="3" Width="63"/>
+                    <Label Content="Capacity:" Padding="0,0,0,0" FontSize="18" VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Left" Width="90" Grid.Row="0" Grid.Column="4"/>
+                    <TextBlock Text="{Binding Path=Name}" FontSize="18" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Width="120" Height="30" HorizontalAlignment="Left"/>
+                    <TextBlock Text="{Binding Path=Type}" FontSize="18" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" Width="90" Height="30" HorizontalAlignment="Left"/>
+                    <TextBlock Text="{Binding Path=Location.City}" FontSize="18" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" Width="90" Height="30" HorizontalAlignment="Left"/>
+                    <TextBlock Text="{Binding Path=Capacity}" FontSize="18" Grid.Row="1" Grid.Column="4" VerticalAlignment="Center" Width="90" Height="30" HorizontalAlignment="Left"/>
+                    <Button x:Name="Details" Content="Details" Click="ViewPhotosButton_Click" FontWeight="Bold" Grid.Row="0" FontSize="18" Grid.Column="6"  VerticalAlignment="Center" Width="94" Height="30" HorizontalAlignment="Center"/>
+                    <Button x:Name="Reserve" Content="Reserve" Click="ReserveButton_Click" FontWeight="Bold" Grid.Row="1" Grid.Column="6" VerticalAlignment="Center" Width="94" Height="30" HorizontalAlignment="Center" FontSize="18"/>
+                </Grid>
+            </Border>
+        </DataTemplate>
+    </Page.Resources>
+
+    <Grid Background="AntiqueWhite">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="72"></RowDefinition>
+            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition Height="110"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+
+
+        <Label x:Name="bookAccommodation" VerticalAlignment="Top" Content="BOOKING ACCOMMODATION"  FontWeight="Bold"  VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="24" Margin="339,20,339,0" Grid.ColumnSpan="3"/>
+
+        <Label x:Name="Name" Content="Name:" HorizontalContentAlignment="Left" Margin="38,10,0,52" FontSize="18" Width="258" Grid.Row="1" HorizontalAlignment="Left" Grid.Column="0" Height="38"/>
+        <Label x:Name="City" Content="City:" Margin="41,12,42,50" FontSize="18" Width="258" Height="38" Grid.Column="2" Grid.Row="1" />
+        <Label x:Name="Country" Content="Country:" HorizontalContentAlignment="Left" Margin="46,12,41,50" FontSize="18" Height="38" Grid.Row="1" Grid.Column="1"/>
+
+        <Label x:Name="NumberOfDays" Grid.Row="2" Grid.Column="1" Content="Number of days:" Margin="46,8,38,64" FontSize="18" Height="38" Width="258"/>
+        <Label x:Name="NumberOfGuests" Content="Number of guests:" Margin="41,8,42,64" FontSize="18" Grid.Row="2" Grid.Column="2" Height="38" Width="258"/>
+
+
+        <TextBox x:Name="nameInput" Height="40" HorizontalAlignment="Left" Width="258" FontSize="18" Margin="38,48,0,12" Grid.Row="1" />
+        <ComboBox x:Name="countryInput" ItemsSource="{Binding Countries}" SelectedItem="{Binding Location.Country}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" VerticalAlignment="Top" HorizontalAlignment="Left" Width="258" Height="40" FontSize="18" SelectionChanged="CountryInput_SelectionChanged" Margin="46,48,0,0" Grid.Row="1" Grid.Column="1"/>
+        <ComboBox x:Name="cityInput" ItemsSource="{Binding CitiesByCountry}" SelectedItem="{Binding Location.City}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" VerticalAlignment="Top" HorizontalAlignment="Center" Width="258" Height="40" Margin="0,48,0,0" FontSize="18" Grid.Row="1" Grid.Column="2"/>
+
+        <CheckBox x:Name="apartment" VerticalContentAlignment="Center" Content="Apartment" Margin="38,10,153,70"  FontSize="18" Grid.Row="2" Grid.Column="0" Height="30"/>
+        <CheckBox x:Name="house" VerticalContentAlignment="Center" Content="House" Margin="38,40,153,40" FontSize="18" Grid.Row="2" Grid.Column="0" Height="30"/>
+        <CheckBox x:Name="cottage" VerticalContentAlignment="Center" Content="Cottage" Margin="38,70,153,10" FontSize="18" Grid.Row="2" Grid.Column="0" Height="30"/>
+
+        <TextBox x:Name="numberOfDays" Text="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="157" TextAlignment="Center" Height="40" Background="#FFDFDCDC" FontSize="18" Grid.Column="1" Grid.Row="2" Margin="98,43,0,0" />
+        <Button x:Name="incrementNumberOfDays" Click="IncrementDaysNumberButton_Click" Content="+" TextElement.FontSize="18" Height="40" Background="#FFDDDDDD" Grid.Column="1" Grid.Row="2" Margin="260,43,38,27"/>
+        <Button x:Name="decrementNumberOfDays" Click="DecrementDaysNumberButton_Click"  Content="-" TextElement.FontSize="18" Margin="50,43,249,27" Grid.Column="1" Grid.Row="2" Height="40"/>
+
+        <TextBox x:Name="numberOfGuests" Text="" Height="40" TextAlignment="Center" Background="#FFDFDCDC" FontSize="18" Margin="98,43,94,27" Grid.Column="2" Grid.Row="2"/>
+        <Button x:Name="incrementNumberOfGuests" Click="IncrementGuestsNumberButton_Click" Height="40" Content="+" TextElement.FontSize="18" Margin="252,43,42,27" Background="#FFDDDDDD" Grid.Column="2" Grid.Row="2"/>
+        <Button x:Name="decrementNumberOfGuests" Click="DecrementGuestsNumberButton_Click" Height="40" Content="-" TextElement.FontSize="18" Margin="47,43,248,27" Grid.Column="2" Grid.Row="2"/>
+
+        <DataGrid x:Name="AccommodationListDataGrid" ItemsSource="{Binding Path=Accommodations,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" IsReadOnly="True" VerticalAlignment="Top" HorizontalAlignment="Left" Height="211" Width="667" Margin="114,34,0,0" Grid.ColumnSpan="3" Grid.Row="1" Grid.RowSpan="3">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Width="1*" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Location" Width="2*" Binding="{Binding Location}"/>
+                <DataGridTextColumn Header="Type" Width="1*" Binding="{Binding Type}" />
+                <DataGridTextColumn Header="Capacity" Width="1.2*" Binding="{Binding Capacity}"/>
+                <DataGridTextColumn Header="Min days for reservation" Width="2.7*" Binding="{Binding MinDaysForReservation}"/>
+                <DataGridTextColumn Header="Min days to cancel" Width="2.1*" Binding="{Binding MinDaysToCancel}"/>
+                <DataGridTemplateColumn x:Name="photosView" Header="Photos" Width="0.9*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Name="photosViewButton" Content="View" Click="ViewPhotosButton_Click"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn x:Name="reservation" Header="Reservation"  Width="1.38*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Name="reservationButton" Content="RESERVE" TextElement.FontWeight="ExtraBold" Click="ReserveButton_Click"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="Search" Content="Search" FontWeight="Bold" Margin="205,10,42,0" Height="35" Width="94" Click="SearchButton_Click" VerticalAlignment="Top" FontSize="18" Grid.Column="2" Grid.Row="3"/>
+        <Button Margin="103,28,153,336" FontSize="16" Click="SignOut_Click" Height="50" Grid.Row="3" RenderTransformOrigin="0.269,0.236">Sign out</Button>
+
+        <Button FontWeight="Bold" Margin="98,10,149,369" Click="ShowAllButton_Click" Width="94" Height="35" Grid.Row="3" Grid.Column="2" FontSize="18">Show all</Button>
+
+        <Label x:Name="numberOfDaysLabel" HorizontalAlignment="Left" Width="246" Height="22" Margin="54,88,0,0" VerticalAlignment="Top" Grid.Column="1" Grid.Row="2"/>
+        <Label x:Name="numberOfGuestsLabel" HorizontalAlignment="Left" Width="246" Height="22" Margin="49,88,0,0" VerticalAlignment="Top" Grid.Column="2" Grid.Row="2"/>
+
+
+        <ListBox x:Name="accommodationList" Height="265" IsSynchronizedWithCurrentItem="True" SelectedItem="{Binding Path=SelectedAccommodation,UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" ItemsSource="{Binding Path=Accommodations,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" ItemTemplate="{StaticResource accommodationTemplate}" Grid.ColumnSpan="3" Grid.Row="3" Margin="38,74,42,74" Width="944">
+            <ListBox.Resources>
+                <Style TargetType="ListViewItem">
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseCaptured"  Value="True">
+                            <Setter Property="IsSelected" Value="True"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </ListBox.Resources>
+        </ListBox>
+
+
+    </Grid>
+</Page>

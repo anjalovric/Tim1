@@ -2,6 +2,7 @@
 using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.View;
+using InitialProject.View.Owner;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -56,8 +57,10 @@ namespace InitialProject
                 {
                     if(user.Role==Model.Role.OWNER)
                     {
-                        OwnerOverview ownerOverview = new OwnerOverview(user);
-                        ownerOverview.Show();
+                        //OwnerOverview ownerOverview = new OwnerOverview(user);
+                        //ownerOverview.Show();
+                        OwnerMainWindow ownerMainWindow = new OwnerMainWindow(user);
+                        ownerMainWindow.Show();
                         Close();
                     }else if(user.Role == Model.Role.GUIDE)
                     {
@@ -67,9 +70,10 @@ namespace InitialProject
                     }
                     else if (user.Role == Model.Role.GUEST1)
                     {
-                        Guest1Overview guest1Overview = new Guest1Overview();
-                        guest1Overview.Show(); 
-                        Close();
+                        Guest1Home guest1Overview = new Guest1Home();
+                        guest1Overview.Owner = this;
+                        guest1Overview.Show();
+                        Hide();
                     }
                     else if (user.Role == Model.Role.GUEST2)
                     {

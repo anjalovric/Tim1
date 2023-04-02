@@ -29,8 +29,8 @@ namespace InitialProject.View
     /// <summary>
     /// Interaction logic for Guest1Overview.xaml
     /// </summary>
-    public partial class Guest1Overview : Window
-    {     
+    public partial class Guest1SearchAccommodation : Page
+    {
         public ObservableCollection<string> Countries { get; set; }
         public ObservableCollection<string> CitiesByCountry { get; set; }
         private LocationRepository locationRepository;
@@ -44,16 +44,29 @@ namespace InitialProject.View
 
         private AccommodationRepository accommodationRepository;
         private ObservableCollection<Accommodation> accommodations;
-        public ObservableCollection<Accommodation> Accommodations 
-        { 
-            get { return accommodations; } 
+        public ObservableCollection<Accommodation> Accommodations
+        {
+            get { return accommodations; }
             set
             {
-                if(value != accommodations)
-                    accommodations=value;
+                if (value != accommodations)
+                    accommodations = value;
                 OnPropertyChanged("Accommodations");
             }
-                
+
+        }
+
+        private Accommodation selectedAccommodation;
+        public Accommodation SelectedAccommodation
+        {
+            get { return selectedAccommodation; }
+            set
+            {
+                if (value != selectedAccommodation)
+                    selectedAccommodation = value;
+                OnPropertyChanged("SelectedAccommodation");
+            }
+
         }
         public Location Location
         {
@@ -67,7 +80,7 @@ namespace InitialProject.View
                 }
             }
         }
-        public Guest1Overview()
+        public Guest1SearchAccommodation()
         {
             InitializeComponent();
             DataContext = this;
@@ -90,13 +103,13 @@ namespace InitialProject.View
             SetAccommodationLocations();
         }
 
-        
+
 
         private void SignOut_Click(object sender, RoutedEventArgs e)
         {
             SignInForm signInForm = new SignInForm();
             signInForm.Show();
-            this.Close();
+            //this.Close();
         }
 
         private void CountryInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -181,7 +194,7 @@ namespace InitialProject.View
 
         private void SearchType(Accommodation accommodation)
         {
-            if (apartment.IsChecked==true || house.IsChecked == true || cottage.IsChecked == true)
+            if (apartment.IsChecked == true || house.IsChecked == true || cottage.IsChecked == true)
             {
                 if (apartment.IsChecked == false)
                 {
@@ -242,7 +255,7 @@ namespace InitialProject.View
         private void DecrementGuestsNumberButton_Click(object sender, RoutedEventArgs e)
         {
             int changedGuestsNumber;
-            if(numberOfGuests.Text!="" && Convert.ToInt32(numberOfGuests.Text)>1)
+            if (numberOfGuests.Text != "" && Convert.ToInt32(numberOfGuests.Text) > 1)
             {
                 changedGuestsNumber = Convert.ToInt32(numberOfGuests.Text) - 1;
                 numberOfGuests.Text = changedGuestsNumber.ToString();
@@ -252,7 +265,7 @@ namespace InitialProject.View
         private void IncrementGuestsNumberButton_Click(object sender, RoutedEventArgs e)
         {
             int changedGuestsNumber;
-            if(numberOfGuests.Text=="")
+            if (numberOfGuests.Text == "")
             {
                 numberOfGuests.Text = "1";
             }
@@ -260,7 +273,7 @@ namespace InitialProject.View
             {
                 changedGuestsNumber = Convert.ToInt32(numberOfGuests.Text) + 1;
                 numberOfGuests.Text = changedGuestsNumber.ToString();
-            }    
+            }
         }
 
         private void DecrementDaysNumberButton_Click(object sender, RoutedEventArgs e)
@@ -276,7 +289,7 @@ namespace InitialProject.View
         private void IncrementDaysNumberButton_Click(object sender, RoutedEventArgs e)
         {
             int changedDaysNumber;
-            if(numberOfDays.Text=="")
+            if (numberOfDays.Text == "")
             {
                 numberOfDays.Text = "1";
             }
@@ -284,7 +297,7 @@ namespace InitialProject.View
             {
                 changedDaysNumber = Convert.ToInt32(numberOfDays.Text) + 1;
                 numberOfDays.Text = changedDaysNumber.ToString();
-            } 
+            }
         }
 
         private void ViewPhotosButton_Click(object sender, RoutedEventArgs e)
@@ -295,7 +308,7 @@ namespace InitialProject.View
                 FindPhotosUrls(imagesUrls);
                 AccommodationPhotosView photosView = new AccommodationPhotosView(imagesUrls);
                 photosView.Show();
-                
+
             }
             catch (Exception ex)
             {
@@ -305,7 +318,7 @@ namespace InitialProject.View
 
         private void FindPhotosUrls(List<string> imagesUrls)
         {
-            Accommodation currentAccommodation = (Accommodation)AccommodationListDataGrid.CurrentItem;
+            Accommodation currentAccommodation = selectedAccommodation;
             foreach (AccommodationImage image in accommodationImages)
             {
                 if (image.Accommodation.Id == currentAccommodation.Id)
@@ -317,7 +330,7 @@ namespace InitialProject.View
 
         private void ReserveButton_Click(object sender, RoutedEventArgs e)
         {
-            Accommodation currentAccommodation = (Accommodation)AccommodationListDataGrid.CurrentItem;
+            Accommodation currentAccommodation = selectedAccommodation;
             AccommodationReservationForm accommodationReservationForm = new AccommodationReservationForm(currentAccommodation, ref accommodationRepository);
             accommodationReservationForm.Show();
         }
@@ -329,7 +342,7 @@ namespace InitialProject.View
             var regex = "^([1-9][0-9]*)$";
             Match match = Regex.Match(content, regex, RegexOptions.IgnoreCase);
             bool isValid = false;
-            if (!match.Success && numberOfDays.Text!="")
+            if (!match.Success && numberOfDays.Text != "")
             {
                 numberOfDays.BorderBrush = Brushes.Red;
                 numberOfDaysLabel.Content = "This field should be positive integer number";
@@ -372,6 +385,7 @@ namespace InitialProject.View
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        
+
+
     }
 }
