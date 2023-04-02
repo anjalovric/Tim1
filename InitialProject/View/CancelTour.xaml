@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
-        Title="CancelTour" Height="450" Width="800">
+        Title="CancelTour" Height="550" Width="1000">
     <Grid>
         <DataGrid x:Name="TourListDataGrid" ItemsSource="{Binding Path=TourInstances,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=Selected}" IsReadOnly="True" AutoGenerateColumns="False" Margin="83,144,65,62" >
             <DataGrid.Columns>

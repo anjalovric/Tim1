@@ -12,7 +12,7 @@ namespace InitialProject.Model
     {
         public int Id { get; set; }
         public  int GuestId{ get; set; }
-        public  Guide Guide{ get; set; }
+        public  int GuideId{ get; set; }
         public bool Used { get; set; }
 
         public DateTime CreateDate { get; set; }
@@ -21,17 +21,17 @@ namespace InitialProject.Model
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), GuestId.ToString(),Guide.Id.ToString(),Used.ToString(),CreateDate.ToString() };
+            string[] csvValues = { Id.ToString(), GuestId.ToString(),GuideId.ToString(),Used.ToString(),CreateDate.ToString() };
             return csvValues;
         }
 
         public void FromCSV(string[] values)
         {
             Id = Convert.ToInt32(values[0]);
-            GuestId = Convert.ToInt32(values[2]);
-            Guide= new Guide() { Id = Convert.ToInt32(values[3]) };
-            Used = Convert.ToBoolean(values[4]);
-            CreateDate = Convert.ToDateTime(values[5]);
+            GuestId = Convert.ToInt32(values[1]);
+            GuideId = Convert.ToInt32(values[2]);
+            Used = Convert.ToBoolean(values[3]);
+            CreateDate = Convert.ToDateTime(values[4]);
         }
     }
 }

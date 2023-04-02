@@ -5,8 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
-        Title="CheckPointDetails" Height="350" Width="400" WindowStartupLocation="CenterScreen">
-    <Grid >
-        <StackPanel x:Name="PointStack"></StackPanel>
+        Title="CheckPointDetails" Height="550" Width="1000" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <StackPanel x:Name="PointStack" Margin="29,71,500,10" ></StackPanel>
+        <Border BorderBrush="Black" RenderTransformOrigin="0.355,0.497" Margin="29,71,513,31" BorderThickness="1"/>
+        <Border BorderBrush="Black" BorderThickness="1" Margin="512,71,30,31"></Border>
+        <StackPanel x:Name="StaticticsStack" Margin="512,71,30,31"></StackPanel>
     </Grid>
 </Window>
