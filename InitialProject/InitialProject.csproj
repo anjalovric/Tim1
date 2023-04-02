@@ -8,12 +8,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Images\accommodation.jpg" />
+    <None Remove="Resources\Images\account.png" />
     <None Remove="Resources\Images\add.png" />
+    <None Remove="Resources\Images\bell.png" />
+    <None Remove="Resources\Images\date.png" />
     <None Remove="Resources\Images\delete.png" />
     <None Remove="Resources\Images\edit.png" />
+    <None Remove="Resources\Images\house.jpg" />
     <None Remove="Resources\Images\minus.png" />
     <None Remove="Resources\Images\plus.png" />
+    <None Remove="Resources\Images\profile.jpg" />
     <None Remove="Resources\Images\search.png" />
+    <None Remove="Resources\Images\sent.png" />
+    <None Remove="Resources\Images\signout.png" />
     <None Remove="Resources\Images\view.png" />
   </ItemGroup>
 
@@ -35,7 +43,18 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Resources\Images\search.png" />
+    <Resource Include="Resources\Images\search.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Images\accommodation.jpg" />
+    <Resource Include="Resources\Images\account.png" />
+    <Resource Include="Resources\Images\bell.png" />
+    <Resource Include="Resources\Images\date.png" />
+    <Resource Include="Resources\Images\house.jpg" />
+    <Resource Include="Resources\Images\profile.jpg" />
+    <Resource Include="Resources\Images\sent.png" />
+    <Resource Include="Resources\Images\signout.png" />
   </ItemGroup>
 
 </Project>

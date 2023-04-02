@@ -1,0 +1,71 @@
+﻿<Window x:Class="InitialProject.View.Guest1Home"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InitialProject.View"
+        mc:Ignorable="d"
+        Title="Guest1Home" Height="768" Width="1024" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Menu VerticalAlignment="Top" Background="DarkGray" Height="72">
+
+            <MenuItem Height="72" Width="148">
+                <MenuItem.Header>
+                    <TextBlock Text="HOME" Margin="-7" FontSize="20" Width="148" VerticalAlignment="Center" TextAlignment="Center"/>
+                </MenuItem.Header>
+                <MenuItem Header="BOOK ACCOMMODATION" Height="55"  FontSize="18" Click="BookingMenuItem_Click">
+                    <MenuItem.Icon>
+                        <Image Source="/Resources/Images/house.jpg"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="ANYWHERE/ANYTIME" Height="55" FontSize="18">
+                    <MenuItem.Icon>
+                        <Image Source="/Resources/Images/date.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem FontSize="20" Width="292" Click="MyReservationsMenuItem_Click">
+                <MenuItem.Header>
+                    <TextBlock Text="MY RESERVATIONS" Margin="-7" FontSize="20" TextAlignment="Center" Width="292"/>
+                </MenuItem.Header>
+            </MenuItem>
+            <MenuItem FontSize="20" Width="178">
+                <MenuItem.Header>
+                    <TextBlock Text="REVIEWS" Margin="-7" FontSize="20" TextAlignment="Center" Width="178"/>
+                </MenuItem.Header>
+            </MenuItem>
+            <MenuItem FontSize="20" Width="162">
+                <MenuItem.Header>
+                    <TextBlock Text="FORUM" Margin="-7" FontSize="20" TextAlignment="Center" Width="162"/>
+                </MenuItem.Header>
+            </MenuItem>
+            <MenuItem Width="115">
+                <MenuItem.Header>
+                    <Image Source="/Resources/Images/bell.png" Margin="23,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Height="48" Width="55"/>
+                </MenuItem.Header>
+            </MenuItem>
+            <MenuItem Width="114.5">
+                <MenuItem.Header>
+                    <Image Source="/Resources/Images/account.png" Margin="23,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Height="48" Width="55"/>
+                </MenuItem.Header>
+                <MenuItem Header="MY PROFILE" Height="55"  FontSize="18" Click="BookingMenuItem_Click">
+                    <MenuItem.Icon>
+                        <Image Source="/Resources/Images/profile.jpg"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="SENT REQUESTS" Height="55" FontSize="18">
+                    <MenuItem.Icon>
+                        <Image Source="/Resources/Images/sent.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="SIGN OUT" Height="55" FontSize="18" Click="SignOutMenuItem_Click">
+                    <MenuItem.Icon>
+                        <Image Source="/Resources/Images/signout.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+        </Menu>
+
+        <Frame x:Name="Main"  Margin="0,72,0,0"/>
+    </Grid>
+</Window>

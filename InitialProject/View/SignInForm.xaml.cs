@@ -67,9 +67,10 @@ namespace InitialProject
                     }
                     else if (user.Role == Model.Role.GUEST1)
                     {
-                        Guest1Overview guest1Overview = new Guest1Overview();
-                        guest1Overview.Show(); 
-                        Close();
+                        Guest1Home guest1Overview = new Guest1Home();
+                        guest1Overview.Owner = this;
+                        guest1Overview.Show();
+                        Hide();
                     }
                     else if (user.Role == Model.Role.GUEST2)
                     {
