@@ -27,11 +27,14 @@ namespace InitialProject.View
         private AccommodationReservationRepository accommodationReservationRepository;
 
         private AvailableDatesForAccommodationReservation selectedDateRange;
+        private Guest1 guest1;
         public ObservableCollection<AvailableDatesForAccommodationReservation> availableDatesForAccommodations { get; set; }
-        public AccommodationGuestsNumberInput(Accommodation currentAccommodation, AvailableDatesForAccommodationReservation selectedDateRange, AccommodationReservationRepository accommodationReservationRepository, ObservableCollection<AvailableDatesForAccommodationReservation> availableDatesForAccommodations)
+        public AccommodationGuestsNumberInput(Accommodation currentAccommodation, AvailableDatesForAccommodationReservation selectedDateRange, AccommodationReservationRepository accommodationReservationRepository, ObservableCollection<AvailableDatesForAccommodationReservation> availableDatesForAccommodations, Guest1 guest1)
         {
             InitializeComponent();
             this.DataContext = this;
+
+            this.guest1 = guest1;
             this.currentAccommodation = currentAccommodation;
             this.accommodationReservationRepository = accommodationReservationRepository;
             this.selectedDateRange = selectedDateRange;
@@ -50,17 +53,16 @@ namespace InitialProject.View
             }
         }
 
-        private Guest1 MakeNewGuest()
+       /* private Guest1 MakeNewGuest()
         {
             Guest1 guest = new Guest1("Anja", "Ducic");
             guest.Id = 1;
             return guest;
-        }
+        }*/
 
         private void MakeNewReservation()
         {
-            Guest1 guest = MakeNewGuest();
-            AccommodationReservation newReservation = new AccommodationReservation(guest, currentAccommodation, selectedDateRange.Arrival, selectedDateRange.Departure);
+            AccommodationReservation newReservation = new AccommodationReservation(guest1, currentAccommodation, selectedDateRange.Arrival, selectedDateRange.Departure);
             accommodationReservationRepository.Add(newReservation);
         }
 

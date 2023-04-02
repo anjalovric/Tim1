@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,6 +15,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using InitialProject.Model;
+using InitialProject.Repository;
+using InitialProject.Service;
 
 namespace InitialProject.View
 {
@@ -20,9 +26,169 @@ namespace InitialProject.View
     /// </summary>
     public partial class MyAccommodationReservations : Page
     {
-        public MyAccommodationReservations()
+        private Guest1 guest1;
+        public ObservableCollection<string> Countries { get; set; }
+        public ObservableCollection<string> CitiesByCountry { get; set; }
+        private LocationRepository locationRepository;
+        private Location location;
+
+        private AccommodationType accommodationType;
+        private AccommodationTypeRepository accommodationTypeRepository;
+
+        private List<AccommodationImage> accommodationImages;
+        private AccommodationImageRepository accommodationImageRepository;
+
+        private AccommodationRepository accommodationRepository;
+        private AccommodationReservationRepository accommodationReservationRepository;
+        private List<Accommodation> accommodations;
+        private List<Model.Owner> owners;
+        private OwnerRepository ownerRepository;
+        public Frame Main;
+        private OwnerReviewRepository ownerReviewRepository;
+
+
+
+        private ObservableCollection<AccommodationReservation> completedAccommodationReservations;
+        public ObservableCollection<AccommodationReservation> CompletedAccommodationReservations
+        {
+            get { return completedAccommodationReservations; }
+            set
+            {
+                if (value != completedAccommodationReservations)
+                    completedAccommodationReservations = value;
+                OnPropertyChanged("CompletedAccommodationReservations");
+            }
+
+        }
+
+        private AccommodationReservation selectedReservation;
+        public AccommodationReservation SelectedReservation
+        {
+            get { return selectedReservation; }
+            set
+            {
+                if (value != selectedReservation)
+                    selectedReservation = value;
+                OnPropertyChanged("SelectedReservation");
+            }
+
+        }
+
+        public MyAccommodationReservations(Guest1 guest1, ref Frame Main)
         {
             InitializeComponent();
+            this.guest1 = guest1;
+
+            DataContext = this;
+            this.Main = Main;  
+
+            accommodationRepository = new AccommodationRepository();
+            accommodations = new List<Accommodation>(accommodationRepository.GetAll());
+            accommodationReservationRepository = new AccommodationReservationRepository();
+
+            ownerRepository = new OwnerRepository();
+            owners = new List<Model.Owner>(ownerRepository.GetAll());
+            ownerReviewRepository = new OwnerReviewRepository();
+
+
+            FillCompletedReservations();
+            FillAccommodationsToReservations();
+            FillOwnerToAccommodationReservations();
+
+            accommodationType = new AccommodationType();
+            accommodationTypeRepository = new AccommodationTypeRepository();
+            SetAccommodationTypes();
+
+            locationRepository = new LocationRepository();
+            location = new Location();
+            Countries = new ObservableCollection<string>(locationRepository.GetAllCountries());
+            CitiesByCountry = new ObservableCollection<string>();
+            
+            SetAccommodationLocations();
+
+
+
         }
+
+        private void FillOwnerToAccommodationReservations()
+        {
+            foreach (AccommodationReservation reservation in CompletedAccommodationReservations)
+            {
+                reservation.Accommodation.Owner = owners.Find(owner => owner.Id == reservation.Accommodation.Owner.Id);
+            }
+        }
+
+        private void FillCompletedReservations()
+        {
+            CompletedAccommodationReservations = new ObservableCollection<AccommodationReservation>();
+
+            List<AccommodationReservation> allReservations = new List<AccommodationReservation>(accommodationReservationRepository.GetAll());
+            
+            foreach(AccommodationReservation reservation in allReservations)
+            {
+                if(reservation.Departure<DateTime.Now && reservation.Guest.Id==guest1.Id)
+                {
+                    CompletedAccommodationReservations.Add(reservation);
+                }
+            }      
+        }
+
+        private void FillAccommodationsToReservations()
+        {
+            foreach(AccommodationReservation reservation in CompletedAccommodationReservations)
+            {
+                reservation.Accommodation = accommodations.Find(accommodation => accommodation.Id == reservation.Accommodation.Id);
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+         private void SetAccommodationLocations()
+        {
+            List<Location> locations = locationRepository.GetAll();
+            foreach (AccommodationReservation reservation in CompletedAccommodationReservations)
+            {
+                reservation.Accommodation.Location = locations.Find(n => n.Id == reservation.Accommodation.Location.Id);
+            }
+        }
+
+        private void SetAccommodationTypes()
+        {
+            List<AccommodationType> types = accommodationTypeRepository.GetAll();
+            foreach (AccommodationReservation reservation in CompletedAccommodationReservations)
+            {
+                if (types.Find(n => n.Id == reservation.Accommodation.Type.Id) != null)
+                {
+                    reservation.Accommodation.Type = types.Find(n => n.Id == reservation.Accommodation.Type.Id);
+                }
+            }
+        }
+
+        private void RateOwnerButton_Click(object sender, RoutedEventArgs e)
+        {
+            if(ownerReviewRepository.HasReview(SelectedReservation))
+            {
+                MessageBox.Show("This reservation is already reviewed.");
+                return;
+            }
+
+            if(SelectedReservation.Departure<DateTime.Now.AddDays(-5))
+            {
+                MessageBox.Show("You can't rate this reservation because 5 days have passed since its departure.");
+                return;
+            }
+
+            OwnerAndAccommodationReviewForm ownerAndAccommodationReviewForm = new OwnerAndAccommodationReviewForm(SelectedReservation, ref Main, ownerReviewRepository);
+
+        }
+
+        
+
+
     }
 }

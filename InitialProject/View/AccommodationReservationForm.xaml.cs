@@ -32,15 +32,18 @@ namespace InitialProject.View
         public List<AccommodationReservation> reservations { get; set; }
         private AccommodationReservationRepository accommodationReservationRepository;
 
+        private Guest1 guest1;
+
         private List<DateTime> availableDates;
         private List<DateTime> availableDatesHelp;
         private List<List<DateTime>> availableDateRanges;
         
-        public AccommodationReservationForm(Accommodation currentAccommodation, ref AccommodationRepository accommodationRepository)
+        public AccommodationReservationForm(Accommodation currentAccommodation, ref AccommodationRepository accommodationRepository, Guest1 guest1)
         {
             InitializeComponent();
             this.DataContext = this;
 
+            this.guest1 = guest1;
             this.currentAccommodation = currentAccommodation;
             accommodationReservationRepository = new AccommodationReservationRepository();
             this.accommodationRepository = accommodationRepository;
@@ -166,7 +169,7 @@ namespace InitialProject.View
             availableDateRanges = new List<List<DateTime>>();
             FillDateRangesList(currentAccommodationId);
 
-            DatesForAccommodationReservation suggestedDates = new DatesForAccommodationReservation(currentAccommodation, accommodationReservationRepository);
+            DatesForAccommodationReservation suggestedDates = new DatesForAccommodationReservation(currentAccommodation, accommodationReservationRepository, guest1);
             suggestedDates.Owner = this;
             if (availableDateRanges.Count > 0 && AvailableDateRangeExists(ref suggestedDates))
                 suggestedDates.Show();
@@ -232,7 +235,7 @@ namespace InitialProject.View
 
         private void DisplayAvailableDatesOutRange()
         {
-            DatesForAccommodationReservation suggestedDates = new DatesForAccommodationReservation(currentAccommodation, accommodationReservationRepository);
+            DatesForAccommodationReservation suggestedDates = new DatesForAccommodationReservation(currentAccommodation, accommodationReservationRepository, guest1);
             suggestedDates.Owner = this;
             foreach (List<DateTime> dates in availableDateRanges)
             {

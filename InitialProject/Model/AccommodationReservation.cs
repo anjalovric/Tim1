@@ -12,6 +12,8 @@ namespace InitialProject.Model
         public DateTime Arrival  { get; set; }
         public DateTime Departure { get; set; }
 
+        
+
         public AccommodationReservation() {
             Guest = new Guest1();
             Accommodation = new Accommodation();
@@ -30,6 +32,7 @@ namespace InitialProject.Model
             Guest = new Guest1();
             Guest.Id = Convert.ToInt32(values[1]);
             Accommodation.Id = Convert.ToInt32(values[2]);
+            
             Arrival = Convert.ToDateTime(values[3]);
             Departure = Convert.ToDateTime(values[4]);
         }

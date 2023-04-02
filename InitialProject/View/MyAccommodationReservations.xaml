@@ -13,17 +13,17 @@
 
                 <Grid>
                     <Label FontSize="24" FontWeight="Bold" Margin="0,10,0,0" HorizontalAlignment="Center">COMPLETED RESERVATIONS</Label>
-                    <DataGrid x:Name="CompletedReservations" Margin="0,30,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" ItemsSource="{Binding Path=Accommodations,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" IsReadOnly="True" Height="322" Width="866" UseLayoutRounding="False">
+                    <DataGrid x:Name="CompletedReservations" Margin="0,30,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" ItemsSource="{Binding Path=CompletedAccommodationReservations,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedReservation}" AutoGenerateColumns="False" IsReadOnly="True" Height="322" Width="866" UseLayoutRounding="False">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Name" Width="2.5*"/>
-                            <DataGridTextColumn Header="Location" Width="3*"/>
-                            <DataGridTextColumn Header="Arrival" Width="2*"/>
-                            <DataGridTextColumn Header="Departure" Width="2*"/>
-                            <DataGridTextColumn Header="Owner" Width="2.5*"/>
+                            <DataGridTextColumn Header="Name" Width="2.5*" Binding="{Binding Accommodation.Name}"/>
+                            <DataGridTextColumn Header="Location" Width="3*" Binding="{Binding Accommodation.Location}"/>
+                            <DataGridTextColumn Header="Arrival" Width="2*" Binding="{Binding Arrival}"/>
+                            <DataGridTextColumn Header="Departure" Width="2*" Binding="{Binding Departure}"/>
+                            <DataGridTextColumn Header="Owner" Width="2.5*" Binding="{Binding Accommodation.Owner.Name}"/>
                             <DataGridTemplateColumn x:Name="Rate" Header="Rate" Width="0.9*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button Name="Rate" Content="Rate"/>
+                                        <Button Name="Rate" Content="Rate" Click="RateOwnerButton_Click"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>

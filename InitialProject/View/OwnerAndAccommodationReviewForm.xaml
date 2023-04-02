@@ -1,0 +1,54 @@
+﻿<Page x:Class="InitialProject.View.OwnerAndAccommodationReviewForm"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:InitialProject.View"
+      mc:Ignorable="d"
+      Title="OwnerAndAccommodationReviewForm" Height="696" Width="1024">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Label HorizontalAlignment="Center" Margin="0,20,0,630" FontSize="24" FontWeight="Bold">RATE ACCOMMODATION FORM</Label>
+        <Label HorizontalContentAlignment="Left" FontSize="18" Margin="71,118,256,540">Cleanliness:</Label>
+        <Label HorizontalContentAlignment="Left" FontSize="18" Margin="71,161,256,498">Owner's correctness:</Label>
+
+        <Slider x:Name="CleanlinessSlider" Minimum="1" Maximum="5" Width="157" Margin="284,128,71,550" TickFrequency="1"/>
+        <Slider x:Name="CorrectnessSlider" Minimum="1" Maximum="5" Width="157" Margin="284,170,71,508" TickFrequency="1"/>
+        <Label HorizontalContentAlignment="Left" FontSize="18" Margin="71,292,256,366" Content="Add photos:"/>
+        <Label HorizontalContentAlignment="Left" FontSize="18" Margin="71,444,256,214" Content="Comments:"/>
+        <TextBox x:Name="Comments" Margin="71,487,71,27"/>
+
+        <Button Width="45" Content="+"  FontSize="21" Height="45" Margin="211,348,256,303">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Ellipse Stroke="Black" 
+                       StrokeThickness="0">
+                            <Ellipse.Fill>
+                                <RadialGradientBrush>
+                                    <GradientStop Color="Gray" />
+                                </RadialGradientBrush>
+                            </Ellipse.Fill>
+                        </Ellipse>
+                        <ContentPresenter HorizontalAlignment="Center"  
+                                VerticalAlignment="Center"/>
+                    </Grid>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+
+
+
+
+        <Button Grid.Column="1" Width="94" Height="35" FontSize="16" FontWeight="Bold" Margin="355,586,63,75" Click="SendOwnerReviewButton_Click">SEND</Button>
+    </Grid>
+</Page>
