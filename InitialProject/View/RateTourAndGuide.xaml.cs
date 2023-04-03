@@ -24,8 +24,6 @@ namespace InitialProject.View
     public partial class RateTourAndGuide : Window
     {
         private GuideAndTourReviewRepository guideAndTourReviewRepository;
-        //private int GuideId;
-        //private int GuestId;
         private String Comment;
         private TourReservation Reservation;
         private Guest2 guest2;
@@ -38,7 +36,6 @@ namespace InitialProject.View
             CurrentTourInstance = tourInstance;
             Reservation = reservation;
         }
-
         private void ZnanjeInkrement_Click(object sender, RoutedEventArgs e)
         {
             int changedNumber;
@@ -48,7 +45,6 @@ namespace InitialProject.View
                 knowledge.Text = changedNumber.ToString();
             }
         }
-
         private void ZnanjeDekrement_Click(object sender, RoutedEventArgs e)
         {
             int changedNumber;
@@ -58,7 +54,6 @@ namespace InitialProject.View
                 knowledge.Text = changedNumber.ToString();
             }
         }
-
         private void JezikInkrement_Click(object sender, RoutedEventArgs e)
         {
             int changedNumber;
@@ -68,7 +63,6 @@ namespace InitialProject.View
                 language.Text = changedNumber.ToString();
             }
         }
-
         private void JezikDekrement_Click(object sender, RoutedEventArgs e)
         {
             int changedNumber;
@@ -78,7 +72,6 @@ namespace InitialProject.View
                 language.Text = changedNumber.ToString();
             }
         }
-
         private void ZanimljivostiInkrement_Click(object sender, RoutedEventArgs e)
         {
             int changedNumber;
@@ -88,7 +81,6 @@ namespace InitialProject.View
                 interestingFacts.Text = changedNumber.ToString();
             }
         }
-
         private void ZanimljivostiDekrement_Click(object sender, RoutedEventArgs e)
         {
             int changedNumber;
@@ -98,7 +90,6 @@ namespace InitialProject.View
                 interestingFacts.Text = changedNumber.ToString();
             }
         }
-
         private void Rate_Click(object sender, RoutedEventArgs e)
         {
             if (guideAndTourReviewRepository.HasReview(Reservation))
@@ -106,19 +97,18 @@ namespace InitialProject.View
                 MessageBox.Show("This reservation is already reviewed.");
                 this.Close();
             }
-            Comment = comment.Text;
-            GuideAndTourReview guideAndTourReview = new GuideAndTourReview(CurrentTourInstance.Guide.Id, guest2.Id, Comment, Reservation);
-            guideAndTourReviewRepository.Save(guideAndTourReview);
-            //rateTourAndGuide.Save(newTourReservation);
-            //}
-            
-            this.Close();
+            else
+            {
+                Comment = comment.Text;
+                GuideAndTourReview guideAndTourReview = new GuideAndTourReview(CurrentTourInstance.Guide.Id, guest2.Id, Comment, Reservation);
+                guideAndTourReviewRepository.Save(guideAndTourReview);
+                this.Close();
+            }
         }
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog=new OpenFileDialog();
@@ -128,6 +118,11 @@ namespace InitialProject.View
             {
                 imagePicture.Source = new BitmapImage(new Uri(openFileDialog.FileName));
             }
+        }
+
+        private void Delete_Click(object sender, RoutedEventArgs e)
+        {
+            comment.Text = "";
         }
     }
 }

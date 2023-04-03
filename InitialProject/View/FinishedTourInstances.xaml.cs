@@ -1,5 +1,6 @@
 ﻿using InitialProject.Model;
 using InitialProject.Repository;
+using InitialProject.Service;
 using InitialProject.View;
 using System;
 using System.Collections.Generic;
@@ -40,83 +41,20 @@ namespace InitialProject.View
             }
 
         }
-        private TourRepository tourRepository;
-        private TourInstanceRepository tourInstanceRepository;
-        private LocationRepository locationRepository;
-        private TourReservationRepository tourReservationRepository;
+        private TourInstanceService tourInstanceService;
+        private TourReservationService tourReservationService;
         private ObservableCollection<TourReservation> tourReservations;
-        private Location location;
-       
-        public Location Location
-        {
-            get { return location; }
-            set
-            {
-                if (value != location)
-                {
-                    location = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
+        private GuideAndTourReviewService guideAndTourReviewService;
         public FinishedTourInstances(Guest2 guest2)
         {
             InitializeComponent();
             DataContext = this;
             this.guest2 = guest2;
-            tourRepository = new TourRepository();
-            tourInstanceRepository = new TourInstanceRepository();
-            tourReservationRepository = new TourReservationRepository();
-            tourReservations = new ObservableCollection<TourReservation>(tourReservationRepository.GetAll());
-            CompletedTours = new ObservableCollection<TourInstance>();
-            SetTourInstances(CompletedTours);
-            locationRepository = new LocationRepository();
-            Location = new Location();
-            SetLocations();
-            SetTours(CompletedTours);
-        }
-        private void SetTourInstances(ObservableCollection<TourInstance> CompletedTours)
-        {
-            List<TourInstance> tourInstances;
-            tourInstances = tourInstanceRepository.GetAll();
-            foreach(TourReservation tourReservation in tourReservations)
-            {
-                foreach (TourInstance tourInstance in tourInstances)
-                {
-                    if(tourReservation.TourInstanceId==tourInstance.Id && tourReservation.GuestId == guest2.Id && tourInstance.Finished==true)
-                    {
-                        CompletedTours.Add(tourInstance);
-                    }
-                }
-            }
-        }
-        public void SetLocations()
-        {
-            List<Location> locations = locationRepository.GetAll();
-            List<Tour> tours = tourRepository.GetAll();
-
-            foreach (Location location in locations)
-            {
-                foreach (Tour tour in tours)
-                {
-                    if (location.Id == tour.Location.Id)
-                        tour.Location = location;
-                }
-            }
-        }
-        public void SetTours(ObservableCollection<TourInstance> CompletedTours)
-        {
-            List<Tour> tours = tourRepository.GetAll();
-            foreach (TourInstance tourInstance in CompletedTours)
-            {
-                foreach (Tour tour in tours)
-                {
-                    if (tour.Id == tourInstance.Tour.Id)
-                    {
-                        tourInstance.Tour = tour;
-                    }
-                }
-            }
+            tourInstanceService = new TourInstanceService();
+            tourReservationService = new TourReservationService();
+            tourReservations = new ObservableCollection<TourReservation>(tourReservationService.GetAll());
+            guideAndTourReviewService = new GuideAndTourReviewService(guest2);
+            CompletedTours=guideAndTourReviewService.CompletedTours;
         }
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -124,29 +62,24 @@ namespace InitialProject.View
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-        private void Rate_Click(object sender, RoutedEventArgs e)
+        private TourReservation FindTourReservation(TourInstance currentTourInstance,TourReservation reservation)
         {
-            TourInstance currentTourInstance = (TourInstance)TourListDataGrid.CurrentItem;
-            foreach (TourInstance tourInstance in CompletedTours)
-            {
-                if (tourInstance.Id == currentTourInstance.Id)
-                {
-                    currentTourInstance = tourInstance;
-                }
-            }
-            TourReservation reservation=new TourReservation();
-            foreach(TourReservation tourReservation in tourReservations)
+            foreach (TourReservation tourReservation in tourReservations)
             {
                 if (tourReservation.TourInstanceId == currentTourInstance.Id)
                 {
                     reservation = tourReservation;
                 }
             }
-            //TourReservationForm tourReservationForm = new TourReservationForm(currentTourInstance, guest2, TourInstances, tourInstanceRepository, Label);
-            //tourReservationForm.Show();
+            return reservation;
+        }
+        private void Rate_Click(object sender, RoutedEventArgs e)
+        {
+            TourInstance currentTourInstance = (TourInstance)TourListDataGrid.CurrentItem;
+            TourReservation reservation=new TourReservation();
+            reservation=FindTourReservation(currentTourInstance,reservation);
             RateTourAndGuide rateTourAndGuide = new RateTourAndGuide(currentTourInstance,guest2,reservation);
             rateTourAndGuide.Show();
-            
         }
     }
 }
