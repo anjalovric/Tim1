@@ -48,6 +48,7 @@ namespace InitialProject.View
         {
             Label header=new Label();
             header.Content=selected.Tour.Name.ToString().ToUpper()+", " + selected.StartDate.ToString().Split(" ")[0]+", "+ selected.StartClock.ToString();
+            header.FontWeight= FontWeights.Bold;
             PointStack.Children.Add(header);
         }
 

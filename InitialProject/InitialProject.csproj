@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-<<<<<<< HEAD
+
     <None Remove="Resources\Images\accommodation.jpg" />
     <None Remove="Resources\Images\account.png" />
     <None Remove="Resources\Images\add.png" />
@@ -20,7 +20,7 @@
     <None Remove="Resources\Images\minus.png" />
     <None Remove="Resources\Images\plus.png" />
     <None Remove="Resources\Images\profile.jpg" />
-=======
+
     <None Remove="Resources\Images\accommodation.png" />
     <None Remove="Resources\Images\add.png" />
     <None Remove="Resources\Images\back_arrow.png" />
@@ -32,7 +32,7 @@
     <None Remove="Resources\Images\plus.png" />
     <None Remove="Resources\Images\profile.png" />
     <None Remove="Resources\Images\question_mark.png" />
->>>>>>> develop
+
     <None Remove="Resources\Images\search.png" />
     <None Remove="Resources\Images\sent.png" />
     <None Remove="Resources\Images\signout.png" />
@@ -72,6 +72,11 @@
     <Content Include="Resources\Images\view.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DotLiquid" Version="2.2.692" />
+    <PackageReference Include="NPOI" Version="2.6.0" />
   </ItemGroup>
 
   <ItemGroup>
