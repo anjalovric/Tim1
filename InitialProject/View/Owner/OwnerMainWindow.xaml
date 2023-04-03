@@ -8,7 +8,7 @@
         Title="OwnerMainWindow" Height="750" Width="430">
     <Grid>
         <Menu Margin="0,0,0,680" Background="Gray">
-            <MenuItem Height="40" Width="100" Name="BurgerMenu">
+            <MenuItem Height="40" Width="100" Name="BurgerMenu" Click="BurgerMenu_Click">
                 <MenuItem.Icon>
                     <Image Source="/Resources/Images/burger_menu.png" HorizontalAlignment="Center" VerticalAlignment="Stretch"/>
                 </MenuItem.Icon>

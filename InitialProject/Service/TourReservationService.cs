@@ -50,7 +50,7 @@ namespace InitialProject.Service
 
         public TourReservation GetTourReservationById(int tourReservationId)
         {
-            return tourReservationrepository.GetReservationById(tourReservationId);
+            return tourReservationrepository.GetById(tourReservationId);
         }
         public List<TourReservation> GetByInstanceId(int instanceId)
         {

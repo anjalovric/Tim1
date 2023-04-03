@@ -76,5 +76,10 @@ namespace InitialProject.Repository
             return lista;
         }
 
+        public AlertGuest2 GetById(int id)
+        {
+            return alerts.Find(c => c.Id == id);
+        }
+
     }
 }

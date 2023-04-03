@@ -77,7 +77,7 @@ namespace InitialProject
                     }
                     else if (user.Role == Model.Role.GUEST2)
                     {
-                        Guest2Overview guest2Overview = new Guest2Overview();
+                        Guest2Overview guest2Overview = new Guest2Overview(user);
                         guest2Overview.Show();
                     Close();
                 } 

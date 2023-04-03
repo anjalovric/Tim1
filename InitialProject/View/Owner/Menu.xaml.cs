@@ -10,27 +10,24 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
-using InitialProject.Model;
 
 namespace InitialProject.View.Owner
 {
     /// <summary>
-    /// Interaction logic for OwnerMainWindow.xaml
+    /// Interaction logic for Menu.xaml
     /// </summary>
-    public partial class OwnerMainWindow : Window
+    public partial class Menu : Page
     {
-        public OwnerMainWindow(User user)
+        public Menu()
         {
             InitializeComponent();
-            MyProfile myProfile = new MyProfile(user);
-            FrameForPages.Content = myProfile;
         }
 
-        private void BurgerMenu_Click(object sender, RoutedEventArgs e)
+        private void MyProfileButton_Click(object sender, RoutedEventArgs e)
         {
-            Menu menu = new Menu();
-            FrameForPages.Content = menu;
+
         }
     }
 }

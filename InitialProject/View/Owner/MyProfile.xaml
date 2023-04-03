@@ -54,5 +54,6 @@
         </ListBox>
 
         <Button Content="Button" HorizontalAlignment="Center" Margin="0,539,0,0" VerticalAlignment="Top" Width="370" Height="43"/>
+        <Label Content="My Reviews" FontSize="15" FontWeight="Bold" Margin="10,144,190,455"/>
     </Grid>
 </Page>

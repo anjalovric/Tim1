@@ -24,5 +24,23 @@ namespace InitialProject.Repository
             _users = _serializer.FromCSV(FilePath);
             return _users.FirstOrDefault(u => u.Username == username);
         }
+
+        public User GetById(int id)
+        {
+            return _users.Find(u => u.Id == id);    
+        }
+        public int NextId()
+        {
+            _users = _serializer.FromCSV(FilePath);
+            if (_users.Count < 1)
+            {
+                return 1;
+            }
+            return _users.Max(c => c.Id) + 1;
+        }
+        public List<User> GetAll()
+        {
+            return _users;
+        }
     }
 }

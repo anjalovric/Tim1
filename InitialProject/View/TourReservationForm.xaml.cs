@@ -34,8 +34,12 @@ namespace InitialProject.View
         private List<TourReservation> tourReservations;
         private List<TourInstance> tourInstances;
         private TourInstanceRepository tourInstanceRepository;
+
+        private ShowTours ShowTours;
+
         private Guest2Overview Guest2Overview;
         private Boolean withVoucher = true;
+
         public ObservableCollection<TourInstance> TourInstances { get; set; }
         public Label Label { get; set; }
         private string age;
@@ -51,8 +55,8 @@ namespace InitialProject.View
                 }
             }
         }
-
-        public TourReservationForm(TourInstance currentTourInstance,int guestId,ObservableCollection<TourInstance> TourInstance,TourInstanceRepository tourInstanceRepository,Label label)
+        private Guest2 guest2;
+        public TourReservationForm(TourInstance currentTourInstance,Guest2 guest2,ObservableCollection<TourInstance> TourInstance,TourInstanceRepository tourInstanceRepository,Label label)
         {
             InitializeComponent();
             DataContext = this;
@@ -63,9 +67,10 @@ namespace InitialProject.View
             tourInstances = tourInstanceRepository.GetAll();
             tourReservationRepository = new TourReservationRepository();
             tourReservations = tourReservationRepository.GetAll();
-            Guest2Overview = new Guest2Overview();
+            ShowTours = new ShowTours(guest2);
             GetCurrentGuestsNumber();
-            GuestId = guestId;
+            this.guest2 = guest2;
+            GuestId = guest2.Id;
         }
         private int GetReservationsNumber()
         {
@@ -114,8 +119,8 @@ namespace InitialProject.View
         {
             Boolean existed = false;
             ObservableCollection<TourInstance> storedTourInstances= new ObservableCollection<TourInstance>(tourInstanceRepository.GetAll());
-            Guest2Overview.SetLocations();
-            Guest2Overview.SetTours(storedTourInstances);
+            ShowTours.SetLocations();
+            ShowTours.SetTours(storedTourInstances);
             TourInstances.Clear();
             foreach (TourInstance tourInstance in storedTourInstances)
             {
