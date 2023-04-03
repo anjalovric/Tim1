@@ -5,15 +5,15 @@ using System.Windows.Navigation;
 using InitialProject.Model;
 using InitialProject.WPF.Views;
 
-namespace InitialProject.View.Owner
+namespace InitialProject.WPF.Views
 {
     /// <summary>
-    /// Interaction logic for Menu.xaml
+    /// Interaction logic for MenuView.xaml
     /// </summary>
-    public partial class Menu : Page
+    public partial class MenuView : Page
     {
         private User user;
-        public Menu(User user)
+        public MenuView(User user)
         {
             InitializeComponent();
             this.user = user;
@@ -21,13 +21,13 @@ namespace InitialProject.View.Owner
 
         private void MyProfileButton_Click(object sender, RoutedEventArgs e)
         {
-            MyProfile myProfile = new MyProfile(user);
-            Application.Current.Windows.OfType<OwnerMainWindow>().FirstOrDefault().FrameForPages.Content = myProfile;
+            MyProfileView myProfile = new MyProfileView(user);
+            Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = myProfile;
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.Windows.OfType<OwnerMainWindow>().FirstOrDefault().FrameForPages.Content = NavigationService.GoBack;
+            Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = NavigationService.GoBack;
         }
     }
 }

@@ -7,16 +7,14 @@ using InitialProject.WPF.ViewModels;
 namespace InitialProject.WPF.Views
 {
     /// <summary>
-    /// Interaction logic for MyProfile.xaml
+    /// Interaction logic for MyProfileView.xaml
     /// </summary>
-    public partial class MyProfile : Page
+    public partial class MyProfileView : Page
     {
-       
-        public MyProfile(User user)
+        public MyProfileView(User user)
         {
             InitializeComponent();
             DataContext = new MyProfileViewModel(user);
-            
         }
         
     }

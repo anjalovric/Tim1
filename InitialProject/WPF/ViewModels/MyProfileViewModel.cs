@@ -19,9 +19,17 @@ namespace InitialProject.WPF.ViewModels
         public ObservableCollection<OwnerReview> OwnerReviews { get; set; }
         private double averageRate;
         private int numberOfRates;
+        private string title;
+        private string imageVisibility;
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
+        public MyProfileViewModel(User user)
+        {
+            ownerReviewService = new OwnerReviewService();
+            MakeOwner(user);
+            OwnerReviews = new ObservableCollection<OwnerReview>(ownerReviewService.GetAllToDisplay(ProfileOwner));
+        }
         public double AverageRate
         {
             get => averageRate;
@@ -34,7 +42,6 @@ namespace InitialProject.WPF.ViewModels
                 }
             }
         }
-
         public int NumberOfRates
         {
             get => numberOfRates;
@@ -47,13 +54,31 @@ namespace InitialProject.WPF.ViewModels
                 }
             }
         }
-        public MyProfileViewModel(User user)
+        public string Title
         {
-            ownerReviewService = new OwnerReviewService();
-            MakeOwner(user);
-            OwnerReviews = new ObservableCollection<OwnerReview>(ownerReviewService.GetAllToDisplay(ProfileOwner));
+            get => title;
+            set
+            {
+                if (value != title)
+                {
+                    title = value;
+                    OnPropertyChanged();
+                }
+            }
         }
-
+        public string ImageVisibility
+        {
+            get => imageVisibility;
+            set
+            {
+                if (value != imageVisibility)
+                {
+                    imageVisibility = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
@@ -63,9 +88,11 @@ namespace InitialProject.WPF.ViewModels
             ProfileOwner = new Model.Owner();
             OwnerService ownerService = new OwnerService();
             ProfileOwner = ownerService.GetByUsername(user.Username);
+            ProfileOwner.IsSuperOwner = ownerService.IsSuperOwner(ProfileOwner);
 
             CalculateAverageRate();
             GetNumberOfRates();
+            DisplayTitle();
         }
 
         private void CalculateAverageRate()
@@ -76,6 +103,20 @@ namespace InitialProject.WPF.ViewModels
         private void GetNumberOfRates()
         {
             NumberOfRates = ownerReviewService.GetNumberOfReviewsByOwner(ProfileOwner);
+        }
+
+        private void DisplayTitle()
+        {
+            if (ProfileOwner.IsSuperOwner)
+            {
+                Title = "Super Owner!";
+                ImageVisibility = "Visible";
+            }
+            else
+            {
+                Title = "Owner";
+                ImageVisibility = "Hidden";
+            }
         }
     }
 

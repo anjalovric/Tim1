@@ -89,5 +89,19 @@ namespace InitialProject.Service
                 }
             }
         }
+
+        public List<OwnerReview> GetAllByOwner(Owner owner)
+        {
+            List<OwnerReview> reviewsByOwner = new List<OwnerReview>();
+            foreach (OwnerReview review in ownerReviews)
+            {
+                Owner reviewedOwner = review.Reservation.Accommodation.Owner;
+                if (reviewedOwner.Id == owner.Id)
+                {
+                    reviewsByOwner.Add(review);
+                }
+            }
+            return reviewsByOwner;
+        }
     }
 }

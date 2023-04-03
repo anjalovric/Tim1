@@ -1,9 +1,9 @@
-﻿<Page x:Class="InitialProject.View.Owner.Menu"
+﻿<Page x:Class="InitialProject.WPF.Views.MenuView"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:InitialProject.View.Owner"
+      xmlns:local="clr-namespace:InitialProject.WPF.Views"
       mc:Ignorable="d" 
       d:DesignHeight="630" d:DesignWidth="430"
       Title="Menu" Background="White">

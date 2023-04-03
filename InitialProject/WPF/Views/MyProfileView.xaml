@@ -1,4 +1,4 @@
-﻿<Page x:Class="InitialProject.WPF.Views.MyProfile"
+﻿<Page x:Class="InitialProject.WPF.Views.MyProfileView"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -41,16 +41,17 @@
                 <Label Content="Full name:" Height="25" Margin="144,5,144,108" VerticalAlignment="Top"/>
                 <Label Content="Age:"  Height="25" Margin="144,35,144,78" VerticalAlignment="Top"/>
                 <Label Content="Email:" Height="25" Margin="144,65,144,48" VerticalAlignment="Top"/>
-                <Label Content="Title:"  Height="25" Margin="144,92,144,21" VerticalAlignment="Top"/>
+                <Label Content="Title:"  Height="25" Margin="144,92,185,0" VerticalAlignment="Top"/>
                 <Label Content="{Binding ProfileOwner, UpdateSourceTrigger=PropertyChanged}" Margin="252,3,0,110" Height="25"/>
                 <Label Content="{Binding ProfileOwner.Age, UpdateSourceTrigger=PropertyChanged}" Margin="252,33,0,80" Height="25"/>
                 <Label Content="{Binding ProfileOwner.Email, UpdateSourceTrigger=PropertyChanged}" Margin="252,65,0,48" Height="25"/>
-                <Label Content="{Binding ProfileOwner.IsSuperOwner}" Margin="252,90,0,23" Height="25"></Label>
+                <Label Content="{Binding Title, UpdateSourceTrigger=PropertyChanged}" FontWeight="Bold" Margin="254,92,0,25" Height="25"/>
+                <Image Source="/Resources/Images/star.png" Visibility="{Binding ImageVisibility, UpdateSourceTrigger=PropertyChanged}" Margin="224,88,150,29"/>
                 <Label Content="Average review:"  Height="25" HorizontalAlignment="Left" Width="103" VerticalAlignment="Top" Margin="144,117,0,0"/>
-                <Label Name="AverageReview" Content="{Binding AverageRate}" Margin="252,119,116,-1" Height="25"/>
+                <Label Name="AverageReview" Content="{Binding AverageRate, UpdateSourceTrigger=PropertyChanged}" Margin="252,118,116,1" Height="25"/>
                 <TextBlock  Margin="297,122,0,0" Height="21" VerticalAlignment="Top" HorizontalAlignment="Left">
                     <Run Text="(" />
-                    <Run Text ="{Binding Path=NumberOfRates }" />
+                    <Run Text ="{Binding Path=NumberOfRates, UpdateSourceTrigger=PropertyChanged }" />
                     <Run Text=" reviews total)" />
                 </TextBlock>
 
