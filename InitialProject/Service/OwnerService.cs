@@ -26,5 +26,9 @@ namespace InitialProject.Service
         {
             return ownerRepository.GetByUsername(username);
         }
+        public Owner GetById(int id)
+        {
+            return ownerRepository.GetById(id);
+        }
     }
 }

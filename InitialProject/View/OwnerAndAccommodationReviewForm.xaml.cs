@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.View.Owner;
+using InitialProject.Service;
 
 namespace InitialProject.View
 {
@@ -24,24 +25,24 @@ namespace InitialProject.View
     public partial class OwnerAndAccommodationReviewForm : Page
     {
         private AccommodationReservation reservation;
-        private OwnerReviewRepository ownerReviewRepository;
+        private OwnerReviewService ownerReviewService;
         public Frame Main;
 
-        public OwnerAndAccommodationReviewForm(AccommodationReservation reservation, ref Frame Main, OwnerReviewRepository ownerReviewRepository)
+        public OwnerAndAccommodationReviewForm(AccommodationReservation reservation, ref Frame Main, OwnerReviewService ownerReviewService)
         {
             InitializeComponent();
             this.DataContext = this;
             this.Main = Main;
             this.Main.Content = this;
             this.reservation = reservation; //trenutna rezervacija koju ocjenjujem
-            this.ownerReviewRepository = ownerReviewRepository;
+            this.ownerReviewService = ownerReviewService;
         }
 
         private void SendOwnerReviewButton_Click(object sender, RoutedEventArgs e)
         {
             
             OwnerReview ownerReview = new OwnerReview(reservation, Convert.ToInt32(CleanlinessSlider.Value), Convert.ToInt32(CorrectnessSlider.Value), Comments.Text);
-            ownerReviewRepository.Save(ownerReview);
+            ownerReviewService.Save(ownerReview);
             NavigationService.GoBack();
             
             

@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using InitialProject.Model;
 using InitialProject.Repository;
+using InitialProject.Service;
 
 namespace InitialProject.View
 {
@@ -24,13 +25,12 @@ namespace InitialProject.View
         private Guest1SearchAccommodation guest1SearchAccommodation;
         private MyAccommodationReservations myReservations;
         private Guest1 guest1;
-        private Guest1Repository guest1Repository;
+        private Guest1Service guest1Service;
         public Guest1Home(User user)
         {
             InitializeComponent();
 
-            guest1Repository = new Guest1Repository();
-            this.guest1 = new Guest1();
+            guest1Service = new Guest1Service();
             GetGuest1ByUser(user);
 
             guest1SearchAccommodation = new Guest1SearchAccommodation(guest1);
@@ -41,7 +41,8 @@ namespace InitialProject.View
 
         private void GetGuest1ByUser(User user)
         {
-            this.guest1 = guest1Repository.GetByUsername(user.Username);
+            this.guest1 = new Guest1();
+            this.guest1 = guest1Service.GetByUsername(user.Username);
         }
 
         private void BookingMenuItem_Click(object sender, RoutedEventArgs e)

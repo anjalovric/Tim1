@@ -77,5 +77,10 @@ namespace InitialProject.Service
         {
             return locationRepository.GetAll().Find(n => n.City.Equals(city) && n.Country.Equals(country));
         }
+
+        public Location GetById(int id)
+        {
+            return locationRepository.GetById(id);
+        }
     }
 }
