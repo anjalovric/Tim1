@@ -77,7 +77,10 @@ namespace InitialProject.Repository
             _serializer.ToCSV(FilePath, _tours);
             return tour;
         }
-      
+        public Tour GetById(int id)
+        {
+            return _tours.Find(c => c.Id == id);
+        }
    
        
     }

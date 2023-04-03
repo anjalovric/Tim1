@@ -134,6 +134,11 @@ namespace InitialProject.Repository
             return list;
 
         }
+
+        public TourInstance GetById(int id)
+        {
+            return _tourInstances.Find(c => c.Id == id);
+        }
         
     }
 }

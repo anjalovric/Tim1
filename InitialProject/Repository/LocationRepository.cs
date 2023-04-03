@@ -1,5 +1,6 @@
 ﻿using InitialProject.Model;
 using InitialProject.Serializer;
+using Org.BouncyCastle.Asn1.Mozilla;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -106,6 +107,11 @@ namespace InitialProject.Repository
         public Location GetByCityAndCountry(string country, string city)
         {
            return _locations.Find(n => n.City.Equals(city) && n.Country.Equals(country));
+        }
+
+        public Location GetById(int id) 
+        {
+            return _locations.Find(n => n.Id==id);
         }
     }
 }
