@@ -62,11 +62,13 @@ namespace InitialProject.View
                 }
             }
         }
-        public ShowTours()
+        private Guest2 guest2;
+        public ShowTours(Guest2 guest2)
         {
             InitializeComponent();
             DataContext = this;
             tourRepository = new TourRepository();
+            this.guest2 = guest2;
             tourInstanceRepository = new TourInstanceRepository();
             tourReservationRepository = new TourReservationRepository();
             alertGuest2Repository = new AlertGuest2Repository();
@@ -252,7 +254,7 @@ namespace InitialProject.View
                     currentTourInstance = tourInstance;
                 }
             }
-            TourReservationForm tourReservationForm = new TourReservationForm(currentTourInstance, 3, TourInstances, tourInstanceRepository, Label);
+            TourReservationForm tourReservationForm = new TourReservationForm(currentTourInstance, guest2, TourInstances, tourInstanceRepository, Label);
             tourReservationForm.Show();
         }
         private void ViewDetails(object sender, RoutedEventArgs e)

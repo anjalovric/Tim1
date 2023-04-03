@@ -64,7 +64,9 @@
     </Content>
 <<<<<<< HEAD
 
-    <Content Include="Resources\Images\bell.png"/>
+    <Content Include="Resources\Images\bell.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
 
 =======
     <Content Include="Resources\Images\arrow.png">
@@ -98,7 +100,9 @@
     <Content Include="Resources\Images\signout.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\tasks.png"/>
+    <Content Include="Resources\Images\tasks.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Images\home.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
