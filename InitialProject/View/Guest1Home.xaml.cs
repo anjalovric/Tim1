@@ -50,6 +50,7 @@ namespace InitialProject.View
         }
         private void MyReservationsMenuItem_Click(object sender, RoutedEventArgs e)
         {
+            myReservations = new MyAccommodationReservations(guest1, ref Main); //moram ga opet napraviti da bi se azuriralo nakon pravljenja nove rezervacije (u upcoming reservations)
             Main.Content = myReservations;   //da li da se pravi novi page (kako bi se resetovalo sve?)
             
         }

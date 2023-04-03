@@ -45,6 +45,7 @@ namespace InitialProject.View
         private OwnerRepository ownerRepository;
         public Frame Main;
         private OwnerReviewRepository ownerReviewRepository;
+        private List<AccommodationReservation> allReservations;
 
 
 
@@ -61,15 +62,41 @@ namespace InitialProject.View
 
         }
 
-        private AccommodationReservation selectedReservation;
-        public AccommodationReservation SelectedReservation
+        private ObservableCollection<AccommodationReservation> notFinishedReservations;
+        public ObservableCollection<AccommodationReservation> NotFinishedReservations
         {
-            get { return selectedReservation; }
+            get { return notFinishedReservations; }
             set
             {
-                if (value != selectedReservation)
-                    selectedReservation = value;
-                OnPropertyChanged("SelectedReservation");
+                if (value != notFinishedReservations)
+                    notFinishedReservations = value;
+                OnPropertyChanged("NotFinishedReservations");
+            }
+
+        }
+
+        private AccommodationReservation selectedCompletedReservation;
+        public AccommodationReservation SelectedCompletedReservation
+        {
+            get { return selectedCompletedReservation; }
+            set
+            {
+                if (value != selectedCompletedReservation)
+                    selectedCompletedReservation = value;
+                OnPropertyChanged("SelectedCompletedReservation");
+            }
+
+        }
+
+        private AccommodationReservation selectedUpcomingReservation;
+        public AccommodationReservation SelectedUpcomingReservation
+        {
+            get { return selectedUpcomingReservation; }
+            set
+            {
+                if (value != selectedUpcomingReservation)
+                    selectedUpcomingReservation = value;
+                OnPropertyChanged("SelectedUpcomingReservation");
             }
 
         }
@@ -91,28 +118,48 @@ namespace InitialProject.View
             ownerReviewRepository = new OwnerReviewRepository();
 
 
-            FillCompletedReservations();
-            FillAccommodationsToReservations();
-            FillOwnerToAccommodationReservations();
-
             accommodationType = new AccommodationType();
             accommodationTypeRepository = new AccommodationTypeRepository();
-            SetAccommodationTypes();
 
             locationRepository = new LocationRepository();
             location = new Location();
             Countries = new ObservableCollection<string>(locationRepository.GetAllCountries());
             CitiesByCountry = new ObservableCollection<string>();
-            
+            allReservations = new List<AccommodationReservation>(accommodationReservationRepository.GetAll());
+            FillAccommodationsToReservations();
+            FillOwnerToAccommodationReservations();
+            SetAccommodationTypes();
             SetAccommodationLocations();
+
+
+
+            FillCompletedReservations();
+
+            FillUpcomingAndCurrentReservations();
+
+            
 
 
 
         }
 
+
+
+        private void FillUpcomingAndCurrentReservations()
+        {
+            NotFinishedReservations = new ObservableCollection<AccommodationReservation>();
+
+            foreach (AccommodationReservation reservation in allReservations)
+            {
+                if (reservation.Departure >= DateTime.Now && reservation.Guest.Id == guest1.Id)
+                {
+                    NotFinishedReservations.Add(reservation);
+                }
+            }
+        }
         private void FillOwnerToAccommodationReservations()
         {
-            foreach (AccommodationReservation reservation in CompletedAccommodationReservations)
+            foreach (AccommodationReservation reservation in allReservations)
             {
                 reservation.Accommodation.Owner = owners.Find(owner => owner.Id == reservation.Accommodation.Owner.Id);
             }
@@ -122,8 +169,6 @@ namespace InitialProject.View
         {
             CompletedAccommodationReservations = new ObservableCollection<AccommodationReservation>();
 
-            List<AccommodationReservation> allReservations = new List<AccommodationReservation>(accommodationReservationRepository.GetAll());
-            
             foreach(AccommodationReservation reservation in allReservations)
             {
                 if(reservation.Departure<DateTime.Now && reservation.Guest.Id==guest1.Id)
@@ -135,7 +180,7 @@ namespace InitialProject.View
 
         private void FillAccommodationsToReservations()
         {
-            foreach(AccommodationReservation reservation in CompletedAccommodationReservations)
+            foreach(AccommodationReservation reservation in allReservations)
             {
                 reservation.Accommodation = accommodations.Find(accommodation => accommodation.Id == reservation.Accommodation.Id);
             }
@@ -151,7 +196,7 @@ namespace InitialProject.View
          private void SetAccommodationLocations()
         {
             List<Location> locations = locationRepository.GetAll();
-            foreach (AccommodationReservation reservation in CompletedAccommodationReservations)
+            foreach (AccommodationReservation reservation in allReservations)
             {
                 reservation.Accommodation.Location = locations.Find(n => n.Id == reservation.Accommodation.Location.Id);
             }
@@ -160,7 +205,7 @@ namespace InitialProject.View
         private void SetAccommodationTypes()
         {
             List<AccommodationType> types = accommodationTypeRepository.GetAll();
-            foreach (AccommodationReservation reservation in CompletedAccommodationReservations)
+            foreach (AccommodationReservation reservation in allReservations)
             {
                 if (types.Find(n => n.Id == reservation.Accommodation.Type.Id) != null)
                 {
@@ -171,23 +216,33 @@ namespace InitialProject.View
 
         private void RateOwnerButton_Click(object sender, RoutedEventArgs e)
         {
-            if(ownerReviewRepository.HasReview(SelectedReservation))
+            if(ownerReviewRepository.HasReview(SelectedCompletedReservation))
             {
                 MessageBox.Show("This reservation is already reviewed.");
                 return;
             }
 
-            if(SelectedReservation.Departure<DateTime.Now.AddDays(-5))
+            if(SelectedCompletedReservation.Departure<DateTime.Now.AddDays(-5))
             {
                 MessageBox.Show("You can't rate this reservation because 5 days have passed since its departure.");
                 return;
             }
 
-            OwnerAndAccommodationReviewForm ownerAndAccommodationReviewForm = new OwnerAndAccommodationReviewForm(SelectedReservation, ref Main, ownerReviewRepository);
+            OwnerAndAccommodationReviewForm ownerAndAccommodationReviewForm = new OwnerAndAccommodationReviewForm(SelectedCompletedReservation, ref Main, ownerReviewRepository);
 
         }
 
-        
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void ChangeDateButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+
 
 
     }
