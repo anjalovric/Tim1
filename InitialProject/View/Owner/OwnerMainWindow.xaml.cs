@@ -20,16 +20,16 @@ namespace InitialProject.View.Owner
     /// </summary>
     public partial class OwnerMainWindow : Window
     {
+        private User user;
         public OwnerMainWindow(User user)
         {
             InitializeComponent();
-            MyProfile myProfile = new MyProfile(user);
-            FrameForPages.Content = myProfile;
+            this.user = user;
         }
 
         private void BurgerMenu_Click(object sender, RoutedEventArgs e)
         {
-            Menu menu = new Menu();
+            Menu menu = new Menu(user);
             FrameForPages.Content = menu;
         }
     }

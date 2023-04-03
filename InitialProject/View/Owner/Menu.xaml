@@ -9,6 +9,8 @@
       Title="Menu" Background="White">
     <Page.Resources>
         <Style x:Key="MenuButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="FontStyle" Value="Normal" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
@@ -21,17 +23,59 @@
 
 
     <Grid>
-        <Button HorizontalAlignment="Center" Margin="0,180,0,0" VerticalAlignment="Top" Width="350" Height="45" Style="{StaticResource MenuButtonStyle}">Home Page</Button>
-        <Button Content="My Accommodation" HorizontalAlignment="Center" VerticalAlignment="Top" Width="350" Height="45" Margin="0,235,0,0" Style="{StaticResource MenuButtonStyle}"/>
-        <Button Content="My Renovation" HorizontalAlignment="Center" VerticalAlignment="Center" Width="350" Height="45" Style="{StaticResource MenuButtonStyle}"/>
-        <Button Name="MyProfileButton" Content="My Profile" HorizontalAlignment="Center" Margin="0,345,0,0" VerticalAlignment="Top" Width="350" Height="45" Style="{StaticResource MenuButtonStyle}" Click="MyProfileButton_Click"/>
+        <Button Content="Home Page" HorizontalAlignment="Center" Margin="0,180,0,0" VerticalAlignment="Top" Width="350" Height="45">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button Content="My Accommodation" HorizontalAlignment="Center" VerticalAlignment="Top" Width="350" Height="45" Margin="0,230,0,0">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button Content="My Renovations" Margin="0,280,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Width="350" Height="46">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button Name="MyProfileButton" Content="My Profile" HorizontalAlignment="Center" Margin="0,331,0,0" VerticalAlignment="Top" Width="350" Height="45" Click="MyProfileButton_Click" >
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Button.Resources>
+        </Button>
         <Image HorizontalAlignment="Left" Height="100" Margin="138,53,0,0" VerticalAlignment="Top" Width="139" RenderTransformOrigin="0.468,0.174" />
-        <Button Content="Sign out" HorizontalAlignment="Center" Margin="0,531,0,0" VerticalAlignment="Top" Width="209" Height="45" Style="{StaticResource MenuButtonStyle}"/>
-        <Button Name="BackButton" HorizontalAlignment="Left" Margin="340,10,0,0" VerticalAlignment="Top" Width="80" Height="43" >
+        <Button Content="Sign out" HorizontalAlignment="Center" Margin="0,515,0,0" VerticalAlignment="Top" Width="210" Height="45">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button Name="BackButton" HorizontalAlignment="Left" Margin="340,10,0,0" VerticalAlignment="Top" Width="80" Height="43" Click="BackButton_Click">
             <Image Source="/Resources/Images/arrow.png" />
         </Button>
-        <Button Content="My Forums" HorizontalAlignment="Center" Margin="0,400,0,0" VerticalAlignment="Top" Width="350" Height="45" Style="{StaticResource MenuButtonStyle}"/>
-        <Button Content="My Suggestions" HorizontalAlignment="Center" Margin="0,455,0,0" VerticalAlignment="Top" Width="350" Height="45" Style="{StaticResource MenuButtonStyle}"/>
+        <Button Content="My Forums" HorizontalAlignment="Center" Margin="0,381,0,0" VerticalAlignment="Top" Width="350" Height="45">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button Content="My Suggestions" HorizontalAlignment="Center" Margin="0,431,0,0" VerticalAlignment="Top" Width="350" Height="45">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Button.Resources>
+        </Button>
 
     </Grid>
 </Page>
