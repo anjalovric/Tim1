@@ -36,5 +36,15 @@ namespace InitialProject.Repository
         {
             return _owners.Find(n => n.Id == id);
         }
+
+        public int NextId()
+        {
+            _owners = _serializer.FromCSV(FilePath);
+            if (_owners.Count < 1)
+            {
+                return 1;
+            }
+            return _owners.Max(c => c.Id) + 1;
+        }
     }
 }

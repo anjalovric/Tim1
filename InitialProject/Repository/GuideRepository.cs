@@ -39,5 +39,20 @@ namespace InitialProject.Repository
             }
             return foundGuide;
         }
+
+        public Guide GetById(int id) 
+        {
+            return guides.Find(x => x.Id == id);
+        }
+
+        public int NextId()
+        {
+            guides = _serializer.FromCSV(FilePath);
+            if (guides.Count < 1)
+            {
+                return 1;
+            }
+            return guides.Max(c => c.Id) + 1;
+        }
     }
 }

@@ -82,9 +82,9 @@ namespace InitialProject.Repository
             return list;
         }
 
-        public TourReservation GetReservationById(int tourReservationId)
+        public TourReservation GetById(int id)
         {
-            return _tourReservations.Find(n => n.Id == tourReservationId);
+            return _tourReservations.Find(n => n.Id == id);
         }
     }
 }

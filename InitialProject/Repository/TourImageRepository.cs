@@ -64,5 +64,10 @@ namespace InitialProject.Repository
             _serializer.ToCSV(FilePath, _tourImages);
             return tourImage;
         }
+
+        public TourImage GetById(int id) 
+        {
+            return _tourImages.Find(c => c.Id ==id);
+        }
     }
 }
