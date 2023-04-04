@@ -20,6 +20,14 @@ namespace InitialProject.Model
             Reservation = new AccommodationReservation();
         }
 
+        public OwnerReview(AccommodationReservation reservation, int cleanliness, int correctness, string comment)
+        {
+            Reservation = reservation;
+            Cleanliness = cleanliness;
+            Correctness = correctness;
+            Comment = comment;
+        }
+
         public string[] ToCSV()
         {
             string[] csvValues = { Id.ToString(), Cleanliness.ToString(), Correctness.ToString(), Comment, Reservation.Id.ToString() };

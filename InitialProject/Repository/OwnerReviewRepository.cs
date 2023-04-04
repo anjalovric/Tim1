@@ -32,6 +32,12 @@ namespace InitialProject.Repository
             return _reviews.Max(c => c.Id) + 1;
         }
 
+        public bool HasReview(AccommodationReservation reservation)
+        {
+            _reviews = _serializer.FromCSV(FilePath);
+            return _reviews.Find(n => n.Reservation.Id == reservation.Id) != null;
+        }
+
         public void Save(OwnerReview review)
         {
             review.Id = NextId();

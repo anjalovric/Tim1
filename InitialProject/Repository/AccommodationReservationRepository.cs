@@ -25,6 +25,7 @@ namespace InitialProject.Repository
 
         public List<AccommodationReservation> GetAll()
         {
+            _accommodationReservations = _serializer.FromCSV(FilePath);
             return _accommodationReservations;
         }
 
@@ -41,6 +42,14 @@ namespace InitialProject.Repository
         {
             accommodationReservation.Id = NextId();
             _accommodationReservations.Add(accommodationReservation);
+            _serializer.ToCSV(FilePath, _accommodationReservations);
+        }
+
+        public void Delete(AccommodationReservation accommodationReservation)
+        {
+            _accommodationReservations = _serializer.FromCSV(FilePath);
+            AccommodationReservation founded = _accommodationReservations.Find(c => c.Id == accommodationReservation.Id);
+            _accommodationReservations.Remove(founded);
             _serializer.ToCSV(FilePath, _accommodationReservations);
         }
 

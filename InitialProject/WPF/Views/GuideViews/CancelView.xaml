@@ -1,0 +1,30 @@
+﻿<Page x:Class="InitialProject.WPF.Views.GuideViews.CancelView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:InitialProject.WPF.Views.GuideViews"
+      mc:Ignorable="d" 
+      d:DesignHeight="700" d:DesignWidth="1100"
+      Title="CancelView" Background="White">
+
+    <Grid>
+        <DataGrid x:Name="TourListDataGrid" ItemsSource="{Binding Path=TourInstances,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=Selected}" IsReadOnly="True" AutoGenerateColumns="False" Margin="83,144,65,62" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Tour name" Width="1*" Binding="{Binding Tour.Name}"/>
+                <DataGridTextColumn Header="Location" Width="1*" Binding="{Binding Tour.Location}"/>
+                <DataGridTextColumn Header="StartDate" Width="0.6*" Binding="{Binding StartDate}"/>
+                <DataGridTextColumn Header="StartHour" Width="1*" Binding="{Binding StartClock}"/>
+                <DataGridTextColumn  Width="1*" Header="Capacity" Binding="{Binding Tour.MaxGuests}"/>
+                <DataGridTemplateColumn x:Name="cancelation" Header="Cancel"  Width="1.2*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Name="cancelButton" Content="CANCEL" TextElement.FontWeight="ExtraBold" Click="Cancel_Click"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </Grid>
+</Page>

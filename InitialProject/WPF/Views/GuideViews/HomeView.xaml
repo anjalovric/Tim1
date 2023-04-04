@@ -1,0 +1,46 @@
+﻿<Page x:Class="InitialProject.WPF.Views.GuideViews.HomeView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:InitialProject.WPF.Views.GuideViews"
+      mc:Ignorable="d" 
+      d:DesignHeight="700" d:DesignWidth="1100"
+      Title="HomeView" Background="White">
+    <Page.Resources>
+        <LinearGradientBrush x:Key="ButtonColor">
+            <GradientStop Color="Black"></GradientStop>
+        </LinearGradientBrush>
+
+    </Page.Resources>
+    <Grid Margin="0,0,0,-6">
+        <DataGrid CanUserResizeColumns="False" CanUserResizeRows="False" CanUserReorderColumns="False" ItemsSource="{Binding Path=Tours,UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" SelectedItem="{Binding Path=Selected}" IsReadOnly="True" Margin="180,172,45,140">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Tour.Name}" Width="100"/>
+                <DataGridTextColumn Header="Duration" Binding="{Binding Tour.Duration}" Width="100"/>
+                <DataGridTextColumn Header="Location" Binding="{Binding Tour.Location}" Width="100"/>
+                <DataGridTextColumn Header="MaxOfGuests" Binding="{Binding Tour.MaxGuests}" Width="100"/>
+                <DataGridTextColumn Header="StartDate" Binding="{Binding StartDate}" Width="60"/>
+                <DataGridTextColumn Header="StartHour" Binding="{Binding StartClock}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Language" Binding="{Binding Tour.Language}" Width="100"/>
+                <DataGridTextColumn Header="Description" Binding="{Binding Tour.Description}" Width="90"/>
+                <DataGridTemplateColumn x:Name="cancelation"  Width="1.2*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Name="cancelButton" Content="START" TextElement.FontWeight="ExtraBold" Click="StartTour_Click"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+      
+
+      
+        <Label Content="List of tours which are starting today:" FontSize="15" HorizontalAlignment="Left" Margin="87,35,0,0" VerticalAlignment="Top" Width="295"/>
+
+        <Button Content="History" HorizontalAlignment="Left" Height="41" Margin="588,590,0,0" VerticalAlignment="Top" Width="100" Click="History_Click"/>
+    
+
+    </Grid>
+
+</Page>

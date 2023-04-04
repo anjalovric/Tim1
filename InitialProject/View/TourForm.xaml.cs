@@ -463,7 +463,9 @@ namespace InitialProject.View
             TourInstanceRepository tourInstanceRepository = new TourInstanceRepository();
             foreach(TourInstance instance in Instances)
             {
+                List<TourImage> tourPictures = tourImageRepository.GetByTour(savedTour.Id);
                 instance.Tour = savedTour;
+                instance.CoverImage = tourPictures[0].Url;
                 tourInstanceRepository.Save(instance);
                 DisplayIfToday(instance);
             }

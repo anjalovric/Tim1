@@ -3,6 +3,8 @@ using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.View;
 using InitialProject.View.Owner;
+using InitialProject.WPF.Views;
+using InitialProject.WPF.Views.GuideViews;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -59,18 +61,20 @@ namespace InitialProject
                     {
                         //OwnerOverview ownerOverview = new OwnerOverview(user);
                         //ownerOverview.Show();
-                        OwnerMainWindow ownerMainWindow = new OwnerMainWindow(user);
+                        OwnerMainWindowView ownerMainWindow = new OwnerMainWindowView(user);
                         ownerMainWindow.Show();
                         Close();
                     }else if(user.Role == Model.Role.GUIDE)
                     {
-                        GuidesOverview guideOverview = new GuidesOverview(user);
-                        guideOverview.Show();
+                        //GuidesOverview guideOverview = new GuidesOverview(user);
+                        //guideOverview.Show();
+                        GuideWindow guideMainWindow = new GuideWindow(user);
+                        guideMainWindow.Show();
                         Close();
                     }
                     else if (user.Role == Model.Role.GUEST1)
                     {
-                        Guest1Home guest1Overview = new Guest1Home();
+                        Guest1Home guest1Overview = new Guest1Home(user);
                         guest1Overview.Owner = this;
                         guest1Overview.Show();
                         Hide();

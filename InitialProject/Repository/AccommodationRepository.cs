@@ -44,5 +44,9 @@ namespace InitialProject.Repository
             return _accommodations;
         }
 
+        public Accommodation GetById(int id)
+        {
+            return _accommodations.Find(n => n.Id == id);
+        }
     }
 }

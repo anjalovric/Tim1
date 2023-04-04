@@ -31,6 +31,7 @@ namespace InitialProject.View
     /// </summary>
     public partial class Guest1SearchAccommodation : Page
     {
+        private Guest1 guest1;
         public ObservableCollection<string> Countries { get; set; }
         public ObservableCollection<string> CitiesByCountry { get; set; }
         private LocationRepository locationRepository;
@@ -80,11 +81,12 @@ namespace InitialProject.View
                 }
             }
         }
-        public Guest1SearchAccommodation()
+        public Guest1SearchAccommodation(Guest1 guest1)
         {
             InitializeComponent();
             DataContext = this;
 
+            this.guest1 = guest1;
             accommodationRepository = new AccommodationRepository();
             Accommodations = new ObservableCollection<Accommodation>(accommodationRepository.GetAll());
 
@@ -101,6 +103,7 @@ namespace InitialProject.View
             CitiesByCountry = new ObservableCollection<string>();
             cityInput.IsEnabled = false;
             SetAccommodationLocations();
+            this.guest1 = guest1;
         }
 
 
@@ -145,6 +148,7 @@ namespace InitialProject.View
                 }
             }
         }
+
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
@@ -331,7 +335,7 @@ namespace InitialProject.View
         private void ReserveButton_Click(object sender, RoutedEventArgs e)
         {
             Accommodation currentAccommodation = selectedAccommodation;
-            AccommodationReservationForm accommodationReservationForm = new AccommodationReservationForm(currentAccommodation, ref accommodationRepository);
+            AccommodationReservationForm accommodationReservationForm = new AccommodationReservationForm(currentAccommodation, ref accommodationRepository, guest1);
             accommodationReservationForm.Show();
         }
 

@@ -27,5 +27,10 @@ namespace InitialProject.Repository
         {
             return _accommodationTypes;
         }
+
+        public AccommodationType GetById(int id)
+        {
+            return _accommodationTypes.Find(n => n.Id == id);
+        }
     }
 }

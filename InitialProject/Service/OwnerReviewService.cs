@@ -9,7 +9,7 @@ using InitialProject.Repository;
 
 namespace InitialProject.Service
 {
-    internal class OwnerReviewService
+    public class OwnerReviewService
     {
         private OwnerReviewRepository ownerReviewRepository;
         private List<OwnerReview> ownerReviews;
@@ -17,12 +17,12 @@ namespace InitialProject.Service
         {
             ownerReviewRepository = new OwnerReviewRepository();
             ownerReviews = new List<OwnerReview>(ownerReviewRepository.GetAll());
-
+            MakeReservations();
         }
 
         public List<OwnerReview> GetAll()
         {
-            return ownerReviewRepository.GetAll();
+            return ownerReviews;
         }
 
         public List<OwnerReview> GetAllToDisplay(Owner owner)
@@ -35,14 +35,83 @@ namespace InitialProject.Service
                 AccommodationReservation reservationToReview = ownerReview.Reservation;
                 bool isGuestReviewed = guestReviewService.IsGuestReviewed(reservationToReview);
                 bool fiveDaysPassed = (DateTime.Now.Date - reservationToReview.Departure.Date).TotalDays > 5;
-                //bool isThisOwner = reservationToReview.Accommodation.Owner.Id == owner.Id;
+                bool isThisOwner = reservationToReview.Accommodation.Owner.Id == owner.Id;
 
-                if ((isGuestReviewed || fiveDaysPassed) ) // && isThisOwner
+                if ((isGuestReviewed || fiveDaysPassed) && isThisOwner)
                 {
                     reviewsToDisplay.Add(ownerReview);
                 }
             }
             return reviewsToDisplay;
+        }
+
+        public bool HasReview(AccommodationReservation reservation)
+        {
+            return ownerReviewRepository.HasReview(reservation);
+        }
+
+        public void Save(OwnerReview review)
+        {
+            ownerReviewRepository.Save(review);
+        }
+
+        public double CalculateAverageRateByOwner(Owner owner)
+        {
+            int rateSum = 0;
+            int numberOfReviews = GetNumberOfReviewsByOwner(owner);
+            foreach (OwnerReview review in ownerReviews)
+            {
+                if (review.Reservation.Accommodation.Owner.Id == owner.Id)
+                {
+                    rateSum += review.Cleanliness;
+                    rateSum += review.Correctness;
+                }
+            }
+
+            return (double)rateSum / (2 * numberOfReviews);
+        }
+
+        public int GetNumberOfReviewsByOwner(Owner owner)
+        {
+            int numberOfReviews = 0;
+            foreach (OwnerReview review in ownerReviews)
+            {
+                if (review.Reservation.Accommodation.Owner.Id == owner.Id)
+                {
+                    numberOfReviews++;
+                }
+            }
+            return numberOfReviews;
+        }
+
+        private void MakeReservations()
+        {
+            AccommodationReservationService accommodationReservationService = new AccommodationReservationService();
+            List<AccommodationReservation> accommodationReservations = new List<AccommodationReservation>();
+            accommodationReservations = accommodationReservationService.GetAll();
+
+            foreach (OwnerReview review in ownerReviews)
+            {
+                AccommodationReservation ownerReservation = accommodationReservations.Find(n => n.Id == review.Reservation.Id);
+                if (ownerReservation != null)
+                {
+                    review.Reservation = ownerReservation;
+                }
+            }
+        }
+
+        public List<OwnerReview> GetAllByOwner(Owner owner)
+        {
+            List<OwnerReview> reviewsByOwner = new List<OwnerReview>();
+            foreach (OwnerReview review in ownerReviews)
+            {
+                Owner reviewedOwner = review.Reservation.Accommodation.Owner;
+                if (reviewedOwner.Id == owner.Id)
+                {
+                    reviewsByOwner.Add(review);
+                }
+            }
+            return reviewsByOwner;
         }
     }
 }
