@@ -25,6 +25,8 @@ namespace InitialProject.Model
 
         public double Attendance { get;set; }
 
+        public string CoverImage { get; set; }
+
         public void FromCSV(string[] values)
         {
             Id = Convert.ToInt32(values[0]);
@@ -34,13 +36,14 @@ namespace InitialProject.Model
             Finished = Convert.ToBoolean(values[4]);
             Guide = new Guide() { Id=Convert.ToInt32(values[5]) };
             Attendance = Convert.ToDouble(values[6]);
+            CoverImage = values[7];
      
 
         }
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), Tour.Id.ToString(), StartDate.ToString(), StartClock ,Finished.ToString(),Guide.Id.ToString(),Attendance.ToString()};
+            string[] csvValues = { Id.ToString(), Tour.Id.ToString(), StartDate.ToString(), StartClock ,Finished.ToString(),Guide.Id.ToString(),Attendance.ToString(),CoverImage};
             return csvValues;
         }
         public TourInstance() 
@@ -49,7 +52,7 @@ namespace InitialProject.Model
             
         }
 
-        public TourInstance( Tour tour, DateTime startDate, string startClock,Guide guide)
+        public TourInstance( Tour tour, DateTime startDate, string startClock,Guide guide,string coverImage)
         {
             Tour = tour;
             StartDate = startDate;
@@ -57,6 +60,7 @@ namespace InitialProject.Model
             Finished = false;
             Guide = guide;
             Attendance = 0;
+            CoverImage = coverImage;
         }
 
 

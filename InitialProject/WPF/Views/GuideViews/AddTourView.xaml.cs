@@ -1,6 +1,6 @@
-﻿using InitialProject.Forms;
-using InitialProject.Model;
+﻿using InitialProject.Model;
 using InitialProject.Repository;
+using InitialProject.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -17,29 +17,27 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Xml;
-using static System.Net.Mime.MediaTypeNames;
 
-namespace InitialProject.View
+namespace InitialProject.WPF.Views.GuideViews
 {
     /// <summary>
-    /// Interaction logic for TourForm.xaml
+    /// Interaction logic for AddTourView.xaml
     /// </summary>
-    public partial class TourForm : Window, INotifyPropertyChanged
+    public partial class AddTourView : Page
     {
-
-
-        private  TourRepository tourRepository;
-        private  LocationRepository locationRepository;
-        private  CheckPointRepository checkPointRepository;
-        private  TourImageRepository tourImageRepository;
-        private  TourInstanceRepository tourInstanceRepository;
+        private TourRepository tourRepository;
+        private LocationRepository locationRepository;
+        private CheckPointRepository checkPointRepository;
+        private TourImageRepository tourImageRepository;
+        private TourInstanceRepository tourInstanceRepository;
         public int pointCounter = 0;
         public ObservableCollection<CheckPoint> TourPoints { get; set; }
         public ObservableCollection<TourImage> TourImages { get; set; }
         public ObservableCollection<TourInstance> Instances { get; set; }
         public ObservableCollection<TourInstance> TodayInstances { get; set; }
+        public ObservableCollection<TourInstance> FutureInstances { get; set; }
         public ObservableCollection<string> Countries { get; set; }
         public ObservableCollection<string> CitiesByCountry { get; set; }
 
@@ -148,7 +146,7 @@ namespace InitialProject.View
             {
                 if (value != maxGuests)
                 {
-                   maxGuests = value;
+                    maxGuests = value;
                     OnPropertyChanged();
                 }
             }
@@ -166,7 +164,7 @@ namespace InitialProject.View
                 }
             }
         }
-        public TourForm(ObservableCollection<TourInstance> todayInstances,User user)
+        public AddTourView(ObservableCollection<TourInstance> todayInstances,User user, ObservableCollection<TourInstance> futureInstances)
         {
             InitializeComponent();
             DataContext = this;
@@ -179,13 +177,12 @@ namespace InitialProject.View
             TourImages = new ObservableCollection<TourImage>();
             Instances = new ObservableCollection<TourInstance>();
             TodayInstances = todayInstances;
+            FutureInstances = futureInstances;
             Countries = new ObservableCollection<string>(locationRepository.GetAllCountries());
             CitiesByCountry = new ObservableCollection<string>();
             ComboBoxCity.IsEnabled = false;
             loggedInUser = user;
-
         }
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -201,24 +198,24 @@ namespace InitialProject.View
             {
 
                 Location newLocation = locationRepository.GetByCityAndCountry(Country, City);
-                
+
                 Tour newTour = new Tour(NameT, Convert.ToInt32(maxGuests), Convert.ToDouble(duration), newLocation, description, LanguageT);
                 Tour savedTour = tourRepository.Save(newTour);
                 tourId = savedTour.Id;
                 saved = savedTour;
-               
+
                 UpdateCheckPoints();
                 AddImages();
                 SaveInstances(savedTour);
-                this.Close();
+               
             }
 
         }
         private bool IsValid()
         {
-            return IsNameValid() & IsMaximuGuestsNumberValid() & IsDurationValid()  & IsCountryValid() & IsCityValid() & IsDescriptionValid() 
+            return IsNameValid() & IsMaximuGuestsNumberValid() & IsDurationValid() & IsCountryValid() & IsCityValid() & IsDescriptionValid()
                     & IsLanguageValid() & IsDateTimeValid()
-                    & IsCheckPointsValid() & IsImagesValid() ;
+                    & IsCheckPointsValid() & IsImagesValid();
 
         }
         private bool IsNameValid()
@@ -229,14 +226,14 @@ namespace InitialProject.View
             bool valid = false;
             if (TourNameTB.Text.Trim().Equals(""))
             {
-               
+
                 TourNameTB.BorderBrush = Brushes.Red;
                 TourNameTB.BorderThickness = new Thickness(1);
                 NameLabel.Content = "This field can't be empty";
             }
             else if (!match.Success)
             {
-                
+
                 TourNameTB.BorderBrush = Brushes.Red;
                 TourNameTB.BorderThickness = new Thickness(1);
                 NameLabel.Content = "Invalid name";
@@ -282,9 +279,9 @@ namespace InitialProject.View
             var content = DurationTB.Text;
             var regex = "(([1-9][0-9]*)(\\.[0-9]+)?)|(0\\.[0-9]+)$";
             var regexMinus = "-";
-            
+
             Match match = Regex.Match(content, regex, RegexOptions.IgnoreCase);
-            Match matchMinus=Regex.Match(content,regexMinus, RegexOptions.IgnoreCase);
+            Match matchMinus = Regex.Match(content, regexMinus, RegexOptions.IgnoreCase);
 
             if (DurationTB.Text.Trim().Equals(""))
             {
@@ -322,8 +319,8 @@ namespace InitialProject.View
             }
             else
             {
-                ComboBoxCity.BorderThickness= new Thickness(1);
-                ComboBoxCity.BorderBrush=Brushes.Green;
+                ComboBoxCity.BorderThickness = new Thickness(1);
+                ComboBoxCity.BorderBrush = Brushes.Green;
                 CityLabel.Content = string.Empty;
                 return true;
             }
@@ -340,7 +337,7 @@ namespace InitialProject.View
                 return false;
             }
             else
-            {   
+            {
                 ComboBoxCountry.BorderThickness = new Thickness(1);
                 ComboBoxCountry.BorderBrush = Brushes.Green;
                 CountryLabel.Content = string.Empty;
@@ -357,14 +354,14 @@ namespace InitialProject.View
             bool valid = false;
             if (LanguageTB.Text.Trim().Equals(""))
             {
-             
+
                 LanguageTB.BorderBrush = Brushes.Red;
                 LanguageTB.BorderThickness = new Thickness(1);
                 LanguageLabel.Content = "This field can't be empty";
             }
             else if (!match.Success)
             {
-                
+
                 LanguageTB.BorderBrush = Brushes.Red;
                 LanguageTB.BorderThickness = new Thickness(1);
                 LanguageLabel.Content = "Only can contains letters and one space between words";
@@ -387,14 +384,14 @@ namespace InitialProject.View
             bool valid = false;
             if (DescriptionTB.Text.Trim().Equals(""))
             {
-                
+
                 DescriptionTB.BorderBrush = Brushes.Red;
                 DescriptionTB.BorderThickness = new Thickness(1);
                 DescriptionLabel.Content = "This field can't be empty";
             }
             else if (!match.Success)
             {
-               
+
                 DescriptionTB.BorderBrush = Brushes.Red;
                 DescriptionTB.BorderThickness = new Thickness(1);
                 DescriptionLabel.Content = "Invalid description";
@@ -441,7 +438,7 @@ namespace InitialProject.View
                 return false;
             }
         }
-        
+
 
         private bool IsDateTimeValid()
         {
@@ -461,16 +458,32 @@ namespace InitialProject.View
         private void SaveInstances(Tour savedTour)
         {
             TourInstanceRepository tourInstanceRepository = new TourInstanceRepository();
-            foreach(TourInstance instance in Instances)
+            foreach (TourInstance instance in Instances)
             {
-                List<TourImage> tourPictures = tourImageRepository.GetByTour(savedTour.Id);
                 instance.Tour = savedTour;
-                instance.CoverImage = tourPictures[0].Url;
+                instance.CoverImage = tourImageRepository.GetByTour(savedTour.Id)[0].Url;
                 tourInstanceRepository.Save(instance);
                 DisplayIfToday(instance);
+                DisplayIfCancelable(instance);
             }
         }
 
+        private void DisplayIfCancelable(TourInstance tour)
+        {
+            if (tour.Finished == false && tour.StartDate > DateTime.Now.Date)
+            {
+                var prevDate = Convert.ToDateTime(tour.StartDate.ToString().Split(" ")[0] + " " + tour.StartClock);
+                var today = DateTime.Now;
+                var diffOfDates = today - prevDate;
+
+                if (diffOfDates.Days < -2)
+                    FutureInstances.Add(tour);
+                else if (diffOfDates.Days == -2 && diffOfDates.Hours < 0)
+                    FutureInstances.Add(tour);
+                else if (diffOfDates.Days == -2 && diffOfDates.Hours == 0 && diffOfDates.Minutes < 0)
+                    FutureInstances.Add(tour);
+            }
+        }
         private void DisplayIfToday(TourInstance instance)
         {
             if (instance.StartDate.Equals(DateTime.Today))
@@ -490,11 +503,11 @@ namespace InitialProject.View
             }
         }
 
-        private bool IsTimeFromFuture(string hour,string min, string sec)
+        private bool IsTimeFromFuture(string hour, string min, string sec)
         {
             return ((Convert.ToInt32(hour) > DateTime.Now.Hour) || (Convert.ToInt32(hour) == DateTime.Now.Hour && Convert.ToInt32(min) > DateTime.Now.Minute) || (Convert.ToInt32(hour) == DateTime.Now.Hour && Convert.ToInt32(min) == DateTime.Now.Minute && Convert.ToInt32(sec) > DateTime.Now.Second));
         }
- 
+
         private void AddImages()
         {
             List<TourImage> tourImages = tourImageRepository.GetAll();
@@ -526,7 +539,7 @@ namespace InitialProject.View
 
         private void AddCheckPoint_Click(object sender, RoutedEventArgs e)
         {
-            CheckPointForm form = new CheckPointForm(checkPointRepository,TourPoints);
+            CheckPointForm form = new CheckPointForm(checkPointRepository, TourPoints);
             form.Show();
 
         }
@@ -546,23 +559,23 @@ namespace InitialProject.View
             foreach (TourImage image in tourImages)
             {
                 if (image.TourId == -1)
-                { 
+                {
                     tourImageRepository.Delete(image);
                 }
             }
-            
-            this.Close();
+
+
         }
 
         private void AddTourImage_Click(object sender, RoutedEventArgs e)
         {
-            TourImageForm tourImageForm = new TourImageForm(tourImageRepository,TourImages);
+            TourImageForm tourImageForm = new TourImageForm(tourImageRepository, TourImages);
             tourImageForm.Show();
         }
 
         private void NewInstance_Click(object sender, RoutedEventArgs e)
         {
-            NewTourInstanceDate newTourInstance = new NewTourInstanceDate(Instances,loggedInUser);
+            NewTourInstanceDate newTourInstance = new NewTourInstanceDate(Instances, loggedInUser);
             newTourInstance.Show();
         }
 

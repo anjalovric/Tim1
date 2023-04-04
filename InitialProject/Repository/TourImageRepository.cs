@@ -1,4 +1,5 @@
-﻿using InitialProject.Model;
+﻿using InitialProject.Domain.RepositoryInterfaces;
+using InitialProject.Model;
 using InitialProject.Serializer;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Repository
 {
-    public class TourImageRepository
+    public class TourImageRepository:ITourImageRepository
     {
         private const string FilePath = "../../../Resources/Data/tourImages.csv";
 
@@ -69,5 +70,15 @@ namespace InitialProject.Repository
         {
             return _tourImages.Find(c => c.Id ==id);
         }
+        public List<TourImage> GetByTour(int touId)
+        {
+            List<TourImage> images= new List<TourImage>();
+            foreach(TourImage image in _tourImages)
+            {
+                if (image.TourId==touId) images.Add(image);
+            }
+            return images;
+        }
+
     }
 }

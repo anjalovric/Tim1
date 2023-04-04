@@ -77,6 +77,7 @@ namespace InitialProject.View
                 newInstance.StartDate = InstanceStartDate;
                 newInstance.StartClock = InstanceStartHour;
                 newInstance.Guide = currentGuide;
+                newInstance.CoverImage = "";
                 tourInstances.Add(newInstance);
                 this.Close();
             }

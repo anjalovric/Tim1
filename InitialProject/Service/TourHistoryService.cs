@@ -1,5 +1,6 @@
 ﻿using InitialProject.Model;
 using InitialProject.Repository;
+using Org.BouncyCastle.Asn1.Sec;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,6 +16,7 @@ namespace InitialProject.Service
         private TourInstanceService tourInstanceService;
         private LocationService locationService;
         private TourDetailsService tourDetailsService;
+        private TourImageService tourImageService;
 
         private List<TourInstance> finishedtourInstances;
         private List<TourInstance> finishedtourInsatncesForChosenYear;
@@ -25,6 +27,7 @@ namespace InitialProject.Service
             tourInstanceService = new TourInstanceService();
             locationService = new LocationService();
             tourDetailsService = new TourDetailsService();
+            tourImageService = new TourImageService();
 
             finishedtourInstances = new List<TourInstance>();
             finishedtourInsatncesForChosenYear=new List<TourInstance>();
@@ -123,7 +126,11 @@ namespace InitialProject.Service
             return tour;
         }
 
-
+        public string FindFirstImageOfTour(int tourId)
+        {
+            List<TourImage> images= tourImageService.GetByTour(tourId);
+            return images[0].Url;
+        }
 
     }
 }
