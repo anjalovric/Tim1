@@ -6,7 +6,6 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Model;
 using InitialProject.Repository;
 
@@ -25,6 +24,7 @@ namespace InitialProject.Service
         public ObservableCollection<AccommodationReservation> CompletedAccommodationReservations;
 
         private AccommodationReservationRepository accommodationReservationRepository;
+        private List<AccommodationReservation> accommodationReservations;
         public AccommodationReservationService()
         {
             accommodationReservationRepository = new AccommodationReservationRepository();
@@ -46,7 +46,6 @@ namespace InitialProject.Service
         {
             return accommodationReservationRepository.GetAll();
         }
-
 
 
         public void Add(AccommodationReservation reservation)
@@ -126,6 +125,24 @@ namespace InitialProject.Service
             }
         }
 
+        private void MakeReservations()
+        {
+            accommodationReservations = accommodationReservationRepository.GetAll();
+            AddAccommodations();
+        }
 
+        private void AddAccommodations()
+        {
+            AccommodationService accommodationService = new AccommodationService();
+            List<Accommodation> allAccommodation = accommodationService.GetAll();
+            foreach(AccommodationReservation reservation in accommodationReservations)
+            {
+                Accommodation reservationAccommodation = allAccommodation.Find(n => n.Id == reservation.Accommodation.Id);
+                if(reservationAccommodation != null)
+                {
+                    reservation.Accommodation = reservationAccommodation;
+                }
+            }
+        }
     }
 }
