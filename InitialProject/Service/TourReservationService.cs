@@ -24,9 +24,9 @@ namespace InitialProject.Service
         {
             tourReservationrepository.Delete(tourReservation);
         }
-        public TourReservation Update(TourReservation tourReservation, int guestsNumber)
+        public TourReservation Update(TourReservation tourReservation, int guestsNumber,Boolean withVoucher)
         {
-            return tourReservationrepository.Update(tourReservation, guestsNumber);
+            return tourReservationrepository.Update(tourReservation, guestsNumber,withVoucher);
         }
         public void Add(TourReservation tourReservation)
         {

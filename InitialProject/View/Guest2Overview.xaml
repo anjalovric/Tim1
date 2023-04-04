@@ -46,7 +46,7 @@
                         <TextBlock Text="My requests" Height="18"/>
                     </StackPanel>
                 </ListViewItem>
-                <ListViewItem Height="40" FontSize="14" FontFamily="Century Gothic" Foreground="Black" HorizontalAlignment="Left">
+                <ListViewItem Height="40" FontSize="14" FontFamily="Century Gothic" Foreground="Black" HorizontalAlignment="Left" MouseDoubleClick="Vouchers_Click">
                     <StackPanel Orientation="Horizontal">
                         <Image Source="/Resources/Images/voucher.png" Height="25" Width="40"/>
                         <TextBlock Text="Vouchers" Height="18"/>
