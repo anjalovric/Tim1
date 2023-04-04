@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using InitialProject.Model;
 using InitialProject.WPF.ViewModels;
+using SixLabors.ImageSharp.Metadata.Profiles.Xmp;
 
 namespace InitialProject.WPF.Views
 {
@@ -19,6 +20,13 @@ namespace InitialProject.WPF.Views
         {
             InitializeComponent();
             DataContext = new AccommodationViewModel(user);
+        }
+
+        private void NewAccommodationButton_Click(object sender, RoutedEventArgs e)
+        {
+            AccommodationInputFormView accommodationInputFormView = new AccommodationInputFormView();
+            Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = accommodationInputFormView;
+
         }
     }
 }

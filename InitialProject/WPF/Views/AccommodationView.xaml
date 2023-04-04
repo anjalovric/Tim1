@@ -11,11 +11,11 @@
         <DataTemplate x:Key="accommodations">
             <Border BorderBrush="Black" BorderThickness="0.5" Margin="0,0,0,0" >
                 <Grid>
-                    <Grid Margin="0,0,0,0">
+                    <Grid Margin="0,0,0,0" >
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="150*"/>
-                            <ColumnDefinition Width="110"/>
-                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="70"/>
+                            <ColumnDefinition Width="120"/>
+                            <ColumnDefinition Width="120"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="20"/>
@@ -24,34 +24,34 @@
                         <Button Grid.Column="0" Grid.RowSpan="2" Grid.Row="0">
                             <Image></Image>
                         </Button>
-                        <TextBlock Text="{Binding Path=Name}" Grid.Column="1" Grid.Row="0" />
-                        <TextBlock Text="{Binding Path=Location}" Grid.Column="1" Grid.Row="1" />
-                        <Button Content="Statistics" Grid.Column="2" Grid.Row="0"/>
-                        <Button Content="Remove" Grid.Column="2" Grid.Row="1"/>
+                        <TextBlock Text="{Binding Path=Name}" Grid.Column="1" Grid.Row="0" Padding="1" />
+                        <TextBlock Text="{Binding Path=Location}" Grid.Column="1" Grid.Row="1" Padding="1" />
+                        <Button Content="Statistics" Grid.Column="2" Grid.Row="0" Padding="1"/>
+                        <Button Content="Remove" Grid.Column="2" Grid.Row="1" Padding="1"/>
                     </Grid>
-                    <Grid Margin="10,10,10,10">
+                    <Grid Margin="0,60,0,0">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="150*"/>
-                            <ColumnDefinition Width="110"/>
-                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="70"/>
+                            <ColumnDefinition Width="120"/>
+                            <ColumnDefinition Width="120"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="20"/>
                             <RowDefinition Height="20"/>
                         </Grid.RowDefinitions>
-                        <TextBlock Grid.Column="0" Grid.Row="0">
+                        <TextBlock Grid.Column="0" Grid.Row="0" Padding="1">
                             <Run Text="Type: " />
                             <Run Text="{Binding Path=Type}"/>
                         </TextBlock>
-                        <TextBlock Grid.Column="1" Grid.Row="0">
+                        <TextBlock Grid.Column="1" Grid.Row="0" Padding="1">
                             <Run Text="Capacity: " />
                             <Run Text="{Binding Path=Capacity}"/>
                         </TextBlock>
-                        <TextBlock Grid.Column="2" Grid.Row="0">
+                        <TextBlock Grid.Column="2" Grid.Row="0" Padding="1">
                             <Run Text="Min days: " />
                             <Run Text="{Binding Path=MinDaysForReservation}"/>
                         </TextBlock>
-                        <TextBlock Grid.Column="1" Grid.Row="1">
+                        <TextBlock Grid.Column="1" Grid.Row="1" Padding="1" Grid.ColumnSpan="2">
                             <Run Text="Days before to cancel: " />
                             <Run Text="{Binding Path=MinDaysToCancel}"/>
                         </TextBlock>
@@ -63,7 +63,7 @@
 
     <Grid>
         <ListBox ItemsSource="{Binding Path=Accommodations}" ItemTemplate="{StaticResource accommodations}" Height="421" VerticalAlignment="Top" Margin="30,31,30,0"/>
-        <Button Content="New Accommodation" HorizontalAlignment="Center" Margin="0,474,0,0"  Width="370" Height="43" VerticalAlignment="Top"/>
+        <Button Name="NewAccommodationButton" Content="New Accommodation" HorizontalAlignment="Center" Margin="0,474,0,0"  Width="370" Height="43" VerticalAlignment="Top" Click="NewAccommodationButton_Click"/>
         <Button Content="My Renovations" HorizontalAlignment="Center" Margin="0,540,0,0"  Width="370" Height="43" VerticalAlignment="Top"/>
     </Grid>
 </Page>
