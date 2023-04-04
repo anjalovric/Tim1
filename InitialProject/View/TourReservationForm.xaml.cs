@@ -15,6 +15,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using DotLiquid.Tags;
 using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.Serializer;
@@ -34,12 +35,10 @@ namespace InitialProject.View
         private List<TourReservation> tourReservations;
         private List<TourInstance> tourInstances;
         private TourInstanceRepository tourInstanceRepository;
-
+        int firstIn = 0;
         private ShowTours ShowTours;
-
         private Guest2Overview Guest2Overview;
-        private Boolean withVoucher = true;
-
+        private Boolean withVoucher;
         public ObservableCollection<TourInstance> TourInstances { get; set; }
         public Label Label { get; set; }
         private string age;
@@ -63,6 +62,7 @@ namespace InitialProject.View
             CurrentTourInstance = currentTourInstance;
             this.TourInstances = TourInstance;
             this.Label = label;
+            withVoucher = false;
             this.tourInstanceRepository = tourInstanceRepository;
             tourInstances = tourInstanceRepository.GetAll();
             tourReservationRepository = new TourReservationRepository();
@@ -140,6 +140,7 @@ namespace InitialProject.View
         }
         private void Confirm_Click(object sender, RoutedEventArgs e)
         {
+            firstIn = 0;
             GuestsNumber = CurrentGuestsNumber - Convert.ToInt32(capacityNumber.Text);
             if (CurrentGuestsNumber == 0)
             {
@@ -158,6 +159,7 @@ namespace InitialProject.View
             {
                 TourReservation newTourReservation = new TourReservation(CurrentTourInstance.Id, GuestsNumber, GuestId,Convert.ToDouble(Age),Convert.ToInt32(capacityNumber.Text),withVoucher);
                 tourReservationRepository.Save(newTourReservation);
+                firstIn++;
             }
             ChangeTourReservation();
             this.Close();
@@ -169,7 +171,7 @@ namespace InitialProject.View
             {
                 if (CurrentTourInstance.Id == tourReservation.TourInstanceId)
                 {
-                    tourReservationRepository.Update(tourReservation, GuestsNumber);
+                    tourReservationRepository.Update(tourReservation, GuestsNumber,withVoucher);
                     changed = true;
                 }
                 else if (changed)
@@ -177,7 +179,7 @@ namespace InitialProject.View
                     break;
                 }
             }
-            if (!changed)
+            if (!changed && firstIn==0)
             {
                 TourReservation newTourReservation = new TourReservation(CurrentTourInstance.Id, GuestsNumber, GuestId, Convert.ToDouble(Age),Convert.ToInt32(capacityNumber.Text),withVoucher);
                 tourReservationRepository.Save(newTourReservation);
@@ -186,6 +188,12 @@ namespace InitialProject.View
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+        private void Vouchers_Click(object sender, RoutedEventArgs e)
+        {
+            ActivatingVoucher activatingVoucher = new ActivatingVoucher(guest2);
+            activatingVoucher.Show();
+            withVoucher = true;
         }
     }
 }

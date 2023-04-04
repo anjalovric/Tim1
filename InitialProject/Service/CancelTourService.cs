@@ -18,7 +18,7 @@ namespace InitialProject.Service
         private VoucherService voucherService;
         private GuideService guideService;
         private TourReservationService tourReservationService;
-
+        //private Guest2 guest;
         public CancelTourService() 
         {
             locationService = new LocationService();

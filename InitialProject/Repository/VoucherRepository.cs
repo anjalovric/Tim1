@@ -54,6 +54,7 @@ namespace InitialProject.Repository
             Voucher current = _vouchers.Find(c => c.Id == voucher.Id);
             int index = _vouchers.IndexOf(current);
             _vouchers.Remove(current);
+            voucher.Used = true;
             _vouchers.Insert(index, voucher);       // keep ascending order of ids in file 
             _serializer.ToCSV(FilePath, _vouchers);
             return voucher;

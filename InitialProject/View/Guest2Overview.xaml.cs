@@ -62,6 +62,10 @@ namespace InitialProject.View
         {
             guest2 = guest2Repository.GetByUsername(user.Username);
         }
+        private void Vouchers_Click(object sender, RoutedEventArgs e)
+        {
+            CC.Content = new VoucherViewForm(guest2);
 
+        }
     }
 }
