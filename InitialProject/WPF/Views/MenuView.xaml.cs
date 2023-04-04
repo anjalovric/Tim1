@@ -29,5 +29,11 @@ namespace InitialProject.WPF.Views
         {
             Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = NavigationService.GoBack;
         }
+
+        private void MyAccommodationButton_Click(object sender, RoutedEventArgs e)
+        {
+            AccommodationView accommodationView = new AccommodationView(user);
+            Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = accommodationView;
+        }
     }
 }

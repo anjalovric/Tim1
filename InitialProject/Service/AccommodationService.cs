@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,7 @@ namespace InitialProject.Service
             accommodations = accommodationRepository.GetAll();
             AddOwners();
             AddLocations();
+            AddTypes();
         }
 
         public List<Accommodation> GetAll()
@@ -56,6 +58,24 @@ namespace InitialProject.Service
                     accommodation.Location = accommodationLocation;
                 }
             }
+        }
+
+        private void AddTypes()
+        {
+            
+        }
+        public ObservableCollection<Accommodation> GetAllByOwner(Owner owner)
+        {
+            ObservableCollection<Accommodation> accommodationsByOwner = new ObservableCollection<Accommodation>();
+
+            foreach (Accommodation accommodation in accommodations)
+            {
+                if (accommodation.Owner.Id == owner.Id)
+                {
+                    accommodationsByOwner.Add(accommodation);
+                }
+            }
+            return accommodationsByOwner;
         }
     }
 }

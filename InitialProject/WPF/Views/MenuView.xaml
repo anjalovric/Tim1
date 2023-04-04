@@ -30,7 +30,7 @@
                 </Style>
             </Button.Resources>
         </Button>
-        <Button Content="My Accommodation" HorizontalAlignment="Center" VerticalAlignment="Top" Width="350" Height="45" Margin="0,230,0,0">
+        <Button Content="My Accommodation" HorizontalAlignment="Center" VerticalAlignment="Top" Width="350" Height="45" Margin="0,230,0,0" Click="MyAccommodationButton_Click">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="10"/>
