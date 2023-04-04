@@ -138,7 +138,8 @@ namespace InitialProject.View
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
-            
+            var response = MessageBox.Show("Do you want to cancel this reservation?");
+
         }
 
         private void ChangeDateButton_Click(object sender, RoutedEventArgs e)
