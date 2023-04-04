@@ -31,6 +31,7 @@ namespace InitialProject.View
        
         private AccommodationReservationService accommodationReservationService;
         private OwnerReviewService ownerReviewService;
+        private CancelAccommodationReservationService cancelAccommodationReservationService;
 
 
 
@@ -98,9 +99,11 @@ namespace InitialProject.View
             this.guest1 = guest1;
             DataContext = this;
             this.Main = Main;
+            this.DataContext = this;
 
             accommodationReservationService = new AccommodationReservationService();
             ownerReviewService = new OwnerReviewService();
+            cancelAccommodationReservationService = new CancelAccommodationReservationService();
            
             CompletedAccommodationReservations = new ObservableCollection<AccommodationReservation>(accommodationReservationService.FillCompletedReservations(guest1));
             NotFinishedReservations = new ObservableCollection<AccommodationReservation>(accommodationReservationService.FillUpcomingAndCurrentReservations(guest1));
@@ -138,8 +141,42 @@ namespace InitialProject.View
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
-            var response = MessageBox.Show("Do you want to cancel this reservation?");
+            if(!IsCancellationAllowed())
+            {
+                MessageBox.Show("You can't cancel this reservation.");
+            }
+            else
+            ConfirmCancellation();
 
+        }
+
+        private bool IsCancellationAllowed()
+        {
+            return DateTime.Now <= SelectedUpcomingReservation.Arrival.AddHours(-24) && DateTime.Now <= SelectedUpcomingReservation.Arrival.AddDays(-selectedUpcomingReservation.Accommodation.MinDaysToCancel);
+        }
+
+        private void ConfirmCancellation()
+        {
+            MessageBoxResult result = ConfirmCancellationMessageBox();
+            if (result == MessageBoxResult.Yes)
+            {
+                CancelledAccommodationReservation cancelledAccommodationReservation = new CancelledAccommodationReservation(SelectedUpcomingReservation);
+                cancelAccommodationReservationService.Add(cancelledAccommodationReservation);
+                accommodationReservationService.Delete(SelectedUpcomingReservation);
+                NotFinishedReservations = new ObservableCollection<AccommodationReservation>(accommodationReservationService.FillUpcomingAndCurrentReservations(guest1));
+
+
+            }
+        }
+
+        private MessageBoxResult ConfirmCancellationMessageBox()           //smije li ovo biti u prozoru?
+        {
+            string sMessageBoxText = $"Do you want to cancel this reservation?\n";
+            string sCaption = "Cancel reservation";
+            MessageBoxButton btnMessageBox = MessageBoxButton.YesNo;
+            MessageBoxImage icnMessageBox = MessageBoxImage.Question;
+            MessageBoxResult result = MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
+            return result;
         }
 
         private void ChangeDateButton_Click(object sender, RoutedEventArgs e)

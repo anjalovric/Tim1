@@ -34,6 +34,18 @@ namespace InitialProject.Service
             //ownerReviewService = new OwnerReviewService();
             locationService = new LocationService();
             accommodationTypeService = new AccommodationTypeService();
+            NotFinishedReservations = new ObservableCollection<AccommodationReservation>();
+            CompletedAccommodationReservations = new ObservableCollection<AccommodationReservation>();
+            FillAccommodationReservations();
+        }
+
+        public List<AccommodationReservation> GetAll()
+        {
+            return accommodationReservationRepository.GetAll();
+        }
+
+        public void FillAccommodationReservations()
+        {
             allReservations = new List<AccommodationReservation>(accommodationReservationRepository.GetAll());
 
             FillAccommodationsToReservations();
@@ -42,12 +54,6 @@ namespace InitialProject.Service
             SetAccommodationLocations();
         }
 
-        public List<AccommodationReservation> GetAll()
-        {
-            return accommodationReservationRepository.GetAll();
-        }
-
-
         public void Add(AccommodationReservation reservation)
         {
             accommodationReservationRepository.Add(reservation);
@@ -55,7 +61,8 @@ namespace InitialProject.Service
 
         public ObservableCollection<AccommodationReservation> FillUpcomingAndCurrentReservations(Guest1 guest1)
         {
-            NotFinishedReservations = new ObservableCollection<AccommodationReservation>();
+            FillAccommodationReservations();
+            NotFinishedReservations.Clear();
 
             foreach (AccommodationReservation reservation in allReservations)
             {
@@ -77,6 +84,7 @@ namespace InitialProject.Service
 
         public ObservableCollection<AccommodationReservation> FillCompletedReservations(Guest1 guest1)
         {
+            FillAccommodationReservations();
             CompletedAccommodationReservations = new ObservableCollection<AccommodationReservation>();
 
             foreach (AccommodationReservation reservation in allReservations)
@@ -143,6 +151,11 @@ namespace InitialProject.Service
                     reservation.Accommodation = reservationAccommodation;
                 }
             }
+        }
+
+        public void Delete(AccommodationReservation accommodationReservation)
+        {
+            accommodationReservationRepository.Delete(accommodationReservation);
         }
     }
 }
