@@ -19,7 +19,7 @@ namespace InitialProject.Service
         private AccommodationTypeService accommodationTypeService;
         private AccommodationService accommodationService;
         private OwnerService ownerService;
-        private OwnerReviewService ownerReviewService;
+        //private OwnerReviewService ownerReviewService;
         public ObservableCollection<AccommodationReservation> NotFinishedReservations;
         public ObservableCollection<AccommodationReservation> CompletedAccommodationReservations;
 
@@ -31,7 +31,7 @@ namespace InitialProject.Service
 
             accommodationService = new AccommodationService();
             ownerService = new OwnerService();
-            ownerReviewService = new OwnerReviewService();
+            //ownerReviewService = new OwnerReviewService();
             locationService = new LocationService();
             accommodationTypeService = new AccommodationTypeService();
             allReservations = new List<AccommodationReservation>(accommodationReservationRepository.GetAll());
