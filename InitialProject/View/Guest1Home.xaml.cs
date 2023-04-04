@@ -11,6 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using InitialProject.Model;
+using InitialProject.Repository;
+using InitialProject.Service;
 
 namespace InitialProject.View
 {
@@ -21,13 +24,25 @@ namespace InitialProject.View
     {
         private Guest1SearchAccommodation guest1SearchAccommodation;
         private MyAccommodationReservations myReservations;
-        public Guest1Home()
+        private Guest1 guest1;
+        private Guest1Service guest1Service;
+        public Guest1Home(User user)
         {
             InitializeComponent();
-            guest1SearchAccommodation = new Guest1SearchAccommodation();
-            myReservations = new MyAccommodationReservations();
+
+            guest1Service = new Guest1Service();
+            GetGuest1ByUser(user);
+
+            guest1SearchAccommodation = new Guest1SearchAccommodation(guest1);
+            myReservations = new MyAccommodationReservations(guest1, ref Main);
             Main.Content = guest1SearchAccommodation;
 
+        }
+
+        private void GetGuest1ByUser(User user)
+        {
+            this.guest1 = new Guest1();
+            this.guest1 = guest1Service.GetByUsername(user.Username);
         }
 
         private void BookingMenuItem_Click(object sender, RoutedEventArgs e)
@@ -36,7 +51,9 @@ namespace InitialProject.View
         }
         private void MyReservationsMenuItem_Click(object sender, RoutedEventArgs e)
         {
+            myReservations = new MyAccommodationReservations(guest1, ref Main); //moram ga opet napraviti da bi se azuriralo nakon pravljenja nove rezervacije (u upcoming reservations)
             Main.Content = myReservations;   //da li da se pravi novi page (kako bi se resetovalo sve?)
+            
         }
 
         private void SignOutMenuItem_Click(object sender, RoutedEventArgs e)

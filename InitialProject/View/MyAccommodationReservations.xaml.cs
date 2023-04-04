@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,6 +15,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using InitialProject.Model;
+using InitialProject.Repository;
+using InitialProject.Service;
 
 namespace InitialProject.View
 {
@@ -20,9 +26,128 @@ namespace InitialProject.View
     /// </summary>
     public partial class MyAccommodationReservations : Page
     {
-        public MyAccommodationReservations()
+        public Frame Main;
+        private Guest1 guest1;
+       
+        private AccommodationReservationService accommodationReservationService;
+        private OwnerReviewService ownerReviewService;
+
+
+
+        /*private List<AccommodationImage> accommodationImages;
+        private AccommodationImageRepository accommodationImageRepository;*/        //dodati za slike
+
+
+
+
+        private ObservableCollection<AccommodationReservation> completedAccommodationReservations;
+        public ObservableCollection<AccommodationReservation> CompletedAccommodationReservations
+        {
+            get { return completedAccommodationReservations; }
+            set
+            {
+                if (value != completedAccommodationReservations)
+                    completedAccommodationReservations = value;
+                OnPropertyChanged("CompletedAccommodationReservations");
+            }
+
+        }
+
+        private ObservableCollection<AccommodationReservation> notFinishedReservations;
+        public ObservableCollection<AccommodationReservation> NotFinishedReservations
+        {
+            get { return notFinishedReservations; }
+            set
+            {
+                if (value != notFinishedReservations)
+                    notFinishedReservations = value;
+                OnPropertyChanged("NotFinishedReservations");
+            }
+
+        }
+
+        private AccommodationReservation selectedCompletedReservation;
+        public AccommodationReservation SelectedCompletedReservation
+        {
+            get { return selectedCompletedReservation; }
+            set
+            {
+                if (value != selectedCompletedReservation)
+                    selectedCompletedReservation = value;
+                OnPropertyChanged("SelectedCompletedReservation");
+            }
+
+        }
+
+        private AccommodationReservation selectedUpcomingReservation;
+        public AccommodationReservation SelectedUpcomingReservation
+        {
+            get { return selectedUpcomingReservation; }
+            set
+            {
+                if (value != selectedUpcomingReservation)
+                    selectedUpcomingReservation = value;
+                OnPropertyChanged("SelectedUpcomingReservation");
+            }
+
+        }
+
+        public MyAccommodationReservations(Guest1 guest1, ref Frame Main)
         {
             InitializeComponent();
+            this.guest1 = guest1;
+            DataContext = this;
+            this.Main = Main;
+
+            accommodationReservationService = new AccommodationReservationService();
+            ownerReviewService = new OwnerReviewService();
+           
+            CompletedAccommodationReservations = new ObservableCollection<AccommodationReservation>(accommodationReservationService.FillCompletedReservations(guest1));
+            NotFinishedReservations = new ObservableCollection<AccommodationReservation>(accommodationReservationService.FillUpcomingAndCurrentReservations(guest1));
+
         }
+
+
+
+       
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        
+
+        private void RateOwnerButton_Click(object sender, RoutedEventArgs e)
+        {
+            if(ownerReviewService.HasReview(SelectedCompletedReservation))
+            {
+                MessageBox.Show("This reservation is already reviewed.");
+                return;
+            }
+
+            if(SelectedCompletedReservation.Departure<DateTime.Now.AddDays(-5))
+            {
+                MessageBox.Show("You can't rate this reservation because 5 days have passed since its departure.");
+                return;
+            }
+
+            OwnerAndAccommodationReviewForm ownerAndAccommodationReviewForm = new OwnerAndAccommodationReviewForm(SelectedCompletedReservation, ref Main, ownerReviewService);
+
+        }
+
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void ChangeDateButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+
+
+
     }
 }

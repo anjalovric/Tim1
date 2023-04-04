@@ -26,6 +26,7 @@ namespace InitialProject.View
     {
         private Accommodation currentAccommodation;
         private AccommodationReservationRepository accommodationReservationRepository;
+        private Guest1 guest1;
 
         public ObservableCollection<AvailableDatesForAccommodationReservation> availableDatesForAccommodations { get; set; }
         private AvailableDatesForAccommodationReservation selectedDateRange;
@@ -42,11 +43,12 @@ namespace InitialProject.View
             }
         }
 
-        public DatesForAccommodationReservation(Accommodation currentAccommodation, AccommodationReservationRepository accommodationReservationRepository)
+        public DatesForAccommodationReservation(Accommodation currentAccommodation, AccommodationReservationRepository accommodationReservationRepository, Guest1 guest1)
         {
             InitializeComponent();
             this.DataContext = this;
 
+            this.guest1 = guest1;
             this.currentAccommodation = currentAccommodation;
             availableDatesForAccommodations = new ObservableCollection<AvailableDatesForAccommodationReservation>();
             this.accommodationReservationRepository = accommodationReservationRepository;
@@ -54,7 +56,7 @@ namespace InitialProject.View
 
         private void ChooseDateButton_Click(object sender, RoutedEventArgs e)
         {
-            AccommodationGuestsNumberInput guestsNumber = new AccommodationGuestsNumberInput(currentAccommodation, selectedDateRange, accommodationReservationRepository, availableDatesForAccommodations);
+            AccommodationGuestsNumberInput guestsNumber = new AccommodationGuestsNumberInput(currentAccommodation, selectedDateRange, accommodationReservationRepository, availableDatesForAccommodations, guest1);
             guestsNumber.Owner = this;
             guestsNumber.Show();
         }

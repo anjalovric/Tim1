@@ -9,7 +9,7 @@ using InitialProject.Repository;
 
 namespace InitialProject.Service
 {
-    internal class OwnerReviewService
+    public class OwnerReviewService
     {
         private OwnerReviewRepository ownerReviewRepository;
         private List<OwnerReview> ownerReviews;
@@ -37,12 +37,22 @@ namespace InitialProject.Service
                 bool fiveDaysPassed = (DateTime.Now.Date - reservationToReview.Departure.Date).TotalDays > 5;
                 //bool isThisOwner = reservationToReview.Accommodation.Owner.Id == owner.Id;
 
-                if ((isGuestReviewed || fiveDaysPassed) ) // && isThisOwner
+                if ((isGuestReviewed || fiveDaysPassed)) // && isThisOwner
                 {
                     reviewsToDisplay.Add(ownerReview);
                 }
             }
             return reviewsToDisplay;
+        }
+
+        public bool HasReview(AccommodationReservation reservation)
+        {
+            return ownerReviewRepository.HasReview(reservation);
+        }
+
+        public void Save(OwnerReview review)
+        {
+            ownerReviewRepository.Save(review);
         }
     }
 }
