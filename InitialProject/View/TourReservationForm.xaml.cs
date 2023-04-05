@@ -15,9 +15,11 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using DotLiquid.Tags;
 using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.Serializer;
+using NPOI.SS.Formula.Functions;
 
 namespace InitialProject.View
 {
@@ -26,7 +28,7 @@ namespace InitialProject.View
     /// </summary>
     public partial class TourReservationForm : Window, INotifyPropertyChanged
     {
-        private int CurrentGuestsNumber;
+        private int AvailableGuestsNumber;
         private int GuestsNumber;
         private int GuestId;
         private TourInstance CurrentTourInstance;
@@ -34,12 +36,9 @@ namespace InitialProject.View
         private List<TourReservation> tourReservations;
         private List<TourInstance> tourInstances;
         private TourInstanceRepository tourInstanceRepository;
-
         private ShowTours ShowTours;
-
-        private Guest2Overview Guest2Overview;
-        private Boolean withVoucher = true;
-
+        private Boolean withVoucher;
+        private int capacityOfThisTour;
         public ObservableCollection<TourInstance> TourInstances { get; set; }
         public Label Label { get; set; }
         private string age;
@@ -63,36 +62,15 @@ namespace InitialProject.View
             CurrentTourInstance = currentTourInstance;
             this.TourInstances = TourInstance;
             this.Label = label;
+            withVoucher = false;
             this.tourInstanceRepository = tourInstanceRepository;
             tourInstances = tourInstanceRepository.GetAll();
             tourReservationRepository = new TourReservationRepository();
             tourReservations = tourReservationRepository.GetAll();
             ShowTours = new ShowTours(guest2);
-            GetCurrentGuestsNumber();
             this.guest2 = guest2;
             GuestId = guest2.Id;
-        }
-        private int GetReservationsNumber()
-        {
-            int reservationsNumber = 0;
-            foreach (TourReservation tourReservation in tourReservations)
-            {
-                if (CurrentTourInstance.Id == tourReservation.TourInstanceId)
-                {
-                    CurrentGuestsNumber = tourReservation.CurrentGuestsNumber;
-                    continue;
-                }
-                reservationsNumber++;
-            }
-            return reservationsNumber;
-        }
-        public int GetCurrentGuestsNumber()
-        {
-            if (tourReservations.Count == 0 || GetReservationsNumber()==tourReservations.Count)
-            {
-                CurrentGuestsNumber = CurrentTourInstance.Tour.MaxGuests;
-            }
-            return CurrentGuestsNumber;
+            capacityOfThisTour = currentTourInstance.Tour.MaxGuests;
         }
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -117,7 +95,7 @@ namespace InitialProject.View
         }
         public void FindAvailableTours()
         {
-            Boolean existed = false;
+            int suma = 0;
             ObservableCollection<TourInstance> storedTourInstances= new ObservableCollection<TourInstance>(tourInstanceRepository.GetAll());
             ShowTours.SetLocations();
             ShowTours.SetTours(storedTourInstances);
@@ -126,22 +104,44 @@ namespace InitialProject.View
             {
                 foreach (TourReservation tourReservation in tourReservations)
                 {
-                    if (tourReservation.TourInstanceId == tourInstance.Id && tourInstance.Id != CurrentTourInstance.Id && tourInstance.Tour.Location.City == CurrentTourInstance.Tour.Location.City && tourInstance.Tour.Location.Country == CurrentTourInstance.Tour.Location.Country && tourReservation.CurrentGuestsNumber > 0 && tourInstance.Finished==false)
+                    if (tourReservation.TourInstanceId == tourInstance.Id && tourInstance.Id != CurrentTourInstance.Id && tourInstance.Tour.Location.City == CurrentTourInstance.Tour.Location.City && tourInstance.Tour.Location.Country == CurrentTourInstance.Tour.Location.Country && tourInstance.Finished==false)
                     {
-                        TourInstances.Add(tourInstance);
-                        existed = true;
+                        suma += tourReservation.Capacity;
                     }
                 }
-                if (tourInstance.Finished==false && !existed && CurrentTourInstance.Id != tourInstance.Id && tourInstance.Tour.Location.City == CurrentTourInstance.Tour.Location.City && tourInstance.Tour.Location.Country == CurrentTourInstance.Tour.Location.Country)
+                if (suma!= capacityOfThisTour && tourInstance.Finished==false && CurrentTourInstance.Id != tourInstance.Id && tourInstance.Tour.Location.City == CurrentTourInstance.Tour.Location.City && tourInstance.Tour.Location.Country == CurrentTourInstance.Tour.Location.Country)
                 {
                     TourInstances.Add(tourInstance);
                 }
             }
         }
+        private int SumOfAllGuests()
+        {
+            int totalGuests = 0;
+            GuestsNumber = Convert.ToInt32(capacityNumber.Text); 
+            foreach (TourReservation tourReservation in tourReservations)
+            {
+                if (CurrentTourInstance.Id == tourReservation.TourInstanceId)
+                {
+                    GuestsNumber += tourReservation.Capacity;
+                    totalGuests += tourReservation.Capacity;
+                    AvailableGuestsNumber = capacityOfThisTour - totalGuests;
+                }
+                else
+                {
+                    AvailableGuestsNumber = capacityOfThisTour - totalGuests;
+                }
+            }
+            return totalGuests;
+        }
         private void Confirm_Click(object sender, RoutedEventArgs e)
         {
-            GuestsNumber = CurrentGuestsNumber - Convert.ToInt32(capacityNumber.Text);
-            if (CurrentGuestsNumber == 0)
+            int totalGuests=SumOfAllGuests();
+            if (GuestsNumber > capacityOfThisTour && totalGuests != capacityOfThisTour) 
+            {
+                MessageBox.Show("There is no enough places for choosen number of people. Available number of places for guest is " + AvailableGuestsNumber + ".");
+                return;
+            } else if (totalGuests == capacityOfThisTour) 
             {
                 MessageBox.Show("There is no enough places for choosen number of people. Tour is completed.");
                 FindAvailableTours();
@@ -149,43 +149,19 @@ namespace InitialProject.View
                 this.Close();
                 return;
             }
-            else if (GuestsNumber < 0 && CurrentGuestsNumber != 0)
-            {
-                MessageBox.Show("There is no enough places for choosen number of people. Available number of places for guest is " + CurrentGuestsNumber + ".");
-                return;
-            }
-            else if (tourReservations.Count == 0)
-            {
-                TourReservation newTourReservation = new TourReservation(CurrentTourInstance.Id, GuestsNumber, GuestId,Convert.ToDouble(Age),Convert.ToInt32(capacityNumber.Text),withVoucher);
-                tourReservationRepository.Save(newTourReservation);
-            }
-            ChangeTourReservation();
+            TourReservation newTourReservation = new TourReservation(CurrentTourInstance.Id, GuestsNumber, GuestId, Convert.ToDouble(Age), Convert.ToInt32(capacityNumber.Text), withVoucher);
+            tourReservationRepository.Save(newTourReservation);
             this.Close();
-        }
-        private void ChangeTourReservation()
-        {
-            Boolean changed = false;
-            foreach (TourReservation tourReservation in tourReservations)
-            {
-                if (CurrentTourInstance.Id == tourReservation.TourInstanceId)
-                {
-                    tourReservationRepository.Update(tourReservation, GuestsNumber);
-                    changed = true;
-                }
-                else if (changed)
-                {
-                    break;
-                }
-            }
-            if (!changed)
-            {
-                TourReservation newTourReservation = new TourReservation(CurrentTourInstance.Id, GuestsNumber, GuestId, Convert.ToDouble(Age),Convert.ToInt32(capacityNumber.Text),withVoucher);
-                tourReservationRepository.Save(newTourReservation);
-            }
         }
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+        private void Vouchers_Click(object sender, RoutedEventArgs e)
+        {
+            ActivatingVoucher activatingVoucher = new ActivatingVoucher(guest2);
+            activatingVoucher.Show();
+            withVoucher = true;
         }
     }
 }

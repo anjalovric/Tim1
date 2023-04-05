@@ -106,7 +106,7 @@ namespace InitialProject.View
             cancelAccommodationReservationService = new CancelAccommodationReservationService();
            
             CompletedAccommodationReservations = new ObservableCollection<AccommodationReservation>(accommodationReservationService.FillCompletedReservations(guest1));
-            NotFinishedReservations = new ObservableCollection<AccommodationReservation>(accommodationReservationService.FillUpcomingAndCurrentReservations(guest1));
+            NotFinishedReservations = new ObservableCollection<AccommodationReservation>(accommodationReservationService.FillUpcomingAndCurrentReservations(guest1, NotFinishedReservations));
 
         }
 
@@ -163,7 +163,8 @@ namespace InitialProject.View
                 CancelledAccommodationReservation cancelledAccommodationReservation = new CancelledAccommodationReservation(SelectedUpcomingReservation);
                 cancelAccommodationReservationService.Add(cancelledAccommodationReservation);
                 accommodationReservationService.Delete(SelectedUpcomingReservation);
-                NotFinishedReservations = new ObservableCollection<AccommodationReservation>(accommodationReservationService.FillUpcomingAndCurrentReservations(guest1));
+                NotFinishedReservations = new ObservableCollection<AccommodationReservation>(accommodationReservationService.FillUpcomingAndCurrentReservations(guest1, NotFinishedReservations));
+
 
 
             }
@@ -181,7 +182,8 @@ namespace InitialProject.View
 
         private void ChangeDateButton_Click(object sender, RoutedEventArgs e)
         {
-
+            ChangeDateAccommodationReservationForm form = new ChangeDateAccommodationReservationForm(SelectedUpcomingReservation);
+            form.Show();
         }
 
 

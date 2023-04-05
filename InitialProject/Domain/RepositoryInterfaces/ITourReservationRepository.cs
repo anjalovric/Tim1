@@ -17,7 +17,7 @@ namespace InitialProject.Domain.RepositoryInterfaces
 
         public void Delete(TourReservation tourReservation);
 
-        public TourReservation Update(TourReservation tourReservation,int guestsNumber);
+        public TourReservation Update(TourReservation tourReservation,int guestsNumber,Boolean withVoucher);
 
         public TourReservation Save(TourReservation tourReservation);
 

@@ -14,9 +14,7 @@ namespace InitialProject.Model
         public  int GuestId{ get; set; }
         public  int GuideId{ get; set; }
         public bool Used { get; set; }
-
         public DateTime CreateDate { get; set; }
-
         public Voucher() { }
         public Voucher(bool used,int guestid,int guideid,DateTime createDate)
         {
@@ -31,7 +29,6 @@ namespace InitialProject.Model
             string[] csvValues = { Id.ToString(), GuestId.ToString(),GuideId.ToString(),Used.ToString(),CreateDate.ToString() };
             return csvValues;
         }
-
         public void FromCSV(string[] values)
         {
             Id = Convert.ToInt32(values[0]);

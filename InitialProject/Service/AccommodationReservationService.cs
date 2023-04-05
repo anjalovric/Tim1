@@ -20,8 +20,20 @@ namespace InitialProject.Service
         private AccommodationService accommodationService;
         private OwnerService ownerService;
         //private OwnerReviewService ownerReviewService;
-        public ObservableCollection<AccommodationReservation> NotFinishedReservations;
+        
         public ObservableCollection<AccommodationReservation> CompletedAccommodationReservations;
+      /*  private ObservableCollection<AccommodationReservation> notFinishedReservations;
+        public ObservableCollection<AccommodationReservation> NotFinishedReservations
+        {
+            get { return notFinishedReservations; }
+            set
+            {
+                if (value != notFinishedReservations)
+                    notFinishedReservations = value;
+                OnPropertyChanged("NotFinishedReservations");
+            }
+
+        }*/
 
         private AccommodationReservationRepository accommodationReservationRepository;
         private List<AccommodationReservation> accommodationReservations;
@@ -34,14 +46,14 @@ namespace InitialProject.Service
             //ownerReviewService = new OwnerReviewService();
             locationService = new LocationService();
             accommodationTypeService = new AccommodationTypeService();
-            NotFinishedReservations = new ObservableCollection<AccommodationReservation>();
+          //  NotFinishedReservations = new ObservableCollection<AccommodationReservation>();
             CompletedAccommodationReservations = new ObservableCollection<AccommodationReservation>();
             FillAccommodationReservations();
         }
 
         public List<AccommodationReservation> GetAll()
         {
-            return accommodationReservationRepository.GetAll();
+            return allReservations;
         }
 
         public void FillAccommodationReservations()
@@ -52,6 +64,7 @@ namespace InitialProject.Service
             FillOwnerToAccommodationReservations();
             SetAccommodationTypes();
             SetAccommodationLocations();
+            AddGuests();
         }
 
         public void Add(AccommodationReservation reservation)
@@ -59,10 +72,10 @@ namespace InitialProject.Service
             accommodationReservationRepository.Add(reservation);
         }
 
-        public ObservableCollection<AccommodationReservation> FillUpcomingAndCurrentReservations(Guest1 guest1)
+        public ObservableCollection<AccommodationReservation> FillUpcomingAndCurrentReservations(Guest1 guest1, ObservableCollection<AccommodationReservation> NotFinishedReservations)
         {
             FillAccommodationReservations();
-            NotFinishedReservations.Clear();
+            NotFinishedReservations = new ObservableCollection<AccommodationReservation>();
 
             foreach (AccommodationReservation reservation in allReservations)
             {
@@ -137,6 +150,7 @@ namespace InitialProject.Service
         {
             accommodationReservations = accommodationReservationRepository.GetAll();
             AddAccommodations();
+            AddGuests();
         }
 
         private void AddAccommodations()
@@ -156,6 +170,20 @@ namespace InitialProject.Service
         public void Delete(AccommodationReservation accommodationReservation)
         {
             accommodationReservationRepository.Delete(accommodationReservation);
+        }
+
+        private void AddGuests()
+        {
+            Guest1Service guest1Service = new Guest1Service();
+            List<Guest1> allGuest = guest1Service.GetAll(); 
+            foreach(AccommodationReservation reservation in allReservations)
+            {
+                Guest1 guestForReservation = allGuest.Find(n => n.Id == reservation.Guest.Id);
+                    if(guestForReservation != null)
+                    {
+                        reservation.Guest = guestForReservation;
+                    }
+            }
         }
     }
 }

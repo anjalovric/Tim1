@@ -12,14 +12,10 @@ namespace InitialProject.Model
         public int TourInstanceId { get; set; }
         public int CurrentGuestsNumber { get; set; }
         public int GuestId { get; set; }
-
         public double AverageGuestsAge { get; set; }
-
         public int Capacity { get; set; }  
-        
         public Boolean WithVaucher { get; set; }
         public TourReservation() { }
-
         public TourReservation(int tourInstanceId, int currentGuestsNumber, int guestId, double averageGuestsAge, int capacity, Boolean withVaucher)
         {
             TourInstanceId = tourInstanceId;
@@ -39,7 +35,6 @@ namespace InitialProject.Model
             Capacity = Convert.ToInt32(values[5]);
             WithVaucher = Convert.ToBoolean(values[6]);
         }
-
         public string[] ToCSV()
         {
             string[] csvValues = { Id.ToString(),TourInstanceId.ToString(),CurrentGuestsNumber.ToString(),GuestId.ToString(),AverageGuestsAge.ToString(),Capacity.ToString(),WithVaucher.ToString()};
