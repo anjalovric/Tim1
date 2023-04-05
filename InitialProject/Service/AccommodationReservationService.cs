@@ -52,6 +52,7 @@ namespace InitialProject.Service
             FillOwnerToAccommodationReservations();
             SetAccommodationTypes();
             SetAccommodationLocations();
+            AddGuests();
         }
 
         public void Add(AccommodationReservation reservation)
@@ -137,6 +138,7 @@ namespace InitialProject.Service
         {
             accommodationReservations = accommodationReservationRepository.GetAll();
             AddAccommodations();
+            AddGuests();
         }
 
         private void AddAccommodations()
@@ -156,6 +158,20 @@ namespace InitialProject.Service
         public void Delete(AccommodationReservation accommodationReservation)
         {
             accommodationReservationRepository.Delete(accommodationReservation);
+        }
+
+        private void AddGuests()
+        {
+            Guest1Service guest1Service = new Guest1Service();
+            List<Guest1> allGuest = guest1Service.GetAll(); 
+            foreach(AccommodationReservation reservation in allReservations)
+            {
+                Guest1 guestForReservation = allGuest.Find(n => n.Id == reservation.Guest.Id);
+                    if(guestForReservation != null)
+                    {
+                        reservation.Guest = guestForReservation;
+                    }
+            }
         }
     }
 }

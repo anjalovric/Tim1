@@ -6,9 +6,11 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using InitialProject.Model;
 using InitialProject.Service;
+using InitialProject.WPF.Views;
 
 namespace InitialProject.WPF.ViewModels
 {
@@ -16,11 +18,12 @@ namespace InitialProject.WPF.ViewModels
     {
         public Model.Owner ProfileOwner { get; set; }
         private OwnerReviewService ownerReviewService;
+        private OwnerReview selectedOwnerReview;
         public ObservableCollection<OwnerReview> OwnerReviews { get; set; }
         private double averageRate;
         private int numberOfRates;
         private string title;
-        private string imageVisibility;
+        private string starVisibility;
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -28,6 +31,7 @@ namespace InitialProject.WPF.ViewModels
         {
             ownerReviewService = new OwnerReviewService();
             MakeOwner(user);
+            selectedOwnerReview = new OwnerReview();
             OwnerReviews = new ObservableCollection<OwnerReview>(ownerReviewService.GetAllToDisplay(ProfileOwner));
         }
         public double AverageRate
@@ -59,26 +63,39 @@ namespace InitialProject.WPF.ViewModels
             get => title;
             set
             {
-                if (value != title)
+                if (!value.Equals(title))
                 {
                     title = value;
                     OnPropertyChanged();
                 }
             }
         }
-        public string ImageVisibility
+        public string StarVisibility
         {
-            get => imageVisibility;
+            get => starVisibility;
             set
             {
-                if (value != imageVisibility)
+                if (!value.Equals(starVisibility))
                 {
-                    imageVisibility = value;
+                    starVisibility = value;
                     OnPropertyChanged();
                 }
             }
         }
-        
+
+        public OwnerReview SelectedOwnerReview
+        {
+            get => selectedOwnerReview;
+            set
+            {
+                if (!value.Equals(selectedOwnerReview))
+                {
+                    selectedOwnerReview = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
@@ -110,14 +127,15 @@ namespace InitialProject.WPF.ViewModels
             if (ProfileOwner.IsSuperOwner)
             {
                 Title = "Super Owner!";
-                ImageVisibility = "Visible";
+                StarVisibility = "Visible";
             }
             else
             {
                 Title = "Owner";
-                ImageVisibility = "Hidden";
+                StarVisibility = "Hidden";
             }
         }
+        
     }
 
 }

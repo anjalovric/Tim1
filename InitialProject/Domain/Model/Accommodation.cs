@@ -50,5 +50,10 @@ namespace InitialProject.Model
             string[] csvValues = { Id.ToString(), Name, Capacity.ToString(), MinDaysForReservation.ToString(), MinDaysToCancel.ToString(), Location.Id.ToString(), Type.Id.ToString(), Owner.Id.ToString() };
             return csvValues;
         }
+
+        public override string ToString()
+        {
+            return Name+", "+Location;
+        }
     }
 }

@@ -22,7 +22,7 @@ namespace InitialProject.Service
 
         public List<Accommodation> GetAll()
         {
-            return accommodationRepository.GetAll();
+            return accommodations;
         }
 
 
@@ -34,45 +34,45 @@ namespace InitialProject.Service
 
         public Accommodation GetById(int id)
         {
-            return accommodationRepository.GetById(id);
+            return accommodations.Find(n => n.Id == id);
         }
 
-            private void MakeAccommodations()
-            {
-                accommodations = accommodationRepository.GetAll();
-                AddOwners();
-                AddLocations();
-                AddTypes();
-            }
+        private void MakeAccommodations()
+        {
+            accommodations = accommodationRepository.GetAll();
+            AddOwners();
+            AddLocations();
+            AddTypes();
+        }
 
 
-            private void AddOwners()
+        private void AddOwners()
+        {
+            OwnerService ownerService = new OwnerService();
+            List<Owner> allOwners = ownerService.GetAll();
+            foreach (Accommodation accommodation in accommodations)
             {
-                OwnerService ownerService = new OwnerService();
-                List<Owner> allOwners = ownerService.GetAll();
-                foreach (Accommodation accommodation in accommodations)
+                Owner accommodationOwner = allOwners.Find(n => n.Id == accommodation.Owner.Id);
+                if (accommodationOwner != null)
                 {
-                    Owner accommodationOwner = allOwners.Find(n => n.Id == accommodation.Owner.Id);
-                    if (accommodationOwner != null)
-                    {
-                        accommodation.Owner = accommodationOwner;
-                    }
+                    accommodation.Owner = accommodationOwner;
                 }
             }
+        }
 
-            private void AddLocations()
+        private void AddLocations()
+        {
+            LocationService locationService = new LocationService();
+            List<Location> allLocations = locationService.GetAll();
+            foreach (Accommodation accommodation in accommodations)
             {
-                LocationService locationService = new LocationService();
-                List<Location> allLocations = locationService.GetAll();
-                foreach (Accommodation accommodation in accommodations)
+                Location accommodationLocation = allLocations.Find(n => n.Id == accommodation.Location.Id);
+                if (accommodationLocation != null)
                 {
-                    Location accommodationLocation = allLocations.Find(n => n.Id == accommodation.Location.Id);
-                    if (accommodationLocation != null)
-                    {
-                        accommodation.Location = accommodationLocation;
-                    }
+                   accommodation.Location = accommodationLocation;
                 }
             }
+        }
 
             private void AddTypes()
             {
