@@ -1,5 +1,4 @@
 ﻿using InitialProject.Model;
-using InitialProject.Repository;
 using InitialProject.Service;
 using System;
 using System.Collections.Generic;
@@ -11,19 +10,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
-namespace InitialProject.View
+namespace InitialProject.WPF.ViewModels
 {
-    /// <summary>
-    /// Interaction logic for CancelTour.xaml
-    /// </summary>
-    public partial class CancelTour : Window, INotifyPropertyChanged
+    public class CancelViewModel
     {
         private ObservableCollection<TourInstance> tourInstances;
         public ObservableCollection<TourInstance> TourInstances
@@ -35,9 +25,7 @@ namespace InitialProject.View
                     tourInstances = value;
                 OnPropertyChanged("TourInstances");
             }
-
         }
-
         private TourInstance selected;
         public TourInstance Selected
         {
@@ -51,40 +39,34 @@ namespace InitialProject.View
         }
 
         private User tourInstanceGuide;
-        //private CancelTourService cancelTourService;
-        public CancelTour(User guide)
+        private TourInstanceService tourInstanceService;
+  
+        private DataGrid TourListDataGrid;
+
+        public CancelViewModel(User guide,DataGrid tourListDataGrid)
         {
-            InitializeComponent();
-            DataContext = this;
             tourInstanceGuide = guide;
+            TourListDataGrid= tourListDataGrid;
 
-            //cancelTourService =new CancelTourService();
+            tourInstanceService = new TourInstanceService();
+
             MakeCancelableTourList();
-
-
         }
-
-        private void MakeCancelableTourList()
-        {
-            //tourInstances = new ObservableCollection<TourInstance>(cancelTourService.FindCancelableTours());
-            //cancelTourService.FillObjects();
-
-        }
-
-        private void Cancel_Click (object sender, RoutedEventArgs e)
-        {
-            TourInstance currentTourInstance = (TourInstance)TourListDataGrid.CurrentItem;
-           // cancelTourService.CancelTourInstance(currentTourInstance, TourInstances, tourInstanceGuide);
-
-        }
-
         public event PropertyChangedEventHandler PropertyChanged;
-
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+        private void MakeCancelableTourList()
+        {
+            tourInstances = new ObservableCollection<TourInstance>(tourInstanceService.FindCancelableTours());
+        }
 
+        public void CancelTour()
+        {
+            TourInstance currentTourInstance = (TourInstance)TourListDataGrid.CurrentItem;
+            tourInstanceService.CancelTourInstance(currentTourInstance, TourInstances, tourInstanceGuide);
 
+        }
     }
 }

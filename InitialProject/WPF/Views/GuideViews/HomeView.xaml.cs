@@ -1,6 +1,7 @@
 ﻿using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.View;
+using SixLabors.ImageSharp.Metadata.Profiles.Xmp;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -27,29 +28,22 @@ namespace InitialProject.WPF.Views.GuideViews
     public partial class HomeView : Page
     {
         public ObservableCollection<TourInstance> Tours { get; set; }
+        private ObservableCollection<TourInstance> FinishedInstances { get; set; }
         private TourRepository tourRepository;
         private TourInstanceRepository tourInstanceRepository;
         private LocationRepository locationRepository;
         private User loggedInUser;
-        private TourInstance selected;
-        public TourInstance Selected
-        {
-            get { return selected; }
-            set
-            {
-                if (value != selected)
-                    selected = value;
-               
-                OnPropertyChanged();
-            }
-        }
-        public HomeView(User user)
+        
+        public TourInstance Selected { get;set; }
+            
+        public HomeView(User user,ObservableCollection<TourInstance> Instances)
         {
             InitializeComponent();
             DataContext = this;
             tourRepository = new TourRepository();
             tourInstanceRepository = new TourInstanceRepository();
             locationRepository = new LocationRepository();
+            FinishedInstances = Instances;
 
             Tours = new ObservableCollection<TourInstance>(tourInstanceRepository.GetByStart());
             SetLocationToTour();
@@ -97,11 +91,9 @@ namespace InitialProject.WPF.Views.GuideViews
 
         private void StartTour_Click(object sender, RoutedEventArgs e)
         {
-            if (Selected != null)
-            {
-                TourCheckPoints checkPoints = new TourCheckPoints(Selected, Tours);
-                checkPoints.Show();
-            }
+
+                StartedTourInstanceView startedTourInstanceView = new StartedTourInstanceView(Selected, Tours,FinishedInstances);
+                Application.Current.Windows.OfType<GuideWindow>().FirstOrDefault().Main.Content = startedTourInstanceView;
 
         }
 

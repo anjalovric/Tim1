@@ -22,7 +22,7 @@ namespace InitialProject.Domain.RepositoryInterfaces
 
         public Location Update(Location location);
 
-        public Location Delete(Location location);
+        public void Delete(Location location);
 
     }
 }

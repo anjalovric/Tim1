@@ -1,12 +1,15 @@
-﻿using InitialProject.Model;
+﻿using InitialProject.Domain.RepositoryInterfaces;
+using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.View;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Security.Policy;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -27,11 +30,15 @@ namespace InitialProject.WPF.Views.GuideViews
     /// </summary>
     public partial class AddTourView : Page
     {
+
+        private readonly GuideRepository guideRepository;
+        private Guide currentGuide;
         private TourRepository tourRepository;
         private LocationRepository locationRepository;
         private CheckPointRepository checkPointRepository;
         private TourImageRepository tourImageRepository;
         private TourInstanceRepository tourInstanceRepository;
+        private TourInstance newInstance;
         public int pointCounter = 0;
         public ObservableCollection<CheckPoint> TourPoints { get; set; }
         public ObservableCollection<TourImage> TourImages { get; set; }
@@ -41,8 +48,39 @@ namespace InitialProject.WPF.Views.GuideViews
         public ObservableCollection<string> Countries { get; set; }
         public ObservableCollection<string> CitiesByCountry { get; set; }
 
+        public string ImageUrl { get;set; }
         public Tour saved;
         private int tourId;
+        private string startTime;
+
+        private TourInstance selectedInstance {  get; set; }
+        private CheckPoint SelectedCheckPoint { get; set; }
+        public string InstanceStartHour
+        {
+            get => startTime;
+            set
+            {
+                if (value != startTime)
+                {
+                    startTime = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private DateTime startDate;
+        public DateTime InstanceStartDate
+        {
+            get => startDate;
+            set
+            {
+                if (value != startDate)
+                {
+                    startDate = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         private string hour;
         private User loggedInUser;
         public string Hours
@@ -53,6 +91,19 @@ namespace InitialProject.WPF.Views.GuideViews
                 if (value != hour)
                 {
                     hour = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private string namet;
+        public string NameTU
+        {
+            get => namet;
+            set
+            {
+                if (value != namet)
+                {
+                    namet = value;
                     OnPropertyChanged();
                 }
             }
@@ -173,6 +224,7 @@ namespace InitialProject.WPF.Views.GuideViews
             checkPointRepository = new CheckPointRepository();
             tourImageRepository = new TourImageRepository();
             tourInstanceRepository = new TourInstanceRepository();
+            guideRepository = new GuideRepository();
             TourPoints = new ObservableCollection<CheckPoint>();
             TourImages = new ObservableCollection<TourImage>();
             Instances = new ObservableCollection<TourInstance>();
@@ -182,6 +234,8 @@ namespace InitialProject.WPF.Views.GuideViews
             CitiesByCountry = new ObservableCollection<string>();
             ComboBoxCity.IsEnabled = false;
             loggedInUser = user;
+           
+            currentGuide = guideRepository.GetByUsername(user.Username);
         }
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -199,7 +253,7 @@ namespace InitialProject.WPF.Views.GuideViews
 
                 Location newLocation = locationRepository.GetByCityAndCountry(Country, City);
 
-                Tour newTour = new Tour(NameT, Convert.ToInt32(maxGuests), Convert.ToDouble(duration), newLocation, description, LanguageT);
+                Tour newTour = new Tour(namet, Convert.ToInt32(maxGuests), Convert.ToDouble(duration), newLocation, description, LanguageT);
                 Tour savedTour = tourRepository.Save(newTour);
                 tourId = savedTour.Id;
                 saved = savedTour;
@@ -537,12 +591,7 @@ namespace InitialProject.WPF.Views.GuideViews
             }
         }
 
-        private void AddCheckPoint_Click(object sender, RoutedEventArgs e)
-        {
-            CheckPointForm form = new CheckPointForm(checkPointRepository, TourPoints);
-            form.Show();
 
-        }
 
         private void CancelTour_Click(object sender, RoutedEventArgs e)
         {
@@ -571,13 +620,32 @@ namespace InitialProject.WPF.Views.GuideViews
         {
             TourImageForm tourImageForm = new TourImageForm(tourImageRepository, TourImages);
             tourImageForm.Show();
+
+            /* OpenFileDialog op = new OpenFileDialog();
+             op.Title = "Select a picture";
+             op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
+               "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
+               "Portable Network Graphic (*.png)|*.png";
+             if (op.ShowDialog() == true)
+             {
+                 string fullPath = op.FileName;
+                 ImageUrl = fullPath;
+
+                 string[] parts = fullPath.Split('\\');
+                 fullPath = parts[parts.Length - 1];
+                 string im = "/Resources/Images/" + fullPath;
+                 fullPath = im;
+                 ImageUrl = fullPath;
+                 TourImage newImage = new TourImage();
+                 newImage.Url = fullPath;
+                 newImage.TourId = -1;
+                 TourImage savedImage = tourImageRepository.Save(newImage);
+                 TourImages.Add(savedImage);
+
+                */
+
         }
 
-        private void NewInstance_Click(object sender, RoutedEventArgs e)
-        {
-            NewTourInstanceDate newTourInstance = new NewTourInstanceDate(Instances, loggedInUser);
-            newTourInstance.Show();
-        }
 
         private void ComboBoxCountry_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -591,5 +659,140 @@ namespace InitialProject.WPF.Views.GuideViews
                 ComboBoxCity.IsEnabled = true;
             }
         }
+
+        private void OK_Click(object sender, RoutedEventArgs e)
+        {
+            newInstance = new TourInstance();
+            if (IsDateValid() && IsTimeValid())
+            {
+                newInstance.StartDate = InstanceStartDate;
+                newInstance.StartClock = InstanceStartHour;
+                newInstance.Guide = currentGuide;
+                newInstance.CoverImage = "";
+                Instances.Add(newInstance);
+                InstanceStartHourTB.Clear();
+                Picker.Text = "";
+                Picker.BorderBrush= new SolidColorBrush(Colors.Green);
+            }
+        }
+        private bool IsDateValid()
+        {
+            if (InstanceStartDate.Date < DateTime.Now.Date)
+            {
+                Picker.BorderBrush = Brushes.Red;
+                PickerLabel.Content = "Can't choose date from past";
+                return false;
+            }
+            else
+            {
+                Picker.BorderBrush = Brushes.Green;
+                PickerLabel.Content = string.Empty;
+                return true;
+            }
+        }
+
+        private bool IsTimeValid()
+        {
+            var content = InstanceStartHourTB.Text;
+            var regex = "(([0-1][0-9])|(2[0-3]))\\:[0-5][0-9]\\:[0-5][0-9]$";
+            Match match = Regex.Match(content, regex, RegexOptions.IgnoreCase);
+            bool valid = false;
+
+ 
+            if (match.Success && InstanceStartDate.Date > DateTime.Now.Date)
+            {
+                valid = true;
+            }
+            else if (match.Success && InstanceStartDate.Date == DateTime.Now.Date)
+            {
+                string times = match.ToString();
+
+                valid = IsTodayTimeValid(times);
+            }
+            return valid;
+        }
+
+        private bool IsTodayTimeValid(string times)
+        {
+            bool valid = false;
+            int hour = Convert.ToInt32(times.Split(':')[0]);
+            int minute = Convert.ToInt32(times.Split(':')[1]);
+            int second = Convert.ToInt32(times.Split(':')[2]);
+
+            if (IsTodayTimeFromPast(hour, minute, second))
+            {
+               
+                InstanceStartHourTB.BorderBrush = Brushes.Red;
+            }
+            else if (IsTodayTimeFromFuture(hour, minute, second))
+            {
+                InstanceStartHourTB.BorderBrush = Brushes.Green;
+                
+                valid = true;
+            }
+
+            return valid;
+        }
+
+        private bool IsTodayTimeFromPast(int hour, int minute, int second)
+        {
+            return ((hour < DateTime.Now.Hour) || (hour == DateTime.Now.Hour && minute < DateTime.Now.Minute) || (hour == DateTime.Now.Hour && minute == DateTime.Now.Minute && second < DateTime.Now.Second));
+        }
+
+        private bool IsTodayTimeFromFuture(int hour, int minute, int second)
+        {
+            return ((hour > DateTime.Now.Hour) || (hour == DateTime.Now.Hour && minute > DateTime.Now.Minute) || (hour == DateTime.Now.Hour && minute == DateTime.Now.Minute && second > DateTime.Now.Second));
+        }
+
+        private void CancelTime_Click(object sender, RoutedEventArgs e)
+        {
+            if(selectedInstance!=null) 
+            {
+                Instances.Remove(selectedInstance);
+                tourInstanceRepository.Delete(selectedInstance);
+            }
+           
+        }
+
+        private void OKCheckPoint_Click(object sender, RoutedEventArgs e)
+        {
+            if (IsCkeckPointValid())
+            {
+                CheckPoint newCheckPoint = new CheckPoint(NameT, false, -1, -1);
+                CheckPoint savedCheckPoint = checkPointRepository.Save(newCheckPoint);
+                TourPoints.Add(savedCheckPoint);
+                CheckPointName.Clear();
+            }
+        }
+
+        private bool IsCkeckPointValid()
+        {
+            bool valid = false;
+            if (CheckPointName.Text.Trim().Equals(""))
+            {
+                CheckPointName.BorderBrush = Brushes.Red;
+                CheckPointName.BorderThickness = new Thickness(1);
+                NameLabel.Content = "This field can't be empty";
+            }
+            else
+            {
+                valid = true;
+                CheckPointName.BorderBrush = Brushes.Green;
+                NameLabel.Content = string.Empty;
+            }
+            return valid;
+        }
+
+        private void CancelCheckPoint_Click(object sender, RoutedEventArgs e)
+        {
+            if (SelectedCheckPoint != null)
+            {
+                TourPoints.Remove(SelectedCheckPoint);
+                checkPointRepository.Delete(SelectedCheckPoint);
+                CheckPointName.Clear();
+            }
+        }
+      
+
     }
 }

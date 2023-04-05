@@ -1,4 +1,5 @@
-﻿using InitialProject.Model;
+﻿using InitialProject.Domain.RepositoryInterfaces;
+using InitialProject.Model;
 using InitialProject.Serializer;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Repository
 {
-    public class AlertGuest2Repository
+    public class AlertGuest2Repository:IAlertGuest2Repository
     {
         private const string FilePath = "../../../Resources/Data/alertsGuest2.csv";
 

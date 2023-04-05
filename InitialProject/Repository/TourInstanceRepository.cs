@@ -1,4 +1,5 @@
-﻿using InitialProject.Model;
+﻿using InitialProject.Domain.RepositoryInterfaces;
+using InitialProject.Model;
 using InitialProject.Serializer;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Repository
 {
-    public class TourInstanceRepository
+    public class TourInstanceRepository:ITourInstanceRepository
     {
         private const string FilePath = "../../../Resources/Data/tourInstances.csv";
        

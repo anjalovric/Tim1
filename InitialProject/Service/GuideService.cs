@@ -1,4 +1,6 @@
-﻿using InitialProject.Model;
+﻿using InitialProject.Domain;
+using InitialProject.Domain.RepositoryInterfaces;
+using InitialProject.Model;
 using InitialProject.Repository;
 using System;
 using System.Collections.Generic;
@@ -10,7 +12,7 @@ namespace InitialProject.Service
 {
     public class GuideService
     {
-        private GuideRepository guideRepository;
+        private IGuideRepository guideRepository=Injector.CreateInstance<IGuideRepository>();
         public GuideService() 
         { 
             guideRepository = new GuideRepository();
@@ -28,9 +30,7 @@ namespace InitialProject.Service
             foreach (Guide guide in guideRepository.GetAll())
             {
                 if (guide.Username == username)
-                {
                     foundedGuide = guide;
-                }
             }
             return foundedGuide;
         }

@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Domain.RepositoryInterfaces
 {
-    public interface ICheckPointRepository:IGenericRepository<TourInstance>
+    public interface ICheckPointRepository:IGenericRepository<CheckPoint>
     {
 
         public CheckPoint Save(CheckPoint checkPoint);
 
         public CheckPoint Update(CheckPoint checkPoint);
 
-        public CheckPoint Delete(CheckPoint checkPoint);
+        public void Delete(CheckPoint checkPoint);
     }
 }

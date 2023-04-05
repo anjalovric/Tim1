@@ -1,5 +1,6 @@
 ﻿using InitialProject.Model;
 using InitialProject.Service;
+using InitialProject.WPF.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -25,60 +26,23 @@ namespace InitialProject.WPF.Views.GuideViews
     /// </summary>
     public partial class CancelView : Page
     {
-        private ObservableCollection<TourInstance> tourInstances;
-        public ObservableCollection<TourInstance> TourInstances
-        {
-            get { return tourInstances; }
-            set
-            {
-                if (value != tourInstances)
-                    tourInstances = value;
-                OnPropertyChanged("TourInstances");
-            }
-        }
-        private TourInstance selected;
-        public TourInstance Selected
-        {
-            get { return selected; }
-            set
-            {
-                if (value != selected)
-                    selected = value;
-                OnPropertyChanged();
-            }
-        }
 
-        private User tourInstanceGuide;
-        private CancelTourService cancelTourService;
+        public CancelViewModel cancelViewModel;
         public CancelView(User guide)
         {
             InitializeComponent();
-            DataContext = this;
-            tourInstanceGuide = guide;
-
-            cancelTourService = new CancelTourService();
-            MakeCancelableTourList();
-        }
-        private void MakeCancelableTourList()
-        {
-            tourInstances = new ObservableCollection<TourInstance>(cancelTourService.FindCancelableTours());
-            cancelTourService.SetLocationToTour();
-            cancelTourService.SetTourToTourInstance();
+            cancelViewModel = new CancelViewModel(guide,this.TourListDataGrid);
+            DataContext = cancelViewModel;
+         
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
-            TourInstance currentTourInstance = (TourInstance)TourListDataGrid.CurrentItem;
-            cancelTourService.CancelTourInstance(currentTourInstance, TourInstances, tourInstanceGuide);
-
+            cancelViewModel.CancelTour();
+ 
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+ 
 
     }
 }

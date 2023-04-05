@@ -1,4 +1,6 @@
-﻿using InitialProject.Model;
+﻿using InitialProject.Domain;
+using InitialProject.Domain.RepositoryInterfaces;
+using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.Serializer;
 using System;
@@ -11,7 +13,7 @@ namespace InitialProject.Service
 {
     public class CheckPointService
     {
-        private CheckPointRepository repository;
+        private ICheckPointRepository repository=Injector.CreateInstance<ICheckPointRepository>();
         public CheckPointService() 
         { 
             repository = new CheckPointRepository();

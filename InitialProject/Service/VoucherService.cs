@@ -1,4 +1,6 @@
-﻿using InitialProject.Model;
+﻿using InitialProject.Domain;
+using InitialProject.Domain.RepositoryInterfaces;
+using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.Serializer;
 using System;
@@ -12,7 +14,8 @@ namespace InitialProject.Service
 {
     public class VoucherService
     {
-        private VoucherRepository voucherRepository;
+        private IVoucherRepository voucherRepository = Injector.CreateInstance<IVoucherRepository>();
+
         public ObservableCollection<Voucher> Vouchers { get; set; }
         public List<Voucher> storedVouchers;
         public VoucherService() 
@@ -33,11 +36,27 @@ namespace InitialProject.Service
         {
             return voucherRepository.Update(voucher);
         }
-        public ObservableCollection<Voucher> FindAllVouchers(ObservableCollection<Voucher> Vouchers,Guest2 guest2)
+        public void SendVoucher(int tourInstanceId, User tourInstanceGuide)
         {
-            foreach(Voucher voucher in storedVouchers)
+            TourReservationService tourReservationService=new TourReservationService();
+            GuideService guideService=new GuideService();
+            foreach (TourReservation reservation in tourReservationService.GetReservationsForTourInstance(tourInstanceId))
             {
-                if (voucher.GuestId == guest2.Id && voucher.Used==false) 
+                Voucher voucher = new Voucher();
+                voucher.Used = false;
+                voucher.GuestId = reservation.GuestId;
+                voucher.GuideId = guideService.GetByUsername(tourInstanceGuide.Username).Id;
+                voucher.CreateDate = DateTime.Now;
+                Voucher savedVoucher = Save(voucher);
+
+            }
+
+        }
+        public ObservableCollection<Voucher> FindAllVouchers(ObservableCollection<Voucher> Vouchers, Guest2 guest2)
+        {
+            foreach (Voucher voucher in storedVouchers)
+            {
+                if (voucher.GuestId == guest2.Id && voucher.Used == false)
                 {
                     Vouchers.Add(voucher);
                 }
@@ -45,4 +64,5 @@ namespace InitialProject.Service
             return Vouchers;
         }
     }
+
 }

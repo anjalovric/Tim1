@@ -1,4 +1,6 @@
-﻿using InitialProject.Model;
+﻿using InitialProject.Domain;
+using InitialProject.Domain.RepositoryInterfaces;
+using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.Serializer;
 using System;
@@ -12,7 +14,8 @@ namespace InitialProject.Service
 {
     public class LocationService
     {
-        private LocationRepository locationRepository;
+        private ILocationRepository locationRepository=Injector.CreateInstance<ILocationRepository>();
+        private TourService tourService = new TourService();
 
         public LocationService() 
         { 
@@ -82,5 +85,7 @@ namespace InitialProject.Service
         {
             return locationRepository.GetById(id);
         }
+        
+        
     }
 }

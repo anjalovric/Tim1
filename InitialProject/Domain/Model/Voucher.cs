@@ -16,6 +16,14 @@ namespace InitialProject.Model
         public bool Used { get; set; }
         public DateTime CreateDate { get; set; }
         public Voucher() { }
+        public Voucher(bool used,int guestid,int guideid,DateTime createDate)
+        {
+            Used= used;
+            GuestId= guestid;
+            GuideId= guideid;
+            CreateDate= createDate;
+        }
+
         public string[] ToCSV()
         {
             string[] csvValues = { Id.ToString(), GuestId.ToString(),GuideId.ToString(),Used.ToString(),CreateDate.ToString() };
