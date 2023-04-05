@@ -57,9 +57,10 @@ namespace InitialProject.Service
 
         public double CalculateAverageRateByOwner(Owner owner)
         {
+            List<OwnerReview> reviewsToDisplay = GetAllToDisplay(owner);
             int rateSum = 0;
             int numberOfReviews = GetNumberOfReviewsByOwner(owner);
-            foreach (OwnerReview review in ownerReviews)
+            foreach (OwnerReview review in reviewsToDisplay)
             {
                 if (review.Reservation.Accommodation.Owner.Id == owner.Id)
                 {
@@ -67,14 +68,18 @@ namespace InitialProject.Service
                     rateSum += review.Correctness;
                 }
             }
-
-            return (double)rateSum / (2 * numberOfReviews);
+            if (numberOfReviews > 0)
+            {
+                return (double)rateSum / (2 * numberOfReviews);
+            }
+            return 0;
         }
 
         public int GetNumberOfReviewsByOwner(Owner owner)
         {
+            List<OwnerReview> reviewsToDisplay = GetAllToDisplay(owner);
             int numberOfReviews = 0;
-            foreach (OwnerReview review in ownerReviews)
+            foreach (OwnerReview review in reviewsToDisplay)
             {
                 if (review.Reservation.Accommodation.Owner.Id == owner.Id)
                 {
