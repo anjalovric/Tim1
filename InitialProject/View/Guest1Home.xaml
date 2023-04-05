@@ -53,7 +53,7 @@
                         <Image Source="/Resources/Images/profile.jpg"/>
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="SENT REQUESTS" Height="55" FontSize="18">
+                <MenuItem Header="SENT REQUESTS" Height="55" FontSize="18" Click="SentRequestsMenuItem_Click">
                     <MenuItem.Icon>
                         <Image Source="/Resources/Images/sent.png"/>
                     </MenuItem.Icon>

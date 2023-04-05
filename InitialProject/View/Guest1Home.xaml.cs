@@ -26,6 +26,7 @@ namespace InitialProject.View
         private MyAccommodationReservations myReservations;
         private Guest1 guest1;
         private Guest1Service guest1Service;
+        private SentAccommodationReservationRequests sentAccommodationReservationRequests;
         public Guest1Home(User user)
         {
             InitializeComponent();
@@ -35,6 +36,7 @@ namespace InitialProject.View
 
             guest1SearchAccommodation = new Guest1SearchAccommodation(guest1);
             myReservations = new MyAccommodationReservations(guest1, ref Main);
+            sentAccommodationReservationRequests = new SentAccommodationReservationRequests();
             Main.Content = guest1SearchAccommodation;
 
         }
@@ -54,12 +56,17 @@ namespace InitialProject.View
             myReservations = new MyAccommodationReservations(guest1, ref Main); //moram ga opet napraviti da bi se azuriralo nakon pravljenja nove rezervacije (u upcoming reservations)
             Main.Content = myReservations;   //da li da se pravi novi page (kako bi se resetovalo sve?)
             
-        }
+        }//negdje proslijedjujem ref Frame?
 
         private void SignOutMenuItem_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
             this.Owner.Show();
+        }
+
+        private void SentRequestsMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            Main.Content = sentAccommodationReservationRequests;
         }
     }
 }
