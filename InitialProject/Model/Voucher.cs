@@ -18,6 +18,13 @@ namespace InitialProject.Model
         public DateTime CreateDate { get; set; }
 
         public Voucher() { }
+        public Voucher(bool used,int guestid,int guideid,DateTime createDate)
+        {
+            Used= used;
+            GuestId= guestid;
+            GuideId= guideid;
+            CreateDate= createDate;
+        }
 
         public string[] ToCSV()
         {

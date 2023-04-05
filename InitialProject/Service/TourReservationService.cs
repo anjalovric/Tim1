@@ -1,4 +1,6 @@
-﻿using InitialProject.Model;
+﻿using InitialProject.Domain;
+using InitialProject.Domain.RepositoryInterfaces;
+using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.Serializer;
 using System;
@@ -11,7 +13,7 @@ namespace InitialProject.Service
 {
     public class TourReservationService
     {
-        private TourReservationRepository tourReservationrepository;
+        private ITourReservationRepository tourReservationrepository=Injector.CreateInstance<ITourReservationRepository>();
         public TourReservationService() 
         {
             tourReservationrepository= new TourReservationRepository();

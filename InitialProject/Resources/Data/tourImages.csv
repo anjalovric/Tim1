@@ -1,2 +1,52 @@
 1|https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1280px-Image_created_with_a_mobile_phone.png|1
 2|https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/800px-Image_created_with_a_mobile_phone.png|2
+3|Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = myProfile;|3
+4|hh|4
+5|ss|5
+6|hh|6
+7|kk|7
+8|kk|8
+9|ll|9
+10|hhh|10
+11|hh|11
+12|ddd|11
+13|ll|12
+14|k|12
+15|k|12
+16|;l|13
+17|hhh|14
+18|C:\Users\Milica\OneDrive\Slike\20201007_170002.jpg|15
+19|C:\Users\Milica\OneDrive\Radna površina\Tim1\InitialProject\Resources\Images\add.png|15
+20|C:\Users\Milica\OneDrive\Radna površina\Tim1\InitialProject\Resources\Images\delete.png|15
+21|C:\Users\Milica\OneDrive\Radna površina\Tim1\InitialProject\Resources\Images\delete.png|15
+22|C:\Users\Milica\OneDrive\Radna površina\Tim1\InitialProject\Resources\Images\delete.png|15
+23|C:\Users\Milica\OneDrive\Radna površina\Tim1\InitialProject\Resources\Images\delete.png|15
+24|C:\Users\Milica\OneDrive\Radna površina\Tim1\InitialProject\Resources\Images\delete.png|15
+25|delete.png|15
+26|\Images\delete.png|15
+27|\InitialProject\Resources\Images\edit.png|15
+28|Resources\Images\delete.png|15
+29|\Resources\Images\delete.png|15
+30|/Resources/Images/edit.png|15
+31|/Resources/Images/edit.png|15
+32|kk|15
+33|gggggg|16
+34|j|17
+35|hh|18
+36|tttttttttt|19
+37|ggggggg|20
+38|f|21
+39|hh|22
+40|kk|23
+41|tgtgt|24
+42|fff|24
+43|h|25
+44|gggggggggggg|26
+45|f|27
+46|lkjkljlkj|28
+47|hh|28
+48|zz|28
+49|gg|28
+50|ddd|29
+51|dfdf|30
+52|fghj|31

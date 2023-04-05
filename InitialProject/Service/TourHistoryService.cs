@@ -33,6 +33,12 @@ namespace InitialProject.Service
             finishedtourInsatncesForChosenYear=new List<TourInstance>();
         }
 
+        public void SetFinishedInstances(ObservableCollection<TourInstance> Instances)
+        {
+            SetLocationToTour();
+            SetTourToTourInstance();
+            GetFinishedInsatnces(Instances);
+        }
         public void GetFinishedInsatnces(ObservableCollection<TourInstance> Instances)
         {   
             foreach (TourInstance instance in tourInstanceService.GetAll())

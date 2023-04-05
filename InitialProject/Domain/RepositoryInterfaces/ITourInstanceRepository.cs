@@ -20,7 +20,7 @@ namespace InitialProject.Domain.RepositoryInterfaces
 
         public void Delete(TourInstance tour);
 
-        public void Update(TourInstance tour);
+        public TourInstance Update(TourInstance tour);
 
     }
 }

@@ -33,58 +33,26 @@ namespace InitialProject.WPF.Views.GuideViews
     {
         public int Year { get; set; }
         public ObservableCollection<TourInstance> Instances { get; set; }
-        public ObservableCollection<Image> Photos { get; set; }
 
-
-        private TourInstance selected;
         private TourHistoryService historyService;
-        public TourInstance Selected
-        {
-            get { return selected; }
-            set
-            {
-                if (value != selected)
-                    selected = value;
+        public TourInstance Selected { get;set; }
 
-                OnPropertyChanged();
-            }
-        }
-        public event PropertyChangedEventHandler PropertyChanged;
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
         public TourStatisticsView()
         {
             InitializeComponent();
             DataContext = this;
 
             Instances = new ObservableCollection<TourInstance>();
-            Photos = new ObservableCollection<Image>();
+
             historyService = new TourHistoryService();
             
-            historyService.SetLocationToTour();
-            historyService.SetTourToTourInstance();
-            historyService.GetFinishedInsatnces(Instances);
-            SetImage();
+
+            historyService.SetFinishedInstances(Instances);
+           
         }
 
-        private void SetImage()
-        {
-            foreach(TourInstance tourInstance in Instances)
-            {
-                string url = historyService.FindFirstImageOfTour(tourInstance.Tour.Id);
-                Image image = new Image();
-                var bitmapImage = new BitmapImage();
-                bitmapImage.BeginInit();
-                bitmapImage.UriSource = new Uri(url); ;
-                bitmapImage.EndInit();
-                image.Source = bitmapImage;
-                Photos.Add(image);
 
-            }
-        }
         private void ViewDetails_Click(object sender, RoutedEventArgs e)
         {
             TourInstance currentTourInstance = (TourInstance)TourListDataGrid.CurrentItem;
@@ -102,13 +70,16 @@ namespace InitialProject.WPF.Views.GuideViews
 
         private void MostVisitedForYear_Click(object sender, RoutedEventArgs e)
         {
-
-            if (Year > 0)
-            {
                 CheckPointDetails checkPointDetails = new CheckPointDetails(historyService.FindMostVisitedForChosenYear(Year));
                 checkPointDetails.Show();
-                ChosenYear.Text = null;
-            }
+
         }
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
     }
 }

@@ -1,8 +1,11 @@
-﻿using InitialProject.Model;
+﻿using InitialProject.Domain;
+using InitialProject.Domain.RepositoryInterfaces;
+using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.Serializer;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +14,7 @@ namespace InitialProject.Service
 {
     public class TourInstanceService
     {
-        private TourInstanceRepository tourInstancerepository;
+        private ITourInstanceRepository tourInstancerepository=Injector.CreateInstance<ITourInstanceRepository>();
 
         public TourInstanceService() 
         {
@@ -94,6 +97,30 @@ namespace InitialProject.Service
             }
             return list;
 
+        }
+
+        public List<TourInstance> FindCancelableTours()
+        {
+            List<TourInstance> cancelableInstances = GetInstancesLaterThan48hFromNow();
+            TourService tourService = new TourService();
+            tourService.SetLocationToTour(cancelableInstances);
+            return cancelableInstances;
+        }
+
+        public void CancelTourInstance(TourInstance currentTourInstance, ObservableCollection<TourInstance> tourInstances, User tourInstanceGuide)
+        {
+            foreach (TourInstance tourInstance in GetAll())
+            {
+                if (tourInstance.Id == currentTourInstance.Id)
+                {
+                    currentTourInstance = tourInstance;
+                }
+            }
+            currentTourInstance.Finished = true;
+            Update(currentTourInstance);
+            tourInstances.Remove(currentTourInstance);
+            VoucherService voucherService = new VoucherService();
+            voucherService.SendVoucher(currentTourInstance.Id, tourInstanceGuide);
         }
     }
 }

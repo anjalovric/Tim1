@@ -24,14 +24,16 @@ namespace InitialProject.WPF.Views.GuideViews
         private AddTourView addTourView;
         private CancelView cancelView;
         private TourStatisticsView tourStatisticsView;
+        private User loggedUser;
         public GuideWindow(User user)
         {
             InitializeComponent();
             DataContext = this;
-            homeView = new HomeView(user);
-            cancelView = new CancelView(user);
-            addTourView = new AddTourView(homeView.Tours,user,cancelView.TourInstances);
             tourStatisticsView = new TourStatisticsView();
+            homeView = new HomeView(user,tourStatisticsView.Instances);
+            cancelView = new CancelView(user);
+            loggedUser = user;
+         
 
             Main.Content = homeView;
 
@@ -39,10 +41,12 @@ namespace InitialProject.WPF.Views.GuideViews
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
+            cancelView = new CancelView(loggedUser);
             Main.Content = cancelView;
         }
         private void Add_Click(object sender, RoutedEventArgs e)
         {
+            addTourView = new AddTourView(homeView.Tours, loggedUser, cancelView.cancelViewModel.TourInstances);
             Main.Content = addTourView;
         }
 
@@ -52,6 +56,7 @@ namespace InitialProject.WPF.Views.GuideViews
         }
         private void TourStatitcs_Click(object sender, RoutedEventArgs e)
         {
+            tourStatisticsView = new TourStatisticsView();
             Main.Content = tourStatisticsView;
         }
     }

@@ -1,4 +1,5 @@
-﻿using InitialProject.Model;
+﻿using InitialProject.Domain.RepositoryInterfaces;
+using InitialProject.Model;
 using InitialProject.Serializer;
 using Org.BouncyCastle.Asn1.Mozilla;
 using System;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Repository
 {
-    public class LocationRepository
+    public class LocationRepository:ILocationRepository
     {
         private const string FilePath = "../../../Resources/Data/locations.csv";
 
