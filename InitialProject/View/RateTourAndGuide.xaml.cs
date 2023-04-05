@@ -28,6 +28,9 @@ namespace InitialProject.View
         private TourReservation Reservation;
         private Guest2 guest2;
         private TourInstance CurrentTourInstance;
+        public int Language;
+        public int InterestingFacts;
+        public int Knowledge;
         public RateTourAndGuide(TourInstance tourInstance,Guest2 guest2, TourReservation reservation)
         {
             InitializeComponent();
@@ -35,6 +38,9 @@ namespace InitialProject.View
             this.guest2 = guest2;
             CurrentTourInstance = tourInstance;
             Reservation = reservation;
+            Language = 1;
+            InterestingFacts = 1;
+            Knowledge = 1;
         }
         private void ZnanjeInkrement_Click(object sender, RoutedEventArgs e)
         {
@@ -43,6 +49,7 @@ namespace InitialProject.View
             {
                 changedNumber = Convert.ToInt32(knowledge.Text) + 1;
                 knowledge.Text = changedNumber.ToString();
+                Knowledge = Convert.ToInt32(knowledge.Text);
             }
         }
         private void ZnanjeDekrement_Click(object sender, RoutedEventArgs e)
@@ -52,6 +59,7 @@ namespace InitialProject.View
             {
                 changedNumber = Convert.ToInt32(knowledge.Text) - 1;
                 knowledge.Text = changedNumber.ToString();
+                Knowledge = Convert.ToInt32(knowledge.Text);
             }
         }
         private void JezikInkrement_Click(object sender, RoutedEventArgs e)
@@ -61,6 +69,7 @@ namespace InitialProject.View
             {
                 changedNumber = Convert.ToInt32(language.Text) + 1;
                 language.Text = changedNumber.ToString();
+                Language = Convert.ToInt32(language.Text);
             }
         }
         private void JezikDekrement_Click(object sender, RoutedEventArgs e)
@@ -69,7 +78,7 @@ namespace InitialProject.View
             if (Convert.ToInt32(language.Text) > 1)
             {
                 changedNumber = Convert.ToInt32(language.Text) - 1;
-                language.Text = changedNumber.ToString();
+                Language = Convert.ToInt32(language.Text);
             }
         }
         private void ZanimljivostiInkrement_Click(object sender, RoutedEventArgs e)
@@ -79,6 +88,7 @@ namespace InitialProject.View
             {
                 changedNumber = Convert.ToInt32(interestingFacts.Text) + 1;
                 interestingFacts.Text = changedNumber.ToString();
+                InterestingFacts = Convert.ToInt32(interestingFacts.Text);
             }
         }
         private void ZanimljivostiDekrement_Click(object sender, RoutedEventArgs e)
@@ -88,6 +98,7 @@ namespace InitialProject.View
             {
                 changedNumber = Convert.ToInt32(interestingFacts.Text) - 1;
                 interestingFacts.Text = changedNumber.ToString();
+                InterestingFacts = Convert.ToInt32(interestingFacts.Text);
             }
         }
         private void Rate_Click(object sender, RoutedEventArgs e)
@@ -100,7 +111,7 @@ namespace InitialProject.View
             else
             {
                 Comment = comment.Text;
-                GuideAndTourReview guideAndTourReview = new GuideAndTourReview(CurrentTourInstance.Guide.Id, guest2.Id, Comment, Reservation);
+                GuideAndTourReview guideAndTourReview = new GuideAndTourReview(CurrentTourInstance.Guide.Id, guest2.Id, Reservation,Language,InterestingFacts, Knowledge,Comment);
                 guideAndTourReviewRepository.Save(guideAndTourReview);
                 this.Close();
             }

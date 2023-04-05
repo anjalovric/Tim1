@@ -20,8 +20,20 @@ namespace InitialProject.Service
         private AccommodationService accommodationService;
         private OwnerService ownerService;
         //private OwnerReviewService ownerReviewService;
-        public ObservableCollection<AccommodationReservation> NotFinishedReservations;
+        
         public ObservableCollection<AccommodationReservation> CompletedAccommodationReservations;
+        private ObservableCollection<AccommodationReservation> notFinishedReservations;
+        public ObservableCollection<AccommodationReservation> NotFinishedReservations
+        {
+            get { return notFinishedReservations; }
+            set
+            {
+                if (value != notFinishedReservations)
+                    notFinishedReservations = value;
+                OnPropertyChanged("NotFinishedReservations");
+            }
+
+        }
 
         private AccommodationReservationRepository accommodationReservationRepository;
         private List<AccommodationReservation> accommodationReservations;

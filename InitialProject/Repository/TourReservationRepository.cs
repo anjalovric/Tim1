@@ -48,7 +48,7 @@ namespace InitialProject.Repository
             _tourReservations.Remove(foundedTourReservation);
             _serializer.ToCSV(FilePath, _tourReservations);
         }
-        public TourReservation Update(TourReservation tourReservation,int guestsNumber)
+        public TourReservation Update(TourReservation tourReservation,int guestsNumber,Boolean withVoucher)
         {
             _tourReservations = _serializer.FromCSV(FilePath);
             TourReservation current = _tourReservations.Find(c => c.Id == tourReservation.Id);
@@ -56,6 +56,7 @@ namespace InitialProject.Repository
             current.CurrentGuestsNumber = guestsNumber;
             current.TourInstanceId = tourReservation.TourInstanceId;
             current.GuestId = tourReservation.GuestId;
+            current.WithVaucher = withVoucher;
             _serializer.ToCSV(FilePath, _tourReservations);
             return tourReservation;
         }
