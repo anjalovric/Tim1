@@ -22,7 +22,7 @@ namespace InitialProject.Service
         //private OwnerReviewService ownerReviewService;
         
         public ObservableCollection<AccommodationReservation> CompletedAccommodationReservations;
-        private ObservableCollection<AccommodationReservation> notFinishedReservations;
+      /*  private ObservableCollection<AccommodationReservation> notFinishedReservations;
         public ObservableCollection<AccommodationReservation> NotFinishedReservations
         {
             get { return notFinishedReservations; }
@@ -33,7 +33,7 @@ namespace InitialProject.Service
                 OnPropertyChanged("NotFinishedReservations");
             }
 
-        }
+        }*/
 
         private AccommodationReservationRepository accommodationReservationRepository;
         private List<AccommodationReservation> accommodationReservations;
@@ -46,7 +46,7 @@ namespace InitialProject.Service
             //ownerReviewService = new OwnerReviewService();
             locationService = new LocationService();
             accommodationTypeService = new AccommodationTypeService();
-            NotFinishedReservations = new ObservableCollection<AccommodationReservation>();
+          //  NotFinishedReservations = new ObservableCollection<AccommodationReservation>();
             CompletedAccommodationReservations = new ObservableCollection<AccommodationReservation>();
             FillAccommodationReservations();
         }
@@ -71,10 +71,10 @@ namespace InitialProject.Service
             accommodationReservationRepository.Add(reservation);
         }
 
-        public ObservableCollection<AccommodationReservation> FillUpcomingAndCurrentReservations(Guest1 guest1)
+        public ObservableCollection<AccommodationReservation> FillUpcomingAndCurrentReservations(Guest1 guest1, ObservableCollection<AccommodationReservation> NotFinishedReservations)
         {
             FillAccommodationReservations();
-            NotFinishedReservations.Clear();
+            NotFinishedReservations = new ObservableCollection<AccommodationReservation>();
 
             foreach (AccommodationReservation reservation in allReservations)
             {
