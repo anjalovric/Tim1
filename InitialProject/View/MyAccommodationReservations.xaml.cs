@@ -181,7 +181,8 @@ namespace InitialProject.View
 
         private void ChangeDateButton_Click(object sender, RoutedEventArgs e)
         {
-
+            ChangeDateAccommodationReservationForm form = new ChangeDateAccommodationReservationForm();
+            form.Show();
         }
 
 
