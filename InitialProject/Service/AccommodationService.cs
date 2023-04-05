@@ -76,7 +76,16 @@ namespace InitialProject.Service
 
             private void AddTypes()
             {
-
+                AccommodationTypeService accommodationTypeService = new AccommodationTypeService();
+                List<AccommodationType> allTypes = accommodationTypeService.GetAll();
+                foreach(Accommodation accommodation in accommodations)
+                {
+                    AccommodationType accommodationType = allTypes.Find(n => n.Id == accommodation.Type.Id);
+                    if(accommodationType != null)
+                    {
+                        accommodation.Type = accommodationType;
+                    }
+                }
             }
             public ObservableCollection<Accommodation> GetAllByOwner(Owner owner)
             {

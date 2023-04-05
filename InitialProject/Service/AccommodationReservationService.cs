@@ -53,7 +53,7 @@ namespace InitialProject.Service
 
         public List<AccommodationReservation> GetAll()
         {
-            return accommodationReservationRepository.GetAll();
+            return allReservations;
         }
 
         public void FillAccommodationReservations()
