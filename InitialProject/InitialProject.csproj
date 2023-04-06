@@ -9,6 +9,10 @@
 
   <ItemGroup>
 
+    <None Remove="Resources\Images\a1.jpg" />
+
+    <None Remove="Resources\Images\a2.jpg" />
+
     <None Remove="Resources\Images\accommodation.jpg" />
     <None Remove="Resources\Images\account.png" />
     <None Remove="Resources\Images\add.png" />
@@ -57,6 +61,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Resources\Images\a1.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\a2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Images\accommodation.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

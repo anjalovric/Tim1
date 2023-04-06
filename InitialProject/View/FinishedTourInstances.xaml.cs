@@ -62,7 +62,7 @@ namespace InitialProject.View
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-        private TourReservation FindTourReservation(TourInstance currentTourInstance,TourReservation reservation)
+        /*private TourReservation FindTourReservation(TourInstance currentTourInstance,TourReservation reservation)
         {
             foreach (TourReservation tourReservation in tourReservations)
             {
@@ -72,13 +72,13 @@ namespace InitialProject.View
                 }
             }
             return reservation;
-        }
+        }*/
         private void Rate_Click(object sender, RoutedEventArgs e)
         {
             TourInstance currentTourInstance = (TourInstance)TourListDataGrid.CurrentItem;
-            TourReservation reservation=new TourReservation();
-            reservation=FindTourReservation(currentTourInstance,reservation);
-            RateTourAndGuide rateTourAndGuide = new RateTourAndGuide(currentTourInstance,guest2,reservation);
+            //TourReservation reservation=new TourReservation();
+            //reservation=FindTourReservation(currentTourInstance,reservation);
+            RateTourAndGuide rateTourAndGuide = new RateTourAndGuide(currentTourInstance,guest2);
             rateTourAndGuide.Show();
         }
     }

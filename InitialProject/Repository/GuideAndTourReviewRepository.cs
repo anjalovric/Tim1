@@ -31,10 +31,10 @@ namespace InitialProject.Repository
             }
             return _reviews.Max(c => c.Id) + 1;
         }
-        public bool HasReview(TourReservation reservation)
+        public bool HasReview(TourInstance tourInstance)
         {
             _reviews = _serializer.FromCSV(FilePath);
-            return _reviews.Find(n => n.Reservation.Id == reservation.Id) != null;
+            return _reviews.Find(n => n.TourInstance.Id == tourInstance.Id) != null;
         }
 
         public void Save(GuideAndTourReview review)

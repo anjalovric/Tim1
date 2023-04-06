@@ -25,13 +25,14 @@
         <Button Content="Confirm" Margin="586,461,197,10" Click="Rate_Click" FontWeight="Bold"/>
         <Button Content="Cancel" Margin="753,461,25,10" Click="Cancel_Click" FontWeight="Bold"/>
         <TextBox Margin="488,260,25,78" IsReadOnly="True"/>
-        <Button Content="Click to upload" HorizontalAlignment="Left" Margin="623,348,0,0" VerticalAlignment="Top" Click="Button_Click" Width="122" FontWeight="Bold">
+        <Button Content="Click to upload" HorizontalAlignment="Left" Margin="753,235,0,0" VerticalAlignment="Top" Click="Button_Click" Width="100" FontWeight="Bold">
 
         </Button>
         <Image x:Name="imagePicture" Margin="502,270,36,85"/>
+
         <Label Content="Rate tour and guide" Margin="70,25,560,386" FontSize="20" FontWeight="Bold"/>
         <Button Content="Delete" Margin="390,407,443,78" Click="Delete_Click">
-            
+
         </Button>
     </Grid>
 </Window>

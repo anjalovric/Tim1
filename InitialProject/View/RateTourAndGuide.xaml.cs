@@ -1,4 +1,5 @@
-﻿using InitialProject.Model;
+﻿using InitialProject.Domain.Model;
+using InitialProject.Model;
 using InitialProject.Repository;
 using Microsoft.Win32;
 using System;
@@ -14,6 +15,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace InitialProject.View
@@ -24,23 +26,29 @@ namespace InitialProject.View
     public partial class RateTourAndGuide : Window
     {
         private GuideAndTourReviewRepository guideAndTourReviewRepository;
+        private TourReviewImageRepository tourReviewImageRepository;
         private String Comment;
         private TourReservation Reservation;
         private Guest2 guest2;
         private TourInstance CurrentTourInstance;
         public int Language;
+        public Uri relativeUri { get; set; }
         public int InterestingFacts;
         public int Knowledge;
-        public RateTourAndGuide(TourInstance tourInstance,Guest2 guest2, TourReservation reservation)
+        public TourReviewImage tourReviewImage;
+        public RateTourAndGuide(TourInstance tourInstance,Guest2 guest2)
         {
             InitializeComponent();
             guideAndTourReviewRepository = new GuideAndTourReviewRepository();
+            tourReviewImageRepository = new TourReviewImageRepository();
             this.guest2 = guest2;
             CurrentTourInstance = tourInstance;
-            Reservation = reservation;
+            //Reservation = reservation;
             Language = 1;
             InterestingFacts = 1;
             Knowledge = 1;
+            tourReviewImage = new TourReviewImage();
+            
         }
         private void ZnanjeInkrement_Click(object sender, RoutedEventArgs e)
         {
@@ -103,7 +111,7 @@ namespace InitialProject.View
         }
         private void Rate_Click(object sender, RoutedEventArgs e)
         {
-            if (guideAndTourReviewRepository.HasReview(Reservation))
+            if (guideAndTourReviewRepository.HasReview(CurrentTourInstance))
             {
                 MessageBox.Show("This reservation is already reviewed.");
                 this.Close();
@@ -111,7 +119,7 @@ namespace InitialProject.View
             else
             {
                 Comment = comment.Text;
-                GuideAndTourReview guideAndTourReview = new GuideAndTourReview(CurrentTourInstance.Guide.Id, guest2.Id, Reservation,Language,InterestingFacts, Knowledge,Comment);
+                GuideAndTourReview guideAndTourReview = new GuideAndTourReview(CurrentTourInstance.Guide.Id, guest2.Id, CurrentTourInstance,Language,InterestingFacts, Knowledge,Comment,tourReviewImage); //trebace se lista proslijedjivati
                 guideAndTourReviewRepository.Save(guideAndTourReview);
                 this.Close();
             }
@@ -127,8 +135,18 @@ namespace InitialProject.View
             openFileDialog.FilterIndex = 1;
             if (openFileDialog.ShowDialog() == true)
             {
-                imagePicture.Source = new BitmapImage(new Uri(openFileDialog.FileName));
+                Uri resource=new Uri(openFileDialog.FileName);
+                String absolutePath = resource.ToString();
+                int relativeIndex = absolutePath.IndexOf("Resources");
+                String relative = absolutePath.Substring(relativeIndex);
+                relativeUri = new Uri("/"+relative,UriKind.Relative);
+                BitmapImage bitmapImage = new BitmapImage(relativeUri);
+                bitmapImage.UriSource = relativeUri;
+                imagePicture.Source = new BitmapImage(new Uri("/"+relative, UriKind.Relative));
+                tourReviewImage = new TourReviewImage(CurrentTourInstance,relative);
+                tourReviewImageRepository.Save(tourReviewImage); //ovdje treba ali u listu. provjeriti i za cancel dugme
             }
+
         }
 
         private void Delete_Click(object sender, RoutedEventArgs e)
