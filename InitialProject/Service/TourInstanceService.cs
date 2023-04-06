@@ -3,6 +3,7 @@ using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.Serializer;
+using InitialProject.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,19 +16,18 @@ namespace InitialProject.Service
     public class TourInstanceService
     {
         private ITourInstanceRepository tourInstancerepository=Injector.CreateInstance<ITourInstanceRepository>();
-
+        private List<TourInstance> finishedtourInstances;
+        private List<TourInstance> finishedtourInsatncesForChosenYear;
         public TourInstanceService() 
         {
-            tourInstancerepository = new TourInstanceRepository();
+            finishedtourInsatncesForChosenYear = new List<TourInstance>();
+            finishedtourInstances = new List<TourInstance>();
         }
 
         public List<TourInstance> GetAll()
         {
             return tourInstancerepository.GetAll();
         }
-
-
-
 
         public TourInstance Save(TourInstance tour)
         {
@@ -121,6 +121,84 @@ namespace InitialProject.Service
             tourInstances.Remove(currentTourInstance);
             VoucherService voucherService = new VoucherService();
             voucherService.SendVoucher(currentTourInstance.Id, tourInstanceGuide);
+        }
+
+        public List<TourInstance> GetFinishedInsatnces(ObservableCollection<TourInstance> Instances)
+        {
+            foreach (TourInstance instance in GetAll())
+            {
+                if (instance.Finished)
+                {
+                    Instances.Add(instance);
+                    finishedtourInstances.Add(instance);
+                }
+            }
+            return finishedtourInstances;
+        }
+
+        public List<TourInstance> GetFinishedInstancesForChoosenYear(int year)
+        {
+            
+            foreach (TourInstance instance in GetAll())
+            {
+                if (instance.Finished && instance.StartDate.Year == year)
+                {
+                    finishedtourInsatncesForChosenYear.Add(instance);
+                }
+            }
+            return finishedtourInsatncesForChosenYear;
+        }
+
+        public TourInstance FindMostVisitedForChosenYear(int year)
+        {
+            GetFinishedInstancesForChoosenYear(year);
+            SetAttendanceToFinishTours();
+            double maximum = 0;
+            TourInstance tour = null;
+            foreach (TourInstance instance in finishedtourInsatncesForChosenYear)
+            {
+                if (instance.Attendance >= maximum)
+                {
+                    maximum = instance.Attendance;
+                    tour = instance;
+                }
+            }
+            return tour;
+        }
+
+        public void SetAttendanceToFinishTours()
+        {
+            TourDetailsService tourDetailsService = new TourDetailsService();
+            foreach (TourInstance tour in finishedtourInstances)
+            {
+                tour.Attendance = tourDetailsService.MakeAttendancePrecentage(tour.Id);
+            }
+            foreach (TourInstance tour in finishedtourInsatncesForChosenYear)
+            {
+                tour.Attendance = tourDetailsService.MakeAttendancePrecentage(tour.Id);
+            }
+        }
+
+        public TourInstance FindMostVisited()
+        {
+            SetAttendanceToFinishTours();
+            double minimum = 0;
+            TourInstance tour = null;
+            foreach (TourInstance instance in finishedtourInstances)
+            {
+                if (instance.Attendance >= minimum)
+                {
+                    minimum = instance.Attendance;
+                    tour = instance;
+                }
+            }
+            return tour;
+        }
+
+        public void SetFinishedInstances(ObservableCollection<TourInstance> Instances)
+        {
+            TourService tourService = new TourService();
+            tourService.SetLocationToTour(GetFinishedInsatnces(Instances));
         }
     }
 }

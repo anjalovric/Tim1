@@ -23,6 +23,7 @@ using System.Net;
 using System.IO;
 using System.DirectoryServices.ActiveDirectory;
 using Image = System.Windows.Controls.Image;
+using InitialProject.WPF.ViewModels;
 
 namespace InitialProject.WPF.Views.GuideViews
 {
@@ -31,55 +32,32 @@ namespace InitialProject.WPF.Views.GuideViews
     /// </summary>
     public partial class TourStatisticsView : Page
     {
-        public int Year { get; set; }
-        public ObservableCollection<TourInstance> Instances { get; set; }
-
-        private TourHistoryService historyService;
-        public TourInstance Selected { get;set; }
-
+       public TourStatisticsViewModel viewModel;
 
         public TourStatisticsView()
         {
+
             InitializeComponent();
-            DataContext = this;
+            viewModel = new TourStatisticsViewModel();
+            DataContext = viewModel;
 
-            Instances = new ObservableCollection<TourInstance>();
-
-            historyService = new TourHistoryService();
-            
-
-            historyService.SetFinishedInstances(Instances);
-           
         }
-
 
         private void ViewDetails_Click(object sender, RoutedEventArgs e)
         {
-            TourInstance currentTourInstance = (TourInstance)TourListDataGrid.CurrentItem;
-            CheckPointDetails checkPointDetails = new CheckPointDetails(currentTourInstance);
-            checkPointDetails.Show();
-
+            viewModel.ViewDetails(this.TourListDataGrid);
+         
         }
 
         private void MostVisited_Click(object sender, RoutedEventArgs e)
         {
-            CheckPointDetails checkPointDetails = new CheckPointDetails(historyService.FindMostVisited());
-            checkPointDetails.Show();
+            viewModel.MostVisited();
+         
         }
-
 
         private void MostVisitedForYear_Click(object sender, RoutedEventArgs e)
         {
-                CheckPointDetails checkPointDetails = new CheckPointDetails(historyService.FindMostVisitedForChosenYear(Year));
-                checkPointDetails.Show();
-
+            viewModel.MostVisitedForYear();
         }
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
     }
 }

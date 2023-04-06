@@ -15,8 +15,7 @@ namespace InitialProject.Service
         private TourService tourService;
         private TourInstanceService tourInstanceService;
         private LocationService locationService;
-        private TourDetailsService tourDetailsService;
-        private TourImageService tourImageService;
+
 
         private List<TourInstance> finishedtourInstances;
         private List<TourInstance> finishedtourInsatncesForChosenYear;
@@ -26,8 +25,8 @@ namespace InitialProject.Service
             tourService = new TourService();
             tourInstanceService = new TourInstanceService();
             locationService = new LocationService();
-            tourDetailsService = new TourDetailsService();
-            tourImageService = new TourImageService();
+           
+            
 
             finishedtourInstances = new List<TourInstance>();
             finishedtourInsatncesForChosenYear=new List<TourInstance>();
@@ -35,9 +34,13 @@ namespace InitialProject.Service
 
         public void SetFinishedInstances(ObservableCollection<TourInstance> Instances)
         {
-            SetLocationToTour();
-            SetTourToTourInstance();
-            GetFinishedInsatnces(Instances);
+            TourService tourService=new TourService();
+            
+
+            //SetLocationToTour();
+            //SetTourToTourInstance();
+           // GetFinishedInsatnces(Instances);
+            tourService.SetLocationToTour(tourInstanceService.GetFinishedInsatnces(Instances));
         }
         public void GetFinishedInsatnces(ObservableCollection<TourInstance> Instances)
         {   
@@ -89,6 +92,7 @@ namespace InitialProject.Service
 
         public void SetAttendanceToFinishTours()
         {
+            TourDetailsService tourDetailsService = new TourDetailsService();
             foreach(TourInstance tour in finishedtourInstances)
             {
                 tour.Attendance = tourDetailsService.MakeAttendancePrecentage(tour.Id);
@@ -117,6 +121,7 @@ namespace InitialProject.Service
 
         public TourInstance FindMostVisitedForChosenYear(int year)
         {
+
             GetFinishedInstancesForChoosenYear(year);
             SetAttendanceToFinishTours();
             double maximum = 0;
@@ -132,11 +137,7 @@ namespace InitialProject.Service
             return tour;
         }
 
-        public string FindFirstImageOfTour(int tourId)
-        {
-            List<TourImage> images= tourImageService.GetByTour(tourId);
-            return images[0].Url;
-        }
+      
 
     }
 }
