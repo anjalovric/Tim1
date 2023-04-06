@@ -163,7 +163,7 @@ namespace InitialProject.View
                 CancelledAccommodationReservation cancelledAccommodationReservation = new CancelledAccommodationReservation(SelectedUpcomingReservation);
                 cancelAccommodationReservationService.Add(cancelledAccommodationReservation);
                 accommodationReservationService.Delete(SelectedUpcomingReservation);
-                NotFinishedReservations = new ObservableCollection<AccommodationReservation>(accommodationReservationService.FillUpcomingAndCurrentReservations(guest1, NotFinishedReservations));
+                NotFinishedReservations.Remove(SelectedUpcomingReservation);
 
 
 
