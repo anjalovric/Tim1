@@ -42,13 +42,17 @@ namespace InitialProject.Service
         {
             List<TourInstance> tourInstances;
             tourInstances = tourInstanceService.GetAll();
+            int exist = 0;
             foreach (TourReservation tourReservation in tourReservations)
             {
                 foreach (TourInstance tourInstance in tourInstances)
                 {
                     if (tourReservation.TourInstanceId == tourInstance.Id && tourReservation.GuestId == guest2.Id && tourInstance.Finished == true)
                     {
-                        CompletedTours.Add(tourInstance);
+                        if (!CompletedTours.Contains(tourInstance))
+                        {
+                            CompletedTours.Add(tourInstance);
+                        }
                     }
                 }
             }
