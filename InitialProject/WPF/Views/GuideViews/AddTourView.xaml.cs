@@ -1,4 +1,5 @@
-﻿using InitialProject.Domain.RepositoryInterfaces;
+﻿using InitialProject.Domain.Model;
+using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.View;
@@ -228,6 +229,8 @@ namespace InitialProject.WPF.Views.GuideViews
                 }
             }
         }
+        public Uri relativeUri { get; set; }
+        private List<TourImage> images=new List<TourImage>();
         public AddTourView(ObservableCollection<TourInstance> todayInstances,User user, ObservableCollection<TourInstance> futureInstances)
         {
             InitializeComponent();
@@ -424,20 +427,20 @@ namespace InitialProject.WPF.Views.GuideViews
 
                 LanguageTB.BorderBrush = Brushes.Red;
                 LanguageTB.BorderThickness = new Thickness(1);
-                LanguageLabel.Content = "This field can't be empty";
+               
             }
             else if (!match.Success)
             {
 
                 LanguageTB.BorderBrush = Brushes.Red;
                 LanguageTB.BorderThickness = new Thickness(1);
-                LanguageLabel.Content = "Only can contains letters and one space between words";
+               
             }
             else
             {
                 valid = true;
                 LanguageTB.BorderBrush = Brushes.Green;
-                LanguageLabel.Content = string.Empty;
+
             }
             return valid;
         }
@@ -478,30 +481,27 @@ namespace InitialProject.WPF.Views.GuideViews
             if (TourPoints.Count >= 2)
             {
                 PointsGrid.BorderBrush = Brushes.Green;
-                PointLabel.Content = string.Empty;
+
                 return true;
             }
             else
             {
                 PointsGrid.BorderBrush = Brushes.Red;
                 PointsGrid.BorderThickness = new Thickness(1);
-                PointLabel.Content = "There must be at least 2 checkpoints";
+
                 return false;
             }
         }
 
         private bool IsImagesValid()
         {
-            if (TourImages.Count >= 1)
+            if (images.Count >= 1)
             {
-                ImagesGrid.BorderBrush = Brushes.Green;
-                ImageLabel.Content = string.Empty;
                 return true;
             }
             else
             {
-                ImagesGrid.BorderBrush = Brushes.Red;
-                ImageLabel.Content = "There should be at least 1 tour image";
+               
                 return false;
             }
         }
@@ -512,13 +512,11 @@ namespace InitialProject.WPF.Views.GuideViews
             if (Instances.Count == 0)
             {
                 DateTimeBox.BorderBrush = Brushes.Red;
-                DateTimeLabel.Content = "This field can't be empty";
                 return false;
             }
             else
             {
                 DateTimeBox.BorderBrush = Brushes.Green;
-                DateTimeLabel.Content = string.Empty;
                 return true;
             }
         }
@@ -631,32 +629,52 @@ namespace InitialProject.WPF.Views.GuideViews
 
         private void AddTourImage_Click(object sender, RoutedEventArgs e)
         {
-            TourImageForm tourImageForm = new TourImageForm(tourImageRepository, TourImages);
-            tourImageForm.Show();
+            // TourImageForm tourImageForm = new TourImageForm(tourImageRepository, TourImages);
+            //tourImageForm.Show();
 
-           /*  OpenFileDialog op = new OpenFileDialog();
-             op.Title = "Select a picture";
-             op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
-               "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
-               "Portable Network Graphic (*.png)|*.png";
-            if (op.ShowDialog() == true)
+            /*  OpenFileDialog op = new OpenFileDialog();
+              op.Title = "Select a picture";
+              op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
+                "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
+                "Portable Network Graphic (*.png)|*.png";
+             if (op.ShowDialog() == true)
+             {
+                 string fullPath = op.FileName;
+
+
+                 string[] parts = fullPath.Split('\\');
+                 fullPath = parts[parts.Length - 1];
+                 string im = "/Resources/Images/" + fullPath;
+                 fullPath = im;
+                 ImageUrl = fullPath;
+                 TourImage newImage = new TourImage();
+                 newImage.Url = fullPath;
+                 newImage.TourId = -1;
+                 TourImage savedImage = tourImageRepository.Save(newImage);
+                 TourImages.Add(savedImage);
+
+
+             }*/
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image files|*.bmp;*.jpg;*.png";
+            openFileDialog.FilterIndex = 1;
+            if (openFileDialog.ShowDialog() == true)
             {
-                string fullPath = op.FileName;
-
-
-                string[] parts = fullPath.Split('\\');
-                fullPath = parts[parts.Length - 1];
-                string im = "/Resources/Images/" + fullPath;
-                fullPath = im;
-                ImageUrl = fullPath;
+                Uri resource = new Uri(openFileDialog.FileName);
+                String absolutePath = resource.ToString();
+                int relativeIndex = absolutePath.IndexOf("Resources");
+                String relative = absolutePath.Substring(relativeIndex);
+                relativeUri = new Uri("/" + relative, UriKind.Relative);
+                BitmapImage bitmapImage = new BitmapImage(relativeUri);
+                bitmapImage.UriSource = relativeUri; 
+                imagePicture.Source = new BitmapImage(new Uri("/" + relative, UriKind.Relative));
                 TourImage newImage = new TourImage();
-                newImage.Url = fullPath;
+                newImage.Url = relative;
                 newImage.TourId = -1;
                 TourImage savedImage = tourImageRepository.Save(newImage);
-                TourImages.Add(savedImage);
+                images.Add(savedImage);
+            }
 
-
-            }*/
         }
 
 
@@ -805,7 +823,88 @@ namespace InitialProject.WPF.Views.GuideViews
                 CheckPointName.Clear();
             }
         }
-      
 
+        private void Next_Click(object sender, RoutedEventArgs e)
+        {
+            for(int i = 0;i<images.Count;i++)
+            {
+                if (imagePicture.Source.ToString().Contains(images[i].Url))
+                {
+                    int k = i + 1;
+                    if (k < images.Count)
+                    {
+                        imagePicture.Source = imagePicture.Source = new BitmapImage(new Uri("/" + images[k].Url, UriKind.Relative));
+                        break;
+                    }
+
+                    if (k == images.Count)
+                    {
+                        imagePicture.Source = imagePicture.Source = new BitmapImage(new Uri("/" + images[0].Url, UriKind.Relative));
+                        break;
+                    }
+                }
+
+            }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            for (int i = 0; i < images.Count; i++)
+            {
+                if (imagePicture.Source.ToString().Contains(images[i].Url))
+                {
+                    int k = i - 1;
+                    if (k >=0)
+                    {
+                        imagePicture.Source = imagePicture.Source = new BitmapImage(new Uri("/" + images[k].Url, UriKind.Relative));
+                        break;
+                    }
+
+                    if (k <0)
+                    {
+                        imagePicture.Source = imagePicture.Source = new BitmapImage(new Uri("/" + images[images.Count-1].Url, UriKind.Relative));
+                        break;
+                    }
+                }
+
+            }
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            if (images.Count != 0)
+            {
+                for (int i = 0; i < images.Count; i++)
+                {
+                    if (imagePicture.Source.ToString().Contains(images[i].Url))
+                    {
+                        TourImage tourImage = images[i];
+                        tourImageRepository.Delete(tourImage);
+                        images.Remove(tourImage);
+                        RemoveImage(i);
+
+                    }
+                }
+            }
+        }
+        private void RemoveImage(int i)
+        {
+            if (images.Count > 0)
+            {
+                int k = i - 1;
+                if (k >= 0)
+                {
+                    imagePicture.Source = imagePicture.Source = new BitmapImage(new Uri("/" + images[k].Url, UriKind.Relative));
+                }
+                else
+                {
+                    imagePicture.Source = imagePicture.Source = new BitmapImage(new Uri("/" + images[images.Count - 1].Url, UriKind.Relative));
+                }
+            }
+            else
+            {
+                imagePicture.Source = null;
+            }
+        }
     }
 }

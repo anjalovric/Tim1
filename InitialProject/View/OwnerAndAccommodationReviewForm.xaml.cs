@@ -16,6 +16,8 @@ using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.View.Owner;
 using InitialProject.Service;
+using InitialProject.Domain.Model;
+using Microsoft.Win32;
 
 namespace InitialProject.View
 {
@@ -27,7 +29,8 @@ namespace InitialProject.View
         private AccommodationReservation reservation;
         private OwnerReviewService ownerReviewService;
         public Frame Main;
-
+        private AccommodationReviewImageService accommodationReviewImageService;
+        public Uri relativeUri { get; set; }
         public OwnerAndAccommodationReviewForm(AccommodationReservation reservation, ref Frame Main, OwnerReviewService ownerReviewService)
         {
             InitializeComponent();
@@ -36,6 +39,7 @@ namespace InitialProject.View
             this.Main.Content = this;
             this.reservation = reservation; //trenutna rezervacija koju ocjenjujem
             this.ownerReviewService = ownerReviewService;
+            this.accommodationReviewImageService = new AccommodationReviewImageService();
         }
 
         private void SendOwnerReviewButton_Click(object sender, RoutedEventArgs e)
@@ -48,5 +52,29 @@ namespace InitialProject.View
             
         }
 
+        private void AddPhotoButton_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image files|*.bmp;*.jpg;*.png";
+            openFileDialog.FilterIndex = 1;
+            if (openFileDialog.ShowDialog() == true)
+            {
+                Uri resource = new Uri(openFileDialog.FileName);
+                String absolutePath = resource.ToString();
+                int relativeIndex = absolutePath.IndexOf("Resources");
+                String relative = absolutePath.Substring(relativeIndex);
+                relativeUri = new Uri("/" + relative, UriKind.Relative);
+                BitmapImage bitmapImage = new BitmapImage(relativeUri);
+                bitmapImage.UriSource = relativeUri;
+                imagePicture.Source = new BitmapImage(new Uri("/" + relative, UriKind.Relative));
+                AccommodationReviewImage accommodationReviewImage = new AccommodationReviewImage(reservation, relative);
+                accommodationReviewImageService.Add(accommodationReviewImage); //ovdje treba ali u listu. provjeriti i za cancel dugme
+            }
+        }
+
+        private void DeletePhotoButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -26,7 +26,7 @@
         <Label HorizontalContentAlignment="Left" FontSize="18" Margin="71,444,256,214" Content="Comments:"/>
         <TextBox x:Name="Comments" Margin="71,487,71,27"/>
 
-        <Button Width="45" Content="+"  FontSize="21" Height="45" Margin="211,348,256,303">
+        <Button Width="45" Content="+" Click="AddPhotoButton_Click" FontSize="21" Height="45" Margin="211,348,256,303">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Grid>
@@ -44,6 +44,32 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
+
+        <TextBox Margin="261,300,71,262" />
+        <Image x:Name="imagePicture" Margin="271,310,82,273"/>
+
+        <Label Content="Rate tour and guide" Margin="70,25,560,386" FontSize="20" FontWeight="Bold"/>
+
+
+        <Canvas Name="canvas" Margin="415,305,75,371" MouseLeftButtonDown="DeletePhotoButton_Click">
+            <Path Stroke="Red" StrokeThickness="2" HorizontalAlignment="Center" VerticalAlignment="Top" Height="20" Stretch="Fill" Width="22">
+                <Path.Data>
+                    <PathGeometry>
+                        <PathGeometry.Figures>
+                            <PathFigure StartPoint="0,0">
+                                <LineSegment Point="25,25"/>
+                            </PathFigure>
+                            <PathFigure StartPoint="0,25">
+                                <LineSegment Point="25,0"/>
+                            </PathFigure>
+                        </PathGeometry.Figures>
+                    </PathGeometry>
+                </Path.Data>
+            </Path>
+        </Canvas>
+
+
+
 
 
 
