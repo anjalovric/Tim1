@@ -24,7 +24,7 @@ namespace InitialProject.WPF.Views.GuideViews
     /// <summary>
     /// Interaction logic for StartedTourInstanceView.xaml
     /// </summary>
-    public partial class StartedTourInstanceView : Page
+    public partial class StartedTourInstanceView : Page 
     {
         public ObservableCollection<CheckPoint> AllPoints { get; set; }
         public ObservableCollection<CheckPoint> CurrentPoint { get; set; }

@@ -38,5 +38,10 @@ namespace InitialProject.Model
             string[] csvValues = { Id.ToString(), Name, LastName, Username};
             return csvValues;
         }
+
+        public override string ToString()
+        {
+            return "Guests from reservation made by "+Name + " " + LastName;
+        }
     }
 }

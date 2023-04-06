@@ -1,7 +1,9 @@
-﻿using InitialProject.Model;
+﻿using InitialProject.Domain.Model;
+using InitialProject.Model;
 using InitialProject.Service;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,6 +27,7 @@ namespace InitialProject.WPF.Views.GuideViews
     {
         TourInstance selectedInstance;
         private TourDetailsService detailsService;
+        public ObservableCollection<CheckPointInformation> CheckPointInformations { get;set; }
 
         public FinishedTourDetails(TourInstance selected)
         {
@@ -32,6 +35,7 @@ namespace InitialProject.WPF.Views.GuideViews
             DataContext = this;
             selectedInstance = selected;
             detailsService = new TourDetailsService();
+            CheckPointInformations = new ObservableCollection<CheckPointInformation>();
 
             MakeHeader(selected);
             ComposeReport();
@@ -52,8 +56,13 @@ namespace InitialProject.WPF.Views.GuideViews
         {
             foreach (CheckPoint point in detailsService.GetInstancePoints(selectedInstance))
             {
-                WriteGuestsCountOnPoint(detailsService.CountGuestsOnPoint(point.Id, selectedInstance), point.Id);
-                ShowGuestsOnPoint(point.Id);
+                CheckPointInformation pointInformation = new CheckPointInformation();
+                pointInformation.CheckPoint= point;
+                pointInformation.countGuests = detailsService.CountGuestsOnPoint(point.Id, selectedInstance);
+                //WriteGuestsCountOnPoint(detailsService.CountGuestsOnPoint(point.Id, selectedInstance), point.Id,pointInformation);
+                ShowGuestsOnPoint(point.Id, pointInformation);
+                CheckPointInformations.Add(pointInformation);
+                
             }
         }
 
@@ -86,7 +95,7 @@ namespace InitialProject.WPF.Views.GuideViews
             PointStack.Children.Add(pointOrder);
         }
 
-        private void ShowGuestsOnPoint(int currentPointId)
+        private void ShowGuestsOnPoint(int currentPointId,CheckPointInformation pointInformation)
         {
 
             foreach (AlertGuest2 alert in detailsService.alertGuest2Service.GetAll())
@@ -94,7 +103,8 @@ namespace InitialProject.WPF.Views.GuideViews
                 if (alert.CheckPointId == currentPointId && alert.Availability && alert.InstanceId == selectedInstance.Id)
                 {
                     Guest2 presentGuest = detailsService.guest2Service.GetById(alert.Guest2Id);
-                    WriteGuestOnPoint(presentGuest);
+                    pointInformation.guest2s.Add(presentGuest);
+                   // WriteGuestOnPoint(presentGuest);
                 }
             }
         }

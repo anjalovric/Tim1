@@ -123,7 +123,7 @@
         <Button  Margin="932,193,108,455" Click="OKCheckPoint_Click">OK</Button>
         <Button   Margin="1019,193,20,455" Click="CancelCheckPoint_Click">Cancel</Button>
         <ListBox x:Name="ImageListBox" Margin="185,518,804,40" />
-        <Image Source="{Binding ImageUrl}" HorizontalAlignment="Left" Height="128" Margin="296,493,0,0" VerticalAlignment="Top" Width="211"/>
+        <Image Source="{Binding Path= ImageUrl, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="128" Margin="296,493,0,0" VerticalAlignment="Top" Width="211"/>
 
 
 

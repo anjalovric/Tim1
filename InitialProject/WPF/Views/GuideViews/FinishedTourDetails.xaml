@@ -7,9 +7,39 @@
       mc:Ignorable="d" 
       d:DesignHeight="700" d:DesignWidth="1100"
       Title="FinishedTourDetails" Background="White">
+    <Page.Resources>
+        <DataTemplate x:Key="checkPoints">
+            <Border BorderBrush="Black" BorderThickness="1">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="560"/>
+
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Grid.Column="0" >
+                <Run Text="On checkpoint " />
+                <Run Text="{Binding Path=CheckPoint.Name}" />
+                    </TextBlock>
+                    <ListBox Grid.Column="0" Grid.Row="1" BorderThickness="0" ItemsSource="{Binding Path= guest2s}">
+
+                    </ListBox>
+                    <TextBlock Grid.Row="2" Grid.Column="0" >
+                <Run Text="number of guests " />
+                <Run Text="{Binding Path=countGuests}" />
+                    </TextBlock>
+                </Grid>
+            </Border>
+        </DataTemplate>
+    </Page.Resources>
 
     <Grid>
-        <StackPanel x:Name="PointStack" Margin="29,100,580,31" ></StackPanel>
+        <StackPanel x:Name="PointStack" Margin="29,100,1071,350" ></StackPanel>
+        <ListBox x:Name="list" ItemsSource="{Binding CheckPointInformations}" ItemTemplate="{StaticResource checkPoints}" Margin="29,100,580,31" ></ListBox>
         <Border BorderBrush="Black" RenderTransformOrigin="0.355,0.497" Margin="29,100,580,31" BorderThickness="1"/>
         <Border BorderBrush="Black" BorderThickness="1" Margin="550,100,30,31">
             <Grid>
