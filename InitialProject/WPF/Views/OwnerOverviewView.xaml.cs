@@ -20,9 +20,16 @@ namespace InitialProject.WPF.Views
     /// </summary>
     public partial class OwnerOverviewView : Page
     {
+        private ReservationReschedulingView reservationReschedulingView;
         public OwnerOverviewView()
         {
             InitializeComponent();
+            reservationReschedulingView = new ReservationReschedulingView();
+        }
+
+        private void RequestButton_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = reservationReschedulingView;
         }
     }
 }

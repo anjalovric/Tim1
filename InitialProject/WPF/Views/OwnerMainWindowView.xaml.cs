@@ -18,6 +18,7 @@ namespace InitialProject.WPF.Views
             InitializeComponent();
             DataContext = new OwnerMainWindowViewModel(user);
             this.user = user;
+            FrameForPages.Content = new OwnerOverviewView();
         }
         private void BurgerMenu_Click(object sender, RoutedEventArgs e)
         {
