@@ -52,8 +52,8 @@ namespace InitialProject.View
             {
                 ChangeAccommodationReservationDateRequest newRequest = new ChangeAccommodationReservationDateRequest(reservation, Arrival, Departure, Reason);
                 requestService.Add(newRequest);
-                MessageBox.Show("Request successfully sent!");
                 this.Close();
+                MessageBox.Show("Request successfully sent!");
             }
             else
             {

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
         Title="AccommodationReservationForm" Height="501" Width="420" WindowStartupLocation="CenterScreen">
-    <Grid>
+    <Grid Background="Cornsilk">
         <Label Content="Arrival date:" Margin="65,20,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" TextElement.FontWeight="DemiBold">
             <Label.RenderTransform>
                 <TransformGroup>
