@@ -1,0 +1,79 @@
+﻿<Window x:Class="InitialProject.View.GuideAndTourReviewForm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InitialProject.View"
+        mc:Ignorable="d"
+        Title="RateTourAndGuide" Height="600" Width="920" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Label Content="Guide knowledge" Margin="70,78,560,333"/>
+        <Label Content="Guide language" Margin="70,119,560,292"/>
+        <Label Content="Interesting facts of tour" Margin="70,168,560,243"/>
+        <TextBlock x:Name="interestingFacts" Text="1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="290" TextAlignment="Center" Height="22" Background="#FFDFDCDC" Margin="534,175,0,0" />
+        <TextBlock x:Name="language" Text="1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="290" TextAlignment="Center" Height="22" Background="#FFDFDCDC" Margin="534,124,0,0" />
+        <TextBlock x:Name="knowledge" Text="1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="290" TextAlignment="Center" Height="22" Background="#FFDFDCDC" Margin="534,79,0,0" />
+        <Button x:Name="dekrementNumber1" Content="-" HorizontalAlignment="Left" Margin="493,175,0,0" VerticalAlignment="Top" Width="20" Click="ZanimljivostiDekrement_Click" Height="22"/>
+        <Button x:Name="inkrementNumber" Content="+" HorizontalAlignment="Left" Margin="850,175,0,0" VerticalAlignment="Top" Width="20" Click="ZanimljivostiInkrement_Click" RenderTransformOrigin="-1.284,0.612" Height="22"/>
+        <Button x:Name="inkrementNumber1" Content="+" HorizontalAlignment="Left" Margin="850,126,0,0" VerticalAlignment="Top" Width="20" Click="JezikInkrement_Click" RenderTransformOrigin="-1.284,0.612" Height="22"/>
+        <Button x:Name="inkrementNumber2" Content="+" HorizontalAlignment="Left" Margin="850,79,0,0" VerticalAlignment="Top" Width="20" Click="ZnanjeInkrement_Click" RenderTransformOrigin="-1.284,0.612" Height="22"/>
+        <Button x:Name="dekrementNumber" Content="-" HorizontalAlignment="Left" Margin="493,126,0,0" VerticalAlignment="Top" Width="20" Click="JezikDekrement_Click" Height="22"/>
+        <Button x:Name="dekrementNumber2" Content="-" HorizontalAlignment="Left" Margin="493,80,0,0" VerticalAlignment="Top" Width="20" Click="ZnanjeDekrement_Click" Height="22"/>
+        <Label Content="Comment" Margin="70,217,679,289"/>
+        <Label Content="Photos" Margin="488,217,280,279"/>
+        <TextBox x:Name="comment" TextWrapping="Wrap" Margin="70,262,443,76" />
+        <Button Content="Confirm" Margin="586,518,197,10" Click="Rate_Click" FontWeight="Bold"/>
+        <Button Content="Cancel" Margin="753,518,25,10" Click="Cancel_Click" FontWeight="Bold"/>
+        <Border BorderBrush="Black" Margin="493,260,30,78" Visibility="Visible" BorderThickness="1"></Border>
+        <Button Content="Click to upload" HorizontalAlignment="Left" Margin="770,231,0,0" VerticalAlignment="Top" Click="Button_Click" Width="100" FontWeight="Bold">
+
+        </Button>
+        <Image x:Name="imagePicture" Margin="496,266,52,89"/>
+
+        <Label Content="Rate tour and guide" Margin="70,25,560,386" FontSize="20" FontWeight="Bold"/>
+        <Button Content="Delete" Margin="390,407,443,78" Click="Delete_Click">
+
+        </Button>
+        <Canvas Margin="860,350,-386,164" Height="20" MouseLeftButtonDown="NextButton_Click">
+            <Line X1="10" Y1="10" X2="50" Y2="10" Stroke="Black" 
+                  StrokeThickness="2" StrokeDashCap="Round" StrokeEndLineCap="Round" StrokeStartLineCap="Round" HorizontalAlignment="Left" VerticalAlignment="Center" Width="36"/>
+            <Line X1="35" Y1="10" X2="30" Y2="5" Stroke="Black" 
+                  StrokeThickness="2" StrokeDashCap="Round" StrokeEndLineCap="Round" StrokeStartLineCap="Round"/>
+            <Line X1="35" Y1="10" X2="30" Y2="15" Stroke="Black" 
+                  StrokeThickness="2" StrokeDashCap="Round" StrokeEndLineCap="Round" StrokeStartLineCap="Round" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Canvas>
+        <Canvas Margin="268,354,406,160" Height="20" MouseLeftButtonDown="BackButton_Click" RenderTransformOrigin="0.5,0.5">
+            <Canvas.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="180"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Canvas.RenderTransform>
+            <Line X1="10" Y1="10" X2="50" Y2="10" Stroke="Black" 
+                  StrokeThickness="2" StrokeDashCap="Round" StrokeEndLineCap="Round" StrokeStartLineCap="Round" HorizontalAlignment="Left" VerticalAlignment="Center" Width="36"/>
+            <Line X1="35" Y1="10" X2="30" Y2="5" Stroke="Black" 
+                  StrokeThickness="2" StrokeDashCap="Round" StrokeEndLineCap="Round" StrokeStartLineCap="Round" HorizontalAlignment="Center" VerticalAlignment="Center" Width="38"/>
+            <Line X1="35" Y1="10" X2="30" Y2="15" Stroke="Black" 
+                  StrokeThickness="2" StrokeDashCap="Round" StrokeEndLineCap="Round" StrokeStartLineCap="Round" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Canvas>
+        <Canvas Name="canvas" Margin="413,331,77,182" MouseLeftButtonDown="DeletePhotoButton_Click">
+            <Path Stroke="Red" StrokeThickness="2" HorizontalAlignment="Center" VerticalAlignment="Top" Height="29" Stretch="Fill" Width="30" Canvas.Left="412.881" Canvas.Top="109.696">
+                <Path.Data>
+                    <PathGeometry>
+                        <PathGeometry.Figures>
+                            <PathFigure StartPoint="0,0">
+                                <LineSegment Point="25,25"/>
+                            </PathFigure>
+                            <PathFigure StartPoint="0,25">
+                                <LineSegment Point="25,0"/>
+                            </PathFigure>
+                        </PathGeometry.Figures>
+                    </PathGeometry>
+                </Path.Data>
+            </Path>
+        </Canvas>
+
+    </Grid>
+</Window>

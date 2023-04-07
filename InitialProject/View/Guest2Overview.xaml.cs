@@ -1,4 +1,5 @@
-﻿using InitialProject.Model;
+﻿using InitialProject.Domain.RepositoryInterfaces;
+using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.Serializer;
 using System;
@@ -67,5 +68,6 @@ namespace InitialProject.View
             CC.Content = new VoucherViewForm(guest2);
 
         }
+       
     }
 }

@@ -78,8 +78,8 @@ namespace InitialProject.View
             TourInstance currentTourInstance = (TourInstance)TourListDataGrid.CurrentItem;
             //TourReservation reservation=new TourReservation();
             //reservation=FindTourReservation(currentTourInstance,reservation);
-            RateTourAndGuide rateTourAndGuide = new RateTourAndGuide(currentTourInstance,guest2);
-            rateTourAndGuide.Show();
+            GuideAndTourReviewForm guideAndTourReview = new GuideAndTourReviewForm(currentTourInstance,guest2);
+            guideAndTourReview.Show();
         }
     }
 }

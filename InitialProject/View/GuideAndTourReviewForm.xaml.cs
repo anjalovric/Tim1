@@ -2,6 +2,7 @@
 using InitialProject.Domain.Model;
 using InitialProject.Model;
 using InitialProject.Repository;
+using InitialProject.Service;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -24,32 +25,31 @@ namespace InitialProject.View
     /// <summary>
     /// Interaction logic for RateTourAndGuide.xaml
     /// </summary>
-    public partial class RateTourAndGuide : Window
+    public partial class GuideAndTourReviewForm : Window
     {
         private GuideAndTourReviewRepository guideAndTourReviewRepository;
-        private TourReviewImageRepository tourReviewImageRepository;
+        private TourReviewImageService tourReviewImageService;
         private String Comment;
-        private TourReservation Reservation;
         private Guest2 guest2;
         private TourInstance CurrentTourInstance;
         public int Language;
+        private List<TourReviewImage> images;
         public Uri relativeUri { get; set; }
         public int InterestingFacts;
         public int Knowledge;
         public TourReviewImage tourReviewImage;
-        public RateTourAndGuide(TourInstance tourInstance,Guest2 guest2)
+        public GuideAndTourReviewForm(TourInstance tourInstance,Guest2 guest2)
         {
             InitializeComponent();
             guideAndTourReviewRepository = new GuideAndTourReviewRepository();
-            tourReviewImageRepository = new TourReviewImageRepository();
+            tourReviewImageService = new TourReviewImageService();
             this.guest2 = guest2;
             CurrentTourInstance = tourInstance;
-            //Reservation = reservation;
+            images = new List<TourReviewImage>();
             Language = 1;
             InterestingFacts = 1;
             Knowledge = 1;
             tourReviewImage = new TourReviewImage();
-            
         }
         private void ZnanjeInkrement_Click(object sender, RoutedEventArgs e)
         {
@@ -120,11 +120,50 @@ namespace InitialProject.View
             else
             {
                 Comment = comment.Text;
-                GuideAndTourReview guideAndTourReview = new GuideAndTourReview(CurrentTourInstance.Guide.Id, guest2.Id, CurrentTourInstance,Language,InterestingFacts, Knowledge,Comment,tourReviewImage); //trebace se lista proslijedjivati
+                GuideAndTourReview guideAndTourReview = new GuideAndTourReview(CurrentTourInstance.Guide.Id, guest2.Id, CurrentTourInstance,Language,InterestingFacts, Knowledge,Comment); //trebace se lista proslijedjivati
                 guideAndTourReviewRepository.Save(guideAndTourReview);
+                StoreImages();
                 this.Close();
             }
         }
+        
+
+        private void StoreImages()
+        {
+            foreach (TourReviewImage image in images)
+            {
+                tourReviewImageService.Save(image);
+            }
+        }
+        private void DeletePhotoButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (images.Count != 0)
+            {
+                for (int i = 0; i < images.Count; i++)
+                {
+                    if (imagePicture.Source.ToString().Contains(images[i].RelativeUri))
+                    {
+                        TourReviewImage image = images[i];    
+                        images.Remove(image);
+                        RemoveImage(i);
+                    }
+                }
+            }
+        }
+
+        private bool IsImageUploadValid()
+        {
+            if (images.Count >= 1)
+            {
+                return true;
+            }
+            else
+            {
+
+                return false;
+            }
+        }
+
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
@@ -144,8 +183,8 @@ namespace InitialProject.View
                 BitmapImage bitmapImage = new BitmapImage(relativeUri);
                 bitmapImage.UriSource = relativeUri;
                 imagePicture.Source = new BitmapImage(new Uri("/"+relative, UriKind.Relative));
-                tourReviewImage = new TourReviewImage(CurrentTourInstance,relative);
-                tourReviewImageRepository.Save(tourReviewImage); //ovdje treba ali u listu. provjeriti i za cancel dugme
+                tourReviewImage = new TourReviewImage(CurrentTourInstance, relative);
+                images.Add(tourReviewImage);
             }
 
         }
@@ -153,6 +192,70 @@ namespace InitialProject.View
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
             comment.Text = "";
+        }
+        private void NextButton_Click(object sender, RoutedEventArgs e)
+        {
+            for (int i = 0; i < images.Count; i++)
+            {
+                if (imagePicture.Source.ToString().Contains(images[i].RelativeUri))
+                {
+                    int k = i + 1;
+                    if (k < images.Count)
+                    {
+                        imagePicture.Source = imagePicture.Source = new BitmapImage(new Uri("/" + images[k].RelativeUri, UriKind.Relative));
+                        break;
+                    }
+
+                    if (k == images.Count)
+                    {
+                        imagePicture.Source = imagePicture.Source = new BitmapImage(new Uri("/" + images[0].RelativeUri, UriKind.Relative));
+                        break;
+                    }
+                }
+
+            }
+        }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            for (int i = 0; i < images.Count; i++)
+            {
+                if (imagePicture.Source.ToString().Contains(images[i].RelativeUri))
+                {
+                    int k = i - 1;
+                    if (k >= 0)
+                    {
+                        imagePicture.Source = imagePicture.Source = new BitmapImage(new Uri("/" + images[k].RelativeUri, UriKind.Relative));
+                        break;
+                    }
+
+                    if (k < 0)
+                    {
+                        imagePicture.Source = imagePicture.Source = new BitmapImage(new Uri("/" + images[images.Count - 1].RelativeUri, UriKind.Relative));
+                        break;
+                    }
+                }
+
+            }
+        }
+        private void RemoveImage(int i)
+        {
+            if (images.Count > 0)
+            {
+                int k = i - 1;
+                if (k >= 0)
+                {
+                    imagePicture.Source = imagePicture.Source = new BitmapImage(new Uri("/" + images[k].RelativeUri, UriKind.Relative));
+                }
+                else
+                {
+                    imagePicture.Source = imagePicture.Source = new BitmapImage(new Uri("/" + images[images.Count - 1].RelativeUri, UriKind.Relative));
+                }
+            }
+            else
+            {
+                imagePicture.Source = null;
+            }
         }
     }
 }
