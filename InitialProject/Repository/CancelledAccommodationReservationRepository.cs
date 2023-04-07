@@ -12,13 +12,13 @@ namespace InitialProject.Repository
     {
         private const string FilePath = "../../../Resources/Data/cancelledAccommodationReservations.csv";
 
-        private readonly Serializer<CancelledAccommodationReservation> _serializer;
+        private readonly Serializer<AccommodationReservation> _serializer;
 
-        private List<CancelledAccommodationReservation> _cancelledAccommodationReservations;
+        private List<AccommodationReservation> _cancelledAccommodationReservations;
 
         public CancelledAccommodationReservationRepository()
         {
-            _serializer = new Serializer<CancelledAccommodationReservation>();
+            _serializer = new Serializer<AccommodationReservation>();
             _cancelledAccommodationReservations = _serializer.FromCSV(FilePath);
         }
 
@@ -32,19 +32,20 @@ namespace InitialProject.Repository
             return _cancelledAccommodationReservations.Max(c => c.Id) + 1;
         }
 
-        public void Add(CancelledAccommodationReservation reservation)
+        public void Add(AccommodationReservation reservation)
         {
-            reservation.Id = NextId();
-            _cancelledAccommodationReservations.Add(reservation);
+            AccommodationReservation cancelled = new AccommodationReservation(reservation.Guest, reservation.Accommodation, reservation.Arrival, reservation.Departure);
+            cancelled.Id = NextId();
+            _cancelledAccommodationReservations.Add(cancelled);
             _serializer.ToCSV(FilePath, _cancelledAccommodationReservations);
         }
 
-        public List<CancelledAccommodationReservation> GetAll()
+        public List<AccommodationReservation> GetAll()
         {
             return _cancelledAccommodationReservations;
         }
 
-        public CancelledAccommodationReservation GetById(int id)
+        public AccommodationReservation GetById(int id)
         {
             return _cancelledAccommodationReservations.Find(n => n.Id == id);
         }
