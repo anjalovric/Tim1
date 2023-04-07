@@ -11,7 +11,8 @@ namespace InitialProject.Model
         public DateTime Arrival { get; set; }
         public DateTime Departure { get; set; }
 
-        public AvailableDatesForAccommodationReservation(DateTime arrival, DateTime departure)        {
+        public AvailableDatesForAccommodationReservation(DateTime arrival, DateTime departure)
+        {
             Arrival = arrival;
             Departure = departure;
         }

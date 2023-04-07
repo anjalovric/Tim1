@@ -1,0 +1,83 @@
+﻿<Page x:Class="InitialProject.WPF.Views.ReservationReschedulingView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:InitialProject.WPF.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="630" d:DesignWidth="430"
+      Title="ReservationReschedulingView" Background="White">
+
+    <Page.Resources>
+        <DataTemplate x:Key="requests">
+            <Border  BorderBrush="Black" BorderThickness="0.5" >
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="110"/>
+                        <ColumnDefinition Width="121"/>
+                        <ColumnDefinition Width="15" />
+                        <ColumnDefinition Width="121"/>
+                        <ColumnDefinition Width="15" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock VerticalAlignment="Bottom" Grid.Column="0" Grid.Row="0">Guest:</TextBlock>
+                    <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding Path=AccommodationReservation.Guest}" FontSize="15"></TextBlock>
+
+                    <TextBlock VerticalAlignment="Bottom" Grid.Column="0" Grid.Row="2">Accommodation:</TextBlock>
+                    <TextBlock Grid.Column="0" Grid.Row="3" Text="{Binding Path=AccommodationReservation.Accommodation.Name}" FontSize="15"></TextBlock>
+                    <TextBlock Grid.Column="0" Grid.Row="4" Text="{Binding Path= AccommodationReservation.Accommodation.Location}"></TextBlock>
+
+                    <TextBlock VerticalAlignment="Bottom" Grid.Column="1" Grid.Row="0" Text="Old date range"></TextBlock>
+                    <TextBlock VerticalAlignment="Bottom" Grid.Column="1" Grid.Row="2" Text="New date range"></TextBlock>
+
+
+                    <Border Grid.Column="1" Grid.Row="1" BorderBrush="Black" BorderThickness="0.5">
+                        <TextBlock  Text="{Binding Path = AccommodationReservation.Arrival}"></TextBlock>
+                     </Border>
+                    <Image  Grid.Column="2" Grid.Row="1" Source="/Resources/Images/calendar.png" />
+                    <Image  Grid.Column="4" Grid.Row="1" Source="/Resources/Images/calendar.png" />
+                    <Border Grid.Column="3" Grid.Row="1" BorderBrush="Black" BorderThickness="0.5">
+                        <TextBlock Text="{Binding Path = AccommodationReservation.Departure}"></TextBlock>
+                     </Border>
+
+                    <Border Grid.Column="1" Grid.Row="3" BorderBrush="Black" BorderThickness="0.5">
+                    <TextBlock Text="{Binding Path = Request.NewArrivalDate}"></TextBlock>
+                    </Border>
+                    <Image  Grid.Column="2" Grid.Row="3" Source="/Resources/Images/calendar.png" />
+                    <Image  Grid.Column="4" Grid.Row="3" Source="/Resources/Images/calendar.png" />
+                    <Border  Grid.Column="3" Grid.Row="3" BorderBrush="Black" BorderThickness="0.5">
+                    <TextBlock Text="{Binding Path = Request.NewDepartureDate}"></TextBlock>
+                    </Border>
+
+                    <TextBlock Grid.Row="5" Grid.Column="0" Text="{Binding Path=Availability}" ></TextBlock>
+                    <Button Name="DeclineButton" Content="Decline" Grid.Column="1" Grid.Row="5" Click="DeclineButton_Click"></Button>
+                    <Button Name="ApproveButton" Content="Approve" Grid.Column="3" Grid.Row="5" Click="ApproveButton_Click"></Button>
+
+                </Grid>
+            </Border>
+        </DataTemplate>
+    </Page.Resources>
+    
+    
+    <Grid Margin="0,0,0,0">
+        <ListBox ItemsSource="{Binding Path= Requests}" ItemTemplate="{StaticResource requests}" IsSynchronizedWithCurrentItem="True" SelectedValue="{Binding Path=SelectedRequest, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" Margin="10,40,10,40">
+            <ListBox.Resources>
+                <Style TargetType="ListBoxItem">
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseCaptured"  Value="True">
+                            <Setter Property="IsSelected" Value="True"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </ListBox.Resources>
+        </ListBox>
+
+    </Grid>
+</Page>
