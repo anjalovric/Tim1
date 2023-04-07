@@ -18,11 +18,12 @@ namespace InitialProject.Service
         private LocationService locationService;
         private TourInstanceService tourInstanceService;
         private TourService tourService;
-<<<<<<< HEAD
+
         private TourReservationService tourReservationService;
         private IGuideAndTourReviewsRepository guideAndTourReviewRepository = Injector.CreateInstance<IGuideAndTourReviewsRepository>();
         private ObservableCollection<TourReservation> tourReservations;
-
+        private AlertGuest2Service alertGuest2Service;
+        private ObservableCollection<AlertGuest2> alertGuest2List;
         public Location Location { get; set; }
 
         public GuideAndTourReviewService()
@@ -34,10 +35,10 @@ namespace InitialProject.Service
             tourService = new TourService();
             tourReservationService = new TourReservationService();
             tourReservations = new ObservableCollection<TourReservation>(tourReservationService.GetAll());
+            alertGuest2Service = new AlertGuest2Service();
+            alertGuest2List = new ObservableCollection<AlertGuest2>(alertGuest2Service.GetAll());
 
-           
-           
-=======
+/*=======
         private GuideAndTourReviewRepository guideAndTourReviewRepository;
         private AlertGuest2Service alertGuest2Service;
         private Guest2 guest2;
@@ -54,7 +55,7 @@ namespace InitialProject.Service
             this.guest2 = guest2;
             CompletedTours = new ObservableCollection<TourInstance>();
             SetTourInstances(CompletedTours);
->>>>>>> 1d3141450d10619d649812f2a477f929560693b3
+>>>>>>> 1d3141450d10619d649812f2a477f929560693b3*/
             Location = new Location();
 
             
