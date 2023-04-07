@@ -697,15 +697,21 @@ namespace InitialProject.WPF.Views.GuideViews
             newInstance = new TourInstance();
             if (IsDateValid() && IsTimeValid())
             {
-                newInstance.StartDate = InstanceStartDate;
                 newInstance.StartClock = InstanceStartHour;
+                newInstance.StartDate = InstanceStartDate;
+                newInstance.Date = InstanceStartDate.ToString().Split(' ')[0];
                 newInstance.Guide = currentGuide;
                 newInstance.CoverImage = "";
                 Instances.Add(newInstance);
-                InstanceStartHourTB.Clear();
-                Picker.Text = "";
-                Picker.BorderBrush= new SolidColorBrush(Colors.Green);
+                ClearDateForm();
             }
+        }
+
+        private void ClearDateForm()
+        {
+            InstanceStartHourTB.Clear();
+            Picker.Text = "";
+            Picker.BorderBrush = new SolidColorBrush(Colors.Green);
         }
         private bool IsDateValid()
         {

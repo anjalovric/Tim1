@@ -32,6 +32,8 @@ namespace InitialProject.Model
 
         public bool Active { get; set; }    
 
+        public string Date { get;set; }
+
         public void FromCSV(string[] values)
         {
             Id = Convert.ToInt32(values[0]);
@@ -44,12 +46,13 @@ namespace InitialProject.Model
             CoverImage = values[7];
             CoverBitmap= new BitmapImage(new Uri("/" + CoverImage, UriKind.Relative));
             Active= Convert.ToBoolean(values[9]);
+            Date = values[10];
 
         }
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), Tour.Id.ToString(), StartDate.ToString(), StartClock ,Finished.ToString(),Guide.Id.ToString(),Attendance.ToString(),CoverImage,CoverBitmap.ToString(),Active.ToString()};
+            string[] csvValues = { Id.ToString(), Tour.Id.ToString(), StartDate.ToString(), StartClock ,Finished.ToString(),Guide.Id.ToString(),Attendance.ToString(),CoverImage,CoverBitmap.ToString(),Active.ToString(),Date};
             return csvValues;
         }
         public TourInstance() 

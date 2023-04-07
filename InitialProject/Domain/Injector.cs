@@ -23,6 +23,7 @@ namespace InitialProject.Domain
         { typeof(IGuideRepository), new GuideRepository() },
         { typeof(IOwnerRepository), new OwnerRepository() },
         { typeof(IUserRepository), new UserRepository() },
+        { typeof(IGuideAndTourReviewsRepository), new GuideAndTourReviewRepository() },
         };
 
         public static T CreateInstance<T>()

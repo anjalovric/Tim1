@@ -71,5 +71,16 @@ namespace InitialProject.Repository
             return _checkPoints.Find(n => n.Id == id);
         }
 
+        public List<CheckPoint> GetByInstance(int tourId)
+        {
+            List<CheckPoint> checkPoints = new List<CheckPoint>();
+            foreach (CheckPoint checkPoint in _checkPoints)
+            {
+                if(checkPoint.TourId ==tourId )
+                    checkPoints.Add(checkPoint);
+            }
+            return checkPoints;
+        }
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using InitialProject.Model;
+﻿using InitialProject.Domain.RepositoryInterfaces;
+using InitialProject.Model;
 using InitialProject.Serializer;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Repository
 {
-    public class GuideAndTourReviewRepository
+    public class GuideAndTourReviewRepository:IGuideAndTourReviewsRepository
     {
         private const string FilePath = "../../../Resources/Data/guideAndTourReview.csv";
 
@@ -47,6 +48,23 @@ namespace InitialProject.Repository
         public List<GuideAndTourReview> GetAll()
         {
             return _reviews;
+        }
+
+        public GuideAndTourReview GetById(int id)
+        {
+            return _reviews.Find(x  => x.Id == id);
+        }
+
+        public List<GuideAndTourReview> GetReviewsByGuide(int guideId)
+        {
+            _reviews = _serializer.FromCSV(FilePath);
+            List<GuideAndTourReview> guideAndTourReviews = new List<GuideAndTourReview>();
+            foreach (GuideAndTourReview review in _reviews)
+            {
+                if(review.GuideId== guideId)
+                    guideAndTourReviews.Add(review);
+            }
+            return guideAndTourReviews;
         }
     }
 }

@@ -17,6 +17,7 @@
     <None Remove="Resources\Images\account.png" />
     <None Remove="Resources\Images\add.png" />
     <None Remove="Resources\Images\bell.png" />
+    <None Remove="Resources\Images\corect.png" />
 
     
     
@@ -96,6 +97,9 @@
     <Content Include="Resources\Images\burger_menu.png">
 
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\corect.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\delete.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

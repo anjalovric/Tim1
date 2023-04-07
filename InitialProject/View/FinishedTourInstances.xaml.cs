@@ -47,14 +47,16 @@ namespace InitialProject.View
         private GuideAndTourReviewService guideAndTourReviewService;
         public FinishedTourInstances(Guest2 guest2)
         {
+            CompletedTours = new ObservableCollection<TourInstance>();
             InitializeComponent();
             DataContext = this;
             this.guest2 = guest2;
             tourInstanceService = new TourInstanceService();
             tourReservationService = new TourReservationService();
             tourReservations = new ObservableCollection<TourReservation>(tourReservationService.GetAll());
-            guideAndTourReviewService = new GuideAndTourReviewService(guest2);
-            CompletedTours=guideAndTourReviewService.CompletedTours;
+            guideAndTourReviewService = new GuideAndTourReviewService();
+            guideAndTourReviewService.SetTourInstances(CompletedTours, guest2);
+           // CompletedTours =guideAndTourReviewService.CompletedTours;
         }
         public event PropertyChangedEventHandler PropertyChanged;
 

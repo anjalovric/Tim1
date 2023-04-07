@@ -58,5 +58,11 @@ namespace InitialProject.WPF.Views.GuideViews
         {
             Main.Content = tourStatisticsView;
         }
+
+        private void Requests_Click(object sender, RoutedEventArgs e)
+        {
+            TourInstanceReviewView tourInstanceReviewView = new TourInstanceReviewView(loggedUser);
+            Main.Content= tourInstanceReviewView;
+        }
     }
 }

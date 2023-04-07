@@ -1,0 +1,104 @@
+﻿<Page x:Class="InitialProject.WPF.Views.GuideViews.TourInstanceReviewView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:InitialProject.WPF.Views.GuideViews"
+      mc:Ignorable="d" 
+      d:DesignHeight="700" d:DesignWidth="1100"
+      Title="TourInstanceReviewView" Background="White">
+
+    <Grid>
+        <DataGrid x:Name="TourListDataGrid" SelectedItem="{Binding Path=Selected}" HorizontalAlignment="Left" Height="470" Margin="59,128,0,0" VerticalAlignment="Top" Width="967" IsReadOnly="True" ItemsSource="{Binding Path=Reviews}" AutoGenerateColumns="False">
+
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Width="80">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding TourInstance.CoverBitmap}" Width="100" Height="40" VerticalAlignment="Top" Visibility="Visible"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Width="80">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding ValidationImage}" Width="100" Height="40" VerticalAlignment="Top" Visibility="Visible"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Guest's name" Binding="{Binding Guest2.Name}" Width="105">
+                    <DataGridColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+
+                            <Setter Property="FontWeight" Value="Bold"/>
+
+                        </Style>
+                    </DataGridColumn.HeaderStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Guest's surname" Binding="{Binding Guest2.LastName}" Width="105">
+                    <DataGridColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+
+                            <Setter Property="FontWeight" Value="Bold"/>
+
+                        </Style>
+                    </DataGridColumn.HeaderStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Tour name" Binding="{Binding TourInstance.Tour.Name}" Width="108">
+                    <DataGridColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+
+                            <Setter Property="FontWeight" Value="Bold"/>
+
+                        </Style>
+                    </DataGridColumn.HeaderStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Location" Binding="{Binding TourInstance.Tour.Location}" Width="150">
+                    <DataGridColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+
+                            <Setter Property="FontWeight" Value="Bold"/>
+
+                        </Style>
+                    </DataGridColumn.HeaderStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Start time" Binding="{Binding TourInstance.StartClock}" Width="150">
+                    <DataGridColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+
+                            <Setter Property="FontWeight" Value="Bold"/>
+
+                        </Style>
+                    </DataGridColumn.HeaderStyle>
+                </DataGridTextColumn>
+                
+                <DataGridTextColumn Header="Start date" Binding="{Binding TourInstance.Date}" Width="100">
+                    <DataGridColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+
+                            <Setter Property="FontWeight" Value="Bold"/>
+
+                        </Style>
+                    </DataGridColumn.HeaderStyle>
+                </DataGridTextColumn>
+                <DataGridTemplateColumn x:Name="cancelation" Header="Review"  Width="80">
+                    <DataGridColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+
+                            <Setter Property="FontWeight" Value="Bold"/>
+
+                        </Style>
+                    </DataGridColumn.HeaderStyle>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Name="cancelButton" Content="REVIEW" TextElement.FontWeight="ExtraBold" Click="Review_Click" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+            </DataGrid.Columns>
+        </DataGrid>
+
+
+    </Grid>
+</Page>

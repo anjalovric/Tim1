@@ -41,5 +41,9 @@ namespace InitialProject.Service
         {
             return repository.GetById(id);
         }
+        public List<CheckPoint> GetByInstance(int tourId)
+        {
+            return repository.GetByInstance(tourId);
+        }
     }
 }

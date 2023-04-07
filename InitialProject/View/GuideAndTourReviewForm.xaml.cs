@@ -120,7 +120,7 @@ namespace InitialProject.View
             else
             {
                 Comment = comment.Text;
-                GuideAndTourReview guideAndTourReview = new GuideAndTourReview(CurrentTourInstance.Guide.Id, guest2.Id, CurrentTourInstance,Language,InterestingFacts, Knowledge,Comment); //trebace se lista proslijedjivati
+                GuideAndTourReview guideAndTourReview = new GuideAndTourReview(CurrentTourInstance.Guide.Id, guest2, CurrentTourInstance, Language, InterestingFacts, Knowledge, Comment); //trebace se lista proslijedjivati
                 guideAndTourReviewRepository.Save(guideAndTourReview);
                 StoreImages();
                 this.Close();

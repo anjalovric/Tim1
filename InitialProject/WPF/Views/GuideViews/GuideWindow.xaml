@@ -39,7 +39,7 @@
                         <MenuItem Header="Reviews" Height="40" Width="100" FontSize="18" >
 
                         </MenuItem>
-                        <MenuItem Header="Requests" Height="40" Width="100" FontSize="18" >
+                        <MenuItem Header="Requests" Height="40" Width="100" FontSize="18" Click="Requests_Click" >
 
                         </MenuItem>
                     </Menu>
