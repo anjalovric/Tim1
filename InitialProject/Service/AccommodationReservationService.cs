@@ -196,23 +196,25 @@ namespace InitialProject.Service
             accommodationReservationRepository.Update(reservation);
         }
 
-        public bool IsAvailableInDateRange(Accommodation accommodation, DateTime startDate, DateTime endDate)
+        public bool IsAvailableInDateRange(AccommodationReservation reservation, DateTime startDate, DateTime endDate)
         {
             DateTime date = startDate;
             while (date<=endDate)
             {
-                if (!IsAvailableOnDate(accommodation, date))
+                if (!IsAvailableOnDate(reservation, date))
                     return false;
                 date = date.AddDays(1);
             }
             return true;
         }
-        private bool IsAvailableOnDate(Accommodation accommodation, DateTime date)
+        private bool IsAvailableOnDate(AccommodationReservation reservationToCheck, DateTime date)
         {
             bool isAvailable = true;
             foreach(var reservation in allReservations)
             {
-                if (reservation.Accommodation.Id == accommodation.Id)
+                bool isSameAccommodation = reservation.Accommodation.Id == reservationToCheck.Accommodation.Id;
+                bool isSameGuest = reservation.Guest.Id == reservationToCheck.Guest.Id;
+                if (isSameAccommodation && !isSameGuest)
                     isAvailable = isAvailable && !(date > reservation.Arrival && date < reservation.Departure);
             }
             return isAvailable;

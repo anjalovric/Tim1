@@ -65,7 +65,7 @@ namespace InitialProject.WPF.ViewModels
         public void SetAvailability()
         {
             AccommodationReservationService reservationService = new AccommodationReservationService();
-            isAccommodationAvailable = reservationService.IsAvailableInDateRange(Request.Reservation.Accommodation, Request.NewArrivalDate, Request.NewDepartureDate);
+            isAccommodationAvailable = reservationService.IsAvailableInDateRange(Request.Reservation, Request.NewArrivalDate, Request.NewDepartureDate);
             if (isAccommodationAvailable)
             {
                 Availability = "available";
