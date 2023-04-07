@@ -35,10 +35,18 @@ namespace InitialProject.Service
             completedRequestRepository.Add(completedRequest);
         }
 
-        private static CompletedAccommodationReschedulingRequest MakeCompletedRequest(ReschedulingAccommodationRequest requestToDecline)
+        public void ApproveRequest(ReschedulingAccommodationRequest requestToApprove)
+        {
+            requestToApprove = requestService.ChangeState(requestToApprove, State.Approved);
+            CompletedAccommodationReschedulingRequest completedRequest = MakeCompletedRequest(requestToApprove);
+            completedRequests.Add(completedRequest);
+            completedRequestRepository.Add(completedRequest);
+        }
+
+        private static CompletedAccommodationReschedulingRequest MakeCompletedRequest(ReschedulingAccommodationRequest requestToComplete)
         {
             CompletedAccommodationReschedulingRequest completedRequest = new CompletedAccommodationReschedulingRequest();
-            completedRequest.Request = requestToDecline;
+            completedRequest.Request = requestToComplete;
            
             return completedRequest;
         }

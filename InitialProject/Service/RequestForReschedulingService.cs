@@ -7,11 +7,9 @@ namespace InitialProject.Service
     public class RequestForReschedulingService
     {
         private ReschedulingAccommodationRequestService requestsService;
-        private List<RequestForReshcedulingViewModel> requestForReshceduling;
         public RequestForReschedulingService()
         {
             requestsService = new ReschedulingAccommodationRequestService();
-            requestForReshceduling = new List<RequestForReshcedulingViewModel>();
         }
 
         public List<RequestForReshcedulingViewModel> GetPendingRequests()

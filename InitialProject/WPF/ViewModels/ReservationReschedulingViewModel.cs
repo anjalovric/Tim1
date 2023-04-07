@@ -16,16 +16,24 @@ namespace InitialProject.WPF.ViewModels
         public ObservableCollection<RequestForReshcedulingViewModel> Requests { get; set; }
         private RequestForReschedulingService requestService;
         private ReschedulingAccommodationRequestService reschedulingRequestService;
+        private CompletedAccommodationReschedulingRequestService completedReschedulingRequestService;
         private RequestForReshcedulingViewModel selectedRequest;
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
         public ReservationReschedulingViewModel()
         {
-            requestService= new RequestForReschedulingService();
-            reschedulingRequestService= new ReschedulingAccommodationRequestService();
+            requestService = new RequestForReschedulingService();
+            reschedulingRequestService = new ReschedulingAccommodationRequestService();
             Requests = new ObservableCollection<RequestForReshcedulingViewModel>(requestService.GetPendingRequests());
+            InitializeSelectedRequest();
+            completedReschedulingRequestService = new CompletedAccommodationReschedulingRequestService();
+        }
+
+        private void InitializeSelectedRequest()
+        {
             SelectedRequest = new RequestForReshcedulingViewModel();
+            SelectedRequest = Requests[0];
         }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -38,7 +46,7 @@ namespace InitialProject.WPF.ViewModels
             get => selectedRequest;
             set
             {
-                if (!value.Equals(selectedRequest))
+                if (value !=selectedRequest)
                 {
                     selectedRequest = value;
                     OnPropertyChanged();
@@ -49,13 +57,21 @@ namespace InitialProject.WPF.ViewModels
         public void DeclineRequest()
         {
             reschedulingRequestService.ChangeState(SelectedRequest.Request, State.Declined);
+            completedReschedulingRequestService.DeclineRequest(SelectedRequest.Request);
             Requests.Remove(SelectedRequest);
         }
 
         public void ApproveRequest()
         {
             reschedulingRequestService.ChangeState(SelectedRequest.Request, State.Approved);
+            completedReschedulingRequestService.ApproveRequest(SelectedRequest.Request);
             Requests.Remove(SelectedRequest);
+        }
+
+        private void ChangeReservationDate(AccommodationReservation reservation)
+        {
+            AccommodationReservationService accommodationReservationService = new AccommodationReservationService();
+
         }
     }
 }

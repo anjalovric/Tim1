@@ -185,5 +185,17 @@ namespace InitialProject.Service
                     }
             }
         }
+
+        public bool IsCancelled(AccommodationReservation reservation)
+        {
+            CancelAccommodationReservationService cancelReservationService = new CancelAccommodationReservationService();
+            List<CancelledAccommodationReservation> allCancelledReservations = cancelReservationService.GetAll();
+            return allCancelledReservations.Find(n => n.reservation.Id == reservation.Id) != null; 
+        }
+
+        public void Update(AccommodationReservation reservation)
+        {
+            accommodationReservationRepository.Update(reservation);
+        }
     }
 }

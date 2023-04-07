@@ -58,7 +58,7 @@ namespace InitialProject.Service
             foreach(ReschedulingAccommodationRequest request in requests)
             {
                 AccommodationReservation reservation = allReservations.Find(n => n.Id == request.Reservation.Id);
-                if(reservation != null)
+                if(reservation != null && !IsReservationCancelled(reservation))
                 {
                     request.Reservation = reservation;
                     SetOldReservationDates(request, reservation);
@@ -79,5 +79,10 @@ namespace InitialProject.Service
             return requestRepository.Update(updatedRequest);
         }
 
+        private bool IsReservationCancelled(AccommodationReservation reservation)
+        {
+            AccommodationReservationService accommodationReservationService = new AccommodationReservationService();
+            return accommodationReservationService.IsCancelled(reservation);
+        }
     }
 }

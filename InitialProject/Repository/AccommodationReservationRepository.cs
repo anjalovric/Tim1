@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using InitialProject.Model;
 using InitialProject.Serializer;
+using Org.BouncyCastle.Asn1.Ocsp;
 
 namespace InitialProject.Repository
 {
@@ -53,5 +54,15 @@ namespace InitialProject.Repository
             _serializer.ToCSV(FilePath, _accommodationReservations);
         }
 
+        public AccommodationReservation Update(AccommodationReservation newReservation)
+        {
+            _accommodationReservations = _serializer.FromCSV(FilePath);
+            AccommodationReservation current = _accommodationReservations.Find(c => c.Id == newReservation.Id);
+            int index = _accommodationReservations.IndexOf(current);
+            _accommodationReservations.Remove(current);
+            _accommodationReservations.Insert(index, newReservation);
+            _serializer.ToCSV(FilePath, _accommodationReservations);
+            return newReservation;
+        }
     }
 }
