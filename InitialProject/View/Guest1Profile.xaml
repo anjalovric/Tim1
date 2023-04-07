@@ -1,0 +1,43 @@
+﻿<Page x:Class="InitialProject.View.Guest1Profile"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:InitialProject.View"
+      mc:Ignorable="d" Height="696" Width="1024"
+      Title="Guest1Profile">
+
+    <Grid Background="AntiqueWhite">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2.5*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="9*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Label FontSize="24" Margin="0,20,0,0" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Top" Width="Auto" Height="Auto" FontWeight="Bold">PROFILE</Label>
+
+        <Button FontSize="18" FontWeight="Bold" Height="35" Width="94" Margin="10,20,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Click="BackButton_Click">BACK</Button>
+
+        <Label FontSize="20" Height="35" Width="130" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">Personal data</Label>
+        <Label FontSize="20" Height="35" Width="80" Grid.Row="1" HorizontalAlignment="Center" Grid.Column="1" VerticalAlignment="Center" Content=""/>
+
+        <Label FontSize="18" Height="35" Width="80" Grid.Row="2" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="67,52,0,0" RenderTransformOrigin="0.459,1.354">Name:</Label>
+        <Label FontSize="18" Height="35" Width="80" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="67,117,0,0" Content="Country:"/>
+        <Label FontSize="18" Height="36" Width="80" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="67,179,0,0" Content="City:"/>
+        <Label FontSize="18" Height="35" Width="94" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="67,245,0,0" Content="Username:"/>
+        <Label FontSize="18" Height="35" Width="132" Grid.Row="2" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="67,312,0,0" Content="Phone number:"/>
+        <Label FontSize="18" Height="35" Width="66" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="67,378,0,0" Content="Email:"/>
+        <TextBlock FontSize="18" Height="35" Width="Auto" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="299,50,0,0" Text="{Binding Path=Guest1.Name}"></TextBlock>
+        <TextBlock FontSize="18" Height="35" Width="Auto" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,52,67,0" Text="{Binding Path=Guest1.LastName}"></TextBlock>
+        <TextBlock FontSize="18" Height="35" Width="Auto" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,117,67,0" Text="{Binding Path=Guest1.Location.Country}"></TextBlock>
+        <TextBlock FontSize="18" Height="35" Width="Auto" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,179,67,0" Text="{Binding Path=Guest1.Location.City}"></TextBlock>
+        <TextBlock FontSize="18" Height="35" Width="Auto" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,245,67,0" Text="{Binding Path=Guest1.Username}"></TextBlock>
+        <TextBlock FontSize="18" Height="35" Width="Auto" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,312,67,0" Text="{Binding Path=Guest1.PhoneNumber}"></TextBlock>
+        <TextBlock FontSize="18" Height="35" Width="Auto" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,378,67,0" Text="{Binding Path=Guest1.Email}"></TextBlock>
+
+        <Image x:Name="accommodationImage" Grid.Row="2" Grid.Column="1" Width="420" Margin="46,52,46,239"/>
+    </Grid>
+</Page>

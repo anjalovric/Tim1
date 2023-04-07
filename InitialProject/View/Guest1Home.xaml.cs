@@ -27,6 +27,8 @@ namespace InitialProject.View
         private Guest1 guest1;
         private Guest1Service guest1Service;
         private SentAccommodationReservationRequests sentAccommodationReservationRequests;
+        private Guest1Profile guest1Profile;
+        
         public Guest1Home(User user)
         {
             InitializeComponent();
@@ -37,6 +39,7 @@ namespace InitialProject.View
             guest1SearchAccommodation = new Guest1SearchAccommodation(guest1, ref Main);
             myReservations = new MyAccommodationReservations(guest1, ref Main);
             sentAccommodationReservationRequests = new SentAccommodationReservationRequests();
+            guest1Profile = new Guest1Profile(guest1);
             Main.Content = guest1SearchAccommodation;
 
         }
@@ -45,6 +48,7 @@ namespace InitialProject.View
         {
             this.guest1 = new Guest1();
             this.guest1 = guest1Service.GetByUsername(user.Username);
+            
         }
 
         private void BookingMenuItem_Click(object sender, RoutedEventArgs e)
@@ -67,6 +71,11 @@ namespace InitialProject.View
         private void SentRequestsMenuItem_Click(object sender, RoutedEventArgs e)
         {
             Main.Content = sentAccommodationReservationRequests;
+        }
+
+        private void MyProfileMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            Main.Content = guest1Profile;
         }
     }
 }

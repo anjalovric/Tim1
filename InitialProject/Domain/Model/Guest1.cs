@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using InitialProject.Serializer;
@@ -20,6 +21,7 @@ namespace InitialProject.Model
        public int ReviewsNumber { get; set; }
        public bool IsSuperGuest { get; set; }
 
+       public string ImagePath { get; set; }
 
 
         public Guest1() { }
@@ -40,13 +42,13 @@ namespace InitialProject.Model
            Email = values[6];
            ReviewsNumber = Convert.ToInt32(values[7]);
            IsSuperGuest = Convert.ToBoolean(values[8]);
-
+           ImagePath = values[9];
 
        }
 
        public string[] ToCSV()
        {
-           string[] csvValues = { Id.ToString(), Name, LastName, Username, PhoneNumber, Location.Id.ToString(), Email, ReviewsNumber.ToString(), IsSuperGuest.ToString() };
+           string[] csvValues = { Id.ToString(), Name, LastName, Username, PhoneNumber, Location.Id.ToString(), Email, ReviewsNumber.ToString(), IsSuperGuest.ToString(), ImagePath };
            return csvValues;
        }
 

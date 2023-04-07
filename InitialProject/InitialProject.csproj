@@ -17,6 +17,9 @@
     <None Remove="Resources\Images\account.png" />
     <None Remove="Resources\Images\add.png" />
     <None Remove="Resources\Images\bell.png" />
+    <None Remove="Resources\Images\black.jpeg" />
+    <None Remove="Resources\Images\blond.jpg" />
+    <None Remove="Resources\Images\brown.jpg" />
 
     
     
@@ -24,8 +27,10 @@
     <None Remove="Resources\Images\home.png" />
     <None Remove="Resources\Images\icons8-christmas-star-96.png" />
     <None Remove="Resources\Images\minus.png" />
+    <None Remove="Resources\Images\orange.jpg" />
     <None Remove="Resources\Images\plus.png" />
     <None Remove="Resources\Images\profile.png" />
+    <None Remove="Resources\Images\red.jpg" />
     <None Remove="Resources\Images\search.png" />
     <None Remove="Resources\Images\signout.png" />
     <None Remove="Resources\Images\tasks.png" />
@@ -149,6 +154,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\Images\black.jpeg" />
+    <Resource Include="Resources\Images\blond.jpg" />
+    <Resource Include="Resources\Images\brown.jpg" />
+    <Resource Include="Resources\Images\orange.jpg" />
+    <Resource Include="Resources\Images\red.jpg" />
     <Resource Include="Resources\Images\search.png" />
   </ItemGroup>
 
