@@ -50,7 +50,7 @@
 
         <Image x:Name="imagePicture" Margin="271,310,82,273"/>
 
-        <Label Content="Rate tour and guide" Margin="70,25,560,386" FontSize="20" FontWeight="Bold"/>
+        
 
 
         <Canvas Name="canvas" Margin="415,305,75,371" MouseLeftButtonDown="DeletePhotoButton_Click">
@@ -71,7 +71,7 @@
         </Canvas>
 
 
-        <Canvas Margin="421,356,53,320" Height="20" MouseLeftButtonDown="NextButton_Click">
+        <Canvas Margin="421,356,53,320" Height="20" MouseLeftButtonDown="NextImageButton_Click">
             <Line X1="10" Y1="10" X2="50" Y2="10" Stroke="Black" 
                   StrokeThickness="2" StrokeDashCap="Round" StrokeEndLineCap="Round" StrokeStartLineCap="Round" HorizontalAlignment="Left" VerticalAlignment="Center" Width="36"/>
             <Line X1="35" Y1="10" X2="30" Y2="5" Stroke="Black" 
@@ -80,7 +80,7 @@
                   StrokeThickness="2" StrokeDashCap="Round" StrokeEndLineCap="Round" StrokeStartLineCap="Round" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Canvas>
 
-        <Canvas Margin="242,356,232,320" Height="20" MouseLeftButtonDown="BackButton_Click" RenderTransformOrigin="0.5,0.5">
+        <Canvas Margin="242,356,232,320" Height="20" MouseLeftButtonDown="BackImageButton_Click" RenderTransformOrigin="0.5,0.5">
             <Canvas.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
