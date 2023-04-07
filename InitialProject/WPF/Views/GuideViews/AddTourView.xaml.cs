@@ -527,6 +527,7 @@ namespace InitialProject.WPF.Views.GuideViews
             {
                 instance.Tour = savedTour;
                 instance.CoverImage = tourImageRepository.GetByTour(savedTour.Id)[0].Url;
+                instance.CoverBitmap = new BitmapImage(new Uri("/" + instance.CoverImage, UriKind.Relative));
                 tourInstanceRepository.Save(instance);
                 DisplayIfToday(instance);
                 DisplayIfCancelable(instance);

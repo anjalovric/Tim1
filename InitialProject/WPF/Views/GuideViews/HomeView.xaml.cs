@@ -28,7 +28,18 @@ namespace InitialProject.WPF.Views.GuideViews
     public partial class HomeView : Page
     {
         public ObservableCollection<TourInstance> Tours { get; set; }
-        private ObservableCollection<TourInstance> FinishedInstances { get; set; }
+        private ObservableCollection<TourInstance> instances;
+        public ObservableCollection<TourInstance> FinishedInstances
+        {
+            get { return instances; }
+            set
+            {
+                if (value != instances)
+                    instances = value;
+                OnPropertyChanged("Completed");
+            }
+
+        }
         private TourRepository tourRepository;
         private TourInstanceRepository tourInstanceRepository;
         private LocationRepository locationRepository;
@@ -44,7 +55,7 @@ namespace InitialProject.WPF.Views.GuideViews
             tourInstanceRepository = new TourInstanceRepository();
             locationRepository = new LocationRepository();
             FinishedInstances = Instances;
-
+            StartedTourInstanceView startedTourInstanceView = new StartedTourInstanceView(Selected, Tours, Instances);
             Tours = new ObservableCollection<TourInstance>(tourInstanceRepository.GetByStart());
             SetLocationToTour();
             SetTourToTourInstance();

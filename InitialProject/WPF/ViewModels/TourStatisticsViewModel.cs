@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -18,8 +19,18 @@ namespace InitialProject.WPF.ViewModels
     public class TourStatisticsViewModel
     {
         public int Year { get; set; }
-        public ObservableCollection<TourInstance> Instances { get; set; }
+        private ObservableCollection<TourInstance> instances;
+        public ObservableCollection<TourInstance> Instances
+        {
+            get { return instances; }
+            set
+            {
+                if (value != instances)
+                    instances = value;
+                OnPropertyChanged("Completed");
+            }
 
+        }
         private TourInstanceService instanceService;
         public TourInstance Selected { get; set; }
         public TourStatisticsViewModel()

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Collections;
 using System.Windows;
 using System.Xml.Linq;
+using System.Windows.Media.Imaging;
 
 namespace InitialProject.Model
 {
@@ -27,6 +28,10 @@ namespace InitialProject.Model
 
         public string CoverImage { get; set; }
 
+        public BitmapImage CoverBitmap { get; set; }
+
+        public bool Active { get; set; }    
+
         public void FromCSV(string[] values)
         {
             Id = Convert.ToInt32(values[0]);
@@ -37,18 +42,20 @@ namespace InitialProject.Model
             Guide = new Guide() { Id=Convert.ToInt32(values[5]) };
             Attendance = Convert.ToDouble(values[6]);
             CoverImage = values[7];
-     
+            CoverBitmap= new BitmapImage(new Uri("/" + CoverImage, UriKind.Relative));
+            Active= Convert.ToBoolean(values[9]);
 
         }
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), Tour.Id.ToString(), StartDate.ToString(), StartClock ,Finished.ToString(),Guide.Id.ToString(),Attendance.ToString(),CoverImage};
+            string[] csvValues = { Id.ToString(), Tour.Id.ToString(), StartDate.ToString(), StartClock ,Finished.ToString(),Guide.Id.ToString(),Attendance.ToString(),CoverImage,CoverBitmap.ToString(),Active.ToString()};
             return csvValues;
         }
         public TourInstance() 
         {
             Finished = false;
+            Active = false;
             
         }
 
@@ -61,6 +68,8 @@ namespace InitialProject.Model
             Guide = guide;
             Attendance = 0;
             CoverImage = coverImage;
+            CoverBitmap = new BitmapImage(new Uri("/" + CoverImage, UriKind.Relative));
+            Active = false;
         }
 
 

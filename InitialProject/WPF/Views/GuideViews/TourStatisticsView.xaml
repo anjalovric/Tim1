@@ -20,7 +20,7 @@
                 <DataGridTemplateColumn Width="80">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Image Source="{Binding CoverImage}" Width="100" Height="40" VerticalAlignment="Top" Visibility="Visible"/>
+                            <Image Source="{Binding CoverBitmap}" Width="100" Height="40" VerticalAlignment="Top" Visibility="Visible"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

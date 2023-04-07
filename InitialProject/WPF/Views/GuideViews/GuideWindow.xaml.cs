@@ -56,7 +56,6 @@ namespace InitialProject.WPF.Views.GuideViews
         }
         private void TourStatitcs_Click(object sender, RoutedEventArgs e)
         {
-            tourStatisticsView = new TourStatisticsView();
             Main.Content = tourStatisticsView;
         }
     }

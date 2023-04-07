@@ -65,10 +65,20 @@ namespace InitialProject.WPF.Views.GuideViews
             selected = selectedInstance;
             FinishedInstances = finishedInstances;  
             tourDetailsService = new TourDetailsService();
+            ActivateTour();
 
             FindPointsForSelectedInstance(selected);
             CheckFirstPoint();
             SetFirstCheckPoint();
+        }
+
+        private void ActivateTour()
+        {
+            if (selected != null)
+            {
+                selected.Active = true;
+                tourInstanceRepository.Update(selected);
+            }
         }
         private void SetFirstCheckPoint()
         {
@@ -112,6 +122,7 @@ namespace InitialProject.WPF.Views.GuideViews
         private void FinishInstance()
         {
             selected.Finished = true;
+            selected.Active = false;
             selected.Attendance = tourDetailsService.MakeAttendancePrecentage(selected.Id);
             tourInstanceRepository.Update(selected);
 
