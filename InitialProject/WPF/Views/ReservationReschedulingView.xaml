@@ -49,7 +49,7 @@
     
     
     <Grid Margin="0,0,0,0">
-        <ListBox ItemsSource="{Binding Path= Requests}" ItemTemplate="{StaticResource requests}" SelectedItem="SelectedRequest" Margin="10,40,10,40"/>
+        <ListBox ItemsSource="{Binding Path= Requests}" ItemTemplate="{StaticResource requests}" IsSynchronizedWithCurrentItem="True" SelectedItem="{Binding Path=SelectedRequest, UpdateSourceTrigger=PropertyChanged}" Margin="10,40,10,40"/>
 
     </Grid>
 </Page>

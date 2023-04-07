@@ -11,31 +11,22 @@ namespace InitialProject.Domain.Model
     public class CompletedAccommodationReschedulingRequest : ISerializable
     {
         public int Id { get; set; }
-        public ChangeAccommodationReservationDateRequest Request { get; set; }
-        public ChangeAccommodationReservationDateRequest.State State { get; set; }
-        public string OwnersExplanation { get; set; }
+        public ReschedulingAccommodationRequest Request { get; set; }
        
         public CompletedAccommodationReschedulingRequest()
         {
-            Request = new ChangeAccommodationReservationDateRequest();
+            Request = new ReschedulingAccommodationRequest();
         }
 
         public void FromCSV(string[] values)
         {
             Id = Convert.ToInt32(values[0]);
-            Request = new ChangeAccommodationReservationDateRequest();
+            Request = new ReschedulingAccommodationRequest();
             Request.Id= Convert.ToInt32(values[1]);
-            if (values[2].Equals("Approved"))
-                State = ChangeAccommodationReservationDateRequest.State.Approved;
-            else if (values[2].Equals("Declined"))
-                State = ChangeAccommodationReservationDateRequest.State.Declined;
-            if (State == ChangeAccommodationReservationDateRequest.State.Declined)
-                OwnersExplanation = values[3];
-           
         }
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), Request.Id.ToString(), State.ToString(), OwnersExplanation};
+            string[] csvValues = { Id.ToString(), Request.Id.ToString()};
             return csvValues;
         }
     }

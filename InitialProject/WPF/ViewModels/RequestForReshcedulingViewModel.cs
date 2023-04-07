@@ -9,15 +9,15 @@ namespace InitialProject.WPF.ViewModels
 {
     public class RequestForReshcedulingViewModel : INotifyPropertyChanged
     {
-        private ChangeAccommodationReservationDateRequest request;
+        private ReschedulingAccommodationRequest request;
         private AccommodationReservation accommodationReservation;
         private bool isAccommodationAvailable;
         public RequestForReshcedulingViewModel()
         {
-            Request = new ChangeAccommodationReservationDateRequest();
+            Request = new ReschedulingAccommodationRequest();
         }
 
-        public ChangeAccommodationReservationDateRequest Request
+        public ReschedulingAccommodationRequest Request
         {
             get => request;
             set

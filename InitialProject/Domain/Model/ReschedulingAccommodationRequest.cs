@@ -1,32 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 using InitialProject.Serializer;
-using NPOI.SS.Formula.Functions;
 
 namespace InitialProject.Model
 {
-    public class ChangeAccommodationReservationDateRequest : ISerializable
+    public enum State { Approved, Pending, Declined };
+    public class ReschedulingAccommodationRequest : ISerializable
     {
         public int Id { get; set; }
-        public AccommodationReservation Reservation { get; set; }   
+        public AccommodationReservation Reservation { get; set; }
         public DateTime NewArrivalDate { get; set; }
         public DateTime NewDepartureDate { get; set; }
-
-        public String Reasons { get; set; }
-
-        public enum State { Approved, Pending, Declined};
-
+        public string Reasons { get; set; }
         public State state { get; set; }
+        public string OwnerExplanationForDeclining;
+        public DateTime OldArrivalDate { get; set; }
+        public DateTime OldDepartureDate { get; set; }
 
-        public ChangeAccommodationReservationDateRequest() {
+        public ReschedulingAccommodationRequest() {
             Reservation = new AccommodationReservation();
         }
 
-        public ChangeAccommodationReservationDateRequest(AccommodationReservation Reservation, DateTime NewArrivalDate, DateTime NewDepartureDate, String Reasons)
+        public ReschedulingAccommodationRequest(AccommodationReservation Reservation, DateTime NewArrivalDate, DateTime NewDepartureDate, string Reasons)
         {
             this.Reservation = Reservation;
             this.NewArrivalDate = NewArrivalDate;
@@ -45,17 +39,22 @@ namespace InitialProject.Model
             NewArrivalDate = Convert.ToDateTime(values[2]);
             NewDepartureDate = Convert.ToDateTime(values[3]);
             Reasons = values[4];
-            String stateValue = values[5];
+            string stateValue = values[5];
             if (stateValue == "Approved")
                 state = State.Approved;
             else if (stateValue == "Pending")
                 state = State.Pending;
             else
                 state = State.Declined;
+            OldArrivalDate = Convert.ToDateTime(values[6]);
+            OldDepartureDate = Convert.ToDateTime(values[7]);
+
+            if (state == State.Declined)
+                OwnerExplanationForDeclining = values[8];
         }
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), Reservation.Id.ToString(), NewArrivalDate.ToString(), NewDepartureDate.ToString(), Reasons, state.ToString()};
+            string[] csvValues = { Id.ToString(), Reservation.Id.ToString(), NewArrivalDate.ToString(), NewDepartureDate.ToString(), Reasons, state.ToString(),OldArrivalDate.ToString(), OldDepartureDate.ToString(), OwnerExplanationForDeclining};
             return csvValues;
         }
     }

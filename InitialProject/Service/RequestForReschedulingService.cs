@@ -6,20 +6,20 @@ namespace InitialProject.Service
 {
     public class RequestForReschedulingService
     {
-        private ChangeAccommodationReservationDateRequestService requestsService;
+        private ReschedulingAccommodationRequestService requestsService;
         private List<RequestForReshcedulingViewModel> requestForReshceduling;
         public RequestForReschedulingService()
         {
-            requestsService = new ChangeAccommodationReservationDateRequestService();
+            requestsService = new ReschedulingAccommodationRequestService();
             requestForReshceduling = new List<RequestForReshcedulingViewModel>();
         }
 
         public List<RequestForReshcedulingViewModel> GetPendingRequests()
         {
-            List<ChangeAccommodationReservationDateRequest> pendingRequest = requestsService.GetPendingRequests();
+            List<ReschedulingAccommodationRequest> pendingRequest = requestsService.GetPendingRequests();
             List<RequestForReshcedulingViewModel> requestsViewModel = new List<RequestForReshcedulingViewModel>();
             
-            foreach(ChangeAccommodationReservationDateRequest request in pendingRequest)
+            foreach(ReschedulingAccommodationRequest request in pendingRequest)
             {
                 RequestForReshcedulingViewModel requestForReshcedulingViewModel = new RequestForReshcedulingViewModel();
                 requestForReshcedulingViewModel.Request = request;

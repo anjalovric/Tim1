@@ -15,16 +15,16 @@ namespace InitialProject.WPF.ViewModels
     {
         public ObservableCollection<RequestForReshcedulingViewModel> Requests { get; set; }
         private RequestForReschedulingService requestService;
+        private ReschedulingAccommodationRequestService reschedulingRequestService;
         private RequestForReshcedulingViewModel selectedRequest;
-        private CompletedAccommodationReschedulingRequestService completedRequestService;
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
         public ReservationReschedulingViewModel()
         {
             requestService= new RequestForReschedulingService();
+            reschedulingRequestService= new ReschedulingAccommodationRequestService();
             Requests = new ObservableCollection<RequestForReshcedulingViewModel>(requestService.GetPendingRequests());
-            completedRequestService = new CompletedAccommodationReschedulingRequestService();
             SelectedRequest = new RequestForReshcedulingViewModel();
         }
 
@@ -48,13 +48,14 @@ namespace InitialProject.WPF.ViewModels
 
         public void DeclineRequest()
         {
-            completedRequestService.DeclineRequest(SelectedRequest.Request);
+            reschedulingRequestService.ChangeState(SelectedRequest.Request, State.Declined);
             Requests.Remove(SelectedRequest);
         }
 
         public void ApproveRequest()
         {
-
+            reschedulingRequestService.ChangeState(SelectedRequest.Request, State.Approved);
+            Requests.Remove(SelectedRequest);
         }
     }
 }
