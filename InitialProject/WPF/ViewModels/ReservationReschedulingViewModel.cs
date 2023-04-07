@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using InitialProject.Model;
 using InitialProject.Service;
 
@@ -33,7 +28,8 @@ namespace InitialProject.WPF.ViewModels
         private void InitializeSelectedRequest()
         {
             SelectedRequest = new RequestForReshcedulingViewModel();
-            SelectedRequest = Requests[0];
+            if(Requests.Count>0)
+                SelectedRequest = Requests[0];
         }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -68,10 +64,5 @@ namespace InitialProject.WPF.ViewModels
             Requests.Remove(SelectedRequest);
         }
 
-        private void ChangeReservationDate(AccommodationReservation reservation)
-        {
-            AccommodationReservationService accommodationReservationService = new AccommodationReservationService();
-
-        }
     }
 }

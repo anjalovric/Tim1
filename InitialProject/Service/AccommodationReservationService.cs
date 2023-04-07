@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using InitialProject.Model;
 using InitialProject.Repository;
+using static NPOI.HSSF.Util.HSSFColor;
 
 namespace InitialProject.Service
 {
@@ -196,6 +194,28 @@ namespace InitialProject.Service
         public void Update(AccommodationReservation reservation)
         {
             accommodationReservationRepository.Update(reservation);
+        }
+
+        public bool IsAvailableInDateRange(Accommodation accommodation, DateTime startDate, DateTime endDate)
+        {
+            DateTime date = startDate;
+            while (date<=endDate)
+            {
+                if (!IsAvailableOnDate(accommodation, date))
+                    return false;
+                date = date.AddDays(1);
+            }
+            return true;
+        }
+        private bool IsAvailableOnDate(Accommodation accommodation, DateTime date)
+        {
+            bool isAvailable = true;
+            foreach(var reservation in allReservations)
+            {
+                if (reservation.Accommodation.Id == accommodation.Id)
+                    isAvailable = isAvailable && !(date > reservation.Arrival && date < reservation.Departure);
+            }
+            return isAvailable;
         }
     }
 }

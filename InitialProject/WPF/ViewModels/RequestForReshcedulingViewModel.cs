@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using InitialProject.Model;
+using InitialProject.Service;
 
 namespace InitialProject.WPF.ViewModels
 {
@@ -12,9 +13,11 @@ namespace InitialProject.WPF.ViewModels
         private ReschedulingAccommodationRequest request;
         private AccommodationReservation accommodationReservation;
         private bool isAccommodationAvailable;
+        public string Availability { get; set; }
         public RequestForReshcedulingViewModel()
         {
             Request = new ReschedulingAccommodationRequest();
+            SetAvailability();
         }
 
         public ReschedulingAccommodationRequest Request
@@ -57,6 +60,20 @@ namespace InitialProject.WPF.ViewModels
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public void SetAvailability()
+        {
+            AccommodationReservationService reservationService = new AccommodationReservationService();
+            isAccommodationAvailable = reservationService.IsAvailableInDateRange(Request.Reservation.Accommodation, Request.NewArrivalDate, Request.NewDepartureDate);
+            if (isAccommodationAvailable)
+            {
+                Availability = "available";
+            }
+            else
+            {
+                Availability = "not available";
+            }
         }
     }
 }

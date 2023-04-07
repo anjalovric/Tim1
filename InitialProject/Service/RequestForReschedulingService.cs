@@ -22,7 +22,7 @@ namespace InitialProject.Service
                 RequestForReshcedulingViewModel requestForReshcedulingViewModel = new RequestForReshcedulingViewModel();
                 requestForReshcedulingViewModel.Request = request;
                 requestForReshcedulingViewModel.AccommodationReservation = request.Reservation;
-                //Is Available
+                requestForReshcedulingViewModel.SetAvailability();
                 requestsViewModel.Add(requestForReshcedulingViewModel);
             }
 

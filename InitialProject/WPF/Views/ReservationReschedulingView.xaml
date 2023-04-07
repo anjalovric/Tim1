@@ -14,9 +14,9 @@
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="110"/>
-                        <ColumnDefinition Width="123"/>
+                        <ColumnDefinition Width="121"/>
                         <ColumnDefinition Width="15" />
-                        <ColumnDefinition Width="123"/>
+                        <ColumnDefinition Width="121"/>
                         <ColumnDefinition Width="15" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
@@ -55,7 +55,8 @@
                     <Border  Grid.Column="3" Grid.Row="3" BorderBrush="Black" BorderThickness="0.5">
                     <TextBlock Text="{Binding Path = Request.NewDepartureDate}"></TextBlock>
                     </Border>
-                    
+
+                    <TextBlock Grid.Row="5" Grid.Column="0" Text="{Binding Path=Availability}" ></TextBlock>
                     <Button Name="DeclineButton" Content="Decline" Grid.Column="1" Grid.Row="5" Click="DeclineButton_Click"></Button>
                     <Button Name="ApproveButton" Content="Approve" Grid.Column="3" Grid.Row="5" Click="ApproveButton_Click"></Button>
 
