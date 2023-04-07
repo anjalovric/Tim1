@@ -118,7 +118,7 @@ namespace InitialProject.View
             }
         }
 
-        private void NextButton_Click(object sender, RoutedEventArgs e)
+        private void NextImageButton_Click(object sender, RoutedEventArgs e)
         {
             for (int i = 0; i < images.Count; i++)
             {
@@ -141,7 +141,7 @@ namespace InitialProject.View
             }
         }
 
-        private void BackButton_Click(object sender, RoutedEventArgs e)
+        private void BackImageButton_Click(object sender, RoutedEventArgs e)
         {
             for (int i = 0; i < images.Count; i++)
             {

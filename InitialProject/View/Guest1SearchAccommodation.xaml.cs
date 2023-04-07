@@ -32,6 +32,7 @@ namespace InitialProject.View
     public partial class Guest1SearchAccommodation : Page
     {
         private Guest1 guest1;
+        public Frame Main;
         public ObservableCollection<string> Countries { get; set; }
         public ObservableCollection<string> CitiesByCountry { get; set; }
         private LocationRepository locationRepository;
@@ -57,18 +58,7 @@ namespace InitialProject.View
 
         }
 
-        private Accommodation selectedAccommodation;
-        public Accommodation SelectedAccommodation
-        {
-            get { return selectedAccommodation; }
-            set
-            {
-                if (value != selectedAccommodation)
-                    selectedAccommodation = value;
-                OnPropertyChanged("SelectedAccommodation");
-            }
-
-        }
+        
         public Location Location
         {
             get { return location; }
@@ -81,11 +71,12 @@ namespace InitialProject.View
                 }
             }
         }
-        public Guest1SearchAccommodation(Guest1 guest1)
+        public Guest1SearchAccommodation(Guest1 guest1, ref Frame Main)
         {
             InitializeComponent();
             DataContext = this;
 
+            this.Main = Main;
             this.guest1 = guest1;
             accommodationRepository = new AccommodationRepository();
             Accommodations = new ObservableCollection<Accommodation>(accommodationRepository.GetAll());
@@ -309,9 +300,10 @@ namespace InitialProject.View
             try
             {
                 List<string> imagesUrls = new List<string>();
-                FindPhotosUrls(imagesUrls);
-                AccommodationPhotosView photosView = new AccommodationPhotosView(imagesUrls);
-                photosView.Show();
+                Accommodation currentAccommodation = ((Button)sender).DataContext as Accommodation;
+                FindPhotosUrls(imagesUrls, currentAccommodation);
+                AccommodationDetails details = new AccommodationDetails(imagesUrls, currentAccommodation, ref Main);
+                
 
             }
             catch (Exception ex)
@@ -320,9 +312,9 @@ namespace InitialProject.View
             }
         }
 
-        private void FindPhotosUrls(List<string> imagesUrls)
+        private void FindPhotosUrls(List<string> imagesUrls, Accommodation currentAccommodation)
         {
-            Accommodation currentAccommodation = selectedAccommodation;
+            Accommodation selectedAccommodation = currentAccommodation;
             foreach (AccommodationImage image in accommodationImages)
             {
                 if (image.Accommodation.Id == currentAccommodation.Id)
@@ -334,7 +326,8 @@ namespace InitialProject.View
 
         private void ReserveButton_Click(object sender, RoutedEventArgs e)
         {
-            Accommodation currentAccommodation = selectedAccommodation;
+            Accommodation currentAccommodation = ((Button)sender).DataContext as Accommodation;
+            //Accommodation currentAccommodation = selectedAccommodation;
             AccommodationReservationForm accommodationReservationForm = new AccommodationReservationForm(currentAccommodation, ref accommodationRepository, guest1);
             accommodationReservationForm.Show();
         }

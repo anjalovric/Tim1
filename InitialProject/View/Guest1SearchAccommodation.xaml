@@ -32,7 +32,7 @@
                     <TextBlock Text="{Binding Path=Type}" FontSize="18" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" Width="90" Height="30" HorizontalAlignment="Left"/>
                     <TextBlock Text="{Binding Path=Location.City}" FontSize="18" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" Width="90" Height="30" HorizontalAlignment="Left"/>
                     <TextBlock Text="{Binding Path=Capacity}" FontSize="18" Grid.Row="1" Grid.Column="4" VerticalAlignment="Center" Width="90" Height="30" HorizontalAlignment="Left"/>
-                    <Button x:Name="Details" Content="Details" Click="ViewPhotosButton_Click" FontWeight="Bold" Grid.Row="0" FontSize="18" Grid.Column="6"  VerticalAlignment="Center" Width="94" Height="30" HorizontalAlignment="Center"/>
+                    <Button x:Name="Details" Content="Details" Click="ViewPhotosButton_Click" FontWeight="Bold" Grid.Row="0" FontSize="18" Grid.Column="6"  VerticalAlignment="Center" Width="94" Height="30" HorizontalAlignment="Center" ClickMode="Press"/>
                     <Button x:Name="Reserve" Content="Reserve" Click="ReserveButton_Click" FontWeight="Bold" Grid.Row="1" Grid.Column="6" VerticalAlignment="Center" Width="94" Height="30" HorizontalAlignment="Center" FontSize="18"/>
                 </Grid>
             </Border>
@@ -79,34 +79,7 @@
         <TextBox x:Name="numberOfGuests" Text="" Height="40" TextAlignment="Center" Background="#FFDFDCDC" FontSize="18" Margin="98,43,94,27" Grid.Column="2" Grid.Row="2"/>
         <Button x:Name="incrementNumberOfGuests" Click="IncrementGuestsNumberButton_Click" Height="40" Content="+" TextElement.FontSize="18" Margin="252,43,42,27" Background="#FFDDDDDD" Grid.Column="2" Grid.Row="2"/>
         <Button x:Name="decrementNumberOfGuests" Click="DecrementGuestsNumberButton_Click" Height="40" Content="-" TextElement.FontSize="18" Margin="47,43,248,27" Grid.Column="2" Grid.Row="2"/>
-
-        <DataGrid x:Name="AccommodationListDataGrid" ItemsSource="{Binding Path=Accommodations,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" IsReadOnly="True" VerticalAlignment="Top" HorizontalAlignment="Left" Height="211" Width="667" Margin="114,34,0,0" Grid.ColumnSpan="3" Grid.Row="1" Grid.RowSpan="3">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Width="1*" Binding="{Binding Name}"/>
-                <DataGridTextColumn Header="Location" Width="2*" Binding="{Binding Location}"/>
-                <DataGridTextColumn Header="Type" Width="1*" Binding="{Binding Type}" />
-                <DataGridTextColumn Header="Capacity" Width="1.2*" Binding="{Binding Capacity}"/>
-                <DataGridTextColumn Header="Min days for reservation" Width="2.7*" Binding="{Binding MinDaysForReservation}"/>
-                <DataGridTextColumn Header="Min days to cancel" Width="2.1*" Binding="{Binding MinDaysToCancel}"/>
-                <DataGridTemplateColumn x:Name="photosView" Header="Photos" Width="0.9*">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Name="photosViewButton" Content="View" Click="ViewPhotosButton_Click"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn x:Name="reservation" Header="Reservation"  Width="1.38*">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Name="reservationButton" Content="RESERVE" TextElement.FontWeight="ExtraBold" Click="ReserveButton_Click"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-
-            </DataGrid.Columns>
-        </DataGrid>
         <Button x:Name="Search" Content="Search" FontWeight="Bold" Margin="205,10,42,0" Height="35" Width="94" Click="SearchButton_Click" VerticalAlignment="Top" FontSize="18" Grid.Column="2" Grid.Row="3"/>
-        <Button Margin="103,28,153,336" FontSize="16" Click="SignOut_Click" Height="50" Grid.Row="3" RenderTransformOrigin="0.269,0.236">Sign out</Button>
 
         <Button FontWeight="Bold" Margin="98,10,149,369" Click="ShowAllButton_Click" Width="94" Height="35" Grid.Row="3" Grid.Column="2" FontSize="18">Show all</Button>
 
@@ -114,7 +87,7 @@
         <Label x:Name="numberOfGuestsLabel" HorizontalAlignment="Left" Width="246" Height="22" Margin="49,88,0,0" VerticalAlignment="Top" Grid.Column="2" Grid.Row="2"/>
 
 
-        <ListBox x:Name="accommodationList" Height="265" IsSynchronizedWithCurrentItem="True" SelectedItem="{Binding Path=SelectedAccommodation,UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" ItemsSource="{Binding Path=Accommodations,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" ItemTemplate="{StaticResource accommodationTemplate}" Grid.ColumnSpan="3" Grid.Row="3" Margin="38,74,42,74" Width="944">
+        <ListBox x:Name="accommodationList" IsSynchronizedWithCurrentItem="True" SelectionMode="Single" ItemsSource="{Binding Path=Accommodations,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" ItemTemplate="{StaticResource accommodationTemplate}" Grid.ColumnSpan="3" Grid.Row="3" Margin="38,74,42,65" Width="944">
             <ListBox.Resources>
                 <Style TargetType="ListViewItem">
                     <Style.Triggers>

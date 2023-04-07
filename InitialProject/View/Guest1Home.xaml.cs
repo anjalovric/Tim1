@@ -34,7 +34,7 @@ namespace InitialProject.View
             guest1Service = new Guest1Service();
             GetGuest1ByUser(user);
 
-            guest1SearchAccommodation = new Guest1SearchAccommodation(guest1);
+            guest1SearchAccommodation = new Guest1SearchAccommodation(guest1, ref Main);
             myReservations = new MyAccommodationReservations(guest1, ref Main);
             sentAccommodationReservationRequests = new SentAccommodationReservationRequests();
             Main.Content = guest1SearchAccommodation;
