@@ -20,12 +20,12 @@ namespace InitialProject.Service
             accommodationReservationService = new AccommodationReservationService();
         }
 
-        public void Add(CancelledAccommodationReservation reservation)
+        public void Add(AccommodationReservation reservation)
         {
             cancelledAccommodationReservationRepository.Add(reservation);
         }
 
-        public List<CancelledAccommodationReservation> GetAll()
+        public List<AccommodationReservation> GetAll()
         {
             return cancelledAccommodationReservationRepository.GetAll();
         }

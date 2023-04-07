@@ -20,8 +20,8 @@
         <Label HorizontalContentAlignment="Left" FontSize="18" Margin="71,118,256,540">Cleanliness:</Label>
         <Label HorizontalContentAlignment="Left" FontSize="18" Margin="71,161,256,498">Owner's correctness:</Label>
 
-        <Slider x:Name="CleanlinessSlider" Minimum="1" Maximum="5" Width="157" Margin="284,128,71,550" TickFrequency="1"/>
-        <Slider x:Name="CorrectnessSlider" Minimum="1" Maximum="5" Width="157" Margin="284,170,71,508" TickFrequency="1"/>
+        <Slider x:Name="CleanlinessSlider" Minimum="1" Maximum="5" Margin="277,128,71,550" TickFrequency="1" IsSnapToTickEnabled="True" AutoToolTipPlacement="BottomRight"/>
+        <Slider x:Name="CorrectnessSlider" Minimum="1" Maximum="5" Margin="277,170,71,508" TickFrequency="1" IsSnapToTickEnabled="True" AutoToolTipPlacement="BottomRight"/>
         <Label HorizontalContentAlignment="Left" FontSize="18" Margin="71,292,256,366" Content="Add photos:"/>
         <Label HorizontalContentAlignment="Left" FontSize="18" Margin="71,444,256,214" Content="Comments:"/>
         <TextBox x:Name="Comments" Margin="71,487,71,27"/>
@@ -45,12 +45,12 @@
             </Button.Template>
         </Button>
 
-        
+
         <Border BorderBrush="Black" Margin="261,300,71,262" Visibility="Visible" BorderThickness="1"></Border>
 
         <Image x:Name="imagePicture" Margin="271,310,82,273"/>
 
-        <Label Content="Rate tour and guide" Margin="70,25,560,386" FontSize="20" FontWeight="Bold"/>
+
 
 
         <Canvas Name="canvas" Margin="415,305,75,371" MouseLeftButtonDown="DeletePhotoButton_Click">
@@ -71,7 +71,7 @@
         </Canvas>
 
 
-        <Canvas Margin="421,356,53,320" Height="20" MouseLeftButtonDown="NextButton_Click">
+        <Canvas Margin="421,356,53,320" Height="20" MouseLeftButtonDown="NextImageButton_Click">
             <Line X1="10" Y1="10" X2="50" Y2="10" Stroke="Black" 
                   StrokeThickness="2" StrokeDashCap="Round" StrokeEndLineCap="Round" StrokeStartLineCap="Round" HorizontalAlignment="Left" VerticalAlignment="Center" Width="36"/>
             <Line X1="35" Y1="10" X2="30" Y2="5" Stroke="Black" 
@@ -80,7 +80,7 @@
                   StrokeThickness="2" StrokeDashCap="Round" StrokeEndLineCap="Round" StrokeStartLineCap="Round" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Canvas>
 
-        <Canvas Margin="242,356,232,320" Height="20" MouseLeftButtonDown="BackButton_Click" RenderTransformOrigin="0.5,0.5">
+        <Canvas Margin="242,356,232,320" Height="20" MouseLeftButtonDown="BackImageButton_Click" RenderTransformOrigin="0.5,0.5">
             <Canvas.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>

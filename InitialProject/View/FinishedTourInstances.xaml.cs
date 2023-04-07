@@ -41,9 +41,6 @@ namespace InitialProject.View
             }
 
         }
-        private TourInstanceService tourInstanceService;
-        private TourReservationService tourReservationService;
-        private ObservableCollection<TourReservation> tourReservations;
         private GuideAndTourReviewService guideAndTourReviewService;
         public FinishedTourInstances(Guest2 guest2)
         {
@@ -51,12 +48,17 @@ namespace InitialProject.View
             InitializeComponent();
             DataContext = this;
             this.guest2 = guest2;
+<<<<<<< HEAD
             tourInstanceService = new TourInstanceService();
             tourReservationService = new TourReservationService();
             tourReservations = new ObservableCollection<TourReservation>(tourReservationService.GetAll());
             guideAndTourReviewService = new GuideAndTourReviewService();
             guideAndTourReviewService.SetTourInstances(CompletedTours, guest2);
            // CompletedTours =guideAndTourReviewService.CompletedTours;
+=======
+            guideAndTourReviewService = new GuideAndTourReviewService(guest2);
+            CompletedTours=guideAndTourReviewService.CompletedTours;
+>>>>>>> 1d3141450d10619d649812f2a477f929560693b3
         }
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -64,22 +66,9 @@ namespace InitialProject.View
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-        /*private TourReservation FindTourReservation(TourInstance currentTourInstance,TourReservation reservation)
-        {
-            foreach (TourReservation tourReservation in tourReservations)
-            {
-                if (tourReservation.TourInstanceId == currentTourInstance.Id)
-                {
-                    reservation = tourReservation;
-                }
-            }
-            return reservation;
-        }*/
         private void Rate_Click(object sender, RoutedEventArgs e)
         {
             TourInstance currentTourInstance = (TourInstance)TourListDataGrid.CurrentItem;
-            //TourReservation reservation=new TourReservation();
-            //reservation=FindTourReservation(currentTourInstance,reservation);
             GuideAndTourReviewForm guideAndTourReview = new GuideAndTourReviewForm(currentTourInstance,guest2);
             guideAndTourReview.Show();
         }

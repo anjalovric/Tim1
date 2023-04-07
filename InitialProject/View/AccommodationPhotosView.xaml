@@ -5,8 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
-        Title="AccommodationPhotosView" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+        Title="AccommodationPhotosView"  Height="696" Width="1024" WindowStartupLocation="CenterScreen">
     <Grid Background="AntiqueWhite">
+        <Label Content="{Binding Path=SelectedAccommodation.Name}" FontSize="24" Margin="0,20,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Width="Auto" Height="Auto" FontWeight="Bold"></Label>
+        
         <ListBox x:Name="imagesList" Width="500" Height="450" VerticalAlignment="Center" HorizontalAlignment="Center"></ListBox>
         
     </Grid>

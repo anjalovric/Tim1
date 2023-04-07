@@ -48,7 +48,7 @@
                 <MenuItem.Header>
                     <Image Source="/Resources/Images/account.png" Margin="23,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Height="48" Width="55"/>
                 </MenuItem.Header>
-                <MenuItem Header="MY PROFILE" Height="55"  FontSize="18" Click="BookingMenuItem_Click">
+                <MenuItem Header="MY PROFILE" Height="55"  FontSize="18" Click="MyProfileMenuItem_Click">
                     <MenuItem.Icon>
                         <Image Source="/Resources/Images/profile.jpg"/>
                     </MenuItem.Icon>

@@ -1,4 +1,10 @@
+<<<<<<< HEAD
 1|1|4/7/2023 12:00:00 AM|23:00:00|True|1|0|https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1280px-Image_created_with_a_mobile_phone.png|/https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1280px-Image_created_with_a_mobile_phone.png|False|4/7/2023
 2|2|4/7/2023 12:00:00 AM|23:59:47|True|1|0|https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/800px-Image_created_with_a_mobile_phone.png|/https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/800px-Image_created_with_a_mobile_phone.png|False|4/7/2023
 3|3|4/7/2023 12:00:00 AM|23:23:00|True|1|0|https://tse1.mm.bing.net/th?id=OIP.iSJYAI1JotBat8xXM9IA3AHaE8&pid=Api&P=0|/https://tse1.mm.bing.net/th?id=OIP.iSJYAI1JotBat8xXM9IA3AHaE8&pid=Api&P=0|False|4/7/2023
 4|4|4/7/2023 12:00:00 AM|23:23:23|True|1|0|Resources/Images/add.png|/Resources/Images/add.png|False|4/7/2023
+=======
+1|47|4/7/2023 12:00:00 AM|19:19:15|True|1|0|Resources/Images/edit.png|/Resources/Images/edit.png|False
+2|48|4/7/2023 12:00:00 AM|13:00:00|True|1|100|Resources/Images/delete.png|/Resources/Images/delete.png|False
+3|48|4/21/2023 12:00:00 AM|12:00:00|False|1|0|Resources/Images/delete.png|/Resources/Images/delete.png|False
+>>>>>>> 1d3141450d10619d649812f2a477f929560693b3

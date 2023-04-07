@@ -18,6 +18,7 @@ namespace InitialProject.Service
         private LocationService locationService;
         private TourInstanceService tourInstanceService;
         private TourService tourService;
+<<<<<<< HEAD
         private TourReservationService tourReservationService;
         private IGuideAndTourReviewsRepository guideAndTourReviewRepository = Injector.CreateInstance<IGuideAndTourReviewsRepository>();
         private ObservableCollection<TourReservation> tourReservations;
@@ -36,6 +37,24 @@ namespace InitialProject.Service
 
            
            
+=======
+        private GuideAndTourReviewRepository guideAndTourReviewRepository;
+        private AlertGuest2Service alertGuest2Service;
+        private Guest2 guest2;
+        private ObservableCollection<AlertGuest2> alertGuest2List;
+        public Location Location { get; set; }
+        public GuideAndTourReviewService(Guest2 guest2)
+        {
+            guideAndTourReviewRepository = new GuideAndTourReviewRepository();
+            locationService = new LocationService();
+            tourInstanceService = new TourInstanceService();
+            tourService = new TourService();
+            alertGuest2Service = new AlertGuest2Service();
+            alertGuest2List = new ObservableCollection<AlertGuest2>(alertGuest2Service.GetAll());
+            this.guest2 = guest2;
+            CompletedTours = new ObservableCollection<TourInstance>();
+            SetTourInstances(CompletedTours);
+>>>>>>> 1d3141450d10619d649812f2a477f929560693b3
             Location = new Location();
 
             
@@ -44,12 +63,11 @@ namespace InitialProject.Service
         {
             List<TourInstance> tourInstances;
             tourInstances = tourInstanceService.GetAll();
-            int exist = 0;
-            foreach (TourReservation tourReservation in tourReservations)
+            foreach (AlertGuest2 alertGuest2 in alertGuest2List)
             {
                 foreach (TourInstance tourInstance in tourInstances)
                 {
-                    if (tourReservation.TourInstanceId == tourInstance.Id && tourReservation.GuestId == guest2.Id && tourInstance.Finished == true)
+                    if (alertGuest2.InstanceId == tourInstance.Id && alertGuest2.Guest2Id == guest2.Id && tourInstance.Finished == true && alertGuest2.Availability==true)
                     {
                         if (!CompletedTours.Contains(tourInstance))
                         {

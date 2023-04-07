@@ -160,13 +160,9 @@ namespace InitialProject.View
             MessageBoxResult result = ConfirmCancellationMessageBox();
             if (result == MessageBoxResult.Yes)
             {
-                CancelledAccommodationReservation cancelledAccommodationReservation = new CancelledAccommodationReservation(SelectedUpcomingReservation);
-                cancelAccommodationReservationService.Add(cancelledAccommodationReservation);
+                cancelAccommodationReservationService.Add(SelectedUpcomingReservation);
                 accommodationReservationService.Delete(SelectedUpcomingReservation);
                 NotFinishedReservations.Remove(SelectedUpcomingReservation);
-
-
-
             }
         }
 
