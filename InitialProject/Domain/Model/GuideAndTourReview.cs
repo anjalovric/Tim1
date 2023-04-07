@@ -18,13 +18,11 @@ namespace InitialProject.Model
         public int InterestingFacts { get; set; }
         public int Knowledge { get; set; }
         public TourInstance TourInstance { get; set; }
-        public TourReviewImage TourReviewImage { get; set; }
         public GuideAndTourReview()
         {
             TourInstance = new TourInstance();
-            TourReviewImage= new TourReviewImage();
         }
-        public GuideAndTourReview(int guideId, int guestId,TourInstance tourInstance, int language, int interestingFacts, int knowledge, String comment,TourReviewImage tourReviewImage)
+        public GuideAndTourReview(int guideId, int guestId,TourInstance tourInstance, int language, int interestingFacts, int knowledge, String comment)
         {
             GuideId = guideId;
             GuestId = guestId;
@@ -33,12 +31,10 @@ namespace InitialProject.Model
             Language = language;
             InterestingFacts = interestingFacts;
             Knowledge = knowledge;
-            TourReviewImage = tourReviewImage;
-            //Reservation = new TourReservation();
         }
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), GuideId.ToString(), GuestId.ToString(), TourInstance.Id.ToString(),Language.ToString(),InterestingFacts.ToString(),Knowledge.ToString(), Comment,TourReviewImage.Id.ToString() };
+            string[] csvValues = { Id.ToString(), GuideId.ToString(), GuestId.ToString(), Language.ToString(),InterestingFacts.ToString(),Knowledge.ToString(), Comment, TourInstance.Id.ToString() };
             return csvValues;
         }
 
@@ -47,14 +43,12 @@ namespace InitialProject.Model
             Id = Convert.ToInt32(values[0]);
             GuideId = Convert.ToInt32(values[1]);
             GuestId = Convert.ToInt32(values[2]);
+            Language= Convert.ToInt32(values[3]);
+            InterestingFacts = Convert.ToInt32(values[4]);
+            Knowledge = Convert.ToInt32(values[5]);
+            Comment = values[6];
             TourInstance = new TourInstance();
-            TourInstance.Id = Convert.ToInt32(values[3]);
-            Language= Convert.ToInt32(values[4]);
-            InterestingFacts = Convert.ToInt32(values[5]);
-            Knowledge = Convert.ToInt32(values[6]);
-            Comment = values[7];
-            TourReviewImage = new TourReviewImage();
-            TourReviewImage.Id = Convert.ToInt32(values[8]);
+            TourInstance.Id = Convert.ToInt32(values[7]);
         }
     }
 }

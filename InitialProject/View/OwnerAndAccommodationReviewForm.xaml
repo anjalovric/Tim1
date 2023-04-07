@@ -26,7 +26,7 @@
         <Label HorizontalContentAlignment="Left" FontSize="18" Margin="71,444,256,214" Content="Comments:"/>
         <TextBox x:Name="Comments" Margin="71,487,71,27"/>
 
-        <Button Width="45" Content="+"  FontSize="21" Height="45" Margin="211,348,256,303">
+        <Button Content="+" Click="AddPhotoButton_Click" FontSize="21" Height="45" Margin="164,344,301,307">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Grid>
@@ -44,6 +44,59 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
+
+        
+        <Border BorderBrush="Black" Margin="261,300,71,262" Visibility="Visible" BorderThickness="1"></Border>
+
+        <Image x:Name="imagePicture" Margin="271,310,82,273"/>
+
+        <Label Content="Rate tour and guide" Margin="70,25,560,386" FontSize="20" FontWeight="Bold"/>
+
+
+        <Canvas Name="canvas" Margin="415,305,75,371" MouseLeftButtonDown="DeletePhotoButton_Click">
+            <Path Stroke="Red" StrokeThickness="2" HorizontalAlignment="Center" VerticalAlignment="Top" Height="20" Stretch="Fill" Width="22">
+                <Path.Data>
+                    <PathGeometry>
+                        <PathGeometry.Figures>
+                            <PathFigure StartPoint="0,0">
+                                <LineSegment Point="25,25"/>
+                            </PathFigure>
+                            <PathFigure StartPoint="0,25">
+                                <LineSegment Point="25,0"/>
+                            </PathFigure>
+                        </PathGeometry.Figures>
+                    </PathGeometry>
+                </Path.Data>
+            </Path>
+        </Canvas>
+
+
+        <Canvas Margin="421,356,53,320" Height="20" MouseLeftButtonDown="NextButton_Click">
+            <Line X1="10" Y1="10" X2="50" Y2="10" Stroke="Black" 
+                  StrokeThickness="2" StrokeDashCap="Round" StrokeEndLineCap="Round" StrokeStartLineCap="Round" HorizontalAlignment="Left" VerticalAlignment="Center" Width="36"/>
+            <Line X1="35" Y1="10" X2="30" Y2="5" Stroke="Black" 
+                  StrokeThickness="2" StrokeDashCap="Round" StrokeEndLineCap="Round" StrokeStartLineCap="Round"/>
+            <Line X1="35" Y1="10" X2="30" Y2="15" Stroke="Black" 
+                  StrokeThickness="2" StrokeDashCap="Round" StrokeEndLineCap="Round" StrokeStartLineCap="Round" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Canvas>
+
+        <Canvas Margin="242,356,232,320" Height="20" MouseLeftButtonDown="BackButton_Click" RenderTransformOrigin="0.5,0.5">
+            <Canvas.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="180"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Canvas.RenderTransform>
+            <Line X1="10" Y1="10" X2="50" Y2="10" Stroke="Black" 
+                  StrokeThickness="2" StrokeDashCap="Round" StrokeEndLineCap="Round" StrokeStartLineCap="Round" HorizontalAlignment="Left" VerticalAlignment="Center" Width="36"/>
+            <Line X1="35" Y1="10" X2="30" Y2="5" Stroke="Black" 
+                  StrokeThickness="2" StrokeDashCap="Round" StrokeEndLineCap="Round" StrokeStartLineCap="Round" HorizontalAlignment="Center" VerticalAlignment="Center" Width="38"/>
+            <Line X1="35" Y1="10" X2="30" Y2="15" Stroke="Black" 
+                  StrokeThickness="2" StrokeDashCap="Round" StrokeEndLineCap="Round" StrokeStartLineCap="Round" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Canvas>
+
 
 
 
