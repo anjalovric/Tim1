@@ -19,7 +19,14 @@
                             <DataGridTextColumn Header="Location" Width="3*" Binding="{Binding Accommodation.Location}"/>
                             <DataGridTextColumn Header="Arrival" Width="2*" Binding="{Binding Arrival}"/>
                             <DataGridTextColumn Header="Departure" Width="2*" Binding="{Binding Departure}"/>
-                            <DataGridTextColumn Header="Owner" Width="2.5*" Binding="{Binding Accommodation.Owner.Name}"/>
+                            <DataGridTextColumn Header="Owner" Width="2.5*">
+                                <DataGridTextColumn.Binding>
+                                    <MultiBinding StringFormat="{}{0} {1}">
+                                        <Binding Path="Accommodation.Owner.Name"/>
+                                        <Binding Path="Accommodation.Owner.LastName" />
+                                    </MultiBinding>
+                                </DataGridTextColumn.Binding>
+                            </DataGridTextColumn>
                             <DataGridTemplateColumn x:Name="Rate" Header="Rate" Width="0.9*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
@@ -44,7 +51,14 @@
                             <DataGridTextColumn Header="Location" Width="3*" Binding="{Binding Accommodation.Location}"/>
                             <DataGridTextColumn Header="Arrival" Width="2*" Binding="{Binding Arrival}"/>
                             <DataGridTextColumn Header="Departure" Width="2*" Binding="{Binding Departure}"/>
-                            <DataGridTextColumn Header="Owner" Width="2.5*" Binding="{Binding Accommodation.Owner.Name}"/>
+                            <DataGridTextColumn Header="Owner" Width="2.5*">
+                                <DataGridTextColumn.Binding>
+                                    <MultiBinding StringFormat="{}{0} {1}">
+                                        <Binding Path="Accommodation.Owner.Name"/>
+                                        <Binding Path="Accommodation.Owner.LastName" />
+                                    </MultiBinding>
+                                </DataGridTextColumn.Binding>
+                            </DataGridTextColumn>
                             <DataGridTemplateColumn x:Name="ChangeDate" Header="Change Date" Width="2*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using InitialProject.Domain.Model;
 using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.Service;
@@ -29,16 +31,20 @@ namespace InitialProject.View
         private SentAccommodationReservationRequests sentAccommodationReservationRequests;
         private Guest1Profile guest1Profile;
         
+       
+        
+        
         public Guest1Home(User user)
         {
             InitializeComponent();
 
+            
             guest1Service = new Guest1Service();
             GetGuest1ByUser(user);
-
+            
             guest1SearchAccommodation = new Guest1SearchAccommodation(guest1, ref Main);
             myReservations = new MyAccommodationReservations(guest1, ref Main);
-            sentAccommodationReservationRequests = new SentAccommodationReservationRequests();
+            sentAccommodationReservationRequests = new SentAccommodationReservationRequests(guest1);
             guest1Profile = new Guest1Profile(guest1);
             Main.Content = guest1SearchAccommodation;
 
@@ -70,7 +76,7 @@ namespace InitialProject.View
 
         private void SentRequestsMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            sentAccommodationReservationRequests = new SentAccommodationReservationRequests();
+            sentAccommodationReservationRequests = new SentAccommodationReservationRequests(guest1);
             Main.Content = sentAccommodationReservationRequests;
         }
 
@@ -78,5 +84,57 @@ namespace InitialProject.View
         {
             Main.Content = guest1Profile;
         }
+
+        private void NotificationsMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            Hyperlink[] links = GetAllNotifications();
+            foreach(Hyperlink link in links)
+            {
+                NotificationsList.Items.Add(new MenuItem { Header = link, IsCheckable = false, Height = 80 }) ;
+            }
+        }
+
+        private Hyperlink CreateHyperlinkNotification(String notification, String state)
+        {
+            Hyperlink link = new Hyperlink();
+            link.IsEnabled = true;
+            link.Inlines.Add(notification);
+
+            if(state.Equals("Approved"))
+                link.Click += NavigateToApprovedRequests_Click;
+            else if(state.Equals("Declined"))
+                link.Click += NavigateToDeclinedRequests_Click;
+
+            return link;
+        }
+
+        private void NavigateToApprovedRequests_Click(object sender, RoutedEventArgs e)
+        {
+            sentAccommodationReservationRequests.RequestsTabControl.SelectedIndex = 0;
+            Main.Content = sentAccommodationReservationRequests;    
+        }
+        private void NavigateToDeclinedRequests_Click(object sender, RoutedEventArgs e)
+        {
+            sentAccommodationReservationRequests.RequestsTabControl.SelectedIndex = 2;
+            Main.Content = sentAccommodationReservationRequests;
+        }
+
+        private Hyperlink[] GetAllNotifications()
+        {
+            CompletedAccommodationReschedulingRequestService completedAccommodationReschedulingRequestsService = new CompletedAccommodationReschedulingRequestService();
+            List<CompletedAccommodationReschedulingRequest> completedRequests = completedAccommodationReschedulingRequestsService.GetAll();
+            completedRequests.Reverse();
+            string[] notifications = new String[completedRequests.Count];
+            Hyperlink[] links = new Hyperlink[completedRequests.Count];
+            for (int i = 0; i < completedRequests.Count; i++)
+            {
+                notifications[i] = completedRequests[i].Request.Reservation.Accommodation.Owner.Name + " " + completedRequests[i].Request.Reservation.Accommodation.Owner.LastName;
+                notifications[i] += " " + completedRequests[i].Request.state.ToString().ToLower() + " your request.";
+                links[i]=CreateHyperlinkNotification(notifications[i], completedRequests[i].Request.state.ToString());
+            }    
+
+            return links;
+        }
+        
     }
 }

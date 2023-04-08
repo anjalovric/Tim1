@@ -27,6 +27,7 @@ namespace InitialProject.View
     {
         private ReschedulingAccommodationRequestService reschedulingAccommodationRequestService;
         private ObservableCollection<ReschedulingAccommodationRequest> approvedRequests;
+        private Guest1 guest1;
         public ObservableCollection<ReschedulingAccommodationRequest> ApprovedRequests
         {
             get { return approvedRequests; }
@@ -63,14 +64,15 @@ namespace InitialProject.View
 
         }
 
-        public SentAccommodationReservationRequests()
+        public SentAccommodationReservationRequests(Guest1 guest1)
         {
             InitializeComponent();
             this.DataContext = this;
+            this.guest1 = guest1;
             reschedulingAccommodationRequestService = new ReschedulingAccommodationRequestService();
-            ApprovedRequests = new ObservableCollection<ReschedulingAccommodationRequest>(reschedulingAccommodationRequestService.GetApprovedRequests());
-            PendingRequests = new ObservableCollection<ReschedulingAccommodationRequest>(reschedulingAccommodationRequestService.GetPendingRequests());
-            DeclinedRequests = new ObservableCollection<ReschedulingAccommodationRequest>(reschedulingAccommodationRequestService.GetDeclinedRequests());
+            ApprovedRequests = new ObservableCollection<ReschedulingAccommodationRequest>(reschedulingAccommodationRequestService.GetApprovedRequests(guest1));
+            PendingRequests = new ObservableCollection<ReschedulingAccommodationRequest>(reschedulingAccommodationRequestService.GetPendingRequests(guest1));
+            DeclinedRequests = new ObservableCollection<ReschedulingAccommodationRequest>(reschedulingAccommodationRequestService.GetDeclinedRequests(guest1));
 
 
         }

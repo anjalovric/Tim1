@@ -20,13 +20,13 @@ namespace InitialProject.Service
             return requests;
         }
 
-        public List<ReschedulingAccommodationRequest> GetApprovedRequests()
+        public List<ReschedulingAccommodationRequest> GetApprovedRequests(Guest1 guest1)
         {
             List<ReschedulingAccommodationRequest> approvedRequests = new List<ReschedulingAccommodationRequest>();
 
             foreach (ReschedulingAccommodationRequest request in requests)
             {
-                if (request.state == State.Approved)
+                if (request.state == State.Approved && request.Reservation.Guest.Id == guest1.Id)
                 {
                     approvedRequests.Add(request);
                 }
@@ -35,13 +35,13 @@ namespace InitialProject.Service
             return approvedRequests;
         }
 
-        public List<ReschedulingAccommodationRequest> GetDeclinedRequests()
+        public List<ReschedulingAccommodationRequest> GetDeclinedRequests(Guest1 guest1)
         {
             List<ReschedulingAccommodationRequest> declinedRequests = new List<ReschedulingAccommodationRequest>();
 
             foreach (ReschedulingAccommodationRequest request in requests)
             {
-                if (request.state == State.Declined)
+                if (request.state == State.Declined && request.Reservation.Guest.Id == guest1.Id)
                 {
                     declinedRequests.Add(request);
                 }
@@ -75,13 +75,13 @@ namespace InitialProject.Service
             return pendingRequests;
         }
 
-        public List<ReschedulingAccommodationRequest> GetPendingRequests()
+        public List<ReschedulingAccommodationRequest> GetPendingRequests(Guest1 guest1)
         {
             List<ReschedulingAccommodationRequest> pendingRequests = new List<ReschedulingAccommodationRequest>();
 
             foreach (ReschedulingAccommodationRequest request in requests)
             {
-                if (request.state == State.Pending)
+                if (request.state == State.Pending && request.Reservation.Guest.Id == guest1.Id)
                 {
                     pendingRequests.Add(request);
                 }
@@ -104,12 +104,12 @@ namespace InitialProject.Service
                 {
                     AccommodationReservation cancelledReservation = allCancelledReservations.Find(n => n.Id == request.Reservation.Id);
                     request.Reservation = cancelledReservation;
-                    SetOldReservationDates(request, cancelledReservation);
+                    //SetOldReservationDates(request, cancelledReservation);
                 }
                 else
                 {
                     request.Reservation = reservation;
-                    SetOldReservationDates(request, reservation);
+                   // SetOldReservationDates(request, reservation);
                 }
             }
         }

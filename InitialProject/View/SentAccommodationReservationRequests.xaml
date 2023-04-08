@@ -9,7 +9,7 @@
       Title="SentAccommodationReservationRequests">
 
     <Grid Background="AntiqueWhite">
-        <TabControl Height="430" VerticalAlignment="Top" Background="AntiqueWhite">
+        <TabControl x:Name="RequestsTabControl" Height="430" VerticalAlignment="Top" Background="AntiqueWhite">
             <TabItem Header="Approved requests" FontSize="16" Background="Gainsboro">
 
                 <Grid>
@@ -67,9 +67,7 @@
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Name" Width="1*" Binding="{Binding Reservation.Accommodation.Name}"/>
                             <DataGridTextColumn Header="Location" Width="2*"  Binding="{Binding Reservation.Accommodation.Location}"/>
-                            <DataGridTextColumn Header="Owner" Width="1*" Binding="{Binding Reservation.Accommodation.Owner.Name}"/>
-                            <DataGridTextColumn Header="Old arrival date" Width="2*" Binding="{Binding Departure}"/>
-                            <DataGridTextColumn Header="Old departure date" Width="2*">
+                            <DataGridTextColumn Header="Owner" Width="1*">
                                 <DataGridTextColumn.Binding>
                                     <MultiBinding StringFormat="{}{0} {1}">
                                         <Binding Path="Reservation.Accommodation.Owner.Name"/>
@@ -77,6 +75,8 @@
                                     </MultiBinding>
                                 </DataGridTextColumn.Binding>
                             </DataGridTextColumn>
+                            <DataGridTextColumn Header="Old arrival date" Width="2*" Binding="{Binding OldArrivalDate}"/>
+                            <DataGridTextColumn Header="Old departure date" Width="2*" Binding="{Binding OldDepartureDate}" />
                             <DataGridTextColumn Header="Comment" Width="2*" Binding="{Binding OwnerExplanationForDeclining}"/>
                         </DataGrid.Columns>
                     </DataGrid>
