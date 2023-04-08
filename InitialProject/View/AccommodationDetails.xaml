@@ -8,7 +8,7 @@
       Height="696" Width="1024"
       Title="AccommodationDetails">
 
-    <Grid Background="AntiqueWhite">
+    <Grid Background="Cornsilk">
         <Grid.RowDefinitions>
             <RowDefinition Height="4*"></RowDefinition>
             <RowDefinition Height="1*"></RowDefinition>
