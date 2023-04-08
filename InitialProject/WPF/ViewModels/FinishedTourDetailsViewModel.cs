@@ -70,19 +70,31 @@ namespace InitialProject.WPF.ViewModels
         private void WriteVoucherPrecentacge(int selectedId)
         {
 
-            With = detailsService.MakeWithVoucherPrecentage(selectedId) + " %";
+            if (detailsService.MakeWithVoucherPrecentage(selectedId) > 0)
+                With = detailsService.MakeWithVoucherPrecentage(selectedId).ToString("#.##") + " %";
+            else
+                With = 0 + "%";
 
-            Without= detailsService.MakeWithoutVoucherPrecentage(selectedId) + " %";
-
+            if(detailsService.MakeWithoutVoucherPrecentage(selectedId)>0)
+                Without= detailsService.MakeWithoutVoucherPrecentage(selectedId).ToString("#.##") + " %";
+            else
+                Without=0 + "%";
         }
 
         private void WriteAgePrecentacge(int selectedId)
         {
-            Under = detailsService.MakeUnder18Precentage(selectedId) + " %";
-
-            Between= detailsService.MakeBetween18And50Precentage(selectedId) + " %";
-
-            Over = detailsService.MakeOver50Precentage(selectedId) + " %";
+            if(detailsService.MakeUnder18Precentage(selectedId)>0)
+                Under = detailsService.MakeUnder18Precentage(selectedId).ToString("#.##") + " %";
+            else
+                Under = 0 + "%";
+            if(detailsService.MakeBetween18And50Precentage(selectedId) > 0)
+                Between= detailsService.MakeBetween18And50Precentage(selectedId).ToString("#.##") + " %";
+            else
+                Between= 0 + "%";
+            if(detailsService.MakeOver50Precentage(selectedId)>0)
+                Over = detailsService.MakeOver50Precentage(selectedId).ToString("#.##") + " %";
+            else
+                Over = 0 + "%";
         }
 
         private void ShowGuestsOnPoint(int currentPointId, CheckPointInformation pointInformation)

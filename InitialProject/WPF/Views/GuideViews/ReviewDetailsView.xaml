@@ -80,7 +80,12 @@
             </Border>
         </Grid>
 
-        <Button Content="RATE AS INAVLID" Height="35" HorizontalAlignment="Left" Margin="871,633,0,0" VerticalAlignment="Top" Width="195"/>
+        <Button Content="RATE AS INAVLID" Height="35" HorizontalAlignment="Left" Margin="871,633,0,0" VerticalAlignment="Top" Width="195" Click="Button_Click"/>
         <Label Content="{Binding Guest}" FontSize="25" FontWeight="Bold" HorizontalAlignment="Left" Margin="362,25,0,0" VerticalAlignment="Top" Width="346" Height="60"/>
+        <StackPanel x:Name="Toast" Margin="567,530,-43,0" Background="LightGray"  Visibility="Hidden" >
+            <Label Content="Validity is changed" Width="185" Height="67" FontSize="18" FontWeight="Heavy" HorizontalAlignment="Center"/>
+            <Button Height="41" Width="100" Click="Toast_Click">OK</Button>
+        </StackPanel>
+
     </Grid>
 </Page>

@@ -40,6 +40,7 @@ namespace InitialProject.WPF.ViewModels
 
         private User tourInstanceGuide;
         private TourInstanceService tourInstanceService;
+        private GuideService guideService=new GuideService();
   
         private DataGrid TourListDataGrid;
 
@@ -49,17 +50,17 @@ namespace InitialProject.WPF.ViewModels
             TourListDataGrid= tourListDataGrid;
 
             tourInstanceService = new TourInstanceService();
-
-            MakeCancelableTourList();
+            Guide loggdedGuide=guideService.GetByUsername(guide.Username);
+            MakeCancelableTourList(loggdedGuide);
         }
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-        private void MakeCancelableTourList()
+        private void MakeCancelableTourList(Guide guide)
         {
-            tourInstances = new ObservableCollection<TourInstance>(tourInstanceService.FindCancelableTours());
+            tourInstances = new ObservableCollection<TourInstance>(tourInstanceService.FindCancelableTours(guide));
         }
 
         public void CancelTour()

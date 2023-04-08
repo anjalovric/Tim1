@@ -30,7 +30,7 @@ namespace InitialProject.WPF.Views.GuideViews
             InitializeComponent();
             DataContext = this;
             tourStatisticsView = new TourStatisticsView();
-            homeView = new HomeView(tourStatisticsView.viewModel.Instances);
+            homeView = new HomeView(user,tourStatisticsView.viewModel.Instances);
             cancelView = new CancelView(user);
             loggedUser = user;
          

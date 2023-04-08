@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 
 namespace InitialProject.WPF.ViewModels
 {
@@ -27,11 +29,16 @@ namespace InitialProject.WPF.ViewModels
         public string Comment { get; set; }
         public string Guest { get; set; }
 
+        private GuideAndTourReview currentReview;
         public ObservableCollection<string> Points { get; set; }
-        public ReviewDetailsViewModel(GuideAndTourReview review) 
+
+        private StackPanel toastMessage;
+        public ReviewDetailsViewModel(GuideAndTourReview review,StackPanel toast) 
         { 
             SetTourDetails(review);
             SetGrades(review);
+            currentReview= review;
+            toastMessage = toast;
         }
 
         public void SetTourDetails(GuideAndTourReview review)
@@ -60,5 +67,24 @@ namespace InitialProject.WPF.ViewModels
             Points= new ObservableCollection<string>(tourDetailsService.GetPointsForGuest(review.Guest2.Id,review.TourInstance));
         }
 
+        public void Valid()
+        {
+            GuideAndTourReviewService guideAndTourReviewService = new GuideAndTourReviewService();
+            if(currentReview.Valid)
+            {
+                currentReview.Valid = false;
+                currentReview.ValidationUri = "Resources/Images/decline.jpg";
+                guideAndTourReviewService.Update(currentReview);
+                toastMessage.Visibility = Visibility.Visible;
+
+            }
+            else
+            {
+                currentReview.Valid = true;
+                currentReview.ValidationUri ="Resources/Images/corect.png";
+                guideAndTourReviewService.Update(currentReview);
+                toastMessage.Visibility = Visibility.Visible;
+            }
+        }
     }
 }

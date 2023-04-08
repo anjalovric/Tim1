@@ -2,6 +2,7 @@
 using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Model;
 using InitialProject.Repository;
+using InitialProject.Serializer;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -177,6 +178,10 @@ namespace InitialProject.Service
             return guideAndTourReviews;
         }
 
+        public GuideAndTourReview Update(GuideAndTourReview review)
+        {
+            return guideAndTourReviewRepository.Update(review);
+        }
 
     }
 }

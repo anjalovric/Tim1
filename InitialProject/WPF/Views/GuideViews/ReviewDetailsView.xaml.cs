@@ -26,8 +26,17 @@ namespace InitialProject.WPF.Views.GuideViews
         public ReviewDetailsView(GuideAndTourReview review)
         {
             InitializeComponent();
-            viewModel = new ReviewDetailsViewModel(review);
+            viewModel = new ReviewDetailsViewModel(review,this.Toast);
             DataContext = viewModel;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            viewModel.Valid();
+        }
+        private void Toast_Click(object sender, RoutedEventArgs e)
+        {
+            Toast.Visibility = Visibility.Hidden;
         }
     }
 }
