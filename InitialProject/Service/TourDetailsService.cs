@@ -15,6 +15,7 @@ namespace InitialProject.Service
         public CheckPointService checkPointService;
         public Guest2Service guest2Service;
 
+
         public TourDetailsService() 
         { 
             reservationService = new TourReservationService();
@@ -33,6 +34,23 @@ namespace InitialProject.Service
             }
             return counter;
         }
+
+        public List<string> GetPointsForGuest(int guest2Id,TourInstance instance)
+        {
+            List<string> pointsName = new List<string>();
+            CheckPointService checkPointService = new CheckPointService();
+            List<CheckPoint> checkPoints = checkPointService.GetByInstance(instance.Tour.Id);
+            foreach (CheckPoint checkPoint in checkPoints) 
+            {
+                foreach (AlertGuest2 alert in alertGuest2Service.GetByInstanceIdAndGuestId(instance.Id, guest2Id))
+                {
+                    if (alert.Availability && alert.CheckPointId==checkPoint.Id)
+                        pointsName.Add(checkPoint.Name);
+                }
+            }
+            return pointsName;
+        }
+
         public bool IsOnTour(int guest2Id, int instanceId)
         {
             bool availabe = false;

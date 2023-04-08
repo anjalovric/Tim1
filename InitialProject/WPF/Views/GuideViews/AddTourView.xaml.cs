@@ -630,32 +630,6 @@ namespace InitialProject.WPF.Views.GuideViews
 
         private void AddTourImage_Click(object sender, RoutedEventArgs e)
         {
-            // TourImageForm tourImageForm = new TourImageForm(tourImageRepository, TourImages);
-            //tourImageForm.Show();
-
-            /*  OpenFileDialog op = new OpenFileDialog();
-              op.Title = "Select a picture";
-              op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
-                "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
-                "Portable Network Graphic (*.png)|*.png";
-             if (op.ShowDialog() == true)
-             {
-                 string fullPath = op.FileName;
-
-
-                 string[] parts = fullPath.Split('\\');
-                 fullPath = parts[parts.Length - 1];
-                 string im = "/Resources/Images/" + fullPath;
-                 fullPath = im;
-                 ImageUrl = fullPath;
-                 TourImage newImage = new TourImage();
-                 newImage.Url = fullPath;
-                 newImage.TourId = -1;
-                 TourImage savedImage = tourImageRepository.Save(newImage);
-                 TourImages.Add(savedImage);
-
-
-             }*/
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Image files|*.bmp;*.jpg;*.png";
             openFileDialog.FilterIndex = 1;
@@ -697,15 +671,21 @@ namespace InitialProject.WPF.Views.GuideViews
             newInstance = new TourInstance();
             if (IsDateValid() && IsTimeValid())
             {
-                newInstance.StartDate = InstanceStartDate;
                 newInstance.StartClock = InstanceStartHour;
+                newInstance.StartDate = InstanceStartDate;
+                newInstance.Date = InstanceStartDate.ToString().Split(' ')[0];
                 newInstance.Guide = currentGuide;
                 newInstance.CoverImage = "";
                 Instances.Add(newInstance);
-                InstanceStartHourTB.Clear();
-                Picker.Text = "";
-                Picker.BorderBrush= new SolidColorBrush(Colors.Green);
+                ClearDateForm();
             }
+        }
+
+        private void ClearDateForm()
+        {
+            InstanceStartHourTB.Clear();
+            Picker.Text = "";
+            Picker.BorderBrush = new SolidColorBrush(Colors.Green);
         }
         private bool IsDateValid()
         {

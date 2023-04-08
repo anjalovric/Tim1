@@ -31,12 +31,12 @@ namespace InitialProject.View
 
         
 
-        private ChangeAccommodationReservationDateRequestService requestService;
+        private Service.ReschedulingAccommodationRequestService requestService;
         public ChangeDateAccommodationReservationForm(AccommodationReservation reservation)
         {
             InitializeComponent();
             this.DataContext = this;
-            requestService = new ChangeAccommodationReservationDateRequestService();
+            requestService = new Service.ReschedulingAccommodationRequestService();
             this.reservation = reservation; 
             
         }
@@ -50,7 +50,7 @@ namespace InitialProject.View
         {
             if(IsValidDateInput())
             {
-                ChangeAccommodationReservationDateRequest newRequest = new ChangeAccommodationReservationDateRequest(reservation, Arrival, Departure, Reason);
+                Model.ReschedulingAccommodationRequest newRequest = new Model.ReschedulingAccommodationRequest(reservation, Arrival, Departure, Reason);
                 requestService.Add(newRequest);
                 this.Close();
                 MessageBox.Show("Request successfully sent!");

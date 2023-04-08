@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using InitialProject.Model;
 using InitialProject.Repository;
+using static NPOI.HSSF.Util.HSSFColor;
 
 namespace InitialProject.Service
 {
@@ -184,6 +182,42 @@ namespace InitialProject.Service
                         reservation.Guest = guestForReservation;
                     }
             }
+        }
+
+        public bool IsCancelled(AccommodationReservation reservation)
+        {
+            CancelAccommodationReservationService cancelReservationService = new CancelAccommodationReservationService();
+            List<AccommodationReservation> allCancelledReservations = cancelReservationService.GetAll();
+            return allCancelledReservations.Find(n => n.Id == reservation.Id) != null; 
+        }
+
+        public void Update(AccommodationReservation reservation)
+        {
+            accommodationReservationRepository.Update(reservation);
+        }
+
+        public bool IsAvailableInDateRange(AccommodationReservation reservation, DateTime startDate, DateTime endDate)
+        {
+            DateTime date = startDate;
+            while (date<=endDate)
+            {
+                if (!IsAvailableOnDate(reservation, date))
+                    return false;
+                date = date.AddDays(1);
+            }
+            return true;
+        }
+        private bool IsAvailableOnDate(AccommodationReservation reservationToCheck, DateTime date)
+        {
+            bool isAvailable = true;
+            foreach(var reservation in allReservations)
+            {
+                bool isSameAccommodation = reservation.Accommodation.Id == reservationToCheck.Accommodation.Id;
+                bool isSameGuest = reservation.Guest.Id == reservationToCheck.Guest.Id;
+                if (isSameAccommodation && !isSameGuest)
+                    isAvailable = isAvailable && !(date > reservation.Arrival && date < reservation.Departure);
+            }
+            return isAvailable;
         }
     }
 }

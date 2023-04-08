@@ -6,7 +6,7 @@
     xmlns:local="clr-namespace:InitialProject.WPF.Views.GuideViews"
             xmlns:vh="clr-namespace:InitialProject.Model"
       mc:Ignorable="d" 
-      d:DesignHeight="700" d:DesignWidth="1100"
+      d:DesignHeight="707" d:DesignWidth="1100"
       Title="TourStatisticsView" Background="White">
     <Page.Resources>
         <vh:ImageConverter x:Key="ImageConverter"/>

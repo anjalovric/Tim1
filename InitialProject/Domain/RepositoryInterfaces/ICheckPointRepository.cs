@@ -15,5 +15,6 @@ namespace InitialProject.Domain.RepositoryInterfaces
         public CheckPoint Update(CheckPoint checkPoint);
 
         public void Delete(CheckPoint checkPoint);
+        public List<CheckPoint> GetByInstance(int tourId);
     }
 }

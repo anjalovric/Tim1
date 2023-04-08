@@ -52,9 +52,14 @@ namespace InitialProject.View
         {
             int pointId = _alertGuest2Repository.GetAll().Find(n => n.Id == AlertId).CheckPointId;
             int instanceId = _alertGuest2Repository.GetAll().Find(n => n.Id == AlertId).InstanceId;
-            Tour thisTour = _tourInstanceRepository.GetAll().Find(n => n.Id == instanceId).Tour;
-            PointLabel.Content = "Are you present on point " + _checkPointRepository.GetAll().Find(n => n.Id == pointId).Name + " on tour " +
-                                thisTour.Name + " ?";
+            if (_tourInstanceRepository.GetAll().Count > 0)
+            {
+                Tour thisTour = null;
+               // thisTour = _tourInstanceRepository.GetAll().Find(n => n.Id == instanceId).Tour;
+               // if(thisTour != null) 
+               //  PointLabel.Content = "Are you present on point " + _checkPointRepository.GetAll().Find(n => n.Id == pointId).Name + " on tour " +
+                               //     thisTour.Name + " ?";
+            }
         }
         private void Confirm_Click(object sender, RoutedEventArgs e)
         {

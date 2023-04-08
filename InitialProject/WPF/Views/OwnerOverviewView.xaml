@@ -46,7 +46,7 @@
                     </Style>
                 </Button.Resources>
             </Button>
-            <Button Name="RequestButton" Content="Button" Height="54">
+            <Button Name="RequestButton" Content="Requests" Height="54" Click="RequestButton_Click">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="40"/>

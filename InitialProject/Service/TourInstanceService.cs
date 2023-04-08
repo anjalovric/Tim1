@@ -45,57 +45,16 @@ namespace InitialProject.Service
         }
         public List<TourInstance> GetByStart()
         {
-            List<TourInstance> list = new List<TourInstance>();
-            foreach (TourInstance tour in tourInstancerepository.GetAll())
+            List<TourInstance> list = tourInstancerepository.GetByStart();
 
-                if (tour.StartDate.Date == DateTime.Now.Date && tour.Finished == false)
-                {
-                    string h = tour.StartClock.Split(':')[0];
-                    string m = tour.StartClock.Split(":")[1];
-                    string s = tour.StartClock.Split(":")[2];
-
-
-                    if (Convert.ToInt32(h) > DateTime.Now.Hour)
-                    {
-                        list.Add(tour);
-                    }
-                    else if (Convert.ToInt32(h) == DateTime.Now.Hour && Convert.ToInt32(m) > DateTime.Now.Minute)
-                    {
-                        list.Add(tour);
-                    }
-                    else if (Convert.ToInt32(h) == DateTime.Now.Hour && Convert.ToInt32(m) == DateTime.Now.Minute && Convert.ToInt32(s) > DateTime.Now.Second)
-                    {
-                        list.Add(tour);
-                    }
-                }
-
+            FillWithTours(list);
             return list;
 
         }
 
-
-
         public List<TourInstance> GetInstancesLaterThan48hFromNow()
-        {
-            List<TourInstance> list = new List<TourInstance>();
-            foreach (TourInstance tour in tourInstancerepository.GetAll())
-            {
-                if (tour.Finished == false && tour.StartDate > DateTime.Now.Date)
-                {
-                    var prevDate = Convert.ToDateTime(tour.StartDate.ToString().Split(" ")[0] + " " + tour.StartClock);
-                    var today = DateTime.Now;
-                    var diffOfDates = today - prevDate;
-
-                    if (diffOfDates.Days < -2)
-                        list.Add(tour);
-                    else if (diffOfDates.Days == -2 && diffOfDates.Hours < 0)
-                        list.Add(tour);
-                    else if (diffOfDates.Days == -2 && diffOfDates.Hours == 0 && diffOfDates.Minutes < 0)
-                        list.Add(tour);
-                }
-
-            }
-            return list;
+        {       
+            return tourInstancerepository.GetInstancesLaterThan48hFromNow();
 
         }
 
@@ -200,5 +159,37 @@ namespace InitialProject.Service
             TourService tourService = new TourService();
             tourService.SetLocationToTour(GetFinishedInsatnces(Instances));
         }
+
+        private void FillWithTours(List<TourInstance> Instances)
+        {
+            TourService tourService=new TourService();
+            foreach(TourInstance instance in Instances)
+            {
+                foreach(Tour tour in tourService.GetAll())
+                {
+                    if (tour.Id == instance.Tour.Id)
+                    {
+                        instance.Tour = tour;
+                    }
+                }
+            }
+            FillWithLocation(Instances);
+        }
+
+        private void FillWithLocation(List<TourInstance> Instances)
+        {
+            LocationService locationService = new LocationService();
+            foreach (TourInstance instance in Instances)
+            {
+                foreach (Location location in locationService.GetAll())
+                {
+                    if (location.Id == instance.Tour.Location.Id)
+                    {
+                        instance.Tour.Location = location;
+                    }
+                }
+            }
+        }
+
     }
 }
