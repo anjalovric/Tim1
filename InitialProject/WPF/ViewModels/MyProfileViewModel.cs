@@ -27,10 +27,10 @@ namespace InitialProject.WPF.ViewModels
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        public MyProfileViewModel(User user)
+        public MyProfileViewModel(Owner owner)
         {
             ownerReviewService = new OwnerReviewService();
-            MakeOwner(user);
+            MakeOwner(owner);
             selectedOwnerReview = new OwnerReview();
             OwnerReviews = new ObservableCollection<OwnerReview>(ownerReviewService.GetAllToDisplay(ProfileOwner));
         }
@@ -100,11 +100,10 @@ namespace InitialProject.WPF.ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-        private void MakeOwner(User user)
+        private void MakeOwner(Owner owner)
         {
-            ProfileOwner = new Model.Owner();
+            ProfileOwner = owner;
             OwnerService ownerService = new OwnerService();
-            ProfileOwner = ownerService.GetByUsername(user.Username);
             ProfileOwner.IsSuperOwner = ownerService.IsSuperOwner(ProfileOwner);
 
             CalculateAverageRate();

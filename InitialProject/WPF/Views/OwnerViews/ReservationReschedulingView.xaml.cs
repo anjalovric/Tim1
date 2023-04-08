@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using InitialProject.Model;
 using InitialProject.WPF.ViewModels;
 
 namespace InitialProject.WPF.Views
@@ -21,10 +22,11 @@ namespace InitialProject.WPF.Views
     /// </summary>
     public partial class ReservationReschedulingView : Page
     {
-        private ReservationReschedulingViewModel reservationReschedulingViewModel = new ReservationReschedulingViewModel();
-        public ReservationReschedulingView()
+        private ReservationReschedulingViewModel reservationReschedulingViewModel;
+        public ReservationReschedulingView(Owner owner)
         {
             InitializeComponent();
+            reservationReschedulingViewModel = new ReservationReschedulingViewModel(owner);
             DataContext = reservationReschedulingViewModel;
         }
 

@@ -8,6 +8,7 @@ namespace InitialProject.WPF.ViewModels
 {
     public class ReservationReschedulingViewModel : INotifyPropertyChanged
     {
+        private Owner profileOwner;
         public ObservableCollection<RequestForReshcedulingViewModel> Requests { get; set; }
         private RequestForReschedulingService requestService;
         private ReschedulingAccommodationRequestService reschedulingRequestService;
@@ -16,8 +17,9 @@ namespace InitialProject.WPF.ViewModels
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        public ReservationReschedulingViewModel()
+        public ReservationReschedulingViewModel(Owner owner)
         {
+            profileOwner = owner;
             requestService = new RequestForReschedulingService();
             reschedulingRequestService = new ReschedulingAccommodationRequestService();
             Requests = new ObservableCollection<RequestForReshcedulingViewModel>(requestService.GetPendingRequests());

@@ -14,9 +14,11 @@ namespace InitialProject.WPF.ViewModels
         private AccommodationReservation accommodationReservation;
         private bool isAccommodationAvailable;
         public string Availability { get; set; }
+        private Owner profileOwner;
         public RequestForReshcedulingViewModel()
         {
             Request = new ReschedulingAccommodationRequest();
+            //profileOwner = owner;
             SetAvailability();
         }
 

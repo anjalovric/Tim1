@@ -12,16 +12,9 @@ namespace InitialProject.WPF.ViewModels
     public class OwnerOverviewViewModel
     {
         public Owner ProfileOwner { get; set; }
-        public OwnerOverviewViewModel(User user)
+        public OwnerOverviewViewModel(Owner owner)
         {
-            MakeProfileOwner(user);
-        }
-
-        private void MakeProfileOwner(User user)
-        {
-            ProfileOwner = new Owner();
-            OwnerService ownerService = new OwnerService();
-            ProfileOwner = ownerService.GetByUsername(user.Username);
+            ProfileOwner = owner;
         }
     }
 }

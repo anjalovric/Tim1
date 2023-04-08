@@ -11,14 +11,16 @@ namespace InitialProject.WPF.ViewModels
 {
     public class AccommodationInputFormViewModel : INotifyPropertyChanged
     {
+        private Owner owner;
         private Location location;
         private string name;
         private AccommodationType type;
         private int capacity;
         private int minDaysForReservation;
         private int minDaysToCancel;
-        public AccommodationInputFormViewModel()
+        public AccommodationInputFormViewModel(Owner owner)
         {
+            this.owner = owner;
             location= new Location();
         }
 

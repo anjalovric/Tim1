@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using InitialProject.Model;
+using InitialProject.Service;
 using InitialProject.WPF.ViewModels;
 
 namespace InitialProject.WPF.Views
@@ -12,18 +13,20 @@ namespace InitialProject.WPF.Views
     /// </summary>
     public partial class OwnerMainWindowView : Window
     {
-        private User user;
+        private Owner owner;
+        private OwnerMainWindowViewModel ownerViewModel;
         public OwnerMainWindowView(User user)
         {
             InitializeComponent();
-            DataContext = new OwnerMainWindowViewModel(user);
-            this.user = user;
-            FrameForPages.Content = new OwnerOverviewView();
+            ownerViewModel = new OwnerMainWindowViewModel(user);
+            DataContext = ownerViewModel;
+            OwnerService ownerService = new OwnerService();
+            this.owner = ownerService.GetByUsername(user.Username);
+            FrameForPages.Content = new OwnerOverviewView(owner);
         }
         private void BurgerMenu_Click(object sender, RoutedEventArgs e)
         {
-            MenuView menu = new MenuView(user);
-            Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = menu;
+            ownerViewModel.MakeMenu();
         }
     }
 }
