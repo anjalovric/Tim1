@@ -56,13 +56,14 @@ namespace InitialProject.Repository
             _serializer.ToCSV(FilePath, _tourReviewImages);
         }
 
-        public TourReviewImage Update(TourReviewImage review)
+        public TourReviewImage Update(TourReviewImage review,int id)
         {
             _tourReviewImages = _serializer.FromCSV(FilePath);
             TourReviewImage current = _tourReviewImages.Find(c => c.Id == review.Id);
             int index = _tourReviewImages.IndexOf(current);
             _tourReviewImages.Remove(current);
-            _tourReviewImages.Insert(index, review);       // keep ascending order of ids in file 
+            current.GuideAndTourReviewId = id;
+            _tourReviewImages.Insert(index, current);       // keep ascending order of ids in file 
             _serializer.ToCSV(FilePath, _tourReviewImages);
             return review;
         }
