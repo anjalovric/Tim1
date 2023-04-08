@@ -66,7 +66,7 @@ namespace InitialProject.Service
 
             foreach(ReschedulingAccommodationRequest request in requests)
             {
-                if(request.state==State.Pending)
+                if(request.state==State.Pending && !IsReservationCancelled(request.Reservation))
                 {
                     pendingRequests.Add(request);
                 }
