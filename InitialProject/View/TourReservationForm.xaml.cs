@@ -19,6 +19,7 @@ using DotLiquid.Tags;
 using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.Serializer;
+using InitialProject.Service;
 using NPOI.SS.Formula.Functions;
 
 namespace InitialProject.View
@@ -37,8 +38,9 @@ namespace InitialProject.View
         private List<TourInstance> tourInstances;
         private TourInstanceRepository tourInstanceRepository;
         private ShowTours ShowTours;
-        private Boolean withVoucher;
+        private bool withVoucher;
         private int capacityOfThisTour;
+        //private ActivatingVoucher ActivatingVoucher;
         public ObservableCollection<TourInstance> TourInstances { get; set; }
         public Label Label { get; set; }
         private string age;
@@ -54,7 +56,20 @@ namespace InitialProject.View
                 }
             }
         }
+        
         private Guest2 guest2;
+        private VoucherService voucherService;
+        private ObservableCollection<Voucher> vouchers;
+        public ObservableCollection<Voucher> Vouchers
+        {
+            get { return vouchers; }
+            set
+            {
+                if (value != vouchers)
+                    vouchers = value;
+                OnPropertyChanged("Vouchers");
+            }
+        }
         public TourReservationForm(TourInstance currentTourInstance,Guest2 guest2,ObservableCollection<TourInstance> TourInstance,TourInstanceRepository tourInstanceRepository,Label label)
         {
             InitializeComponent();
@@ -63,6 +78,7 @@ namespace InitialProject.View
             this.TourInstances = TourInstance;
             this.Label = label;
             withVoucher = false;
+            //ActivatingVoucher = new ActivatingVoucher(guest2);
             this.tourInstanceRepository = tourInstanceRepository;
             tourInstances = tourInstanceRepository.GetAll();
             tourReservationRepository = new TourReservationRepository();
@@ -71,6 +87,9 @@ namespace InitialProject.View
             this.guest2 = guest2;
             GuestId = guest2.Id;
             capacityOfThisTour = currentTourInstance.Tour.MaxGuests;
+            voucherService = new VoucherService();
+            vouchers = new ObservableCollection<Voucher>();
+            Vouchers = new ObservableCollection<Voucher>(voucherService.FindAllVouchers(vouchers, guest2));
         }
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -157,11 +176,11 @@ namespace InitialProject.View
         {
             this.Close();
         }
-        private void Vouchers_Click(object sender, RoutedEventArgs e)
+        private void Activate(object sender, RoutedEventArgs e)
         {
-            ActivatingVoucher activatingVoucher = new ActivatingVoucher(guest2);
-            activatingVoucher.Show();
-            withVoucher = true;
+            Voucher currentVoucher = (Voucher)ActivationVoucherDataGrid.CurrentItem;
+            voucherService.Update(currentVoucher);
+            this.withVoucher = true;
         }
     }
 }
