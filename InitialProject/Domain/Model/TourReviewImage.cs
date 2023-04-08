@@ -11,27 +11,25 @@ namespace InitialProject.Domain.Model
     public class TourReviewImage:ISerializable
     {
         public int Id { get; set; }
-        public TourInstance TourInstance { get; set; }
+        public int GuideAndTourReviewId { get; set; }
         public string RelativeUri { get; set; }
         public TourReviewImage()
         {
-            //TourInstance = new TourInstance();
         }
-        public TourReviewImage(TourInstance tourInstance, string relativeUri)
+        public TourReviewImage(int guideAndTourReviewId, string relativeUri)
         {
-            TourInstance = tourInstance;
+            GuideAndTourReviewId = guideAndTourReviewId;
             RelativeUri= relativeUri;
         }
         public void FromCSV(string[] values)
         {
             Id = Convert.ToInt32(values[0]);
-            TourInstance = new TourInstance();
-            TourInstance.Id= Convert.ToInt32(values[1]);
+            GuideAndTourReviewId= Convert.ToInt32(values[1]);
             RelativeUri= values[2];
         }
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), TourInstance.Id.ToString(), RelativeUri};
+            string[] csvValues = { Id.ToString(), GuideAndTourReviewId.ToString(), RelativeUri};
             return csvValues;
         }
 

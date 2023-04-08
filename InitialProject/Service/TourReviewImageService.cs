@@ -25,7 +25,10 @@ namespace InitialProject.Service
         {
             tourReviewImageRepository.Save(image);
         }
-
+        public void Update(TourReviewImage image,int id)
+        {
+            tourReviewImageRepository.Update(image,id);
+        }
         public void Delete(TourReviewImage image)
         {
             tourReviewImageRepository.Delete(image);
