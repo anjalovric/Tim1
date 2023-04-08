@@ -66,5 +66,16 @@ namespace InitialProject.Repository
             }
             return guideAndTourReviews;
         }
+
+        public GuideAndTourReview Update(GuideAndTourReview review)
+        {
+            _reviews = _serializer.FromCSV(FilePath);
+            GuideAndTourReview current = _reviews.Find(c => c.Id == review.Id);
+            int index = _reviews.IndexOf(current);
+            _reviews.Remove(current);
+            _reviews.Insert(index, review);       // keep ascending order of ids in file 
+            _serializer.ToCSV(FilePath, _reviews);
+            return review;
+        }
     }
 }

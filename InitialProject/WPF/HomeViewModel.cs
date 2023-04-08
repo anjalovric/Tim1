@@ -16,7 +16,7 @@ namespace InitialProject.WPF
 {
     public class HomeViewModel
     {
-
+        public string Home { get; set; }
         public ObservableCollection<TourInstance> Tours { get; set; }
         private ObservableCollection<TourInstance> instances;
         public ObservableCollection<TourInstance> FinishedInstances
@@ -33,15 +33,23 @@ namespace InitialProject.WPF
 
 
         public TourInstance Selected { get; set; }
+        private GuideService guideService=new GuideService();
 
-        public HomeViewModel(ObservableCollection<TourInstance> Instances)
+        public HomeViewModel(User user,ObservableCollection<TourInstance> Instances)
         {
+            Guide loggedGuide=guideService.GetByUsername(user.Username);
             FinishedInstances = Instances;
             TourInstanceService tourInstanceService = new TourInstanceService();
-            Tours = new ObservableCollection<TourInstance>(tourInstanceService.GetByStart());
+            Tours = new ObservableCollection<TourInstance>(tourInstanceService.GetByStart(loggedGuide));
+            SetTitle(user);
         }
 
-
+        private void SetTitle(User user)
+        {
+            GuideService guideService = new GuideService();
+            Guide guide=guideService.GetByUsername(user.Username);
+            Home = guide.Name + " " + guide.Username + "'s home page";
+        }
      
 
         public event PropertyChangedEventHandler PropertyChanged;

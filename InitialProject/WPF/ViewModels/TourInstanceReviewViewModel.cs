@@ -6,7 +6,9 @@ using NPOI.POIFS.Storage;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -14,10 +16,22 @@ using Window = System.Windows.Window;
 
 namespace InitialProject.WPF.ViewModels
 {
-    public class TourInstanceReviewViewModel
+    public class TourInstanceReviewViewModel:INotifyPropertyChanged
     {
-       public ObservableCollection<GuideAndTourReview> Reviews { get; set; }  
-       public GuideAndTourReview Selected { get; set; }
+        private ObservableCollection<GuideAndTourReview> reviews;
+        public ObservableCollection<GuideAndTourReview> Reviews
+        {
+            get => reviews;
+            set
+            {
+                if (value != reviews)
+                {
+                    reviews = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public GuideAndTourReview Selected { get; set; }
 
         private GuideAndTourReviewService guideAndTourReviewService;
         private GuideService guideService;
@@ -46,6 +60,12 @@ namespace InitialProject.WPF.ViewModels
             GuideAndTourReview review = Selected;
             ReviewDetailsView reviewDetailsView = new ReviewDetailsView(review);
             Application.Current.Windows.OfType<GuideWindow>().FirstOrDefault().Main.Content = reviewDetailsView;
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

@@ -277,6 +277,7 @@ namespace InitialProject.WPF.Views.GuideViews
                 UpdateCheckPoints();
                 AddImages();
                 SaveInstances(savedTour);
+                Toast.Visibility = Visibility.Visible;
                
             }
 
@@ -525,6 +526,7 @@ namespace InitialProject.WPF.Views.GuideViews
             TourInstanceRepository tourInstanceRepository = new TourInstanceRepository();
             foreach (TourInstance instance in Instances)
             {
+                instance.Guide = currentGuide;
                 instance.Tour = savedTour;
                 instance.CoverImage = tourImageRepository.GetByTour(savedTour.Id)[0].Url;
                 instance.CoverBitmap = new BitmapImage(new Uri("/" + instance.CoverImage, UriKind.Relative));
@@ -679,6 +681,11 @@ namespace InitialProject.WPF.Views.GuideViews
                 Instances.Add(newInstance);
                 ClearDateForm();
             }
+        }
+
+        private void OKToast(object sender, RoutedEventArgs e)
+        {
+            Toast.Visibility = Visibility.Hidden;
         }
 
         private void ClearDateForm()

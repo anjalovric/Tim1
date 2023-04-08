@@ -10,9 +10,9 @@ namespace InitialProject.Domain.RepositoryInterfaces
 {
     public interface ITourInstanceRepository:IGenericRepository<TourInstance>
     {
-        public List<TourInstance> GetByStart();
+        public List<TourInstance> GetByStart(Guide guide);
 
-        public List<TourInstance> GetInstancesLaterThan48hFromNow();
+        public List<TourInstance> GetInstancesLaterThan48hFromNow(Guide guide);
 
 
         public TourInstance Save(TourInstance tour);

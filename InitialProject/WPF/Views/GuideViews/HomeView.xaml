@@ -14,17 +14,24 @@
 
     </Page.Resources>
     <Grid Margin="0,0,0,-6">
-        <DataGrid CanUserResizeColumns="False" CanUserResizeRows="False" CanUserReorderColumns="False" ItemsSource="{Binding Path=Tours,UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" SelectedItem="{Binding Path=Selected}" IsReadOnly="True" Margin="180,172,45,140">
+        <DataGrid CanUserResizeColumns="False" CanUserResizeRows="False" CanUserReorderColumns="False" ItemsSource="{Binding Path=Tours,UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" SelectedItem="{Binding Path=Selected}" IsReadOnly="True" Margin="223,164,28,58">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Binding="{Binding Tour.Name}" Width="100"/>
-                <DataGridTextColumn Header="Duration" Binding="{Binding Tour.Duration}" Width="100"/>
-                <DataGridTextColumn Header="Location" Binding="{Binding Tour.Location}" Width="100"/>
-                <DataGridTextColumn Header="MaxOfGuests" Binding="{Binding Tour.MaxGuests}" Width="100"/>
-                <DataGridTextColumn Header="StartDate" Binding="{Binding StartDate}" Width="60"/>
-                <DataGridTextColumn Header="StartHour" Binding="{Binding StartClock}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Language" Binding="{Binding Tour.Language}" Width="100"/>
-                <DataGridTextColumn Header="Description" Binding="{Binding Tour.Description}" Width="90"/>
-                <DataGridTemplateColumn x:Name="cancelation"  Width="1.2*">
+                <DataGridTemplateColumn x:Name="Cover"  Width="1*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding CoverBitmap}" Width="100" Height="40" VerticalAlignment="Top" Visibility="Visible"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Name" Binding="{Binding Tour.Name}" Width="1*"/>
+                <DataGridTextColumn Header="Duration" Binding="{Binding Tour.Duration}" Width="1*"/>
+                <DataGridTextColumn Header="Location" Binding="{Binding Tour.Location}" Width="1.5*"/>
+                <DataGridTextColumn Header="MaxOfGuests" Binding="{Binding Tour.MaxGuests}" Width="1*"/>
+                <DataGridTextColumn Header="StartDate" Binding="{Binding Date}" Width="1*"/>
+                <DataGridTextColumn Header="StartHour" Binding="{Binding StartClock}" Width="1*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Language" Binding="{Binding Tour.Language}" Width="1*"/>
+                <DataGridTextColumn Header="Description" Binding="{Binding Tour.Description}" Width="1*"/>
+                <DataGridTemplateColumn x:Name="cancelation"  Width="1*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button Name="cancelButton" Content="START" TextElement.FontWeight="ExtraBold" Click="StartTour_Click"/>
@@ -33,10 +40,12 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-      
 
-      
-        <Label Content="List of tours which are starting today:" FontSize="15" HorizontalAlignment="Left" Margin="87,35,0,0" VerticalAlignment="Top" Width="295"/>
+
+
+        <Label Content="List of tours which are starting today:" FontSize="15" HorizontalAlignment="Left" Margin="223,129,0,0" VerticalAlignment="Top" Width="295"/>
+        <Calendar HorizontalAlignment="Left" Margin="0,318,0,0" VerticalAlignment="Top" Height="216" Width="218"/>
+        <Label Content="{Binding Home}" HorizontalAlignment="Left" FontSize="25" FontWeight="Bold" Margin="392,31,0,0" VerticalAlignment="Top" Height="53" Width="350"/>
 
 
     </Grid>

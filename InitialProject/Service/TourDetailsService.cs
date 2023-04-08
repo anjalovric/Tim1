@@ -115,8 +115,10 @@ namespace InitialProject.Service
         }
         public double MakeWithVoucherPrecentage(int selectedId)
         {
-            if(CountGuest(selectedId)!=0)
-                return CountWithVouchers(selectedId) / CountGuest(selectedId) * 100;
+            if (CountGuest(selectedId) != 0)
+            {
+                return (double)CountWithVouchers(selectedId) /(double) CountGuest(selectedId) * 100;
+            }
             else
                 return 0;
         }
@@ -124,7 +126,7 @@ namespace InitialProject.Service
         public double MakeWithoutVoucherPrecentage(int selectedId)
         {
             if(CountGuest(selectedId)!=0)
-                return CountWithoutVouchers(selectedId) / CountGuest(selectedId) * 100;
+                return (double)CountWithoutVouchers(selectedId) /(double) CountGuest(selectedId) * 100;
             else
                 return 0;
 
@@ -146,24 +148,24 @@ namespace InitialProject.Service
         public double MakeUnder18Precentage(int selectedId)
         {
             if(CountGuest(selectedId)!=0)
-                return CountUnder18(selectedId) / CountGuest(selectedId) * 100;
+                return (double)CountUnder18(selectedId) / (double)CountGuest(selectedId) * 100;
             else
-                return 0;
+                return 0.0;
         }
 
         public double MakeBetween18And50Precentage(int selectedId)
         {
             if(CountGuest(selectedId)!=0)
-                return CountBetween18And50(selectedId) / CountGuest(selectedId) * 100;
+                return (double)CountBetween18And50(selectedId) / (double)CountGuest(selectedId) * 100;
             else
                 return 0;
         }
         public double MakeOver50Precentage(int selectedId)
         {
             if(CountGuest(selectedId)!=0)
-                return CountOver50(selectedId) / CountGuest(selectedId) * 100;
+                return (double)CountOver50(selectedId) / (double)CountGuest(selectedId) * 100;
             else
-                return 0;
+                return 0.00;
         }
         public int CountAttendance(int selectedId)
         {
@@ -180,7 +182,7 @@ namespace InitialProject.Service
             if (CountGuest(selectedId)!=0)
                 return CountAttendance(selectedId) / CountGuest(selectedId) * 100;
             else
-                return 0;
+                return 0.00;
         }
 
         public int CountGuestsOnPoint(int currentPointId,TourInstance selectedInstance)
