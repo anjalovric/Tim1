@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using InitialProject.Model;
 using InitialProject.Repository;
+using InitialProject.Service;
 
 namespace InitialProject.View
 {
@@ -24,19 +25,21 @@ namespace InitialProject.View
     public partial class AccommodationGuestsNumberInput : Window
     {
         public Accommodation currentAccommodation { get; set; }
-        private AccommodationReservationRepository accommodationReservationRepository;
+        private AccommodationReservationService accommodationReservationService;
+        private CancelledAccommodationReservationRepository cancelledAccommodationReservationRepository;
 
         private AvailableDatesForAccommodationReservation selectedDateRange;
         private Guest1 guest1;
         public ObservableCollection<AvailableDatesForAccommodationReservation> availableDatesForAccommodations { get; set; }
-        public AccommodationGuestsNumberInput(Accommodation currentAccommodation, AvailableDatesForAccommodationReservation selectedDateRange, AccommodationReservationRepository accommodationReservationRepository, ObservableCollection<AvailableDatesForAccommodationReservation> availableDatesForAccommodations, Guest1 guest1)
+        public AccommodationGuestsNumberInput(Accommodation currentAccommodation, AvailableDatesForAccommodationReservation selectedDateRange, AccommodationReservationService accommodationReservationService, ObservableCollection<AvailableDatesForAccommodationReservation> availableDatesForAccommodations, Guest1 guest1)
         {
             InitializeComponent();
             this.DataContext = this;
 
             this.guest1 = guest1;
             this.currentAccommodation = currentAccommodation;
-            this.accommodationReservationRepository = accommodationReservationRepository;
+            this.accommodationReservationService = accommodationReservationService;
+            cancelledAccommodationReservationRepository = new CancelledAccommodationReservationRepository();
             this.selectedDateRange = selectedDateRange;
             this.availableDatesForAccommodations = availableDatesForAccommodations;
         }
@@ -63,7 +66,7 @@ namespace InitialProject.View
         private void MakeNewReservation()
         {
             AccommodationReservation newReservation = new AccommodationReservation(guest1, currentAccommodation, selectedDateRange.Arrival, selectedDateRange.Departure);
-            accommodationReservationRepository.Add(newReservation);
+            accommodationReservationService.Add(newReservation);
         }
 
         private MessageBoxResult ConfirmReservation()
@@ -91,6 +94,8 @@ namespace InitialProject.View
                 this.Owner.Close();
             }
         }
+
+
 
 
         private void DecrementGuestsNumberButton_Click(object sender, RoutedEventArgs e)

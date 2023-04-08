@@ -18,6 +18,7 @@ namespace InitialProject.Model
         public int MinDaysToCancel { get; set; }
         public Owner Owner { get; set; }
 
+
         public Accommodation() {}
 
         public Accommodation(string name, Location location, AccommodationType type, int capacity, int minDaysForReservation, int minDaysToCancel, Owner owner)

@@ -60,7 +60,7 @@ namespace InitialProject.Service
             return requestRepository.GetById(id);
         }
 
-        public List<ReschedulingAccommodationRequest>GetPendingRequests()
+        public List<ReschedulingAccommodationRequest>GetPendingRequestsIfNotCancelled()
         {
             List<ReschedulingAccommodationRequest> pendingRequests = new List<ReschedulingAccommodationRequest>();
 
@@ -75,15 +75,38 @@ namespace InitialProject.Service
             return pendingRequests;
         }
 
+        public List<ReschedulingAccommodationRequest> GetPendingRequests()
+        {
+            List<ReschedulingAccommodationRequest> pendingRequests = new List<ReschedulingAccommodationRequest>();
+
+            foreach (ReschedulingAccommodationRequest request in requests)
+            {
+                if (request.state == State.Pending)
+                {
+                    pendingRequests.Add(request);
+                }
+            }
+
+            return pendingRequests;
+        }
+
         private void SetReservations()
         {
             AccommodationReservationService accommodationReservationService = new AccommodationReservationService();
+            CancelAccommodationReservationService cancelAccommodationReservationService = new CancelAccommodationReservationService();
             List<AccommodationReservation> allReservations = accommodationReservationService.GetAll();
+            List<AccommodationReservation> allCancelledReservations = cancelAccommodationReservationService.GetAll();
 
-            foreach(ReschedulingAccommodationRequest request in requests)
+            foreach (ReschedulingAccommodationRequest request in requests)
             {
                 AccommodationReservation reservation = allReservations.Find(n => n.Id == request.Reservation.Id);
-                if(reservation != null && !IsReservationCancelled(reservation))
+                if(reservation == null)
+                {
+                    AccommodationReservation cancelledReservation = allCancelledReservations.Find(n => n.Id == request.Reservation.Id);
+                    request.Reservation = cancelledReservation;
+                    SetOldReservationDates(request, cancelledReservation);
+                }
+                else
                 {
                     request.Reservation = reservation;
                     SetOldReservationDates(request, reservation);

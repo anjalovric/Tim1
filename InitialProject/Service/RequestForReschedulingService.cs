@@ -14,7 +14,7 @@ namespace InitialProject.Service
 
         public List<RequestForReshcedulingViewModel> GetPendingRequests()
         {
-            List<ReschedulingAccommodationRequest> pendingRequest = requestsService.GetPendingRequests();
+            List<ReschedulingAccommodationRequest> pendingRequest = requestsService.GetPendingRequestsIfNotCancelled();
             List<RequestForReshcedulingViewModel> requestsViewModel = new List<RequestForReshcedulingViewModel>();
             
             foreach(ReschedulingAccommodationRequest request in pendingRequest)
