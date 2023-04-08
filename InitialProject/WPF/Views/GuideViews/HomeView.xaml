@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:InitialProject.WPF.Views.GuideViews"
       mc:Ignorable="d" 
-      d:DesignHeight="700" d:DesignWidth="1100"
+      d:DesignHeight="707" d:DesignWidth="1100"
       Title="HomeView" Background="White">
     <Page.Resources>
         <LinearGradientBrush x:Key="ButtonColor">
@@ -38,8 +38,6 @@
       
         <Label Content="List of tours which are starting today:" FontSize="15" HorizontalAlignment="Left" Margin="87,35,0,0" VerticalAlignment="Top" Width="295"/>
 
-        <Button Content="History" HorizontalAlignment="Left" Height="41" Margin="588,590,0,0" VerticalAlignment="Top" Width="100" Click="History_Click"/>
-    
 
     </Grid>
 

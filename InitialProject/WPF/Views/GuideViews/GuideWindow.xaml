@@ -8,49 +8,53 @@
         Title="GuideWindow" Height="750" Width="1100" WindowStartupLocation="CenterScreen">
     <Grid>
         <DockPanel>
-            <Grid DockPanel.Dock="Top" Height="40">
+            <Grid DockPanel.Dock="Top" Height="33" Background="LightGray">
 
                 <DockPanel  Width="500" HorizontalAlignment="Left">
-                    <Menu DockPanel.Dock="Top" Width="500" Height="40" HorizontalAlignment="Left">
-                        <MenuItem Header="Home" Height="40" Width="100" FontSize="18" Click="Home_Click" >
+                    <Menu DockPanel.Dock="Top" Width="500" Height="40" HorizontalAlignment="Left" Background="LightGray">
+                        <MenuItem Header="Home" Height="33" Width="100" FontSize="15" Click="Home_Click" >
 
                         </MenuItem>
-                        <MenuItem Header="Tours" Height="40" Width="100" FontSize="18" >
-                            <MenuItem Header="Add" Height="35" Width="150" FontSize="18" Click="Add_Click">
-                         
+                        <MenuItem Header="Tours" Height="33" Width="100" FontSize="15" >
+                            <MenuItem Header="Add" Height="33" Width="150" FontSize="15" Click="Add_Click">
+
                             </MenuItem>
-                            <MenuItem Header="Cancel" Height="35" Width="150" FontSize="18" Click="Cancel_Click" >
+                            <MenuItem Header="Cancel" Height="33" Width="150" FontSize="15" Click="Cancel_Click" >
 
                             </MenuItem>
                         </MenuItem>
-                        <MenuItem Header="Statistics" Height="40" Width="100" FontSize="18" >
-                            <MenuItem Header="Tours" Height="35" Width="150" FontSize="18" Click="TourStatitcs_Click">
+                        <MenuItem Header="Statistics" Height="33" Width="100" FontSize="15" >
+                            <MenuItem Header="Tours" Height="33" Width="150" FontSize="15" Click="TourStatitcs_Click">
 
                             </MenuItem>
-                            <MenuItem Header="Requests" Height="35" Width="150" FontSize="18"  >
-                                <MenuItem Header="Monthly" Height="35" Width="150" FontSize="18"  >
+                            <MenuItem Header="Requests" Height="33" Width="150" FontSize="15"  >
+                                <MenuItem Header="Monthly" Height="33" Width="150" FontSize="15"  >
 
                                 </MenuItem>
-                                <MenuItem Header="Yearly" Height="35" Width="150" FontSize="18" >
+                                <MenuItem Header="Yearly" Height="33" Width="150" FontSize="15" >
 
                                 </MenuItem>
                             </MenuItem>
                         </MenuItem>
-                        <MenuItem Header="Reviews" Height="40" Width="100" FontSize="18" >
+                        <MenuItem Header="Reviews" Height="33" Width="100" FontSize="15" Click="Review_Click">
 
                         </MenuItem>
-                        <MenuItem Header="Requests" Height="40" Width="100" FontSize="18" Click="Requests_Click" >
+                        <MenuItem Header="Requests" Height="33" Width="100" FontSize="15"  >
 
                         </MenuItem>
                     </Menu>
                 </DockPanel>
-                <DockPanel  Width="400" HorizontalAlignment="Right">
-                    <Menu DockPanel.Dock="Top" Width="150" Height="40" HorizontalAlignment="Right">
-                        <MenuItem  Height="40" Width="75" FontSize="20" >
-
+                <DockPanel  Width="400" HorizontalAlignment="Right" Background="LightGray" >
+                    <Menu DockPanel.Dock="Top" Width="150" Height="33" HorizontalAlignment="Right" Background="LightGray">
+                        <MenuItem  Height="33" Width="75" FontSize="15" Click="SignOut_Click" >
+                            <MenuItem.Icon>
+                                <Image Source="/Resources/Images/signout.png" Width="60" Margin="1,-7,-45,-8"  />
+                            </MenuItem.Icon>
                         </MenuItem>
-                        <MenuItem  Height="40" Width="75" FontSize="20" >
-
+                        <MenuItem  Height="33" Width="75" FontSize="15" >
+                            <MenuItem.Icon>
+                                <Image Height="28" Source="/Resources/Images/profile.png" Width="60" Margin="1,-7,-45,-8"  />
+                            </MenuItem.Icon>
                         </MenuItem>
 
                     </Menu>

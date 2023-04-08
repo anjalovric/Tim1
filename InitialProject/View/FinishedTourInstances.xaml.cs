@@ -56,8 +56,8 @@ namespace InitialProject.View
             guideAndTourReviewService.SetTourInstances(CompletedTours, guest2);
            // CompletedTours =guideAndTourReviewService.CompletedTours;
 
-           // guideAndTourReviewService = new GuideAndTourReviewService(guest2);
-           // CompletedTours=guideAndTourReviewService.CompletedTours;
+            //guideAndTourReviewService = new GuideAndTourReviewService(guest2);
+            //CompletedTours=guideAndTourReviewService.CompletedTours;
 
         }
         public event PropertyChangedEventHandler PropertyChanged;

@@ -15,7 +15,7 @@ namespace InitialProject.Domain.Model
         public string RelativeUri { get; set; }
         public TourReviewImage()
         {
-            TourInstance = new TourInstance();
+            //TourInstance = new TourInstance();
         }
         public TourReviewImage(TourInstance tourInstance, string relativeUri)
         {
