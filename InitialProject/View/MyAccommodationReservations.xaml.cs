@@ -141,6 +141,7 @@ namespace InitialProject.View
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
+
             if(!IsCancellationAllowed())
             {
                 MessageBox.Show("You can't cancel this reservation.");

@@ -14,9 +14,9 @@ namespace InitialProject.Model
         public int GuestId { get; set; }
         public double AverageGuestsAge { get; set; }
         public int Capacity { get; set; }  
-        public Boolean WithVaucher { get; set; }
+        public bool WithVaucher { get; set; }
         public TourReservation() { }
-        public TourReservation(int tourInstanceId, int currentGuestsNumber, int guestId, double averageGuestsAge, int capacity, Boolean withVaucher)
+        public TourReservation(int tourInstanceId, int currentGuestsNumber, int guestId, double averageGuestsAge, int capacity, bool withVaucher)
         {
             TourInstanceId = tourInstanceId;
             CurrentGuestsNumber = currentGuestsNumber;
