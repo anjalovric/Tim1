@@ -22,15 +22,27 @@ namespace InitialProject.WPF.Views
     /// </summary>
     public partial class OwnerReviewView : Page
     {
+        private OwnerReviewViewModel ownerReviewViewModel;
         public OwnerReviewView(OwnerReview ownerReview)
         {
             InitializeComponent();
-            DataContext = new OwnerReviewViewModel(ownerReview);
+            ownerReviewViewModel = new OwnerReviewViewModel(ownerReview);
+            DataContext = ownerReviewViewModel;
         }
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = NavigationService.GoBack;
+        }
+
+        private void NextImageButton_Click(object sender, RoutedEventArgs e)
+        {
+            ownerReviewViewModel.GetNextImage();
+        }
+
+        private void PreviousImageButton_Click(object sender, RoutedEventArgs e)
+        {
+            ownerReviewViewModel.GetPreviousImage();
         }
     }
 }

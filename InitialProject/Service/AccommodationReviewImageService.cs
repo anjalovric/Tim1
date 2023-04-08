@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using InitialProject.Domain.Model;
+using InitialProject.Model;
 using InitialProject.Repository;
 
 namespace InitialProject.Service
@@ -29,6 +30,20 @@ namespace InitialProject.Service
         public void Delete(AccommodationReviewImage image)
         {
             accommodationReviewImageRepository.Delete(image);
+        }
+
+        public List<AccommodationReviewImage> GetAllByReservation(AccommodationReservation reservation)
+        {
+            List<AccommodationReviewImage> imagesForReservation = new List<AccommodationReviewImage>();
+
+            foreach(var image in accommodationReviewImageRepository.GetAll())
+            {
+                if(image.Reservation.Id == reservation.Id)
+                {
+                    imagesForReservation.Add(image);
+                }
+            }
+            return imagesForReservation;
         }
 
     }

@@ -36,11 +36,21 @@
         <DatePicker DisplayDate="{Binding Path=AccommodationReservation.Arrival}" HorizontalAlignment="Left" Margin="216,148,0,0" VerticalAlignment="Top" Height="28" Width="182"/>
         <TextBlock HorizontalAlignment="Left" Margin="35,197,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Height="28" Width="112"><Run Text="Cleanliness: " /><Run Text=" "/><Run Text="{Binding OwnerReview.Cleanliness}" /></TextBlock>
         <TextBlock HorizontalAlignment="Left" Margin="216,196,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Height="28" Width="144"><Run Text="Owner's correctness: " /><Run Text=" "/><Run Text="{Binding OwnerReview.Correctness}" /></TextBlock>
-        <Label Content="Comment"  HorizontalAlignment="Left" Margin="35,248,0,0" VerticalAlignment="Top" Height="28" Width="138"/>
-        <TextBlock HorizontalAlignment="Left" Margin="35,281,0,0" TextWrapping="Wrap" Text="{Binding Path=OwnerReview.Comment}" VerticalAlignment="Top" Height="97" Width="363"/>
-        <Image HorizontalAlignment="Left" Height="138" Margin="125,425,0,0" VerticalAlignment="Top" Width="168"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="64,490,0,0" VerticalAlignment="Top"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="320,490,0,0" VerticalAlignment="Top"/>
+        <Label Content="Comment"  HorizontalAlignment="Left" Margin="34,230,0,0" VerticalAlignment="Top" Height="28" Width="138"/>
+        <Border Height="97" Width="363" BorderBrush="Black" BorderThickness="0.5">
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Path=OwnerReview.Comment}" VerticalAlignment="Top" Height="97" Width="363"/>
+        </Border>
+        <Image Source="{Binding Path= ImageUrl, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="138" Margin="125,425,0,0" VerticalAlignment="Top" Width="168"/>
+        <Button Name="NextImageButton" HorizontalAlignment="Left" Margin="26,470,0,0" VerticalAlignment="Top" Height="32" Width="78" Click="NextImageButton_Click">
+            <Button.Content>
+                <Image Source="/Resources/Images/back_arrow.png"/>
+            </Button.Content>
+        </Button>
+        <Button Name="PreviousImageButton" HorizontalAlignment="Left" Height="32" Width="74" Margin="324,470,0,0" VerticalAlignment="Top" Click="PreviousImageButton_Click">
+            <Button.Content>
+                <Image Source="/Resources/Images/arrow.png" />
+            </Button.Content>
+        </Button>
 
     </Grid>
 </Page>
