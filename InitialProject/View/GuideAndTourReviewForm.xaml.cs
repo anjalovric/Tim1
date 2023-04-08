@@ -34,6 +34,7 @@ namespace InitialProject.View
         private TourInstance CurrentTourInstance;
         public int Language;
         private List<TourReviewImage> images;
+        private int reviewId;
         public Uri relativeUri { get; set; }
         public int InterestingFacts;
         public int Knowledge;
@@ -41,6 +42,7 @@ namespace InitialProject.View
         public GuideAndTourReviewForm(TourInstance tourInstance,Guest2 guest2)
         {
             InitializeComponent();
+            reviewId = -1;
             guideAndTourReviewRepository = new GuideAndTourReviewRepository();
             tourReviewImageService = new TourReviewImageService();
             this.guest2 = guest2;
@@ -120,9 +122,17 @@ namespace InitialProject.View
             else
             {
                 Comment = comment.Text;
-                GuideAndTourReview guideAndTourReview = new GuideAndTourReview(CurrentTourInstance.Guide.Id, guest2.Id, CurrentTourInstance,Language,InterestingFacts, Knowledge,Comment); //trebace se lista proslijedjivati
+                GuideAndTourReview guideAndTourReview = new GuideAndTourReview(CurrentTourInstance.Guide.Id, guest2.Id, CurrentTourInstance,Language,InterestingFacts, Knowledge,Comment); 
                 guideAndTourReviewRepository.Save(guideAndTourReview);
                 StoreImages();
+                foreach(TourReviewImage image in images)
+                {
+                    if (image.GuideAndTourReviewId == -1)
+                    {
+                        //image.GuideAndTourReviewId = guideAndTourReview.Id;
+                        tourReviewImageService.Update(image,guideAndTourReview.Id);
+                    } 
+                }
                 this.Close();
             }
         }
@@ -183,7 +193,7 @@ namespace InitialProject.View
                 BitmapImage bitmapImage = new BitmapImage(relativeUri);
                 bitmapImage.UriSource = relativeUri;
                 imagePicture.Source = new BitmapImage(new Uri("/"+relative, UriKind.Relative));
-                tourReviewImage = new TourReviewImage(CurrentTourInstance, relative);
+                tourReviewImage = new TourReviewImage(reviewId, relative);
                 images.Add(tourReviewImage);
             }
 

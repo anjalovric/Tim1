@@ -1,6 +1,6 @@
 1|4|3|41|True|2|True
 2|5|3|41|True|2|True
-3|9|3|41|True|2|True
-4|4|3|41|False|2|False
-5|5|3|41|False|2|False
-6|9|3|41|False|2|False
+3|9|3|41|True|3|True
+4|4|3|41|True|3|True
+5|5|3|41|True|1|True
+6|9|3|41|True|1|True
