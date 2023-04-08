@@ -14,15 +14,15 @@
 
                 <Grid>
                     <Label FontSize="24" FontWeight="Bold" Margin="0,10,0,0" HorizontalAlignment="Center">APPROVED REQUESTS</Label>
-                    <DataGrid x:Name="ApprovedRequests" Margin="0,30,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" ItemsSource="{Binding Path=ApprovedRequests,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" IsReadOnly="True" Height="322" Width="866" UseLayoutRounding="False">
+                    <DataGrid x:Name="ApprovedRequestsDataGrid" Margin="0,30,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" ItemsSource="{Binding Path=ApprovedRequests,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" IsReadOnly="True" Height="322" Width="866" UseLayoutRounding="False">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Name" Width="1*" Binding="{Binding Accommodation.Name}"/>
-                            <DataGridTextColumn Header="Location" Width="2*"  Binding="{Binding Accommodation.Location}"/>
-                            <DataGridTextColumn Header="Owner" Width="1*" Binding="{Binding Arrival}"/>
-                            <DataGridTextColumn Header="Old arrival date" Width="2*" Binding="{Binding Departure}"/>
-                            <DataGridTextColumn Header="Old departure date" Width="2*" Binding="{Binding Accommodation.Owner.Name}"/>
-                            <DataGridTextColumn Header="New arrival date" Width="2*" Binding="{Binding Departure}"/>
-                            <DataGridTextColumn Header="New departure date" Width="2*" Binding="{Binding Departure}"/>
+                            <DataGridTextColumn Header="Name" Width="1*" Binding="{Binding Reservation.Accommodation.Name}"/>
+                            <DataGridTextColumn Header="Location" Width="2*"  Binding="{Binding Reservation.Accommodation.Location}"/>
+                            <DataGridTextColumn Header="Owner" Width="1*" Binding="{Binding Reservation.Accommodation.Owner.Name}"/>
+                            <DataGridTextColumn Header="Old arrival date" Width="2*" Binding="{Binding OldArrivalDate}"/>
+                            <DataGridTextColumn Header="Old departure date" Width="2*" Binding="{Binding OldDepartureDate}"/>
+                            <DataGridTextColumn Header="New arrival date" Width="2*" Binding="{Binding NewArrivalDate}"/>
+                            <DataGridTextColumn Header="New departure date" Width="2*" Binding="{Binding NewDepartureDate}"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
@@ -32,15 +32,15 @@
             <TabItem Header="Pending requests" FontSize="16" Background="Gainsboro">
                 <Grid>
                     <Label FontSize="24" FontWeight="Bold" Margin="0,10,0,0" HorizontalAlignment="Center">PENDING REQUESTS</Label>
-                    <DataGrid x:Name="PendingRequests" Margin="0,30,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" ItemsSource="{Binding Path=PendingRequests,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" IsReadOnly="True" Height="322" Width="866" UseLayoutRounding="False">
+                    <DataGrid x:Name="PendingRequestsDataGrid" Margin="0,30,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" ItemsSource="{Binding Path=PendingRequests,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" IsReadOnly="True" Height="322" Width="866" UseLayoutRounding="False">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Name" Width="1*" Binding="{Binding Accommodation.Name}"/>
-                            <DataGridTextColumn Header="Location" Width="2*"  Binding="{Binding Accommodation.Location}"/>
-                            <DataGridTextColumn Header="Owner" Width="1*" Binding="{Binding Arrival}"/>
-                            <DataGridTextColumn Header="Old arrival date" Width="2*" Binding="{Binding Departure}"/>
-                            <DataGridTextColumn Header="Old departure date" Width="2*" Binding="{Binding Accommodation.Owner.Name}"/>
-                            <DataGridTextColumn Header="New arrival date" Width="2*" Binding="{Binding Departure}"/>
-                            <DataGridTextColumn Header="New departure date" Width="2*" Binding="{Binding Departure}"/>
+                            <DataGridTextColumn Header="Name" Width="1*" Binding="{Binding Reservation.Accommodation.Name}"/>
+                            <DataGridTextColumn Header="Location" Width="2*"  Binding="{Binding Reservation.Accommodation.Location}"/>
+                            <DataGridTextColumn Header="Owner" Width="1*" Binding="{Binding Reservation.Accommodation.Owner.Name}"/>
+                            <DataGridTextColumn Header="Old arrival date" Width="2*" Binding="{Binding OldArrivalDate}"/>
+                            <DataGridTextColumn Header="Old departure date" Width="2*" Binding="{Binding OldDepartureDate}"/>
+                            <DataGridTextColumn Header="New arrival date" Width="2*" Binding="{Binding NewArrivalDate}"/>
+                            <DataGridTextColumn Header="New departure date" Width="2*" Binding="{Binding NewDepartureDate}"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
@@ -49,14 +49,14 @@
             <TabItem Header="Declined requests" FontSize="16" Background="Gainsboro">
                 <Grid>
                     <Label FontSize="24" FontWeight="Bold" Margin="0,10,0,0" HorizontalAlignment="Center">DECLINED REQUESTS</Label>
-                    <DataGrid x:Name="DeclinedRequests" Margin="0,30,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" ItemsSource="{Binding Path=DeclinedRequests,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" IsReadOnly="True" Height="322" Width="866" UseLayoutRounding="False">
+                    <DataGrid x:Name="DeclinedRequestsDataGrid" Margin="0,30,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" ItemsSource="{Binding Path=DeclinedRequests,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" IsReadOnly="True" Height="322" Width="866" UseLayoutRounding="False">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Name" Width="1*" Binding="{Binding Accommodation.Name}"/>
-                            <DataGridTextColumn Header="Location" Width="2*"  Binding="{Binding Accommodation.Location}"/>
-                            <DataGridTextColumn Header="Owner" Width="1*" Binding="{Binding Arrival}"/>
+                            <DataGridTextColumn Header="Name" Width="1*" Binding="{Binding Reservation.Accommodation.Name}"/>
+                            <DataGridTextColumn Header="Location" Width="2*"  Binding="{Binding Reservation.Accommodation.Location}"/>
+                            <DataGridTextColumn Header="Owner" Width="1*" Binding="{Binding Reservation.Accommodation.Owner.Name}"/>
                             <DataGridTextColumn Header="Old arrival date" Width="2*" Binding="{Binding Departure}"/>
                             <DataGridTextColumn Header="Old departure date" Width="2*" Binding="{Binding Accommodation.Owner.Name}"/>
-                            <DataGridTextColumn Header="Comment" Width="2*"/>
+                            <DataGridTextColumn Header="Comment" Width="2*" Binding="{Binding OwnerExplanationForDeclining}"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>

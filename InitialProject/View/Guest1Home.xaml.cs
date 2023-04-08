@@ -70,6 +70,7 @@ namespace InitialProject.View
 
         private void SentRequestsMenuItem_Click(object sender, RoutedEventArgs e)
         {
+            sentAccommodationReservationRequests = new SentAccommodationReservationRequests();
             Main.Content = sentAccommodationReservationRequests;
         }
 

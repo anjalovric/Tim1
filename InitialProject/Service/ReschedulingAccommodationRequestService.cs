@@ -20,6 +20,36 @@ namespace InitialProject.Service
             return requests;
         }
 
+        public List<ReschedulingAccommodationRequest> GetApprovedRequests()
+        {
+            List<ReschedulingAccommodationRequest> approvedRequests = new List<ReschedulingAccommodationRequest>();
+
+            foreach (ReschedulingAccommodationRequest request in requests)
+            {
+                if (request.state == State.Approved)
+                {
+                    approvedRequests.Add(request);
+                }
+            }
+
+            return approvedRequests;
+        }
+
+        public List<ReschedulingAccommodationRequest> GetDeclinedRequests()
+        {
+            List<ReschedulingAccommodationRequest> declinedRequests = new List<ReschedulingAccommodationRequest>();
+
+            foreach (ReschedulingAccommodationRequest request in requests)
+            {
+                if (request.state == State.Declined)
+                {
+                    declinedRequests.Add(request);
+                }
+            }
+
+            return declinedRequests;
+        }
+
         public void Add(ReschedulingAccommodationRequest request)
         {
             requestRepository.Add(request);

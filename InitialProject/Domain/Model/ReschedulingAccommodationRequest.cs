@@ -12,7 +12,7 @@ namespace InitialProject.Model
         public DateTime NewDepartureDate { get; set; }
         public string Reasons { get; set; }
         public State state { get; set; }
-        public string OwnerExplanationForDeclining;
+        public string OwnerExplanationForDeclining { get; set; }
         public DateTime OldArrivalDate { get; set; }
         public DateTime OldDepartureDate { get; set; }
 
