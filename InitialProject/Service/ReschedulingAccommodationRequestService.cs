@@ -124,6 +124,8 @@ namespace InitialProject.Service
         {
             ReschedulingAccommodationRequest updatedRequest = requests.Find(n => n.Id == request.Id);
             updatedRequest.state=newState;
+            if(newState == State.Approved)
+                UpdateReservationDates(request);
             return requestRepository.Update(updatedRequest);
         }
 
@@ -131,6 +133,14 @@ namespace InitialProject.Service
         {
             AccommodationReservationService accommodationReservationService = new AccommodationReservationService();
             return accommodationReservationService.IsCancelled(reservation);
+        }
+
+        private void UpdateReservationDates(ReschedulingAccommodationRequest request)
+        {
+            AccommodationReservationService accommodationReservationService = new AccommodationReservationService();
+            request.Reservation.Arrival = request.NewArrivalDate;
+            request.Reservation.Departure = request.NewDepartureDate;
+            accommodationReservationService.Update(request.Reservation);
         }
     }
 }

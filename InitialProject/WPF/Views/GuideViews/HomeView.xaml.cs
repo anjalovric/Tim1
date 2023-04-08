@@ -29,10 +29,10 @@ namespace InitialProject.WPF.Views.GuideViews
     public partial class HomeView : Page
     {   
         public HomeViewModel viewModel;
-        public HomeView(ObservableCollection<TourInstance> Instances)
+        public HomeView(User user, ObservableCollection<TourInstance> Instances)
         {
             InitializeComponent();
-            viewModel = new HomeViewModel(Instances);
+            viewModel = new HomeViewModel(user,Instances);
             DataContext = viewModel;
             
         }

@@ -6,16 +6,24 @@ using System.Threading.Tasks;
 using InitialProject.Model;
 using System.Windows;
 using InitialProject.WPF.Views;
+using InitialProject.Service;
 
 namespace InitialProject.WPF.ViewModels
 {
     public class OwnerMainWindowViewModel
     {
-        private User user;
+        private Owner owner;
         public OwnerMainWindowViewModel(User user)
         {
-            this.user = user;
+            OwnerService ownerService = new OwnerService();
+            owner = ownerService.GetByUsername(user.Username);
         }
        
+        public void MakeMenu()
+        {
+            MenuView menu = new MenuView(owner);
+            Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = menu;
+        }
+
     }
 }

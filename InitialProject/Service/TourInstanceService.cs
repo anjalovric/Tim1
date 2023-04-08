@@ -43,24 +43,24 @@ namespace InitialProject.Service
         {
             return tourInstancerepository.Update(tour);
         }
-        public List<TourInstance> GetByStart()
+        public List<TourInstance> GetByStart(Guide guide)
         {
-            List<TourInstance> list = tourInstancerepository.GetByStart();
+            List<TourInstance> list = tourInstancerepository.GetByStart(guide);
 
             FillWithTours(list);
             return list;
 
         }
 
-        public List<TourInstance> GetInstancesLaterThan48hFromNow()
+        public List<TourInstance> GetInstancesLaterThan48hFromNow(Guide guide)
         {       
-            return tourInstancerepository.GetInstancesLaterThan48hFromNow();
+            return tourInstancerepository.GetInstancesLaterThan48hFromNow(guide);
 
         }
 
-        public List<TourInstance> FindCancelableTours()
+        public List<TourInstance> FindCancelableTours(Guide guide)
         {
-            List<TourInstance> cancelableInstances = GetInstancesLaterThan48hFromNow();
+            List<TourInstance> cancelableInstances = GetInstancesLaterThan48hFromNow(guide);
             TourService tourService = new TourService();
             tourService.SetLocationToTour(cancelableInstances);
             return cancelableInstances;

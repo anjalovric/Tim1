@@ -16,15 +16,17 @@ namespace InitialProject.WPF.Views
     /// </summary>
     public partial class AccommodationView : Page
     {
-        public AccommodationView(User user)
+        private Owner owner;
+        public AccommodationView(Owner owner)
         {
             InitializeComponent();
-            DataContext = new AccommodationViewModel(user);
+            this.owner = owner;
+            DataContext = new AccommodationViewModel(owner);
         }
 
         private void NewAccommodationButton_Click(object sender, RoutedEventArgs e)
         {
-            AccommodationInputFormView accommodationInputFormView = new AccommodationInputFormView();
+            AccommodationInputFormView accommodationInputFormView = new AccommodationInputFormView(owner);
             Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = accommodationInputFormView;
 
         }

@@ -77,14 +77,14 @@ namespace InitialProject.Repository
             _serializer.ToCSV(FilePath, _tourInstances);
             return tour;
         }
-        public List<TourInstance> GetByStart()
+        public List<TourInstance> GetByStart(Guide guide)
         {
 
             _tourInstances = _serializer.FromCSV(FilePath);
             List<TourInstance> list = new List<TourInstance>();
             foreach (TourInstance tour in _tourInstances)
 
-                if(tour.StartDate.Date==DateTime.Now.Date && tour.Finished==false) 
+                if(tour.StartDate.Date==DateTime.Now.Date && tour.Finished==false && tour.Guide.Id==guide.Id) 
                 {   
                     string h = tour.StartClock.Split(':')[0];
                     string m = tour.StartClock.Split(":")[1];
@@ -110,14 +110,14 @@ namespace InitialProject.Repository
 
 
 
-        public List<TourInstance> GetInstancesLaterThan48hFromNow()
+        public List<TourInstance> GetInstancesLaterThan48hFromNow(Guide guide)
         {
 
             _tourInstances = _serializer.FromCSV(FilePath);
             List<TourInstance> list = new List<TourInstance>();
             foreach (TourInstance tour in _tourInstances)
             {
-                if (tour.Finished == false && tour.StartDate>DateTime.Now.Date)
+                if (tour.Finished == false && tour.StartDate>DateTime.Now.Date && tour.Guide.Id==guide.Id)
                 {
                     var prevDate = Convert.ToDateTime(tour.StartDate.ToString().Split(" ")[0] +" "+ tour.StartClock);
                     var today = DateTime.Now;

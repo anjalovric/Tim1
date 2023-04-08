@@ -49,7 +49,7 @@ namespace InitialProject.View
             tourInstanceRepository = new TourInstanceRepository();
             locationRepository = new LocationRepository();
 
-            Tours = new ObservableCollection<TourInstance>(tourInstanceRepository.GetByStart());
+           // Tours = new ObservableCollection<TourInstance>(tourInstanceRepository.GetByStart());
             SetLocationToTour();
             SetTourToTourInstance();
             loggedInUser = user;

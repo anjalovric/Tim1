@@ -1,4 +1,5 @@
 ﻿using System.Windows.Controls;
+using InitialProject.Model;
 using InitialProject.WPF.ViewModels;
 
 namespace InitialProject.WPF.Views
@@ -8,10 +9,10 @@ namespace InitialProject.WPF.Views
     /// </summary>
     public partial class AccommodationInputFormView : Page
     {
-        public AccommodationInputFormView()
+        public AccommodationInputFormView(Owner owner)
         {
             InitializeComponent();
-            DataContext = new AccommodationInputFormViewModel();
+            DataContext = new AccommodationInputFormViewModel(owner);
         }
     }
 }

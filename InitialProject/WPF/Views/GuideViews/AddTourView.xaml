@@ -66,7 +66,7 @@
         <Label Content="Add date and time for this tour" VerticalAlignment="Top" Height="30" Grid.Column="0" Margin="897,320,13,0"/>
         <ListBox x:Name="DateTimeBox" ItemsSource="{Binding Path=Instances}" Margin="634,350,216,187" SelectedItem="{Binding selectedInstance}"/>
 
-        <Button Click="AddTourImage_Click" Margin="198,493,796,152">ADD</Button>
+        <Button Click="AddTourImage_Click" Margin="296,500,693,154">ADD</Button>
         <Grid Margin="914,377,0,174">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
@@ -113,14 +113,18 @@
 
         <Button  Margin="932,193,108,455" Click="OKCheckPoint_Click">OK</Button>
         <Button   Margin="1019,193,20,455" Click="CancelCheckPoint_Click">Cancel</Button>
-        <Border BorderBrush="Black" Margin="134,553,674,10" Visibility="Visible" BorderThickness="1"></Border>
-        <Image x:Name="imagePicture" HorizontalAlignment="Left" Height="106" Margin="211,553,0,0" VerticalAlignment="Top" Width="173"/>
-        <Button Content="NEXT" HorizontalAlignment="Left" Margin="443,574,0,0" VerticalAlignment="Top" Click="Next_Click" Height="24" Width="56"/>
+        <Border BorderBrush="Black" Margin="134,553,638,10" Visibility="Visible" BorderThickness="1"></Border>
+        <Image x:Name="imagePicture" HorizontalAlignment="Left" Height="110" Margin="134,553,0,0" VerticalAlignment="Top" Width="328"/>
+        <Button Content="NEXT" HorizontalAlignment="Left" Margin="494,573,0,0" VerticalAlignment="Top" Click="Next_Click" Height="24" Width="56"/>
         <Button Content="BACK" Margin="41,569,990,82" Click="Button_Click" RenderTransformOrigin="0.5,0.5">
         </Button>
         <Label Content="Images of tour" HorizontalAlignment="Left" Margin="41,505,0,0" VerticalAlignment="Top" Height="43" Width="138"/>
-        <Button Content="DELETE" HorizontalAlignment="Left" Margin="346,493,0,0" VerticalAlignment="Top" Height="27" Width="111" Click="Button_Click_1"/>
+        <Button Content="DELETE" HorizontalAlignment="Left" Margin="439,500,0,0" VerticalAlignment="Top" Height="26" Width="111" Click="Button_Click_1"/>
         <Label Content="TOUR FORM" HorizontalAlignment="Left" FontSize="25" FontWeight="Bold"  Margin="457,27,0,0" VerticalAlignment="Top" Width="290"/>
+        <StackPanel x:Name="Toast" HorizontalAlignment="Left" Height="154" Margin="720,553,0,0" VerticalAlignment="Top" Width="380" Background="LightGray" Visibility="Hidden">
+            <Label FontSize="16" FontWeight="Heavy" HorizontalAlignment="Center">Tour is succesfully created</Label>
+            <Button Height="37" Width="71" Click="OKToast">OK</Button>
+        </StackPanel>
 
 
 

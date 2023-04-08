@@ -12,16 +12,16 @@ namespace InitialProject.WPF.Views
     /// </summary>
     public partial class MenuView : Page
     {
-        private User user;
-        public MenuView(User user)
+        private Owner owner;
+        public MenuView(Owner owner)
         {
             InitializeComponent();
-            this.user = user;
+            this.owner = owner;
         }
 
         private void MyProfileButton_Click(object sender, RoutedEventArgs e)
         {
-            MyProfileView myProfile = new MyProfileView(user);
+            MyProfileView myProfile = new MyProfileView(owner);
             Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = myProfile;
         }
 
@@ -32,7 +32,7 @@ namespace InitialProject.WPF.Views
 
         private void MyAccommodationButton_Click(object sender, RoutedEventArgs e)
         {
-            AccommodationView accommodationView = new AccommodationView(user);
+            AccommodationView accommodationView = new AccommodationView(owner);
             Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = accommodationView;
         }
     }

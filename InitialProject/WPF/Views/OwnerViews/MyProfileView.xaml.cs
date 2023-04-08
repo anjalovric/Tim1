@@ -16,10 +16,10 @@ namespace InitialProject.WPF.Views
     public partial class MyProfileView : Page
     {
         private MyProfileViewModel myProfileViewModel;
-        public MyProfileView(User user)
+        public MyProfileView(Owner owner)
         {
             InitializeComponent();
-            myProfileViewModel = new MyProfileViewModel(user);
+            myProfileViewModel = new MyProfileViewModel(owner);
             DataContext = myProfileViewModel;
         }
 

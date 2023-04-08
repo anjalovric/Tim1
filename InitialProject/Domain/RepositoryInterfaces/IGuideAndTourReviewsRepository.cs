@@ -15,5 +15,6 @@ namespace InitialProject.Domain.RepositoryInterfaces
         public void Save(GuideAndTourReview review);
 
         public List<GuideAndTourReview> GetReviewsByGuide(int guideId);
+        public GuideAndTourReview Update(GuideAndTourReview review);
     }
 }

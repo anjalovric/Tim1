@@ -14,17 +14,12 @@ namespace InitialProject.WPF.ViewModels
         public ObservableCollection<Accommodation> Accommodations { get; set; }
         private Owner profileOwner;
         private AccommodationService accommodationService;
-        public AccommodationViewModel(User user)
+        public AccommodationViewModel(Owner owner)
         {
-            MakeProfileOwner(user);
+            profileOwner = owner;
             accommodationService = new AccommodationService();
             Accommodations = accommodationService.GetAllByOwner(profileOwner);
         }
 
-        private void MakeProfileOwner(User user)
-        {
-            OwnerService ownerService = new OwnerService();
-            this.profileOwner = ownerService.GetByUsername(user.Username);
-        }
     }
 }
