@@ -121,8 +121,7 @@ namespace InitialProject.View
 
         private Hyperlink[] GetAllNotifications()
         {
-            CompletedAccommodationReschedulingRequestService completedAccommodationReschedulingRequestsService = new CompletedAccommodationReschedulingRequestService();
-            List<CompletedAccommodationReschedulingRequest> completedRequests = completedAccommodationReschedulingRequestsService.GetAll();
+            List<CompletedAccommodationReschedulingRequest> completedRequests = GetRequestsByGuest();
             completedRequests.Reverse();
             string[] notifications = new String[completedRequests.Count];
             Hyperlink[] links = new Hyperlink[completedRequests.Count];
@@ -135,6 +134,22 @@ namespace InitialProject.View
 
             return links;
         }
-        
+
+        private List<CompletedAccommodationReschedulingRequest> GetRequestsByGuest()
+        {
+            CompletedAccommodationReschedulingRequestService completedAccommodationReschedulingRequestsService = new CompletedAccommodationReschedulingRequestService();
+            List<CompletedAccommodationReschedulingRequest> storedRequests = new List<CompletedAccommodationReschedulingRequest>(completedAccommodationReschedulingRequestsService.GetAll());
+            List<CompletedAccommodationReschedulingRequest> filteredRequests = new List<CompletedAccommodationReschedulingRequest>();
+
+            foreach(CompletedAccommodationReschedulingRequest completedRequest in storedRequests)
+            {
+                if(completedRequest.Request.Reservation.Guest.Id==guest1.Id)
+                    filteredRequests.Add(completedRequest);
+            }
+
+            return filteredRequests;
+
+        }
+
     }
 }
