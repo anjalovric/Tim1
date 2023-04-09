@@ -47,12 +47,12 @@
                     </Style>
                 </Button.Resources>
             </Button>
-            <Button HorizontalContentAlignment="Left" Name="RequestButton" Height="54" Click="RequestButton_Click">
+            <Button Command="{Binding RequestsCommand}" HorizontalContentAlignment="Left" Name="RequestButton" Height="54">
                 <Button.Content>
-                    <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Horizontal" Width="300">
                         <Label Width="20"></Label>
                         <Image Source="/Resources/Images/request.png" Height="30"/>
-                        <Label Content="New requests to reschedule!" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="144"/>
+                        <Label Content="New requests to reschedule!" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="146"/>
                     </StackPanel>
                 </Button.Content>
                 <Button.Resources>
@@ -63,7 +63,7 @@
             </Button>
             <Button HorizontalContentAlignment="Left" Name="SuggestionButton" Height="54">
                 <Button.Content>
-                    <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Horizontal" Width="300">
                         <Label Width="20"></Label>
                         <Image Source="/Resources/Images/suggestion.png" Height="30"/>
                         <Label Content="New location suggestions!" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="144"/>
@@ -77,10 +77,10 @@
             </Button>
             <Button HorizontalContentAlignment="Left" Name="ForumButton" Height="54">
                 <Button.Content>
-                    <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Horizontal" Width="300">
                         <Label Width="20"></Label>
                         <Image Source="/Resources/Images/forum.png" Height="30"/>
-                        <Label Content="New forums!" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="144"/>
+                        <Label Content="New forums!"  VerticalContentAlignment="Center" />
                     </StackPanel>
                 </Button.Content>
             <Button.Resources>

@@ -25,28 +25,5 @@ namespace InitialProject.WPF.Views
         {
             formViewModel.EnableCityComboBox();
         }
-
-        private void CancelButton_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            AccommodationView accommodationView = new AccommodationView(owner);
-            Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = accommodationView;
-        }
-
-        private void OkButton_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            formViewModel.SaveAccommodation();
-            AccommodationView accommodationView = new AccommodationView(owner);
-            Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = accommodationView;
-        }
-
-        private void AddImageButton_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            formViewModel.AddImageFromFileSystem();
-        }
-
-        private void RemoveImageButton_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-
-        }
     }
 }

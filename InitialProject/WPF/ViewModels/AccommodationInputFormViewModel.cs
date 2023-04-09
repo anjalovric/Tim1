@@ -14,6 +14,8 @@ using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.Service;
 using Microsoft.Win32;
+using InitialProject.WPF.Views;
+using System.Windows;
 
 namespace InitialProject.WPF.ViewModels
 {
@@ -33,19 +35,62 @@ namespace InitialProject.WPF.ViewModels
         public ObservableCollection<AccommodationImage> Images { get; set; }
         public ObservableCollection<string> Countries { get; set; }
         public ObservableCollection<string> CitiesByCountry { get; set; }
+        public RelayCommand CancelCommand { get; set; }
+        public RelayCommand OkCommand { get; set; }
+        public RelayCommand AddImageCommand { get; set; }
+        public RelayCommand RemoveImageCommand { get; set; }
         public AccommodationInputFormViewModel(Owner owner)
         {
             this.owner = owner;
             accommodationService = new AccommodationService();
-            location = new Location();
-            Type = new AccommodationType();
             MakeListOfTypes();
             Images = new ObservableCollection<AccommodationImage>();
             MakeListOfLocations();
+            InitializeAccommodation();
+            MakeCommands();
+        }
+
+        private void MakeCommands()
+        {
+            CancelCommand = new RelayCommand(Cancel_Executed, CanExecute);
+            OkCommand = new RelayCommand(Ok_Executed, CanExecute);
+            AddImageCommand = new RelayCommand(AddImage_Executed, CanExecute);
+            RemoveImageCommand = new RelayCommand(RemoveImage_Executed, CanExecute);
+        }
+        private void InitializeAccommodation()
+        {
+            location = new Location();
+            Type = new AccommodationType();
             minDaysToCancel = 1;
             minDaysForReservation = 1;
         }
 
+        private bool CanExecute(object sender)
+        {
+            return true;
+        }
+
+        private void Cancel_Executed(object sender)
+        {
+            AccommodationView accommodationView = new AccommodationView(owner);
+            Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = accommodationView;
+        }
+
+        private void Ok_Executed(object sender)
+        {
+            SaveAccommodation();
+            AccommodationView accommodationView = new AccommodationView(owner);
+            Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = accommodationView;
+        }
+        private void AddImage_Executed(object sender)
+        {
+            AddImageFromFileSystem();
+        }
+
+        private void RemoveImage_Executed(object sender)
+        {
+           
+        }
         private void MakeListOfLocations()
         {
             LocationService locationService = new LocationService();

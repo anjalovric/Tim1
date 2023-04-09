@@ -22,19 +22,12 @@ namespace InitialProject.WPF.Views
     /// </summary>
     public partial class OwnerOverviewView : Page
     {
-        private ReservationReschedulingView reservationReschedulingView;
         private OwnerOverviewViewModel ownerOverviewViewModel;
         public OwnerOverviewView(Owner owner)
         {
             InitializeComponent();
             ownerOverviewViewModel = new OwnerOverviewViewModel(owner);
             DataContext = ownerOverviewViewModel;
-            reservationReschedulingView = new ReservationReschedulingView(owner);
-        }
-
-        private void RequestButton_Click(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = reservationReschedulingView;
         }
     }
 }

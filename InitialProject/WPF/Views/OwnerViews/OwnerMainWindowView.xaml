@@ -8,43 +8,44 @@
         Title="OwnerMainWindowView" Height="750" Width="430">
     <Grid>
         <Menu Margin="0,0,0,680" Background="Gray">
-            <MenuItem Height="40" Width="100" Name="BurgerMenu" Click="BurgerMenu_Click">
+            <MenuItem Command="{Binding BurgerMenuCommand}" Height="40" Width="100" Name="BurgerMenu">
                 <MenuItem.Icon>
                     <Image Source="/Resources/Images/burger_menu.png" HorizontalAlignment="Center" VerticalAlignment="Stretch"/>
                 </MenuItem.Icon>
             </MenuItem>
         </Menu>
-        <Frame Name="FrameForPages" Margin="0,40,0,40" NavigationUIVisibility="Hidden">
+        <Frame JournalOwnership="OwnsJournal" Name="FrameForPages" Margin="0,40,0,40" NavigationUIVisibility="Hidden">
             
         </Frame>
-        <Menu Margin="0,680,0,0" Background="LightGray" BorderBrush="Gray">
-            <MenuItem Width="83" Height="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
-                <MenuItem.Icon>
-                    <Image Source="/Resources/Images/back_arrow.png"/>
-                </MenuItem.Icon>
-            </MenuItem>
-            <MenuItem  Width="83" Height="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
-                <MenuItem.Icon>
-                    <Image Source="/Resources/Images/accommodation.png" />
-                </MenuItem.Icon>
-            </MenuItem>
-            <MenuItem  Width="83" Height="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
-                <MenuItem.Icon>
-                    <Image Source="/Resources/Images/home.png" />
-                </MenuItem.Icon>
-            </MenuItem>
-            <MenuItem  Width="83" Height="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
-                <MenuItem.Icon>
-                    <Image Source="/Resources/Images/question_mark.png" />
-                </MenuItem.Icon>
-            </MenuItem>
-            <MenuItem  Width="83" Height="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
-                <MenuItem.Icon>
-                    <Image Source="/Resources/Images/profile.png" />
-                </MenuItem.Icon>
-            </MenuItem>
-           
+        <Border Margin="0,680,0,0" Background="LightGray" BorderBrush="Gray">
+            <StackPanel Orientation="Horizontal">
+                <Button Name="BackButton" Command="NavigationCommands.BrowseBack" Width="83" Height="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                    <Button.Content>
+                        <Image Source="/Resources/Images/back_arrow.png"/>
+                    </Button.Content>
+                </Button>
+                <Button  Command="{Binding MyAccommodationCommand}" Width="83" Height="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                    <Button.Content>
+                        <Image Source="/Resources/Images/accommodation.png" />
+                    </Button.Content>
+                </Button>
+                <Button Command="{Binding HomePageCommand}" Width="83" Height="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                    <Button.Content>
+                        <Image Source="/Resources/Images/home.png" />
+                    </Button.Content>
+                </Button>
+                <Button  Width="83" Height="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                    <Button.Content>
+                        <Image Source="/Resources/Images/question_mark.png" />
+                    </Button.Content>
+                </Button>
+                <Button Command="{Binding MyProfileCommand}" Width="83" Height="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                    <Button.Content>
+                        <Image Source="/Resources/Images/profile.png" />
+                    </Button.Content>
+                </Button>
 
-        </Menu>
+            </StackPanel>
+        </Border>
     </Grid>
 </Window>

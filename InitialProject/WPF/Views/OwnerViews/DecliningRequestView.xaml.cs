@@ -29,10 +29,5 @@ namespace InitialProject.WPF.Views.OwnerViews
             decliningRequestViewModel = new DecliningRequestViewModel(request);
             DataContext = decliningRequestViewModel;
         }
-
-        private void ConfirmButton_Click(object sender, RoutedEventArgs e)
-        {
-            decliningRequestViewModel.Confirm();
-        }
     }
 }

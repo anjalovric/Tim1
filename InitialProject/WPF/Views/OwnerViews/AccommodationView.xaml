@@ -63,7 +63,7 @@
 
     <Grid>
         <ListBox ItemsSource="{Binding Path=Accommodations}" ItemTemplate="{StaticResource accommodations}" Height="421" VerticalAlignment="Top" Margin="30,31,30,0"/>
-        <Button Name="NewAccommodationButton" Content="New Accommodation" HorizontalAlignment="Center" Margin="0,474,0,0"  Width="370" Height="43" VerticalAlignment="Top" Click="NewAccommodationButton_Click"/>
+        <Button Command="{Binding NewAccommodationCommand}" Name="NewAccommodationButton" Content="New Accommodation" HorizontalAlignment="Center" Margin="0,474,0,0"  Width="370" Height="43" VerticalAlignment="Top"/>
         <Button Content="My Renovations" HorizontalAlignment="Center" Margin="0,540,0,0"  Width="370" Height="43" VerticalAlignment="Top"/>
     </Grid>
 </Page>

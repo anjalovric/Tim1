@@ -22,13 +22,5 @@ namespace InitialProject.WPF.Views
             myProfileViewModel = new MyProfileViewModel(owner);
             DataContext = myProfileViewModel;
         }
-
-        private void ViewButton_Click(object sender, RoutedEventArgs e)
-        {
-            object buttonDataContext = (sender as Button).DataContext;
-            myProfileViewModel.SelectedOwnerReview = (OwnerReview)buttonDataContext;
-            OwnerReviewView ownerReviewView = new OwnerReviewView(myProfileViewModel.SelectedOwnerReview);
-            Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = ownerReviewView;
-        }
     }
 }

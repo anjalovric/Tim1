@@ -16,9 +16,11 @@ namespace InitialProject.WPF.ViewModels
     {
         public ReschedulingAccommodationRequest ReschedulingAccommodationRequest { get; set; }
         private string explanation { get; set; }
+        public RelayCommand ConfirmCommand { get; set; }
         public DecliningRequestViewModel(ReschedulingAccommodationRequest request)
         {
             ReschedulingAccommodationRequest = request;
+            ConfirmCommand = new RelayCommand(Confirm_Executed, CanExecute);
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -26,6 +28,18 @@ namespace InitialProject.WPF.ViewModels
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private bool CanExecute(object sender)
+        {
+            return true;
+        }
+
+        private void Confirm_Executed(object sender)
+        {
+            ReservationReschedulingView reservationReschedulingView = new ReservationReschedulingView(ReschedulingAccommodationRequest.Reservation.Accommodation.Owner);
+            reservationReschedulingView.reservationReschedulingViewModel.SaveDeclinedRequest(Explanation);
+            Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = reservationReschedulingView;
         }
 
         public string Explanation
@@ -39,12 +53,6 @@ namespace InitialProject.WPF.ViewModels
                     OnPropertyChanged();
                 }
             }
-        }
-        public void Confirm()
-        {
-            ReservationReschedulingView reservationReschedulingView = new ReservationReschedulingView(ReschedulingAccommodationRequest.Reservation.Accommodation.Owner);
-            reservationReschedulingView.reservationReschedulingViewModel.SaveDeclinedRequest(Explanation);
-            Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = reservationReschedulingView;
         }
     }
 }
