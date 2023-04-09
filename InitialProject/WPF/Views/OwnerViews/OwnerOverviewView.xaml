@@ -35,10 +35,11 @@
         <Label Content="You are signed in as owner!" HorizontalAlignment="Left" Margin="154,151,0,0" VerticalAlignment="Top" Width="220"/>
         <Label Content="Notifications" FontSize="15" HorizontalAlignment="Left" Margin="29,215,0,0" VerticalAlignment="Top"/>
         <StackPanel Margin="31,250,29,0" Background="#FFCFC0C0">
-            <Button Name="ReviewButton" Height="54" >
+            <Button HorizontalContentAlignment="Left" Name="ReviewButton" Height="54" >
                 <StackPanel Orientation="Horizontal">
-                    <Image Source="/Resources/Images/star.png" Height="30"/>
-                    <Label Padding="0" Content="My Button Text" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                    <Label Width="20"></Label>
+                    <Image Source="/Resources/Images/clock.png" Height="30"/>
+                    <Label Content="New guests to review!" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="144"/>
                 </StackPanel>
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
@@ -46,21 +47,42 @@
                     </Style>
                 </Button.Resources>
             </Button>
-            <Button Name="RequestButton" Content="Requests" Height="54" Click="RequestButton_Click">
+            <Button HorizontalContentAlignment="Left" Name="RequestButton" Height="54" Click="RequestButton_Click">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Width="20"></Label>
+                        <Image Source="/Resources/Images/request.png" Height="30"/>
+                        <Label Content="New requests to reschedule!" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="144"/>
+                    </StackPanel>
+                </Button.Content>
+                <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="40"/>
+                </Style>
+            </Button.Resources>
+            </Button>
+            <Button HorizontalContentAlignment="Left" Name="SuggestionButton" Height="54">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Width="20"></Label>
+                        <Image Source="/Resources/Images/suggestion.png" Height="30"/>
+                        <Label Content="New location suggestions!" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="144"/>
+                    </StackPanel>
+                </Button.Content>
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="40"/>
                 </Style>
             </Button.Resources>
             </Button>
-            <Button Name="SuggestionButton" Content="Button" Height="54">
-            <Button.Resources>
-                <Style TargetType="{x:Type Border}">
-                    <Setter Property="CornerRadius" Value="40"/>
-                </Style>
-            </Button.Resources>
-            </Button>
-            <Button Name="ForumButton" Content="Button" Height="54">
+            <Button HorizontalContentAlignment="Left" Name="ForumButton" Height="54">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Width="20"></Label>
+                        <Image Source="/Resources/Images/forum.png" Height="30"/>
+                        <Label Content="New forums!" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="144"/>
+                    </StackPanel>
+                </Button.Content>
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="40"/>

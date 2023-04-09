@@ -15,23 +15,23 @@
             <Label Content="Country" Margin="25,129,206,595"/>
             <Label Content="City" Margin="226,129,25,595"/>
             <Label Content="Type" Margin="25,204,206,520"/>
-            <ComboBox Name="ComboBoxCountry" ItemsSource="{Binding Countries}" SelectedItem="{Binding Location.Country}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" HorizontalAlignment="Left" Margin="25,161,0,0" VerticalAlignment="Top" Width="162"/>
-            <ComboBox Name="ComboBoxCity" ItemsSource="{Binding CitiesByCountry}" SelectedItem="{Binding Location.City}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" HorizontalAlignment="Left" Margin="226,161,0,0" VerticalAlignment="Top" Width="162"/>
+            <ComboBox Name="ComboBoxCountry" ItemsSource="{Binding Countries}" SelectedItem="{Binding Location.Country}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" HorizontalAlignment="Left" Margin="25,161,0,0" VerticalAlignment="Top" Width="162" SelectionChanged="ComboBoxCountry_SelectionChanged"/>
+            <ComboBox Name="ComboBoxCity" ItemsSource="{Binding CitiesByCountry}" SelectedItem="{Binding Location.City}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" IsEnabled="{Binding Path=IsCityComboBoxEnabled}" HorizontalAlignment="Left" Margin="226,161,0,0" VerticalAlignment="Top" Width="162"/>
             <ComboBox Name="TypeComboBox" ItemsSource="{Binding Path=AccommodationTypes}" DisplayMemberPath="Name" SelectedItem="{Binding Path=Accommodation.Type}" HorizontalAlignment="Left" Margin="25,236,0,0" VerticalAlignment="Top" Width="162"/>
-            <Label Content="Capacity" Margin="25,283,329,437"/>
-            <TextBox HorizontalAlignment="Left" Margin="87,283,0,0" TextWrapping="Wrap" Text="{Binding Path=Capacity, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="100" Height="31"/>
+            <Label Content="Capacity" Margin="25,283,314,437"/>
+            <TextBox HorizontalAlignment="Left" Margin="104,283,0,0" TextWrapping="Wrap" Text="{Binding Path=Capacity, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="83" Height="31"/>
             <Label Content="Min number of days for reservation" Margin="25,337,167,382"/>
             <Label Content="Number of days before to cancel" Margin="26,393,165,327"/>
             <TextBox HorizontalAlignment="Left" Margin="251,338,0,0" TextWrapping="Wrap" Text="{Binding Path=MinDaysForReservation, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="137" Height="31"/>
             <TextBox HorizontalAlignment="Left" Margin="252,393,0,0" TextWrapping="Wrap" Text="{Binding Path=MinDaysToCancel, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="137" Height="31"/>
             <Label Content="Images" HorizontalAlignment="Left" Margin="25,453,0,0" VerticalAlignment="Top" Width="190"/>
-            <Button Content="+" HorizontalAlignment="Left" Margin="35,498,0,0" VerticalAlignment="Top" Width="139" Height="34"/>
-            <Button Content="-" HorizontalAlignment="Left" Margin="251,498,0,0" VerticalAlignment="Top" Width="137" Height="34"/>
-            <Image HorizontalAlignment="Left" Height="100" Margin="120,584,0,0" VerticalAlignment="Top" Width="167"/>
-            <Button Content="Button" HorizontalAlignment="Left" Margin="66,625,0,0" VerticalAlignment="Top"/>
-            <Button Content="Button" HorizontalAlignment="Left" Margin="306,625,0,0" VerticalAlignment="Top"/>
-            <Button Content="Cancel" HorizontalAlignment="Left" Margin="38,700,0,0" VerticalAlignment="Top" Width="136" Height="41"/>
-            <Button Content="OK" HorizontalAlignment="Left" Margin="251,700,0,0" VerticalAlignment="Top" Width="137" Height="41"/>
+            <Button Name="AddImageButton" Content="+" HorizontalAlignment="Left" Margin="35,498,0,0" VerticalAlignment="Top" Width="139" Height="34" Click="AddImageButton_Click"/>
+            <Button Name="RemoveImageButton" Content="-" HorizontalAlignment="Left" Margin="251,498,0,0" VerticalAlignment="Top" Width="137" Height="34" Click="RemoveImageButton_Click"/>
+            <Image Source="{Binding Path=ImageUrl, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="100" Margin="120,584,0,0" VerticalAlignment="Top" Width="167"/>
+            <Button Name="PreviousImageButton" Content="Button" HorizontalAlignment="Left" Margin="66,625,0,0" VerticalAlignment="Top"/>
+            <Button Name ="NextImageButton" Content="Button" HorizontalAlignment="Left" Margin="306,625,0,0" VerticalAlignment="Top"/>
+            <Button Name="CancelButton" Content="Cancel" HorizontalAlignment="Left" Margin="38,700,0,0" VerticalAlignment="Top" Width="136" Height="41" Click="CancelButton_Click"/>
+            <Button Name="OkButton" Content="OK" Margin="251,700,0,10" HorizontalAlignment="Left" Width="137" Click="OkButton_Click"/>
         </Grid>
     </ScrollViewer>
 </Page>

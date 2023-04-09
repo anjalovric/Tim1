@@ -50,8 +50,8 @@
                     <Border Grid.Column="1" Grid.Row="3" BorderBrush="Black" BorderThickness="0.5">
                     <TextBlock Text="{Binding Path = Request.NewArrivalDate}"></TextBlock>
                     </Border>
-                    <Image  Grid.Column="2" Grid.Row="3" Source="/Resources/Images/calendar.png" />
-                    <Image  Grid.Column="4" Grid.Row="3" Source="/Resources/Images/calendar.png" />
+                    <Image  Grid.Column="2" Grid.Row="3" Source="/Resources/Images/calendarIcon.png" />
+                    <Image  Grid.Column="4" Grid.Row="3" Source="/Resources/Images/calendarIcon.png" />
                     <Border  Grid.Column="3" Grid.Row="3" BorderBrush="Black" BorderThickness="0.5">
                     <TextBlock Text="{Binding Path = Request.NewDepartureDate}"></TextBlock>
                     </Border>
