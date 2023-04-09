@@ -72,6 +72,7 @@ namespace InitialProject.View
             tourInstanceRepository = new TourInstanceRepository();
             tourReservationRepository = new TourReservationRepository();
             alertGuest2Repository = new AlertGuest2Repository();
+            Alerts = new List<AlertGuest2>(alertGuest2Repository.GetAll());
             TourInstances = new ObservableCollection<TourInstance>();
             SetTourInstances(TourInstances);
             TourReservations = new ObservableCollection<TourReservation>(tourReservationRepository.GetAll());
@@ -104,10 +105,15 @@ namespace InitialProject.View
                 foreach (AlertGuest2 alert in Alerts)
                 {
                     AlertGuestForm alertGuestForm = new AlertGuestForm(alert.Id);
-                    if (3 == alert.Guest2Id && alert.Informed == false)
+                    
+                    if (alert.Guest2Id == guest2.Id && alert.Informed == false)
+                    {
                         alertGuestForm.Show();
+                    }
+                   
                 }
             }
+            
         }
         public void SetLocations()
         {

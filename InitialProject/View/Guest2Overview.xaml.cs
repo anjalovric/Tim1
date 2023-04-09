@@ -46,7 +46,11 @@ namespace InitialProject.View
             CC.Content = new ShowTours(guest2);
 
         }
+        private void ActiveTours_Click(object sender, RoutedEventArgs e)
+        {
+            CC.Content = new ActiveToursForm(guest2);
 
+        }
         private void SignOut_Click(object sender, RoutedEventArgs e)
         {
             SignInForm signInForm = new SignInForm();

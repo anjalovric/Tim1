@@ -125,8 +125,6 @@ namespace InitialProject.View
 
                 GuideAndTourReview guideAndTourReview = new GuideAndTourReview(CurrentTourInstance.Guide.Id, guest2, CurrentTourInstance, Language, InterestingFacts, Knowledge, Comment); //trebace se lista proslijedjivati
 
-
-
                 guideAndTourReviewRepository.Save(guideAndTourReview);
                 StoreImages();
                 foreach(TourReviewImage image in images)
