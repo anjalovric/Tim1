@@ -30,7 +30,7 @@ namespace InitialProject.Repository
             return _accommodationReservations;
         }
 
-         public int NextId()
+         public int NextId()        //ne koristim je, sta da uradim s njom?
         {
             _accommodationReservations = _serializer.FromCSV(FilePath);
             if (_accommodationReservations.Count < 1)
@@ -39,9 +39,9 @@ namespace InitialProject.Repository
             }
             return _accommodationReservations.Max(c => c.Id) + 1;
         }
-        public void Add(AccommodationReservation accommodationReservation)
+        public void Add(AccommodationReservation accommodationReservation, int nextId)
         {
-            accommodationReservation.Id = NextId();
+            accommodationReservation.Id = nextId;
             _accommodationReservations.Add(accommodationReservation);
             _serializer.ToCSV(FilePath, _accommodationReservations);
         }

@@ -141,5 +141,17 @@ namespace InitialProject.Repository
             return _tourInstances.Find(c => c.Id == id);
         }
         
+        public TourInstance GetActive(Guide guide)
+        {
+            TourInstance active = null;
+            foreach(TourInstance tour in _tourInstances)
+            {
+                if(tour.Active && tour.Guide.Id == guide.Id)
+                {
+                    active = tour;
+                }
+            }
+            return active;
+        }
     }
 }

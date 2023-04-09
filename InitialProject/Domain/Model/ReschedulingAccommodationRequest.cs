@@ -12,7 +12,7 @@ namespace InitialProject.Model
         public DateTime NewDepartureDate { get; set; }
         public string Reasons { get; set; }
         public State state { get; set; }
-        public string OwnerExplanationForDeclining;
+        public string OwnerExplanationForDeclining { get; set; }
         public DateTime OldArrivalDate { get; set; }
         public DateTime OldDepartureDate { get; set; }
 
@@ -27,6 +27,8 @@ namespace InitialProject.Model
             this.NewDepartureDate = NewDepartureDate;
             this.NewDepartureDate = this.NewDepartureDate.AddHours(23);
             this.NewDepartureDate = this.NewDepartureDate.AddMinutes(59);
+            this.OldArrivalDate = Reservation.Arrival;
+            this.OldDepartureDate = Reservation.Departure;
             this.Reasons = Reasons;
             this.state = State.Pending;
         }

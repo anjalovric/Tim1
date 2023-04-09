@@ -190,6 +190,34 @@ namespace InitialProject.Service
                 }
             }
         }
+        public TourInstance GetByActive(Guide guide)
+        {
+            return tourInstancerepository.GetActive(guide);
+        }
 
+        public void FillTour(TourInstance instance)
+        {
+            TourService tourService = new TourService();
+            foreach(Tour tour in tourService.GetAll())
+            {
+                if(tour.Id== instance.Tour.Id)
+                {
+                    instance.Tour= tour;
+                }
+            }
+            FillWithLocation(instance);
+        }
+
+        private void FillWithLocation(TourInstance instance)
+        {
+            LocationService locationService = new LocationService();
+            foreach(Location location in locationService.GetAll())
+            {
+                if(location.Id== instance.Tour.Location.Id)
+                {
+                    instance.Tour.Location= location;
+                }
+            }
+        }
     }
 }

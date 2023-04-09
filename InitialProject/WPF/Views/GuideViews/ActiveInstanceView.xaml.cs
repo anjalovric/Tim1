@@ -1,4 +1,5 @@
-﻿using InitialProject.Model;
+﻿using InitialProject.Domain.RepositoryInterfaces;
+using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.Service;
 using System;
@@ -11,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -22,26 +24,64 @@ using System.Windows.Shapes;
 namespace InitialProject.WPF.Views.GuideViews
 {
     /// <summary>
-    /// Interaction logic for StartedTourInstanceView.xaml
+    /// Interaction logic for ActiveInstanceView.xaml
     /// </summary>
-    public partial class StartedTourInstanceView : Page 
+    public partial class ActiveInstanceView : Page,INotifyPropertyChanged
     {
         public ObservableCollection<CheckPoint> AllPoints { get; set; }
         public ObservableCollection<CheckPoint> CurrentPoint { get; set; }
-        public ObservableCollection<TourInstance> Tours { get; set; }
-        public ObservableCollection<TourInstance> FinishedInstances { get; set; }
-
-        private TourDetailsService tourDetailsService;
-
-
         private CheckPointRepository pointsRepository;
+        private int orderCounter = 0;
         private TourInstanceRepository tourInstanceRepository;
         private TourReservationRepository tourReservationRepository;
         private AlertGuest2Repository alertGuest2Repository;
         private TourInstance selected;
+        private TourDetailsService tourDetailsService;
+        private TourInstanceService tourInstanceService=new TourInstanceService();
+        private ObservableCollection<TourInstance> tour;
+        public ObservableCollection<TourInstance> Tours
+        {
+            get => tour;
+            set
+            {
+                if (value != tour)
+                {
+                    tour = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private ObservableCollection<TourInstance> finishedInstances;
+        public ObservableCollection<TourInstance> FinishedInstances
+        {
+            get => finishedInstances;
+            set
+            {
+                if (value != finishedInstances)
+                {
+                    finishedInstances = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
-        private int orderCounter = 1;
-
+        public ActiveInstanceView(TourInstance active, ObservableCollection<TourInstance> tours, ObservableCollection<TourInstance> finishedInstances)
+        {
+            InitializeComponent();
+            DataContext = this;
+            selected=active;
+            FinishedInstances = finishedInstances;
+            Tours= tours;
+            pointsRepository = new CheckPointRepository();
+            AllPoints = new ObservableCollection<CheckPoint>();
+            CurrentPoint = new ObservableCollection<CheckPoint>();
+            tourDetailsService = new TourDetailsService();
+            tourInstanceRepository = new TourInstanceRepository();
+            tourReservationRepository = new TourReservationRepository();
+            alertGuest2Repository = new AlertGuest2Repository();
+            FindPointsForSelectedInstance(active);
+            FindLastCheckedPoint();
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -49,48 +89,9 @@ namespace InitialProject.WPF.Views.GuideViews
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-        public StartedTourInstanceView(TourInstance selectedInstance, ObservableCollection<TourInstance> tours, ObservableCollection<TourInstance> finishedInstances)
-        {
-            InitializeComponent();
-            DataContext = this;
-
-            pointsRepository = new CheckPointRepository();
-            tourInstanceRepository = new TourInstanceRepository();
-            tourReservationRepository = new TourReservationRepository();
-            alertGuest2Repository = new AlertGuest2Repository();
-            AllPoints = new ObservableCollection<CheckPoint>();
-            CurrentPoint = new ObservableCollection<CheckPoint>();
-            Tours = tours;
-            selected = selectedInstance;
-            FinishedInstances = finishedInstances;  
-            tourDetailsService = new TourDetailsService();
-            ActivateTour();
-
-            FindPointsForSelectedInstance(selected);
-            CheckFirstPoint();
-            SetFirstCheckPoint();
-        }
-
-        private void ActivateTour()
-        {
-            if (selected != null)
-            {
-                selected.Active = true;
-                tourInstanceRepository.Update(selected);
-            }
-        }
-        private void SetFirstCheckPoint()
-        {
-            if (AllPoints.Count != 0)
-            {
-                CurrentPoint.Add(AllPoints.ToList().Find(n => n.Order == orderCounter));
-                AddAlerts(CurrentPoint[0].Id, selected.Id);
-            }
-        }
         private void FindPointsForSelectedInstance(TourInstance selectedInstance)
         {
             List<CheckPoint> points = pointsRepository.GetAll();
-
             if (selectedInstance != null)
             {
                 foreach (CheckPoint point in points)
@@ -103,17 +104,18 @@ namespace InitialProject.WPF.Views.GuideViews
             }
         }
 
-        private void CheckFirstPoint()
+        private void FindLastCheckedPoint()
         {
             foreach (CheckPoint point in AllPoints)
             {
-                if (point.Order == 1)
+                if(point.Checked==false)
                 {
-                    point.Checked = true;
-                    pointsRepository.Update(point);
+                    orderCounter = point.Order - 1;
+                    CurrentPoint.Add(AllPoints[orderCounter - 1]);
                 }
             }
         }
+
         private void FinishTour_Click(object sender, RoutedEventArgs e)
         {
             FinishInstance();
@@ -131,13 +133,25 @@ namespace InitialProject.WPF.Views.GuideViews
             FinishedInstances.Add(selected);
             CurrentPoint[0].Checked = true;
 
-            Tours.Remove(selected);
+
+            tourInstanceService.FillTour(selected);
+            FindActive(selected);
             Finish.IsEnabled = false;
-            Next.IsEnabled= false;
+            Next.IsEnabled = false;
             FinishMessage.Content = "This tour is finished";
         }
 
-
+        private void FindActive(TourInstance selected)
+        {
+            foreach(TourInstance instance in Tours)
+            {
+                if(instance.Id == selected.Id)
+                {
+                    Tours.Remove(instance);
+                    break;
+                }
+            }
+        }
         private void ChangeCurrentPointToNextState()
         {
             List<CheckPoint> points = AllPoints.ToList();

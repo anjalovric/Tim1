@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using InitialProject.Model;
 using InitialProject.Repository;
+using InitialProject.Service;
 
 namespace InitialProject.View
 {
@@ -25,7 +26,7 @@ namespace InitialProject.View
     public partial class DatesForAccommodationReservation : Window
     {
         private Accommodation currentAccommodation;
-        private AccommodationReservationRepository accommodationReservationRepository;
+        private AccommodationReservationService accommodationReservationService;
         private Guest1 guest1;
 
         public ObservableCollection<AvailableDatesForAccommodationReservation> availableDatesForAccommodations { get; set; }
@@ -43,7 +44,7 @@ namespace InitialProject.View
             }
         }
 
-        public DatesForAccommodationReservation(Accommodation currentAccommodation, AccommodationReservationRepository accommodationReservationRepository, Guest1 guest1)
+        public DatesForAccommodationReservation(Accommodation currentAccommodation, AccommodationReservationService accommodationReservationService, Guest1 guest1)
         {
             InitializeComponent();
             this.DataContext = this;
@@ -51,12 +52,12 @@ namespace InitialProject.View
             this.guest1 = guest1;
             this.currentAccommodation = currentAccommodation;
             availableDatesForAccommodations = new ObservableCollection<AvailableDatesForAccommodationReservation>();
-            this.accommodationReservationRepository = accommodationReservationRepository;
+            this.accommodationReservationService = accommodationReservationService;
         }
 
         private void ChooseDateButton_Click(object sender, RoutedEventArgs e)
         {
-            AccommodationGuestsNumberInput guestsNumber = new AccommodationGuestsNumberInput(currentAccommodation, selectedDateRange, accommodationReservationRepository, availableDatesForAccommodations, guest1);
+            AccommodationGuestsNumberInput guestsNumber = new AccommodationGuestsNumberInput(currentAccommodation, selectedDateRange, accommodationReservationService, availableDatesForAccommodations, guest1);
             guestsNumber.Owner = this;
             guestsNumber.Show();
         }

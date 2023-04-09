@@ -35,5 +35,6 @@ namespace InitialProject.WPF.Views
             AccommodationView accommodationView = new AccommodationView(owner);
             Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = accommodationView;
         }
+
     }
 }
