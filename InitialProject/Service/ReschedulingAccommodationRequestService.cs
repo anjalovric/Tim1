@@ -32,6 +32,7 @@ namespace InitialProject.Service
                 }
             }
 
+            approvedRequests.Reverse();
             return approvedRequests;
         }
 
@@ -47,6 +48,7 @@ namespace InitialProject.Service
                 }
             }
 
+            declinedRequests.Reverse();
             return declinedRequests;
         }
 
@@ -86,7 +88,7 @@ namespace InitialProject.Service
                     pendingRequests.Add(request);
                 }
             }
-
+            pendingRequests.Reverse();
             return pendingRequests;
         }
 

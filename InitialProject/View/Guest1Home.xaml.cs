@@ -88,9 +88,14 @@ namespace InitialProject.View
         private void NotificationsMenuItem_Click(object sender, RoutedEventArgs e)
         {
             Hyperlink[] links = GetAllNotifications();
+            NotificationsList.Items.Clear();
             foreach(Hyperlink link in links)
             {
-                NotificationsList.Items.Add(new MenuItem { Header = link, IsCheckable = false, Height = 80 }) ;
+                if(link.Tag.Equals(0))
+                    NotificationsList.Items.Add(new MenuItem { Header = link, IsCheckable = false, Width=260, BorderBrush = Brushes.Black, Background=Brushes.PaleGreen}) ;
+                else
+                    NotificationsList.Items.Add(new MenuItem { Header = link, IsCheckable = false, Width = 260, BorderBrush = Brushes.Black, Background = Brushes.LightCoral });
+
             }
         }
 
@@ -101,9 +106,17 @@ namespace InitialProject.View
             link.Inlines.Add(notification);
 
             if(state.Equals("Approved"))
+            {
                 link.Click += NavigateToApprovedRequests_Click;
+                link.Tag = 0;
+            }
+                
             else if(state.Equals("Declined"))
+            {
                 link.Click += NavigateToDeclinedRequests_Click;
+                link.Tag = 1;
+            }
+                
 
             return link;
         }
@@ -128,7 +141,9 @@ namespace InitialProject.View
             for (int i = 0; i < completedRequests.Count; i++)
             {
                 notifications[i] = completedRequests[i].Request.Reservation.Accommodation.Owner.Name + " " + completedRequests[i].Request.Reservation.Accommodation.Owner.LastName;
-                notifications[i] += " " + completedRequests[i].Request.state.ToString().ToLower() + " your request.";
+                notifications[i] += "\n" + completedRequests[i].Request.state.ToString().ToUpper() + "\nyour rescheduling requests";
+                notifications[i] += "\nin " + completedRequests[i].Request.Reservation.Accommodation.Name + " for dates: ";
+                notifications[i] += "\n" + completedRequests[i].Request.NewArrivalDate + " to\n" + completedRequests[i].Request.NewDepartureDate + ".";
                 links[i]=CreateHyperlinkNotification(notifications[i], completedRequests[i].Request.state.ToString());
             }    
 
