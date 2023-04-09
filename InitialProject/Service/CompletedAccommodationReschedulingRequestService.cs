@@ -50,7 +50,7 @@ namespace InitialProject.Service
         private void SetRequests()
         {
             ReschedulingAccommodationRequestService requestService = new ReschedulingAccommodationRequestService();
-            List<ReschedulingAccommodationRequest> allRequest = new List<ReschedulingAccommodationRequest>();
+            List<ReschedulingAccommodationRequest> allRequest = new List<ReschedulingAccommodationRequest>(requestService.GetAll());
 
             foreach(CompletedAccommodationReschedulingRequest completedRequest in completedRequests)
             {

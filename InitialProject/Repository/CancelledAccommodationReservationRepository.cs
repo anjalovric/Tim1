@@ -22,7 +22,7 @@ namespace InitialProject.Repository
             _cancelledAccommodationReservations = _serializer.FromCSV(FilePath);
         }
 
-        public int NextId()
+        /*public int NextId()
         {
             _cancelledAccommodationReservations = _serializer.FromCSV(FilePath);
             if (_cancelledAccommodationReservations.Count < 1)
@@ -31,15 +31,14 @@ namespace InitialProject.Repository
             }
             return _cancelledAccommodationReservations.Max(c => c.Id) + 1;
         }
-
+        */
         public void Add(AccommodationReservation reservation)
         {
             AccommodationReservation cancelled = new AccommodationReservation(reservation.Guest, reservation.Accommodation, reservation.Arrival, reservation.Departure);
-            cancelled.Id = NextId();
+            cancelled.Id = reservation.Id;
             _cancelledAccommodationReservations.Add(cancelled);
             _serializer.ToCSV(FilePath, _cancelledAccommodationReservations);
         }
-
         public List<AccommodationReservation> GetAll()
         {
             return _cancelledAccommodationReservations;

@@ -30,8 +30,15 @@
         <Label FontSize="18" Height="35" Width="94" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="67,245,0,0" Content="Username:"/>
         <Label FontSize="18" Height="35" Width="132" Grid.Row="2" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="67,312,0,0" Content="Phone number:"/>
         <Label FontSize="18" Height="35" Width="66" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="67,378,0,0" Content="Email:"/>
-        <TextBlock FontSize="18" Height="35" Width="Auto" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="299,50,0,0" Text="{Binding Path=Guest1.Name}"></TextBlock>
-        <TextBlock FontSize="18" Height="35" Width="Auto" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,52,67,0" Text="{Binding Path=Guest1.LastName}"></TextBlock>
+
+        <TextBlock FontSize="18" Height="35" Width="Auto" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,52,67,0">
+            <TextBlock.Text>
+                <MultiBinding StringFormat="{}{0} {1}">
+                    <Binding Path="Guest1.Name" />
+                    <Binding Path="Guest1.LastName" />
+                </MultiBinding>
+            </TextBlock.Text>
+        </TextBlock>
         <TextBlock FontSize="18" Height="35" Width="Auto" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,117,67,0" Text="{Binding Path=Guest1.Location.Country}"></TextBlock>
         <TextBlock FontSize="18" Height="35" Width="Auto" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,179,67,0" Text="{Binding Path=Guest1.Location.City}"></TextBlock>
         <TextBlock FontSize="18" Height="35" Width="Auto" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,245,67,0" Text="{Binding Path=Guest1.Username}"></TextBlock>
