@@ -201,6 +201,7 @@
 
   <ItemGroup>
     <PackageReference Include="DotLiquid" Version="2.2.692" />
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="4.5.0" />
     <PackageReference Include="NPOI" Version="2.6.0" />
   </ItemGroup>
 

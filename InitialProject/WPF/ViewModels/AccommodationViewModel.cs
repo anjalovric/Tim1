@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,7 @@ namespace InitialProject.WPF.ViewModels
         public ObservableCollection<Accommodation> Accommodations { get; set; }
         private Owner profileOwner;
         private AccommodationService accommodationService;
+
         public RelayCommand NewAccommodationCommand { get; set; }
         public AccommodationViewModel(Owner owner)
         {

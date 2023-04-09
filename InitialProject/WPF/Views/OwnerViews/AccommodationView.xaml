@@ -22,7 +22,7 @@
                             <RowDefinition Height="20"/>
                         </Grid.RowDefinitions>
                         <Button Grid.Column="0" Grid.RowSpan="2" Grid.Row="0">
-                            <Image></Image>
+                            <Image Source="{Binding Path=CoverImage.Url}" Stretch="Fill"></Image>
                         </Button>
                         <TextBlock Text="{Binding Path=Name}" Grid.Column="1" Grid.Row="0" Padding="1" />
                         <TextBlock Text="{Binding Path=Location}" Grid.Column="1" Grid.Row="1" Padding="1" />
@@ -32,8 +32,8 @@
                     <Grid Margin="0,60,0,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="90"/>
-                            <ColumnDefinition Width="120"/>
-                            <ColumnDefinition Width="120"/>
+                            <ColumnDefinition Width="140"/>
+                            <ColumnDefinition Width="100"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="20"/>
