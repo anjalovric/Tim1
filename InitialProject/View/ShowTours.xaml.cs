@@ -106,10 +106,10 @@ namespace InitialProject.View
                 {
                     AlertGuestForm alertGuestForm = new AlertGuestForm(alert.Id);
                     
-                        if (alert.Guest2Id == guest2.Id && alert.Informed == false)
-                        {
-                            alertGuestForm.Show();
-                        }
+                    if (alert.Guest2Id == guest2.Id && alert.Informed == false)
+                    {
+                        alertGuestForm.Show();
+                    }
                    
                 }
             }

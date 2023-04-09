@@ -42,6 +42,7 @@ namespace InitialProject.View
 
         }
         private ObservableCollection<CheckPoint> checkPoint;
+        private List<CheckPoint> AllPoints;
         public ObservableCollection<CheckPoint> CheckPoint
         {
             get { return checkPoint; }
@@ -58,45 +59,81 @@ namespace InitialProject.View
         private TourInstanceRepository tourInstanceRepository;
         private LocationRepository locationRepository;
         private Location location;
-        private TourReservationRepository tourReservationRepository;
-        private ObservableCollection<CheckPoint> CheckPoints;
         private CheckPointService checkPointService;
+        private int orderCounter = 0;
+        private TourInstance tourInstance;
+        private CheckPoint CurrentPoint;
 
         public ActiveToursForm(Guest2 guest2)
         {
             InitializeComponent();
             this.DataContext = this;
             this.Guest2 = guest2;
+            CurrentPoint = new CheckPoint();
+            AllPoints = new List<CheckPoint>();
             tourRepository = new TourRepository();
             tourInstanceRepository = new TourInstanceRepository();
-            tourReservationRepository = new TourReservationRepository();
             checkPointService = new CheckPointService();
-            CheckPoints = new ObservableCollection<CheckPoint>(checkPointService.GetAll());
             alertGuest2Repository = new AlertGuest2Repository();
             TourInstances = new ObservableCollection<TourInstance>();
             Alerts = new List<AlertGuest2>(alertGuest2Repository.GetAll());
             CheckPoint = new ObservableCollection<CheckPoint>();
+            tourInstances = new ObservableCollection<TourInstance>(tourInstanceRepository.GetAll());
+            tourInstance = FindActiveTour(tourInstances);
+            FindPointsForActiveInstance();
             SetTourInstances(TourInstances);
             locationRepository = new LocationRepository();
             location = new Location();
             SetLocations();
-            SetTours(TourInstances);
+            SetTours(tourInstance);
+            SetCheckPoint();
         }
         private void SetTourInstances(ObservableCollection<TourInstance> TourInstances)
         {
-            List<TourInstance> tourInstances;
-            tourInstances = tourInstanceRepository.GetAll();
-            TourInstance tourInstance = FindActiveTour(tourInstances);
+            TourInstances.Clear();
+            if (tourInstance!=null)
+                TourInstances.Add(tourInstance);
+        }
+        private void SetCheckPoint()
+        {
             foreach (AlertGuest2 alertGuest2 in FindAllAlertGuestsByGuestId())
             {
-                foreach (CheckPoint checkPoint in CheckPoints)
+                foreach (CheckPoint checkPoint in AllPoints)
                 {
-                    if (alertGuest2.Availability == true && alertGuest2.CheckPointId == checkPoint.Id && checkPoint.Checked == true && tourInstance.Tour.Id == checkPoint.TourId)
+                    if (alertGuest2.Availability == true && alertGuest2.CheckPointId == checkPoint.Id)
                     {
-                        TourInstances.Add(tourInstance);
-                        CheckPoint.Add(checkPoint);
+                        FindLastCheckedPoint();
                         return;
                     }
+                }
+            }
+        }
+        private void FindPointsForActiveInstance()
+        {
+            ObservableCollection<TourInstance> tourInstances=new ObservableCollection<TourInstance>(tourInstanceRepository.GetAll());
+            TourInstance tourInstance = FindActiveTour(tourInstances);
+            List<CheckPoint> points = checkPointService.GetAll();
+            if (tourInstance != null)
+            {
+                foreach (CheckPoint point in points)
+                {
+                    if (point.TourId == tourInstance.Tour.Id)
+                    {
+                        AllPoints.Add(point);
+                    }
+                }
+            }
+        }
+        private void FindLastCheckedPoint()
+        {
+            foreach (CheckPoint point in AllPoints)
+            {
+                if (point.Checked == false)
+                {
+                    orderCounter = point.Order - 1;
+                    CurrentPoint=AllPoints[orderCounter - 1];
+                    CheckPoint.Add(CurrentPoint);
+                    break;
                 }
             }
         }
@@ -113,7 +150,7 @@ namespace InitialProject.View
             }
             return AlertGuest2;
         }
-        private TourInstance FindActiveTour(List<TourInstance> TourInstances)
+        private TourInstance FindActiveTour(ObservableCollection<TourInstance> TourInstances)
         {
             foreach(TourInstance tourInstance in TourInstances)
             {
@@ -138,10 +175,10 @@ namespace InitialProject.View
                 }
             }
         }
-        public void SetTours(ObservableCollection<TourInstance> TourInstances)
+        public void SetTours(TourInstance tourInstance)
         {
             List<Tour> tours = tourRepository.GetAll();
-            foreach (TourInstance tourInstance in TourInstances)
+            if (tourInstance != null)
             {
                 foreach (Tour tour in tours)
                 {

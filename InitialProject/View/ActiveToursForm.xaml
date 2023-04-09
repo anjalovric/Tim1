@@ -18,7 +18,7 @@
 
 
         </DataGrid>
-        <DataGrid Margin="400,265,231,44"  ItemsSource="{Binding Path=CheckPoint,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" AutoGenerateColumns="False">
+        <DataGrid Margin="400,265,231,44" ItemsSource="{Binding Path=CheckPoint,UpdateSourceTrigger=PropertyChanged}"  IsReadOnly="True" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Checkpoint name" Width="1*" Binding="{Binding Name}" />
             </DataGrid.Columns>
