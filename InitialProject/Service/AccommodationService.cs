@@ -19,24 +19,19 @@ namespace InitialProject.Service
             accommodationRepository = new AccommodationRepository();
             MakeAccommodations();
         }
-
         public List<Accommodation> GetAll()
         {
             return accommodations;
         }
 
-
-
         public void Add(Accommodation accommodation)
         {
             accommodationRepository.Add(accommodation);
         }
-
         public Accommodation GetById(int id)
         {
             return accommodations.Find(n => n.Id == id);
         }
-
         private void MakeAccommodations()
         {
             accommodations = accommodationRepository.GetAll();
@@ -44,8 +39,6 @@ namespace InitialProject.Service
             AddLocations();
             AddTypes();
         }
-
-
         private void AddOwners()
         {
             OwnerService ownerService = new OwnerService();
@@ -59,7 +52,6 @@ namespace InitialProject.Service
                 }
             }
         }
-
         private void AddLocations()
         {
             LocationService locationService = new LocationService();
@@ -73,7 +65,6 @@ namespace InitialProject.Service
                 }
             }
         }
-
             private void AddTypes()
             {
                 AccommodationTypeService accommodationTypeService = new AccommodationTypeService();
@@ -102,4 +93,4 @@ namespace InitialProject.Service
             }
         }
     }
-
+//44 linije

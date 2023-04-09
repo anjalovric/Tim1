@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using InitialProject.Domain.Model;
 using InitialProject.Model;
+using InitialProject.WPF.Views;
 
 namespace InitialProject.View
 {
@@ -23,15 +24,13 @@ namespace InitialProject.View
     public partial class AccommodationDetails : Page
     {
         public Accommodation SelectedAccommodation { get; set; }
-        public Frame Main;
         private List<AccommodationImage> images;
         public Uri relativeUri { get; set; }
-        public AccommodationDetails(List<string> imagesUrl, Accommodation currentAccommodation, ref Frame Main)
+        public AccommodationDetails(List<string> imagesUrl, Accommodation currentAccommodation)
         {
             InitializeComponent();
             this.DataContext = this;
-            this.Main = Main;
-            this.Main.Content = this;
+            Application.Current.Windows.OfType<Guest1Home>().FirstOrDefault().Main.Content = this;
             SelectedAccommodation = currentAccommodation;
             images = new List<AccommodationImage>();
           

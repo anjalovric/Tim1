@@ -32,7 +32,6 @@ namespace InitialProject.View
     public partial class Guest1SearchAccommodation : Page
     {
         private Guest1 guest1;
-        public Frame Main;
         public ObservableCollection<string> Countries { get; set; }
         public ObservableCollection<string> CitiesByCountry { get; set; }
         private LocationRepository locationRepository;
@@ -71,12 +70,12 @@ namespace InitialProject.View
                 }
             }
         }
-        public Guest1SearchAccommodation(Guest1 guest1, ref Frame Main)
+        public Guest1SearchAccommodation(Guest1 guest1)
         {
             InitializeComponent();
             DataContext = this;
 
-            this.Main = Main;
+            
             this.guest1 = guest1;
             accommodationRepository = new AccommodationRepository();
             Accommodations = new ObservableCollection<Accommodation>(accommodationRepository.GetAll());
@@ -302,7 +301,7 @@ namespace InitialProject.View
                 List<string> imagesUrls = new List<string>();
                 Accommodation currentAccommodation = ((Button)sender).DataContext as Accommodation;
                 FindPhotosUrls(imagesUrls, currentAccommodation);
-                AccommodationDetails details = new AccommodationDetails(imagesUrls, currentAccommodation, ref Main);
+                AccommodationDetails details = new AccommodationDetails(imagesUrls, currentAccommodation);
                 
 
             }

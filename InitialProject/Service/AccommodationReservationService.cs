@@ -12,150 +12,101 @@ namespace InitialProject.Service
     public class AccommodationReservationService
     {
         private Guest1 guest1;
-        private List<AccommodationReservation> allReservations;
+        private List<AccommodationReservation> storedReservations;
         private LocationService locationService;
         private AccommodationTypeService accommodationTypeService;
         private AccommodationService accommodationService;
         private OwnerService ownerService;
-        private CancelAccommodationReservationService cancelAccommodationReservationService;
-        
-        public ObservableCollection<AccommodationReservation> CompletedAccommodationReservations;
-        public ObservableCollection<AccommodationReservation> NotFinishedReservations;
-
+        public ObservableCollection<AccommodationReservation> CompletedReservations;
+        public ObservableCollection<AccommodationReservation> NotCompletedReservations;
         private AccommodationReservationRepository accommodationReservationRepository;
-        private List<AccommodationReservation> accommodationReservations;
         public AccommodationReservationService()
         {
             accommodationReservationRepository = new AccommodationReservationRepository();
-
             accommodationService = new AccommodationService();
             ownerService = new OwnerService();
             locationService = new LocationService();
             accommodationTypeService = new AccommodationTypeService();
-            NotFinishedReservations = new ObservableCollection<AccommodationReservation>();
-            CompletedAccommodationReservations = new ObservableCollection<AccommodationReservation>();
-            cancelAccommodationReservationService = new CancelAccommodationReservationService();
-            FillAccommodationReservations();
+            NotCompletedReservations = new ObservableCollection<AccommodationReservation>();
+            CompletedReservations = new ObservableCollection<AccommodationReservation>();
+            SetAccommodationReservations();
         }
-
         public List<AccommodationReservation> GetAll()
         {
-            return allReservations;
+            return storedReservations;
         }
-
-        public void FillAccommodationReservations()
+        public void SetAccommodationReservations()
         {
-            allReservations = new List<AccommodationReservation>(accommodationReservationRepository.GetAll());
-
-            FillAccommodationsToReservations();
-            FillOwnerToAccommodationReservations();
+            storedReservations = new List<AccommodationReservation>(accommodationReservationRepository.GetAll());
+            SetAccommodationsToReservations();
+            SetOwnerToAccommodationReservations();
             SetAccommodationTypes();
             SetAccommodationLocations();
-            AddGuests();
+            SetGuests();
         }
-
         public void Add(AccommodationReservation reservation)
         {
-            accommodationReservationRepository.Add(reservation, GenerateId());
+            accommodationReservationRepository.Add(reservation);
         }
 
-        private int GenerateId()
-        { 
-            List<AccommodationReservation> allCancelledReservations = cancelAccommodationReservationService.GetAll();
-            List<AccommodationReservation> allStoredReservations = accommodationReservationRepository.GetAll();
-
-            if (allCancelledReservations.Count < 1 && allStoredReservations.Count < 1)
-                return 1;
-
-
-            int cancelledId = FindMaxId(allCancelledReservations);
-            int id = FindMaxId(allReservations);
-
-            
-
-            if (cancelledId > id)
-                return cancelledId + 1;
-            else
-                return id + 1;
-        }
-        private int FindMaxId(List<AccommodationReservation> reservations)
+        
+        public ObservableCollection<AccommodationReservation> GetCompletedReservations(Guest1 guest1)
         {
-            int id = 0;
-
-            foreach(AccommodationReservation reservation in reservations)
+            SetAccommodationReservations();
+            CompletedReservations = new ObservableCollection<AccommodationReservation>();
+            foreach (AccommodationReservation reservation in storedReservations)
             {
-                if(reservation.Id>id)
-                    id= reservation.Id;
+                if (reservation.Departure < DateTime.Now && reservation.Guest.Id == guest1.Id)
+                {
+                    CompletedReservations.Add(reservation);
+                }
             }
-            return id;
+            return CompletedReservations;
         }
-
-        public ObservableCollection<AccommodationReservation> FillUpcomingAndCurrentReservations(Guest1 guest1)
+        public ObservableCollection<AccommodationReservation> GetNotCompletedReservations(Guest1 guest1)
         {
-            FillAccommodationReservations();
-            NotFinishedReservations = new ObservableCollection<AccommodationReservation>();
-
-            foreach (AccommodationReservation reservation in allReservations)
+            SetAccommodationReservations();
+            NotCompletedReservations = new ObservableCollection<AccommodationReservation>();
+            foreach (AccommodationReservation reservation in storedReservations)
             {
                 if (reservation.Departure >= DateTime.Now && reservation.Guest.Id == guest1.Id)
                 {
-                    NotFinishedReservations.Add(reservation);
+                    NotCompletedReservations.Add(reservation);
                 }
             }
-
-            return NotFinishedReservations;
+            return NotCompletedReservations;
         }
-        private void FillOwnerToAccommodationReservations()
+        private void SetOwnerToAccommodationReservations()
         {
-            foreach (AccommodationReservation reservation in allReservations)
+            foreach (AccommodationReservation reservation in storedReservations)
             {
                 reservation.Accommodation.Owner = ownerService.GetById(reservation.Accommodation.Owner.Id);
             }
         }
-
-        public ObservableCollection<AccommodationReservation> FillCompletedReservations(Guest1 guest1)
+        private void SetAccommodationsToReservations()
         {
-            FillAccommodationReservations();
-            CompletedAccommodationReservations = new ObservableCollection<AccommodationReservation>();
-
-            foreach (AccommodationReservation reservation in allReservations)
-            {
-                if (reservation.Departure < DateTime.Now && reservation.Guest.Id == guest1.Id)
-                {
-                    CompletedAccommodationReservations.Add(reservation);
-                }
-            }
-            return CompletedAccommodationReservations;
-        }
-
-        private void FillAccommodationsToReservations()
-        {
-            foreach (AccommodationReservation reservation in allReservations)
+            foreach (AccommodationReservation reservation in storedReservations)
             {
                 reservation.Accommodation = accommodationService.GetById(reservation.Accommodation.Id);
             }
         }
-
         public event PropertyChangedEventHandler PropertyChanged;
-
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
         private void SetAccommodationLocations()
         {
             List<Location> locations = locationService.GetAll();
-            foreach (AccommodationReservation reservation in allReservations)
+            foreach (AccommodationReservation reservation in storedReservations)
             {
                 reservation.Accommodation.Location = locationService.GetById(reservation.Accommodation.Location.Id);
             }
         }
-
         private void SetAccommodationTypes()
         {
             List<AccommodationType> types = accommodationTypeService.GetAll();
-            foreach (AccommodationReservation reservation in allReservations)
+            foreach (AccommodationReservation reservation in storedReservations)
             {
                 if (accommodationTypeService.GetById(reservation.Accommodation.Type.Id) != null)
                 {
@@ -163,38 +114,15 @@ namespace InitialProject.Service
                 }
             }
         }
-
-        private void MakeReservations()
-        {
-            accommodationReservations = accommodationReservationRepository.GetAll();
-            AddAccommodations();
-            AddGuests();
-        }
-
-        private void AddAccommodations()
-        {
-            AccommodationService accommodationService = new AccommodationService();
-            List<Accommodation> allAccommodation = accommodationService.GetAll();
-            foreach(AccommodationReservation reservation in accommodationReservations)
-            {
-                Accommodation reservationAccommodation = allAccommodation.Find(n => n.Id == reservation.Accommodation.Id);
-                if(reservationAccommodation != null)
-                {
-                    reservation.Accommodation = reservationAccommodation;
-                }
-            }
-        }
-
         public void Delete(AccommodationReservation accommodationReservation)
         {
             accommodationReservationRepository.Delete(accommodationReservation);
         }
-
-        private void AddGuests()
+        private void SetGuests()
         {
             Guest1Service guest1Service = new Guest1Service();
             List<Guest1> allGuest = guest1Service.GetAll(); 
-            foreach(AccommodationReservation reservation in allReservations)
+            foreach(AccommodationReservation reservation in storedReservations)
             {
                 Guest1 guestForReservation = allGuest.Find(n => n.Id == reservation.Guest.Id);
                     if(guestForReservation != null)
@@ -203,19 +131,16 @@ namespace InitialProject.Service
                     }
             }
         }
-
         public bool IsCancelled(AccommodationReservation reservation)
         {
-            CancelAccommodationReservationService cancelReservationService = new CancelAccommodationReservationService();
-            List<AccommodationReservation> allCancelledReservations = cancelReservationService.GetAll();
+            CancelledAccommodationReservationService cancelledReservationService = new CancelledAccommodationReservationService();
+            List<AccommodationReservation> allCancelledReservations = cancelledReservationService.GetAll();
             return allCancelledReservations.Find(n => n.Id == reservation.Id) != null; 
         }
-
         public void Update(AccommodationReservation reservation)
         {
             accommodationReservationRepository.Update(reservation);
         }
-
         public bool IsAvailableInDateRange(AccommodationReservation reservation, DateTime startDate, DateTime endDate)
         {
             DateTime date = startDate;
@@ -230,7 +155,7 @@ namespace InitialProject.Service
         private bool IsAvailableOnDate(AccommodationReservation reservationToCheck, DateTime date)
         {
             bool isAvailable = true;
-            foreach(var reservation in allReservations)
+            foreach(var reservation in storedReservations)
             {
                 bool isSameAccommodation = reservation.Accommodation.Id == reservationToCheck.Accommodation.Id;
                 bool isSameGuest = reservation.Guest.Id == reservationToCheck.Guest.Id;
@@ -241,3 +166,5 @@ namespace InitialProject.Service
         }
     }
 }
+//92 linija
+//15-16 metoda

@@ -10,7 +10,6 @@ namespace InitialProject.Domain.RepositoryInterfaces
     public interface IAccommodationReservationRepository : IGenericRepository<AccommodationReservation>
     {
         public void Add(AccommodationReservation accommodationReservation);
-        public void Add(AccommodationReservation accommodationReservation, int nextId);
         public void Delete(AccommodationReservation accommodationReservation);
         public AccommodationReservation Update(AccommodationReservation newReservation);
     }

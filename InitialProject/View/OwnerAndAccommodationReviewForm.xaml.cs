@@ -19,6 +19,7 @@ using InitialProject.Service;
 using InitialProject.Domain.Model;
 using Microsoft.Win32;
 using InitialProject.Domain.RepositoryInterfaces;
+using InitialProject.WPF.Views;
 
 namespace InitialProject.View
 {
@@ -29,23 +30,19 @@ namespace InitialProject.View
     {
         private AccommodationReservation reservation;
         private OwnerReviewService ownerReviewService;
-        public Frame Main;
         private AccommodationReviewImageService accommodationReviewImageService;
         public Uri relativeUri { get; set; }
         private List<AccommodationReviewImage> images;
-        public OwnerAndAccommodationReviewForm(AccommodationReservation reservation, ref Frame Main, OwnerReviewService ownerReviewService)
+        public OwnerAndAccommodationReviewForm(AccommodationReservation reservation, OwnerReviewService ownerReviewService)
         {
             InitializeComponent();
             this.DataContext = this;
-            this.Main = Main;
-            this.Main.Content = this;
-            this.reservation = reservation; //trenutna rezervacija koju ocjenjujem
+            Application.Current.Windows.OfType<Guest1Home>().FirstOrDefault().Main.Content = this;
+            this.reservation = reservation;
             this.ownerReviewService = ownerReviewService;
             this.accommodationReviewImageService = new AccommodationReviewImageService();
             images = new List<AccommodationReviewImage>();
         }
-       
-
         private void SendOwnerReviewButton_Click(object sender, RoutedEventArgs e)
         {
             if (IsImageUploadValid())
@@ -58,7 +55,6 @@ namespace InitialProject.View
             else
                 MessageBox.Show("You must upload at least one photo!");  
         }
-
         private void StoreImages()
         {
             foreach(AccommodationReviewImage image in images)
@@ -66,7 +62,6 @@ namespace InitialProject.View
                 accommodationReviewImageService.Add(image);
             }
         }
-
         private bool IsImageUploadValid()
         {
             if (images.Count >= 1)
@@ -75,32 +70,36 @@ namespace InitialProject.View
             }
             else
             {
-
                 return false;
             }
         }
-
         private void AddPhotoButton_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = MakeOpenFileDialog();
+            if (openFileDialog.ShowDialog() == true)
+            {
+                String relative = MakeRelativePath(openFileDialog);
+                relativeUri = new Uri("/" + relative, UriKind.Relative);
+                imagePicture.Source = new BitmapImage(new Uri("/" + relative, UriKind.Relative));
+                AccommodationReviewImage accommodationReviewImage = new AccommodationReviewImage(reservation, relative);
+                images.Add(accommodationReviewImage);
+            }
+        }
+        private String MakeRelativePath(OpenFileDialog openFileDialog)
+        {
+            Uri resource = new Uri(openFileDialog.FileName);
+            String absolutePath = resource.ToString();
+            int relativeIndex = absolutePath.IndexOf("Resources");
+            String relative = absolutePath.Substring(relativeIndex);
+            return relative;
+        }
+        private OpenFileDialog MakeOpenFileDialog()
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Image files|*.bmp;*.jpg;*.png";
             openFileDialog.FilterIndex = 1;
-            if (openFileDialog.ShowDialog() == true)
-            {
-                Uri resource = new Uri(openFileDialog.FileName);
-                String absolutePath = resource.ToString();
-                int relativeIndex = absolutePath.IndexOf("Resources");
-                String relative = absolutePath.Substring(relativeIndex);
-                relativeUri = new Uri("/" + relative, UriKind.Relative);
-                BitmapImage bitmapImage = new BitmapImage(relativeUri);
-                bitmapImage.UriSource = relativeUri;
-                imagePicture.Source = new BitmapImage(new Uri("/" + relative, UriKind.Relative));
-                AccommodationReviewImage accommodationReviewImage = new AccommodationReviewImage(reservation, relative);
-                //accommodationReviewImageService.Add(accommodationReviewImage); //ovdje treba ali u listu. provjeriti i za cancel dugme
-                images.Add(accommodationReviewImage);
-            }
+            return openFileDialog;
         }
-
         private void DeletePhotoButton_Click(object sender, RoutedEventArgs e)
         {
             if (images.Count != 0)
@@ -109,15 +108,13 @@ namespace InitialProject.View
                 {
                     if (imagePicture.Source.ToString().Contains(images[i].RelativeUri))
                     {
-                        AccommodationReviewImage image = images[i];
-                        //accommodationReviewImageService.Delete(image);      
+                        AccommodationReviewImage image = images[i];     
                         images.Remove(image);   
                         RemoveImage(i);
                     }
                 }
             }
         }
-
         private void NextImageButton_Click(object sender, RoutedEventArgs e)
         {
             for (int i = 0; i < images.Count; i++)
@@ -140,7 +137,6 @@ namespace InitialProject.View
 
             }
         }
-
         private void BackImageButton_Click(object sender, RoutedEventArgs e)
         {
             for (int i = 0; i < images.Count; i++)
@@ -163,8 +159,6 @@ namespace InitialProject.View
 
             }
         }
-
-       
         private void RemoveImage(int i)
         {
             if (images.Count > 0)
@@ -172,11 +166,11 @@ namespace InitialProject.View
                 int k = i - 1;
                 if (k >= 0)
                 {
-                    imagePicture.Source = imagePicture.Source = new BitmapImage(new Uri("/" + images[k].RelativeUri, UriKind.Relative));
+                    imagePicture.Source  = new BitmapImage(new Uri("/" + images[k].RelativeUri, UriKind.Relative));
                 }
                 else
                 {
-                    imagePicture.Source = imagePicture.Source = new BitmapImage(new Uri("/" + images[images.Count - 1].RelativeUri, UriKind.Relative));
+                    imagePicture.Source = new BitmapImage(new Uri("/" + images[images.Count - 1].RelativeUri, UriKind.Relative));
                 }
             }
             else
@@ -186,3 +180,4 @@ namespace InitialProject.View
         }
     }
 }
+//88 linija

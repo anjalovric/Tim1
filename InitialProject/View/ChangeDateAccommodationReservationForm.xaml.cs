@@ -49,7 +49,7 @@ namespace InitialProject.View
         private void SendButton_Click(object sender, RoutedEventArgs e)
         {
             if(IsValidDateInput())
-            {
+            {////////////////////////////////da li se tu pravi objekat ili u servisu?
                 Model.ReschedulingAccommodationRequest newRequest = new Model.ReschedulingAccommodationRequest(reservation, Arrival, Departure, Reason);
                 requestService.Add(newRequest);
                 this.Close();
@@ -61,7 +61,7 @@ namespace InitialProject.View
             }
         }
 
-        private bool IsValidDateInput()
+        private bool IsValidDateInput() //da li moze tu?
         {
             return (Arrival <= Departure && Arrival.Date > DateTime.Now && Arrival != null && Departure != null);
         }

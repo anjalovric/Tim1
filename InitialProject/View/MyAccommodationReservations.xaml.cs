@@ -26,11 +26,11 @@ namespace InitialProject.View
     /// </summary>
     public partial class MyAccommodationReservations : Page
     {
-        private Frame Main;
+        
         private Guest1 guest1;
         private AccommodationReservationService accommodationReservationService;
         private OwnerReviewService ownerReviewService;
-        private CancelAccommodationReservationService cancelAccommodationReservationService;
+        private CancelledAccommodationReservationService cancelledAccommodationReservationService;
         private ObservableCollection<AccommodationReservation> completedReservations;
         public ObservableCollection<AccommodationReservation> CompletedReservations
         {
@@ -83,20 +83,19 @@ namespace InitialProject.View
 
         }
 
-        public MyAccommodationReservations(Guest1 guest1, ref Frame Main)
+        public MyAccommodationReservations(Guest1 guest1)
         {
             InitializeComponent();
             this.guest1 = guest1;
-            DataContext = this;
-            this.Main = Main;
+            
             this.DataContext = this;
 
             accommodationReservationService = new AccommodationReservationService();
             ownerReviewService = new OwnerReviewService();
-            cancelAccommodationReservationService = new CancelAccommodationReservationService();
+            cancelledAccommodationReservationService = new CancelledAccommodationReservationService();
            
-            CompletedReservations = new ObservableCollection<AccommodationReservation>(accommodationReservationService.FillCompletedReservations(guest1));
-            NotCompletedReservations = new ObservableCollection<AccommodationReservation>(accommodationReservationService.FillUpcomingAndCurrentReservations(guest1));
+            CompletedReservations = new ObservableCollection<AccommodationReservation>(accommodationReservationService.GetCompletedReservations(guest1));
+            NotCompletedReservations = new ObservableCollection<AccommodationReservation>(accommodationReservationService.GetNotCompletedReservations(guest1));
 
         }
 
@@ -116,13 +115,13 @@ namespace InitialProject.View
                 return;
             }
 
-            if(SelectedCompletedReservation.Departure<DateTime.Now.AddDays(-5))
+            if(!ownerReviewService.IsReservationValidToReview(SelectedCompletedReservation))
             {
                 MessageBox.Show("You can't rate this reservation because 5 days have passed since its departure.");
                 return;
             }
 
-            OwnerAndAccommodationReviewForm ownerAndAccommodationReviewForm = new OwnerAndAccommodationReviewForm(SelectedCompletedReservation, ref Main, ownerReviewService);
+            OwnerAndAccommodationReviewForm ownerAndAccommodationReviewForm = new OwnerAndAccommodationReviewForm(SelectedCompletedReservation, ownerReviewService);
 
         }
 
@@ -130,23 +129,24 @@ namespace InitialProject.View
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
 
-            if(!cancelAccommodationReservationService.IsCancellationAllowed(SelectedNotCompletedReservation))
+            if(!cancelledAccommodationReservationService.IsCancellationAllowed(SelectedNotCompletedReservation))
             {
                 MessageBox.Show("You can't cancel this reservation.");
+                return;
             }
-            else
+            if(cancelledAccommodationReservationService.ConfirmCancellationMessageBox() == MessageBoxResult.Yes)
+            {
                 ConfirmCancellation();
+            }
+            
 
         }
         private void ConfirmCancellation()
         {
-            MessageBoxResult result = cancelAccommodationReservationService.ConfirmCancellationMessageBox();
-            if (result == MessageBoxResult.Yes)
-            {
-                cancelAccommodationReservationService.Add(SelectedNotCompletedReservation);
-                accommodationReservationService.Delete(SelectedNotCompletedReservation);
-                NotCompletedReservations.Remove(SelectedNotCompletedReservation);
-            }
+            cancelledAccommodationReservationService.Add(SelectedNotCompletedReservation);
+            accommodationReservationService.Delete(SelectedNotCompletedReservation);
+            NotCompletedReservations.Remove(SelectedNotCompletedReservation);
+            
         }
         private void ChangeDateButton_Click(object sender, RoutedEventArgs e)
         {
@@ -155,3 +155,4 @@ namespace InitialProject.View
         }
     }
 }
+//67 linija

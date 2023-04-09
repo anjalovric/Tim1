@@ -10,74 +10,70 @@ using InitialProject.Repository;
 
 namespace InitialProject.Service
 {
-    public class CancelAccommodationReservationService
+    public class CancelledAccommodationReservationService
     {
         private CancelledAccommodationReservationRepository cancelledAccommodationReservationRepository;
         private Guest1 guest1;
-        private List<AccommodationReservation> allCancelledReservations;
+        private List<AccommodationReservation> storedCancelledReservations;
         private LocationService locationService;
         private AccommodationTypeService accommodationTypeService;
         private AccommodationService accommodationService;
         private OwnerService ownerService;
 
-
-        public CancelAccommodationReservationService()
+        public CancelledAccommodationReservationService()
         {
             cancelledAccommodationReservationRepository = new CancelledAccommodationReservationRepository();
             accommodationService = new AccommodationService();
             ownerService = new OwnerService();
             locationService = new LocationService();
             accommodationTypeService = new AccommodationTypeService();
-            FillAccommodationReservations();
-        }
 
+            SetCancelledAccommodationReservations();
+        }
         public void Add(AccommodationReservation reservation)
         {
             cancelledAccommodationReservationRepository.Add(reservation);
         }
-
         public List<AccommodationReservation> GetAll()
         {
             return cancelledAccommodationReservationRepository.GetAll();
         }
-        private void FillAccommodationsToReservations()
+        public void SetCancelledAccommodationReservations()
         {
-            foreach (AccommodationReservation reservation in allCancelledReservations)
+            storedCancelledReservations = new List<AccommodationReservation>(cancelledAccommodationReservationRepository.GetAll());
+
+            SetAccommodationsToReservations();
+            SetOwnerToAccommodationReservations();
+            SetAccommodationTypes();
+            SetAccommodationLocations();
+            SetGuests();
+        }
+        private void SetAccommodationsToReservations()
+        {
+            foreach (AccommodationReservation reservation in storedCancelledReservations)
             {
                 reservation.Accommodation = accommodationService.GetById(reservation.Accommodation.Id);
             }
         }
-        public void FillAccommodationReservations()
+        private void SetOwnerToAccommodationReservations()
         {
-            allCancelledReservations = new List<AccommodationReservation>(cancelledAccommodationReservationRepository.GetAll());
-
-            FillAccommodationsToReservations();
-            FillOwnerToAccommodationReservations();
-            SetAccommodationTypes();
-            SetAccommodationLocations();
-            AddGuests();
-        }
-        private void FillOwnerToAccommodationReservations()
-        {
-            foreach (AccommodationReservation reservation in allCancelledReservations)
+            foreach (AccommodationReservation reservation in storedCancelledReservations)
             {
                 reservation.Accommodation.Owner = ownerService.GetById(reservation.Accommodation.Owner.Id);
             }
         }
-
         private void SetAccommodationLocations()
         {
             List<Location> locations = locationService.GetAll();
-            foreach (AccommodationReservation reservation in allCancelledReservations)
+            foreach (AccommodationReservation reservation in storedCancelledReservations)
             {
                 reservation.Accommodation.Location = locationService.GetById(reservation.Accommodation.Location.Id);
             }
         }
-
         private void SetAccommodationTypes()
         {
             List<AccommodationType> types = accommodationTypeService.GetAll();
-            foreach (AccommodationReservation reservation in allCancelledReservations)
+            foreach (AccommodationReservation reservation in storedCancelledReservations)
             {
                 if (accommodationTypeService.GetById(reservation.Accommodation.Type.Id) != null)
                 {
@@ -85,12 +81,11 @@ namespace InitialProject.Service
                 }
             }
         }
-
-        private void AddGuests()
+        private void SetGuests()
         {
             Guest1Service guest1Service = new Guest1Service();
             List<Guest1> allGuest = guest1Service.GetAll();
-            foreach (AccommodationReservation reservation in allCancelledReservations)
+            foreach (AccommodationReservation reservation in storedCancelledReservations)
             {
                 Guest1 guestForReservation = allGuest.Find(n => n.Id == reservation.Guest.Id);
                 if (guestForReservation != null)
@@ -99,12 +94,10 @@ namespace InitialProject.Service
                 }
             }
         }
-
         public bool IsCancellationAllowed(AccommodationReservation SelectedNotCompletedReservation)
         {
             return DateTime.Now <= SelectedNotCompletedReservation.Arrival.AddHours(-24) && DateTime.Now <= SelectedNotCompletedReservation.Arrival.AddDays(-SelectedNotCompletedReservation.Accommodation.MinDaysToCancel);
         }
-
         public MessageBoxResult ConfirmCancellationMessageBox()           
         {
             string sMessageBoxText = $"Do you want to cancel this reservation?\n";
@@ -114,6 +107,6 @@ namespace InitialProject.Service
             MessageBoxResult result = MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
             return result;
         }
-
     }
 }
+//58 linija

@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using InitialProject.Domain.Model;
 using InitialProject.Model;
 using InitialProject.Repository;
+using NPOI.SS.Formula.Functions;
 
 namespace InitialProject.Service
 {
@@ -63,5 +65,25 @@ namespace InitialProject.Service
 
         }
 
+        public List<CompletedAccommodationReschedulingRequest> GetRequestsByGuest(Guest1 guest1)
+        {
+            List<CompletedAccommodationReschedulingRequest> storedRequests = new List<CompletedAccommodationReschedulingRequest>(completedRequestRepository.GetAll());
+            List<CompletedAccommodationReschedulingRequest> filteredRequests = new List<CompletedAccommodationReschedulingRequest>();
+
+            foreach (CompletedAccommodationReschedulingRequest completedRequest in storedRequests)
+            {
+                if (completedRequest.Request.Reservation.Guest.Id == guest1.Id)
+                    filteredRequests.Add(completedRequest);
+            }
+
+            return filteredRequests;
+        }
+        public String GenerateNotification(CompletedAccommodationReschedulingRequest completedRequest)
+        {
+            return completedRequest.Request.Reservation.Accommodation.Owner.Name + " " + completedRequest.Request.Reservation.Accommodation.Owner.LastName + "\n"
+                + completedRequest.Request.state.ToString().ToUpper() + "\nyour rescheduling request" + "\nin " + completedRequest.Request.Reservation.Accommodation.Name + " for dates: "
+                + "\n" + completedRequest.Request.NewArrivalDate + " to\n" + completedRequest.Request.NewDepartureDate + ".";
+        }
     }
 }
+//manje<80 linija

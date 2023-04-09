@@ -26,68 +26,56 @@ namespace InitialProject.View
     {
         private Guest1SearchAccommodation guest1SearchAccommodation;
         private MyAccommodationReservations myReservations;
-        private Guest1 guest1;
-        private Guest1Service guest1Service;
         private SentAccommodationReservationRequests sentAccommodationReservationRequests;
         private Guest1Profile guest1Profile;
+        private Guest1 guest1;
+        private Guest1Service guest1Service;
+        
         
        
-        
-        
         public Guest1Home(User user)
         {
             InitializeComponent();
-
-            
             guest1Service = new Guest1Service();
-            GetGuest1ByUser(user);
-            
-            guest1SearchAccommodation = new Guest1SearchAccommodation(guest1, ref Main);
-            myReservations = new MyAccommodationReservations(guest1, ref Main);
-            sentAccommodationReservationRequests = new SentAccommodationReservationRequests(guest1);
-            guest1Profile = new Guest1Profile(guest1);
+            this.guest1 = guest1Service.GetByUsername(user.Username);
+            guest1SearchAccommodation = new Guest1SearchAccommodation(guest1);
             Main.Content = guest1SearchAccommodation;
 
         }
 
-        private void GetGuest1ByUser(User user)
-        {
-            this.guest1 = new Guest1();
-            this.guest1 = guest1Service.GetByUsername(user.Username);
-            
-        }
+       //servise ukloniti iz polja
+       //nazivi
+       //observ.u serv
 
         private void BookingMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            Main.Content = guest1SearchAccommodation;   //da li da se pravi novi page (kako bi se resetovalo sve?)
+            guest1SearchAccommodation = new Guest1SearchAccommodation(guest1);
+            Main.Content = guest1SearchAccommodation;  
         }
         private void MyReservationsMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            myReservations = new MyAccommodationReservations(guest1, ref Main); //moram ga opet napraviti da bi se azuriralo nakon pravljenja nove rezervacije (u upcoming reservations)
-            Main.Content = myReservations;   //da li da se pravi novi page (kako bi se resetovalo sve?)
+            myReservations = new MyAccommodationReservations(guest1); 
+            Main.Content = myReservations;   
             
-        }//negdje proslijedjujem ref Frame?
-
+        }
         private void SignOutMenuItem_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
             this.Owner.Show();
         }
-
         private void SentRequestsMenuItem_Click(object sender, RoutedEventArgs e)
         {
             sentAccommodationReservationRequests = new SentAccommodationReservationRequests(guest1);
             Main.Content = sentAccommodationReservationRequests;
         }
-
         private void MyProfileMenuItem_Click(object sender, RoutedEventArgs e)
         {
+            guest1Profile = new Guest1Profile(guest1);
             Main.Content = guest1Profile;
         }
-
         private void NotificationsMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            Hyperlink[] links = GetAllNotifications();
+            Hyperlink[] links = MakeNotifications();
             NotificationsList.Items.Clear();
             foreach(Hyperlink link in links)
             {
@@ -98,7 +86,6 @@ namespace InitialProject.View
 
             }
         }
-
         private Hyperlink CreateHyperlinkNotification(String notification, String state)
         {
             Hyperlink link = new Hyperlink();
@@ -120,7 +107,6 @@ namespace InitialProject.View
 
             return link;
         }
-
         private void NavigateToApprovedRequests_Click(object sender, RoutedEventArgs e)
         {
             sentAccommodationReservationRequests = new SentAccommodationReservationRequests(guest1);
@@ -133,40 +119,20 @@ namespace InitialProject.View
             sentAccommodationReservationRequests.RequestsTabControl.SelectedIndex = 2;
             Main.Content = sentAccommodationReservationRequests;
         }
-
-        private Hyperlink[] GetAllNotifications()
+        private Hyperlink[] MakeNotifications()
         {
-            List<CompletedAccommodationReschedulingRequest> completedRequests = GetRequestsByGuest();
+            CompletedAccommodationReschedulingRequestService completedAccommodationReschedulingRequestService = new CompletedAccommodationReschedulingRequestService();
+            List<CompletedAccommodationReschedulingRequest> completedRequests = completedAccommodationReschedulingRequestService.GetRequestsByGuest(guest1);
             completedRequests.Reverse();
             string[] notifications = new String[completedRequests.Count];
             Hyperlink[] links = new Hyperlink[completedRequests.Count];
             for (int i = 0; i < completedRequests.Count; i++)
             {
-                notifications[i] = completedRequests[i].Request.Reservation.Accommodation.Owner.Name + " " + completedRequests[i].Request.Reservation.Accommodation.Owner.LastName;
-                notifications[i] += "\n" + completedRequests[i].Request.state.ToString().ToUpper() + "\nyour rescheduling request";
-                notifications[i] += "\nin " + completedRequests[i].Request.Reservation.Accommodation.Name + " for dates: ";
-                notifications[i] += "\n" + completedRequests[i].Request.NewArrivalDate + " to\n" + completedRequests[i].Request.NewDepartureDate + ".";
+                notifications[i] = completedAccommodationReschedulingRequestService.GenerateNotification(completedRequests[i]);
                 links[i]=CreateHyperlinkNotification(notifications[i], completedRequests[i].Request.state.ToString());
-            }    
-
+            }   
             return links;
         }
-
-        private List<CompletedAccommodationReschedulingRequest> GetRequestsByGuest()
-        {
-            CompletedAccommodationReschedulingRequestService completedAccommodationReschedulingRequestsService = new CompletedAccommodationReschedulingRequestService();
-            List<CompletedAccommodationReschedulingRequest> storedRequests = new List<CompletedAccommodationReschedulingRequest>(completedAccommodationReschedulingRequestsService.GetAll());
-            List<CompletedAccommodationReschedulingRequest> filteredRequests = new List<CompletedAccommodationReschedulingRequest>();
-
-            foreach(CompletedAccommodationReschedulingRequest completedRequest in storedRequests)
-            {
-                if(completedRequest.Request.Reservation.Guest.Id==guest1.Id)
-                    filteredRequests.Add(completedRequest);
-            }
-
-            return filteredRequests;
-
-        }
-
     }
 }
+//72 linije
