@@ -79,7 +79,6 @@ namespace InitialProject.View
             SetTourInstances(TourInstances);
             locationRepository = new LocationRepository();
             location = new Location();
-            
             SetLocations();
             SetTours(TourInstances);
         }
@@ -87,21 +86,43 @@ namespace InitialProject.View
         {
             List<TourInstance> tourInstances;
             tourInstances = tourInstanceRepository.GetAll();
-            foreach (TourInstance tourInstance in tourInstances)
+            TourInstance tourInstance = FindActiveTour(tourInstances);
+            foreach (AlertGuest2 alertGuest2 in FindAllAlertGuestsByGuestId())
             {
-                foreach(AlertGuest2 alertGuest2 in Alerts)
+                foreach (CheckPoint checkPoint in CheckPoints)
                 {
-                    foreach(CheckPoint checkPoint in CheckPoints)
+                    if (alertGuest2.Availability == true && alertGuest2.CheckPointId == checkPoint.Id && checkPoint.Checked == true && tourInstance.Tour.Id == checkPoint.TourId)
                     {
-                        if (alertGuest2.Guest2Id == Guest2.Id && alertGuest2.Availability == true && tourInstance.Active == true && alertGuest2.CheckPointId==checkPoint.Id &&checkPoint.Checked==true)
-                        {
-                            TourInstances.Add(tourInstance);
-                            CheckPoint.Add(checkPoint);
-                            break;
-                        }
+                        TourInstances.Add(tourInstance);
+                        CheckPoint.Add(checkPoint);
+                        return;
                     }
                 }
             }
+        }
+        private List<AlertGuest2> FindAllAlertGuestsByGuestId()
+        {
+            List<AlertGuest2> AlertGuest2;
+            AlertGuest2 = new List<AlertGuest2>();
+            foreach (AlertGuest2 alertGuest2 in Alerts)
+            {
+                if (alertGuest2.Guest2Id == Guest2.Id)
+                {
+                    AlertGuest2.Add(alertGuest2);
+                }
+            }
+            return AlertGuest2;
+        }
+        private TourInstance FindActiveTour(List<TourInstance> TourInstances)
+        {
+            foreach(TourInstance tourInstance in TourInstances)
+            {
+                if (tourInstance.Active == true)
+                {
+                    return tourInstance;
+                }
+            }
+            return null;
         }
         public void SetLocations()
         {

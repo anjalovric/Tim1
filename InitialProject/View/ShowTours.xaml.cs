@@ -105,13 +105,12 @@ namespace InitialProject.View
                 foreach (AlertGuest2 alert in Alerts)
                 {
                     AlertGuestForm alertGuestForm = new AlertGuestForm(alert.Id);
-                    foreach (TourInstance tourInstance in TourInstances)
-                    {
-                        if (alert.Guest2Id == guest2.Id && alert.Informed == false && alert.InstanceId!=tourInstance.Id)
+                    
+                        if (alert.Guest2Id == guest2.Id && alert.Informed == false)
                         {
                             alertGuestForm.Show();
                         }
-                    }
+                   
                 }
             }
             
