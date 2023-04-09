@@ -52,8 +52,14 @@ namespace InitialProject.WPF.ViewModels
             }
         }
 
-        public void DeclineRequest()
+        public void DeclineRequest(ReschedulingAccommodationRequest request)
         {
+            SelectedRequest.Request.OwnerExplanationForDeclining = request.OwnerExplanationForDeclining;
+        }
+
+        public void SaveDeclinedRequest(string ownersExplanationForDeclining)
+        {
+            SelectedRequest.Request.OwnerExplanationForDeclining = ownersExplanationForDeclining;
             reschedulingRequestService.ChangeState(SelectedRequest.Request, State.Declined);
             completedReschedulingRequestService.DeclineRequest(SelectedRequest.Request);
             Requests.Remove(SelectedRequest);

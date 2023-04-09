@@ -80,9 +80,9 @@
             </Button.Resources>
         </Button>
         <Image HorizontalAlignment="Left" Height="100" Margin="138,53,0,0" VerticalAlignment="Top" Width="139" RenderTransformOrigin="0.468,0.174" />
-        <Button  HorizontalContentAlignment="Left" HorizontalAlignment="Center" Margin="0,551,0,0" VerticalAlignment="Top" Width="210" Height="45">
+        <Button Name="SignOutButton" HorizontalContentAlignment="Left" HorizontalAlignment="Center" Margin="0,551,0,0" VerticalAlignment="Top" Width="210" Height="45" Click="SignOutButton_Click">
             <Button.Content>
-                <StackPanel Orientation="Horizontal" Width="234">
+                <StackPanel Orientation="Horizontal" Width="200">
                     <Label Width="20"></Label>
                     <Image Source="/Resources/Images/signout.png" Height="20"/>
                     <Label>Sign out</Label>

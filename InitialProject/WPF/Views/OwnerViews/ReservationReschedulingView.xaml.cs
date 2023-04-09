@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using InitialProject.Model;
 using InitialProject.WPF.ViewModels;
+using InitialProject.WPF.Views.OwnerViews;
 
 namespace InitialProject.WPF.Views
 {
@@ -22,7 +23,7 @@ namespace InitialProject.WPF.Views
     /// </summary>
     public partial class ReservationReschedulingView : Page
     {
-        private ReservationReschedulingViewModel reservationReschedulingViewModel;
+        public ReservationReschedulingViewModel reservationReschedulingViewModel;
         public ReservationReschedulingView(Owner owner)
         {
             InitializeComponent();
@@ -32,7 +33,9 @@ namespace InitialProject.WPF.Views
 
         private void DeclineButton_Click(object sender, RoutedEventArgs e)
         {
-            reservationReschedulingViewModel.DeclineRequest();
+            DecliningRequestView decliningRequestView = new DecliningRequestView(reservationReschedulingViewModel.SelectedRequest.Request);
+            Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = decliningRequestView;
+            reservationReschedulingViewModel.DeclineRequest(decliningRequestView.decliningRequestViewModel.ReschedulingAccommodationRequest);
         }
 
         private void ApproveButton_Click(object sender, RoutedEventArgs e)
