@@ -17,7 +17,19 @@ namespace InitialProject.WPF
     public class HomeViewModel
     {
         public string Home { get; set; }
-        public ObservableCollection<TourInstance> Tours { get; set; }
+        private ObservableCollection<TourInstance> tours;
+
+        public ObservableCollection<TourInstance> Tours
+        {
+            get { return tours; }
+            set
+            {
+                if (value != tours)
+                    tours = value;
+                OnPropertyChanged();
+            }
+
+        }
         private ObservableCollection<TourInstance> instances;
         public ObservableCollection<TourInstance> FinishedInstances
         {
@@ -34,12 +46,13 @@ namespace InitialProject.WPF
 
         public TourInstance Selected { get; set; }
         private GuideService guideService=new GuideService();
-
+        private TourInstanceService tourInstanceService;
+        private Guide loggedGuide;
         public HomeViewModel(User user,ObservableCollection<TourInstance> Instances)
         {
-            Guide loggedGuide=guideService.GetByUsername(user.Username);
+            loggedGuide=guideService.GetByUsername(user.Username);
             FinishedInstances = Instances;
-            TourInstanceService tourInstanceService = new TourInstanceService();
+            tourInstanceService = new TourInstanceService();
             Tours = new ObservableCollection<TourInstance>(tourInstanceService.GetByStart(loggedGuide));
             SetTitle(user);
         }
@@ -61,9 +74,12 @@ namespace InitialProject.WPF
 
         public void StartTour()
         {
-            StartedTourInstanceView startedTourInstanceView = new StartedTourInstanceView(Selected, Tours, FinishedInstances);
-            Application.Current.Windows.OfType<GuideWindow>().FirstOrDefault().Main.Content = startedTourInstanceView;
+            if (tourInstanceService.GetByActive(loggedGuide) == null)
+            {
+                StartedTourInstanceView startedTourInstanceView = new StartedTourInstanceView(Selected, Tours, FinishedInstances);
+                Application.Current.Windows.OfType<GuideWindow>().FirstOrDefault().Main.Content = startedTourInstanceView;
 
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using InitialProject.Model;
+using InitialProject.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,16 +34,39 @@ namespace InitialProject.WPF.Views.GuideViews
             homeView = new HomeView(user,tourStatisticsView.viewModel.Instances);
             cancelView = new CancelView(user);
             loggedUser = user;
-         
 
-            Main.Content = homeView;
+
+            SwitchFirstPage(loggedUser);
 
         }
 
+        private void SwitchFirstPage(User user)
+        {
+            TourInstanceService tourInstanceService = new TourInstanceService();
+            GuideService guideService = new GuideService();
+            Guide guide = guideService.GetByUsername(user.Username);
+            if (tourInstanceService.GetByActive(guide) == null)
+            {
+                Main.Content = homeView;
+            }
+            else
+            {
+                ActiveInstanceView activeInstanceView = new ActiveInstanceView(tourInstanceService.GetByActive(guide),homeView.viewModel.Tours,tourStatisticsView.viewModel.Instances);   
+                Main.Content = activeInstanceView;
+            }
+        }
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
             cancelView = new CancelView(loggedUser);
             Main.Content = cancelView;
+        }
+        private void Activated_Click(object sender, RoutedEventArgs e)
+        {
+            TourInstanceService tourInstanceService = new TourInstanceService();
+            GuideService guideService = new GuideService();
+            Guide guide = guideService.GetByUsername(loggedUser.Username);
+            ActiveInstanceView activeInstanceView = new ActiveInstanceView(tourInstanceService.GetByActive(guide), homeView.viewModel.Tours, tourStatisticsView.viewModel.Instances);
+            Main.Content = activeInstanceView;
         }
         private void Add_Click(object sender, RoutedEventArgs e)
         {

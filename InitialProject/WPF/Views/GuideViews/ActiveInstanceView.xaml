@@ -1,0 +1,39 @@
+﻿<Page x:Class="InitialProject.WPF.Views.GuideViews.ActiveInstanceView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:InitialProject.WPF.Views.GuideViews"
+      mc:Ignorable="d" 
+      d:DesignHeight="707" d:DesignWidth="1100"
+      Title="ActiveInstanceView" Background="White">
+
+    <Grid>
+        <Label Margin="94,92,657,556" Visibility="Visible">
+            List of checkpoints for choosen tour:
+        </Label>
+        <DataGrid ItemsSource="{Binding Path=AllPoints,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" AutoGenerateColumns="False" Margin="94,144,550,264">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="1*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Order" Binding="{Binding Order}" Width="1*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Checked" Binding="{Binding Checked}" Width="1*"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label  Width="200" Margin="94,443,806,200">Current checkpoint:</Label>
+        <DataGrid  Margin="94,500,550,100" ItemsSource="{Binding Path=CurrentPoint,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="1*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Order" Binding="{Binding Order}" Width="1*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Checked" Binding="{Binding Checked}" Width="1*"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="Finish" Click="FinishTour_Click"  Margin="784,290,124,305" >Finish tour</Button>
+
+        <Button x:Name="Next"  Click="Next_Click" Margin="585,518,440,108" >Next point</Button>
+
+
+
+        <Label x:Name="FinishMessage" HorizontalAlignment="Left"  Margin="784,518,0,0" VerticalAlignment="Top" Width="192" Height="48"/>
+
+    </Grid>
+</Page>
