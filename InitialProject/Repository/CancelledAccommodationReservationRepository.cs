@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Model;
 using InitialProject.Serializer;
 
 namespace InitialProject.Repository
 {
-    public class CancelledAccommodationReservationRepository
+    public class CancelledAccommodationReservationRepository : ICancelledAccommodationReservationRepository
     {
         private const string FilePath = "../../../Resources/Data/cancelledAccommodationReservations.csv";
 
@@ -22,7 +23,7 @@ namespace InitialProject.Repository
             _cancelledAccommodationReservations = _serializer.FromCSV(FilePath);
         }
 
-        /*public int NextId()
+        public int NextId()
         {
             _cancelledAccommodationReservations = _serializer.FromCSV(FilePath);
             if (_cancelledAccommodationReservations.Count < 1)
@@ -31,7 +32,7 @@ namespace InitialProject.Repository
             }
             return _cancelledAccommodationReservations.Max(c => c.Id) + 1;
         }
-        */
+        
         public void Add(AccommodationReservation reservation)
         {
             AccommodationReservation cancelled = new AccommodationReservation(reservation.Guest, reservation.Accommodation, reservation.Arrival, reservation.Departure);
@@ -48,9 +49,5 @@ namespace InitialProject.Repository
         {
             return _cancelledAccommodationReservations.Find(n => n.Id == id);
         }
-
-
-
-
     }
 }

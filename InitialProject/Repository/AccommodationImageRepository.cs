@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Model;
 using InitialProject.Serializer;
 
 namespace InitialProject.Repository
 {
-    public class AccommodationImageRepository
+    public class AccommodationImageRepository : IAccommodationImageRepository
     {
         private const string FilePath = "../../../Resources/Data/accommodationImages.csv";
 
@@ -57,5 +58,9 @@ namespace InitialProject.Repository
             return images;
         }
 
+        public AccommodationImage GetById(int id)
+        {
+            return _accommodationImages.Find(n => n.Id == id);
+        }
     }
 }

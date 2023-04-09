@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Model;
 using InitialProject.Serializer;
 using Org.BouncyCastle.Asn1.Ocsp;
 
 namespace InitialProject.Repository
 {
-    public class AccommodationReservationRepository
+    public class AccommodationReservationRepository : IAccommodationReservationRepository
     {
         private const string FilePath = "../../../Resources/Data/accommodationReservations.csv";
 
@@ -30,7 +31,7 @@ namespace InitialProject.Repository
             return _accommodationReservations;
         }
 
-         public int NextId()        //ne koristim je, sta da uradim s njom?
+         public int NextId()
         {
             _accommodationReservations = _serializer.FromCSV(FilePath);
             if (_accommodationReservations.Count < 1)
@@ -65,5 +66,15 @@ namespace InitialProject.Repository
             return newReservation;
         }
 
+        public void Add(AccommodationReservation accommodationReservation)
+        {
+            _accommodationReservations.Add(accommodationReservation);
+            _serializer.ToCSV(FilePath, _accommodationReservations);
+        }
+
+        public AccommodationReservation GetById(int id)
+        {
+            return _accommodationReservations.Find(c => c.Id == id);
+        }
     }
 }

@@ -35,7 +35,6 @@ namespace InitialProject.WPF.Views.GuideViews
 
 
         private CheckPointRepository pointsRepository;
-        private TourRepository tourRepository;
         private TourInstanceRepository tourInstanceRepository;
         private TourReservationRepository tourReservationRepository;
         private AlertGuest2Repository alertGuest2Repository;
@@ -109,7 +108,10 @@ namespace InitialProject.WPF.Views.GuideViews
             foreach (CheckPoint point in AllPoints)
             {
                 if (point.Order == 1)
+                {
                     point.Checked = true;
+                    pointsRepository.Update(point);
+                }
             }
         }
         private void FinishTour_Click(object sender, RoutedEventArgs e)
@@ -170,11 +172,13 @@ namespace InitialProject.WPF.Views.GuideViews
             for (int i = 0; i < orderCounter; i++)
             {
                 points[i].Checked = true;
+                pointsRepository.Update(points[i]);
                 AllPoints.Add(points[i]);
             }
             for (int i = orderCounter; i < pointSize; i++)
             {
                 points[i].Checked = false;
+                pointsRepository.Update(points[i]);
                 AllPoints.Add(points[i]);
             }
         }

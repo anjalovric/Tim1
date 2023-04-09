@@ -106,26 +106,19 @@ namespace InitialProject.Service
                 {
                     AccommodationReservation cancelledReservation = allCancelledReservations.Find(n => n.Id == request.Reservation.Id);
                     request.Reservation = cancelledReservation;
-                    //SetOldReservationDates(request, cancelledReservation);
                 }
                 else
                 {
                     request.Reservation = reservation;
-                   // SetOldReservationDates(request, reservation);
                 }
             }
-        }
-
-        private void SetOldReservationDates(ReschedulingAccommodationRequest request, AccommodationReservation reservation)
-        {
-            request.OldArrivalDate = reservation.Arrival;
-            request.OldDepartureDate = reservation.Departure;
         }
 
         public ReschedulingAccommodationRequest ChangeState(ReschedulingAccommodationRequest request, State newState)
         {
             ReschedulingAccommodationRequest updatedRequest = requests.Find(n => n.Id == request.Id);
             updatedRequest.state=newState;
+            updatedRequest.OwnerExplanationForDeclining = request.OwnerExplanationForDeclining;
             if(newState == State.Approved)
                 UpdateReservationDates(request);
             return requestRepository.Update(updatedRequest);

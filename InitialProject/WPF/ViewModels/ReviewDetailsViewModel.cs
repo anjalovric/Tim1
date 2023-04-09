@@ -1,10 +1,14 @@
-﻿using InitialProject.Model;
+﻿using InitialProject.Domain.Model;
+using InitialProject.Model;
 using InitialProject.Service;
 using InitialProject.WPF.Views.GuideViews;
+using SixLabors.ImageSharp.Processing.Processors.Transforms;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -13,7 +17,7 @@ using System.Windows.Media.Imaging;
 
 namespace InitialProject.WPF.ViewModels
 {
-    public class ReviewDetailsViewModel
+    public class ReviewDetailsViewModel:INotifyPropertyChanged
     {
         public string Name { get;set; }
         public string Language { get;set; }
@@ -33,6 +37,23 @@ namespace InitialProject.WPF.ViewModels
         public ObservableCollection<string> Points { get; set; }
 
         private StackPanel toastMessage;
+
+        private List<TourReviewImage> images;
+
+        private BitmapImage current;
+        public BitmapImage Current
+        {
+            get => current;
+            set
+            {
+                if (value != current)
+                {
+                    current = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private int currentCounter = 0;
         public ReviewDetailsViewModel(GuideAndTourReview review,StackPanel toast) 
         { 
             SetTourDetails(review);
@@ -49,6 +70,7 @@ namespace InitialProject.WPF.ViewModels
             StartDate = review.TourInstance.Date;
             StartTime = review.TourInstance.StartClock;
             FindCheckPoints(review);
+            SetFirstImages(review);
 
         }
 
@@ -86,5 +108,37 @@ namespace InitialProject.WPF.ViewModels
                 toastMessage.Visibility = Visibility.Visible;
             }
         }
+
+        private void SetFirstImages(GuideAndTourReview review)
+        {
+            TourReviewImageService tourReviewImageService = new TourReviewImageService();
+            images = tourReviewImageService.GetByReviewId(review.Id);
+            Current = new BitmapImage(new Uri("/" + images[0].RelativeUri, UriKind.Relative));
+
+        }
+
+        public void GoBack()
+        {
+            currentCounter--;
+            if (currentCounter < 0)
+                currentCounter = images.Count - 1;
+            Current = new BitmapImage(new Uri("/" + images[currentCounter].RelativeUri, UriKind.Relative));
+        }
+
+        public void GoForward()
+        {
+            currentCounter++;
+            if (currentCounter >= images.Count)
+                currentCounter = 0;
+            Current = new BitmapImage(new Uri("/" + images[currentCounter].RelativeUri, UriKind.Relative));
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
     }
 }

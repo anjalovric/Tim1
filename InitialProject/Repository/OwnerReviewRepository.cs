@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Model;
 using InitialProject.Serializer;
 
 namespace InitialProject.Repository
 {
-    public class OwnerReviewRepository
+    public class OwnerReviewRepository : IOwnerReviewRepository
     {
         private const string FilePath = "../../../Resources/Data/ownerReviews.csv";
 
@@ -48,6 +49,11 @@ namespace InitialProject.Repository
         public List<OwnerReview> GetAll()
         {
             return _reviews;
+        }
+
+        public OwnerReview GetById(int id)
+        {
+            return _reviews.Find(n => n.Id == id);
         }
     }
 }

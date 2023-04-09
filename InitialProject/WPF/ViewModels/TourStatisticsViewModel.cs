@@ -33,11 +33,17 @@ namespace InitialProject.WPF.ViewModels
         }
         private TourInstanceService instanceService;
         public TourInstance Selected { get; set; }
-        public TourStatisticsViewModel()
+
+        GuideService guideService = new GuideService();
+        private User loggedUser;
+        private TextBox ChosenYear;
+        public TourStatisticsViewModel(User user,TextBox chosenYear)
         {
+            loggedUser = user;  
+            ChosenYear= chosenYear;
             Instances = new ObservableCollection<TourInstance>();
             instanceService = new TourInstanceService();
-            instanceService.SetFinishedInstances(Instances);
+            instanceService.SetFinishedInstances(Instances,guideService.GetByUsername(user.Username));
         }
         public void ViewDetails(DataGrid TourListDataGrid)
         {
@@ -57,9 +63,12 @@ namespace InitialProject.WPF.ViewModels
 
         public void MostVisitedForYear()
         {
-            FinishedTourDetails finishedTourDetails = new FinishedTourDetails(instanceService.FindMostVisitedForChosenYear(Year));
-            Application.Current.Windows.OfType<GuideWindow>().FirstOrDefault().Main.Content = finishedTourDetails;
-
+            if (Year != null)
+            {
+                FinishedTourDetails finishedTourDetails = new FinishedTourDetails(instanceService.FindMostVisitedForChosenYear(Year, guideService.GetByUsername(loggedUser.Username)));
+                Application.Current.Windows.OfType<GuideWindow>().FirstOrDefault().Main.Content = finishedTourDetails;
+            }
+            ChosenYear.Clear();
         }
         public event PropertyChangedEventHandler PropertyChanged;
 

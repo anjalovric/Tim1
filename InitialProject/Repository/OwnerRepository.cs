@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Model;
 using InitialProject.Serializer;
 
 namespace InitialProject.Repository
 {
-    public class OwnerRepository
+    public class OwnerRepository : IOwnerRepository
     {
         private const string FilePath = "../../../Resources/Data/owners.csv";
 

@@ -22,14 +22,14 @@ namespace InitialProject.WPF.ViewModels
             profileOwner = owner;
             requestService = new RequestForReschedulingService();
             reschedulingRequestService = new ReschedulingAccommodationRequestService();
-            Requests = new ObservableCollection<RequestForReshcedulingViewModel>(requestService.GetPendingRequests());
+            Requests = new ObservableCollection<RequestForReshcedulingViewModel>(requestService.GetPendingRequests(owner));
             InitializeSelectedRequest();
             completedReschedulingRequestService = new CompletedAccommodationReschedulingRequestService();
         }
 
         private void InitializeSelectedRequest()
         {
-            SelectedRequest = new RequestForReshcedulingViewModel();
+            SelectedRequest = new RequestForReshcedulingViewModel(profileOwner);
             if(Requests.Count>0)
                 SelectedRequest = Requests[0];
         }
@@ -52,8 +52,14 @@ namespace InitialProject.WPF.ViewModels
             }
         }
 
-        public void DeclineRequest()
+        public void DeclineRequest(ReschedulingAccommodationRequest request)
         {
+            SelectedRequest.Request.OwnerExplanationForDeclining = request.OwnerExplanationForDeclining;
+        }
+
+        public void SaveDeclinedRequest(string ownersExplanationForDeclining)
+        {
+            SelectedRequest.Request.OwnerExplanationForDeclining = ownersExplanationForDeclining;
             reschedulingRequestService.ChangeState(SelectedRequest.Request, State.Declined);
             completedReschedulingRequestService.DeclineRequest(SelectedRequest.Request);
             Requests.Remove(SelectedRequest);

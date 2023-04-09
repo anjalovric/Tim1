@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.Serializer;
@@ -32,6 +34,7 @@ namespace InitialProject.View
         private TourRepository _tourRepository;
         private TourInstanceRepository _tourInstanceRepository;
         private int AlertId;
+        private LocationRepository locationRepository;
         public AlertGuestForm(int alertId)
         {
             InitializeComponent();
@@ -41,10 +44,9 @@ namespace InitialProject.View
             _checkPointRepository = new CheckPointRepository();
             _tourRepository = new TourRepository();
             _tourInstanceRepository = new TourInstanceRepository();
-
+            locationRepository = new LocationRepository();
             _serializer = new Serializer<AlertGuest2>();
             alerts = _serializer.FromCSV(FilePath);
-
             CreateLabelContent();
             
         }
@@ -54,11 +56,38 @@ namespace InitialProject.View
             int instanceId = _alertGuest2Repository.GetAll().Find(n => n.Id == AlertId).InstanceId;
             if (_tourInstanceRepository.GetAll().Count > 0)
             {
-                Tour thisTour = null;
-               // thisTour = _tourInstanceRepository.GetAll().Find(n => n.Id == instanceId).Tour;
-               // if(thisTour != null) 
-               //  PointLabel.Content = "Are you present on point " + _checkPointRepository.GetAll().Find(n => n.Id == pointId).Name + " on tour " +
-                               //     thisTour.Name + " ?";
+                Tour thisTour;
+                thisTour = _tourInstanceRepository.GetAll().Find(n => n.Id == instanceId).Tour;
+                SetLocations();
+                SetTour(thisTour);
+                if(thisTour != null) 
+                 PointLabel.Content = "Are you present on point " + _checkPointRepository.GetAll().Find(n => n.Id == pointId).Name + " on tour " +
+                                    thisTour.Name + " ?";
+            }
+        }
+        public void SetLocations()
+        {
+            List<Location> locations = locationRepository.GetAll();
+            List<Tour> tours = _tourRepository.GetAll();
+
+            foreach (Location location in locations)
+            {
+                foreach (Tour tour in tours)
+                {
+                    if (location.Id == tour.Location.Id)
+                        tour.Location = location;
+                }
+            }
+        }
+        public void SetTour(Tour Tour)
+        {
+            List<Tour> tours = _tourRepository.GetAll();
+            foreach(Tour tour in tours)
+            {
+                if (tour.Id == Tour.Id)
+                {
+                    Tour.Name = tour.Name;
+                }
             }
         }
         private void Confirm_Click(object sender, RoutedEventArgs e)
@@ -80,7 +109,6 @@ namespace InitialProject.View
             {
                 if (alertGuest2.Availability == false && alertGuest2.Id == AlertId)
                 {
-                   
                     alertGuest2.Informed = true;
                     _alertGuest2Repository.Update(alertGuest2);
                 }

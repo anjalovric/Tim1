@@ -35,5 +35,12 @@ namespace InitialProject.WPF.Views
             AccommodationView accommodationView = new AccommodationView(owner);
             Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = accommodationView;
         }
+
+        private void SignOutButton_Click(object sender, RoutedEventArgs e)
+        {
+            SignInForm signInForm = new SignInForm();
+            signInForm.Show();
+            Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().Close();
+        }
     }
 }

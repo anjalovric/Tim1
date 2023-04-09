@@ -34,6 +34,8 @@ namespace InitialProject.Model
 
         public string Date { get;set; }
 
+        public bool Canceled { get; set; }
+
         public void FromCSV(string[] values)
         {
             Id = Convert.ToInt32(values[0]);
@@ -47,18 +49,20 @@ namespace InitialProject.Model
             CoverBitmap= new BitmapImage(new Uri("/" + CoverImage, UriKind.Relative));
             Active= Convert.ToBoolean(values[9]);
             Date = values[10];
+            Canceled = Convert.ToBoolean(values[11]);
 
         }
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), Tour.Id.ToString(), StartDate.ToString(), StartClock ,Finished.ToString(),Guide.Id.ToString(),Attendance.ToString(),CoverImage,CoverBitmap.ToString(),Active.ToString(),Date};
+            string[] csvValues = { Id.ToString(), Tour.Id.ToString(), StartDate.ToString(), StartClock ,Finished.ToString(),Guide.Id.ToString(),Attendance.ToString(),CoverImage,CoverBitmap.ToString(),Active.ToString(),Date,Canceled.ToString()};
             return csvValues;
         }
         public TourInstance() 
         {
             Finished = false;
             Active = false;
+            Canceled = false;
             
         }
 
@@ -73,6 +77,7 @@ namespace InitialProject.Model
             CoverImage = coverImage;
             CoverBitmap = new BitmapImage(new Uri("/" + CoverImage, UriKind.Relative));
             Active = false;
+            Canceled= false;
         }
 
 
