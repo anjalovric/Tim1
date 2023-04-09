@@ -121,8 +121,8 @@ namespace InitialProject.View
 
         private void History_Click(object sender, RoutedEventArgs e)
         {
-            HistoryView historyView = new HistoryView();
-            historyView.Show();
+         //   HistoryView historyView = new HistoryView();
+           // historyView.Show();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

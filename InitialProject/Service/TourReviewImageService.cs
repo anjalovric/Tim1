@@ -1,4 +1,6 @@
-﻿using InitialProject.Domain.Model;
+﻿using InitialProject.Domain;
+using InitialProject.Domain.Model;
+using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Repository;
 using System;
 using System.Collections.Generic;
@@ -10,12 +12,9 @@ namespace InitialProject.Service
 {
     public class TourReviewImageService
     {
-        private TourReviewImageRepository tourReviewImageRepository;
+        private ITourReviewImageRepository tourReviewImageRepository=Injector.CreateInstance<ITourReviewImageRepository>();
 
-        public TourReviewImageService()
-        {
-            tourReviewImageRepository = new TourReviewImageRepository();
-        }
+        public TourReviewImageService() { }
 
         public List<TourReviewImage> GetAll()
         {
@@ -32,6 +31,11 @@ namespace InitialProject.Service
         public void Delete(TourReviewImage image)
         {
             tourReviewImageRepository.Delete(image);
+        }
+
+        public List<TourReviewImage> GetByReviewId(int reviewId)
+        {
+           return tourReviewImageRepository.GetByReviewId(reviewId);
         }
     }
 }

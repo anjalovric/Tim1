@@ -38,5 +38,14 @@ namespace InitialProject.WPF.Views.GuideViews
         {
             Toast.Visibility = Visibility.Hidden;
         }
+
+        private void Back_Click(object sender, RoutedEventArgs e)
+        {
+            viewModel.GoBack();
+        }
+        private void Next_Click(object sender, RoutedEventArgs e)
+        {
+            viewModel.GoForward();
+        }
     }
 }

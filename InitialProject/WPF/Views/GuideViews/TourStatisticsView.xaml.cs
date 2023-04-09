@@ -34,11 +34,11 @@ namespace InitialProject.WPF.Views.GuideViews
     {
        public TourStatisticsViewModel viewModel;
 
-        public TourStatisticsView()
+        public TourStatisticsView(User user)
         {
 
             InitializeComponent();
-            viewModel = new TourStatisticsViewModel();
+            viewModel = new TourStatisticsViewModel(user,this.ChosenYear);
             DataContext = viewModel;
 
         }
