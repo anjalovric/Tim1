@@ -112,6 +112,7 @@ namespace InitialProject.WPF.Views.GuideViews
                 {
                     orderCounter = point.Order - 1;
                     CurrentPoint.Add(AllPoints[orderCounter - 1]);
+                    break;
                 }
             }
         }
