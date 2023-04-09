@@ -45,7 +45,7 @@ namespace InitialProject.View
             _serializer = new Serializer<AlertGuest2>();
             alerts = _serializer.FromCSV(FilePath);
 
-            CreateLabelContent();
+            //CreateLabelContent();
             
         }
         private void CreateLabelContent()
