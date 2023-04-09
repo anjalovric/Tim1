@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using InitialProject.Model;
 using InitialProject.Repository;
+using InitialProject.Service;
 
 namespace InitialProject.View
 {
@@ -30,7 +31,7 @@ namespace InitialProject.View
         public Accommodation currentAccommodation { get; set; }
         private AccommodationRepository accommodationRepository;
         public List<AccommodationReservation> reservations { get; set; }
-        private AccommodationReservationRepository accommodationReservationRepository;
+        private AccommodationReservationService accommodationReservationService;
 
         private Guest1 guest1;
 
@@ -45,9 +46,9 @@ namespace InitialProject.View
 
             this.guest1 = guest1;
             this.currentAccommodation = currentAccommodation;
-            accommodationReservationRepository = new AccommodationReservationRepository();
+            accommodationReservationService = new AccommodationReservationService();
             this.accommodationRepository = accommodationRepository;
-            this.reservations = new List<AccommodationReservation>(accommodationReservationRepository.GetAll());
+            this.reservations = new List<AccommodationReservation>(accommodationReservationService.GetAll());
             SetAccommodation();
 
             availableDates = new List<DateTime>();
@@ -163,13 +164,13 @@ namespace InitialProject.View
 
         public void GetAvailableDates(int currentAccommodationId)
         {
-            reservations = accommodationReservationRepository.GetAll();
+            reservations = accommodationReservationService.GetAll();
             availableDates = new List<DateTime>();
             availableDatesHelp = new List<DateTime>();
             availableDateRanges = new List<List<DateTime>>();
             FillDateRangesList(currentAccommodationId);
 
-            DatesForAccommodationReservation suggestedDates = new DatesForAccommodationReservation(currentAccommodation, accommodationReservationRepository, guest1);
+            DatesForAccommodationReservation suggestedDates = new DatesForAccommodationReservation(currentAccommodation, accommodationReservationService, guest1);
             suggestedDates.Owner = this;
             if (availableDateRanges.Count > 0 && AvailableDateRangeExists(ref suggestedDates))
                 suggestedDates.Show();
@@ -235,7 +236,7 @@ namespace InitialProject.View
 
         private void DisplayAvailableDatesOutRange()
         {
-            DatesForAccommodationReservation suggestedDates = new DatesForAccommodationReservation(currentAccommodation, accommodationReservationRepository, guest1);
+            DatesForAccommodationReservation suggestedDates = new DatesForAccommodationReservation(currentAccommodation, accommodationReservationService, guest1);
             suggestedDates.Owner = this;
             foreach (List<DateTime> dates in availableDateRanges)
             {

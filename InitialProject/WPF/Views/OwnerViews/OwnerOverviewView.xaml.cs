@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using InitialProject.Model;
+using InitialProject.WPF.ViewModels;
 
 namespace InitialProject.WPF.Views
 {
@@ -22,9 +23,12 @@ namespace InitialProject.WPF.Views
     public partial class OwnerOverviewView : Page
     {
         private ReservationReschedulingView reservationReschedulingView;
+        private OwnerOverviewViewModel ownerOverviewViewModel;
         public OwnerOverviewView(Owner owner)
         {
             InitializeComponent();
+            ownerOverviewViewModel = new OwnerOverviewViewModel(owner);
+            DataContext = ownerOverviewViewModel;
             reservationReschedulingView = new ReservationReschedulingView(owner);
         }
 

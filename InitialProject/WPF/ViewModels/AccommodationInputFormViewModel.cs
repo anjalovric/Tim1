@@ -1,11 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
+using InitialProject.Domain.Model;
+using System.Windows.Media.Imaging;
+using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Model;
+using InitialProject.Repository;
+using InitialProject.Service;
+using Microsoft.Win32;
 
 namespace InitialProject.WPF.ViewModels
 {
@@ -18,12 +26,63 @@ namespace InitialProject.WPF.ViewModels
         private int capacity;
         private int minDaysForReservation;
         private int minDaysToCancel;
+        private string imageUrl;
+        private bool isCityComboBoxEnabled;
+        private AccommodationService accommodationService;
+        public List<AccommodationType> AccommodationTypes { get; set; }
+        public ObservableCollection<AccommodationImage> Images { get; set; }
+        public ObservableCollection<string> Countries { get; set; }
+        public ObservableCollection<string> CitiesByCountry { get; set; }
         public AccommodationInputFormViewModel(Owner owner)
         {
             this.owner = owner;
-            location= new Location();
+            accommodationService = new AccommodationService();
+            location = new Location();
+            Type = new AccommodationType();
+            MakeListOfTypes();
+            Images = new ObservableCollection<AccommodationImage>();
+            MakeListOfLocations();
+            minDaysToCancel = 1;
+            minDaysForReservation = 1;
         }
 
+        private void MakeListOfLocations()
+        {
+            LocationService locationService = new LocationService();
+            Countries = new ObservableCollection<string>(locationService.GetAllCountries());
+            CitiesByCountry = new ObservableCollection<string>();
+            isCityComboBoxEnabled = false;
+        }
+
+        private void MakeListOfTypes()
+        {
+            AccommodationTypeService typeService = new AccommodationTypeService();
+            AccommodationTypes = typeService.GetAll();
+        }
+        public bool IsCityComboBoxEnabled
+        {
+            get { return isCityComboBoxEnabled; }
+            set
+            {
+                if (value != isCityComboBoxEnabled)
+                {
+                    isCityComboBoxEnabled = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public string ImageUrl
+        {
+            get { return imageUrl; }
+            set
+            {
+                if (!value.Equals(imageUrl))
+                {
+                    imageUrl = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         public Location Location
         {
             get { return location; }
@@ -42,7 +101,7 @@ namespace InitialProject.WPF.ViewModels
             get { return name; }
             set
             {
-                if (value != name)
+                if (!value.Equals(name))
                 {
                     name = value;
                     OnPropertyChanged();
@@ -107,5 +166,67 @@ namespace InitialProject.WPF.ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        public void EnableCityComboBox()
+        {
+            LocationService locationService = new LocationService();
+            if (Location.Country != null)
+            {
+                CitiesByCountry.Clear();
+                foreach (string city in locationService.GetCitiesByCountry(Location.Country))
+                {
+                    CitiesByCountry.Add(city);
+                }
+                IsCityComboBoxEnabled = true;
+            }
+        }
+        private void MakeAndAddImage()
+        {
+            AccommodationImage image = new AccommodationImage();
+            image.Url = ImageUrl;
+            image.Id = -1;
+            Images.Add(image);
+        }
+
+        private void SaveImages(Accommodation accommodation)
+        {
+            AccommodationImageService imageService = new AccommodationImageService();
+            foreach (AccommodationImage image in Images)
+            {
+                image.Accommodation = accommodation;
+                image.Id = imageService.Add(image);
+            }
+        }
+
+        public void SaveAccommodation()
+        {
+            Accommodation newAccommodation = new Accommodation();
+            newAccommodation.Name = Name;
+            newAccommodation.Owner = owner;
+            newAccommodation.Capacity = Capacity;
+            newAccommodation.MinDaysToCancel = MinDaysToCancel;
+            newAccommodation.MinDaysForReservation = minDaysForReservation;
+            newAccommodation.Location = Location;
+            newAccommodation.Type = Type;
+            accommodationService.Add(newAccommodation);
+            SaveImages(newAccommodation);
+        }
+
+        public void AddImageFromFileSystem()
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image files|*.bmp;*.jpg;*.png";
+            openFileDialog.FilterIndex = 1;
+            if (openFileDialog.ShowDialog() == true)
+            {
+                Uri resource = new Uri(openFileDialog.FileName);
+                String absolutePath = resource.ToString();
+                int relativeIndex = absolutePath.IndexOf("Resources");
+                String relative = absolutePath.Substring(relativeIndex);
+                ImageUrl = "/" + relative;
+                MakeAndAddImage();
+            }
+        }
+
     }
 }

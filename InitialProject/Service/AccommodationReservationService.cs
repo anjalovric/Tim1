@@ -17,21 +17,10 @@ namespace InitialProject.Service
         private AccommodationTypeService accommodationTypeService;
         private AccommodationService accommodationService;
         private OwnerService ownerService;
-        //private OwnerReviewService ownerReviewService;
+        private CancelAccommodationReservationService cancelAccommodationReservationService;
         
         public ObservableCollection<AccommodationReservation> CompletedAccommodationReservations;
-      /*  private ObservableCollection<AccommodationReservation> notFinishedReservations;
-        public ObservableCollection<AccommodationReservation> NotFinishedReservations
-        {
-            get { return notFinishedReservations; }
-            set
-            {
-                if (value != notFinishedReservations)
-                    notFinishedReservations = value;
-                OnPropertyChanged("NotFinishedReservations");
-            }
-
-        }*/
+        public ObservableCollection<AccommodationReservation> NotFinishedReservations;
 
         private AccommodationReservationRepository accommodationReservationRepository;
         private List<AccommodationReservation> accommodationReservations;
@@ -41,11 +30,11 @@ namespace InitialProject.Service
 
             accommodationService = new AccommodationService();
             ownerService = new OwnerService();
-            //ownerReviewService = new OwnerReviewService();
             locationService = new LocationService();
             accommodationTypeService = new AccommodationTypeService();
-          //  NotFinishedReservations = new ObservableCollection<AccommodationReservation>();
+            NotFinishedReservations = new ObservableCollection<AccommodationReservation>();
             CompletedAccommodationReservations = new ObservableCollection<AccommodationReservation>();
+            cancelAccommodationReservationService = new CancelAccommodationReservationService();
             FillAccommodationReservations();
         }
 
@@ -67,7 +56,38 @@ namespace InitialProject.Service
 
         public void Add(AccommodationReservation reservation)
         {
-            accommodationReservationRepository.Add(reservation);
+            accommodationReservationRepository.Add(reservation, GenerateId());
+        }
+
+        private int GenerateId()
+        { 
+            List<AccommodationReservation> allCancelledReservations = cancelAccommodationReservationService.GetAll();
+            List<AccommodationReservation> allStoredReservations = accommodationReservationRepository.GetAll();
+
+            if (allCancelledReservations.Count < 1 && allStoredReservations.Count < 1)
+                return 1;
+
+
+            int cancelledId = FindMaxId(allCancelledReservations);
+            int id = FindMaxId(allReservations);
+
+            
+
+            if (cancelledId > id)
+                return cancelledId + 1;
+            else
+                return id + 1;
+        }
+        private int FindMaxId(List<AccommodationReservation> reservations)
+        {
+            int id = 0;
+
+            foreach(AccommodationReservation reservation in reservations)
+            {
+                if(reservation.Id>id)
+                    id= reservation.Id;
+            }
+            return id;
         }
 
         public ObservableCollection<AccommodationReservation> FillUpcomingAndCurrentReservations(Guest1 guest1, ObservableCollection<AccommodationReservation> NotFinishedReservations)

@@ -23,28 +23,56 @@
 
 
     <Grid>
-        <Button Content="Home Page" HorizontalAlignment="Center" Margin="0,180,0,0" VerticalAlignment="Top" Width="350" Height="45">
+        <Button HorizontalContentAlignment="Left" HorizontalAlignment="Center" Margin="0,180,0,0" VerticalAlignment="Top" Width="350" Height="45">
+            <Button.Content>
+                <StackPanel Orientation="Horizontal" Width="234">
+                    <Label Width="20"></Label>
+                    <Image Source="/Resources/Images/home.png" Height="20"/>
+                    <Label>Home Page</Label>
+                </StackPanel>
+            </Button.Content>
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="10"/>
                 </Style>
             </Button.Resources>
         </Button>
-        <Button Content="My Accommodation" HorizontalAlignment="Center" VerticalAlignment="Top" Width="350" Height="45" Margin="0,230,0,0" Click="MyAccommodationButton_Click">
+        <Button  HorizontalContentAlignment="Left" HorizontalAlignment="Center" VerticalAlignment="Top" Width="350" Height="45" Margin="0,230,0,0" Click="MyAccommodationButton_Click">
+            <Button.Content>
+                <StackPanel Orientation="Horizontal" Width="234">
+                    <Label Width="20"></Label>
+                    <Image Source="/Resources/Images/accommodation.png" Height="20"/>
+                    <Label>My Accommodation</Label>
+                </StackPanel>
+            </Button.Content>
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="10"/>
                 </Style>
             </Button.Resources>
         </Button>
-        <Button Content="My Renovations" Margin="0,280,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Width="350" Height="46">
+        <Button  HorizontalContentAlignment="Left" Margin="0,280,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Width="350" Height="46">
+            <Button.Content>
+                <StackPanel Orientation="Horizontal" Width="234">
+                    <Label Width="20"></Label>
+                    <Image Source="/Resources/Images/tools.png" Height="20"/>
+                    <Label>My Renovations</Label>
+                </StackPanel>
+            </Button.Content>
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="10"/>
                 </Style>
             </Button.Resources>
         </Button>
-        <Button Name="MyProfileButton" Content="My Profile" HorizontalAlignment="Center" Margin="0,331,0,0" VerticalAlignment="Top" Width="350" Height="45" Click="MyProfileButton_Click" >
+        <Button  HorizontalContentAlignment="Left" Name="MyProfileButton" HorizontalAlignment="Center" Margin="0,331,0,0" VerticalAlignment="Top" Width="350" Height="45" Click="MyProfileButton_Click" >
+            <Button.Content>
+                <StackPanel Orientation="Horizontal" Width="234">
+                    <Label Width="20"></Label>
+                    <Image Source="/Resources/Images/profile.png" Height="20"/>
+                    <Label>My Profile</Label>
+                </StackPanel>
+            </Button.Content>
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="10"/>
@@ -52,7 +80,14 @@
             </Button.Resources>
         </Button>
         <Image HorizontalAlignment="Left" Height="100" Margin="138,53,0,0" VerticalAlignment="Top" Width="139" RenderTransformOrigin="0.468,0.174" />
-        <Button Content="Sign out" HorizontalAlignment="Center" Margin="0,515,0,0" VerticalAlignment="Top" Width="210" Height="45">
+        <Button  HorizontalContentAlignment="Left" HorizontalAlignment="Center" Margin="0,551,0,0" VerticalAlignment="Top" Width="210" Height="45">
+            <Button.Content>
+                <StackPanel Orientation="Horizontal" Width="234">
+                    <Label Width="20"></Label>
+                    <Image Source="/Resources/Images/signout.png" Height="20"/>
+                    <Label>Sign out</Label>
+                </StackPanel>
+            </Button.Content>
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="10"/>
@@ -62,14 +97,42 @@
         <Button Name="BackButton" HorizontalAlignment="Left" Margin="340,10,0,0" VerticalAlignment="Top" Width="80" Height="43" Click="BackButton_Click">
             <Image Source="/Resources/Images/arrow.png" />
         </Button>
-        <Button Content="My Forums" HorizontalAlignment="Center" Margin="0,381,0,0" VerticalAlignment="Top" Width="350" Height="45">
+        <Button  HorizontalContentAlignment="Left" HorizontalAlignment="Center" Margin="0,381,0,0" VerticalAlignment="Top" Width="350" Height="45">
+            <Button.Content>
+                <StackPanel Orientation="Horizontal" Width="234">
+                    <Label Width="20"></Label>
+                    <Image Source="/Resources/Images/forum.png" Height="20"/>
+                    <Label>My Forums</Label>
+                </StackPanel>
+            </Button.Content>
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="10"/>
                 </Style>
             </Button.Resources>
         </Button>
-        <Button Content="My Suggestions" HorizontalAlignment="Center" Margin="0,431,0,0" VerticalAlignment="Top" Width="350" Height="45">
+        <Button  HorizontalContentAlignment="Left" HorizontalAlignment="Center" Margin="0,431,0,0" VerticalAlignment="Top" Width="350" Height="45">
+            <Button.Content>
+                <StackPanel Orientation="Horizontal" Width="234">
+                    <Label Width="20"></Label>
+                    <Image Source="/Resources/Images/suggestion.png" Height="20"/>
+                    <Label>My Suggestions</Label>
+                </StackPanel>
+            </Button.Content>
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button  HorizontalContentAlignment="Left" HorizontalAlignment="Center" Margin="0,481,0,0" VerticalAlignment="Top" Width="350" Height="45">
+            <Button.Content>
+                <StackPanel Orientation="Horizontal" Width="234">
+                    <Label Width="20"></Label>
+                    <Image Source="/Resources/Images/request.png" Height="20"/>
+                    <Label>My Requests For Rescheduling</Label>
+                </StackPanel>
+            </Button.Content>
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="10"/>
