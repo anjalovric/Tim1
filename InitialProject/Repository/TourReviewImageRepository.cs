@@ -1,4 +1,5 @@
 ﻿using InitialProject.Domain.Model;
+using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Model;
 using InitialProject.Serializer;
 using System;
@@ -10,7 +11,7 @@ using System.Windows.Controls;
 
 namespace InitialProject.Repository
 {
-    public class TourReviewImageRepository
+    public class TourReviewImageRepository:ITourReviewImageRepository
     {
         private const string FilePath = "../../../Resources/Data/tourReviewImages.csv";
 
@@ -68,6 +69,19 @@ namespace InitialProject.Repository
             return review;
         }
 
-        
+        public List<TourReviewImage> GetByReviewId(int reviewId)
+        {
+            List<TourReviewImage> images= new List<TourReviewImage>();
+            foreach(TourReviewImage image in _tourReviewImages)
+            {
+                if(image.GuideAndTourReviewId==reviewId) images.Add(image);
+            }
+            return images;
+        }
+
+        public TourReviewImage GetById(int id)
+        {
+            return _tourReviewImages.Find(x  => x.Id == id);
+        }
     }
 }

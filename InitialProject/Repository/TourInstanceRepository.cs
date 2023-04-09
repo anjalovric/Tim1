@@ -84,7 +84,7 @@ namespace InitialProject.Repository
             List<TourInstance> list = new List<TourInstance>();
             foreach (TourInstance tour in _tourInstances)
 
-                if(tour.StartDate.Date==DateTime.Now.Date && tour.Finished==false && tour.Guide.Id==guide.Id) 
+                if(tour.StartDate.Date==DateTime.Now.Date && tour.Finished==false && tour.Guide.Id==guide.Id && tour.Canceled==false) 
                 {   
                     string h = tour.StartClock.Split(':')[0];
                     string m = tour.StartClock.Split(":")[1];
@@ -117,7 +117,7 @@ namespace InitialProject.Repository
             List<TourInstance> list = new List<TourInstance>();
             foreach (TourInstance tour in _tourInstances)
             {
-                if (tour.Finished == false && tour.StartDate>DateTime.Now.Date && tour.Guide.Id==guide.Id)
+                if (tour.Finished == false && tour.StartDate>DateTime.Now.Date && tour.Guide.Id==guide.Id && tour.Canceled==false)
                 {
                     var prevDate = Convert.ToDateTime(tour.StartDate.ToString().Split(" ")[0] +" "+ tour.StartClock);
                     var today = DateTime.Now;
@@ -141,5 +141,17 @@ namespace InitialProject.Repository
             return _tourInstances.Find(c => c.Id == id);
         }
         
+        public TourInstance GetActive(Guide guide)
+        {
+            TourInstance active = null;
+            foreach(TourInstance tour in _tourInstances)
+            {
+                if(tour.Active && tour.Guide.Id == guide.Id)
+                {
+                    active = tour;
+                }
+            }
+            return active;
+        }
     }
 }

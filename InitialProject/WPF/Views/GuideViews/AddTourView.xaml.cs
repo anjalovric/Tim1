@@ -113,8 +113,7 @@ namespace InitialProject.WPF.Views.GuideViews
         public string NameTU
         {
             get => namet;
-            set
-            {
+            set{
                 if (value != namet)
                 {
                     namet = value;

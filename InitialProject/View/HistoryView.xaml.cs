@@ -47,7 +47,7 @@ namespace InitialProject.View
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-        public HistoryView()
+        public HistoryView(User user)
         {
             InitializeComponent();
             DataContext = this;
@@ -83,8 +83,8 @@ namespace InitialProject.View
 
             if (Year > 0)
             {
-                CheckPointDetails checkPointDetails = new CheckPointDetails(historyService.FindMostVisitedForChosenYear(Year));
-                checkPointDetails.Show();
+         //       CheckPointDetails checkPointDetails = new CheckPointDetails(historyService.FindMostVisitedForChosenYear(Year,user));
+             //   checkPointDetails.Show();
                 ChosenYear.Text = null;
             }
         }

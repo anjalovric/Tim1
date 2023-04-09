@@ -75,18 +75,18 @@ namespace InitialProject.Service
                     currentTourInstance = tourInstance;
                 }
             }
-            currentTourInstance.Finished = true;
+            currentTourInstance.Canceled = true;
             Update(currentTourInstance);
             tourInstances.Remove(currentTourInstance);
             VoucherService voucherService = new VoucherService();
             voucherService.SendVoucher(currentTourInstance.Id, tourInstanceGuide);
         }
 
-        public List<TourInstance> GetFinishedInsatnces(ObservableCollection<TourInstance> Instances)
+        public List<TourInstance> GetFinishedInsatnces(ObservableCollection<TourInstance> Instances,Guide guide)
         {
             foreach (TourInstance instance in GetAll())
             {
-                if (instance.Finished)
+                if (instance.Finished && instance.Guide.Id==guide.Id)
                 {
                     Instances.Add(instance);
                     finishedtourInstances.Add(instance);
@@ -95,12 +95,12 @@ namespace InitialProject.Service
             return finishedtourInstances;
         }
 
-        public List<TourInstance> GetFinishedInstancesForChoosenYear(int year)
+        public List<TourInstance> GetFinishedInstancesForChoosenYear(int year,Guide guide)
         {
             
             foreach (TourInstance instance in GetAll())
             {
-                if (instance.Finished && instance.StartDate.Year == year)
+                if (instance.Finished && instance.StartDate.Year == year && instance.Guide.Id==guide.Id)
                 {
                     finishedtourInsatncesForChosenYear.Add(instance);
                 }
@@ -108,9 +108,9 @@ namespace InitialProject.Service
             return finishedtourInsatncesForChosenYear;
         }
 
-        public TourInstance FindMostVisitedForChosenYear(int year)
+        public TourInstance FindMostVisitedForChosenYear(int year, Guide guide )
         {
-            GetFinishedInstancesForChoosenYear(year);
+            GetFinishedInstancesForChoosenYear(year,guide);
             SetAttendanceToFinishTours();
             double maximum = 0;
             TourInstance tour = null;
@@ -122,6 +122,7 @@ namespace InitialProject.Service
                     tour = instance;
                 }
             }
+            FillTour(tour);
             return tour;
         }
 
@@ -154,10 +155,10 @@ namespace InitialProject.Service
             return tour;
         }
 
-        public void SetFinishedInstances(ObservableCollection<TourInstance> Instances)
+        public void SetFinishedInstances(ObservableCollection<TourInstance> Instances,Guide guide)
         {
             TourService tourService = new TourService();
-            tourService.SetLocationToTour(GetFinishedInsatnces(Instances));
+            tourService.SetLocationToTour(GetFinishedInsatnces(Instances,guide));
         }
 
         private void FillWithTours(List<TourInstance> Instances)
@@ -190,6 +191,34 @@ namespace InitialProject.Service
                 }
             }
         }
+        public TourInstance GetByActive(Guide guide)
+        {
+            return tourInstancerepository.GetActive(guide);
+        }
 
+        public void FillTour(TourInstance instance)
+        {
+            TourService tourService = new TourService();
+            foreach(Tour tour in tourService.GetAll())
+            {
+                if(tour.Id== instance.Tour.Id)
+                {
+                    instance.Tour= tour;
+                }
+            }
+            FillWithLocation(instance);
+        }
+
+        private void FillWithLocation(TourInstance instance)
+        {
+            LocationService locationService = new LocationService();
+            foreach(Location location in locationService.GetAll())
+            {
+                if(location.Id== instance.Tour.Location.Id)
+                {
+                    instance.Tour.Location= location;
+                }
+            }
+        }
     }
 }

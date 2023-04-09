@@ -32,7 +32,7 @@ namespace InitialProject.Service
             finishedtourInsatncesForChosenYear=new List<TourInstance>();
         }
 
-        public void SetFinishedInstances(ObservableCollection<TourInstance> Instances)
+        public void SetFinishedInstances(ObservableCollection<TourInstance> Instances,Guide guide)
         {
             TourService tourService=new TourService();
             
@@ -40,7 +40,7 @@ namespace InitialProject.Service
             //SetLocationToTour();
             //SetTourToTourInstance();
            // GetFinishedInsatnces(Instances);
-            tourService.SetLocationToTour(tourInstanceService.GetFinishedInsatnces(Instances));
+            tourService.SetLocationToTour(tourInstanceService.GetFinishedInsatnces(Instances,guide));
         }
         public void GetFinishedInsatnces(ObservableCollection<TourInstance> Instances)
         {   
@@ -54,11 +54,11 @@ namespace InitialProject.Service
             }
         }
 
-        public void GetFinishedInstancesForChoosenYear(int year)
+        public void GetFinishedInstancesForChoosenYear(int year,Guide guide)
         {
             foreach (TourInstance instance in tourInstanceService.GetAll())
             {
-                if (instance.Finished && instance.StartDate.Year==year)
+                if (instance.Finished && instance.StartDate.Year==year && instance.Guide.Id==guide.Id)
                 {
                     finishedtourInsatncesForChosenYear.Add(instance);
                 }
@@ -119,10 +119,10 @@ namespace InitialProject.Service
             return tour;
         }
 
-        public TourInstance FindMostVisitedForChosenYear(int year)
+        public TourInstance FindMostVisitedForChosenYear(int year,Guide guide)
         {
 
-            GetFinishedInstancesForChoosenYear(year);
+            GetFinishedInstancesForChoosenYear(year,guide);
             SetAttendanceToFinishTours();
             double maximum = 0;
             TourInstance tour = null;

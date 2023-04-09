@@ -1,6 +1,7 @@
 ﻿using InitialProject.Forms;
 using InitialProject.Model;
 using InitialProject.Repository;
+using InitialProject.Service;
 using InitialProject.View;
 using InitialProject.View.Owner;
 using InitialProject.WPF.Views;
@@ -66,8 +67,6 @@ namespace InitialProject
                         Close();
                     }else if(user.Role == Model.Role.GUIDE)
                     {
-                        //GuidesOverview guideOverview = new GuidesOverview(user);
-                        //guideOverview.Show();
                         GuideWindow guideMainWindow = new GuideWindow(user);
                         guideMainWindow.Show();
                         Close();
