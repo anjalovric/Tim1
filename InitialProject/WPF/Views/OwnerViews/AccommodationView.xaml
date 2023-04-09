@@ -31,7 +31,7 @@
                     </Grid>
                     <Grid Margin="0,60,0,0">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="70"/>
+                            <ColumnDefinition Width="90"/>
                             <ColumnDefinition Width="120"/>
                             <ColumnDefinition Width="120"/>
                         </Grid.ColumnDefinitions>
@@ -41,7 +41,7 @@
                         </Grid.RowDefinitions>
                         <TextBlock Grid.Column="0" Grid.Row="0" Padding="1">
                             <Run Text="Type: " />
-                            <Run Text="{Binding Path=Type}"/>
+                            <Run Text="{Binding Path=Type.Name}"/>
                         </TextBlock>
                         <TextBlock Grid.Column="1" Grid.Row="0" Padding="1">
                             <Run Text="Capacity: " />

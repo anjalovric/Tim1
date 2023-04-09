@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using InitialProject.Domain.Model;
+using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Model;
 using InitialProject.Serializer;
 
 namespace InitialProject.Repository
 {
-    public class CompletedAccommodationReschedulingRequestRepository
+    public class CompletedAccommodationReschedulingRequestRepository : ICompletedAccommodationReschedulingRequestRepository
     {
         private const string FilePath = "../../../Resources/Data/completedAccommodationReschedulingRequests.csv";
 
