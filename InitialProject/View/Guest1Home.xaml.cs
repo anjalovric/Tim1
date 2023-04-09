@@ -92,9 +92,9 @@ namespace InitialProject.View
             foreach(Hyperlink link in links)
             {
                 if(link.Tag.Equals(0))
-                    NotificationsList.Items.Add(new MenuItem { Header = link, IsCheckable = false, Width=260, BorderBrush = Brushes.Black, Background=Brushes.PaleGreen}) ;
+                    NotificationsList.Items.Add(new MenuItem { Header = link, IsCheckable = false, Width=280, BorderBrush = Brushes.Black, Background=Brushes.PaleGreen}) ;
                 else
-                    NotificationsList.Items.Add(new MenuItem { Header = link, IsCheckable = false, Width = 260, BorderBrush = Brushes.Black, Background = Brushes.LightCoral });
+                    NotificationsList.Items.Add(new MenuItem { Header = link, IsCheckable = false, Width = 280, BorderBrush = Brushes.Black, Background = Brushes.LightCoral });
 
             }
         }
@@ -123,11 +123,13 @@ namespace InitialProject.View
 
         private void NavigateToApprovedRequests_Click(object sender, RoutedEventArgs e)
         {
+            sentAccommodationReservationRequests = new SentAccommodationReservationRequests(guest1);
             sentAccommodationReservationRequests.RequestsTabControl.SelectedIndex = 0;
             Main.Content = sentAccommodationReservationRequests;    
         }
         private void NavigateToDeclinedRequests_Click(object sender, RoutedEventArgs e)
         {
+            sentAccommodationReservationRequests = new SentAccommodationReservationRequests(guest1);
             sentAccommodationReservationRequests.RequestsTabControl.SelectedIndex = 2;
             Main.Content = sentAccommodationReservationRequests;
         }
@@ -141,7 +143,7 @@ namespace InitialProject.View
             for (int i = 0; i < completedRequests.Count; i++)
             {
                 notifications[i] = completedRequests[i].Request.Reservation.Accommodation.Owner.Name + " " + completedRequests[i].Request.Reservation.Accommodation.Owner.LastName;
-                notifications[i] += "\n" + completedRequests[i].Request.state.ToString().ToUpper() + "\nyour rescheduling requests";
+                notifications[i] += "\n" + completedRequests[i].Request.state.ToString().ToUpper() + "\nyour rescheduling request";
                 notifications[i] += "\nin " + completedRequests[i].Request.Reservation.Accommodation.Name + " for dates: ";
                 notifications[i] += "\n" + completedRequests[i].Request.NewArrivalDate + " to\n" + completedRequests[i].Request.NewDepartureDate + ".";
                 links[i]=CreateHyperlinkNotification(notifications[i], completedRequests[i].Request.state.ToString());

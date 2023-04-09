@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Model;
 using InitialProject.Repository;
@@ -97,6 +98,21 @@ namespace InitialProject.Service
                     reservation.Guest = guestForReservation;
                 }
             }
+        }
+
+        public bool IsCancellationAllowed(AccommodationReservation SelectedNotCompletedReservation)
+        {
+            return DateTime.Now <= SelectedNotCompletedReservation.Arrival.AddHours(-24) && DateTime.Now <= SelectedNotCompletedReservation.Arrival.AddDays(-SelectedNotCompletedReservation.Accommodation.MinDaysToCancel);
+        }
+
+        public MessageBoxResult ConfirmCancellationMessageBox()           
+        {
+            string sMessageBoxText = $"Do you want to cancel this reservation?\n";
+            string sCaption = "Cancel reservation";
+            MessageBoxButton btnMessageBox = MessageBoxButton.YesNo;
+            MessageBoxImage icnMessageBox = MessageBoxImage.Question;
+            MessageBoxResult result = MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
+            return result;
         }
 
     }

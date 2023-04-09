@@ -66,6 +66,6 @@
             </MenuItem>
         </Menu>
 
-        <Frame x:Name="Main"  Margin="0,72,0,0"/>
+        <Frame x:Name="Main"  Margin="0,72,0,0" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Window>

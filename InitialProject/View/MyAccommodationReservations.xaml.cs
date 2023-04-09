@@ -26,43 +26,33 @@ namespace InitialProject.View
     /// </summary>
     public partial class MyAccommodationReservations : Page
     {
-        public Frame Main;
+        private Frame Main;
         private Guest1 guest1;
-       
         private AccommodationReservationService accommodationReservationService;
         private OwnerReviewService ownerReviewService;
         private CancelAccommodationReservationService cancelAccommodationReservationService;
-
-
-
-        /*private List<AccommodationImage> accommodationImages;
-        private AccommodationImageRepository accommodationImageRepository;*/        //dodati za slike
-
-
-
-
-        private ObservableCollection<AccommodationReservation> completedAccommodationReservations;
-        public ObservableCollection<AccommodationReservation> CompletedAccommodationReservations
+        private ObservableCollection<AccommodationReservation> completedReservations;
+        public ObservableCollection<AccommodationReservation> CompletedReservations
         {
-            get { return completedAccommodationReservations; }
+            get { return completedReservations; }
             set
             {
-                if (value != completedAccommodationReservations)
-                    completedAccommodationReservations = value;
-                OnPropertyChanged("CompletedAccommodationReservations");
+                if (value != completedReservations)
+                    completedReservations = value;
+                OnPropertyChanged("CompletedReservations");
             }
 
         }
 
-        private ObservableCollection<AccommodationReservation> notFinishedReservations;
-        public ObservableCollection<AccommodationReservation> NotFinishedReservations
+        private ObservableCollection<AccommodationReservation> notCompletedReservations;
+        public ObservableCollection<AccommodationReservation> NotCompletedReservations
         {
-            get { return notFinishedReservations; }
+            get { return notCompletedReservations; }
             set
             {
-                if (value != notFinishedReservations)
-                    notFinishedReservations = value;
-                OnPropertyChanged("NotFinishedReservations");
+                if (value != notCompletedReservations)
+                    notCompletedReservations = value;
+                OnPropertyChanged("NotCompletedReservations");
             }
 
         }
@@ -80,15 +70,15 @@ namespace InitialProject.View
 
         }
 
-        private AccommodationReservation selectedUpcomingReservation;
-        public AccommodationReservation SelectedUpcomingReservation
+        private AccommodationReservation selectedNotCompletedReservation;
+        public AccommodationReservation SelectedNotCompletedReservation
         {
-            get { return selectedUpcomingReservation; }
+            get { return selectedNotCompletedReservation; }
             set
             {
-                if (value != selectedUpcomingReservation)
-                    selectedUpcomingReservation = value;
-                OnPropertyChanged("SelectedUpcomingReservation");
+                if (value != selectedNotCompletedReservation)
+                    selectedNotCompletedReservation = value;
+                OnPropertyChanged("SelectedNotCompletedReservation");
             }
 
         }
@@ -105,21 +95,18 @@ namespace InitialProject.View
             ownerReviewService = new OwnerReviewService();
             cancelAccommodationReservationService = new CancelAccommodationReservationService();
            
-            CompletedAccommodationReservations = new ObservableCollection<AccommodationReservation>(accommodationReservationService.FillCompletedReservations(guest1));
-            NotFinishedReservations = new ObservableCollection<AccommodationReservation>(accommodationReservationService.FillUpcomingAndCurrentReservations(guest1, NotFinishedReservations));
+            CompletedReservations = new ObservableCollection<AccommodationReservation>(accommodationReservationService.FillCompletedReservations(guest1));
+            NotCompletedReservations = new ObservableCollection<AccommodationReservation>(accommodationReservationService.FillUpcomingAndCurrentReservations(guest1));
 
         }
 
 
-
-       
         public event PropertyChangedEventHandler PropertyChanged;
-
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-        
+        } 
+
 
         private void RateOwnerButton_Click(object sender, RoutedEventArgs e)
         {
@@ -139,52 +126,32 @@ namespace InitialProject.View
 
         }
 
+
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
 
-            if(!IsCancellationAllowed())
+            if(!cancelAccommodationReservationService.IsCancellationAllowed(SelectedNotCompletedReservation))
             {
                 MessageBox.Show("You can't cancel this reservation.");
             }
             else
-            ConfirmCancellation();
+                ConfirmCancellation();
 
         }
-
-        private bool IsCancellationAllowed()
-        {
-            return DateTime.Now <= SelectedUpcomingReservation.Arrival.AddHours(-24) && DateTime.Now <= SelectedUpcomingReservation.Arrival.AddDays(-selectedUpcomingReservation.Accommodation.MinDaysToCancel);
-        }
-
         private void ConfirmCancellation()
         {
-            MessageBoxResult result = ConfirmCancellationMessageBox();
+            MessageBoxResult result = cancelAccommodationReservationService.ConfirmCancellationMessageBox();
             if (result == MessageBoxResult.Yes)
             {
-                cancelAccommodationReservationService.Add(SelectedUpcomingReservation);
-                accommodationReservationService.Delete(SelectedUpcomingReservation);
-                NotFinishedReservations.Remove(SelectedUpcomingReservation);
+                cancelAccommodationReservationService.Add(SelectedNotCompletedReservation);
+                accommodationReservationService.Delete(SelectedNotCompletedReservation);
+                NotCompletedReservations.Remove(SelectedNotCompletedReservation);
             }
         }
-
-        private MessageBoxResult ConfirmCancellationMessageBox()           //smije li ovo biti u prozoru?
-        {
-            string sMessageBoxText = $"Do you want to cancel this reservation?\n";
-            string sCaption = "Cancel reservation";
-            MessageBoxButton btnMessageBox = MessageBoxButton.YesNo;
-            MessageBoxImage icnMessageBox = MessageBoxImage.Question;
-            MessageBoxResult result = MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
-            return result;
-        }
-
         private void ChangeDateButton_Click(object sender, RoutedEventArgs e)
         {
-            ChangeDateAccommodationReservationForm form = new ChangeDateAccommodationReservationForm(SelectedUpcomingReservation);
+            ChangeDateAccommodationReservationForm form = new ChangeDateAccommodationReservationForm(SelectedNotCompletedReservation);
             form.Show();
         }
-
-
-
-
     }
 }

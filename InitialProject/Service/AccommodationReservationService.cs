@@ -90,7 +90,7 @@ namespace InitialProject.Service
             return id;
         }
 
-        public ObservableCollection<AccommodationReservation> FillUpcomingAndCurrentReservations(Guest1 guest1, ObservableCollection<AccommodationReservation> NotFinishedReservations)
+        public ObservableCollection<AccommodationReservation> FillUpcomingAndCurrentReservations(Guest1 guest1)
         {
             FillAccommodationReservations();
             NotFinishedReservations = new ObservableCollection<AccommodationReservation>();
