@@ -16,21 +16,21 @@ using InitialProject.Domain.Model;
 using InitialProject.Model;
 using InitialProject.WPF.Views;
 
-namespace InitialProject.View
+namespace InitialProject.WPF.Views.Guest1Views
 {
     /// <summary>
     /// Interaction logic for AccommodationDetails.xaml
     /// </summary>
-    public partial class AccommodationDetails : Page
+    public partial class AccommodationDetailsView : Page
     {
         public Accommodation SelectedAccommodation { get; set; }
         private List<AccommodationImage> images;
         public Uri relativeUri { get; set; }
-        public AccommodationDetails(List<string> imagesUrl, Accommodation currentAccommodation)
+        public AccommodationDetailsView(List<string> imagesUrl, Accommodation currentAccommodation)
         {
             InitializeComponent();
             this.DataContext = this;
-            Application.Current.Windows.OfType<Guest1Home>().FirstOrDefault().Main.Content = this;
+            Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = this;
             SelectedAccommodation = currentAccommodation;
             images = new List<AccommodationImage>();
           

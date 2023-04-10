@@ -6,24 +6,12 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using InitialProject.Model;
 using InitialProject.Service;
 
-namespace InitialProject.View
+namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 {
-    /// <summary>
-    /// Interaction logic for SentAccommodationReservationRequests.xaml
-    /// </summary>
-    public partial class SentAccommodationReservationRequests : Page, INotifyPropertyChanged
+    public class SentAccommodationReservationRequestsViewModel : INotifyPropertyChanged
     {
         private ReschedulingAccommodationRequestService reschedulingAccommodationRequestService;
         private ObservableCollection<ReschedulingAccommodationRequest> approvedRequests;
@@ -63,17 +51,13 @@ namespace InitialProject.View
             }
 
         }
-
-        public SentAccommodationReservationRequests(Guest1 guest1)
+        public SentAccommodationReservationRequestsViewModel(Guest1 guest1)
         {
-            InitializeComponent();
-            this.DataContext = this;
             this.guest1 = guest1;
             reschedulingAccommodationRequestService = new ReschedulingAccommodationRequestService();
             ApprovedRequests = new ObservableCollection<ReschedulingAccommodationRequest>(reschedulingAccommodationRequestService.GetApprovedRequests(guest1));
             PendingRequests = new ObservableCollection<ReschedulingAccommodationRequest>(reschedulingAccommodationRequestService.GetPendingRequests(guest1));
             DeclinedRequests = new ObservableCollection<ReschedulingAccommodationRequest>(reschedulingAccommodationRequestService.GetDeclinedRequests(guest1));
-
 
         }
         public event PropertyChangedEventHandler PropertyChanged;

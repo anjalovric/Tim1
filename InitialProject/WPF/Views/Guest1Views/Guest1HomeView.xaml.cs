@@ -16,30 +16,32 @@ using InitialProject.Domain.Model;
 using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.Service;
+using InitialProject.WPF.ViewModels.Guest1ViewModels;
 
-namespace InitialProject.View
+namespace InitialProject.WPF.Views.Guest1Views
 {
     /// <summary>
     /// Interaction logic for Guest1Home.xaml
     /// </summary>
-    public partial class Guest1Home : Window
+    public partial class Guest1HomeView : Window
     {
-        private Guest1SearchAccommodation guest1SearchAccommodation;
-        private MyAccommodationReservations myReservations;
-        private SentAccommodationReservationRequests sentAccommodationReservationRequests;
+        private Guest1SearchAccommodationView guest1SearchAccommodation;
+        private MyAccommodationReservationsView myReservations;
+        private SentAccommodationReservationRequestsView sentAccommodationReservationRequests;
         private Guest1Profile guest1Profile;
         private Guest1 guest1;
         private Guest1Service guest1Service;
         
-        
+        private Guest1HomeViewModel guest1HomeViewModel;
        
-        public Guest1Home(User user)
+        public Guest1HomeView(User user)
         {
             InitializeComponent();
             guest1Service = new Guest1Service();
-            this.guest1 = guest1Service.GetByUsername(user.Username);
-            guest1SearchAccommodation = new Guest1SearchAccommodation(guest1);
-            Main.Content = guest1SearchAccommodation;
+            this.guest1 = guest1Service.GetByUsername(user.Username);   //treba li gost objekat
+            guest1HomeViewModel = new Guest1HomeViewModel(user);
+            DataContext=guest1HomeViewModel;
+            Main.Content = new Guest1SearchAccommodationView(guest1);
 
         }
 
@@ -47,32 +49,7 @@ namespace InitialProject.View
        //nazivi
        //observ.u serv
 
-        private void BookingMenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            guest1SearchAccommodation = new Guest1SearchAccommodation(guest1);
-            Main.Content = guest1SearchAccommodation;  
-        }
-        private void MyReservationsMenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            myReservations = new MyAccommodationReservations(guest1); 
-            Main.Content = myReservations;   
-            
-        }
-        private void SignOutMenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-            this.Owner.Show();
-        }
-        private void SentRequestsMenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            sentAccommodationReservationRequests = new SentAccommodationReservationRequests(guest1);
-            Main.Content = sentAccommodationReservationRequests;
-        }
-        private void MyProfileMenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            guest1Profile = new Guest1Profile(guest1);
-            Main.Content = guest1Profile;
-        }
+      
         private void NotificationsMenuItem_Click(object sender, RoutedEventArgs e)
         {
             Hyperlink[] links = MakeNotifications();
@@ -109,13 +86,13 @@ namespace InitialProject.View
         }
         private void NavigateToApprovedRequests_Click(object sender, RoutedEventArgs e)
         {
-            sentAccommodationReservationRequests = new SentAccommodationReservationRequests(guest1);
+            sentAccommodationReservationRequests = new SentAccommodationReservationRequestsView(guest1);
             sentAccommodationReservationRequests.RequestsTabControl.SelectedIndex = 0;
             Main.Content = sentAccommodationReservationRequests;    
         }
         private void NavigateToDeclinedRequests_Click(object sender, RoutedEventArgs e)
         {
-            sentAccommodationReservationRequests = new SentAccommodationReservationRequests(guest1);
+            sentAccommodationReservationRequests = new SentAccommodationReservationRequestsView(guest1);
             sentAccommodationReservationRequests.RequestsTabControl.SelectedIndex = 2;
             Main.Content = sentAccommodationReservationRequests;
         }

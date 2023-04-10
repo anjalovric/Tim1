@@ -2,6 +2,7 @@
 using InitialProject.Repository;
 using InitialProject.Service;
 using InitialProject.View;
+using InitialProject.WPF.ViewModels;
 using SixLabors.ImageSharp.Metadata.Profiles.Xmp;
 using System;
 using System.Collections.Generic;
@@ -27,20 +28,15 @@ namespace InitialProject.WPF.Views.GuideViews
     /// Interaction logic for HomeView.xaml
     /// </summary>
     public partial class HomeView : Page
-    {   
+    {
         public HomeViewModel viewModel;
         public HomeView(User user, ObservableCollection<TourInstance> Instances)
         {
             InitializeComponent();
-            viewModel = new HomeViewModel(user,Instances);
+            viewModel= new HomeViewModel(user, Instances);
             DataContext = viewModel;
-            
-        }
-        private void StartTour_Click(object sender, RoutedEventArgs e)
-        {
-            viewModel.StartTour();
-        }
 
+        }
 
     }
 }

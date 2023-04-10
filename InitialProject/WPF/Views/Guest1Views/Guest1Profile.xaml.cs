@@ -16,7 +16,7 @@ using InitialProject.Domain.Model;
 using InitialProject.Model;
 using NPOI.SS.Formula.PTG;
 
-namespace InitialProject.View
+namespace InitialProject.WPF.Views.Guest1Views
 {
     /// <summary>
     /// Interaction logic for Guest1Profile.xaml

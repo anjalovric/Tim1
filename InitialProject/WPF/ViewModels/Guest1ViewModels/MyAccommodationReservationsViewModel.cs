@@ -7,26 +7,16 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using InitialProject.Domain.Model;
 using InitialProject.Model;
-using InitialProject.Repository;
 using InitialProject.Service;
+using InitialProject.WPF.Views.Guest1Views;
 
-namespace InitialProject.View
+namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 {
-    /// <summary>
-    /// Interaction logic for MyAccommodationReservations.xaml
-    /// </summary>
-    public partial class MyAccommodationReservations : Page
+    public class MyAccommodationReservationsViewModel : INotifyPropertyChanged
     {
-        
+
         private Guest1 guest1;
         private AccommodationReservationService accommodationReservationService;
         private OwnerReviewService ownerReviewService;
@@ -83,20 +73,30 @@ namespace InitialProject.View
 
         }
 
-        public MyAccommodationReservations(Guest1 guest1)
-        {
-            InitializeComponent();
-            this.guest1 = guest1;
-            
-            this.DataContext = this;
+        public RelayCommand RateOwnerAndAccommodationCommand { get; set; }
+        public RelayCommand CancelReservationCommand { get; set; }
+        public RelayCommand RescheduleReservationCommand { get; set; }
 
+        public MyAccommodationReservationsViewModel(Guest1 guest1)
+        {
+            this.guest1 = guest1;
             accommodationReservationService = new AccommodationReservationService();
+
+            
             ownerReviewService = new OwnerReviewService();
             cancelledAccommodationReservationService = new CancelledAccommodationReservationService();
-           
+
             CompletedReservations = new ObservableCollection<AccommodationReservation>(accommodationReservationService.GetCompletedReservations(guest1));
             NotCompletedReservations = new ObservableCollection<AccommodationReservation>(accommodationReservationService.GetNotCompletedReservations(guest1));
+            MakeCommands();
 
+        }
+
+        private void MakeCommands()
+        {
+            RateOwnerAndAccommodationCommand = new RelayCommand(RateOwnerAndAccommodation_Executed, CanExecute);
+            CancelReservationCommand = new RelayCommand(CancelReservation_Executed, CanExecute);
+            RescheduleReservationCommand = new RelayCommand(RescheduleReservation_Executed, CanExecute);
         }
 
 
@@ -104,41 +104,46 @@ namespace InitialProject.View
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        } 
+        }
 
-
-        private void RateOwnerButton_Click(object sender, RoutedEventArgs e)
+        private bool CanExecute(object sender)
         {
-            if(ownerReviewService.HasReview(SelectedCompletedReservation))
+            return true;
+        }
+
+
+        private void RateOwnerAndAccommodation_Executed(object sender)
+        {
+            if (ownerReviewService.HasReview(SelectedCompletedReservation))
             {
                 MessageBox.Show("This reservation is already reviewed.");
                 return;
             }
 
-            if(!ownerReviewService.IsReservationValidToReview(SelectedCompletedReservation))
+            if (!ownerReviewService.IsReservationValidToReview(SelectedCompletedReservation))
             {
                 MessageBox.Show("You can't rate this reservation because 5 days have passed since its departure.");
                 return;
             }
 
-            OwnerAndAccommodationReviewForm ownerAndAccommodationReviewForm = new OwnerAndAccommodationReviewForm(SelectedCompletedReservation, ownerReviewService);
-
+            OwnerAndAccommodationReviewFormView ownerAndAccommodationReviewForm = new OwnerAndAccommodationReviewFormView(guest1,SelectedCompletedReservation);
+            Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = ownerAndAccommodationReviewForm;
         }
 
 
-        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        private void CancelReservation_Executed(object sender)
         {
 
-            if(!cancelledAccommodationReservationService.IsCancellationAllowed(SelectedNotCompletedReservation))
+            if (!cancelledAccommodationReservationService.IsCancellationAllowed(SelectedNotCompletedReservation))
             {
                 MessageBox.Show("You can't cancel this reservation.");
                 return;
             }
-            if(cancelledAccommodationReservationService.ConfirmCancellationMessageBox() == MessageBoxResult.Yes)
+            if (cancelledAccommodationReservationService.ConfirmCancellationMessageBox() == MessageBoxResult.Yes)
             {
                 ConfirmCancellation();
             }
-            
+
 
         }
         private void ConfirmCancellation()
@@ -146,13 +151,13 @@ namespace InitialProject.View
             cancelledAccommodationReservationService.Add(SelectedNotCompletedReservation);
             accommodationReservationService.Delete(SelectedNotCompletedReservation);
             NotCompletedReservations.Remove(SelectedNotCompletedReservation);
-            
+
         }
-        private void ChangeDateButton_Click(object sender, RoutedEventArgs e)
+        private void RescheduleReservation_Executed(object sender)
         {
-            ChangeDateAccommodationReservationForm form = new ChangeDateAccommodationReservationForm(SelectedNotCompletedReservation);
-            form.Show();
+            ReschedulingAccommodationReservationFormView form = new ReschedulingAccommodationReservationFormView(SelectedNotCompletedReservation);
+            form.Show();    //kad pravim novi manji prozor, da li samo show korisitm?
         }
+
     }
 }
-//67 linija

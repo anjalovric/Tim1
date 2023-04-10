@@ -2,6 +2,7 @@
 using InitialProject.Repository;
 using InitialProject.Service;
 using InitialProject.WPF.Views.GuideViews;
+using Microsoft.Windows.Input;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,7 +13,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace InitialProject.WPF
+namespace InitialProject.WPF.ViewModels
 {
     public class HomeViewModel
     {
@@ -42,28 +43,31 @@ namespace InitialProject.WPF
             }
 
         }
-
-
         public TourInstance Selected { get; set; }
-        private GuideService guideService=new GuideService();
+        private GuideService guideService = new GuideService();
         private TourInstanceService tourInstanceService;
         private Guide loggedGuide;
-        public HomeViewModel(User user,ObservableCollection<TourInstance> Instances)
+        public RelayCommand StartCommand { get; set; }
+        public HomeViewModel(User user, ObservableCollection<TourInstance> Instances)
         {
-            loggedGuide=guideService.GetByUsername(user.Username);
+            loggedGuide = guideService.GetByUsername(user.Username);
             FinishedInstances = Instances;
             tourInstanceService = new TourInstanceService();
             Tours = new ObservableCollection<TourInstance>(tourInstanceService.GetByStart(loggedGuide));
             SetTitle(user);
+            StartCommand = new RelayCommand(StartTour_Executed, CanExecute);
         }
-
+        private bool CanExecute(object sender)
+        {
+            return true;
+        }
         private void SetTitle(User user)
         {
             GuideService guideService = new GuideService();
-            Guide guide=guideService.GetByUsername(user.Username);
+            Guide guide = guideService.GetByUsername(user.Username);
             Home = guide.Name + " " + guide.Username + "'s home page";
         }
-     
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -72,7 +76,7 @@ namespace InitialProject.WPF
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public void StartTour()
+        private void StartTour_Executed(object sender)
         {
             if (tourInstanceService.GetByActive(loggedGuide) == null)
             {

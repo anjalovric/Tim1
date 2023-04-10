@@ -18,12 +18,12 @@ using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.Service;
 
-namespace InitialProject.View
+namespace InitialProject.WPF.Views.Guest1Views
 {
     /// <summary>
     /// Interaction logic for AccommodationReservationForm.xaml
     /// </summary>
-    public partial class AccommodationReservationForm : Window
+    public partial class AccommodationReservationFormView : Window
     {
         public DateTime Arrival { get; set; }
         public DateTime Departure { get; set; }
@@ -39,7 +39,7 @@ namespace InitialProject.View
         private List<DateTime> availableDatesHelp;
         private List<List<DateTime>> availableDateRanges;
         
-        public AccommodationReservationForm(Accommodation currentAccommodation, ref AccommodationRepository accommodationRepository, Guest1 guest1)
+        public AccommodationReservationFormView(Accommodation currentAccommodation, ref AccommodationRepository accommodationRepository, Guest1 guest1)
         {
             InitializeComponent();
             this.DataContext = this;
@@ -170,7 +170,7 @@ namespace InitialProject.View
             availableDateRanges = new List<List<DateTime>>();
             FillDateRangesList(currentAccommodationId);
 
-            DatesForAccommodationReservation suggestedDates = new DatesForAccommodationReservation(currentAccommodation, accommodationReservationService, guest1);
+            DatesForAccommodationReservationView suggestedDates = new DatesForAccommodationReservationView(currentAccommodation, accommodationReservationService, guest1);
             suggestedDates.Owner = this;
             if (availableDateRanges.Count > 0 && AvailableDateRangeExists(ref suggestedDates))
                 suggestedDates.Show();
@@ -193,7 +193,7 @@ namespace InitialProject.View
             }
         }
 
-        private bool AvailableDateRangeExists(ref DatesForAccommodationReservation suggestedDates)
+        private bool AvailableDateRangeExists(ref DatesForAccommodationReservationView suggestedDates)
         {
             bool existed = false;
             foreach (List<DateTime> dates in availableDateRanges)
@@ -236,7 +236,7 @@ namespace InitialProject.View
 
         private void DisplayAvailableDatesOutRange()
         {
-            DatesForAccommodationReservation suggestedDates = new DatesForAccommodationReservation(currentAccommodation, accommodationReservationService, guest1);
+            DatesForAccommodationReservationView suggestedDates = new DatesForAccommodationReservationView(currentAccommodation, accommodationReservationService, guest1);
             suggestedDates.Owner = this;
             foreach (List<DateTime> dates in availableDateRanges)
             {

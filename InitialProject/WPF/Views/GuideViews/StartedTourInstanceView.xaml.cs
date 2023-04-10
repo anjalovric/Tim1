@@ -36,15 +36,6 @@ namespace InitialProject.WPF.Views.GuideViews
 
         }
 
-        private void FinishTour_Click(object sender, RoutedEventArgs e)
-        {
-            viewModel.FinishTour();
-        }
 
-        private void Next_Click(object sender, RoutedEventArgs e)
-        {
-          viewModel.NextPoint();
-
-        }
     }
 }
