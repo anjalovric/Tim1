@@ -27,7 +27,7 @@ namespace InitialProject.View
     /// </summary>
     public partial class GuideAndTourReviewForm : Window
     {
-        private GuideAndTourReviewRepository guideAndTourReviewRepository;
+        private GuideAndTourReviewService guideAndTourReviewService;
         private TourReviewImageService tourReviewImageService;
         private String Comment;
         private Guest2 guest2;
@@ -43,7 +43,7 @@ namespace InitialProject.View
         {
             InitializeComponent();
             reviewId = -1;
-            guideAndTourReviewRepository = new GuideAndTourReviewRepository();
+            guideAndTourReviewService = new GuideAndTourReviewService();
             tourReviewImageService = new TourReviewImageService();
             this.guest2 = guest2;
             CurrentTourInstance = tourInstance;
@@ -114,7 +114,7 @@ namespace InitialProject.View
         }
         private void Rate_Click(object sender, RoutedEventArgs e)
         {
-            if (guideAndTourReviewRepository.HasReview(CurrentTourInstance))
+            if (guideAndTourReviewService.HasReview(CurrentTourInstance))
             {
                 MessageBox.Show("This reservation is already reviewed.");
                 this.Close();
@@ -125,21 +125,18 @@ namespace InitialProject.View
 
                 GuideAndTourReview guideAndTourReview = new GuideAndTourReview(CurrentTourInstance.Guide.Id, guest2, CurrentTourInstance, Language, InterestingFacts, Knowledge, Comment); //trebace se lista proslijedjivati
 
-                guideAndTourReviewRepository.Save(guideAndTourReview);
+                guideAndTourReviewService.Save(guideAndTourReview);
                 StoreImages();
                 foreach(TourReviewImage image in images)
                 {
                     if (image.GuideAndTourReviewId == -1)
                     {
-                        //image.GuideAndTourReviewId = guideAndTourReview.Id;
                         tourReviewImageService.Update(image,guideAndTourReview.Id);
                     } 
                 }
                 this.Close();
             }
         }
-        
-
         private void StoreImages()
         {
             foreach (TourReviewImage image in images)
@@ -162,7 +159,6 @@ namespace InitialProject.View
                 }
             }
         }
-
         private bool IsImageUploadValid()
         {
             if (images.Count >= 1)
@@ -175,7 +171,6 @@ namespace InitialProject.View
                 return false;
             }
         }
-
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
@@ -227,7 +222,6 @@ namespace InitialProject.View
 
             }
         }
-
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             for (int i = 0; i < images.Count; i++)
