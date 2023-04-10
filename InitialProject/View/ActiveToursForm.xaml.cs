@@ -53,37 +53,32 @@ namespace InitialProject.View
                 OnPropertyChanged("CheckPoint");
             }
         }
-        private AlertGuest2Repository alertGuest2Repository;
+        private AlertGuest2Service alertGuest2Service;
         private List<AlertGuest2> Alerts;
-        private TourRepository tourRepository;
-        private TourInstanceRepository tourInstanceRepository;
-        private LocationRepository locationRepository;
-        private Location location;
+        private TourService tourService;
+        private TourInstanceService tourInstanceService;
+        private LocationService locationService;
         private CheckPointService checkPointService;
-        private int orderCounter = 0;
         private TourInstance tourInstance;
-        private CheckPoint CurrentPoint;
 
         public ActiveToursForm(Guest2 guest2)
         {
             InitializeComponent();
             this.DataContext = this;
             this.Guest2 = guest2;
-            CurrentPoint = new CheckPoint();
             AllPoints = new List<CheckPoint>();
-            tourRepository = new TourRepository();
-            tourInstanceRepository = new TourInstanceRepository();
+            tourService = new TourService();
+            tourInstanceService = new TourInstanceService();
             checkPointService = new CheckPointService();
-            alertGuest2Repository = new AlertGuest2Repository();
+            alertGuest2Service = new AlertGuest2Service();
             TourInstances = new ObservableCollection<TourInstance>();
-            Alerts = new List<AlertGuest2>(alertGuest2Repository.GetAll());
+            Alerts = new List<AlertGuest2>(alertGuest2Service.GetAll());
             CheckPoint = new ObservableCollection<CheckPoint>();
-            tourInstances = new ObservableCollection<TourInstance>(tourInstanceRepository.GetAll());
+            tourInstances = new ObservableCollection<TourInstance>(tourInstanceService.GetAll());
             tourInstance = FindActiveTour(tourInstances);
             FindPointsForActiveInstance();
             SetTourInstances(TourInstances);
-            locationRepository = new LocationRepository();
-            location = new Location();
+            locationService = new LocationService();
             SetLocations();
             SetTours(tourInstance);
             SetCheckPoint();
@@ -110,7 +105,7 @@ namespace InitialProject.View
         }
         private void FindPointsForActiveInstance()
         {
-            ObservableCollection<TourInstance> tourInstances=new ObservableCollection<TourInstance>(tourInstanceRepository.GetAll());
+            ObservableCollection<TourInstance> tourInstances=new ObservableCollection<TourInstance>(tourInstanceService.GetAll());
             TourInstance tourInstance = FindActiveTour(tourInstances);
             List<CheckPoint> points = checkPointService.GetAll();
             if (tourInstance != null)
@@ -126,13 +121,13 @@ namespace InitialProject.View
         }
         private void FindLastCheckedPoint()
         {
+            int orderCounter = 0;
             foreach (CheckPoint point in AllPoints)
             {
                 if (point.Checked == false)
                 {
                     orderCounter = point.Order - 1;
-                    CurrentPoint=AllPoints[orderCounter - 1];
-                    CheckPoint.Add(CurrentPoint);
+                    CheckPoint.Add(AllPoints[orderCounter - 1]);
                     break;
                 }
             }
@@ -163,8 +158,8 @@ namespace InitialProject.View
         }
         public void SetLocations()
         {
-            List<Location> locations = locationRepository.GetAll();
-            List<Tour> tours = tourRepository.GetAll();
+            List<Location> locations = locationService.GetAll();
+            List<Tour> tours = tourService.GetAll();
 
             foreach (Location location in locations)
             {
@@ -177,7 +172,7 @@ namespace InitialProject.View
         }
         public void SetTours(TourInstance tourInstance)
         {
-            List<Tour> tours = tourRepository.GetAll();
+            List<Tour> tours = tourService.GetAll();
             if (tourInstance != null)
             {
                 foreach (Tour tour in tours)

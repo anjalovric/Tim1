@@ -7,3 +7,16 @@
 7|r1|True|15|1
 8|r2|True|15|2
 9|r3|True|15|3
+10|o1|True|16|1
+11|o2|True|16|2
+12|s1|False|17|1
+13|s2|False|17|2
+14|w1|True|18|1
+15|w2|True|18|2
+16|w3|False|18|3
+17|q1|True|19|1
+18|q2|True|19|2
+19|q3|False|19|3
+20|t1|True|20|1
+21|t2|True|20|2
+22|t3|False|20|3
