@@ -62,7 +62,6 @@ namespace InitialProject.WPF.ViewModels
         {
             tourInstances = new ObservableCollection<TourInstance>(tourInstanceService.FindCancelableTours(guide));
         }
-
         public void CancelTour()
         {
             TourInstance currentTourInstance = (TourInstance)TourListDataGrid.CurrentItem;

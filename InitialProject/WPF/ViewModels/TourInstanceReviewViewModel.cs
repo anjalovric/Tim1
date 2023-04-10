@@ -41,8 +41,6 @@ namespace InitialProject.WPF.ViewModels
             guideAndTourReviewService = new GuideAndTourReviewService();
             guideService = new GuideService();
             GetGuideReviews(guide);
-
-
         }
         private void GetGuideReviews(User guide)
         {
@@ -52,7 +50,6 @@ namespace InitialProject.WPF.ViewModels
             List<GuideAndTourReview> filledInstances = guideAndTourReviewService.FillWithInstance(filledGuets);
             List<GuideAndTourReview> filledTours = guideAndTourReviewService.FillWithTour(filledInstances);
             Reviews = new ObservableCollection<GuideAndTourReview>(guideAndTourReviewService.FillWithLocation(filledTours));
-
         }
 
         public void ViewDetails()

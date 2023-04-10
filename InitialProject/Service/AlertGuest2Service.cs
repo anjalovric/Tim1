@@ -47,6 +47,10 @@ namespace InitialProject.Service
             return alertGuest2Repository.GetByInstanceIdAndGuestId(instanceId,guestId);
         }
 
+        public void AddAlerts(int currentPointId, int _callId, TourInstance selected)
+        {
+            alertGuest2Repository.AddAlerts(currentPointId, _callId, selected);
+        }
     }
 
 }

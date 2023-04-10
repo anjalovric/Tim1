@@ -9,6 +9,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace InitialProject.Service
 {
@@ -19,18 +20,14 @@ namespace InitialProject.Service
         private LocationService locationService;
         private TourInstanceService tourInstanceService;
         private TourService tourService;
-
         private TourReservationService tourReservationService;
         private IGuideAndTourReviewsRepository guideAndTourReviewRepository = Injector.CreateInstance<IGuideAndTourReviewsRepository>();
         private ObservableCollection<TourReservation> tourReservations;
         private AlertGuest2Service alertGuest2Service;
         private ObservableCollection<AlertGuest2> alertGuest2List;
         public Location Location { get; set; }
-
         public GuideAndTourReviewService()
         {
-
-
             locationService = new LocationService();
             tourInstanceService = new TourInstanceService();
             tourService = new TourService();
@@ -38,28 +35,11 @@ namespace InitialProject.Service
             tourReservations = new ObservableCollection<TourReservation>(tourReservationService.GetAll());
             alertGuest2Service = new AlertGuest2Service();
             alertGuest2List = new ObservableCollection<AlertGuest2>(alertGuest2Service.GetAll());
+<<<<<<< HEAD
 
-/*=======
-        private GuideAndTourReviewRepository guideAndTourReviewRepository;
-        private AlertGuest2Service alertGuest2Service;
-        private Guest2 guest2;
-        private ObservableCollection<AlertGuest2> alertGuest2List;
-        public Location Location { get; set; }
-        public GuideAndTourReviewService(Guest2 guest2)
-        {
-            guideAndTourReviewRepository = new GuideAndTourReviewRepository();
-            locationService = new LocationService();
-            tourInstanceService = new TourInstanceService();
-            tourService = new TourService();
-            alertGuest2Service = new AlertGuest2Service();
-            alertGuest2List = new ObservableCollection<AlertGuest2>(alertGuest2Service.GetAll());
-            this.guest2 = guest2;
-            CompletedTours = new ObservableCollection<TourInstance>();
-            SetTourInstances(CompletedTours);
->>>>>>> 1d3141450d10619d649812f2a477f929560693b3*/
+=======
+>>>>>>> feat/RateTourAndGuide
             Location = new Location();
-
-            
         }
         public void SetTourInstances(ObservableCollection<TourInstance> CompletedTours,Guest2 guest2)
         {
@@ -109,12 +89,10 @@ namespace InitialProject.Service
                 }
             }
         }
-
         public List<GuideAndTourReview> GetReviewsByGuide(int guideId)
         {
             return guideAndTourReviewRepository.GetReviewsByGuide(guideId);
         }
-
         public List<GuideAndTourReview> FillWithGuests(List<GuideAndTourReview> guideAndTourReviews)
         {
             Guest2Service guest2Service = new Guest2Service();
@@ -145,7 +123,6 @@ namespace InitialProject.Service
             }
             return guideAndTourReviews;
         }
-
         public List<GuideAndTourReview> FillWithTour(List<GuideAndTourReview> guideAndTourReviews)
         {
             TourService tourService = new TourService();
@@ -161,7 +138,6 @@ namespace InitialProject.Service
             }
             return guideAndTourReviews;
         }
-
         public List<GuideAndTourReview> FillWithLocation(List<GuideAndTourReview> guideAndTourReviews)
         {
             LocationService locationService = new LocationService();
@@ -177,11 +153,25 @@ namespace InitialProject.Service
             }
             return guideAndTourReviews;
         }
-
         public GuideAndTourReview Update(GuideAndTourReview review)
         {
             return guideAndTourReviewRepository.Update(review);
         }
-
+        public List<GuideAndTourReview> GetAll()
+        {
+            return guideAndTourReviewRepository.GetAll();
+        }
+        public GuideAndTourReview Save(GuideAndTourReview review)
+        {
+            return guideAndTourReviewRepository.Save(review);
+        }
+        public void Delete(GuideAndTourReview review)
+        {
+            guideAndTourReviewRepository.Delete(review);
+        }
+        public bool HasReview(TourInstance tourInstance)
+        {
+            return guideAndTourReviewRepository.HasReview(tourInstance);
+        }
     }
 }

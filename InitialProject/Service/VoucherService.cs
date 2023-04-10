@@ -15,13 +15,10 @@ namespace InitialProject.Service
     public class VoucherService
     {
         private IVoucherRepository voucherRepository = Injector.CreateInstance<IVoucherRepository>();
-
-        public ObservableCollection<Voucher> Vouchers { get; set; }
         public List<Voucher> storedVouchers;
         public VoucherService() 
         {
             voucherRepository = new VoucherRepository();
-            Vouchers= new ObservableCollection<Voucher>();
             storedVouchers = GetAll();
         }
         public List<Voucher> GetAll()
@@ -52,8 +49,9 @@ namespace InitialProject.Service
             }
 
         }
-        public ObservableCollection<Voucher> FindAllVouchers(ObservableCollection<Voucher> Vouchers, Guest2 guest2)
+        public ObservableCollection<Voucher> FindAllVouchers(Guest2 guest2)
         {
+            ObservableCollection<Voucher> Vouchers = new ObservableCollection<Voucher>();
             foreach (Voucher voucher in storedVouchers)
             {
                 if (voucher.GuestId == guest2.Id && voucher.Used == false)

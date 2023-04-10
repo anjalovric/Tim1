@@ -34,14 +34,12 @@
                 <DataGridTemplateColumn x:Name="cancelation"  Width="1*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Name="cancelButton" Content="START" TextElement.FontWeight="ExtraBold" Click="StartTour_Click"/>
+                            <Button Name="cancelButton" Content="START" TextElement.FontWeight="ExtraBold" Command="{Binding Path=DataContext.StartCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-
-
 
         <Label Content="List of tours which are starting today:" FontSize="15" HorizontalAlignment="Left" Margin="223,129,0,0" VerticalAlignment="Top" Width="295"/>
         <Calendar HorizontalAlignment="Left" Margin="0,318,0,0" VerticalAlignment="Top" Height="216" Width="218"/>

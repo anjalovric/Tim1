@@ -20,19 +20,24 @@
             </DataGrid.Columns>
         </DataGrid>
         <Label  Width="200" Margin="94,443,806,200">Current checkpoint:</Label>
-        <DataGrid  Margin="94,500,550,100" ItemsSource="{Binding Path=CurrentPoint,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" AutoGenerateColumns="False">
+        <DataGrid  Margin="94,500,550,118" ItemsSource="{Binding Path=CurrentPoint,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="1*"></DataGridTextColumn>
                 <DataGridTextColumn Header="Order" Binding="{Binding Order}" Width="1*"></DataGridTextColumn>
                 <DataGridTextColumn Header="Checked" Binding="{Binding Checked}" Width="1*"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="Finish"   Click="FinishTour_Click" Margin="784,290,124,305" >Finish tour</Button>
+        <Button x:Name="Finish"   Command="{Binding FinishCommand}" Margin="767,407,104,237" >Finish tour</Button>
 
-        <Button x:Name="Next"  Click="Next_Click" Margin="585,518,440,108" >Next point</Button>
+        <Button x:Name="Next"  Command="{Binding NextCommand}" Margin="587,528,445,147" >
+            <Image Source="/Resources/Images/arrow.png" Height="20" VerticalAlignment="Center" Width="63"/>
+        </Button>
 
+        <StackPanel x:Name="FinishMessage" Margin="739,518,0,1" Background="LightGray" Visibility="Hidden">
+            <Label Height="58" FontSize="20" FontWeight="Heavy" HorizontalAlignment="Center">This tour is finished!</Label>
+            <Button Width="105" Height="59">OK</Button>
+        </StackPanel>
+        <Rectangle HorizontalAlignment="Left" Height="467" Margin="699,122,0,0" Stroke="Black" VerticalAlignment="Top" Width="1" Fill="LightGray"/>
 
-
-        <Label x:Name="FinishMessage" HorizontalAlignment="Left"  Margin="784,518,0,0" VerticalAlignment="Top" Width="192" Height="48"/>
     </Grid>
 </Page>

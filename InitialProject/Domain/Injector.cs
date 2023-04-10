@@ -1,5 +1,6 @@
 ﻿using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Repository;
+using InitialProject.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,9 @@ namespace InitialProject.Domain
         { typeof(IOwnerRepository), new OwnerRepository() },
         { typeof(IUserRepository), new UserRepository() },
         { typeof(IGuideAndTourReviewsRepository), new GuideAndTourReviewRepository() },
-        { typeof(ITourReviewImageRepository), new TourReviewImageRepository() },
+        { typeof(ITourReviewImageRepository), new TourReviewImageRepository() }
+    //    { typeof(TourDetailsService), new TourDetailsService() },
+  //       { typeof(TourInstanceService), new TourInstanceService() }
         };
 
         public static T CreateInstance<T>()

@@ -3,6 +3,7 @@ using InitialProject.Model;
 using InitialProject.Serializer;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -80,6 +81,31 @@ namespace InitialProject.Repository
                     checkPoints.Add(checkPoint);
             }
             return checkPoints;
+        }
+        public void FindPointsForSelectedInstance(TourInstance selectedInstance,ObservableCollection<CheckPoint> AllPoints)
+        {
+            if (selectedInstance != null)
+            {
+                foreach (CheckPoint point in _checkPoints)
+                {
+                    if (point.TourId == selectedInstance.Tour.Id)
+                    {
+                        AllPoints.Add(point);
+                    }
+                }
+            }
+        }
+
+        public void CheckFirstPoint(ObservableCollection<CheckPoint> AllPoints)
+        {
+            foreach (CheckPoint point in AllPoints)
+            {
+                if (point.Order == 1)
+                {
+                    point.Checked = true;
+                    Update(point);
+                }
+            }
         }
 
     }

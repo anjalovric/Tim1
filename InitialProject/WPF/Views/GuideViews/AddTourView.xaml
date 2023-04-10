@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:InitialProject.WPF.Views.GuideViews"
+      xmlns:val="clr-namespace:InitialProject.WPF.Validations.GuideValidations" xmlns:viewmodels="clr-namespace:InitialProject.WPF.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:TourInstanceReviewViewModel}"
       mc:Ignorable="d" 
       d:DesignHeight="707" d:DesignWidth="1100"
       Title="AddTourView" Background="White">
@@ -22,24 +23,48 @@
 
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="51*"></ColumnDefinition>
-                <ColumnDefinition Width="16*"/>
-                <ColumnDefinition Width="67*"></ColumnDefinition>
+                <ColumnDefinition Width="50*"></ColumnDefinition>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="30*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Label Grid.Row="0" Grid.Column="0" Margin="0,10,0,10" Grid.ColumnSpan="2">Name:</Label>
-            <Label Grid.Row="1" Grid.Column="0" Margin="0,10,0,10" Grid.ColumnSpan="2">Maximum number of guests</Label>
-            <Label Grid.Row="2" Grid.Column="0" Margin="0,10,0,10" Grid.ColumnSpan="2">Duration of tour in hours</Label>
-            <Label Grid.Row="4" Grid.Column="0" Margin="0,10,0,10" Grid.ColumnSpan="2">City</Label>
-            <Label Grid.Row="3" Grid.Column="0" Margin="0,12,0,8" Grid.ColumnSpan="2">Country</Label>
-            <Label Grid.Row="5" Grid.Column="0" Margin="0,6,0,14" Grid.ColumnSpan="2">Description</Label>
-            <Label Grid.Row="6" Grid.Column="0" Margin="0,10,0,10" Grid.ColumnSpan="2">Language</Label>
-            <TextBox x:Name="TourNameTB" Grid.Row="0" Grid.Column="2" Text="{Binding Path=NameTU,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}" Margin="0,10,0,10"/>
-            <TextBox x:Name="MaxGuestsTB" Grid.Row="1" Grid.Column="2" Text="{Binding Path=MaxGuests,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}" Margin="0,10,0,10"/>
-            <TextBox x:Name="DurationTB" Grid.Row="2" Grid.Column="2" Text="{Binding Path=Duration,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}" Margin="0,10,0,10"/>
-            <ComboBox x:Name="ComboBoxCity" ItemsSource="{Binding CitiesByCountry}" SelectedItem="{Binding City}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" Grid.Row="4" Grid.Column="2" Margin="0,10,0,10"/>
-            <TextBox x:Name="DescriptionTB" Grid.Row="5" Grid.Column="2" Text="{Binding Path=Description,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}" Margin="0,10,0,10"/>
-            <TextBox x:Name="LanguageTB" Grid.Row="6" Grid.Column="2" Text="{Binding Path=LanguageT,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}" Margin="0,10,0,10"/>
-            <ComboBox x:Name="ComboBoxCountry" ItemsSource="{Binding Countries}" SelectedItem="{Binding Country}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" Grid.Row="3" Grid.Column="2" Margin="0,9,0,12" SelectionChanged="ComboBoxCountry_SelectionChanged"/>
+            <Label Grid.Row="0" Grid.Column="0" Margin="0,10,0,10" >Name:</Label>
+            <Label Grid.Row="1" Grid.Column="0" Margin="0,10,0,10" >Maximum number of guests</Label>
+            <Label Grid.Row="2" Grid.Column="0" Margin="0,10,0,10" >Duration of tour in hours</Label>
+            <Label Grid.Row="4" Grid.Column="0" Margin="0,10,0,10" >City</Label>
+            <Label Grid.Row="3" Grid.Column="0" Margin="0,12,0,8" >Country</Label>
+            <Label Grid.Row="5" Grid.Column="0" Margin="0,6,0,14" >Description</Label>
+            <Label Grid.Row="6" Grid.Column="0" Margin="0,10,0,10">Language</Label>
+
+            
+            <TextBox x:Name="TourNameTB" Grid.Row="0" Grid.Column="1"  Margin="0,10,0,10">
+                <TextBox.Text>
+                    <Binding Path="NameTU" UpdateSourceTrigger="PropertyChanged">
+
+                </Binding>
+                </TextBox.Text>
+                <Validation.ErrorTemplate>
+                    <ControlTemplate>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
+                            <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Validation.ErrorTemplate>
+            </TextBox>
+            <TextBox x:Name="MaxGuestsTB" Grid.Row="1" Grid.Column="1" Text="{Binding Path=MaxGuests,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}" Margin="0,10,0,10"/>
+            <TextBox x:Name="DurationTB" Grid.Row="2" Grid.Column="1" Text="{Binding Path=Duration,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}" Margin="0,10,0,10"/>
+            <ComboBox x:Name="ComboBoxCity" ItemsSource="{Binding CitiesByCountry}" SelectedItem="{Binding City}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" Grid.Row="4" Grid.Column="1" Margin="0,10,0,10"/>
+            <TextBox x:Name="DescriptionTB" Grid.Row="5" Grid.Column="1" Text="{Binding Path=Description,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}" Margin="0,10,0,10"/>
+            <TextBox x:Name="LanguageTB" Grid.Row="6" Grid.Column="1" Text="{Binding Path=LanguageT,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}" Margin="0,10,0,10"/>
+            <ComboBox x:Name="ComboBoxCountry" ItemsSource="{Binding Countries}" SelectedItem="{Binding Country}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" Grid.Row="3" Grid.Column="1" Margin="0,9,0,12" SelectionChanged="ComboBoxCountry_SelectionChanged"/>
 
 
 
