@@ -1,0 +1,18 @@
+﻿<UserControl x:Class="InitialProject.WPF.Views.Guest2Views.VoucherViewForm"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:InitialProject.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <DataGrid x:Name="VouchersDataGrid" ItemsSource="{Binding Path=Vouchers,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=Selected}" IsReadOnly="True" AutoGenerateColumns="False"  Margin="313,175,148,41">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Voucher" Width="1*" Binding="{Binding Id}"/>
+                <DataGridTextColumn Header="Valid" Width="1*" Binding="{Binding CreateDate}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </Grid>
+</UserControl>

@@ -20,7 +20,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace InitialProject.View
+namespace InitialProject.WPF.Views.Guest2Views
 {
     /// <summary>
     /// Interaction logic for FinishedTourInstances.xaml
