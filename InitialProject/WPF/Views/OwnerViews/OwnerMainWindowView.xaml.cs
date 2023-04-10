@@ -24,9 +24,5 @@ namespace InitialProject.WPF.Views
             this.owner = ownerService.GetByUsername(user.Username);
             FrameForPages.Content = new OwnerOverviewView(owner);
         }
-        private void BurgerMenu_Click(object sender, RoutedEventArgs e)
-        {
-            ownerViewModel.MakeMenu();
-        }
     }
 }

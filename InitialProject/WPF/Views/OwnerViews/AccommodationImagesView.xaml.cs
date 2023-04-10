@@ -15,19 +15,17 @@ using System.Windows.Shapes;
 using InitialProject.Model;
 using InitialProject.WPF.ViewModels;
 
-namespace InitialProject.WPF.Views
+namespace InitialProject.WPF.Views.OwnerViews
 {
     /// <summary>
-    /// Interaction logic for OwnerOverviewView.xaml
+    /// Interaction logic for AccommodationImagesView.xaml
     /// </summary>
-    public partial class OwnerOverviewView : Page
+    public partial class AccommodationImagesView : Page
     {
-        private OwnerOverviewViewModel ownerOverviewViewModel;
-        public OwnerOverviewView(Owner owner)
+        public AccommodationImagesView(Accommodation accommodation)
         {
             InitializeComponent();
-            ownerOverviewViewModel = new OwnerOverviewViewModel(owner);
-            DataContext = ownerOverviewViewModel;
+            DataContext = new AccommodationImagesViewModel(accommodation);
         }
     }
 }

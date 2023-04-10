@@ -12,21 +12,29 @@ namespace InitialProject.Service
             requestsService = new ReschedulingAccommodationRequestService();
         }
 
-        public List<RequestForReshcedulingViewModel> GetPendingRequests()
+        public List<RequestForReshcedulingViewModel> GetPendingRequests(Owner owner)
         {
             List<ReschedulingAccommodationRequest> pendingRequest = requestsService.GetPendingRequestsIfNotCancelled();
             List<RequestForReshcedulingViewModel> requestsViewModel = new List<RequestForReshcedulingViewModel>();
             
             foreach(ReschedulingAccommodationRequest request in pendingRequest)
             {
-                RequestForReshcedulingViewModel requestForReshcedulingViewModel = new RequestForReshcedulingViewModel();
-                requestForReshcedulingViewModel.Request = request;
-                requestForReshcedulingViewModel.AccommodationReservation = request.Reservation;
-                requestForReshcedulingViewModel.SetAvailability();
-                requestsViewModel.Add(requestForReshcedulingViewModel);
+                if (request.Reservation.Accommodation.Owner.Id == owner.Id)
+                {
+                    AddRequestToList(owner, requestsViewModel, request);
+                }
             }
 
             return requestsViewModel;
+        }
+
+        private static void AddRequestToList(Owner owner, List<RequestForReshcedulingViewModel> requestsViewModel, ReschedulingAccommodationRequest request)
+        {
+            RequestForReshcedulingViewModel requestForReshcedulingViewModel = new RequestForReshcedulingViewModel(owner);
+            requestForReshcedulingViewModel.Request = request;
+            requestForReshcedulingViewModel.AccommodationReservation = request.Reservation;
+            requestForReshcedulingViewModel.SetAvailability();
+            requestsViewModel.Add(requestForReshcedulingViewModel);
         }
     }
 }

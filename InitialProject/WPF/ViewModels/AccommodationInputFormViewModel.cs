@@ -14,6 +14,8 @@ using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.Service;
 using Microsoft.Win32;
+using InitialProject.WPF.Views;
+using System.Windows;
 
 namespace InitialProject.WPF.ViewModels
 {
@@ -29,23 +31,103 @@ namespace InitialProject.WPF.ViewModels
         private string imageUrl;
         private bool isCityComboBoxEnabled;
         private AccommodationService accommodationService;
+        private int imageCounter = 0;
         public List<AccommodationType> AccommodationTypes { get; set; }
         public ObservableCollection<AccommodationImage> Images { get; set; }
         public ObservableCollection<string> Countries { get; set; }
         public ObservableCollection<string> CitiesByCountry { get; set; }
+        public RelayCommand CancelCommand { get; set; }
+        public RelayCommand OkCommand { get; set; }
+        public RelayCommand AddImageCommand { get; set; }
+        public RelayCommand RemoveImageCommand { get; set; }
+        public RelayCommand NextImageCommand { get; set; }
+        public RelayCommand PreviousImageCommand { get; set; }
         public AccommodationInputFormViewModel(Owner owner)
         {
             this.owner = owner;
             accommodationService = new AccommodationService();
-            location = new Location();
-            Type = new AccommodationType();
             MakeListOfTypes();
             Images = new ObservableCollection<AccommodationImage>();
             MakeListOfLocations();
+            InitializeAccommodation();
+            MakeCommands();
+        }
+
+        private void MakeCommands()
+        {
+            CancelCommand = new RelayCommand(Cancel_Executed, CanExecute);
+            OkCommand = new RelayCommand(Ok_Executed, CanExecute);
+            AddImageCommand = new RelayCommand(AddImage_Executed, CanExecute);
+            RemoveImageCommand = new RelayCommand(RemoveImage_Executed, CanExecute);
+            NextImageCommand = new RelayCommand(NextImage_Executed, CanExecute);
+            PreviousImageCommand = new RelayCommand(PreviousImage_Executed, CanExecute);
+        }
+        private void InitializeAccommodation()
+        {
+            location = new Location();
+            Type = new AccommodationType();
             minDaysToCancel = 1;
             minDaysForReservation = 1;
         }
 
+        private bool CanExecute(object sender)
+        {
+            return true;
+        }
+
+        private void Cancel_Executed(object sender)
+        {
+            AccommodationView accommodationView = new AccommodationView(owner);
+            Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = accommodationView;
+        }
+
+        private void Ok_Executed(object sender)
+        {
+            SaveAccommodation();
+            AccommodationView accommodationView = new AccommodationView(owner);
+            Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = accommodationView;
+        }
+        private void AddImage_Executed(object sender)
+        {
+            AddImageFromFileSystem();
+        }
+
+        private void RemoveImage_Executed(object sender)
+        {
+            if (Images.Count>1)
+            {
+               foreach(AccommodationImage image in Images)
+               {
+                    if (image.Url.Equals(ImageUrl))
+                    {
+                        Images.Remove(image);
+                        break;
+                    }
+               }
+                imageCounter -= 1;
+               NextImage_Executed(sender);
+            }
+        }
+
+        private void NextImage_Executed(object sender)
+        {
+            if (imageCounter != Images.Count - 1)
+                imageCounter += 1;
+            else
+                imageCounter = 0;
+
+            ImageUrl =Images[imageCounter].Url;
+        }
+
+        private void PreviousImage_Executed(object sender)
+        {
+            if (imageCounter != Images.Count - 1)
+                imageCounter += 1;
+            else
+                imageCounter = 0;
+
+            ImageUrl =Images[imageCounter].Url;
+        }
         private void MakeListOfLocations()
         {
             LocationService locationService = new LocationService();

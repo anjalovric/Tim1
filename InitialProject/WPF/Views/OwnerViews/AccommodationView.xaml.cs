@@ -23,12 +23,5 @@ namespace InitialProject.WPF.Views
             this.owner = owner;
             DataContext = new AccommodationViewModel(owner);
         }
-
-        private void NewAccommodationButton_Click(object sender, RoutedEventArgs e)
-        {
-            AccommodationInputFormView accommodationInputFormView = new AccommodationInputFormView(owner);
-            Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = accommodationInputFormView;
-
-        }
     }
 }

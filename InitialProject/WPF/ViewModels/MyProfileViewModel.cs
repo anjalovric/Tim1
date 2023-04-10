@@ -24,6 +24,7 @@ namespace InitialProject.WPF.ViewModels
         private int numberOfRates;
         private string title;
         private string starVisibility;
+        public RelayCommand ViewCommand { get; set; }
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -31,8 +32,20 @@ namespace InitialProject.WPF.ViewModels
         {
             ownerReviewService = new OwnerReviewService();
             MakeOwner(owner);
-            selectedOwnerReview = new OwnerReview();
             OwnerReviews = new ObservableCollection<OwnerReview>(ownerReviewService.GetAllToDisplay(ProfileOwner));
+            InitializeSelectedOwnerReview();
+            ViewCommand = new RelayCommand(View_Executed, CanExecute);
+        }
+
+        private bool CanExecute(object sender)
+        {
+            return true;
+        }
+
+        private void View_Executed(object sender)
+        {
+            OwnerReviewView ownerReviewView = new OwnerReviewView(SelectedOwnerReview);
+            Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = ownerReviewView;
         }
         public double AverageRate
         {
@@ -96,6 +109,14 @@ namespace InitialProject.WPF.ViewModels
             }
         }
 
+        private void InitializeSelectedOwnerReview()
+        {
+            selectedOwnerReview = new OwnerReview();
+            if(OwnerReviews.Count >0)
+            {
+                SelectedOwnerReview = OwnerReviews[0];
+            }
+    }
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

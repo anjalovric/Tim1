@@ -17,7 +17,7 @@ namespace InitialProject.Model
         public int MinDaysForReservation { get; set; }
         public int MinDaysToCancel { get; set; }
         public Owner Owner { get; set; }
-
+        public AccommodationImage CoverImage { get; set; }
 
         public Accommodation() {}
 
@@ -45,6 +45,7 @@ namespace InitialProject.Model
             Type.Id = Convert.ToInt32(values[6]);
             Owner = new Owner();
             Owner.Id = Convert.ToInt32(values[7]);
+            CoverImage = new AccommodationImage();
         }
         public string[] ToCSV()
         {

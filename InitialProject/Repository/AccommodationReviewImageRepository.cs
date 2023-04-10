@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using InitialProject.Domain.Model;
+using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Model;
 using InitialProject.Serializer;
 
 namespace InitialProject.Repository
 {
-    public class AccommodationReviewImageRepository
+    public class AccommodationReviewImageRepository : IAccommodationReviewImageRepository
     {
         private const string FilePath = "../../../Resources/Data/accommodationReviewImages.csv";
 
@@ -55,6 +56,9 @@ namespace InitialProject.Repository
             _serializer.ToCSV(FilePath, _accommodationReviewImages);
         }
 
-
+        public AccommodationReviewImage GetById(int id)
+        {
+            return _accommodationReviewImages.Find(n => n.Id == id);
+        }
     }
 }

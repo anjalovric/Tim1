@@ -26,5 +26,17 @@ namespace InitialProject.Service
             return accommodationImageRepository.Add(image);
         }
 
+        public List<AccommodationImage> GetAllByAccommodation(Accommodation accommodation)
+        {
+            List<AccommodationImage> images = new List<AccommodationImage>();
+            foreach(var image in accommodationImageRepository.GetAll())
+            {
+                if(image.Accommodation.Id == accommodation.Id)
+                {
+                    images.Add(image);
+                }
+            }
+            return images;
+        }
     }
 }

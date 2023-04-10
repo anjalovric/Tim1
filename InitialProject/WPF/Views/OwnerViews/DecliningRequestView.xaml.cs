@@ -15,19 +15,19 @@ using System.Windows.Shapes;
 using InitialProject.Model;
 using InitialProject.WPF.ViewModels;
 
-namespace InitialProject.WPF.Views
+namespace InitialProject.WPF.Views.OwnerViews
 {
     /// <summary>
-    /// Interaction logic for OwnerOverviewView.xaml
+    /// Interaction logic for DecliningRequestView.xaml
     /// </summary>
-    public partial class OwnerOverviewView : Page
+    public partial class DecliningRequestView : Page
     {
-        private OwnerOverviewViewModel ownerOverviewViewModel;
-        public OwnerOverviewView(Owner owner)
+        public DecliningRequestViewModel decliningRequestViewModel;
+        public DecliningRequestView(ReschedulingAccommodationRequest request)
         {
             InitializeComponent();
-            ownerOverviewViewModel = new OwnerOverviewViewModel(owner);
-            DataContext = ownerOverviewViewModel;
+            decliningRequestViewModel = new DecliningRequestViewModel(request);
+            DataContext = decliningRequestViewModel;
         }
     }
 }

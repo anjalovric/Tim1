@@ -3,6 +3,11 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using InitialProject.Model;
 using InitialProject.Service;
+using InitialProject.WPF.Views.OwnerViews;
+using InitialProject.WPF.Views;
+using System.Windows;
+using System.Linq;
+using System.Windows.Controls;
 
 namespace InitialProject.WPF.ViewModels
 {
@@ -14,6 +19,8 @@ namespace InitialProject.WPF.ViewModels
         private ReschedulingAccommodationRequestService reschedulingRequestService;
         private CompletedAccommodationReschedulingRequestService completedReschedulingRequestService;
         private RequestForReshcedulingViewModel selectedRequest;
+        public RelayCommand DeclineCommand { get; set; }
+        public RelayCommand ApproveCommand { get; set; }
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -22,16 +29,38 @@ namespace InitialProject.WPF.ViewModels
             profileOwner = owner;
             requestService = new RequestForReschedulingService();
             reschedulingRequestService = new ReschedulingAccommodationRequestService();
-            Requests = new ObservableCollection<RequestForReshcedulingViewModel>(requestService.GetPendingRequests());
+            Requests = new ObservableCollection<RequestForReshcedulingViewModel>(requestService.GetPendingRequests(owner));
+            SelectedRequest = new RequestForReshcedulingViewModel(profileOwner);
             InitializeSelectedRequest();
             completedReschedulingRequestService = new CompletedAccommodationReschedulingRequestService();
+            MakeCommands();
         }
 
+        private void MakeCommands()
+        {
+            DeclineCommand = new RelayCommand(Decline_Executed, CanExecute);
+            ApproveCommand = new RelayCommand(Approve_Executed, CanExecute);
+        }
+        private bool CanExecute(object sender)
+        {
+            return true;
+        }
+
+        private void Decline_Executed(object sender)
+        {
+            DecliningRequestView decliningRequestView = new DecliningRequestView(SelectedRequest.Request);
+            Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = decliningRequestView;
+            DeclineRequest(decliningRequestView.decliningRequestViewModel.ReschedulingAccommodationRequest);
+        }
+
+        private void Approve_Executed(object sender)
+        {
+            ApproveRequest();
+        }
         private void InitializeSelectedRequest()
         {
-            SelectedRequest = new RequestForReshcedulingViewModel();
             if(Requests.Count>0)
-                SelectedRequest = Requests[0];
+               SelectedRequest = Requests[0];
         }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -52,11 +81,18 @@ namespace InitialProject.WPF.ViewModels
             }
         }
 
-        public void DeclineRequest()
+        public void DeclineRequest(ReschedulingAccommodationRequest request)
         {
+            SelectedRequest.Request.OwnerExplanationForDeclining = request.OwnerExplanationForDeclining;
+        }
+
+        public void SaveDeclinedRequest(string ownersExplanationForDeclining)
+        {
+            SelectedRequest.Request.OwnerExplanationForDeclining = ownersExplanationForDeclining;
             reschedulingRequestService.ChangeState(SelectedRequest.Request, State.Declined);
             completedReschedulingRequestService.DeclineRequest(SelectedRequest.Request);
             Requests.Remove(SelectedRequest);
+            InitializeSelectedRequest();
         }
 
         public void ApproveRequest()
@@ -64,6 +100,7 @@ namespace InitialProject.WPF.ViewModels
             reschedulingRequestService.ChangeState(SelectedRequest.Request, State.Approved);
             completedReschedulingRequestService.ApproveRequest(SelectedRequest.Request);
             Requests.Remove(SelectedRequest);
+            InitializeSelectedRequest();
         }
 
     }

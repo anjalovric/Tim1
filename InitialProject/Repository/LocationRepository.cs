@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Repository
 {
-    public class LocationRepository:ILocationRepository
+    public class LocationRepository : ILocationRepository 
     {
         private const string FilePath = "../../../Resources/Data/locations.csv";
 
