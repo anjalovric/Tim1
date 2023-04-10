@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using InitialProject.Domain;
 using InitialProject.Domain.Model;
+using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Model;
 using InitialProject.Repository;
 using NPOI.SS.Formula.Functions;
@@ -9,12 +11,12 @@ namespace InitialProject.Service
 {
     public class CompletedAccommodationReschedulingRequestService
     {
-        private CompletedAccommodationReschedulingRequestRepository completedRequestRepository;
+        private ICompletedAccommodationReschedulingRequestRepository completedRequestRepository = Injector.CreateInstance<ICompletedAccommodationReschedulingRequestRepository>();
         private List<CompletedAccommodationReschedulingRequest> completedRequests;
         private ReschedulingAccommodationRequestService requestService;
         public CompletedAccommodationReschedulingRequestService()
         {
-            completedRequestRepository = new CompletedAccommodationReschedulingRequestRepository();
+            //completedRequestRepository = new CompletedAccommodationReschedulingRequestRepository();
             completedRequests = new List<CompletedAccommodationReschedulingRequest>(completedRequestRepository.GetAll());
             SetRequests();
             requestService = new ReschedulingAccommodationRequestService();

@@ -11,6 +11,8 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using InitialProject.WPF.Views.Guest1Views;
 
+using InitialProject.WPF.Views.Guest2Views;
+
 namespace InitialProject
 {
     /// <summary>

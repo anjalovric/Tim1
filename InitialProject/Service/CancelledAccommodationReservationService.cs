@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using InitialProject.Domain;
 using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Model;
 using InitialProject.Repository;
@@ -12,7 +13,7 @@ namespace InitialProject.Service
 {
     public class CancelledAccommodationReservationService
     {
-        private CancelledAccommodationReservationRepository cancelledAccommodationReservationRepository;
+        private ICancelledAccommodationReservationRepository cancelledAccommodationReservationRepository = Injector.CreateInstance<ICancelledAccommodationReservationRepository>();
         private Guest1 guest1;
         private List<AccommodationReservation> storedCancelledReservations;
         private LocationService locationService;
@@ -22,7 +23,7 @@ namespace InitialProject.Service
 
         public CancelledAccommodationReservationService()
         {
-            cancelledAccommodationReservationRepository = new CancelledAccommodationReservationRepository();
+            //cancelledAccommodationReservationRepository = new CancelledAccommodationReservationRepository();
             accommodationService = new AccommodationService();
             ownerService = new OwnerService();
             locationService = new LocationService();

@@ -23,25 +23,67 @@ namespace InitialProject.WPF.ViewModels
 
         private int orderCounter = 1;
         private TourInstance selected;
-        private Button Next;
-        private Button Finish;
-        private StackPanel FinishMessage;
+        private bool nextEnabled;
+        public bool NextEnabled
+        {
+            get => nextEnabled;
+            set
+            {
+                if (value != nextEnabled)
+                {
+                    nextEnabled = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private bool finishEnabled;
+        public bool FinishEnabled
+        {
+            get => finishEnabled;
+            set
+            {
+                if (value != finishEnabled)
+                {
+                    finishEnabled = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public string Title { get;set; }
+        private string toast;
+        public string Toast
+        {
+            get => toast;
+            set
+            {
+                if (value != toast)
+                {
+                    toast = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
         public RelayCommand NextCommand { get; set; }
         public RelayCommand FinishCommand { get; set; }
 
-        public StartedTourViewModel(TourInstance active, ObservableCollection<TourInstance> tours, ObservableCollection<TourInstance> finishedInstances, Button next, Button finish, StackPanel finishMessage) 
+        public StartedTourViewModel(TourInstance active, ObservableCollection<TourInstance> tours, ObservableCollection<TourInstance> finishedInstances) 
         {
             AllPoints = new ObservableCollection<CheckPoint>();
             CurrentPoint = new ObservableCollection<CheckPoint>();
             Tours = tours;
             selected = active;
             FinishedInstances = finishedInstances;
-            Next = next;
-            Finish = finish;
-            FinishMessage = finishMessage;
-            StartInstance();
+            SetStartState();
             MakeCommands();
+        }
+        private void SetStartState()
+        {
+            Toast = "Hidden";
+            NextEnabled= true;
+            FinishEnabled= true;
+            Title = selected.Tour.Name + ", " + selected.Date + ", " + selected.StartClock;
+            StartInstance();
         }
         private void MakeCommands()
         {
@@ -84,9 +126,9 @@ namespace InitialProject.WPF.ViewModels
             CurrentPoint[0].Checked = true;
 
             FindActive(finished);
-            Finish.IsEnabled = false;
-            Next.IsEnabled = false;
-            FinishMessage.Visibility = Visibility.Visible;
+            NextEnabled = false;
+            FinishEnabled= false;
+            Toast = "Visible";
         }
 
         private void FindActive(TourInstance selected)
@@ -108,7 +150,7 @@ namespace InitialProject.WPF.ViewModels
             orderCounter++;
             if (orderCounter == AllPoints.ToList().Count)
             {
-                Next.IsEnabled = false;
+                NextEnabled = false;
                 FinishInstance();
             }
             checkPointService.UpdateAllPointsListToNextPoint(AllPoints, orderCounter);

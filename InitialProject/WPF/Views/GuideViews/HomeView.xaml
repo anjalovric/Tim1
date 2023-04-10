@@ -26,7 +26,7 @@
                 <DataGridTextColumn Header="Name" Binding="{Binding Tour.Name}" Width="1*"/>
                 <DataGridTextColumn Header="Duration" Binding="{Binding Tour.Duration}" Width="1*"/>
                 <DataGridTextColumn Header="Location" Binding="{Binding Tour.Location}" Width="1.5*"/>
-                <DataGridTextColumn Header="MaxOfGuests" Binding="{Binding Tour.MaxGuests}" Width="1*"/>
+                <DataGridTextColumn Header="Capacity" Binding="{Binding Tour.MaxGuests}" Width="1*"/>
                 <DataGridTextColumn Header="StartDate" Binding="{Binding Date}" Width="1*"/>
                 <DataGridTextColumn Header="StartHour" Binding="{Binding StartClock}" Width="1*"></DataGridTextColumn>
                 <DataGridTextColumn Header="Language" Binding="{Binding Tour.Language}" Width="1*"/>

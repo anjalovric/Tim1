@@ -2,6 +2,7 @@
 using InitialProject.WPF.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,29 +24,12 @@ namespace InitialProject.WPF.Views.GuideViews
     public partial class ReviewDetailsView : Page
     {
         ReviewDetailsViewModel viewModel;
-        public ReviewDetailsView(GuideAndTourReview review)
+        public ReviewDetailsView(GuideAndTourReview review,ObservableCollection<GuideAndTourReview> Reviews,User user)
         {
             InitializeComponent();
-            viewModel = new ReviewDetailsViewModel(review,this.Toast);
+            viewModel = new ReviewDetailsViewModel(review,Reviews,user);
             DataContext = viewModel;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            viewModel.Valid();
-        }
-        private void Toast_Click(object sender, RoutedEventArgs e)
-        {
-            Toast.Visibility = Visibility.Hidden;
-        }
-
-        private void Back_Click(object sender, RoutedEventArgs e)
-        {
-            viewModel.GoBack();
-        }
-        private void Next_Click(object sender, RoutedEventArgs e)
-        {
-            viewModel.GoForward();
-        }
     }
 }

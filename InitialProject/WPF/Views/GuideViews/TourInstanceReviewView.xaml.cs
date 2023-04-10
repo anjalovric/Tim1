@@ -33,10 +33,5 @@ namespace InitialProject.WPF.Views.GuideViews
 
 
         }
-        private void Review_Click(object sender, RoutedEventArgs e)
-        {
-            viewModel.ViewDetails();
-
-        }
     }
 }

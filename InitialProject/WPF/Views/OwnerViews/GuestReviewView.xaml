@@ -1,0 +1,60 @@
+﻿<Page x:Class="InitialProject.WPF.Views.OwnerViews.GuestReviewView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:InitialProject.WPF.Views.OwnerViews"
+      mc:Ignorable="d" 
+      d:DesignHeight="630" d:DesignWidth="430"
+      Title="GuestReviewView" Background="White">
+    <Page.Resources>
+        <DataTemplate x:Key="guestToReview">
+            <Border BorderBrush="Black" BorderThickness="0.5">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="120"/>
+                        <ColumnDefinition Width="170"/>
+                        <ColumnDefinition Width="100"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="25"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.RowSpan="2" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center"> 
+                    <Run Text="{Binding Path= Guest.Name}"/>
+                    <Run Text="{Binding Path = Guest.LastName}" />
+                    </TextBlock>
+                    <Label Grid.Column="1" Grid.Row="0" >Accommodation:</Label>
+                    <Label Content="{Binding Path=Accommodation.Name}" Grid.Row="1" Grid.Column="1"></Label>
+                    <Button Command="{Binding Path=DataContext.ReviewCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" Grid.Column="2" Grid.Row="0" Grid.RowSpan="2" HorizontalAlignment="Left" VerticalAlignment="Center">Review</Button>
+                </Grid>
+            </Border>
+        </DataTemplate>
+    </Page.Resources>
+
+    <Grid>
+        <Label Content="Guest left to review" FontSize="15" HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top" Width="151"/>
+        <ListBox ItemsSource="{Binding ReservationsToReview}" ItemTemplate="{StaticResource guestToReview}" IsSynchronizedWithCurrentItem="True" SelectedItem="{Binding SelectedReservation, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" Margin="20,45,20,315">
+            <ListBox.Resources>
+                <Style TargetType="ListBoxItem">
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver"  Value="True">
+                            <Setter Property="IsSelected" Value="True"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </ListBox.Resources>
+        </ListBox>
+        <Label Content="Review history" FontSize="15" HorizontalAlignment="Left" Margin="20,337,0,0" VerticalAlignment="Top" Width="151"/>
+        <DataGrid ItemsSource="{Binding Path= GuestReviews}" Margin="20,372,20,0" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Reservation.Guest.Name}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Last Name" Binding="{Binding Reservation.Guest.LastName}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Cleanliness" Binding="{Binding Cleanliness}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Rules Following" Binding="{Binding RulesFollowing}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Comment" Binding="{Binding Comment}" Width="100"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </Grid>
+</Page>

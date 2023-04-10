@@ -30,6 +30,8 @@
 
     <None Remove="Resources\Images\forum.png" />
 
+    <None Remove="Resources\Images\greenCorect.png" />
+
 
     
     
@@ -41,6 +43,7 @@
     <None Remove="Resources\Images\plus.png" />
     <None Remove="Resources\Images\profile.png" />
     <None Remove="Resources\Images\red.jpg" />
+    <None Remove="Resources\Images\redIncorect.png" />
     <None Remove="Resources\Images\request.png" />
     <None Remove="Resources\Images\search.png" />
     <None Remove="Resources\Images\signout.png" />
@@ -145,6 +148,9 @@
     <Content Include="Resources\Images\forum.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Images\greenCorect.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
 
     <Content Include="Resources\Images\help.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -154,6 +160,9 @@
     </Content>
     <Content Include="Resources\Images\icons8-christmas-star-96.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\redIncorect.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\request.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -232,6 +241,10 @@
     <Content Include="Resources\Images\voucher.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="WPF\Views\Guest2Views\" />
   </ItemGroup>
 
 </Project>

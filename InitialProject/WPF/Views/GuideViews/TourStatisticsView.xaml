@@ -87,15 +87,15 @@
                     </DataGridColumn.HeaderStyle>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Name="cancelButton" Content="DETAILS" TextElement.FontWeight="ExtraBold" Click="ViewDetails_Click"/>
+                            <Button Name="cancelButton" Content="DETAILS" TextElement.FontWeight="ExtraBold" Command="{Binding Path=DataContext.ViewDetailsCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
 
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="The most visited tour" HorizontalAlignment="Left" Margin="829,225,0,0" VerticalAlignment="Top" Height="77" Width="179" Click="MostVisited_Click"/>
-        <Button Content="The most visited for chosen year" HorizontalAlignment="Left" Margin="829,475,0,0" VerticalAlignment="Top" Height="76" Width="179" Click="MostVisitedForYear_Click"/>
+        <Button Content="The most visited tour" HorizontalAlignment="Left" Margin="829,225,0,0" VerticalAlignment="Top" Height="77" Width="179" Command="{Binding MostVisitedCommand}"/>
+        <Button Content="The most visited for chosen year" HorizontalAlignment="Left" Margin="829,475,0,0" VerticalAlignment="Top" Height="76" Width="179" Command="{Binding MostVisitedForYearCommand}"/>
         <TextBox x:Name="ChosenYear" Margin="829,440,92,0" TextWrapping="Wrap"  VerticalAlignment="Top" Text="{Binding Path=Year,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}" Height="30"/>
 
     </Grid>

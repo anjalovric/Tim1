@@ -4,6 +4,8 @@ using System.Linq;
 using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
+using InitialProject.Domain.RepositoryInterfaces;
+using InitialProject.Domain;
 using InitialProject.Model;
 using InitialProject.Repository;
 
@@ -11,11 +13,11 @@ namespace InitialProject.Service
 {
     public class OwnerReviewService
     {
-        private OwnerReviewRepository ownerReviewRepository;
+        private IOwnerReviewRepository ownerReviewRepository = Injector.CreateInstance<IOwnerReviewRepository>();
         private List<OwnerReview> ownerReviews;
         public OwnerReviewService()
         {
-            ownerReviewRepository = new OwnerReviewRepository();
+            //ownerReviewRepository = new OwnerReviewRepository();
             ownerReviews = new List<OwnerReview>(ownerReviewRepository.GetAll());
             MakeReservations();
         }

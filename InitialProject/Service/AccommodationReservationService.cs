@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows.Documents;
+using InitialProject.Domain.RepositoryInterfaces;
+using InitialProject.Domain;
 using InitialProject.Model;
 using InitialProject.Repository;
 using static NPOI.HSSF.Util.HSSFColor;
 
 namespace InitialProject.Service
-{
+{//sta sa cancelled repoz.koji pravim i ovdje? da li da bude injector?
     public class AccommodationReservationService
     {
         private Guest1 guest1;
@@ -19,10 +22,11 @@ namespace InitialProject.Service
         private OwnerService ownerService;
         public ObservableCollection<AccommodationReservation> CompletedReservations;
         public ObservableCollection<AccommodationReservation> NotCompletedReservations;
-        private AccommodationReservationRepository accommodationReservationRepository;
+        private IAccommodationReservationRepository accommodationReservationRepository = Injector.CreateInstance<IAccommodationReservationRepository>();
+
         public AccommodationReservationService()
         {
-            accommodationReservationRepository = new AccommodationReservationRepository();
+            //accommodationReservationRepository = new AccommodationReservationRepository();
             accommodationService = new AccommodationService();
             ownerService = new OwnerService();
             locationService = new LocationService();
@@ -102,7 +106,10 @@ namespace InitialProject.Service
             {
                 reservation.Accommodation.Location = locationService.GetById(reservation.Accommodation.Location.Id);
             }
+            
         }
+        
+        
         private void SetAccommodationTypes()
         {
             List<AccommodationType> types = accommodationTypeService.GetAll();
@@ -163,6 +170,26 @@ namespace InitialProject.Service
                     isAvailable = isAvailable && !(date > reservation.Arrival && date < reservation.Departure);
             }
             return isAvailable;
+        }
+
+        public List<AccommodationReservation> GetAllForReviewByOwner(Owner owner)
+        {
+            List<AccommodationReservation> reservationsToReview = new List<AccommodationReservation>();
+            GuestReviewService guestReviewService = new GuestReviewService();
+
+            if (storedReservations.Count > 0)
+            {
+                foreach (AccommodationReservation reservation in storedReservations)
+                {
+                    bool stayedLessThan5DaysAgo = (reservation.Departure.Date < DateTime.Now.Date) && (DateTime.Now.Date - reservation.Departure.Date).TotalDays <= 5;
+                    bool alreadyReviewed = guestReviewService.HasReview(reservation);
+                    bool isThisOwner = reservation.Accommodation.Owner.Id == owner.Id;
+
+                    if (stayedLessThan5DaysAgo && !alreadyReviewed && isThisOwner)
+                        reservationsToReview.Add(reservation);
+                }
+            }
+            return reservationsToReview;
         }
     }
 }

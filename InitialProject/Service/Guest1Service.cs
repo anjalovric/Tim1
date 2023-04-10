@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using InitialProject.Domain.RepositoryInterfaces;
+using InitialProject.Domain;
 using InitialProject.Model;
 using InitialProject.Repository;
 
@@ -10,12 +12,12 @@ namespace InitialProject.Service
 {
     public class Guest1Service
     {
-        private Guest1Repository guest1Repository;
+        private IGuest1Repository guest1Repository = Injector.CreateInstance<IGuest1Repository>();
         private LocationService locationService;
 
         public Guest1Service()
         {
-            guest1Repository = new Guest1Repository();
+            //guest1Repository = new Guest1Repository();
             locationService = new LocationService();
         }
 

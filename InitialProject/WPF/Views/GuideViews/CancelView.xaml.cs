@@ -26,23 +26,12 @@ namespace InitialProject.WPF.Views.GuideViews
     /// </summary>
     public partial class CancelView : Page
     {
-
         public CancelViewModel cancelViewModel;
         public CancelView(User guide)
         {
             InitializeComponent();
             cancelViewModel = new CancelViewModel(guide,this.TourListDataGrid);
-            DataContext = cancelViewModel;
-         
+            DataContext = cancelViewModel;       
         }
-
-        private void Cancel_Click(object sender, RoutedEventArgs e)
-        {
-            cancelViewModel.CancelTour();
- 
-        }
-
- 
-
     }
 }

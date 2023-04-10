@@ -43,6 +43,7 @@ namespace InitialProject.WPF.ViewModels
         private GuideService guideService=new GuideService();
   
         private DataGrid TourListDataGrid;
+        public RelayCommand CancelCommand { get; set; }
 
         public CancelViewModel(User guide,DataGrid tourListDataGrid)
         {
@@ -52,6 +53,11 @@ namespace InitialProject.WPF.ViewModels
             tourInstanceService = new TourInstanceService();
             Guide loggdedGuide=guideService.GetByUsername(guide.Username);
             MakeCancelableTourList(loggdedGuide);
+            CancelCommand = new RelayCommand(CancelExecuted, CanExecute);
+        }
+        private bool CanExecute(object sender)
+        {
+            return true;
         }
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -62,7 +68,7 @@ namespace InitialProject.WPF.ViewModels
         {
             tourInstances = new ObservableCollection<TourInstance>(tourInstanceService.FindCancelableTours(guide));
         }
-        public void CancelTour()
+        public void CancelExecuted(object sender)
         {
             TourInstance currentTourInstance = (TourInstance)TourListDataGrid.CurrentItem;
             tourInstanceService.CancelTourInstance(currentTourInstance, TourInstances, tourInstanceGuide);

@@ -30,8 +30,16 @@ namespace InitialProject.WPF.Views.Guest1Views
             reschedulingAccommodationReservationFormViewModel = new ReschedulingAccommodationReservationFormViewModel(SelectedNotCompletedReservation);
             this.DataContext = reschedulingAccommodationReservationFormViewModel; 
             
+            
+        }
+        protected override void OnPreviewMouseUp(MouseButtonEventArgs e)  //gdje cu s njom?
+        {
+            base.OnPreviewMouseUp(e);
+            if (Mouse.Captured is CalendarItem)
+            {
+                Mouse.Capture(null);
+            }
         }
 
-       
     }
 }

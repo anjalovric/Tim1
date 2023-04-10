@@ -1,5 +1,7 @@
 ﻿using InitialProject.Model;
 using InitialProject.Service;
+using InitialProject.WPF.Views.GuideViews;
+using NPOI.Util;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -19,55 +21,104 @@ namespace InitialProject.WPF.ViewModels
     {
         public ObservableCollection<CheckPoint> AllPoints { get; set; }
         public ObservableCollection<CheckPoint> CurrentPoint { get; set; }
-
+        public ObservableCollection<TourInstance> Tours { get; set; }
+        public ObservableCollection<TourInstance> FinishedInstances { get; set; }
         private int orderCounter = 0;
         private TourInstance selected;
-        private Button Next;
-        private Button Finish;
-        private StackPanel FinishMessage;
-
-        private ObservableCollection<TourInstance> tour;
-        public ObservableCollection<TourInstance> Tours
-        {
-            get => tour;
-            set
-            {
-                if (value != tour)
-                {
-                    tour = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-        private ObservableCollection<TourInstance> finishedInstances;
-        public ObservableCollection<TourInstance> FinishedInstances
-        {
-            get => finishedInstances;
-            set
-            {
-                if (value != finishedInstances)
-                {
-                    finishedInstances = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
         private TourInstanceService tourInstanceService = new TourInstanceService();
         private CheckPointService checkPointService = new CheckPointService();
         private AlertGuest2Service alertGuest2Service = new AlertGuest2Service();
-   
-        public ActiveInstanceViewModel(TourInstance active, ObservableCollection<TourInstance> tours, ObservableCollection<TourInstance> finishedInstances,Button next,Button finish,StackPanel finishMessage)
+
+        public RelayCommand NextPointCommand { get; set; }
+        public RelayCommand FinishCommand { get; set; }
+
+        public RelayCommand HomeCommand { get; set; }
+
+        private string toast;
+        public string Toast
+        {
+            get => toast;
+            set
+            {
+                if (value != toast)
+                {
+                    toast = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private string title;
+        public string Title
+        {
+            get => title;
+            set
+            {
+                if (value != title)
+                {
+                    title = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private bool nextEnabled;
+        public bool NextEnabled
+        {
+            get => nextEnabled;
+            set
+            {
+                if (value != nextEnabled)
+                {
+                    nextEnabled = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private bool finishEnabled;
+        public bool FinishEnabled
+        {
+            get => finishEnabled;
+            set
+            {
+                if (value != finishEnabled)
+                {
+                    finishEnabled = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private HomeView homeView;
+        public ActiveInstanceViewModel(TourInstance active, ObservableCollection<TourInstance> tours, ObservableCollection<TourInstance> finishedInstances,HomeView HomeView)
         {
             selected = active;
             FinishedInstances = finishedInstances;
             Tours = tours;
-            Next= next;
-            Finish= finish;
-            FinishMessage = finishMessage;
+            homeView= HomeView;
             AllPoints = new ObservableCollection<CheckPoint>();
             CurrentPoint = new ObservableCollection<CheckPoint>();
             checkPointService.FindPointsForSelectedInstance(active, AllPoints);
+            SetStartState();
+
+        }
+        private void SetStartState()
+        {
+            Toast = "Hidden";
+            TourInstanceService tourInstanceService = new TourInstanceService();
+            tourInstanceService.FillTour(selected);
+            Title = selected.Tour.Name + ", " + selected.Date + ", " + selected.StartClock;
+            NextEnabled = true;
+            FinishEnabled = true;
             FindLastCheckedPoint();
+            MakeComands();
+        }
+        private void MakeComands()
+        {
+            NextPointCommand = new RelayCommand(NextPointExecuted, CanExecute);
+            FinishCommand=new RelayCommand(FinishTourExecuted, CanExecute);
+            HomeCommand=new RelayCommand (HomeExecuted, CanExecute);
+        }
+        private bool CanExecute(object sender)
+        {
+            return true;
         }
         private void FindLastCheckedPoint()
         {
@@ -81,12 +132,14 @@ namespace InitialProject.WPF.ViewModels
                 }
             }
         }
-
-        public void FinishTour()
+        public void FinishTourExecuted(object sender)
         {
             FinishInstance();
         }
-
+        public void HomeExecuted(object sender)
+        {
+            Application.Current.Windows.OfType<GuideWindow>().FirstOrDefault().Main.Content = homeView;
+        }
         private void FinishInstance()
         {
             TourInstance finished = tourInstanceService.SetFinishStatus(selected);
@@ -94,11 +147,10 @@ namespace InitialProject.WPF.ViewModels
             CurrentPoint[0].Checked = true;
 
             FindActive(finished);
-            Finish.IsEnabled = false;
-            Next.IsEnabled = false;
-            FinishMessage.Visibility = Visibility.Visible;
+            FinishEnabled = false;
+            NextEnabled = false;
+            Toast = "Visible";
         }
-
         private void FindActive(TourInstance selected)
         {
             foreach (TourInstance instance in Tours)
@@ -110,7 +162,6 @@ namespace InitialProject.WPF.ViewModels
                 }
             }
         }
-
         private void ChangeCurrentPointToNextState()
         {
             List<CheckPoint> points = AllPoints.ToList();
@@ -119,7 +170,7 @@ namespace InitialProject.WPF.ViewModels
             int nextOrder = orderCounter + 1;
             CurrentPoint.Add(points.Find(n => n.Order == nextOrder));
         }
-        public void NextPoint()
+        public void NextPointExecuted(object sender)
         {
             ChangeCurrentPointToNextState();
 
@@ -127,7 +178,7 @@ namespace InitialProject.WPF.ViewModels
 
             if (orderCounter == AllPoints.ToList().Count)
             {
-                Next.IsEnabled = false;
+                NextEnabled = false;
                 FinishInstance();
             }
 

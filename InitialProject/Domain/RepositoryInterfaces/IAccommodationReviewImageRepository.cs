@@ -13,5 +13,8 @@ namespace InitialProject.Domain.RepositoryInterfaces
         public void Add(AccommodationReviewImage accommodationReviewImage);
 
         public void Delete(AccommodationReviewImage accommodationReviewImage);
+        public List<AccommodationReviewImage> GetAll();
+        public int NextId();
+        public AccommodationReviewImage GetById(int id);
     }
 }

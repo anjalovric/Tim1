@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using InitialProject.Domain.RepositoryInterfaces;
+using InitialProject.Domain;
 using InitialProject.Model;
 using InitialProject.Repository;
 
@@ -10,11 +12,11 @@ namespace InitialProject.Service
 {
     internal class OwnerService
     {
-        private OwnerRepository ownerRepository;
+        private IOwnerRepository ownerRepository = Injector.CreateInstance<IOwnerRepository>();
         private List<Owner> owners;
         public OwnerService()
         {
-            ownerRepository = new OwnerRepository();
+            //ownerRepository = new OwnerRepository();
             owners = ownerRepository.GetAll();
         }
 

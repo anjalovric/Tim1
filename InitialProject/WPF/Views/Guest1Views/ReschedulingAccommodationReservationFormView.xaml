@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
         Title="ReschedulingAccommodationReservationForm" Height="522" Width="660" WindowStartupLocation="CenterScreen">
+    
     <Grid>
         <Label FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top" Height="43" Width="372" Margin="0,20,0,0">CHANGING RESERVATION DATE</Label>
         <Label FontSize="18" HorizontalAlignment="Left" Margin="160,0,0,300" Height="40" Width="110">Arrival date:</Label>

@@ -47,5 +47,10 @@ namespace InitialProject.Repository
         {
             return _reviews;
         }
+        public GuestReview GetById(int id)
+        {
+            return _reviews.Find(n => n.Id == id);
+           
+        }
     }
 }

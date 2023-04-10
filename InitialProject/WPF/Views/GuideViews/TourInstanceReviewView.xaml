@@ -12,17 +12,24 @@
         <DataGrid x:Name="TourListDataGrid" SelectedItem="{Binding Path=Selected}" HorizontalAlignment="Left" Height="470" Margin="59,128,0,0" VerticalAlignment="Top" Width="967" IsReadOnly="True" ItemsSource="{Binding Path=Reviews}" AutoGenerateColumns="False">
 
             <DataGrid.Columns>
-                <DataGridTemplateColumn Width="80">
+                <DataGridTemplateColumn Width="80" >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Image Source="{Binding TourInstance.CoverBitmap}" Width="100" Height="40" VerticalAlignment="Top" Visibility="Visible"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Width="80">
+                <DataGridTemplateColumn Width="80" Header="Validity">
+                    <DataGridColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+
+                            <Setter Property="FontWeight" Value="Bold"/>
+
+                        </Style>
+                    </DataGridColumn.HeaderStyle>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Image Source="{Binding ValidationImage}" Width="100" Height="40" VerticalAlignment="Top" Visibility="Visible"/>
+                            <Image Source="{Binding ValidationImage,UpdateSourceTrigger=PropertyChanged}" Width="100" Height="40" VerticalAlignment="Top" Visibility="Visible"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -71,7 +78,7 @@
                         </Style>
                     </DataGridColumn.HeaderStyle>
                 </DataGridTextColumn>
-                
+
                 <DataGridTextColumn Header="Start date" Binding="{Binding TourInstance.Date}" Width="100">
                     <DataGridColumn.HeaderStyle>
                         <Style TargetType="DataGridColumnHeader">
@@ -91,13 +98,14 @@
                     </DataGridColumn.HeaderStyle>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Name="cancelButton" Content="REVIEW" TextElement.FontWeight="ExtraBold" Click="Review_Click" />
+                            <Button Name="cancelButton" Content="REVIEW" TextElement.FontWeight="ExtraBold" Command="{Binding Path=DataContext.ViewReviewCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
 
             </DataGrid.Columns>
         </DataGrid>
+        <Label Content="Reviews" HorizontalAlignment="Left" Margin="492,40,0,0" FontSize="28" FontWeight="Bold" VerticalAlignment="Top" Width="254" Height="61"/>
 
 
     </Grid>

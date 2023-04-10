@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using InitialProject.Domain.RepositoryInterfaces;
+using InitialProject.Domain;
 using InitialProject.Model;
 using InitialProject.Repository;
 
@@ -6,13 +8,14 @@ namespace InitialProject.Service
 {
     public class GuestReviewService
     {
-        private GuestReviewRepository guestReviewRepository;
+        private IGuestReviewRepository guestReviewRepository = Injector.CreateInstance<IGuestReviewRepository>();
         private List<GuestReview> guestReviews;
 
         public GuestReviewService()
         {
-            guestReviewRepository = new GuestReviewRepository();
+            //guestReviewRepository = new GuestReviewRepository();
             guestReviews = new List<GuestReview>(guestReviewRepository.GetAll());
+            MakeReservations();
         }
 
         public bool IsGuestReviewed(AccommodationReservation accommodationReservation)
@@ -34,6 +37,27 @@ namespace InitialProject.Service
                     review.Reservation = ownerReservation;
                 }
             }
+        }
+
+        public bool HasReview(AccommodationReservation reservation)
+        {
+            return guestReviewRepository.HasReview(reservation);
+        }
+        public List<GuestReview> GetAllByOwner(Owner owner)
+        {
+            List<GuestReview> reviewsByOwner = new List<GuestReview>();
+
+            foreach (GuestReview review in guestReviews)
+            {
+                if (review.Reservation != null && review.Reservation.Accommodation.Owner.Id == owner.Id)
+                    reviewsByOwner.Add(review);
+            }
+            return reviewsByOwner;
+        }
+
+        public void Save(GuestReview guestReview)
+        {
+            guestReviewRepository.Save(guestReview);
         }
     }
 }

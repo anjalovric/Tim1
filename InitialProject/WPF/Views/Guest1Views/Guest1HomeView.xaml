@@ -39,7 +39,7 @@
                     <TextBlock Text="FORUM" Margin="-7" FontSize="20" TextAlignment="Center" Width="162"/>
                 </MenuItem.Header>
             </MenuItem>
-            <MenuItem x:Name="NotificationsList" Width="115" Click="NotificationsMenuItem_Click" FontSize="16">
+            <MenuItem x:Name="NotificationsList" Width="115" Command="{Binding NotificationsCommand}" ItemsSource="{Binding Path=StoredNotifications,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontSize="16">
                 <MenuItem.Header>
                     <Image Source="/Resources/Images/bell.png" Margin="23,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Height="48" Width="55"/>
                 </MenuItem.Header>

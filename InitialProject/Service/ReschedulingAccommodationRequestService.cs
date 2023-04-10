@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using InitialProject.Domain.RepositoryInterfaces;
+using InitialProject.Domain;
 using InitialProject.Model;
 using InitialProject.Repository;
 
@@ -6,11 +8,11 @@ namespace InitialProject.Service
 {
     public class ReschedulingAccommodationRequestService
     {
-        private ReschedulingAccommodationRequestRepository requestRepository;
+        private IReschedulingAccommodationRequestRepository requestRepository = Injector.CreateInstance<IReschedulingAccommodationRequestRepository>();
         private List<ReschedulingAccommodationRequest> requests;
         public ReschedulingAccommodationRequestService()
         {
-            requestRepository = new ReschedulingAccommodationRequestRepository();
+            //requestRepository = new ReschedulingAccommodationRequestRepository();
             requests = new List<ReschedulingAccommodationRequest>(requestRepository.GetAll());
             SetReservations();
         }

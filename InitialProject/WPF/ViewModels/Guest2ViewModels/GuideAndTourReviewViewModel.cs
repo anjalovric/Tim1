@@ -1,4 +1,4 @@
-﻿
+﻿using DotLiquid.Tags;
 using InitialProject.Domain.Model;
 using InitialProject.Model;
 using InitialProject.Repository;
@@ -7,139 +7,157 @@ using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.Xml;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using SixLabors.ImageSharp;
+using Image = System.Windows.Controls.Image;
+using InitialProject.WPF.Views.Guest2Views;
 
-namespace InitialProject.View
+namespace InitialProject.WPF.ViewModels.Guest2ViewModels
 {
-    /// <summary>
-    /// Interaction logic for RateTourAndGuide.xaml
-    /// </summary>
-    public partial class GuideAndTourReviewForm : Window
+    public class GuideAndTourReviewViewModel
     {
         private GuideAndTourReviewRepository guideAndTourReviewRepository;
+        public RelayCommand Language_Increment_Command { get; set; }
+        public RelayCommand Knowledge_Increment_Command { get; set; }
+        public RelayCommand Facts_Increment_Command { get; set; }
+        public RelayCommand Language_Decrement_Command { get; set; }
+        public RelayCommand Knowledge_Decrement_Command { get; set; }
+        public RelayCommand UploadImageCommand { get; set; }
+        public RelayCommand ConfirmCommand { get; set; }
+        public RelayCommand DeleteCommand { get; set; }
+        public RelayCommand NextCommand { get; set; }
+        public RelayCommand BackCommand { get; set; }
+        public RelayCommand Facts_Decrement_Command { get; set; }
+        public RelayCommand DeletePhotoCommand { get; set; }
+        public RelayCommand CancelCommand { get; set; }
         private TourReviewImageService tourReviewImageService;
         private String Comment;
         private Guest2 guest2;
         private TourInstance CurrentTourInstance;
-        public int Language;
         private List<TourReviewImage> images;
         private int reviewId;
         public Uri relativeUri { get; set; }
-        public int InterestingFacts;
-        public int Knowledge;
         public TourReviewImage tourReviewImage;
-        public GuideAndTourReviewForm(TourInstance tourInstance,Guest2 guest2)
+        private TextBlock knowledge;
+        private TextBlock language;
+        private TextBlock interestingFacts;
+        private Image imagePicture;
+        private TextBox comment;
+        public GuideAndTourReviewViewModel(TourInstance tourInstance, Guest2 guest2, TextBlock knowledge,TextBlock language,TextBlock interestingFacts,Image imagePicture,TextBox comment)
         {
-            InitializeComponent();
             reviewId = -1;
             guideAndTourReviewRepository = new GuideAndTourReviewRepository();
             tourReviewImageService = new TourReviewImageService();
             this.guest2 = guest2;
             CurrentTourInstance = tourInstance;
             images = new List<TourReviewImage>();
-            Language = 1;
-            InterestingFacts = 1;
-            Knowledge = 1;
+            MakeCommands();
+            this.knowledge = knowledge;
+            this.language = language;
+            this.interestingFacts = interestingFacts;
+            this.imagePicture = imagePicture;
+            this.comment = comment;
             tourReviewImage = new TourReviewImage();
         }
-        private void ZnanjeInkrement_Click(object sender, RoutedEventArgs e)
+        private void MakeCommands()
         {
-            int changedNumber;
-            if (Convert.ToInt32(knowledge.Text) < 5)
-            {
-                changedNumber = Convert.ToInt32(knowledge.Text) + 1;
-                knowledge.Text = changedNumber.ToString();
-                Knowledge = Convert.ToInt32(knowledge.Text);
-            }
+            Language_Increment_Command = new RelayCommand(Language_Increment_Executed, CanExecute);
+            Knowledge_Increment_Command = new RelayCommand(Knowledge_Increment_Executed, CanExecute);
+            Facts_Increment_Command= new RelayCommand(Facts_Increment_Executed, CanExecute);
+            Language_Decrement_Command= new RelayCommand(Language_Decrement_Executed, CanExecute);
+            Knowledge_Decrement_Command=new RelayCommand(Knowledge_Decrement_Executed, CanExecute);
+            Facts_Decrement_Command = new RelayCommand(Facts_Decrement_Executed,CanExecute);
+            UploadImageCommand = new RelayCommand(UploadImage_Executed,CanExecute);
+            ConfirmCommand = new RelayCommand(Confirm_Executed,CanExecute);
+            DeleteCommand = new RelayCommand(Delete_Executed, CanExecute);
+            NextCommand = new RelayCommand(NextButton_Executed, CanExecute);
+            BackCommand = new RelayCommand(BackButton_Executed, CanExecute);
+            DeletePhotoCommand=new RelayCommand(DeletePhotoButton_Executed,CanExecute);
+            CancelCommand = new RelayCommand(Cancel_Executed, CanExecute);
         }
-        private void ZnanjeDekrement_Click(object sender, RoutedEventArgs e)
+        private bool CanExecute(object sender)
         {
-            int changedNumber;
-            if (Convert.ToInt32(knowledge.Text) > 1)
-            {
-                changedNumber = Convert.ToInt32(knowledge.Text) - 1;
-                knowledge.Text = changedNumber.ToString();
-                Knowledge = Convert.ToInt32(knowledge.Text);
-            }
+            return true;
         }
-        private void JezikInkrement_Click(object sender, RoutedEventArgs e)
+        private void Language_Increment_Executed(object sender)
         {
             int changedNumber;
             if (Convert.ToInt32(language.Text) < 5)
             {
                 changedNumber = Convert.ToInt32(language.Text) + 1;
                 language.Text = changedNumber.ToString();
-                Language = Convert.ToInt32(language.Text);
             }
         }
-        private void JezikDekrement_Click(object sender, RoutedEventArgs e)
+        private void Knowledge_Increment_Executed(object sender)
         {
             int changedNumber;
-            if (Convert.ToInt32(language.Text) > 1)
+            if (Convert.ToInt32(knowledge.Text) < 5)
             {
-                changedNumber = Convert.ToInt32(language.Text) - 1;
-                Language = Convert.ToInt32(language.Text);
+                changedNumber = Convert.ToInt32(knowledge.Text) + 1;
+                knowledge.Text = changedNumber.ToString();
             }
         }
-        private void ZanimljivostiInkrement_Click(object sender, RoutedEventArgs e)
+        private void Facts_Increment_Executed(object sender)
         {
             int changedNumber;
             if (Convert.ToInt32(interestingFacts.Text) < 5)
             {
                 changedNumber = Convert.ToInt32(interestingFacts.Text) + 1;
                 interestingFacts.Text = changedNumber.ToString();
-                InterestingFacts = Convert.ToInt32(interestingFacts.Text);
             }
         }
-        private void ZanimljivostiDekrement_Click(object sender, RoutedEventArgs e)
+        private void Language_Decrement_Executed(object sender)
+        {
+            int changedNumber;
+            if (Convert.ToInt32(language.Text) > 1)
+            {
+                changedNumber = Convert.ToInt32(language.Text) - 1;
+                language.Text = changedNumber.ToString();
+            }
+        }
+        private void Knowledge_Decrement_Executed(object sender)
+        {
+            int changedNumber;
+            if (Convert.ToInt32(knowledge.Text) > 1)
+            {
+                changedNumber = Convert.ToInt32(knowledge.Text) - 1;
+                knowledge.Text = changedNumber.ToString();
+            }
+        }
+        private void Facts_Decrement_Executed(object sender)
         {
             int changedNumber;
             if (Convert.ToInt32(interestingFacts.Text) > 1)
             {
                 changedNumber = Convert.ToInt32(interestingFacts.Text) - 1;
                 interestingFacts.Text = changedNumber.ToString();
-                InterestingFacts = Convert.ToInt32(interestingFacts.Text);
             }
         }
-        private void Rate_Click(object sender, RoutedEventArgs e)
+        private void Confirm_Executed(object sender)
         {
-            if (guideAndTourReviewRepository.HasReview(CurrentTourInstance))
-            {
-                MessageBox.Show("This reservation is already reviewed.");
-                this.Close();
-            }
-            else
+            if (IsImageUploadValid())
             {
                 Comment = comment.Text;
-
-                GuideAndTourReview guideAndTourReview = new GuideAndTourReview(CurrentTourInstance.Guide.Id, guest2, CurrentTourInstance, Language, InterestingFacts, Knowledge, Comment); //trebace se lista proslijedjivati
-
+                GuideAndTourReview guideAndTourReview = new GuideAndTourReview(CurrentTourInstance.Guide.Id, guest2, CurrentTourInstance, Convert.ToInt32(language.Text), Convert.ToInt32(interestingFacts.Text), Convert.ToInt32(knowledge.Text), Comment); //trebace se lista proslijedjivati
                 guideAndTourReviewRepository.Save(guideAndTourReview);
                 StoreImages();
-                foreach(TourReviewImage image in images)
+                foreach (TourReviewImage image in images)
                 {
                     if (image.GuideAndTourReviewId == -1)
                     {
-                        //image.GuideAndTourReviewId = guideAndTourReview.Id;
-                        tourReviewImageService.Update(image,guideAndTourReview.Id);
-                    } 
+                        tourReviewImageService.Update(image, guideAndTourReview.Id);
+                    }
                 }
-                this.Close();
+                Application.Current.Windows.OfType<GuideAndTourReviewForm>().FirstOrDefault().Close();
             }
-        }
-        
+            else
+                MessageBox.Show("You must upload at least one photo!");
 
+        }
         private void StoreImages()
         {
             foreach (TourReviewImage image in images)
@@ -147,7 +165,7 @@ namespace InitialProject.View
                 tourReviewImageService.Save(image);
             }
         }
-        private void DeletePhotoButton_Click(object sender, RoutedEventArgs e)
+        private void DeletePhotoButton_Executed(object sender)
         {
             if (images.Count != 0)
             {
@@ -155,14 +173,13 @@ namespace InitialProject.View
                 {
                     if (imagePicture.Source.ToString().Contains(images[i].RelativeUri))
                     {
-                        TourReviewImage image = images[i];    
+                        TourReviewImage image = images[i];
                         images.Remove(image);
                         RemoveImage(i);
                     }
                 }
             }
         }
-
         private bool IsImageUploadValid()
         {
             if (images.Count >= 1)
@@ -171,41 +188,38 @@ namespace InitialProject.View
             }
             else
             {
-
                 return false;
             }
         }
 
-        private void Cancel_Click(object sender, RoutedEventArgs e)
+        private void Cancel_Executed(object sender)
         {
-            this.Close();
+            Application.Current.Windows.OfType<GuideAndTourReviewForm>().FirstOrDefault().Close();
         }
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void UploadImage_Executed(object sender)
         {
-            OpenFileDialog openFileDialog=new OpenFileDialog();
+            OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Image files|*.bmp;*.jpg;*.png";
             openFileDialog.FilterIndex = 1;
             if (openFileDialog.ShowDialog() == true)
             {
-                Uri resource=new Uri(openFileDialog.FileName);
+                Uri resource = new Uri(openFileDialog.FileName);
                 String absolutePath = resource.ToString();
                 int relativeIndex = absolutePath.IndexOf("Resources");
                 String relative = absolutePath.Substring(relativeIndex);
-                relativeUri = new Uri("/"+relative,UriKind.Relative);
+                relativeUri = new Uri("/" + relative, UriKind.Relative);
                 BitmapImage bitmapImage = new BitmapImage(relativeUri);
                 bitmapImage.UriSource = relativeUri;
-                imagePicture.Source = new BitmapImage(new Uri("/"+relative, UriKind.Relative));
+                imagePicture.Source = new BitmapImage(new Uri("/" + relative, UriKind.Relative));
                 tourReviewImage = new TourReviewImage(reviewId, relative);
                 images.Add(tourReviewImage);
             }
-
         }
-
-        private void Delete_Click(object sender, RoutedEventArgs e)
+        private void Delete_Executed(object sender)
         {
             comment.Text = "";
         }
-        private void NextButton_Click(object sender, RoutedEventArgs e)
+        private void NextButton_Executed(object sender)
         {
             for (int i = 0; i < images.Count; i++)
             {
@@ -224,11 +238,9 @@ namespace InitialProject.View
                         break;
                     }
                 }
-
             }
         }
-
-        private void BackButton_Click(object sender, RoutedEventArgs e)
+        private void BackButton_Executed(object sender)
         {
             for (int i = 0; i < images.Count; i++)
             {
@@ -247,7 +259,6 @@ namespace InitialProject.View
                         break;
                     }
                 }
-
             }
         }
         private void RemoveImage(int i)

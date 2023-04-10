@@ -57,5 +57,11 @@ namespace InitialProject.Repository
             _owners.Insert(index, owner); 
             _serializer.ToCSV(FilePath, _owners);
         }
+        public void Save(Owner owner)
+        {
+            owner.Id = NextId();
+            _owners.Add(owner);
+            _serializer.ToCSV(FilePath, _owners);
+        }
     }
 }

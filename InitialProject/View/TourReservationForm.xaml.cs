@@ -89,7 +89,7 @@ namespace InitialProject.View
             capacityOfThisTour = currentTourInstance.Tour.MaxGuests;
             voucherService = new VoucherService();
             vouchers = new ObservableCollection<Voucher>();
-            Vouchers = new ObservableCollection<Voucher>(voucherService.FindAllVouchers(vouchers, guest2));
+            Vouchers = new ObservableCollection<Voucher>(voucherService.FindAllVouchers(guest2));
         }
         public event PropertyChangedEventHandler PropertyChanged;
 
