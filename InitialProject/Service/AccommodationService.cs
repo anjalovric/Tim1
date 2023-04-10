@@ -65,32 +65,45 @@ namespace InitialProject.Service
                 }
             }
         }
-            private void AddTypes()
-            {
-                AccommodationTypeService accommodationTypeService = new AccommodationTypeService();
-                List<AccommodationType> allTypes = accommodationTypeService.GetAll();
-                foreach(Accommodation accommodation in accommodations)
-                {
-                    AccommodationType accommodationType = allTypes.Find(n => n.Id == accommodation.Type.Id);
-                    if(accommodationType != null)
-                    {
-                        accommodation.Type = accommodationType;
-                    }
-                }
-            }
-            public ObservableCollection<Accommodation> GetAllByOwner(Owner owner)
-            {
-                ObservableCollection<Accommodation> accommodationsByOwner = new ObservableCollection<Accommodation>();
 
-                foreach (Accommodation accommodation in accommodations)
+ 
+
+        private void AddTypes()
+        {
+            AccommodationTypeService accommodationTypeService = new AccommodationTypeService();
+            List<AccommodationType> allTypes = accommodationTypeService.GetAll();
+            foreach(Accommodation accommodation in accommodations)
+
+            {
+                AccommodationType accommodationType = allTypes.Find(n => n.Id == accommodation.Type.Id);
+                if(accommodationType != null)
                 {
-                    if (accommodation.Owner.Id == owner.Id)
-                    {
-                        accommodationsByOwner.Add(accommodation);
-                    }
+                    accommodation.Type = accommodationType;
                 }
-                return accommodationsByOwner;
             }
         }
+
+    
+
+        public ObservableCollection<Accommodation> GetAllByOwner(Owner owner)
+        {
+            ObservableCollection<Accommodation> accommodationsByOwner = new ObservableCollection<Accommodation>();
+
+            foreach (Accommodation accommodation in accommodations)
+            {
+                if (accommodation.Owner.Id == owner.Id)
+                {
+                    accommodation.CoverImage = GetCoverImage(accommodation);
+                    accommodationsByOwner.Add(accommodation);
+                }
+            }
+            return accommodationsByOwner;
+        }
+
+        private AccommodationImage GetCoverImage(Accommodation accommodation)
+        {
+            AccommodationImageService imageService = new AccommodationImageService();
+            return imageService.GetAll().Find(image => image.Id == accommodation.Id);
+        }
     }
-//44 linije
+}

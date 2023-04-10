@@ -21,6 +21,6 @@ namespace InitialProject.Domain.RepositoryInterfaces
 
         public TourReservation Save(TourReservation tourReservation);
 
-
+        public List<TourReservation> GetReservationsForTour(TourInstance selected);
     }
 }

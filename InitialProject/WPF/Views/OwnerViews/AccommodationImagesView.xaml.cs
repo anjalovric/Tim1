@@ -18,16 +18,14 @@ using InitialProject.WPF.ViewModels;
 namespace InitialProject.WPF.Views.OwnerViews
 {
     /// <summary>
-    /// Interaction logic for DecliningRequestView.xaml
+    /// Interaction logic for AccommodationImagesView.xaml
     /// </summary>
-    public partial class DecliningRequestView : Page
+    public partial class AccommodationImagesView : Page
     {
-        public DecliningRequestViewModel decliningRequestViewModel;
-        public DecliningRequestView(ReschedulingAccommodationRequest request)
+        public AccommodationImagesView(Accommodation accommodation)
         {
             InitializeComponent();
-            decliningRequestViewModel = new DecliningRequestViewModel(request);
-            DataContext = decliningRequestViewModel;
+            DataContext = new AccommodationImagesViewModel(accommodation);
         }
     }
 }

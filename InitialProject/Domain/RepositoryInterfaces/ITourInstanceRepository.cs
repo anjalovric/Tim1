@@ -24,5 +24,7 @@ namespace InitialProject.Domain.RepositoryInterfaces
 
         public TourInstance GetActive(Guide guide);
 
+        public void ActivateTour(TourInstance selected);
+
     }
 }

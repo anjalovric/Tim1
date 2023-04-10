@@ -25,28 +25,22 @@ namespace InitialProject.Service
         {
             return locationRepository.GetAll();
         }
-
         public Location Save(Location location)
         {
             return locationRepository.Save(location);
         }
-
-
         public void Delete(Location location)
         {
             locationRepository.Delete(location);
         }
-
         public Location Update(Location location)
         {
             return locationRepository.Update(location);
         }
-
         public int Add(Location location)
         {
             return locationRepository.Add(location);
         }
-
         public ObservableCollection<string> GetCitiesByCountry(string country)
         {
             ObservableCollection<string> cities = new ObservableCollection<string>();
@@ -84,8 +78,6 @@ namespace InitialProject.Service
         public Location GetById(int id)
         {
             return locationRepository.GetById(id);
-        }
-        
-        
+        }    
     }
 }

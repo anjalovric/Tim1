@@ -28,22 +28,6 @@ namespace InitialProject.Service
         {
             return tourRepository.GetAll();
         }
-
-        public Tour Save(Tour tour)
-        {
-
-            return tourRepository.Save(tour);
-        }
-
-        public void Delete(Tour tour)
-        {
-            tourRepository.Delete(tour);
-        }
-
-        public Tour Update(Tour tour)
-        {
-            return tourRepository.Update(tour);
-        }
         public void SetTourToTourInstance(List<TourInstance> tourInstances)
         {
             foreach (TourInstance tourInstance in tourInstances)

@@ -29,20 +29,5 @@ namespace InitialProject.WPF.Views
             ownerReviewViewModel = new OwnerReviewViewModel(ownerReview);
             DataContext = ownerReviewViewModel;
         }
-
-        private void ExitButton_Click(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = NavigationService.GoBack;
-        }
-
-        private void NextImageButton_Click(object sender, RoutedEventArgs e)
-        {
-            ownerReviewViewModel.GetNextImage();
-        }
-
-        private void PreviousImageButton_Click(object sender, RoutedEventArgs e)
-        {
-            ownerReviewViewModel.GetPreviousImage();
-        }
     }
 }

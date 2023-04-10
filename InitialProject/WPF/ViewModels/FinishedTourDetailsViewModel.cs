@@ -17,24 +17,19 @@ namespace InitialProject.WPF.ViewModels
     {
         public string With { get; set; }
         public string Without { get; set; } 
-
         public string Attendance { get; set; }
-
         public string Under { get; set; }
-
         public string Over { get;set; }
-
         public string Between { get; set; }
-
         public string Header { get; set; }
+
         TourInstance selectedInstance;
-        private TourDetailsService detailsService;
         public ObservableCollection<CheckPointInformation> CheckPointInformations { get; set; }
 
         public FinishedTourDetailsViewModel(TourInstance selected)
         {
             selectedInstance = selected;
-            detailsService = new TourDetailsService();
+            
             CheckPointInformations = new ObservableCollection<CheckPointInformation>();
 
             UnitReport(selected);
@@ -55,6 +50,7 @@ namespace InitialProject.WPF.ViewModels
 
         private void ComposeReport()
         {
+            TourDetailsService detailsService = new TourDetailsService();
             foreach (CheckPoint point in detailsService.GetInstancePoints(selectedInstance))
             {
                 CheckPointInformation pointInformation = new CheckPointInformation();
@@ -65,11 +61,9 @@ namespace InitialProject.WPF.ViewModels
 
             }
         }
-
-
         private void WriteVoucherPrecentacge(int selectedId)
         {
-
+            TourDetailsService detailsService=new TourDetailsService();
             if (detailsService.MakeWithVoucherPrecentage(selectedId) > 0)
                 With = detailsService.MakeWithVoucherPrecentage(selectedId).ToString("#.##") + " %";
             else
@@ -83,7 +77,8 @@ namespace InitialProject.WPF.ViewModels
 
         private void WriteAgePrecentacge(int selectedId)
         {
-            if(detailsService.MakeUnder18Precentage(selectedId)>0)
+            TourDetailsService detailsService = new TourDetailsService();
+            if (detailsService.MakeUnder18Precentage(selectedId)>0)
                 Under = detailsService.MakeUnder18Precentage(selectedId).ToString("#.##") + " %";
             else
                 Under = 0 + "%";
@@ -99,7 +94,7 @@ namespace InitialProject.WPF.ViewModels
 
         private void ShowGuestsOnPoint(int currentPointId, CheckPointInformation pointInformation)
         {
-
+            TourDetailsService detailsService=new TourDetailsService();
             foreach (AlertGuest2 alert in detailsService.alertGuest2Service.GetAll())
             {
                 if (alert.CheckPointId == currentPointId && alert.Availability && alert.InstanceId == selectedInstance.Id)
@@ -109,14 +104,10 @@ namespace InitialProject.WPF.ViewModels
                 }
             }
         }
-
-
-
         private void WriteAttendancePrecentacge(int selectedId)
         {
+            TourDetailsService detailsService = new TourDetailsService();
             Attendance = detailsService.MakeAttendancePrecentage(selectedId) + " %";
-        }
-
-       
+        }      
     }
 }

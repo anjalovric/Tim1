@@ -10,6 +10,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls.Primitives;
 
 namespace InitialProject.Service
 {
@@ -28,17 +29,6 @@ namespace InitialProject.Service
         {
             return tourInstancerepository.GetAll();
         }
-
-        public TourInstance Save(TourInstance tour)
-        {
-            return tourInstancerepository.Save(tour);
-        }
-
-        public void Delete(TourInstance tour)
-        {
-            tourInstancerepository.Delete(tour);
-        }
-
         public TourInstance Update(TourInstance tour)
         {
             return tourInstancerepository.Update(tour);
@@ -49,15 +39,12 @@ namespace InitialProject.Service
 
             FillWithTours(list);
             return list;
-
         }
-
         public List<TourInstance> GetInstancesLaterThan48hFromNow(Guide guide)
         {       
             return tourInstancerepository.GetInstancesLaterThan48hFromNow(guide);
 
         }
-
         public List<TourInstance> FindCancelableTours(Guide guide)
         {
             List<TourInstance> cancelableInstances = GetInstancesLaterThan48hFromNow(guide);
@@ -96,8 +83,7 @@ namespace InitialProject.Service
         }
 
         public List<TourInstance> GetFinishedInstancesForChoosenYear(int year,Guide guide)
-        {
-            
+        {   
             foreach (TourInstance instance in GetAll())
             {
                 if (instance.Finished && instance.StartDate.Year == year && instance.Guide.Id==guide.Id)
@@ -219,6 +205,22 @@ namespace InitialProject.Service
                     instance.Tour.Location= location;
                 }
             }
+        }
+
+        public TourInstance SetFinishStatus(TourInstance selected)
+        {
+            TourDetailsService tourDetailsService = new TourDetailsService();
+            selected.Finished = true;
+            selected.Active = false;
+            selected.Attendance = tourDetailsService.MakeAttendancePrecentage(selected.Id);
+            tourInstancerepository.Update(selected);
+            FillTour(selected);
+            return selected;
+        }
+
+        public void ActivateTour(TourInstance selected)
+        {
+            tourInstancerepository.ActivateTour(selected);
         }
     }
 }

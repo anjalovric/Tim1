@@ -57,8 +57,8 @@
                     </Border>
 
                     <TextBlock Grid.Row="5" Grid.Column="0" Text="{Binding Path=Availability}" ></TextBlock>
-                    <Button Name="DeclineButton" Content="Decline" Grid.Column="1" Grid.Row="5" Click="DeclineButton_Click"></Button>
-                    <Button Name="ApproveButton" Content="Approve" Grid.Column="3" Grid.Row="5" Click="ApproveButton_Click"></Button>
+                    <Button Command="{Binding DataContext.DeclineCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" Name="DeclineButton" Content="Decline" Grid.Column="1" Grid.Row="5"></Button>
+                    <Button Command="{Binding DataContext.ApproveCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" Name="ApproveButton" Content="Approve" Grid.Column="3" Grid.Row="5"></Button>
 
                 </Grid>
             </Border>

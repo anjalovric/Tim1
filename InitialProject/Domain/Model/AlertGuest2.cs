@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls.Primitives;
 using InitialProject.Serializer;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -23,6 +24,15 @@ namespace InitialProject.Model
         public bool Informed { get; set; }
 
         public AlertGuest2() { }
+        public AlertGuest2(int reservationId,int guest2Id,int currentPointId,int instanceId) 
+        {
+            Availability = false;
+            ReservationId = reservationId;
+            Guest2Id = guest2Id;
+            CheckPointId = currentPointId;
+            InstanceId = instanceId;
+            Informed = false;
+        }
 
         public string[] ToCSV()
         {
