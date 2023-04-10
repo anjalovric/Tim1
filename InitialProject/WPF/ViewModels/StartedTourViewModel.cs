@@ -27,6 +27,9 @@ namespace InitialProject.WPF.ViewModels
         private Button Finish;
         private StackPanel FinishMessage;
 
+        public RelayCommand NextCommand { get; set; }
+        public RelayCommand FinishCommand { get; set; }
+
         public StartedTourViewModel(TourInstance active, ObservableCollection<TourInstance> tours, ObservableCollection<TourInstance> finishedInstances, Button next, Button finish, StackPanel finishMessage) 
         {
             AllPoints = new ObservableCollection<CheckPoint>();
@@ -38,6 +41,16 @@ namespace InitialProject.WPF.ViewModels
             Finish = finish;
             FinishMessage = finishMessage;
             StartInstance();
+            MakeCommands();
+        }
+        private void MakeCommands()
+        {
+            NextCommand = new RelayCommand(NextExecuted, CanExecute);
+            FinishCommand=new RelayCommand(FinishExecuted, CanExecute);
+        }
+        private bool CanExecute(object sender)
+        {
+            return true;
         }
         private void StartInstance()
         {
@@ -58,7 +71,7 @@ namespace InitialProject.WPF.ViewModels
             }
         }
 
-        public void FinishTour()
+        public void FinishExecuted(object sender)
         {
             FinishInstance();
         }
@@ -87,7 +100,7 @@ namespace InitialProject.WPF.ViewModels
                 }
             }
         }
-        public void NextPoint()
+        public void NextExecuted(object sender)
         {
             CheckPointService checkPointService = new CheckPointService();
             AlertGuest2Service alertGuest2Service = new AlertGuest2Service();

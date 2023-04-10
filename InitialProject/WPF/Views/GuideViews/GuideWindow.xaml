@@ -12,22 +12,22 @@
 
                 <DockPanel  Width="500" HorizontalAlignment="Left">
                     <Menu DockPanel.Dock="Top" Width="500" Height="40" HorizontalAlignment="Left" Background="LightGray">
-                        <MenuItem Header="Home" Height="33" Width="100" FontSize="15" Click="Home_Click" >
+                        <MenuItem Header="Home" Height="33" Width="100" FontSize="15" Command="{Binding HomeCommand}" >
 
                         </MenuItem>
                         <MenuItem Header="Tours" Height="33" Width="100" FontSize="15" >
-                            <MenuItem Header="Add" Height="33" Width="150" FontSize="15" Click="Add_Click">
+                            <MenuItem Header="Add" Height="33" Width="150" FontSize="15" Command="{Binding AddCommand}">
 
                             </MenuItem>
-                            <MenuItem Header="Cancel" Height="33" Width="150" FontSize="15" Click="Cancel_Click" >
+                            <MenuItem Header="Cancel" Height="33" Width="150" FontSize="15" Command="{Binding CancelCommand}" >
 
                             </MenuItem>
-                            <MenuItem Header="Activated" Height="33" Width="150" FontSize="15" Click="Activated_Click" >
+                            <MenuItem Header="Activated" Height="33" Width="150" FontSize="15" Command="{Binding ActivatedCommand}" >
 
                             </MenuItem>
                         </MenuItem>
                         <MenuItem Header="Statistics" Height="33" Width="100" FontSize="15" >
-                            <MenuItem Header="Tours" Height="33" Width="150" FontSize="15" Click="TourStatitcs_Click">
+                            <MenuItem Header="Tours" Height="33" Width="150" FontSize="15" Command="{Binding TourStatisticsCommand}">
 
                             </MenuItem>
                             <MenuItem Header="Requests" Height="33" Width="150" FontSize="15"  >
@@ -39,7 +39,7 @@
                                 </MenuItem>
                             </MenuItem>
                         </MenuItem>
-                        <MenuItem Header="Reviews" Height="33" Width="100" FontSize="15" Click="Review_Click">
+                        <MenuItem Header="Reviews" Height="33" Width="100" FontSize="15" Command="{Binding ReviewCommand}">
 
                         </MenuItem>
                         <MenuItem Header="Requests" Height="33" Width="100" FontSize="15"  >
@@ -49,7 +49,7 @@
                 </DockPanel>
                 <DockPanel  Width="400" HorizontalAlignment="Right" Background="LightGray" >
                     <Menu DockPanel.Dock="Top" Width="150" Height="33" HorizontalAlignment="Right" Background="LightGray">
-                        <MenuItem  Height="33" Width="75" FontSize="15" Click="SignOut_Click" >
+                        <MenuItem  Height="33" Width="75" FontSize="15" Command="{Binding SignOutCommand}">
                             <MenuItem.Icon>
                                 <Image Source="/Resources/Images/signout.png" Width="60" Margin="1,-7,-45,-8"  />
                             </MenuItem.Icon>
