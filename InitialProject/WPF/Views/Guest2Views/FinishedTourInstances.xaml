@@ -16,7 +16,7 @@
                 <DataGridTemplateColumn x:Name="rate" Header="Rate" Width="0.9*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Name="rateButton" Content="Rate" Click="Rate_Click"/>
+                            <Button Name="rateButton" Content="Rate" Command="{Binding Path=DataContext.RateCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

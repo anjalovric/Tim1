@@ -1,4 +1,5 @@
 ﻿using InitialProject.Model;
+using InitialProject.WPF.ViewModels.Guest2ViewModels;
 using InitialProject.Service;
 using System;
 using System.Collections.Generic;
@@ -25,42 +26,12 @@ namespace InitialProject.WPF.Views.Guest2Views
     /// </summary>
     public partial class VoucherViewForm : UserControl
     {
-        private VoucherService voucherService;
-        private Model.Guest2 guest2;
-        private ObservableCollection<Voucher> vouchers;
-        public ObservableCollection<Voucher> Vouchers
-        {
-            get { return vouchers; }
-            set
-            {
-                if (value != vouchers)
-                    vouchers = value;
-                OnPropertyChanged("Vouchers");
-            }
-        }
-        private ObservableCollection<Voucher> voucher; 
+        private Model.Guest2 guest2; 
         public VoucherViewForm(Model.Guest2 guest)
         {
             InitializeComponent();
-            DataContext = this;
             this.guest2 = guest;
-            voucherService = new VoucherService();
-            voucher = new ObservableCollection<Voucher>();
-            Vouchers = new ObservableCollection<Voucher>(voucherService.FindAllVouchers(guest2));
-            VoucherValidity(Vouchers);
-        }
-        private void VoucherValidity(ObservableCollection<Voucher> Vouchers)
-        {
-            foreach (Voucher voucher in Vouchers)
-            {
-                voucher.CreateDate = voucher.CreateDate.AddYears(1);
-            }
-        }
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            DataContext = new VoucherViewModel(guest2);
         }
     }
 }

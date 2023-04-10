@@ -13,52 +13,30 @@
         <TextBlock x:Name="interestingFacts" Text="1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="290" TextAlignment="Center" Height="22" Background="#FFDFDCDC" Margin="534,175,0,0" />
         <TextBlock x:Name="language" Text="1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="290" TextAlignment="Center" Height="22" Background="#FFDFDCDC" Margin="534,124,0,0" />
         <TextBlock x:Name="knowledge" Text="1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="290" TextAlignment="Center" Height="22" Background="#FFDFDCDC" Margin="534,79,0,0" />
-        <Button x:Name="dekrementNumber1" Content="-" HorizontalAlignment="Left" Margin="493,175,0,0" VerticalAlignment="Top" Width="20" Click="ZanimljivostiDekrement_Click" Height="22"/>
-        <Button x:Name="inkrementNumber" Content="+" HorizontalAlignment="Left" Margin="850,175,0,0" VerticalAlignment="Top" Width="20" Click="ZanimljivostiInkrement_Click" RenderTransformOrigin="-1.284,0.612" Height="22"/>
-        <Button x:Name="inkrementNumber1" Content="+" HorizontalAlignment="Left" Margin="850,126,0,0" VerticalAlignment="Top" Width="20" Click="JezikInkrement_Click" RenderTransformOrigin="-1.284,0.612" Height="22"/>
-        <Button x:Name="inkrementNumber2" Content="+" HorizontalAlignment="Left" Margin="850,79,0,0" VerticalAlignment="Top" Width="20" Click="ZnanjeInkrement_Click" RenderTransformOrigin="-1.284,0.612" Height="22"/>
-        <Button x:Name="dekrementNumber" Content="-" HorizontalAlignment="Left" Margin="493,126,0,0" VerticalAlignment="Top" Width="20" Click="JezikDekrement_Click" Height="22"/>
-        <Button x:Name="dekrementNumber2" Content="-" HorizontalAlignment="Left" Margin="493,80,0,0" VerticalAlignment="Top" Width="20" Click="ZnanjeDekrement_Click" Height="22"/>
+        <Button x:Name="dekrementNumber1" Content="-" Command="{Binding Facts_Decrement_Command}" HorizontalAlignment="Left" Margin="493,175,0,0" VerticalAlignment="Top" Width="20" Height="22"/>
+        <Button x:Name="inkrementNumber" Content="+" Command="{Binding Facts_Increment_Command}" HorizontalAlignment="Left" Margin="850,175,0,0" VerticalAlignment="Top" Width="20" RenderTransformOrigin="-1.284,0.612" Height="22"/>
+        <Button x:Name="inkrementNumber1" Command="{Binding Language_Increment_Command}" Content="+" HorizontalAlignment="Left" Margin="850,126,0,0" VerticalAlignment="Top" Width="20" RenderTransformOrigin="-1.284,0.612" Height="22"/>
+        <Button x:Name="inkrementNumber2" Content="+" HorizontalAlignment="Left" Command="{Binding Knowledge_Increment_Command}" Margin="850,79,0,0" VerticalAlignment="Top" Width="20" RenderTransformOrigin="-1.284,0.612" Height="22"/>
+        <Button x:Name="dekrementNumber" Content="-" HorizontalAlignment="Left" Command="{Binding Language_Decrement_Command}" Margin="493,126,0,0" VerticalAlignment="Top" Width="20"  Height="22"/>
+        <Button x:Name="dekrementNumber2" Content="-" HorizontalAlignment="Left" Command="{Binding Knowledge_Decrement_Command}" Margin="493,80,0,0" VerticalAlignment="Top" Width="20"  Height="22"/>
         <Label Content="Comment" Margin="70,217,679,289"/>
         <Label Content="Photos" Margin="488,217,280,279"/>
         <TextBox x:Name="comment" TextWrapping="Wrap" Margin="70,262,443,76" />
-        <Button Content="Confirm" Margin="586,518,197,10" Click="Rate_Click" FontWeight="Bold"/>
-        <Button Content="Cancel" Margin="753,518,25,10" Click="Cancel_Click" FontWeight="Bold"/>
+        <Button Content="Confirm" Command="{Binding ConfirmCommand}" Margin="586,518,197,10" FontWeight="Bold"/>
+        <Button Content="Cancel" Command="{Binding CancelCommand}" Margin="753,518,25,10" FontWeight="Bold"/>
         <Border BorderBrush="Black" Margin="493,260,30,78" Visibility="Visible" BorderThickness="1"></Border>
-        <Button Content="Click to upload" HorizontalAlignment="Left" Margin="770,231,0,0" VerticalAlignment="Top" Click="Button_Click" Width="100" FontWeight="Bold">
+        <Button Content="Click to upload" Command="{Binding UploadImageCommand}" HorizontalAlignment="Left" Margin="770,231,0,0" VerticalAlignment="Top" Width="100" FontWeight="Bold">
 
         </Button>
-        <Image x:Name="imagePicture" Margin="496,266,52,89"/>
+        <Image x:Name="imagePicture" Margin="526,266,71,89"/>
 
         <Label Content="Rate tour and guide" Margin="70,25,560,386" FontSize="20" FontWeight="Bold"/>
-        <Button Content="Delete" Margin="390,407,443,78" Click="Delete_Click">
+        <Button Content="Delete" Command="{Binding DeleteCommand}" Margin="390,407,443,78">
 
         </Button>
-        <Canvas Margin="860,350,-386,164" Height="20" MouseLeftButtonDown="NextButton_Click">
-            <Line X1="10" Y1="10" X2="50" Y2="10" Stroke="Black" 
-                  StrokeThickness="2" StrokeDashCap="Round" StrokeEndLineCap="Round" StrokeStartLineCap="Round" HorizontalAlignment="Left" VerticalAlignment="Center" Width="36"/>
-            <Line X1="35" Y1="10" X2="30" Y2="5" Stroke="Black" 
-                  StrokeThickness="2" StrokeDashCap="Round" StrokeEndLineCap="Round" StrokeStartLineCap="Round"/>
-            <Line X1="35" Y1="10" X2="30" Y2="15" Stroke="Black" 
-                  StrokeThickness="2" StrokeDashCap="Round" StrokeEndLineCap="Round" StrokeStartLineCap="Round" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        </Canvas>
-        <Canvas Margin="268,354,406,160" Height="20" MouseLeftButtonDown="BackButton_Click" RenderTransformOrigin="0.5,0.5">
-            <Canvas.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="180"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Canvas.RenderTransform>
-            <Line X1="10" Y1="10" X2="50" Y2="10" Stroke="Black" 
-                  StrokeThickness="2" StrokeDashCap="Round" StrokeEndLineCap="Round" StrokeStartLineCap="Round" HorizontalAlignment="Left" VerticalAlignment="Center" Width="36"/>
-            <Line X1="35" Y1="10" X2="30" Y2="5" Stroke="Black" 
-                  StrokeThickness="2" StrokeDashCap="Round" StrokeEndLineCap="Round" StrokeStartLineCap="Round" HorizontalAlignment="Center" VerticalAlignment="Center" Width="38"/>
-            <Line X1="35" Y1="10" X2="30" Y2="15" Stroke="Black" 
-                  StrokeThickness="2" StrokeDashCap="Round" StrokeEndLineCap="Round" StrokeStartLineCap="Round" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        </Canvas>
-        <Canvas Name="canvas" Margin="413,331,77,182" MouseLeftButtonDown="DeletePhotoButton_Click">
+
+
+        <Canvas Name="canvas" Margin="413,331,77,182">
             <Path Stroke="Red" StrokeThickness="2" HorizontalAlignment="Center" VerticalAlignment="Top" Height="29" Stretch="Fill" Width="30" Canvas.Left="412.881" Canvas.Top="109.696">
                 <Path.Data>
                     <PathGeometry>
@@ -74,6 +52,11 @@
                 </Path.Data>
             </Path>
         </Canvas>
-
+        <Button Command="{Binding BackCommand}" HorizontalAlignment="Left" Margin="482,366,0,0" VerticalAlignment="Top" Width="31" FontWeight="Bold" Background="White" BorderBrush="White">
+            <Image Source="/Resources/Images/back_arrow.png" Height="25" Width="50"/>
+        </Button>
+        <Button Command="{Binding NextCommand}" HorizontalAlignment="Left" Margin="860,369,0,0" VerticalAlignment="Top" Width="35" FontWeight="Bold" Background="White" BorderBrush="White">
+            <Image Source="/Resources/Images/arrow.png" Height="25" Width="28"/>
+        </Button>
     </Grid>
 </Window>
