@@ -47,7 +47,6 @@ namespace InitialProject.Service
                 Voucher savedVoucher = Save(voucher);
 
             }
-
         }
         public ObservableCollection<Voucher> FindAllVouchers(Guest2 guest2)
         {
