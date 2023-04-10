@@ -8,22 +8,10 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
-namespace InitialProject.View
+namespace InitialProject.WPF.ViewModels.Guest2ViewModels
 {
-    /// <summary>
-    /// Interaction logic for VoucherViewForm.xaml
-    /// </summary>
-    public partial class VoucherViewForm : UserControl
+    public class VoucherViewModel:INotifyPropertyChanged
     {
         private VoucherService voucherService;
         private Model.Guest2 guest2;
@@ -38,11 +26,9 @@ namespace InitialProject.View
                 OnPropertyChanged("Vouchers");
             }
         }
-        private ObservableCollection<Voucher> voucher; 
-        public VoucherViewForm(Model.Guest2 guest)
+        private ObservableCollection<Voucher> voucher;
+        public VoucherViewModel(Model.Guest2 guest)
         {
-            InitializeComponent();
-            DataContext = this;
             this.guest2 = guest;
             voucherService = new VoucherService();
             voucher = new ObservableCollection<Voucher>();
@@ -64,3 +50,4 @@ namespace InitialProject.View
         }
     }
 }
+

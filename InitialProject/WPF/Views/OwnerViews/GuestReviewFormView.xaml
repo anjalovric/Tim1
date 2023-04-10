@@ -1,0 +1,57 @@
+﻿<Page x:Class="InitialProject.WPF.Views.OwnerViews.GuestReviewFormView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:tk="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit.NET5" 
+      xmlns:local="clr-namespace:InitialProject.WPF.Views.OwnerViews"
+      mc:Ignorable="d" 
+      d:DesignHeight="630" d:DesignWidth="430"
+      Title="GuestReviewFormView" Background="White">
+
+    <Grid>
+        <Border HorizontalAlignment="Center" Height="144" BorderBrush="Black" BorderThickness="1" VerticalAlignment="Top" Width="383">
+            <Grid Margin="9,0,9,-1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="134*"/>
+                    <RowDefinition Height="9*"/>
+                </Grid.RowDefinitions>
+                <Image Source="/Resources/Images/User_icon_2.svg.png" HorizontalAlignment="Left" Height="104"  VerticalAlignment="Top" Width="120" Margin="10,29,0,0"/>
+                <Label Content="Guest info" HorizontalAlignment="Left" Margin="10,3,0,0" VerticalAlignment="Top" Width="99"/>
+                <Label Content="Name" HorizontalAlignment="Center" Margin="0,45,0,0" VerticalAlignment="Top" Width="80"/>
+                <Label Content="Last Name" HorizontalAlignment="Center" Margin="0,76,0,0" VerticalAlignment="Top" Width="80"/>
+                <Label Content="Username" HorizontalAlignment="Center" Margin="0,107,0,0" VerticalAlignment="Top" Width="80"/>
+                <Border BorderBrush="Black" BorderThickness="0, 0, 0, 0.5" Width="133" Margin="249,45,8,64">
+                    <Label Content="{Binding Path = Guest.Name}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="133" Height="26"/>
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="0, 0, 0, 0.5" Width="133" Margin="249,108,8,1">
+                    <Label Content="{Binding Path = Guest.Username}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="133" Height="25"/>
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="0, 0, 0, 0.5" Width="133" Margin="249,76,8,33">
+                    <Label Content="{Binding Path = Guest.LastName}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="133" Height="25"/>
+                </Border>
+
+
+            </Grid>
+        </Border>
+        <Label Content="Cleanliness" HorizontalAlignment="Left" Margin="23,197,0,0" VerticalAlignment="Top" Width="128"/>
+        <Label Content="Following the rules" HorizontalAlignment="Left" Margin="23,241,0,0" VerticalAlignment="Top" Width="128"/>
+        <Label Content="Additional comment" HorizontalAlignment="Left" Margin="23,0,0,0" VerticalAlignment="Center" Width="128"/>
+        <Label Content="(Optional)" HorizontalAlignment="Left" Margin="278,0,0,0" VerticalAlignment="Center" Width="128" HorizontalContentAlignment="Right"/>
+        <tk:WatermarkTextBox HorizontalAlignment="Center" Margin="0,333,0,0" TextWrapping="Wrap" Text="{Binding Path = GuestReview.Comment}" Watermark="Enter comment here" VerticalAlignment="Top" Width="383" Height="161">
+        </tk:WatermarkTextBox>
+        <Button Command="NavigationCommands.BrowseBack" Content="Cancel" HorizontalAlignment="Left" Margin="23,546,0,0" VerticalAlignment="Top" Height="41" Width="142"/>
+        <Button Command="{Binding ConfirmCommand}" Content="Confirm" IsEnabled="{Binding Path= IsOkButtonEnabled}" HorizontalAlignment="Left" Margin="264,546,0,0" VerticalAlignment="Top" Height="41" Width="142"/>
+
+        <RadioButton Command="{Binding SelectCleanlinessCommand}" CommandParameter="1" GroupName="Cleanliness" Name="Cleanliness1" Content="1" HorizontalAlignment="Left" Margin="200,200,0,0" VerticalAlignment="Top" Height="21" Width="34" FontSize="16"/>
+        <RadioButton Command="{Binding SelectCleanlinessCommand}"  CommandParameter="2" GroupName="Cleanliness" Name="Cleanliness2" Content="2" HorizontalAlignment="Left" Margin="230,200,0,0" VerticalAlignment="Top" Height="21" Width="34" FontSize="16" RenderTransformOrigin="0.637,-0.564"/>
+        <RadioButton Command="{Binding SelectCleanlinessCommand}"  CommandParameter="3" GroupName="Cleanliness" Name="Cleanliness3" Content="3" HorizontalAlignment="Left" Margin="260,200,0,0" VerticalAlignment="Top" Height="21" Width="34" FontSize="16" />
+        <RadioButton Command="{Binding SelectCleanlinessCommand}"  CommandParameter="4" GroupName="Cleanliness" Name="Cleanliness4" Content="4" HorizontalAlignment="Left" Margin="290,200,0,0" VerticalAlignment="Top" Height="21" Width="34" FontSize="16" />
+        <RadioButton Command="{Binding SelectCleanlinessCommand}"  CommandParameter="5" GroupName="Cleanliness" Name="Cleanliness5" Content="5" HorizontalAlignment="Left" Margin="320,200,0,0" VerticalAlignment="Top" Height="21" Width="34" FontSize="16" />
+        <RadioButton Command="{Binding SelectRulesFollowingCommand}" CommandParameter="2" GroupName="RulesFollowing" Name="RulesFollowing2" Content="2" HorizontalAlignment="Left" Margin="230,245,0,0" VerticalAlignment="Top" Height="21" Width="34" FontSize="16" RenderTransformOrigin="0.637,-0.564"/>
+        <RadioButton Command="{Binding SelectRulesFollowingCommand}" CommandParameter="3" GroupName="RulesFollowing" Name="RulesFollowing3" Content="3" HorizontalAlignment="Left" Margin="260,245,0,0" VerticalAlignment="Top" Height="21" Width="34" FontSize="16"/>
+        <RadioButton Command="{Binding SelectRulesFollowingCommand}" CommandParameter="4" GroupName="RulesFollowing" Name="RulesFollowing4" Content="4" HorizontalAlignment="Left" Margin="290,245,0,0" VerticalAlignment="Top" Height="21" Width="34" FontSize="16"/>
+        <RadioButton Command="{Binding SelectRulesFollowingCommand}" CommandParameter="5" GroupName="RulesFollowing" Name="RulesFollowing5" Content="5" HorizontalAlignment="Left" Margin="320,245,0,0" VerticalAlignment="Top" Height="21" Width="34" FontSize="16"/>
+        <RadioButton Command="{Binding SelectRulesFollowingCommand}" CommandParameter="1" GroupName="RulesFollowing" Name="RulesFollowing1" Content="1" HorizontalAlignment="Left" Margin="200,245,0,0" VerticalAlignment="Top" Height="21" Width="34" FontSize="16"/>
+    </Grid>
+</Page>

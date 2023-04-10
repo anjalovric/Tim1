@@ -243,4 +243,8 @@
     </Content>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="WPF\Views\Guest2Views\" />
+  </ItemGroup>
+
 </Project>

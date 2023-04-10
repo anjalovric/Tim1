@@ -7,6 +7,8 @@ using InitialProject.Model;
 using System.Windows;
 using InitialProject.WPF.Views;
 using InitialProject.Service;
+using System.Windows.Navigation;
+using System.Windows.Controls;
 
 namespace InitialProject.WPF.ViewModels
 {
@@ -14,7 +16,6 @@ namespace InitialProject.WPF.ViewModels
     {
         private Owner owner;
         public RelayCommand BurgerMenuCommand { get; set; }
-        public RelayCommand GoBackCommand { get; set; }
         public RelayCommand MyAccommodationCommand { get; set; }
         public RelayCommand HomePageCommand { get; set; }
         public RelayCommand MyProfileCommand { get; set; }

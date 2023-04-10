@@ -239,5 +239,25 @@ namespace InitialProject.Service
             }
             return isAvailable;
         }
+
+        public List<AccommodationReservation> GetAllForReviewByOwner(Owner owner)
+        {
+            List<AccommodationReservation> reservationsToReview = new List<AccommodationReservation>();
+            GuestReviewService guestReviewService = new GuestReviewService();
+
+            if (allReservations.Count > 0)
+            {
+                foreach (AccommodationReservation reservation in allReservations)
+                {
+                    bool stayedLessThan5DaysAgo = (reservation.Departure.Date < DateTime.Now.Date) && (DateTime.Now.Date - reservation.Departure.Date).TotalDays <= 5;
+                    bool alreadyReviewed = guestReviewService.HasReview(reservation);
+                    bool isThisOwner = reservation.Accommodation.Owner.Id == owner.Id;
+
+                    if (stayedLessThan5DaysAgo && !alreadyReviewed && isThisOwner)
+                        reservationsToReview.Add(reservation);
+                }
+            }
+            return reservationsToReview;
+        }
     }
 }

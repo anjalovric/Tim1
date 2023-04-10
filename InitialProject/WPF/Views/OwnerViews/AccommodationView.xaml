@@ -21,7 +21,7 @@
                             <RowDefinition Height="20"/>
                             <RowDefinition Height="20"/>
                         </Grid.RowDefinitions>
-                        <Button Grid.Column="0" Grid.RowSpan="2" Grid.Row="0" Command="{Binding Path=DataContext.ViewImagesCommand, RelativeSource={RelativeSource AncestorType=ListBox}}">
+                        <Button Grid.Column="0" Grid.RowSpan="2" Grid.Row="0" Command="{Binding Path=DataContext.ViewImagesCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}">
                             <Image Source="{Binding Path=CoverImage.Url}" Stretch="Fill"></Image>
                         </Button>
                         <TextBlock Text="{Binding Path=Name}" Grid.Column="1" Grid.Row="0" Padding="1" />
@@ -62,11 +62,11 @@
     </Page.Resources>
 
     <Grid>
-        <ListBox ItemsSource="{Binding Path=Accommodations}" ItemTemplate="{StaticResource accommodations}" SelectedItem="{Binding Path=SelectedAccommodation, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" IsSynchronizedWithCurrentItem="True" SelectionMode="Single" Height="421" VerticalAlignment="Top" Margin="30,31,30,0">
+        <ListBox Name="AccommodationListBox" ItemsSource="{Binding Path=Accommodations}" ItemTemplate="{StaticResource accommodations}" SelectedItem="{Binding SelectedAccommodation, UpdateSourceTrigger=PropertyChanged}" IsSynchronizedWithCurrentItem="True" SelectionMode="Single" Height="421" VerticalAlignment="Top" Margin="30,31,30,0">
             <ListBox.Resources>
                 <Style TargetType="ListBoxItem">
                     <Style.Triggers>
-                        <Trigger Property="IsMouseCaptured"  Value="True">
+                        <Trigger Property="IsMouseOver"  Value="True">
                             <Setter Property="IsSelected" Value="True"/>
                         </Trigger>
                     </Style.Triggers>

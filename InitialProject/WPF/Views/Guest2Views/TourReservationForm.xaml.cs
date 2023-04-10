@@ -22,7 +22,7 @@ using InitialProject.Serializer;
 using InitialProject.Service;
 using NPOI.SS.Formula.Functions;
 
-namespace InitialProject.View
+namespace InitialProject.WPF.Views.Guest2Views
 {
     /// <summary>
     /// Interaction logic for TourReservationForm.xaml

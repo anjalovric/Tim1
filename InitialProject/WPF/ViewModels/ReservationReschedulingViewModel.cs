@@ -48,14 +48,18 @@ namespace InitialProject.WPF.ViewModels
 
         private void Decline_Executed(object sender)
         {
-            DecliningRequestView decliningRequestView = new DecliningRequestView(SelectedRequest.Request);
-            Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = decliningRequestView;
-            DeclineRequest(decliningRequestView.decliningRequestViewModel.ReschedulingAccommodationRequest);
+            if(SelectedRequest != null)
+            {
+                DecliningRequestView decliningRequestView = new DecliningRequestView(SelectedRequest.Request);
+                Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = decliningRequestView;
+                DeclineRequest(decliningRequestView.decliningRequestViewModel.ReschedulingAccommodationRequest);
+            }
         }
 
         private void Approve_Executed(object sender)
         {
-            ApproveRequest();
+            if(SelectedRequest != null)
+                ApproveRequest();
         }
         private void InitializeSelectedRequest()
         {

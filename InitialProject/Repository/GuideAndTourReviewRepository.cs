@@ -38,11 +38,12 @@ namespace InitialProject.Repository
             return _reviews.Find(n => n.TourInstance.Id == tourInstance.Id) != null;
         }
 
-        public void Save(GuideAndTourReview review)
+        public GuideAndTourReview Save(GuideAndTourReview review)
         {
             review.Id = NextId();
             _reviews.Add(review);
             _serializer.ToCSV(FilePath, _reviews);
+            return review;
         }
 
         public List<GuideAndTourReview> GetAll()
@@ -77,5 +78,13 @@ namespace InitialProject.Repository
             _serializer.ToCSV(FilePath, _reviews);
             return review;
         }
+        public void Delete(GuideAndTourReview review)
+        {
+            _reviews = _serializer.FromCSV(FilePath);
+            GuideAndTourReview founded = _reviews.Find(c => c.Id == review.Id);
+            _reviews.Remove(founded);
+            _serializer.ToCSV(FilePath, _reviews);
+        }
+
     }
 }
