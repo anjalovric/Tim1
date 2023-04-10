@@ -93,7 +93,7 @@ namespace InitialProject.WPF.Views.Guest2Views
             tourInstances = tourInstanceRepository.GetAll();
             foreach (TourInstance tourInstance in tourInstances)
             {
-                if (tourInstance.Finished == false)
+                if (tourInstance.Finished == false && tourInstance.Canceled==false)
                     TourInstances.Add(tourInstance);
             }
         }
