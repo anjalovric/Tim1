@@ -14,8 +14,6 @@ namespace InitialProject.Service
         public AlertGuest2Service alertGuest2Service;
         public CheckPointService checkPointService;
         public Guest2Service guest2Service;
-
-
         public TourDetailsService() 
         { 
             reservationService = new TourReservationService();
@@ -23,7 +21,6 @@ namespace InitialProject.Service
             checkPointService = new CheckPointService();
             guest2Service = new Guest2Service();
         }
-
         public int CountGuest(int selectedId)
         {
             int counter = 0;
@@ -34,7 +31,6 @@ namespace InitialProject.Service
             }
             return counter;
         }
-
         public List<string> GetPointsForGuest(int guest2Id,TourInstance instance)
         {
             List<string> pointsName = new List<string>();
@@ -50,7 +46,6 @@ namespace InitialProject.Service
             }
             return pointsName;
         }
-
         public bool IsOnTour(int guest2Id, int instanceId)
         {
             bool availabe = false;
@@ -61,7 +56,6 @@ namespace InitialProject.Service
             }
             return availabe;
         }
-
         public int CountWithoutVouchers(int selectedId)
         {
             int counter = 0;
@@ -73,7 +67,6 @@ namespace InitialProject.Service
                 }
             }
             return counter;
-
         }
         public int CountUnder18(int selectedId)
         {
@@ -85,9 +78,7 @@ namespace InitialProject.Service
 
             }
             return under18Counter;
-
         }
-
         public int CountBetween18And50(int selectedId)
         {
             int counter = 0;
@@ -98,9 +89,7 @@ namespace InitialProject.Service
 
             }
             return counter;
-
         }
-
         public int CountOver50(int selectedId)
         {
             int counter = 0;
@@ -111,7 +100,6 @@ namespace InitialProject.Service
 
             }
             return counter;
-
         }
         public double MakeWithVoucherPrecentage(int selectedId)
         {
@@ -122,16 +110,13 @@ namespace InitialProject.Service
             else
                 return 0;
         }
-
         public double MakeWithoutVoucherPrecentage(int selectedId)
         {
             if(CountGuest(selectedId)!=0)
                 return (double)CountWithoutVouchers(selectedId) /(double) CountGuest(selectedId) * 100;
             else
                 return 0;
-
         }
-
         public int CountWithVouchers(int selectedId)
         {
             int counter = 0;
@@ -143,7 +128,6 @@ namespace InitialProject.Service
                 }
             }
             return counter;
-
         }
         public double MakeUnder18Precentage(int selectedId)
         {
@@ -152,7 +136,6 @@ namespace InitialProject.Service
             else
                 return 0.0;
         }
-
         public double MakeBetween18And50Precentage(int selectedId)
         {
             if(CountGuest(selectedId)!=0)
@@ -176,7 +159,6 @@ namespace InitialProject.Service
             }
             return counter;
         }
-
         public double MakeAttendancePrecentage(int selectedId)
         {
             if (CountGuest(selectedId)!=0)
@@ -184,7 +166,6 @@ namespace InitialProject.Service
             else
                 return 0.00;
         }
-
         public int CountGuestsOnPoint(int currentPointId,TourInstance selectedInstance)
         {
             int counter = 0;
@@ -198,10 +179,8 @@ namespace InitialProject.Service
 
                 }
             }
-
             return counter;
         }
-
         public List<CheckPoint> GetInstancePoints(TourInstance selectedInstance)
         {
             List<CheckPoint> tourPoints = new List<CheckPoint>();

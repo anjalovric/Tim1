@@ -5,6 +5,7 @@ using InitialProject.Repository;
 using InitialProject.Serializer;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -44,6 +45,34 @@ namespace InitialProject.Service
         public List<CheckPoint> GetByInstance(int tourId)
         {
             return repository.GetByInstance(tourId);
+        }
+        public void UpdateAllPointsListToNextPoint(ObservableCollection<CheckPoint> AllPoints, int orderCounter)
+        {
+            int pointSize = AllPoints.Count;
+            List<CheckPoint> points = AllPoints.ToList();
+            AllPoints.Clear();
+            for (int i = 0; i < orderCounter; i++)
+            {
+                points[i].Checked = true;
+                repository.Update(points[i]);
+                AllPoints.Add(points[i]);
+            }
+            for (int i = orderCounter; i < pointSize; i++)
+            {
+                points[i].Checked = false;
+                repository.Update(points[i]);
+                AllPoints.Add(points[i]);
+            }
+        }
+
+        public void FindPointsForSelectedInstance(TourInstance selectedInstance, ObservableCollection<CheckPoint> AllPoints)
+        {
+            repository.FindPointsForSelectedInstance(selectedInstance,AllPoints);
+        }
+
+        public void CheckFirstPoint(ObservableCollection<CheckPoint> AllPoints)
+        {
+           repository.CheckFirstPoint(AllPoints);
         }
     }
 }

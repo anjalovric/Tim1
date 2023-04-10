@@ -73,7 +73,6 @@ namespace InitialProject.WPF.ViewModels
             SetFirstImages(review);
 
         }
-
         public void SetGrades(GuideAndTourReview review)
         {
             Guide = review.Knowledge;
@@ -82,13 +81,11 @@ namespace InitialProject.WPF.ViewModels
             Comment = review.Comment;
             Guest = review.Guest2.Name + " " + review.Guest2.LastName + "'s review";
         }
-
         private void FindCheckPoints(GuideAndTourReview review)
         {
             TourDetailsService tourDetailsService = new TourDetailsService();
             Points= new ObservableCollection<string>(tourDetailsService.GetPointsForGuest(review.Guest2.Id,review.TourInstance));
         }
-
         public void Valid()
         {
             GuideAndTourReviewService guideAndTourReviewService = new GuideAndTourReviewService();
@@ -98,7 +95,6 @@ namespace InitialProject.WPF.ViewModels
                 currentReview.ValidationUri = "Resources/Images/decline.jpg";
                 guideAndTourReviewService.Update(currentReview);
                 toastMessage.Visibility = Visibility.Visible;
-
             }
             else
             {
@@ -108,13 +104,11 @@ namespace InitialProject.WPF.ViewModels
                 toastMessage.Visibility = Visibility.Visible;
             }
         }
-
         private void SetFirstImages(GuideAndTourReview review)
         {
             TourReviewImageService tourReviewImageService = new TourReviewImageService();
             images = tourReviewImageService.GetByReviewId(review.Id);
             Current = new BitmapImage(new Uri("/" + images[0].RelativeUri, UriKind.Relative));
-
         }
 
         public void GoBack()

@@ -58,5 +58,9 @@ namespace InitialProject.Service
         {
             return tourReservationrepository.GetReservationsForTourInstance(instanceId);
         }
+        public List<TourReservation> GetReservationsForTour(TourInstance selected)
+        {
+            return tourReservationrepository.GetReservationsForTour(selected);
+        }
     }
 }

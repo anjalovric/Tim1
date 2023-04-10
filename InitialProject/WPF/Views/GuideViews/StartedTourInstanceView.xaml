@@ -31,8 +31,9 @@
 
         <Button x:Name="Next"  Click="Next_Click" Margin="585,518,440,108" >Next point</Button>
 
-
-
-        <Label x:Name="FinishMessage" HorizontalAlignment="Left"  Margin="784,518,0,0" VerticalAlignment="Top" Width="192" Height="48"/>
+        <StackPanel x:Name="FinishMessage" Margin="739,518,0,1" Background="LightGray" Visibility="Hidden">
+            <Label Height="58" FontSize="20" FontWeight="Heavy" HorizontalAlignment="Center">This tour is finished!</Label>
+            <Button Width="105" Height="59">OK</Button>
+        </StackPanel>
     </Grid>
 </Page>

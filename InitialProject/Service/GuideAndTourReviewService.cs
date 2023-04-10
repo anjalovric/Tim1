@@ -39,24 +39,6 @@ namespace InitialProject.Service
             alertGuest2Service = new AlertGuest2Service();
             alertGuest2List = new ObservableCollection<AlertGuest2>(alertGuest2Service.GetAll());
 
-/*=======
-        private GuideAndTourReviewRepository guideAndTourReviewRepository;
-        private AlertGuest2Service alertGuest2Service;
-        private Guest2 guest2;
-        private ObservableCollection<AlertGuest2> alertGuest2List;
-        public Location Location { get; set; }
-        public GuideAndTourReviewService(Guest2 guest2)
-        {
-            guideAndTourReviewRepository = new GuideAndTourReviewRepository();
-            locationService = new LocationService();
-            tourInstanceService = new TourInstanceService();
-            tourService = new TourService();
-            alertGuest2Service = new AlertGuest2Service();
-            alertGuest2List = new ObservableCollection<AlertGuest2>(alertGuest2Service.GetAll());
-            this.guest2 = guest2;
-            CompletedTours = new ObservableCollection<TourInstance>();
-            SetTourInstances(CompletedTours);
->>>>>>> 1d3141450d10619d649812f2a477f929560693b3*/
             Location = new Location();
 
             
@@ -109,12 +91,10 @@ namespace InitialProject.Service
                 }
             }
         }
-
         public List<GuideAndTourReview> GetReviewsByGuide(int guideId)
         {
             return guideAndTourReviewRepository.GetReviewsByGuide(guideId);
         }
-
         public List<GuideAndTourReview> FillWithGuests(List<GuideAndTourReview> guideAndTourReviews)
         {
             Guest2Service guest2Service = new Guest2Service();

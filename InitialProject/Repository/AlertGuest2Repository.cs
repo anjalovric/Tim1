@@ -1,11 +1,13 @@
 ﻿using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Model;
 using InitialProject.Serializer;
+using InitialProject.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls.Primitives;
 
 namespace InitialProject.Repository
 {
@@ -80,6 +82,26 @@ namespace InitialProject.Repository
         public AlertGuest2 GetById(int id)
         {
             return alerts.Find(c => c.Id == id);
+        }
+
+        public void AddAlerts(int currentPointId, int _callId,TourInstance selected)
+        {
+            //  List<TourReservation> availableReservations = GetReservationsForTour();
+            TourReservationService tourReservationService = new TourReservationService();
+            List<TourReservation> availableReservations = tourReservationService.GetReservationsForTour(selected);
+            foreach (TourReservation tour in availableReservations)
+            {
+                AlertGuest2 alertGuest2 = new AlertGuest2(tour.Id, tour.GuestId, currentPointId, selected.Id);
+                /*   alertGuest2.Availability = false;
+                   alertGuest2.ReservationId = tour.Id;
+                   alertGuest2.Guest2Id = tour.GuestId;
+                   alertGuest2.CheckPointId = currentPointId;
+                   alertGuest2.InstanceId = selected.Id;
+                   alertGuest2.Informed = false;*/
+                AlertGuest2 savedAlert = Save(alertGuest2);
+
+
+            }
         }
 
     }

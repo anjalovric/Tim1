@@ -17,13 +17,6 @@ namespace InitialProject.Service
         { 
             guideRepository = new GuideRepository();
         }
-
-
-        public List<Guide> GetAll()
-        {
-            return guideRepository.GetAll();
-        }
-
         public Guide GetByUsername(string username)
         {
             Guide foundedGuide = null;

@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 
 namespace InitialProject.Repository
@@ -83,10 +84,23 @@ namespace InitialProject.Repository
             }
             return list;
         }
-
         public TourReservation GetById(int id)
         {
             return _tourReservations.Find(n => n.Id == id);
+        }
+        public List<TourReservation> GetReservationsForTour(TourInstance selected)
+        {
+            List<TourReservation> tourReservations = GetAll();
+            List<TourReservation> availableReservations = new List<TourReservation>();
+            foreach (TourReservation reservation in tourReservations)
+            {
+                if (reservation.TourInstanceId == selected.Id)
+                {
+                    availableReservations.Add(reservation);
+                }
+            }
+
+            return availableReservations;
         }
     }
 }

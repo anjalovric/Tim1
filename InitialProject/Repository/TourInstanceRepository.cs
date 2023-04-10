@@ -6,40 +6,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls.Primitives;
 
 namespace InitialProject.Repository
 {
     public class TourInstanceRepository:ITourInstanceRepository
     {
         private const string FilePath = "../../../Resources/Data/tourInstances.csv";
-       
-
-        private readonly Serializer<TourInstance> _serializer;
-     
-
-        
-        private List<TourInstance> _tourInstances;
-       
-
+        private readonly Serializer<TourInstance> _serializer;  
+        private List<TourInstance> _tourInstances;    
         public TourInstanceRepository()
         {
-
             _serializer = new Serializer<TourInstance>();
-            
-
-            _tourInstances = _serializer.FromCSV(FilePath);
-            
-           
-        }
-        
+            _tourInstances = _serializer.FromCSV(FilePath);   
+        }     
         public List<TourInstance> GetAll()
         {
             return _tourInstances;
         }
-
-
-
-
         public TourInstance Save(TourInstance tour)
         {
             tour.Id = NextId();
@@ -48,7 +32,6 @@ namespace InitialProject.Repository
             _serializer.ToCSV(FilePath, _tourInstances);
             return tour;
         }
-
         public int NextId()
         {
             _tourInstances = _serializer.FromCSV(FilePath);
@@ -58,7 +41,6 @@ namespace InitialProject.Repository
             }
             return _tourInstances.Max(c => c.Id) + 1;
         }
-
         public void Delete(TourInstance tour)
         {
             _tourInstances = _serializer.FromCSV(FilePath);
@@ -66,7 +48,6 @@ namespace InitialProject.Repository
             _tourInstances.Remove(founded);
             _serializer.ToCSV(FilePath, _tourInstances);
         }
-
         public TourInstance Update(TourInstance tour)
         {
             _tourInstances = _serializer.FromCSV(FilePath);
@@ -79,7 +60,6 @@ namespace InitialProject.Repository
         }
         public List<TourInstance> GetByStart(Guide guide)
         {
-
             _tourInstances = _serializer.FromCSV(FilePath);
             List<TourInstance> list = new List<TourInstance>();
             foreach (TourInstance tour in _tourInstances)
@@ -102,14 +82,8 @@ namespace InitialProject.Repository
                         list.Add(tour);
                     }
                 }
-
-
             return list;
-    
         }
-
-
-
         public List<TourInstance> GetInstancesLaterThan48hFromNow(Guide guide)
         {
 
@@ -129,18 +103,15 @@ namespace InitialProject.Repository
                         list.Add (tour);
                     else if(diffOfDates.Days == -2 && diffOfDates.Hours==0 && diffOfDates.Minutes<0 )
                         list.Add (tour);
-            }
-
+                }
             }
             return list;
 
         }
-
         public TourInstance GetById(int id)
         {
             return _tourInstances.Find(c => c.Id == id);
-        }
-        
+        }       
         public TourInstance GetActive(Guide guide)
         {
             TourInstance active = null;
@@ -152,6 +123,14 @@ namespace InitialProject.Repository
                 }
             }
             return active;
+        }
+        public void ActivateTour(TourInstance selected)
+        {
+            if (selected != null)
+            {
+                selected.Active = true;
+                Update(selected);
+            }
         }
     }
 }
