@@ -40,7 +40,7 @@ namespace InitialProject.WPF.ViewModels
             get { return selectedAccommodation; }
             set
             {
-                if (value != selectedAccommodation)
+                if (value != (selectedAccommodation))
                 {
                     selectedAccommodation = value;
                     OnPropertyChanged();
@@ -77,6 +77,7 @@ namespace InitialProject.WPF.ViewModels
 
         private void ViewImages_Executed(object sender)
         {
+            if (SelectedAccommodation != null)
             Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = new AccommodationImagesView(SelectedAccommodation);
         }
     }

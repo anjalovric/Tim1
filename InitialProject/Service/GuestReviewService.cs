@@ -13,6 +13,7 @@ namespace InitialProject.Service
         {
             guestReviewRepository = new GuestReviewRepository();
             guestReviews = new List<GuestReview>(guestReviewRepository.GetAll());
+            MakeReservations();
         }
 
         public bool IsGuestReviewed(AccommodationReservation accommodationReservation)
@@ -34,6 +35,27 @@ namespace InitialProject.Service
                     review.Reservation = ownerReservation;
                 }
             }
+        }
+
+        public bool HasReview(AccommodationReservation reservation)
+        {
+            return guestReviewRepository.HasReview(reservation);
+        }
+        public List<GuestReview> GetAllByOwner(Owner owner)
+        {
+            List<GuestReview> reviewsByOwner = new List<GuestReview>();
+
+            foreach (GuestReview review in guestReviews)
+            {
+                if (review.Reservation != null && review.Reservation.Accommodation.Owner.Id == owner.Id)
+                    reviewsByOwner.Add(review);
+            }
+            return reviewsByOwner;
+        }
+
+        public void Save(GuestReview guestReview)
+        {
+            guestReviewRepository.Save(guestReview);
         }
     }
 }

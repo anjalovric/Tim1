@@ -35,7 +35,7 @@
         <Label Content="You are signed in as owner!" HorizontalAlignment="Left" Margin="154,151,0,0" VerticalAlignment="Top" Width="220"/>
         <Label Content="Notifications" FontSize="15" HorizontalAlignment="Left" Margin="29,215,0,0" VerticalAlignment="Top"/>
         <StackPanel Margin="31,250,29,0" Background="#FFCFC0C0">
-            <Button HorizontalContentAlignment="Left" Name="ReviewButton" Height="54" >
+            <Button Command="{Binding ReviewGuestCommand}" HorizontalContentAlignment="Left" Name="ReviewButton" Height="54" >
                 <StackPanel Orientation="Horizontal">
                     <Label Width="20"></Label>
                     <Image Source="/Resources/Images/clock.png" Height="30"/>

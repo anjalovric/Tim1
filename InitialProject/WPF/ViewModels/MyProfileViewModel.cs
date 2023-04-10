@@ -44,8 +44,11 @@ namespace InitialProject.WPF.ViewModels
 
         private void View_Executed(object sender)
         {
-            OwnerReviewView ownerReviewView = new OwnerReviewView(SelectedOwnerReview);
-            Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = ownerReviewView;
+            if(SelectedOwnerReview != null)
+            {
+                OwnerReviewView ownerReviewView = new OwnerReviewView(SelectedOwnerReview);
+                Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = ownerReviewView;
+            }
         }
         public double AverageRate
         {
@@ -101,7 +104,7 @@ namespace InitialProject.WPF.ViewModels
             get => selectedOwnerReview;
             set
             {
-                if (!value.Equals(selectedOwnerReview))
+                if (value != selectedOwnerReview)
                 {
                     selectedOwnerReview = value;
                     OnPropertyChanged();
