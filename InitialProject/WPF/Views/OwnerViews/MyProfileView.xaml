@@ -59,7 +59,7 @@
         </Border>
         <ListBox Name="ReviewsListBox" Margin="10,195,10,137" ItemsSource="{Binding Path=OwnerReviews}" ItemTemplate="{StaticResource ownerReviews}" IsSynchronizedWithCurrentItem="True" SelectedValue="{Binding Path=SelectedOwnerReview}" HorizontalContentAlignment="Stretch">
             <ListBox.Resources>
-                <Style TargetType="ListBoxItem">
+                <Style TargetType="ListViewItem">
                     <Style.Triggers>
                         <Trigger Property="IsMouseCaptured"  Value="True">
                             <Setter Property="IsSelected" Value="True"/>

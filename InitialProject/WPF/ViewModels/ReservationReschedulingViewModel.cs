@@ -7,6 +7,7 @@ using InitialProject.WPF.Views.OwnerViews;
 using InitialProject.WPF.Views;
 using System.Windows;
 using System.Linq;
+using System.Windows.Controls;
 
 namespace InitialProject.WPF.ViewModels
 {

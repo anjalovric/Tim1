@@ -21,7 +21,7 @@
                             <RowDefinition Height="20"/>
                             <RowDefinition Height="20"/>
                         </Grid.RowDefinitions>
-                        <Button Grid.Column="0" Grid.RowSpan="2" Grid.Row="0">
+                        <Button Grid.Column="0" Grid.RowSpan="2" Grid.Row="0" Command="{Binding Path=DataContext.ViewImagesCommand, RelativeSource={RelativeSource AncestorType=ListBox}}">
                             <Image Source="{Binding Path=CoverImage.Url}" Stretch="Fill"></Image>
                         </Button>
                         <TextBlock Text="{Binding Path=Name}" Grid.Column="1" Grid.Row="0" Padding="1" />
@@ -62,7 +62,17 @@
     </Page.Resources>
 
     <Grid>
-        <ListBox ItemsSource="{Binding Path=Accommodations}" ItemTemplate="{StaticResource accommodations}" Height="421" VerticalAlignment="Top" Margin="30,31,30,0"/>
+        <ListBox ItemsSource="{Binding Path=Accommodations}" ItemTemplate="{StaticResource accommodations}" SelectedItem="{Binding Path=SelectedAccommodation, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" IsSynchronizedWithCurrentItem="True" SelectionMode="Single" Height="421" VerticalAlignment="Top" Margin="30,31,30,0">
+            <ListBox.Resources>
+                <Style TargetType="ListBoxItem">
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseCaptured"  Value="True">
+                            <Setter Property="IsSelected" Value="True"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </ListBox.Resources>
+        </ListBox>
         <Button Command="{Binding NewAccommodationCommand}" Name="NewAccommodationButton" Content="New Accommodation" HorizontalAlignment="Center" Margin="0,474,0,0"  Width="370" Height="43" VerticalAlignment="Top"/>
         <Button Content="My Renovations" HorizontalAlignment="Center" Margin="0,540,0,0"  Width="370" Height="43" VerticalAlignment="Top"/>
     </Grid>
