@@ -8,8 +8,8 @@
         Title="AlertGuestForm" Height="330" Width="530" WindowStartupLocation="CenterScreen">
     <Grid Margin="0,0,0,-6">
         <Label BorderBrush="Gray" x:Name="PointLabel"  HorizontalAlignment="Left"  VerticalAlignment="Top" Height="55" Width="354" Margin="55,27,0,0"/>
-        <Button Content="YES" Height="30" Width="60" TextElement.FontWeight="Bold" Click="Confirm_Click" Margin="138,130,302,130" />
-        <Button Content="NO" Height="30" Width="60" TextElement.FontWeight="Bold" Click="Cancel_Click" Margin="250,130,190,130" />
+        <Button Content="YES" Command ="{Binding ConfirmCommand}" Height="30" Width="60" TextElement.FontWeight="Bold"  Margin="138,130,302,130" />
+        <Button Content="NO" Command ="{Binding CancelCommand}" Height="30" Width="60" TextElement.FontWeight="Bold" Margin="250,130,190,130" />
 
 
 

@@ -35,10 +35,7 @@ namespace InitialProject.Service
             tourReservations = new ObservableCollection<TourReservation>(tourReservationService.GetAll());
             alertGuest2Service = new AlertGuest2Service();
             alertGuest2List = new ObservableCollection<AlertGuest2>(alertGuest2Service.GetAll());
-<<<<<<< HEAD
 
-=======
->>>>>>> feat/RateTourAndGuide
             Location = new Location();
         }
         public void SetTourInstances(ObservableCollection<TourInstance> CompletedTours,Guest2 guest2)

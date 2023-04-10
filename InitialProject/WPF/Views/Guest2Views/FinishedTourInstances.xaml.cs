@@ -2,6 +2,8 @@
 using InitialProject.Repository;
 using InitialProject.Service;
 using InitialProject.View;
+using InitialProject.WPF.ViewModels.Guest2ViewModels;
+using Org.BouncyCastle.Crypto.Tls;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -29,39 +31,11 @@ namespace InitialProject.WPF.Views.Guest2Views
     public partial class FinishedTourInstances : UserControl
     {
         private Guest2 guest2;
-        private ObservableCollection<TourInstance> completedTours;
-        public ObservableCollection<TourInstance> CompletedTours 
-        {
-            get { return completedTours; }
-            set
-            {
-                if (value != completedTours)
-                    completedTours = value;
-                OnPropertyChanged("CompletedTours");
-            }
-
-        }
-        private GuideAndTourReviewService guideAndTourReviewService;
         public FinishedTourInstances(Guest2 guest2)
         {
-            CompletedTours = new ObservableCollection<TourInstance>();
             InitializeComponent();
-            DataContext = this;
             this.guest2 = guest2;
-            guideAndTourReviewService = new GuideAndTourReviewService();
-            guideAndTourReviewService.SetTourInstances(CompletedTours, guest2);
-        }
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-        private void Rate_Click(object sender, RoutedEventArgs e)
-        {
-            TourInstance currentTourInstance = (TourInstance)TourListDataGrid.CurrentItem;
-            GuideAndTourReviewForm guideAndTourReview = new GuideAndTourReviewForm(currentTourInstance,guest2);
-            guideAndTourReview.Show();
+            DataContext = new FinishedTourInstancesViewModel(guest2);
         }
     }
 }
