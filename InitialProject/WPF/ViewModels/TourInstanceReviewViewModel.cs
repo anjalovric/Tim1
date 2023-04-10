@@ -32,15 +32,18 @@ namespace InitialProject.WPF.ViewModels
             }
         }
         public GuideAndTourReview Selected { get; set; }
-
+        private User user;
         private GuideAndTourReviewService guideAndTourReviewService;
         private GuideService guideService;
 
+        public RelayCommand ViewReviewCommand { get; set; } 
        public TourInstanceReviewViewModel(User guide)
         {
+            user= guide;
             guideAndTourReviewService = new GuideAndTourReviewService();
             guideService = new GuideService();
             GetGuideReviews(guide);
+            ViewReviewCommand = new RelayCommand(ViewDetailsExecuted, CanExecute);
         }
         private void GetGuideReviews(User guide)
         {
@@ -51,11 +54,14 @@ namespace InitialProject.WPF.ViewModels
             List<GuideAndTourReview> filledTours = guideAndTourReviewService.FillWithTour(filledInstances);
             Reviews = new ObservableCollection<GuideAndTourReview>(guideAndTourReviewService.FillWithLocation(filledTours));
         }
-
-        public void ViewDetails()
+        private bool CanExecute(object sender)
+        {
+            return true;
+        }
+        public void ViewDetailsExecuted(object sender)
         {
             GuideAndTourReview review = Selected;
-            ReviewDetailsView reviewDetailsView = new ReviewDetailsView(review);
+            ReviewDetailsView reviewDetailsView = new ReviewDetailsView(review,Reviews,user);
             Application.Current.Windows.OfType<GuideWindow>().FirstOrDefault().Main.Content = reviewDetailsView;
         }
 

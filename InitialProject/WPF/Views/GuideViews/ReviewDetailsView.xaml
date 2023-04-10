@@ -69,11 +69,11 @@
             <Label x:Name="Images" Grid.Row="4" Content="Images" Grid.Column="1" VerticalAlignment="Bottom" Margin="0,12,0,8"/>
             <Image x:Name="CurrentImage" Source="{Binding Current, UpdateSourceTrigger=PropertyChanged}" Grid.Row="5" Grid.Column="1" Width="150" Height="150" Margin="48,12,48,1"/>
             <Label Content="{Binding Comment}" Grid.Column="0" Grid.Row="5" ></Label>
-            <Button  Grid.Row="5" Grid.Column="1" Visibility="Visible" Margin="226,54,10,94" Click="Next_Click">
+            <Button  Grid.Row="5" Grid.Column="1" Visibility="Visible" Margin="226,54,10,94" Command="{Binding GoForwardCommand}">
                 <Image Source="/Resources/Images/arrow.png" Height="20" VerticalAlignment="Top"/>
             </Button>
             <Border BorderBrush="Black" BorderThickness="1" CornerRadius="10" Grid.RowSpan="6" Grid.ColumnSpan="2" Margin="-10,-14,0,0">
-                <Button  Margin="309,400,0,92" HorizontalAlignment="Left" Width="54" Click="Back_Click">
+                <Button  Margin="309,400,0,92" HorizontalAlignment="Left" Width="54" Command="{Binding GOBackCommand}">
                     <Image Source="/Resources/Images/back_arrow.png" Height="20" VerticalAlignment="Top"/>
                 </Button>
 
@@ -83,11 +83,11 @@
             </Border>
         </Grid>
 
-        <Button Content="RATE AS INAVLID" Height="35" HorizontalAlignment="Left" Margin="871,633,0,0" VerticalAlignment="Top" Width="195" Click="Button_Click"/>
+        <Button Content="CHANGE VALIDITY" Height="35" HorizontalAlignment="Left" Margin="871,633,0,0" VerticalAlignment="Top" Width="195" Command="{Binding ValidCommand}"/>
         <Label Content="{Binding Guest}" FontSize="25" FontWeight="Bold" HorizontalAlignment="Left" Margin="362,25,0,0" VerticalAlignment="Top" Width="346" Height="60"/>
-        <StackPanel x:Name="Toast" Margin="567,530,-43,0" Background="LightGray"  Visibility="Hidden" >
+        <StackPanel x:Name="Toast" Margin="567,530,-43,0" Background="LightGray"  Visibility="{Binding ToastVisibility}" >
             <Label Content="Validity is changed" Width="185" Height="67" FontSize="18" FontWeight="Heavy" HorizontalAlignment="Center"/>
-            <Button Height="41" Width="100" Click="Toast_Click">OK</Button>
+            <Button Height="41" Width="100" Command="NavigationCommands.BrowseBack">OK</Button>
         </StackPanel>
 
     </Grid>

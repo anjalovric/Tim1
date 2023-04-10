@@ -31,23 +31,11 @@ namespace InitialProject.WPF.Views.GuideViews
     public partial class ActiveInstanceView : Page
     {
         ActiveInstanceViewModel viewModel;
-        public ActiveInstanceView(TourInstance active, ObservableCollection<TourInstance> tours, ObservableCollection<TourInstance> finishedInstances)
+        public ActiveInstanceView(TourInstance active, ObservableCollection<TourInstance> tours, ObservableCollection<TourInstance> finishedInstances,HomeView homeview)
         {
             InitializeComponent();
-            viewModel = new ActiveInstanceViewModel(active, tours, finishedInstances, this.Next, this.Finish, this.FinishMessage);
+            viewModel = new ActiveInstanceViewModel(active, tours, finishedInstances,homeview);
             DataContext = viewModel;
         }
-
-        private void FinishTour_Click(object sender, RoutedEventArgs e)
-        {
-            viewModel.FinishTour();
-        }
-
-       private void Next_Click(object sender, RoutedEventArgs e)
-        {
-          viewModel.NextPoint();
-
-        }
-
     }
 }

@@ -37,6 +37,11 @@ namespace InitialProject.WPF.ViewModels
         GuideService guideService = new GuideService();
         private User loggedUser;
         private TextBox ChosenYear;
+
+        public RelayCommand MostVisitedCommand { get; set; }
+        public RelayCommand MostVisitedForYearCommand { get;set; }
+        public RelayCommand ViewDetailsCommand { get; set; }
+
         public TourStatisticsViewModel(User user,TextBox chosenYear)
         {
             loggedUser = user;  
@@ -44,24 +49,31 @@ namespace InitialProject.WPF.ViewModels
             Instances = new ObservableCollection<TourInstance>();
             instanceService = new TourInstanceService();
             instanceService.SetFinishedInstances(Instances,guideService.GetByUsername(user.Username));
+            MakeCommands();
         }
-        public void ViewDetails(DataGrid TourListDataGrid)
+        private void MakeCommands()
         {
-            TourInstance currentTourInstance = (TourInstance)TourListDataGrid.CurrentItem;
-            FinishedTourDetails finishedTourDetails = new FinishedTourDetails(currentTourInstance);
+            MostVisitedCommand = new RelayCommand(MostVisitedExecuted, CanExecute);
+            MostVisitedForYearCommand = new RelayCommand(MostVisitedForYearExecuted, CanExecute);
+            ViewDetailsCommand=new RelayCommand(ViewDetailsExecuted, CanExecute);
+        }
+        private bool CanExecute(object sender)
+        {
+            return true;
+        }
+        public void ViewDetailsExecuted(object sender)
+        {
+            FinishedTourDetails finishedTourDetails = new FinishedTourDetails(Selected);
             Application.Current.Windows.OfType<GuideWindow>().FirstOrDefault().Main.Content = finishedTourDetails;
 
         }
-
-        public void MostVisited()
+        public void MostVisitedExecuted(object sender)
         {
             FinishedTourDetails finishedTourDetails = new FinishedTourDetails(instanceService.FindMostVisited());
             Application.Current.Windows.OfType<GuideWindow>().FirstOrDefault().Main.Content = finishedTourDetails;
 
         }
-
-
-        public void MostVisitedForYear()
+        public void MostVisitedForYearExecuted(object sender)
         {
             if (Year != null)
             {

@@ -2,6 +2,8 @@
 using InitialProject.Model;
 using InitialProject.Service;
 using InitialProject.WPF.Views.GuideViews;
+using NPOI.OpenXmlFormats.Spreadsheet;
+using NPOI.Util;
 using SixLabors.ImageSharp.Processing.Processors.Transforms;
 using System;
 using System.Collections.Generic;
@@ -9,6 +11,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices.ObjectiveC;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -35,8 +38,7 @@ namespace InitialProject.WPF.ViewModels
 
         private GuideAndTourReview currentReview;
         public ObservableCollection<string> Points { get; set; }
-
-        private StackPanel toastMessage;
+        public ObservableCollection<GuideAndTourReview> Reviews { get; set; }
 
         private List<TourReviewImage> images;
 
@@ -54,14 +56,45 @@ namespace InitialProject.WPF.ViewModels
             }
         }
         private int currentCounter = 0;
-        public ReviewDetailsViewModel(GuideAndTourReview review,StackPanel toast) 
+        public RelayCommand GoBackCommand { get; set; }
+        public RelayCommand GoForwardCommand { get;set; }
+        public RelayCommand ValidCommand { get; set; }
+
+        private string toastVisibility;
+        public string ToastVisibility
+        {
+            get => toastVisibility;
+            set
+            {
+                if (!value.Equals(toastVisibility))
+                {
+                    toastVisibility = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private User loggedUser;
+        public ReviewDetailsViewModel(GuideAndTourReview review,ObservableCollection<GuideAndTourReview> reviews,User user) 
         { 
+            loggedUser = user;
             SetTourDetails(review);
             SetGrades(review);
             currentReview= review;
-            toastMessage = toast;
+            Reviews = reviews;
+            ToastVisibility = "Hidden";
+            MakeCommands();
         }
-
+        private void MakeCommands()
+        {
+            GoBackCommand = new RelayCommand(GoBackExecuted, CanExecute);
+            GoForwardCommand=new RelayCommand(GoForwardExecuted, CanExecute);
+            ValidCommand=new RelayCommand(ValidExecuted,CanExecute);
+        }
+        private bool CanExecute(object sender)
+        {
+            return true;
+        }
         public void SetTourDetails(GuideAndTourReview review)
         {
             Name=review.TourInstance.Tour.Name;
@@ -71,7 +104,6 @@ namespace InitialProject.WPF.ViewModels
             StartTime = review.TourInstance.StartClock;
             FindCheckPoints(review);
             SetFirstImages(review);
-
         }
         public void SetGrades(GuideAndTourReview review)
         {
@@ -86,23 +118,38 @@ namespace InitialProject.WPF.ViewModels
             TourDetailsService tourDetailsService = new TourDetailsService();
             Points= new ObservableCollection<string>(tourDetailsService.GetPointsForGuest(review.Guest2.Id,review.TourInstance));
         }
-        public void Valid()
+        public void ValidExecuted(object sender)
         {
-            GuideAndTourReviewService guideAndTourReviewService = new GuideAndTourReviewService();
             if(currentReview.Valid)
             {
-                currentReview.Valid = false;
-                currentReview.ValidationUri = "Resources/Images/decline.jpg";
-                guideAndTourReviewService.Update(currentReview);
-                toastMessage.Visibility = Visibility.Visible;
+                ChangeValidationState(false, "Resources/Images/redIncorect.png");
             }
             else
             {
-                currentReview.Valid = true;
-                currentReview.ValidationUri ="Resources/Images/corect.png";
-                guideAndTourReviewService.Update(currentReview);
-                toastMessage.Visibility = Visibility.Visible;
+                ChangeValidationState(true, "Resources/Images/greenCorect.png");
             }
+        }
+        private void ChangeValidationState(bool state,string url)
+        {
+                GuideAndTourReviewService guideAndTourReviewService = new GuideAndTourReviewService();
+                currentReview.Valid = state;
+                currentReview.ValidationUri = url;
+                guideAndTourReviewService.Update(currentReview);
+                ReplaceReview();
+                ToastVisibility = "Visible";
+        }
+        private void ReplaceReview()
+        {
+            Reviews.Clear();
+            GuideService guideService= new GuideService();
+            Guide loggedGuide = guideService.GetByUsername(loggedUser.Username);
+            GuideAndTourReviewService guideAndTourReviewService = new GuideAndTourReviewService();
+            List<GuideAndTourReview> reviews = guideAndTourReviewService.GetReviewsByGuide(loggedGuide.Id);
+            List<GuideAndTourReview> filledGuets = guideAndTourReviewService.FillWithGuests(reviews);
+            List<GuideAndTourReview> filledInstances = guideAndTourReviewService.FillWithInstance(filledGuets);
+            List<GuideAndTourReview> filledTours = guideAndTourReviewService.FillWithTour(filledInstances);
+            foreach (GuideAndTourReview review in guideAndTourReviewService.FillWithLocation(filledTours)) 
+                Reviews.Add(review);
         }
         private void SetFirstImages(GuideAndTourReview review)
         {
@@ -110,16 +157,14 @@ namespace InitialProject.WPF.ViewModels
             images = tourReviewImageService.GetByReviewId(review.Id);
             Current = new BitmapImage(new Uri("/" + images[0].RelativeUri, UriKind.Relative));
         }
-
-        public void GoBack()
+        public void GoBackExecuted(object sender)
         {
             currentCounter--;
             if (currentCounter < 0)
                 currentCounter = images.Count - 1;
             Current = new BitmapImage(new Uri("/" + images[currentCounter].RelativeUri, UriKind.Relative));
         }
-
-        public void GoForward()
+        public void GoForwardExecuted(object sender)
         {
             currentCounter++;
             if (currentCounter >= images.Count)

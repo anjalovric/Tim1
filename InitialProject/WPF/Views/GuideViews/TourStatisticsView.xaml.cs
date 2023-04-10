@@ -42,22 +42,5 @@ namespace InitialProject.WPF.Views.GuideViews
             DataContext = viewModel;
 
         }
-
-        private void ViewDetails_Click(object sender, RoutedEventArgs e)
-        {
-            viewModel.ViewDetails(this.TourListDataGrid);
-         
-        }
-
-        private void MostVisited_Click(object sender, RoutedEventArgs e)
-        {
-            viewModel.MostVisited();
-         
-        }
-
-        private void MostVisitedForYear_Click(object sender, RoutedEventArgs e)
-        {
-            viewModel.MostVisitedForYear();
-        }
     }
 }

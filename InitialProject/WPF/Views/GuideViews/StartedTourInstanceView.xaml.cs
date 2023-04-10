@@ -31,7 +31,7 @@ namespace InitialProject.WPF.Views.GuideViews
         public StartedTourInstanceView(TourInstance selectedInstance, ObservableCollection<TourInstance> tours, ObservableCollection<TourInstance> finishedInstances)
         {
             InitializeComponent();
-            viewModel=new StartedTourViewModel(selectedInstance, tours, finishedInstances,this.Next,this.Finish,this.FinishMessage);
+            viewModel=new StartedTourViewModel(selectedInstance, tours, finishedInstances);
             DataContext = viewModel;
 
         }
