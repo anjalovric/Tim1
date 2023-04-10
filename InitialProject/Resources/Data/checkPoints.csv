@@ -9,5 +9,8 @@
 9|t1|True|25|1
 10|t2|False|25|2
 11|z1|True|26|1
-12|z2|False|26|2
-13|z3|False|26|3
+12|z2|True|26|2
+13|z3|True|26|3
+14|a1|True|27|1
+15|a2|False|27|2
+16|a3|False|27|3

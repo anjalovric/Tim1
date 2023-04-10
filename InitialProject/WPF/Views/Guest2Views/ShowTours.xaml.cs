@@ -93,7 +93,7 @@ namespace InitialProject.WPF.Views.Guest2Views
             tourInstances = tourInstanceRepository.GetAll();
             foreach (TourInstance tourInstance in tourInstances)
             {
-                if (tourInstance.Finished == false && tourInstance.Canceled==false)
+                if (!tourInstance.Finished && !tourInstance.Canceled)
                     TourInstances.Add(tourInstance);
             }
         }
@@ -214,7 +214,7 @@ namespace InitialProject.WPF.Views.Guest2Views
                 TourInstances.Clear();
                 foreach (TourInstance tourInstance in storedTourInstances)
                 {
-                    if (!tourInstance.Finished)
+                    if (!tourInstance.Finished && !tourInstance.Canceled)
                         TourInstances.Add(tourInstance);
                 }
                 foreach (TourInstance tourInstance in storedTourInstances)
@@ -307,7 +307,7 @@ namespace InitialProject.WPF.Views.Guest2Views
             TourInstances.Clear();
             foreach (TourInstance tourInstance in tourInstances)
             {
-                if (!tourInstance.Finished)
+                if (!tourInstance.Finished && !tourInstance.Canceled)
                     TourInstances.Add(tourInstance);
             }
             Label.Content = "Showing all tours:";

@@ -12,7 +12,6 @@ using System.Windows;
 using InitialProject.Service;
 using InitialProject.WPF.Views.Guest2Views;
 using System.Windows.Controls;
-using InitialProject.View;
 
 namespace InitialProject.WPF.ViewModels.Guest2ViewModels
 {
@@ -61,8 +60,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
                     _alertGuest2Service.Update(alertGuest2);
                 }
             }
-            MessageBox.Show("Uspjesno ste dodati na turu kao prisutan.");
-            //Application.Current.Windows.OfType<ShowTours>().FirstOrDefault().Close();
+            Application.Current.Windows.OfType<AlertGuestForm>().FirstOrDefault().Close();
         }
         private void Cancel_Executed(object sender)
         {
@@ -74,8 +72,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
                     _alertGuest2Service.Update(alertGuest2);
                 }
             }
-            MessageBox.Show("Niste dodati na turu kao prisutan.");
-            //Application.Current.Windows.OfType<AlertGuestForm>().FirstOrDefault().Close();
+            Application.Current.Windows.OfType<AlertGuestForm>().FirstOrDefault().Close();   
         }
         private void CreateLabelContent()
         {
