@@ -19,7 +19,7 @@
         </Frame>
         <Border Margin="0,680,0,0" Background="LightGray" BorderBrush="Gray">
             <StackPanel Orientation="Horizontal">
-                <Button Name="BackButton" Command="NavigationCommands.PreviousPage" DataContext="{Binding ElementName=FrameForPages}" Width="83" Height="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                <Button Name="BackButton" Command="NavigationCommands.BrowseBack" CommandTarget="{Binding ElementName=FrameForPages}" Width="83" Height="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
                     <Button.Content>
                         <Image Source="/Resources/Images/back_arrow.png"/>
                     </Button.Content>

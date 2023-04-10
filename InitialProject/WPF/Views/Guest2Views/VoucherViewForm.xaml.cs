@@ -46,7 +46,7 @@ namespace InitialProject.WPF.Views.Guest2Views
             this.guest2 = guest;
             voucherService = new VoucherService();
             voucher = new ObservableCollection<Voucher>();
-            Vouchers = new ObservableCollection<Voucher>(voucherService.FindAllVouchers(voucher,guest2));
+            Vouchers = new ObservableCollection<Voucher>(voucherService.FindAllVouchers(guest2));
             VoucherValidity(Vouchers);
         }
         private void VoucherValidity(ObservableCollection<Voucher> Vouchers)
