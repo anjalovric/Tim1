@@ -14,7 +14,7 @@
 
     </Page.Resources>
     <Grid Margin="0,0,0,-6">
-        <DataGrid CanUserResizeColumns="False" CanUserResizeRows="False" CanUserReorderColumns="False" ItemsSource="{Binding Path=Tours,UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" SelectedItem="{Binding Path=Selected}" IsReadOnly="True" Margin="223,164,28,58">
+        <DataGrid CanUserResizeColumns="False" CanUserResizeRows="False" CanUserReorderColumns="False" ItemsSource="{Binding Path=Tours,UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" SelectedItem="{Binding Path=Selected}" IsReadOnly="True" Margin="249,164,28,58">
             <DataGrid.Columns>
                 <DataGridTemplateColumn x:Name="Cover"  Width="1*">
                     <DataGridTemplateColumn.CellTemplate>
@@ -41,11 +41,14 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <Label Content="List of tours which are starting today:" FontSize="15" HorizontalAlignment="Left" Margin="223,129,0,0" VerticalAlignment="Top" Width="295"/>
-        <Calendar HorizontalAlignment="Left" Margin="0,318,0,0" VerticalAlignment="Top" Height="216" Width="218"/>
+        <Label Content="List of tours which are starting today:" FontSize="15" HorizontalAlignment="Left" Margin="249,129,0,0" VerticalAlignment="Top" Width="295"/>
+        <Calendar HorizontalAlignment="Left" Margin="2,292,0,0" VerticalAlignment="Top" Height="216" Width="218"/>
         <Label Content="{Binding Home}" HorizontalAlignment="Left" FontSize="25" FontWeight="Bold" Margin="392,31,0,0" VerticalAlignment="Top" Height="53" Width="350"/>
 
-
+        <Label Content="{Binding Clock,UpdateSourceTrigger=PropertyChanged}" Height="55" HorizontalAlignment="Left" Margin="39,220,0,0"   VerticalAlignment="Top" Width="160" FontSize="29" FontWeight="Bold" />
+        <Image Source="/Resources/Images/clock.png" HorizontalAlignment="Left" Height="26" Margin="49,189,0,0" VerticalAlignment="Top" Width="29" RenderTransformOrigin="0.966,0.769"/>
+        <Label Content="GMT+1" HorizontalAlignment="Left" Margin="80,183,0,0" VerticalAlignment="Top" Height="38" Width="106" FontSize="21" RenderTransformOrigin="0.555,0.85"/>
+        <Rectangle HorizontalAlignment="Left" Height="511" Margin="218,144,0,0" Stroke="Black" VerticalAlignment="Top" Fill="LightGray" Width="1"/>
     </Grid>
 
 </Page>

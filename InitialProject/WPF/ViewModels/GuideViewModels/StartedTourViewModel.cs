@@ -1,20 +1,14 @@
 ﻿using InitialProject.Model;
 using InitialProject.Service;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
 
 namespace InitialProject.WPF.ViewModels
 {
-    public class StartedTourViewModel:INotifyPropertyChanged
+    public class StartedTourViewModel : INotifyPropertyChanged
     {
         public ObservableCollection<CheckPoint> AllPoints { get; set; }
         public ObservableCollection<CheckPoint> CurrentPoint { get; set; }
@@ -49,7 +43,7 @@ namespace InitialProject.WPF.ViewModels
                 }
             }
         }
-        public string Title { get;set; }
+        public string Title { get; set; }
         private string toast;
         public string Toast
         {
@@ -67,7 +61,7 @@ namespace InitialProject.WPF.ViewModels
         public RelayCommand NextCommand { get; set; }
         public RelayCommand FinishCommand { get; set; }
 
-        public StartedTourViewModel(TourInstance active, ObservableCollection<TourInstance> tours, ObservableCollection<TourInstance> finishedInstances) 
+        public StartedTourViewModel(TourInstance active, ObservableCollection<TourInstance> tours, ObservableCollection<TourInstance> finishedInstances)
         {
             AllPoints = new ObservableCollection<CheckPoint>();
             CurrentPoint = new ObservableCollection<CheckPoint>();
@@ -80,15 +74,15 @@ namespace InitialProject.WPF.ViewModels
         private void SetStartState()
         {
             Toast = "Hidden";
-            NextEnabled= true;
-            FinishEnabled= true;
+            NextEnabled = true;
+            FinishEnabled = true;
             Title = selected.Tour.Name + ", " + selected.Date + ", " + selected.StartClock;
             StartInstance();
         }
         private void MakeCommands()
         {
             NextCommand = new RelayCommand(NextExecuted, CanExecute);
-            FinishCommand=new RelayCommand(FinishExecuted, CanExecute);
+            FinishCommand = new RelayCommand(FinishExecuted, CanExecute);
         }
         private bool CanExecute(object sender)
         {
@@ -127,7 +121,7 @@ namespace InitialProject.WPF.ViewModels
 
             FindActive(finished);
             NextEnabled = false;
-            FinishEnabled= false;
+            FinishEnabled = false;
             Toast = "Visible";
         }
 
