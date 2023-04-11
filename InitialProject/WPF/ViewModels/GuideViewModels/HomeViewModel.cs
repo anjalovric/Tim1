@@ -7,19 +7,22 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Threading;
 
 namespace InitialProject.WPF.ViewModels
 {
-    public class HomeViewModel
+    public class HomeViewModel:INotifyPropertyChanged
     {
+        System.Windows.Threading.DispatcherTimer Timer = new System.Windows.Threading.DispatcherTimer();
         public string Home { get; set; }
         private ObservableCollection<TourInstance> tours;
-
         public ObservableCollection<TourInstance> Tours
         {
             get { return tours; }
@@ -27,6 +30,18 @@ namespace InitialProject.WPF.ViewModels
             {
                 if (value != tours)
                     tours = value;
+                OnPropertyChanged();
+            }
+
+        }
+        private string clock;
+        public string Clock
+        {
+            get { return clock; }
+            set
+            {
+                if (value != clock)
+                    clock = value;
                 OnPropertyChanged();
             }
 
@@ -56,6 +71,10 @@ namespace InitialProject.WPF.ViewModels
             Tours = new ObservableCollection<TourInstance>(tourInstanceService.GetByStart(loggedGuide));
             SetTitle(user);
             StartCommand = new RelayCommand(StartTour_Executed, CanExecute);
+            DispatcherTimer LiveTime = new DispatcherTimer();
+             LiveTime.Interval = TimeSpan.FromSeconds(1);
+             LiveTime.Tick += timer_Tick;
+             LiveTime.Start();
         }
         private bool CanExecute(object sender)
         {
@@ -84,6 +103,10 @@ namespace InitialProject.WPF.ViewModels
                 Application.Current.Windows.OfType<GuideWindow>().FirstOrDefault().Main.Content = startedTourInstanceView;
 
             }
+        }
+        void timer_Tick(object sender, EventArgs e)
+        {
+             Clock = DateTime.Now.ToString("HH:mm:ss");
         }
     }
 }

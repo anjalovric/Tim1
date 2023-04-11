@@ -4,7 +4,8 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:InitialProject.WPF.Views.GuideViews"
-      xmlns:val="clr-namespace:InitialProject.WPF.Validations.GuideValidations" xmlns:viewmodels="clr-namespace:InitialProject.WPF.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:TourInstanceReviewViewModel}"
+      xmlns:val="clr-namespace:InitialProject.WPF.Validations.GuideValidations" 
+      xmlns:viewmodels="clr-namespace:InitialProject.WPF.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:TourInstanceReviewViewModel}"
       mc:Ignorable="d" 
       d:DesignHeight="707" d:DesignWidth="1100"
       Title="AddTourView" Background="White">
@@ -39,8 +40,10 @@
             <TextBox x:Name="TourNameTB" Grid.Row="0" Grid.Column="1"  Margin="0,10,0,10">
                 <TextBox.Text>
                     <Binding Path="NameTU" UpdateSourceTrigger="PropertyChanged">
-
-                </Binding>
+                        <Binding.ValidationRules>
+                            <val:StringTourNameValidationRule  ValidationStep="RawProposedValue"></val:StringTourNameValidationRule>
+                        </Binding.ValidationRules>
+                    </Binding>
                 </TextBox.Text>
                 <Validation.ErrorTemplate>
                     <ControlTemplate>
