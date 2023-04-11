@@ -18,12 +18,12 @@ using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.Service;
 
-namespace InitialProject.View
+namespace InitialProject.WPF.Views.Guest1Views
 {
     /// <summary>
     /// Interaction logic for DatesForAccommodationReservation.xaml
     /// </summary>
-    public partial class DatesForAccommodationReservation : Window
+    public partial class DatesForAccommodationReservationView : Window
     {
         private Accommodation currentAccommodation;
         private AccommodationReservationService accommodationReservationService;
@@ -44,7 +44,7 @@ namespace InitialProject.View
             }
         }
 
-        public DatesForAccommodationReservation(Accommodation currentAccommodation, AccommodationReservationService accommodationReservationService, Guest1 guest1)
+        public DatesForAccommodationReservationView(Accommodation currentAccommodation, AccommodationReservationService accommodationReservationService, Guest1 guest1)
         {
             InitializeComponent();
             this.DataContext = this;
@@ -57,7 +57,7 @@ namespace InitialProject.View
 
         private void ChooseDateButton_Click(object sender, RoutedEventArgs e)
         {
-            AccommodationGuestsNumberInput guestsNumber = new AccommodationGuestsNumberInput(currentAccommodation, selectedDateRange, accommodationReservationService, availableDatesForAccommodations, guest1);
+            AccommodationGuestsNumberInputView guestsNumber = new AccommodationGuestsNumberInputView(currentAccommodation, selectedDateRange, accommodationReservationService, availableDatesForAccommodations, guest1);
             guestsNumber.Owner = this;
             guestsNumber.Show();
         }

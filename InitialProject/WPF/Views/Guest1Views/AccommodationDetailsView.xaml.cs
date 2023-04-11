@@ -14,24 +14,23 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using InitialProject.Domain.Model;
 using InitialProject.Model;
+using InitialProject.WPF.Views;
 
-namespace InitialProject.View
+namespace InitialProject.WPF.Views.Guest1Views
 {
     /// <summary>
     /// Interaction logic for AccommodationDetails.xaml
     /// </summary>
-    public partial class AccommodationDetails : Page
+    public partial class AccommodationDetailsView : Page
     {
         public Accommodation SelectedAccommodation { get; set; }
-        public Frame Main;
         private List<AccommodationImage> images;
         public Uri relativeUri { get; set; }
-        public AccommodationDetails(List<string> imagesUrl, Accommodation currentAccommodation, ref Frame Main)
+        public AccommodationDetailsView(List<string> imagesUrl, Accommodation currentAccommodation)
         {
             InitializeComponent();
             this.DataContext = this;
-            this.Main = Main;
-            this.Main.Content = this;
+            Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = this;
             SelectedAccommodation = currentAccommodation;
             images = new List<AccommodationImage>();
           

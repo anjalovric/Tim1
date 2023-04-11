@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Model;
 using InitialProject.Serializer;
+using InitialProject.View;
 
 namespace InitialProject.Repository
 {
@@ -23,7 +24,7 @@ namespace InitialProject.Repository
             _cancelledAccommodationReservations = _serializer.FromCSV(FilePath);
         }
 
-        public int NextId()
+        public int NextId()             //sta sa njom da uradim, visak je?
         {
             _cancelledAccommodationReservations = _serializer.FromCSV(FilePath);
             if (_cancelledAccommodationReservations.Count < 1)
@@ -48,6 +49,16 @@ namespace InitialProject.Repository
         public AccommodationReservation GetById(int id)
         {
             return _cancelledAccommodationReservations.Find(n => n.Id == id);
+        }
+        public int GetMaxId()
+        {
+            int id = 0;
+            foreach (AccommodationReservation reservation in _cancelledAccommodationReservations)
+            {
+                if (reservation.Id > id)
+                    id = reservation.Id;
+            }
+            return id;
         }
     }
 }

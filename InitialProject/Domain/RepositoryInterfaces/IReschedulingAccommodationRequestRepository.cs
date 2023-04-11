@@ -10,5 +10,9 @@ namespace InitialProject.Domain.RepositoryInterfaces
     public interface IReschedulingAccommodationRequestRepository : IGenericRepository<ReschedulingAccommodationRequest>
     {
         public void Add(ReschedulingAccommodationRequest request);
+        public ReschedulingAccommodationRequest Update(ReschedulingAccommodationRequest updatedRequest);
+        public void Save(ReschedulingAccommodationRequest reschedulingAccommodationRequest);
+        public int NextId();
+        public ReschedulingAccommodationRequest GetById(int id);
     }
 }

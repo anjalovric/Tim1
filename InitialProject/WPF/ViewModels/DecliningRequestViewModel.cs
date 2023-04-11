@@ -43,6 +43,7 @@ namespace InitialProject.WPF.ViewModels
         }
 
         public string Explanation
+
         {
             get => explanation;
             set

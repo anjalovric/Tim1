@@ -22,6 +22,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using InitialProject.WPF.ViewModels.Guest2ViewModels;
 
 namespace InitialProject.WPF.Views.Guest2Views
 {
@@ -30,48 +31,10 @@ namespace InitialProject.WPF.Views.Guest2Views
     /// </summary>
     public partial class Guest2Overview : Window
     {
-        public Model.Guest2 WindowGuest2 { get; set; }
-        private Guest2 guest2;
-        private Guest2Repository guest2Repository;
         public Guest2Overview(User user)
         {
             InitializeComponent();
-            guest2Repository = new Guest2Repository();
-            guest2 = new Model.Guest2();
-            GetGuest2ByUser(user);
-            CC.Content = new ShowTours(guest2);
+            DataContext = new Guest2OverviewViewModel(user,CC);
         }
-        private void Restart_Click(object sender, RoutedEventArgs e)
-        {
-            CC.Content = new ShowTours(guest2);
-
-        }
-        private void ActiveTours_Click(object sender, RoutedEventArgs e)
-        {
-            CC.Content = new ActiveToursForm(guest2);
-
-        }
-        private void SignOut_Click(object sender, RoutedEventArgs e)
-        {
-            SignInForm signInForm = new SignInForm();
-            signInForm.Show();
-            this.Close();
-
-        }
-        private void ShowFinished_Click(object sender, RoutedEventArgs e)
-        {
-            CC.Content = new FinishedTourInstances(guest2);
-
-        }
-        private void GetGuest2ByUser(User user)
-        {
-            guest2 = guest2Repository.GetByUsername(user.Username);
-        }
-        private void Vouchers_Click(object sender, RoutedEventArgs e)
-        {
-            CC.Content = new VoucherViewForm(guest2);
-
-        }
-       
     }
 }

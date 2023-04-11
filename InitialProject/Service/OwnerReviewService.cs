@@ -4,6 +4,8 @@ using System.Linq;
 using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
+using InitialProject.Domain.RepositoryInterfaces;
+using InitialProject.Domain;
 using InitialProject.Model;
 using InitialProject.Repository;
 
@@ -11,20 +13,18 @@ namespace InitialProject.Service
 {
     public class OwnerReviewService
     {
-        private OwnerReviewRepository ownerReviewRepository;
+        private IOwnerReviewRepository ownerReviewRepository = Injector.CreateInstance<IOwnerReviewRepository>();
         private List<OwnerReview> ownerReviews;
         public OwnerReviewService()
         {
-            ownerReviewRepository = new OwnerReviewRepository();
+            //ownerReviewRepository = new OwnerReviewRepository();
             ownerReviews = new List<OwnerReview>(ownerReviewRepository.GetAll());
             MakeReservations();
         }
-
         public List<OwnerReview> GetAll()
         {
             return ownerReviews;
         }
-
         public List<OwnerReview> GetAllToDisplay(Owner owner)
         {
             List<OwnerReview> reviewsToDisplay = new List<OwnerReview>();
@@ -44,17 +44,14 @@ namespace InitialProject.Service
             }
             return reviewsToDisplay;
         }
-
         public bool HasReview(AccommodationReservation reservation)
         {
             return ownerReviewRepository.HasReview(reservation);
         }
-
         public void Save(OwnerReview review)
         {
             ownerReviewRepository.Save(review);
         }
-
         public double CalculateAverageRateByOwner(Owner owner)
         {
             List<OwnerReview> reviewsToDisplay = GetAllToDisplay(owner);
@@ -74,7 +71,6 @@ namespace InitialProject.Service
             }
             return 0;
         }
-
         public int GetNumberOfReviewsByOwner(Owner owner)
         {
             List<OwnerReview> reviewsToDisplay = GetAllToDisplay(owner);
@@ -88,7 +84,6 @@ namespace InitialProject.Service
             }
             return numberOfReviews;
         }
-
         private void MakeReservations()
         {
             AccommodationReservationService accommodationReservationService = new AccommodationReservationService();
@@ -104,7 +99,6 @@ namespace InitialProject.Service
                 }
             }
         }
-
         public List<OwnerReview> GetAllByOwner(Owner owner)
         {
             List<OwnerReview> reviewsByOwner = new List<OwnerReview>();
@@ -118,5 +112,10 @@ namespace InitialProject.Service
             }
             return reviewsByOwner;
         }
+        public bool IsReservationValidToReview(AccommodationReservation SelectedCompletedReservation)
+        {
+            return SelectedCompletedReservation.Departure >= DateTime.Now.AddDays(-5);
+        }
     }
 }
+//61 linija

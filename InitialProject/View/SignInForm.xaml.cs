@@ -9,7 +9,10 @@ using InitialProject.WPF.Views.GuideViews;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using InitialProject.WPF.Views.Guest1Views;
+
 using InitialProject.WPF.Views.Guest2Views;
+
 namespace InitialProject
 {
     /// <summary>
@@ -73,10 +76,9 @@ namespace InitialProject
                     }
                     else if (user.Role == Model.Role.GUEST1)
                     {
-                        Guest1Home guest1Overview = new Guest1Home(user);
-                        guest1Overview.Owner = this;
+                        Guest1HomeView guest1Overview = new Guest1HomeView(user);
                         guest1Overview.Show();
-                        Hide();
+                        Close();
                     }
                     else if (user.Role == Model.Role.GUEST2)
                     {

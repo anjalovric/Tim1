@@ -17,12 +17,12 @@ using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.Service;
 
-namespace InitialProject.View
+namespace InitialProject.WPF.Views.Guest1Views
 {
     /// <summary>
     /// Interaction logic for AccommodationGuestsNumberInput.xaml
     /// </summary>
-    public partial class AccommodationGuestsNumberInput : Window
+    public partial class AccommodationGuestsNumberInputView : Window
     {
         public Accommodation currentAccommodation { get; set; }
         private AccommodationReservationService accommodationReservationService;
@@ -31,7 +31,7 @@ namespace InitialProject.View
         private AvailableDatesForAccommodationReservation selectedDateRange;
         private Guest1 guest1;
         public ObservableCollection<AvailableDatesForAccommodationReservation> availableDatesForAccommodations { get; set; }
-        public AccommodationGuestsNumberInput(Accommodation currentAccommodation, AvailableDatesForAccommodationReservation selectedDateRange, AccommodationReservationService accommodationReservationService, ObservableCollection<AvailableDatesForAccommodationReservation> availableDatesForAccommodations, Guest1 guest1)
+        public AccommodationGuestsNumberInputView(Accommodation currentAccommodation, AvailableDatesForAccommodationReservation selectedDateRange, AccommodationReservationService accommodationReservationService, ObservableCollection<AvailableDatesForAccommodationReservation> availableDatesForAccommodations, Guest1 guest1)
         {
             InitializeComponent();
             this.DataContext = this;

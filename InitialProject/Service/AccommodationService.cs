@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using InitialProject.Domain;
 using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Model;
 using InitialProject.Repository;
@@ -12,14 +13,13 @@ namespace InitialProject.Service
 {
     public class AccommodationService
     {
-        private AccommodationRepository accommodationRepository;
+        private IAccommodationRepository accommodationRepository = Injector.CreateInstance<IAccommodationRepository>();
         private List<Accommodation> accommodations;
         public AccommodationService()
         {
-            accommodationRepository = new AccommodationRepository();
+           // accommodationRepository = new AccommodationRepository();
             MakeAccommodations();
         }
-
         public List<Accommodation> GetAll()
         {
             return accommodations;
@@ -29,12 +29,10 @@ namespace InitialProject.Service
         {
             accommodationRepository.Add(accommodation);
         }
-
         public Accommodation GetById(int id)
         {
             return accommodations.Find(n => n.Id == id);
         }
-
         private void MakeAccommodations()
         {
             accommodations = accommodationRepository.GetAll();
@@ -42,8 +40,6 @@ namespace InitialProject.Service
             AddLocations();
             AddTypes();
         }
-
-
         private void AddOwners()
         {
             OwnerService ownerService = new OwnerService();
@@ -57,7 +53,6 @@ namespace InitialProject.Service
                 }
             }
         }
-
         private void AddLocations()
         {
             LocationService locationService = new LocationService();
@@ -72,11 +67,14 @@ namespace InitialProject.Service
             }
         }
 
+ 
+
         private void AddTypes()
         {
             AccommodationTypeService accommodationTypeService = new AccommodationTypeService();
             List<AccommodationType> allTypes = accommodationTypeService.GetAll();
             foreach(Accommodation accommodation in accommodations)
+
             {
                 AccommodationType accommodationType = allTypes.Find(n => n.Id == accommodation.Type.Id);
                 if(accommodationType != null)
@@ -85,6 +83,9 @@ namespace InitialProject.Service
                 }
             }
         }
+
+    
+
         public ObservableCollection<Accommodation> GetAllByOwner(Owner owner)
         {
             ObservableCollection<Accommodation> accommodationsByOwner = new ObservableCollection<Accommodation>();
@@ -107,4 +108,3 @@ namespace InitialProject.Service
         }
     }
 }
-

@@ -31,18 +31,21 @@ namespace InitialProject.Repository
             return _accommodationReservations;
         }
 
-         public int NextId()
+        public int NextId()
         {
-            _accommodationReservations = _serializer.FromCSV(FilePath);
-            if (_accommodationReservations.Count < 1)
-            {
+            CancelledAccommodationReservationRepository cancelledAccommodationReservationRepository = new CancelledAccommodationReservationRepository();
+            List<AccommodationReservation> storedCancelledReservations = cancelledAccommodationReservationRepository.GetAll();
+            if (storedCancelledReservations.Count < 1 && _accommodationReservations.Count < 1)
                 return 1;
-            }
-            return _accommodationReservations.Max(c => c.Id) + 1;
+            int cancelledId = cancelledAccommodationReservationRepository.GetMaxId();
+            int id = GetMaxId();
+            if (cancelledId > id)
+                return cancelledId + 1;
+            return id + 1;
         }
-        public void Add(AccommodationReservation accommodationReservation, int nextId)
+        public void Add(AccommodationReservation accommodationReservation)
         {
-            accommodationReservation.Id = nextId;
+            accommodationReservation.Id = NextId();
             _accommodationReservations.Add(accommodationReservation);
             _serializer.ToCSV(FilePath, _accommodationReservations);
         }
@@ -66,15 +69,26 @@ namespace InitialProject.Repository
             return newReservation;
         }
 
-        public void Add(AccommodationReservation accommodationReservation)
-        {
-            _accommodationReservations.Add(accommodationReservation);
-            _serializer.ToCSV(FilePath, _accommodationReservations);
-        }
+        
 
         public AccommodationReservation GetById(int id)
         {
             return _accommodationReservations.Find(c => c.Id == id);
         }
+
+       
+
+       private int GetMaxId()
+       {
+           int id = 0;
+           foreach(AccommodationReservation reservation in _accommodationReservations)
+           {
+               if(reservation.Id>id)
+                   id = reservation.Id;
+           }
+           return id;
+       }
+
+
     }
 }

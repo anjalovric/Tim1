@@ -10,5 +10,8 @@ namespace InitialProject.Domain.RepositoryInterfaces
     public interface IOwnerRepository:IGenericRepository<Owner>
     {
         public Owner GetByUsername(string username);
+        public void Save(Owner owner);
+        public int NextId();
+        public Owner GetById(int id);
     }
 }

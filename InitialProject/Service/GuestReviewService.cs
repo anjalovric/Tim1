@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using InitialProject.Domain.RepositoryInterfaces;
+using InitialProject.Domain;
 using InitialProject.Model;
 using InitialProject.Repository;
 
@@ -6,12 +8,12 @@ namespace InitialProject.Service
 {
     public class GuestReviewService
     {
-        private GuestReviewRepository guestReviewRepository;
+        private IGuestReviewRepository guestReviewRepository = Injector.CreateInstance<IGuestReviewRepository>();
         private List<GuestReview> guestReviews;
 
         public GuestReviewService()
         {
-            guestReviewRepository = new GuestReviewRepository();
+            //guestReviewRepository = new GuestReviewRepository();
             guestReviews = new List<GuestReview>(guestReviewRepository.GetAll());
             MakeReservations();
         }

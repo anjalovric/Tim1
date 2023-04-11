@@ -24,15 +24,14 @@ using InitialProject.Serializer;
 using InitialProject.View.Owner;
 
 
-namespace InitialProject.View
+namespace InitialProject.WPF.Views.Guest1Views
 {
     /// <summary>
     /// Interaction logic for Guest1Overview.xaml
     /// </summary>
-    public partial class Guest1SearchAccommodation : Page
+    public partial class Guest1SearchAccommodationView : Page
     {
         private Guest1 guest1;
-        public Frame Main;
         public ObservableCollection<string> Countries { get; set; }
         public ObservableCollection<string> CitiesByCountry { get; set; }
         private LocationRepository locationRepository;
@@ -71,12 +70,12 @@ namespace InitialProject.View
                 }
             }
         }
-        public Guest1SearchAccommodation(Guest1 guest1, ref Frame Main)
+        public Guest1SearchAccommodationView(Guest1 guest1)
         {
             InitializeComponent();
             DataContext = this;
 
-            this.Main = Main;
+            
             this.guest1 = guest1;
             accommodationRepository = new AccommodationRepository();
             Accommodations = new ObservableCollection<Accommodation>(accommodationRepository.GetAll());
@@ -302,7 +301,7 @@ namespace InitialProject.View
                 List<string> imagesUrls = new List<string>();
                 Accommodation currentAccommodation = ((Button)sender).DataContext as Accommodation;
                 FindPhotosUrls(imagesUrls, currentAccommodation);
-                AccommodationDetails details = new AccommodationDetails(imagesUrls, currentAccommodation, ref Main);
+                AccommodationDetailsView details = new AccommodationDetailsView(imagesUrls, currentAccommodation);
                 
 
             }
@@ -328,7 +327,7 @@ namespace InitialProject.View
         {
             Accommodation currentAccommodation = ((Button)sender).DataContext as Accommodation;
             //Accommodation currentAccommodation = selectedAccommodation;
-            AccommodationReservationForm accommodationReservationForm = new AccommodationReservationForm(currentAccommodation, ref accommodationRepository, guest1);
+            AccommodationReservationFormView accommodationReservationForm = new AccommodationReservationFormView(currentAccommodation, ref accommodationRepository, guest1);
             accommodationReservationForm.Show();
         }
 

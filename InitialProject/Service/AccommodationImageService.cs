@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using InitialProject.Domain;
 using InitialProject.Domain.Model;
+using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Model;
 using InitialProject.Repository;
 
@@ -11,10 +13,10 @@ namespace InitialProject.Service
 {
     public class AccommodationImageService
     {
-        private AccommodationImageRepository accommodationImageRepository;
+        private IAccommodationImageRepository accommodationImageRepository = Injector.CreateInstance<IAccommodationImageRepository>();
         public AccommodationImageService()
         {
-            accommodationImageRepository = new AccommodationImageRepository();
+            //accommodationImageRepository = new AccommodationImageRepository();
         }
 
         public List<AccommodationImage> GetAll()

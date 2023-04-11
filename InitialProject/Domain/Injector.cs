@@ -25,7 +25,21 @@ namespace InitialProject.Domain
         { typeof(IOwnerRepository), new OwnerRepository() },
         { typeof(IUserRepository), new UserRepository() },
         { typeof(IGuideAndTourReviewsRepository), new GuideAndTourReviewRepository() },
-        { typeof(ITourReviewImageRepository), new TourReviewImageRepository() }
+        { typeof(ITourReviewImageRepository), new TourReviewImageRepository() },
+        { typeof(IAccommodationImageRepository), new AccommodationImageRepository() },
+        { typeof(IAccommodationRepository), new AccommodationRepository() },
+        { typeof(IAccommodationReservationRepository), new AccommodationReservationRepository() },
+        { typeof(IAccommodationReviewImageRepository), new AccommodationReviewImageRepository() },
+        { typeof(IAccommodationTypeRepository), new AccommodationTypeRepository() },
+        { typeof(ICancelledAccommodationReservationRepository), new CancelledAccommodationReservationRepository() },
+        { typeof(ICompletedAccommodationReschedulingRequestRepository), new CompletedAccommodationReschedulingRequestRepository() },
+        { typeof(IGuest1Repository), new Guest1Repository() },
+        { typeof(IGuestReviewRepository), new GuestReviewRepository() },
+        { typeof(IOwnerReviewRepository), new OwnerReviewRepository() },
+        { typeof(IReschedulingAccommodationRequestRepository), new ReschedulingAccommodationRequestRepository() }
+
+
+
     //    { typeof(TourDetailsService), new TourDetailsService() },
   //       { typeof(TourInstanceService), new TourInstanceService() }
         };
