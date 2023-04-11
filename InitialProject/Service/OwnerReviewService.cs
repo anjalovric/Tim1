@@ -17,7 +17,6 @@ namespace InitialProject.Service
         private List<OwnerReview> ownerReviews;
         public OwnerReviewService()
         {
-            //ownerReviewRepository = new OwnerReviewRepository();
             ownerReviews = new List<OwnerReview>(ownerReviewRepository.GetAll());
             MakeReservations();
         }

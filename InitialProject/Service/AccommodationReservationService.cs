@@ -16,23 +16,14 @@ namespace InitialProject.Service
     {
         private Guest1 guest1;
         private List<AccommodationReservation> storedReservations;
-        private LocationService locationService;
-        private AccommodationTypeService accommodationTypeService;
-        private AccommodationService accommodationService;
-        private OwnerService ownerService;
-        public ObservableCollection<AccommodationReservation> CompletedReservations;
-        public ObservableCollection<AccommodationReservation> NotCompletedReservations;
+        public List<AccommodationReservation> CompletedReservations;
+        public List<AccommodationReservation> NotCompletedReservations;
         private IAccommodationReservationRepository accommodationReservationRepository = Injector.CreateInstance<IAccommodationReservationRepository>();
 
         public AccommodationReservationService()
         {
-            //accommodationReservationRepository = new AccommodationReservationRepository();
-            accommodationService = new AccommodationService();
-            ownerService = new OwnerService();
-            locationService = new LocationService();
-            accommodationTypeService = new AccommodationTypeService();
-            NotCompletedReservations = new ObservableCollection<AccommodationReservation>();
-            CompletedReservations = new ObservableCollection<AccommodationReservation>();
+            NotCompletedReservations = new List<AccommodationReservation>();
+            CompletedReservations = new List<AccommodationReservation>();
             SetAccommodationReservations();
         }
         public List<AccommodationReservation> GetAll()
@@ -54,10 +45,10 @@ namespace InitialProject.Service
         }
 
         
-        public ObservableCollection<AccommodationReservation> GetCompletedReservations(Guest1 guest1)
+        public List<AccommodationReservation> GetCompletedReservations(Guest1 guest1)
         {
             SetAccommodationReservations();
-            CompletedReservations = new ObservableCollection<AccommodationReservation>();
+            CompletedReservations = new List<AccommodationReservation>();
             foreach (AccommodationReservation reservation in storedReservations)
             {
                 if (reservation.Departure < DateTime.Now && reservation.Guest.Id == guest1.Id)
@@ -67,10 +58,10 @@ namespace InitialProject.Service
             }
             return CompletedReservations;
         }
-        public ObservableCollection<AccommodationReservation> GetNotCompletedReservations(Guest1 guest1)
+        public List<AccommodationReservation> GetNotCompletedReservations(Guest1 guest1)
         {
             SetAccommodationReservations();
-            NotCompletedReservations = new ObservableCollection<AccommodationReservation>();
+            NotCompletedReservations = new List<AccommodationReservation>();
             foreach (AccommodationReservation reservation in storedReservations)
             {
                 if (reservation.Departure >= DateTime.Now && reservation.Guest.Id == guest1.Id)
@@ -82,6 +73,7 @@ namespace InitialProject.Service
         }
         private void SetOwnerToAccommodationReservations()
         {
+            OwnerService ownerService = new OwnerService();
             foreach (AccommodationReservation reservation in storedReservations)
             {
                 reservation.Accommodation.Owner = ownerService.GetById(reservation.Accommodation.Owner.Id);
@@ -89,6 +81,7 @@ namespace InitialProject.Service
         }
         private void SetAccommodationsToReservations()
         {
+            AccommodationService accommodationService = new AccommodationService();
             foreach (AccommodationReservation reservation in storedReservations)
             {
                 reservation.Accommodation = accommodationService.GetById(reservation.Accommodation.Id);
@@ -101,6 +94,8 @@ namespace InitialProject.Service
         }
         private void SetAccommodationLocations()
         {
+            LocationService locationService = new LocationService();
+
             List<Location> locations = locationService.GetAll();
             foreach (AccommodationReservation reservation in storedReservations)
             {
@@ -112,6 +107,7 @@ namespace InitialProject.Service
         
         private void SetAccommodationTypes()
         {
+            AccommodationTypeService accommodationTypeService = new AccommodationTypeService();
             List<AccommodationType> types = accommodationTypeService.GetAll();
             foreach (AccommodationReservation reservation in storedReservations)
             {

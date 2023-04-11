@@ -13,7 +13,6 @@ namespace InitialProject.Service
 
         public GuestReviewService()
         {
-            //guestReviewRepository = new GuestReviewRepository();
             guestReviews = new List<GuestReview>(guestReviewRepository.GetAll());
             MakeReservations();
         }

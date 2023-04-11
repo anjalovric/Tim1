@@ -21,7 +21,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
     public class OwnerAndAccommodationReviewFormViewModel:INotifyPropertyChanged
     {
         private AccommodationReservation reservation;
-        private AccommodationReviewImageService accommodationReviewImageService;
         public Uri relativeUri { get; set; }
         private List<AccommodationReviewImage> images;
         public RelayCommand SendCommand { get; set; }
@@ -54,7 +53,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         {
             this.reservation = SelectedCompletedReservation;
             this.guest1 = guest1;
-            this.accommodationReviewImageService = new AccommodationReviewImageService();
             images = new List<AccommodationReviewImage>();
             MakeCommands();
         }
@@ -85,6 +83,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         }
         private void StoreImages()
         {
+            AccommodationReviewImageService accommodationReviewImageService = new AccommodationReviewImageService();
             foreach (AccommodationReviewImage image in images)
             {
                 accommodationReviewImageService.Add(image);

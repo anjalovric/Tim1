@@ -25,10 +25,8 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         public RelayCommand SendCommand { get; set; }
 
 
-       // private Service.ReschedulingAccommodationRequestService requestService;
         public ReschedulingAccommodationReservationFormViewModel(AccommodationReservation SelectedNotCompletedReservation)
         {
-            //requestService = new Service.ReschedulingAccommodationRequestService();
             this.reservation = SelectedNotCompletedReservation;
             MakeCommands();
         }
@@ -51,13 +49,9 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 
         private void Send_Executed(object sender)
         {
-            //Service.ReschedulingAccommodationRequestService requestService;
-            //requestService = new Service.ReschedulingAccommodationRequestService();
 
             if (IsValidDateInput())
-            {
-                //Model.ReschedulingAccommodationRequest newRequest = new Model.ReschedulingAccommodationRequest(reservation, Arrival, Departure, Reason);
-                //requestService.Add(newRequest);
+            { 
                 StoreRequest();
                 Application.Current.Windows.OfType<ReschedulingAccommodationReservationFormView>().FirstOrDefault().Close();
                 MessageBox.Show("Request successfully sent!");

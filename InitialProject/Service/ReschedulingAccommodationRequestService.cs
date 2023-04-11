@@ -12,7 +12,6 @@ namespace InitialProject.Service
         private List<ReschedulingAccommodationRequest> requests;
         public ReschedulingAccommodationRequestService()
         {
-            //requestRepository = new ReschedulingAccommodationRequestRepository();
             requests = new List<ReschedulingAccommodationRequest>(requestRepository.GetAll());
             SetReservations();
         }
