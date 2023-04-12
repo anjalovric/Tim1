@@ -16,7 +16,6 @@ namespace InitialProject.Service
         private Guest1 guest1;
         private ICancelledAccommodationReservationRepository cancelledAccommodationReservationRepository = Injector.CreateInstance<ICancelledAccommodationReservationRepository>();
         private List<AccommodationReservation> storedCancelledReservations;
-
         public CancelledAccommodationReservationService()
         {
             SetCancelledAccommodationReservations();
@@ -32,7 +31,6 @@ namespace InitialProject.Service
         public void SetCancelledAccommodationReservations()
         {
             storedCancelledReservations = new List<AccommodationReservation>(cancelledAccommodationReservationRepository.GetAll());
-
             SetAccommodationsToReservations();
             SetOwnerToAccommodationReservations();
             SetAccommodationTypes();
@@ -43,26 +41,20 @@ namespace InitialProject.Service
         {
             AccommodationService accommodationService = new AccommodationService();
             foreach (AccommodationReservation reservation in storedCancelledReservations)
-            {
                 reservation.Accommodation = accommodationService.GetById(reservation.Accommodation.Id);
-            }
         }
         private void SetOwnerToAccommodationReservations()
         {
             OwnerService ownerService = new OwnerService();
             foreach (AccommodationReservation reservation in storedCancelledReservations)
-            {
                 reservation.Accommodation.Owner = ownerService.GetById(reservation.Accommodation.Owner.Id);
-            }
         }
         private void SetAccommodationLocations()
         {
             LocationService locationService = new LocationService();
             List<Location> locations = locationService.GetAll();
             foreach (AccommodationReservation reservation in storedCancelledReservations)
-            {
                 reservation.Accommodation.Location = locationService.GetById(reservation.Accommodation.Location.Id);
-            }
         }
         private void SetAccommodationTypes()
         {
@@ -71,9 +63,7 @@ namespace InitialProject.Service
             foreach (AccommodationReservation reservation in storedCancelledReservations)
             {
                 if (accommodationTypeService.GetById(reservation.Accommodation.Type.Id) != null)
-                {
                     reservation.Accommodation.Type = accommodationTypeService.GetById(reservation.Accommodation.Type.Id);
-                }
             }
         }
         private void SetGuests()
@@ -84,9 +74,7 @@ namespace InitialProject.Service
             {
                 Guest1 guestForReservation = allGuest.Find(n => n.Id == reservation.Guest.Id);
                 if (guestForReservation != null)
-                {
                     reservation.Guest = guestForReservation;
-                }
             }
         }
         public bool IsCancellationAllowed(AccommodationReservation SelectedNotCompletedReservation)
@@ -104,4 +92,3 @@ namespace InitialProject.Service
         }
     }
 }
-//58 linija

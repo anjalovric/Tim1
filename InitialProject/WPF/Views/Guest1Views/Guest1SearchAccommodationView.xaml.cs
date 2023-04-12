@@ -19,7 +19,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using InitialProject.Model;
-using InitialProject.Repository;
 using InitialProject.Serializer;
 using InitialProject.View.Owner;
 using InitialProject.Service;
@@ -35,15 +34,7 @@ namespace InitialProject.WPF.Views.Guest1Views
         private Guest1 guest1;
         public ObservableCollection<string> Countries { get; set; }
         public ObservableCollection<string> CitiesByCountry { get; set; }
-        private LocationRepository locationRepository;
-        private Location location;
-
-        private AccommodationType accommodationType;
-        private AccommodationTypeService accommodationTypeService;
-
-        private List<AccommodationImage> accommodationImages;
-        private AccommodationImageService accommodationImageService;
-
+        private LocationService locationService;
         private AccommodationService accommodationService;
         private ObservableCollection<Accommodation> accommodations;
         public ObservableCollection<Accommodation> Accommodations
@@ -57,8 +48,7 @@ namespace InitialProject.WPF.Views.Guest1Views
             }
 
         }
-
-        
+        private Location location;
         public Location Location
         {
             get { return location; }
@@ -75,61 +65,49 @@ namespace InitialProject.WPF.Views.Guest1Views
         {
             InitializeComponent();
             DataContext = this;
-
-            
             this.guest1 = guest1;
             accommodationService = new AccommodationService();
             Accommodations = new ObservableCollection<Accommodation>(accommodationService.GetAll());
-
-            accommodationImageService = new AccommodationImageService();
-            accommodationImages = new List<AccommodationImage>(accommodationImageService.GetAll());
-
-            accommodationType = new AccommodationType();
-            accommodationTypeService = new AccommodationTypeService();
             SetAccommodationTypes();
-
-            locationRepository = new LocationRepository();
+            GetLocations();
+            SetAccommodationLocations();
+        }
+        private void GetLocations()
+        {
+            locationService = new LocationService();
             location = new Location();
-            Countries = new ObservableCollection<string>(locationRepository.GetAllCountries());
+            Countries = new ObservableCollection<string>(locationService.GetAllCountries());
             CitiesByCountry = new ObservableCollection<string>();
             cityInput.IsEnabled = false;
-            SetAccommodationLocations();
-            this.guest1 = guest1;
         }
-
-
-
         private void SignOut_Click(object sender, RoutedEventArgs e)
         {
             SignInForm signInForm = new SignInForm();
             signInForm.Show();
-            //this.Close();
         }
-
         private void CountryInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (countryInput.SelectedItem != null)
             {
                 CitiesByCountry.Clear();
-                foreach (string city in locationRepository.GetCitiesByCountry((string)countryInput.SelectedItem))
+                foreach (string city in locationService.GetCitiesByCountry((string)countryInput.SelectedItem))
                 {
                     CitiesByCountry.Add(city);
                 }
                 cityInput.IsEnabled = true;
             }
         }
-
         private void SetAccommodationLocations()
         {
-            List<Location> locations = locationRepository.GetAll();
+            List<Location> locations = locationService.GetAll();
             foreach (Accommodation accommodation in Accommodations)
             {
                 accommodation.Location = locations.Find(n => n.Id == accommodation.Location.Id);
             }
         }
-
         private void SetAccommodationTypes()
         {
+            AccommodationTypeService accommodationTypeService = new AccommodationTypeService();
             List<AccommodationType> types = accommodationTypeService.GetAll();
             foreach (Accommodation accommodation in Accommodations)
             {
@@ -139,31 +117,35 @@ namespace InitialProject.WPF.Views.Guest1Views
                 }
             }
         }
-
-
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
             if (IsNumberOfDaysValid() && IsNumberOfGuestsValid())
             {
                 List<Accommodation> storedAccommodation = accommodationService.GetAll();
-                Accommodations.Clear();
+                FillWithStoredAccommodation(storedAccommodation);
                 foreach (Accommodation accommodation in storedAccommodation)
                 {
-                    Accommodations.Add(accommodation);
-                }
-                foreach (Accommodation accommodation in storedAccommodation)
-                {
-                    SearchName(accommodation);
-                    SearchCity(accommodation);
-                    SearchCountry(accommodation);
-
-                    SearchType(accommodation);
-                    SearchNumberOfGuests(accommodation);
-                    SearchNumberOfDays(accommodation);
+                    SearchByInputParameters(accommodation);
                 }
             }
         }
-
+        private void SearchByInputParameters(Accommodation accommodation)
+        {
+            SearchName(accommodation);
+            SearchCity(accommodation);
+            SearchCountry(accommodation);
+            SearchType(accommodation);
+            SearchNumberOfGuests(accommodation);
+            SearchNumberOfDays(accommodation);
+        }
+        private void FillWithStoredAccommodation(List<Accommodation> storedAccommodation)
+        {
+            Accommodations.Clear();
+            foreach (Accommodation accommodation in storedAccommodation)
+            {
+                Accommodations.Add(accommodation);
+            }
+        }
         private void SearchName(Accommodation accommodation)
         {
             if (!accommodation.Name.ToLower().Contains(nameInput.Text.ToLower()))
@@ -178,7 +160,6 @@ namespace InitialProject.WPF.Views.Guest1Views
                 Accommodations.Remove(accommodation);
             }
         }
-
         private void SearchCountry(Accommodation accommodation)
         {
             if (Location.Country != null && !accommodation.Location.Country.ToLower().Equals(Location.Country.ToLower()))
@@ -186,29 +167,35 @@ namespace InitialProject.WPF.Views.Guest1Views
                 Accommodations.Remove(accommodation);
             }
         }
-
         private void SearchType(Accommodation accommodation)
         {
             if (apartment.IsChecked == true || house.IsChecked == true || cottage.IsChecked == true)
             {
                 if (apartment.IsChecked == false)
-                {
-                    if (accommodation.Type.Name.ToLower() == "apartment")
-                        Accommodations.Remove(accommodation);
-                }
+                    RemoveIfApartment(accommodation);
+
                 if (house.IsChecked == false)
-                {
-                    if (accommodation.Type.Name.ToLower() == "house")
-                        Accommodations.Remove(accommodation);
-                }
+                    RemoveIfHouse(accommodation);
+
                 if (cottage.IsChecked == false)
-                {
-                    if (accommodation.Type.Name.ToLower() == "cottage")
-                        Accommodations.Remove(accommodation);
-                }
+                    RemoveIfCottage(accommodation);
             }
         }
-
+        private void RemoveIfApartment(Accommodation accommodation)
+        {
+            if (accommodation.Type.Name.ToLower() == "apartment")
+                Accommodations.Remove(accommodation);
+        }
+        private void RemoveIfHouse(Accommodation accommodation)
+        {
+            if (accommodation.Type.Name.ToLower() == "house")
+                Accommodations.Remove(accommodation);
+        }
+        private void RemoveIfCottage(Accommodation accommodation)
+        {
+            if (accommodation.Type.Name.ToLower() == "cottage")
+                Accommodations.Remove(accommodation);
+        }
         private void SearchNumberOfGuests(Accommodation accommodation)
         {
             if (!(numberOfGuests.Text == "") && Convert.ToInt32(numberOfGuests.Text) > accommodation.Capacity)
@@ -216,7 +203,6 @@ namespace InitialProject.WPF.Views.Guest1Views
                 Accommodations.Remove(accommodation);
             }
         }
-
         private void SearchNumberOfDays(Accommodation accommodation)
         {
             if (!(numberOfDays.Text == "") && Convert.ToInt32(numberOfDays.Text) < accommodation.MinDaysForReservation)
@@ -224,7 +210,6 @@ namespace InitialProject.WPF.Views.Guest1Views
                 Accommodations.Remove(accommodation);
             }
         }
-
         private void ShowAllButton_Click(object sender, RoutedEventArgs e)
         {
             Accommodations.Clear();
@@ -233,7 +218,6 @@ namespace InitialProject.WPF.Views.Guest1Views
 
             ResetAllSearchingFields();
         }
-
         private void ResetAllSearchingFields()
         {
             nameInput.Text = "";
@@ -246,7 +230,6 @@ namespace InitialProject.WPF.Views.Guest1Views
             numberOfDays.Text = "";
             numberOfGuests.Text = "";
         }
-
         private void DecrementGuestsNumberButton_Click(object sender, RoutedEventArgs e)
         {
             int changedGuestsNumber;
@@ -256,21 +239,17 @@ namespace InitialProject.WPF.Views.Guest1Views
                 numberOfGuests.Text = changedGuestsNumber.ToString();
             }
         }
-
         private void IncrementGuestsNumberButton_Click(object sender, RoutedEventArgs e)
         {
             int changedGuestsNumber;
             if (numberOfGuests.Text == "")
-            {
                 numberOfGuests.Text = "1";
-            }
             else
             {
                 changedGuestsNumber = Convert.ToInt32(numberOfGuests.Text) + 1;
                 numberOfGuests.Text = changedGuestsNumber.ToString();
             }
         }
-
         private void DecrementDaysNumberButton_Click(object sender, RoutedEventArgs e)
         {
             int changedDaysNumber;
@@ -280,21 +259,17 @@ namespace InitialProject.WPF.Views.Guest1Views
                 numberOfDays.Text = changedDaysNumber.ToString();
             }
         }
-
         private void IncrementDaysNumberButton_Click(object sender, RoutedEventArgs e)
         {
             int changedDaysNumber;
             if (numberOfDays.Text == "")
-            {
                 numberOfDays.Text = "1";
-            }
             else
             {
                 changedDaysNumber = Convert.ToInt32(numberOfDays.Text) + 1;
                 numberOfDays.Text = changedDaysNumber.ToString();
             }
         }
-
         private void ViewPhotosButton_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -303,17 +278,16 @@ namespace InitialProject.WPF.Views.Guest1Views
                 Accommodation currentAccommodation = ((Button)sender).DataContext as Accommodation;
                 FindPhotosUrls(imagesUrls, currentAccommodation);
                 AccommodationDetailsView details = new AccommodationDetailsView(imagesUrls, currentAccommodation);
-                
-
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message.ToString());
             }
         }
-
         private void FindPhotosUrls(List<string> imagesUrls, Accommodation currentAccommodation)
         {
+            AccommodationImageService accommodationImageService = new AccommodationImageService();
+            List<AccommodationImage> accommodationImages = new List<AccommodationImage>(accommodationImageService.GetAll());
             Accommodation selectedAccommodation = currentAccommodation;
             foreach (AccommodationImage image in accommodationImages)
             {
@@ -323,27 +297,19 @@ namespace InitialProject.WPF.Views.Guest1Views
                 }
             }
         }
-
         private void ReserveButton_Click(object sender, RoutedEventArgs e)
         {
             Accommodation currentAccommodation = ((Button)sender).DataContext as Accommodation;
             AccommodationReservationFormView accommodationReservationForm = new AccommodationReservationFormView(currentAccommodation, guest1);
             accommodationReservationForm.Show();
         }
-
-
         private bool IsNumberOfDaysValid()
         {
-            var content = numberOfDays.Text;
-            var regex = "^([1-9][0-9]*)$";
-            Match match = Regex.Match(content, regex, RegexOptions.IgnoreCase);
+            var content = numberOfDays.Text; 
+            Match match = CreateValidationNumberRegex(content);
             bool isValid = false;
             if (!match.Success && numberOfDays.Text != "")
-            {
-                numberOfDays.BorderBrush = Brushes.Red;
-                numberOfDaysLabel.Content = "This field should be positive integer number";
-                numberOfDays.BorderThickness = new Thickness(1);
-            }
+                ShowNumberOfDaysValidationMessages();
             else
             {
                 isValid = true;
@@ -352,19 +318,25 @@ namespace InitialProject.WPF.Views.Guest1Views
             }
             return isValid;
         }
-
+        private void ShowNumberOfDaysValidationMessages()
+        {
+            numberOfDays.BorderBrush = Brushes.Red;
+            numberOfDaysLabel.Content = "This field should be positive integer number";
+            numberOfDays.BorderThickness = new Thickness(1);
+        }
+        private void ShowNumberOfGuestsValidationMessages()
+        {
+            numberOfGuests.BorderBrush = Brushes.Red;
+            numberOfGuestsLabel.Content = "This field should be positive integer number";
+            numberOfGuests.BorderThickness = new Thickness(1);
+        }
         private bool IsNumberOfGuestsValid()
         {
             var content = numberOfGuests.Text;
-            var regex = "^([1-9][0-9]*)$";
-            Match match = Regex.Match(content, regex, RegexOptions.IgnoreCase);
+            Match match = CreateValidationNumberRegex(content);
             bool isValid = false;
             if (!match.Success && numberOfGuests.Text != "")
-            {
-                numberOfGuests.BorderBrush = Brushes.Red;
-                numberOfGuestsLabel.Content = "This field should be positive integer number";
-                numberOfGuests.BorderThickness = new Thickness(1);
-            }
+                ShowNumberOfGuestsValidationMessages();
             else
             {
                 isValid = true;
@@ -373,15 +345,16 @@ namespace InitialProject.WPF.Views.Guest1Views
             }
             return isValid;
         }
-
+        private Match CreateValidationNumberRegex(string content)
+        {
+            var regex = "^([1-9][0-9]*)$";
+            Match match = Regex.Match(content, regex, RegexOptions.IgnoreCase);
+            return match;
+        }
         public event PropertyChangedEventHandler PropertyChanged;
-
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
-
-
     }
 }

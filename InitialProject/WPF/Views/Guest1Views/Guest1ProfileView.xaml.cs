@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using InitialProject.Domain.Model;
 using InitialProject.Model;
+using InitialProject.WPF.ViewModels.Guest1ViewModels;
 using NPOI.SS.Formula.PTG;
 
 namespace InitialProject.WPF.Views.Guest1Views
@@ -21,18 +22,14 @@ namespace InitialProject.WPF.Views.Guest1Views
     /// <summary>
     /// Interaction logic for Guest1Profile.xaml
     /// </summary>
-    public partial class Guest1Profile : Page
+    public partial class Guest1ProfileView : Page
     {
-        public Guest1 Guest1 {get; set;}
-        public Guest1Profile(Guest1 guest1)
+        private Guest1ProfileViewModel guest1ProfileViewModel;
+        public Guest1ProfileView(Guest1 guest1)
         {
             InitializeComponent();
-            this.DataContext = this;
-            Guest1 = guest1;
-            Uri imageUri = new Uri(guest1.ImagePath, UriKind.Relative);
-            BitmapImage imageBitmap = new BitmapImage(imageUri);
-            accommodationImage.Source = imageBitmap;
-
+            guest1ProfileViewModel = new Guest1ProfileViewModel(guest1); 
+            this.DataContext = guest1ProfileViewModel;
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)

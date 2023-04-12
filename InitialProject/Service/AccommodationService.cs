@@ -17,14 +17,12 @@ namespace InitialProject.Service
         private List<Accommodation> accommodations;
         public AccommodationService()
         {
-           // accommodationRepository = new AccommodationRepository();
             MakeAccommodations();
         }
         public List<Accommodation> GetAll()
         {
             return accommodations;
         }
-
         public void Add(Accommodation accommodation)
         {
             accommodationRepository.Add(accommodation);
@@ -66,15 +64,11 @@ namespace InitialProject.Service
                 }
             }
         }
-
- 
-
         private void AddTypes()
         {
             AccommodationTypeService accommodationTypeService = new AccommodationTypeService();
             List<AccommodationType> allTypes = accommodationTypeService.GetAll();
             foreach(Accommodation accommodation in accommodations)
-
             {
                 AccommodationType accommodationType = allTypes.Find(n => n.Id == accommodation.Type.Id);
                 if(accommodationType != null)
@@ -83,13 +77,9 @@ namespace InitialProject.Service
                 }
             }
         }
-
-    
-
         public ObservableCollection<Accommodation> GetAllByOwner(Owner owner)
         {
             ObservableCollection<Accommodation> accommodationsByOwner = new ObservableCollection<Accommodation>();
-
             foreach (Accommodation accommodation in accommodations)
             {
                 if (accommodation.Owner.Id == owner.Id)
@@ -100,7 +90,6 @@ namespace InitialProject.Service
             }
             return accommodationsByOwner;
         }
-
         private AccommodationImage GetCoverImage(Accommodation accommodation)
         {
             AccommodationImageService imageService = new AccommodationImageService();

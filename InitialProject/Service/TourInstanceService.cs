@@ -36,7 +36,6 @@ namespace InitialProject.Service
         public List<TourInstance> GetByStart(Guide guide)
         {
             List<TourInstance> list = tourInstancerepository.GetByStart(guide);
-
             FillWithTours(list);
             return list;
         }
@@ -55,20 +54,23 @@ namespace InitialProject.Service
 
         public void CancelTourInstance(TourInstance currentTourInstance, ObservableCollection<TourInstance> tourInstances, User tourInstanceGuide)
         {
-            foreach (TourInstance tourInstance in GetAll())
-            {
-                if (tourInstance.Id == currentTourInstance.Id)
-                {
-                    currentTourInstance = tourInstance;
-                }
-            }
-            currentTourInstance.Canceled = true;
-            Update(currentTourInstance);
-            tourInstances.Remove(currentTourInstance);
+            GuideService guideService = new GuideService();
+            Guide loggedGuide = guideService.GetByUsername(tourInstanceGuide.Username);
+            SetToCancelState(currentTourInstance, tourInstances, loggedGuide);
             VoucherService voucherService = new VoucherService();
             voucherService.SendVoucher(currentTourInstance.Id, tourInstanceGuide);
         }
-
+        private void SetToCancelState(TourInstance currentTourInstance, ObservableCollection<TourInstance> tourInstances, Guide loggedGuide)
+        {
+            foreach (TourInstance tourInstance in GetAll())
+                if (tourInstance.Id == currentTourInstance.Id)
+                    currentTourInstance = tourInstance;
+            currentTourInstance.Canceled = true;
+            Update(currentTourInstance);
+            tourInstances.Clear();
+            foreach (TourInstance tour in FindCancelableTours(loggedGuide))
+                tourInstances.Add(tour);
+        }
         public List<TourInstance> GetFinishedInsatnces(ObservableCollection<TourInstance> Instances,Guide guide)
         {
             foreach (TourInstance instance in GetAll())

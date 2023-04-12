@@ -15,7 +15,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using InitialProject.Model;
-using InitialProject.Repository;
 using InitialProject.Service;
 
 namespace InitialProject.WPF.Views.Guest1Views
@@ -29,41 +28,36 @@ namespace InitialProject.WPF.Views.Guest1Views
         public DateTime Departure { get; set; }
         public TimeSpan lengthOfStay { get; set; }
         public Accommodation currentAccommodation { get; set; }
-        private AccommodationService accommodationService;
         public List<AccommodationReservation> reservations { get; set; }
-        private AccommodationReservationService accommodationReservationService;
-
         private Guest1 guest1;
-
         private List<DateTime> availableDates;
         private List<DateTime> availableDatesHelp;
         private List<List<DateTime>> availableDateRanges;
-        
         public AccommodationReservationFormView(Accommodation currentAccommodation, Guest1 guest1)
         {
             InitializeComponent();
             this.DataContext = this;
-
             this.guest1 = guest1;
             this.currentAccommodation = currentAccommodation;
-            accommodationReservationService = new AccommodationReservationService();
-            this.accommodationService = new AccommodationService();
+            AccommodationReservationService accommodationReservationService = new AccommodationReservationService();
             this.reservations = new List<AccommodationReservation>(accommodationReservationService.GetAll());
             SetAccommodation();
-
+            InitializeAvailableDatesLists();
+        }
+        private void InitializeAvailableDatesLists()
+        {
             availableDates = new List<DateTime>();
             availableDatesHelp = new List<DateTime>();
             availableDateRanges = new List<List<DateTime>>();
         }
-
         private void SetAccommodation()
         {
+            AccommodationService accommodationService = new AccommodationService();
             foreach (AccommodationReservation reservation in reservations)
             {
                 reservation.Accommodation = accommodationService.GetAll().Find(accommodationInstance => accommodationInstance.Id == reservation.Accommodation.Id);
             }
         }
-
         private void DecrementDaysNumberButton_Click(object sender, RoutedEventArgs e)
         {
             int changedDaysNumber;
@@ -73,19 +67,16 @@ namespace InitialProject.WPF.Views.Guest1Views
                 numberOfDays.Text = changedDaysNumber.ToString();
             }
         }
-
         private void IncrementDaysNumberButton_Click(object sender, RoutedEventArgs e)
         {
             int changedDaysNumber;
             changedDaysNumber = Convert.ToInt32(numberOfDays.Text) + 1;
             numberOfDays.Text = changedDaysNumber.ToString();
         }
-
         private bool IsValidDateInput()
         {
             return (Arrival <= Departure && Convert.ToInt32(lengthOfStay.TotalDays) >= (Convert.ToInt32(numberOfDays.Text) - 1) && Arrival.Date > DateTime.Now && Arrival != null && Departure != null);
         }
-
         private bool IsEnteredCorrectDateRange()
         {
             return ((Convert.ToInt32(lengthOfStay.TotalDays) + 1) >= currentAccommodation.MinDaysForReservation && Convert.ToInt32(numberOfDays.Text) >= currentAccommodation.MinDaysForReservation);
@@ -96,19 +87,12 @@ namespace InitialProject.WPF.Views.Guest1Views
             int daysNumberFromCalendar = Convert.ToInt32(lengthOfStay.TotalDays);
 
             if (!IsValidDateInput())
-            {
                 MessageBox.Show("Non valid input, please enter values again!");
-            }
             else if (!IsEnteredCorrectDateRange())
-            {
                 MessageBox.Show("The minimum number of days for booking this accommodation is " + currentAccommodation.MinDaysForReservation.ToString());
-            }
             else
-            {
                 GetAvailableDates(currentAccommodation.Id);
-            }
         }
-
         private bool IsDateAvailable(int currentAccommodationId, DateTime date)
         {
             foreach (AccommodationReservation reservation in reservations)
@@ -123,7 +107,6 @@ namespace InitialProject.WPF.Views.Guest1Views
             }
            return true;
         }
-        
         private void AddAvailableDateToList(DateTime date)
         {
             availableDates.Add(date);
@@ -135,7 +118,6 @@ namespace InitialProject.WPF.Views.Guest1Views
                 availableDatesHelp = new List<DateTime>(availableDates);
             }
         }
-
         private void AddAvailableDateOutRangeToList(DateTime date)
         {
             availableDates.Add(date);
@@ -149,7 +131,6 @@ namespace InitialProject.WPF.Views.Guest1Views
                 availableDatesHelp = new List<DateTime>(availableDates);
             }
         }
-
         private bool AreAvailableDatesConsecutive(List<DateTime> dates)
         {
             for (int i = 0; i < Convert.ToInt32(numberOfDays.Text) - 1; i++)
@@ -161,16 +142,14 @@ namespace InitialProject.WPF.Views.Guest1Views
             }
             return true;
         }
-
         public void GetAvailableDates(int currentAccommodationId)
         {
+            AccommodationReservationService accommodationReservationService = new AccommodationReservationService();
             reservations = accommodationReservationService.GetAll();
-            availableDates = new List<DateTime>();
-            availableDatesHelp = new List<DateTime>();
-            availableDateRanges = new List<List<DateTime>>();
+            InitializeAvailableDatesLists();
             FillDateRangesList(currentAccommodationId);
 
-            DatesForAccommodationReservationView suggestedDates = new DatesForAccommodationReservationView(currentAccommodation, accommodationReservationService, guest1);
+            DatesForAccommodationReservationView suggestedDates = new DatesForAccommodationReservationView(currentAccommodation, guest1);
             suggestedDates.Owner = this;
             if (availableDateRanges.Count > 0 && AvailableDateRangeExists(ref suggestedDates))
                 suggestedDates.Show();
@@ -178,10 +157,8 @@ namespace InitialProject.WPF.Views.Guest1Views
             { 
                 FindAvailableDatesOutRange();
                 DisplayAvailableDatesOutRange();
-            }
-                
+            }     
         }
-
         private void FillDateRangesList(int currentAccommodationId)
         {
             DateTime start = Arrival;
@@ -192,7 +169,6 @@ namespace InitialProject.WPF.Views.Guest1Views
                 start = start.AddDays(1);
             }
         }
-
         private bool AvailableDateRangeExists(ref DatesForAccommodationReservationView suggestedDates)
         {
             bool existed = false;
@@ -208,12 +184,9 @@ namespace InitialProject.WPF.Views.Guest1Views
             }
             return existed;
         }
-
         private void FindAvailableDatesOutRange()
         {
-            availableDates = new List<DateTime>();
-            availableDatesHelp = new List<DateTime>();
-            availableDateRanges = new List<List<DateTime>>();
+            InitializeAvailableDatesLists();
             DateTime start = Departure;
             while (IsDateAvailable(currentAccommodation.Id, start))
                 start = start.AddDays(-1);
@@ -221,7 +194,6 @@ namespace InitialProject.WPF.Views.Guest1Views
             start = start.AddDays(1);
             FillDatesOutRangeList(ref start);
         }
-
         private void FillDatesOutRangeList(ref DateTime start)
         {
             while (availableDateRanges.Count < 3)
@@ -233,10 +205,9 @@ namespace InitialProject.WPF.Views.Guest1Views
                 start = start.AddDays(1);
             }
         }
-
         private void DisplayAvailableDatesOutRange()
         {
-            DatesForAccommodationReservationView suggestedDates = new DatesForAccommodationReservationView(currentAccommodation, accommodationReservationService, guest1);
+            DatesForAccommodationReservationView suggestedDates = new DatesForAccommodationReservationView(currentAccommodation, guest1);
             suggestedDates.Owner = this;
             foreach (List<DateTime> dates in availableDateRanges)
             {
@@ -246,12 +217,10 @@ namespace InitialProject.WPF.Views.Guest1Views
             }
             suggestedDates.Show();
         }
-
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
-
         protected override void OnPreviewMouseUp(MouseButtonEventArgs e)
         {
             base.OnPreviewMouseUp(e);

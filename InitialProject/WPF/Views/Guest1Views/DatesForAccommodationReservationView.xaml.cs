@@ -26,7 +26,6 @@ namespace InitialProject.WPF.Views.Guest1Views
     public partial class DatesForAccommodationReservationView : Window
     {
         private Accommodation currentAccommodation;
-        private AccommodationReservationService accommodationReservationService;
         private Guest1 guest1;
 
         public ObservableCollection<AvailableDatesForAccommodationReservation> availableDatesForAccommodations { get; set; }
@@ -44,7 +43,7 @@ namespace InitialProject.WPF.Views.Guest1Views
             }
         }
 
-        public DatesForAccommodationReservationView(Accommodation currentAccommodation, AccommodationReservationService accommodationReservationService, Guest1 guest1)
+        public DatesForAccommodationReservationView(Accommodation currentAccommodation, Guest1 guest1)
         {
             InitializeComponent();
             this.DataContext = this;
@@ -52,12 +51,11 @@ namespace InitialProject.WPF.Views.Guest1Views
             this.guest1 = guest1;
             this.currentAccommodation = currentAccommodation;
             availableDatesForAccommodations = new ObservableCollection<AvailableDatesForAccommodationReservation>();
-            this.accommodationReservationService = accommodationReservationService;
         }
 
         private void ChooseDateButton_Click(object sender, RoutedEventArgs e)
         {
-            AccommodationGuestsNumberInputView guestsNumber = new AccommodationGuestsNumberInputView(currentAccommodation, selectedDateRange, accommodationReservationService, availableDatesForAccommodations, guest1);
+            AccommodationGuestsNumberInputView guestsNumber = new AccommodationGuestsNumberInputView(currentAccommodation, selectedDateRange, availableDatesForAccommodations, guest1);
             guestsNumber.Owner = this;
             guestsNumber.Show();
         }

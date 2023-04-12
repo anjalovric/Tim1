@@ -86,19 +86,19 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 
         private void MyReservations_Executed(object sender)
         {
-            MyAccommodationReservationsView myReservations = new MyAccommodationReservationsView(guest1);
-            Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = myReservations;
+            MyAccommodationReservationsView myReservationsView = new MyAccommodationReservationsView(guest1);
+            Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = myReservationsView;
         }
         
         private void SentRequests_Executed(object sender)
         {
-            SentAccommodationReservationRequestsView sentAccommodationReservationRequests = new SentAccommodationReservationRequestsView(guest1);
-            Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = sentAccommodationReservationRequests;
+            SentAccommodationReservationRequestsView sentAccommodationReservationRequestsView = new SentAccommodationReservationRequestsView(guest1);
+            Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = sentAccommodationReservationRequestsView;
         }
         private void MyProfile_Executed(object sender)
         {
-            Guest1Profile guest1Profile = new Guest1Profile(guest1);
-            Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = guest1Profile;
+            Guest1ProfileView guest1ProfileView = new Guest1ProfileView(guest1);
+            Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = guest1ProfileView;
         }
 
         private void SignOut_Executed(object sender)
@@ -146,15 +146,15 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 
         private void NavigateToApprovedRequests_Click(object sender, RoutedEventArgs e)
         {
-            SentAccommodationReservationRequestsView sentAccommodationReservationRequests = new SentAccommodationReservationRequestsView(guest1);
-            sentAccommodationReservationRequests.RequestsTabControl.SelectedIndex = 0;
-            Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = sentAccommodationReservationRequests;
+            SentAccommodationReservationRequestsView sentAccommodationReservationRequestsView = new SentAccommodationReservationRequestsView(guest1);
+            sentAccommodationReservationRequestsView.RequestsTabControl.SelectedIndex = 0;
+            Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = sentAccommodationReservationRequestsView;
         }
         private void NavigateToDeclinedRequests_Click(object sender, RoutedEventArgs e)
         {
-            SentAccommodationReservationRequestsView sentAccommodationReservationRequests = new SentAccommodationReservationRequestsView(guest1);
-            sentAccommodationReservationRequests.RequestsTabControl.SelectedIndex = 2;
-            Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = sentAccommodationReservationRequests;
+            SentAccommodationReservationRequestsView sentAccommodationReservationRequestsView = new SentAccommodationReservationRequestsView(guest1);
+            sentAccommodationReservationRequestsView.RequestsTabControl.SelectedIndex = 2;
+            Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = sentAccommodationReservationRequestsView;
         }
 
         private System.Windows.Documents.Hyperlink[] MakeNotifications()
