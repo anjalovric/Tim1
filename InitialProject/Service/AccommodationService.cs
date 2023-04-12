@@ -68,7 +68,6 @@ namespace InitialProject.Service
         }
 
  
-
         private void AddTypes()
         {
             AccommodationTypeService accommodationTypeService = new AccommodationTypeService();
@@ -85,7 +84,6 @@ namespace InitialProject.Service
         }
 
     
-
         public ObservableCollection<Accommodation> GetAllByOwner(Owner owner)
         {
             ObservableCollection<Accommodation> accommodationsByOwner = new ObservableCollection<Accommodation>();

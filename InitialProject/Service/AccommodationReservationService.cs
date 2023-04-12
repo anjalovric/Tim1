@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Windows.Documents;
-using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Domain;
+using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Model;
-using InitialProject.Repository;
-using static NPOI.HSSF.Util.HSSFColor;
 
 namespace InitialProject.Service
 {//sta sa cancelled repoz.koji pravim i ovdje? da li da bude injector?
