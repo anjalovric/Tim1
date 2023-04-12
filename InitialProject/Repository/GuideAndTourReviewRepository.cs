@@ -48,7 +48,7 @@ namespace InitialProject.Repository
 
         public List<GuideAndTourReview> GetAll()
         {
-            return _reviews;
+            return _serializer.FromCSV(FilePath);
         }
 
         public GuideAndTourReview GetById(int id)

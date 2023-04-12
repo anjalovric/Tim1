@@ -77,6 +77,7 @@ namespace InitialProject.Repository
 
         public ObservableCollection<string> GetCitiesByCountry(string country)
         {
+            _locations=_serializer.FromCSV(FilePath);
             ObservableCollection<string> cities = new ObservableCollection<string>();
             foreach(Location location in _locations)
             {
@@ -93,6 +94,7 @@ namespace InitialProject.Repository
 
         public List<string> GetAllCountries()
         {
+            _locations = _serializer.FromCSV(FilePath);
             List<string> countries = new List<string>();
             foreach(Location location in _locations)
             {
@@ -106,11 +108,13 @@ namespace InitialProject.Repository
 
         public Location GetByCityAndCountry(string country, string city)
         {
-           return _locations.Find(n => n.City.Equals(city) && n.Country.Equals(country));
+            _locations = _serializer.FromCSV(FilePath);
+            return _locations.Find(n => n.City.Equals(city) && n.Country.Equals(country));
         }
 
         public Location GetById(int id) 
         {
+            _locations = _serializer.FromCSV(FilePath);
             return _locations.Find(n => n.Id==id);
         }
     }
