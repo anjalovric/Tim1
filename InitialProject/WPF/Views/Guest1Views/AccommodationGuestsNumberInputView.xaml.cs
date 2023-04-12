@@ -26,7 +26,6 @@ namespace InitialProject.WPF.Views.Guest1Views
     {
         public Accommodation currentAccommodation { get; set; }
         private AccommodationReservationService accommodationReservationService;
-        private CancelledAccommodationReservationRepository cancelledAccommodationReservationRepository;
 
         private AvailableDatesForAccommodationReservation selectedDateRange;
         private Guest1 guest1;
@@ -39,7 +38,6 @@ namespace InitialProject.WPF.Views.Guest1Views
             this.guest1 = guest1;
             this.currentAccommodation = currentAccommodation;
             this.accommodationReservationService = accommodationReservationService;
-            cancelledAccommodationReservationRepository = new CancelledAccommodationReservationRepository();
             this.selectedDateRange = selectedDateRange;
             this.availableDatesForAccommodations = availableDatesForAccommodations;
         }
@@ -56,12 +54,6 @@ namespace InitialProject.WPF.Views.Guest1Views
             }
         }
 
-       /* private Guest1 MakeNewGuest()
-        {
-            Guest1 guest = new Guest1("Anja", "Ducic");
-            guest.Id = 1;
-            return guest;
-        }*/
 
         private void MakeNewReservation()
         {

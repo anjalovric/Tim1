@@ -49,7 +49,7 @@ namespace InitialProject.Service
         {
             List<TourInstance> cancelableInstances = GetInstancesLaterThan48hFromNow(guide);
             TourService tourService = new TourService();
-            tourService.SetLocationToTour(cancelableInstances);
+            tourService.SetTourToTourInstance(cancelableInstances);
             return cancelableInstances;
         }
 
@@ -144,7 +144,7 @@ namespace InitialProject.Service
         public void SetFinishedInstances(ObservableCollection<TourInstance> Instances,Guide guide)
         {
             TourService tourService = new TourService();
-            tourService.SetLocationToTour(GetFinishedInsatnces(Instances,guide));
+            tourService.SetTourToTourInstance(GetFinishedInsatnces(Instances,guide));
         }
 
         private void FillWithTours(List<TourInstance> Instances)
@@ -217,7 +217,6 @@ namespace InitialProject.Service
             FillTour(selected);
             return selected;
         }
-
         public void ActivateTour(TourInstance selected)
         {
             tourInstancerepository.ActivateTour(selected);

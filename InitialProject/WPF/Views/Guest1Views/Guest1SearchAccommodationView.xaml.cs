@@ -22,6 +22,7 @@ using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.Serializer;
 using InitialProject.View.Owner;
+using InitialProject.Service;
 
 
 namespace InitialProject.WPF.Views.Guest1Views
@@ -38,12 +39,12 @@ namespace InitialProject.WPF.Views.Guest1Views
         private Location location;
 
         private AccommodationType accommodationType;
-        private AccommodationTypeRepository accommodationTypeRepository;
+        private AccommodationTypeService accommodationTypeService;
 
         private List<AccommodationImage> accommodationImages;
-        private AccommodationImageRepository accommodationImageRepository;
+        private AccommodationImageService accommodationImageService;
 
-        private AccommodationRepository accommodationRepository;
+        private AccommodationService accommodationService;
         private ObservableCollection<Accommodation> accommodations;
         public ObservableCollection<Accommodation> Accommodations
         {
@@ -77,14 +78,14 @@ namespace InitialProject.WPF.Views.Guest1Views
 
             
             this.guest1 = guest1;
-            accommodationRepository = new AccommodationRepository();
-            Accommodations = new ObservableCollection<Accommodation>(accommodationRepository.GetAll());
+            accommodationService = new AccommodationService();
+            Accommodations = new ObservableCollection<Accommodation>(accommodationService.GetAll());
 
-            accommodationImageRepository = new AccommodationImageRepository();
-            accommodationImages = new List<AccommodationImage>(accommodationImageRepository.GetAll());
+            accommodationImageService = new AccommodationImageService();
+            accommodationImages = new List<AccommodationImage>(accommodationImageService.GetAll());
 
             accommodationType = new AccommodationType();
-            accommodationTypeRepository = new AccommodationTypeRepository();
+            accommodationTypeService = new AccommodationTypeService();
             SetAccommodationTypes();
 
             locationRepository = new LocationRepository();
@@ -129,7 +130,7 @@ namespace InitialProject.WPF.Views.Guest1Views
 
         private void SetAccommodationTypes()
         {
-            List<AccommodationType> types = accommodationTypeRepository.GetAll();
+            List<AccommodationType> types = accommodationTypeService.GetAll();
             foreach (Accommodation accommodation in Accommodations)
             {
                 if (types.Find(n => n.Id == accommodation.Type.Id) != null)
@@ -144,7 +145,7 @@ namespace InitialProject.WPF.Views.Guest1Views
         {
             if (IsNumberOfDaysValid() && IsNumberOfGuestsValid())
             {
-                List<Accommodation> storedAccommodation = accommodationRepository.GetAll();
+                List<Accommodation> storedAccommodation = accommodationService.GetAll();
                 Accommodations.Clear();
                 foreach (Accommodation accommodation in storedAccommodation)
                 {
@@ -227,7 +228,7 @@ namespace InitialProject.WPF.Views.Guest1Views
         private void ShowAllButton_Click(object sender, RoutedEventArgs e)
         {
             Accommodations.Clear();
-            foreach (Accommodation accommodation in accommodationRepository.GetAll())
+            foreach (Accommodation accommodation in accommodationService.GetAll())
                 Accommodations.Add(accommodation);
 
             ResetAllSearchingFields();
@@ -326,8 +327,7 @@ namespace InitialProject.WPF.Views.Guest1Views
         private void ReserveButton_Click(object sender, RoutedEventArgs e)
         {
             Accommodation currentAccommodation = ((Button)sender).DataContext as Accommodation;
-            //Accommodation currentAccommodation = selectedAccommodation;
-            AccommodationReservationFormView accommodationReservationForm = new AccommodationReservationFormView(currentAccommodation, ref accommodationRepository, guest1);
+            AccommodationReservationFormView accommodationReservationForm = new AccommodationReservationFormView(currentAccommodation, guest1);
             accommodationReservationForm.Show();
         }
 

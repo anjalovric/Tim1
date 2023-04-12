@@ -29,7 +29,7 @@ namespace InitialProject.WPF.Views.Guest1Views
         public DateTime Departure { get; set; }
         public TimeSpan lengthOfStay { get; set; }
         public Accommodation currentAccommodation { get; set; }
-        private AccommodationRepository accommodationRepository;
+        private AccommodationService accommodationService;
         public List<AccommodationReservation> reservations { get; set; }
         private AccommodationReservationService accommodationReservationService;
 
@@ -39,7 +39,7 @@ namespace InitialProject.WPF.Views.Guest1Views
         private List<DateTime> availableDatesHelp;
         private List<List<DateTime>> availableDateRanges;
         
-        public AccommodationReservationFormView(Accommodation currentAccommodation, ref AccommodationRepository accommodationRepository, Guest1 guest1)
+        public AccommodationReservationFormView(Accommodation currentAccommodation, Guest1 guest1)
         {
             InitializeComponent();
             this.DataContext = this;
@@ -47,7 +47,7 @@ namespace InitialProject.WPF.Views.Guest1Views
             this.guest1 = guest1;
             this.currentAccommodation = currentAccommodation;
             accommodationReservationService = new AccommodationReservationService();
-            this.accommodationRepository = accommodationRepository;
+            this.accommodationService = new AccommodationService();
             this.reservations = new List<AccommodationReservation>(accommodationReservationService.GetAll());
             SetAccommodation();
 
@@ -60,7 +60,7 @@ namespace InitialProject.WPF.Views.Guest1Views
         {
             foreach (AccommodationReservation reservation in reservations)
             {
-                reservation.Accommodation = accommodationRepository.GetAll().Find(accommodationInstance => accommodationInstance.Id == reservation.Accommodation.Id);
+                reservation.Accommodation = accommodationService.GetAll().Find(accommodationInstance => accommodationInstance.Id == reservation.Accommodation.Id);
             }
         }
 
