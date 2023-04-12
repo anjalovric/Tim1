@@ -2,12 +2,8 @@
 using InitialProject.Model;
 using InitialProject.Serializer;
 using InitialProject.Service;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls.Primitives;
 
 namespace InitialProject.Repository
 {
@@ -37,7 +33,6 @@ namespace InitialProject.Repository
         {
             return _serializer.FromCSV(FilePath);
         }
-
         public AlertGuest2 Save(AlertGuest2 alert)
         {
             alert.Id = NextId();
@@ -46,7 +41,6 @@ namespace InitialProject.Repository
             _serializer.ToCSV(FilePath, alerts);
             return alert;
         }
-
         public AlertGuest2 Update(AlertGuest2 alert)
         {
             alerts = _serializer.FromCSV(FilePath);
@@ -65,7 +59,6 @@ namespace InitialProject.Repository
             alerts.Remove(founded);
             _serializer.ToCSV(FilePath, alerts);
         }
-
         public List<AlertGuest2> GetByInstanceIdAndGuestId(int instanceId,int guestId)
         {
             alerts = _serializer.FromCSV(FilePath);
@@ -79,23 +72,18 @@ namespace InitialProject.Repository
             }
             return lista;
         }
-
         public AlertGuest2 GetById(int id)
         {
             return alerts.Find(c => c.Id == id);
         }
-
         public void AddAlerts(int currentPointId, int _callId,TourInstance selected)
-        {
-           
+        {      
             TourReservationService tourReservationService = new TourReservationService();
             List<TourReservation> availableReservations = tourReservationService.GetReservationsForTour(selected);
             foreach (TourReservation tour in availableReservations)
             {
                 AlertGuest2 alertGuest2 = new AlertGuest2(tour.Id, tour.GuestId, currentPointId, selected.Id);
                 AlertGuest2 savedAlert = Save(alertGuest2);
-
-
             }
         }
 
