@@ -14,10 +14,7 @@ namespace InitialProject.Service
     public class TourReservationService
     {
         private ITourReservationRepository tourReservationrepository=Injector.CreateInstance<ITourReservationRepository>();
-        public TourReservationService() 
-        {
-            tourReservationrepository= new TourReservationRepository();
-        }
+        public TourReservationService() {}
         public TourReservation Save(TourReservation tourReservation)
         {
             return tourReservationrepository.Save(tourReservation);

@@ -1,5 +1,6 @@
 ﻿using InitialProject.Model;
 using InitialProject.Repository;
+using InitialProject.WPF.Validations.GuideValidations;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -271,12 +272,12 @@ namespace InitialProject.WPF.Views.GuideViews
         }
         private bool IsValid()
         {
-            return IsNameValid() & IsMaximuGuestsNumberValid() & IsDurationValid() & IsCountryValid() & IsCityValid() & IsDescriptionValid()
+            return  IsCountryValid() & IsCityValid()
                     & IsLanguageValid() & IsDateTimeValid()
                     & IsCheckPointsValid() & IsImagesValid();
 
         }
-        private bool IsNameValid()
+  /*      private bool IsNameValid()
         {
             var content = TourNameTB.Text;
             var regex = @"[A-Za-z]+(\\ [A-Za-z]+)*$";
@@ -362,7 +363,7 @@ namespace InitialProject.WPF.Views.GuideViews
                 return true;
             }
             return false;
-        }
+        }*/
 
 
 
@@ -434,7 +435,7 @@ namespace InitialProject.WPF.Views.GuideViews
         }
 
 
-        private bool IsDescriptionValid()
+/*        private bool IsDescriptionValid()
         {
             var content = DescriptionTB.Text;
             var regex = @"[A-Za-z]([A-Za-z0-9]|.)*(\\ [A-Za-z0-9]+)*$";
@@ -463,7 +464,7 @@ namespace InitialProject.WPF.Views.GuideViews
             return valid;
 
         }
-
+*/
         private bool IsCheckPointsValid()
         {
             if (TourPoints.Count >= 2)
@@ -822,7 +823,7 @@ namespace InitialProject.WPF.Views.GuideViews
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Previous_Click(object sender, RoutedEventArgs e)
         {
             for (int i = 0; i < images.Count; i++)
             {
@@ -845,7 +846,7 @@ namespace InitialProject.WPF.Views.GuideViews
             }
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void DeleteImage_Click(object sender, RoutedEventArgs e)
         {
             if (images.Count != 0)
             {
@@ -881,5 +882,6 @@ namespace InitialProject.WPF.Views.GuideViews
                 imagePicture.Source = null;
             }
         }
+
     }
 }

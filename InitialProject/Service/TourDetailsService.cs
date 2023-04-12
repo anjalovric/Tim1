@@ -5,10 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 namespace InitialProject.Service
-{
-    public class TourDetailsService
+{   public class TourDetailsService
     {
         public TourReservationService reservationService;
         public AlertGuest2Service alertGuest2Service;
@@ -25,18 +23,15 @@ namespace InitialProject.Service
         {
             int counter = 0;
             foreach (TourReservation reservation in reservationService.GetByInstanceId(selectedId))
-            {
                 if (IsOnTour(reservation.GuestId, selectedId))
                     counter += reservation.Capacity;
-            }
+            
             return counter;
         }
         public List<string> GetPointsForGuest(int guest2Id,TourInstance instance)
         {
             List<string> pointsName = new List<string>();
-            CheckPointService checkPointService = new CheckPointService();
-            List<CheckPoint> checkPoints = checkPointService.GetByInstance(instance.Tour.Id);
-            foreach (CheckPoint checkPoint in checkPoints) 
+            foreach (CheckPoint checkPoint in checkPointService.GetByInstance(instance.Tour.Id)) 
             {
                 foreach (AlertGuest2 alert in alertGuest2Service.GetByInstanceIdAndGuestId(instance.Id, guest2Id))
                 {
@@ -50,63 +45,51 @@ namespace InitialProject.Service
         {
             bool availabe = false;
             foreach (AlertGuest2 alert in alertGuest2Service.GetByInstanceIdAndGuestId(instanceId, guest2Id))
-            {
                 if (alert.Availability)
                     availabe = true;
-            }
+            
             return availabe;
         }
         public int CountWithoutVouchers(int selectedId)
         {
             int counter = 0;
             foreach (TourReservation reservation in reservationService.GetByInstanceId(selectedId))
-            {
                 if (IsOnTour(reservation.GuestId, selectedId) && !reservation.WithVaucher)
-                {
                     counter += reservation.Capacity;
-                }
-            }
+            
             return counter;
         }
         public int CountUnder18(int selectedId)
         {
             int under18Counter = 0;
-            foreach (TourReservation reservation in reservationService.GetByInstanceId(selectedId))
-            {
+            foreach (TourReservation reservation in reservationService.GetByInstanceId(selectedId))   
                 if (IsOnTour(reservation.GuestId, selectedId) && reservation.AverageGuestsAge <= 18)
                     under18Counter += reservation.Capacity;
-
-            }
+            
             return under18Counter;
         }
         public int CountBetween18And50(int selectedId)
         {
             int counter = 0;
             foreach (TourReservation reservation in reservationService.GetByInstanceId(selectedId))
-            {
                 if (IsOnTour(reservation.GuestId, selectedId) && reservation.AverageGuestsAge > 18 && reservation.AverageGuestsAge <= 50)
                     counter += reservation.Capacity;
-
-            }
+            
             return counter;
         }
         public int CountOver50(int selectedId)
         {
             int counter = 0;
             foreach (TourReservation reservation in reservationService.GetByInstanceId(selectedId))
-            {
                 if (IsOnTour(reservation.GuestId, selectedId) && reservation.AverageGuestsAge > 50)
                     counter += reservation.Capacity;
-
-            }
+            
             return counter;
         }
         public double MakeWithVoucherPrecentage(int selectedId)
         {
             if (CountGuest(selectedId) != 0)
-            {
                 return (double)CountWithVouchers(selectedId) /(double) CountGuest(selectedId) * 100;
-            }
             else
                 return 0;
         }
@@ -121,12 +104,9 @@ namespace InitialProject.Service
         {
             int counter = 0;
             foreach (TourReservation reservation in reservationService.GetByInstanceId(selectedId))
-            {
                 if (IsOnTour(reservation.GuestId, selectedId) && reservation.WithVaucher)
-                {
                     counter += reservation.Capacity;
-                }
-            }
+            
             return counter;
         }
         public double MakeUnder18Precentage(int selectedId)
@@ -154,9 +134,8 @@ namespace InitialProject.Service
         {
             int counter = 0;
             foreach (TourReservation reservation in reservationService.GetByInstanceId(selectedId))
-            {
                 counter += reservation.Capacity;
-            }
+            
             return counter;
         }
         public double MakeAttendancePrecentage(int selectedId)
@@ -166,31 +145,22 @@ namespace InitialProject.Service
             else
                 return 0.00;
         }
-        public int CountGuestsOnPoint(int currentPointId,TourInstance selectedInstance)
+        public int CountGuestsOnPoint(int currentPointId, TourInstance selectedInstance)
         {
             int counter = 0;
-            List<AlertGuest2> allAlerts = alertGuest2Service.GetAll();
-
-            foreach (AlertGuest2 alert in allAlerts)
-            {
+            foreach (AlertGuest2 alert in alertGuest2Service.GetAll())
                 if (alert.CheckPointId == currentPointId && alert.Availability && alert.InstanceId == selectedInstance.Id)
-                {
                     counter += reservationService.GetTourReservationById(alert.ReservationId).Capacity;
-
-                }
-            }
+            
             return counter;
         }
         public List<CheckPoint> GetInstancePoints(TourInstance selectedInstance)
         {
             List<CheckPoint> tourPoints = new List<CheckPoint>();
             foreach (CheckPoint point in checkPointService.GetAll())
-            {
                 if (point.TourId == selectedInstance.Tour.Id)
-                {
                     tourPoints.Add(point);
-                }
-            }
+
             return tourPoints;
         }
     }
