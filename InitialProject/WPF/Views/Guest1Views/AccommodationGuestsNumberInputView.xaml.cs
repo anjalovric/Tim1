@@ -14,7 +14,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using InitialProject.Model;
-using InitialProject.Repository;
 using InitialProject.Service;
 
 namespace InitialProject.WPF.Views.Guest1Views
@@ -25,42 +24,34 @@ namespace InitialProject.WPF.Views.Guest1Views
     public partial class AccommodationGuestsNumberInputView : Window
     {
         public Accommodation currentAccommodation { get; set; }
-        private AccommodationReservationService accommodationReservationService;
-
         private AvailableDatesForAccommodationReservation selectedDateRange;
         private Guest1 guest1;
         public ObservableCollection<AvailableDatesForAccommodationReservation> availableDatesForAccommodations { get; set; }
-        public AccommodationGuestsNumberInputView(Accommodation currentAccommodation, AvailableDatesForAccommodationReservation selectedDateRange, AccommodationReservationService accommodationReservationService, ObservableCollection<AvailableDatesForAccommodationReservation> availableDatesForAccommodations, Guest1 guest1)
+        public AccommodationGuestsNumberInputView(Accommodation currentAccommodation, AvailableDatesForAccommodationReservation selectedDateRange, ObservableCollection<AvailableDatesForAccommodationReservation> availableDatesForAccommodations, Guest1 guest1)
         {
             InitializeComponent();
             this.DataContext = this;
-
             this.guest1 = guest1;
             this.currentAccommodation = currentAccommodation;
-            this.accommodationReservationService = accommodationReservationService;
             this.selectedDateRange = selectedDateRange;
             this.availableDatesForAccommodations = availableDatesForAccommodations;
         }
-
         private void ConfirmReservationButton_Click(object sender, RoutedEventArgs e)
         {
             if (Convert.ToInt32(numberOfGuests.Text) > currentAccommodation.Capacity)
-            {
                 MessageBox.Show("Maximum number of guests for this accommodation is " + currentAccommodation.Capacity.ToString() + ".");
-            }
             else
-            {
                 ContinueReservation();
-            }
         }
-
-
         private void MakeNewReservation()
         {
+            AccommodationReservationService accommodationReservationService = new AccommodationReservationService();
             AccommodationReservation newReservation = new AccommodationReservation(guest1, currentAccommodation, selectedDateRange.Arrival, selectedDateRange.Departure);
             accommodationReservationService.Add(newReservation);
+            this.Close();
+            this.Owner.Close();
+            this.Owner.Owner.Close();
         }
-
         private MessageBoxResult ConfirmReservation()
         {
             string sMessageBoxText = $"Do you want to make a reservation?\n";
@@ -74,22 +65,13 @@ namespace InitialProject.WPF.Views.Guest1Views
         {
             MessageBoxResult result = ConfirmReservation();
             if (result == MessageBoxResult.Yes)
-            {
                 MakeNewReservation();
-                this.Close();
-                this.Owner.Close();
-                this.Owner.Owner.Close();
-            }
             else if (result == MessageBoxResult.No)
             {
                 this.Close();
                 this.Owner.Close();
             }
         }
-
-
-
-
         private void DecrementGuestsNumberButton_Click(object sender, RoutedEventArgs e)
         {
             int changedGuestsNumber;
@@ -105,11 +87,9 @@ namespace InitialProject.WPF.Views.Guest1Views
             changedGuestsNumber = Convert.ToInt32(numberOfGuests.Text) + 1;
             numberOfGuests.Text = changedGuestsNumber.ToString();
         }
-
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
-        }
-          
+        }  
     }
 }

@@ -43,8 +43,6 @@ namespace InitialProject.Service
         {
             accommodationReservationRepository.Add(reservation);
         }
-
-        
         public List<AccommodationReservation> GetCompletedReservations(Guest1 guest1)
         {
             SetAccommodationReservations();
@@ -75,17 +73,13 @@ namespace InitialProject.Service
         {
             OwnerService ownerService = new OwnerService();
             foreach (AccommodationReservation reservation in storedReservations)
-            {
                 reservation.Accommodation.Owner = ownerService.GetById(reservation.Accommodation.Owner.Id);
-            }
         }
         private void SetAccommodationsToReservations()
         {
             AccommodationService accommodationService = new AccommodationService();
             foreach (AccommodationReservation reservation in storedReservations)
-            {
                 reservation.Accommodation = accommodationService.GetById(reservation.Accommodation.Id);
-            }
         }
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -98,12 +92,9 @@ namespace InitialProject.Service
 
             List<Location> locations = locationService.GetAll();
             foreach (AccommodationReservation reservation in storedReservations)
-            {
                 reservation.Accommodation.Location = locationService.GetById(reservation.Accommodation.Location.Id);
-            }
             
         }
-        
         
         private void SetAccommodationTypes()
         {
@@ -112,9 +103,7 @@ namespace InitialProject.Service
             foreach (AccommodationReservation reservation in storedReservations)
             {
                 if (accommodationTypeService.GetById(reservation.Accommodation.Type.Id) != null)
-                {
                     reservation.Accommodation.Type = accommodationTypeService.GetById(reservation.Accommodation.Type.Id);
-                }
             }
         }
         public void Delete(AccommodationReservation accommodationReservation)
@@ -128,10 +117,8 @@ namespace InitialProject.Service
             foreach(AccommodationReservation reservation in storedReservations)
             {
                 Guest1 guestForReservation = allGuest.Find(n => n.Id == reservation.Guest.Id);
-                    if(guestForReservation != null)
-                    {
-                        reservation.Guest = guestForReservation;
-                    }
+                if(guestForReservation != null)
+                    reservation.Guest = guestForReservation;
             }
         }
         public bool IsCancelled(AccommodationReservation reservation)
@@ -189,5 +176,3 @@ namespace InitialProject.Service
         }
     }
 }
-//92 linija
-//15-16 metoda
