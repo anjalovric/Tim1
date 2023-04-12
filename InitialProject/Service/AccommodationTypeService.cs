@@ -27,5 +27,6 @@ namespace InitialProject.Service
         {
             return accommodationTypeRepository.GetById(id);
         }
+
     }
 }
