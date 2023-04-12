@@ -26,13 +26,13 @@ namespace InitialProject.WPF.Views.Guest1Views
     public partial class Guest1HomeView : Window
     {
         private Guest1 guest1;
-        private Guest1Service guest1Service;
+        //private Guest1Service guest1Service;
         private Guest1HomeViewModel guest1HomeViewModel;
        
         public Guest1HomeView(User user)
         {
             InitializeComponent();
-            guest1Service = new Guest1Service();
+            Guest1Service guest1Service = new Guest1Service();
             this.guest1 = guest1Service.GetByUsername(user.Username);   //treba li gost objekat
             guest1HomeViewModel = new Guest1HomeViewModel(user);
             DataContext=guest1HomeViewModel;
@@ -40,9 +40,7 @@ namespace InitialProject.WPF.Views.Guest1Views
 
         }
 
-        //servise ukloniti iz polja
         //nazivi
-        //observ.u serv
         
 
 

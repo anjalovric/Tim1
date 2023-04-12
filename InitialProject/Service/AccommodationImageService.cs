@@ -16,7 +16,6 @@ namespace InitialProject.Service
         private IAccommodationImageRepository accommodationImageRepository = Injector.CreateInstance<IAccommodationImageRepository>();
         public AccommodationImageService()
         {
-            //accommodationImageRepository = new AccommodationImageRepository();
         }
 
         public List<AccommodationImage> GetAll()

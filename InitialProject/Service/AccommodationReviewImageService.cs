@@ -18,7 +18,6 @@ namespace InitialProject.Service
 
         public AccommodationReviewImageService()
         {
-           // accommodationReviewImageRepository = new AccommodationReviewImageRepository();
         }
 
         public List<AccommodationReviewImage> GetAll()

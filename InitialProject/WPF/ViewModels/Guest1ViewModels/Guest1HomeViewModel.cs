@@ -24,7 +24,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
     public class Guest1HomeViewModel:INotifyPropertyChanged
     {
         private Guest1 guest1;
-        private Guest1Service guest1Service;
 
         public RelayCommand BookingCommand { get; set; }
         public RelayCommand MyReservationsCommand { get; set; }
@@ -54,7 +53,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 
         public Guest1HomeViewModel(User user)
         {
-            guest1Service = new Guest1Service();
+            Guest1Service guest1Service = new Guest1Service();
             this.guest1 = guest1Service.GetByUsername(user.Username);
             StoredNotifications = new ObservableCollection<MenuItem>();
             MakeCommands();
@@ -63,7 +62,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 
         //servise ukloniti iz polja
         //nazivi
-        //observ.u serv
 
         private void MakeCommands()
         {

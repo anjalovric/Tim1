@@ -19,7 +19,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 
         private Guest1 guest1;
         private AccommodationReservationService accommodationReservationService;
-        private OwnerReviewService ownerReviewService;
         private CancelledAccommodationReservationService cancelledAccommodationReservationService;
         private ObservableCollection<AccommodationReservation> completedReservations;
         public ObservableCollection<AccommodationReservation> CompletedReservations
@@ -81,9 +80,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         {
             this.guest1 = guest1;
             accommodationReservationService = new AccommodationReservationService();
-
-            
-            ownerReviewService = new OwnerReviewService();
             cancelledAccommodationReservationService = new CancelledAccommodationReservationService();
 
             CompletedReservations = new ObservableCollection<AccommodationReservation>(accommodationReservationService.GetCompletedReservations(guest1));
@@ -114,6 +110,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 
         private void RateOwnerAndAccommodation_Executed(object sender)
         {
+            OwnerReviewService ownerReviewService = new OwnerReviewService();
             if (ownerReviewService.HasReview(SelectedCompletedReservation))
             {
                 MessageBox.Show("This reservation is already reviewed.");

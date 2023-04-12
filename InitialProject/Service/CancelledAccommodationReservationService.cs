@@ -13,22 +13,12 @@ namespace InitialProject.Service
 {
     public class CancelledAccommodationReservationService
     {
-        private ICancelledAccommodationReservationRepository cancelledAccommodationReservationRepository = Injector.CreateInstance<ICancelledAccommodationReservationRepository>();
         private Guest1 guest1;
+        private ICancelledAccommodationReservationRepository cancelledAccommodationReservationRepository = Injector.CreateInstance<ICancelledAccommodationReservationRepository>();
         private List<AccommodationReservation> storedCancelledReservations;
-        private LocationService locationService;
-        private AccommodationTypeService accommodationTypeService;
-        private AccommodationService accommodationService;
-        private OwnerService ownerService;
 
         public CancelledAccommodationReservationService()
         {
-            //cancelledAccommodationReservationRepository = new CancelledAccommodationReservationRepository();
-            accommodationService = new AccommodationService();
-            ownerService = new OwnerService();
-            locationService = new LocationService();
-            accommodationTypeService = new AccommodationTypeService();
-
             SetCancelledAccommodationReservations();
         }
         public void Add(AccommodationReservation reservation)
@@ -51,6 +41,7 @@ namespace InitialProject.Service
         }
         private void SetAccommodationsToReservations()
         {
+            AccommodationService accommodationService = new AccommodationService();
             foreach (AccommodationReservation reservation in storedCancelledReservations)
             {
                 reservation.Accommodation = accommodationService.GetById(reservation.Accommodation.Id);
@@ -58,6 +49,7 @@ namespace InitialProject.Service
         }
         private void SetOwnerToAccommodationReservations()
         {
+            OwnerService ownerService = new OwnerService();
             foreach (AccommodationReservation reservation in storedCancelledReservations)
             {
                 reservation.Accommodation.Owner = ownerService.GetById(reservation.Accommodation.Owner.Id);
@@ -65,6 +57,7 @@ namespace InitialProject.Service
         }
         private void SetAccommodationLocations()
         {
+            LocationService locationService = new LocationService();
             List<Location> locations = locationService.GetAll();
             foreach (AccommodationReservation reservation in storedCancelledReservations)
             {
@@ -73,6 +66,7 @@ namespace InitialProject.Service
         }
         private void SetAccommodationTypes()
         {
+            AccommodationTypeService accommodationTypeService = new AccommodationTypeService();
             List<AccommodationType> types = accommodationTypeService.GetAll();
             foreach (AccommodationReservation reservation in storedCancelledReservations)
             {
