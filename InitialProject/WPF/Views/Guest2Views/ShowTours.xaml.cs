@@ -80,7 +80,6 @@ namespace InitialProject.WPF.Views.Guest2Views
             TourImages = new ObservableCollection<TourImage>(tourImageRepository.GetAll());
             locationRepository = new LocationRepository();
             Location = new Location();
-            SetLocations();
             SetTours(TourInstances);
             ShowAlertGuestForm();
             Countries = new ObservableCollection<string>(locationRepository.GetAllCountries());
@@ -105,40 +104,31 @@ namespace InitialProject.WPF.Views.Guest2Views
                 foreach (AlertGuest2 alert in Alerts)
                 {
                     AlertGuestForm alertGuestForm = new AlertGuestForm(alert.Id);
-                    
+
                     if (alert.Guest2Id == guest2.Id && alert.Informed == false)
                     {
                         alertGuestForm.Show();
                     }
-                   
-                }
-            }
-            
-        }
-        public void SetLocations()
-        {
-            List<Location> locations = locationRepository.GetAll();
-            List<Tour> tours = tourRepository.GetAll();
 
-            foreach (Location location in locations)
-            {
-                foreach (Tour tour in tours)
-                {
-                    if (location.Id == tour.Location.Id)
-                        tour.Location = location;
                 }
             }
+
         }
         public void SetTours(ObservableCollection<TourInstance> TourInstances)
         {
             List<Tour> tours = tourRepository.GetAll();
+            List<Location> locations = locationRepository.GetAll();
             foreach (TourInstance tourInstance in TourInstances)
             {
                 foreach (Tour tour in tours)
                 {
-                    if (tour.Id == tourInstance.Tour.Id)
+                    foreach (Location location in locations)
                     {
-                        tourInstance.Tour = tour;
+                        if (location.Id == tour.Location.Id && tour.Id == tourInstance.Tour.Id)
+                        {
+                            tour.Location = location;
+                            tourInstance.Tour = tour;
+                        }
                     }
                 }
             }
@@ -209,7 +199,6 @@ namespace InitialProject.WPF.Views.Guest2Views
             if (IsDurationValid())
             {
                 ObservableCollection<TourInstance> storedTourInstances = new ObservableCollection<TourInstance>(tourInstanceRepository.GetAll());
-                SetLocations();
                 SetTours(storedTourInstances);
                 TourInstances.Clear();
                 foreach (TourInstance tourInstance in storedTourInstances)

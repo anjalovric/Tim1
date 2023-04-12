@@ -38,7 +38,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             PointLabel = pointLabel;
             MakeCommands();
             alerts = _alertGuest2Service.GetAll();
-            CreateLabelContent();
+            //CreateLabelContent();
         }
         private void MakeCommands()
         {
@@ -80,7 +80,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             int instanceId = _alertGuest2Service.GetAll().Find(n => n.Id == AlertId).InstanceId;
             if (_tourInstanceService.GetAll().Count > 0)
             {
-                Tour thisTour;
+                Tour thisTour=null;
                 thisTour = _tourInstanceService.GetAll().Find(n => n.Id == instanceId).Tour;
                 SetLocations();
                 SetTour(thisTour);

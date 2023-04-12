@@ -26,12 +26,11 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
                 OnPropertyChanged("Vouchers");
             }
         }
-        private ObservableCollection<Voucher> voucher;
         public VoucherViewModel(Model.Guest2 guest)
         {
             this.guest2 = guest;
             voucherService = new VoucherService();
-            voucher = new ObservableCollection<Voucher>();
+            vouchers = new ObservableCollection<Voucher>();
             Vouchers = new ObservableCollection<Voucher>(voucherService.FindAllVouchers(guest2));
             VoucherValidity(Vouchers);
         }
