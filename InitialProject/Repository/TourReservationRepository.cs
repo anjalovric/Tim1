@@ -15,11 +15,8 @@ namespace InitialProject.Repository
     public class TourReservationRepository : ITourReservationRepository
     {
         private const string FilePath = "../../../Resources/Data/tourReservations.csv";
-
         private readonly Serializer<TourReservation> _serializer;
-
         private List<TourReservation> _tourReservations;
-
         public TourReservationRepository()
         {
             _serializer = new Serializer<TourReservation>();
@@ -70,9 +67,8 @@ namespace InitialProject.Repository
         }
         public List<TourReservation> GetAll()
         {
-            return _tourReservations;
+            return _serializer.FromCSV(FilePath);
         }
-
         public List<TourReservation> GetReservationsForTourInstance(int tourInstanceId)
         {
             _tourReservations = _serializer.FromCSV(FilePath);
@@ -86,6 +82,7 @@ namespace InitialProject.Repository
         }
         public TourReservation GetById(int id)
         {
+            _tourReservations = _serializer.FromCSV(FilePath);
             return _tourReservations.Find(n => n.Id == id);
         }
         public List<TourReservation> GetReservationsForTour(TourInstance selected)
@@ -99,7 +96,6 @@ namespace InitialProject.Repository
                     availableReservations.Add(reservation);
                 }
             }
-
             return availableReservations;
         }
     }

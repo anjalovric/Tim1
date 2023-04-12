@@ -13,14 +13,15 @@ namespace InitialProject.Service
 {
     public class TourService
     {
-        private ITourRepository tourRepository = Injector.CreateInstance<ITourRepository>();
-        private TourInstanceService tourInstanceService = new TourInstanceService();
+        private ITourRepository tourRepository;
+       // private TourInstanceService tourInstanceService = new TourInstanceService();
         private List<Tour> tours;
         private List<TourInstance> tourInstances;
         public TourService()
         {
-            tourInstances = tourInstanceService.GetAll();
-             tours = GetAll();
+            tourRepository = Injector.CreateInstance<ITourRepository>();
+         //   tourInstances = tourInstanceService.GetAll();
+            tours = GetAll();
         }
 
         public List<Tour> GetAll()
@@ -39,19 +40,20 @@ namespace InitialProject.Service
                     }
                 }
             }
+            SetLocationToTour(tourInstances);
         }
         public void SetLocationToTour(List<TourInstance> tourInstance)
         {
             LocationService locationService = new LocationService();
             foreach (Location location in locationService.GetAll())
             {
-                foreach (Tour tour in tours)
+                foreach (TourInstance tour in tourInstance)
                 {
-                    if (location.Id == tour.Location.Id)
-                        tour.Location = location;
+                    if (location.Id == tour.Tour.Location.Id)
+                        tour.Tour.Location = location;
                 }
             }
-            SetTourToTourInstance(tourInstance);
+           
         }
     }
 }

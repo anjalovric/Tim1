@@ -3,6 +3,7 @@ using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Domain;
 using InitialProject.Model;
 using InitialProject.Repository;
+using System;
 
 namespace InitialProject.Service
 {
@@ -14,15 +15,10 @@ namespace InitialProject.Service
         public GuestReviewService()
         {
             guestReviews = new List<GuestReview>(guestReviewRepository.GetAll());
-            MakeReservations();
+            SetReservations();
         }
 
-        public bool IsGuestReviewed(AccommodationReservation accommodationReservation)
-        {
-            return guestReviewRepository.HasReview(accommodationReservation);
-        }
-
-        private void MakeReservations()
+        private void SetReservations()
         {
             AccommodationReservationService accommodationReservationService = new AccommodationReservationService();
             List<AccommodationReservation> accommodationReservations = new List<AccommodationReservation>();
@@ -57,6 +53,15 @@ namespace InitialProject.Service
         public void Save(GuestReview guestReview)
         {
             guestReviewRepository.Save(guestReview);
+        }
+
+        public bool IsReservationForReview(AccommodationReservation reservation, Owner owner)
+        {
+            bool stayedLessThan5DaysAgo = (reservation.Departure.Date < DateTime.Now.Date) && (DateTime.Now.Date - reservation.Departure.Date).TotalDays <= 5;
+            bool alreadyReviewed = HasReview(reservation);
+            bool isThisOwner = reservation.Accommodation.Owner.Id == owner.Id;
+
+            return stayedLessThan5DaysAgo && !alreadyReviewed && isThisOwner;
         }
     }
 }

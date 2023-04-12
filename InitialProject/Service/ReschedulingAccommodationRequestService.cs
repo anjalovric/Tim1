@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using InitialProject.Domain.RepositoryInterfaces;
+﻿using System;
+using System.Collections.Generic;
 using InitialProject.Domain;
+using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Model;
-using InitialProject.Repository;
 
 namespace InitialProject.Service
 {
@@ -15,41 +15,17 @@ namespace InitialProject.Service
             requests = new List<ReschedulingAccommodationRequest>(requestRepository.GetAll());
             SetReservations();
         }
+
         public List<ReschedulingAccommodationRequest> GetAll()
         {
             return requests;
         }
-        public List<ReschedulingAccommodationRequest> GetApprovedRequests(Guest1 guest1)
-        {
-            List<ReschedulingAccommodationRequest> approvedRequests = new List<ReschedulingAccommodationRequest>();
-
-            foreach (ReschedulingAccommodationRequest request in requests)
-            {
-                if (request.state == State.Approved && request.Reservation.Guest.Id == guest1.Id)
-                {
-                    approvedRequests.Add(request);
-                }
-            }
-            approvedRequests.Reverse();
-            return approvedRequests;
-        }
-        public List<ReschedulingAccommodationRequest> GetDeclinedRequests(Guest1 guest1)
-        {
-            List<ReschedulingAccommodationRequest> declinedRequests = new List<ReschedulingAccommodationRequest>();
-            foreach (ReschedulingAccommodationRequest request in requests)
-            {
-                if (request.state == State.Declined && request.Reservation.Guest.Id == guest1.Id)
-                {
-                    declinedRequests.Add(request);
-                }
-            }
-            declinedRequests.Reverse();
-            return declinedRequests;
-        }
+        
         public void Add(ReschedulingAccommodationRequest request)
         {
             requestRepository.Add(request);
         }
+
         public ReschedulingAccommodationRequest GetById(int id)
         {
             return requestRepository.GetById(id);
@@ -60,63 +36,53 @@ namespace InitialProject.Service
 
             foreach(ReschedulingAccommodationRequest request in requests)
             {
-                if(request.state==State.Pending && !IsReservationCancelled(request.Reservation))
+                if(request.state==State.Pending && !IsReservationCancelled(request.Reservation) && request.Reservation.Arrival.Date > DateTime.Now.Date)
                 {
                     pendingRequests.Add(request);
                 }
             }
-
             return pendingRequests;
         }
-        public List<ReschedulingAccommodationRequest> GetPendingRequests(Guest1 guest1)
-        {
-            List<ReschedulingAccommodationRequest> pendingRequests = new List<ReschedulingAccommodationRequest>();
 
-            foreach (ReschedulingAccommodationRequest request in requests)
-            {
-                if (request.state == State.Pending && request.Reservation.Guest.Id == guest1.Id)
-                {
-                    pendingRequests.Add(request);
-                }
-            }
-            pendingRequests.Reverse();
-            return pendingRequests;
-        }
         private void SetReservations()
         {
             AccommodationReservationService accommodationReservationService = new AccommodationReservationService();
             CancelledAccommodationReservationService cancelAccommodationReservationService = new CancelledAccommodationReservationService();
             List<AccommodationReservation> storedReservations = accommodationReservationService.GetAll();
             List<AccommodationReservation> storedCancelledReservations = cancelAccommodationReservationService.GetAll();
-
             foreach (ReschedulingAccommodationRequest request in requests)
-            {
-                AccommodationReservation reservation = storedReservations.Find(n => n.Id == request.Reservation.Id);
-                if(reservation == null)
-                {
-                    AccommodationReservation cancelledReservation = storedCancelledReservations.Find(n => n.Id == request.Reservation.Id);
-                    request.Reservation = cancelledReservation;
-                }
-                else
-                {
-                    request.Reservation = reservation;
-                }
-            }
+                request.Reservation = SetReservationToRequest(request, storedReservations, storedCancelledReservations);
         }
+
+        private AccommodationReservation SetReservationToRequest(ReschedulingAccommodationRequest request, List<AccommodationReservation> storedReservations, List<AccommodationReservation> storedCancelledReservations)
+        {
+            AccommodationReservation reservation = storedReservations.Find(n => n.Id == request.Reservation.Id);
+            if (reservation == null)
+            {
+                AccommodationReservation cancelledReservation = storedCancelledReservations.Find(n => n.Id == request.Reservation.Id);
+                request.Reservation = cancelledReservation;
+            }
+            else
+                request.Reservation = reservation;
+            return request.Reservation;
+        }
+
         public ReschedulingAccommodationRequest ChangeState(ReschedulingAccommodationRequest request, State newState)
         {
             ReschedulingAccommodationRequest updatedRequest = requests.Find(n => n.Id == request.Id);
-            updatedRequest.state=newState;
+            updatedRequest.state = newState;
             updatedRequest.OwnerExplanationForDeclining = request.OwnerExplanationForDeclining;
             if(newState == State.Approved)
                 UpdateReservationDates(request);
             return requestRepository.Update(updatedRequest);
         }
+
         private bool IsReservationCancelled(AccommodationReservation reservation)
         {
-            AccommodationReservationService accommodationReservationService = new AccommodationReservationService();
-            return accommodationReservationService.IsCancelled(reservation);
+            CancelledAccommodationReservationService cancelledReservationService = new CancelledAccommodationReservationService();
+            return cancelledReservationService.IsCancelled(reservation);
         }
+
         private void UpdateReservationDates(ReschedulingAccommodationRequest request)
         {
             AccommodationReservationService accommodationReservationService = new AccommodationReservationService();
@@ -126,4 +92,3 @@ namespace InitialProject.Service
         }
     }
 }
-//71 linija

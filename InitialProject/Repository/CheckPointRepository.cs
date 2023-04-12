@@ -74,6 +74,7 @@ namespace InitialProject.Repository
 
         public List<CheckPoint> GetByInstance(int tourId)
         {
+            _checkPoints = _serializer.FromCSV(FilePath);
             List<CheckPoint> checkPoints = new List<CheckPoint>();
             foreach (CheckPoint checkPoint in _checkPoints)
             {
@@ -84,6 +85,7 @@ namespace InitialProject.Repository
         }
         public void FindPointsForSelectedInstance(TourInstance selectedInstance,ObservableCollection<CheckPoint> AllPoints)
         {
+            _checkPoints = _serializer.FromCSV(FilePath);
             if (selectedInstance != null)
             {
                 foreach (CheckPoint point in _checkPoints)

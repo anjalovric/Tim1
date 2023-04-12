@@ -16,7 +16,6 @@ namespace InitialProject.Service
 
         public AccommodationTypeService()
         {
-            //accommodationTypeRepository = new AccommodationTypeRepository();
         }
 
         public List<AccommodationType> GetAll()
@@ -28,5 +27,6 @@ namespace InitialProject.Service
         {
             return accommodationTypeRepository.GetById(id);
         }
+
     }
 }

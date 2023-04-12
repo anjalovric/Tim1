@@ -27,22 +27,30 @@ namespace InitialProject.Service
         public List<OwnerReview> GetAllToDisplay(Owner owner)
         {
             List<OwnerReview> reviewsToDisplay = new List<OwnerReview>();
-            GuestReviewService guestReviewService = new GuestReviewService();
 
             foreach (OwnerReview ownerReview in ownerReviews)
             {
                 AccommodationReservation reservationToReview = ownerReview.Reservation;
-                bool isGuestReviewed = guestReviewService.IsGuestReviewed(reservationToReview);
-                bool fiveDaysPassed = (DateTime.Now.Date - reservationToReview.Departure.Date).TotalDays > 5;
+                IsReviewForDisplay(reservationToReview);
                 bool isThisOwner = reservationToReview.Accommodation.Owner.Id == owner.Id;
 
-                if ((isGuestReviewed || fiveDaysPassed) && isThisOwner)
+                if (IsReviewForDisplay(reservationToReview) && isThisOwner)
                 {
                     reviewsToDisplay.Add(ownerReview);
                 }
             }
             return reviewsToDisplay;
         }
+
+        private bool IsReviewForDisplay(AccommodationReservation reservationToReview)
+        {
+            GuestReviewService guestReviewService = new GuestReviewService();
+
+            bool isGuestReviewed = guestReviewService.HasReview(reservationToReview);
+            bool fiveDaysPassed = (DateTime.Now.Date - reservationToReview.Departure.Date).TotalDays > 5;
+            return isGuestReviewed || fiveDaysPassed;
+        }
+
         public bool HasReview(AccommodationReservation reservation)
         {
             return ownerReviewRepository.HasReview(reservation);
@@ -58,11 +66,8 @@ namespace InitialProject.Service
             int numberOfReviews = GetNumberOfReviewsByOwner(owner);
             foreach (OwnerReview review in reviewsToDisplay)
             {
-                if (review.Reservation.Accommodation.Owner.Id == owner.Id)
-                {
-                    rateSum += review.Cleanliness;
-                    rateSum += review.Correctness;
-                }
+                rateSum += review.Cleanliness;
+                rateSum += review.Correctness;
             }
             if (numberOfReviews > 0)
             {
@@ -76,10 +81,7 @@ namespace InitialProject.Service
             int numberOfReviews = 0;
             foreach (OwnerReview review in reviewsToDisplay)
             {
-                if (review.Reservation.Accommodation.Owner.Id == owner.Id)
-                {
-                    numberOfReviews++;
-                }
+                numberOfReviews++;
             }
             return numberOfReviews;
         }
@@ -98,19 +100,7 @@ namespace InitialProject.Service
                 }
             }
         }
-        public List<OwnerReview> GetAllByOwner(Owner owner)
-        {
-            List<OwnerReview> reviewsByOwner = new List<OwnerReview>();
-            foreach (OwnerReview review in ownerReviews)
-            {
-                Owner reviewedOwner = review.Reservation.Accommodation.Owner;
-                if (reviewedOwner.Id == owner.Id)
-                {
-                    reviewsByOwner.Add(review);
-                }
-            }
-            return reviewsByOwner;
-        }
+        
         public bool IsReservationValidToReview(AccommodationReservation SelectedCompletedReservation)
         {
             return SelectedCompletedReservation.Departure >= DateTime.Now.AddDays(-5);

@@ -13,7 +13,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 {
     public class SentAccommodationReservationRequestsViewModel : INotifyPropertyChanged
     {
-        private ReschedulingAccommodationRequestService reschedulingAccommodationRequestService;
+        private RequestForReschedulingService requestForReschedulingService;
         private ObservableCollection<ReschedulingAccommodationRequest> approvedRequests;
         private Guest1 guest1;
         public ObservableCollection<ReschedulingAccommodationRequest> ApprovedRequests
@@ -54,10 +54,10 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         public SentAccommodationReservationRequestsViewModel(Guest1 guest1)
         {
             this.guest1 = guest1;
-            reschedulingAccommodationRequestService = new ReschedulingAccommodationRequestService();
-            ApprovedRequests = new ObservableCollection<ReschedulingAccommodationRequest>(reschedulingAccommodationRequestService.GetApprovedRequests(guest1));
-            PendingRequests = new ObservableCollection<ReschedulingAccommodationRequest>(reschedulingAccommodationRequestService.GetPendingRequests(guest1));
-            DeclinedRequests = new ObservableCollection<ReschedulingAccommodationRequest>(reschedulingAccommodationRequestService.GetDeclinedRequests(guest1));
+            requestForReschedulingService = new RequestForReschedulingService();
+            ApprovedRequests = new ObservableCollection<ReschedulingAccommodationRequest>(requestForReschedulingService.GetApprovedRequests(guest1));
+            PendingRequests = new ObservableCollection<ReschedulingAccommodationRequest>(requestForReschedulingService.GetPendingRequests(guest1));
+            DeclinedRequests = new ObservableCollection<ReschedulingAccommodationRequest>(requestForReschedulingService.GetDeclinedRequests(guest1));
 
         }
         public event PropertyChangedEventHandler PropertyChanged;

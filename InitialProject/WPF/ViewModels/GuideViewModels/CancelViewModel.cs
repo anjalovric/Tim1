@@ -70,6 +70,7 @@ namespace InitialProject.WPF.ViewModels
         }
         public void CancelExecuted(object sender)
         {
+            
             TourInstance currentTourInstance = (TourInstance)TourListDataGrid.CurrentItem;
             tourInstanceService.CancelTourInstance(currentTourInstance, TourInstances, tourInstanceGuide);
 

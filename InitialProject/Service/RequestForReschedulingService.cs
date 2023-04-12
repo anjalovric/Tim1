@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using InitialProject.Model;
 using InitialProject.WPF.ViewModels;
+using Org.BouncyCastle.Asn1.Ocsp;
 
 namespace InitialProject.Service
 {
@@ -36,5 +37,50 @@ namespace InitialProject.Service
             requestForReshcedulingViewModel.SetAvailability();
             requestsViewModel.Add(requestForReshcedulingViewModel);
         }
+
+        public List<ReschedulingAccommodationRequest> GetApprovedRequests(Guest1 guest1)
+        {
+            List<ReschedulingAccommodationRequest> approvedRequests = new List<ReschedulingAccommodationRequest>();
+
+            foreach (ReschedulingAccommodationRequest request in requestsService.GetAll())
+            {
+                if (request.state == State.Approved && request.Reservation.Guest.Id == guest1.Id)
+                {
+                    approvedRequests.Add(request);
+                }
+            }
+            approvedRequests.Reverse();
+            return approvedRequests;
+        }
+        public List<ReschedulingAccommodationRequest> GetDeclinedRequests(Guest1 guest1)
+        {
+            List<ReschedulingAccommodationRequest> declinedRequests = new List<ReschedulingAccommodationRequest>();
+            foreach (ReschedulingAccommodationRequest request in requestsService.GetAll())
+            {
+                if (request.state == State.Declined && request.Reservation.Guest.Id == guest1.Id)
+                {
+                    declinedRequests.Add(request);
+                }
+            }
+            declinedRequests.Reverse();
+            return declinedRequests;
+        }
+
+        public List<ReschedulingAccommodationRequest> GetPendingRequests(Guest1 guest1)
+        {
+            List<ReschedulingAccommodationRequest> pendingRequests = new List<ReschedulingAccommodationRequest>();
+
+            foreach (ReschedulingAccommodationRequest request in requestsService.GetAll())
+            {
+                if (request.state == State.Pending && request.Reservation.Guest.Id == guest1.Id)
+                {
+                    pendingRequests.Add(request);
+                }
+            }
+            pendingRequests.Reverse();
+            return pendingRequests;
+        }
+
+
     }
 }
