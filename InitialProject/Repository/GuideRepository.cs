@@ -25,11 +25,12 @@ namespace InitialProject.Repository
 
         public List<Guide> GetAll()
         {
-            return guides;
+            return _serializer.FromCSV(FilePath); ;
         }
 
         public Guide GetByUsername(string username)
         {
+            guides = _serializer.FromCSV(FilePath);
             Guide foundGuide = null;
             foreach(Guide guide in guides)
             {
@@ -43,6 +44,7 @@ namespace InitialProject.Repository
 
         public Guide GetById(int id) 
         {
+            guides = _serializer.FromCSV(FilePath);
             return guides.Find(x => x.Id == id);
         }
 

@@ -22,7 +22,7 @@ namespace InitialProject.Repository
         }     
         public List<TourInstance> GetAll()
         {
-            return _tourInstances;
+            return _serializer.FromCSV(FilePath);
         }
         public TourInstance Save(TourInstance tour)
         {
@@ -69,8 +69,6 @@ namespace InitialProject.Repository
                     string h = tour.StartClock.Split(':')[0];
                     string m = tour.StartClock.Split(":")[1];
                     string s = tour.StartClock.Split(":")[2];
-
-
                     if(Convert.ToInt32(h)> DateTime.Now.Hour)
                     {
                         list.Add(tour);
@@ -106,7 +104,6 @@ namespace InitialProject.Repository
                 }
             }
             return list;
-
         }
         public TourInstance GetById(int id)
         {

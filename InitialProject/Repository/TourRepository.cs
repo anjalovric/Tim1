@@ -22,24 +22,15 @@ namespace InitialProject.Repository
        
         
         public TourRepository()
-        {
-            
+        {            
             _serializer = new Serializer<Tour>();
            
-
-            _tours = _serializer.FromCSV(FilePath);
-          
-
-        }
-        
+            _tours = _serializer.FromCSV(FilePath);          
+        }        
         public List<Tour> GetAll()
         {
-            return _tours;
+            return _serializer.FromCSV(FilePath); ;
         }
-
-
-       
-
         public Tour Save(Tour tour)
         {
 
@@ -49,7 +40,6 @@ namespace InitialProject.Repository
             _serializer.ToCSV(FilePath, _tours);
             return tour;
         }
-
         public int NextId()
         {
             _tours = _serializer.FromCSV(FilePath);
@@ -59,7 +49,6 @@ namespace InitialProject.Repository
             }
             return _tours.Max(c => c.Id) + 1;
         }
-
         public void Delete(Tour tour)
         {
             _tours = _serializer.FromCSV(FilePath);
@@ -67,7 +56,6 @@ namespace InitialProject.Repository
             _tours.Remove(founded);
             _serializer.ToCSV(FilePath, _tours);
         }
-
         public Tour Update(Tour tour)
         {
             _tours = _serializer.FromCSV(FilePath);
@@ -81,8 +69,6 @@ namespace InitialProject.Repository
         public Tour GetById(int id)
         {
             return _tours.Find(c => c.Id == id);
-        }
-   
-       
+        }      
     }
 }
