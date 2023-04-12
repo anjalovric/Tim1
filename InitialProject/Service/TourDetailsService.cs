@@ -1,12 +1,8 @@
 ﻿using InitialProject.Model;
-using InitialProject.Repository;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 namespace InitialProject.Service
-{   public class TourDetailsService
+{
+    public class TourDetailsService
     {
         public TourReservationService reservationService;
         public AlertGuest2Service alertGuest2Service;

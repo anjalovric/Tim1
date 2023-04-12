@@ -103,7 +103,8 @@ namespace InitialProject.WPF.ViewModels
         {
             Toast = "Hidden";
             TourInstanceService tourInstanceService = new TourInstanceService();
-            tourInstanceService.FillTour(selected);
+            TourInstanceTourLocationService tourInstanceTourLocation = new TourInstanceTourLocationService();
+            tourInstanceTourLocation.FillTour(selected);
             Title = selected.Tour.Name + ", " + selected.Date + ", " + selected.StartClock;
             NextEnabled = true;
             FinishEnabled = true;

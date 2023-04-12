@@ -21,10 +21,8 @@ namespace InitialProject.Service
         {
             return alertGuest2Repository.GetAll();
         }
-
         public AlertGuest2 Save(AlertGuest2 alert)
-        {
-            
+        {        
             return alertGuest2Repository.Save(alert);
         }
 
