@@ -31,10 +31,5 @@ namespace InitialProject.WPF.Views.Guest1Views
             guest1ProfileViewModel = new Guest1ProfileViewModel(guest1); 
             this.DataContext = guest1ProfileViewModel;
         }
-
-        private void BackButton_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.GoBack();
-        }
     }
 }

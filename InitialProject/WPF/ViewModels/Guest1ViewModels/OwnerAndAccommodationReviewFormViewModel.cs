@@ -31,7 +31,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         public int AccommodationCleanliness { get; set; }
         public int OwnerCorrectness { get; set; }
         public string Comments { get; set; }
-        public BitmapImage imageSource { get; set; }
+        private BitmapImage imageSource { get; set; }
         public BitmapImage ImageSource
         {
             get { return imageSource; }
