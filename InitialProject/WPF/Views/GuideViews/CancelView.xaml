@@ -19,7 +19,7 @@
                 <DataGridTemplateColumn x:Name="cancelation" Header="Cancel"  Width="1.2*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Name="cancelButton" Content="CANCEL" TextElement.FontWeight="ExtraBold" Command="{Binding CancelCommand}"/>
+                            <Button Name="cancelButton" Content="CANCEL" TextElement.FontWeight="ExtraBold" Command="{Binding Path=DataContext.CancelCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

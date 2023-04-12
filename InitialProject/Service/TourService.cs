@@ -20,7 +20,6 @@ namespace InitialProject.Service
         public TourService()
         {
             tourInstances = tourInstanceService.GetAll();
-            tourRepository = new TourRepository();
              tours = GetAll();
         }
 

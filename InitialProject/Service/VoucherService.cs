@@ -18,7 +18,6 @@ namespace InitialProject.Service
         public List<Voucher> storedVouchers;
         public VoucherService() 
         {
-            voucherRepository = new VoucherRepository();
             storedVouchers = GetAll();
         }
         public List<Voucher> GetAll()

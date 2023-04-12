@@ -14,9 +14,7 @@ namespace InitialProject.Service
     {
         private IGuideRepository guideRepository=Injector.CreateInstance<IGuideRepository>();
         public GuideService() 
-        { 
-            guideRepository = new GuideRepository();
-        }
+        { }
         public Guide GetByUsername(string username)
         {
             Guide foundedGuide = null;

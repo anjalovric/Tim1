@@ -17,10 +17,7 @@ namespace InitialProject.Service
         private ILocationRepository locationRepository=Injector.CreateInstance<ILocationRepository>();
         private TourService tourService = new TourService();
 
-        public LocationService() 
-        { 
-            locationRepository = new LocationRepository();
-        }
+        public LocationService(){ }
         public List<Location> GetAll()
         {
             return locationRepository.GetAll();

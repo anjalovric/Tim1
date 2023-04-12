@@ -15,10 +15,7 @@ namespace InitialProject.Service
     public class CheckPointService
     {
         private ICheckPointRepository repository=Injector.CreateInstance<ICheckPointRepository>();
-        public CheckPointService() 
-        { 
-            repository = new CheckPointRepository();
-        }
+        public CheckPointService() {  }
 
         public List<CheckPoint> GetAll()
         {

@@ -15,10 +15,7 @@ namespace InitialProject.Service
     public class AlertGuest2Service
     {
         private IAlertGuest2Repository alertGuest2Repository=Injector.CreateInstance<IAlertGuest2Repository>();
-        public AlertGuest2Service() 
-        {
-            alertGuest2Repository = new AlertGuest2Repository();
-        }
+        public AlertGuest2Service()  {}
 
         public List<AlertGuest2> GetAll()
         {
