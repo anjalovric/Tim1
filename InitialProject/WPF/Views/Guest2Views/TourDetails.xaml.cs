@@ -45,10 +45,5 @@ namespace InitialProject.WPF.Views.Guest2Views
             img.VerticalAlignment = VerticalAlignment.Center;
             img.HorizontalAlignment = HorizontalAlignment.Center;
         }
-
-        private void Back_Click(object sender, RoutedEventArgs e)
-        {
-            
-        }
     }
 }

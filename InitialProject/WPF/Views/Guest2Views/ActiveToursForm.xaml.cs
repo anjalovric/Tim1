@@ -31,7 +31,6 @@ namespace InitialProject.WPF.Views.Guest2Views
     public partial class ActiveToursForm : UserControl
     {
         private Guest2 Guest2;
-
         public ActiveToursForm(Guest2 guest2)
         {
             InitializeComponent();

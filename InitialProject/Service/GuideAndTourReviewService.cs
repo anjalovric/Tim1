@@ -121,9 +121,9 @@ namespace InitialProject.Service
         {
             return guideAndTourReviewRepository.Update(review);
         }
-        public bool HasReview(TourInstance tourInstance)
+        public bool HasReview(TourInstance tourInstance,Guest2 guest2)
         {
-            return guideAndTourReviewRepository.HasReview(tourInstance);
+            return guideAndTourReviewRepository.HasReview(tourInstance,guest2);
         }
         public GuideAndTourReview Save(GuideAndTourReview review)
         {

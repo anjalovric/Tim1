@@ -24,7 +24,6 @@ namespace InitialProject.Service
             }
             FillWithLocation(Instances);
         }
-
         private void FillWithLocation(List<TourInstance> Instances)
         {
             LocationService locationService = new LocationService();

@@ -64,8 +64,6 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             }
             CloseAction();
         }
-
-       
         private void Cancel_Executed(object sender)
         {
             foreach (AlertGuest2 alertGuest2 in alerts)

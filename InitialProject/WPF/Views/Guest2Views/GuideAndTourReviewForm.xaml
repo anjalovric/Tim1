@@ -19,8 +19,8 @@
         <Button x:Name="inkrementNumber2" Content="+" HorizontalAlignment="Left" Command="{Binding Knowledge_Increment_Command}" Margin="850,79,0,0" VerticalAlignment="Top" Width="20" RenderTransformOrigin="-1.284,0.612" Height="22"/>
         <Button x:Name="dekrementNumber" Content="-" HorizontalAlignment="Left" Command="{Binding Language_Decrement_Command}" Margin="493,126,0,0" VerticalAlignment="Top" Width="20"  Height="22"/>
         <Button x:Name="dekrementNumber2" Content="-" HorizontalAlignment="Left" Command="{Binding Knowledge_Decrement_Command}" Margin="493,80,0,0" VerticalAlignment="Top" Width="20"  Height="22"/>
-        <Label Content="Comment" Margin="70,217,679,289"/>
-        <Label Content="Photos" Margin="488,217,280,279"/>
+        <Label Content="Add comment" FontWeight="Bold" FontSize="20" Margin="70,217,679,289"/>
+        <Label Content="Add photos" FontWeight="Bold" FontSize="20" Margin="488,217,280,279"/>
         <TextBox x:Name="comment" TextWrapping="Wrap" Margin="70,262,443,76" />
         <Button Content="Confirm" Command="{Binding ConfirmCommand}" Margin="586,518,197,10" FontWeight="Bold"/>
         <Button Content="Cancel" Command="{Binding CancelCommand}" Margin="753,518,25,10" FontWeight="Bold"/>

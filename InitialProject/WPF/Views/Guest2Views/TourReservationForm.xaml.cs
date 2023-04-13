@@ -181,7 +181,6 @@ namespace InitialProject.WPF.Views.Guest2Views
             Voucher currentVoucher = (Voucher)ActivationVoucherDataGrid.CurrentItem;
             voucherService.Update(currentVoucher);
             this.withVoucher = true;
-
             Vouchers.Clear();
             foreach (Voucher voucher in voucherService.FindAllVouchers(guest2))
                 Vouchers.Add(voucher);
