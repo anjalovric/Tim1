@@ -55,33 +55,23 @@ namespace InitialProject.Service
                     }
                 }
             }
-            SetLocations();
             SetTours(CompletedTours);
-        }
-        public void SetLocations()
-        {
-            List<Location> locations = locationService.GetAll();
-            List<Tour> tours = tourService.GetAll();
-
-            foreach (Location location in locations)
-            {
-                foreach (Tour tour in tours)
-                {
-                    if (location.Id == tour.Location.Id)
-                        tour.Location = location;
-                }
-            }
         }
         public void SetTours(ObservableCollection<TourInstance> CompletedTours)
         {
             List<Tour> tours = tourService.GetAll();
+            List<Location> locations = locationService.GetAll();
             foreach (TourInstance tourInstance in CompletedTours)
             {
-                foreach (Tour tour in tours)
+                foreach (Location location in locations)
                 {
-                    if (tour.Id == tourInstance.Tour.Id)
+                    foreach (Tour tour in tours)
                     {
-                        tourInstance.Tour = tour;
+                        if (location.Id == tour.Location.Id && tour.Id == tourInstance.Tour.Id)
+                        {
+                            tour.Location = location;
+                            tourInstance.Tour = tour;
+                        }
                     }
                 }
             }

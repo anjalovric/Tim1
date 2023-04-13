@@ -1,5 +1,6 @@
 ﻿using InitialProject.Model;
 using InitialProject.Repository;
+using InitialProject.Service;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -135,29 +136,46 @@ namespace InitialProject.WPF.Views.Guest2Views
         }
         private bool IsDurationValid()
         {
-            var content = durationInput.Text;
-            var regex = "(([1-9][0-9]*)(\\.[0-9]+)?)|(0\\.[0-9]+)$";
-            var regexMinus = "-";
-            Match match = Regex.Match(content, regex, RegexOptions.IgnoreCase);
-            Match matchMinus = Regex.Match(content, regexMinus, RegexOptions.IgnoreCase);
+            Match matchForPositive = CreateValidationDurationRegexForPositiveNumber();
+            Match matchForNegative= CreateValidationDurationRegexForNegativeNumber();
             if (durationInput.Text == "")
             {
                 return true;
             }
-            if (!match.Success || Convert.ToDouble(match.ToString()) == 0.0 || Convert.ToString(match).Equals('0') || matchMinus.Success)
+            if (!matchForPositive.Success || Convert.ToDouble(matchForPositive.ToString()) == 0.0 || Convert.ToString(matchForPositive).Equals('0') || matchForNegative.Success)
             {
-                durationInput.BorderBrush = Brushes.Red;
-                DurationLabel.Content = "Invalid number";
-                durationInput.BorderThickness = new Thickness(1);
+                ShowDurationValidationMessages();
                 return false;
             }
-            else if (match.Success)
+            else if (matchForPositive.Success)
             {
-                durationInput.BorderBrush = Brushes.Green;
-                DurationLabel.Content = string.Empty;
+                ShowSuccessMessage();
                 return true;
             }
             return false;
+        }
+        private Match CreateValidationDurationRegexForPositiveNumber()
+        {
+            var regex = "(([1-9][0-9]*)(\\.[0-9]+)?)|(0\\.[0-9]+)$";
+            Match match = Regex.Match(durationInput.Text, regex, RegexOptions.IgnoreCase);
+            return match;
+        }
+        private Match CreateValidationDurationRegexForNegativeNumber()
+        {
+            var regex = "-";
+            Match match = Regex.Match(durationInput.Text, regex, RegexOptions.IgnoreCase);
+            return match;
+        }
+        private void ShowDurationValidationMessages()
+        {
+            durationInput.BorderBrush = Brushes.Red;
+            DurationLabel.Content = "Invalid number";
+            durationInput.BorderThickness = new Thickness(1);
+        }
+        private void ShowSuccessMessage()
+        {
+            durationInput.BorderBrush = Brushes.Green;
+            DurationLabel.Content = string.Empty;
         }
         private void SearchCity(TourInstance tourInstance)
         {
@@ -200,19 +218,31 @@ namespace InitialProject.WPF.Views.Guest2Views
             {
                 ObservableCollection<TourInstance> storedTourInstances = new ObservableCollection<TourInstance>(tourInstanceRepository.GetAll());
                 SetTours(storedTourInstances);
-                TourInstances.Clear();
+                FillWithStoredTourInstances(storedTourInstances);
                 foreach (TourInstance tourInstance in storedTourInstances)
                 {
-                    if (!tourInstance.Finished && !tourInstance.Canceled)
-                        TourInstances.Add(tourInstance);
+                    SearchByInputParameters(tourInstance);
                 }
-                foreach (TourInstance tourInstance in storedTourInstances)
+            }
+        }
+        private void SearchByInputParameters(TourInstance tourInstance)
+        {
+            SearchCity(tourInstance);
+            SearchCountry(tourInstance);
+            SearchDuration(tourInstance);
+            SearchLanguage(tourInstance);
+            SearchNumberOfGuest(tourInstance);
+        }
+        private void FillWithStoredTourInstances(ObservableCollection<TourInstance> storedTourInstances)
+        {
+            SetTours(storedTourInstances);
+            TourInstances.Clear();
+            foreach (TourInstance tourInstance in storedTourInstances)
+            {
+                if(!tourInstance.Canceled && !tourInstance.Finished)
                 {
-                    SearchCity(tourInstance);
-                    SearchCountry(tourInstance);
-                    SearchDuration(tourInstance);
-                    SearchLanguage(tourInstance);
-                    SearchNumberOfGuest(tourInstance);
+                    TourInstances.Add(tourInstance);
+                    SetTours(TourInstances);
                 }
             }
         }
@@ -297,7 +327,10 @@ namespace InitialProject.WPF.Views.Guest2Views
             foreach (TourInstance tourInstance in tourInstances)
             {
                 if (!tourInstance.Finished && !tourInstance.Canceled)
+                {
                     TourInstances.Add(tourInstance);
+                    SetTours(TourInstances);
+                }
             }
             Label.Content = "Showing all tours:";
             ResetAllFields();

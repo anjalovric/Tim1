@@ -12,6 +12,7 @@ using System.Windows;
 using InitialProject.Service;
 using InitialProject.WPF.Views.Guest2Views;
 using System.Windows.Controls;
+using InitialProject.WPF.Views.Guest1Views;
 
 namespace InitialProject.WPF.ViewModels.Guest2ViewModels
 {
@@ -27,6 +28,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         private int AlertId;
         private LocationService _locationService;
         private System.Windows.Controls.Label PointLabel;
+        public Action CloseAction { get; set; }
         public AlertGuestViewModel(int alertId, System.Windows.Controls.Label pointLabel)
         {
             AlertId = alertId;
@@ -38,7 +40,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             PointLabel = pointLabel;
             MakeCommands();
             alerts = _alertGuest2Service.GetAll();
-            //CreateLabelContent();
+            CreateLabelContent();
         }
         private void MakeCommands()
         {
@@ -60,8 +62,10 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
                     _alertGuest2Service.Update(alertGuest2);
                 }
             }
-            Application.Current.Windows.OfType<AlertGuestForm>().FirstOrDefault().Close();
+            CloseAction();
         }
+
+       
         private void Cancel_Executed(object sender)
         {
             foreach (AlertGuest2 alertGuest2 in alerts)
@@ -72,7 +76,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
                     _alertGuest2Service.Update(alertGuest2);
                 }
             }
-            Application.Current.Windows.OfType<AlertGuestForm>().FirstOrDefault().Close();   
+            CloseAction();
         }
         private void CreateLabelContent()
         {
@@ -80,7 +84,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             int instanceId = _alertGuest2Service.GetAll().Find(n => n.Id == AlertId).InstanceId;
             if (_tourInstanceService.GetAll().Count > 0)
             {
-                Tour thisTour=null;
+                Tour thisTour;
                 thisTour = _tourInstanceService.GetAll().Find(n => n.Id == instanceId).Tour;
                 SetLocations();
                 SetTour(thisTour);

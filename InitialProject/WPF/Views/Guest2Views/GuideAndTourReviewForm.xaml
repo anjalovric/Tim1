@@ -25,38 +25,27 @@
         <Button Content="Confirm" Command="{Binding ConfirmCommand}" Margin="586,518,197,10" FontWeight="Bold"/>
         <Button Content="Cancel" Command="{Binding CancelCommand}" Margin="753,518,25,10" FontWeight="Bold"/>
         <Border BorderBrush="Black" Margin="493,260,30,78" Visibility="Visible" BorderThickness="1"></Border>
-        <Button Content="Click to upload" Command="{Binding UploadImageCommand}" HorizontalAlignment="Left" Margin="770,231,0,0" VerticalAlignment="Top" Width="100" FontWeight="Bold">
-
+        <Button Command="{Binding UploadImageCommand}" HorizontalAlignment="Left" Margin="810,445,0,0" VerticalAlignment="Top" Width="30" FontWeight="Bold" Height="30">
+            <Image Source="/Resources/Images/add.png" Height="25" Width="50"/>
         </Button>
-        <Image x:Name="imagePicture" Margin="526,266,71,89"/>
+        <Image x:Name="imagePicture" Margin="526,266,71,89" Source="{Binding ImageSource, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
 
         <Label Content="Rate tour and guide" Margin="70,25,560,386" FontSize="20" FontWeight="Bold"/>
-        <Button Content="Delete" Command="{Binding DeleteCommand}" Margin="390,407,443,78">
-
-        </Button>
+        
 
 
-        <Canvas Name="canvas" Margin="413,331,77,182">
-            <Path Stroke="Red" StrokeThickness="2" HorizontalAlignment="Center" VerticalAlignment="Top" Height="29" Stretch="Fill" Width="30" Canvas.Left="412.881" Canvas.Top="109.696">
-                <Path.Data>
-                    <PathGeometry>
-                        <PathGeometry.Figures>
-                            <PathFigure StartPoint="0,0">
-                                <LineSegment Point="25,25"/>
-                            </PathFigure>
-                            <PathFigure StartPoint="0,25">
-                                <LineSegment Point="25,0"/>
-                            </PathFigure>
-                        </PathGeometry.Figures>
-                    </PathGeometry>
-                </Path.Data>
-            </Path>
-        </Canvas>
+
         <Button Command="{Binding BackCommand}" HorizontalAlignment="Left" Margin="482,366,0,0" VerticalAlignment="Top" Width="31" FontWeight="Bold" Background="White" BorderBrush="White">
             <Image Source="/Resources/Images/back_arrow.png" Height="25" Width="50"/>
         </Button>
         <Button Command="{Binding NextCommand}" HorizontalAlignment="Left" Margin="860,369,0,0" VerticalAlignment="Top" Width="35" FontWeight="Bold" Background="White" BorderBrush="White">
             <Image Source="/Resources/Images/arrow.png" Height="25" Width="28"/>
+        </Button>
+        <Button Command="{Binding DeletePhotoCommand}" Margin="840,436,30,78" FontWeight="Bold" Height="30" Width="30">
+            <Image Source="/Resources/Images/delete.png" Height="25" Width="50"/>
+        </Button>
+        <Button Command="{Binding DeletePhotoCommand}" Margin="0,436,30,78" FontWeight="Bold" Height="30" Width="30">
+            <Image Source="/Resources/Images/delete.png" Height="25" Width="50"/>
         </Button>
     </Grid>
 </Window>

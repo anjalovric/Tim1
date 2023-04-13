@@ -1,0 +1,16 @@
+1|l1|False|1|1
+2|l2|False|1|2
+3|p1|False|2|1
+4|p2|False|2|2
+5|a1|True|3|1
+6|a2|True|3|2
+7|a3|False|3|3
+8|h1|True|4|1
+9|h2|True|4|2
+10|g1|True|5|1
+11|g2|True|5|2
+12|m1|True|6|1
+13|m2|True|6|2
+14|m3|True|6|3
+15|h1|True|7|1
+16|h2|False|7|2
