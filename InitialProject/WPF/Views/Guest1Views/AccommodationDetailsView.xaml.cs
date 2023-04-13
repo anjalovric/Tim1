@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using InitialProject.Domain.Model;
 using InitialProject.Model;
+using InitialProject.WPF.ViewModels.Guest1ViewModels;
 using InitialProject.WPF.Views;
 
 namespace InitialProject.WPF.Views.Guest1Views
@@ -23,71 +24,13 @@ namespace InitialProject.WPF.Views.Guest1Views
     /// </summary>
     public partial class AccommodationDetailsView : Page
     {
-        public Accommodation SelectedAccommodation { get; set; }
-        private List<AccommodationImage> images;
-        public Uri relativeUri { get; set; }
-        public AccommodationDetailsView(List<string> imagesUrl, Accommodation currentAccommodation)
+        private AccommodationDetailsViewModel accommodationDetailsViewModel;
+        
+        public AccommodationDetailsView(Accommodation currentAccommodation, Guest1 guest1)
         {
             InitializeComponent();
-            this.DataContext = this;
-            Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = this;
-            SelectedAccommodation = currentAccommodation;
-            images = new List<AccommodationImage>();
-          
-        }
-          
-        
-
-       
-        private void BackButton_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.GoBack();
-        }
-
-        private void NextImageButton_Click(object sender, RoutedEventArgs e)
-        {
-            for (int i = 0; i < images.Count; i++)
-            {
-                if (accommodationImage.Source.ToString().Contains(images[i].Url))
-                {
-                    int k = i + 1;
-                    if (k < images.Count)
-                    {
-                        accommodationImage.Source = new BitmapImage(new Uri("/" + images[k].Url, UriKind.Relative));
-                        break;
-                    }
-
-                    if (k == images.Count)
-                    {
-                        accommodationImage.Source = new BitmapImage(new Uri("/" + images[0].Url, UriKind.Relative));
-                        break;
-                    }
-                }
-
-            }
-        }
-
-        private void BackImageButton_Click(object sender, RoutedEventArgs e)
-        {
-            for (int i = 0; i < images.Count; i++)
-            {
-                if (accommodationImage.Source.ToString().Contains(images[i].Url))
-                {
-                    int k = i - 1;
-                    if (k >= 0)
-                    {
-                        accommodationImage.Source = new BitmapImage(new Uri("/" + images[k].Url, UriKind.Relative));
-                        break;
-                    }
-
-                    if (k < 0)
-                    {
-                        accommodationImage.Source = new BitmapImage(new Uri("/" + images[images.Count - 1].Url, UriKind.Relative));
-                        break;
-                    }
-                }
-
-            }
-        }
+            accommodationDetailsViewModel = new AccommodationDetailsViewModel(currentAccommodation, guest1);
+            this.DataContext = accommodationDetailsViewModel;
+        } 
     }
 }

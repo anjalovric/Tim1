@@ -270,33 +270,13 @@ namespace InitialProject.WPF.Views.Guest1Views
                 numberOfDays.Text = changedDaysNumber.ToString();
             }
         }
-        private void ViewPhotosButton_Click(object sender, RoutedEventArgs e)
+        private void ViewDetails_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                List<string> imagesUrls = new List<string>();
-                Accommodation currentAccommodation = ((Button)sender).DataContext as Accommodation;
-                FindPhotosUrls(imagesUrls, currentAccommodation);
-                AccommodationDetailsView details = new AccommodationDetailsView(imagesUrls, currentAccommodation);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message.ToString());
-            }
+            Accommodation currentAccommodation = ((Button)sender).DataContext as Accommodation;
+            AccommodationDetailsView details = new AccommodationDetailsView(currentAccommodation, guest1);
+            Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = details;
         }
-        private void FindPhotosUrls(List<string> imagesUrls, Accommodation currentAccommodation)
-        {
-            AccommodationImageService accommodationImageService = new AccommodationImageService();
-            List<AccommodationImage> accommodationImages = new List<AccommodationImage>(accommodationImageService.GetAll());
-            Accommodation selectedAccommodation = currentAccommodation;
-            foreach (AccommodationImage image in accommodationImages)
-            {
-                if (image.Accommodation.Id == currentAccommodation.Id)
-                {
-                    imagesUrls.Add(image.Url);
-                }
-            }
-        }
+        
         private void ReserveButton_Click(object sender, RoutedEventArgs e)
         {
             Accommodation currentAccommodation = ((Button)sender).DataContext as Accommodation;

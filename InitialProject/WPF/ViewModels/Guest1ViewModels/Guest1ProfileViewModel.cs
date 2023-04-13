@@ -17,7 +17,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 {
     public class Guest1ProfileViewModel : INotifyPropertyChanged
     {
-        private Guest1 guest1;
+        public Guest1 Guest1 { get; set; }
         private BitmapImage imageSource { get; set; }
         public BitmapImage ImageSource
         {
@@ -37,13 +37,13 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         }
         public Guest1ProfileViewModel(Guest1 guest1)
         {
-            this.guest1 = guest1;
+            this.Guest1 = guest1;
             string relative = FindImageRelativePath();
             ImageSource = new BitmapImage(new Uri(relative, UriKind.Relative));
         }
         private string FindImageRelativePath()
         {
-            return guest1.ImagePath;
+            return Guest1.ImagePath;
         }
         
     }
