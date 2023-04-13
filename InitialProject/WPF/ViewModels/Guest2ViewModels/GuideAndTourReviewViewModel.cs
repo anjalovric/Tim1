@@ -168,27 +168,28 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         {
             if (IsImageUploadValid())
             {
-                StoreReview();
-                StoreImages();
+                int id = StoreReview().Id;
+                StoreImages(id);
                 MessageBox.Show("Review successfully sent!");
                 Application.Current.Windows.OfType<GuideAndTourReviewForm>().FirstOrDefault().Close();
             }
             else
                 MessageBox.Show("You must upload at least one photo!");
         }
-        private void StoreImages()
+        private void StoreImages(int reviewId)
         {
             TourReviewImageService tourReviewImageService = new TourReviewImageService();
             foreach (TourReviewImage image in images)
             {
+                image.GuideAndTourReviewId = reviewId;
                 tourReviewImageService.Save(image);
             }
         }
-        private void StoreReview()
+        private GuideAndTourReview StoreReview()
         {
             GuideAndTourReviewService guideAndTourReviewService = new GuideAndTourReviewService();
             GuideAndTourReview guideAndTourReview = new GuideAndTourReview(CurrentTourInstance.Guide.Id, guest2, CurrentTourInstance, Convert.ToInt32(language.Text), Convert.ToInt32(interestingFacts.Text), Convert.ToInt32(knowledge.Text), Comment);
-            guideAndTourReviewService.Save(guideAndTourReview);
+            return guideAndTourReviewService.Save(guideAndTourReview);
         }
         private bool IsImageUploadValid()
         {

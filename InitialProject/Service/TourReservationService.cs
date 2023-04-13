@@ -59,5 +59,13 @@ namespace InitialProject.Service
         {
             return tourReservationrepository.GetReservationsForTour(selected);
         }
+
+        public int CountAttendance(int selectedId)
+        {
+            int counter = 0;
+            foreach (TourReservation reservation in GetByInstanceId(selectedId))
+                counter += reservation.Capacity;
+            return counter;
+        }
     }
 }

@@ -125,9 +125,9 @@ namespace InitialProject.Service
         {
             return guideAndTourReviewRepository.HasReview(tourInstance);
         }
-        public void Save(GuideAndTourReview review)
+        public GuideAndTourReview Save(GuideAndTourReview review)
         {
-            guideAndTourReviewRepository.Save(review);
+           return guideAndTourReviewRepository.Save(review);
         }
     }
 }

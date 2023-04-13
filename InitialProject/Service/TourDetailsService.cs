@@ -18,22 +18,15 @@ namespace InitialProject.Service
         {
             int counter = 0;
             foreach (TourReservation reservation in reservationService.GetByInstanceId(selectedId))
-                if (IsOnTour(reservation.GuestId, selectedId))
+                if (alertGuest2Service.IsOnTour(reservation.GuestId, selectedId))
                     counter += reservation.Capacity;           
             return counter;
-        }
-        public bool IsOnTour(int guest2Id, int instanceId)
-        {
-            foreach (AlertGuest2 alert in alertGuest2Service.GetByInstanceIdAndGuestId(instanceId, guest2Id))
-                if (alert.Availability)
-                    return true;            
-            return false;
         }
         public int CountWithoutVouchers(int selectedId)
         {
             int counter = 0;
             foreach (TourReservation reservation in reservationService.GetByInstanceId(selectedId))
-                if (IsOnTour(reservation.GuestId, selectedId) && !reservation.WithVaucher)
+                if (alertGuest2Service.IsOnTour(reservation.GuestId, selectedId) && !reservation.WithVaucher)
                     counter += reservation.Capacity;            
             return counter;
         }
@@ -41,7 +34,7 @@ namespace InitialProject.Service
         {
             int under18Counter = 0;
             foreach (TourReservation reservation in reservationService.GetByInstanceId(selectedId))   
-                if (IsOnTour(reservation.GuestId, selectedId) && reservation.AverageGuestsAge <= 18)
+                if (alertGuest2Service.IsOnTour(reservation.GuestId, selectedId) && reservation.AverageGuestsAge <= 18)
                     under18Counter += reservation.Capacity;           
             return under18Counter;
         }
@@ -49,7 +42,7 @@ namespace InitialProject.Service
         {
             int counter = 0;
             foreach (TourReservation reservation in reservationService.GetByInstanceId(selectedId))
-                if (IsOnTour(reservation.GuestId, selectedId) && reservation.AverageGuestsAge > 18 && reservation.AverageGuestsAge <= 50)
+                if (alertGuest2Service.IsOnTour(reservation.GuestId, selectedId) && reservation.AverageGuestsAge > 18 && reservation.AverageGuestsAge <= 50)
                     counter += reservation.Capacity;           
             return counter;
         }
@@ -57,7 +50,7 @@ namespace InitialProject.Service
         {
             int counter = 0;
             foreach (TourReservation reservation in reservationService.GetByInstanceId(selectedId))
-                if (IsOnTour(reservation.GuestId, selectedId) && reservation.AverageGuestsAge > 50)
+                if (alertGuest2Service.IsOnTour(reservation.GuestId, selectedId) && reservation.AverageGuestsAge > 50)
                     counter += reservation.Capacity;            
             return counter;
         }
@@ -77,7 +70,7 @@ namespace InitialProject.Service
         {
             int counter = 0;
             foreach (TourReservation reservation in reservationService.GetByInstanceId(selectedId))
-                if (IsOnTour(reservation.GuestId, selectedId) && reservation.WithVaucher)
+                if (alertGuest2Service.IsOnTour(reservation.GuestId, selectedId) && reservation.WithVaucher)
                     counter += reservation.Capacity;           
             return counter;
         }
@@ -99,26 +92,11 @@ namespace InitialProject.Service
                 return (double)CountOver50(selectedId) / (double)CountGuest(selectedId) * 100;
             return 0.00;
         }
-        public int CountAttendance(int selectedId)
-        {
-            int counter = 0;
-            foreach (TourReservation reservation in reservationService.GetByInstanceId(selectedId))
-                counter += reservation.Capacity;            
-            return counter;
-        }
         public double MakeAttendancePrecentage(int selectedId)
         {
             if (CountGuest(selectedId)!=0)
-                return (double)CountAttendance(selectedId) / (double)CountGuest(selectedId) * 100;
+                return (double)reservationService.CountAttendance(selectedId) / (double)CountGuest(selectedId) * 100;
             return 0.00;
-        }
-        public int CountGuestsOnPoint(int currentPointId, TourInstance selectedInstance)
-        {
-            int counter = 0;
-            foreach (AlertGuest2 alert in alertGuest2Service.GetAll())
-                if (alert.CheckPointId == currentPointId && alert.Availability && alert.InstanceId == selectedInstance.Id)
-                    counter += reservationService.GetTourReservationById(alert.ReservationId).Capacity; 
-            return counter;
         }
     }
 }

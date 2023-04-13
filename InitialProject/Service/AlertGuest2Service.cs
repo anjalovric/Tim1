@@ -46,6 +46,24 @@ namespace InitialProject.Service
         {
             alertGuest2Repository.AddAlerts(currentPointId, _callId, selected);
         }
+
+        public int CountGuestsOnPoint(int currentPointId, TourInstance selectedInstance)
+        {
+            TourReservationService reservationService = new TourReservationService();
+            int counter = 0;
+            foreach (AlertGuest2 alert in GetAll())
+                if (alert.CheckPointId == currentPointId && alert.Availability && alert.InstanceId == selectedInstance.Id)
+                    counter += reservationService.GetTourReservationById(alert.ReservationId).Capacity;
+            return counter;
+        }
+
+        public bool IsOnTour(int guest2Id, int instanceId)
+        {
+            foreach (AlertGuest2 alert in GetByInstanceIdAndGuestId(instanceId, guest2Id))
+                if (alert.Availability)
+                    return true;
+            return false;
+        }
     }
 
 }

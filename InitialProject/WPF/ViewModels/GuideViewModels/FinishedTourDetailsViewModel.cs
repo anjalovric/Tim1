@@ -50,13 +50,13 @@ namespace InitialProject.WPF.ViewModels
 
         private void ComposeReport()
         {
-            TourDetailsService detailsService = new TourDetailsService();
+            AlertGuest2Service alertGuest2Service = new AlertGuest2Service();
             CheckPointService checkPointService = new CheckPointService();
             foreach (CheckPoint point in checkPointService.GetInstancePoints(selectedInstance))
             {
                 CheckPointInformation pointInformation = new CheckPointInformation();
                 pointInformation.CheckPoint = point;
-                pointInformation.countGuests = detailsService.CountGuestsOnPoint(point.Id, selectedInstance);
+                pointInformation.countGuests = alertGuest2Service.CountGuestsOnPoint(point.Id, selectedInstance);
                 ShowGuestsOnPoint(point.Id, pointInformation);
                 CheckPointInformations.Add(pointInformation);
 
