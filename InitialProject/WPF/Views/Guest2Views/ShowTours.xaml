@@ -52,7 +52,7 @@
         <Button Content="Search" FontWeight="Bold" HorizontalAlignment="Left" Margin="873,201,0,0" VerticalAlignment="Top" Height="22" Click="Search_Click" Width="75"/>
         <Label x:Name="Label" FontWeight="Bold" Content="Showing all tours: " HorizontalAlignment="Left" Margin="159,279,0,0" VerticalAlignment="Top" Height="24"/>
         <Button x:Name="Restart" Width="76" Content="Restart" HorizontalAlignment="Left" Margin="948,201,0,0" VerticalAlignment="Top" TextElement.FontWeight="Bold" Click="Restart_Click" Height="22"/>
-        <Label x:Name="DurationLabel" HorizontalAlignment="Left" Margin="271,116,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="DurationLabel" HorizontalAlignment="Left" Margin="874,158,0,0" VerticalAlignment="Top" Height="25" Width="150"/>
         <Label Content="Searching tours" FontWeight="Bold" HorizontalAlignment="Left" Margin="159,38,0,0" VerticalAlignment="Top"/>
 
 

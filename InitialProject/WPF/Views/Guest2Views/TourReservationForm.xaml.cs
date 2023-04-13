@@ -20,6 +20,7 @@ using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.Serializer;
 using InitialProject.Service;
+using InitialProject.WPF.ViewModels.Guest2ViewModels;
 using NPOI.SS.Formula.Functions;
 
 namespace InitialProject.WPF.Views.Guest2Views
@@ -116,7 +117,6 @@ namespace InitialProject.WPF.Views.Guest2Views
         {
             int suma = 0;
             ObservableCollection<TourInstance> storedTourInstances= new ObservableCollection<TourInstance>(tourInstanceRepository.GetAll());
-            ShowTours.SetLocations();
             ShowTours.SetTours(storedTourInstances);
             TourInstances.Clear();
             foreach (TourInstance tourInstance in storedTourInstances)
@@ -181,6 +181,10 @@ namespace InitialProject.WPF.Views.Guest2Views
             Voucher currentVoucher = (Voucher)ActivationVoucherDataGrid.CurrentItem;
             voucherService.Update(currentVoucher);
             this.withVoucher = true;
+
+            Vouchers.Clear();
+            foreach (Voucher voucher in voucherService.FindAllVouchers(guest2))
+                Vouchers.Add(voucher);
         }
     }
 }

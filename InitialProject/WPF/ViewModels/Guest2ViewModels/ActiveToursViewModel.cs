@@ -62,7 +62,6 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             FindPointsForActiveInstance();
             SetTourInstances(TourInstances);
             locationService = new LocationService();
-            SetLocations();
             SetTours(tourInstance);
             SetCheckPoint();
         }
@@ -142,30 +141,21 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             }
             return null;
         }
-        public void SetLocations()
-        {
-            List<Location> locations = locationService.GetAll();
-            List<Tour> tours = tourService.GetAll();
-
-            foreach (Location location in locations)
-            {
-                foreach (Tour tour in tours)
-                {
-                    if (location.Id == tour.Location.Id)
-                        tour.Location = location;
-                }
-            }
-        }
         public void SetTours(TourInstance tourInstance)
         {
             List<Tour> tours = tourService.GetAll();
+            List<Location> locations = locationService.GetAll();
             if (tourInstance != null)
             {
-                foreach (Tour tour in tours)
+                foreach (Location location in locations)
                 {
-                    if (tour.Id == tourInstance.Tour.Id)
+                    foreach (Tour tour in tours)
                     {
-                        tourInstance.Tour = tour;
+                        if (location.Id == tour.Location.Id && tour.Id == tourInstance.Tour.Id)
+                        {
+                            tour.Location = location;
+                            tourInstance.Tour = tour;
+                        }
                     }
                 }
             }
