@@ -71,10 +71,14 @@ namespace InitialProject.WPF.ViewModels
             Tours = new ObservableCollection<TourInstance>(tourInstanceService.GetByStart(loggedGuide));
             SetTitle(user);
             StartCommand = new RelayCommand(StartTour_Executed, CanExecute);
+            SetClock();
+        }
+        private void SetClock()
+        {
             DispatcherTimer LiveTime = new DispatcherTimer();
-             LiveTime.Interval = TimeSpan.FromSeconds(1);
-             LiveTime.Tick += timer_Tick;
-             LiveTime.Start();
+            LiveTime.Interval = TimeSpan.FromSeconds(1);
+            LiveTime.Tick += timer_Tick;
+            LiveTime.Start();
         }
         private bool CanExecute(object sender)
         {
@@ -86,22 +90,17 @@ namespace InitialProject.WPF.ViewModels
             Guide guide = guideService.GetByUsername(user.Username);
             Home = guide.Name + " " + guide.Username + "'s home page";
         }
-
-
         public event PropertyChangedEventHandler PropertyChanged;
-
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
         private void StartTour_Executed(object sender)
         {
             if (tourInstanceService.GetByActive(loggedGuide) == null)
             {
                 StartedTourInstanceView startedTourInstanceView = new StartedTourInstanceView(Selected, Tours, FinishedInstances);
                 Application.Current.Windows.OfType<GuideWindow>().FirstOrDefault().Main.Content = startedTourInstanceView;
-
             }
         }
         void timer_Tick(object sender, EventArgs e)

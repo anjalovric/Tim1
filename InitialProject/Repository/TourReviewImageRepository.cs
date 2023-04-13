@@ -1,13 +1,8 @@
 ﻿using InitialProject.Domain.Model;
 using InitialProject.Domain.RepositoryInterfaces;
-using InitialProject.Model;
 using InitialProject.Serializer;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
 
 namespace InitialProject.Repository
 {
@@ -29,7 +24,6 @@ namespace InitialProject.Repository
         {
             return _serializer.FromCSV(FilePath);
         }
-
         public TourReviewImage Save(TourReviewImage review)
         {
             review.Id = NextId();
@@ -38,7 +32,6 @@ namespace InitialProject.Repository
             _serializer.ToCSV(FilePath, _tourReviewImages);
             return review;
         }
-
         public int NextId()
         {
             _tourReviewImages = _serializer.FromCSV(FilePath);
@@ -56,7 +49,6 @@ namespace InitialProject.Repository
             _tourReviewImages.Remove(founded);
             _serializer.ToCSV(FilePath, _tourReviewImages);
         }
-
         public TourReviewImage Update(TourReviewImage review,int id)
         {
             _tourReviewImages = _serializer.FromCSV(FilePath);
@@ -68,7 +60,6 @@ namespace InitialProject.Repository
             _serializer.ToCSV(FilePath, _tourReviewImages);
             return review;
         }
-
         public List<TourReviewImage> GetByReviewId(int reviewId)
         {
             List<TourReviewImage> images= new List<TourReviewImage>();
@@ -78,7 +69,6 @@ namespace InitialProject.Repository
             }
             return images;
         }
-
         public TourReviewImage GetById(int id)
         {
             return _tourReviewImages.Find(x  => x.Id == id);

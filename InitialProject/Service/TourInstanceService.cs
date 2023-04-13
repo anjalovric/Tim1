@@ -1,17 +1,8 @@
 ﻿using InitialProject.Domain;
 using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Model;
-using InitialProject.Repository;
-using InitialProject.Serializer;
-using InitialProject.View;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls.Primitives;
-
 namespace InitialProject.Service
 {
     public class TourInstanceService
@@ -24,7 +15,6 @@ namespace InitialProject.Service
             finishedtourInsatncesForChosenYear = new List<TourInstance>();
             finishedtourInstances = new List<TourInstance>();
         }
-
         public List<TourInstance> GetAll()
         {
             return tourInstancerepository.GetAll();
@@ -36,40 +26,13 @@ namespace InitialProject.Service
         public List<TourInstance> GetByStart(Guide guide)
         {
             List<TourInstance> list = tourInstancerepository.GetByStart(guide);
-            FillWithTours(list);
+            TourInstanceTourLocationService tourInstanceTourLocation = new TourInstanceTourLocationService();
+            tourInstanceTourLocation.FillWithTours(list);
             return list;
         }
         public List<TourInstance> GetInstancesLaterThan48hFromNow(Guide guide)
         {       
             return tourInstancerepository.GetInstancesLaterThan48hFromNow(guide);
-
-        }
-        public List<TourInstance> FindCancelableTours(Guide guide)
-        {
-            List<TourInstance> cancelableInstances = GetInstancesLaterThan48hFromNow(guide);
-            TourService tourService = new TourService();
-            tourService.SetTourToTourInstance(cancelableInstances);
-            return cancelableInstances;
-        }
-
-        public void CancelTourInstance(TourInstance currentTourInstance, ObservableCollection<TourInstance> tourInstances, User tourInstanceGuide)
-        {
-            GuideService guideService = new GuideService();
-            Guide loggedGuide = guideService.GetByUsername(tourInstanceGuide.Username);
-            SetToCancelState(currentTourInstance, tourInstances, loggedGuide);
-            VoucherService voucherService = new VoucherService();
-            voucherService.SendVoucher(currentTourInstance.Id, tourInstanceGuide);
-        }
-        private void SetToCancelState(TourInstance currentTourInstance, ObservableCollection<TourInstance> tourInstances, Guide loggedGuide)
-        {
-            foreach (TourInstance tourInstance in GetAll())
-                if (tourInstance.Id == currentTourInstance.Id)
-                    currentTourInstance = tourInstance;
-            currentTourInstance.Canceled = true;
-            Update(currentTourInstance);
-            tourInstances.Clear();
-            foreach (TourInstance tour in FindCancelableTours(loggedGuide))
-                tourInstances.Add(tour);
         }
         public List<TourInstance> GetFinishedInsatnces(ObservableCollection<TourInstance> Instances,Guide guide)
         {
@@ -83,19 +46,15 @@ namespace InitialProject.Service
             }
             return finishedtourInstances;
         }
-
-        public List<TourInstance> GetFinishedInstancesForChoosenYear(int year,Guide guide)
-        {   
+        public List<TourInstance> GetFinishedInstancesForChoosenYear(int year, Guide guide)
+        {
             foreach (TourInstance instance in GetAll())
-            {
-                if (instance.Finished && instance.StartDate.Year == year && instance.Guide.Id==guide.Id)
-                {
+            { 
+                if (instance.Finished && instance.StartDate.Year == year && instance.Guide.Id == guide.Id)
                     finishedtourInsatncesForChosenYear.Add(instance);
-                }
             }
             return finishedtourInsatncesForChosenYear;
         }
-
         public TourInstance FindMostVisitedForChosenYear(int year, Guide guide )
         {
             GetFinishedInstancesForChoosenYear(year,guide);
@@ -110,10 +69,10 @@ namespace InitialProject.Service
                     tour = instance;
                 }
             }
-            FillTour(tour);
+            TourInstanceTourLocationService tourInstanceTourLocation = new TourInstanceTourLocationService();
+            tourInstanceTourLocation.FillTour(tour);
             return tour;
         }
-
         public void SetAttendanceToFinishTours()
         {
             TourDetailsService tourDetailsService = new TourDetailsService();
@@ -126,7 +85,6 @@ namespace InitialProject.Service
                 tour.Attendance = tourDetailsService.MakeAttendancePrecentage(tour.Id);
             }
         }
-
         public TourInstance FindMostVisited()
         {
             SetAttendanceToFinishTours();
@@ -142,73 +100,15 @@ namespace InitialProject.Service
             }
             return tour;
         }
-
         public void SetFinishedInstances(ObservableCollection<TourInstance> Instances,Guide guide)
         {
             TourService tourService = new TourService();
             tourService.SetTourToTourInstance(GetFinishedInsatnces(Instances,guide));
         }
-
-        private void FillWithTours(List<TourInstance> Instances)
-        {
-            TourService tourService=new TourService();
-            foreach(TourInstance instance in Instances)
-            {
-                foreach(Tour tour in tourService.GetAll())
-                {
-                    if (tour.Id == instance.Tour.Id)
-                    {
-                        instance.Tour = tour;
-                    }
-                }
-            }
-            FillWithLocation(Instances);
-        }
-
-        private void FillWithLocation(List<TourInstance> Instances)
-        {
-            LocationService locationService = new LocationService();
-            foreach (TourInstance instance in Instances)
-            {
-                foreach (Location location in locationService.GetAll())
-                {
-                    if (location.Id == instance.Tour.Location.Id)
-                    {
-                        instance.Tour.Location = location;
-                    }
-                }
-            }
-        }
         public TourInstance GetByActive(Guide guide)
         {
             return tourInstancerepository.GetActive(guide);
         }
-
-        public void FillTour(TourInstance instance)
-        {
-            TourService tourService = new TourService();
-            foreach(Tour tour in tourService.GetAll())
-            {
-                if(tour.Id== instance.Tour.Id)
-                {
-                    instance.Tour= tour;
-                }
-            }
-            FillWithLocation(instance);
-        }
-
-        private void FillWithLocation(TourInstance instance)
-        {
-            LocationService locationService = new LocationService();
-            foreach(Location location in locationService.GetAll())
-            {
-                if(location.Id== instance.Tour.Location.Id)
-                {
-                    instance.Tour.Location= location;
-                }
-            }
-        }
-
         public TourInstance SetFinishStatus(TourInstance selected)
         {
             TourDetailsService tourDetailsService = new TourDetailsService();
@@ -216,7 +116,8 @@ namespace InitialProject.Service
             selected.Active = false;
             selected.Attendance = tourDetailsService.MakeAttendancePrecentage(selected.Id);
             tourInstancerepository.Update(selected);
-            FillTour(selected);
+            TourInstanceTourLocationService tourInstanceTourLocation = new TourInstanceTourLocationService();
+            tourInstanceTourLocation.FillTour(selected);
             return selected;
         }
         public void ActivateTour(TourInstance selected)

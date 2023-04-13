@@ -4,8 +4,6 @@ using InitialProject.Domain;
 using InitialProject.Domain.Model;
 using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Model;
-using InitialProject.Repository;
-using NPOI.SS.Formula.Functions;
 
 namespace InitialProject.Service
 {

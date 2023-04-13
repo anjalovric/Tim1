@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using InitialProject.Domain;
-using InitialProject.Domain.Model;
 using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Model;
-using InitialProject.Repository;
 
 namespace InitialProject.Service
 {
@@ -27,6 +21,10 @@ namespace InitialProject.Service
             return accommodationImageRepository.Add(image);
         }
 
+        public AccommodationImage GetCoverImage(Accommodation accommodation)
+        {
+            return GetAll().Find(image => image.Accommodation.Id == accommodation.Id);
+        }
         public List<AccommodationImage> GetAllByAccommodation(Accommodation accommodation)
         {
             List<AccommodationImage> images = new List<AccommodationImage>();

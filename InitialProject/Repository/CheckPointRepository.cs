@@ -1,34 +1,25 @@
 ﻿using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Model;
 using InitialProject.Serializer;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace InitialProject.Repository
 {
     public class CheckPointRepository:ICheckPointRepository
     {
         private const string FilePath = "../../../Resources/Data/checkPoints.csv";
-
         private readonly Serializer<CheckPoint> _serializer;
-
         private List<CheckPoint> _checkPoints;
-
         public CheckPointRepository()
         {
             _serializer = new Serializer<CheckPoint>();
             _checkPoints = _serializer.FromCSV(FilePath);
         }
-
         public List<CheckPoint> GetAll()
         {
             return _serializer.FromCSV(FilePath);
         }
-
         public CheckPoint Save(CheckPoint checkPoint)
         {
             checkPoint.Id = NextId();
@@ -37,8 +28,6 @@ namespace InitialProject.Repository
             _serializer.ToCSV(FilePath, _checkPoints);
             return checkPoint;
         }
-
-
         public int NextId()
         {
             _checkPoints = _serializer.FromCSV(FilePath);
@@ -48,7 +37,6 @@ namespace InitialProject.Repository
             }
             return _checkPoints.Max(c => c.Id) + 1;
         }
-
         public void Delete(CheckPoint checkPoint)
         {
             _checkPoints = _serializer.FromCSV(FilePath);
@@ -91,13 +79,10 @@ namespace InitialProject.Repository
                 foreach (CheckPoint point in _checkPoints)
                 {
                     if (point.TourId == selectedInstance.Tour.Id)
-                    {
                         AllPoints.Add(point);
-                    }
                 }
             }
         }
-
         public void CheckFirstPoint(ObservableCollection<CheckPoint> AllPoints)
         {
             foreach (CheckPoint point in AllPoints)

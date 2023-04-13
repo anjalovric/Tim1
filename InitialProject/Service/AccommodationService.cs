@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using InitialProject.Domain;
 using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Model;
-using InitialProject.Repository;
 
 namespace InitialProject.Service
 {
@@ -64,36 +58,35 @@ namespace InitialProject.Service
                 }
             }
         }
+
         private void AddTypes()
         {
             AccommodationTypeService accommodationTypeService = new AccommodationTypeService();
             List<AccommodationType> allTypes = accommodationTypeService.GetAll();
-            foreach(Accommodation accommodation in accommodations)
+            foreach (Accommodation accommodation in accommodations)
             {
                 AccommodationType accommodationType = allTypes.Find(n => n.Id == accommodation.Type.Id);
-                if(accommodationType != null)
+                if (accommodationType != null)
                 {
                     accommodation.Type = accommodationType;
                 }
             }
         }
-        public ObservableCollection<Accommodation> GetAllByOwner(Owner owner)
+
+        public List<Accommodation> GetAllByOwner(Owner owner)
         {
-            ObservableCollection<Accommodation> accommodationsByOwner = new ObservableCollection<Accommodation>();
+            AccommodationImageService imageService = new AccommodationImageService();
+            List<Accommodation> accommodationsByOwner = new List<Accommodation>();
             foreach (Accommodation accommodation in accommodations)
             {
                 if (accommodation.Owner.Id == owner.Id)
                 {
-                    accommodation.CoverImage = GetCoverImage(accommodation);
+                    accommodation.CoverImage = imageService.GetCoverImage(accommodation);
                     accommodationsByOwner.Add(accommodation);
                 }
             }
             return accommodationsByOwner;
         }
-        private AccommodationImage GetCoverImage(Accommodation accommodation)
-        {
-            AccommodationImageService imageService = new AccommodationImageService();
-            return imageService.GetAll().Find(image => image.Id == accommodation.Id);
-        }
+        
     }
 }

@@ -66,14 +66,14 @@ namespace InitialProject.WPF.ViewModels
         }
         private void MakeCancelableTourList(Guide guide)
         {
-            tourInstances = new ObservableCollection<TourInstance>(tourInstanceService.FindCancelableTours(guide));
+            TourInstanceCancelationService tourInstanceCancelationService = new TourInstanceCancelationService();
+            tourInstances = new ObservableCollection<TourInstance>(tourInstanceCancelationService.FindCancelableTours(guide));
         }
         public void CancelExecuted(object sender)
         {
-            
+            TourInstanceCancelationService service = new TourInstanceCancelationService();
             TourInstance currentTourInstance = (TourInstance)TourListDataGrid.CurrentItem;
-            tourInstanceService.CancelTourInstance(currentTourInstance, TourInstances, tourInstanceGuide);
-
+            service.CancelTourInstance(currentTourInstance, TourInstances, tourInstanceGuide);
         }
     }
 }

@@ -15,25 +15,18 @@ namespace InitialProject.Service
     {
         private ITourImageRepository repository = Injector.CreateInstance<ITourImageRepository>();
         public TourImageService() { }
-
-
         public List<TourImage> GetAll()
         {
             return repository.GetAll();
         }
-
         public TourImage Save(TourImage tourImage)
         {
             return repository.Save(tourImage);
         }
-
-
-
         public void Delete(TourImage tourImage)
         {
             repository.Delete(tourImage);
         }
-
         public TourImage Update(TourImage tourImage)
         {
             return repository.Update(tourImage);
@@ -46,7 +39,6 @@ namespace InitialProject.Service
         public List<TourImage> GetByTour(int touId)
         {
             return repository.GetByTour(touId);
-
         }
     }
 

@@ -4,10 +4,6 @@ using InitialProject.Serializer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls.Primitives;
-
 namespace InitialProject.Repository
 {
     public class TourInstanceRepository:ITourInstanceRepository
@@ -36,9 +32,8 @@ namespace InitialProject.Repository
         {
             _tourInstances = _serializer.FromCSV(FilePath);
             if (_tourInstances.Count < 1)
-            {
                 return 1;
-            }
+
             return _tourInstances.Max(c => c.Id) + 1;
         }
         public void Delete(TourInstance tour)
@@ -115,9 +110,7 @@ namespace InitialProject.Repository
             foreach(TourInstance tour in _tourInstances)
             {
                 if(tour.Active && tour.Guide.Id == guide.Id)
-                {
                     active = tour;
-                }
             }
             return active;
         }

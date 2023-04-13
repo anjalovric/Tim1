@@ -30,7 +30,7 @@ namespace InitialProject.WPF.ViewModels
         {
             profileOwner = owner;
             accommodationService = new AccommodationService();
-            Accommodations = accommodationService.GetAllByOwner(profileOwner);
+            Accommodations = new ObservableCollection<Accommodation>(accommodationService.GetAllByOwner(profileOwner));
             InitializeSelectedAccommodation();
             MakeCommands();
         }

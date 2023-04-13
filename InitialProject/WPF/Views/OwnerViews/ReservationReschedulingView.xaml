@@ -39,12 +39,12 @@
 
 
                     <Border Grid.Column="1" Grid.Row="1" BorderBrush="Black" BorderThickness="0.5">
-                        <TextBlock  Text="{Binding Path = AccommodationReservation.Arrival}"></TextBlock>
+                        <TextBlock  Text="{Binding Path = Request.OldArrivalDate}"></TextBlock>
                      </Border>
                     <Image  Grid.Column="2" Grid.Row="1" Source="/Resources/Images/calendarIcon.png" />
                     <Image  Grid.Column="4" Grid.Row="1" Source="/Resources/Images/calendarIcon.png" />
                     <Border Grid.Column="3" Grid.Row="1" BorderBrush="Black" BorderThickness="0.5">
-                        <TextBlock Text="{Binding Path = AccommodationReservation.Departure}"></TextBlock>
+                        <TextBlock Text="{Binding Path = Request.OldDepartureDate}"></TextBlock>
                      </Border>
 
                     <Border Grid.Column="1" Grid.Row="3" BorderBrush="Black" BorderThickness="0.5">

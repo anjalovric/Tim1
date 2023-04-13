@@ -1,13 +1,12 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Windows;
 using InitialProject.Model;
 using InitialProject.Service;
-using InitialProject.WPF.Views.OwnerViews;
 using InitialProject.WPF.Views;
-using System.Windows;
-using System.Linq;
-using System.Windows.Controls;
+using InitialProject.WPF.Views.OwnerViews;
 
 namespace InitialProject.WPF.ViewModels
 {
@@ -27,13 +26,23 @@ namespace InitialProject.WPF.ViewModels
         public ReservationReschedulingViewModel(Owner owner)
         {
             profileOwner = owner;
-            requestService = new RequestForReschedulingService();
             reschedulingRequestService = new ReschedulingAccommodationRequestService();
-            Requests = new ObservableCollection<RequestForReshcedulingViewModel>(requestService.GetPendingRequests(owner));
+            requestService = new RequestForReschedulingService();
+            Requests = new ObservableCollection<RequestForReshcedulingViewModel>(requestService.GetPendingRequests(profileOwner));
             SelectedRequest = new RequestForReshcedulingViewModel(profileOwner);
             InitializeSelectedRequest();
             completedReschedulingRequestService = new CompletedAccommodationReschedulingRequestService();
             MakeCommands();
+        }
+
+        private void RefreshRequests()
+        {
+            requestService = new RequestForReschedulingService();
+            Requests.Clear();
+            foreach(var request in requestService.GetPendingRequests(profileOwner))
+            {
+                Requests.Add(request);
+            }
         }
 
         private void MakeCommands()
@@ -97,6 +106,7 @@ namespace InitialProject.WPF.ViewModels
             completedReschedulingRequestService.DeclineRequest(SelectedRequest.Request);
             Requests.Remove(SelectedRequest);
             InitializeSelectedRequest();
+            RefreshRequests();
         }
 
         public void ApproveRequest()
@@ -105,6 +115,7 @@ namespace InitialProject.WPF.ViewModels
             completedReschedulingRequestService.ApproveRequest(SelectedRequest.Request);
             Requests.Remove(SelectedRequest);
             InitializeSelectedRequest();
+            RefreshRequests();
         }
 
     }

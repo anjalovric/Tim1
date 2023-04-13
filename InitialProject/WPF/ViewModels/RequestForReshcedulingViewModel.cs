@@ -13,7 +13,7 @@ namespace InitialProject.WPF.ViewModels
         private ReschedulingAccommodationRequest request;
         private AccommodationReservation accommodationReservation;
         private bool isAccommodationAvailable;
-        public string Availability { get; set; }
+        private string availability;
         private Owner profileOwner;
         public RequestForReshcedulingViewModel(Owner owner)
         {
@@ -30,6 +30,19 @@ namespace InitialProject.WPF.ViewModels
                 if (!value.Equals(request))
                 {
                     request = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public string Availability
+        {
+            get => availability;
+            set
+            {
+                if (!value.Equals(availability))
+                {
+                    availability = value;
                     OnPropertyChanged();
                 }
             }
@@ -66,8 +79,8 @@ namespace InitialProject.WPF.ViewModels
 
         public void SetAvailability()
         {
-            AccommodationReservationService reservationService = new AccommodationReservationService();
-            isAccommodationAvailable = reservationService.IsAvailableInDateRange(Request.Reservation, Request.NewArrivalDate, Request.NewDepartureDate);
+            AvailableDatesForAccommodationService datesService = new AvailableDatesForAccommodationService();
+            isAccommodationAvailable = datesService.IsAvailableInDateRange(Request.Reservation, Request.NewArrivalDate, Request.NewDepartureDate);
             if (isAccommodationAvailable)
             {
                 Availability = "available";
