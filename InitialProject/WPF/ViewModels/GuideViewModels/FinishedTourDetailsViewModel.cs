@@ -51,7 +51,8 @@ namespace InitialProject.WPF.ViewModels
         private void ComposeReport()
         {
             TourDetailsService detailsService = new TourDetailsService();
-            foreach (CheckPoint point in detailsService.GetInstancePoints(selectedInstance))
+            CheckPointService checkPointService = new CheckPointService();
+            foreach (CheckPoint point in checkPointService.GetInstancePoints(selectedInstance))
             {
                 CheckPointInformation pointInformation = new CheckPointInformation();
                 pointInformation.CheckPoint = point;

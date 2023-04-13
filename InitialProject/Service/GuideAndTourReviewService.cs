@@ -1,7 +1,6 @@
 ﻿using InitialProject.Domain;
 using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Model;
-using InitialProject.Repository;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 namespace InitialProject.Service
@@ -87,9 +86,7 @@ namespace InitialProject.Service
                 foreach (TourInstance instance in tourInstanceService.GetAll())
                 {
                     if (instance.Id == review.TourInstance.Id)
-                    {
                         review.TourInstance = instance;
-                    }
                 }
             }
             return guideAndTourReviews;

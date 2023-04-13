@@ -1,14 +1,9 @@
 ﻿using InitialProject.Domain;
 using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Model;
-using InitialProject.Repository;
-using InitialProject.Serializer;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace InitialProject.Service
 {
@@ -16,28 +11,13 @@ namespace InitialProject.Service
     {
         private ICheckPointRepository repository=Injector.CreateInstance<ICheckPointRepository>();
         public CheckPointService() {  }
-
         public List<CheckPoint> GetAll()
         {
             return repository.GetAll();
         }
-
         public CheckPoint Save(CheckPoint checkPoint)
         {
             return repository.Save(checkPoint);
-        }
-
-        public void Delete(CheckPoint checkPoint)
-        {
-            repository.Delete(checkPoint);
-        }
-        public CheckPoint Update(CheckPoint checkPoint)
-        {
-            return repository.Update(checkPoint);
-        }
-        public CheckPoint GetById(int id)
-        {
-            return repository.GetById(id);
         }
         public List<CheckPoint> GetByInstance(int tourId)
         {
@@ -61,15 +41,35 @@ namespace InitialProject.Service
                 AllPoints.Add(points[i]);
             }
         }
-
         public void FindPointsForSelectedInstance(TourInstance selectedInstance, ObservableCollection<CheckPoint> AllPoints)
         {
             repository.FindPointsForSelectedInstance(selectedInstance,AllPoints);
         }
-
         public void CheckFirstPoint(ObservableCollection<CheckPoint> AllPoints)
         {
            repository.CheckFirstPoint(AllPoints);
+        }
+        public List<CheckPoint> GetInstancePoints(TourInstance selectedInstance)
+        {
+            List<CheckPoint> tourPoints = new List<CheckPoint>();
+            foreach (CheckPoint point in GetAll())
+                if (point.TourId == selectedInstance.Tour.Id)
+                    tourPoints.Add(point);
+            return tourPoints;
+        }
+        public List<string> GetPointsForGuest(int guest2Id, TourInstance instance)
+        {
+            AlertGuest2Service alertGuest2Service = new AlertGuest2Service();
+            List<string> pointsName = new List<string>();
+            foreach (CheckPoint checkPoint in GetByInstance(instance.Tour.Id))
+            {
+                foreach (AlertGuest2 alert in alertGuest2Service.GetByInstanceIdAndGuestId(instance.Id, guest2Id))
+                {
+                    if (alert.Availability && alert.CheckPointId == checkPoint.Id)
+                        pointsName.Add(checkPoint.Name);
+                }
+            }
+            return pointsName;
         }
     }
 }
