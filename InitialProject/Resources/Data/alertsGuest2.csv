@@ -7,3 +7,7 @@
 7|7|2|9|True|5|True
 8|6|1|10|True|5|True
 9|7|2|10|True|5|True
+10|8|1|11|True|6|True
+11|9|2|11|False|6|True
+12|8|1|12|True|6|True
+13|9|2|12|True|6|True

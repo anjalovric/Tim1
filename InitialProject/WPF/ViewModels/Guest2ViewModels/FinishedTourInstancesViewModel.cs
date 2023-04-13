@@ -52,7 +52,6 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             RateCommand = new RelayCommand(Rate_Executed, CanExecute);
         }
         public event PropertyChangedEventHandler PropertyChanged;
-
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
@@ -63,7 +62,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         }
         public void Rate_Executed(object sender)
         {
-            if (guideAndTourReviewService.HasReview(Selected))
+            if (guideAndTourReviewService.HasReview(Selected,guest2))
             {
                 MessageBox.Show("This reservation is already reviewed.");
                 return;

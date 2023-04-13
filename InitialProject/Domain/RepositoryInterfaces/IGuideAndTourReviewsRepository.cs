@@ -10,7 +10,7 @@ namespace InitialProject.Domain.RepositoryInterfaces
 {
     public interface IGuideAndTourReviewsRepository:IGenericRepository<GuideAndTourReview>
     {
-        public bool HasReview(TourInstance tourInstance);
+        public bool HasReview(TourInstance tourInstance, Guest2 guest2);
 
         public GuideAndTourReview Save(GuideAndTourReview review);
 

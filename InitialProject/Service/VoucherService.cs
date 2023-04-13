@@ -44,7 +44,6 @@ namespace InitialProject.Service
                 voucher.GuideId = guideService.GetByUsername(tourInstanceGuide.Username).Id;
                 voucher.CreateDate = DateTime.Now;
                 Voucher savedVoucher = Save(voucher);
-
             }
         }
         public ObservableCollection<Voucher> FindAllVouchers(Guest2 guest2)
@@ -60,5 +59,4 @@ namespace InitialProject.Service
             return Vouchers;
         }
     }
-
 }

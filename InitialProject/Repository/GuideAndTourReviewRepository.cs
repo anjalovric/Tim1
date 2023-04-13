@@ -32,10 +32,14 @@ namespace InitialProject.Repository
             }
             return _reviews.Max(c => c.Id) + 1;
         }
-        public bool HasReview(TourInstance tourInstance)
+        public bool HasReview(TourInstance tourInstance,Guest2 guest2)
         {
             _reviews = _serializer.FromCSV(FilePath);
-            return _reviews.Find(n => n.TourInstance.Id == tourInstance.Id) != null;
+            if(_reviews.Find(n => n.TourInstance.Id == tourInstance.Id) != null && _reviews.Find(n => n.Guest2.Id == guest2.Id) != null)
+            {
+                return true;
+            }
+            return false;
         }
 
         public GuideAndTourReview Save(GuideAndTourReview review)
