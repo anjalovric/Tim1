@@ -79,9 +79,9 @@ namespace InitialProject.Service
         }
         public String GenerateNotification(CompletedAccommodationReschedulingRequest completedRequest)
         {
-            return completedRequest.Request.Reservation.Accommodation.Owner.Name + " " + completedRequest.Request.Reservation.Accommodation.Owner.LastName + "\n"
-                + completedRequest.Request.state.ToString().ToUpper() + "\nyour rescheduling request" + "\nin " + completedRequest.Request.Reservation.Accommodation.Name + " for dates: "
-                + "\n" + completedRequest.Request.NewArrivalDate + " to\n" + completedRequest.Request.NewDepartureDate + ".";
+            return "Request status - " + completedRequest.Request.state.ToString().ToUpper() + "\nOwner: " + completedRequest.Request.Reservation.Accommodation.Owner.Name + " " + completedRequest.Request.Reservation.Accommodation.Owner.LastName + "\n"
+                + "Name: " + completedRequest.Request.Reservation.Accommodation.Name
+                + "\nFor: " + completedRequest.Request.NewArrivalDate.ToString("d") + " - " + completedRequest.Request.NewDepartureDate.ToString("d");
         }
     }
 }

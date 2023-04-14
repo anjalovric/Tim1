@@ -24,6 +24,7 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using Image = System.Windows.Controls.Image;
+using System.Windows.Controls;
 
 namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 {
@@ -133,9 +134,9 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             foreach (System.Windows.Documents.Hyperlink link in links)
             {
                 if (link.Tag.Equals(0))
-                    StoredNotifications.Add(new MenuItem { Header = link, IsCheckable = false, Width = 280, Background = System.Windows.Media.Brushes.PaleGreen, BorderBrush = System.Windows.Media.Brushes.Black, BorderThickness = new Thickness(2), Icon = new Image { Source = new BitmapImage(new Uri("/Resources/Images/greenCorect.png", UriKind.Relative)) } }) ;
+                    StoredNotifications.Add(new MenuItem { Header = link, IsCheckable = false, Width = 300, Background = System.Windows.Media.Brushes.PaleGreen, BorderBrush = System.Windows.Media.Brushes.Black, BorderThickness = new Thickness(2), Icon = new Image { Source = new BitmapImage(new Uri("/Resources/Images/greenCorect.png", UriKind.Relative)) } }) ;
                 else
-                    StoredNotifications.Add(new MenuItem { Header = link, IsCheckable = false, Width = 280, Background = System.Windows.Media.Brushes.LightCoral, BorderBrush = System.Windows.Media.Brushes.Black, BorderThickness = new Thickness(2), Icon = new Image { Source = new BitmapImage(new Uri("/Resources/Images/redIncorect.png", UriKind.Relative)) } });
+                    StoredNotifications.Add(new MenuItem { Header = link, IsCheckable = false, Width = 300, Background = System.Windows.Media.Brushes.LightCoral, BorderBrush = System.Windows.Media.Brushes.Black, BorderThickness = new Thickness(2), Icon = new Image { Source = new BitmapImage(new Uri("/Resources/Images/redIncorect.png", UriKind.Relative)) } });
             }
         }
 
@@ -196,3 +197,4 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 
         }
     }
+//gdje preuzeti gosta, smije li u homeview
