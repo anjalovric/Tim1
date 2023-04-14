@@ -1,21 +1,11 @@
 ﻿using InitialProject.Domain.Model;
 using InitialProject.Model;
 using InitialProject.Service;
-using InitialProject.WPF.Views.GuideViews;
-using NPOI.OpenXmlFormats.Spreadsheet;
-using NPOI.Util;
-using SixLabors.ImageSharp.Processing.Processors.Transforms;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices.ObjectiveC;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 
 namespace InitialProject.WPF.ViewModels
@@ -27,15 +17,11 @@ namespace InitialProject.WPF.ViewModels
         public string StartDate { get;set; }
         public Location Location { get;set; }
         public string StartTime { get;set; }
-
         public int Guide { get; set; }
         public int LanguageKnowledge { get; set; }
-
         public int Interestigness { get; set; } 
-
         public string Comment { get; set; }
         public string Guest { get; set; }
-
         private GuideAndTourReview currentReview;
         public ObservableCollection<string> Points { get; set; }
         public ObservableCollection<GuideAndTourReview> Reviews { get; set; }
@@ -73,7 +59,6 @@ namespace InitialProject.WPF.ViewModels
                 }
             }
         }
-
         private User loggedUser;
         public ReviewDetailsViewModel(GuideAndTourReview review,ObservableCollection<GuideAndTourReview> reviews,User user) 
         { 
@@ -115,8 +100,8 @@ namespace InitialProject.WPF.ViewModels
         }
         private void FindCheckPoints(GuideAndTourReview review)
         {
-            TourDetailsService tourDetailsService = new TourDetailsService();
-            Points= new ObservableCollection<string>(tourDetailsService.GetPointsForGuest(review.Guest2.Id,review.TourInstance));
+            CheckPointService checkPointService = new CheckPointService();
+            Points= new ObservableCollection<string>(checkPointService.GetPointsForGuest(review.Guest2.Id,review.TourInstance));
         }
         public void ValidExecuted(object sender)
         {
@@ -173,11 +158,9 @@ namespace InitialProject.WPF.ViewModels
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
     }
 }

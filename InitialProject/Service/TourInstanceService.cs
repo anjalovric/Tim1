@@ -34,7 +34,7 @@ namespace InitialProject.Service
         {       
             return tourInstancerepository.GetInstancesLaterThan48hFromNow(guide);
         }
-        public List<TourInstance> GetFinishedInsatnces(ObservableCollection<TourInstance> Instances,Guide guide)
+        public List<TourInstance> GetFinishedInstances(ObservableCollection<TourInstance> Instances,Guide guide)
         {
             foreach (TourInstance instance in GetAll())
             {
@@ -103,7 +103,7 @@ namespace InitialProject.Service
         public void SetFinishedInstances(ObservableCollection<TourInstance> Instances,Guide guide)
         {
             TourService tourService = new TourService();
-            tourService.SetTourToTourInstance(GetFinishedInsatnces(Instances,guide));
+            tourService.SetTourToTourInstance(GetFinishedInstances(Instances,guide));
         }
         public TourInstance GetByActive(Guide guide)
         {

@@ -1,26 +1,17 @@
 ﻿using InitialProject.Domain;
 using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Model;
-using InitialProject.Repository;
-using InitialProject.Serializer;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace InitialProject.Service
 {
     public class TourService
     {
         private ITourRepository tourRepository;
-       // private TourInstanceService tourInstanceService = new TourInstanceService();
         private List<Tour> tours;
-        private List<TourInstance> tourInstances;
         public TourService()
         {
             tourRepository = Injector.CreateInstance<ITourRepository>();
-         //   tourInstances = tourInstanceService.GetAll();
             tours = GetAll();
         }
 

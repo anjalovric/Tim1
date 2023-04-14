@@ -13,9 +13,7 @@ namespace InitialProject.Service
     public class TourReviewImageService
     {
         private ITourReviewImageRepository tourReviewImageRepository=Injector.CreateInstance<ITourReviewImageRepository>();
-
         public TourReviewImageService() { }
-
         public List<TourReviewImage> GetAll()
         {
             return tourReviewImageRepository.GetAll();
@@ -32,7 +30,6 @@ namespace InitialProject.Service
         {
             tourReviewImageRepository.Delete(image);
         }
-
         public List<TourReviewImage> GetByReviewId(int reviewId)
         {
            return tourReviewImageRepository.GetByReviewId(reviewId);

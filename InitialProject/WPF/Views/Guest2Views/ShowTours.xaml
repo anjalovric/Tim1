@@ -12,7 +12,7 @@
             <RowDefinition Height="14*"/>
             <RowDefinition Height="65*"/>
         </Grid.RowDefinitions>
-        <DataGrid x:Name="TourListDataGrid" ItemsSource="{Binding Path=TourInstances,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=Selected}" IsReadOnly="True" AutoGenerateColumns="False" VerticalAlignment="Top" HorizontalAlignment="Left" Height="403" Width="865" Margin="159,318,0,0" Grid.RowSpan="3">
+        <DataGrid x:Name="TourListDataGrid" ItemsSource="{Binding Path=TourInstances,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=Selected}" IsReadOnly="True" AutoGenerateColumns="False" VerticalAlignment="Top" HorizontalAlignment="Left" Height="403" Width="865" Margin="159,355,0,0" Grid.RowSpan="3">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Location" Width="1*" Binding="{Binding Tour.Location}"/>
                 <DataGridTextColumn Header="Duration" Width="1*" Binding="{Binding Tour.Duration}"/>
@@ -50,10 +50,10 @@
         <Button x:Name="decrementCapacityNumber" Content="-" HorizontalAlignment="Left" Margin="539,201,0,0" VerticalAlignment="Top" Width="20" Click="DecrementCapacityNumber_Click" Height="22"/>
         <Button x:Name="incrementCapacityNumber" Content="+" HorizontalAlignment="Left" Margin="671,201,0,0" VerticalAlignment="Top" Width="20" Click="IncrementCapacityNumber_Click" RenderTransformOrigin="-1.284,0.612" Height="22"/>
         <Button Content="Search" FontWeight="Bold" HorizontalAlignment="Left" Margin="873,201,0,0" VerticalAlignment="Top" Height="22" Click="Search_Click" Width="75"/>
-        <Label x:Name="Label" FontWeight="Bold" Content="Showing all tours: " HorizontalAlignment="Left" Margin="159,279,0,0" VerticalAlignment="Top" Height="24"/>
+        <Label x:Name="Label" FontWeight="Bold" Content="Showing all tours: " FontSize="20" HorizontalAlignment="Left" Margin="159,279,0,0" VerticalAlignment="Top" Height="71"/>
         <Button x:Name="Restart" Width="76" Content="Restart" HorizontalAlignment="Left" Margin="948,201,0,0" VerticalAlignment="Top" TextElement.FontWeight="Bold" Click="Restart_Click" Height="22"/>
-        <Label x:Name="DurationLabel" HorizontalAlignment="Left" Margin="271,116,0,0" VerticalAlignment="Top"/>
-        <Label Content="Searching tours" FontWeight="Bold" HorizontalAlignment="Left" Margin="159,38,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="DurationLabel" HorizontalAlignment="Left" Margin="874,158,0,0" VerticalAlignment="Top" Height="25" Width="150"/>
+        <Label Content="Searching tours" FontSize="20" FontWeight="Bold" HorizontalAlignment="Left" Margin="159,38,0,0" VerticalAlignment="Top"/>
 
 
 

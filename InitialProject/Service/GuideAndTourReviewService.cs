@@ -40,31 +40,24 @@ namespace InitialProject.Service
                     }
                 }
             }
-            SetLocations();
             SetTours(CompletedTours);
-        }
-        public void SetLocations()
-        {
-            List<Location> locations = locationService.GetAll();
-            List<Tour> tours = tourService.GetAll();
-            foreach (Location location in locations)
-            {
-                foreach (Tour tour in tours)
-                {
-                    if (location.Id == tour.Location.Id)
-                        tour.Location = location;
-                }
-            }
         }
         public void SetTours(ObservableCollection<TourInstance> CompletedTours)
         {
             List<Tour> tours = tourService.GetAll();
+            List<Location> locations = locationService.GetAll();
             foreach (TourInstance tourInstance in CompletedTours)
             {
-                foreach (Tour tour in tours)
+                foreach (Location location in locations)
                 {
-                    if (tour.Id == tourInstance.Tour.Id)
-                        tourInstance.Tour = tour;
+                    foreach (Tour tour in tours)
+                    {
+                        if (location.Id == tour.Location.Id && tour.Id == tourInstance.Tour.Id)
+                        {
+                            tour.Location = location;
+                            tourInstance.Tour = tour;
+                        }
+                    }
                 }
             }
         }
@@ -93,9 +86,7 @@ namespace InitialProject.Service
                 foreach (TourInstance instance in tourInstanceService.GetAll())
                 {
                     if (instance.Id == review.TourInstance.Id)
-                    {
                         review.TourInstance = instance;
-                    }
                 }
             }
             return guideAndTourReviews;
@@ -130,9 +121,13 @@ namespace InitialProject.Service
         {
             return guideAndTourReviewRepository.Update(review);
         }
-        public bool HasReview(TourInstance tourInstance)
+        public bool HasReview(TourInstance tourInstance,Guest2 guest2)
         {
-            return guideAndTourReviewRepository.HasReview(tourInstance);
+            return guideAndTourReviewRepository.HasReview(tourInstance,guest2);
+        }
+        public GuideAndTourReview Save(GuideAndTourReview review)
+        {
+           return guideAndTourReviewRepository.Save(review);
         }
     }
 }

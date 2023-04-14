@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <DataGrid x:Name="ActiveTourListDataGrid" ItemsSource="{Binding Path=TourInstances,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=Selected}" IsReadOnly="True" AutoGenerateColumns="False" VerticalAlignment="Top" HorizontalAlignment="Left" Height="220" Width="957" Margin="400,24,0,0">
+        <DataGrid x:Name="ActiveTourListDataGrid" ItemsSource="{Binding Path=TourInstances,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=Selected}" IsReadOnly="True" AutoGenerateColumns="False" VerticalAlignment="Top" HorizontalAlignment="Left" Height="261" Width="957" Margin="400,104,0,0">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Location" Width="1*" Binding="{Binding Tour.Location}"/>
                 <DataGridTextColumn Header="Duration" Width="1*" Binding="{Binding Tour.Duration}"/>
@@ -18,10 +18,11 @@
 
 
         </DataGrid>
-        <DataGrid Margin="400,265,231,44" ItemsSource="{Binding Path=CheckPoint,UpdateSourceTrigger=PropertyChanged}"  IsReadOnly="True" AutoGenerateColumns="False">
+        <DataGrid Margin="400,370,231,44" ItemsSource="{Binding Path=CheckPoint,UpdateSourceTrigger=PropertyChanged}"  IsReadOnly="True" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Checkpoint name" Width="1*" Binding="{Binding Name}" />
             </DataGrid.Columns>
         </DataGrid>
+        <Label Content="Active tours" FontWeight="Bold" FontSize="20" HorizontalAlignment="Left" Margin="400,44,0,0" VerticalAlignment="Top" Width="156"/>
     </Grid>
 </UserControl>

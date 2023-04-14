@@ -15,10 +15,13 @@ using System.Windows.Controls;
 using SixLabors.ImageSharp;
 using Image = System.Windows.Controls.Image;
 using InitialProject.WPF.Views.Guest2Views;
+using System.Runtime.CompilerServices;
+using System.ComponentModel;
+using InitialProject.WPF.Views.Guest1Views;
 
 namespace InitialProject.WPF.ViewModels.Guest2ViewModels
 {
-    public class GuideAndTourReviewViewModel
+    public class GuideAndTourReviewViewModel:INotifyPropertyChanged
     {
         private GuideAndTourReviewRepository guideAndTourReviewRepository;
         public RelayCommand Language_Increment_Command { get; set; }
@@ -47,6 +50,23 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         private TextBlock interestingFacts;
         private Image imagePicture;
         private TextBox comment;
+        public BitmapImage imageSource { get; set; }
+        public BitmapImage ImageSource
+        {
+            get { return imageSource; }
+            set
+            {
+                if (value != imageSource)
+                    imageSource = value;
+                OnPropertyChanged("ImageSource");
+            }
+
+        }
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
         public GuideAndTourReviewViewModel(TourInstance tourInstance, Guest2 guest2, TextBlock knowledge,TextBlock language,TextBlock interestingFacts,Image imagePicture,TextBox comment)
         {
             reviewId = -1;
@@ -74,9 +94,9 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             UploadImageCommand = new RelayCommand(UploadImage_Executed,CanExecute);
             ConfirmCommand = new RelayCommand(Confirm_Executed,CanExecute);
             DeleteCommand = new RelayCommand(Delete_Executed, CanExecute);
-            NextCommand = new RelayCommand(NextButton_Executed, CanExecute);
-            BackCommand = new RelayCommand(BackButton_Executed, CanExecute);
-            DeletePhotoCommand=new RelayCommand(DeletePhotoButton_Executed,CanExecute);
+            NextCommand = new RelayCommand(NextPhoto_Executed, CanExecute);
+            BackCommand = new RelayCommand(PreviousPhoto_Executed, CanExecute);
+            DeletePhotoCommand=new RelayCommand(DeletePhoto_Executed,CanExecute);
             CancelCommand = new RelayCommand(Cancel_Executed, CanExecute);
         }
         private bool CanExecute(object sender)
@@ -137,48 +157,39 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
                 interestingFacts.Text = changedNumber.ToString();
             }
         }
+
+        private void Cancel_Executed(object sender)
+        {
+            Application.Current.Windows.OfType<GuideAndTourReviewForm>().FirstOrDefault().Close();
+        }
+
+
         private void Confirm_Executed(object sender)
         {
             if (IsImageUploadValid())
             {
-                Comment = comment.Text;
-                GuideAndTourReview guideAndTourReview = new GuideAndTourReview(CurrentTourInstance.Guide.Id, guest2, CurrentTourInstance, Convert.ToInt32(language.Text), Convert.ToInt32(interestingFacts.Text), Convert.ToInt32(knowledge.Text), Comment); //trebace se lista proslijedjivati
-                guideAndTourReviewRepository.Save(guideAndTourReview);
-                StoreImages();
-                foreach (TourReviewImage image in images)
-                {
-                    if (image.GuideAndTourReviewId == -1)
-                    {
-                        tourReviewImageService.Update(image, guideAndTourReview.Id);
-                    }
-                }
+                int id = StoreReview().Id;
+                StoreImages(id);
+                MessageBox.Show("Review successfully sent!");
                 Application.Current.Windows.OfType<GuideAndTourReviewForm>().FirstOrDefault().Close();
             }
             else
                 MessageBox.Show("You must upload at least one photo!");
-
         }
-        private void StoreImages()
+        private void StoreImages(int reviewId)
         {
+            TourReviewImageService tourReviewImageService = new TourReviewImageService();
             foreach (TourReviewImage image in images)
             {
+                image.GuideAndTourReviewId = reviewId;
                 tourReviewImageService.Save(image);
             }
         }
-        private void DeletePhotoButton_Executed(object sender)
+        private GuideAndTourReview StoreReview()
         {
-            if (images.Count != 0)
-            {
-                for (int i = 0; i < images.Count; i++)
-                {
-                    if (imagePicture.Source.ToString().Contains(images[i].RelativeUri))
-                    {
-                        TourReviewImage image = images[i];
-                        images.Remove(image);
-                        RemoveImage(i);
-                    }
-                }
-            }
+            GuideAndTourReviewService guideAndTourReviewService = new GuideAndTourReviewService();
+            GuideAndTourReview guideAndTourReview = new GuideAndTourReview(CurrentTourInstance.Guide.Id, guest2, CurrentTourInstance, Convert.ToInt32(language.Text), Convert.ToInt32(interestingFacts.Text), Convert.ToInt32(knowledge.Text), Comment);
+            return guideAndTourReviewService.Save(guideAndTourReview);
         }
         private bool IsImageUploadValid()
         {
@@ -192,73 +203,97 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             }
         }
 
-        private void Cancel_Executed(object sender)
-        {
-            Application.Current.Windows.OfType<GuideAndTourReviewForm>().FirstOrDefault().Close();
-        }
         private void UploadImage_Executed(object sender)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Image files|*.bmp;*.jpg;*.png";
-            openFileDialog.FilterIndex = 1;
+            OpenFileDialog openFileDialog = MakeOpenFileDialog();
             if (openFileDialog.ShowDialog() == true)
             {
-                Uri resource = new Uri(openFileDialog.FileName);
-                String absolutePath = resource.ToString();
-                int relativeIndex = absolutePath.IndexOf("Resources");
-                String relative = absolutePath.Substring(relativeIndex);
+                String relative = MakeRelativePath(openFileDialog);
                 relativeUri = new Uri("/" + relative, UriKind.Relative);
-                BitmapImage bitmapImage = new BitmapImage(relativeUri);
-                bitmapImage.UriSource = relativeUri;
-                imagePicture.Source = new BitmapImage(new Uri("/" + relative, UriKind.Relative));
+                ImageSource = new BitmapImage(new Uri("/" + relative, UriKind.Relative));
                 tourReviewImage = new TourReviewImage(reviewId, relative);
                 images.Add(tourReviewImage);
             }
         }
+        private String MakeRelativePath(OpenFileDialog openFileDialog)
+        {
+            Uri resource = new Uri(openFileDialog.FileName);
+            String absolutePath = resource.ToString();
+            int relativeIndex = absolutePath.IndexOf("Resources");
+            String relative = absolutePath.Substring(relativeIndex);
+            return relative;
+        }
+
+        private OpenFileDialog MakeOpenFileDialog()
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image files|*.bmp;*.jpg;*.png";
+            openFileDialog.FilterIndex = 1;
+            return openFileDialog;
+        }
+
+        private void DeletePhoto_Executed(object sender)
+        {
+            if (images.Count != 0)
+            {
+                for (int i = 0; i < images.Count; i++)
+                {
+                    if (ImageSource.ToString().Contains(images[i].RelativeUri))
+                    {
+                        TourReviewImage image = images[i];
+                        images.Remove(image);
+                        RemoveImage(i);
+                    }
+                }
+            }
+        }
+
         private void Delete_Executed(object sender)
         {
             comment.Text = "";
         }
-        private void NextButton_Executed(object sender)
+        private void NextPhoto_Executed(object sender)
         {
             for (int i = 0; i < images.Count; i++)
             {
-                if (imagePicture.Source.ToString().Contains(images[i].RelativeUri))
+                if (ImageSource.ToString().Contains(images[i].RelativeUri))
                 {
                     int k = i + 1;
                     if (k < images.Count)
                     {
-                        imagePicture.Source = imagePicture.Source = new BitmapImage(new Uri("/" + images[k].RelativeUri, UriKind.Relative));
+                        ImageSource = new BitmapImage(new Uri("/" + images[k].RelativeUri, UriKind.Relative));
                         break;
                     }
 
                     if (k == images.Count)
                     {
-                        imagePicture.Source = imagePicture.Source = new BitmapImage(new Uri("/" + images[0].RelativeUri, UriKind.Relative));
+                        ImageSource = new BitmapImage(new Uri("/" + images[0].RelativeUri, UriKind.Relative));
                         break;
                     }
                 }
+
             }
         }
-        private void BackButton_Executed(object sender)
+        private void PreviousPhoto_Executed(object sender)
         {
             for (int i = 0; i < images.Count; i++)
             {
-                if (imagePicture.Source.ToString().Contains(images[i].RelativeUri))
+                if (ImageSource.ToString().Contains(images[i].RelativeUri))
                 {
                     int k = i - 1;
                     if (k >= 0)
                     {
-                        imagePicture.Source = imagePicture.Source = new BitmapImage(new Uri("/" + images[k].RelativeUri, UriKind.Relative));
+                        ImageSource = new BitmapImage(new Uri("/" + images[k].RelativeUri, UriKind.Relative));
                         break;
                     }
 
                     if (k < 0)
                     {
-                        imagePicture.Source = imagePicture.Source = new BitmapImage(new Uri("/" + images[images.Count - 1].RelativeUri, UriKind.Relative));
+                        ImageSource = new BitmapImage(new Uri("/" + images[images.Count - 1].RelativeUri, UriKind.Relative));
                         break;
                     }
                 }
+
             }
         }
         private void RemoveImage(int i)
@@ -268,17 +303,19 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
                 int k = i - 1;
                 if (k >= 0)
                 {
-                    imagePicture.Source = imagePicture.Source = new BitmapImage(new Uri("/" + images[k].RelativeUri, UriKind.Relative));
+                    ImageSource = new BitmapImage(new Uri("/" + images[k].RelativeUri, UriKind.Relative));
                 }
                 else
                 {
-                    imagePicture.Source = imagePicture.Source = new BitmapImage(new Uri("/" + images[images.Count - 1].RelativeUri, UriKind.Relative));
+                    ImageSource = new BitmapImage(new Uri("/" + images[images.Count - 1].RelativeUri, UriKind.Relative));
                 }
             }
             else
             {
-                imagePicture.Source = null;
+                ImageSource = null;
             }
         }
+
+
     }
 }
