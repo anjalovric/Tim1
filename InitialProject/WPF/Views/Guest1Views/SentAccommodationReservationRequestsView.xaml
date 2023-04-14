@@ -14,7 +14,7 @@
 
                 <Grid>
                     <Label FontSize="24" FontWeight="Bold" Margin="0,10,0,0" HorizontalAlignment="Center">APPROVED REQUESTS</Label>
-                    <DataGrid x:Name="ApprovedRequestsDataGrid" Margin="0,30,0,0" RowBackground="PaleGreen" HorizontalAlignment="Center" VerticalAlignment="Center" ItemsSource="{Binding Path=ApprovedRequests,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" IsReadOnly="True" Height="322" Width="950" UseLayoutRounding="False">
+                    <DataGrid x:Name="ApprovedRequestsDataGrid" VerticalScrollBarVisibility="Auto" Margin="0,30,0,0" RowBackground="PaleGreen" HorizontalAlignment="Center" VerticalAlignment="Center" ItemsSource="{Binding Path=ApprovedRequests,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" IsReadOnly="True" Height="322" Width="950" UseLayoutRounding="False">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Name" Width="1*" Binding="{Binding Reservation.Accommodation.Name}"/>
                             <DataGridTextColumn Header="Location" Width="2*"  Binding="{Binding Reservation.Accommodation.Location}"/>
@@ -39,7 +39,7 @@
             <TabItem Header="Pending requests" FontSize="16" Background="Gainsboro">
                 <Grid>
                     <Label FontSize="24" FontWeight="Bold" Margin="0,10,0,0" HorizontalAlignment="Center">PENDING REQUESTS</Label>
-                    <DataGrid x:Name="PendingRequestsDataGrid" Margin="0,30,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" ItemsSource="{Binding Path=PendingRequests,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" IsReadOnly="True" Height="322" Width="950" UseLayoutRounding="False">
+                    <DataGrid x:Name="PendingRequestsDataGrid" VerticalScrollBarVisibility="Auto" Margin="0,30,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" ItemsSource="{Binding Path=PendingRequests,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" IsReadOnly="True" Height="322" Width="950" UseLayoutRounding="False">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Name" Width="1*" Binding="{Binding Reservation.Accommodation.Name}"/>
                             <DataGridTextColumn Header="Location" Width="2*"  Binding="{Binding Reservation.Accommodation.Location}"/>
@@ -62,9 +62,9 @@
 
             <TabItem Header="Declined requests" FontSize="16" Background="Gainsboro">
                 <Grid>
-                    <Label FontSize="24" FontWeight="Bold" Margin="0,10,0,0" HorizontalAlignment="Center">DECLINED REQUESTS</Label>
-                    <DataGrid x:Name="DeclinedRequestsDataGrid" Margin="0,30,0,0" RowBackground="LightCoral" HorizontalAlignment="Center" VerticalAlignment="Center" ItemsSource="{Binding Path=DeclinedRequests,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" IsReadOnly="True" Height="322" Width="950" UseLayoutRounding="False">
-                        <DataGrid.Columns>
+                    <Label FontSize="24"  FontWeight="Bold" Margin="0,10,0,0" HorizontalAlignment="Center">DECLINED REQUESTS</Label>
+                    <DataGrid  x:Name="DeclinedRequestsDataGrid" Margin="0,30,0,0" RowBackground="LightCoral"  HorizontalAlignment="Center" VerticalAlignment="Center" VerticalScrollBarVisibility="Auto" ItemsSource="{Binding Path=DeclinedRequests,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" IsReadOnly="True" Height="322" Width="950" UseLayoutRounding="False">
+                        <DataGrid.Columns >
                             <DataGridTextColumn Header="Name" Width="1*" Binding="{Binding Reservation.Accommodation.Name}"/>
                             <DataGridTextColumn Header="Location" Width="2*"  Binding="{Binding Reservation.Accommodation.Location}"/>
                             <DataGridTextColumn Header="Owner" Width="1*">
@@ -77,7 +77,13 @@
                             </DataGridTextColumn>
                             <DataGridTextColumn Header="Old arrival date" Width="2*" Binding="{Binding OldArrivalDate}"/>
                             <DataGridTextColumn Header="Old departure date" Width="2*" Binding="{Binding OldDepartureDate}" />
-                            <DataGridTextColumn Header="Comment" Width="2*" Binding="{Binding OwnerExplanationForDeclining}"/>
+                            <DataGridTemplateColumn Header="Comment" Width="2*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding OwnerExplanationForDeclining}" TextWrapping="Wrap" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>

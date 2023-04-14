@@ -18,7 +18,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
     public class Guest1ProfileViewModel : INotifyPropertyChanged
     {
         public Guest1 Guest1 { get; set; }
-        private BitmapImage imageSource { get; set; }
+        private BitmapImage imageSource;
         public BitmapImage ImageSource
         {
             get { return imageSource; }

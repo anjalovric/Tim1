@@ -61,6 +61,7 @@ namespace InitialProject.WPF.Views.Guest1Views
                 }
             }
         }
+        
         public Guest1SearchAccommodationView(Guest1 guest1)
         {
             InitializeComponent();
@@ -71,6 +72,15 @@ namespace InitialProject.WPF.Views.Guest1Views
             SetAccommodationTypes();
             GetLocations();
             SetAccommodationLocations();
+            SetAccommodationCoverImages();
+        }
+        private void SetAccommodationCoverImages()
+        {
+            AccommodationImageService accommodationImageService = new AccommodationImageService();
+            foreach (Accommodation accommodation in Accommodations)
+            {
+                    accommodation.CoverImage = accommodationImageService.GetCoverImage(accommodation);
+            }
         }
         private void GetLocations()
         {
@@ -336,5 +346,6 @@ namespace InitialProject.WPF.Views.Guest1Views
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+        
     }
 }

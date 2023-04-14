@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows;
 using InitialProject.Model;
 using InitialProject.WPF.Views.Guest1Views;
+using System.Windows.Interactivity;
 
 namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 {
@@ -19,15 +20,16 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 
         public String Reason { get; set; }
 
-        public AccommodationReservation reservation { get; set; }
+        public AccommodationReservation Reservation { get; set; }
 
         public RelayCommand BackCommand { get; set; }
         public RelayCommand SendCommand { get; set; }
+        public RelayCommand OnPreviewMouseUpCommand { get; set; }
 
 
         public ReschedulingAccommodationReservationFormViewModel(AccommodationReservation SelectedNotCompletedReservation)
         {
-            this.reservation = SelectedNotCompletedReservation;
+            this.Reservation = SelectedNotCompletedReservation;
             MakeCommands();
         }
 
@@ -35,6 +37,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         {
             BackCommand = new RelayCommand(Back_Executed, CanExecute);
             SendCommand = new RelayCommand(Send_Executed, CanExecute);
+            OnPreviewMouseUpCommand = new RelayCommand(OnPreviewMouseUp_Executed, CanExecute);
         }
         private bool CanExecute(object sender)
         {
@@ -66,7 +69,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         {
             Service.ReschedulingAccommodationRequestService requestService;
             requestService = new Service.ReschedulingAccommodationRequestService();
-            Model.ReschedulingAccommodationRequest newRequest = new Model.ReschedulingAccommodationRequest(reservation, Arrival, Departure, Reason);
+            Model.ReschedulingAccommodationRequest newRequest = new Model.ReschedulingAccommodationRequest(Reservation, Arrival, Departure, Reason);
             requestService.Add(newRequest);
         }
 
@@ -75,13 +78,17 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             return (Arrival <= Departure && Arrival.Date > DateTime.Now && Arrival != null && Departure != null);
         }
 
-       /* protected override void OnPreviewMouseUp(MouseButtonEventArgs e)  //gdje cu s njom?
+        private void OnPreviewMouseUp_Executed(Object sender)
         {
-            base.OnPreviewMouseUp(e);
+            OnPreviewMouseUp(null);
+        }
+        private void OnPreviewMouseUp(MouseButtonEventArgs e)
+        {
             if (Mouse.Captured is CalendarItem)
             {
                 Mouse.Capture(null);
             }
-        }*/
+        }
+
     }
 }

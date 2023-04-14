@@ -20,8 +20,11 @@
         <Label HorizontalContentAlignment="Left" FontSize="18" Margin="71,118,256,540">Cleanliness:</Label>
         <Label HorizontalContentAlignment="Left" FontSize="18" Margin="71,161,256,498">Owner's correctness:</Label>
 
-        <Slider x:Name="CleanlinessSlider"  Minimum="1" Maximum="5" Margin="277,128,71,550" TickFrequency="1" IsSnapToTickEnabled="True" AutoToolTipPlacement="BottomRight" Value="{Binding Path=AccommodationCleanliness}"/>
-        <Slider x:Name="CorrectnessSlider" Minimum="1" Maximum="5" Margin="277,170,71,508" TickFrequency="1" IsSnapToTickEnabled="True" AutoToolTipPlacement="BottomRight" Value="{Binding Path=OwnerCorrectness}"/>
+        <Slider x:Name="CleanlinessSlider"  Minimum="1" Maximum="5" Margin="277,128,116,550" TickFrequency="1" IsSnapToTickEnabled="True" AutoToolTipPlacement="BottomRight" Value="{Binding Path=AccommodationCleanliness}"/>
+        <Slider x:Name="CorrectnessSlider" Minimum="1" Maximum="5" Margin="277,170,116,508" TickFrequency="1" IsSnapToTickEnabled="True" AutoToolTipPlacement="BottomRight" Value="{Binding Path=OwnerCorrectness}"/>
+        <TextBox Text="{Binding ElementName=CleanlinessSlider,Path=Value}" Margin="410,124,71,546" FontSize="16" HorizontalContentAlignment="Center" RenderTransformOrigin="-0.097,0.462"/>
+        <TextBox Text="{Binding ElementName=CorrectnessSlider,Path=Value}" Margin="410,166,71,504" Width="31" FontSize="16" HorizontalContentAlignment="Center"/>
+        
         <Label HorizontalContentAlignment="Left" FontSize="18" Margin="71,292,256,366" Content="Add photos:"/>
         <Label HorizontalContentAlignment="Left" FontSize="18" Margin="71,444,256,214" Content="Comments:"/>
         <TextBox x:Name="Comments" Margin="71,487,71,27" Text="{Binding Path=Comments}"/>

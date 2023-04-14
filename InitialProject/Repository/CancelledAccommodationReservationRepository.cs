@@ -24,7 +24,7 @@ namespace InitialProject.Repository
             _cancelledAccommodationReservations = _serializer.FromCSV(FilePath);
         }
 
-        public int NextId()             //sta sa njom da uradim, visak je?
+        public int NextId()
         {
             _cancelledAccommodationReservations = _serializer.FromCSV(FilePath);
             if (_cancelledAccommodationReservations.Count < 1)

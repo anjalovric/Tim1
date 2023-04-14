@@ -18,6 +18,12 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Drawing;
 using System.Windows.Media;
+using Color = System.Windows.Media.Color;
+using NPOI.SS.UserModel;
+using System.Windows.Controls.Primitives;
+using System.Windows.Input;
+using System.Windows.Media.Imaging;
+using Image = System.Windows.Controls.Image;
 
 namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 {
@@ -30,6 +36,9 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         public RelayCommand SentRequestsCommand { get; set; }
         public RelayCommand SignOutCommand { get; set; }
         public RelayCommand NotificationsCommand { get; set; }
+
+        public RelayCommand SubmenuOpenedCommand { get; set; }
+
         public event PropertyChangedEventHandler? PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
@@ -46,7 +55,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                     storedNotifications = value;
                 OnPropertyChanged("StoredNotifications");
             }
-
         }
         public Guest1HomeViewModel(User user)
         {
@@ -56,8 +64,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             MakeCommands();
         }
 
-        //nazivi
-
         private void MakeCommands()
         {
             BookingCommand = new RelayCommand(Booking_Executed, CanExecute);
@@ -66,6 +72,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             SentRequestsCommand = new RelayCommand(SentRequests_Executed, CanExecute);
             SignOutCommand = new RelayCommand(SignOut_Executed, CanExecute);
             NotificationsCommand = new RelayCommand(Notifications_Executed, CanExecute);
+            SubmenuOpenedCommand = new RelayCommand(Submenu_Executed, CanExecute);
         }
 
         private bool CanExecute(object sender)
@@ -103,17 +110,32 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Close();
         }
 
+        private void Submenu_Executed(object sender)
+        {
+            MenuItem_SubmenuOpened(sender, null);
+        }
+        private void MenuItem_SubmenuOpened(object sender, RoutedEventArgs e) 
+        {
+            MenuItem owner = (MenuItem)sender;
+            Popup child = (Popup)owner.Template.FindName("PART_Popup", owner);
+            child.Placement = PlacementMode.Left;
+            child.HorizontalOffset = owner.ActualWidth;
+            child.VerticalOffset = owner.ActualHeight;
+        }
+
         private void Notifications_Executed(object sender)
         {
             System.Windows.Documents.Hyperlink[] links = MakeNotifications();
             StoredNotifications.Clear();
+            if (links.Length == 0)
+                StoredNotifications.Add(new MenuItem { Header = "No recent notifications." });
+            else
             foreach (System.Windows.Documents.Hyperlink link in links)
             {
                 if (link.Tag.Equals(0))
-                    StoredNotifications.Add(new MenuItem { Header = link, IsCheckable = false, Width = 280 });
+                    StoredNotifications.Add(new MenuItem { Header = link, IsCheckable = false, Width = 280, Background = System.Windows.Media.Brushes.PaleGreen, BorderBrush = System.Windows.Media.Brushes.Black, BorderThickness = new Thickness(2), Icon = new Image { Source = new BitmapImage(new Uri("/Resources/Images/greenCorect.png", UriKind.Relative)) } }) ;
                 else
-                    StoredNotifications.Add(new MenuItem { Header = link, IsCheckable = false, Width = 280});
-
+                    StoredNotifications.Add(new MenuItem { Header = link, IsCheckable = false, Width = 280, Background = System.Windows.Media.Brushes.LightCoral, BorderBrush = System.Windows.Media.Brushes.Black, BorderThickness = new Thickness(2), Icon = new Image { Source = new BitmapImage(new Uri("/Resources/Images/redIncorect.png", UriKind.Relative)) } });
             }
         }
 
@@ -122,41 +144,45 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             System.Windows.Documents.Hyperlink link = new System.Windows.Documents.Hyperlink();
             link.IsEnabled = true;
             link.Inlines.Add(notification);
-
-            if (state.Equals("Approved"))
-            {
-                link.Click += NavigateToApprovedRequests_Click;
-                link.Tag = 0;
-            }
-
-            else if (state.Equals("Declined"))
-            {
-                link.Click += NavigateToDeclinedRequests_Click;
-                link.Tag = 1;
-            }
-
-
+            SetCommandToLink(ref link, state);
             return link;
         }
 
-        private void NavigateToApprovedRequests_Click(object sender, RoutedEventArgs e)
+        private void SetCommandToLink(ref System.Windows.Documents.Hyperlink link, String state)
+        {
+            if (state.Equals("Approved"))
+            {
+                link.Command = new RelayCommand(NavigateToApprovedRequests_Executed, CanExecute);
+                link.Tag = 0;
+
+            }
+            else if (state.Equals("Declined"))
+            {
+                link.Command = new RelayCommand(NavigateToDeclinedRequests_Executed, CanExecute);
+                link.Tag = 1;
+            }
+        }
+
+        private void NavigateToApprovedRequests_Executed(object sender)
         {
             SentAccommodationReservationRequestsView sentAccommodationReservationRequestsView = new SentAccommodationReservationRequestsView(guest1);
             sentAccommodationReservationRequestsView.RequestsTabControl.SelectedIndex = 0;
             Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = sentAccommodationReservationRequestsView;
+            Keyboard.ClearFocus();  //to highlight other controls when mouse on it
         }
-        private void NavigateToDeclinedRequests_Click(object sender, RoutedEventArgs e)
+        private void NavigateToDeclinedRequests_Executed(object sender)
         {
             SentAccommodationReservationRequestsView sentAccommodationReservationRequestsView = new SentAccommodationReservationRequestsView(guest1);
             sentAccommodationReservationRequestsView.RequestsTabControl.SelectedIndex = 2;
             Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = sentAccommodationReservationRequestsView;
+            Keyboard.ClearFocus(); //to highlight other controls when mouse on it
         }
 
         private System.Windows.Documents.Hyperlink[] MakeNotifications()
         {
             CompletedAccommodationReschedulingRequestService completedAccommodationReschedulingRequestService = new CompletedAccommodationReschedulingRequestService();
             List<CompletedAccommodationReschedulingRequest> completedRequests = completedAccommodationReschedulingRequestService.GetRequestsByGuest(guest1);
-            completedRequests.Reverse();
+            completedRequests.Reverse();    //last notification will be shown first in notifications list
             string[] notifications = new String[completedRequests.Count];
             System.Windows.Documents.Hyperlink[] links = new System.Windows.Documents.Hyperlink[completedRequests.Count];
             for (int i = 0; i < completedRequests.Count; i++)
@@ -169,4 +195,4 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 
 
         }
-    }//boja obavj, border obavj, klik na zvono ne radi iz prve, komande za link???
+    }
