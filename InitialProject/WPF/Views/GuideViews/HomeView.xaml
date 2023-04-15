@@ -23,7 +23,7 @@
                 <DataGridTemplateColumn x:Name="Cover"  Width="1*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Image Source="{Binding CoverBitmap}" Width="100" Height="40" VerticalAlignment="Top" Visibility="Visible" Stretch="Fill"/>
+                            <Image Source="{Binding CoverBitmap}" Width="100" Height="40" VerticalAlignment="Top" Visibility="Visible" Stretch="Uniform"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
