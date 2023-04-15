@@ -25,7 +25,7 @@ namespace InitialProject.WPF.Views.Guest2Views
     /// <summary>
     /// Interaction logic for ShowTours.xaml
     /// </summary>
-    public partial class ShowTours : UserControl
+    public partial class ShowToursView : UserControl
     {
         private ObservableCollection<TourInstance> tourInstances;
         public ObservableCollection<TourInstance> TourInstances
@@ -64,7 +64,7 @@ namespace InitialProject.WPF.Views.Guest2Views
             }
         }
         private Guest2 guest2;
-        public ShowTours(Guest2 guest2)
+        public ShowToursView(Guest2 guest2)
         {
             InitializeComponent();
             DataContext = this;
@@ -104,7 +104,7 @@ namespace InitialProject.WPF.Views.Guest2Views
             {
                 foreach (AlertGuest2 alert in Alerts)
                 {
-                    AlertGuestForm alertGuestForm = new AlertGuestForm(alert.Id);
+                    AlertGuestFormView alertGuestForm = new AlertGuestFormView(alert.Id);
 
                     if (alert.Guest2Id == guest2.Id && alert.Informed == false)
                     {
@@ -279,7 +279,7 @@ namespace InitialProject.WPF.Views.Guest2Views
                     currentTourInstance = tourInstance;
                 }
             }
-            TourReservationForm tourReservationForm = new TourReservationForm(currentTourInstance, guest2, TourInstances, tourInstanceRepository, Label);
+            TourReservationFormView tourReservationForm = new TourReservationFormView(currentTourInstance, guest2, TourInstances, tourInstanceRepository, Label);
             tourReservationForm.Show();
         }
         private void ViewDetails(object sender, RoutedEventArgs e)
@@ -289,7 +289,7 @@ namespace InitialProject.WPF.Views.Guest2Views
             {
                 List<string> imagesUrls = new List<string>();
                 GetImagesUrls(imagesUrls, currentTourInstance);
-                TourDetails detailsView = new TourDetails(imagesUrls, currentTourInstance);
+                TourDetailsView detailsView = new TourDetailsView(imagesUrls, currentTourInstance);
                 detailsView.Show();
             }
             catch (Exception ex)

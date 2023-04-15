@@ -159,7 +159,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
 
         private void Cancel_Executed(object sender)
         {
-            Application.Current.Windows.OfType<GuideAndTourReviewForm>().FirstOrDefault().Close();
+            Application.Current.Windows.OfType<GuideAndTourReviewFormView>().FirstOrDefault().Close();
         }
 
 
@@ -170,7 +170,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
                 int id = StoreReview().Id;
                 StoreImages(id);
                 MessageBox.Show("Review successfully sent!");
-                Application.Current.Windows.OfType<GuideAndTourReviewForm>().FirstOrDefault().Close();
+                Application.Current.Windows.OfType<GuideAndTourReviewFormView>().FirstOrDefault().Close();
             }
             else
                 MessageBox.Show("You must upload at least one photo!");

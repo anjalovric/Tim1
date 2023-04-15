@@ -22,10 +22,10 @@ namespace InitialProject.WPF.Views.Guest2Views
     /// <summary>
     /// Interaction logic for AlertGuestForm.xaml
     /// </summary>
-    public partial class AlertGuestForm : Window
+    public partial class AlertGuestFormView : Window
     {
         private int AlertId;
-        public AlertGuestForm(int alertId)
+        public AlertGuestFormView(int alertId)
         {
             InitializeComponent();
             AlertId = alertId;

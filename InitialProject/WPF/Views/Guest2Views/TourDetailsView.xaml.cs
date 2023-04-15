@@ -18,10 +18,10 @@ namespace InitialProject.WPF.Views.Guest2Views
     /// <summary>
     /// Interaction logic for TourDetails.xaml
     /// </summary>
-    public partial class TourDetails : Window
+    public partial class TourDetailsView : Window
     {
         public TourInstance TourInstance { get; set; }
-        public TourDetails(List<string> imagesUrl,TourInstance tourInstance)
+        public TourDetailsView(List<string> imagesUrl,TourInstance tourInstance)
         {
             InitializeComponent();
             this.DataContext = this;
