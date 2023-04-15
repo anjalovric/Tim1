@@ -7,10 +7,14 @@
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
         Title="Guest1Home" Height="768" Width="1024" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        
+    </Window.Resources>
+
     <Grid>
-        <Menu VerticalAlignment="Top" Height="72" TextElement.Foreground="#7286A0" BorderThickness="5,5,5,5" BorderBrush="#7286A0">
+        <Menu VerticalAlignment="Top" Height="72"  TextElement.Foreground="#22301a" BorderThickness="5,5,5,5" BorderBrush="#22301a">
             <Menu.Background>
-                <ImageBrush ImageSource="/Resources/Images/flowers.jpg" Opacity="0.7"></ImageBrush>
+                <ImageBrush ImageSource="/Resources/Images/guest1Menu.jpeg" Opacity="0.9"></ImageBrush>
             </Menu.Background>
             
 
@@ -77,6 +81,7 @@
             </MenuItem>
         </Menu>
 
-        <Frame x:Name="Main"  Margin="0,72,0,0" NavigationUIVisibility="Hidden"/>
+        <Frame x:Name="Main"  Margin="0,72,0,0" NavigationUIVisibility="Hidden">
+        </Frame>
     </Grid>
 </Window>

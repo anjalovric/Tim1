@@ -9,7 +9,7 @@
       Title="SentAccommodationReservationRequests">
 
     <Grid Background="AntiqueWhite">
-        <TabControl x:Name="RequestsTabControl" Height="430" VerticalAlignment="Top" Background="AntiqueWhite" Width="Auto">
+        <TabControl x:Name="RequestsTabControl" Height="430" VerticalAlignment="Top" Background="AntiqueWhite" Width="1024">
             <TabControl.TabStripPlacement>Top</TabControl.TabStripPlacement>
             <TabControl.Template>
                 <ControlTemplate TargetType="{x:Type TabControl}">
@@ -35,7 +35,7 @@
 
                 <Grid>
                     <Label FontSize="24" FontWeight="Bold" Margin="0,10,0,0" HorizontalAlignment="Center">APPROVED REQUESTS</Label>
-                    <DataGrid x:Name="ApprovedRequestsDataGrid" VerticalScrollBarVisibility="Auto" Margin="0,30,0,0" RowBackground="PaleGreen" HorizontalAlignment="Center" VerticalAlignment="Center" ItemsSource="{Binding Path=ApprovedRequests,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" IsReadOnly="True" Height="322" Width="950" UseLayoutRounding="False">
+                    <DataGrid x:Name="ApprovedRequestsDataGrid" VerticalScrollBarVisibility="Auto" Margin="0,30,0,0" RowBackground="PaleGreen" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Left" ItemsSource="{Binding Path=ApprovedRequests,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" IsReadOnly="True" Height="322" Width="950" UseLayoutRounding="False">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Name" Width="1*" Binding="{Binding Reservation.Accommodation.Name}"/>
                             <DataGridTextColumn Header="Location" Width="2*"  Binding="{Binding Reservation.Accommodation.Location}"/>

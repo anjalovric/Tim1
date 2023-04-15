@@ -34,6 +34,8 @@
 
     <None Remove="Resources\Images\greenCorect.png" />
 
+    <None Remove="Resources\Images\guest1Menu.jpeg" />
+
 
     
     
@@ -228,6 +230,9 @@
     <Resource Include="Resources\Images\black.jpeg" />
     <Resource Include="Resources\Images\blond.jpg" />
     <Resource Include="Resources\Images\brown.jpg" />
+    <Resource Include="Resources\Images\guest1Menu.jpeg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Images\orange.jpg" />
     <Resource Include="Resources\Images\red.jpg" />
     <Resource Include="Resources\Images\search.png" />
