@@ -3,6 +3,7 @@ using InitialProject.Service;
 using InitialProject.WPF.Views.GuideViews;
 using MathNet.Numerics;
 using NPOI.POIFS.Storage;
+using NPOI.SS.Formula.Atp;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -60,9 +61,10 @@ namespace InitialProject.WPF.ViewModels
         }
         public void ViewDetailsExecuted(object sender)
         {
-            GuideAndTourReview review = Selected;
-            ReviewDetailsView reviewDetailsView = new ReviewDetailsView(review,Reviews,user);
-            Application.Current.Windows.OfType<GuideWindow>().FirstOrDefault().Main.Content = reviewDetailsView;
+                GuideAndTourReview review = Selected;
+                ReviewDetailsView reviewDetailsView = new ReviewDetailsView(review, Reviews, user);
+                Application.Current.Windows.OfType<GuideWindow>().FirstOrDefault().Main.Content = reviewDetailsView;
+
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

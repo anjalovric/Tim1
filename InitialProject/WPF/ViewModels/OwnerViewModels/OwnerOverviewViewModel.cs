@@ -10,7 +10,7 @@ using InitialProject.WPF.Views;
 using InitialProject.WPF.Views.OwnerViews;
 using MathNet.Numerics.Distributions;
 
-namespace InitialProject.WPF.ViewModels
+namespace InitialProject.WPF.ViewModels.OwnerViewModels
 {
     public class OwnerOverviewViewModel
     {

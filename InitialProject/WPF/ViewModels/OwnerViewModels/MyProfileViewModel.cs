@@ -12,11 +12,11 @@ using InitialProject.Model;
 using InitialProject.Service;
 using InitialProject.WPF.Views;
 
-namespace InitialProject.WPF.ViewModels
+namespace InitialProject.WPF.ViewModels.OwnerViewModels
 {
     public class MyProfileViewModel : INotifyPropertyChanged
     {
-        public Model.Owner ProfileOwner { get; set; }
+        public Owner ProfileOwner { get; set; }
         private OwnerReviewService ownerReviewService;
         private OwnerReview selectedOwnerReview;
         public ObservableCollection<OwnerReview> OwnerReviews { get; set; }
@@ -44,7 +44,7 @@ namespace InitialProject.WPF.ViewModels
 
         private void View_Executed(object sender)
         {
-            if(SelectedOwnerReview != null)
+            if (SelectedOwnerReview != null)
             {
                 OwnerReviewView ownerReviewView = new OwnerReviewView(SelectedOwnerReview);
                 Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = ownerReviewView;
@@ -115,11 +115,11 @@ namespace InitialProject.WPF.ViewModels
         private void InitializeSelectedOwnerReview()
         {
             selectedOwnerReview = new OwnerReview();
-            if(OwnerReviews.Count >0)
+            if (OwnerReviews.Count > 0)
             {
                 SelectedOwnerReview = OwnerReviews[0];
             }
-    }
+        }
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
@@ -158,7 +158,7 @@ namespace InitialProject.WPF.ViewModels
                 StarVisibility = "Hidden";
             }
         }
-        
+
     }
 
 }

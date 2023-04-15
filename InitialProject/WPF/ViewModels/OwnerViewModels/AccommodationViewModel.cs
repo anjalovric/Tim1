@@ -13,7 +13,7 @@ using InitialProject.Service;
 using InitialProject.WPF.Views;
 using InitialProject.WPF.Views.OwnerViews;
 
-namespace InitialProject.WPF.ViewModels
+namespace InitialProject.WPF.ViewModels.OwnerViewModels
 {
     public class AccommodationViewModel : INotifyPropertyChanged
     {
@@ -40,7 +40,7 @@ namespace InitialProject.WPF.ViewModels
             get { return selectedAccommodation; }
             set
             {
-                if (value != (selectedAccommodation))
+                if (value != selectedAccommodation)
                 {
                     selectedAccommodation = value;
                     OnPropertyChanged();
@@ -78,7 +78,7 @@ namespace InitialProject.WPF.ViewModels
         private void ViewImages_Executed(object sender)
         {
             if (SelectedAccommodation != null)
-            Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = new AccommodationImagesView(SelectedAccommodation);
+                Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = new AccommodationImagesView(SelectedAccommodation);
         }
     }
 }

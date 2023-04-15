@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 using InitialProject.Model;
 using InitialProject.Service;
 
-namespace InitialProject.WPF.ViewModels
+namespace InitialProject.WPF.ViewModels.OwnerViewModels
 {
     public class RequestForReshcedulingViewModel : INotifyPropertyChanged
     {

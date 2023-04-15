@@ -77,8 +77,11 @@ namespace InitialProject.WPF.ViewModels
             TourInstanceService tourInstanceService = new TourInstanceService();
             GuideService guideService = new GuideService();
             Guide guide = guideService.GetByUsername(loggedUser.Username);
-            ActiveInstanceView activeInstanceView = new ActiveInstanceView(tourInstanceService.GetByActive(guide), homeView.viewModel.Tours, tourStatisticsView.viewModel.Instances,homeView);
-            Application.Current.Windows.OfType<GuideWindow>().FirstOrDefault().Main.Content = activeInstanceView;
+            if (tourInstanceService.GetByActive(guide) != null)
+            {
+                ActiveInstanceView activeInstanceView = new ActiveInstanceView(tourInstanceService.GetByActive(guide), homeView.viewModel.Tours, tourStatisticsView.viewModel.Instances, homeView);
+                Application.Current.Windows.OfType<GuideWindow>().FirstOrDefault().Main.Content = activeInstanceView;
+            }
         }
         private void Add_Executed(object sender)
         {

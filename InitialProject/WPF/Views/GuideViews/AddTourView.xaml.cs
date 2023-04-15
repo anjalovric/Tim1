@@ -37,6 +37,7 @@ namespace InitialProject.WPF.Views.GuideViews
         public ObservableCollection<TourInstance> FutureInstances { get; set; }
         public ObservableCollection<string> Countries { get; set; }
         public ObservableCollection<string> CitiesByCountry { get; set; }
+        public ObservableCollection<string> Languages { get; set; }
 
         private string imageUrl;
         public Tour saved;
@@ -217,12 +218,26 @@ namespace InitialProject.WPF.Views.GuideViews
                 }
             }
         }
+        private bool citySelected;
+        public bool CitySelected
+        {
+            get => citySelected;
+            set
+            {
+                if (value != citySelected)
+                {
+                    citySelected = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         public Uri relativeUri { get; set; }
         private List<TourImage> images=new List<TourImage>();
         public AddTourView(ObservableCollection<TourInstance> todayInstances,User user, ObservableCollection<TourInstance> futureInstances)
         {
             InitializeComponent();
             DataContext = this;
+            CitySelected = false;
             tourRepository = new TourRepository();
             locationRepository = new LocationRepository();
             checkPointRepository = new CheckPointRepository();
@@ -236,18 +251,27 @@ namespace InitialProject.WPF.Views.GuideViews
             FutureInstances = futureInstances;
             Countries = new ObservableCollection<string>(locationRepository.GetAllCountries());
             CitiesByCountry = new ObservableCollection<string>();
+            Languages = new ObservableCollection<string>();
+            AddLanguages();
             ComboBoxCity.IsEnabled = false;
             loggedInUser = user;
-           
             currentGuide = guideRepository.GetByUsername(user.Username);
         }
         public event PropertyChangedEventHandler PropertyChanged;
-
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        private void AddLanguages()
+        {
+            Languages.Add("english");
+            Languages.Add("spanish");
+            Languages.Add("russian");
+            Languages.Add("arabic");
+            Languages.Add("serbian");
+            Languages.Add("italian");
+        }
 
 
         private void AddTour_Click(object sender, RoutedEventArgs e)
@@ -273,98 +297,11 @@ namespace InitialProject.WPF.Views.GuideViews
         private bool IsValid()
         {
             return  IsCountryValid() & IsCityValid()
-                    & IsLanguageValid() & IsDateTimeValid()
+                    & IsDateTimeValid()
                     & IsCheckPointsValid() & IsImagesValid();
 
         }
-  /*      private bool IsNameValid()
-        {
-            var content = TourNameTB.Text;
-            var regex = @"[A-Za-z]+(\\ [A-Za-z]+)*$";
-            Match match = Regex.Match(content, regex, RegexOptions.IgnoreCase);
-            bool valid = false;
-            if (TourNameTB.Text.Trim().Equals(""))
-            {
-
-                TourNameTB.BorderBrush = Brushes.Red;
-                TourNameTB.BorderThickness = new Thickness(1);
-                NameLabel.Content = "This field can't be empty";
-            }
-            else if (!match.Success)
-            {
-
-                TourNameTB.BorderBrush = Brushes.Red;
-                TourNameTB.BorderThickness = new Thickness(1);
-                NameLabel.Content = "Invalid name";
-            }
-            else
-            {
-                valid = true;
-                TourNameTB.BorderBrush = Brushes.Green;
-                NameLabel.Content = string.Empty;
-            }
-            return valid;
-        }
-        private bool IsMaximuGuestsNumberValid()
-        {
-            var content = MaxGuestsTB.Text;
-            var regex = @"^[1-9]\d*$";
-            Match match = Regex.Match(content, regex, RegexOptions.IgnoreCase);
-            bool valid = false;
-            if (MaxGuestsTB.Text.Trim().Equals(""))
-            {
-
-                MaxGuestsTB.BorderBrush = Brushes.Red;
-                MaxGuestsTB.BorderThickness = new Thickness(1);
-                MaxGuestLabel.Content = "This field can't be empty";
-            }
-            else if (!match.Success)
-            {
-                MaxGuestLabel.Content = "This field should be positive number";
-                MaxGuestsTB.BorderBrush = Brushes.Red;
-                MaxGuestsTB.BorderThickness = new Thickness(1);
-            }
-            else
-            {
-                valid = true;
-                MaxGuestsTB.BorderBrush = Brushes.Green;
-                MaxGuestLabel.Content = string.Empty;
-            }
-            return valid;
-        }
-
-        private bool IsDurationValid()
-        {
-            var content = DurationTB.Text;
-            var regex = "(([1-9][0-9]*)(\\.[0-9]+)?)|(0\\.[0-9]+)$";
-            var regexMinus = "-";
-
-            Match match = Regex.Match(content, regex, RegexOptions.IgnoreCase);
-            Match matchMinus = Regex.Match(content, regexMinus, RegexOptions.IgnoreCase);
-
-            if (DurationTB.Text.Trim().Equals(""))
-            {
-                DurationTB.BorderBrush = Brushes.Red;
-                DurationTB.BorderThickness = new Thickness(1);
-                DurationLabel.Content = "This field can't be empty";
-                return false;
-            }
-            else if (!match.Success || Convert.ToDouble(match.ToString()) == 0.0 || Convert.ToString(match).Equals('0') || matchMinus.Success)
-            {
-                DurationTB.BorderBrush = Brushes.Red;
-                DurationLabel.Content = "Invalid number";
-                DurationTB.BorderThickness = new Thickness(1);
-                return false;
-            }
-            else if (match.Success)
-            {
-                DurationTB.BorderBrush = Brushes.Green;
-                DurationLabel.Content = string.Empty;
-                return true;
-            }
-            return false;
-        }*/
-
+ 
 
 
         private bool IsCityValid()
@@ -373,14 +310,14 @@ namespace InitialProject.WPF.Views.GuideViews
             {
                 ComboBoxCity.BorderThickness = new Thickness(1);
                 ComboBoxCity.BorderBrush = Brushes.Red;
-                CityLabel.Content = "Can't be empty";
+                
                 return false;
             }
             else
             {
+                CitySelected = true;
                 ComboBoxCity.BorderThickness = new Thickness(1);
                 ComboBoxCity.BorderBrush = Brushes.Green;
-                CityLabel.Content = string.Empty;
                 return true;
             }
         }
@@ -392,20 +329,19 @@ namespace InitialProject.WPF.Views.GuideViews
             {
                 ComboBoxCountry.BorderThickness = new Thickness(1);
                 ComboBoxCountry.BorderBrush = Brushes.Red;
-                CountryLabel.Content = "Can't be empty";
+                
                 return false;
             }
             else
             {
                 ComboBoxCountry.BorderThickness = new Thickness(1);
                 ComboBoxCountry.BorderBrush = Brushes.Green;
-                CountryLabel.Content = string.Empty;
                 return true;
             }
         }
 
 
-        private bool IsLanguageValid()
+  /*      private bool IsLanguageValid()
         {
             var content = LanguageTB.Text;
             var regex = @"[A-Za-z]+(\\ [A-Za-z]+)*$";
@@ -432,39 +368,7 @@ namespace InitialProject.WPF.Views.GuideViews
 
             }
             return valid;
-        }
-
-
-/*        private bool IsDescriptionValid()
-        {
-            var content = DescriptionTB.Text;
-            var regex = @"[A-Za-z]([A-Za-z0-9]|.)*(\\ [A-Za-z0-9]+)*$";
-            Match match = Regex.Match(content, regex, RegexOptions.IgnoreCase);
-            bool valid = false;
-            if (DescriptionTB.Text.Trim().Equals(""))
-            {
-
-                DescriptionTB.BorderBrush = Brushes.Red;
-                DescriptionTB.BorderThickness = new Thickness(1);
-                DescriptionLabel.Content = "This field can't be empty";
-            }
-            else if (!match.Success)
-            {
-
-                DescriptionTB.BorderBrush = Brushes.Red;
-                DescriptionTB.BorderThickness = new Thickness(1);
-                DescriptionLabel.Content = "Invalid description";
-            }
-            else
-            {
-                valid = true;
-                DescriptionTB.BorderBrush = Brushes.Green;
-                DescriptionLabel.Content = string.Empty;
-            }
-            return valid;
-
-        }
-*/
+        }*/
         private bool IsCheckPointsValid()
         {
             if (TourPoints.Count >= 2)
@@ -687,13 +591,11 @@ namespace InitialProject.WPF.Views.GuideViews
             if (InstanceStartDate.Date < DateTime.Now.Date)
             {
                 Picker.BorderBrush = Brushes.Red;
-                PickerLabel.Content = "Can't choose date from past";
                 return false;
             }
             else
             {
                 Picker.BorderBrush = Brushes.Green;
-                PickerLabel.Content = string.Empty;
                 return true;
             }
         }
@@ -779,13 +681,11 @@ namespace InitialProject.WPF.Views.GuideViews
             {
                 CheckPointName.BorderBrush = Brushes.Red;
                 CheckPointName.BorderThickness = new Thickness(1);
-                NameLabel.Content = "This field can't be empty";
             }
             else
             {
                 valid = true;
                 CheckPointName.BorderBrush = Brushes.Green;
-                NameLabel.Content = string.Empty;
             }
             return valid;
         }

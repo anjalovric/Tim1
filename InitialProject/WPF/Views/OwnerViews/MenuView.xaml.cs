@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using InitialProject.Model;
 using InitialProject.WPF.ViewModels;
+using InitialProject.WPF.ViewModels.OwnerViewModels;
 using InitialProject.WPF.Views;
 
 namespace InitialProject.WPF.Views

@@ -75,7 +75,7 @@ namespace InitialProject.WPF.ViewModels
         }
         public void MostVisitedForYearExecuted(object sender)
         {
-            if (Year != null)
+            if (Year>0)
             {
                 FinishedTourDetails finishedTourDetails = new FinishedTourDetails(instanceService.FindMostVisitedForChosenYear(Year, guideService.GetByUsername(loggedUser.Username)));
                 Application.Current.Windows.OfType<GuideWindow>().FirstOrDefault().Main.Content = finishedTourDetails;

@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using InitialProject.Model;
 using InitialProject.WPF.ViewModels;
+using InitialProject.WPF.ViewModels.OwnerViewModels;
 using InitialProject.WPF.Views.OwnerViews;
 
 namespace InitialProject.WPF.Views

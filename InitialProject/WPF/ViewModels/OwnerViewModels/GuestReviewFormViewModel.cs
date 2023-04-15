@@ -12,7 +12,7 @@ using InitialProject.WPF.Views;
 using InitialProject.Service;
 using System.Windows;
 
-namespace InitialProject.WPF.ViewModels
+namespace InitialProject.WPF.ViewModels.OwnerViewModels
 {
     public class GuestReviewFormViewModel : INotifyPropertyChanged
     {

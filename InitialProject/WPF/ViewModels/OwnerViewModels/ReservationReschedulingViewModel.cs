@@ -8,7 +8,7 @@ using InitialProject.Service;
 using InitialProject.WPF.Views;
 using InitialProject.WPF.Views.OwnerViews;
 
-namespace InitialProject.WPF.ViewModels
+namespace InitialProject.WPF.ViewModels.OwnerViewModels
 {
     public class ReservationReschedulingViewModel : INotifyPropertyChanged
     {
@@ -39,7 +39,7 @@ namespace InitialProject.WPF.ViewModels
         {
             requestService = new RequestForReschedulingService();
             Requests.Clear();
-            foreach(var request in requestService.GetPendingRequests(profileOwner))
+            foreach (var request in requestService.GetPendingRequests(profileOwner))
             {
                 Requests.Add(request);
             }
@@ -57,7 +57,7 @@ namespace InitialProject.WPF.ViewModels
 
         private void Decline_Executed(object sender)
         {
-            if(SelectedRequest != null)
+            if (SelectedRequest != null)
             {
                 DecliningRequestView decliningRequestView = new DecliningRequestView(SelectedRequest.Request);
                 Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = decliningRequestView;
@@ -67,13 +67,13 @@ namespace InitialProject.WPF.ViewModels
 
         private void Approve_Executed(object sender)
         {
-            if(SelectedRequest != null)
+            if (SelectedRequest != null)
                 ApproveRequest();
         }
         private void InitializeSelectedRequest()
         {
-            if(Requests.Count>0)
-               SelectedRequest = Requests[0];
+            if (Requests.Count > 0)
+                SelectedRequest = Requests[0];
         }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -86,7 +86,7 @@ namespace InitialProject.WPF.ViewModels
             get => selectedRequest;
             set
             {
-                if (value !=selectedRequest)
+                if (value != selectedRequest)
                 {
                     selectedRequest = value;
                     OnPropertyChanged();

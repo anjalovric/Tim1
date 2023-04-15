@@ -17,7 +17,7 @@ using Microsoft.Win32;
 using InitialProject.WPF.Views;
 using System.Windows;
 
-namespace InitialProject.WPF.ViewModels
+namespace InitialProject.WPF.ViewModels.OwnerViewModels
 {
     public class AccommodationInputFormViewModel : INotifyPropertyChanged
     {
@@ -94,18 +94,18 @@ namespace InitialProject.WPF.ViewModels
 
         private void RemoveImage_Executed(object sender)
         {
-            if (Images.Count>1)
+            if (Images.Count > 1)
             {
-               foreach(AccommodationImage image in Images)
-               {
+                foreach (AccommodationImage image in Images)
+                {
                     if (image.Url.Equals(ImageUrl))
                     {
                         Images.Remove(image);
                         break;
                     }
-               }
+                }
                 imageCounter -= 1;
-               NextImage_Executed(sender);
+                NextImage_Executed(sender);
             }
         }
 
@@ -116,7 +116,7 @@ namespace InitialProject.WPF.ViewModels
             else
                 imageCounter = 0;
 
-            ImageUrl =Images[imageCounter].Url;
+            ImageUrl = Images[imageCounter].Url;
         }
 
         private void PreviousImage_Executed(object sender)
@@ -126,7 +126,7 @@ namespace InitialProject.WPF.ViewModels
             else
                 imageCounter = 0;
 
-            ImageUrl =Images[imageCounter].Url;
+            ImageUrl = Images[imageCounter].Url;
         }
         private void MakeListOfLocations()
         {
@@ -302,9 +302,9 @@ namespace InitialProject.WPF.ViewModels
             if (openFileDialog.ShowDialog() == true)
             {
                 Uri resource = new Uri(openFileDialog.FileName);
-                String absolutePath = resource.ToString();
+                string absolutePath = resource.ToString();
                 int relativeIndex = absolutePath.IndexOf("Resources");
-                String relative = absolutePath.Substring(relativeIndex);
+                string relative = absolutePath.Substring(relativeIndex);
                 ImageUrl = "/" + relative;
                 MakeAndAddImage();
             }
