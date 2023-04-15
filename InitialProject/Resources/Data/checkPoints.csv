@@ -17,8 +17,8 @@
 17|b|False|8|2
 18|a|False|9|1
 19|aa|False|9|2
-20|a|False|10|1
-21|aa|False|10|2
+20|a|True|10|1
+21|aa|True|10|2
 22|y|True|11|1
 23|tt|True|11|2
 24|Prvi|True|12|1
