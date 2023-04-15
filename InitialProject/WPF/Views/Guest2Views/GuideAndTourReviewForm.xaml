@@ -28,18 +28,45 @@
         <Button Command="{Binding UploadImageCommand}" HorizontalAlignment="Left" Margin="810,445,0,0" VerticalAlignment="Top" Width="30" FontWeight="Bold" Height="30">
             <Image Source="/Resources/Images/add.png" Height="25" Width="50"/>
         </Button>
-        <Image x:Name="imagePicture" Margin="526,266,71,89" Source="{Binding ImageSource, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <Image x:Name="imagePicture" Margin="540,266,102,89" Source="{Binding ImageSource, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
 
         <Label Content="Rate tour and guide" Margin="70,25,560,386" FontSize="20" FontWeight="Bold"/>
-        
 
 
 
-        <Button Command="{Binding BackCommand}" HorizontalAlignment="Left" Margin="482,366,0,0" VerticalAlignment="Top" Width="31" FontWeight="Bold" Background="White" BorderBrush="White">
-            <Image Source="/Resources/Images/back_arrow.png" Height="25" Width="50"/>
+
+
+        <Button Command="{Binding BackCommand}" Margin="367,344,395,165" RenderTransformOrigin="0.5,0.5">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="180"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid>
+                        <StackPanel Orientation="Horizontal">
+                            <Rectangle Width="30" Height="14" Stroke="Black" Fill="Black"/>
+                            <Polygon Points= "0,15 15,22 0,30" Stroke="Black" Fill="Black" Height="45" Width="30" />
+                        </StackPanel>
+                    </Grid>
+                </ControlTemplate>
+            </Button.Template>
         </Button>
-        <Button Command="{Binding NextCommand}" HorizontalAlignment="Left" Margin="860,369,0,0" VerticalAlignment="Top" Width="35" FontWeight="Bold" Background="White" BorderBrush="White">
-            <Image Source="/Resources/Images/arrow.png" Height="25" Width="28"/>
+        <Button Command="{Binding NextCommand}" Margin="860,342,-121,165">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <StackPanel Orientation="Horizontal">
+                            <Rectangle Width="30" Height="14" Stroke="Black" Fill="Black"/>
+                            <Polygon Points= "0,15 15,22 0,30" Stroke="Black" Fill="Black" Height="45" Width="30" />
+                        </StackPanel>
+                    </Grid>
+                </ControlTemplate>
+            </Button.Template>
         </Button>
         <Button Command="{Binding DeletePhotoCommand}" Margin="840,436,30,78" FontWeight="Bold" Height="30" Width="30">
             <Image Source="/Resources/Images/delete.png" Height="25" Width="50"/>

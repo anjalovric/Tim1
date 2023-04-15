@@ -60,15 +60,15 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             tourInstances = new ObservableCollection<TourInstance>(tourInstanceService.GetAll());
             tourInstance = FindActiveTour(tourInstances);
             FindPointsForActiveInstance();
+            SetCheckPoint();
             SetTourInstances(TourInstances);
             locationService = new LocationService();
             SetTours(tourInstance);
-            SetCheckPoint();
         }
         private void SetTourInstances(ObservableCollection<TourInstance> TourInstances)
         {
             TourInstances.Clear();
-            if (tourInstance != null)
+            if (tourInstance != null && CheckPoint.Count()!=0)
                 TourInstances.Add(tourInstance);
         }
         private void SetCheckPoint()

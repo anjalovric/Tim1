@@ -10,10 +10,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
+using System.Windows.Media;
+using System.Runtime.CompilerServices;
+using System.ComponentModel;
 
 namespace InitialProject.WPF.ViewModels.Guest2ViewModels
 {
-    public class Guest2OverviewViewModel
+    public class Guest2OverviewViewModel:INotifyPropertyChanged
     {
         public Model.Guest2 WindowGuest2 { get; set; }
         private Guest2 guest2;
@@ -24,14 +28,37 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         public RelayCommand SignOutCommand { get; set; }
         public RelayCommand FinishedToursCommand { get; set; }
         private ContentControl ContentControl;
+        private BitmapImage imageSource;
+        public BitmapImage ImageSource
+        {
+            get { return imageSource; }
+            set
+            {
+                if (value != imageSource)
+                    imageSource = value;
+                OnPropertyChanged("ImageSource");
+            }
+
+        }
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
         public Guest2OverviewViewModel(User user,ContentControl contentControl)
         {
             guest2Repository = new Guest2Repository();
             guest2 = new Model.Guest2();
             GetGuest2ByUser(user);
+            string relative = FindImageRelativePath();
+            ImageSource = new BitmapImage(new Uri(relative, UriKind.Relative));
             ContentControl = contentControl;
             MakeCommands();
             ContentControl.Content = new ShowTours(guest2);
+        }
+        private string FindImageRelativePath()
+        {
+            return guest2.ImagePath;
         }
         private void MakeCommands()
         {

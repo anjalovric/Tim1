@@ -2,16 +2,20 @@
 using InitialProject.Repository;
 using InitialProject.Service;
 using InitialProject.WPF.Views.Guest2Views;
+using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Media;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace InitialProject.WPF.ViewModels.Guest2ViewModels
 {
@@ -60,7 +64,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             }
 
         }
-        private Guest2 guest2;
+        public Guest2 guest2 { get; set; }
         private VoucherService voucherService;
         private ObservableCollection<Voucher> vouchers;
         private ObservableCollection<TourInstance> tourInstance;
@@ -110,7 +114,6 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             ConfirmCommand = new RelayCommand(Confirm_Executed, CanExecute);
             CloseCommand = new RelayCommand(Cancel_Executed, CanExecute);
             ActivateCommand = new RelayCommand(Activate_Executed, CanExecute);
-            
         }
         private bool CanExecute(object sender)
         {
