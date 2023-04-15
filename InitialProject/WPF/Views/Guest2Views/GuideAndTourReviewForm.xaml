@@ -71,7 +71,7 @@
         <Button Command="{Binding DeletePhotoCommand}" Margin="840,436,30,78" FontWeight="Bold" Height="30" Width="30">
             <Image Source="/Resources/Images/delete.png" Height="25" Width="50"/>
         </Button>
-        <Button Command="{Binding DeletePhotoCommand}" Margin="0,436,30,78" FontWeight="Bold" Height="30" Width="30">
+        <Button Command="{Binding DeleteCommand}" Margin="0,436,30,78" FontWeight="Bold" Height="30" Width="30">
             <Image Source="/Resources/Images/delete.png" Height="25" Width="50"/>
         </Button>
     </Grid>
