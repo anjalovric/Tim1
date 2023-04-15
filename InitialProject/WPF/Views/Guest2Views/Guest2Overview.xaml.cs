@@ -23,6 +23,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using InitialProject.WPF.ViewModels.Guest2ViewModels;
+using InitialProject.Service;
 
 namespace InitialProject.WPF.Views.Guest2Views
 {

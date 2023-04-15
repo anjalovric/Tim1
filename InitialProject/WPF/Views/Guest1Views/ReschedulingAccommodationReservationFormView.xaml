@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
         Title="ReschedulingAccommodationReservationForm" Height="522" Width="660" WindowStartupLocation="CenterScreen">
@@ -11,8 +12,20 @@
         <Label FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top" Height="43" Width="372" Margin="0,20,0,0">CHANGING RESERVATION DATE</Label>
         <Label FontSize="18" HorizontalAlignment="Left" Margin="160,0,0,300" Height="40" Width="110">Arrival date:</Label>
 
-        <Calendar x:Name="ArrivalDate" Width="196" Margin="120,119,0,196" HorizontalAlignment="Left" SelectedDate="{Binding Path=Arrival, Mode=TwoWay}"/>
-        <Calendar x:Name="DepartureDate" Width="197" Margin="0,119,120,196" HorizontalAlignment="Right" SelectedDate="{Binding Path=Departure, Mode=TwoWay}"/>
+        <Calendar x:Name="ArrivalDate" Width="196" Margin="120,119,0,196" HorizontalAlignment="Left" SelectedDate="{Binding Path=Arrival, Mode=TwoWay}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="PreviewMouseUp">
+                    <i:InvokeCommandAction Command="{Binding OnPreviewMouseUpCommand}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </Calendar>
+        <Calendar x:Name="DepartureDate" Width="197" Margin="0,119,120,196" HorizontalAlignment="Right" SelectedDate="{Binding Path=Departure, Mode=TwoWay}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="PreviewMouseUp">
+                    <i:InvokeCommandAction Command="{Binding OnPreviewMouseUpCommand}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </Calendar>
         <Label FontSize="18" Height="40" Width="140" HorizontalAlignment="Right" Margin="0,0,150,300" Content="Departure date:"/>
 
         <Label FontSize="18" HorizontalAlignment="Center" Margin="0,180,0,0" Height="40" Width="230" Content="Reasons for changing date:"/>

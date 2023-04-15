@@ -14,7 +14,7 @@ namespace InitialProject.Model
         public string Name { get; set; }
         public string LastName { get; set; }
         public string Username { get; set; }
-
+        public string ImagePath { get; set; }
 
 
 
@@ -30,12 +30,12 @@ namespace InitialProject.Model
             Name = values[1];
             LastName = values[2];
             Username = values[3];
-
+            ImagePath = values[4];
         }
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), Name, LastName, Username};
+            string[] csvValues = { Id.ToString(), Name, LastName, Username, ImagePath };
             return csvValues;
         }
 

@@ -14,5 +14,6 @@ namespace InitialProject.Domain.RepositoryInterfaces
         public List<AccommodationReservation> GetAll();
         public int NextId();
         public AccommodationReservation GetById(int id);
+        public int GetMaxId();
     }
 }

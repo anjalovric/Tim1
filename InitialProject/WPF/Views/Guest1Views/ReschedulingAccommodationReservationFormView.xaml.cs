@@ -32,14 +32,7 @@ namespace InitialProject.WPF.Views.Guest1Views
             
             
         }
-        protected override void OnPreviewMouseUp(MouseButtonEventArgs e)  //gdje cu s njom?
-        {
-            base.OnPreviewMouseUp(e);
-            if (Mouse.Captured is CalendarItem)
-            {
-                Mouse.Capture(null);
-            }
-        }
+        
 
     }
 }

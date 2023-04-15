@@ -11,7 +11,7 @@ namespace InitialProject.Repository
 {
     public class OwnerReviewRepository : IOwnerReviewRepository
     {
-        private const string FilePath = "../../../Resources/Data/ownerReviews.csv";
+        private const string FilePath = "../../../Resources/Data/ownerAndAccommodationReviews.csv";
 
         private readonly Serializer<OwnerReview> _serializer;
 

@@ -19,7 +19,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
     {
         private Guest1 guest1;  //trebace kad dodam dugme za rezervaciju
         private int currentCounter = 0;
-        private BitmapImage imageSource { get; set; }
+        private BitmapImage imageSource;
         public BitmapImage ImageSource
         {
             get { return imageSource; }

@@ -3,15 +3,20 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
         Title="Guest1Home" Height="768" Width="1024" WindowStartupLocation="CenterScreen">
     <Grid>
-        <Menu VerticalAlignment="Top" Background="DarkGray" Height="72">
+        <Menu VerticalAlignment="Top" Height="72" TextElement.Foreground="#7286A0" BorderThickness="5,5,5,5" BorderBrush="#7286A0">
+            <Menu.Background>
+                <ImageBrush ImageSource="/Resources/Images/flowers.jpg" Opacity="0.7"></ImageBrush>
+            </Menu.Background>
+            
 
-            <MenuItem Height="72" Width="148">
+            <MenuItem Height="72" Width="148" VerticalAlignment="Center">
                 <MenuItem.Header>
-                    <TextBlock Text="HOME" Margin="-7" FontSize="20" Width="148" VerticalAlignment="Center" TextAlignment="Center"/>
+                    <TextBlock Text="HOME" Margin="-7" FontSize="20" Width="148" VerticalAlignment="Center" TextAlignment="Center" FontWeight="ExtraBlack"/>
                 </MenuItem.Header>
                 <MenuItem Header="BOOK ACCOMMODATION" Height="55"  FontSize="18" Command="{Binding BookingCommand}">
                     <MenuItem.Icon>
@@ -26,27 +31,33 @@
             </MenuItem>
             <MenuItem FontSize="20" Width="292" Command="{Binding MyReservationsCommand}">
                 <MenuItem.Header>
-                    <TextBlock Text="MY RESERVATIONS" Margin="-7" FontSize="20" TextAlignment="Center" Width="292"/>
+                    <TextBlock Text="MY RESERVATIONS" Margin="-7" FontSize="20" TextAlignment="Center" Width="292" FontWeight="ExtraBlack"/>
                 </MenuItem.Header>
             </MenuItem>
             <MenuItem FontSize="20" Width="178">
                 <MenuItem.Header>
-                    <TextBlock Text="REVIEWS" Margin="-7" FontSize="20" TextAlignment="Center" Width="178"/>
+                    <TextBlock Text="REVIEWS" Margin="-7" FontSize="20" TextAlignment="Center" Width="178" FontWeight="ExtraBlack"/>
                 </MenuItem.Header>
             </MenuItem>
             <MenuItem FontSize="20" Width="162">
                 <MenuItem.Header>
-                    <TextBlock Text="FORUM" Margin="-7" FontSize="20" TextAlignment="Center" Width="162"/>
+                    <TextBlock Text="FORUM" Margin="-7" FontSize="20" TextAlignment="Center" Width="162" FontWeight="ExtraBlack"/>
                 </MenuItem.Header>
             </MenuItem>
-            <MenuItem x:Name="NotificationsList" Width="115" Command="{Binding NotificationsCommand}" ItemsSource="{Binding Path=StoredNotifications,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontSize="16">
+            <MenuItem x:Name="NotificationsList" Width="115" Command="{Binding NotificationsCommand}"  ItemsSource="{Binding Path=StoredNotifications,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontSize="16">
                 <MenuItem.Header>
                     <Image Source="/Resources/Images/bell.png" Margin="23,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Height="48" Width="55"/>
                 </MenuItem.Header>
             </MenuItem>
-            <MenuItem Width="114.5">
+            <MenuItem Width="104">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SubmenuOpened">
+                        <i:InvokeCommandAction Command="{Binding SubmenuOpenedCommand}"
+                CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type MenuItem}}}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
                 <MenuItem.Header>
-                    <Image Source="/Resources/Images/account.png" Margin="23,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Height="48" Width="55"/>
+                    <Image Source="/Resources/Images/account.png" Margin="21,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Height="48" Width="50"/>
                 </MenuItem.Header>
                 <MenuItem Header="MY PROFILE" Height="55"  FontSize="18" Command="{Binding MyProfileCommand}">
                     <MenuItem.Icon>

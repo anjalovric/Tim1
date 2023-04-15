@@ -13,5 +13,6 @@ namespace InitialProject.Domain.RepositoryInterfaces
         public void Save(OwnerReview review);
         public int NextId();
         public OwnerReview GetById(int id);
+        public List<OwnerReview> GetAll();
     }
 }

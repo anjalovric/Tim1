@@ -14,7 +14,7 @@
 
         </Grid.ColumnDefinitions>
         <StackPanel Width="240" Orientation="Vertical" HorizontalAlignment="Left" Background="#FFD0C4C4" Grid.ColumnSpan="2">
-            <Image Source="/Resources/Images/blond.jpg" Width="100" Height="180" />
+            <Image x:Name="profileImage" Width="180" Height="205" Source="{Binding ImageSource, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
             
                 <MenuItem Header="Profile" Height="30" FontSize="14" FontFamily="Century Gothic" Foreground="Black" HorizontalAlignment="Left">
                 <MenuItem.Icon>

@@ -14,5 +14,6 @@ namespace InitialProject.Domain.RepositoryInterfaces
         public void Save(ReschedulingAccommodationRequest reschedulingAccommodationRequest);
         public int NextId();
         public ReschedulingAccommodationRequest GetById(int id);
+        public List<ReschedulingAccommodationRequest> GetAll();
     }
 }

@@ -116,17 +116,20 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                 MessageBox.Show("This reservation is already reviewed.");
                 return;
             }
-
             if (!ownerReviewService.IsReservationValidToReview(SelectedCompletedReservation))
             {
                 MessageBox.Show("You can't rate this reservation because 5 days have passed since its departure.");
                 return;
             }
-
-            OwnerAndAccommodationReviewFormView ownerAndAccommodationReviewForm = new OwnerAndAccommodationReviewFormView(guest1,SelectedCompletedReservation);
-            Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = ownerAndAccommodationReviewForm;
+            ShowReviewForm();
         }
 
+        private void ShowReviewForm()
+        {
+            OwnerAndAccommodationReviewFormView ownerAndAccommodationReviewForm = new OwnerAndAccommodationReviewFormView(guest1, SelectedCompletedReservation);
+            Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = ownerAndAccommodationReviewForm;
+
+        }
 
         private void CancelReservation_Executed(object sender)
         {
@@ -153,7 +156,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         private void RescheduleReservation_Executed(object sender)
         {
             ReschedulingAccommodationReservationFormView form = new ReschedulingAccommodationReservationFormView(SelectedNotCompletedReservation);
-            form.Show();    //kad pravim novi manji prozor, da li samo show korisitm?
+            form.Show();    
         }
 
     }

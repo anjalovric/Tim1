@@ -21,7 +21,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
     public class OwnerAndAccommodationReviewFormViewModel:INotifyPropertyChanged
     {
         private AccommodationReservation reservation;
-        public Uri relativeUri { get; set; }
+        public Uri RelativeUri { get; set; }
         private List<AccommodationReviewImage> images;
         public RelayCommand SendCommand { get; set; }
         public RelayCommand AddPhotoCommand { get; set; }
@@ -31,7 +31,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         public int AccommodationCleanliness { get; set; }
         public int OwnerCorrectness { get; set; }
         public string Comments { get; set; }
-        private BitmapImage imageSource { get; set; }
+        private BitmapImage imageSource;
         public BitmapImage ImageSource
         {
             get { return imageSource; }
@@ -113,7 +113,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             if (openFileDialog.ShowDialog() == true)
             {
                 String relative = MakeRelativePath(openFileDialog);
-                relativeUri = new Uri("/" + relative, UriKind.Relative);
+                RelativeUri = new Uri("/" + relative, UriKind.Relative);
                 ImageSource = new BitmapImage(new Uri("/" + relative, UriKind.Relative));
                 AccommodationReviewImage accommodationReviewImage = new AccommodationReviewImage(reservation, relative);
                 images.Add(accommodationReviewImage);
@@ -200,18 +200,12 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             {
                 int k = i - 1;
                 if (k >= 0)
-                {
                     ImageSource = new BitmapImage(new Uri("/" + images[k].RelativeUri, UriKind.Relative));
-                }
                 else
-                {
                     ImageSource = new BitmapImage(new Uri("/" + images[images.Count - 1].RelativeUri, UriKind.Relative));
-                }
             }
             else
-            {
                 ImageSource = null;
-            }
         }
     }
 }
