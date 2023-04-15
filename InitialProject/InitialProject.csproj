@@ -51,6 +51,7 @@
     <None Remove="Resources\Images\search.png" />
     <None Remove="Resources\Images\signout.png" />
     <None Remove="Resources\Images\signOutIcon.png" />
+    <None Remove="Resources\Images\sky.jpg" />
     <None Remove="Resources\Images\suggestion.png" />
     <None Remove="Resources\Images\tasks.png" />
 
@@ -147,6 +148,9 @@
     </Content>
     <Content Include="Resources\Images\edit.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\sky.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Resource Include="Resources\Images\flowers.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
