@@ -10,7 +10,7 @@ using InitialProject.Model;
 using InitialProject.Service;
 using InitialProject.WPF.Views;
 
-namespace InitialProject.WPF.ViewModels
+namespace InitialProject.WPF.ViewModels.OwnerViewModels
 {
     public class OwnerReviewViewModel : INotifyPropertyChanged
     {
@@ -58,7 +58,7 @@ namespace InitialProject.WPF.ViewModels
         }
         private void MakeFirstImage()
         {
-            if(Images.Count >0)
+            if (Images.Count > 0)
             {
                 ImageUrl = "/" + Images[0].RelativeUri;
             }
@@ -86,7 +86,7 @@ namespace InitialProject.WPF.ViewModels
 
         public void GetNextImage()
         {
-            if (imageCounter != Images.Count-1)
+            if (imageCounter != Images.Count - 1)
                 imageCounter += 1;
             else
                 imageCounter = 0;
@@ -95,7 +95,7 @@ namespace InitialProject.WPF.ViewModels
 
         public void GetPreviousImage()
         {
-            if (imageCounter != Images.Count-1)
+            if (imageCounter != Images.Count - 1)
                 imageCounter += 1;
             else
                 imageCounter = 0;

@@ -14,7 +14,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using InitialProject.Model;
 using InitialProject.Repository;
-using InitialProject.View.Owner;
 using InitialProject.Service;
 using InitialProject.Domain.Model;
 using Microsoft.Win32;

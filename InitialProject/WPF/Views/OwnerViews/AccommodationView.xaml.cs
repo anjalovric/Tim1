@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using InitialProject.Model;
 using InitialProject.WPF.ViewModels;
+using InitialProject.WPF.ViewModels.OwnerViewModels;
 using SixLabors.ImageSharp.Metadata.Profiles.Xmp;
 
 namespace InitialProject.WPF.Views

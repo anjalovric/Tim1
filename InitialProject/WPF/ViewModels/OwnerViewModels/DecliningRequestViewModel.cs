@@ -10,7 +10,7 @@ using System.Windows;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace InitialProject.WPF.ViewModels
+namespace InitialProject.WPF.ViewModels.OwnerViewModels
 {
     public class DecliningRequestViewModel : INotifyPropertyChanged
     {

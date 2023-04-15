@@ -10,7 +10,7 @@ using InitialProject.WPF.Views;
 using SixLabors.ImageSharp.Metadata.Profiles.Xmp;
 using System.Windows.Navigation;
 
-namespace InitialProject.WPF.ViewModels
+namespace InitialProject.WPF.ViewModels.OwnerViewModels
 {
     public class MenuViewModel
     {

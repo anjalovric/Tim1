@@ -20,7 +20,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using InitialProject.Model;
 using InitialProject.Serializer;
-using InitialProject.View.Owner;
 using InitialProject.Service;
 
 

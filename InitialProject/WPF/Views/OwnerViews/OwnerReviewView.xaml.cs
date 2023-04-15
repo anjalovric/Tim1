@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using InitialProject.Model;
 using InitialProject.WPF.ViewModels;
+using InitialProject.WPF.ViewModels.OwnerViewModels;
 
 namespace InitialProject.WPF.Views
 {

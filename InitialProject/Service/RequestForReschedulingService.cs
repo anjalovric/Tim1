@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using InitialProject.Model;
 using InitialProject.WPF.ViewModels;
+using InitialProject.WPF.ViewModels.OwnerViewModels;
 using Org.BouncyCastle.Asn1.Ocsp;
 
 namespace InitialProject.Service

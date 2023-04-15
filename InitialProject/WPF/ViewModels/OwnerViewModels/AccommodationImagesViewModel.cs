@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using InitialProject.Model;
 using InitialProject.Service;
 
-namespace InitialProject.WPF.ViewModels
+namespace InitialProject.WPF.ViewModels.OwnerViewModels
 {
     public class AccommodationImagesViewModel : INotifyPropertyChanged
     {
@@ -23,7 +23,7 @@ namespace InitialProject.WPF.ViewModels
 
         public AccommodationImagesViewModel(Accommodation accommodation)
         {
-            this.Accommodation = accommodation;
+            Accommodation = accommodation;
             MakeImages();
             ImageUrl = Images[0].Url;
             MakeCommands();

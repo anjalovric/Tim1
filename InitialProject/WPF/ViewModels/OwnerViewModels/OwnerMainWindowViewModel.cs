@@ -10,7 +10,7 @@ using InitialProject.Service;
 using System.Windows.Navigation;
 using System.Windows.Controls;
 
-namespace InitialProject.WPF.ViewModels
+namespace InitialProject.WPF.ViewModels.OwnerViewModels
 {
     public class OwnerMainWindowViewModel
     {
@@ -25,7 +25,7 @@ namespace InitialProject.WPF.ViewModels
             owner = ownerService.GetByUsername(user.Username);
             MakeCommands();
         }
-       
+
         private void MakeCommands()
         {
             BurgerMenuCommand = new RelayCommand(BurgerMenu_Executed, CanExecute);
