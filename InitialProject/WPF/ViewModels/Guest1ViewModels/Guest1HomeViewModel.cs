@@ -61,6 +61,8 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         {
             Guest1Service guest1Service = new Guest1Service();
             this.guest1 = guest1Service.GetByUsername(user.Username);
+            Guest1SearchAccommodationView guest1SearchAccommodationView = new Guest1SearchAccommodationView(guest1);
+            Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = guest1SearchAccommodationView;
             StoredNotifications = new ObservableCollection<MenuItem>();
             MakeCommands();
         }
@@ -197,4 +199,3 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 
         }
     }
-//gdje preuzeti gosta, smije li u homeview

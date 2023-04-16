@@ -26,17 +26,13 @@ namespace InitialProject.WPF.Views.Guest1Views
     /// </summary>
     public partial class Guest1HomeView : Window
     {
-        private Guest1 guest1;
         private Guest1HomeViewModel guest1HomeViewModel;
        
         public Guest1HomeView(User user)
         {
             InitializeComponent();
-            Guest1Service guest1Service = new Guest1Service();
-            this.guest1 = guest1Service.GetByUsername(user.Username);  
             guest1HomeViewModel = new Guest1HomeViewModel(user);
             DataContext=guest1HomeViewModel;
-            Main.Content = new Guest1SearchAccommodationView(guest1);
         }
     }
 }
