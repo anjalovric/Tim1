@@ -6,6 +6,39 @@
       xmlns:local="clr-namespace:InitialProject.View"
       mc:Ignorable="d"
       Title="OwnerAndAccommodationReviewForm" Height="696" Width="1024">
+    <Page.Resources>
+        <Style TargetType="Grid">
+            <Setter Property="Background" Value="#c99585"></Setter>
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="Foreground" Value="#37492d"></Setter>
+            <Setter Property="FontWeight" Value="Bold"></Setter>
+        </Style>
+        <Style TargetType="Calendar">
+            <Setter Property="BorderBrush" Value="#22301a"></Setter>
+            <Setter Property="BorderThickness" Value="4"></Setter>
+            <Setter Property="Background" Value="#dbc9ab"></Setter>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Background" Value="#dbc9ab"></Setter>
+            <Setter Property="BorderBrush" Value="#22301a"></Setter>
+            <Setter Property="BorderThickness" Value="1"></Setter>
+        </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="#8c9d75"></Setter>
+            <Setter Property="Foreground" Value="#22301a"></Setter>
+            <Setter Property="FontWeight" Value="UltraBlack"></Setter>
+            <Setter Property="FontSize" Value="20"></Setter>
+            <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+            <Setter Property="BorderBrush" Value="#22301a"></Setter>
+            <Setter Property="BorderThickness" Value="3"></Setter>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="Background" Value="#dbc9ab"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+        </Style>
+    </Page.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -16,28 +49,28 @@
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <Label HorizontalAlignment="Center" Margin="0,20,0,630" FontSize="24" FontWeight="Bold">RATE ACCOMMODATION FORM</Label>
+        <Label HorizontalAlignment="Center" Margin="0,20,0,630" FontFamily="Baskerville Old Face"  FontSize="24" FontWeight="Bold">RATE ACCOMMODATION FORM</Label>
         <Label HorizontalContentAlignment="Left" FontSize="18" Margin="71,118,256,540">Cleanliness:</Label>
         <Label HorizontalContentAlignment="Left" FontSize="18" Margin="71,161,256,498">Owner's correctness:</Label>
 
         <Slider x:Name="CleanlinessSlider"  Minimum="1" Maximum="5" Margin="277,128,116,550" TickFrequency="1" IsSnapToTickEnabled="True" AutoToolTipPlacement="BottomRight" Value="{Binding Path=AccommodationCleanliness}"/>
         <Slider x:Name="CorrectnessSlider" Minimum="1" Maximum="5" Margin="277,170,116,508" TickFrequency="1" IsSnapToTickEnabled="True" AutoToolTipPlacement="BottomRight" Value="{Binding Path=OwnerCorrectness}"/>
-        <TextBox Text="{Binding ElementName=CleanlinessSlider,Path=Value}" Margin="410,124,71,546" FontSize="16" HorizontalContentAlignment="Center" RenderTransformOrigin="-0.097,0.462"/>
-        <TextBox Text="{Binding ElementName=CorrectnessSlider,Path=Value}" Margin="410,166,71,504" Width="31" FontSize="16" HorizontalContentAlignment="Center"/>
-        
+        <TextBlock Text="{Binding ElementName=CleanlinessSlider,Path=Value}" Margin="410,124,71,546" Width="31" FontSize="16" RenderTransformOrigin="-0.097,0.462" TextAlignment="Center"/>
+        <TextBlock Text="{Binding ElementName=CorrectnessSlider,Path=Value}" Margin="410,166,71,504" Width="31" FontSize="16" TextAlignment="Center"/>
+
         <Label HorizontalContentAlignment="Left" FontSize="18" Margin="71,292,256,366" Content="Add photos:"/>
         <Label HorizontalContentAlignment="Left" FontSize="18" Margin="71,444,256,214" Content="Comments:"/>
-        <TextBox x:Name="Comments" Margin="71,487,71,27" Text="{Binding Path=Comments}"/>
+        <TextBox x:Name="Comments" Grid.Column="0" Grid.Row="0" Height="165" HorizontalAlignment="Center" VerticalAlignment="Bottom" Text="{Binding Path=Comments}" Margin="0,0,0,55" Width="370"/>
 
         <Button Content="+" Command="{Binding AddPhotoCommand}" FontSize="21" Height="45" Margin="164,344,301,307">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Grid>
-                        <Ellipse Stroke="Black" 
-                       StrokeThickness="0">
+                        <Ellipse Stroke="#22301a" 
+                       StrokeThickness="3">
                             <Ellipse.Fill>
                                 <RadialGradientBrush>
-                                    <GradientStop Color="Pink" />
+                                    <GradientStop Color="#8c9d75" />
                                 </RadialGradientBrush>
                             </Ellipse.Fill>
                         </Ellipse>
@@ -49,7 +82,7 @@
         </Button>
 
 
-        <Border BorderBrush="Black" Margin="261,300,71,262" Visibility="Visible" BorderThickness="1"></Border>
+        <Border BorderBrush="#37492d" Margin="261,300,71,262" Visibility="Visible" BorderThickness="4"></Border>
 
         <Image x:Name="imagePicture" Margin="271,310,82,273" Source="{Binding ImageSource, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
 
@@ -64,8 +97,8 @@
                 <ControlTemplate TargetType="Button">
                     <Grid>
                         <StackPanel Orientation="Horizontal">
-                            <Rectangle Width="30" Height="14" Stroke="DeepPink" Fill="DeepPink"/>
-                            <Polygon Points= "0,15 15,22 0,30" Stroke="DeepPink" Fill="DeepPink" Height="45" Width="30" />
+                            <Rectangle Width="30" Height="14" Stroke="#22301a" Fill="#22301a"/>
+                            <Polygon Points= "0,15 15,22 0,30" Stroke="#22301a" Fill="#22301a" Height="45" Width="30" />
                         </StackPanel>
                     </Grid>
                 </ControlTemplate>
@@ -88,8 +121,8 @@
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Grid>
                         <StackPanel Orientation="Horizontal">
-                            <Rectangle Width="30" Height="14" Stroke="DeepPink" Fill="DeepPink"/>
-                            <Polygon Points= "0,15 15,22 0,30" Stroke="DeepPink" Fill="DeepPink" Height="45" Width="30" />
+                            <Rectangle Width="30" Height="14" Stroke="#22301a" Fill="#22301a"/>
+                            <Polygon Points= "0,15 15,22 0,30" Stroke="#22301a"  Fill="#22301a" Height="45" Width="30" />
                         </StackPanel>
                     </Grid>
                 </ControlTemplate>

@@ -7,9 +7,35 @@
       mc:Ignorable="d" 
       Height="696" Width="1024"
       Title="SentAccommodationReservationRequests">
-
-    <Grid Background="AntiqueWhite">
-        <TabControl x:Name="RequestsTabControl" Height="430" VerticalAlignment="Top" Background="AntiqueWhite" Width="1024">
+    <Page.Resources>
+        <Style TargetType="Grid">
+            <Setter Property="Background" Value="#37492d"></Setter>
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="Foreground" Value="#d9c7b3"></Setter>
+            <Setter Property="FontWeight" Value="Medium"></Setter>
+            <Setter Property="FontFamily" Value="Baskerville Old Face"></Setter>
+        </Style>
+        <Style TargetType="TabItem">
+            <Setter Property="Height" Value="40"></Setter>
+            <Setter Property="TextElement.FontWeight" Value="DemiBold"></Setter>
+            <Setter Property="Background" Value="#dbc9ab"></Setter>
+            <Setter Property="BorderBrush" Value="#22301a"></Setter>
+            <Setter Property="BorderThickness" Value="10"></Setter>
+            <Setter Property="TextElement.Foreground" Value="#22301a"></Setter>
+        </Style>
+        <Style TargetType="DataGrid">
+            <Setter Property="BorderBrush" Value="#22301a"></Setter>
+            <Setter Property="BorderThickness" Value="4"></Setter>
+            <Setter Property="Background" Value="#FFFCECB9"></Setter>
+            <Setter Property="ColumnHeaderHeight" Value="35"></Setter>
+        </Style>
+        <Style TargetType="DataGridColumnHeader">
+            <Setter Property="TextElement.Foreground" Value="#22301a"></Setter>
+        </Style>
+    </Page.Resources>
+    <Grid>
+        <TabControl x:Name="RequestsTabControl" Height="430" VerticalAlignment="Top" Width="1024">
             <TabControl.TabStripPlacement>Top</TabControl.TabStripPlacement>
             <TabControl.Template>
                 <ControlTemplate TargetType="{x:Type TabControl}">
@@ -23,19 +49,20 @@
                    IsItemsHost="True" 
                    HorizontalAlignment="Center" />
                         <Border Grid.Row="1" 
-                 BorderBrush="#7286A0" 
-                 BorderThickness="1">
+                 BorderBrush="#22301a" 
+                 BorderThickness="0,4,0,0">
                             <ContentPresenter Content="{TemplateBinding SelectedContent}" />
                         </Border>
                     </Grid>
                 </ControlTemplate>
             </TabControl.Template>
 
-            <TabItem Header="Approved requests" FontSize="16" Background="Gainsboro" HorizontalAlignment="Center">
+            <TabItem Header="Approved requests" FontSize="16" HorizontalAlignment="Center">
 
                 <Grid>
                     <Label FontSize="24" FontWeight="Bold" Margin="0,10,0,0" HorizontalAlignment="Center">APPROVED REQUESTS</Label>
-                    <DataGrid x:Name="ApprovedRequestsDataGrid" VerticalScrollBarVisibility="Auto" Margin="0,30,0,0" RowBackground="PaleGreen" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Left" ItemsSource="{Binding Path=ApprovedRequests,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" IsReadOnly="True" Height="322" Width="950" UseLayoutRounding="False">
+                    <DataGrid x:Name="ApprovedRequestsDataGrid" VerticalScrollBarVisibility="Auto" Margin="0,40,0,0" RowBackground="#CDFFCC" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Left" ItemsSource="{Binding Path=ApprovedRequests,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" IsReadOnly="True" Height="322" Width="950" UseLayoutRounding="False" HeadersVisibility="Column">
+
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Name" Width="1*" Binding="{Binding Reservation.Accommodation.Name}"/>
                             <DataGridTextColumn Header="Location" Width="2*"  Binding="{Binding Reservation.Accommodation.Location}"/>
@@ -57,10 +84,10 @@
 
 
             </TabItem>
-            <TabItem Header="Pending requests" FontSize="16" Background="Gainsboro" HorizontalAlignment="Center">
+            <TabItem Header="Pending requests" FontSize="16" HorizontalAlignment="Center">
                 <Grid>
                     <Label FontSize="24" FontWeight="Bold" Margin="0,10,0,0" HorizontalAlignment="Center">PENDING REQUESTS</Label>
-                    <DataGrid x:Name="PendingRequestsDataGrid" VerticalScrollBarVisibility="Auto" Margin="0,30,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" ItemsSource="{Binding Path=PendingRequests,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" IsReadOnly="True" Height="322" Width="950" UseLayoutRounding="False">
+                    <DataGrid x:Name="PendingRequestsDataGrid" VerticalScrollBarVisibility="Auto" HeadersVisibility="Column" Margin="0,40,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" ItemsSource="{Binding Path=PendingRequests,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" IsReadOnly="True" Height="322" Width="950" UseLayoutRounding="False">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Name" Width="1*" Binding="{Binding Reservation.Accommodation.Name}"/>
                             <DataGridTextColumn Header="Location" Width="2*"  Binding="{Binding Reservation.Accommodation.Location}"/>
@@ -81,10 +108,10 @@
                 </Grid>
             </TabItem>
 
-            <TabItem Header="Declined requests" FontSize="16" Background="Gainsboro">
+            <TabItem Header="Declined requests" FontSize="16">
                 <Grid>
                     <Label FontSize="24"  FontWeight="Bold" Margin="0,10,0,0" HorizontalAlignment="Center">DECLINED REQUESTS</Label>
-                    <DataGrid  x:Name="DeclinedRequestsDataGrid" Margin="0,30,0,0" RowBackground="LightCoral"  HorizontalAlignment="Center" VerticalAlignment="Center" VerticalScrollBarVisibility="Auto" ItemsSource="{Binding Path=DeclinedRequests,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" IsReadOnly="True" Height="322" Width="950" UseLayoutRounding="False">
+                    <DataGrid  x:Name="DeclinedRequestsDataGrid" Margin="0,40,0,0" HeadersVisibility="Column" RowBackground="#FF8986"  HorizontalAlignment="Center" VerticalAlignment="Center" VerticalScrollBarVisibility="Auto" ItemsSource="{Binding Path=DeclinedRequests,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" IsReadOnly="True" Height="322" Width="950" UseLayoutRounding="False">
                         <DataGrid.Columns >
                             <DataGridTextColumn Header="Name" Width="1*" Binding="{Binding Reservation.Accommodation.Name}"/>
                             <DataGridTextColumn Header="Location" Width="2*"  Binding="{Binding Reservation.Accommodation.Location}"/>
