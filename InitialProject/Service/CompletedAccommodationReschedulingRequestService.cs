@@ -77,11 +77,6 @@ namespace InitialProject.Service
 
             return filteredRequests;
         }
-        public String GenerateNotification(CompletedAccommodationReschedulingRequest completedRequest)
-        {
-            return "Request status - " + completedRequest.Request.state.ToString().ToUpper() + "\nOwner: " + completedRequest.Request.Reservation.Accommodation.Owner.Name + " " + completedRequest.Request.Reservation.Accommodation.Owner.LastName + "\n"
-                + "Name: " + completedRequest.Request.Reservation.Accommodation.Name
-                + "\nFor: " + completedRequest.Request.NewArrivalDate.ToString("d") + " - " + completedRequest.Request.NewDepartureDate.ToString("d");
-        }
+        
     }
 }

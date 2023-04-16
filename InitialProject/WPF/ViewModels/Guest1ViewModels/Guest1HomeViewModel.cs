@@ -190,12 +190,18 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             System.Windows.Documents.Hyperlink[] links = new System.Windows.Documents.Hyperlink[completedRequests.Count];
             for (int i = 0; i < completedRequests.Count; i++)
             {
-                notifications[i] = completedAccommodationReschedulingRequestService.GenerateNotification(completedRequests[i]);
+                notifications[i] = GenerateNotification(completedRequests[i]);
                 links[i] = CreateHyperlinkNotification(notifications[i], completedRequests[i].Request.state.ToString());
             }
             return links;
         }
-
-
+        public String GenerateNotification(CompletedAccommodationReschedulingRequest completedRequest)
+        {
+            return "Request status - " + completedRequest.Request.state.ToString().ToUpper() + "\nOwner: " + completedRequest.Request.Reservation.Accommodation.Owner.Name + " " + completedRequest.Request.Reservation.Accommodation.Owner.LastName + "\n"
+                + "Name: " + completedRequest.Request.Reservation.Accommodation.Name
+                + "\nFor: " + completedRequest.Request.NewArrivalDate.ToString("d") + " - " + completedRequest.Request.NewDepartureDate.ToString("d");
         }
+
+
+    }
     }
