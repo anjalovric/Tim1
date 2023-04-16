@@ -25,9 +25,9 @@ namespace InitialProject.WPF.Views.Guest2Views
     /// <summary>
     /// Interaction logic for RateTourAndGuide.xaml
     /// </summary>
-    public partial class GuideAndTourReviewForm : Window
+    public partial class GuideAndTourReviewFormView : Window
     {
-        public GuideAndTourReviewForm(TourInstance tourInstance, Guest2 guest2)
+        public GuideAndTourReviewFormView(TourInstance tourInstance, Guest2 guest2)
         {
             InitializeComponent();
             DataContext = new GuideAndTourReviewViewModel(tourInstance, guest2, knowledge, language, interestingFacts, imagePicture, comment);

@@ -9,22 +9,85 @@
       Title="CancelView" Background="White">
 
     <Grid>
-        <DataGrid x:Name="TourListDataGrid" ItemsSource="{Binding Path=TourInstances,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=Selected}" IsReadOnly="True" AutoGenerateColumns="False" Margin="83,144,65,62" >
+        <Grid.Background>
+            <ImageBrush ImageSource="/Resources/Images/sky.jpg"/>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="8*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <DataGrid Grid.Row="1" Grid.Column="1" x:Name="TourListDataGrid" ItemsSource="{Binding Path=TourInstances,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=Selected}" IsReadOnly="True" AutoGenerateColumns="False"  HorizontalContentAlignment="Center" BorderThickness="4">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Tour name" Width="1*" Binding="{Binding Tour.Name}"/>
-                <DataGridTextColumn Header="Location" Width="1*" Binding="{Binding Tour.Location}"/>
-                <DataGridTextColumn Header="StartDate" Width="0.6*" Binding="{Binding StartDate}"/>
-                <DataGridTextColumn Header="StartHour" Width="1*" Binding="{Binding StartClock}"/>
-                <DataGridTextColumn  Width="1*" Header="Capacity" Binding="{Binding Tour.MaxGuests}"/>
-                <DataGridTemplateColumn x:Name="cancelation" Header="Cancel"  Width="1.2*">
+                <DataGridTemplateColumn x:Name="Cover"  Width="0.7*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding CoverBitmap}" Stretch="Fill"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Tour name" Width="1*" Binding="{Binding Tour.Name}">
+                    <DataGridColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="FontWeight" Value="Bold"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                            <Setter Property="Height" Value="30"/>
+                        </Style>
+                    </DataGridColumn.HeaderStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Location" Width="1*" Binding="{Binding Tour.Location}">
+                    <DataGridColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="FontWeight" Value="Bold"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridColumn.HeaderStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="StartDate" Width="1*" Binding="{Binding Date}">
+                    <DataGridColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="FontWeight" Value="Bold"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridColumn.HeaderStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="StartHour" Width="1*" Binding="{Binding StartClock}">
+                    <DataGridColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="FontWeight" Value="Bold"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridColumn.HeaderStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn  Width="1*" Header="Capacity" Binding="{Binding Tour.MaxGuests}">
+                    <DataGridColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="FontWeight" Value="Bold"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridColumn.HeaderStyle>
+                </DataGridTextColumn>
+                <DataGridTemplateColumn x:Name="cancelation" Header="Cancel"  Width="1*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button Name="cancelButton" Content="CANCEL" TextElement.FontWeight="ExtraBold" Command="{Binding Path=DataContext.CancelCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
+                    <DataGridColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="FontWeight" Value="Bold"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridColumn.HeaderStyle>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
 
+        <Label  Height="40"  FontSize="25" FontWeight="Bold" Grid.Column="1" Grid.Row="0" HorizontalContentAlignment="Center" HorizontalAlignment="Center">CANCEL TOUR</Label>
     </Grid>
 </Page>

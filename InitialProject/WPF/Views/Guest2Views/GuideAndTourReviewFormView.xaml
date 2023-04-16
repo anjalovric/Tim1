@@ -1,4 +1,4 @@
-﻿<Window x:Class="InitialProject.WPF.Views.Guest2Views.GuideAndTourReviewForm"
+﻿<Window x:Class="InitialProject.WPF.Views.Guest2Views.GuideAndTourReviewFormView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -71,7 +71,7 @@
         <Button Command="{Binding DeletePhotoCommand}" Margin="840,436,30,78" FontWeight="Bold" Height="30" Width="30">
             <Image Source="/Resources/Images/delete.png" Height="25" Width="50"/>
         </Button>
-        <Button Command="{Binding DeletePhotoCommand}" Margin="0,436,30,78" FontWeight="Bold" Height="30" Width="30">
+        <Button Command="{Binding DeleteCommand}" Margin="0,436,30,78" FontWeight="Bold" Height="30" Width="30">
             <Image Source="/Resources/Images/delete.png" Height="25" Width="50"/>
         </Button>
     </Grid>

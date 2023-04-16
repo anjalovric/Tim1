@@ -15,7 +15,7 @@ namespace InitialProject.WPF.Validations.GuideValidations
             try
             {
                 string stringValue = value as string;
-                Regex r = new Regex(@"^[A-Za-z]+(\\ [A-Za-z]+)*$");
+                Regex r = new Regex(@"^[A-Za-z]+(\s[A-Za-z]+)*$");
 
                 if (stringValue.Length == 0)
                 {

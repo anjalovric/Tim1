@@ -22,7 +22,6 @@ namespace InitialProject.Repository
             _serializer = new Serializer<GuideAndTourReview>();
             _reviews = _serializer.FromCSV(FilePath);
         }
-
         public int NextId()
         {
             _reviews = _serializer.FromCSV(FilePath);
@@ -32,12 +31,13 @@ namespace InitialProject.Repository
             }
             return _reviews.Max(c => c.Id) + 1;
         }
-        public bool HasReview(TourInstance tourInstance,Guest2 guest2)
+        public bool HasReview(TourInstance tourInstance, Guest2 guest2)
         {
             _reviews = _serializer.FromCSV(FilePath);
-            if(_reviews.Find(n => n.TourInstance.Id == tourInstance.Id) != null && _reviews.Find(n => n.Guest2.Id == guest2.Id) != null)
+            foreach (GuideAndTourReview review in _reviews)
             {
-                return true;
+                if (review.TourInstance.Id == tourInstance.Id && review.Guest2.Id == guest2.Id)
+                    return true;
             }
             return false;
         }

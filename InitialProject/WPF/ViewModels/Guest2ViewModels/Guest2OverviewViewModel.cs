@@ -54,7 +54,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             ImageSource = new BitmapImage(new Uri(relative, UriKind.Relative));
             ContentControl = contentControl;
             MakeCommands();
-            ContentControl.Content = new ShowTours(guest2);
+            ContentControl.Content = new ShowToursView(guest2);
         }
         private string FindImageRelativePath()
         {
@@ -74,15 +74,15 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         }
         private void Show_Executed(object sender)
         {
-            ContentControl.Content=new ShowTours(guest2);
+            ContentControl.Content=new ShowToursView(guest2);
         }
         private void Vouchers_Executed(object sender)
         {
-            ContentControl.Content= new VoucherViewForm(guest2);
+            ContentControl.Content= new VoucherFormView(guest2);
         }
         private void ActiveTours_Executed(object sender)
         {
-            ContentControl.Content = new ActiveToursForm(guest2);
+            ContentControl.Content = new ActiveToursFormView(guest2);
 
         }
         private void SignOut_Executed(object sender)
@@ -93,7 +93,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         }
         private void ShowFinished_Executed(object sender)
         {
-            ContentControl.Content = new FinishedTourInstances(guest2);
+            ContentControl.Content = new FinishedTourInstancesFormView(guest2);
 
         }
         private void GetGuest2ByUser(User user)

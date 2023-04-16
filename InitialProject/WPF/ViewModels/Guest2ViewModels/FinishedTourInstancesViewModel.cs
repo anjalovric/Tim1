@@ -67,7 +67,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
                 MessageBox.Show("This reservation is already reviewed.");
                 return;
             }
-            GuideAndTourReviewForm guideAndTourReview = new GuideAndTourReviewForm(Selected, guest2);
+            GuideAndTourReviewFormView guideAndTourReview = new GuideAndTourReviewFormView(Selected, guest2);
             guideAndTourReview.Show();
         }
     }

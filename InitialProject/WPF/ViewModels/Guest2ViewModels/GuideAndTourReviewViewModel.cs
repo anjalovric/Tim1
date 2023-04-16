@@ -38,7 +38,6 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         public RelayCommand DeletePhotoCommand { get; set; }
         public RelayCommand CancelCommand { get; set; }
         private TourReviewImageService tourReviewImageService;
-        private String Comment;
         private Guest2 guest2;
         private TourInstance CurrentTourInstance;
         private List<TourReviewImage> images;
@@ -160,7 +159,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
 
         private void Cancel_Executed(object sender)
         {
-            Application.Current.Windows.OfType<GuideAndTourReviewForm>().FirstOrDefault().Close();
+            Application.Current.Windows.OfType<GuideAndTourReviewFormView>().FirstOrDefault().Close();
         }
 
 
@@ -171,7 +170,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
                 int id = StoreReview().Id;
                 StoreImages(id);
                 MessageBox.Show("Review successfully sent!");
-                Application.Current.Windows.OfType<GuideAndTourReviewForm>().FirstOrDefault().Close();
+                Application.Current.Windows.OfType<GuideAndTourReviewFormView>().FirstOrDefault().Close();
             }
             else
                 MessageBox.Show("You must upload at least one photo!");
@@ -188,7 +187,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         private GuideAndTourReview StoreReview()
         {
             GuideAndTourReviewService guideAndTourReviewService = new GuideAndTourReviewService();
-            GuideAndTourReview guideAndTourReview = new GuideAndTourReview(CurrentTourInstance.Guide.Id, guest2, CurrentTourInstance, Convert.ToInt32(language.Text), Convert.ToInt32(interestingFacts.Text), Convert.ToInt32(knowledge.Text), Comment);
+            GuideAndTourReview guideAndTourReview = new GuideAndTourReview(CurrentTourInstance.Guide.Id, guest2, CurrentTourInstance, Convert.ToInt32(language.Text), Convert.ToInt32(interestingFacts.Text), Convert.ToInt32(knowledge.Text), comment.Text);
             return guideAndTourReviewService.Save(guideAndTourReview);
         }
         private bool IsImageUploadValid()
