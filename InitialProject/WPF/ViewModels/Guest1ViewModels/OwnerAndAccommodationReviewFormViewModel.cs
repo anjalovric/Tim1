@@ -93,7 +93,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         {
             OwnerReviewService ownerReviewService = new OwnerReviewService();
             OwnerReview ownerReview = new OwnerReview(reservation, AccommodationCleanliness, OwnerCorrectness, Comments);
-            ownerReviewService.Save(ownerReview);
+            ownerReviewService.Add(ownerReview);
         }
         private bool IsImageUploadValid()
         {

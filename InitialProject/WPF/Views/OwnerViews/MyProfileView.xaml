@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:InitialProject.WPF.Views"
       mc:Ignorable="d" 
       d:DesignHeight="630" d:DesignWidth="430"
-      Title="MyProfile" Background="White">
+      Title="My Profile" Background="White">
     <Page.Resources>
         <DataTemplate x:Key="ownerReviews">
             <Border BorderBrush="Black" BorderThickness="0.5" Margin="0,0,0,0" >

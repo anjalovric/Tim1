@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:InitialProject.WPF.Views"
       mc:Ignorable="d" 
       d:DesignHeight="630" d:DesignWidth="430"
-      Title="AccommodationView" Background="White">
+      Title="My Accommodation" Background="White">
     <Page.Resources>
         <DataTemplate x:Key="accommodations">
             <Border BorderBrush="Black" BorderThickness="0.5" Margin="0,0,0,0" >

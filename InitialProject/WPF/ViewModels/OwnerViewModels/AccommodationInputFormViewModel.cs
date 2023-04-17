@@ -4,18 +4,11 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
-using InitialProject.Domain.Model;
-using System.Windows.Media.Imaging;
-using InitialProject.Domain.RepositoryInterfaces;
-using InitialProject.Model;
-using InitialProject.Repository;
-using InitialProject.Service;
-using Microsoft.Win32;
-using InitialProject.WPF.Views;
 using System.Windows;
+using InitialProject.Model;
+using InitialProject.Service;
+using InitialProject.WPF.Views;
+using Microsoft.Win32;
 
 namespace InitialProject.WPF.ViewModels.OwnerViewModels
 {
@@ -74,7 +67,6 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         {
             return true;
         }
-
         private void Cancel_Executed(object sender)
         {
             AccommodationView accommodationView = new AccommodationView(owner);
@@ -111,22 +103,28 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         private void NextImage_Executed(object sender)
         {
-            if (imageCounter != Images.Count - 1)
-                imageCounter += 1;
-            else
-                imageCounter = 0;
+            if (Images.Count > 1)
+            {
+                if (imageCounter != Images.Count - 1)
+                    imageCounter += 1;
+                else
+                    imageCounter = 0;
 
-            ImageUrl = Images[imageCounter].Url;
+                ImageUrl = Images[imageCounter].Url;
+            }
         }
 
         private void PreviousImage_Executed(object sender)
         {
-            if (imageCounter != Images.Count - 1)
-                imageCounter += 1;
-            else
-                imageCounter = 0;
+            if(Images.Count > 1)
+            {
+                if (imageCounter != Images.Count - 1)
+                    imageCounter += 1;
+                else
+                    imageCounter = 0;
 
-            ImageUrl = Images[imageCounter].Url;
+                ImageUrl = Images[imageCounter].Url;
+            }
         }
         private void MakeListOfLocations()
         {

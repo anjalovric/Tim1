@@ -8,13 +8,9 @@ using InitialProject.Model;
 
 namespace InitialProject.Domain.RepositoryInterfaces
 {
-    public interface IGuestReviewRepository
+    public interface IGuestReviewRepository : IGenericRepository<GuestReview>
     {
-        public List<GuestReview> GetAll();
         public bool HasReview(AccommodationReservation reservation);
-        public void Save(GuestReview guestReview);
-        public int NextId();
-        public GuestReview GetById(int id);
-
+        public void Add(GuestReview guestReview);
     }
 }

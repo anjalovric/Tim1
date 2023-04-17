@@ -50,9 +50,9 @@ namespace InitialProject.Service
             return reviewsByOwner;
         }
 
-        public void Save(GuestReview guestReview)
+        public void Add(GuestReview guestReview)
         {
-            guestReviewRepository.Save(guestReview);
+            guestReviewRepository.Add(guestReview);
         }
 
         public bool IsReservationForReview(AccommodationReservation reservation, Owner owner)

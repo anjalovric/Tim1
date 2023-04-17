@@ -55,9 +55,9 @@ namespace InitialProject.Service
         {
             return ownerReviewRepository.HasReview(reservation);
         }
-        public void Save(OwnerReview review)
+        public void Add(OwnerReview review)
         {
-            ownerReviewRepository.Save(review);
+            ownerReviewRepository.Add(review);
         }
         public double CalculateAverageRateByOwner(Owner owner)
         {

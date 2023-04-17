@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:InitialProject.WPF.Views"
       mc:Ignorable="d" 
       d:DesignHeight="630" d:DesignWidth="430"
-      Title="ReservationReschedulingView" Background="White">
+      Title="Requests For Rescheduling" Background="White">
 
     <Page.Resources>
         <DataTemplate x:Key="requests">

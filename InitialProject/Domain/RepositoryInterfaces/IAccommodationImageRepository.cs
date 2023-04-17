@@ -11,9 +11,5 @@ namespace InitialProject.Domain.RepositoryInterfaces
     {
         public int Add(AccommodationImage image);
         public List<string> GetUrlByAccommodationId(int id);
-
-        public List<AccommodationImage> GetAll();
-        public int NextId();
-        public AccommodationImage GetById(int id);
     }
 }

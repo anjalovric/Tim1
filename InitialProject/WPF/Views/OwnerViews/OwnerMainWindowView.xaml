@@ -4,18 +4,35 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.WPF.Views"
+        xmlns:converters="clr-namespace:InitialProject.WPF.Converters"
         mc:Ignorable="d"
         Title="OwnerMainWindowView" Height="750" Width="430">
+    <Window.Resources>
+        <converters:ActivePageTitleConverter x:Key="ActivePageTitleConverter" />
+    </Window.Resources>
+
     <Grid>
-        <Menu Margin="0,0,0,680" Background="Gray">
-            <MenuItem Command="{Binding BurgerMenuCommand}" Height="40" Width="100" Name="BurgerMenu">
-                <MenuItem.Icon>
-                    <Image Source="/Resources/Images/burger_menu.png" HorizontalAlignment="Center" VerticalAlignment="Stretch"/>
-                </MenuItem.Icon>
-            </MenuItem>
-        </Menu>
+        <Border Margin="0,0,0,680" Background="Gray">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.1*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Menu Grid.Row="0" Grid.Column="0"  Background="Gray">
+                    <MenuItem Command="{Binding BurgerMenuCommand}" VerticalContentAlignment="Center" Name="BurgerMenu" Width="45" Height="38">
+                        <MenuItem.Icon>
+                            <Image Source="/Resources/Images/burger_menu.png" HorizontalAlignment="Center" VerticalAlignment="Stretch"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </Menu>
+                <Label Grid.Row="0" FontSize="15" FontWeight="Bold" Foreground="Black" Content="{Binding ElementName=FrameForPages, Path=Content, Converter={StaticResource ActivePageTitleConverter}}" Margin="10,0,0,0" Height="45" VerticalAlignment="Top" Grid.Column="1" />
+            </Grid>
+        </Border>
         <Frame JournalOwnership="OwnsJournal" Name="FrameForPages" Margin="0,40,0,40" NavigationUIVisibility="Hidden">
-            
+
         </Frame>
         <Border Margin="0,680,0,0" Background="LightGray" BorderBrush="Gray">
             <StackPanel Orientation="Horizontal">

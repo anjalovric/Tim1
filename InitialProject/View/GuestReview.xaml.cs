@@ -68,7 +68,7 @@ namespace InitialProject.View
         private void SaveGuestReview()
         {
             GuestReviewRepository guestReviewRepository = new GuestReviewRepository();
-            guestReviewRepository.Save(Review);
+            guestReviewRepository.Add(Review);
         }
 
         private void Cleanliness_Checked(object sender, RoutedEventArgs e)

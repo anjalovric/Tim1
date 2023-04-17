@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:InitialProject.WPF.Views"
       mc:Ignorable="d" 
       d:DesignHeight="630" d:DesignWidth="430"
-      Title="OwnerOverviewView" Background="White">
+      Title="Home Page" Background="White">
     <Page.Resources>
         <Style TargetType="Button" x:Key="NotificationButton">
             <Setter Property="Template">

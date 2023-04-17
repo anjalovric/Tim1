@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:InitialProject.WPF.Views"
       mc:Ignorable="d" 
       d:DesignHeight="630" d:DesignWidth="430"
-      Title="OwnerReviewView" Background="White">
+      Title="My Profile" Background="White">
 
     <Grid>
         <Rectangle HorizontalAlignment="Center" Height="30" Stroke="Black" VerticalAlignment="Top" Width="430"/>
@@ -33,9 +33,21 @@
         <Run Text="{Binding Path= OwnerReview.Reservation.Accommodation.Name}" />
         </TextBlock>
         <Label Content="Date:" HorizontalAlignment="Left" Margin="35,148,0,0" VerticalAlignment="Top" Height="28" Width="138"/>
-        <DatePicker DisplayDate="{Binding Path=AccommodationReservation.Arrival}" HorizontalAlignment="Left" Margin="216,148,0,0" VerticalAlignment="Top" Height="28" Width="182"/>
+        <Grid Margin="216,143,34,454">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Image  Grid.Column="1" Grid.Row="0" Source="/Resources/Images/calendarIcon.png" Margin="69,0,0,0" />
+            <Border Grid.Column="0" BorderBrush="Black" BorderThickness="0.5" Height="33" VerticalAlignment="Center" Margin="0,0,26,0" Grid.ColumnSpan="2">
+                <TextBlock Text="{Binding Path=OwnerReview.Reservation.Arrival}" HorizontalAlignment="Left"  VerticalAlignment="Center" Height="32" Width="156"/>
+            </Border>
+        </Grid>
         <TextBlock HorizontalAlignment="Left" Margin="35,197,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Height="28" Width="112"><Run Text="Cleanliness: " /><Run Text=" "/><Run Text="{Binding OwnerReview.Cleanliness}" /></TextBlock>
-        <TextBlock HorizontalAlignment="Left" Margin="216,196,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Height="28" Width="144"><Run Text="Owner's correctness: " /><Run Text=" "/><Run Text="{Binding OwnerReview.Correctness}" /></TextBlock>
+        <TextBlock HorizontalAlignment="Left" Margin="215,196,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Height="28" Width="145"><Run Text="Owner's correctness: " /><Run Text=" "/><Run Text="{Binding OwnerReview.Correctness}" /></TextBlock>
         <Label Content="Comment"  HorizontalAlignment="Left" Margin="34,230,0,0" VerticalAlignment="Top" Height="28" Width="138"/>
         <Border Height="97" Width="363" BorderBrush="Black" BorderThickness="0.5">
             <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Path=OwnerReview.Comment}" VerticalAlignment="Top" Height="97" Width="363"/>
