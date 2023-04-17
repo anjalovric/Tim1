@@ -6,10 +6,10 @@
       xmlns:local="clr-namespace:InitialProject.WPF.Views"
       mc:Ignorable="d" 
       d:DesignHeight="630" d:DesignWidth="430"
-      Title="My Profile" Background="White">
+      Title="My Profile" Background="LightGray">
 
     <Grid>
-        <Rectangle HorizontalAlignment="Center" Height="30" Stroke="Black" VerticalAlignment="Top" Width="430"/>
+        <Rectangle Fill="Gray" HorizontalAlignment="Center" Height="30" Stroke="Black" VerticalAlignment="Top" Width="430"/>
         <Button Command="NavigationCommands.BrowseBack" Name="ExitButton" Content="x" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="384,5,0,0" VerticalAlignment="Top" Height="25" Width="27">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
@@ -49,7 +49,7 @@
         <TextBlock HorizontalAlignment="Left" Margin="35,197,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Height="28" Width="112"><Run Text="Cleanliness: " /><Run Text=" "/><Run Text="{Binding OwnerReview.Cleanliness}" /></TextBlock>
         <TextBlock HorizontalAlignment="Left" Margin="215,196,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Height="28" Width="145"><Run Text="Owner's correctness: " /><Run Text=" "/><Run Text="{Binding OwnerReview.Correctness}" /></TextBlock>
         <Label Content="Comment"  HorizontalAlignment="Left" Margin="34,230,0,0" VerticalAlignment="Top" Height="28" Width="138"/>
-        <Border Height="97" Width="363" BorderBrush="Black" BorderThickness="0.5">
+        <Border Background="White" Height="97" Width="363" BorderBrush="Black" BorderThickness="0.5">
             <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Path=OwnerReview.Comment}" VerticalAlignment="Top" Height="97" Width="363"/>
         </Border>
         <Image Source="{Binding Path= ImageUrl, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="138" Margin="125,425,0,0" VerticalAlignment="Top" Width="168"/>

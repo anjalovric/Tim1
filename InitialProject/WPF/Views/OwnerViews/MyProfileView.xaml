@@ -6,10 +6,10 @@
       xmlns:local="clr-namespace:InitialProject.WPF.Views"
       mc:Ignorable="d" 
       d:DesignHeight="630" d:DesignWidth="430"
-      Title="My Profile" Background="White">
+      Title="My Profile" Background="LightBlue">
     <Page.Resources>
         <DataTemplate x:Key="ownerReviews">
-            <Border BorderBrush="Black" BorderThickness="0.5" Margin="0,0,0,0" >
+            <Border Background="LightGray" BorderBrush="Black" BorderThickness="0.5" Margin="0,0,0,0" >
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="150*"/>
@@ -35,7 +35,7 @@
     </Page.Resources>
 
     <Grid>
-        <Border HorizontalAlignment="Center" Height="144" BorderBrush="Black" BorderThickness="1" VerticalAlignment="Top" Width="410">
+        <Border Background="Gray"  HorizontalAlignment="Center" Height="144" BorderBrush="Black" BorderThickness="1" VerticalAlignment="Top" Width="410">
             <Grid Margin="0,0,0,-1">
                 <Image Source="/Resources/Images/User_icon_2.svg.png" HorizontalAlignment="Left" Height="99"  VerticalAlignment="Top" Width="108" Margin="10,14,0,0"/>
                 <Label Content="Full name:" Height="25" Margin="144,5,144,108" VerticalAlignment="Top"/>

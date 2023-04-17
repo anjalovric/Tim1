@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:InitialProject.WPF.Views"
         xmlns:converters="clr-namespace:InitialProject.WPF.Converters"
         mc:Ignorable="d"
-        Title="OwnerMainWindowView" Height="750" Width="430">
+        Title="OwnerMainWindowView" Height="750" Width="430" Background="LightBlue">
     <Window.Resources>
         <converters:ActivePageTitleConverter x:Key="ActivePageTitleConverter" />
     </Window.Resources>

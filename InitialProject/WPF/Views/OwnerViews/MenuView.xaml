@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:InitialProject.WPF.Views"
       mc:Ignorable="d" 
       d:DesignHeight="630" d:DesignWidth="430"
-      Title="Menu" Background="White">
+      Title="Menu" Background="LightBlue">
     <Page.Resources>
         <Style x:Key="MenuButtonStyle" TargetType="{x:Type Button}">
             <Setter Property="FontSize" Value="13" />
@@ -124,7 +124,7 @@
                 </Style>
             </Button.Resources>
         </Button>
-        <Button  HorizontalContentAlignment="Left" HorizontalAlignment="Center" Margin="0,481,0,0" VerticalAlignment="Top" Width="350" Height="45">
+        <Button Command="{Binding MyRequestsCommand}" HorizontalContentAlignment="Left" HorizontalAlignment="Center" Margin="0,481,0,0" VerticalAlignment="Top" Width="350" Height="45">
             <Button.Content>
                 <StackPanel Orientation="Horizontal" Width="234">
                     <Label Width="20"></Label>

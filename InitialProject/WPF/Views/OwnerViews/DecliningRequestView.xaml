@@ -6,10 +6,10 @@
       xmlns:local="clr-namespace:InitialProject.WPF.Views.OwnerViews"
       mc:Ignorable="d" 
       d:DesignHeight="530" d:DesignWidth="430"
-      Title="Requests For Rescheduling" Background="White">
+      Title="Requests For Rescheduling" Background="LightGray">
 
     <Grid>
-        <Rectangle HorizontalAlignment="Center" Height="30" Stroke="Black" VerticalAlignment="Top" Width="430"/>
+        <Rectangle Fill="Gray" HorizontalAlignment="Center" Height="30" Stroke="Black" VerticalAlignment="Top" Width="430"/>
         <Button Name="ExitButton" Command="NavigationCommands.BrowseBack" Content="x" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="384,5,0,0" VerticalAlignment="Top" Height="25" Width="27">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">

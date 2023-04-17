@@ -6,10 +6,10 @@
       xmlns:local="clr-namespace:InitialProject.WPF.Views.OwnerViews"
       mc:Ignorable="d" 
       d:DesignHeight="630" d:DesignWidth="430"
-      Title="Guest Review" Background="White">
+      Title="Guest Review" Background="LightBlue">
     <Page.Resources>
         <DataTemplate x:Key="guestToReview">
-            <Border BorderBrush="Black" BorderThickness="0.5">
+            <Border BorderBrush="Black" BorderThickness="0.5" Background="LightGray">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="120"/>
@@ -46,7 +46,7 @@
             </ListBox.Resources>
         </ListBox>
         <Label Content="Review history" FontSize="15" HorizontalAlignment="Left" Margin="20,337,0,0" VerticalAlignment="Top" Width="151"/>
-        <DataGrid ItemsSource="{Binding Path= GuestReviews}" Margin="20,372,20,0" AutoGenerateColumns="False" IsReadOnly="True">
+        <DataGrid Background="LightGray" ItemsSource="{Binding Path= GuestReviews}" Margin="20,372,20,0" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding Reservation.Guest.Name}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Last Name" Binding="{Binding Reservation.Guest.LastName}"></DataGridTextColumn>

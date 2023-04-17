@@ -6,11 +6,11 @@
       xmlns:local="clr-namespace:InitialProject.WPF.Views"
       mc:Ignorable="d" 
       d:DesignHeight="630" d:DesignWidth="430"
-      Title="Requests For Rescheduling" Background="White">
+      Title="Requests For Rescheduling" Background="LightBlue">
 
     <Page.Resources>
         <DataTemplate x:Key="requests">
-            <Border  BorderBrush="Black" BorderThickness="0.5" >
+            <Border Background="LightGray" BorderBrush="Black" BorderThickness="0.5" >
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="110"/>

@@ -7,7 +7,7 @@
       xmlns:local="clr-namespace:InitialProject.WPF.Views"
       mc:Ignorable="d" 
       d:DesignHeight="630" d:DesignWidth="430"
-      Title="Enter Accommodation" Background="White">
+      Title="Enter Accommodation" Background="LightBlue">
 
     <ScrollViewer>
         <Grid Height="751">

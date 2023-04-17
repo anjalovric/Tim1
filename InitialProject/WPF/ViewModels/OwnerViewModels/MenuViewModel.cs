@@ -19,6 +19,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         public RelayCommand MyAccommodationCommand { get; set; }
         public RelayCommand MyProfileCommand { get; set; }
         public RelayCommand SignOutCommand { get; set; }
+        public RelayCommand MyRequestsCommand { get; set; }
         public MenuViewModel(Owner owner)
         {
             this.owner = owner;
@@ -31,6 +32,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             MyAccommodationCommand = new RelayCommand(MyAccommodation_Executed, CanExecute);
             MyProfileCommand = new RelayCommand(MyProfile_Executed, CanExecute);
             SignOutCommand = new RelayCommand(SignOut_Executed, CanExecute);
+            MyRequestsCommand = new RelayCommand(MyRequests_Executed, CanExecute);
         }
         private bool CanExecute(object sender)
         {
@@ -60,6 +62,13 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             SignInForm signInForm = new SignInForm();
             signInForm.Show();
             Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().Close();
+        }
+
+        private void MyRequests_Executed(object sender)
+        {
+
+            ReservationReschedulingView reschedulingView = new ReservationReschedulingView(owner);
+            Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = reschedulingView;
         }
     }
 }
