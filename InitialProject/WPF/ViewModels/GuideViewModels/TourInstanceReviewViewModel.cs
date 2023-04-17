@@ -1,19 +1,12 @@
 ﻿using InitialProject.Model;
 using InitialProject.Service;
 using InitialProject.WPF.Views.GuideViews;
-using MathNet.Numerics;
-using NPOI.POIFS.Storage;
-using NPOI.SS.Formula.Atp;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using Window = System.Windows.Window;
 
 namespace InitialProject.WPF.ViewModels
 {

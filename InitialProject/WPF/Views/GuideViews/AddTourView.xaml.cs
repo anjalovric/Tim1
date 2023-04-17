@@ -1,6 +1,5 @@
 ﻿using InitialProject.Model;
 using InitialProject.Repository;
-using InitialProject.WPF.Validations.GuideValidations;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;

@@ -5,3 +5,5 @@
 5|1|2|5|1|4||7|True|Resources/Images/greenCorect.png
 6|1|1|4|5|2|t a|12|False|Resources/Images/redIncorect.png
 7|1|1|4|3|2|Very cool tour|16|True|Resources/Images/greenCorect.png
+8|1|1|3|5|1|Center is beautiful|17|True|Resources/Images/greenCorect.png
+9|1|2|2|2|2|Park is ugly|17|False|Resources/Images/redIncorect.png
