@@ -10,9 +10,6 @@ namespace InitialProject.Domain.RepositoryInterfaces
     public interface IOwnerReviewRepository : IGenericRepository<OwnerReview>
     {
         public bool HasReview(AccommodationReservation reservation);
-        public void Save(OwnerReview review);
-        public int NextId();
-        public OwnerReview GetById(int id);
-        public List<OwnerReview> GetAll();
+        public void Add(OwnerReview review);
     }
 }

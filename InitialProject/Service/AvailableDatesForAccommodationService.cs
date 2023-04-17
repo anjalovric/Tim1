@@ -33,9 +33,9 @@ namespace InitialProject.Service
             foreach (var reservation in reservations)
             {
                 bool isSameAccommodation = reservation.Accommodation.Id == reservationToCheck.Accommodation.Id;
-                bool isSameGuest = reservation.Guest.Id == reservationToCheck.Guest.Id;
-                if (isSameAccommodation && !isSameGuest)
-                    isAvailable = isAvailable && !(date > reservation.Arrival && date < reservation.Departure);
+                bool isSameReservation = reservation.Id == reservationToCheck.Id;
+                if (isSameAccommodation && !isSameReservation)
+                    isAvailable = isAvailable && !(date.Date >= reservation.Arrival.Date && date.Date <= reservation.Departure.Date);
             }
             return isAvailable;
         }

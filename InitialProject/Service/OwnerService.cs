@@ -16,7 +16,6 @@ namespace InitialProject.Service
         private List<Owner> owners;
         public OwnerService()
         {
-            //ownerRepository = new OwnerRepository();
             owners = ownerRepository.GetAll();
         }
 

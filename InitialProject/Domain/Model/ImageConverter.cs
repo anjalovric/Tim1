@@ -24,7 +24,7 @@ namespace InitialProject.Model
 
             bitmap.BeginInit();
             MemoryStream memoryStream = new MemoryStream();
-            image.Save(memoryStream, ImageFormat.Png);
+            image.Add(memoryStream, ImageFormat.Png);
             memoryStream.Seek(0, SeekOrigin.Begin);
             bitmap.StreamSource = memoryStream;
             bitmap.EndInit();*/

@@ -81,7 +81,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         private void ConfirmCommand_Executed(object sender)
         {
             GuestReviewService guestReviewService = new GuestReviewService();
-            guestReviewService.Save(GuestReview);
+            guestReviewService.Add(GuestReview);
             Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = new GuestReviewView(reservationToReview.Accommodation.Owner);
         }
         private void EnableOkButton()

@@ -10,8 +10,5 @@ namespace InitialProject.Domain.RepositoryInterfaces
 {
     public interface IAccommodationTypeRepository : IGenericRepository<AccommodationType>
     {
-        public List<AccommodationType> GetAll();
-        public int NextId();
-        public AccommodationType GetById(int id);
     }
 }

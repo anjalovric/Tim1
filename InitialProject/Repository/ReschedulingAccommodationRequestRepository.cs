@@ -59,11 +59,5 @@ namespace InitialProject.Repository
             _serializer.ToCSV(FilePath, _requests);
             return updatedRequest;
         }
-        public void Save(ReschedulingAccommodationRequest request)
-        {
-            request.Id = NextId();
-            _requests.Add(request);
-            _serializer.ToCSV(FilePath, _requests);
-        }
     }
 }

@@ -36,7 +36,7 @@ namespace InitialProject.Repository
             return _reviews.Find(n => n.Reservation.Id == reservation.Id) != null;
         }
 
-        public void Save(GuestReview review)
+        public void Add(GuestReview review)
         {
             review.Id = NextId();
             _reviews.Add(review);

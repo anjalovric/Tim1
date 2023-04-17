@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:InitialProject.WPF.Views.OwnerViews"
       mc:Ignorable="d" 
       d:DesignHeight="630" d:DesignWidth="430"
-      Title="AccommodationImagesView" Background="White">
+      Title="My Accommodation" Background="White">
 
     <Grid>
         <Rectangle HorizontalAlignment="Center" Height="30" Stroke="Black" VerticalAlignment="Top" Width="430"/>
