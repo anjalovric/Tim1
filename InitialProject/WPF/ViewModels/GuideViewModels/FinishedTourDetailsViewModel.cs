@@ -1,15 +1,7 @@
 ﻿using InitialProject.Domain.Model;
 using InitialProject.Model;
 using InitialProject.Service;
-using InitialProject.WPF.Views.GuideViews;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Navigation;
-using System.Windows;
 
 namespace InitialProject.WPF.ViewModels
 {
@@ -108,7 +100,7 @@ namespace InitialProject.WPF.ViewModels
         private void WriteAttendancePrecentacge(int selectedId)
         {
             TourDetailsService detailsService = new TourDetailsService();
-            Attendance = detailsService.MakeAttendancePrecentage(selectedId) + " %";
+            Attendance = detailsService.MakeAttendancePrecentage(selectedId).ToString("#.##") + " %";
         }      
     }
 }

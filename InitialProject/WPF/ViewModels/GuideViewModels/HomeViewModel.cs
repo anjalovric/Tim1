@@ -1,18 +1,11 @@
 ﻿using InitialProject.Model;
-using InitialProject.Repository;
 using InitialProject.Service;
 using InitialProject.WPF.Views.GuideViews;
-using Microsoft.Windows.Input;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Globalization;
 using System.Linq;
-using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 
@@ -88,7 +81,7 @@ namespace InitialProject.WPF.ViewModels
         {
             GuideService guideService = new GuideService();
             Guide guide = guideService.GetByUsername(user.Username);
-            Home = guide.Name + " " + guide.Username + "'s home page";
+            Home = guide.Name + " " + guide.LastName + "'s home page";
         }
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

@@ -106,13 +106,9 @@ namespace InitialProject.WPF.ViewModels
         public void ValidExecuted(object sender)
         {
             if(currentReview.Valid)
-            {
                 ChangeValidationState(false, "Resources/Images/redIncorect.png");
-            }
             else
-            {
                 ChangeValidationState(true, "Resources/Images/greenCorect.png");
-            }
         }
         private void ChangeValidationState(bool state,string url)
         {

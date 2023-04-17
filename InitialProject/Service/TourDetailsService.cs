@@ -94,8 +94,8 @@ namespace InitialProject.Service
         }
         public double MakeAttendancePrecentage(int selectedId)
         {
-            if (CountGuest(selectedId)!=0)
-                return (double)reservationService.CountAttendance(selectedId) / (double)CountGuest(selectedId) * 100;
+            if (CountGuest(selectedId) != 0)
+                return (double)CountGuest(selectedId) * 100 / (double)reservationService.CountAttendance(selectedId);
             return 0.00;
         }
     }

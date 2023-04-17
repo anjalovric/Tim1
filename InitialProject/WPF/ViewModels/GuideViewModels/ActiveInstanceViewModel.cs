@@ -1,19 +1,12 @@
 ﻿using InitialProject.Model;
 using InitialProject.Service;
 using InitialProject.WPF.Views.GuideViews;
-using NPOI.Util;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 
 namespace InitialProject.WPF.ViewModels
 {
@@ -97,12 +90,10 @@ namespace InitialProject.WPF.ViewModels
             CurrentPoint = new ObservableCollection<CheckPoint>();
             checkPointService.FindPointsForSelectedInstance(active, AllPoints);
             SetStartState();
-
         }
         private void SetStartState()
         {
             Toast = "Hidden";
-            TourInstanceService tourInstanceService = new TourInstanceService();
             TourInstanceTourLocationService tourInstanceTourLocation = new TourInstanceTourLocationService();
             tourInstanceTourLocation.FillTour(selected);
             Title = selected.Tour.Name + ", " + selected.Date + ", " + selected.StartClock;
@@ -166,7 +157,6 @@ namespace InitialProject.WPF.ViewModels
         private void ChangeCurrentPointToNextState()
         {
             List<CheckPoint> points = AllPoints.ToList();
-
             CurrentPoint.Remove(points.Find(n => n.Order == orderCounter));
             int nextOrder = orderCounter + 1;
             CurrentPoint.Add(points.Find(n => n.Order == nextOrder));
@@ -174,21 +164,16 @@ namespace InitialProject.WPF.ViewModels
         public void NextPointExecuted(object sender)
         {
             ChangeCurrentPointToNextState();
-
             orderCounter++;
-
             if (orderCounter == AllPoints.ToList().Count)
             {
                 NextEnabled = false;
                 FinishInstance();
             }
-
             checkPointService.UpdateAllPointsListToNextPoint(AllPoints, orderCounter);
             alertGuest2Service.AddAlerts(CurrentPoint[0].Id, selected.Id, selected);
-
         }
         public event PropertyChangedEventHandler PropertyChanged;
-
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

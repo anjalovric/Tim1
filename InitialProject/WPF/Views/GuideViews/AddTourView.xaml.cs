@@ -1,6 +1,5 @@
 ﻿using InitialProject.Model;
 using InitialProject.Repository;
-using InitialProject.WPF.Validations.GuideValidations;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -12,7 +11,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-
 namespace InitialProject.WPF.Views.GuideViews
 {
     /// <summary>
@@ -20,7 +18,6 @@ namespace InitialProject.WPF.Views.GuideViews
     /// </summary>
     public partial class AddTourView : Page
     {
-
         private readonly GuideRepository guideRepository;
         private Guide currentGuide;
         private TourRepository tourRepository;
@@ -43,7 +40,6 @@ namespace InitialProject.WPF.Views.GuideViews
         public Tour saved;
         private int tourId;
         private string startTime;
-
         private TourInstance selectedInstance {  get; set; }
         private CheckPoint SelectedCheckPoint { get; set; }
         public string InstanceStartHour
@@ -262,7 +258,6 @@ namespace InitialProject.WPF.Views.GuideViews
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
         private void AddLanguages()
         {
             Languages.Add("english");
@@ -272,13 +267,10 @@ namespace InitialProject.WPF.Views.GuideViews
             Languages.Add("serbian");
             Languages.Add("italian");
         }
-
-
         private void AddTour_Click(object sender, RoutedEventArgs e)
         {
             if (IsValid())
             {
-
                 Location newLocation = locationRepository.GetByCityAndCountry(Country, City);
 
                 Tour newTour = new Tour(namet, Convert.ToInt32(maxGuests), Convert.ToDouble(duration), newLocation, description, LanguageT);
@@ -289,117 +281,34 @@ namespace InitialProject.WPF.Views.GuideViews
                 UpdateCheckPoints();
                 AddImages();
                 SaveInstances(savedTour);
-                Toast.Visibility = Visibility.Visible;
-               
+                Toast.Visibility = Visibility.Visible;             
             }
-
         }
         private bool IsValid()
         {
-            return  IsCountryValid() & IsCityValid()
-                    & IsDateTimeValid()
+            return  IsDateTimeValid()
                     & IsCheckPointsValid() & IsImagesValid();
-
         }
- 
-
-
-        private bool IsCityValid()
-        {
-            if (ComboBoxCity.SelectedItem == null)
-            {
-                ComboBoxCity.BorderThickness = new Thickness(1);
-                ComboBoxCity.BorderBrush = Brushes.Red;
-                
-                return false;
-            }
-            else
-            {
-                CitySelected = true;
-                ComboBoxCity.BorderThickness = new Thickness(1);
-                ComboBoxCity.BorderBrush = Brushes.Green;
-                return true;
-            }
-        }
-
-
-        private bool IsCountryValid()
-        {
-            if (ComboBoxCountry.SelectedItem == null)
-            {
-                ComboBoxCountry.BorderThickness = new Thickness(1);
-                ComboBoxCountry.BorderBrush = Brushes.Red;
-                
-                return false;
-            }
-            else
-            {
-                ComboBoxCountry.BorderThickness = new Thickness(1);
-                ComboBoxCountry.BorderBrush = Brushes.Green;
-                return true;
-            }
-        }
-
-
-  /*      private bool IsLanguageValid()
-        {
-            var content = LanguageTB.Text;
-            var regex = @"[A-Za-z]+(\\ [A-Za-z]+)*$";
-            Match match = Regex.Match(content, regex, RegexOptions.IgnoreCase);
-            bool valid = false;
-            if (LanguageTB.Text.Trim().Equals(""))
-            {
-
-                LanguageTB.BorderBrush = Brushes.Red;
-                LanguageTB.BorderThickness = new Thickness(1);
-               
-            }
-            else if (!match.Success)
-            {
-
-                LanguageTB.BorderBrush = Brushes.Red;
-                LanguageTB.BorderThickness = new Thickness(1);
-               
-            }
-            else
-            {
-                valid = true;
-                LanguageTB.BorderBrush = Brushes.Green;
-
-            }
-            return valid;
-        }*/
         private bool IsCheckPointsValid()
         {
             if (TourPoints.Count >= 2)
             {
                 PointsGrid.BorderBrush = Brushes.Green;
-
                 return true;
             }
             else
             {
                 PointsGrid.BorderBrush = Brushes.Red;
                 PointsGrid.BorderThickness = new Thickness(1);
-
                 return false;
             }
         }
-
         private bool IsImagesValid()
         {
             if (images.Count >= 1)
-            {
                 return true;
-            }
-            else
-            {
-               
-                return false;
-            }
+            return false;
         }
-
-
         private bool IsDateTimeValid()
         {
             if (Instances.Count == 0)
@@ -427,7 +336,6 @@ namespace InitialProject.WPF.Views.GuideViews
                 DisplayIfCancelable(instance);
             }
         }
-
         private void DisplayIfCancelable(TourInstance tour)
         {
             if (tour.Finished == false && tour.StartDate > DateTime.Now.Date)
@@ -455,19 +363,14 @@ namespace InitialProject.WPF.Views.GuideViews
                     string sec = instance.StartClock.Split(":")[2];
 
                     if (IsTimeFromFuture(hour, min, sec))
-                    {
                         TodayInstances.Add(instance);
-                    }
-
                 }
             }
         }
-
         private bool IsTimeFromFuture(string hour, string min, string sec)
         {
             return ((Convert.ToInt32(hour) > DateTime.Now.Hour) || (Convert.ToInt32(hour) == DateTime.Now.Hour && Convert.ToInt32(min) > DateTime.Now.Minute) || (Convert.ToInt32(hour) == DateTime.Now.Hour && Convert.ToInt32(min) == DateTime.Now.Minute && Convert.ToInt32(sec) > DateTime.Now.Second));
         }
-
         private void AddImages()
         {
             List<TourImage> tourImages = tourImageRepository.GetAll();
@@ -480,7 +383,6 @@ namespace InitialProject.WPF.Views.GuideViews
                 }
             }
         }
-
         private void UpdateCheckPoints()
         {
             List<CheckPoint> checkPoints = checkPointRepository.GetAll();
@@ -496,32 +398,21 @@ namespace InitialProject.WPF.Views.GuideViews
                 }
             }
         }
-
-
-
         private void CancelTour_Click(object sender, RoutedEventArgs e)
         {
             List<CheckPoint> checkPoints = checkPointRepository.GetAll();
             foreach (CheckPoint checkPoint in checkPoints)
             {
                 if (checkPoint.TourId == -1)
-                {
                     checkPointRepository.Delete(checkPoint);
-                }
             }
-
             List<TourImage> tourImages = tourImageRepository.GetAll();
             foreach (TourImage image in tourImages)
             {
                 if (image.TourId == -1)
-                {
                     tourImageRepository.Delete(image);
-                }
             }
-
-
         }
-
         private void AddTourImage_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -535,18 +426,19 @@ namespace InitialProject.WPF.Views.GuideViews
                 String relative = absolutePath.Substring(relativeIndex);
                 relativeUri = new Uri("/" + relative, UriKind.Relative);
                 BitmapImage bitmapImage = new BitmapImage(relativeUri);
-                bitmapImage.UriSource = relativeUri; 
-                imagePicture.Source = new BitmapImage(new Uri("/" + relative, UriKind.Relative));
-                TourImage newImage = new TourImage();
-                newImage.Url = relative;
-                newImage.TourId = -1;
-                TourImage savedImage = tourImageRepository.Save(newImage);
-                images.Add(savedImage);
+                bitmapImage.UriSource = relativeUri;
+                CreateImage(relative);
             }
-
         }
-
-
+        private void CreateImage(String relative)
+        {
+            imagePicture.Source = new BitmapImage(new Uri("/" + relative, UriKind.Relative));
+            TourImage newImage = new TourImage();
+            newImage.Url = relative;
+            newImage.TourId = -1;
+            TourImage savedImage = tourImageRepository.Save(newImage);
+            images.Add(savedImage);
+        }
         private void ComboBoxCountry_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (ComboBoxCountry.SelectedItem != null)
@@ -559,7 +451,6 @@ namespace InitialProject.WPF.Views.GuideViews
                 ComboBoxCity.IsEnabled = true;
             }
         }
-
         private void OK_Click(object sender, RoutedEventArgs e)
         {
             newInstance = new TourInstance();
@@ -574,12 +465,10 @@ namespace InitialProject.WPF.Views.GuideViews
                 ClearDateForm();
             }
         }
-
         private void OKToast(object sender, RoutedEventArgs e)
         {
             Toast.Visibility = Visibility.Hidden;
         }
-
         private void ClearDateForm()
         {
             InstanceStartHourTB.Clear();
@@ -599,7 +488,6 @@ namespace InitialProject.WPF.Views.GuideViews
                 return true;
             }
         }
-
         private bool IsTimeValid()
         {
             var content = InstanceStartHourTB.Text;
@@ -607,15 +495,11 @@ namespace InitialProject.WPF.Views.GuideViews
             Match match = Regex.Match(content, regex, RegexOptions.IgnoreCase);
             bool valid = false;
 
- 
             if (match.Success && InstanceStartDate.Date > DateTime.Now.Date)
-            {
                 valid = true;
-            }
             else if (match.Success && InstanceStartDate.Date == DateTime.Now.Date)
             {
                 string times = match.ToString();
-
                 valid = IsTodayTimeValid(times);
             }
             return valid;
@@ -629,40 +513,32 @@ namespace InitialProject.WPF.Views.GuideViews
             int second = Convert.ToInt32(times.Split(':')[2]);
 
             if (IsTodayTimeFromPast(hour, minute, second))
-            {
-               
+            {               
                 InstanceStartHourTB.BorderBrush = Brushes.Red;
             }
             else if (IsTodayTimeFromFuture(hour, minute, second))
             {
-                InstanceStartHourTB.BorderBrush = Brushes.Green;
-                
+                InstanceStartHourTB.BorderBrush = Brushes.Green;                
                 valid = true;
             }
-
             return valid;
         }
-
         private bool IsTodayTimeFromPast(int hour, int minute, int second)
         {
             return ((hour < DateTime.Now.Hour) || (hour == DateTime.Now.Hour && minute < DateTime.Now.Minute) || (hour == DateTime.Now.Hour && minute == DateTime.Now.Minute && second < DateTime.Now.Second));
         }
-
         private bool IsTodayTimeFromFuture(int hour, int minute, int second)
         {
             return ((hour > DateTime.Now.Hour) || (hour == DateTime.Now.Hour && minute > DateTime.Now.Minute) || (hour == DateTime.Now.Hour && minute == DateTime.Now.Minute && second > DateTime.Now.Second));
         }
-
         private void CancelTime_Click(object sender, RoutedEventArgs e)
         {
             if(selectedInstance!=null) 
             {
                 Instances.Remove(selectedInstance);
                 tourInstanceRepository.Delete(selectedInstance);
-            }
-           
+            }          
         }
-
         private void OKCheckPoint_Click(object sender, RoutedEventArgs e)
         {
             if (IsCkeckPointValid())
@@ -673,7 +549,6 @@ namespace InitialProject.WPF.Views.GuideViews
                 CheckPointName.Clear();
             }
         }
-
         private bool IsCkeckPointValid()
         {
             bool valid = false;
@@ -689,7 +564,6 @@ namespace InitialProject.WPF.Views.GuideViews
             }
             return valid;
         }
-
         private void CancelCheckPoint_Click(object sender, RoutedEventArgs e)
         {
             if (SelectedCheckPoint != null)
@@ -699,7 +573,6 @@ namespace InitialProject.WPF.Views.GuideViews
                 CheckPointName.Clear();
             }
         }
-
         private void Next_Click(object sender, RoutedEventArgs e)
         {
             for(int i = 0;i<images.Count;i++)
@@ -712,7 +585,6 @@ namespace InitialProject.WPF.Views.GuideViews
                         imagePicture.Source = imagePicture.Source = new BitmapImage(new Uri("/" + images[k].Url, UriKind.Relative));
                         break;
                     }
-
                     if (k == images.Count)
                     {
                         imagePicture.Source = imagePicture.Source = new BitmapImage(new Uri("/" + images[0].Url, UriKind.Relative));
@@ -722,7 +594,6 @@ namespace InitialProject.WPF.Views.GuideViews
 
             }
         }
-
         private void Previous_Click(object sender, RoutedEventArgs e)
         {
             for (int i = 0; i < images.Count; i++)
@@ -735,7 +606,6 @@ namespace InitialProject.WPF.Views.GuideViews
                         imagePicture.Source = imagePicture.Source = new BitmapImage(new Uri("/" + images[k].Url, UriKind.Relative));
                         break;
                     }
-
                     if (k <0)
                     {
                         imagePicture.Source = imagePicture.Source = new BitmapImage(new Uri("/" + images[images.Count-1].Url, UriKind.Relative));
@@ -769,19 +639,12 @@ namespace InitialProject.WPF.Views.GuideViews
             {
                 int k = i - 1;
                 if (k >= 0)
-                {
                     imagePicture.Source = imagePicture.Source = new BitmapImage(new Uri("/" + images[k].Url, UriKind.Relative));
-                }
                 else
-                {
                     imagePicture.Source = imagePicture.Source = new BitmapImage(new Uri("/" + images[images.Count - 1].Url, UriKind.Relative));
-                }
             }
             else
-            {
                 imagePicture.Source = null;
-            }
         }
-
     }
 }

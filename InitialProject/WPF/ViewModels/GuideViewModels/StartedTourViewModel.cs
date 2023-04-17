@@ -106,12 +106,10 @@ namespace InitialProject.WPF.ViewModels
                 alertGuest2Service.AddAlerts(CurrentPoint[0].Id, selected.Id, selected);
             }
         }
-
         public void FinishExecuted(object sender)
         {
             FinishInstance();
         }
-
         private void FinishInstance()
         {
             TourInstanceService tourInstanceService = new TourInstanceService();
@@ -124,7 +122,6 @@ namespace InitialProject.WPF.ViewModels
             FinishEnabled = false;
             Toast = "Visible";
         }
-
         private void FindActive(TourInstance selected)
         {
             foreach (TourInstance instance in Tours)
@@ -149,7 +146,6 @@ namespace InitialProject.WPF.ViewModels
             }
             checkPointService.UpdateAllPointsListToNextPoint(AllPoints, orderCounter);
             alertGuest2Service.AddAlerts(CurrentPoint[0].Id, selected.Id, selected);
-
         }
         private void ChangeCurrentPointToNextState()
         {
