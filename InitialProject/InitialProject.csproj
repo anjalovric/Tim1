@@ -16,6 +16,8 @@
     <None Remove="Resources\Images\accommodation.jpg" />
     <None Remove="Resources\Images\account.png" />
     <None Remove="Resources\Images\add.png" />
+    <None Remove="Resources\Images\andjelkina-kapija.jpg" />
+    <None Remove="Resources\Images\athens.jpg" />
     <None Remove="Resources\Images\bell.png" />
     <None Remove="Resources\Images\calendarIcon.png" />
     <None Remove="Resources\Images\clock.png" />
@@ -34,6 +36,8 @@
 
     <None Remove="Resources\Images\greenCorect.png" />
 
+    <None Remove="Resources\Images\guest1Menu.jpeg" />
+
 
     
     
@@ -42,6 +46,7 @@
     <None Remove="Resources\Images\icons8-christmas-star-96.png" />
     <None Remove="Resources\Images\logo.jpg" />
     <None Remove="Resources\Images\minus.png" />
+    <None Remove="Resources\Images\museum.jpg" />
     <None Remove="Resources\Images\orange.jpg" />
     <None Remove="Resources\Images\plus.png" />
     <None Remove="Resources\Images\profile.png" />
@@ -81,6 +86,7 @@
     <None Remove="Resources\Images\signout.png" />
     <None Remove="Resources\Images\star.png" />
     <None Remove="Resources\Images\tools.png" />
+    <None Remove="Resources\Images\trebinje.jpg" />
     <None Remove="Resources\Images\User_icon_2.svg.png" />
     <None Remove="Resources\Images\view.png" />
     <None Remove="Resources\Images\voucher.png" />
@@ -98,6 +104,12 @@
     </Content>
     <Content Include="Resources\Images\add.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\andjelkina-kapija.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\athens.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
 
     <Content Include="Resources\Images\bell.png">
@@ -149,7 +161,13 @@
     <Content Include="Resources\Images\edit.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Images\museum.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Images\sky.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\trebinje.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Resource Include="Resources\Images\flowers.jpg">
@@ -232,6 +250,9 @@
     <Resource Include="Resources\Images\black.jpeg" />
     <Resource Include="Resources\Images\blond.jpg" />
     <Resource Include="Resources\Images\brown.jpg" />
+    <Resource Include="Resources\Images\guest1Menu.jpeg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Images\orange.jpg" />
     <Resource Include="Resources\Images\red.jpg" />
     <Resource Include="Resources\Images\search.png" />
@@ -255,10 +276,6 @@
     <Content Include="Resources\Images\voucher.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="WPF\Views\Guest2Views\" />
   </ItemGroup>
 
 </Project>

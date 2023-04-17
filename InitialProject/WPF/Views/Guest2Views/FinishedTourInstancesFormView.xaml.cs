@@ -28,10 +28,10 @@ namespace InitialProject.WPF.Views.Guest2Views
     /// Interaction logic for FinishedTourInstances.xaml
     /// </summary>
     
-    public partial class FinishedTourInstances : UserControl
+    public partial class FinishedTourInstancesFormView : UserControl
     {
         private Guest2 guest2;
-        public FinishedTourInstances(Guest2 guest2)
+        public FinishedTourInstancesFormView(Guest2 guest2)
         {
             InitializeComponent();
             this.guest2 = guest2;

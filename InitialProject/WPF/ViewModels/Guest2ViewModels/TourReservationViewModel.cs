@@ -29,7 +29,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         private List<TourReservation> tourReservations;
         private List<TourInstance> tourInstances;
         private TourInstanceRepository tourInstanceRepository;
-        private ShowTours ShowTours;
+        private ShowToursView ShowTours;
         private bool withVoucher;
         private int capacityOfThisTour;
         public RelayCommand Guests_Increment_Command { get; set; }
@@ -92,7 +92,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             tourInstances = tourInstanceRepository.GetAll();
             tourReservationRepository = new TourReservationRepository();
             tourReservations = tourReservationRepository.GetAll();
-            ShowTours = new ShowTours(guest2);
+            ShowTours = new ShowToursView(guest2);
             this.guest2 = guest2;
             GuestId = guest2.Id;
             capacityOfThisTour = currentTourInstance.Tour.MaxGuests;
@@ -187,16 +187,16 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
                 MessageBox.Show("There is no enough places for choosen number of people. Tour is completed.");
                 FindAvailableTours();
                 Label.Content = "Showing available tours: ";
-                Application.Current.Windows.OfType<TourReservationForm>().FirstOrDefault().Close();
+                Application.Current.Windows.OfType<TourReservationFormView>().FirstOrDefault().Close();
                 return;
             }
             TourReservation newTourReservation = new TourReservation(CurrentTourInstance.Id, GuestsNumber, GuestId, Convert.ToDouble(Age), Convert.ToInt32(capacity.Text), withVoucher);
             tourReservationRepository.Save(newTourReservation);
-            Application.Current.Windows.OfType<TourReservationForm>().FirstOrDefault().Close();
+            Application.Current.Windows.OfType<TourReservationFormView>().FirstOrDefault().Close();
         }
         private void Cancel_Executed(object sender)
         {
-            Application.Current.Windows.OfType<TourReservationForm>().FirstOrDefault().Close();
+            Application.Current.Windows.OfType<TourReservationFormView>().FirstOrDefault().Close();
         }
         private void Activate_Executed(object sender)
         {

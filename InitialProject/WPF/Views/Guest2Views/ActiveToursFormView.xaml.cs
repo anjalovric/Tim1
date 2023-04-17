@@ -1,6 +1,10 @@
-﻿using InitialProject.Model;
-using InitialProject.WPF.ViewModels.Guest2ViewModels;
+﻿using InitialProject.Domain.Model;
+using InitialProject.Domain.RepositoryInterfaces;
+using InitialProject.Model;
+using InitialProject.Repository;
 using InitialProject.Service;
+using InitialProject.WPF.ViewModels;
+using InitialProject.WPF.ViewModels.Guest2ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -22,16 +26,17 @@ using System.Windows.Shapes;
 namespace InitialProject.WPF.Views.Guest2Views
 {
     /// <summary>
-    /// Interaction logic for VoucherViewForm.xaml
+    /// Interaction logic for ActiveToursForm.xaml
     /// </summary>
-    public partial class VoucherViewForm : UserControl
+    public partial class ActiveToursFormView : UserControl
     {
-        private Model.Guest2 guest2; 
-        public VoucherViewForm(Model.Guest2 guest)
+        private Guest2 Guest2;
+        public ActiveToursFormView(Guest2 guest2)
         {
             InitializeComponent();
-            this.guest2 = guest;
-            DataContext = new VoucherViewModel(guest2);
+            this.Guest2 = guest2;
+            this.DataContext = new ActiveToursViewModel(Guest2); ;
         }
+        
     }
 }

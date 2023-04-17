@@ -100,7 +100,7 @@ namespace InitialProject.WPF.ViewModels
         private void WriteAttendancePrecentacge(int selectedId)
         {
             TourDetailsService detailsService = new TourDetailsService();
-            Attendance = detailsService.MakeAttendancePrecentage(selectedId) + " %";
+            Attendance = detailsService.MakeAttendancePrecentage(selectedId).ToString("#.##") + " %";
         }      
     }
 }

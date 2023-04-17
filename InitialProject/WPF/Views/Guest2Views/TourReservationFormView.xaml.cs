@@ -29,9 +29,9 @@ namespace InitialProject.WPF.Views.Guest2Views
     /// <summary>
     /// Interaction logic for TourReservationForm.xaml
     /// </summary>
-    public partial class TourReservationForm : Window
+    public partial class TourReservationFormView : Window
     {
-        public TourReservationForm(TourInstance currentTourInstance, Guest2 guest2, ObservableCollection<TourInstance> TourInstance, TourInstanceRepository tourInstanceRepository, Label label)
+        public TourReservationFormView(TourInstance currentTourInstance, Guest2 guest2, ObservableCollection<TourInstance> TourInstance, TourInstanceRepository tourInstanceRepository, Label label)
         {
             InitializeComponent();
             DataContext = new TourReservationViewModel(currentTourInstance, guest2, TourInstance, tourInstanceRepository, label, capacityNumber);
