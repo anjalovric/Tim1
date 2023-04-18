@@ -9,6 +9,9 @@
       Title="TourInstanceReviewView" Background="White">
 
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Resources/Images/sky.jpg"/>
+        </Grid.Background>
         <DataGrid x:Name="TourListDataGrid" SelectedItem="{Binding Path=Selected}" HorizontalAlignment="Left" Height="470" Margin="59,128,0,0" VerticalAlignment="Top" Width="967" IsReadOnly="True" ItemsSource="{Binding Path=Reviews}" AutoGenerateColumns="False">
 
             <DataGrid.Columns>
@@ -42,7 +45,7 @@
                         </Style>
                     </DataGridColumn.HeaderStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Guest's surname" Binding="{Binding Guest2.LastName}" Width="105">
+                <DataGridTextColumn Header="Guest's surname" Binding="{Binding Guest2.LastName}" Width="150">
                     <DataGridColumn.HeaderStyle>
                         <Style TargetType="DataGridColumnHeader">
 
@@ -60,7 +63,7 @@
                         </Style>
                     </DataGridColumn.HeaderStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Location" Binding="{Binding TourInstance.Tour.Location}" Width="150">
+                <DataGridTextColumn Header="Location" Binding="{Binding TourInstance.Tour.Location}" Width="168">
                     <DataGridColumn.HeaderStyle>
                         <Style TargetType="DataGridColumnHeader">
 
@@ -69,7 +72,7 @@
                         </Style>
                     </DataGridColumn.HeaderStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Start time" Binding="{Binding TourInstance.StartClock}" Width="150">
+                <DataGridTextColumn Header="Start time" Binding="{Binding TourInstance.StartClock}" Width="80">
                     <DataGridColumn.HeaderStyle>
                         <Style TargetType="DataGridColumnHeader">
 
@@ -79,7 +82,7 @@
                     </DataGridColumn.HeaderStyle>
                 </DataGridTextColumn>
 
-                <DataGridTextColumn Header="Start date" Binding="{Binding TourInstance.Date}" Width="100">
+                <DataGridTextColumn Header="Start date" Binding="{Binding TourInstance.Date}" Width="90">
                     <DataGridColumn.HeaderStyle>
                         <Style TargetType="DataGridColumnHeader">
 

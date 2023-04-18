@@ -11,9 +11,22 @@ using System.Windows.Controls;
 namespace InitialProject.WPF.ViewModels
 {
 
-    public class TourStatisticsViewModel
+    public class TourStatisticsViewModel:INotifyPropertyChanged
     {
         public int Year { get; set; }
+        private string toastVisibility;
+        public string ToastVisibility
+        {
+            get => toastVisibility;
+            set
+            {
+                if (!value.Equals(toastVisibility))
+                {
+                    toastVisibility = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         private ObservableCollection<TourInstance> instances;
         public ObservableCollection<TourInstance> Instances
         {
@@ -36,6 +49,7 @@ namespace InitialProject.WPF.ViewModels
         public RelayCommand MostVisitedCommand { get; set; }
         public RelayCommand MostVisitedForYearCommand { get;set; }
         public RelayCommand ViewDetailsCommand { get; set; }
+        public RelayCommand OKCommand { get; set; }
 
         public TourStatisticsViewModel(User user,TextBox chosenYear)
         {
@@ -44,6 +58,7 @@ namespace InitialProject.WPF.ViewModels
             Instances = new ObservableCollection<TourInstance>();
             instanceService = new TourInstanceService();
             instanceService.SetFinishedInstances(Instances,guideService.GetByUsername(user.Username));
+            ToastVisibility = "Hidden";
             MakeCommands();
         }
         private void MakeCommands()
@@ -51,6 +66,7 @@ namespace InitialProject.WPF.ViewModels
             MostVisitedCommand = new RelayCommand(MostVisitedExecuted, CanExecute);
             MostVisitedForYearCommand = new RelayCommand(MostVisitedForYearExecuted, CanExecute);
             ViewDetailsCommand=new RelayCommand(ViewDetailsExecuted, CanExecute);
+            OKCommand=new RelayCommand(OKExecuted, CanExecute);
         }
         private bool CanExecute(object sender)
         {
@@ -70,11 +86,16 @@ namespace InitialProject.WPF.ViewModels
         }
         public void MostVisitedForYearExecuted(object sender)
         {
-            if (Year>0)
+            if (Year == 2023)
             {
-                FinishedTourDetails finishedTourDetails = new FinishedTourDetails(instanceService.FindMostVisitedForChosenYear(Year, guideService.GetByUsername(loggedUser.Username)));
-                Application.Current.Windows.OfType<GuideWindow>().FirstOrDefault().Main.Content = finishedTourDetails;
+                if (instanceService.FindMostVisitedForChosenYear(Year, guideService.GetByUsername(loggedUser.Username)) != null)
+                {
+                    FinishedTourDetails finishedTourDetails = new FinishedTourDetails(instanceService.FindMostVisitedForChosenYear(Year, guideService.GetByUsername(loggedUser.Username)));
+                    Application.Current.Windows.OfType<GuideWindow>().FirstOrDefault().Main.Content = finishedTourDetails;
+                }
             }
+            else
+                ToastVisibility = "Visible";
             ChosenYear.Clear();
         }
         public event PropertyChangedEventHandler PropertyChanged;
@@ -82,6 +103,10 @@ namespace InitialProject.WPF.ViewModels
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        public void OKExecuted(object sender)
+        {
+                ToastVisibility = "Hidden";    
         }
     }
 }

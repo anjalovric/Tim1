@@ -70,7 +70,8 @@ namespace InitialProject.Service
                 }
             }
             TourInstanceTourLocationService tourInstanceTourLocation = new TourInstanceTourLocationService();
-            tourInstanceTourLocation.FillTour(tour);
+            if(tour!=null)
+                tourInstanceTourLocation.FillTour(tour);
             return tour;
         }
         public void SetAttendanceToFinishTours()
