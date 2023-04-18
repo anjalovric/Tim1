@@ -24,6 +24,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             OwnerService ownerService = new OwnerService();
             owner = ownerService.GetByUsername(user.Username);
             MakeCommands();
+            Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = new OwnerOverviewView(owner);
         }
 
         private void MakeCommands()

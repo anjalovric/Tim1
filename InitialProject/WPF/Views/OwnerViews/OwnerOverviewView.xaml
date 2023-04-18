@@ -39,7 +39,7 @@
                 <StackPanel Orientation="Horizontal">
                     <Label Width="20"></Label>
                     <Image Source="/Resources/Images/clock.png" Height="30"/>
-                    <Label Content="New guests to review!" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="144"/>
+                    <Label Content="New guests to review!" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Width="144"/>
                 </StackPanel>
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
@@ -52,7 +52,7 @@
                     <StackPanel Orientation="Horizontal" Width="300">
                         <Label Width="20"></Label>
                         <Image Source="/Resources/Images/request.png" Height="30"/>
-                        <Label Content="New requests to reschedule!" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="146"/>
+                        <Label Content="New requests to reschedule!" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Width="186"/>
                     </StackPanel>
                 </Button.Content>
                 <Button.Resources>
@@ -66,7 +66,7 @@
                     <StackPanel Orientation="Horizontal" Width="300">
                         <Label Width="20"></Label>
                         <Image Source="/Resources/Images/suggestion.png" Height="30"/>
-                        <Label Content="New location suggestions!" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="144"/>
+                        <Label Content="New location suggestions!" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Width="144"/>
                     </StackPanel>
                 </Button.Content>
             <Button.Resources>

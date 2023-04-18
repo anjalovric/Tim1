@@ -21,9 +21,6 @@ namespace InitialProject.WPF.Views
             InitializeComponent();
             ownerViewModel = new OwnerMainWindowViewModel(user);
             DataContext = ownerViewModel;
-            OwnerService ownerService = new OwnerService();
-            this.owner = ownerService.GetByUsername(user.Username);
-            FrameForPages.Content = new OwnerOverviewView(owner);
         }
     }
 }
