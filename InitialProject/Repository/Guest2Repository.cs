@@ -5,10 +5,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using InitialProject.Domain.RepositoryInterfaces;
 namespace InitialProject.Repository
 {
-    public class Guest2Repository
+    public class Guest2Repository:IGuest2Repository
     {
         private const string FilePath = "../../../Resources/Data/guests2.csv";
 
@@ -33,6 +33,15 @@ namespace InitialProject.Repository
         public Guest2 GetById(int id)
         {
             return _guests.Find(n => n.Id==id);
+        }
+        public int NextId()
+        {
+            _guests = _serializer.FromCSV(FilePath);
+            if (_guests.Count < 1)
+            {
+                return 1;
+            }
+            return _guests.Max(c => c.Id) + 1;
         }
     }
 }

@@ -144,12 +144,12 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             {
                 foreach (TourReservation tourReservation in tourReservations)
                 {
-                    if (tourReservation.TourInstanceId == tourInstance.Id && tourInstance.Id != CurrentTourInstance.Id && tourInstance.Tour.Location.City == CurrentTourInstance.Tour.Location.City && tourInstance.Tour.Location.Country == CurrentTourInstance.Tour.Location.Country && tourInstance.Finished == false)
+                    if (tourReservation.TourInstanceId == tourInstance.Id && tourInstance.Id != CurrentTourInstance.Id && tourInstance.Tour.Location.City == CurrentTourInstance.Tour.Location.City && tourInstance.Tour.Location.Country == CurrentTourInstance.Tour.Location.Country && tourInstance.Finished == false && tourInstance.Canceled==false)
                     {
                         suma += tourReservation.Capacity;
                     }
                 }
-                if (suma != capacityOfThisTour && tourInstance.Finished == false && CurrentTourInstance.Id != tourInstance.Id && tourInstance.Tour.Location.City == CurrentTourInstance.Tour.Location.City && tourInstance.Tour.Location.Country == CurrentTourInstance.Tour.Location.Country)
+                if (suma != capacityOfThisTour && tourInstance.Finished == false && CurrentTourInstance.Id != tourInstance.Id && tourInstance.Tour.Location.City == CurrentTourInstance.Tour.Location.City && tourInstance.Tour.Location.Country == CurrentTourInstance.Tour.Location.Country && tourInstance.Canceled == false)
                 {
                     TourInstances.Add(tourInstance);
                 }
@@ -176,23 +176,40 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         }
         private void Confirm_Executed(object sender)
         {
-            int totalGuests = SumOfAllGuests();
-            if (GuestsNumber > capacityOfThisTour && totalGuests != capacityOfThisTour)
+            if (IsTourAvailable())
             {
-                MessageBox.Show("There is no enough places for choosen number of people. Available number of places for guest is " + AvailableGuestsNumber + ".");
                 return;
             }
-            else if (totalGuests == capacityOfThisTour)
+            else if (IsTourCompleted())
             {
-                MessageBox.Show("There is no enough places for choosen number of people. Tour is completed.");
-                FindAvailableTours();
-                Label.Content = "Showing available tours: ";
-                Application.Current.Windows.OfType<TourReservationFormView>().FirstOrDefault().Close();
                 return;
             }
             TourReservation newTourReservation = new TourReservation(CurrentTourInstance.Id, GuestsNumber, GuestId, Convert.ToDouble(Age), Convert.ToInt32(capacity.Text), withVoucher);
             tourReservationRepository.Save(newTourReservation);
             Application.Current.Windows.OfType<TourReservationFormView>().FirstOrDefault().Close();
+        }
+        private Boolean IsTourAvailable()
+        {
+            int totalGuests = SumOfAllGuests();
+            if (GuestsNumber > capacityOfThisTour && totalGuests != capacityOfThisTour)
+            {
+                MessageBox.Show("There is no enough places for choosen number of people. Available number of places for guest is " + AvailableGuestsNumber + ".");
+                return true;
+            }
+            return false;
+        }
+        private Boolean IsTourCompleted()
+        {
+            int totalGuests = SumOfAllGuests();
+            if (totalGuests == capacityOfThisTour)
+            {
+                MessageBox.Show("There is no enough places for choosen number of people. Tour is completed.");
+                FindAvailableTours();
+                Label.Content = "Showing available tours: ";
+                Application.Current.Windows.OfType<TourReservationFormView>().FirstOrDefault().Close();
+                return true;
+            }
+            return false;
         }
         private void Cancel_Executed(object sender)
         {

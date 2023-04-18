@@ -13,18 +13,20 @@
     </Page.Resources>
 
     <Grid>
-
+        <Grid.Background>
+            <ImageBrush ImageSource="/Resources/Images/sky.jpg"/>
+        </Grid.Background>
         <DataGrid x:Name="TourListDataGrid" SelectedItem="{Binding Path=Selected}" HorizontalAlignment="Left" Height="470" Margin="59,128,0,0" VerticalAlignment="Top" Width="733" IsReadOnly="True" ItemsSource="{Binding Path=Instances}" AutoGenerateColumns="False">
 
             <DataGrid.Columns>
-                <DataGridTemplateColumn Width="80">
+                <DataGridTemplateColumn Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Image Source="{Binding CoverBitmap}" Width="100" Height="40" VerticalAlignment="Top" Visibility="Visible"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Name" Binding="{Binding Tour.Name}" Width="100" >
+                <DataGridTextColumn Header="Name" Binding="{Binding Tour.Name}" Width="*" >
                     <DataGridColumn.HeaderStyle>
                         <Style TargetType="DataGridColumnHeader">
                             <Setter Property="FontWeight" Value="Bold"/>
@@ -32,55 +34,55 @@
                         </Style>
                     </DataGridColumn.HeaderStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Location" Binding="{Binding Tour.Location}" Width="100">
+                <DataGridTextColumn Header="Location" Binding="{Binding Tour.Location}" Width="*">
                     <DataGridColumn.HeaderStyle>
                         <Style TargetType="DataGridColumnHeader">
-                   
+
                             <Setter Property="FontWeight" Value="Bold"/>
 
                         </Style>
                     </DataGridColumn.HeaderStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="StartClock" Binding="{Binding StartClock}" Width="100">
+                <DataGridTextColumn Header="StartClock" Binding="{Binding StartClock}" Width="*">
                     <DataGridColumn.HeaderStyle>
                         <Style TargetType="DataGridColumnHeader">
-                           
+
                             <Setter Property="FontWeight" Value="Bold"/>
 
                         </Style>
                     </DataGridColumn.HeaderStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="StartDate" Binding="{Binding StartDate}" Width="60">
+                <DataGridTextColumn Header="StartDate" Binding="{Binding Date}" Width="*">
                     <DataGridColumn.HeaderStyle>
                         <Style TargetType="DataGridColumnHeader">
-                          
+
                             <Setter Property="FontWeight" Value="Bold"/>
 
                         </Style>
                     </DataGridColumn.HeaderStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Duration" Binding="{Binding Tour.Duration}" Width="100">
+                <DataGridTextColumn Header="Duration" Binding="{Binding Tour.Duration}" Width="*">
                     <DataGridColumn.HeaderStyle>
                         <Style TargetType="DataGridColumnHeader">
-                          
+
                             <Setter Property="FontWeight" Value="Bold"/>
 
                         </Style>
                     </DataGridColumn.HeaderStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Capacity" Binding="{Binding Tour.MaxGuests}" Width="100">
+                <DataGridTextColumn Header="Capacity" Binding="{Binding Tour.MaxGuests}" Width="*">
                     <DataGridColumn.HeaderStyle>
                         <Style TargetType="DataGridColumnHeader">
-                          
+
                             <Setter Property="FontWeight" Value="Bold"/>
 
                         </Style>
                     </DataGridColumn.HeaderStyle>
                 </DataGridTextColumn>
-                <DataGridTemplateColumn x:Name="cancelation" Header="Details"  Width="80">
+                <DataGridTemplateColumn x:Name="cancelation" Header="Details"  Width="*">
                     <DataGridColumn.HeaderStyle>
                         <Style TargetType="DataGridColumnHeader">
-                            
+
                             <Setter Property="FontWeight" Value="Bold"/>
 
                         </Style>
@@ -96,7 +98,12 @@
         </DataGrid>
         <Button Content="The most visited tour" HorizontalAlignment="Left" Margin="829,225,0,0" VerticalAlignment="Top" Height="77" Width="179" Command="{Binding MostVisitedCommand}"/>
         <Button Content="The most visited for chosen year" HorizontalAlignment="Left" Margin="829,475,0,0" VerticalAlignment="Top" Height="76" Width="179" Command="{Binding MostVisitedForYearCommand}"/>
-        <TextBox x:Name="ChosenYear" Margin="829,440,92,0" TextWrapping="Wrap"  VerticalAlignment="Top" Text="{Binding Path=Year,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}" Height="30"/>
+        <TextBox x:Name="ChosenYear" Margin="829,440,81,0" TextWrapping="Wrap"  VerticalAlignment="Top" Text="{Binding Path=Year,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}" Height="35"/>
 
+        <StackPanel x:Name="Toast" HorizontalAlignment="Left" Height="156"  VerticalAlignment="Top" Width="440" Background="LightGray" Visibility="{Binding ToastVisibility}" Margin="660,551,0,0" >
+            <Label FontSize="16" FontWeight="Heavy" HorizontalAlignment="Center">There are no tours for this year</Label>
+            <Button Height="37" Width="71" Command="{Binding OKCommand}">OK</Button>
+        </StackPanel>
+        <Label Content="TOUR STATISTICS" HorizontalAlignment="Left" Margin="386,49,0,0" VerticalAlignment="Top" Width="307" Height="40" FontWeight="Bold" FontSize="25" HorizontalContentAlignment="Center"/>
     </Grid>
 </Page>
