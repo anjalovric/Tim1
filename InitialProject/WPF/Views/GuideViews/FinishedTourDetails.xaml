@@ -67,6 +67,6 @@
                 <Label x:Name="Total" Content="{Binding Attendance}" FontSize="15" FontWeight="Bold" Margin="180,398,175,0" Height="98" VerticalAlignment="Top" />
             </Grid>
         </Border>
-        <Label Content="{Binding Header}" FontSize="25" FontWeight="Bold" HorizontalAlignment="Left" Margin="338,26,0,0" VerticalAlignment="Top" Width="364" Height="40"/>
+        <Label Content="{Binding Header}" FontSize="25" FontWeight="Bold" HorizontalAlignment="Left" Margin="274,26,0,0" VerticalAlignment="Top" Width="570" Height="40"/>
     </Grid>
 </Page>
