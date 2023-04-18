@@ -110,7 +110,7 @@
         <Image Source="/Resources/Images/clock.png" HorizontalAlignment="Left" Height="26" Margin="49,189,0,0" VerticalAlignment="Top" Width="29" RenderTransformOrigin="0.966,0.769"/>
         <Label Content="GMT+1" HorizontalAlignment="Left" Margin="80,183,0,0" VerticalAlignment="Top" Height="38" Width="106" FontSize="21" RenderTransformOrigin="0.555,0.85"/>
         <Rectangle HorizontalAlignment="Left" Height="511" Margin="218,144,0,0" Stroke="Black" VerticalAlignment="Top" Fill="LightGray" Width="1"/>
-        <Image HorizontalAlignment="Left" Height="139" Margin="2,0,0,0" VerticalAlignment="Top" Width="228" Source="/Resources/Images/logo.jpg" Stretch="Fill" />
+        <Image HorizontalAlignment="Left" Height="202" Margin="2,0,0,0" VerticalAlignment="Top" Width="247" Source="/Resources/Images/logo.jpg" Stretch="Fill" />
     </Grid>
 
 </Page>

@@ -86,7 +86,7 @@ namespace InitialProject.WPF.ViewModels
         }
         public void MostVisitedForYearExecuted(object sender)
         {
-            if (Year == 2023)
+            if (Year > 2019 && Year < 2024)
             {
                 if (instanceService.FindMostVisitedForChosenYear(Year, guideService.GetByUsername(loggedUser.Username)) != null)
                 {
