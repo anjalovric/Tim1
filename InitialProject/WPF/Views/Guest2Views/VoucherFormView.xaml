@@ -7,13 +7,16 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <DataGrid x:Name="VouchersDataGrid" ItemsSource="{Binding Path=Vouchers,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=Selected}" IsReadOnly="True" AutoGenerateColumns="False"  Margin="313,247,148,41">
+        
+        <Label Content="All vouchers" FontWeight="Bold" Foreground="White" FontSize="20" HorizontalAlignment="Left" Margin="192,127,0,0" VerticalAlignment="Top" Width="228"/>
+        <DataGrid x:Name="VouchersDataGrid" ItemsSource="{Binding Path=Vouchers, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=Selected}" IsReadOnly="True" AutoGenerateColumns="False" VerticalAlignment="Top" HorizontalAlignment="Left" Height="453" Width="832" Margin="192,238,0,0">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Voucher" Width="1*" Binding="{Binding Id}"/>
                 <DataGridTextColumn Header="Valid" Width="1*" Binding="{Binding CreateDate}"/>
             </DataGrid.Columns>
+
+
         </DataGrid>
-        <Label Content="All vouchers" FontWeight="Bold" FontSize="20" HorizontalAlignment="Left" Margin="313,110,0,0" VerticalAlignment="Top" Width="215"/>
 
     </Grid>
 </UserControl>
