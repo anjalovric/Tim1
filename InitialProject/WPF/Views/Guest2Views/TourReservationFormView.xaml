@@ -7,12 +7,13 @@
         mc:Ignorable="d"
 
         Title="TourReservationForm" Height="800" Width="1024" WindowStartupLocation="CenterScreen">
-    <Grid Background="#FFF3EEEE">
+    <Grid Background="#FFA6ADB9">
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="4*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="4*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -20,21 +21,22 @@
             <ColumnDefinition Width="6*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <TextBlock x:Name="capacityNumber" Grid.Column="2" Grid.Row="1" Text="1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="267" TextAlignment="Center" Height="28" Background="#FFDFDCDC" Margin="341,276,0,0"/>
-        <Button Content="-" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Left" TextElement.FontWeight="Bold" Margin="300,276,0,0" VerticalAlignment="Top" Width="36" Command="{Binding Guests_Decrement_Command}" RenderTransformOrigin="0.596,1.286" Height="28"/>
-        <Button Content="+" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Left" TextElement.FontWeight="Bold" Margin="624,276,0,0" VerticalAlignment="Top" Width="34" Command="{Binding Guests_Increment_Command}" RenderTransformOrigin="7.062,-0.088" Height="28"/>
-        <Button Content="OK" TextElement.FontWeight="Bold" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Left" Margin="487,0,0,0" VerticalAlignment="Center" Width="74" Command="{Binding ConfirmCommand}" Height="53"/>
-        <Button Content="Cancel" TextElement.FontWeight="Bold" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Left" Margin="588,0,0,0" VerticalAlignment="Center" Width="70" Command="{Binding CloseCommand}" Height="53"/>
+        <TextBlock x:Name="capacityNumber" Grid.Column="2" Grid.Row="1" Text="1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="267" TextAlignment="Center" Height="28" Background="#FFDFDCDC" Margin="341,203,0,0"/>
+        <Button Content="-" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Left" TextElement.FontWeight="Bold" Margin="295,201,0,0" VerticalAlignment="Top" Width="36" Command="{Binding Guests_Decrement_Command}" RenderTransformOrigin="0.596,1.286" Height="32"/>
+        <Button Content="+" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Left" TextElement.FontWeight="Bold" Margin="624,201,0,0" VerticalAlignment="Top" Width="34" Command="{Binding Guests_Increment_Command}" RenderTransformOrigin="7.062,-0.088" Height="32"/>
+        <Button Content="OK" TextElement.FontWeight="Bold" Grid.Column="2" Grid.Row="4" HorizontalAlignment="Left" Margin="509,10,0,0" VerticalAlignment="Top" Width="74" Command="{Binding ConfirmCommand}" Height="53"/>
+        <Button Content="Cancel" TextElement.FontWeight="Bold" Grid.Column="2" Grid.Row="4" HorizontalAlignment="Left" Margin="588,0,0,0" VerticalAlignment="Center" Width="70" Command="{Binding CloseCommand}" Height="53"/>
         <Label Content="Reservation" Grid.Row="0" Grid.Column="1" FontSize="20" FontWeight="Bold" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="153" Grid.ColumnSpan="2"/>
-        <Label Content="Name: " Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top" Width="106" Grid.ColumnSpan="2"/>
-        <Label Content="Average of years: " Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Margin="13,197,0,0" VerticalAlignment="Top" Width="118" Grid.ColumnSpan="2"/>
-        <Label Content="Number of guests: " Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Margin="13,278,0,0" VerticalAlignment="Top" Width="118" Grid.ColumnSpan="2"/>
-        <TextBlock Grid.Row="1" Grid.Column="2" Margin="302,50,10,216" Text="{Binding Path=guest2.Name}"/>
+        <Label Content="Name: " Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Margin="10,32,0,0" VerticalAlignment="Top" Width="106" Grid.ColumnSpan="2"/>
+        <Label Content="Average of years: " Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Margin="10,143,0,0" VerticalAlignment="Top" Width="118" Grid.ColumnSpan="2"/>
+        <Label Content="Number of guests: " Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Margin="10,201,0,0" VerticalAlignment="Top" Width="118" Grid.ColumnSpan="2" Height="53" RenderTransformOrigin="0.5,0.5"/>
+
+        <TextBlock Grid.Row="1" Grid.Column="2" Margin="295,32,17,227" Text="{Binding Path=guest2.Name}"/>
 
 
 
-        <TextBox x:Name="ageInput" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="2" Margin="300,197,0,0" TextWrapping="Wrap" Text="{Binding Path=Age,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="358" Height="31"/>
-        <DataGrid x:Name="ActivationVoucherDataGrid" Grid.Row="3" Grid.Column="1" ItemsSource="{Binding Path=Vouchers,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=Selected}" IsReadOnly="True" AutoGenerateColumns="False" Margin="13,10,7,10" Grid.ColumnSpan="2" >
+        <TextBox x:Name="ageInput" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="2" Margin="295,143,0,0" TextWrapping="Wrap" Text="{Binding Path=Age,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="363" Height="31"/>
+        <DataGrid x:Name="ActivationVoucherDataGrid" Grid.Row="3" Grid.Column="1" ItemsSource="{Binding Path=Vouchers,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=Selected}" IsReadOnly="True" AutoGenerateColumns="False" Margin="13,10,10,10" Grid.ColumnSpan="2" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Voucher" Width="1*" Binding="{Binding Id}"/>
                 <DataGridTemplateColumn x:Name="reservation" Header="Activation"  Width="1.2*">
@@ -46,9 +48,10 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Label Content="Last Name: " Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Margin="13,122,0,0" VerticalAlignment="Top" Width="106" Grid.ColumnSpan="2"/>
-        <TextBlock Grid.Row="1" Grid.Column="2" Margin="300,127,10,139" Text="{Binding guest2.LastName}"/>
+        <Label Content="Last Name: " Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Margin="8,87,0,0" VerticalAlignment="Top" Width="106" Grid.ColumnSpan="2"/>
+        <TextBlock Grid.Row="1" Grid.Column="2" Margin="295,87,15,172" Text="{Binding guest2.LastName}"/>
         <Label x:Name="AgeLabel" Grid.Row="1" Grid.Column="2" Margin="302,233,191,58"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="2" TextWrapping="Wrap" Text="Ovdje se nalaze svi vauceri koje mozes iskoristiti za svoju rezervaciju ture" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" Width="628" FontWeight="Bold"/>
 
     </Grid>
 </Window>

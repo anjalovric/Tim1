@@ -32,10 +32,14 @@ namespace InitialProject.WPF.Views.Guest2Views
     /// </summary>
     public partial class Guest2Overview : Window
     {
+        public User user { get; set; }
         public Guest2Overview(User user)
         {
             InitializeComponent();
+            this.user = user;
             DataContext = new Guest2OverviewViewModel(user,CC);
         }
+
+        
     }
 }

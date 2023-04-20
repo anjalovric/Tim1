@@ -36,9 +36,9 @@ namespace InitialProject.Service
         {
             return repository.GetById(id);
         }
-        public List<TourImage> GetByTour(int touId)
+        public List<TourImage> GetByTour(int tourId)
         {
-            return repository.GetByTour(touId);
+            return repository.GetByTour(tourId);
         }
     }
 

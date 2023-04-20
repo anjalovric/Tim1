@@ -7,7 +7,17 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <DataGrid x:Name="ActiveTourListDataGrid" ItemsSource="{Binding Path=TourInstances,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=Selected}" IsReadOnly="True" AutoGenerateColumns="False" VerticalAlignment="Top" HorizontalAlignment="Left" Height="261" Width="957" Margin="400,104,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <DataGrid x:Name="ActiveTourListDataGrid" Grid.Column="1" ItemsSource="{Binding Path=TourInstances,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=Selected}" IsReadOnly="True" AutoGenerateColumns="False" VerticalAlignment="Center" HorizontalAlignment="Center" Height="240"  Width="800" Grid.Row="1">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Location" Width="1*" Binding="{Binding Tour.Location}"/>
                 <DataGridTextColumn Header="Duration" Width="1*" Binding="{Binding Tour.Duration}"/>
@@ -18,11 +28,11 @@
 
 
         </DataGrid>
-        <DataGrid Margin="400,370,231,44" ItemsSource="{Binding Path=CheckPoint,UpdateSourceTrigger=PropertyChanged}"  IsReadOnly="True" AutoGenerateColumns="False">
+        <DataGrid Grid.Row="2" Grid.Column="1" ItemsSource="{Binding Path=CheckPoint,UpdateSourceTrigger=PropertyChanged}"  IsReadOnly="True" AutoGenerateColumns="False" Height="240" Width="800">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Checkpoint name" Width="1*" Binding="{Binding Name}" />
             </DataGrid.Columns>
         </DataGrid>
-        <Label Content="Active tours" FontWeight="Bold" FontSize="20" HorizontalAlignment="Left" Margin="400,44,0,0" VerticalAlignment="Top" Width="156"/>
+        <Label Content="Active tours" FontWeight="Bold" Foreground="White" FontSize="20" HorizontalAlignment="Left" Margin="93,0,0,0" VerticalAlignment="Top" Width="228" Grid.Column="1" Grid.Row="1"/>
     </Grid>
 </UserControl>

@@ -5,9 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:InitialProject.View"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="768" d:DesignWidth="1024">
     <Grid>
-        <DataGrid x:Name="TourListDataGrid" ItemsSource="{Binding Path=CompletedTours,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=Selected}" IsReadOnly="True" AutoGenerateColumns="False" VerticalAlignment="Top" HorizontalAlignment="Left" Height="449" Width="1079" Margin="346,176,0,0">
+        <DataGrid x:Name="TourListDataGrid" ItemsSource="{Binding Path=CompletedTours,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=Selected}" IsReadOnly="True" AutoGenerateColumns="False" VerticalAlignment="Top" HorizontalAlignment="Left" Height="453" Width="832" Margin="192,238,0,0">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Location" Width="1*" Binding="{Binding Tour.Location}"/>
                 <DataGridTextColumn Header="Duration" Width="1*" Binding="{Binding Tour.Duration}"/>
@@ -24,6 +24,6 @@
 
 
         </DataGrid>
-        <Label Content="Finished tours" FontWeight="Bold" FontSize="20" HorizontalAlignment="Left" Margin="346,79,0,0" VerticalAlignment="Top" Width="228"/>
+        <Label Content="Finished tours" FontWeight="Bold" Foreground="White" FontSize="20" HorizontalAlignment="Left" Margin="192,127,0,0" VerticalAlignment="Top" Width="228"/>
     </Grid>
 </UserControl>

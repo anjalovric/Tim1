@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:tk="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit.NET5" 
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
         Title="RateTourAndGuide" Height="600" Width="920" WindowStartupLocation="CenterScreen">
@@ -21,12 +22,12 @@
         <Button x:Name="dekrementNumber2" Content="-" HorizontalAlignment="Left" Command="{Binding Knowledge_Decrement_Command}" Margin="493,80,0,0" VerticalAlignment="Top" Width="20"  Height="22"/>
         <Label Content="Add comment" FontWeight="Bold" FontSize="20" Margin="70,217,679,289"/>
         <Label Content="Add photos" FontWeight="Bold" FontSize="20" Margin="488,217,280,279"/>
-        <TextBox x:Name="comment" TextWrapping="Wrap" Margin="70,262,443,76" />
+        <tk:WatermarkTextBox x:Name="comment" TextWrapping="Wrap" Margin="70,262,443,76" Watermark="Enter comment here" />
         <Button Content="Confirm" Command="{Binding ConfirmCommand}" Margin="586,518,197,10" FontWeight="Bold"/>
         <Button Content="Cancel" Command="{Binding CancelCommand}" Margin="753,518,25,10" FontWeight="Bold"/>
         <Border BorderBrush="Black" Margin="493,260,30,78" Visibility="Visible" BorderThickness="1"></Border>
         <Button Command="{Binding UploadImageCommand}" HorizontalAlignment="Left" Margin="810,445,0,0" VerticalAlignment="Top" Width="30" FontWeight="Bold" Height="30">
-            <Image Source="/Resources/Images/add.png" Height="25" Width="50"/>
+            <Image Source="/Resources/Images/icons8-upload-64.png" Height="25" Width="50"/>
         </Button>
         <Image x:Name="imagePicture" Margin="540,266,102,89" Source="{Binding ImageSource, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
 
@@ -69,10 +70,10 @@
             </Button.Template>
         </Button>
         <Button Command="{Binding DeletePhotoCommand}" Margin="840,436,30,78" FontWeight="Bold" Height="30" Width="30">
-            <Image Source="/Resources/Images/delete.png" Height="25" Width="50"/>
+            <Image Source="/Resources/Images/icons8-delete-67.png" Height="25" Width="50"/>
         </Button>
         <Button Command="{Binding DeleteCommand}" Margin="0,436,30,78" FontWeight="Bold" Height="30" Width="30">
-            <Image Source="/Resources/Images/delete.png" Height="25" Width="50"/>
+            <Image Source="/Resources/Images/icons8-delete-67.png" Height="25" Width="50"/>
         </Button>
     </Grid>
 </Window>

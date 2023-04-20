@@ -44,6 +44,13 @@
     <None Remove="Resources\Images\help.png" />
     <None Remove="Resources\Images\home.png" />
     <None Remove="Resources\Images\icons8-christmas-star-96.png" />
+    <None Remove="Resources\Images\icons8-delete-67.png" />
+    <None Remove="Resources\Images\icons8-notification-64.png" />
+    <None Remove="Resources\Images\icons8-review-60.png" />
+    <None Remove="Resources\Images\icons8-review-64.png" />
+    <None Remove="Resources\Images\icons8-upload-64.png" />
+    <None Remove="Resources\Images\img_exit.png" />
+    <None Remove="Resources\Images\img_home.png" />
     <None Remove="Resources\Images\logo.jpg" />
     <None Remove="Resources\Images\minus.png" />
     <None Remove="Resources\Images\museum.jpg" />
@@ -159,6 +166,27 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\edit.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\icons8-delete-67.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\icons8-notification-64.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\icons8-review-60.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\icons8-review-64.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\icons8-upload-64.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\img_exit.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\img_home.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\museum.jpg">
