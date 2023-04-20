@@ -47,6 +47,7 @@
     <None Remove="Resources\Images\logo.jpg" />
     <None Remove="Resources\Images\minus.png" />
     <None Remove="Resources\Images\museum.jpg" />
+    <None Remove="Resources\Images\newLogo.jpg" />
     <None Remove="Resources\Images\orange.jpg" />
     <None Remove="Resources\Images\plus.png" />
     <None Remove="Resources\Images\profile.png" />
@@ -253,6 +254,9 @@
     <Resource Include="Resources\Images\guest1Menu.jpeg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Content Include="Resources\Images\newLogo.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Resource Include="Resources\Images\orange.jpg" />
     <Resource Include="Resources\Images\red.jpg" />
     <Resource Include="Resources\Images\search.png" />
