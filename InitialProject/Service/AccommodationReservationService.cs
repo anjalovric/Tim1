@@ -5,7 +5,7 @@ using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Model;
 
 namespace InitialProject.Service
-{//sta sa cancelled repoz.koji pravim i ovdje? da li da bude injector?
+{
     public class AccommodationReservationService
     {
         private List<AccommodationReservation> reservations;
