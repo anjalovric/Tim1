@@ -17,15 +17,15 @@
                 </Style>
             </Button.Resources>
         </Button>
-        <Label Content="Images" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" RenderTransformOrigin="0,0.401" Width="134" Height="28" VerticalContentAlignment="Center">
+        <Label Content="Images" HorizontalAlignment="Left" Margin="0,-1,0,0" VerticalAlignment="Top" RenderTransformOrigin="0,0.401" Width="134" Height="28" VerticalContentAlignment="Bottom">
         </Label>
-        <Image Source="{Binding Path=ImageUrl, UpdateSourceTrigger=PropertyChanged}" Stretch="Fill" HorizontalAlignment="Left" Height="298" Margin="77,172,0,0" VerticalAlignment="Top" Width="272"/>
+        <Image Source="{Binding Path=ImageUrl, UpdateSourceTrigger=PropertyChanged}" Stretch="Fill" HorizontalAlignment="Left" Height="298" Margin="77,172,0,0" VerticalAlignment="Top" Width="279"/>
         <Button Command="{Binding NextImageCommand}" Name="NextImageButton" HorizontalAlignment="Left" Margin="0,315,0,0" VerticalAlignment="Top" Height="32" Width="70">
             <Button.Content>
                 <Image Source="/Resources/Images/back_arrow.png"/>
             </Button.Content>
         </Button>
-        <Button Command="{Binding PreviousImageCommand}" Name="PreviousImageButton" HorizontalAlignment="Left" Height="32" Width="70" Margin="350,315,0,0" VerticalAlignment="Top">
+        <Button Command="{Binding PreviousImageCommand}" Name="PreviousImageButton" HorizontalAlignment="Left" Height="32" Width="70" Margin="360,315,0,0" VerticalAlignment="Top">
             <Button.Content>
                 <Image Source="/Resources/Images/arrow.png" />
             </Button.Content>

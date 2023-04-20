@@ -22,7 +22,10 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         private AccommodationService accommodationService;
         public RelayCommand NewAccommodationCommand { get; set; }
         public RelayCommand ViewImagesCommand { get; set; }
+        public RelayCommand OKCommand { get; set; }
         private Accommodation selectedAccommodation;
+        private string stackPanelVisibility;
+        private string stackPanelMessage;
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -33,6 +36,8 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             Accommodations = new ObservableCollection<Accommodation>(accommodationService.GetAllByOwner(profileOwner));
             InitializeSelectedAccommodation();
             MakeCommands();
+            DisplayNotificationPanel();
+
         }
 
         public Accommodation SelectedAccommodation
@@ -43,6 +48,32 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
                 if (value != selectedAccommodation)
                 {
                     selectedAccommodation = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public string StackPanelMessage
+        {
+            get { return stackPanelMessage; }
+            set
+            {
+                if (value != stackPanelMessage)
+                {
+                    stackPanelMessage = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public string StackPanelVisibility
+        {
+            get { return stackPanelVisibility; }
+            set
+            {
+                if (value != stackPanelVisibility)
+                {
+                    stackPanelVisibility = value;
                     OnPropertyChanged();
                 }
             }
@@ -62,6 +93,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         {
             NewAccommodationCommand = new RelayCommand(NewAccommodation_Executed, CanExecute);
             ViewImagesCommand = new RelayCommand(ViewImages_Executed, CanExecute);
+            OKCommand = new RelayCommand(OK_Executed, CanExecute);
         }
 
         private bool CanExecute(object sender)
@@ -79,6 +111,26 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         {
             if (SelectedAccommodation != null)
                 Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = new AccommodationImagesView(SelectedAccommodation);
+        }
+
+        private void OK_Executed(object sender)
+        {
+            StackPanelVisibility = "Hidden";
+        }
+
+        private void DisplayNotificationPanel()
+        {
+            OwnerNotificationsService notificationsService = new OwnerNotificationsService();
+            if(notificationsService.IsAccommodationAdded())
+            {
+                StackPanelMessage = "New accommodation successfully added!";
+                StackPanelVisibility = "Visible";
+                notificationsService.Delete(Domain.Model.OwnerNotificationType.ACCOMMODATION_ADDED);
+            }
+            else
+            {
+                StackPanelVisibility = "Hidden";
+            }
         }
     }
 }
