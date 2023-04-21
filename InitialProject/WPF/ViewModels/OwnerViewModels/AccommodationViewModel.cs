@@ -23,6 +23,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         public RelayCommand NewAccommodationCommand { get; set; }
         public RelayCommand ViewImagesCommand { get; set; }
         public RelayCommand OKCommand { get; set; }
+        public RelayCommand StatisticsCommand { get; set; }
         private Accommodation selectedAccommodation;
         private string stackPanelVisibility;
         private string stackPanelMessage;
@@ -94,6 +95,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             NewAccommodationCommand = new RelayCommand(NewAccommodation_Executed, CanExecute);
             ViewImagesCommand = new RelayCommand(ViewImages_Executed, CanExecute);
             OKCommand = new RelayCommand(OK_Executed, CanExecute);
+            StatisticsCommand = new RelayCommand(Statistics_Executed, CanExecute);
         }
 
         private bool CanExecute(object sender)
@@ -118,6 +120,11 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             StackPanelVisibility = "Hidden";
         }
 
+        private void Statistics_Executed(object sender)
+        {
+            if (SelectedAccommodation != null)
+                Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = new StatisticsByYearView(SelectedAccommodation);
+        }
         private void DisplayNotificationPanel()
         {
             OwnerNotificationsService notificationsService = new OwnerNotificationsService();
