@@ -39,5 +39,32 @@ namespace InitialProject.Service
             }
             return isAvailable;
         }
+
+        public void GetAllYearsWithRequests(Accommodation accommodation, HashSet<int> years)
+        {
+            ReschedulingAccommodationRequestService requestService = new ReschedulingAccommodationRequestService(); 
+            foreach (var request in requestService.GetAll().FindAll(n => n.Reservation.Accommodation.Id == accommodation.Id))
+            {
+                years.Add(request.Reservation.Arrival.Year);
+            }
+        }
+
+        public void GetAllYearsWithCancellations(Accommodation accommodation, HashSet<int> years)
+        {
+            CancelledAccommodationReservationService cancelledReservationService = new CancelledAccommodationReservationService();
+            foreach (var reservation in cancelledReservationService.GetAll().FindAll(n => n.Accommodation.Id == accommodation.Id))
+            {
+                years.Add(reservation.Arrival.Year);
+            }
+        }
+
+        public void GetAllYearsWithReservations(Accommodation accommodation, HashSet<int> years)
+        {
+            AccommodationReservationService reservationService = new AccommodationReservationService();
+            foreach (var reservation in reservationService.GetAll().FindAll(n => n.Accommodation.Id == accommodation.Id))
+            {
+                years.Add(reservation.Arrival.Year);
+            }
+        }
     }
 }

@@ -38,36 +38,13 @@ namespace InitialProject.Service
         private List<int> GetAllYears(Accommodation accommodation)
         {
             HashSet<int> years = new HashSet<int>();
-            GetAllYearsWithReservations(accommodation, years);
+            AvailableDatesForAccommodationService datesService = new AvailableDatesForAccommodationService();
+            datesService.GetAllYearsWithReservations(accommodation, years);
 
-            GetAllYearsWithCancellations(accommodation, years);
+            datesService.GetAllYearsWithCancellations(accommodation, years);
 
-            GetAllYearsWithRequests(accommodation, years);
+            datesService.GetAllYearsWithRequests(accommodation, years);
             return years.OrderBy(x => x).ToList();
-        }
-
-        private void GetAllYearsWithRequests(Accommodation accommodation, HashSet<int> years)
-        {
-            foreach (var request in requestService.GetAll().FindAll(n => n.Reservation.Accommodation.Id == accommodation.Id))
-            {
-                years.Add(request.Reservation.Arrival.Year);
-            }
-        }
-
-        private void GetAllYearsWithCancellations(Accommodation accommodation, HashSet<int> years)
-        {
-            foreach (var reservation in cancelledReservationService.GetAll().FindAll(n => n.Accommodation.Id == accommodation.Id))
-            {
-                years.Add(reservation.Arrival.Year);
-            }
-        }
-
-        private void GetAllYearsWithReservations(Accommodation accommodation, HashSet<int> years)
-        {
-            foreach (var reservation in reservationService.GetAll().FindAll(n => n.Accommodation.Id == accommodation.Id))
-            {
-                years.Add(reservation.Arrival.Year);
-            }
         }
 
         private int GetReservationNumberByYear(Accommodation accommodation, int year)
@@ -110,9 +87,9 @@ namespace InitialProject.Service
             foreach(int year in GetAllYears(accommodation))
             {
                 int daysInYear = DateTime.IsLeapYear(year) ? 366 : 365;
-                if ( GetBusyDaysNumberByYear(accommodation, year)/daysInYear > busyness)
+                if (GetBusyDaysNumberByYear(accommodation, year)/daysInYear > busyness)
                 {
-                    busyness = GetBusyDaysNumberByYear(accommodation, year) / daysInYear;
+                    busyness = GetBusyDaysNumberByYear(accommodation, year)/daysInYear;
                     busiestYear = year;
                 }
             }
@@ -124,7 +101,13 @@ namespace InitialProject.Service
             int counter = 0;
             foreach (var reservation in reservationService.GetAll().FindAll(n => n.Accommodation.Id == accommodation.Id))
             {
-                counter += reservation.Departure.Day - reservation.Arrival.Day;
+                if(reservation.Arrival.Year == year && reservation.Departure.Year == year)
+                    counter += reservation.Departure.Day - reservation.Arrival.Day;
+                else
+                {
+                    DateTime lastDayOfYear = new DateTime(year, 12, 31);
+                    counter += lastDayOfYear.Day - reservation.Arrival.Day;
+                }
             }
             return counter;
         }
