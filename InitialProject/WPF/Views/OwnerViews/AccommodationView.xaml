@@ -9,31 +9,32 @@
       Title="My Accommodation" Background="LightBlue">
     <Page.Resources>
         <DataTemplate x:Key="accommodations">
-            <Border BorderBrush="Black" BorderThickness="0.5" Margin="0,0,0,0" Background="LightGray">
+            <Border BorderBrush="DarkGray" BorderThickness="1" Margin="0,0,0,0" Background="LightGray" CornerRadius="15">
                 <Grid>
                     <Grid Margin="0,0,0,0" >
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="70"/>
-                            <ColumnDefinition Width="120"/>
-                            <ColumnDefinition Width="120"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="2.6*"/>
+                            <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="25"/>
+                            <RowDefinition Height="5" />
                             <RowDefinition Height="20"/>
                         </Grid.RowDefinitions>
-                        <Button Grid.Column="0" Grid.RowSpan="2" Grid.Row="0" Command="{Binding Path=DataContext.ViewImagesCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}">
+                        <Button Grid.Column="0" Grid.RowSpan="3" Grid.Row="0"  Margin="5, 5, 0, 0" Command="{Binding Path=DataContext.ViewImagesCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}">
                             <Image Source="{Binding Path=CoverImage.Url}" Stretch="Fill"></Image>
                         </Button>
-                        <TextBlock Text="{Binding Path=Name}" Grid.Column="1" Grid.Row="0" Padding="1" />
-                        <TextBlock Text="{Binding Path=Location}" Grid.Column="1" Grid.Row="1" Padding="1" />
-                        <Button Content="Statistics" Grid.Column="2" Grid.Row="0" Padding="1"/>
-                        <Button Content="Remove" Grid.Column="2" Grid.Row="1" Padding="1"/>
+                        <TextBlock Text="{Binding Path=Name}" Margin="0, 5, 0, 0" Grid.Column="1" Grid.Row="0" Padding="1" />
+                        <TextBlock Text="{Binding Path=Location}" Grid.Column="1" Grid.Row="2" Padding="1" />
+                        <Button Content="Statistics" Margin="0, 5, 5, 0" Grid.Column="2" Grid.Row="0" Padding="1"/>
+                        <Button Content="Remove" Margin="0, 0, 5, 0" Grid.Column="2" Grid.Row="2" Padding="1"/>
                     </Grid>
                     <Grid Margin="0,60,0,0">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="90"/>
-                            <ColumnDefinition Width="140"/>
-                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="110"/>
+                            <ColumnDefinition Width="135"/>
+                            <ColumnDefinition Width="85"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="20"/>
@@ -55,6 +56,7 @@
                             <Run Text="Days before to cancel: " />
                             <Run Text="{Binding Path=MinDaysToCancel}"/>
                         </TextBlock>
+                        <CheckBox Grid.Row="1" Grid.Column="0" IsChecked="False" IsEnabled="False">Renovated</CheckBox>
                     </Grid>
                 </Grid>
             </Border>
@@ -73,8 +75,8 @@
                 </Style>
             </ListBox.Resources>
         </ListBox>
-        <Button Command="{Binding NewAccommodationCommand}" Name="NewAccommodationButton" Content="New Accommodation" HorizontalAlignment="Center" Margin="0,474,0,0"  Width="370" Height="43" VerticalAlignment="Top"/>
-        <Button Content="My Renovations" HorizontalAlignment="Center" Margin="0,540,0,0"  Width="370" Height="43" VerticalAlignment="Top"/>
+        <Button Command="{Binding NewAccommodationCommand}" Name="NewAccommodationButton" Content="New Accommodation" HorizontalAlignment="Center" Margin="30,474,30,0"  Width="355" Height="43" VerticalAlignment="Top"/>
+        <Button Content="My Renovations" HorizontalAlignment="Center" Margin="30,540,30,0"  Width="355" Height="43" VerticalAlignment="Top"/>
         <StackPanel Margin="0,-7,0,528" Background="LightGray" Visibility="{Binding Path=StackPanelVisibility, UpdateSourceTrigger=PropertyChanged}">
             <Grid Height="100">
                 <Grid.ColumnDefinitions>

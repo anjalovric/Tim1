@@ -9,24 +9,26 @@
       Title="Guest Review" Background="LightBlue">
     <Page.Resources>
         <DataTemplate x:Key="guestToReview">
-            <Border BorderBrush="Black" BorderThickness="0.5" Background="LightGray">
+            <Border BorderBrush="DarkGray" Width="345" BorderThickness="0.5" Background="LightGray">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="120"/>
-                        <ColumnDefinition Width="170"/>
-                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="0.5*"/>
+                        <ColumnDefinition Width="1.5*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="25"/>
                         <RowDefinition Height="25"/>
                     </Grid.RowDefinitions>
-                    <TextBlock Grid.RowSpan="2" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center"> 
+                    <Image Source="/Resources/Images/user-male-circle.png" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Height="25" VerticalAlignment="Center"/>
+                    <TextBlock Grid.RowSpan="2" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center"> 
                     <Run Text="{Binding Path= Guest.Name}"/>
                     <Run Text="{Binding Path = Guest.LastName}" />
                     </TextBlock>
-                    <Label Grid.Column="1" Grid.Row="0" >Accommodation:</Label>
-                    <Label Content="{Binding Path=Accommodation.Name}" Grid.Row="1" Grid.Column="1"></Label>
-                    <Button Command="{Binding Path=DataContext.ReviewCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" Grid.Column="2" Grid.Row="0" Grid.RowSpan="2" HorizontalAlignment="Left" VerticalAlignment="Center">Review</Button>
+                    <Label Grid.Column="2" Grid.Row="0" >Accommodation:</Label>
+                    <Label Content="{Binding Path=Accommodation.Name}" Grid.Row="1" Grid.Column="2"></Label>
+                    <Button Command="{Binding Path=DataContext.ReviewCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" Grid.Column="3" Grid.Row="0" Grid.RowSpan="2" HorizontalAlignment="Left" VerticalAlignment="Center">Review</Button>
                 </Grid>
             </Border>
         </DataTemplate>
@@ -34,7 +36,7 @@
 
     <Grid>
         <Label Content="Guest left to review" FontSize="15" HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top" Width="151"/>
-        <ListBox ItemsSource="{Binding ReservationsToReview}" ItemTemplate="{StaticResource guestToReview}" IsSynchronizedWithCurrentItem="True" SelectedItem="{Binding SelectedReservation, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" Margin="20,45,20,315">
+        <ListBox ItemsSource="{Binding ReservationsToReview}" ItemTemplate="{StaticResource guestToReview}" IsSynchronizedWithCurrentItem="True" SelectedItem="{Binding SelectedReservation, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" Margin="30,45,30,315">
             <ListBox.Resources>
                 <Style TargetType="ListBoxItem">
                     <Style.Triggers>
@@ -46,7 +48,7 @@
             </ListBox.Resources>
         </ListBox>
         <Label Content="Review history" FontSize="15" HorizontalAlignment="Left" Margin="20,337,0,0" VerticalAlignment="Top" Width="151"/>
-        <DataGrid Background="LightGray" ItemsSource="{Binding Path= GuestReviews}" Margin="20,372,20,0" AutoGenerateColumns="False" IsReadOnly="True">
+        <DataGrid Background="LightGray" ItemsSource="{Binding Path= GuestReviews}" Margin="30,372,30,0" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding Reservation.Guest.Name}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Last Name" Binding="{Binding Reservation.Guest.LastName}"></DataGridTextColumn>

@@ -94,6 +94,7 @@
     <None Remove="Resources\Images\star.png" />
     <None Remove="Resources\Images\tools.png" />
     <None Remove="Resources\Images\trebinje.jpg" />
+    <None Remove="Resources\Images\user-male-circle.png" />
     <None Remove="Resources\Images\User_icon_2.svg.png" />
     <None Remove="Resources\Images\view.png" />
     <None Remove="Resources\Images\voucher.png" />
@@ -197,6 +198,9 @@
     </Content>
     <Content Include="Resources\Images\trebinje.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\user-male-circle.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Resource Include="Resources\Images\flowers.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
