@@ -178,7 +178,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             NumberOfGuests = "";
             Name = "";
             GetLocations();
-            SetAccommodationCoverImages();
+            //SetAccommodationCoverImages();
             MakeCommands();
         }
         private bool CanExecute(object sender)
@@ -225,12 +225,11 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                 IsCityComboBoxEnabled = true;
             }
         }
-        
-        
         private void Search_Executed(object sender)
         {
             if (IsNumberOfDaysValid() && IsNumberOfGuestsValid())
             {
+                accommodationService = new AccommodationService();
                 List<Accommodation> storedAccommodation = accommodationService.GetAll();
                 Accommodations.Clear();
                 Accommodations = new ObservableCollection<Accommodation>(storedAccommodation);
@@ -242,77 +241,12 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         }
         private void SearchByInputParameters(Accommodation accommodation)
         {
-            SearchName(accommodation);
-            SearchCity(accommodation);
-            SearchCountry(accommodation);
-            SearchType(accommodation);
-            SearchNumberOfGuests(accommodation);
-            SearchNumberOfDays(accommodation);
-        }
-       
-        private void SearchName(Accommodation accommodation)
-        {
-            if (!accommodation.Name.ToLower().Contains(Name.ToLower()))
-            {
-                Accommodations.Remove(accommodation);
-            }
-        }
-        private void SearchCity(Accommodation accommodation)
-        {
-            if (LocationCity != null && !accommodation.Location.City.ToLower().Equals(LocationCity.ToLower()))
-            {
-                Accommodations.Remove(accommodation);
-            }
-        }
-        private void SearchCountry(Accommodation accommodation)
-        {
-            if (LocationCountry != null && !accommodation.Location.Country.ToLower().Equals(LocationCountry.ToLower()))
-            {
-                Accommodations.Remove(accommodation);
-            }
-        }
-        private void SearchType(Accommodation accommodation)
-        {
-            if (ApartmentChecked == true || HouseChecked == true || CottageChecked == true)
-            {
-                if (ApartmentChecked == false)
-                    RemoveIfApartment(accommodation);
-
-                if (HouseChecked == false)
-                    RemoveIfHouse(accommodation);
-
-                if (CottageChecked == false)
-                    RemoveIfCottage(accommodation);
-            }
-        }
-        private void RemoveIfApartment(Accommodation accommodation)
-        {
-            if (accommodation.Type.Name.ToLower() == "apartment")
-                Accommodations.Remove(accommodation);
-        }
-        private void RemoveIfHouse(Accommodation accommodation)
-        {
-            if (accommodation.Type.Name.ToLower() == "house")
-                Accommodations.Remove(accommodation);
-        }
-        private void RemoveIfCottage(Accommodation accommodation)
-        {
-            if (accommodation.Type.Name.ToLower() == "cottage")
-                Accommodations.Remove(accommodation);
-        }
-        private void SearchNumberOfGuests(Accommodation accommodation)
-        {
-            if (!(NumberOfGuests == "") && Convert.ToInt32(NumberOfGuests) > accommodation.Capacity)
-            {
-                Accommodations.Remove(accommodation);
-            }
-        }
-        private void SearchNumberOfDays(Accommodation accommodation)
-        {
-            if (!(NumberOfDays == "") && Convert.ToInt32(NumberOfDays) < accommodation.MinDaysForReservation)
-            {
-                Accommodations.Remove(accommodation);
-            }
+            Accommodations = new ObservableCollection<Accommodation>(accommodationService.SearchName(accommodation, Name));
+            Accommodations = new ObservableCollection<Accommodation>(accommodationService.SearchCity(accommodation, LocationCity));
+            Accommodations = new ObservableCollection<Accommodation>(accommodationService.SearchCountry(accommodation, LocationCountry));
+            Accommodations = new ObservableCollection<Accommodation>(accommodationService.SearchType(accommodation, ApartmentChecked, HouseChecked, CottageChecked));
+            Accommodations = new ObservableCollection<Accommodation>(accommodationService.SearchNumberOfGuests(accommodation, NumberOfGuests));
+            Accommodations = new ObservableCollection<Accommodation>(accommodationService.SearchNumberOfDays(accommodation, NumberOfDays));
         }
         private void ShowAll_Executed(object sender)
         {
