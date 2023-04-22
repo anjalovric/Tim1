@@ -9,6 +9,7 @@ using InitialProject.Model;
 using InitialProject.WPF.Views;
 using SixLabors.ImageSharp.Metadata.Profiles.Xmp;
 using System.Windows.Navigation;
+using InitialProject.WPF.Views.OwnerViews;
 
 namespace InitialProject.WPF.ViewModels.OwnerViewModels
 {
@@ -20,6 +21,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         public RelayCommand MyProfileCommand { get; set; }
         public RelayCommand SignOutCommand { get; set; }
         public RelayCommand MyRequestsCommand { get; set; }
+        public RelayCommand GuestReviewsCommand { get; set; }
         public MenuViewModel(Owner owner)
         {
             this.owner = owner;
@@ -33,6 +35,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             MyProfileCommand = new RelayCommand(MyProfile_Executed, CanExecute);
             SignOutCommand = new RelayCommand(SignOut_Executed, CanExecute);
             MyRequestsCommand = new RelayCommand(MyRequests_Executed, CanExecute);
+            GuestReviewsCommand = new RelayCommand(GuestReviews_Executed, CanExecute);
         }
         private bool CanExecute(object sender)
         {
@@ -69,6 +72,13 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
             ReservationReschedulingView reschedulingView = new ReservationReschedulingView(owner);
             Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = reschedulingView;
+        }
+
+        private void GuestReviews_Executed(object sender)
+        {
+
+            GuestReviewView guestReviewView = new GuestReviewView(owner);
+            Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = guestReviewView;
         }
     }
 }

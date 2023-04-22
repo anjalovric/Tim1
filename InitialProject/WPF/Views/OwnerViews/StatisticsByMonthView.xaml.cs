@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,20 +10,22 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 using InitialProject.Model;
-using InitialProject.WPF.ViewModels.Guest2ViewModels;
-namespace InitialProject.WPF.Views.Guest2Views
+using InitialProject.WPF.ViewModels.OwnerViewModels;
+
+namespace InitialProject.WPF.Views.OwnerViews
 {
     /// <summary>
-    /// Interaction logic for TourDetails.xaml
+    /// Interaction logic for StatisticsByMonthView.xaml
     /// </summary>
-    public partial class TourDetailsView : Window
+    public partial class StatisticsByMonthView : Page
     {
-        public TourDetailsView(TourInstance tourInstance,Guest2 guest2)
+        public StatisticsByMonthView(Accommodation accommodation, int year)
         {
             InitializeComponent();
-            this.DataContext = new TourDetailsViewModel(tourInstance,guest2);
+            DataContext = new StatisticsByMonthViewModel(accommodation, year);
         }
     }
 }

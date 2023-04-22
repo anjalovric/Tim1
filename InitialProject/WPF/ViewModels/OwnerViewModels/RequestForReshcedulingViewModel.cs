@@ -19,7 +19,6 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         {
             Request = new ReschedulingAccommodationRequest();
             profileOwner = owner;
-            //SetAvailability();
         }
 
         public ReschedulingAccommodationRequest Request

@@ -290,6 +290,13 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             newAccommodation.Type = Type;
             accommodationService.Add(newAccommodation);
             SaveImages(newAccommodation);
+            SaveNotification();
+        }
+
+        private void SaveNotification()
+        {
+            OwnerNotificationsService notificationsService = new OwnerNotificationsService();
+            notificationsService.Add(Domain.Model.OwnerNotificationType.ACCOMMODATION_ADDED);
         }
 
         public void AddImageFromFileSystem()
