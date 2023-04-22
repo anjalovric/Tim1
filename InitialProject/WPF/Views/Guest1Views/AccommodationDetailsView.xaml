@@ -4,21 +4,29 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:InitialProject.View"
-      mc:Ignorable="d" 
-      Height="696" Width="1024"
+      mc:Ignorable="d"
+      d:DesignHeight="696" d:DesignWidth="1024"
       Title="AccommodationDetails">
     <Page.Resources>
-       
         <Style TargetType="Grid">
-            <Setter Property="Background" Value="#37492d"></Setter>
+            <Setter Property="Background" Value="#c99585"></Setter>
         </Style>
         <Style TargetType="Label">
-            <Setter Property="Foreground" Value="#d9c7b3"></Setter>
-            <Setter Property="FontWeight" Value="Medium"></Setter>
+            <Setter Property="Foreground" Value="#37492d"></Setter>
+            <Setter Property="FontWeight" Value="Bold"></Setter>
         </Style>
         <Style TargetType="TextBlock">
-            <Setter Property="Foreground" Value="#d9c7b3"></Setter>
-            <Setter Property="FontWeight" Value="Medium"></Setter>
+            <Setter Property="Foreground" Value="#37492d"></Setter>
+            <Setter Property="FontWeight" Value="Bold"></Setter>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="#8c9d75"></Setter>
+            <Setter Property="Foreground" Value="#22301a"></Setter>
+            <Setter Property="FontWeight" Value="UltraBlack"></Setter>
+            <Setter Property="FontSize" Value="20"></Setter>
+            <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+            <Setter Property="BorderBrush" Value="#22301a"></Setter>
+            <Setter Property="BorderThickness" Value="3,3,3,3"></Setter>
         </Style>
 
     </Page.Resources>
@@ -33,7 +41,7 @@
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Label Content="{Binding Path=SelectedAccommodation.Name}" FontSize="24" Margin="0,20,0,0" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Top" Width="Auto" Height="Auto" FontWeight="Bold"></Label>
+        <Label Content="{Binding Path=SelectedAccommodation.Name}" FontSize="24" Margin="0,20,0,0" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" FontWeight="ExtraBold" FontFamily="Baskerville Old Face" VerticalAlignment="Top" Width="Auto" Height="Auto"></Label>
 
         <Button FontWeight="Bold" Height="35" BorderBrush="#22301a" BorderThickness="3,3,3,3" Width="94" Margin="10,20,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Command="NavigationCommands.BrowseBack">
             <Grid Background="#8c9d75" Width="94" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35">
@@ -45,6 +53,9 @@
                 <TextBlock Text="BACK" Grid.Column="1" VerticalAlignment="Center" FontSize="16"  Foreground="#22301a" FontWeight="Bold" HorizontalAlignment="Center" Width="Auto"/>
             </Grid>
         </Button>
+
+        <Button x:Name="Reserve" Content="Reserve" Grid.Row="3" Grid.Column="1" Command="{Binding ReserveCommand}" FontWeight="Bold" Margin="0,0,10,20" VerticalAlignment="Bottom" Width="94" Height="35" HorizontalAlignment="Right" FontSize="18"/>
+
 
         <Label FontSize="20" FontWeight="Bold" Height="35" Width="80" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">Details</Label>
         <Label FontSize="20" Height="35" FontWeight="Bold" Width="80" Grid.Row="1" HorizontalAlignment="Center" Grid.Column="1" VerticalAlignment="Center">Photos</Label>

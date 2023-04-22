@@ -5,8 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:InitialProject.View"
       mc:Ignorable="d" 
-      d:DesignHeight="696" d:DesignWidth="1024"
-      Title="SentAccommodationReservationRequests">
+      Title="SentAccommodationReservationRequests" d:DesignHeight="696" d:DesignWidth="1024">
     <Page.Resources>
         <Style TargetType="Grid">
             <Setter Property="Background" Value="#37492d"></Setter>
@@ -35,7 +34,7 @@
         </Style>
     </Page.Resources>
     <Grid>
-        <TabControl x:Name="RequestsTabControl" Height="430" VerticalAlignment="Top" Width="1024">
+        <TabControl x:Name="RequestsTabControl" Height="430" VerticalAlignment="Top">
             <TabControl.TabStripPlacement>Top</TabControl.TabStripPlacement>
             <TabControl.Template>
                 <ControlTemplate TargetType="{x:Type TabControl}">
@@ -64,8 +63,20 @@
                     <DataGrid x:Name="ApprovedRequestsDataGrid" VerticalScrollBarVisibility="Auto" Margin="0,40,0,0" RowBackground="#CDFFCC" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Left" ItemsSource="{Binding Path=ApprovedRequests,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" IsReadOnly="True" Height="322" Width="950" UseLayoutRounding="False" HeadersVisibility="Column">
 
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Name" Width="1*" Binding="{Binding Reservation.Accommodation.Name}"/>
-                            <DataGridTextColumn Header="Location" Width="2*"  Binding="{Binding Reservation.Accommodation.Location}"/>
+                            <DataGridTextColumn Header="Name" Width="1*" Binding="{Binding Reservation.Accommodation.Name}">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="ToolTip" Value="{Binding Reservation.Accommodation.Name}" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Location" Width="2*"  Binding="{Binding Reservation.Accommodation.Location}">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="ToolTip" Value="{Binding Reservation.Accommodation.Location}" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
                             <DataGridTextColumn Header="Owner" Width="1*">
                                 <DataGridTextColumn.Binding>
                                     <MultiBinding StringFormat="{}{0} {1}">
@@ -73,11 +84,47 @@
                                         <Binding Path="Reservation.Accommodation.Owner.LastName" />
                                     </MultiBinding>
                                 </DataGridTextColumn.Binding>
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="ToolTip">
+                                            <Setter.Value>
+                                                <TextBlock>
+                                                    <Run Text="{Binding Reservation.Accommodation.Owner.Name}"/>
+                                                    <Run Text="{Binding Reservation.Accommodation.Owner.LastName}"/>    
+                                                </TextBlock>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
-                            <DataGridTextColumn Header="Old arrival date" Width="2*" Binding="{Binding OldArrivalDate}"/>
-                            <DataGridTextColumn Header="Old departure date" Width="2*" Binding="{Binding OldDepartureDate}"/>
-                            <DataGridTextColumn Header="New arrival date" Width="2*" Binding="{Binding NewArrivalDate}"/>
-                            <DataGridTextColumn Header="New departure date" Width="2*" Binding="{Binding NewDepartureDate}"/>
+                            <DataGridTextColumn Header="Old arrival date" Width="2*" Binding="{Binding OldArrivalDate}">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="ToolTip" Value="{Binding OldArrivalDate}" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Old departure date" Width="2*" Binding="{Binding OldDepartureDate}">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="ToolTip" Value="{Binding OldDepartureDate}" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="New arrival date" Width="2*" Binding="{Binding NewArrivalDate}">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="ToolTip" Value="{Binding NewArrivalDate}" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="New departure date" Width="2*" Binding="{Binding NewDepartureDate}">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="ToolTip" Value="{Binding NewDepartureDate}" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
@@ -87,10 +134,22 @@
             <TabItem Header="Pending requests" FontSize="16" HorizontalAlignment="Center">
                 <Grid>
                     <Label FontSize="24" FontWeight="Bold" Margin="0,10,0,0" HorizontalAlignment="Center">PENDING REQUESTS</Label>
-                    <DataGrid x:Name="PendingRequestsDataGrid" VerticalScrollBarVisibility="Auto" HeadersVisibility="Column" Margin="0,40,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" ItemsSource="{Binding Path=PendingRequests,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" IsReadOnly="True" Height="322" Width="980" UseLayoutRounding="False">
+                    <DataGrid x:Name="PendingRequestsDataGrid" VerticalScrollBarVisibility="Auto" HeadersVisibility="Column" Margin="0,40,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" ItemsSource="{Binding Path=PendingRequests,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" IsReadOnly="True" Height="322" Width="950" UseLayoutRounding="False">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Name" Width="1*" Binding="{Binding Reservation.Accommodation.Name}"/>
-                            <DataGridTextColumn Header="Location" Width="2*"  Binding="{Binding Reservation.Accommodation.Location}"/>
+                            <DataGridTextColumn Header="Name" Width="1*" Binding="{Binding Reservation.Accommodation.Name}">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="ToolTip" Value="{Binding Reservation.Accommodation.Name}" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Location" Width="2*"  Binding="{Binding Reservation.Accommodation.Location}">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="ToolTip" Value="{Binding Reservation.Accommodation.Location}" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
                             <DataGridTextColumn Header="Owner" Width="1*">
                                 <DataGridTextColumn.Binding>
                                     <MultiBinding StringFormat="{}{0} {1}">
@@ -98,11 +157,47 @@
                                         <Binding Path="Reservation.Accommodation.Owner.LastName" />
                                     </MultiBinding>
                                 </DataGridTextColumn.Binding>
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="ToolTip">
+                                            <Setter.Value>
+                                                <TextBlock>
+                                                    <Run Text="{Binding Reservation.Accommodation.Owner.Name}"/>
+                                                    <Run Text="{Binding Reservation.Accommodation.Owner.LastName}"/>
+                                                </TextBlock>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
-                            <DataGridTextColumn Header="Old arrival date" Width="2*" Binding="{Binding OldArrivalDate}"/>
-                            <DataGridTextColumn Header="Old departure date" Width="2*" Binding="{Binding OldDepartureDate}"/>
-                            <DataGridTextColumn Header="New arrival date" Width="2*" Binding="{Binding NewArrivalDate}"/>
-                            <DataGridTextColumn Header="New departure date" Width="2*" Binding="{Binding NewDepartureDate}"/>
+                            <DataGridTextColumn Header="Old arrival date" Width="2*" Binding="{Binding OldArrivalDate}">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="ToolTip" Value="{Binding OldArrivalDate}" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Old departure date" Width="2*" Binding="{Binding OldDepartureDate}">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="ToolTip" Value="{Binding OldDepartureDate}" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="New arrival date" Width="2*" Binding="{Binding NewArrivalDate}">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="ToolTip" Value="{Binding NewArrivalDate}" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="New departure date" Width="2*" Binding="{Binding NewDepartureDate}">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="ToolTip" Value="{Binding NewDepartureDate}" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
@@ -113,25 +208,61 @@
                     <Label FontSize="24"  FontWeight="Bold" Margin="0,10,0,0" HorizontalAlignment="Center">DECLINED REQUESTS</Label>
                     <DataGrid  x:Name="DeclinedRequestsDataGrid" Margin="0,40,0,0" HeadersVisibility="Column" RowBackground="#FF8986"  HorizontalAlignment="Center" VerticalAlignment="Center" VerticalScrollBarVisibility="Auto" ItemsSource="{Binding Path=DeclinedRequests,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" IsReadOnly="True" Height="322" Width="950" UseLayoutRounding="False">
                         <DataGrid.Columns >
-                            <DataGridTextColumn Header="Name" Width="1*" Binding="{Binding Reservation.Accommodation.Name}"/>
-                            <DataGridTextColumn Header="Location" Width="2*"  Binding="{Binding Reservation.Accommodation.Location}"/>
-                            <DataGridTextColumn Header="Owner" Width="1*">
+                            <DataGridTextColumn Header="Name" Width="1.4*" Binding="{Binding Reservation.Accommodation.Name}">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="ToolTip" Value="{Binding Reservation.Accommodation.Name}" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Location" Width="3*"  Binding="{Binding Reservation.Accommodation.Location}">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="ToolTip" Value="{Binding Reservation.Accommodation.Location}" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Owner" Width="1.2*">
                                 <DataGridTextColumn.Binding>
                                     <MultiBinding StringFormat="{}{0} {1}">
                                         <Binding Path="Reservation.Accommodation.Owner.Name"/>
                                         <Binding Path="Reservation.Accommodation.Owner.LastName" />
                                     </MultiBinding>
                                 </DataGridTextColumn.Binding>
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="ToolTip">
+                                            <Setter.Value>
+                                                <TextBlock>
+                                                    <Run Text="{Binding Reservation.Accommodation.Owner.Name}"/>
+                                                    <Run Text="{Binding Reservation.Accommodation.Owner.LastName}"/>
+                                                </TextBlock>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
-                            <DataGridTextColumn Header="Old arrival date" Width="2*" Binding="{Binding OldArrivalDate}"/>
-                            <DataGridTextColumn Header="Old departure date" Width="2*" Binding="{Binding OldDepartureDate}" />
-                            <DataGridTemplateColumn Header="Comment" Width="2*">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding OwnerExplanationForDeclining}" TextWrapping="Wrap" />
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
+                            <DataGridTextColumn Header="Old arrival date" Width="2.1*" Binding="{Binding OldArrivalDate}">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="ToolTip" Value="{Binding OldArrivalDate}" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Old departure date" Width="2.1*" Binding="{Binding OldDepartureDate}">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="ToolTip" Value="{Binding OldDepartureDate}" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Comment" Width="1.5*" Binding="{Binding OwnerExplanationForDeclining}">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="ToolTip" Value="{Binding OwnerExplanationForDeclining}" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
