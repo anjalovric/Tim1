@@ -212,15 +212,12 @@
     <Content Include="Resources\Images\trebinje.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-<<<<<<< HEAD
     <Resource Include="Resources\Images\back.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-=======
     <Content Include="Resources\Images\user-male-circle.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
->>>>>>> develop
     <Resource Include="Resources\Images\flowers.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
