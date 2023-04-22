@@ -35,8 +35,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             }
 
         }
-        
-
         private string name;
         public string Name
         {
@@ -159,6 +157,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             }
         }
 
+
         public RelayCommand SearchCommand { get; set; }
         public RelayCommand ShowAllCommand { get; set; }
         public RelayCommand ReserveCommand { get; set; }
@@ -174,12 +173,16 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             this.guest1 = guest1;
             accommodationService = new AccommodationService();
             Accommodations = new ObservableCollection<Accommodation>(accommodationService.GetAll());
+            SortAccommodationBySuperOwners();
             NumberOfDays = "";
             NumberOfGuests = "";
             Name = "";
             GetLocations();
-            //SetAccommodationCoverImages();
             MakeCommands();
+        }
+        private void SortAccommodationBySuperOwners()
+        {
+            Accommodations = new ObservableCollection<Accommodation>(Accommodations.OrderByDescending(x => x.Owner.IsSuperOwner).ToList());
         }
         private bool CanExecute(object sender)
         {
@@ -238,6 +241,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                     SearchByInputParameters(accommodation);
                 }
             }
+            SortAccommodationBySuperOwners();
         }
         private void SearchByInputParameters(Accommodation accommodation)
         {
@@ -255,6 +259,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                 Accommodations.Add(accommodation);
 
             ResetAllSearchingFields();
+            SortAccommodationBySuperOwners();
         }
         private void ResetAllSearchingFields()
         {
