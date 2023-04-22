@@ -1,7 +1,11 @@
-﻿using System;
+﻿using InitialProject.Model;
+using InitialProject.Repository;
+using InitialProject.Service;
+using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -11,23 +15,21 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
-using InitialProject.Model;
 using InitialProject.WPF.ViewModels.Guest2ViewModels;
+
 namespace InitialProject.WPF.Views.Guest2Views
 {
     /// <summary>
-    /// Interaction logic for TourDetails.xaml
+    /// Interaction logic for Guest2ProfileView.xaml
     /// </summary>
-    public partial class TourDetailsView : Window
+    public partial class Guest2ProfileView : UserControl
     {
-        public TourDetailsView(TourInstance tourInstance,Guest2 guest2)
+        public Guest2ProfileView(Model.Guest2 guest2)
         {
             InitializeComponent();
-            TourDetailsViewModel tourDetailsViewModel= new TourDetailsViewModel(tourInstance, guest2);
-            this.DataContext = tourDetailsViewModel;
-            if (tourDetailsViewModel.CloseAction == null)
-                tourDetailsViewModel.CloseAction = new Action(this.Close);
+            DataContext = new Guest2ProfileViewModel(guest2);
         }
     }
 }

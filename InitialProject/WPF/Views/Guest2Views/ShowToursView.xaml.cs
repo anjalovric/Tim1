@@ -224,6 +224,7 @@ namespace InitialProject.WPF.Views.Guest2Views
                 {
                     SearchByInputParameters(tourInstance);
                 }
+                Label.Content = "Showing searching tours:";
             }
         }
         private void SearchByInputParameters(TourInstance tourInstance)
@@ -285,11 +286,8 @@ namespace InitialProject.WPF.Views.Guest2Views
         }
         private void ViewDetails(object sender, RoutedEventArgs e)
         {
-            //TourInstance currentTourInstance = (TourInstance)TourListDataGrid.CurrentItem;
             TourInstance currentTourInstance = ((Button)sender).DataContext as TourInstance;
             TourDetailsView details = new TourDetailsView(currentTourInstance, guest2);
-            //Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = details;
-            //TourDetailsView detailsView = new TourDetailsView(currentTourInstance, guest2);
             details.Show();
         }
         private void GetImagesUrls(List<string> imagesUrls, TourInstance currentTourInstance)

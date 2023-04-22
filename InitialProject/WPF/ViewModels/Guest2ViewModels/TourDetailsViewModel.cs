@@ -37,6 +37,8 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
 
         public RelayCommand NextPhotoCommand { get; set; }
         public RelayCommand PreviousPhotoCommand { get; set; }
+        public RelayCommand CancelCommand { get; set; }
+        public Action CloseAction { get; set; }
         public TourDetailsViewModel(TourInstance currentTourInstance, Guest2 guest2)
         {
             Selected = currentTourInstance;
@@ -49,6 +51,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         {
             NextPhotoCommand = new RelayCommand(NextPhoto_Executed, CanExecute);
             PreviousPhotoCommand = new RelayCommand(PreviousPhoto_Executed, CanExecute);
+            CancelCommand = new RelayCommand(Cancel_Executed, CanExecute);
         }
         private bool CanExecute(object sender)
         {
@@ -67,6 +70,10 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             if (currentCounter < 0)
                 currentCounter = images.Count - 1;
             ImageSource = new BitmapImage(new Uri("/"+images[currentCounter].Url, UriKind.Relative));
+        }
+        private void Cancel_Executed(object sender)
+        {
+            CloseAction();
         }
         private void NextPhoto_Executed(object sender)
         {

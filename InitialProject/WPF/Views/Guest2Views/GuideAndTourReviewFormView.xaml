@@ -7,37 +7,50 @@
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
         Title="RateTourAndGuide" Height="600" Width="920" WindowStartupLocation="CenterScreen">
-    <Grid>
-        <Label Content="Guide knowledge" Margin="70,78,560,333"/>
-        <Label Content="Guide language" Margin="70,119,560,292"/>
-        <Label Content="Interesting facts of tour" Margin="70,168,560,243"/>
-        <TextBlock x:Name="interestingFacts" Text="1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="290" TextAlignment="Center" Height="22" Background="#FFDFDCDC" Margin="534,175,0,0" />
-        <TextBlock x:Name="language" Text="1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="290" TextAlignment="Center" Height="22" Background="#FFDFDCDC" Margin="534,124,0,0" />
-        <TextBlock x:Name="knowledge" Text="1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="290" TextAlignment="Center" Height="22" Background="#FFDFDCDC" Margin="534,79,0,0" />
-        <Button x:Name="dekrementNumber1" Content="-" Command="{Binding Facts_Decrement_Command}" HorizontalAlignment="Left" Margin="493,175,0,0" VerticalAlignment="Top" Width="20" Height="22"/>
-        <Button x:Name="inkrementNumber" Content="+" Command="{Binding Facts_Increment_Command}" HorizontalAlignment="Left" Margin="850,175,0,0" VerticalAlignment="Top" Width="20" RenderTransformOrigin="-1.284,0.612" Height="22"/>
-        <Button x:Name="inkrementNumber1" Command="{Binding Language_Increment_Command}" Content="+" HorizontalAlignment="Left" Margin="850,126,0,0" VerticalAlignment="Top" Width="20" RenderTransformOrigin="-1.284,0.612" Height="22"/>
-        <Button x:Name="inkrementNumber2" Content="+" HorizontalAlignment="Left" Command="{Binding Knowledge_Increment_Command}" Margin="850,79,0,0" VerticalAlignment="Top" Width="20" RenderTransformOrigin="-1.284,0.612" Height="22"/>
-        <Button x:Name="dekrementNumber" Content="-" HorizontalAlignment="Left" Command="{Binding Language_Decrement_Command}" Margin="493,126,0,0" VerticalAlignment="Top" Width="20"  Height="22"/>
-        <Button x:Name="dekrementNumber2" Content="-" HorizontalAlignment="Left" Command="{Binding Knowledge_Decrement_Command}" Margin="493,80,0,0" VerticalAlignment="Top" Width="20"  Height="22"/>
-        <Label Content="Add comment" FontWeight="Bold" FontSize="20" Margin="70,217,679,289"/>
-        <Label Content="Add photos" FontWeight="Bold" FontSize="20" Margin="488,217,280,279"/>
-        <tk:WatermarkTextBox x:Name="comment" TextWrapping="Wrap" Margin="70,262,443,76" Watermark="Enter comment here" />
-        <Button Content="Confirm" Command="{Binding ConfirmCommand}" Margin="586,518,197,10" FontWeight="Bold"/>
-        <Button Content="Cancel" Command="{Binding CancelCommand}" Margin="753,518,25,10" FontWeight="Bold"/>
-        <Border BorderBrush="Black" Margin="493,260,30,78" Visibility="Visible" BorderThickness="1"></Border>
-        <Button Command="{Binding UploadImageCommand}" HorizontalAlignment="Left" Margin="810,445,0,0" VerticalAlignment="Top" Width="30" FontWeight="Bold" Height="30">
-            <Image Source="/Resources/Images/icons8-upload-64.png" Height="25" Width="50"/>
+    <Grid Background="LightGray">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="Guide knowledge" Margin="34,16,306,15" Grid.Row="1"/>
+        <Label Content="Guide language" Margin="34,13,281,1" Grid.Row="2"/>
+        <Label Content="Interesting facts of tour" Margin="34,10,266,13" Grid.Row="3"/>
+        <TextBlock x:Name="interestingFacts" Text="1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="330" TextAlignment="Center" Height="28" Background="#FFFCECB9" Margin="58,18,0,0" Grid.Column="1" Grid.Row="3" />
+        <TextBlock x:Name="language" Text="1" HorizontalAlignment="Left" VerticalAlignment="Center" Width="330" TextAlignment="Center" Height="28" Background="#FFFCECB9" Margin="58,0,0,0" Grid.Column="1" Grid.Row="2" />
+        <TextBlock x:Name="knowledge" Text="1" HorizontalAlignment="Left" VerticalAlignment="Center" Width="330" TextAlignment="Center" Height="28" Background="#FFFCECB9" Grid.Column="1" Grid.Row="1" Margin="58,0,0,0" />
+        <Button x:Name="dekrementNumber1" Content="-" Command="{Binding Facts_Decrement_Command}" HorizontalAlignment="Left" Margin="10,18,0,0" VerticalAlignment="Top" Width="30" Height="28" BorderBrush="Gray" Background="#FFFCECB9" BorderThickness="1" Grid.Column="1" Grid.Row="3"/>
+        <Button x:Name="inkrementNumber" Content="+" Command="{Binding Facts_Increment_Command}" HorizontalAlignment="Left" Margin="401,18,0,0" VerticalAlignment="Top" Width="30" RenderTransformOrigin="-1.284,0.612" Height="28" Background="#FFFCECB9" BorderBrush="Gray" BorderThickness="1" Grid.Column="1" Grid.Row="3"/>
+        <Button x:Name="inkrementNumber1" Command="{Binding Language_Increment_Command}" Content="+" HorizontalAlignment="Left" Margin="401,0,0,0" VerticalAlignment="Center" Width="30" RenderTransformOrigin="-1.284,0.612" Height="28" Background="#FFFCECB9" BorderBrush="Gray" BorderThickness="1" Grid.Column="1" Grid.Row="2"/>
+        <Button x:Name="inkrementNumber2" Content="+" HorizontalAlignment="Left" Command="{Binding Knowledge_Increment_Command}" Margin="401,0,0,0" VerticalAlignment="Center" Width="30" RenderTransformOrigin="-1.284,0.612" Height="28" Background="#FFFCECB9" BorderBrush="Gray" BorderThickness="1" Grid.Column="1" Grid.Row="1"/>
+        <Button x:Name="dekrementNumber" Content="-" HorizontalAlignment="Left" Command="{Binding Language_Decrement_Command}" Margin="10,0,0,0" VerticalAlignment="Center" Width="30"  Height="28" BorderBrush="Gray" Background="#FFFCECB9" BorderThickness="1" Grid.Column="1" Grid.Row="2"/>
+        <Button x:Name="dekrementNumber2" Content="-" HorizontalAlignment="Left" Command="{Binding Knowledge_Decrement_Command}" Margin="10,0,0,0" VerticalAlignment="Center" Width="30"  Height="28" BorderBrush="Gray" Background="#FFFCECB9" BorderThickness="1" Grid.Column="1" Grid.Row="1"/>
+        <Label Content="Add comment" FontWeight="Bold" FontSize="20" Margin="34,6,266,7" Grid.Row="4"/>
+        <Label Content="Add photos" FontWeight="Bold" FontSize="20" Margin="10,9,286,11" Grid.Column="1" Grid.Row="4"/>
+        <tk:WatermarkTextBox x:Name="comment" TextWrapping="Wrap" Margin="34,15,30,15" Watermark="Enter comment here" BorderBrush="Gray" BorderThickness="1" Grid.Row="5"/>
+        <Button Content="Confirm" Background="#FFFCECB9" Command="{Binding ConfirmCommand}" Margin="251,5,116,16" FontWeight="Bold" BorderBrush="Gray" BorderThickness="4,4,4,4" Grid.Column="1" Grid.Row="6"/>
+        <Button Content="Cancel" Background="#FFFCECB9" Command="{Binding CancelCommand}" Margin="344,5,29,16" FontWeight="Bold" BorderBrush="Gray" BorderThickness="4,4,4,4" Grid.Column="1" Grid.Row="6"/>
+        <Border Background="White" BorderBrush="Gray" Margin="10,15,29,16" Visibility="Visible" BorderThickness="1" Grid.Column="1" Grid.Row="5"/>
+        <Button Command="{Binding UploadImageCommand}" BorderBrush="White" Background="White" HorizontalAlignment="Left" Margin="355,170,42,22" FontWeight="Bold" Height="30" Grid.Column="1" Grid.Row="5">
+            <Image Source="/Resources/Images/icons8-upload-64.png" Height="22" Width="20"/>
         </Button>
-        <Image x:Name="imagePicture" Margin="540,266,102,89" Source="{Binding ImageSource, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <Image x:Name="imagePicture" Margin="45,35,108,35" Source="{Binding ImageSource, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="5"/>
 
-        <Label Content="Rate tour and guide" Margin="70,25,560,386" FontSize="20" FontWeight="Bold"/>
-
-
+        <Label Content="Rate tour and guide" Margin="32,11,185,0" FontSize="20" FontWeight="Bold"/>
 
 
 
-        <Button Command="{Binding BackCommand}" Margin="367,344,395,165" RenderTransformOrigin="0.5,0.5">
+
+
+        <Button Command="{Binding BackCommand}" Margin="390,88,425,91" RenderTransformOrigin="0.5,0.5" Grid.Row="5" Grid.ColumnSpan="2">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -50,30 +63,30 @@
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Grid>
                         <StackPanel Orientation="Horizontal">
-                            <Rectangle Width="30" Height="14" Stroke="Black" Fill="Black"/>
-                            <Polygon Points= "0,15 15,22 0,30" Stroke="Black" Fill="Black" Height="45" Width="30" />
+                            <Rectangle Width="30" Height="15" Stroke="Gray" Fill="Gray"/>
+                            <Polygon Points= "0,15 15,20 0,30" Stroke="Gray" Fill="Gray" Height="45" Width="30" />
                         </StackPanel>
                     </Grid>
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Button Command="{Binding NextCommand}" Margin="860,342,-121,165">
+        <Button Command="{Binding NextCommand}" Margin="410,85,0,91" Grid.Column="1" Grid.Row="5">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Grid>
                         <StackPanel Orientation="Horizontal">
-                            <Rectangle Width="30" Height="14" Stroke="Black" Fill="Black"/>
-                            <Polygon Points= "0,15 15,22 0,30" Stroke="Black" Fill="Black" Height="45" Width="30" />
+                            <Rectangle Width="30" Height="14" Stroke="Gray" Fill="Gray"/>
+                            <Polygon Points= "0,15 15,22 0,30" Stroke="Gray" Fill="Gray" Height="45" Width="30" />
                         </StackPanel>
                     </Grid>
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Button Command="{Binding DeletePhotoCommand}" Margin="840,436,30,78" FontWeight="Bold" Height="30" Width="30">
-            <Image Source="/Resources/Images/icons8-delete-67.png" Height="25" Width="50"/>
+        <Button Command="{Binding DeletePhotoCommand}" BorderBrush="White" Background="White" Height="30" Margin="380,170,42,22" FontWeight="Bold" Grid.Column="1" Grid.Row="5">
+            <Image Source="/Resources/Images/icons8-delete-67.png" Height="22" Width="20"/>
         </Button>
-        <Button Command="{Binding DeleteCommand}" Margin="0,436,30,78" FontWeight="Bold" Height="30" Width="30">
-            <Image Source="/Resources/Images/icons8-delete-67.png" Height="25" Width="50"/>
+        <Button Command="{Binding DeleteCommand}" BorderBrush="White" Background="White" Margin="380,170,42,22" Height="30" FontWeight="Bold" Grid.Row="5">
+            <Image Source="/Resources/Images/icons8-delete-67.png" Height="22" Width="20"/>
         </Button>
     </Grid>
 </Window>

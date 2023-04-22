@@ -26,6 +26,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         public RelayCommand VouchersCommand { get; set; }
         public RelayCommand ActiveToursCommand { get; set; }
         public RelayCommand SignOutCommand { get; set; }
+        public RelayCommand ProfileCommand { get; set; }
         public RelayCommand FinishedToursCommand { get; set; }
         private ContentControl ContentControl;
         private BitmapImage imageSource;
@@ -67,6 +68,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             ActiveToursCommand = new RelayCommand(ActiveTours_Executed, CanExecute);
             SignOutCommand = new RelayCommand(SignOut_Executed, CanExecute);
             FinishedToursCommand = new RelayCommand(ShowFinished_Executed, CanExecute);
+            ProfileCommand = new RelayCommand(Profile_Executed, CanExecute);
         }
         private bool CanExecute(object sender)
         {
@@ -75,6 +77,10 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         private void Show_Executed(object sender)
         {
             ContentControl.Content=new ShowToursView(guest2);
+        }
+        private void Profile_Executed(object sender)
+        {
+            ContentControl.Content = new Guest2ProfileView(guest2);
         }
         private void Vouchers_Executed(object sender)
         {

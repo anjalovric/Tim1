@@ -14,6 +14,9 @@ namespace InitialProject.Model
         public string Name { get; set; }
         public string LastName { get; set; }
         public string Username { get; set; }
+        public string PhoneNumber { get; set; }
+        public string DateOfBirth { get; set; }
+        public Location Location { get; set; }
         public string ImagePath { get; set; }
 
 
@@ -30,12 +33,16 @@ namespace InitialProject.Model
             Name = values[1];
             LastName = values[2];
             Username = values[3];
-            ImagePath = values[4];
+            PhoneNumber = values[4];
+            DateOfBirth = values[5];
+            Location = new Location();
+            Location.Id = Convert.ToInt32(values[6]);
+            ImagePath = values[7];
         }
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), Name, LastName, Username, ImagePath };
+            string[] csvValues = { Id.ToString(), Name, LastName, Username, PhoneNumber, DateOfBirth,Location.Id.ToString(), ImagePath };
             return csvValues;
         }
 
