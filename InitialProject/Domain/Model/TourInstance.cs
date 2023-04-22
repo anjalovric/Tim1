@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using InitialProject.Serializer;
-using System.Text;
-using System.Threading.Tasks;
-using System.Collections;
-using System.Windows;
-using System.Xml.Linq;
+﻿using InitialProject.Serializer;
+using System;
 using System.Windows.Media.Imaging;
 
 namespace InitialProject.Model
@@ -19,7 +12,6 @@ namespace InitialProject.Model
 
         public DateTime StartDate { get; set; }
 
-        public string StartClock { get; set; }
         public bool Finished { get; set; }
 
         public Guide Guide{ get; set; }
@@ -41,36 +33,31 @@ namespace InitialProject.Model
             Id = Convert.ToInt32(values[0]);
             Tour = new Tour() { Id = Convert.ToInt32(values[1]) };
             StartDate = Convert.ToDateTime(values[2]);
-            StartClock = values[3];
-            Finished = Convert.ToBoolean(values[4]);
-            Guide = new Guide() { Id=Convert.ToInt32(values[5]) };
-            Attendance = Convert.ToDouble(values[6]);
-            CoverImage = values[7];
+            Finished = Convert.ToBoolean(values[3]);
+            Guide = new Guide() { Id=Convert.ToInt32(values[4]) };
+            Attendance = Convert.ToDouble(values[5]);
+            CoverImage = values[6];
             CoverBitmap= new BitmapImage(new Uri("/" + CoverImage, UriKind.Relative));
-            Active= Convert.ToBoolean(values[9]);
-            Date = values[10];
-            Canceled = Convert.ToBoolean(values[11]);
-
+            Active= Convert.ToBoolean(values[8]);
+            Date = values[9];
+            Canceled = Convert.ToBoolean(values[10]);
         }
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), Tour.Id.ToString(), StartDate.ToString(), StartClock ,Finished.ToString(),Guide.Id.ToString(),Attendance.ToString(),CoverImage,CoverBitmap.ToString(),Active.ToString(),Date,Canceled.ToString()};
+            string[] csvValues = { Id.ToString(), Tour.Id.ToString(), StartDate.ToString(),Finished.ToString(),Guide.Id.ToString(),Attendance.ToString(),CoverImage,CoverBitmap.ToString(),Active.ToString(),Date,Canceled.ToString()};
             return csvValues;
         }
         public TourInstance() 
         {
             Finished = false;
             Active = false;
-            Canceled = false;
-            
+            Canceled = false;        
         }
-
-        public TourInstance( Tour tour, DateTime startDate, string startClock,Guide guide,string coverImage)
+        public TourInstance( Tour tour, DateTime startDate,Guide guide,string coverImage)
         {
             Tour = tour;
             StartDate = startDate;
-            StartClock = startClock;
             Finished = false;
             Guide = guide;
             Attendance = 0;
@@ -79,11 +66,9 @@ namespace InitialProject.Model
             Active = false;
             Canceled= false;
         }
-
-
         public override string ToString()
         {
-            return StartDate.ToShortDateString() + " " + StartClock.ToString();
+            return StartDate.ToString();
         }
     }
 }

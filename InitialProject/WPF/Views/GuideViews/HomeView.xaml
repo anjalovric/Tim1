@@ -60,15 +60,7 @@
                         </Style>
                     </DataGridColumn.HeaderStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="StartDate" Binding="{Binding Date}" Width="1*">
-                    <DataGridColumn.HeaderStyle>
-                        <Style TargetType="DataGridColumnHeader">
-                            <Setter Property="FontWeight" Value="Bold"/>
-                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                        </Style>
-                    </DataGridColumn.HeaderStyle>
-                </DataGridTextColumn>
-                <DataGridTextColumn Header="StartHour" Binding="{Binding StartClock}" Width="1*">
+                <DataGridTextColumn Header="StartDate" Binding="{Binding StartDate}" Width="1.5*">
                     <DataGridColumn.HeaderStyle>
                         <Style TargetType="DataGridColumnHeader">
                             <Setter Property="FontWeight" Value="Bold"/>

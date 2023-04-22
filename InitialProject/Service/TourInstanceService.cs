@@ -1,8 +1,11 @@
 ﻿using InitialProject.Domain;
 using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Model;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Windows.Media.Imaging;
+
 namespace InitialProject.Service
 {
     public class TourInstanceService
@@ -19,9 +22,17 @@ namespace InitialProject.Service
         {
             return tourInstancerepository.GetAll();
         }
+        public void Delete(TourInstance tour)
+        {
+             tourInstancerepository.Delete(tour);   
+        }
         public TourInstance Update(TourInstance tour)
         {
             return tourInstancerepository.Update(tour);
+        }
+        public TourInstance Save(TourInstance tour)
+        {
+            return tourInstancerepository.Save(tour);
         }
         public List<TourInstance> GetByStart(Guide guide)
         {
@@ -124,6 +135,40 @@ namespace InitialProject.Service
         public void ActivateTour(TourInstance selected)
         {
             tourInstancerepository.ActivateTour(selected);
+        }
+        public void SaveInstances(Tour savedTour, User loggedUser,ObservableCollection<TourInstance> FutureInstances,ObservableCollection<TourInstance> TodayInstances,ObservableCollection <TourInstance> Instances,List<TourImage> images)
+        {
+            GuideService guideService = new GuideService();
+            TourImageService tourImageService = new TourImageService();
+            foreach (TourInstance instance in Instances)
+            {
+                instance.Guide = guideService.GetByUsername(loggedUser.Username);
+                instance.Tour = savedTour;
+                instance.CoverImage = images[0].Url;
+                instance.CoverBitmap = new BitmapImage(new Uri("/" + instance.CoverImage, UriKind.Relative));
+                Save(instance);
+                DisplayIfToday(instance,TodayInstances);
+                DisplayIfCancelable(instance,FutureInstances);
+            }
+        }
+        private void DisplayIfCancelable(TourInstance tour,ObservableCollection<TourInstance> FutureInstances)
+        {
+            if (tour.StartDate > DateTime.Now.Date)
+            {
+                var diffOfDates = DateTime.Now - tour.StartDate;
+
+                if (diffOfDates.Days < -2)
+                    FutureInstances.Add(tour);
+                else if (diffOfDates.Days == -2 && diffOfDates.Hours < 0)
+                    FutureInstances.Add(tour);
+                else if (diffOfDates.Days == -2 && diffOfDates.Hours == 0 && diffOfDates.Minutes < 0)
+                    FutureInstances.Add(tour);
+            }
+        }
+        private void DisplayIfToday(TourInstance instance, ObservableCollection<TourInstance> TodayInstances)
+        {
+            if (instance.StartDate.Date == DateTime.Today.Date && instance.StartDate > DateTime.Now)
+                TodayInstances.Add(instance);
         }
     }
 }

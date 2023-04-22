@@ -34,7 +34,7 @@ namespace InitialProject.Service
             OwnerReviewService ownerReviewService = new OwnerReviewService();
             double averageRate = ownerReviewService.CalculateAverageRateByOwner(owner);
             int numberOfReviews = ownerReviewService.GetNumberOfReviewsByOwner(owner);
-            return averageRate >= 4.5 && numberOfReviews >= 50;
+            return averageRate >= 4.5 && numberOfReviews >=2;
         }
 
         public Owner GetById(int id)

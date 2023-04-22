@@ -76,7 +76,7 @@ namespace InitialProject.WPF.ViewModels
             Toast = "Hidden";
             NextEnabled = true;
             FinishEnabled = true;
-            Title = selected.Tour.Name + ", " + selected.Date + ", " + selected.StartClock;
+            Title = selected.Tour.Name + ", " + selected.StartDate;
             StartInstance();
         }
         private void MakeCommands()

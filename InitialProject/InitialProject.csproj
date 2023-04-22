@@ -28,6 +28,8 @@
 
     <None Remove="Resources\Images\calendar.png" />
 
+    <None Remove="Resources\Images\datetime.png" />
+
     <None Remove="Resources\Images\decline.jpg" />
 
     <None Remove="Resources\Images\flowers.jpg" />
@@ -44,6 +46,7 @@
     <None Remove="Resources\Images\help.png" />
     <None Remove="Resources\Images\home.png" />
     <None Remove="Resources\Images\icons8-christmas-star-96.png" />
+    <None Remove="Resources\Images\location.jpg" />
     <None Remove="Resources\Images\logo.jpg" />
     <None Remove="Resources\Images\minus.png" />
     <None Remove="Resources\Images\museum.jpg" />
@@ -152,6 +155,10 @@
 
     </Content>
 
+    <Content Include="Resources\Images\datetime.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+
     <Content Include="Resources\Images\decline.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -160,6 +167,9 @@
     </Content>
     <Content Include="Resources\Images\edit.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\location.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\museum.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
