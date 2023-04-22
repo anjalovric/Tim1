@@ -1,6 +1,7 @@
 ﻿using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.Service;
+using InitialProject.WPF.Views.Guest1Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -223,6 +224,7 @@ namespace InitialProject.WPF.Views.Guest2Views
                 {
                     SearchByInputParameters(tourInstance);
                 }
+                Label.Content = "Showing searching tours:";
             }
         }
         private void SearchByInputParameters(TourInstance tourInstance)
@@ -284,18 +286,9 @@ namespace InitialProject.WPF.Views.Guest2Views
         }
         private void ViewDetails(object sender, RoutedEventArgs e)
         {
-            TourInstance currentTourInstance = (TourInstance)TourListDataGrid.CurrentItem;
-            try
-            {
-                List<string> imagesUrls = new List<string>();
-                GetImagesUrls(imagesUrls, currentTourInstance);
-                TourDetailsView detailsView = new TourDetailsView(imagesUrls, currentTourInstance);
-                detailsView.Show();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message.ToString());
-            }
+            TourInstance currentTourInstance = ((Button)sender).DataContext as TourInstance;
+            TourDetailsView details = new TourDetailsView(currentTourInstance, guest2);
+            details.Show();
         }
         private void GetImagesUrls(List<string> imagesUrls, TourInstance currentTourInstance)
         {

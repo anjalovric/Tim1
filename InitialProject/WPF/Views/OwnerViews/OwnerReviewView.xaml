@@ -48,9 +48,9 @@
         </Grid>
         <TextBlock HorizontalAlignment="Left" Margin="35,197,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Height="28" Width="112"><Run Text="Cleanliness: " /><Run Text=" "/><Run Text="{Binding OwnerReview.Cleanliness}" /></TextBlock>
         <TextBlock HorizontalAlignment="Left" Margin="215,196,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Height="28" Width="145"><Run Text="Owner's correctness: " /><Run Text=" "/><Run Text="{Binding OwnerReview.Correctness}" /></TextBlock>
-        <Label Content="Comment"  HorizontalAlignment="Left" Margin="34,230,0,0" VerticalAlignment="Top" Height="28" Width="138"/>
+        <Label Content="Comment"  HorizontalAlignment="Left" Margin="35,230,0,0" VerticalAlignment="Top" Height="28" Width="138"/>
         <Border Background="White" Height="97" Width="363" BorderBrush="Black" BorderThickness="0.5">
-            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Path=OwnerReview.Comment}" VerticalAlignment="Top" Height="97" Width="363"/>
+            <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding Path=OwnerReview.Comment}" VerticalAlignment="Center" Height="98" Width="364"/>
         </Border>
         <Image Source="{Binding Path= ImageUrl, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="138" Margin="125,425,0,0" VerticalAlignment="Top" Width="168"/>
         <Button Command="{Binding NextImageCommand}" Name="NextImageButton" HorizontalAlignment="Left" Margin="26,470,0,0" VerticalAlignment="Top" Height="32" Width="78">

@@ -6,65 +6,72 @@
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
         Title="Guest2Overview" Height="768" Width="1024" WindowStartupLocation="CenterScreen" WindowState="Maximized">
-    <Grid Background="#FFF3EEEE">
+    <Grid Background="#1e2e44">
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="100*"/>
+            <ColumnDefinition Width="3*"/>
+
 
 
         </Grid.ColumnDefinitions>
-        <StackPanel Width="240" Orientation="Vertical" HorizontalAlignment="Left" Background="#FFD0C4C4" Grid.ColumnSpan="2">
-            <Image x:Name="profileImage" Width="180" Height="205" Source="{Binding ImageSource, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
-            
-                <MenuItem Header="Profile" Height="30" FontSize="14" FontFamily="Century Gothic" Foreground="Black" HorizontalAlignment="Left">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        <Border Grid.Column="0" Grid.Row="0" BorderBrush="Black" Background="#1e2e44" Margin="0,0,0,501" Grid.RowSpan="2"/>
+        <Image Source="{Binding ImageSource, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Grid.Row="0" Height="171" Width="247"/>
+        <Border Grid.Column="0" Grid.Row="1" BorderBrush="Black" Background="#1e2e44"/>
+        <Menu HorizontalAlignment="Center" Width="256" Background="#1e2e44" Grid.Row="1">
+            <Menu.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Width="NaN" Margin="3,14,1,0" Background="#1e2e44" />
+                </ItemsPanelTemplate>
+            </Menu.ItemsPanel>
+            <MenuItem Header="Profile" Foreground="Gray" FontSize="20" FontWeight="Bold" Command="{Binding ProfileCommand}">
                 <MenuItem.Icon>
                     <Image Source="/Resources/Images/profile.png" Height="15" Width="20"/>
                 </MenuItem.Icon>
-                
-                </MenuItem>
-
-                <MenuItem Header="Show" Command="{Binding ShowCommand}" Height="40" FontSize="14" FontFamily="Century Gothic" Foreground="Black" HorizontalAlignment="Left">
+            </MenuItem>
+            <MenuItem Header="Show" Foreground="Gray" FontSize="20" FontWeight="Bold">
+                <MenuItem Header="All tours" Background="#1e2e44" Command="{Binding ShowCommand}"/>
+                <MenuItem Header="Active tours" Background="#1e2e44" Command="{Binding ActiveToursCommand}"/>
                 <MenuItem.Icon>
                     <Image Source="/Resources/Images/home.png" Height="15" Width="20"/>
                 </MenuItem.Icon>
-                </MenuItem>
-                <MenuItem Header="Show active tours" Command="{Binding ActiveToursCommand}" Height="40" FontSize="14" FontFamily="Century Gothic" Foreground="Black" HorizontalAlignment="Left">
-                <MenuItem.Icon >
-                    <Image Source="/Resources/Images/home.png" Height="15" Width="20"/>
-                </MenuItem.Icon>
-                </MenuItem>
-                <MenuItem Header="Grade tours and guide" Command="{Binding FinishedToursCommand}" Height="40" FontSize="14" FontFamily="Century Gothic" Foreground="Black" HorizontalAlignment="Left">
-                    <MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Grade tours and guide" Foreground="Gray" FontSize="20" FontWeight="Bold" Command="{Binding FinishedToursCommand}" Width="302">
+                <MenuItem.Icon>
                     <Image Source="/Resources/Images/icons8-christmas-star-96.png" Height="15" Width="20"/>
                 </MenuItem.Icon>
-                </MenuItem>
-                <MenuItem Header="Notifications" Height="40" FontSize="14" FontFamily="Century Gothic" Foreground="Black" HorizontalAlignment="Left">
-                    <MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Notifications" Foreground="Gray" FontSize="20" FontWeight="Bold">
+                <MenuItem.Icon>
                     <Image Source="/Resources/Images/bell.png" Height="15" Width="20"/>
                 </MenuItem.Icon>
-                </MenuItem>
-                <MenuItem Header="My requests" Height="40" FontSize="14" FontFamily="Century Gothic" Foreground="Black" HorizontalAlignment="Left">
-                    <MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="My requests" Foreground="Gray" FontSize="20" FontWeight="Bold">
+                <MenuItem.Icon>
                     <Image Source="/Resources/Images/tasks.png" Height="15" Width="20"/>
                 </MenuItem.Icon>
-                </MenuItem>
-                <MenuItem Header="Vouchers" Command="{Binding VouchersCommand}" Height="40" FontSize="14" FontFamily="Century Gothic" Foreground="Black" HorizontalAlignment="Left">
-                    <MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Vouchers" Foreground="Gray" FontSize="20" FontWeight="Bold" Command="{Binding VouchersCommand}">
+                <MenuItem.Icon>
                     <Image Source="/Resources/Images/voucher.png" Height="15" Width="20"/>
                 </MenuItem.Icon>
-                </MenuItem>
-                <MenuItem Header="Help" Height="40" FontSize="14" FontFamily="Century Gothic" Foreground="Black" HorizontalAlignment="Left">
-                    <MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Help" Foreground="Gray" FontSize="20" FontWeight="Bold">
+                <MenuItem.Icon>
                     <Image Source="/Resources/Images/help.png" Height="15" Width="20"/>
                 </MenuItem.Icon>
-                </MenuItem>
-                <MenuItem Header="Sign out" Height="40" Command="{Binding SignOutCommand}" FontSize="14" FontFamily="Century Gothic" Foreground="Black" HorizontalAlignment="Left">
-                    <MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Sign out" Foreground="Gray" FontSize="20" FontWeight="Bold" Command="{Binding SignOutCommand}">
+                <MenuItem.Icon>
                     <Image Source="/Resources/Images/signout.png" Height="15" Width="20"/>
                 </MenuItem.Icon>
-                </MenuItem>
-            
-        </StackPanel>
-        <ContentControl x:Name="CC" Grid.ColumnSpan="2" Margin="10,0,0,0" Background="#FFF3EEEE"/>
+            </MenuItem>
+        </Menu>
+
+        <ContentControl x:Name="CC" Grid.Column="1" Background="#151f2d" Grid.RowSpan="2"/>
     </Grid>
 </Window>

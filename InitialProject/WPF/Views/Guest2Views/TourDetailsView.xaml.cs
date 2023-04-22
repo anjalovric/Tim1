@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using InitialProject.Model;
+using InitialProject.WPF.ViewModels.Guest2ViewModels;
 namespace InitialProject.WPF.Views.Guest2Views
 {
     /// <summary>
@@ -20,30 +21,13 @@ namespace InitialProject.WPF.Views.Guest2Views
     /// </summary>
     public partial class TourDetailsView : Window
     {
-        public TourInstance TourInstance { get; set; }
-        public TourDetailsView(List<string> imagesUrl,TourInstance tourInstance)
+        public TourDetailsView(TourInstance tourInstance,Guest2 guest2)
         {
             InitializeComponent();
-            this.DataContext = this;
-            TourInstance = tourInstance;
-            foreach (string url in imagesUrl)
-            {
-                Image img = new Image();
-                var bitmapImage = new BitmapImage();
-                bitmapImage.BeginInit();
-                bitmapImage.UriSource = new Uri(url); ;
-                bitmapImage.EndInit();
-                img.Source = bitmapImage;
-                setPhotoDimensions(ref img);
-                imagesList.Items.Add(img);
-            }
-        }
-        private void setPhotoDimensions(ref Image img)
-        {
-            img.Width = imagesList.Width;
-            img.Height = imagesList.Height;
-            img.VerticalAlignment = VerticalAlignment.Center;
-            img.HorizontalAlignment = HorizontalAlignment.Center;
+            TourDetailsViewModel tourDetailsViewModel= new TourDetailsViewModel(tourInstance, guest2);
+            this.DataContext = tourDetailsViewModel;
+            if (tourDetailsViewModel.CloseAction == null)
+                tourDetailsViewModel.CloseAction = new Action(this.Close);
         }
     }
 }

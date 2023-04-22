@@ -9,25 +9,26 @@
       Title="My Profile" Background="LightBlue">
     <Page.Resources>
         <DataTemplate x:Key="ownerReviews">
-            <Border Background="LightGray" BorderBrush="Black" BorderThickness="0.5" Margin="0,0,0,0" >
-                <Grid>
+            <Border Background="LightGray" BorderBrush="DarkGray" BorderThickness="0.5" Margin="0,0,0,0" >
+                <Grid Margin="0, 0, 0, 0">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="150*"/>
-                        <ColumnDefinition Width="110"/>
-                        <ColumnDefinition Width="40"/>
-                        <ColumnDefinition Width="40"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="2.5*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="20"/>
                         <RowDefinition Height="20"/>
                     </Grid.RowDefinitions>
-
-                    <TextBlock Text="{Binding Path=Reservation.Guest}" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2"/>
-                    <TextBlock Text="Cleanliness" Grid.Column="1" Grid.Row="0" ></TextBlock>
-                    <TextBlock Text="Owner's correctness" Grid.Column="1" Grid.Row="1"></TextBlock>
-                    <TextBlock Text="{Binding Path=Cleanliness}" Grid.Column="2" Grid.Row="0"></TextBlock>
-                    <TextBlock Text="{Binding Path=Correctness}" Grid.Column="2" Grid.Row="1" ></TextBlock>
-                    <Button Command="{Binding Path=DataContext.ViewCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" Name="ViewButton" Content="View"  Grid.Column="3" Grid.Row="0" Grid.RowSpan="2" Height="16" HorizontalContentAlignment="Center"></Button>
+                    <Image Source="/Resources/Images/user-male-circle.png" Grid.Column="0" Grid.Row="0" Height="25" Grid.RowSpan="2" VerticalAlignment="Center"/>
+                    <TextBlock Text="{Binding Path=Reservation.Guest}" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Margin="2, 2, 0, 0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                    <TextBlock Text="Cleanliness" Grid.Column="2" Grid.Row="0" ></TextBlock>
+                    <TextBlock Text="Owner's correctness" Grid.Column="2" Grid.Row="1"></TextBlock>
+                    <TextBlock Text="{Binding Path=Cleanliness}" Grid.Column="3" Grid.Row="0"></TextBlock>
+                    <TextBlock Text="{Binding Path=Correctness}" Grid.Column="3" Grid.Row="1" ></TextBlock>
+                    <Button Command="{Binding Path=DataContext.ViewCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" Name="ViewButton" Content="View"  Grid.Column="4" Grid.Row="0" Grid.RowSpan="2" Height="20" HorizontalContentAlignment="Center"></Button>
                 </Grid>
             </Border>
 
@@ -35,21 +36,34 @@
     </Page.Resources>
 
     <Grid>
-        <Border Background="Gray"  HorizontalAlignment="Center" Height="144" BorderBrush="Black" BorderThickness="1" VerticalAlignment="Top" Width="410">
-            <Grid Margin="0,0,0,-1">
-                <Image Source="/Resources/Images/User_icon_2.svg.png" HorizontalAlignment="Left" Height="99"  VerticalAlignment="Top" Width="108" Margin="10,14,0,0"/>
-                <Label Content="Full name:" Height="25" Margin="144,5,144,108" VerticalAlignment="Top"/>
-                <Label Content="Age:"  Height="25" Margin="144,35,144,78" VerticalAlignment="Top"/>
-                <Label Content="Email:" Height="25" Margin="144,65,144,48" VerticalAlignment="Top"/>
-                <Label Content="Title:"  Height="25" Margin="144,92,185,0" VerticalAlignment="Top"/>
-                <Label Content="{Binding ProfileOwner, UpdateSourceTrigger=PropertyChanged}" Margin="252,3,0,110" Height="25"/>
-                <Label Content="{Binding ProfileOwner.Age, UpdateSourceTrigger=PropertyChanged}" Margin="252,33,0,80" Height="25"/>
-                <Label Content="{Binding ProfileOwner.Email, UpdateSourceTrigger=PropertyChanged}" Margin="252,65,0,48" Height="25"/>
-                <Label Content="{Binding Title, UpdateSourceTrigger=PropertyChanged}" FontWeight="Bold" Margin="254,92,0,25" Height="25"/>
-                <Image Source="/Resources/Images/star.png" Visibility="{Binding StarVisibility, UpdateSourceTrigger=PropertyChanged}" Margin="224,88,150,29"/>
-                <Label Content="Average review:"  Height="25" HorizontalAlignment="Left" Width="103" VerticalAlignment="Top" Margin="144,117,0,0"/>
-                <Label Name="AverageReview" Content="{Binding AverageRate, UpdateSourceTrigger=PropertyChanged}" Margin="252,118,116,1" Height="25"/>
-                <TextBlock  Margin="297,122,0,0" Height="21" VerticalAlignment="Top" HorizontalAlignment="Left">
+        <Border Background="Gray"  Width="372" Margin="30, 30, 30, 0" HorizontalAlignment="Center" Height="144" BorderBrush="DarkGray" BorderThickness="0.5" VerticalAlignment="Top">
+            <Grid Margin="0, 0, 0, 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.3*"/>
+                    <ColumnDefinition Width="1.15*"/>
+                    <ColumnDefinition Width="0.3*"/>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Image Source="/Resources/Images/User_icon_2.svg.png" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="0" Grid.RowSpan="4" Stretch="Fill" VerticalAlignment="Top"/>
+                <Label Content="Full name:" Grid.Row="0" Grid.Column="1" VerticalAlignment="Top" Margin="0, 5, 0, 0"/>
+                <Label Content="Age:" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top"/>
+                <Label Content="Email:" Grid.Row="2" Grid.Column="1" VerticalAlignment="Top"/>
+                <Label Content="Title:"  Grid.Row="3" Grid.Column="1" VerticalAlignment="Top"/>
+                <Label Content="{Binding ProfileOwner, UpdateSourceTrigger=PropertyChanged}" Margin="0, 5, 0, 0" Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2"/>
+                <Label Content="{Binding ProfileOwner.Age, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2"/>
+                <Label Content="{Binding ProfileOwner.Email, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2"/>
+                <Label Content="{Binding Title, UpdateSourceTrigger=PropertyChanged}" FontWeight="Bold" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2"/>
+                <Image Source="/Resources/Images/star.png" Visibility="{Binding StarVisibility, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" Grid.Row="3"/>
+                <Label Content="Average review:" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left"  VerticalAlignment="Top" />
+                <Label Name="AverageReview" Content="{Binding AverageRate, UpdateSourceTrigger=PropertyChanged}" Grid.Row="4" Grid.Column="2"/>
+                <TextBlock  Grid.Row="4" Grid.Column="3" VerticalAlignment="Center" >
                     <Run Text="(" />
                     <Run Text ="{Binding Path=NumberOfRates, UpdateSourceTrigger=PropertyChanged }" />
                     <Run Text=" reviews total)" />
@@ -57,7 +71,7 @@
 
             </Grid>
         </Border>
-        <ListBox Name="ReviewsListBox" Margin="10,195,10,137" ItemsSource="{Binding Path=OwnerReviews}" ItemTemplate="{StaticResource ownerReviews}" IsSynchronizedWithCurrentItem="True" SelectedItem="{Binding SelectedOwnerReview, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" SelectionMode="Single" HorizontalContentAlignment="Stretch">
+        <ListBox Name="ReviewsListBox" Margin="30,230,30,121" ItemsSource="{Binding Path=OwnerReviews}" ItemTemplate="{StaticResource ownerReviews}" IsSynchronizedWithCurrentItem="True" SelectedItem="{Binding SelectedOwnerReview, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" SelectionMode="Single" HorizontalContentAlignment="Stretch">
             <ListBox.Resources>
                 <Style TargetType="ListBoxItem">
                     <Style.Triggers>
@@ -69,8 +83,8 @@
             </ListBox.Resources>
         </ListBox>
 
-        <Button Content="Generate average review pdf report" HorizontalAlignment="Center" Margin="0,539,0,0" VerticalAlignment="Top" Width="370" Height="43"/>
-        <Label Content="My Reviews" FontSize="15" FontWeight="Bold" Margin="10,159,190,440"/>
+        <Button Content="Generate average review pdf report" HorizontalAlignment="Center" Margin="30,539,30,0" VerticalAlignment="Top" Height="43" Width="355"/>
+        <Label Content="My Reviews" FontSize="15" Margin="30,204,170,380"/>
 
     </Grid>
 </Page>

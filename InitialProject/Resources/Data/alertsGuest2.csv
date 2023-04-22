@@ -52,3 +52,13 @@
 52|32|2|64|True|30|True
 53|31|1|65|True|30|True
 54|32|2|65|False|30|True
+55|34|1|66|True|31|True
+56|35|2|66|True|31|True
+57|34|1|67|True|31|True
+58|35|2|67|True|31|True
+59|34|1|68|False|31|True
+60|35|2|68|True|31|True
+61|36|1|73|True|33|True
+62|36|1|74|False|33|True
+63|36|1|75|False|33|False
+64|36|1|76|False|33|False

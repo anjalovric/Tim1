@@ -86,7 +86,7 @@ namespace InitialProject.WPF.ViewModels
             Language=review.TourInstance.Tour.Language;
             Location = review.TourInstance.Tour.Location;
             StartDate = review.TourInstance.Date;
-            StartTime = review.TourInstance.StartClock;
+            StartTime = review.TourInstance.StartDate.Hour + ":" + review.TourInstance.StartDate.Minute + ":" + review.TourInstance.StartDate.Second;
             FindCheckPoints(review);
             SetFirstImages(review);
         }

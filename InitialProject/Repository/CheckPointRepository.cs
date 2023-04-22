@@ -54,12 +54,10 @@ namespace InitialProject.Repository
             _serializer.ToCSV(FilePath, _checkPoints);
             return checkPoint;
         }
-
         public CheckPoint GetById(int id)
         {
             return _checkPoints.Find(n => n.Id == id);
         }
-
         public List<CheckPoint> GetByInstance(int tourId)
         {
             _checkPoints = _serializer.FromCSV(FilePath);
@@ -94,6 +92,5 @@ namespace InitialProject.Repository
                 }
             }
         }
-
     }
 }

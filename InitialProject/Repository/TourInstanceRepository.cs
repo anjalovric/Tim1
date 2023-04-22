@@ -59,36 +59,19 @@ namespace InitialProject.Repository
             List<TourInstance> list = new List<TourInstance>();
             foreach (TourInstance tour in _tourInstances)
 
-                if(tour.StartDate.Date==DateTime.Now.Date && tour.Finished==false && tour.Guide.Id==guide.Id && tour.Canceled==false) 
-                {   
-                    string h = tour.StartClock.Split(':')[0];
-                    string m = tour.StartClock.Split(":")[1];
-                    string s = tour.StartClock.Split(":")[2];
-                    if(Convert.ToInt32(h)> DateTime.Now.Hour)
-                    {
+                if(tour.StartDate.Date==DateTime.Now.Date && tour.Finished==false && tour.Guide.Id==guide.Id && tour.Canceled==false && tour.StartDate>DateTime.Now)                  
                         list.Add(tour);
-                    }else if(Convert.ToInt32(h)==DateTime.Now.Hour && Convert.ToInt32(m)>DateTime.Now.Minute)
-                    {
-                        list.Add(tour);
-                    }else if(Convert.ToInt32(h)==DateTime.Now.Hour && Convert.ToInt32(m)==DateTime.Now.Minute && Convert.ToInt32(s) >DateTime.Now.Second)
-                    {
-                        list.Add(tour);
-                    }
-                }
             return list;
         }
         public List<TourInstance> GetInstancesLaterThan48hFromNow(Guide guide)
         {
-
             _tourInstances = _serializer.FromCSV(FilePath);
             List<TourInstance> list = new List<TourInstance>();
             foreach (TourInstance tour in _tourInstances)
             {
                 if (tour.Finished == false && tour.StartDate>DateTime.Now.Date && tour.Guide.Id==guide.Id && tour.Canceled==false)
                 {
-                    var prevDate = Convert.ToDateTime(tour.StartDate.ToString().Split(" ")[0] +" "+ tour.StartClock);
-                    var today = DateTime.Now;
-                    var diffOfDates = today - prevDate;
+                    var diffOfDates = DateTime.Now - tour.StartDate;
 
                     if (diffOfDates.Days < -2 )
                         list.Add(tour);

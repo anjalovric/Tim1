@@ -7,7 +7,7 @@
       xmlns:local="clr-namespace:InitialProject.WPF.Views.OwnerViews"
       mc:Ignorable="d" 
       d:DesignHeight="630" d:DesignWidth="430"
-      Title="Review Guest" Background="LightBlue">
+      Title="Review Guest" Background="White">
 
     <Grid>
         <Border Background="Gray" HorizontalAlignment="Center" Height="144" BorderBrush="Black" BorderThickness="1" VerticalAlignment="Top" Width="383">

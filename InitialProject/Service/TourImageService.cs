@@ -36,9 +36,20 @@ namespace InitialProject.Service
         {
             return repository.GetById(id);
         }
-        public List<TourImage> GetByTour(int touId)
+        public List<TourImage> GetByTour(int tourId)
         {
-            return repository.GetByTour(touId);
+            return repository.GetByTour(tourId);
+        }
+        public void AddImages(int tourId,List<TourImage>images)
+        {
+            foreach (TourImage image in images)
+            {
+                if (image.TourId == -1)
+                {
+                    image.TourId = tourId;
+                    Save(image);
+                }
+            }
         }
     }
 

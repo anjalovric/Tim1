@@ -4,7 +4,6 @@ using InitialProject.Model;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-
 namespace InitialProject.Service
 {
     public class CheckPointService
@@ -19,9 +18,17 @@ namespace InitialProject.Service
         {
             return repository.Save(checkPoint);
         }
+        public CheckPoint Update(CheckPoint checkPoint)
+        {
+            return repository.Update(checkPoint);
+        }
         public List<CheckPoint> GetByInstance(int tourId)
         {
             return repository.GetByInstance(tourId);
+        }
+        public void Delete(CheckPoint checkPoint)
+        {
+            repository.Delete(checkPoint);
         }
         public void UpdateAllPointsListToNextPoint(ObservableCollection<CheckPoint> AllPoints, int orderCounter)
         {
@@ -70,6 +77,20 @@ namespace InitialProject.Service
                 }
             }
             return pointsName;
+        }
+        public void UpdateCheckPoints(int tourId,ObservableCollection<CheckPoint> TourPoints)
+        {
+            int i = 1;
+            foreach (CheckPoint checkPoint in TourPoints)
+            {
+                if (checkPoint.TourId == -1)
+                {
+                    checkPoint.TourId = tourId;
+                    checkPoint.Order = i;
+                    Save(checkPoint);
+                    i++;
+                }
+            }
         }
     }
 }
