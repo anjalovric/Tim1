@@ -84,14 +84,13 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             {
                 Tour thisTour;
                 thisTour = _tourInstanceService.GetAll().Find(n => n.Id == instanceId).Tour;
-                SetLocations();
-                SetTour(thisTour);
+                SetLocations(thisTour);
                 if (thisTour != null)
-                    PointLabel.Content = "Are you present on point " + _checkPointService.GetAll().Find(n => n.Id == pointId).Name + " on tour " +
-                                       thisTour.Name + " ?";
+                    PointLabel.Content = "Name: " + thisTour.Name + "\n\nLocation: " + thisTour.Location+"\n\nDuration: "+thisTour.Duration+"\n\nCheckpoint: "+ _checkPointService.GetAll().Find(n => n.Id == pointId).Name;
+
             }
         }
-        public void SetLocations()
+        public void SetLocations(Tour Tour)
         {
             List<Location> locations = _locationService.GetAll();
             List<Tour> tours = _tourRepository.GetAll();
@@ -100,12 +99,17 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             {
                 foreach (Tour tour in tours)
                 {
-                    if (location.Id == tour.Location.Id)
-                        tour.Location = location;
+                    if (location.Id == tour.Location.Id && tour.Id == Tour.Id)
+                    {
+                        Tour.Location = location;
+                        Tour.Name = tour.Name;
+                        Tour.Duration = tour.Duration;
+                    }
+                        //tour.Location = location;
                 }
             }
         }
-        public void SetTour(Tour Tour)
+        /*public void SetTour(Tour Tour)
         {
             List<Tour> tours = _tourRepository.GetAll();
             foreach (Tour tour in tours)
@@ -115,6 +119,6 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
                     Tour.Name = tour.Name;
                 }
             }
-        }
+        }*/
     }
 }

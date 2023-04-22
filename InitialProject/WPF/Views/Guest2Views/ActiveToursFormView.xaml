@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:InitialProject.View"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="768" d:DesignWidth="1024" Width="1024" Height="768" Background="Transparent">
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -17,6 +18,7 @@
             <ColumnDefinition Width="10*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+        <Border BorderBrush="#151f2d" Background="#151f2d" BorderThickness="4,4,4,4" CornerRadius="25 25 25 25" Grid.ColumnSpan="3" Grid.RowSpan="3"/>
         <DataGrid x:Name="ActiveTourListDataGrid" Grid.Column="1" ItemsSource="{Binding Path=TourInstances,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=Selected}" IsReadOnly="True" AutoGenerateColumns="False" VerticalAlignment="Center" HorizontalAlignment="Center" Height="240"  Width="800" Grid.Row="1">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Location" Width="1*" Binding="{Binding Tour.Location}"/>
@@ -33,6 +35,9 @@
                 <DataGridTextColumn Header="Checkpoint name" Width="1*" Binding="{Binding Name}" />
             </DataGrid.Columns>
         </DataGrid>
-        <Label Content="Active tours" FontWeight="Bold" Foreground="White" FontSize="20" HorizontalAlignment="Left" Margin="93,0,0,0" VerticalAlignment="Top" Width="228" Grid.Column="1" Grid.Row="1"/>
+
+        <Label Content="Active tours" FontWeight="Bold" Foreground="White" FontSize="20" HorizontalAlignment="Left" Margin="27,0,0,0" VerticalAlignment="Center" Width="228" Grid.Column="1"/>
+        <TextBlock Text="U nastavku mozete vidjeti sve aktivne ture na koje ste se prijavili i aktivan checkpoint." Foreground="#7166f9" HorizontalAlignment="Left" Margin="27,105,0,0" VerticalAlignment="Top" Width="834" Height="39" Grid.Column="1" Grid.ColumnSpan="2"/>
+
     </Grid>
 </UserControl>
