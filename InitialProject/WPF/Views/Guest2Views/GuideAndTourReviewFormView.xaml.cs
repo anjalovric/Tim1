@@ -32,5 +32,7 @@ namespace InitialProject.WPF.Views.Guest2Views
             InitializeComponent();
             DataContext = new GuideAndTourReviewViewModel(tourInstance, guest2, knowledge, language, interestingFacts, imagePicture, comment);
         }
+
+        
     }
 }

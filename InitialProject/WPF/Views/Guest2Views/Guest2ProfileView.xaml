@@ -6,6 +6,12 @@
              xmlns:local="clr-namespace:InitialProject.WPF.Views.Guest2Views"
              mc:Ignorable="d" 
              d:DesignHeight="768" d:DesignWidth="1024" Width="1024" Height="768">
+    <UserControl.Resources>
+        <Style x:Key="LabelStyle" TargetType="Label">
+            <Setter Property="Foreground" Value="#7166f9"/>
+            <Setter Property="FontSize" Value="15"/>
+        </Style>
+    </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -30,19 +36,19 @@
         <Label Content="Ivana Kovacevic" Foreground="White" Grid.Row="0" Grid.Column="0" Margin="58,16,68,10" FontSize="20" FontWeight="Bold"/>
         <Image Grid.Row="1" Source="{Binding ImageSource, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Margin="52,16,63,32" Grid.RowSpan="3"></Image>
         <Label Grid.Row="1" Grid.Column="1" Content="CONTACT INFORMATION" Foreground="White" FontSize="18" FontWeight="Bold"/>
-        <Label Grid.Row="2" Grid.Column="1" Content="First name" Foreground="#7166f9" FontSize="15"/>
+        <Label Grid.Row="2" Grid.Column="1" Content="First name" Style="{StaticResource LabelStyle}"/>
         <TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding Guest2.Name}" FontWeight="Bold" Foreground="White" FontSize="15" Margin="0,10,0,0"/>
-        <Label Grid.Row="3" Grid.Column="1" Content="Last name" Foreground="#7166f9" FontSize="15"/>
+        <Label Grid.Row="3" Grid.Column="1" Content="Last name" Style="{StaticResource LabelStyle}"/>
         <TextBlock Grid.Row="3" Grid.Column="2" Text="{Binding Guest2.LastName}" FontWeight="Bold" Foreground="White" FontSize="15" Margin="0,10,0,0"/>
-        <Label Grid.Row="4" Grid.Column="1" Content="Username" Foreground="#7166f9" FontSize="15"/>
+        <Label Grid.Row="4" Grid.Column="1" Content="Username" Style="{StaticResource LabelStyle}"/>
         <TextBlock Grid.Row="4" Grid.Column="2" Text="{Binding Guest2.Username}" FontWeight="Bold" Foreground="White" FontSize="15" Margin="0,10,0,0"/>
-        <Label Grid.Row="5" Grid.Column="1" Content="Phone" Foreground="#7166f9" FontSize="15"/>
+        <Label Grid.Row="5" Grid.Column="1" Content="Phone" Style="{StaticResource LabelStyle}"/>
         <TextBlock Grid.Row="5" Grid.Column="2" Text="{Binding Guest2.PhoneNumber}" FontWeight="Bold" Foreground="White" FontSize="15" Margin="0,10,0,0"/>
-        <Label Grid.Row="6" Grid.Column="1" Content="Date of Birth" Foreground="#7166f9" FontSize="15"/>
+        <Label Grid.Row="6" Grid.Column="1" Content="Date of Birth" Style="{StaticResource LabelStyle}"/>
         <TextBlock Grid.Row="6" Grid.Column="2" Text="{Binding Guest2.DateOfBirth}" FontWeight="Bold" Foreground="White" FontSize="15" Margin="0,10,0,0"/>
-        <Label Grid.Row="7" Grid.Column="1" Content="City" Foreground="#7166f9" FontSize="15"/>
+        <Label Grid.Row="7" Grid.Column="1" Content="City" Style="{StaticResource LabelStyle}"/>
         <TextBlock Grid.Row="7" Grid.Column="2" Text="{Binding Guest2.Location.City}" FontWeight="Bold" Foreground="White" FontSize="15" Margin="0,10,0,0"/>
-        <Label Grid.Row="8" Grid.Column="1" Content="Country" Foreground="#7166f9" FontSize="15"/>
+        <Label Grid.Row="8" Grid.Column="1" Content="Country" Style="{StaticResource LabelStyle}"/>
         <TextBlock Grid.Row="8" Grid.Column="2" Text="{Binding Guest2.Location.Country}" FontWeight="Bold" Foreground="White" FontSize="15" Margin="0,10,0,0"/>
         
     </Grid>
