@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:InitialProject.View"
       mc:Ignorable="d"
-      Title="MyAccommodationReservations" Height="696" Width="1024">
+      Title="MyAccommodationReservations" d:DesignHeight="696" d:DesignWidth="1024">
     <Page.Resources>
         <Style TargetType="Grid">
             <Setter Property="Background" Value="#37492d"></Setter>
@@ -57,17 +57,16 @@
                 </ControlTemplate>
             </TabControl.Template>
 
-            <TabItem Header="Completed reservations" FontSize="16">
-
+            <TabItem Header="Not completed reservations" FontSize="16">
                 <Grid>
-                    <Label FontSize="24" FontWeight="Bold" Margin="0,10,0,0" HorizontalAlignment="Center">COMPLETED RESERVATIONS</Label>
-                    <DataGrid x:Name="CompletedReservationsDataGrid" Margin="0,30,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" ItemsSource="{Binding Path=CompletedReservations,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedCompletedReservation}" AutoGenerateColumns="False" IsReadOnly="True" Height="322" Width="866" UseLayoutRounding="False">
+                    <Label FontSize="24" FontWeight="Bold" Margin="0,10,0,0" HorizontalAlignment="Center">NOT COMPLETED RESERVATIONS</Label>
+                    <DataGrid x:Name="NotCompletedReservationsDataGrid" VerticalContentAlignment="Center" FontSize="16" Margin="0,30,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" ItemsSource="{Binding Path=NotCompletedReservations,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedNotCompletedReservation}" AutoGenerateColumns="False" IsReadOnly="True" Height="322" Width="970" UseLayoutRounding="False">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Name" Width="2.5*" Binding="{Binding Accommodation.Name}"/>
-                            <DataGridTextColumn Header="Location" Width="3*" Binding="{Binding Accommodation.Location}"/>
-                            <DataGridTextColumn Header="Arrival" Width="2.5*" Binding="{Binding Arrival}"/>
-                            <DataGridTextColumn Header="Departure" Width="2.5*" Binding="{Binding Departure}"/>
-                            <DataGridTextColumn Header="Owner" Width="2.5*">
+                            <DataGridTextColumn Header="Name" Width="2*" Binding="{Binding Accommodation.Name}"/>
+                            <DataGridTextColumn Header="Location" Width="4.5*" Binding="{Binding Accommodation.Location}"/>
+                            <DataGridTextColumn Header="Arrival" Width="3.2*" Binding="{Binding Arrival}"/>
+                            <DataGridTextColumn Header="Departure" Width="3.2*" Binding="{Binding Departure}"/>
+                            <DataGridTextColumn Header="Owner" Width="1.8*">
                                 <DataGridTextColumn.Binding>
                                     <MultiBinding StringFormat="{}{0} {1}">
                                         <Binding Path="Accommodation.Owner.Name"/>
@@ -75,7 +74,44 @@
                                     </MultiBinding>
                                 </DataGridTextColumn.Binding>
                             </DataGridTextColumn>
-                            <DataGridTemplateColumn x:Name="Rate" Header="Rate" Width="0.9*">
+                            <DataGridTemplateColumn x:Name="ChangeDate" Header="Reschedule" Width="1.7*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Name="ChangeDate" Background="#c99585" Content="Reschedule" Command="{Binding DataContext.RescheduleReservationCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
+                            <DataGridTemplateColumn x:Name="Cancel" Header="Cancel" Width="1.1*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Name="Rate" Content="Cancel" Background="#c99585" Command="{Binding DataContext.CancelReservationCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Completed reservations" FontSize="16">
+                <Grid>
+                    <Label FontSize="24" FontWeight="Bold" Margin="0,10,0,0" HorizontalAlignment="Center">COMPLETED RESERVATIONS</Label>
+                    <DataGrid x:Name="CompletedReservationsDataGrid" VerticalContentAlignment="Center" FontSize="16" Margin="0,30,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" ItemsSource="{Binding Path=CompletedReservations,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedCompletedReservation}" AutoGenerateColumns="False" IsReadOnly="True" Height="322" Width="920" UseLayoutRounding="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Name" Width="2.5*" Binding="{Binding Accommodation.Name}"/>
+                            <DataGridTextColumn Header="Location" Width="4.5*" Binding="{Binding Accommodation.Location}"/>
+                            <DataGridTextColumn Header="Arrival" Width="3.2*" Binding="{Binding Arrival}"/>
+                            <DataGridTextColumn Header="Departure" Width="3.2*" Binding="{Binding Departure}"/>
+                            <DataGridTextColumn Header="Owner" Width="2*">
+                                <DataGridTextColumn.Binding>
+                                    <MultiBinding StringFormat="{}{0} {1}">
+                                        <Binding Path="Accommodation.Owner.Name"/>
+                                        <Binding Path="Accommodation.Owner.LastName" />
+                                    </MultiBinding>
+                                </DataGridTextColumn.Binding>
+                            </DataGridTextColumn>
+                            <DataGridTemplateColumn x:Name="Rate" Header="Rate" Width="1*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <Button Name="Rate" Content="Rate" Background="#c99585" Command="{Binding DataContext.RateOwnerAndAccommodationCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
@@ -83,51 +119,10 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
                         </DataGrid.Columns>
-
-
                     </DataGrid>
                 </Grid>
 
 
-            </TabItem>
-            <TabItem Header="Upcoming reservations" FontSize="16">
-                <Grid>
-                    <Label FontSize="24" FontWeight="Bold" Margin="0,10,0,0" HorizontalAlignment="Center">UPCOMING RESERVATIONS</Label>
-                    <DataGrid x:Name="NotCompletedReservationsDataGrid" Margin="0,30,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" ItemsSource="{Binding Path=NotCompletedReservations,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedNotCompletedReservation}" AutoGenerateColumns="False" IsReadOnly="True" Height="322" Width="866" UseLayoutRounding="False">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Name" Width="2.5*" Binding="{Binding Accommodation.Name}"/>
-                            <DataGridTextColumn Header="Location" Width="3*" Binding="{Binding Accommodation.Location}"/>
-                            <DataGridTextColumn Header="Arrival" Width="2.5*" Binding="{Binding Arrival}"/>
-                            <DataGridTextColumn Header="Departure" Width="2.5*" Binding="{Binding Departure}"/>
-                            <DataGridTextColumn Header="Owner" Width="2.5*">
-                                <DataGridTextColumn.Binding>
-                                    <MultiBinding StringFormat="{}{0} {1}">
-                                        <Binding Path="Accommodation.Owner.Name"/>
-                                        <Binding Path="Accommodation.Owner.LastName" />
-                                    </MultiBinding>
-                                </DataGridTextColumn.Binding>
-                            </DataGridTextColumn>
-                            <DataGridTemplateColumn x:Name="ChangeDate" Header="Change Date" Width="2*">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Button Name="ChangeDate" Background="#c99585" Content="Change date" Command="{Binding DataContext.RescheduleReservationCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-
-                            <DataGridTemplateColumn x:Name="Cancel" Header="Cancel" Width="1*">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Button Name="Rate" Content="Cancel" Background="#c99585" Command="{Binding DataContext.CancelReservationCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-
-                        </DataGrid.Columns>
-
-
-                    </DataGrid>
-                </Grid>
             </TabItem>
 
         </TabControl>

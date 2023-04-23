@@ -50,6 +50,32 @@ namespace InitialProject.Service
             return reviewsByOwner;
         }
 
+        public List<GuestReview> GetAllToDisplay(Guest1 guest1)
+        {
+            List<GuestReview> reviewsToDisplay = new List<GuestReview>();
+
+            foreach (GuestReview guestReview in guestReviews)
+            {
+                AccommodationReservation reservationToReview = guestReview.Reservation;
+                bool isThisGuest1 = reservationToReview.Guest.Id == guest1.Id;
+
+                if (IsReviewForDisplay(reservationToReview) && isThisGuest1)
+                {
+                    reviewsToDisplay.Add(guestReview);
+                }
+            }
+            return reviewsToDisplay;
+        }
+
+        private bool IsReviewForDisplay(AccommodationReservation reservationToReview)
+        {
+            OwnerReviewService ownerReviewService = new OwnerReviewService();
+
+            bool isOwnerReviewed = ownerReviewService.HasReview(reservationToReview);
+            bool fiveDaysPassed = (DateTime.Now.Date - reservationToReview.Departure.Date).TotalDays > 5;
+            return isOwnerReviewed || fiveDaysPassed;
+        }
+    
         public void Add(GuestReview guestReview)
         {
             guestReviewRepository.Add(guestReview);
@@ -63,5 +89,51 @@ namespace InitialProject.Service
 
             return stayedLessThan5DaysAgo && !alreadyReviewed && isThisOwner;
         }
+
+        public double GetAverageCleanlinessReview(Guest1 guest1)
+        {
+            double sumCleanlinessReview = 0;
+            int counter = 0;
+
+            foreach (GuestReview guestReview in guestReviews)
+            {
+                if(guestReview.Reservation.Guest.Id == guest1.Id)
+                {
+                    sumCleanlinessReview += guestReview.Cleanliness;
+                    counter++;
+                }
+            }
+                return sumCleanlinessReview/counter;
+        }
+
+        public double GetAverageFollowingRulesReview(Guest1 guest1)
+        {
+            double sumFollowingRulesReview = 0;
+            int counter = 0;
+
+            foreach (GuestReview guestReview in guestReviews)
+            {
+                if (guestReview.Reservation.Guest.Id == guest1.Id)
+                {
+                    sumFollowingRulesReview += guestReview.RulesFollowing;
+                    counter++;
+                }
+            }
+            return sumFollowingRulesReview / counter;
+        }
+        public int GetReviewsNumberByGuest(Guest1 guest1)
+        {
+            int counter = 0;
+
+            foreach (GuestReview guestReview in guestReviews)
+            {
+                if (guestReview.Reservation.Guest.Id == guest1.Id)
+                {
+                    counter++;
+                }
+            }
+            return counter;
+        }
+
     }
 }
