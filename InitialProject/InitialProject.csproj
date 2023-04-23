@@ -9,6 +9,8 @@
 
   <ItemGroup>
 
+    <None Remove="Resources\Images\365day.png" />
+
     <None Remove="Resources\Images\a1.jpg" />
 
     <None Remove="Resources\Images\a2.jpg" />
@@ -16,11 +18,15 @@
     <None Remove="Resources\Images\accommodation.jpg" />
     <None Remove="Resources\Images\account.png" />
     <None Remove="Resources\Images\add.png" />
+    <None Remove="Resources\Images\addBW.png" />
     <None Remove="Resources\Images\andjelkina-kapija.jpg" />
     <None Remove="Resources\Images\athens.jpg" />
     <None Remove="Resources\Images\bell.png" />
     <None Remove="Resources\Images\calendarIcon.png" />
+    <None Remove="Resources\Images\CANC.png" />
+    <None Remove="Resources\Images\CG.png" />
     <None Remove="Resources\Images\clock.png" />
+    <None Remove="Resources\Images\continue.png" />
     <None Remove="Resources\Images\corect.png" />
     <None Remove="Resources\Images\black.jpeg" />
     <None Remove="Resources\Images\blond.jpg" />
@@ -54,12 +60,15 @@
     <None Remove="Resources\Images\icons8-upload-64.png" />
     <None Remove="Resources\Images\img_exit.png" />
     <None Remove="Resources\Images\img_home.png" />
+    <None Remove="Resources\Images\LOGO %282%29.jpg" />
     <None Remove="Resources\Images\logo.jpg" />
     <None Remove="Resources\Images\minus.png" />
+    <None Remove="Resources\Images\month.png" />
     <None Remove="Resources\Images\museum.jpg" />
     <None Remove="Resources\Images\orange.jpg" />
     <None Remove="Resources\Images\plus.png" />
     <None Remove="Resources\Images\profile.png" />
+    <None Remove="Resources\Images\Red-incorrect-icon-design-on-transparent-background-PNG.png" />
     <None Remove="Resources\Images\red.jpg" />
     <None Remove="Resources\Images\redIncorect.png" />
     <None Remove="Resources\Images\request.png" />
@@ -96,11 +105,24 @@
     <None Remove="Resources\Images\signout.png" />
     <None Remove="Resources\Images\star.png" />
     <None Remove="Resources\Images\tools.png" />
+    <None Remove="Resources\Images\tour.jpg" />
+    <None Remove="Resources\Images\transparentGREEN.jpg" />
+    <None Remove="Resources\Images\transparentRED.png" />
     <None Remove="Resources\Images\trebinje.jpg" />
     <None Remove="Resources\Images\user-male-circle.png" />
     <None Remove="Resources\Images\User_icon_2.svg.png" />
     <None Remove="Resources\Images\view.png" />
     <None Remove="Resources\Images\voucher.png" />
+    <None Remove="Resources\Images\yearly.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\Images\365day.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\month.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
@@ -115,6 +137,9 @@
     </Content>
     <Content Include="Resources\Images\add.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\addBW.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\andjelkina-kapija.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -149,10 +174,19 @@
     <Content Include="Resources\Images\calendarIcon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Images\CANC.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\CG.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Images\clock.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\clock.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\continue.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
 
@@ -200,10 +234,25 @@
     <Content Include="Resources\Images\img_home.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Images\LOGO (2).jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Images\museum.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Images\Red-incorrect-icon-design-on-transparent-background-PNG.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Images\sky.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\tour.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\transparentGREEN.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\transparentRED.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\trebinje.jpg">
@@ -211,6 +260,9 @@
     </Content>
     <Content Include="Resources\Images\user-male-circle.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\yearly.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Resource Include="Resources\Images\flowers.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -238,7 +290,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\request.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     
     <Content Include="Resources\Images\signout.png">

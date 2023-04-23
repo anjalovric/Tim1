@@ -60,5 +60,5 @@
 60|35|2|68|True|31|True
 61|36|1|73|True|33|True
 62|36|1|74|False|33|True
-63|36|1|75|False|33|False
-64|36|1|76|False|33|False
+63|36|1|75|True|33|True
+64|36|1|76|True|33|True

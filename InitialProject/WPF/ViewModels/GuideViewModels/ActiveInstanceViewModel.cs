@@ -96,7 +96,7 @@ namespace InitialProject.WPF.ViewModels
             Toast = "Hidden";
             TourInstanceTourLocationService tourInstanceTourLocation = new TourInstanceTourLocationService();
             tourInstanceTourLocation.FillTour(selected);
-            Title = selected.Tour.Name + ", " + selected.Date;
+            Title = selected.Tour.Name + ", " + selected.StartDate;
             NextEnabled = true;
             FinishEnabled = true;
             FindLastCheckedPoint();

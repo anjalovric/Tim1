@@ -8,47 +8,62 @@
         Title="GuideWindow" Height="750" Width="1100" WindowStartupLocation="CenterScreen">
     <Grid>
         <DockPanel>
-            <Grid DockPanel.Dock="Top" Height="33" Background="LightGray">
+            <Grid DockPanel.Dock="Top" Height="33" Style="{StaticResource GridMenu}">
 
                 <DockPanel  Width="500" HorizontalAlignment="Left">
-                    <Menu DockPanel.Dock="Top" Width="500" Height="40" HorizontalAlignment="Left" Background="LightGray">
-                        <MenuItem Header="Home" Height="33" Width="100" FontSize="15" Command="{Binding HomeCommand}" >
+                    <Menu DockPanel.Dock="Top" Width="500" Height="40" HorizontalAlignment="Left" Style="{StaticResource Menu}">
+                        <MenuItem Header="Home" Height="33" Width="100"  Command="{Binding HomeCommand}" >
 
                         </MenuItem>
-                        <MenuItem Header="Tours" Height="33" Width="100" FontSize="15" >
-                            <MenuItem Header="Add" Height="33" Width="150" FontSize="15" Command="{Binding AddCommand}">
-
+                        <MenuItem Header="Tours" Height="33" Width="100" >
+                            <MenuItem Header="Add" Height="33" Width="150"  Command="{Binding AddCommand}" Style="{StaticResource MenuItem}">
+                                <MenuItem.Icon>
+                                    <Image Source="/Resources/Images/addBW.png"/>
+                                </MenuItem.Icon>
                             </MenuItem>
-                            <MenuItem Header="Cancel" Height="33" Width="150" FontSize="15" Command="{Binding CancelCommand}" >
-
+                            <MenuItem Header="Cancel" Height="33" Width="150"  Command="{Binding CancelCommand}" Style="{StaticResource MenuItem}" >
+                                <MenuItem.Icon>
+                                    <Image Source="/Resources/Images/CANC.png"/>
+                                </MenuItem.Icon>
                             </MenuItem>
-                            <MenuItem Header="Activated" Height="33" Width="150" FontSize="15" Command="{Binding ActivatedCommand}" >
-
+                            <MenuItem Header="Activated" Height="33" Width="155" Command="{Binding ActivatedCommand}" Style="{StaticResource MenuItem}" >
+                                <MenuItem.Icon>
+                                    <Image Source="/Resources/Images/continue.png"/>
+                                </MenuItem.Icon>
                             </MenuItem>
                         </MenuItem>
-                        <MenuItem Header="Statistics" Height="33" Width="100" FontSize="15" >
-                            <MenuItem Header="Tours" Height="33" Width="150" FontSize="15" Command="{Binding TourStatisticsCommand}">
-
+                        <MenuItem Header="Statistics" Height="33" Width="100"  >
+                            <MenuItem Header="Tours" Height="33" Width="150" Command="{Binding TourStatisticsCommand}" Style="{StaticResource MenuItem}">
+                                <MenuItem.Icon>
+                                    <Image Source="/Resources/Images/tour.jpg"/>
+                                </MenuItem.Icon>
                             </MenuItem>
-                            <MenuItem Header="Requests" Height="33" Width="150" FontSize="15"  >
-                                <MenuItem Header="Monthly" Height="33" Width="150" FontSize="15"  >
-
+                            <MenuItem Header="Requests" Height="33" Width="150"  Style="{StaticResource MenuItem}" >
+                                <MenuItem.Icon>
+                                    <Image Source="/Resources/Images/request.png"/>
+                                </MenuItem.Icon>
+                                <MenuItem Header="Monthly" Height="33" Width="155"   Style="{StaticResource MenuItem}">
+                                    <MenuItem.Icon>
+                                        <Image Source="/Resources/Images/month.png"/>
+                                    </MenuItem.Icon>
                                 </MenuItem>
-                                <MenuItem Header="Yearly" Height="33" Width="150" FontSize="15" >
-
+                                <MenuItem Header="Yearly" Height="33" Width="150"  Style="{StaticResource MenuItem}">
+                                    <MenuItem.Icon>
+                                        <Image Source="/Resources/Images/365day.png"/>
+                                    </MenuItem.Icon>
                                 </MenuItem>
                             </MenuItem>
                         </MenuItem>
-                        <MenuItem Header="Reviews" Height="33" Width="100" FontSize="15" Command="{Binding ReviewCommand}">
+                        <MenuItem Header="Reviews" Height="33" Width="100"  Command="{Binding ReviewCommand}">
 
                         </MenuItem>
-                        <MenuItem Header="Requests" Height="33" Width="100" FontSize="15"  >
+                        <MenuItem Header="Requests" Height="33" Width="100"  >
 
                         </MenuItem>
                     </Menu>
                 </DockPanel>
-                <DockPanel  Width="400" HorizontalAlignment="Right" Background="LightGray" >
-                    <Menu DockPanel.Dock="Top" Width="150" Height="33" HorizontalAlignment="Right" Background="LightGray">
+                <DockPanel  Width="400" HorizontalAlignment="Right" Style="{StaticResource DockPanel}" >
+                    <Menu DockPanel.Dock="Top" Width="150" Height="33" HorizontalAlignment="Right" Style="{StaticResource Menu}">
                         <MenuItem  Height="33" Width="75" FontSize="15" Command="{Binding SignOutCommand}">
                             <MenuItem.Icon>
                                 <Image Source="/Resources/Images/signout.png" Width="60" Margin="1,-7,-45,-8"  />

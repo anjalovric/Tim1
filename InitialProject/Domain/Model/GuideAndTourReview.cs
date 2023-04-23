@@ -28,7 +28,7 @@ namespace InitialProject.Model
         {
             TourInstance = new TourInstance();
             Valid = true;
-            ValidationUri = "Resources/Images/greenCorect.png";
+            ValidationUri = "Resources/Images/transparentGREEN.jpg";
             ValidationImage = new BitmapImage(new Uri("/" + ValidationUri, UriKind.Relative));
         }
         public GuideAndTourReview(int guideId, Guest2 guest,TourInstance tourInstance, int language, int interestingFacts, int knowledge, String comment)
@@ -42,7 +42,7 @@ namespace InitialProject.Model
             Knowledge = knowledge;
             Comment = comment;
             Valid = true;
-            ValidationUri = "Resources/Images/greenCorect.png";
+            ValidationUri = "Resources/Images/transparentGREEN.jpg";
             ValidationImage = new BitmapImage(new Uri("/" + ValidationUri, UriKind.Relative));
         }
         public string[] ToCSV()

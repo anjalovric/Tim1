@@ -6,40 +6,49 @@
       xmlns:local="clr-namespace:InitialProject.WPF.Views.GuideViews"
       mc:Ignorable="d" 
       d:DesignHeight="707" d:DesignWidth="1100"
-      Title="ActiveInstanceView" Background="White">
+      Title="ActiveInstanceView" >
 
-    <Grid>
-        <Label Margin="94,92,657,556" Visibility="Visible">
+    <Grid Style="{StaticResource Background}">
+        <Label Margin="94,92,657,556" VerticalAlignment="Center" Style="{StaticResource Label}">
             List of checkpoints for choosen tour:
         </Label>
-        <DataGrid ItemsSource="{Binding Path=AllPoints,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" AutoGenerateColumns="False" Margin="94,144,550,264">
+        <DataGrid HeadersVisibility="Column" ItemsSource="{Binding Path=AllPoints,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource Tables}" Margin="94,144,550,264">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="1*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Order" Binding="{Binding Order}" Width="1*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Checked" Binding="{Binding Checked}" Width="1*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="1*" HeaderStyle="{StaticResource CenterGridHeaderStyle}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Order" Binding="{Binding Order}" Width="1*" HeaderStyle="{StaticResource CenterGridHeaderStyle}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Checked" Binding="{Binding Checked}" Width="1*" HeaderStyle="{StaticResource CenterGridHeaderStyle}"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Label  Width="200" Margin="94,443,806,200">Current checkpoint:</Label>
-        <DataGrid  Margin="94,500,550,125" ItemsSource="{Binding Path=CurrentPoint,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" AutoGenerateColumns="False">
+        <Label  Width="200" Margin="94,443,806,200" VerticalAlignment="Center" Style="{StaticResource Label}">Current checkpoint:</Label>
+        <DataGrid HeadersVisibility="Column" Margin="94,500,550,118" ItemsSource="{Binding Path=CurrentPoint,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource Tables}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="1*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Order" Binding="{Binding Order}" Width="1*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Checked" Binding="{Binding Checked}" Width="1*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="1*" HeaderStyle="{StaticResource CenterGridHeaderStyle}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Order" Binding="{Binding Order}" Width="1*" HeaderStyle="{StaticResource CenterGridHeaderStyle}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Checked" Binding="{Binding Checked}" Width="1*" HeaderStyle="{StaticResource CenterGridHeaderStyle}"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="Finish" Command="{Binding FinishCommand}"  Margin="784,290,124,353" IsEnabled="{Binding FinishEnabled}" >Finish tour</Button>
+        <Button x:Name="Finish" Style="{StaticResource Button}" Command="{Binding FinishCommand}"  Margin="784,290,124,353" IsEnabled="{Binding FinishEnabled}" >Finish tour</Button>
 
-        <Button x:Name="Next"  Command="{Binding NextPointCommand}" Margin="585,529,440,125" IsEnabled="{Binding NextEnabled}" >
-            <Image Source="/Resources/Images/arrow.png" Height="20" VerticalAlignment="Center" Width="63"/>
+        <Button x:Name="Next"  Command="{Binding NextPointCommand}" Margin="569,500,431,118" IsEnabled="{Binding NextEnabled}" >
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <StackPanel Orientation="Horizontal">
+                            <Rectangle Width="30" Height="14" Stroke="black" Fill="black"/>
+                            <Polygon Points= "0,15 15,22 0,30" Stroke="black" Fill="black" Height="45" Width="35" />
+                        </StackPanel>
+                    </Grid>
+                </ControlTemplate>
+            </Button.Template>
         </Button>
 
 
-        <StackPanel x:Name="FinishMessage" Margin="739,518,0,1" Background="LightGray" Visibility="{Binding Toast}">
-            <Label Height="58" FontSize="20" FontWeight="Heavy" HorizontalAlignment="Center">This tour is finished!</Label>
-            <Button Width="105" Height="40" Command="{Binding HomeCommand}" IsEnabled="True" >OK</Button>
+        <StackPanel x:Name="FinishMessage" Margin="750,557,0,0" Style="{StaticResource Toast}" Visibility="{Binding Toast}">
+            <Label Height="45" FontSize="20" FontWeight="Heavy" HorizontalAlignment="Center">This tour is finished!</Label>
+            <Button Style="{StaticResource ButtonToast}" Command="{Binding HomeCommand}" IsEnabled="True" >OK</Button>
         </StackPanel>
-        <Rectangle HorizontalAlignment="Left" Height="467" Margin="699,122,0,0" Stroke="Black" VerticalAlignment="Top" Width="1" Fill="LightGray"/>
-        <Label HorizontalAlignment="Left" Margin="780,158,0,0" VerticalAlignment="Top" Height="151" Width="216" FontSize="16" FontWeight="Medium">
+        <Rectangle HorizontalAlignment="Left" Height="467" Margin="699,122,0,0" Style="{StaticResource Rectangle}"/>
+        <Label HorizontalAlignment="Left" Margin="780,158,0,0" VerticalAlignment="Top" Height="151" Width="216" Style="{StaticResource StatisticLabel}">
             <TextBlock Height="151" Width="206">
             Press FINISH TOUR
             <LineBreak></LineBreak>
@@ -48,7 +57,12 @@
             before regular end!
             </TextBlock>
         </Label>
-        <Label Content="{Binding Title}" FontSize="25" FontWeight="Bold" HorizontalAlignment="Left" Margin="436,41,0,0" VerticalAlignment="Top" Width="370" Height="46"/>
+
+        <Grid Style="{StaticResource BackgroundHeader}" Margin="0,0,0,605">
+            <Label Content="{Binding Title}" Style="{StaticResource Header}" Margin="293,16,0,16"  Width="606" HorizontalAlignment="Left" />
+            <Image Source="/Resources/Images/LOGO (2).jpg" Margin="0,0,908,0"/>
+
+        </Grid>
 
 
     </Grid>
