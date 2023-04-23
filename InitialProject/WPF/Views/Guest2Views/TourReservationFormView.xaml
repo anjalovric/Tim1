@@ -30,8 +30,8 @@
 
         <Button Content="-" Background="#FFFCECB9" Grid.Column="2" Grid.Row="4" HorizontalAlignment="Left" TextElement.FontWeight="Bold" Margin="262,10,0,0" VerticalAlignment="Top" Width="36" Command="{Binding Guests_Decrement_Command}" RenderTransformOrigin="0.596,1.286" Height="36" BorderBrush="Gray" BorderThickness="3,3,3,3"/>
         <Button Content="+" Background="#FFFCECB9" Grid.Column="2" Grid.Row="4" HorizontalAlignment="Left" TextElement.FontWeight="Bold" Margin="638,10,0,0" VerticalAlignment="Top" Width="34" Command="{Binding Guests_Increment_Command}" RenderTransformOrigin="7.062,-0.088" Height="36" BorderBrush="Gray" BorderThickness="3,3,3,3"/>
-        <Button Content="OK" Background="#FFFCECB9" TextElement.FontWeight="Bold" Grid.Column="2" Grid.Row="7" HorizontalAlignment="Left" Margin="577,10,0,0" VerticalAlignment="Top" Command="{Binding ConfirmCommand}" BorderBrush="Gray" BorderThickness="4,4,4,4" Width="44"/>
-        <Button Content="Cancel" Background="#FFFCECB9" TextElement.FontWeight="Bold" Grid.Column="2" Grid.Row="7" HorizontalAlignment="Left" Margin="626,10,0,10" VerticalAlignment="Top" Command="{Binding CloseCommand}" BorderBrush="Gray" BorderThickness="4,4,4,4"/>
+        <Button Content="   OK" Background="#FFFCECB9" TextElement.FontWeight="Bold" Grid.Column="2" Grid.Row="7" HorizontalAlignment="Left" Margin="513,10,0,0" VerticalAlignment="Top" Command="{Binding ConfirmCommand}" BorderBrush="Gray" BorderThickness="4,4,4,4" Width="75"/>
+        <Button Content="   Cancel" Background="#FFFCECB9" TextElement.FontWeight="Bold" Grid.Column="2" Grid.Row="7" HorizontalAlignment="Left" Margin="597,10,0,0" VerticalAlignment="Top" Command="{Binding CloseCommand}" BorderBrush="Gray" BorderThickness="4,4,4,4" Width="75"/>
         <Label Content="Reservation" Grid.Row="0" Grid.Column="1" FontSize="20" FontWeight="Bold" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="153" Grid.ColumnSpan="2"/>
         <Label Content="Name: " Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Margin="10,8,0,0" VerticalAlignment="Top" Width="106" Grid.ColumnSpan="2"/>
         <Label Content="Average of years: " Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="118" Grid.ColumnSpan="2" Height="40" RenderTransformOrigin="0.5,0.5"/>
@@ -41,7 +41,7 @@
 
 
         <Border BorderBrush="Gray" BorderThickness="3,3,3,3" Grid.Column="2" Margin="262,10,0,21" Grid.Row="3">
-            <TextBox x:Name="ageInput" Background="#FFFCECB9" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="2" TextWrapping="Wrap" Text="{Binding Path=Age,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Width="421" Height="40"/>
+            <TextBox x:Name="ageInput" Background="#FFFCECB9" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="2" TextWrapping="Wrap" Text="{Binding Path=Age,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Width="411" Height="40"/>
         </Border>
 
         <DataGrid x:Name="ActivationVoucherDataGrid" Grid.Row="6" ItemsSource="{Binding Path=Vouchers,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=Selected}" IsReadOnly="True" AutoGenerateColumns="False" Margin="10,10,0,71" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2" >
@@ -60,6 +60,8 @@
         <TextBlock Grid.Row="2" Grid.Column="2" Margin="262,9,48,21" Text="{Binding guest2.LastName}" FontWeight="Bold"/>
         <Label x:Name="AgeLabel" Grid.Row="1" Grid.Column="2" Margin="302,233,191,58"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="5" TextWrapping="Wrap" Text="Ovdje se nalaze svi vauceri koje mozes iskoristiti za svoju rezervaciju ture" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" Width="628" FontWeight="Bold"/>
+        <Image Grid.Column="2" Source="/Resources/Images/cancel.png" Margin="603,3,0,28" HorizontalAlignment="Left" Width="17" Grid.Row="7"/>
+        <Image Source="/Resources/Images/ok.png" Grid.Column="2" Margin="523,3,132,28" Grid.Row="7"/>
 
     </Grid>
 </Window>

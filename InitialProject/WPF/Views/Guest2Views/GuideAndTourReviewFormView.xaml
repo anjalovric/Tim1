@@ -6,7 +6,7 @@
         xmlns:tk="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit.NET5" 
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
-        Title="RateTourAndGuide" Height="600" Width="920" WindowStartupLocation="CenterScreen">
+        Title="RateTourAndGuide" Height="600" Width="990" WindowStartupLocation="CenterScreen">
     <Grid Background="LightGray">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -36,13 +36,14 @@
         <Label Content="Add comment" FontWeight="Bold" FontSize="20" Margin="34,6,266,7" Grid.Row="4"/>
         <Label Content="Add photos" FontWeight="Bold" FontSize="20" Margin="10,9,286,11" Grid.Column="1" Grid.Row="4"/>
         <tk:WatermarkTextBox x:Name="comment" TextWrapping="Wrap" Margin="34,15,30,15" Watermark="Enter comment here" BorderBrush="Gray" BorderThickness="1" Grid.Row="5"/>
-        <Button Content="Confirm" Background="#FFFCECB9" Command="{Binding ConfirmCommand}" Margin="251,5,116,16" FontWeight="Bold" BorderBrush="Gray" BorderThickness="4,4,4,4" Grid.Column="1" Grid.Row="6"/>
-        <Button Content="Cancel" Background="#FFFCECB9" Command="{Binding CancelCommand}" Margin="344,5,29,16" FontWeight="Bold" BorderBrush="Gray" BorderThickness="4,4,4,4" Grid.Column="1" Grid.Row="6"/>
-        <Border Background="White" BorderBrush="Gray" Margin="10,15,29,16" Visibility="Visible" BorderThickness="1" Grid.Column="1" Grid.Row="5"/>
-        <Button Command="{Binding UploadImageCommand}" BorderBrush="White" Background="White" HorizontalAlignment="Left" Margin="355,170,42,22" FontWeight="Bold" Height="30" Grid.Column="1" Grid.Row="5">
+        <Button Content="  Confirm" Background="#FFFCECB9" Command="{Binding ConfirmCommand}" Margin="230,5,128,16" FontWeight="Bold" BorderBrush="Gray" BorderThickness="4,4,4,4" Grid.Column="1" Grid.Row="6"/>
+        <Image Source="/Resources/Images/ok.png" Grid.Row="6" Grid.Column="1" Margin="234,8,213,18"/>
+        <Button Content="  Cancel" Background="#FFFCECB9" Command="{Binding CancelCommand}" Margin="337,5,29,16" FontWeight="Bold" BorderBrush="Gray" BorderThickness="4,4,4,4" Grid.Column="1" Grid.Row="6"/>
+        <Border Background="White" BorderBrush="Gray" Margin="50,15,50,15" Visibility="Visible" BorderThickness="1" Grid.Column="1" Grid.Row="5"/>
+        <Button Command="{Binding UploadImageCommand}" BorderBrush="White" Background="White" HorizontalAlignment="Left" Margin="367,176,0,22" FontWeight="Bold" Grid.Column="1" Grid.Row="5" Width="29">
             <Image Source="/Resources/Images/icons8-upload-64.png" Height="22" Width="20"/>
         </Button>
-        <Image x:Name="imagePicture" Margin="45,35,108,35" Source="{Binding ImageSource, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="5"/>
+        <Image x:Name="imagePicture" Margin="50,56,50,55" Source="{Binding ImageSource, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="5"/>
 
         <Label Content="Rate tour and guide" Margin="32,11,185,0" FontSize="20" FontWeight="Bold"/>
 
@@ -50,7 +51,7 @@
 
 
 
-        <Button Command="{Binding BackCommand}" Margin="390,88,425,91" RenderTransformOrigin="0.5,0.5" Grid.Row="5" Grid.ColumnSpan="2">
+        <Button Command="{Binding BackCommand}" Margin="489,85,432,94" RenderTransformOrigin="0.5,0.5" Grid.Row="5" Grid.ColumnSpan="2">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -64,13 +65,13 @@
                     <Grid>
                         <StackPanel Orientation="Horizontal">
                             <Rectangle Width="30" Height="15" Stroke="Gray" Fill="Gray"/>
-                            <Polygon Points= "0,15 15,20 0,30" Stroke="Gray" Fill="Gray" Height="45" Width="30" />
+                            <Polygon Points= "0,15 15,20 0,30" Stroke="Gray" Fill="Gray" Height="45" Width="30" RenderTransformOrigin="0.489,0.551" />
                         </StackPanel>
                     </Grid>
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Button Command="{Binding NextCommand}" Margin="410,85,0,91" Grid.Column="1" Grid.Row="5">
+        <Button Command="{Binding NextCommand}" Margin="432,88,-24,88" Grid.Column="1" Grid.Row="5">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Grid>
@@ -82,11 +83,12 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Button Command="{Binding DeletePhotoCommand}" BorderBrush="White" Background="White" Height="30" Margin="380,170,42,22" FontWeight="Bold" Grid.Column="1" Grid.Row="5">
+        <Button Command="{Binding DeletePhotoCommand}" BorderBrush="White" Background="White" Margin="401,176,64,22" FontWeight="Bold" Grid.Column="1" Grid.Row="5">
             <Image Source="/Resources/Images/icons8-delete-67.png" Height="22" Width="20"/>
         </Button>
-        <Button Command="{Binding DeleteCommand}" BorderBrush="White" Background="White" Margin="380,170,42,22" Height="30" FontWeight="Bold" Grid.Row="5">
+        <Button Command="{Binding DeleteCommand}" BorderBrush="White" Background="White" Margin="422,176,42,22" FontWeight="Bold" Grid.Row="5">
             <Image Source="/Resources/Images/icons8-delete-67.png" Height="22" Width="20"/>
         </Button>
+        <Image Source="/Resources/Images/cancel.png" Grid.Row="6" Grid.Column="1" Margin="346,8,109,18"/>
     </Grid>
 </Window>

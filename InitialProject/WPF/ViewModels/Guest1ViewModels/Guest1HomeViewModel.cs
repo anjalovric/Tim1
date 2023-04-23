@@ -39,6 +39,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         public RelayCommand NotificationsCommand { get; set; }
 
         public RelayCommand SubmenuOpenedCommand { get; set; }
+        public RelayCommand ReviewsCommand { get; set; }
 
         public event PropertyChangedEventHandler? PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -76,6 +77,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             SignOutCommand = new RelayCommand(SignOut_Executed, CanExecute);
             NotificationsCommand = new RelayCommand(Notifications_Executed, CanExecute);
             SubmenuOpenedCommand = new RelayCommand(Submenu_Executed, CanExecute);
+            ReviewsCommand = new RelayCommand(Reviews_Executed, CanExecute);
         }
 
         private bool CanExecute(object sender)
@@ -104,6 +106,12 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         {
             Guest1ProfileView guest1ProfileView = new Guest1ProfileView(guest1);
             Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = guest1ProfileView;
+        }
+
+        private void Reviews_Executed(object sender)
+        {
+            Guest1ReviewsView guest1ReviewsView = new Guest1ReviewsView(guest1);
+            Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = guest1ReviewsView;
         }
 
         private void SignOut_Executed(object sender)
