@@ -38,7 +38,8 @@ namespace InitialProject.Domain
         { typeof(IOwnerReviewRepository), new OwnerReviewRepository() },
         { typeof(IReschedulingAccommodationRequestRepository), new ReschedulingAccommodationRequestRepository() },
         { typeof(IOwnerNotificationRepository), new OwnerNotificationRepository() },
-        { typeof(IAccommodationRenovationSuggestionRepository), new AccommodationRenovationSuggestionRepository() }
+        { typeof(IAccommodationRenovationSuggestionRepository), new AccommodationRenovationSuggestionRepository() },
+        { typeof(IOrdinaryTourRequestsRepository), new OrdinaryTourRequestsRepository()}
         };
 
         public static T CreateInstance<T>()
