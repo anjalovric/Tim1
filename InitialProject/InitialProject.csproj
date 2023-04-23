@@ -25,6 +25,7 @@
     <None Remove="Resources\Images\bell.png" />
     <None Remove="Resources\Images\calendarIcon.png" />
 
+
     <None Remove="Resources\Images\cancel.png" />
 
     <None Remove="Resources\Images\CANC.png" />
@@ -185,10 +186,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
 
+
     <Content Include="Resources\Images\cancel.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\CANC.png">
+
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\CG.png">
@@ -255,11 +258,13 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
 
+
     <Content Include="Resources\Images\ok.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\Red-incorrect-icon-design-on-transparent-background-PNG.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+
 
     </Content>
     <Content Include="Resources\Images\sky.jpg">
