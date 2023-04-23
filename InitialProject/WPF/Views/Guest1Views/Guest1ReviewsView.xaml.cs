@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using InitialProject.Model;
+using InitialProject.WPF.ViewModels.Guest1ViewModels;
 
 namespace InitialProject.WPF.Views.Guest1Views
 {
@@ -21,9 +22,12 @@ namespace InitialProject.WPF.Views.Guest1Views
     /// </summary>
     public partial class Guest1ReviewsView : Page
     {
+        private Guest1ReviewsViewModel guest1ReviewsViewModel;
         public Guest1ReviewsView(Guest1 guest1)
         {
             InitializeComponent();
+            guest1ReviewsViewModel = new Guest1ReviewsViewModel(guest1);
+            this.DataContext = guest1ReviewsViewModel;
         }
     }
 }
