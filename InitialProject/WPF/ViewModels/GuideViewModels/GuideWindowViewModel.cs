@@ -1,19 +1,32 @@
 ﻿using InitialProject.Model;
 using InitialProject.Service;
 using InitialProject.WPF.Views.GuideViews;
+using System;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Windows;
 
 namespace InitialProject.WPF.ViewModels
 {
-    public class GuideWindowViewModel
+    public class GuideWindowViewModel:INotifyPropertyChanged
     {
         private HomeView homeView;
         private AddTourView addTourView;
         private CancelView cancelView;
         private TourStatisticsView tourStatisticsView;
         private User loggedUser;
-
+        private bool themeIsChecked;
+        public bool ThemeIsChecked
+        {
+            get { return themeIsChecked; }
+            set
+            {
+                themeIsChecked = value;
+                OnPropertyChanged("ThemeIsChecked");
+                ThemeChanged();
+            }
+        }
         public RelayCommand HomeCommand { get; set; }
         public RelayCommand CancelCommand { get; set; }
         public RelayCommand AddCommand { get; set; }
@@ -31,6 +44,12 @@ namespace InitialProject.WPF.ViewModels
 
             SwitchFirstPage(loggedUser);
             MakeCommands();
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         private void MakeCommands()
         {
@@ -105,6 +124,14 @@ namespace InitialProject.WPF.ViewModels
             signInForm.Show();
             Application.Current.Windows.OfType<GuideWindow>().FirstOrDefault().Close();
         }
-
+        private void ThemeChanged()
+        {
+            var app = (App)Application.Current;
+            if (ThemeIsChecked.Equals(true))
+                app.ChangeTheme(new Uri("Resources/DarkTheme.xaml", UriKind.Relative));
+            else
+                app.ChangeTheme(new Uri("Resources/LightTheme.xaml", UriKind.Relative));
+           // SetIcons(app);
+        }
     }
 }

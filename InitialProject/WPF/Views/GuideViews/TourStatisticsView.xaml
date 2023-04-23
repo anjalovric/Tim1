@@ -9,31 +9,31 @@
       d:DesignHeight="707" d:DesignWidth="1100"
       Title="TourStatisticsView" >
 
-    <Grid Style="{StaticResource Background}">
-        <DataGrid x:Name="TourListDataGrid" SelectedItem="{Binding Path=Selected}" HeadersVisibility="Column" HorizontalAlignment="Left" Height="470" Margin="59,128,0,0" VerticalAlignment="Top" Width="733" Style="{StaticResource Tables}" ItemsSource="{Binding Path=Instances}" >
+    <Grid Style="{DynamicResource Background}">
+        <DataGrid ColumnHeaderStyle="{DynamicResource CenterGridHeaderStyle}" x:Name="TourListDataGrid" SelectedItem="{Binding Path=Selected}" HeadersVisibility="Column" HorizontalAlignment="Left" Height="470" Margin="59,128,0,0" VerticalAlignment="Top" Width="733" Style="{DynamicResource  Tables}" ItemsSource="{Binding Path=Instances}" >
 
             <DataGrid.Columns>
-                <DataGridTemplateColumn Width="*" HeaderStyle="{StaticResource CenterGridHeaderStyle}" >
+                <DataGridTemplateColumn Width="*" >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Image Source="{Binding CoverBitmap}" Width="100" Height="40"  VerticalAlignment="Top" Visibility="Visible"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Name" Binding="{Binding Tour.Name}" Width="*" HeaderStyle="{StaticResource CenterGridHeaderStyle}" >
+                <DataGridTextColumn Header="Name" Binding="{Binding Tour.Name}" Width="*"  >
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Location" Binding="{Binding Tour.Location}" Width="1.5*" HeaderStyle="{StaticResource CenterGridHeaderStyle}">
+                <DataGridTextColumn Header="Location" Binding="{Binding Tour.Location}" Width="1.5*" >
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="StartDate" Binding="{Binding StartDate}" Width="1.6*" HeaderStyle="{StaticResource CenterGridHeaderStyle}">
+                <DataGridTextColumn Header="StartDate" Binding="{Binding StartDate}" Width="1.6*" >
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Duration" Binding="{Binding Tour.Duration}" Width="*" HeaderStyle="{StaticResource CenterGridHeaderStyle}">
+                <DataGridTextColumn Header="Duration" Binding="{Binding Tour.Duration}" Width="*" >
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Capacity" Binding="{Binding Tour.MaxGuests}" Width="*" HeaderStyle="{StaticResource CenterGridHeaderStyle}">
+                <DataGridTextColumn Header="Capacity" Binding="{Binding Tour.MaxGuests}" Width="*" >
                 </DataGridTextColumn>
-                <DataGridTemplateColumn x:Name="cancelation" Header="Details"  Width="*" HeaderStyle="{StaticResource CenterGridHeaderStyle}">
+                <DataGridTemplateColumn x:Name="cancelation" Header="Details"  Width="*" >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Name="cancelButton" Content="DETAILS" Style="{StaticResource ButtonTable}" TextElement.FontWeight="ExtraBold" Command="{Binding Path=DataContext.ViewDetailsCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
+                            <Button Name="cancelButton" Content="DETAILS" Style="{DynamicResource ButtonTable}" TextElement.FontWeight="ExtraBold" Command="{Binding Path=DataContext.ViewDetailsCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -42,16 +42,16 @@
         </DataGrid>
 
 
-        <StackPanel x:Name="Toast" HorizontalAlignment="Left"   VerticalAlignment="Top" Style="{StaticResource Toast}" Visibility="{Binding ToastVisibility}" Margin="750,557,0,0" >
-            <Label FontSize="16" FontWeight="Heavy" HorizontalAlignment="Center">There are no tours for this year</Label>
-            <Button Style="{StaticResource ButtonToast}" Command="{Binding OKCommand}">OK</Button>
+        <StackPanel x:Name="Toast" HorizontalAlignment="Left"   VerticalAlignment="Top" Style="{DynamicResource Toast}" Visibility="{Binding ToastVisibility}" Margin="750,557,0,0" >
+            <Label Style="{StaticResource LabelToast}" HorizontalAlignment="Center">There are no tours for this year</Label>
+            <Button Style="{DynamicResource ButtonToast}" Command="{Binding OKCommand}">OK</Button>
         </StackPanel>
-        <Grid Margin="829,202,59,331" Style="{StaticResource InerInerGrid}">
-            <Button Content="The most visited tour" HorizontalAlignment="Center"  VerticalAlignment="Top" Height="77" Width="180" Command="{Binding MostVisitedCommand}" Style="{StaticResource Button}" Margin="0,33,0,0"/>
+        <Grid Margin="829,202,59,331" Style="{DynamicResource InerInerGrid}">
+            <Button Content="The most visited tour" HorizontalAlignment="Center"  VerticalAlignment="Top" Height="77" Width="180" Command="{Binding MostVisitedCommand}" Style="{DynamicResource Button}" Margin="0,33,0,0"/>
 
         </Grid>
-        <Grid Margin="829,393,59,103" Style="{StaticResource InerInerGrid}">
-            <Button Style="{StaticResource Button}" HorizontalAlignment="Center"  VerticalAlignment="Top" Height="76" Width="180" Command="{Binding MostVisitedForYearCommand}" Margin="0,72,0,0">
+        <Grid Margin="829,393,59,103" Style="{DynamicResource  InerInerGrid}">
+            <Button Style="{DynamicResource Button}" HorizontalAlignment="Center"  VerticalAlignment="Top" Height="76" Width="180" Command="{Binding MostVisitedForYearCommand}" Margin="0,72,0,0">
                 <Button.Content >
                     <TextBlock Width="101" Height="52">
                     The most visited
@@ -61,13 +61,13 @@
                     </TextBlock>
                 </Button.Content>
             </Button>
-            <TextBox x:Name="ChosenYear"  TextWrapping="Wrap"  VerticalAlignment="Top" Text="{Binding Path=Year,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}" Height="35" Style="{StaticResource TextBox}" Margin="10,37,10,0"/>
-            <Rectangle  Style="{StaticResource RectangleDashed}"  />
+            <TextBox x:Name="ChosenYear"  TextWrapping="Wrap"  VerticalAlignment="Top" Text="{Binding Path=Year,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}" Height="35" Style="{DynamicResource TextBox}" Margin="10,37,10,0"/>
+            <Rectangle  Style="{DynamicResource RectangleDashed}"  />
 
         </Grid>
-        <Rectangle  Style="{StaticResource RectangleDashed}"  Margin="829,202,59,331" />
-        <Grid Margin="0,0,0,584" Style="{StaticResource BackgroundHeader}">
-            <Label Content="TOUR STATISTICS" VerticalAlignment="Center" Width="308" Height="46" Style="{StaticResource Header}"/>
+        <Rectangle  Style="{DynamicResource RectangleDashed}"  Margin="829,202,59,331" />
+        <Grid Margin="0,0,0,584" Style="{DynamicResource BackgroundHeader}">
+            <Label Content="TOUR STATISTICS" VerticalAlignment="Center" Width="308" Height="46" Style="{DynamicResource Header}"/>
             <Image Source="/Resources/Images/LOGO (2).jpg" Margin="0,-10,881,0"/>
         </Grid>
     </Grid>
