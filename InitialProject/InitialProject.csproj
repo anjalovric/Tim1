@@ -24,12 +24,9 @@
     <None Remove="Resources\Images\back.png" />
     <None Remove="Resources\Images\bell.png" />
     <None Remove="Resources\Images\calendarIcon.png" />
-<<<<<<< HEAD
     <None Remove="Resources\Images\cancel.png" />
-=======
     <None Remove="Resources\Images\CANC.png" />
     <None Remove="Resources\Images\CG.png" />
->>>>>>> 7bd2d5fdd158a34ff65b6c7a8eec517108f4d6b8
     <None Remove="Resources\Images\clock.png" />
     <None Remove="Resources\Images\continue.png" />
     <None Remove="Resources\Images\corect.png" />
@@ -70,11 +67,11 @@
     <None Remove="Resources\Images\minus.png" />
     <None Remove="Resources\Images\month.png" />
     <None Remove="Resources\Images\museum.jpg" />
-<<<<<<< HEAD
+
     <None Remove="Resources\Images\ok.png" />
-=======
+
     <None Remove="Resources\Images\newLogo.jpg" />
->>>>>>> 7bd2d5fdd158a34ff65b6c7a8eec517108f4d6b8
+
     <None Remove="Resources\Images\orange.jpg" />
     <None Remove="Resources\Images\plus.png" />
     <None Remove="Resources\Images\profile.png" />
@@ -185,16 +182,14 @@
     <Content Include="Resources\Images\calendarIcon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-<<<<<<< HEAD
-    <Content Include="Resources\Images\cancel.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-=======
-    <Content Include="Resources\Images\CANC.png">
+	  <Content Include="Resources\Images\cancel.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+		<Content Include="Resources\Images\CANC.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\CG.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
->>>>>>> 7bd2d5fdd158a34ff65b6c7a8eec517108f4d6b8
     </Content>
     <Content Include="Resources\Images\clock.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -256,13 +251,11 @@
     <Content Include="Resources\Images\museum.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-<<<<<<< HEAD
-    <Content Include="Resources\Images\ok.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-=======
-    <Content Include="Resources\Images\Red-incorrect-icon-design-on-transparent-background-PNG.png">
+	  <Content Include="Resources\Images\ok.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+		<Content Include="Resources\Images\Red-incorrect-icon-design-on-transparent-background-PNG.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
->>>>>>> 7bd2d5fdd158a34ff65b6c7a8eec517108f4d6b8
     </Content>
     <Content Include="Resources\Images\sky.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
