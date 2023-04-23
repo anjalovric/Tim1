@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using InitialProject.Model;
 using InitialProject.Service;
 
+
 namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 {
     public class SentAccommodationReservationRequestsViewModel : INotifyPropertyChanged

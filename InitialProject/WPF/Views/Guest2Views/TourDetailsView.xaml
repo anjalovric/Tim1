@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
         Title="TourDetails" Height="750" Width="820" WindowStartupLocation="CenterScreen">
-    <Grid Background="#FFA6ADB9">
+    <Grid Background="LightGray">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
@@ -27,8 +27,8 @@
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Grid>
                         <StackPanel Orientation="Horizontal">
-                            <Rectangle Width="30" Height="14" Stroke="Black" Fill="Black"/>
-                            <Polygon Points= "0,15 15,22 0,30" Stroke="Black" Fill="Black" Height="45" Width="30" />
+                            <Rectangle Width="30" Height="14" Stroke="Gray" Fill="Gray"/>
+                            <Polygon Points= "0,15 15,22 0,30" Stroke="Gray" Fill="Gray" Height="45" Width="30" />
                         </StackPanel>
                     </Grid>
                 </ControlTemplate>
@@ -47,8 +47,8 @@
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Grid>
                         <StackPanel Orientation="Horizontal">
-                            <Rectangle Width="30" Height="14" Stroke="Black" Fill="Black"/>
-                            <Polygon Points= "0,15 15,22 0,30" Stroke="Black" Fill="Black" Height="45" Width="30" />
+                            <Rectangle Width="30" Height="14" Stroke="Gray" Fill="Gray"/>
+                            <Polygon Points= "0,15 15,22 0,30" Stroke="Gray" Fill="Gray" Height="45" Width="30" />
                         </StackPanel>
                     </Grid>
                 </ControlTemplate>
@@ -68,6 +68,7 @@
         <TextBlock Margin="124,207,78,473" RenderTransformOrigin="0.5,0.5" Text="{Binding Path=Selected.Tour.Duration,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1"/>
         <TextBlock Margin="124,296,116,381" RenderTransformOrigin="0.5,0.5" Text="{Binding Path=Selected.Tour.Language,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1"/>
         <TextBlock Margin="124,385,78,267" RenderTransformOrigin="0.5,0.5" Text="{Binding Path=Selected.Tour.MaxGuests,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1"/>
+        <Button Grid.Column="1" Content="Cancel" FontWeight="Bold" HorizontalAlignment="Left" Margin="311,676,0,0" VerticalAlignment="Top" Height="31" Width="69" Command ="{Binding CancelCommand}"/>
 
     </Grid>
 </Window>

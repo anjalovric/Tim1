@@ -12,6 +12,7 @@ using System.Windows;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using InitialProject.Service;
+using System.Windows.Controls;
 
 namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 {
@@ -39,10 +40,13 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        public RelayCommand ReserveCommand { get; set; }
+
         public RelayCommand NextPhotoCommand { get; set; }
         public RelayCommand PreviousPhotoCommand { get; set; }
         public AccommodationDetailsViewModel(Accommodation currentAccommodation, Guest1 guest1)//obrisi imagesUrl
         {
+            this.guest1 = guest1;
             SelectedAccommodation = currentAccommodation;
             SetFirstImage();
             MakeCommands();
@@ -52,6 +56,12 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         {
             NextPhotoCommand = new RelayCommand(NextPhoto_Executed, CanExecute);
             PreviousPhotoCommand = new RelayCommand(PreviousPhoto_Executed, CanExecute);
+            ReserveCommand = new RelayCommand(Reserve_Executed, CanExecute);
+        }
+        private void Reserve_Executed(object sender)
+        {
+            AccommodationReservationFormView accommodationReservationForm = new AccommodationReservationFormView(SelectedAccommodation, guest1);
+            accommodationReservationForm.Show();
         }
         private bool CanExecute(object sender)
         {

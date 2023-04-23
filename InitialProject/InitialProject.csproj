@@ -21,6 +21,7 @@
     <None Remove="Resources\Images\addBW.png" />
     <None Remove="Resources\Images\andjelkina-kapija.jpg" />
     <None Remove="Resources\Images\athens.jpg" />
+    <None Remove="Resources\Images\back.png" />
     <None Remove="Resources\Images\bell.png" />
     <None Remove="Resources\Images\calendarIcon.png" />
     <None Remove="Resources\Images\CANC.png" />
@@ -65,6 +66,7 @@
     <None Remove="Resources\Images\minus.png" />
     <None Remove="Resources\Images\month.png" />
     <None Remove="Resources\Images\museum.jpg" />
+    <None Remove="Resources\Images\newLogo.jpg" />
     <None Remove="Resources\Images\orange.jpg" />
     <None Remove="Resources\Images\plus.png" />
     <None Remove="Resources\Images\profile.png" />
@@ -77,6 +79,7 @@
     <None Remove="Resources\Images\signOutIcon.png" />
     <None Remove="Resources\Images\sky.jpg" />
     <None Remove="Resources\Images\suggestion.png" />
+    <None Remove="Resources\Images\superOwner.png" />
     <None Remove="Resources\Images\tasks.png" />
 
     <None Remove="Resources\Images\date.png" />
@@ -258,6 +261,9 @@
     <Content Include="Resources\Images\trebinje.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Resources\Images\back.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Content Include="Resources\Images\user-male-circle.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -347,6 +353,9 @@
     <Resource Include="Resources\Images\guest1Menu.jpeg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Content Include="Resources\Images\newLogo.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Resource Include="Resources\Images\orange.jpg" />
     <Resource Include="Resources\Images\red.jpg" />
     <Resource Include="Resources\Images\search.png" />
@@ -361,6 +370,9 @@
     <Resource Include="Resources\Images\profile.jpg" />
     <Resource Include="Resources\Images\sent.png" />
     <Resource Include="Resources\Images\signout.png" />
+    <Resource Include="Resources\Images\superOwner.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>

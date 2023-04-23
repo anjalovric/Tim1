@@ -5,10 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
-        Title="AlertGuestForm" Height="330" Width="530" WindowStartupLocation="CenterScreen">
-    <Grid Margin="0,0,0,-6">
-        <Label BorderBrush="Gray" x:Name="PointLabel"  HorizontalAlignment="Left"  VerticalAlignment="Top" Height="55" Width="354" Margin="55,27,0,0"/>
-        <Button Content="YES" Command ="{Binding ConfirmCommand}" Height="30" Width="60" TextElement.FontWeight="Bold"  Margin="138,130,302,130" />
-        <Button Content="NO" Command ="{Binding CancelCommand}" Height="30" Width="60" TextElement.FontWeight="Bold" Margin="250,130,190,130" />
+        Title="AlertGuestForm"  WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Label Content="Confirm your presence" Grid.Row="0" FontSize="20" FontWeight="Bold" Margin="10,0,-10,0"/>
+        <TextBlock Text="You can see more information about the tour below." Grid.Row="1" Margin="10,10,133,6" Grid.ColumnSpan="2"></TextBlock>
+        <Label BorderBrush="Gray" x:Name="PointLabel"  HorizontalAlignment="Center"  VerticalAlignment="Top" Height="124" Width="280" Grid.Row="2" Margin="0,62,0,0"/>
+        <Button Content="YES" Command ="{Binding ConfirmCommand}" TextElement.FontWeight="Bold"  Margin="84,19,160,29" Grid.Row="3" Grid.Column="1" />
+        <Button Content="NO" Command ="{Binding CancelCommand}" TextElement.FontWeight="Bold" Margin="160,19,83,29" Grid.Row="3" Grid.Column="1" />
+        <Label Content="Tour" Grid.Column="0" Grid.Row="2" FontWeight="Bold" Margin="10,10,182,288"/>
     </Grid>
 </Window>

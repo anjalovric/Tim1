@@ -5,11 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:InitialProject.View"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="768" d:DesignWidth="1024" Width="1024" Height="768">
     <Grid>
-        
-        <Label Content="All vouchers" FontWeight="Bold" Foreground="White" FontSize="20" HorizontalAlignment="Left" Margin="192,127,0,0" VerticalAlignment="Top" Width="228"/>
-        <DataGrid x:Name="VouchersDataGrid" ItemsSource="{Binding Path=Vouchers, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=Selected}" IsReadOnly="True" AutoGenerateColumns="False" VerticalAlignment="Top" HorizontalAlignment="Left" Height="453" Width="832" Margin="192,238,0,0">
+        <Border Background="#151f2d" BorderBrush="#151f2d" CornerRadius="25 25 25 25" BorderThickness="4,4,4,4"/>
+        <Label Content="All vouchers" Foreground="White" FontWeight="Bold" FontSize="20" HorizontalAlignment="Left" Margin="87,70,0,0" VerticalAlignment="Top" Width="228"/>
+        <DataGrid x:Name="VouchersDataGrid" ItemsSource="{Binding Path=Vouchers, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=Selected}" IsReadOnly="True" AutoGenerateColumns="False" VerticalAlignment="Top" HorizontalAlignment="Left" Height="453" Width="832" Margin="87,190,0,0">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Voucher" Width="1*" Binding="{Binding Id}"/>
                 <DataGridTextColumn Header="Valid" Width="1*" Binding="{Binding CreateDate}"/>
@@ -17,6 +17,7 @@
 
 
         </DataGrid>
+        <Label Content="U nastavku se nalaze svi vasi osvojeni vauceri" Foreground="#7166f9" HorizontalAlignment="Left" Margin="87,131,0,0" VerticalAlignment="Top" Width="832" Height="54"/>
 
     </Grid>
 </UserControl>

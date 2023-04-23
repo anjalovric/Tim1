@@ -59,8 +59,35 @@
         <Label FontSize="18" HorizontalAlignment="Center" Margin="0,180,0,0" VerticalAlignment="Center" FontWeight="DemiBold" Width="224" Content="Reasons for rescheduling:"/>
         <TextBox x:Name="Reasons" HorizontalAlignment="Center" Height="80" Width="420" Margin="0,300,0,0" Text="{Binding Path=Reason, Mode=TwoWay}"/>
 
-        <Button Height="35" Width="94" FontSize="16" FontWeight="Bold" Margin="10,20,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Command="{Binding BackCommand}">BACK</Button>
-        <Button Height="35" Width="94" FontSize="16" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,20" Content="SEND" Command="{Binding SendCommand}"/>
+        <Button Height="35" Width="94" FontSize="16" FontWeight="Bold" Margin="10,20,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Command="{Binding BackCommand}">
+            <Grid Background="#8c9d75" Width="94" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Image Source="/Resources/Images/back.png" HorizontalAlignment="Left" Margin="10,0,0,0" Width="26" Height="22" Grid.Column="0"/>
+                <TextBlock Background="#8c9d75" Text="BACK" Grid.Column="1" VerticalAlignment="Center" FontSize="16"  Foreground="#22301a" FontWeight="Bold" HorizontalAlignment="Center" Width="Auto"/>
+            </Grid>
+        </Button>
+        <Button Height="35" Width="94" FontSize="16" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,20" Command="{Binding SendCommand}">
+            <Grid Background="#8c9d75" Width="94" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Image Source="/Resources/Images/back.png" VerticalAlignment="Center" HorizontalAlignment="Right"  Margin="0,0,0,0" Width="Auto" Height="22" Grid.Column="1" RenderTransformOrigin="0.5,0.5">
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="180"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
+                <TextBlock Background="#8c9d75" Text="SEND" Grid.Column="0" VerticalAlignment="Center" FontSize="16"  Foreground="#22301a" Margin="10,0,0,0" FontWeight="Bold" HorizontalAlignment="Left" Width="50"/>
+            </Grid>
+        </Button>
 
     </Grid>
 </Window>

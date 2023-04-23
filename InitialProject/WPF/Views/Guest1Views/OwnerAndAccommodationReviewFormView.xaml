@@ -49,10 +49,21 @@
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <Label HorizontalAlignment="Center" Margin="0,20,0,630" FontFamily="Baskerville Old Face"  FontSize="24" FontWeight="Bold">RATE ACCOMMODATION FORM</Label>
+        <Label HorizontalAlignment="Center" Margin="0,20,0,0" VerticalAlignment="Top" Height="43" FontFamily="Baskerville Old Face"  FontSize="24" FontWeight="Bold">RATE RESERVATION</Label>
         <Label HorizontalContentAlignment="Left" FontSize="18" Margin="71,118,256,540">Cleanliness:</Label>
         <Label HorizontalContentAlignment="Left" FontSize="18" Margin="71,161,256,498">Owner's correctness:</Label>
 
+        <Button FontSize="18" FontWeight="Bold" Height="35" BorderBrush="#22301a" BorderThickness="3" Width="94" Margin="10,20,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Command="NavigationCommands.BrowseBack">
+            <Grid Background="#8c9d75" Width="94" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Image Source="/Resources/Images/back.png" HorizontalAlignment="Left" Margin="10,0,0,0" Width="26" Height="22" Grid.Column="0"/>
+                <TextBlock Background="#8c9d75" Text="BACK" Grid.Column="1" VerticalAlignment="Center" FontSize="16"  Foreground="#22301a" FontWeight="Bold" HorizontalAlignment="Center" Width="Auto"/>
+            </Grid>
+        </Button>
+        
         <Slider x:Name="CleanlinessSlider"  Minimum="1" Maximum="5" Margin="277,128,116,550" TickFrequency="1" IsSnapToTickEnabled="True" AutoToolTipPlacement="BottomRight" Value="{Binding Path=AccommodationCleanliness}"/>
         <Slider x:Name="CorrectnessSlider" Minimum="1" Maximum="5" Margin="277,170,116,508" TickFrequency="1" IsSnapToTickEnabled="True" AutoToolTipPlacement="BottomRight" Value="{Binding Path=OwnerCorrectness}"/>
         <TextBlock Text="{Binding ElementName=CleanlinessSlider,Path=Value}" Margin="410,124,71,546" Width="31" FontSize="16" RenderTransformOrigin="-0.097,0.462" TextAlignment="Center"/>
@@ -107,7 +118,25 @@
 
 
 
-        <Button Grid.Column="1" Width="94" Height="35" FontSize="16" FontWeight="Bold" Margin="355,586,63,75" Command="{Binding SendCommand}">SEND</Button>
+        <Button Grid.Column="1" Width="94" Height="35" FontSize="16" FontWeight="Bold" Margin="355,586,63,75" Command="{Binding SendCommand}">
+            <Grid Background="#8c9d75" Width="94" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Image Source="/Resources/Images/back.png" VerticalAlignment="Center" HorizontalAlignment="Right"  Margin="0,0,0,0" Width="Auto" Height="22" Grid.Column="1" RenderTransformOrigin="0.5,0.5">
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="180"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
+                <TextBlock Background="#8c9d75" Text="SEND" Grid.Column="0" VerticalAlignment="Center" FontSize="16"  Foreground="#22301a" Margin="10,0,0,0" FontWeight="Bold" HorizontalAlignment="Left" Width="50"/>
+            </Grid>
+        </Button>
         <Button Command="{Binding PreviousPhotoCommand}" Height="50" Margin="217,342,236,304" RenderTransformOrigin="0.5,0.5">
             <Button.RenderTransform>
                 <TransformGroup>

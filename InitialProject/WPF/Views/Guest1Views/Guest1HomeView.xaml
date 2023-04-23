@@ -6,10 +6,8 @@
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
-        Title="Guest1Home" Height="768" Width="1024" WindowStartupLocation="CenterScreen">
-    <Window.Resources>
-        
-    </Window.Resources>
+        Title="Guest1Home" d:DesignHeight="768" d:DesignWidth="1024" Height="768" Width="1024" WindowStartupLocation="CenterScreen">
+  
 
     <Grid>
         <Menu VerticalAlignment="Top" Height="72"  TextElement.Foreground="#22301a" BorderThickness="5,5,5,5" BorderBrush="#22301a">
