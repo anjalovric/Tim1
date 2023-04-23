@@ -6,6 +6,24 @@
              xmlns:local="clr-namespace:InitialProject.View"
              mc:Ignorable="d" 
              d:DesignHeight="768" d:DesignWidth="1024" Width="1024" Height="768">
+    <UserControl.Resources>
+        <Style x:Key="LabelStyle" TargetType="Label">
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+        </Style>
+        <Style x:Key="BorderStyle" TargetType="TextBox">
+            <Setter Property="BorderBrush" Value="#7166f9"/>
+            <Setter Property="BorderThickness" Value="3,3,3,3"/>
+        </Style>
+        <Style x:Key="borderStyle" TargetType="Button">
+            <Setter Property="BorderBrush" Value="#7166f9"/>
+            <Setter Property="BorderThickness" Value="3,3,3,3"/>
+            <Setter Property="Background" Value="#FFFCECB9"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+        </Style>
+    </UserControl.Resources>
     <Grid>
         <Border Background="#151f2d" BorderBrush="#151f2d" CornerRadius="25 25 25 25" BorderThickness="4,4,4,4"/>
         <DataGrid x:Name="TourListDataGrid" ItemsSource="{Binding Path=TourInstances,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=Selected}" IsReadOnly="True" AutoGenerateColumns="False" VerticalAlignment="Top" HorizontalAlignment="Left" Height="403" Width="899" Margin="80,332,0,0">
@@ -33,26 +51,26 @@
 
         </DataGrid>
         <ComboBox x:Name="cityInput" BorderBrush="#7166f9" BorderThickness="3,3,3,3" ItemsSource="{Binding CitiesByCountry}" SelectedItem="{Binding Location.City}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" HorizontalAlignment="Left" Margin="463,130,0,0" VerticalAlignment="Top" Width="152" Height="22"/>
-        <TextBox x:Name="durationInput" BorderBrush="#7166f9" BorderThickness="3,3,3,3" Background="#FFFCECB9" HorizontalAlignment="Left" Margin="828,130,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="151" Height="22" RenderTransformOrigin="0.496,0.294"/>
-        <TextBox x:Name="languageInput" BorderBrush="#7166f9" BorderThickness="3,3,3,3" Background="#FFFCECB9" HorizontalAlignment="Left" Margin="80,201,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="151" Height="22" RenderTransformOrigin="-0.983,1.416"/>
+        <TextBox x:Name="durationInput" Style="{StaticResource BorderStyle}" Background="#FFFCECB9" HorizontalAlignment="Left" Margin="828,130,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="151" Height="22" RenderTransformOrigin="0.496,0.294"/>
+        <TextBox x:Name="languageInput" Style="{StaticResource BorderStyle}" Background="#FFFCECB9" HorizontalAlignment="Left" Margin="80,201,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="151" Height="22" RenderTransformOrigin="-0.983,1.416"/>
         <Border BorderBrush="#7166f9" BorderThickness="3,3,3,3" Margin="492,201,434,545">
             <TextBlock x:Name="capacityNumber" Text="1" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Top" Width="98" TextAlignment="Center" Height="20" Background="#FFFCECB9" Margin="0,-1,0,0" />
         </Border>
 
 
-        <Label Content="City" Foreground="#7166f9" Grid.Row="0" FontWeight="Bold" HorizontalAlignment="Left" Margin="463,95,0,0" VerticalAlignment="Top" RenderTransformOrigin="5.351,0.387"/>
-        <Label Content="Duration" Foreground="#7166f9" Grid.Row="0" FontWeight="Bold" HorizontalAlignment="Left" Margin="828,95,0,0" VerticalAlignment="Top"/>
-        <Label Content="Language" Foreground="#7166f9" FontWeight="Bold" HorizontalAlignment="Left" Margin="80,170,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.413,0.366"/>
-        <Label Content="Capacity" Foreground="#7166f9" FontWeight="Bold" HorizontalAlignment="Left" Margin="463,170,0,0" VerticalAlignment="Top"/>
+        <Label Content="City" Grid.Row="0" Margin="463,95,0,0" RenderTransformOrigin="5.351,0.387" Style="{StaticResource LabelStyle}" Foreground="#7166f9"/>
+        <Label Content="Duration" Grid.Row="0" Margin="828,95,0,0" Style="{StaticResource LabelStyle}" Foreground="#7166f9"/>
+        <Label Content="Language" Margin="80,170,0,0" RenderTransformOrigin="0.413,0.366" Style="{StaticResource LabelStyle}" Foreground="#7166f9"/>
+        <Label Content="Capacity" Margin="463,170,0,0" Style="{StaticResource LabelStyle}" Foreground="#7166f9"/>
         <ComboBox x:Name="countryInput" ItemsSource="{Binding Countries}" BorderBrush="#7166f9" BorderThickness="3,3,3,3" SelectedItem="{Binding Location.Country}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" HorizontalAlignment="Left" Margin="80,130,0,0" VerticalAlignment="Top" Width="151" SelectionChanged="CountryInput_SelectionChanged" Height="22"/>
-        <Label Content="Country" Foreground="#7166f9" FontWeight="Bold" HorizontalAlignment="Left" Margin="80,90,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="decrementCapacityNumber" BorderBrush="#7166f9" BorderThickness="3,3,3,3" Background="#FFFCECB9" Content="-" HorizontalAlignment="Left" Margin="463,201,0,0" VerticalAlignment="Top" Width="20" Click="DecrementCapacityNumber_Click" Height="22"/>
-        <Button x:Name="incrementCapacityNumber" BorderBrush="#7166f9" BorderThickness="3,3,3,3" Background="#FFFCECB9" Content="+" HorizontalAlignment="Left" Margin="595,201,0,0" VerticalAlignment="Top" Width="20" Click="IncrementCapacityNumber_Click" RenderTransformOrigin="-1.284,0.612" Height="22"/>
-        <Button Content="Search" BorderBrush="#7166f9" BorderThickness="3,3,3,3" Background="#FFFCECB9" FontWeight="Bold" HorizontalAlignment="Left" Margin="828,201,0,0" VerticalAlignment="Top" Height="22" Click="Search_Click" Width="76"/>
-        <Label x:Name="Label" Grid.Row="0" Foreground="White" FontWeight="Bold" Content="Showing all tours: " FontSize="20" HorizontalAlignment="Left" Margin="80,279,0,0" VerticalAlignment="Top" Height="71"/>
-        <Button x:Name="Restart" Background="#FFFCECB9" BorderBrush="#7166f9" BorderThickness="3,3,3,3" Width="76" Content="Restart" HorizontalAlignment="Left" Margin="903,201,0,0" VerticalAlignment="Top" TextElement.FontWeight="Bold" Click="Restart_Click" Height="22"/>
+        <Label Content="Country" Margin="80,90,0,0" Style="{StaticResource LabelStyle}"/>
+        <Button x:Name="decrementCapacityNumber" Style="{StaticResource borderStyle}" Content="-" HorizontalAlignment="Left" Margin="463,201,0,0" VerticalAlignment="Top" Width="20" Click="DecrementCapacityNumber_Click" Height="22"/>
+        <Button x:Name="incrementCapacityNumber" Style="{StaticResource borderStyle}" Content="+" HorizontalAlignment="Left" Margin="595,201,0,0" VerticalAlignment="Top" Width="20" Click="IncrementCapacityNumber_Click" RenderTransformOrigin="-1.284,0.612" Height="22"/>
+        <Button Content="Search" Style="{StaticResource borderStyle}" FontWeight="Bold" HorizontalAlignment="Left" Margin="828,201,0,0" VerticalAlignment="Top" Height="22" Click="Search_Click" Width="76"/>
+        <Label x:Name="Label" Grid.Row="0" Foreground="White" Content="Showing all tours: " FontSize="20" Margin="80,279,0,0" Height="71" Style="{StaticResource LabelStyle}"/>
+        <Button x:Name="Restart" Style="{StaticResource borderStyle}" Width="76" Content="Restart" HorizontalAlignment="Left" Margin="903,201,0,0" VerticalAlignment="Top" TextElement.FontWeight="Bold" Click="Restart_Click" Height="22"/>
         <Label x:Name="DurationLabel" HorizontalAlignment="Left" Margin="874,158,0,0" VerticalAlignment="Top" Height="25" Width="150"/>
-        <Label Content="Searching tours" FontSize="20" Foreground="White" FontWeight="Bold" HorizontalAlignment="Left" Margin="80,38,0,0" VerticalAlignment="Top"/>
+        <Label Content="Searching tours" FontSize="20" Foreground="White" Margin="80,38,0,0" Style="{StaticResource LabelStyle}"/>
         
 
     </Grid>
