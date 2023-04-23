@@ -36,7 +36,7 @@
                     <TextBlock Text="MY RESERVATIONS" Margin="-7" FontSize="20" TextAlignment="Center" Width="292" FontWeight="ExtraBlack"/>
                 </MenuItem.Header>
             </MenuItem>
-            <MenuItem FontSize="20" Width="178">
+            <MenuItem FontSize="20" Width="178" Command="{Binding ReviewsCommand}">
                 <MenuItem.Header>
                     <TextBlock Text="REVIEWS" Margin="-7" FontSize="20" TextAlignment="Center" Width="178" FontWeight="ExtraBlack"/>
                 </MenuItem.Header>

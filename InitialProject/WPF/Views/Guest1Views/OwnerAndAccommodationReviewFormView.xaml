@@ -141,14 +141,14 @@
             </Grid>
             <Label HorizontalContentAlignment="Left" Grid.Row="4" Grid.Column="0"  VerticalAlignment="Center" FontSize="18" Margin="65,0,0,0" Content="Comments:"/>
 
-            <TextBox x:Name="Comments" Margin="0,10,0,0" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Height="165" HorizontalAlignment="Center" VerticalAlignment="Top" Text="{Binding Path=Comments}" Width="370"/>
+            <TextBox x:Name="Comments" Margin="71,10,71,46" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Path=Comments}"/>
 
 
         </Grid>
 
         <Grid Grid.Column="1" Grid.Row="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="2*"></RowDefinition>
+                <RowDefinition Height="1.5*"></RowDefinition>
                 <RowDefinition Height="1*"></RowDefinition>
                 <RowDefinition Height="3.5*"></RowDefinition>
                 <RowDefinition Height="1*"></RowDefinition>
@@ -159,17 +159,59 @@
             <Label HorizontalAlignment="Center" Margin="0,20,0,0" Grid.Row="0" Grid.Column="0"  VerticalAlignment="Top" Height="43" FontFamily="Baskerville Old Face"  FontSize="24" FontWeight="Bold">SUGGESTIONS FOR RENOVATION</Label>
             <Label  Margin="20,0,0,0"  Grid.Row="1" Height="Auto" FontSize="18" Grid.Column="0"  VerticalAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Left">Condition of accommodation:</Label>
 
-            <TextBox Width="472" Height="150" Margin="10,0,0,0" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <TextBox Text="{Binding Path=ConditionsOfAccommodation}" Width="472" Height="150" Margin="10,0,0,0"  Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Top"/>
 
             <Label  Margin="20,0,0,0"  Grid.Row="3" Height="Auto" FontSize="18" Grid.Column="0"  VerticalAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Left">Level of urgency:</Label>
-            <ComboBox Height="100" FontSize="16" Width="472" Grid.Row="4" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="20,0,0,0" MaxHeight="100">
-                
-                <ComboBoxItem Width="472" Height="Auto">Level 1 - it would be nice to renovate some small things, but everything works as it should without it</ComboBoxItem>
+            <ComboBox Height="50" FontSize="16" Grid.Row="4" SelectedValuePath="Content" Grid.Column="0" VerticalAlignment="Top" Margin="20,0,20,0" SelectedValue="{Binding LevelOfUrgency}" DisplayMemberPath="">
+                <ComboBox.ItemContainerStyle>
+                    <Style TargetType="ComboBoxItem">
+                        <Setter Property="Width" Value="472"></Setter>
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                        <Setter Property="ContentTemplate">
+                            <Setter.Value>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding}" TextWrapping="Wrap"/>
+                                </DataTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Property="BorderBrush" Value="#22301a"></Setter>
+                        <Setter Property="BorderThickness" Value="1"></Setter>
+                        <Setter Property="Background" Value="#dbc9ab"></Setter>
+                    </Style>
+                </ComboBox.ItemContainerStyle>
+                <ComboBoxItem>Level 1 - it would be nice to renovate some small things, but everything works as it should without it</ComboBoxItem>
                 <ComboBoxItem>Level 2 - minor complaints about the accommodation that if removed would make it perfect</ComboBoxItem>
                 <ComboBoxItem>Level 3 - a few things that were really annoying should be renovated</ComboBoxItem>
                 <ComboBoxItem>Level 4 - there are a lot of bad things and renovation is really necessary</ComboBoxItem>
                 <ComboBoxItem>Level 5 - the accommodation is in a very bad condition and is not worth renting at all if not is renovating</ComboBoxItem>
+
             </ComboBox>
+
+
+
+            <Button Grid.Column="0" Grid.Row="5" Width="94" Height="35" FontSize="16" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontWeight="Bold" Margin="0,0,20,46" Command="{Binding SendCommand}">
+                <Grid Background="#8c9d75" Width="94" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="/Resources/Images/back.png" VerticalAlignment="Center" HorizontalAlignment="Right"  Margin="0,0,0,0" Width="Auto" Height="22" Grid.Column="1" RenderTransformOrigin="0.5,0.5">
+                        <Image.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="180"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Image.RenderTransform>
+                    </Image>
+                    <TextBlock Background="#8c9d75" Text="SEND" Grid.Column="0" VerticalAlignment="Center" FontSize="16"  Foreground="#22301a" Margin="10,0,0,0" FontWeight="Bold" HorizontalAlignment="Left" Width="50"/>
+                </Grid>
+            </Button>
+
+
+
 
 
         </Grid>
@@ -177,32 +219,5 @@
 
         <Border Grid.Column="1" BorderThickness="1 0 1 0" Width="1" HorizontalAlignment="Left" BorderBrush="#22301a" />
 
-
-
-
-
-        <Button Grid.Column="1" Width="94" Height="35" FontSize="16" FontWeight="Bold" Margin="355,586,63,75" Command="{Binding SendCommand}">
-            <Grid Background="#8c9d75" Width="94" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" >
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <Image Source="/Resources/Images/back.png" VerticalAlignment="Center" HorizontalAlignment="Right"  Margin="0,0,0,0" Width="Auto" Height="22" Grid.Column="1" RenderTransformOrigin="0.5,0.5">
-                    <Image.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform/>
-                            <RotateTransform Angle="180"/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </Image.RenderTransform>
-                </Image>
-                <TextBlock Background="#8c9d75" Text="SEND" Grid.Column="0" VerticalAlignment="Center" FontSize="16"  Foreground="#22301a" Margin="10,0,0,0" FontWeight="Bold" HorizontalAlignment="Left" Width="50"/>
-            </Grid>
-        </Button>
-
-
-
-        <Button HorizontalAlignment="Right" Margin="0,305,75,0" Name="DeleteButton" Width="25" BorderThickness="0" FlowDirection="LeftToRight" Grid.IsSharedSizeScope="False" Grid.Row="0" Grid.Column="0" HorizontalContentAlignment="Center" Padding="0" VerticalAlignment="Top" Command="{Binding DeletePhotoCommand}"/>
     </Grid>
 </Page>

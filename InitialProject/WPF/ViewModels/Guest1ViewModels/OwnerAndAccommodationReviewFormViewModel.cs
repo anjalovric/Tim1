@@ -43,6 +43,10 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             }
 
         }
+
+        public string ConditionsOfAccommodation { get; set; }
+        public string LevelOfUrgency { get; set; }
+
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
@@ -73,14 +77,31 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         {
             if (IsImageUploadValid())
             {
-                StoreReview();
+                StoreReview();  //pazi da se ne sacuva ovo, a da se ne dozvoli prethodno renovacija
                 StoreImages();
-                MessageBox.Show("Review successfully sent!");
+                StoreRenovationSuggestion();
+                MessageBox.Show("Successfully sent!");
                 Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = new MyAccommodationReservationsView(guest1);
             }
             else
                 MessageBox.Show("You must upload at least one photo!");
         }
+
+        private void StoreRenovationSuggestion()
+        {
+            if(ConditionsOfAccommodation!=null || LevelOfUrgency!=null) //else, dont store renovation suggestion (doesnt exist)
+            {
+                AccommodationRenovationSuggestionService accommodationRenovationSuggestionService =  new AccommodationRenovationSuggestionService();
+                if (ConditionsOfAccommodation == null)
+                    ConditionsOfAccommodation = "";
+                if (LevelOfUrgency == null)
+                    LevelOfUrgency = "";
+
+                AccommodationRenovationSuggestion suggestion = new AccommodationRenovationSuggestion(reservation,LevelOfUrgency,ConditionsOfAccommodation);
+                accommodationRenovationSuggestionService.Add(suggestion);
+            }
+        }
+
         private void StoreImages()
         {
             AccommodationReviewImageService accommodationReviewImageService = new AccommodationReviewImageService();

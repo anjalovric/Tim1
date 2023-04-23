@@ -8,8 +8,8 @@ using InitialProject.Model;
 
 namespace InitialProject.Domain.RepositoryInterfaces
 {
-    public interface IAccommodationTypeRepository : IGenericRepository<AccommodationType>
+    public interface IAccommodationRenovationSuggestionRepository : IGenericRepository<AccommodationRenovationSuggestion>
     {
-
+        public void Add(AccommodationRenovationSuggestion suggestion);
     }
 }
