@@ -11,5 +11,6 @@ namespace InitialProject.Domain.RepositoryInterfaces
     {
         public Owner GetByUsername(string username);
         public void Add(Owner owner);
+        public void Update(Owner owner);
     }
 }
