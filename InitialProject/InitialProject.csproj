@@ -17,6 +17,7 @@
 
     <None Remove="Resources\Images\accommodation.jpg" />
     <None Remove="Resources\Images\account.png" />
+    <None Remove="Resources\Images\add-new.png" />
     <None Remove="Resources\Images\add.png" />
     <None Remove="Resources\Images\addBW.png" />
     <None Remove="Resources\Images\andjelkina-kapija.jpg" />
@@ -81,6 +82,7 @@
     <None Remove="Resources\Images\Red-incorrect-icon-design-on-transparent-background-PNG.png" />
     <None Remove="Resources\Images\red.jpg" />
     <None Remove="Resources\Images\redIncorect.png" />
+    <None Remove="Resources\Images\report.png" />
     <None Remove="Resources\Images\request.png" />
     <None Remove="Resources\Images\search.png" />
     <None Remove="Resources\Images\signout.png" />
@@ -130,6 +132,9 @@
   <ItemGroup>
     <Content Include="Resources\Images\365day.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\add-new.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\month.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -266,6 +271,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 
 
+    </Content>
+    <Content Include="Resources\Images\report.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\sky.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

@@ -7,7 +7,21 @@
         xmlns:tk="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit.NET5" 
         mc:Ignorable="d"
         Title="CreateOrdinaryTourRequest" Height="800" Width="1024" d:DesignHeight="800" d:DesignWidth="1024" WindowStartupLocation="CenterScreen">
-    <Grid>
+    <Window.Resources>
+        <Style x:Key="LabelStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Foreground" Value="#FF3B0463"/>
+            <Setter Property="FontWeight" Value="Black"/>
+        </Style>
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="BorderBrush" Value="#FF3B0463"/>
+            <Setter Property="BorderThickness" Value="3,3,3,3"/>
+            <Setter Property="Background" Value="LightGray"/>
+            <Setter Property="Foreground" Value="#FF3B0463"/>
+        </Style>
+    </Window.Resources>
+    <Grid Background="#FF4F5E73">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
@@ -25,30 +39,33 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Border BorderBrush="Black" BorderThickness="2,2,2,2" Margin="10,6,10,71" Grid.RowSpan="9" Grid.Row="2" Grid.ColumnSpan="2"/>
-        <Label Content="Creating request of the tour" FontSize="20" FontWeight="Bold" Margin="40,10,10,19" Grid.Column="0" Grid.Row="0"/>
-        <Label Grid.Row="2" Grid.Column="0" Content="Name" Margin="40,25,0,10"/>
-        <Label Content="Country" Grid.Row="3" Grid.Column="0" Margin="40,25,0,1" RenderTransformOrigin="0.5,0.5"/>
-        <Label Content="Language" Grid.Row="5" Grid.Column="0" Margin="40,25,0,0"/>
-        <Label Content="Description" Grid.Row="6" Grid.Column="0" Margin="40,25,0,0"/>
-        <Label Content="Capacity" Grid.Row="7" Grid.Column="0" Margin="40,25,0,78" Grid.RowSpan="2"/>
-        <Label Content="Start Date" Grid.Row="8" Grid.Column="0" Margin="40,25,0,78" Grid.RowSpan="2"/>
-        <Label Content="End Date" Grid.Row="9" Grid.Column="0" Margin="40,25,0,78" Grid.RowSpan="2"/>
-        <TextBox x:Name="Name" Grid.Column="1" Grid.Row="2" Margin="0,10,60,10"/>
-        <ComboBox x:Name="cityInput" BorderBrush="#7166f9" BorderThickness="3,3,3,3" ItemsSource="{Binding CitiesByCountry}" SelectedItem="{Binding Location.City}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" HorizontalAlignment="Left" Margin="10,14,0,0" VerticalAlignment="Top" Width="442" Height="47" Grid.Column="1" Grid.Row="4"/>
-        <TextBox x:Name="Language" Grid.Column="1" Grid.Row="5" Margin="0,10,60,10"/>
-        <TextBox x:Name="Description" Grid.Column="1" Grid.Row="6" Margin="0,5,60,15"/>
-        <Border Grid.Column="1" Grid.Row="7" Margin="68,20,124,20" BorderBrush="Black" BorderThickness="1,1,1,1"/>
+        <Border BorderBrush="#FF3B0463" BorderThickness="3,3,3,3" Margin="10,6,10,71" Grid.RowSpan="9" Grid.Row="2" Grid.ColumnSpan="2"/>
+        <Label Content="Creating request of the tour" FontSize="20" FontWeight="Bold" Foreground="White" Margin="3,10,50,19" Grid.Column="0" Grid.Row="0"/>
+        <Label Grid.Row="2" Grid.Column="0" Content="Name" Margin="40,25,0,10" Style="{StaticResource LabelStyle}"/>
+        <Label Content="Country" Grid.Row="3" Grid.Column="0" Margin="40,25,0,1" Style="{StaticResource LabelStyle}" RenderTransformOrigin="0.5,0.5"/>
+        <Label Content="Language" Grid.Row="5" Grid.Column="0" Margin="40,25,0,0" Style="{StaticResource LabelStyle}"/>
+        <Label Content="Description" Grid.Row="6" Grid.Column="0" Margin="40,25,0,0" Style="{StaticResource LabelStyle}"/>
+        <Label Content="Capacity" Grid.Row="7" Grid.Column="0" Margin="40,25,0,78" Grid.RowSpan="2" Style="{StaticResource LabelStyle}"/>
+        <Label Content="Start Date" Grid.Row="8" Grid.Column="0" Margin="40,25,0,78" Grid.RowSpan="2" Style="{StaticResource LabelStyle}"/>
+        <Label Content="End Date" Grid.Row="9" Grid.Column="0" Margin="40,25,0,78" Grid.RowSpan="2" Style="{StaticResource LabelStyle}"/>
+        <TextBox x:Name="Name" Grid.Column="1" Grid.Row="2" Margin="20,25,60,10" BorderBrush="#FF3B0463" BorderThickness="3,3,3,3"/>
+        <ComboBox x:Name="cityInput" BorderBrush="#FF3B0463" BorderThickness="3,3,3,3" ItemsSource="{Binding CitiesByCountry}" SelectedItem="{Binding Location.City}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" HorizontalAlignment="Left" Margin="20,25,0,0" VerticalAlignment="Top" Width="425" Height="37" Grid.Column="1" Grid.Row="4"/>
+        <TextBox x:Name="Language" Grid.Column="1" Grid.Row="5" Margin="20,25,60,10" BorderBrush="#FF3B0463" BorderThickness="3,3,3,3"/>
+        <TextBox x:Name="Description" Grid.Column="1" Grid.Row="6" Margin="20,25,60,10" BorderBrush="#FF3B0463" BorderThickness="3,3,3,3"/>
+        <Border Grid.Column="1" Grid.Row="7" Margin="68,20,105,20" BorderBrush="#FF3B0463" BorderThickness="3,3,3,3"/>
 
 
-        <TextBlock x:Name="Capacity" Grid.Column="1" Grid.Row="7" Margin="68,20,124,20" Text="1" TextAlignment="Center"/>
-        <Button Grid.Column="1" Grid.Row="7" Margin="0,20,472,20" Content="-" Command="{Binding DecrementCommand}"/>
-        <tk:DateTimePicker FontSize="9" x:Name="Start" Grid.Column="1" Text="{Binding Path=StartDate,Mode=TwoWay}" Format="FullDateTime" DataContext="{Binding}" Margin="10,10,60,0" Grid.Row="8" />
-        <tk:DateTimePicker FontSize="9" x:Name="End" Grid.Column="1" Text="{Binding Path=EndDate,Mode=TwoWay}" Format="FullDateTime" DataContext="{Binding}" Margin="10,10,60,10" Grid.Row="9" />
-        <Button x:Name="increment" Grid.Column="1" Grid.Row="7" Margin="412,20,60,20" Content="+"  Command="{Binding IncrementCommand}"/>
-        <Button Grid.Column="1" Content="Confirm" HorizontalAlignment="Left" Margin="342,10,0,0" Grid.Row="10" VerticalAlignment="Top" Height="40" Width="70" Command="{Binding ConfirmCommand}" />
-        <Button Grid.Column="1" Content="Cancel" HorizontalAlignment="Left" Margin="432,10,0,0" Grid.Row="10" VerticalAlignment="Top" Width="70" Height="40" Command="{Binding CancelCommand}"/>
-        <Label Content="City" Grid.Row="4" Grid.Column="0" Margin="40,25,0,0" RenderTransformOrigin="0.5,0.5"/>
-        <ComboBox x:Name="countryInput" ItemsSource="{Binding Countries}" BorderBrush="#7166f9" BorderThickness="3,3,3,3" SelectedItem="{Binding Location.Country}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Width="442" SelectionChanged="CountryInput_SelectionChanged" Height="51" Grid.Column="1" Grid.Row="3"/>
+        <TextBlock x:Name="Capacity" Grid.Column="1" Grid.Row="7" Margin="71,23,108,23" Text="1" TextAlignment="Center" Background="White"/>
+        <Button Grid.Column="1" Grid.Row="7" Margin="20,20,452,20" Content="-" Command="{Binding DecrementCommand}" BorderBrush="#FF3B0463" BorderThickness="3,3,3,3"/>
+        <tk:DateTimePicker FontSize="9" x:Name="Start" Grid.Column="1" Text="{Binding Path=StartDate,Mode=TwoWay}" Format="FullDateTime" DataContext="{Binding}" Margin="20,25,60,10" Grid.Row="8" BorderBrush="#FF3B0463" BorderThickness="3,3,3,3"/>
+        <tk:DateTimePicker FontSize="9" x:Name="End" Grid.Column="1" Text="{Binding Path=EndDate,Mode=TwoWay}" Format="FullDateTime" DataContext="{Binding}" Margin="20,25,60,10" Grid.Row="9" BorderBrush="#FF3B0463" BorderThickness="3,3,3,3"/>
+        <Button x:Name="increment" Grid.Column="1" Grid.Row="7" Margin="412,20,60,20" Content="+"  Command="{Binding IncrementCommand}" BorderBrush="#FF3B0463" BorderThickness="3,3,3,3"/>
+        <Button Grid.Column="1" Content="       Confirm" HorizontalAlignment="Left" Margin="315,10,0,0" Grid.Row="10" VerticalAlignment="Top" Command="{Binding ConfirmCommand}" Style="{StaticResource ButtonStyle}" Height="34" Width="83"/>
+        <Button Grid.Column="1" Content="   Cancel" HorizontalAlignment="Left" Margin="412,10,0,0" Grid.Row="10" VerticalAlignment="Top" Command="{Binding CancelCommand}" Style="{StaticResource ButtonStyle}" Height="34" Width="83"/>
+        <Label Content="City" Grid.Row="4" Grid.Column="0" Margin="40,25,0,0" RenderTransformOrigin="0.5,0.5" Style="{StaticResource LabelStyle}"/>
+        <ComboBox x:Name="countryInput" ItemsSource="{Binding Countries}" BorderBrush="#FF3B0463" BorderThickness="3,3,3,3" SelectedItem="{Binding Location.Country}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" HorizontalAlignment="Left" Margin="20,25,0,0" VerticalAlignment="Center" Width="425" SelectionChanged="CountryInput_SelectionChanged" Height="37" Grid.Column="1" Grid.Row="3"/>
+        <Label Content="Potrebno je popuniti sva navedena polja." FontSize="18" Margin="3,15,50,15" Grid.Column="0" Grid.Row="1" Foreground="White"/>
+        <Image Margin="320,11,160,28" Grid.Column="1" Grid.Row="10" Source="/Resources/Images/ok.png"/>
+        <Image Margin="416,11,64,28" Grid.Column="1" Grid.Row="10" Source="/Resources/Images/cancel.png"/>
     </Grid>
 </Window>
