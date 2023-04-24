@@ -50,7 +50,7 @@
                     <Image Source="/Resources/Images/bell.png" Height="15" Width="20"/>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="My requests" Foreground="Gray" FontSize="20" FontWeight="Bold">
+            <MenuItem Header="My requests" Foreground="Gray" FontSize="20" FontWeight="Bold" Command="{Binding RequestsCommand}">
                 <MenuItem.Icon>
                     <Image Source="/Resources/Images/tasks.png" Height="15" Width="20"/>
                 </MenuItem.Icon>
