@@ -43,6 +43,10 @@
 
     <None Remove="Resources\Images\forum.png" />
 
+    <None Remove="Resources\Images\goldStar.png" />
+
+    <None Remove="Resources\Images\goldStar1.png" />
+
     <None Remove="Resources\Images\greenCorect.png" />
 
     <None Remove="Resources\Images\guest1Menu.jpeg" />
@@ -350,6 +354,12 @@
     <Resource Include="Resources\Images\black.jpeg" />
     <Resource Include="Resources\Images\blond.jpg" />
     <Resource Include="Resources\Images\brown.jpg" />
+    <Resource Include="Resources\Images\goldStar.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\goldStar1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Images\guest1Menu.jpeg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>

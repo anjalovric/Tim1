@@ -135,10 +135,12 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-            <Grid FlowDirection="LeftToRight" HorizontalAlignment="Left" IsEnabled="True" ShowGridLines="False" VerticalAlignment="Top" Grid.Column="1" Margin="161,64,0,0" Grid.Row="3">
-                <Line Stroke="Red" StrokeThickness="2" X1="0"  X2="25" Y1="0" Y2="25"/>
-                <Line Stroke="Red" StrokeThickness="2" X1="0" X2="25" Y1="25" Y2="0"/>
-            </Grid>
+            <Button Background="Transparent" Height="30" Width="30" Grid.Row="3" VerticalAlignment="Top" BorderThickness="0" Margin="0,62,66,0" Grid.Column="1" HorizontalAlignment="Right" Command="{Binding DeletePhotoCommand}">
+                <Grid FlowDirection="LeftToRight" HorizontalAlignment="Left" IsEnabled="True" ShowGridLines="False" VerticalAlignment="Center" Background="Transparent" >
+                    <Line Stroke="Red" StrokeThickness="2" X1="0"  X2="25" Y1="0" Y2="25"/>
+                    <Line Stroke="Red" StrokeThickness="2" X1="0" X2="25" Y1="25" Y2="0"/>
+                </Grid>
+            </Button>
             <Label HorizontalContentAlignment="Left" Grid.Row="4" Grid.Column="0"  VerticalAlignment="Center" FontSize="18" Margin="65,0,0,0" Content="Comments:"/>
 
             <TextBox x:Name="Comments" Margin="71,10,71,46" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Path=Comments}"/>
@@ -151,6 +153,7 @@
                 <RowDefinition Height="1.5*"></RowDefinition>
                 <RowDefinition Height="1*"></RowDefinition>
                 <RowDefinition Height="3.5*"></RowDefinition>
+                <RowDefinition Height="0.7*"></RowDefinition>
                 <RowDefinition Height="1*"></RowDefinition>
                 <RowDefinition Height="2*"></RowDefinition>
                 <RowDefinition Height="4*"></RowDefinition>
@@ -161,8 +164,8 @@
 
             <TextBox Text="{Binding Path=ConditionsOfAccommodation}" Width="472" Height="150" Margin="10,0,0,0"  Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Top"/>
 
-            <Label  Margin="20,0,0,0"  Grid.Row="3" Height="Auto" FontSize="18" Grid.Column="0"  VerticalAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Left">Level of urgency:</Label>
-            <ComboBox Height="50" FontSize="16" Grid.Row="4" SelectedValuePath="Content" Grid.Column="0" VerticalAlignment="Top" Margin="20,0,20,0" SelectedValue="{Binding LevelOfUrgency}" DisplayMemberPath="">
+            <Label  Margin="20,0,0,0"  Grid.Row="4" Height="Auto" FontSize="18" Grid.Column="0"  VerticalAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Left">Level of urgency:</Label>
+            <ComboBox Height="50" FontSize="16" Grid.Row="5" SelectedValuePath="Content" Grid.Column="0" VerticalAlignment="Top" Margin="20,0,20,0" SelectedValue="{Binding LevelOfUrgency}" DisplayMemberPath="">
                 <ComboBox.ItemContainerStyle>
                     <Style TargetType="ComboBoxItem">
                         <Setter Property="Width" Value="472"></Setter>
@@ -190,7 +193,7 @@
 
 
 
-            <Button Grid.Column="0" Grid.Row="5" Width="94" Height="35" FontSize="16" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontWeight="Bold" Margin="0,0,20,46" Command="{Binding SendCommand}">
+            <Button Grid.Column="0" Grid.Row="6" Width="94" Height="35" FontSize="16" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontWeight="Bold" Margin="0,0,20,46" Command="{Binding SendCommand}">
                 <Grid Background="#8c9d75" Width="94" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
