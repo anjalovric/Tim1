@@ -15,6 +15,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows.Xps.Serialization;
 
 namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 {
@@ -75,21 +76,35 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         }
         private void Send_Executed(object sender)
         {
-            if (IsImageUploadValid())
+            if (!IsImageUploadValid())
+                MessageBox.Show("You must upload at least one photo!");
+            else if (!IsRenovationSuggestionValid())
+                MessageBox.Show("You must fill all fields for renovation suggestion!");
+            else
             {
-                StoreReview();  //pazi da se ne sacuva ovo, a da se ne dozvoli prethodno renovacija
+                StoreReview();
                 StoreImages();
                 StoreRenovationSuggestion();
                 MessageBox.Show("Successfully sent!");
                 Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = new MyAccommodationReservationsView(guest1);
             }
-            else
-                MessageBox.Show("You must upload at least one photo!");
+        }
+
+        private bool IsRenovationSuggestionValid()
+        {
+            if ((ConditionsOfAccommodation == null || ConditionsOfAccommodation=="") && LevelOfUrgency == null)
+                return true;
+            if (ConditionsOfAccommodation == null || ConditionsOfAccommodation == "")
+                return false;
+            if (LevelOfUrgency == null)
+                return false;
+            return true;
+            
         }
 
         private void StoreRenovationSuggestion()
         {
-            if(ConditionsOfAccommodation!=null || LevelOfUrgency!=null) //else, dont store renovation suggestion (doesnt exist)
+            if(ConditionsOfAccommodation!=null && ConditionsOfAccommodation!="" && LevelOfUrgency!=null) //else, dont store renovation suggestion (doesnt exist)
             {
                 AccommodationRenovationSuggestionService accommodationRenovationSuggestionService =  new AccommodationRenovationSuggestionService();
                 if (ConditionsOfAccommodation == null)
@@ -234,3 +249,4 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         }
     }
 }
+//ako postoji ocjena, ali ne i preporuka za renoviranje, da li onda ne moze opet da preporuci (jer pise da se to radi u nastavku ocjenjivanja)???

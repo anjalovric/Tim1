@@ -12,23 +12,26 @@ namespace InitialProject.Domain.Model
     public class OwnerNotification : ISerializable
     {
         public int Id { get; set; }
-        
+        public Owner Owner { get; set; }
         public OwnerNotificationType Type { get; set; }
         public OwnerNotification() { }
-        public OwnerNotification(int id, OwnerNotificationType type)
+        public OwnerNotification(int id, Owner owner, OwnerNotificationType type)
         {
             Id = id;
+            Owner = owner;
             Type = type;
         }
 
         public void FromCSV(string[] values)
         {
             Id = Convert.ToInt32(values[0]);
-            Type = (OwnerNotificationType)Enum.Parse(typeof(OwnerNotificationType), values[1]);
+            Owner = new Owner();
+            Owner.Id = Convert.ToInt32(values[1]);
+            Type = (OwnerNotificationType)Enum.Parse(typeof(OwnerNotificationType), values[2]);
         }
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), Type.ToString()};
+            string[] csvValues = { Id.ToString(), Owner.Id.ToString(), Type.ToString()};
             return csvValues;
         }
     }

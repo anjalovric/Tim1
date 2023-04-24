@@ -103,7 +103,9 @@ namespace InitialProject.Service
                     counter++;
                 }
             }
-                return sumCleanlinessReview/counter;
+            if (counter == 0)
+                return 1;
+            return sumCleanlinessReview/counter;
         }
 
         public double GetAverageFollowingRulesReview(Guest1 guest1)
@@ -119,6 +121,8 @@ namespace InitialProject.Service
                     counter++;
                 }
             }
+            if (counter == 0)
+                return 1;
             return sumFollowingRulesReview / counter;
         }
         public int GetReviewsNumberByGuest(Guest1 guest1)
@@ -133,6 +137,12 @@ namespace InitialProject.Service
                 }
             }
             return counter;
+        }
+
+        public int GetAverageRating(Guest1 guest1)  //pitati da li je ok da ovako dobijem prosj.ocjenu
+        {
+           return Convert.ToInt32((GetAverageCleanlinessReview(guest1) + GetAverageFollowingRulesReview(guest1)) / 2);
+               //da li ako nema ocjena da prikazem onda 1 zvjezdu i da sve bude na 1(Slideri), svakako prikazujem i broj reviews
         }
 
     }

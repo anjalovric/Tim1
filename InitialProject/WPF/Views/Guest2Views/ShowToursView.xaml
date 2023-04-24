@@ -63,7 +63,7 @@
         <Label Content="Language" Margin="80,170,0,0" RenderTransformOrigin="0.413,0.366" Style="{StaticResource LabelStyle}" Foreground="#7166f9"/>
         <Label Content="Capacity" Margin="463,170,0,0" Style="{StaticResource LabelStyle}" Foreground="#7166f9"/>
         <ComboBox x:Name="countryInput" ItemsSource="{Binding Countries}" BorderBrush="#7166f9" BorderThickness="3,3,3,3" SelectedItem="{Binding Location.Country}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" HorizontalAlignment="Left" Margin="80,130,0,0" VerticalAlignment="Top" Width="151" SelectionChanged="CountryInput_SelectionChanged" Height="22"/>
-        <Label Content="Country" Margin="80,90,0,0" Style="{StaticResource LabelStyle}"/>
+        <Label Content="Country" Margin="80,90,0,0" Style="{StaticResource LabelStyle}" Foreground="#7166f9"/>
         <Button x:Name="decrementCapacityNumber" Style="{StaticResource borderStyle}" Content="-" HorizontalAlignment="Left" Margin="463,201,0,0" VerticalAlignment="Top" Width="20" Click="DecrementCapacityNumber_Click" Height="22"/>
         <Button x:Name="incrementCapacityNumber" Style="{StaticResource borderStyle}" Content="+" HorizontalAlignment="Left" Margin="595,201,0,0" VerticalAlignment="Top" Width="20" Click="IncrementCapacityNumber_Click" RenderTransformOrigin="-1.284,0.612" Height="22"/>
         <Button Content="Search" Style="{StaticResource borderStyle}" FontWeight="Bold" HorizontalAlignment="Left" Margin="828,201,0,0" VerticalAlignment="Top" Height="22" Click="Search_Click" Width="76"/>

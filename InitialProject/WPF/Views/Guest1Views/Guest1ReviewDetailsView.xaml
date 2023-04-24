@@ -1,0 +1,106 @@
+﻿<Page x:Class="InitialProject.WPF.Views.Guest1Views.Guest1ReviewDetailsView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:InitialProject.WPF.Views.Guest1Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="696" d:DesignWidth="1024"
+      Title="Guest1ReviewDetailsView">
+
+    <Page.Resources>
+        <Style TargetType="Grid">
+            <Setter Property="Background" Value="#37492d"></Setter>
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="Foreground" Value="#d9c7b3"></Setter>
+            <Setter Property="FontWeight" Value="Medium"></Setter>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#d9c7b3"></Setter>
+            <Setter Property="FontWeight" Value="Medium"></Setter>
+        </Style>
+    </Page.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*"></RowDefinition>
+                <RowDefinition Height="2*"></RowDefinition>
+                <RowDefinition Height="2*"></RowDefinition>
+                <RowDefinition Height="2*"></RowDefinition>
+                <RowDefinition Height="2*"></RowDefinition>
+                <RowDefinition Height="2*"></RowDefinition>
+                <RowDefinition Height="2*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Label HorizontalAlignment="Center" VerticalAlignment="Top" HorizontalContentAlignment="Center" Grid.Row="0" FontFamily="Baskerville Old Face" FontSize="24" FontWeight="Bold" Margin="0,20,0,0">RESERVATION DETAILS</Label>
+
+            <Label HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Center" Grid.Row="1" FontSize="18" FontWeight="Bold" Margin="70,0,0,0">Owner:</Label>
+            <Label HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Center" Grid.Row="2" FontSize="18" FontWeight="Bold" Margin="70,0,0,0">Accommodation:</Label>
+            <Label HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Center" Grid.Row="3" FontSize="18" FontWeight="Bold" Margin="70,0,0,0">Location:</Label>
+            <Label HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Center" Grid.Row="4" FontSize="18" FontWeight="Bold" Margin="70,0,0,0">Arrival date:</Label>
+            <Label HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Center" Grid.Row="5" FontSize="18" FontWeight="Bold" Margin="70,0,0,0">Departure date:</Label>
+
+            <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center"  Grid.Row="1" FontSize="18" FontWeight="Bold" Width="Auto" Margin="0,0,70,0">
+                <Run Text="{Binding SelectedReview.Reservation.Accommodation.Owner.Name}"/>
+                <Run Text="{Binding SelectedReview.Reservation.Accommodation.Owner.LastName}"/>
+            </TextBlock>
+            <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center"  Grid.Row="2" FontSize="18" FontWeight="Bold" Width="Auto" Margin="0,0,70,0" Text="{Binding SelectedReview.Reservation.Accommodation.Name}"></TextBlock>
+            <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center"  Grid.Row="3" FontSize="18" FontWeight="Bold" Width="Auto" Margin="0,0,70,0">
+                <Run Text="{Binding SelectedReview.Reservation.Accommodation.Location.Country}"/>
+                <Run Text=", "></Run>
+                <Run Text="{Binding SelectedReview.Reservation.Accommodation.Location.City}"/>
+            </TextBlock>
+            <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center"  Grid.Row="4" FontSize="18" FontWeight="Bold" Width="Auto" Margin="0,0,70,0" Text="{Binding SelectedReview.Reservation.Arrival}"></TextBlock>
+            <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center"  Grid.Row="5" FontSize="18" FontWeight="Bold" Width="Auto" Margin="0,0,70,0" Text="{Binding SelectedReview.Reservation.Departure}"></TextBlock>
+
+
+        </Grid>
+
+
+
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*"></RowDefinition>
+                <RowDefinition Height="2*"></RowDefinition>
+                <RowDefinition Height="2*"></RowDefinition>
+                <RowDefinition Height="2*"></RowDefinition>
+                <RowDefinition Height="6*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Button FontSize="18" FontWeight="Bold" Height="35" BorderBrush="#22301a" BorderThickness="3" Width="94" Margin="10,20,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="0" Grid.Column="0" Command="NavigationCommands.BrowseBack">
+                <Grid Background="#8c9d75" Width="94" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="/Resources/Images/back.png" HorizontalAlignment="Left" Margin="10,0,0,0" Width="26" Height="22" Grid.Column="0"/>
+                    <TextBlock Background="#8c9d75" Text="BACK" Grid.Column="1" VerticalAlignment="Center" FontSize="16"  Foreground="#22301a" FontWeight="Bold" HorizontalAlignment="Center" Width="Auto"/>
+                </Grid>
+            </Button>
+
+            <Label HorizontalAlignment="Center" VerticalAlignment="Top" HorizontalContentAlignment="Center" Grid.Row="0" FontFamily="Baskerville Old Face" FontSize="24" FontWeight="Bold" Margin="0,20,0,0">REVIEW DETAILS</Label>
+
+            <Label HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Center" Grid.Row="1" FontSize="18" FontWeight="Bold" Margin="70,0,0,0">Cleanliness:</Label>
+            <Label HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Center" Grid.Row="2" FontSize="18" FontWeight="Bold" Margin="70,0,0,0">Following rules:</Label>
+            <Label HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Center" Grid.Row="3" FontSize="18" FontWeight="Bold" Margin="70,0,0,0">Owner's comment:</Label>
+            <ScrollViewer Background="#8c9d75" VerticalAlignment="Top" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Center" Grid.Row="4" Margin="70,10,70,10" Height="200">
+                <TextBlock Foreground="#37492d" Text="{Binding Path=SelectedReview.Comment}" TextWrapping="Wrap" FontSize="18" FontWeight="Bold" Width="350"/>
+            </ScrollViewer>
+            <Slider x:Name="CleanlinessSlider" Minimum="1" Maximum="5" TickFrequency="1" AutoToolTipPlacement="BottomRight"   Width="120" Grid.Row="1" IsEnabled="False" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,130,0" Value="{Binding SelectedReview.Cleanliness, Mode=OneWay}"></Slider>
+            <Slider x:Name="FollowingRulesSlider" Width="120" Minimum="1" Maximum="5" Grid.Row="2" IsEnabled="False" TickFrequency="1" HorizontalAlignment="Right" AutoToolTipPlacement="BottomRight" VerticalAlignment="Center" Margin="0,0,130,0"  Value="{Binding SelectedReview.RulesFollowing, Mode=OneWay}"></Slider>
+
+            <TextBlock Text="{Binding ElementName=CleanlinessSlider,Path=Value}" Foreground="black" FontSize="18" HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Center" Background="#dbc9ab" Grid.Row="1" Margin="0,0,70,0" Width="30" Height="24" FontWeight="Normal"></TextBlock>
+            <TextBlock Text="{Binding ElementName=FollowingRulesSlider,Path=Value}" Foreground="Black" FontSize="18" HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Center"  Background="#dbc9ab" Grid.Row="2" Margin="0,0,70,0" Width="30" Height="24" FontWeight="Normal"></TextBlock>
+
+
+
+        </Grid>
+        <Border Grid.Column="1" BorderThickness="1 0 1 0" Width="1" HorizontalAlignment="Left" BorderBrush="#22301a" />
+
+    </Grid>
+</Page>

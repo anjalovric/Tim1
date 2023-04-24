@@ -25,6 +25,12 @@
             </TabControl>
         </Border>
         <Label Content="My requests" Foreground="White" Margin="91,80,626,0" Height="46" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="20" FontWeight="Bold"/>
-        <Button Margin="98,689,801,48" Content="Create request" Command="{Binding CreateCommand}"/>
+        <Button Margin="98,690,808,49" Content="Create request" Command="{Binding CreateCommand}" FontWeight="Bold" HorizontalContentAlignment="Right"/>
+        <Image Margin="102,690,898,49" RenderTransformOrigin="0.5,0.5" Source="/Resources/Images/add-new.png"/>
+        <Label Content="Mozete pogledati sve vase zahtjeve za ture kao i njihov status." Foreground="#7166f9" Margin="91,126,0,0" Height="46" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <Button Margin="232,689,670,48" Content="Generate report" Command="{Binding CreateCommand}" FontWeight="Bold" HorizontalContentAlignment="Right"/>
+        <Image Margin="236,690,764,49" RenderTransformOrigin="0.5,0.5" Source="/Resources/Images/report.png"/>
+
+
     </Grid>
 </UserControl>
