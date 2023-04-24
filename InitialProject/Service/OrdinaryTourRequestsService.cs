@@ -1,12 +1,8 @@
-﻿using InitialProject.Domain.RepositoryInterfaces;
-using InitialProject.Domain;
-using InitialProject.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using InitialProject.Domain;
 using InitialProject.Domain.Model;
+using InitialProject.Domain.RepositoryInterfaces;
+using InitialProject.Model;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace InitialProject.Service
@@ -32,5 +28,30 @@ namespace InitialProject.Service
         {
             return requestRepository.GetByGuestId(id);
         }
+        public List<OrdinaryTourRequests> GetOnWaitingRequests()
+        {
+            List<OrdinaryTourRequests> requests= new List<OrdinaryTourRequests>();
+            foreach(OrdinaryTourRequests request in GetAll()) 
+            {
+                if(request.Status.Equals("On waiting"))
+                    requests.Add(request);
+            }
+            SetLocations(requests);
+            return requests;
+        }
+        private void SetLocations(List<OrdinaryTourRequests> requests) 
+        {
+            LocationService locationService = new LocationService();
+            foreach(OrdinaryTourRequests request in requests)
+            {
+                foreach(Location location in locationService.GetAll())
+                {
+                    if(location.Id==request.Location.Id)
+                        request.Location = location;
+                }
+            }
+        }
+
     }
+
 }

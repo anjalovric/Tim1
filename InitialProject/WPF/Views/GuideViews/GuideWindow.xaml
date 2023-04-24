@@ -61,7 +61,8 @@
 
                         </MenuItem>
                         <MenuItem Header="Requests" Height="33" Width="100"  >
-
+                            <MenuItem Header="Regular" Height="33" Width="150" Command="{Binding OrdinaryRequestCommand}" Style="{DynamicResource MenuItem}">
+                            </MenuItem>
                         </MenuItem>
                     </Menu>
                 </DockPanel>

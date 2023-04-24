@@ -19,7 +19,7 @@
             <ColumnDefinition Width="10*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <DataGrid HeadersVisibility="Column" ColumnHeaderStyle="{StaticResource CenterGridHeaderStyle}" Grid.Row="1" Grid.Column="1" x:Name="TourListDataGrid" ItemsSource="{Binding Path=TourInstances,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=Selected}" Style="{DynamicResource Tables}">
+        <DataGrid HeadersVisibility="Column" ColumnHeaderStyle="{DynamicResource CenterGridHeaderStyle}" Grid.Row="1" Grid.Column="1" x:Name="TourListDataGrid" ItemsSource="{Binding Path=TourInstances,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=Selected}" Style="{DynamicResource Tables}">
             <DataGrid.Columns>
                 <DataGridTemplateColumn x:Name="Cover"  Width="0.7*">
                     <DataGridTemplateColumn.CellTemplate>
