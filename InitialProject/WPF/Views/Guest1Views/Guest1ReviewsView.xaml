@@ -119,8 +119,8 @@
 
             <Label FontSize="18" Grid.Row="8" Width="Auto" Height="35" HorizontalAlignment="Center" VerticalAlignment="Top" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Margin="0,0,0,0">Change of average ratings:</Label>
 
-            <TextBlock Text="{Binding ElementName=CleanlinessSlider,Path=Value}" HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Center" Grid.Row="4" Margin="0,0,90,0" Width="30" Height="24"></TextBlock>
-            <TextBlock Text="{Binding ElementName=FollowingRulesSlider,Path=Value}" HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Center" Grid.Row="5" Margin="0,0,90,0" Width="30" Height="24"></TextBlock>
+            <TextBlock Text="{Binding ElementName=CleanlinessSlider,Path=Value}" HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Center" Grid.Row="4" Margin="0,0,70,0" Width="30" Height="24"></TextBlock>
+            <TextBlock Text="{Binding ElementName=FollowingRulesSlider,Path=Value}" HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Center" Grid.Row="5" Margin="0,0,70,0" Width="30" Height="24"></TextBlock>
 
         </Grid>
 
@@ -131,11 +131,11 @@
             </Grid.RowDefinitions>
             <Label FontSize="24" HorizontalAlignment="Center" FontFamily="Baskerville Old Face"  VerticalAlignment="Top" Height="43" Width="Auto" Margin="0,20,0,0">REVIEWS</Label>
 
-            
 
-            <DataGrid VerticalScrollBarVisibility="Auto" VerticalContentAlignment="Center" FontSize="16"  Width="460" Height="520"  HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Left"  IsReadOnly="True" UseLayoutRounding="False" HeadersVisibility="Column" Grid.Row="1" Grid.Column="0" Margin="20, 20, 20, 50" ItemsSource="{Binding Path=Guest1Reviews,Mode=OneWay}" AutoGenerateColumns="False" BorderBrush="DarkGray">
+
+            <DataGrid VerticalScrollBarVisibility="Auto" SelectedItem="{Binding Path=SelectedReview}" VerticalContentAlignment="Center" FontSize="16"  Width="460" Height="520"  HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Left"  IsReadOnly="True" UseLayoutRounding="False" HeadersVisibility="Column" Grid.Row="1" Grid.Column="0" Margin="20, 20, 20, 50" ItemsSource="{Binding Path=Guest1Reviews,Mode=OneWay}" AutoGenerateColumns="False" BorderBrush="DarkGray">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Owner" Width="3*">
+                    <DataGridTextColumn Header="Owner" Width="2*">
                         <DataGridTextColumn.Binding>
                             <MultiBinding StringFormat="{}{0} {1}">
                                 <Binding Path="Reservation.Accommodation.Owner.Name"/>
@@ -169,13 +169,13 @@
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="Comment" Width="2*" Binding="{Binding Comment}">
-                        <DataGridTextColumn.ElementStyle>
-                            <Style TargetType="{x:Type TextBlock}">
-                                <Setter Property="ToolTip" Value="{Binding Comment}" />
-                            </Style>
-                        </DataGridTextColumn.ElementStyle>
-                    </DataGridTextColumn>
+                    <DataGridTemplateColumn x:Name="Review" Header="Review details" Width="2.5*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Name="ReviewButton" FontSize="16" FontWeight="Normal" Background="#c99585" Content="Details" Command="{Binding DataContext.ShowReviewDetailsCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
 

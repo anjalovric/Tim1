@@ -6,9 +6,11 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Media.Imaging;
 using InitialProject.Model;
 using InitialProject.Service;
+using InitialProject.WPF.Views.Guest1Views;
 
 namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 {
@@ -33,21 +35,40 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             }
 
         }
+        public GuestReview SelectedReview { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        public RelayCommand ShowReviewDetailsCommand { get; set; }
         public Guest1ReviewsViewModel(Guest1 guest1)
         {
             this.guest1 = guest1;
             guestReviewService = new GuestReviewService();
             Guest1Reviews = new ObservableCollection<GuestReview>(guestReviewService.GetAllToDisplay(guest1));
+            SetRatings();
+            ShowReviewDetailsCommand = new RelayCommand(ShowReviewDetails_Executed, CanExecute);
+            
+        }
+        private bool CanExecute(object sender)
+        {
+            return true;
+        }
+        private void ShowReviewDetails_Executed(object sender)
+        {
+            Guest1ReviewDetailsView view = new Guest1ReviewDetailsView(guest1, SelectedReview);
+            Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = view;
+
+        }
+
+        private void SetRatings()
+        {
             AverageCleanliness = guestReviewService.GetAverageCleanlinessReview(guest1);
             AverageFollowingRules = guestReviewService.GetAverageFollowingRulesReview(guest1);
             ReviewsNumber = guestReviewService.GetReviewsNumberByGuest(guest1);
             AverageRating = guestReviewService.GetAverageRating(guest1);
-            
         }
         
     }
