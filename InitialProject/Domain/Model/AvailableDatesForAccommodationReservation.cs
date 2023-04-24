@@ -15,6 +15,8 @@ namespace InitialProject.Model
         {
             Arrival = arrival;
             Departure = departure;
+            Departure = Departure.AddHours(23);
+            Departure = Departure.AddMinutes(59);
         }
 
     }

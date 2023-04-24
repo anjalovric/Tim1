@@ -72,6 +72,7 @@
     <None Remove="Resources\Images\img_home.png" />
     <None Remove="Resources\Images\LOGO %282%29.jpg" />
     <None Remove="Resources\Images\logo.jpg" />
+    <None Remove="Resources\Images\medal.png" />
     <None Remove="Resources\Images\minus.png" />
     <None Remove="Resources\Images\month.png" />
     <None Remove="Resources\Images\museum.jpg" />
@@ -382,7 +383,7 @@
     <Resource Include="Resources\Images\goldStar.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Resources\Images\goldStar1.png"/>
+    <Resource Include="Resources\Images\goldStar1.png" />
 
     <Resource Include="Resources\Images\back.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -396,6 +397,9 @@
     <Content Include="Resources\Images\newLogo.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Resources\Images\medal.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Images\orange.jpg" />
     <Resource Include="Resources\Images\red.jpg" />
     <Resource Include="Resources\Images\search.png" />
