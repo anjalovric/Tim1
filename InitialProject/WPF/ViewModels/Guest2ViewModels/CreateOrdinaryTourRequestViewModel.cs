@@ -44,6 +44,8 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
                 }
             }
         }
+        //public DateTime EndDate { get; set; }
+        public DateTime NowDate { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
@@ -64,8 +66,10 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         {
             Capacity = capacity;
             Country=country;
-            City = city;
+            City = city;  
             Language = language;
+            StartDate = DateTime.Now;
+            EndDate = DateTime.Now;
             Description = description;
             Name = name;
             Guest2=guest2;
@@ -116,7 +120,13 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             LocationService locationService = new LocationService();
             Model.Location newLocation = locationService.GetByCityAndCountry(Country.SelectedValue.ToString(), City.SelectedValue.ToString());
             OrdinaryTourRequestsService requestService = new OrdinaryTourRequestsService();
-            OrdinaryTourRequests request = new OrdinaryTourRequests(Name.Text,Guest2.Id, Convert.ToInt32(Capacity.Text), newLocation, Description.Text, Language.Text, Convert.ToDateTime(Start), Convert.ToDateTime(End), false, "On waiting",Start.ToString().Split(" ")[0],End.ToString().Split(" ")[0],-1);
+            DateTime createDate=DateTime.Now;
+            if (EndDate < StartDate)
+            {
+                MessageBox.Show("Niste dobro popunili polja!");
+                return;
+            }
+            OrdinaryTourRequests request = new OrdinaryTourRequests(Name.Text,Guest2.Id, Convert.ToInt32(Capacity.Text), newLocation, Description.Text, Language.Text, Convert.ToDateTime(Start), Convert.ToDateTime(End), false, "On waiting",Start.ToString().Split(" ")[0],End.ToString().Split(" ")[0],-1,createDate);
             requestService.Save(request);
             Application.Current.Windows.OfType<CreateOrdinaryTourRequest>().FirstOrDefault().Close();
         }

@@ -148,7 +148,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\congratulations2.png">
-
+    </Content>
     <Content Include="Resources\Images\analytics.png">
 
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
