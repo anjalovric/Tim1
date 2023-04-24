@@ -29,6 +29,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         public RelayCommand ProfileCommand { get; set; }
         public RelayCommand FinishedToursCommand { get; set; }
         public RelayCommand RequestsCommand { get; set; }
+        //public RelayCommand StatisticsCommand { get; set; }
         private ContentControl ContentControl;
         private BitmapImage imageSource;
         public BitmapImage ImageSource
@@ -71,6 +72,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             FinishedToursCommand = new RelayCommand(ShowFinished_Executed, CanExecute);
             ProfileCommand = new RelayCommand(Profile_Executed, CanExecute);
             RequestsCommand = new RelayCommand(Requests_Executed, CanExecute);
+            //StatisticsCommand = new RelayCommand(Statistics_Executed, CanExecute);
         }
         private bool CanExecute(object sender)
         {
@@ -80,6 +82,10 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         {
             ContentControl.Content=new ShowToursView(guest2);
         }
+        /*private void Statistics_Executed(object sender)
+        {
+            ContentControl.Content = new TourRequestStatisticsView(guest2);
+        }*/
         private void Requests_Executed(object sender)
         {
             ContentControl.Content = new MyRequestsFormView(guest2);
