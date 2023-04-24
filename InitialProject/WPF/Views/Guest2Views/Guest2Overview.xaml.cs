@@ -39,7 +39,5 @@ namespace InitialProject.WPF.Views.Guest2Views
             this.user = user;
             DataContext = new Guest2OverviewViewModel(user,CC);
         }
-
-        
     }
 }

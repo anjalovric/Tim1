@@ -33,6 +33,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         public string Name { get; set; }
         private OrdinaryTourRequestsService ordinaryTourRequestsService { get; set; }
         public RelayCommand CreateCommand { get; set; }
+        public RelayCommand StatisticsCommand { get; set; }
         private Guest2 Guest2;
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -45,6 +46,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             ordinaryTourRequestsService = new OrdinaryTourRequestsService();
             OrdinaryTourRequests = new ObservableCollection<OrdinaryTourRequests>(ordinaryTourRequestsService.GetByGuestId(Guest2.Id));
             CreateCommand = new RelayCommand(Create_Executed, CanExecute);
+            StatisticsCommand = new RelayCommand(Statistics_Executed, CanExecute);
         }
         private bool CanExecute(object sender)
         {
@@ -54,6 +56,11 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         {
             CreateOrdinaryTourRequest createOrdinaryTourRequest = new CreateOrdinaryTourRequest(Guest2);
             createOrdinaryTourRequest.Show();
+        }
+        private void Statistics_Executed(object sender)
+        {
+            TourRequestStatisticsView tourRequestStatisticsView = new TourRequestStatisticsView(Guest2);
+            tourRequestStatisticsView.Show();
         }
     }
 }

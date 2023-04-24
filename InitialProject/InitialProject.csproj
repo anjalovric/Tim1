@@ -20,6 +20,7 @@
     <None Remove="Resources\Images\add-new.png" />
     <None Remove="Resources\Images\add.png" />
     <None Remove="Resources\Images\addBW.png" />
+    <None Remove="Resources\Images\analytics.png" />
     <None Remove="Resources\Images\andjelkina-kapija.jpg" />
     <None Remove="Resources\Images\athens.jpg" />
     <None Remove="Resources\Images\back.png" />
@@ -142,10 +143,14 @@
     <Content Include="Resources\Images\add-new.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+
     <Content Include="Resources\Images\congratulations.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\congratulations2.png">
+
+    <Content Include="Resources\Images\analytics.png">
+
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\month.png">
