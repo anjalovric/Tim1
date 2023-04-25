@@ -47,8 +47,8 @@
         <TextBlock Text="NUMBER OF REQUEST BY LANGUAGE" Margin="90,126,26,56" Grid.Row="2" Style="{StaticResource FontStyle}"/>
         <Border BorderBrush="#7166f9" BorderThickness="2,2,2,2" Margin="67,119,9,5" CornerRadius="25,25,25,25" Grid.Row="2" Grid.Column="1"/>
         <TextBlock Text="NUMBER OF REQUESTS BY LOCATION" Margin="91,126,25,56" Grid.Row="2" Grid.Column="1" Style="{StaticResource FontStyle}"/>
-        <TextBlock TextWrapping="Wrap" Margin="100,36,60,132" Grid.Row="2"/>
-        <TextBlock TextWrapping="Wrap" Margin="109,36,51,132" Grid.Row="2" Grid.Column="1"/>
+        <TextBlock TextWrapping="Wrap" Margin="100,36,60,132" Grid.Row="2" Text="{Binding Path=acceptedRequest}"/>
+        <TextBlock TextWrapping="Wrap" Margin="109,36,51,132" Grid.Row="2" Grid.Column="1" Text="{Binding Path=invalidRequest}"/>
         <TextBlock TextWrapping="Wrap" Margin="100,163,60,10" Grid.Row="2"/>
         <TextBlock TextWrapping="Wrap" Margin="115,168,45,10" Grid.Row="2" Grid.Column="1"/>
         <TextBlock TextWrapping="Wrap" Margin="188,92,228,76" Grid.Row="2" Grid.Column="2"/>
