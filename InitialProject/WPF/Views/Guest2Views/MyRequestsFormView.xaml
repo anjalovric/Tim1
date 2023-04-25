@@ -30,6 +30,8 @@
         <Label Content="Mozete pogledati sve vase zahtjeve za ture kao i njihov status." Foreground="#7166f9" Margin="91,126,0,0" Height="46" VerticalAlignment="Top" HorizontalAlignment="Left"/>
         <Button Margin="232,689,670,48" Content="Generate report" Command="{Binding CreateCommand}" FontWeight="Bold" HorizontalContentAlignment="Right"/>
         <Image Margin="236,690,764,49" RenderTransformOrigin="0.5,0.5" Source="/Resources/Images/report.png"/>
+        <Button Margin="374,689,528,48" Content="Statistics" Command="{Binding StatisticsCommand}" FontWeight="Bold"/>
+        <Image Margin="378,690,622,49" RenderTransformOrigin="0.5,0.5" Source="/Resources/Images/analytics.png"/>
 
 
     </Grid>

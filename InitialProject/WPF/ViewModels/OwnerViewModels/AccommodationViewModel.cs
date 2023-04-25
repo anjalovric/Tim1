@@ -128,11 +128,11 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         private void DisplayNotificationPanel()
         {
             OwnerNotificationsService notificationsService = new OwnerNotificationsService();
-            if(notificationsService.IsAccommodationAdded())
+            if(notificationsService.IsAccommodationAdded(profileOwner))
             {
                 StackPanelMessage = "New accommodation successfully added!";
                 StackPanelVisibility = "Visible";
-                notificationsService.Delete(Domain.Model.OwnerNotificationType.ACCOMMODATION_ADDED);
+                notificationsService.Delete(Domain.Model.OwnerNotificationType.ACCOMMODATION_ADDED, profileOwner);
             }
             else
             {

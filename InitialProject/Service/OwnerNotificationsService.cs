@@ -14,25 +14,25 @@ namespace InitialProject.Service
         {
         }
 
-        public void Add(OwnerNotificationType type)
+        public void Add(OwnerNotificationType type, Owner owner)
         {
-            notificationRepository.Add(type);
+            notificationRepository.Add(type, owner);
         }
 
-        public void Delete(OwnerNotificationType type)
+        public void Delete(OwnerNotificationType type, Owner owner)
         {
-            notificationRepository.Delete(type);
+            notificationRepository.Delete(type, owner);
         }
 
-        public bool IsAccommodationAdded()
+        public bool IsAccommodationAdded(Owner owner)
         {
             List<OwnerNotification> notifications = notificationRepository.GetAll();
-            return notifications.Find(n => n.Type.Equals(OwnerNotificationType.ACCOMMODATION_ADDED)) != null;
+            return notifications.Find(n => n.Type.Equals(OwnerNotificationType.ACCOMMODATION_ADDED) && n.Owner.Id == owner.Id) != null;
         }
-        public bool IsAccommodationDeleted()
+        public bool IsAccommodationDeleted(Owner owner)
         {
             List<OwnerNotification> notifications = notificationRepository.GetAll();
-            return notifications.Find(n => n.Type.Equals(OwnerNotificationType.ACCOMMODATION_DELETED)) != null;
+            return notifications.Find(n => n.Type.Equals(OwnerNotificationType.ACCOMMODATION_DELETED) && n.Owner.Id == owner.Id) != null;
         }
         public bool HasGuestToReview(Owner owner)
         {
@@ -44,6 +44,12 @@ namespace InitialProject.Service
         {
             RequestForReschedulingService requestService = new RequestForReschedulingService();
             return requestService.GetPendingRequests(owner).Count != 0;
+        }
+
+        public bool IsNewSuperOwner(Owner owner)
+        {
+            OwnerNotification notification = notificationRepository.GetAll().Find(n => n.Type == OwnerNotificationType.SUPEROWNER && n.Owner.Id == owner.Id);
+            return notification != null;
         }
     }
 }

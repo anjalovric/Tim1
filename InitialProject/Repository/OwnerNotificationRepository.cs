@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using InitialProject.Domain.Model;
 using InitialProject.Domain.RepositoryInterfaces;
+using InitialProject.Model;
 using InitialProject.Serializer;
 
 namespace InitialProject.Repository
@@ -28,11 +29,12 @@ namespace InitialProject.Repository
             return _serializer.FromCSV(FilePath);
         }
 
-        public OwnerNotification Add(OwnerNotificationType type)
+        public OwnerNotification Add(OwnerNotificationType type, Owner owner)
         {
             OwnerNotification notification = new OwnerNotification();
             notification.Id = NextId();
             notification.Type = type;
+            notification.Owner = owner;
             _notifications = _serializer.FromCSV(FilePath);
             _notifications.Add(notification);
             _serializer.ToCSV(FilePath, _notifications);
@@ -49,10 +51,10 @@ namespace InitialProject.Repository
             return _notifications.Max(c => c.Id) + 1;
         }
 
-        public void Delete(OwnerNotificationType type)
+        public void Delete(OwnerNotificationType type, Owner owner)
         {
             _notifications = _serializer.FromCSV(FilePath);
-            OwnerNotification founded = _notifications.Find(c => c.Type.Equals(type));
+            OwnerNotification founded = _notifications.Find(c => c.Type.Equals(type) && c.Owner.Id == owner.Id);
             _notifications.Remove(founded);
             _serializer.ToCSV(FilePath, _notifications);
         }

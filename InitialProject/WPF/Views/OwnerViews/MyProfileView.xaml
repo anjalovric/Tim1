@@ -39,8 +39,8 @@
         <Border Background="Gray"  Width="372" Margin="30, 30, 30, 0" HorizontalAlignment="Center" Height="144" BorderBrush="DarkGray" BorderThickness="0.5" VerticalAlignment="Top">
             <Grid Margin="0, 0, 0, 0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1.3*"/>
-                    <ColumnDefinition Width="1.15*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="0.3*"/>
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
@@ -56,13 +56,13 @@
                 <Label Content="Age:" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top"/>
                 <Label Content="Email:" Grid.Row="2" Grid.Column="1" VerticalAlignment="Top"/>
                 <Label Content="Title:"  Grid.Row="3" Grid.Column="1" VerticalAlignment="Top"/>
-                <Label Content="{Binding ProfileOwner, UpdateSourceTrigger=PropertyChanged}" Margin="0, 5, 0, 0" Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2"/>
-                <Label Content="{Binding ProfileOwner.Age, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2"/>
-                <Label Content="{Binding ProfileOwner.Email, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2"/>
-                <Label Content="{Binding Title, UpdateSourceTrigger=PropertyChanged}" FontWeight="Bold" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2"/>
+                <Label Content="{Binding ProfileOwner, UpdateSourceTrigger=PropertyChanged}" Margin="0, 5, 0, 0" Grid.Row="0" Grid.Column="3" />
+                <Label Content="{Binding ProfileOwner.Age, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="3" />
+                <Label Content="{Binding ProfileOwner.Email, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="3"/>
+                <Label Content="{Binding Title, UpdateSourceTrigger=PropertyChanged}" FontWeight="Bold" Grid.Row="3" Grid.Column="3" />
                 <Image Source="/Resources/Images/star.png" Visibility="{Binding StarVisibility, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" Grid.Row="3"/>
                 <Label Content="Average review:" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left"  VerticalAlignment="Top" />
-                <Label Name="AverageReview" Content="{Binding AverageRate, UpdateSourceTrigger=PropertyChanged}" Grid.Row="4" Grid.Column="2"/>
+                <Label Name="AverageReview" Content="{Binding AverageRate, UpdateSourceTrigger=PropertyChanged}" HorizontalContentAlignment="Right" Grid.Row="4" Grid.Column="2"/>
                 <TextBlock  Grid.Row="4" Grid.Column="3" VerticalAlignment="Center" >
                     <Run Text="(" />
                     <Run Text ="{Binding Path=NumberOfRates, UpdateSourceTrigger=PropertyChanged }" />
@@ -86,5 +86,21 @@
         <Button Content="Generate average review pdf report" HorizontalAlignment="Center" Margin="30,539,30,0" VerticalAlignment="Top" Height="43" Width="355"/>
         <Label Content="My Reviews" FontSize="15" Margin="30,204,170,380"/>
 
+        <StackPanel Margin="0,0,0,528" Background="LightGray" Visibility="{Binding Path=StackPanelVisibility, UpdateSourceTrigger=PropertyChanged}">
+            <Grid Height="100">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="0.5*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1.5*"/>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Image Source="/Resources/Images/congratulations2.png" Stretch="Fill" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" />
+                <Label Content="You became SUPER OWNER!" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" VerticalContentAlignment="Bottom"/>
+                <Button Command="{Binding OKCommand}" Grid.Row="2" Grid.Column="1" Content="OK" />
+            </Grid>
+        </StackPanel>
     </Grid>
 </Page>
