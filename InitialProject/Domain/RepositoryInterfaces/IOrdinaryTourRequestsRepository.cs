@@ -15,7 +15,7 @@ namespace InitialProject.Domain.RepositoryInterfaces
         public void Delete(OrdinaryTourRequests request);
 
         public OrdinaryTourRequests Update(OrdinaryTourRequests request);
-
+        
         public OrdinaryTourRequests Save(OrdinaryTourRequests request);
         public ObservableCollection<OrdinaryTourRequests> GetByGuestId(int id);
 

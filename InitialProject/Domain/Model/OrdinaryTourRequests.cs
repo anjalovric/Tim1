@@ -42,7 +42,7 @@ namespace InitialProject.Domain.Model
             Informed = informed;
             Status = status;
             Start = start;
-            End = End;
+            End = end;
             GuideId = guideId;
             CreateDate = createDate;
             NewAccepted = newAccepted;
