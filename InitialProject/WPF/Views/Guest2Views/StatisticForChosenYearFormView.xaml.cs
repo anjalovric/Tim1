@@ -1,7 +1,8 @@
-﻿using InitialProject.Service;
+﻿using InitialProject.Domain.Model;
+using InitialProject.Model;
+using InitialProject.Service;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,23 +13,20 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using InitialProject.Domain.Model;
-using System.Diagnostics.Metrics;
 using InitialProject.WPF.ViewModels.Guest2ViewModels;
 
 namespace InitialProject.WPF.Views.Guest2Views
 {
     /// <summary>
-    /// Interaction logic for TourRequestStatisticsView.xaml
+    /// Interaction logic for StatisticForChoosenYear.xaml
     /// </summary>
-    public partial class TourRequestStatisticsView : Window
+    public partial class StatisticForChosenYearFormView : Window
     {
-        public TourRequestStatisticsView(Model.Guest2 guest2)
+        public StatisticForChosenYearFormView(Model.Guest2 guest2,string year)
         {
             InitializeComponent();
-            DataContext = new TourRequestStatisticsViewModel(guest2, year);
+            DataContext = new StatisticForChosenYearViewModel(guest2,year);
         }
     }
 }
