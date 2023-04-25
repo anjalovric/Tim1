@@ -29,5 +29,6 @@ namespace InitialProject.WPF.Views.GuideViews
             InitializeComponent();
             DataContext=new CreateTourFromRequestViewModel(Tours,user,Future,request,Requests);
         }
+
     }
 }

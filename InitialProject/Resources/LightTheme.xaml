@@ -30,6 +30,12 @@
         <Setter Property="Background" Value="{StaticResource MenuBlue}"/>
     </Style>
 
+    <Style x:Key="TextBlock" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Foreground" Value="Black"/>
+    </Style>
+
     <Style x:Key="GridMenu" TargetType="Grid">
         <Setter Property="Background" Value="{StaticResource MenuBlue}"/>
     </Style>
@@ -136,13 +142,30 @@
     </Style>
 
     <!--CALENDAR-->
+    <Style x:Key="Calendar1" TargetType="Calendar">
+        <Setter Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                 
+                    <GradientStop Color="#089bd6" Offset="0"/>
+
+                    <GradientStop Color="#9ce1fc" Offset="0.1"/>
+
+                    <GradientStop Color="#9ce1fc" Offset="0.1"/>
+
+                    <GradientStop Color="#20bcf9" Offset="1"/>
+
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="BorderThickness" Value="2.5"/>
+        <Setter Property="BorderBrush" Value="{StaticResource RoyalBlue}"/>
+    </Style>
     <Style x:Key="Calendar" TargetType="Calendar">
         <Setter Property="Background" Value="{StaticResource CalendarBlue}"/>
         <Setter Property="BorderThickness" Value="2.5"/>
         <Setter Property="BorderBrush" Value="{StaticResource RoyalBlue}"/>
     </Style>
-    
-   
 
     <Style x:Key="ButtonTable" TargetType="Button">
         <Setter Property="Background" Value="{StaticResource CalendarBlue}"/>
@@ -173,6 +196,12 @@
     <Style x:Key="ListBox" TargetType="ListBox">
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Background" Value="{StaticResource InnerBlue}"/>
+    </Style>
+    <Style x:Key="ListBoxForm" TargetType="ListBox">
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Background" Value="{StaticResource InnerBlue}"/>
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="BorderBrush" Value="RoyalBlue"/>
     </Style>
 
     <Style x:Key="Run" TargetType="Run">
@@ -350,7 +379,7 @@
 
     </Style>
 
-    <Style x:Key="dt" TargetType="tk:DateTimePicker">
+    <Style x:Key="dt" TargetType="tk:TimePicker">
         <Setter Property="Background" Value="{StaticResource CalendarBlue}"></Setter>
         <Setter Property="Foreground" Value="black"></Setter>
 
@@ -461,7 +490,7 @@
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter Property="Foreground" Value="LightCyan"/>
-                            <Setter Property="Background" Value="LightCyan"/>
+                            <Setter Property="Background" Value="AliceBlue"/>
                         </Trigger>
                         <Trigger Property="IsGrouping" Value="true">
                             <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>

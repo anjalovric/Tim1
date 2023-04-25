@@ -35,6 +35,7 @@ namespace InitialProject.WPF.ViewModels
         public RelayCommand ReviewCommand { get; set; }
         public RelayCommand SignOutCommand { get; set; }
         public RelayCommand OrdinaryRequestCommand { get; set; }
+        public RelayCommand RequestYearlyStatisticsCommand { get; set; }
         public GuideWindowViewModel(User user) 
         {
             tourStatisticsView = new TourStatisticsView(user);
@@ -62,6 +63,7 @@ namespace InitialProject.WPF.ViewModels
             ReviewCommand=new RelayCommand(Review_Executed, CanExecute);
             SignOutCommand = new RelayCommand(SignOut_Executed, CanExecute);
             OrdinaryRequestCommand= new RelayCommand(OrdinaryRequest_Executed,CanExecute);
+            RequestYearlyStatisticsCommand = new RelayCommand(RequestYearlyStatistic_Executed, CanExecute);
         }
 
         private bool CanExecute(object sender)
@@ -119,7 +121,11 @@ namespace InitialProject.WPF.ViewModels
             TourInstanceReviewView tourInstanceReviewView = new TourInstanceReviewView(loggedUser);
             Application.Current.Windows.OfType<GuideWindow>().FirstOrDefault().Main.Content = tourInstanceReviewView;
         }
-
+        private void RequestYearlyStatistic_Executed(object sender)
+        {
+            RequestsStatistisYearly requestsStatistisYearly = new RequestsStatistisYearly();
+            Application.Current.Windows.OfType<GuideWindow>().FirstOrDefault().Main.Content = requestsStatistisYearly;
+        }
         private void SignOut_Executed(object sender)
         {
             SignInForm signInForm = new SignInForm();

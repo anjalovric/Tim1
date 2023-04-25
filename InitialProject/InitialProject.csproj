@@ -92,6 +92,7 @@
     <None Remove="Resources\Images\redIncorect.png" />
     <None Remove="Resources\Images\report.png" />
     <None Remove="Resources\Images\request.png" />
+    <None Remove="Resources\Images\RR.png" />
     <None Remove="Resources\Images\search.png" />
     <None Remove="Resources\Images\signout.png" />
     <None Remove="Resources\Images\signOutIcon.png" />
@@ -292,6 +293,9 @@
     </Content>
     <Content Include="Resources\Images\report.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\RR.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\sky.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

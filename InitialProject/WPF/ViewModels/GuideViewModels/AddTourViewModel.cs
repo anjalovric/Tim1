@@ -77,6 +77,19 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
                 }
             }
         }
+        private DateTime start;
+        public DateTime Start
+        {
+            get => start;
+            set
+            {
+                if (value != start)
+                {
+                    start = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         private string city;
         public string City
         {
@@ -183,6 +196,19 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
                 }
             }
         }
+        private DateTime date;
+        public DateTime Date
+        {
+            get => date;
+            set
+            {
+                if (value != date)
+                {
+                    date = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         private string isErrorMessageVisible;
         public string IsErrorMessageVisible
         {
@@ -243,6 +269,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             isErrorMessageVisible = "Hidden";
             MakeCommands();
             MakeListOfLocations();
+            Start=DateTime.Now;
         }
 
         private void MakeListOfLocations()
@@ -338,12 +365,14 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         {
             GuideService guideService = new GuideService();
             newInstance = new TourInstance();
-            if (IsTimeValid())
-            {
-                newInstance.StartDate = InstanceStartDate;
+
+                string date = Date.ToString().Split(" ")[0] + " " + InstanceStartDate.ToString().Split(" ")[1] + " " + InstanceStartDate.ToString().Split(" ")[2];
+                newInstance.StartDate = Convert.ToDateTime(date);
                 newInstance.Date = InstanceStartDate.ToString().Split(' ')[0];
                 newInstance.Guide = guideService.GetByUsername(loggedInUser.Username);
                 newInstance.CoverImage = "";
+            if (IsTimeValid())
+            {
                 Instances.Add(newInstance);
                 IsErrorMessageVisible = "Hidden";
             }
@@ -352,7 +381,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         }
         private bool IsTimeValid()
         {
-            if (InstanceStartDate.Date > DateTime.Now.Date || (InstanceStartDate.Date == DateTime.Now.Date && InstanceStartDate > DateTime.Now))
+            if (newInstance.StartDate.Date > DateTime.Now.Date || (InstanceStartDate.Date == DateTime.Now.Date && InstanceStartDate > DateTime.Now))
                 return true;
             return false; ;
         }

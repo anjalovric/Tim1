@@ -58,6 +58,22 @@ namespace InitialProject.Service
             return requestRepository.Update(request);
         }
 
+        public List<OrdinaryTourRequests> GetByLanguage(string language) 
+        { 
+            List<OrdinaryTourRequests> ordinaryTourRequests = new List<OrdinaryTourRequests>();
+            foreach(OrdinaryTourRequests request in GetAll())
+                if (request.Language.Equals(language))
+                    ordinaryTourRequests.Add(request);
+            return ordinaryTourRequests;
+        }
+        public List<OrdinaryTourRequests> GetByLocation(Location location)
+        {
+            List<OrdinaryTourRequests> ordinaryTourRequests = new List<OrdinaryTourRequests>();
+            foreach (OrdinaryTourRequests request in GetAll())
+                if (request.Location.Id==location.Id)
+                    ordinaryTourRequests.Add(request);
+            return ordinaryTourRequests;
+        }
     }
 
 }
