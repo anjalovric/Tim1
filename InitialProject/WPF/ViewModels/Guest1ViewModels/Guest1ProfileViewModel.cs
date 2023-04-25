@@ -49,13 +49,13 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         }
         private void GetReviewsNumber()
         {
-            GuestReviewService guestReviewService = new GuestReviewService();
-            ReviewsNumber = guestReviewService.GetReviewsNumberByGuest(Guest1);
+            GuestAverageReviewService guestAverageReviewService = new GuestAverageReviewService();
+            ReviewsNumber = guestAverageReviewService.GetReviewsNumberByGuest(Guest1);
         }
         private void GetAverageRating()
         {
-            GuestReviewService guestReviewService = new GuestReviewService();
-            AverageRating = guestReviewService.GetAverageRating(Guest1);
+            GuestAverageReviewService guestAverageReviewService = new GuestAverageReviewService();
+            AverageRating = guestAverageReviewService.GetAverageRating(Guest1);
         }
         private string FindImageRelativePath()
         {

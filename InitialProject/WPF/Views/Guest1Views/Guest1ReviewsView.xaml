@@ -86,7 +86,7 @@
                 <RowDefinition Height="8*"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <Label FontSize="24" HorizontalAlignment="Center" FontFamily="Baskerville Old Face"  VerticalAlignment="Top" Height="43" Width="Auto" Margin="0,20,0,0">AVERAGE RATINGS</Label>
+            <Label FontSize="24" HorizontalAlignment="Center" Grid.Row="0" FontFamily="Baskerville Old Face"  VerticalAlignment="Top" Height="43" Width="Auto" Margin="0,20,0,0">AVERAGE RATINGS</Label>
 
             <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top">
                 <ListBox Grid.Row="1" Background="#c99585" BorderBrush="Transparent" BorderThickness="0" Width="Auto" ItemsSource="{Binding AverageRating, Converter={StaticResource Int2Images}}"  Height="Auto" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center">
