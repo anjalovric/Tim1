@@ -239,7 +239,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
 
         private void CreateTour_Executed(object sender)
         {
-            CreateTourFromRequestView createTourFromRequestView = new CreateTourFromRequestView(Tours,loggedUser,Future,Selected);
+            CreateTourFromRequestView createTourFromRequestView = new CreateTourFromRequestView(Tours,loggedUser,Future,Selected, Requests);
             Application.Current.Windows.OfType<GuideWindow>().FirstOrDefault().Main.Content = createTourFromRequestView;
 
         }

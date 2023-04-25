@@ -247,6 +247,11 @@
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Background" Value="{StaticResource RoyalBlue}" />
                         </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Background" Value="LightBlue"  />
+                            <Setter Property="Foreground" Value="AliceBlue"/>
+                            <Setter Property="BorderBrush" Value="AliceBlue"/>
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>

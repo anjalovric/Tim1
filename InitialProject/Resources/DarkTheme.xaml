@@ -274,9 +274,14 @@
 
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="LightGray" />
-                            </Trigger>
-                        </ControlTemplate.Triggers>
+                            <Setter Property="Background" Value="LightGray" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Background" Value="LightBlue" />
+                            <Setter Property="Foreground" Value="lightGray"/>
+                            <Setter Property="BorderBrush" Value="lightGray"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>

@@ -40,7 +40,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             PointLabel = pointLabel;
             MakeCommands();
             alerts = _alertGuest2Service.GetAll();
-            CreateLabelContent();
+            //CreateLabelContent();
         }
         private void MakeCommands()
         {
