@@ -80,8 +80,8 @@
 
 
 
-        <Button Grid.Column="1" Grid.Row="5" Width="94" Height="35" FontSize="16" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontWeight="Bold" Margin="0,0,20,45" Command="{Binding NextCommand}">
-            <Grid Background="#8c9d75" Width="94" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" >
+        <Button Grid.Column="1" Grid.Row="5" Width="100" Height="35" FontSize="18" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontWeight="Bold" Margin="0,0,20,45" Command="{Binding NextCommand}">
+            <Grid Background="#8c9d75" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
@@ -96,17 +96,17 @@
                         </TransformGroup>
                     </Image.RenderTransform>
                 </Image>
-                <TextBlock Background="#8c9d75" Text="NEXT" Grid.Column="0" VerticalAlignment="Center" FontSize="16"  Foreground="#22301a" Margin="10,0,0,0" FontWeight="Bold" HorizontalAlignment="Left" Width="50"/>
+                <TextBlock Background="#8c9d75" Text="NEXT" Grid.Column="0" VerticalAlignment="Center" FontSize="18"  Foreground="#22301a" Margin="10,0,0,0" FontWeight="Bold" HorizontalAlignment="Left" Width="58"/>
             </Grid>
         </Button>
-        <Button Height="35" Width="94" FontSize="16" IsEnabled="True" FontWeight="Bold" Grid.Column="0" Grid.Row="0" Margin="20,20,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Command="{Binding BackCommand}">
-            <Grid Background="#8c9d75" Width="94" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" >
+        <Button Height="35" Width="100" FontSize="16" IsEnabled="True" FontWeight="Bold" Grid.Column="0" Grid.Row="0" Margin="20,20,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Command="{Binding BackCommand}">
+            <Grid Background="#8c9d75" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <Image Source="/Resources/Images/back.png" HorizontalAlignment="Left" Margin="10,0,0,0" Width="26" Height="22" Grid.Column="0"/>
-                <TextBlock Background="#8c9d75" Text="BACK" Grid.Column="1" VerticalAlignment="Center" FontSize="16"  Foreground="#22301a" FontWeight="Bold" HorizontalAlignment="Center" Width="Auto"/>
+                <TextBlock Background="#8c9d75" Text="BACK" Grid.Column="1" Margin="8,0,0,0" VerticalAlignment="Center" FontSize="18"  Foreground="#22301a" FontWeight="Bold" HorizontalAlignment="Center" Width="Auto"/>
             </Grid>
         </Button>
     </Grid>

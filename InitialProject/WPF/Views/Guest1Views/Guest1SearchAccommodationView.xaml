@@ -43,8 +43,36 @@
                     <TextBlock Text="{Binding Path=Type}" Margin="0,0,0,15" FontSize="18" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" Width="Auto" Height="30" HorizontalAlignment="Left"/>
                     <TextBlock Text="{Binding Path=Location.City}" Margin="0,0,0,15" FontSize="18" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" Width="Auto" Height="30" HorizontalAlignment="Left"/>
                     <TextBlock Text="{Binding Path=Capacity}" Margin="0,0,0,15" FontSize="18" Grid.Row="1" Grid.Column="4" VerticalAlignment="Center" Width="90" Height="30" HorizontalAlignment="Left"/>
-                    <Button x:Name="Details" Content="Details"  Command="{Binding Path=DataContext.ViewDetailsCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" FontWeight="Bold" Grid.Row="0" FontSize="18" Grid.Column="6"  VerticalAlignment="Center" Width="94" Height="35" HorizontalAlignment="Center" ClickMode="Press"/>
-                    <Button x:Name="Reserve" Content="Reserve"  Command="{Binding Path=DataContext.ReserveCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" FontWeight="Bold" Grid.Row="1" Grid.Column="6" VerticalAlignment="Center" Width="94" Height="35" HorizontalAlignment="Center" FontSize="18"/>
+                    <Button x:Name="Details"  Command="{Binding Path=DataContext.ViewDetailsCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" FontWeight="Bold" Grid.Row="0" FontSize="18" Grid.Column="6"  VerticalAlignment="Center" Width="100" Height="35" HorizontalAlignment="Center" ClickMode="Press">
+                        <Grid Background="#8c9d75" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Source="/Resources/Images/info.png" VerticalAlignment="Center" HorizontalAlignment="Right"  Margin="8,0,0,0" Width="Auto" Height="22" Grid.Column="1" RenderTransformOrigin="0.5,0.5">
+                            </Image>
+                            <TextBlock Text="Details" Grid.Column="0" VerticalAlignment="Center" FontSize="18" Margin="5,0,0,0"  Foreground="#22301a" FontWeight="Bold" HorizontalAlignment="Left" Width="Auto"/>
+                        </Grid>
+                    </Button>
+                    <Button x:Name="Reserve"  Command="{Binding Path=DataContext.ReserveCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" FontWeight="Bold" Grid.Row="1" Grid.Column="6" VerticalAlignment="Center" Width="100" Height="35" HorizontalAlignment="Center" FontSize="18">
+                        <Grid Background="#8c9d75" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Source="/Resources/Images/back.png" VerticalAlignment="Center" HorizontalAlignment="Right"  Margin="3,0,0,0" Width="Auto" Height="22" Grid.Column="1" RenderTransformOrigin="0.5,0.5">
+                                <Image.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform/>
+                                        <SkewTransform/>
+                                        <RotateTransform Angle="180"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </Image.RenderTransform>
+                            </Image>
+                            <TextBlock Text="Reserve" Grid.Column="0" VerticalAlignment="Center" FontSize="18" Margin="5,0,0,0"  Foreground="#22301a" FontWeight="Bold" HorizontalAlignment="Left" Width="Auto"/>
+                        </Grid>
+                    </Button>
                     <Image Source="/Resources/Images/superOwner.png" Height="20" Width="20" Grid.Row="1" Grid.Column="6" VerticalAlignment="Center" Margin="0,0,150,0" HorizontalAlignment="Center">
                         <Image.Style>
                             <Style TargetType="Image">
@@ -155,9 +183,9 @@
         <TextBox x:Name="numberOfGuestsInput" Text="{Binding Path=NumberOfGuests,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="40" TextAlignment="Center"  FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center" Width="157" Margin="0,10,0,0"  Grid.Column="2" Grid.Row="2"/>
         <Button x:Name="incrementNumberOfGuests" Command="{Binding IncrementGuestsNumberCommand}" Height="40" Content="+"  VerticalAlignment="Center" HorizontalAlignment="Center" Margin="208,10,0,0" Grid.Column="2" Grid.Row="2" Width="45"/>
         <Button x:Name="decrementNumberOfGuests" Command="{Binding DecrementGuestsNumberCommand}" Height="40" Content="-"  VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,10,208,0" Grid.Column="2" Grid.Row="2" Width="45"/>
-        <Button x:Name="Search" Content="Search" FontWeight="Bold" HorizontalAlignment="Center" Margin="160,10,0,0" Height="35" Width="94" Command="{Binding SearchCommand}"  VerticalAlignment="Top" FontSize="18" Grid.Column="2" Grid.Row="3" BorderBrush="#FF22301A" BorderThickness="3,3,3,3"/>
+        <Button x:Name="Search" Content="Search" FontWeight="Bold" HorizontalAlignment="Left" Margin="197,10,0,0" Height="35" Width="100" Command="{Binding SearchCommand}"  VerticalAlignment="Top" FontSize="18" Grid.Column="2" Grid.Row="3" BorderBrush="#FF22301A" BorderThickness="3,3,3,3"/>
 
-        <Button FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,40,0" Command="{Binding ShowAllCommand}" Width="94" Height="35" Grid.Row="3" Grid.Column="2" FontSize="18" BorderBrush="#FF22301A" BorderThickness="3,3,3,3">Show all</Button>
+        <Button FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="92,10,0,0" Command="{Binding ShowAllCommand}" Width="100" Height="35" Grid.Row="3" Grid.Column="2" FontSize="18" BorderBrush="#FF22301A" BorderThickness="3,3,3,3">Show all</Button>
 
         <Label x:Name="numberOfDaysLabel" HorizontalAlignment="Left" Width="246" Height="22" Margin="54,88,0,0" VerticalAlignment="Top" Grid.Column="1" Grid.Row="2"/>
         <Label x:Name="numberOfGuestsLabel" HorizontalAlignment="Left" Width="246" Height="22" Margin="49,88,0,0" VerticalAlignment="Top" Grid.Column="2" Grid.Row="2"/>

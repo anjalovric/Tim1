@@ -10,22 +10,23 @@
       Title="Guest1Reviews">
     <Page.Resources>
         <Style TargetType="Grid">
-            <Setter Property="Background" Value="#c99585"></Setter>
-        </Style>
-        <Style TargetType="TextBlock">
-            <Setter Property="Background" Value="#dbc9ab"></Setter>
-            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
-            <Setter Property="FontSize" Value="16"></Setter>
+            <Setter Property="Background" Value="#37492d"></Setter>
         </Style>
         <Style TargetType="Label">
-            <Setter Property="Foreground" Value="#37492d"></Setter>
-            <Setter Property="FontWeight" Value="Bold"></Setter>
+            <Setter Property="Foreground" Value="#d9c7b3"></Setter>
+            <Setter Property="FontWeight" Value="Medium"></Setter>
+        </Style>
+        <Style TargetType="CheckBox">
+            <Setter Property="Foreground" Value="#d9c7b3"></Setter>
+            <Setter Property="FontWeight" Value="Medium"></Setter>
+            <Setter Property="Background" Value="#FFFCECB9"></Setter>
         </Style>
         <Style TargetType="TextBox">
-            <Setter Property="Background" Value="#dbc9ab"></Setter>
+            <Setter Property="Background" Value="#FFFCECB9"></Setter>
             <Setter Property="BorderBrush" Value="#22301a"></Setter>
-            <Setter Property="BorderThickness" Value="1"></Setter>
+            <Setter Property="BorderThickness" Value="3"></Setter>
         </Style>
+
         <Style TargetType="Button">
             <Setter Property="Background" Value="#8c9d75"></Setter>
             <Setter Property="Foreground" Value="#22301a"></Setter>
@@ -33,21 +34,30 @@
             <Setter Property="FontSize" Value="20"></Setter>
             <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
             <Setter Property="BorderBrush" Value="#22301a"></Setter>
-            <Setter Property="BorderThickness" Value="3"></Setter>
+            <Setter Property="BorderThickness" Value="3,3,3,3"></Setter>
         </Style>
         <Style TargetType="DataGrid">
             <Setter Property="BorderBrush" Value="#22301a"></Setter>
-            <Setter Property="BorderThickness" Value="4"></Setter>
-            <Setter Property="Background" Value="#FFFCECB9"></Setter>
-            <Setter Property="ColumnHeaderHeight" Value="35"></Setter>
+            <Setter Property="BorderThickness" Value="4,4,3,4"></Setter>
+            <Setter Property="Background" Value="#FFF9ECC5"></Setter>
+            <Setter Property="ColumnHeaderHeight" Value="40"></Setter>
+            <Setter Property="RowHeight" Value="30"></Setter>
+            <Setter Property="FontWeight" Value="Medium"></Setter>
+            <Setter Property="RowBackground" Value="#FFFCECB9"></Setter>
         </Style>
         <Style TargetType="DataGridColumnHeader">
             <Setter Property="TextElement.Foreground" Value="#22301a"></Setter>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="BorderThickness" Value="0,0,1,4"/>
+            <Setter Property="BorderBrush" Value="#22301a"/>
+            <Setter Property="Background" Value="#dbc9ab"/>
+            <Setter Property="FontWeight" Value="Bold"/>
         </Style>
-        <Style TargetType="DataGridRow">
-            <Setter Property="Height" Value="30"></Setter>
+        <Style TargetType="DataGridCell">
+            <Setter Property="TextBlock.TextAlignment" Value="Center"></Setter>
         </Style>
-        <Style TargetType="{x:Type ListBoxItem}">    <!--For disable highlighting on stars rating listbox-->
+        <Style TargetType="{x:Type ListBoxItem}">
+            <!--For disable highlighting on stars rating listbox-->
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type ListBoxItem}">
@@ -63,7 +73,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        
+
         <converters:IntToImageConverter x:Key="Int2Images"></converters:IntToImageConverter>
     </Page.Resources>
 
@@ -89,7 +99,7 @@
             <Label FontSize="24" HorizontalAlignment="Center" Grid.Row="0" FontFamily="Baskerville Old Face"  VerticalAlignment="Top" Height="43" Width="Auto" Margin="0,20,0,0">AVERAGE RATINGS</Label>
 
             <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top">
-                <ListBox Grid.Row="1" Background="#c99585" BorderBrush="Transparent" BorderThickness="0" Width="Auto" ItemsSource="{Binding AverageRating, Converter={StaticResource Int2Images}}"  Height="Auto" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center">
+                <ListBox Grid.Row="1" Background="#37492d" BorderBrush="Transparent" BorderThickness="0" Width="Auto" ItemsSource="{Binding AverageRating, Converter={StaticResource Int2Images}}"  Height="Auto" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Image Source="{Binding}" Height="20" Width="20"></Image>
@@ -105,22 +115,22 @@
 
 
 
-            <TextBlock FontSize="20" Background="Transparent" HorizontalAlignment="Center" Grid.Row="2" Width="Auto" Height="35" VerticalAlignment="Top" Margin="0,0,0,0">
+            <TextBlock FontSize="18" Foreground="#d9c7b3" FontWeight="Normal" Background="Transparent" HorizontalAlignment="Center" Grid.Row="2" Width="Auto" Height="35" VerticalAlignment="Top" Margin="0,0,0,0">
                 <Run Text="{Binding ReviewsNumber}"/>
                 <Run Text="Reviews"/>
             </TextBlock>
-            
+
             <Label FontSize="18" Grid.Row="4" Width="Auto" Height="35" HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Margin="70,0,0,0">Cleanliness:</Label>
             <Label FontSize="18" Grid.Row="5" Width="Auto" Height="35" HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Margin="70,0,0,0">Following rules:</Label>
             <Slider x:Name="CleanlinessSlider" Minimum="1" Maximum="5" TickFrequency="0.1" AutoToolTipPlacement="BottomRight"   Width="120" Grid.Row="4" IsEnabled="False" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,130,0" Value="{Binding AverageCleanliness, Mode=OneWay}"></Slider>
             <Slider x:Name="FollowingRulesSlider" Width="120" Minimum="1" Maximum="5" Grid.Row="5" IsEnabled="False" TickFrequency="0.1" HorizontalAlignment="Right" AutoToolTipPlacement="BottomRight" VerticalAlignment="Center" Margin="0,0,130,0"  Value="{Binding AverageFollowingRules, Mode=OneWay}"></Slider>
             <Label FontSize="18" Grid.Row="6" Width="Auto" Height="35" HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Margin="70,0,0,0">Average ratings report:</Label>
-            <Button Grid.Row="6" HorizontalAlignment="Right" VerticalAlignment="Center" Height="35" Width="94" Margin="0,0,90,0" FontSize="18">REPORT</Button>
+            <Button Grid.Row="6" HorizontalAlignment="Left" VerticalAlignment="Center" Height="35" Width="100" FontWeight="Bold" Margin="342,0,0,0" FontSize="18">Report</Button>
 
             <Label FontSize="18" Grid.Row="8" Width="Auto" Height="35" HorizontalAlignment="Center" VerticalAlignment="Top" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Margin="0,0,0,0">Change of average ratings:</Label>
 
-            <TextBlock Text="{Binding ElementName=CleanlinessSlider,Path=Value}" HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Center" Grid.Row="4" Margin="0,0,70,0" Width="30" Height="24"></TextBlock>
-            <TextBlock Text="{Binding ElementName=FollowingRulesSlider,Path=Value}" HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Center" Grid.Row="5" Margin="0,0,70,0" Width="30" Height="24"></TextBlock>
+            <TextBlock Foreground="#d9c7b3" Text="{Binding ElementName=CleanlinessSlider,Path=Value}" HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Center" Background="#22301a" Grid.Row="4" Margin="0,0,70,0" Width="30" Height="24" FontSize="18"></TextBlock>
+            <TextBlock Foreground="#d9c7b3" Text="{Binding ElementName=FollowingRulesSlider,Path=Value}" HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Center" Background="#22301a" Grid.Row="5" Margin="0,0,70,0" Width="30" Height="24" FontSize="18"></TextBlock>
 
         </Grid>
 
@@ -133,7 +143,7 @@
 
 
 
-            <DataGrid VerticalScrollBarVisibility="Auto" SelectedItem="{Binding Path=SelectedReview}" VerticalContentAlignment="Center" FontSize="16"  Width="460" Height="520"  HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Left"  IsReadOnly="True" UseLayoutRounding="False" HeadersVisibility="Column" Grid.Row="1" Grid.Column="0" Margin="20, 20, 20, 50" ItemsSource="{Binding Path=Guest1Reviews,Mode=OneWay}" AutoGenerateColumns="False" BorderBrush="DarkGray">
+            <DataGrid VerticalScrollBarVisibility="Auto" SelectedItem="{Binding Path=SelectedReview}" VerticalContentAlignment="Center" FontSize="16"  Width="460" Height="520"  HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Left"  IsReadOnly="True" UseLayoutRounding="False" HeadersVisibility="Column" Grid.Row="1" Grid.Column="0" Margin="20, 20, 20, 50" ItemsSource="{Binding Path=Guest1Reviews,Mode=OneWay}" AutoGenerateColumns="False" >
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Owner" Width="2*">
                         <DataGridTextColumn.Binding>
@@ -172,7 +182,7 @@
                     <DataGridTemplateColumn x:Name="Review" Header="Review details" Width="2.5*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Name="ReviewButton" FontSize="16" FontWeight="Normal" Background="#c99585" Content="Details" Command="{Binding DataContext.ShowReviewDetailsCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
+                                <Button Name="ReviewButton" FontSize="16" FontWeight="DemiBold"  Background="#c99585" Content="Details" Command="{Binding DataContext.ShowReviewDetailsCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>

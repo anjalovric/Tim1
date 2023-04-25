@@ -65,6 +65,7 @@
     <None Remove="Resources\Images\help.png" />
     <None Remove="Resources\Images\home.png" />
     <None Remove="Resources\Images\icons8-christmas-star-96.png" />
+    <None Remove="Resources\Images\info.png" />
     <None Remove="Resources\Images\location.jpg" />
     <None Remove="Resources\Images\icons8-delete-67.png" />
     <None Remove="Resources\Images\icons8-notification-64.png" />
@@ -79,6 +80,7 @@
     <None Remove="Resources\Images\minus.png" />
     <None Remove="Resources\Images\month.png" />
     <None Remove="Resources\Images\museum.jpg" />
+    <None Remove="Resources\Images\notes.png" />
 
     <None Remove="Resources\Images\ok.png" />
 
@@ -92,6 +94,7 @@
     <None Remove="Resources\Images\redIncorect.png" />
     <None Remove="Resources\Images\report.png" />
     <None Remove="Resources\Images\request.png" />
+    <None Remove="Resources\Images\reserve.png" />
     <None Remove="Resources\Images\search.png" />
     <None Remove="Resources\Images\signout.png" />
     <None Remove="Resources\Images\signOutIcon.png" />
@@ -410,7 +413,13 @@
     <Content Include="Resources\Images\newLogo.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Resources\Images\info.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Images\medal.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\notes.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\orange.jpg" />

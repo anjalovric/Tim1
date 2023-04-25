@@ -70,6 +70,8 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             AverageFollowingRules = guestAverageReviewService.GetAverageFollowingRulesReview(guest1);
             ReviewsNumber = guestAverageReviewService.GetReviewsNumberByGuest(guest1);
             AverageRating = guestAverageReviewService.GetAverageRating(guest1);
+            AverageCleanliness = Math.Round(AverageCleanliness, 1);
+            AverageFollowingRules = Math.Round(AverageFollowingRules, 1);
         }
         
     }

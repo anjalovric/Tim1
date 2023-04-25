@@ -9,21 +9,30 @@
       Title="Guest1Profile">
     <Page.Resources>
         <Style TargetType="Grid">
-            <Setter Property="Background" Value="#c99585"></Setter>
+            <Setter Property="Background" Value="#37492d"></Setter>
         </Style>
         <Style TargetType="Label">
-            <Setter Property="Foreground" Value="#37492d"></Setter>
-            <Setter Property="FontWeight" Value="Bold"></Setter>
+            <Setter Property="Foreground" Value="#d9c7b3"></Setter>
+            <Setter Property="FontWeight" Value="Medium"></Setter>
         </Style>
-        <Style TargetType="Calendar">
-            <Setter Property="BorderBrush" Value="#22301a"></Setter>
-            <Setter Property="BorderThickness" Value="4"></Setter>
-            <Setter Property="Background" Value="#dbc9ab"></Setter>
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#d9c7b3"></Setter>
+            <Setter Property="FontWeight" Value="Medium"></Setter>
         </Style>
-        <Style TargetType="TextBox">
-            <Setter Property="Background" Value="#dbc9ab"></Setter>
+        <Style TargetType="Run">
+            <Setter Property="Foreground" Value="#d9c7b3"></Setter>
+            <Setter Property="FontWeight" Value="Medium"></Setter>
+            <Setter Property="FontSize" Value="20"></Setter>
+        </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="#8c9d75"></Setter>
+            <Setter Property="Foreground" Value="#22301a"></Setter>
+            <Setter Property="FontWeight" Value="UltraBlack"></Setter>
+            <Setter Property="FontSize" Value="20"></Setter>
+            <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
             <Setter Property="BorderBrush" Value="#22301a"></Setter>
-            <Setter Property="BorderThickness" Value="1"></Setter>
+            <Setter Property="BorderThickness" Value="3,3,3,3"></Setter>
         </Style>
         <Style TargetType="{x:Type ListBoxItem}">
             <!--For disable highlighting on stars rating listbox-->
@@ -42,7 +51,6 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
         <converters:IntToImageConverter x:Key="Int2Images"></converters:IntToImageConverter>
     </Page.Resources>
 
@@ -58,8 +66,7 @@
         </Grid.ColumnDefinitions>
         <Label FontSize="24" Margin="0,20,0,0" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Top" Width="Auto" Height="Auto" FontWeight="Bold">PROFILE</Label>
 
-        <Button FontSize="18" FontWeight="Bold" Height="35" Width="94" Margin="10,20,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Command="NavigationCommands.BrowseBack">BACK</Button>
-
+        
         <Label FontSize="20" Height="35" Width="Auto" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">Personal data</Label>
         <Image Source="/Resources/Images/medal.png" Width="40" Height="40" Grid.Column="1" Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Center">
             <Image.Style>
@@ -74,8 +81,8 @@
             </Image.Style>
         </Image>
         <TextBlock FontSize="20" Height="35" FontWeight="DemiBold" Width="Auto" Grid.Row="1" HorizontalAlignment="Center" Grid.Column="1" VerticalAlignment="Center">
-             <Run Text="SUPER-GUEST BONUS:"/>
-             <Run Text="{Binding Bonus}"/>
+             <Run Text="SUPER-GUEST BONUS:" FontWeight="DemiBold"/>
+             <Run Text="{Binding Bonus}" FontWeight="DemiBold"/>
             <TextBlock.Style>
                             <Style TargetType="TextBlock">
                                 <Setter Property="Visibility" Value="Collapsed"/>
@@ -109,9 +116,9 @@
         <TextBlock FontSize="18" Height="35" Width="Auto" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,312,67,0" Text="{Binding Path=Guest1.PhoneNumber}"></TextBlock>
         <TextBlock FontSize="18" Height="35" Width="Auto" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,378,67,0" Text="{Binding Path=Guest1.Email}"></TextBlock>
 
-        <Image x:Name="accommodationImage" Grid.Row="2" Grid.Column="1" Width="420" Source="{Binding ImageSource, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Margin="46,52,46,239" MaxHeight="200"/>
+        <Image x:Name="accommodationImage" Grid.Row="2" Grid.Column="1" Width="420" Source="{Binding ImageSource, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Margin="46,52,46,239" Height="200"/>
 
-        <StackPanel Grid.Row="2" Grid.Column="1" VerticalAlignment="Bottom"  Margin="0,0,0,170" Orientation="Horizontal" HorizontalAlignment="Center">
+        <StackPanel Grid.Row="2" Grid.Column="1" VerticalAlignment="Bottom"  Margin="0,0,0,200" Orientation="Horizontal" HorizontalAlignment="Center">
             <ListBox Grid.Row="2" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Width="Auto" ItemsSource="{Binding AverageRating, Converter={StaticResource Int2Images}}"  Height="Auto" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
@@ -126,8 +133,17 @@
             </ListBox>
         </StackPanel>
 
-     
-        <TextBlock  FontSize="20" Grid.Column="1" Grid.Row="3" Width="Auto" Height="35" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,130">
+        <Button FontSize="18" FontWeight="Bold" IsEnabled="True" Height="35" Width="100" Margin="20,20,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="0" Grid.Column="0" Command="NavigationCommands.BrowseBack">
+            <Grid Background="#8c9d75" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Image Source="/Resources/Images/back.png" HorizontalAlignment="Left" Margin="10,0,0,0" Width="26" Height="22" Grid.Column="0"/>
+                <TextBlock Background="#8c9d75" Text="BACK" Grid.Column="1" VerticalAlignment="Center" FontSize="18" Margin="8,0,0,0"  Foreground="#22301a" FontWeight="Bold" HorizontalAlignment="Center" Width="Auto"/>
+            </Grid>
+        </Button>
+        <TextBlock  FontSize="20" Grid.Column="1" Grid.Row="3" Width="Auto" FontWeight="Normal" Height="35" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,160">
              <Run Text="{Binding ReviewsNumber}"/>
              <Run Text="Reviews"/>
         </TextBlock>

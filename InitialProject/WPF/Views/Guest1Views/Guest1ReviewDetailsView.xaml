@@ -20,6 +20,15 @@
             <Setter Property="Foreground" Value="#d9c7b3"></Setter>
             <Setter Property="FontWeight" Value="Medium"></Setter>
         </Style>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="#8c9d75"></Setter>
+            <Setter Property="Foreground" Value="#22301a"></Setter>
+            <Setter Property="FontWeight" Value="UltraBlack"></Setter>
+            <Setter Property="FontSize" Value="20"></Setter>
+            <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+            <Setter Property="BorderBrush" Value="#22301a"></Setter>
+            <Setter Property="BorderThickness" Value="3"></Setter>
+        </Style>
     </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -69,17 +78,16 @@
                 <RowDefinition Height="3*"></RowDefinition>
                 <RowDefinition Height="2*"></RowDefinition>
                 <RowDefinition Height="2*"></RowDefinition>
-                <RowDefinition Height="2*"></RowDefinition>
-                <RowDefinition Height="6*"></RowDefinition>
+                <RowDefinition Height="8*"></RowDefinition>
             </Grid.RowDefinitions>
-            <Button FontSize="18" FontWeight="Bold" Height="35" BorderBrush="#22301a" BorderThickness="3" Width="94" Margin="10,20,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="0" Grid.Column="0" Command="NavigationCommands.BrowseBack">
-                <Grid Background="#8c9d75" Width="94" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" >
+            <Button Height="35" Width="100" FontSize="16" IsEnabled="True" FontWeight="Bold" Grid.Column="0" Grid.Row="0" Margin="20,20,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Command="NavigationCommands.BrowseBack">
+                <Grid Background="#8c9d75" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <Image Source="/Resources/Images/back.png" HorizontalAlignment="Left" Margin="10,0,0,0" Width="26" Height="22" Grid.Column="0"/>
-                    <TextBlock Background="#8c9d75" Text="BACK" Grid.Column="1" VerticalAlignment="Center" FontSize="16"  Foreground="#22301a" FontWeight="Bold" HorizontalAlignment="Center" Width="Auto"/>
+                    <TextBlock Background="#8c9d75" Text="BACK" Grid.Column="1" Margin="8,0,0,0" VerticalAlignment="Center" FontSize="18"  Foreground="#22301a" FontWeight="Bold" HorizontalAlignment="Center" Width="Auto"/>
                 </Grid>
             </Button>
 
@@ -87,8 +95,8 @@
 
             <Label HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Center" Grid.Row="1" FontSize="18" FontWeight="Bold" Margin="70,0,0,0">Cleanliness:</Label>
             <Label HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Center" Grid.Row="2" FontSize="18" FontWeight="Bold" Margin="70,0,0,0">Following rules:</Label>
-            <Label HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Center" Grid.Row="3" FontSize="18" FontWeight="Bold" Margin="70,0,0,0">Owner's comment:</Label>
-            <ScrollViewer Background="#8c9d75" VerticalAlignment="Top" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Center" Grid.Row="4" Margin="70,10,70,10" Height="200">
+            <Label HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Center" Grid.Row="3" FontSize="18" FontWeight="Bold" Margin="70,32,0,0">Owner's comment:</Label>
+            <ScrollViewer Background="#8c9d75" VerticalAlignment="Center" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Center" Grid.Row="4" Margin="70,10,70,70" Height="170">
                 <TextBlock Foreground="#37492d" Text="{Binding Path=SelectedReview.Comment}" TextWrapping="Wrap" FontSize="18" FontWeight="Bold" Width="350"/>
             </ScrollViewer>
             <Slider x:Name="CleanlinessSlider" Minimum="1" Maximum="5" TickFrequency="1" AutoToolTipPlacement="BottomRight"   Width="120" Grid.Row="1" IsEnabled="False" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,130,0" Value="{Binding SelectedReview.Cleanliness, Mode=OneWay}"></Slider>
