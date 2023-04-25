@@ -25,6 +25,8 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         public ObservableCollection<TourInstance> TodayInstances { get; set; }
         public ObservableCollection<TourInstance> FutureInstances { get; set; }
 
+        public ObservableCollection<OrdinaryTourRequests> TourRequests { get; set; }
+
         private User loggedInUser;
         public TourInstance selectedInstance { get; set; }
         public CheckPoint SelectedCheckPoint { get; set; }
@@ -103,6 +105,32 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
                 if (value != namet)
                 {
                     namet = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private bool addEnabled;
+        public bool AddEnabled
+        {
+            get => addEnabled;
+            set
+            {
+                if (value != addEnabled)
+                {
+                    addEnabled = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private bool deleteEnabled;
+        public bool DeleteEnabled
+        {
+            get => deleteEnabled;
+            set
+            {
+                if (value != deleteEnabled)
+                {
+                    deleteEnabled = value;
                     OnPropertyChanged();
                 }
             }
@@ -239,6 +267,19 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
                 }
             }
         }
+        private string toastAvailability;
+        public string ToastAvailability
+        {
+            get => toastAvailability;
+            set
+            {
+                if (value != toastAvailability)
+                {
+                    toastAvailability = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         private bool isComboBoxCityEnabled;
         public bool IsComboBoxCityEnabled
         {
@@ -257,6 +298,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         private List<TourImage> images = new List<TourImage>();
         private TourInstance newInstance;
         private int tourId;
+        private int savednsatnceId;
 
         public RelayCommand ConfirmCommand { get; set; }
         public RelayCommand AddDateTimeCommand { get; set; }
@@ -267,6 +309,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         public RelayCommand PreviousImageCommand { get; set; }
         public RelayCommand AddImageCommand { get; set; }
         public RelayCommand DeleteCheckPointCommand { get; set; }
+        public RelayCommand CloceToastAvailability { get; set; }
 
         private OrdinaryTourRequests tourRequests;
 
@@ -276,7 +319,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-        public CreateTourFromRequestViewModel(ObservableCollection<TourInstance> todayInstances, User user, ObservableCollection<TourInstance> futureInstances,OrdinaryTourRequests request)
+        public CreateTourFromRequestViewModel(ObservableCollection<TourInstance> todayInstances, User user, ObservableCollection<TourInstance> futureInstances,OrdinaryTourRequests request,ObservableCollection<OrdinaryTourRequests>Requests)
         {
             TourPoints = new ObservableCollection<CheckPoint>();
             TourImages = new ObservableCollection<TourImage>();
@@ -290,6 +333,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             MakeCommands();
             SetDatas(request);
             Date = Start;
+            TourRequests = Requests;
         }
 
         private void SetDatas(OrdinaryTourRequests request)
@@ -300,6 +344,9 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             MaxGuests = request.MaxGuests;
             Start = request.StartDate;
             End=request.EndDate;
+            AddEnabled = true;
+            DeleteEnabled= true;
+            ToastAvailability = "Hidden";
         }
         private bool CanExecute(object sender)
         {
@@ -317,6 +364,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             PreviousImageCommand = new RelayCommand(PreviousImage_Executed, CanExecute);
             AddImageCommand = new RelayCommand(AddTourImage_Executed, CanExecute);
             DeleteCheckPointCommand = new RelayCommand(CancelCheckPoint_Executed, CanExecute);
+            CloceToastAvailability= new RelayCommand(CloseToastAvailability_Executed, CanExecute);
         }
         private void Confirm_Executed(object sender)
         {
@@ -329,8 +377,21 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             tourId = savedTour.Id;
             SaveInputs(savedTour);
             Toast = "Visible";
+            UpdateRequests();
         }
 
+        private void UpdateRequests()
+        {
+            GuideService guideService = new GuideService();
+            OrdinaryTourRequestsService ordinaryTourRequestsService = new OrdinaryTourRequestsService();
+            TourRequests.Remove(tourRequests);
+            tourRequests.Status = "Accepted";
+            tourRequests.GuideId = guideService.GetByUsername(loggedInUser.Username).Id;
+            tourRequests.NewAccepted = true;
+            tourRequests.InstanceId = savednsatnceId;
+            ordinaryTourRequestsService.Update(tourRequests);
+
+        }
         private void SaveInputs(Tour savedTour)
         {
             CheckPointService checkPointService = new CheckPointService();
@@ -338,7 +399,8 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             TourImageService tourImageService = new TourImageService();
             tourImageService.AddImages(tourId, images);
             TourInstanceService tourInstanceService = new TourInstanceService();
-            tourInstanceService.SaveInstances(savedTour, loggedInUser, FutureInstances, TodayInstances, Instances, images);
+            List<TourInstance>Saved=tourInstanceService.SaveInstances(savedTour, loggedInUser, FutureInstances, TodayInstances, Instances, images);
+            savednsatnceId = Saved[0].Id;
         }
         private void AddTourImage_Executed(object sender)
         {
@@ -373,10 +435,12 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             if (IsTimeValid(newInstance))
             {
                 Instances.Add(newInstance);
-                IsErrorMessageVisible = "Hidden";
+                ToastAvailability = "Hidden";
+                AddEnabled = false;
+                DeleteEnabled = false;
             }
             else
-                IsErrorMessageVisible = "Visible";
+                ToastAvailability = "Visible";
         }
         private bool IsTimeValid(TourInstance instance)
         {
@@ -390,6 +454,10 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         {
             if (selectedInstance != null)
                 Instances.Remove(selectedInstance);
+        }
+        private void CloseToastAvailability_Executed(object sender)
+        {
+            ToastAvailability = "Hidden";
         }
         private void OKCheckPoint_Executed(object sender)
         {

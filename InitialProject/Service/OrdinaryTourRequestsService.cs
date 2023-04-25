@@ -2,6 +2,8 @@
 using InitialProject.Domain.Model;
 using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Model;
+using InitialProject.Serializer;
+using Org.BouncyCastle.Asn1.Ocsp;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
@@ -50,6 +52,10 @@ namespace InitialProject.Service
                         request.Location = location;
                 }
             }
+        }
+        public OrdinaryTourRequests Update(OrdinaryTourRequests request)
+        {
+            return requestRepository.Update(request);
         }
 
     }

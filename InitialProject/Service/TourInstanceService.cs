@@ -136,20 +136,22 @@ namespace InitialProject.Service
         {
             tourInstancerepository.ActivateTour(selected);
         }
-        public void SaveInstances(Tour savedTour, User loggedUser,ObservableCollection<TourInstance> FutureInstances,ObservableCollection<TourInstance> TodayInstances,ObservableCollection <TourInstance> Instances,List<TourImage> images)
+        public List<TourInstance> SaveInstances(Tour savedTour, User loggedUser,ObservableCollection<TourInstance> FutureInstances,ObservableCollection<TourInstance> TodayInstances,ObservableCollection <TourInstance> Instances,List<TourImage> images)
         {
             GuideService guideService = new GuideService();
             TourImageService tourImageService = new TourImageService();
+            List<TourInstance>saved= new List<TourInstance> ();
             foreach (TourInstance instance in Instances)
             {
                 instance.Guide = guideService.GetByUsername(loggedUser.Username);
                 instance.Tour = savedTour;
                 instance.CoverImage = images[0].Url;
                 instance.CoverBitmap = new BitmapImage(new Uri("/" + instance.CoverImage, UriKind.Relative));
-                Save(instance);
+                saved.Add(Save(instance));
                 DisplayIfToday(instance,TodayInstances);
                 DisplayIfCancelable(instance,FutureInstances);
             }
+            return saved;
         }
         private void DisplayIfCancelable(TourInstance tour,ObservableCollection<TourInstance> FutureInstances)
         {

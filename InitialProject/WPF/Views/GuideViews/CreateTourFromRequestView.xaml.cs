@@ -24,10 +24,10 @@ namespace InitialProject.WPF.Views.GuideViews
     /// </summary>
     public partial class CreateTourFromRequestView : Page
     {
-        public CreateTourFromRequestView(ObservableCollection<TourInstance>Tours,User user,ObservableCollection<TourInstance> Future,OrdinaryTourRequests request)
+        public CreateTourFromRequestView(ObservableCollection<TourInstance>Tours,User user,ObservableCollection<TourInstance> Future,OrdinaryTourRequests request,ObservableCollection<OrdinaryTourRequests> Requests)
         {
             InitializeComponent();
-            DataContext=new CreateTourFromRequestViewModel(Tours,user,Future,request);
+            DataContext=new CreateTourFromRequestViewModel(Tours,user,Future,request,Requests);
         }
     }
 }
