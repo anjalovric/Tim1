@@ -18,7 +18,7 @@
                         </Style>
                         <Style TargetType="TextBlock">
                             <Setter Property="Foreground" Value="#37492d"></Setter>
-                            <Setter Property="FontWeight" Value="ExtraBlack"></Setter>
+                            <Setter Property="FontWeight" Value="UltraBlack"></Setter>
                         </Style>
                     </Grid.Resources>
                     <Grid.RowDefinitions>
@@ -35,10 +35,10 @@
                         <ColumnDefinition Width="162*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Image x:Name="accommodationImage" Width="140" HorizontalAlignment="Left" Source="{Binding Path=CoverImage.Url}" Stretch="Fill"  VerticalAlignment="Center" Grid.Column="0" Grid.RowSpan="2" Margin="10,5,5,5"/>
-                    <Label Content="Name:" Padding="0,15,0,0" HorizontalAlignment="Left" FontSize="18" Width="67" VerticalAlignment="Center" VerticalContentAlignment="Center" Grid.Row="0" Grid.Column="1"/>
-                    <Label Content="Type:" FontSize="18" Padding="0,15,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" VerticalContentAlignment="Center" Width="67"  Grid.Row="0" Grid.Column="2"/>
-                    <Label Content="City:" Padding="0,15,0,0" FontSize="18" VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Left"  Grid.Row="0" Grid.Column="3" Width="63"/>
-                    <Label Content="Capacity:" Padding="0,15,0,0" FontSize="18" VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Left" Width="90" Grid.Row="0" Grid.Column="4"/>
+                    <Label Content="Name:" FontWeight="Medium" Padding="0,15,0,0" HorizontalAlignment="Left" FontSize="18" Width="67" VerticalAlignment="Center" VerticalContentAlignment="Center" Grid.Row="0" Grid.Column="1"/>
+                    <Label Content="Type:" FontWeight="Medium" FontSize="18" Padding="0,15,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" VerticalContentAlignment="Center" Width="67"  Grid.Row="0" Grid.Column="2"/>
+                    <Label Content="City:" FontWeight="Medium" Padding="0,15,0,0" FontSize="18" VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Left"  Grid.Row="0" Grid.Column="3" Width="63"/>
+                    <Label Content="Capacity:" FontWeight="Medium" Padding="0,15,0,0" FontSize="18" VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Left" Width="90" Grid.Row="0" Grid.Column="4"/>
                     <TextBlock Text="{Binding Path=Name}" Margin="0,0,0,15" FontSize="18" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Width="Auto" Height="30" HorizontalAlignment="Left"/>
                     <TextBlock Text="{Binding Path=Type}" Margin="0,0,0,15" FontSize="18" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" Width="Auto" Height="30" HorizontalAlignment="Left"/>
                     <TextBlock Text="{Binding Path=Location.City}" Margin="0,0,0,15" FontSize="18" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" Width="Auto" Height="30" HorizontalAlignment="Left"/>
@@ -106,10 +106,8 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
+        <Image HorizontalAlignment="Left"  VerticalAlignment="Top"  Source="/Resources/Images/LOGO (2).jpg" Grid.Row="0" Margin="10,-4,0,0" Grid.Column="0" Width="180" Height="100" Stretch="Fill" Grid.RowSpan="2"   />
 
-        <Image Source="/Resources/Images/newLogo.jpg"  Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Width="60" Margin="20,20,0,0">
-
-        </Image>
 
         <Label x:Name="bookAccommodation" Foreground="#d9c7b3" VerticalAlignment="Center" Content="BOOKING ACCOMMODATION"  FontWeight="Bold"  VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="24" Margin="0,20,0,0" Grid.ColumnSpan="3" FontFamily="Baskerville Old Face" HorizontalAlignment="Center">
             <Label.Style>

@@ -112,5 +112,16 @@ namespace InitialProject.Service
             return result;
         }
 
+        public int GetReservationsNumberByGuestInPrevousYear(Guest1 guest1)
+        {
+            int counter = 0;
+            foreach(AccommodationReservation reservation in reservations)
+            {
+                if (reservation.Guest.Id == guest1.Id)
+                    counter++;
+            }
+            return counter;
+        }
+
     }
 }

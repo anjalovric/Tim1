@@ -25,12 +25,22 @@
         </Style>
         <Style TargetType="DataGrid">
             <Setter Property="BorderBrush" Value="#22301a"></Setter>
-            <Setter Property="BorderThickness" Value="4"></Setter>
+            <Setter Property="BorderThickness" Value="4,4,3,4"></Setter>
             <Setter Property="Background" Value="#FFFCECB9"></Setter>
-            <Setter Property="ColumnHeaderHeight" Value="35"></Setter>
+            <Setter Property="ColumnHeaderHeight" Value="40"></Setter>
+            <Setter Property="RowHeight" Value="30"></Setter>
         </Style>
         <Style TargetType="DataGridColumnHeader">
             <Setter Property="TextElement.Foreground" Value="#22301a"></Setter>
+
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="BorderThickness" Value="0,0,1,4"/>
+            <Setter Property="BorderBrush" Value="#22301a"/>
+            <Setter Property="Background" Value="#dbc9ab"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+        <Style TargetType="DataGridCell">
+            <Setter Property="TextBlock.TextAlignment" Value="Center"></Setter>
         </Style>
     </Page.Resources>
 
@@ -60,13 +70,13 @@
             <TabItem Header="Not completed reservations" FontSize="16">
                 <Grid>
                     <Label FontSize="24" FontWeight="Bold" Margin="0,10,0,0" HorizontalAlignment="Center">NOT COMPLETED RESERVATIONS</Label>
-                    <DataGrid x:Name="NotCompletedReservationsDataGrid" VerticalContentAlignment="Center" FontSize="16" Margin="0,30,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" ItemsSource="{Binding Path=NotCompletedReservations,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedNotCompletedReservation}" AutoGenerateColumns="False" IsReadOnly="True" Height="322" Width="970" UseLayoutRounding="False">
+                    <DataGrid x:Name="NotCompletedReservationsDataGrid" VerticalContentAlignment="Center" FontSize="16" Margin="0,30,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" ItemsSource="{Binding Path=NotCompletedReservations,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedNotCompletedReservation}" HeadersVisibility="Column" AutoGenerateColumns="False" IsReadOnly="True" Height="322" Width="970" UseLayoutRounding="False">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Name" Width="2*" Binding="{Binding Accommodation.Name}"/>
-                            <DataGridTextColumn Header="Location" Width="4.5*" Binding="{Binding Accommodation.Location}"/>
+                            <DataGridTextColumn Header="Location" Width="3*" Binding="{Binding Accommodation.Location}"/>
                             <DataGridTextColumn Header="Arrival" Width="3.2*" Binding="{Binding Arrival}"/>
                             <DataGridTextColumn Header="Departure" Width="3.2*" Binding="{Binding Departure}"/>
-                            <DataGridTextColumn Header="Owner" Width="1.8*">
+                            <DataGridTextColumn Header="Owner" Width="2.5*">
                                 <DataGridTextColumn.Binding>
                                     <MultiBinding StringFormat="{}{0} {1}">
                                         <Binding Path="Accommodation.Owner.Name"/>
@@ -97,13 +107,13 @@
             <TabItem Header="Completed reservations" FontSize="16">
                 <Grid>
                     <Label FontSize="24" FontWeight="Bold" Margin="0,10,0,0" HorizontalAlignment="Center">COMPLETED RESERVATIONS</Label>
-                    <DataGrid x:Name="CompletedReservationsDataGrid" VerticalContentAlignment="Center" FontSize="16" Margin="0,30,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" ItemsSource="{Binding Path=CompletedReservations,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedCompletedReservation}" AutoGenerateColumns="False" IsReadOnly="True" Height="322" Width="920" UseLayoutRounding="False">
+                    <DataGrid x:Name="CompletedReservationsDataGrid" HeadersVisibility="Column" VerticalContentAlignment="Center" FontSize="16" Margin="0,30,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" ItemsSource="{Binding Path=CompletedReservations,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedCompletedReservation}" AutoGenerateColumns="False" IsReadOnly="True" Height="322" Width="920" UseLayoutRounding="False">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Name" Width="2.5*" Binding="{Binding Accommodation.Name}"/>
-                            <DataGridTextColumn Header="Location" Width="4.5*" Binding="{Binding Accommodation.Location}"/>
+                            <DataGridTextColumn Header="Location" Width="3*" Binding="{Binding Accommodation.Location}"/>
                             <DataGridTextColumn Header="Arrival" Width="3.2*" Binding="{Binding Arrival}"/>
                             <DataGridTextColumn Header="Departure" Width="3.2*" Binding="{Binding Departure}"/>
-                            <DataGridTextColumn Header="Owner" Width="2*">
+                            <DataGridTextColumn Header="Owner" Width="2.5*">
                                 <DataGridTextColumn.Binding>
                                     <MultiBinding StringFormat="{}{0} {1}">
                                         <Binding Path="Accommodation.Owner.Name"/>

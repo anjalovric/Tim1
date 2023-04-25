@@ -31,6 +31,24 @@ namespace InitialProject.Service
             return guest1;
             
         }
+        
+
+        public bool IsSuperGuest(Guest1 guest1)
+        {
+            AccommodationReservationService accommodationReservationService = new AccommodationReservationService();
+            if(accommodationReservationService.GetReservationsNumberByGuestInPrevousYear(guest1)>=10)
+            {
+               MakeSuperGuest(guest1);
+               return true;
+            }
+            return false;
+        }
+
+        public void MakeSuperGuest(Guest1 guest1)
+        {
+            guest1.IsSuperGuest = true;
+            guest1Repository.Update(guest1);
+        }
     }
 
 }

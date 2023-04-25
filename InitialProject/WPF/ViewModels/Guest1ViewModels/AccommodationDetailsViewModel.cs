@@ -18,7 +18,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 {
     public class AccommodationDetailsViewModel :INotifyPropertyChanged
     {
-        private Guest1 guest1;  //trebace kad dodam dugme za rezervaciju
+        private Guest1 guest1;
         private int currentCounter = 0;
         private BitmapImage imageSource;
         public BitmapImage ImageSource
@@ -48,7 +48,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 
         public RelayCommand NextPhotoCommand { get; set; }
         public RelayCommand PreviousPhotoCommand { get; set; }
-        public AccommodationDetailsViewModel(Accommodation currentAccommodation, Guest1 guest1)//obrisi imagesUrl
+        public AccommodationDetailsViewModel(Accommodation currentAccommodation, Guest1 guest1)
         {
             this.guest1 = guest1;
             SelectedAccommodation = currentAccommodation;

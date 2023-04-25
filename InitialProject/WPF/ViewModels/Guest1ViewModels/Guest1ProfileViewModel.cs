@@ -42,10 +42,16 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         public Guest1ProfileViewModel(Guest1 guest1)
         {
             this.Guest1 = guest1;
+            MakeGuest();
             string relative = FindImageRelativePath();
             ImageSource = new BitmapImage(new Uri(relative, UriKind.Relative));
             GetAverageRating();
             GetReviewsNumber();
+        }
+        private void MakeGuest()
+        {
+            Guest1Service guest1Service = new Guest1Service();
+            Guest1.IsSuperGuest = guest1Service.IsSuperGuest(Guest1);
         }
         private void GetReviewsNumber()
         {

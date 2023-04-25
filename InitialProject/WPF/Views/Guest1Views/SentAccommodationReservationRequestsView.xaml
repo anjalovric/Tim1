@@ -25,12 +25,22 @@
         </Style>
         <Style TargetType="DataGrid">
             <Setter Property="BorderBrush" Value="#22301a"></Setter>
-            <Setter Property="BorderThickness" Value="4"></Setter>
+            <Setter Property="BorderThickness" Value="4,4,3,4"></Setter>
             <Setter Property="Background" Value="#FFFCECB9"></Setter>
-            <Setter Property="ColumnHeaderHeight" Value="35"></Setter>
+            <Setter Property="ColumnHeaderHeight" Value="40"></Setter>
+            <Setter Property="RowHeight" Value="30"></Setter>
+            <Setter Property="FontWeight" Value="Medium"></Setter>
         </Style>
         <Style TargetType="DataGridColumnHeader">
             <Setter Property="TextElement.Foreground" Value="#22301a"></Setter>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="BorderThickness" Value="0,0,1,4"/>
+            <Setter Property="BorderBrush" Value="#22301a"/>
+            <Setter Property="Background" Value="#dbc9ab"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+        <Style TargetType="DataGridCell">
+            <Setter Property="TextBlock.TextAlignment" Value="Center"></Setter>
         </Style>
     </Page.Resources>
     <Grid>
@@ -63,21 +73,21 @@
                     <DataGrid x:Name="ApprovedRequestsDataGrid" FontSize="16" VerticalContentAlignment="Center" VerticalScrollBarVisibility="Auto" Margin="0,40,0,0" RowBackground="#CDFFCC" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Left" ItemsSource="{Binding Path=ApprovedRequests,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" IsReadOnly="True" Height="322" Width="950" UseLayoutRounding="False" HeadersVisibility="Column">
 
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Name" Width="1*" Binding="{Binding Reservation.Accommodation.Name}">
+                            <DataGridTextColumn Header="Name" Width="1.5*" Binding="{Binding Reservation.Accommodation.Name}">
                                 <DataGridTextColumn.ElementStyle>
                                     <Style TargetType="{x:Type TextBlock}">
                                         <Setter Property="ToolTip" Value="{Binding Reservation.Accommodation.Name}" />
                                     </Style>
                                 </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
-                            <DataGridTextColumn Header="Location" Width="2*"  Binding="{Binding Reservation.Accommodation.Location}">
+                            <DataGridTextColumn Header="Location" Width="1.5*"  Binding="{Binding Reservation.Accommodation.Location}">
                                 <DataGridTextColumn.ElementStyle>
                                     <Style TargetType="{x:Type TextBlock}">
                                         <Setter Property="ToolTip" Value="{Binding Reservation.Accommodation.Location}" />
                                     </Style>
                                 </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
-                            <DataGridTextColumn Header="Owner" Width="1*">
+                            <DataGridTextColumn Header="Owner" Width="1.5*">
                                 <DataGridTextColumn.Binding>
                                     <MultiBinding StringFormat="{}{0} {1}">
                                         <Binding Path="Reservation.Accommodation.Owner.Name"/>
@@ -136,21 +146,21 @@
                     <Label FontSize="24" FontWeight="Bold" Margin="0,10,0,0" HorizontalAlignment="Center">PENDING REQUESTS</Label>
                     <DataGrid x:Name="PendingRequestsDataGrid" FontSize="16" VerticalContentAlignment="Center" VerticalScrollBarVisibility="Auto" HeadersVisibility="Column" Margin="0,40,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" ItemsSource="{Binding Path=PendingRequests,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" IsReadOnly="True" Height="322" Width="950" UseLayoutRounding="False">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Name" Width="1*" Binding="{Binding Reservation.Accommodation.Name}">
+                            <DataGridTextColumn Header="Name" Width="1.5*" Binding="{Binding Reservation.Accommodation.Name}">
                                 <DataGridTextColumn.ElementStyle>
                                     <Style TargetType="{x:Type TextBlock}">
                                         <Setter Property="ToolTip" Value="{Binding Reservation.Accommodation.Name}" />
                                     </Style>
                                 </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
-                            <DataGridTextColumn Header="Location" Width="2*"  Binding="{Binding Reservation.Accommodation.Location}">
+                            <DataGridTextColumn Header="Location" Width="1.5*"  Binding="{Binding Reservation.Accommodation.Location}">
                                 <DataGridTextColumn.ElementStyle>
                                     <Style TargetType="{x:Type TextBlock}">
                                         <Setter Property="ToolTip" Value="{Binding Reservation.Accommodation.Location}" />
                                     </Style>
                                 </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
-                            <DataGridTextColumn Header="Owner" Width="1*">
+                            <DataGridTextColumn Header="Owner" Width="1.5*">
                                 <DataGridTextColumn.Binding>
                                     <MultiBinding StringFormat="{}{0} {1}">
                                         <Binding Path="Reservation.Accommodation.Owner.Name"/>
@@ -215,7 +225,7 @@
                                     </Style>
                                 </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
-                            <DataGridTextColumn Header="Location" Width="3*"  Binding="{Binding Reservation.Accommodation.Location}">
+                            <DataGridTextColumn Header="Location" Width="1.5*"  Binding="{Binding Reservation.Accommodation.Location}">
                                 <DataGridTextColumn.ElementStyle>
                                     <Style TargetType="{x:Type TextBlock}">
                                         <Setter Property="ToolTip" Value="{Binding Reservation.Accommodation.Location}" />
