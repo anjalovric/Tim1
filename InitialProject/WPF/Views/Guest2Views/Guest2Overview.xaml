@@ -60,6 +60,7 @@
                     <Image Source="/Resources/Images/voucher.png" Height="15" Width="20"/>
                 </MenuItem.Icon>
             </MenuItem>
+            
             <MenuItem Header="Help" Foreground="Gray" FontSize="20" FontWeight="Bold">
                 <MenuItem.Icon>
                     <Image Source="/Resources/Images/help.png" Height="15" Width="20"/>

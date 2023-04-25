@@ -34,6 +34,10 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         }
         public Accommodation SelectedAccommodation { get; set; }
         private List<AccommodationImage> images;
+
+        public int AverageRating { get; set; }
+        public int ReviewsNumber { get; set; }
+
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
@@ -50,8 +54,14 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             SelectedAccommodation = currentAccommodation;
             SetFirstImage();
             MakeCommands();
+            SetRating();
         }
-        
+        private void SetRating()
+        {
+            AccommodationAverageReviewService accommodationAverageReviewService = new AccommodationAverageReviewService();
+            AverageRating = accommodationAverageReviewService.GetAverageRating(SelectedAccommodation);
+            ReviewsNumber = accommodationAverageReviewService.GetReviewsNumberByAccommodation(SelectedAccommodation);
+        }
         private void MakeCommands()
         {
             NextPhotoCommand = new RelayCommand(NextPhoto_Executed, CanExecute);

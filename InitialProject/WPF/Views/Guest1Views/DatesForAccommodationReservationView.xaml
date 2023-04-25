@@ -5,22 +5,69 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
-        Title="DatesForAccommodationReservation" Height="350" Width="450" WindowStartupLocation="CenterScreen">
+        Title="DatesForAccommodationReservation" Height="522" Width="660" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <Style TargetType="Grid">
+            <Setter Property="Background" Value="#c99585"></Setter>
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="Foreground" Value="#37492d"></Setter>
+            <Setter Property="FontWeight" Value="ExtraBold"></Setter>
+        </Style>
+        <Style TargetType="Calendar">
+            <Setter Property="BorderBrush" Value="#22301a"></Setter>
+            <Setter Property="BorderThickness" Value="4"></Setter>
+            <Setter Property="Background" Value="#dbc9ab"></Setter>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Background" Value="#dbc9ab"></Setter>
+            <Setter Property="BorderBrush" Value="#22301a"></Setter>
+            <Setter Property="BorderThickness" Value="1"></Setter>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="#8c9d75"></Setter>
+            <Setter Property="Foreground" Value="#22301a"></Setter>
+            <Setter Property="FontWeight" Value="UltraBlack"></Setter>
+            <Setter Property="FontSize" Value="20"></Setter>
+            <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+            <Setter Property="BorderBrush" Value="#22301a"></Setter>
+            <Setter Property="BorderThickness" Value="3"></Setter>
+        </Style>
+        <Style TargetType="DataGrid">
+            <Setter Property="BorderBrush" Value="#22301a"></Setter>
+            <Setter Property="BorderThickness" Value="4"></Setter>
+            <Setter Property="Background" Value="#FFFCECB9"></Setter>
+            <Setter Property="ColumnHeaderHeight" Value="35"></Setter>
+        </Style>
+        <Style TargetType="DataGridColumnHeader">
+            <Setter Property="TextElement.Foreground" Value="#22301a"></Setter>
+        </Style>
+    </Window.Resources>
     <Grid>
-        <Label Content="Select desired date:" HorizontalAlignment="Center" Margin="0,20,0,0" TextElement.FontFamily="Candara" TextElement.FontWeight="Heavy"  TextElement.FontSize="20"></Label>
-        <DataGrid x:Name="AvailableDates" SelectedItem="{Binding SelectedDateRange, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" ItemsSource="{Binding Path=availableDatesForAccommodations,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"  AutoGenerateColumns="False" Grid.ColumnSpan="3" IsReadOnly="True" VerticalAlignment="Center" HorizontalAlignment="Center" Height="211" Width="391">
+        <Label Content="SELECT DESIRED DATE" Height="Auto" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" Margin="0,20,0,0" FontWeight="Bold" FontFamily="Baskerville Old Face" TextElement.FontSize="24"></Label>
+        <DataGrid x:Name="AvailableDates" FontSize="16" SelectedItem="{Binding SelectedDateRange, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" ItemsSource="{Binding Path=availableDatesForAccommodations,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"  AutoGenerateColumns="False" Margin="0,20,0,0" IsReadOnly="True" VerticalAlignment="Center" HorizontalAlignment="Center" Height="320" Width="520">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="ARRIVAL DATE" Width="1*" Binding="{Binding Arrival, Mode=OneWay}"/>
-                <DataGridTextColumn Header="DEPARTURE DATE" Width="1*" Binding="{Binding Departure, Mode=OneWay}"/>
-                <DataGridTemplateColumn x:Name="SelectDate" Header="Choose date" Width="0.52*">
+                <DataGridTextColumn Header="Arrival date" Width="2*" Binding="{Binding Arrival, Mode=OneWay}"/>
+                <DataGridTextColumn Header="Departure date" Width="2*" Binding="{Binding Departure, Mode=OneWay}"/>
+                <DataGridTemplateColumn x:Name="SelectDate" Header="Choose date" Width="1*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Name="chooseDateButton" Content="Choose" Background="LightCyan" TextElement.FontWeight="ExtraBold" Click="ChooseDateButton_Click"/>
+                            <Button Name="chooseDateButton" Content="CHOOSE" Background="#c99585" TextElement.FontWeight="Medium" Command="{Binding DataContext.ChooseDateCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" FontSize="16"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Height="32" Width="60" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="22,0,0,10" TextElement.FontSize="15" TextElement.FontWeight="SemiBold" Click="CancelButton_Click">Cancel</Button>
+
+        <Button Height="35" Width="94" FontSize="16" FontWeight="Bold"  Margin="20,20,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="True" Command="{Binding BackCommand}">
+            <Grid Background="#8c9d75" Width="94" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Image Source="/Resources/Images/back.png" HorizontalAlignment="Left" Margin="10,0,0,0" Width="26" Height="22" Grid.Column="0"/>
+                <TextBlock Background="#8c9d75" Text="BACK" Grid.Column="1" VerticalAlignment="Center" FontSize="16"  Foreground="#22301a" FontWeight="Bold" HorizontalAlignment="Center" Width="Auto"/>
+            </Grid>
+        </Button>
     </Grid>
 </Window>

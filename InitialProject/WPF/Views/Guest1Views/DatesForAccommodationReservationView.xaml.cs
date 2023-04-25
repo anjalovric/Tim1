@@ -17,6 +17,7 @@ using System.Windows.Shapes;
 using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.Service;
+using InitialProject.WPF.ViewModels.Guest1ViewModels;
 
 namespace InitialProject.WPF.Views.Guest1Views
 {
@@ -25,57 +26,13 @@ namespace InitialProject.WPF.Views.Guest1Views
     /// </summary>
     public partial class DatesForAccommodationReservationView : Window
     {
-        private Accommodation currentAccommodation;
-        private Guest1 guest1;
-
-        public ObservableCollection<AvailableDatesForAccommodationReservation> availableDatesForAccommodations { get; set; }
-        private AvailableDatesForAccommodationReservation selectedDateRange;
-        public AvailableDatesForAccommodationReservation SelectedDateRange
-        {
-            get { return selectedDateRange; }
-            set
-            {
-                if (selectedDateRange != value)
-                {
-                    selectedDateRange = value;
-                    this.OnPropertyChanged("SelectedDateRange");
-                }
-            }
-        }
-
-        public DatesForAccommodationReservationView(Accommodation currentAccommodation, Guest1 guest1)
+        private DatesForAccommodationReservationViewModel datesForAccommodationReservationViewModel;
+        public DatesForAccommodationReservationView(Accommodation currentAccommodation, Guest1 guest1, List<AvailableDatesForAccommodationReservation> availableDates)
         {
             InitializeComponent();
-            this.DataContext = this;
-
-            this.guest1 = guest1;
-            this.currentAccommodation = currentAccommodation;
-            availableDatesForAccommodations = new ObservableCollection<AvailableDatesForAccommodationReservation>();
+            datesForAccommodationReservationViewModel = new DatesForAccommodationReservationViewModel(guest1, currentAccommodation, availableDates);
+            this.DataContext = datesForAccommodationReservationViewModel;
         }
 
-        private void ChooseDateButton_Click(object sender, RoutedEventArgs e)
-        {
-            AccommodationGuestsNumberInputView guestsNumber = new AccommodationGuestsNumberInputView(currentAccommodation, selectedDateRange, availableDatesForAccommodations, guest1);
-            guestsNumber.Owner = this;
-            guestsNumber.Show();
-        }
-        public void AddNewDateRange(DateTime arrival, DateTime departure)
-        {
-            departure = departure.AddHours(23);
-            departure = departure.AddMinutes(59);
-            availableDatesForAccommodations.Add(new AvailableDatesForAccommodationReservation(arrival, departure));
-        }
-
-        private void CancelButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
     }
 }

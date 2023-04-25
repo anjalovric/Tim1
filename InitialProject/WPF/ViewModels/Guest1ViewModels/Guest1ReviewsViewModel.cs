@@ -65,10 +65,11 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 
         private void SetRatings()
         {
-            AverageCleanliness = guestReviewService.GetAverageCleanlinessReview(guest1);
-            AverageFollowingRules = guestReviewService.GetAverageFollowingRulesReview(guest1);
-            ReviewsNumber = guestReviewService.GetReviewsNumberByGuest(guest1);
-            AverageRating = guestReviewService.GetAverageRating(guest1);
+            GuestAverageReviewService guestAverageReviewService = new GuestAverageReviewService();
+            AverageCleanliness = guestAverageReviewService.GetAverageCleanlinessReview(guest1);
+            AverageFollowingRules = guestAverageReviewService.GetAverageFollowingRulesReview(guest1);
+            ReviewsNumber = guestAverageReviewService.GetReviewsNumberByGuest(guest1);
+            AverageRating = guestAverageReviewService.GetAverageRating(guest1);
         }
         
     }

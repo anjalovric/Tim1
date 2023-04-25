@@ -1,18 +1,14 @@
 ﻿using InitialProject.Domain.Model;
-using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Repository;
 using InitialProject.Service;
+using InitialProject.WPF.Views.Guest2Views;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
 using System.Windows;
-using InitialProject.WPF.Views.Guest2Views;
+using System.Windows.Controls;
 
 namespace InitialProject.WPF.ViewModels.Guest2ViewModels
 {
@@ -48,6 +44,8 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
                 }
             }
         }
+        //public DateTime EndDate { get; set; }
+        public DateTime NowDate { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
@@ -68,8 +66,10 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         {
             Capacity = capacity;
             Country=country;
-            City = city;
+            City = city;  
             Language = language;
+            StartDate = DateTime.Now;
+            EndDate = DateTime.Now;
             Description = description;
             Name = name;
             Guest2=guest2;
@@ -120,7 +120,13 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             LocationService locationService = new LocationService();
             Model.Location newLocation = locationService.GetByCityAndCountry(Country.SelectedValue.ToString(), City.SelectedValue.ToString());
             OrdinaryTourRequestsService requestService = new OrdinaryTourRequestsService();
-            OrdinaryTourRequests request = new OrdinaryTourRequests(Name.Text,Guest2.Id, Convert.ToInt32(Capacity.Text), newLocation, Description.Text, Language.Text, Convert.ToDateTime(Start), Convert.ToDateTime(End), false, "On waiting");
+            DateTime createDate=DateTime.Now;
+            if (EndDate < StartDate)
+            {
+                MessageBox.Show("Niste dobro popunili polja!");
+                return;
+            }
+            OrdinaryTourRequests request = new OrdinaryTourRequests(Name.Text,Guest2.Id, Convert.ToInt32(Capacity.Text), newLocation, Description.Text, Language.Text, Convert.ToDateTime(Start), Convert.ToDateTime(End), false, "On waiting",Start.ToString().Split(" ")[0],End.ToString().Split(" ")[0],-1,createDate,false,-1);
             requestService.Save(request);
             Application.Current.Windows.OfType<CreateOrdinaryTourRequest>().FirstOrDefault().Close();
         }
