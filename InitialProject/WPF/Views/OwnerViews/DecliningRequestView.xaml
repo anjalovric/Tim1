@@ -6,24 +6,22 @@
       xmlns:local="clr-namespace:InitialProject.WPF.Views.OwnerViews"
       mc:Ignorable="d" 
       d:DesignHeight="530" d:DesignWidth="430"
-      Title="Requests For Rescheduling" Background="LightGray">
+      Title="Requests For Rescheduling">
 
-    <Grid>
-        <Rectangle Fill="Gray" HorizontalAlignment="Center" Height="30" Stroke="Black" VerticalAlignment="Top" Width="430"/>
-        <Button Name="ExitButton" Command="NavigationCommands.BrowseBack" Content="x" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="384,5,0,0" VerticalAlignment="Top" Height="25" Width="27">
+    <Grid Margin="0, 30, 0, 30" Background="White">
+        <Rectangle Fill="LightGray" HorizontalAlignment="Center" Height="30" Stroke="DarkGray" VerticalAlignment="Top" Width="430"/>
+        <Button Name="ExitButton" Command="NavigationCommands.BrowseBack" Content="x" Foreground="DarkGray" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="384,5,0,0" VerticalAlignment="Top" Height="25" Width="27" BorderBrush="DarkGray" Background="AliceBlue">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="100"/>
                 </Style>
             </Button.Resources>
         </Button>
-        <Label Content="Declining Request" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" RenderTransformOrigin="0,0.401" Width="134" Height="28" VerticalContentAlignment="Center">
+        <Label Foreground="DarkGray" Content="Declining Request" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" RenderTransformOrigin="0,0.401" Width="134" Height="28" VerticalContentAlignment="Center">
         </Label>
         <Label Content="{Binding Path= ReschedulingAccommodationRequest.Reservation.Guest}" FontSize="15" HorizontalAlignment="Left" Margin="41,82,0,0" VerticalAlignment="Top" Width="174" Height="30"/>
         <Label Content="Explanation (optional): " HorizontalAlignment="Left" Margin="41,169,0,0" VerticalAlignment="Top" Width="174"/>
-        <Border BorderBrush="Black" BorderThickness="0.5" Margin="41,200,32,0" Height="163" VerticalAlignment="Top">
-            <TextBox HorizontalAlignment="Center" Text="{Binding Path= Explanation, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Center" Height="163" Width="356"/>
-        </Border>
-        <Button Command="{Binding ConfirmCommand}" Name="ConfirmButton" Content="Confirm" HorizontalAlignment="Left" Margin="274,431,0,0" VerticalAlignment="Top" Width="124" Height="41"/>
+        <TextBox HorizontalAlignment="Center" Text="{Binding Path= Explanation, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Center" Height="162" Width="348" BorderThickness="1" BorderBrush="DarkGray"/>
+        <Button Command="{Binding ConfirmCommand}" Name="ConfirmButton" Content="Confirm" HorizontalAlignment="Left" Margin="265,429,0,0" VerticalAlignment="Top" Width="124" Height="41" Background="AliceBlue" BorderBrush="DarkGray"/>
     </Grid>
 </Page>

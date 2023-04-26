@@ -24,7 +24,9 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         private int numberOfRates;
         private string title;
         private string starVisibility;
+        private string stackPanelVisibility;
         public RelayCommand ViewCommand { get; set; }
+        public RelayCommand OKCommand { get; set; }
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -35,6 +37,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             OwnerReviews = new ObservableCollection<OwnerReview>(ownerReviewService.GetAllToDisplay(ProfileOwner));
             InitializeSelectedOwnerReview();
             ViewCommand = new RelayCommand(View_Executed, CanExecute);
+            OKCommand = new RelayCommand(OK_Executed, CanExecute);
         }
 
         private bool CanExecute(object sender)
@@ -49,6 +52,11 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
                 OwnerReviewView ownerReviewView = new OwnerReviewView(SelectedOwnerReview);
                 Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = ownerReviewView;
             }
+        }
+
+        private void OK_Executed(object sender)
+        {
+            StackPanelVisibility = "Hidden";
         }
         public double AverageRate
         {
@@ -151,14 +159,39 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             {
                 Title = "Super Owner!";
                 StarVisibility = "Visible";
+                DisplayStackPanel();
             }
             else
             {
                 Title = "Owner";
                 StarVisibility = "Hidden";
+                StackPanelVisibility = "Hidden";
             }
         }
 
-    }
+        public string StackPanelVisibility
+        {
+            get => stackPanelVisibility;
+            set
+            {
+                if (!value.Equals(stackPanelVisibility))
+                {
+                    stackPanelVisibility = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
+        private void DisplayStackPanel()
+        {
+            OwnerNotificationsService notificationsService = new OwnerNotificationsService();
+            if (notificationsService.IsNewSuperOwner(ProfileOwner))
+            {
+                StackPanelVisibility = "Visible";
+                notificationsService.Delete(Domain.Model.OwnerNotificationType.SUPEROWNER, ProfileOwner);
+            }
+            else
+                StackPanelVisibility = "Hidden";
+        }
+    }
 }

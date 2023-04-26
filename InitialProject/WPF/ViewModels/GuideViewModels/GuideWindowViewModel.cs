@@ -1,19 +1,32 @@
 ﻿using InitialProject.Model;
 using InitialProject.Service;
 using InitialProject.WPF.Views.GuideViews;
+using System;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Windows;
 
 namespace InitialProject.WPF.ViewModels
 {
-    public class GuideWindowViewModel
+    public class GuideWindowViewModel:INotifyPropertyChanged
     {
         private HomeView homeView;
         private AddTourView addTourView;
         private CancelView cancelView;
         private TourStatisticsView tourStatisticsView;
         private User loggedUser;
-
+        private bool themeIsChecked;
+        public bool ThemeIsChecked
+        {
+            get { return themeIsChecked; }
+            set
+            {
+                themeIsChecked = value;
+                OnPropertyChanged("ThemeIsChecked");
+                ThemeChanged();
+            }
+        }
         public RelayCommand HomeCommand { get; set; }
         public RelayCommand CancelCommand { get; set; }
         public RelayCommand AddCommand { get; set; }
@@ -21,6 +34,7 @@ namespace InitialProject.WPF.ViewModels
         public RelayCommand TourStatisticsCommand { get; set; }
         public RelayCommand ReviewCommand { get; set; }
         public RelayCommand SignOutCommand { get; set; }
+        public RelayCommand OrdinaryRequestCommand { get; set; }
         public GuideWindowViewModel(User user) 
         {
             tourStatisticsView = new TourStatisticsView(user);
@@ -32,6 +46,12 @@ namespace InitialProject.WPF.ViewModels
             SwitchFirstPage(loggedUser);
             MakeCommands();
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
         private void MakeCommands()
         {
             HomeCommand = new RelayCommand(Home_Executed, CanExecute);
@@ -41,6 +61,7 @@ namespace InitialProject.WPF.ViewModels
             TourStatisticsCommand= new RelayCommand(TourStatitcs_Executed, CanExecute);
             ReviewCommand=new RelayCommand(Review_Executed, CanExecute);
             SignOutCommand = new RelayCommand(SignOut_Executed, CanExecute);
+            OrdinaryRequestCommand= new RelayCommand(OrdinaryRequest_Executed,CanExecute);
         }
 
         private bool CanExecute(object sender)
@@ -105,6 +126,18 @@ namespace InitialProject.WPF.ViewModels
             signInForm.Show();
             Application.Current.Windows.OfType<GuideWindow>().FirstOrDefault().Close();
         }
-
+        private void OrdinaryRequest_Executed(object sender)
+        {
+           OrdinaryRequestOverviewView ordinaryRequestOverviewView = new OrdinaryRequestOverviewView(loggedUser, homeView.viewModel.Tours, cancelView.cancelViewModel.TourInstances);
+            Application.Current.Windows.OfType<GuideWindow>().FirstOrDefault().Main.Content = ordinaryRequestOverviewView;
+        }
+        private void ThemeChanged()
+        {
+            var app = (App)Application.Current;
+            if (ThemeIsChecked.Equals(true))
+                app.ChangeTheme(new Uri("Resources/DarkTheme.xaml", UriKind.Relative));
+            else
+                app.ChangeTheme(new Uri("Resources/LightTheme.xaml", UriKind.Relative));
+        }
     }
 }

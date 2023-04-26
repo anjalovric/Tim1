@@ -1,6 +1,7 @@
 ﻿using InitialProject.Domain;
 using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Model;
+using InitialProject.Serializer;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
@@ -15,7 +16,10 @@ namespace InitialProject.Service
             tourRepository = Injector.CreateInstance<ITourRepository>();
             tours = GetAll();
         }
-
+        public Tour Save(Tour tour)
+        {          
+            return tourRepository.Save(tour);
+        }
         public List<Tour> GetAll()
         {
             return tourRepository.GetAll();

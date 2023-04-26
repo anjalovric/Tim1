@@ -5,10 +5,32 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
-        Title="AlertGuestForm" Height="330" Width="530" WindowStartupLocation="CenterScreen">
-    <Grid Margin="0,0,0,-6">
-        <Label BorderBrush="Gray" x:Name="PointLabel"  HorizontalAlignment="Left"  VerticalAlignment="Top" Height="55" Width="354" Margin="55,27,0,0"/>
-        <Button Content="YES" Command ="{Binding ConfirmCommand}" Height="30" Width="60" TextElement.FontWeight="Bold"  Margin="138,130,302,130" />
-        <Button Content="NO" Command ="{Binding CancelCommand}" Height="30" Width="60" TextElement.FontWeight="Bold" Margin="250,130,190,130" />
+        Title="Confirm" d:Height="450" d:Width="700" Height="450" Width="700" WindowStartupLocation="CenterScreen">
+    <Grid Background="#333333">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="52*"/>
+            <ColumnDefinition Width="73*"/>
+            <ColumnDefinition Width="125*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Label Content=" Confirm your presence" Foreground="White" Background="#3d3d3d" Grid.Row="0" FontSize="20" FontWeight="Bold" Margin="-3,0,0,0" Grid.ColumnSpan="3"/>
+        <TextBlock Text="   You can see more information about the tour below." Background="#3d3d3d" Foreground="White" Grid.ColumnSpan="3" Margin="0,51,0,271" Grid.RowSpan="3"/>
+        <Button Content="   YES"  BorderBrush="#3d3d3d" BorderThickness="3,3,3,3" Command ="{Binding ConfirmCommand}" TextElement.FontWeight="Bold"  Margin="204,19,80,10" Grid.Row="3" Grid.Column="2" />
+        <Button Content="   NO" BorderBrush="#3d3d3d" BorderThickness="3,3,3,3" Command ="{Binding CancelCommand}" TextElement.FontWeight="Bold" Margin="275,19,10,10" Grid.Row="3" Grid.Column="2" />
+        <Border BorderBrush="#333333" BorderThickness="4,4,4,4" Grid.ColumnSpan="2" Margin="0,0,2,54" Grid.RowSpan="2" Grid.Row="2" CornerRadius="25,25,25,25" Background="#3d3d3d"/>
+        <Label Content="Tour" Foreground="White"  Grid.Column="0" Grid.Row="2" FontWeight="Bold" Margin="10,5,0,219" Grid.ColumnSpan="2"/>
+        <Label BorderBrush="Gray" x:Name="PointLabel" Foreground="White" HorizontalAlignment="Center"  VerticalAlignment="Top" Height="215" Width="311" Grid.Row="2" Margin="0,56,0,0" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+        <Image Grid.Row="3" Grid.Column="2" Source="/Resources/Images/cancel.png" Margin="284,18,48,9" RenderTransformOrigin="0.477,0.347"/>
+        <Image Grid.Row="3" Grid.Column="2" Source="/Resources/Images/ok.png" Margin="214,20,118,11"/>
+        <Border BorderBrush="#333333" BorderThickness="4,4,4,4" Grid.Column="2" Grid.Row="2" CornerRadius="25,25,25,25" Background="#3d3d3d"/>
+        <Label Content="Guide" Foreground="White"  Grid.Column="2" Grid.Row="2" FontWeight="Bold" Margin="3,5,-3,220"/>
+        <Label BorderBrush="Gray" x:Name="GuideLabel" Foreground="White" HorizontalAlignment="Center"  VerticalAlignment="Top" Height="215" Width="330" Grid.Row="2" Margin="0,56,0,0" Grid.Column="2" Grid.RowSpan="2"/>
+
+
     </Grid>
 </Window>

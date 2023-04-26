@@ -5,9 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:InitialProject.View"
              mc:Ignorable="d" 
-             d:DesignHeight="768" d:DesignWidth="1024">
+             d:DesignHeight="768" d:DesignWidth="1024" Width="1024" Height="768">
     <Grid>
-        <DataGrid x:Name="TourListDataGrid" ItemsSource="{Binding Path=CompletedTours,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=Selected}" IsReadOnly="True" AutoGenerateColumns="False" VerticalAlignment="Top" HorizontalAlignment="Left" Height="453" Width="832" Margin="192,238,0,0">
+        <Border Background="#151f2d" BorderBrush="#151f2d" CornerRadius="25 25 25 25" BorderThickness="4,4,4,4"/>
+        <DataGrid x:Name="TourListDataGrid" ItemsSource="{Binding Path=CompletedTours,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=Selected}" IsReadOnly="True" AutoGenerateColumns="False" VerticalAlignment="Top" HorizontalAlignment="Left" Height="453" Width="832" Margin="90,202,0,0">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Location" Width="1*" Binding="{Binding Tour.Location}"/>
                 <DataGridTextColumn Header="Duration" Width="1*" Binding="{Binding Tour.Duration}"/>
@@ -16,7 +17,7 @@
                 <DataGridTemplateColumn x:Name="rate" Header="Rate" Width="0.9*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Name="rateButton" Content="Rate" Command="{Binding Path=DataContext.RateCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
+                            <Button x:Name="rateButton" Content="RATE" TextElement.FontWeight="ExtraBold" Command="{Binding Path=DataContext.RateCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -24,6 +25,7 @@
 
 
         </DataGrid>
-        <Label Content="Finished tours" FontWeight="Bold" Foreground="White" FontSize="20" HorizontalAlignment="Left" Margin="192,127,0,0" VerticalAlignment="Top" Width="228"/>
+        <Label Content="Finished tours" Foreground="White" FontWeight="Bold" FontSize="20" HorizontalAlignment="Left" Margin="90,78,0,0" VerticalAlignment="Top" Width="228"/>
+        <TextBlock Text="U nastavku mozete vidjeti sve ture koje su zavrsene a na kojima ste se pojavili. Iste ture mozete i ocijeniti." Foreground="#7166f9" HorizontalAlignment="Left" Margin="90,138,0,0" VerticalAlignment="Top" Width="834" Height="39"/>
     </Grid>
 </UserControl>

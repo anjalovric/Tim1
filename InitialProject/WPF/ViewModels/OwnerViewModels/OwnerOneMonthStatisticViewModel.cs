@@ -10,7 +10,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
     public class OwnerOneMonthStatisticViewModel
     {
         public int Year { get; set; }
-        public int Month { get; set; }
+        public string Month { get; set; }
         public Accommodation Accommodation { get; set; }
         public int Reservations { get; set; }
         public int Cancellations { get; set; }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows;
 using InitialProject.Domain;
 using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Model;
@@ -101,5 +102,15 @@ namespace InitialProject.Service
             }
             return reservationsToReview;
         }
+        public MessageBoxResult ConfirmReservation()
+        {
+            string sMessageBoxText = $"Do you want to make a reservation?\n";
+            string sCaption = "Confirm reservation";
+            MessageBoxButton btnMessageBox = MessageBoxButton.YesNo;
+            MessageBoxImage icnMessageBox = MessageBoxImage.Question;
+            MessageBoxResult result = MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
+            return result;
+        }
+
     }
 }

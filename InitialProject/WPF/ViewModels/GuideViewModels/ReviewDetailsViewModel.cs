@@ -17,9 +17,9 @@ namespace InitialProject.WPF.ViewModels
         public string StartDate { get;set; }
         public Location Location { get;set; }
         public string StartTime { get;set; }
-        public int Guide { get; set; }
-        public int LanguageKnowledge { get; set; }
-        public int Interestigness { get; set; } 
+        public string Guide { get; set; }
+        public string LanguageKnowledge { get; set; }
+        public string Interestigness { get; set; } 
         public string Comment { get; set; }
         public string Guest { get; set; }
         private GuideAndTourReview currentReview;
@@ -86,15 +86,15 @@ namespace InitialProject.WPF.ViewModels
             Language=review.TourInstance.Tour.Language;
             Location = review.TourInstance.Tour.Location;
             StartDate = review.TourInstance.Date;
-            StartTime = review.TourInstance.StartClock;
+            StartTime = review.TourInstance.StartDate.Hour + ":" + review.TourInstance.StartDate.Minute + ":" + review.TourInstance.StartDate.Second;
             FindCheckPoints(review);
             SetFirstImages(review);
         }
         public void SetGrades(GuideAndTourReview review)
         {
-            Guide = review.Knowledge;
-            Interestigness = review.InterestingFacts;
-            LanguageKnowledge = review.Language;
+            Guide = review.Knowledge + " /5★";
+            Interestigness = review.InterestingFacts + " /5★";
+            LanguageKnowledge = review.Language + " /5★";
             Comment = review.Comment;
             Guest = review.Guest2.Name + " " + review.Guest2.LastName + "'s review";
         }
@@ -106,9 +106,9 @@ namespace InitialProject.WPF.ViewModels
         public void ValidExecuted(object sender)
         {
             if(currentReview.Valid)
-                ChangeValidationState(false, "Resources/Images/redIncorect.png");
+                ChangeValidationState(false, "Resources/Images/transparentRED.png");
             else
-                ChangeValidationState(true, "Resources/Images/greenCorect.png");
+                ChangeValidationState(true, "Resources/Images/transparentGREEN.jpg");
         }
         private void ChangeValidationState(bool state,string url)
         {

@@ -5,8 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
-        Title="TourDetails" Height="750" Width="820" WindowStartupLocation="CenterScreen">
-    <Grid Background="#FFA6ADB9">
+        Title="TourDetails" Height="800" Width="820" d:Height="800" d:Width="820" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <Style x:Key="LabelStyle" TargetType="Label">
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+        </Style>
+    </Window.Resources>
+    <Grid Background="LightGray">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
@@ -27,8 +34,8 @@
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Grid>
                         <StackPanel Orientation="Horizontal">
-                            <Rectangle Width="30" Height="14" Stroke="Black" Fill="Black"/>
-                            <Polygon Points= "0,15 15,22 0,30" Stroke="Black" Fill="Black" Height="45" Width="30" />
+                            <Rectangle Width="30" Height="14" Stroke="Gray" Fill="Gray"/>
+                            <Polygon Points= "0,15 15,22 0,30" Stroke="Gray" Fill="Gray" Height="45" Width="30" />
                         </StackPanel>
                     </Grid>
                 </ControlTemplate>
@@ -47,8 +54,8 @@
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Grid>
                         <StackPanel Orientation="Horizontal">
-                            <Rectangle Width="30" Height="14" Stroke="Black" Fill="Black"/>
-                            <Polygon Points= "0,15 15,22 0,30" Stroke="Black" Fill="Black" Height="45" Width="30" />
+                            <Rectangle Width="30" Height="14" Stroke="Gray" Fill="Gray"/>
+                            <Polygon Points= "0,15 15,22 0,30" Stroke="Gray" Fill="Gray" Height="45" Width="30" />
                         </StackPanel>
                     </Grid>
                 </ControlTemplate>
@@ -56,18 +63,20 @@
         </Button>
 
 
-        <Label Content="Description:" TextElement.FontWeight="Bold" HorizontalAlignment="Left" Margin="28,496,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.044,0.541"/>
-        <Label Content="Photos" TextElement.FontWeight="Bold" HorizontalAlignment="Left" Margin="28,89,0,0" VerticalAlignment="Top"/>
-        <Label Content="Details" TextElement.FontWeight="Bold" HorizontalAlignment="Left" FontSize="20" Margin="28,15,0,0" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="35,542,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="165" Width="715" Text="{Binding Path=Selected.Tour.Description,UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="2"/>
-        <Label Content="Location:" TextElement.FontWeight="Bold" HorizontalAlignment="Left" Margin="45,113,0,0" VerticalAlignment="Top" Grid.Column="1" Width="74"/>
-        <Label Content="Duration:" TextElement.FontWeight="Bold" HorizontalAlignment="Left" Margin="45,202,0,0" VerticalAlignment="Top" Grid.Column="1" Width="62"/>
-        <Label Content="Language:" TextElement.FontWeight="Bold" HorizontalAlignment="Left" Margin="45,291,0,0" VerticalAlignment="Top" Grid.Column="1" Width="68"/>
-        <Label Content="Capacity:" TextElement.FontWeight="Bold" HorizontalAlignment="Left" Margin="45,380,0,0" VerticalAlignment="Top" Grid.Column="1" Width="74" Height="53"/>
+        <Label Content="Description:" Margin="28,496,0,0" RenderTransformOrigin="0.044,0.541" Style="{StaticResource LabelStyle}"/>
+        <Label Content="Photos" Margin="28,89,0,0" Style="{StaticResource LabelStyle}"/>
+        <Label Content="Details" FontSize="20" Margin="28,15,0,0" Style="{StaticResource LabelStyle}"/>
+        <TextBlock HorizontalAlignment="Left" Margin="35,542,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="125" Width="734" Text="{Binding Path=Selected.Tour.Description,UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="2"/>
+        <Label Content="Location:" Margin="45,113,0,0" Grid.Column="1" Width="74" Style="{StaticResource LabelStyle}"/>
+        <Label Content="Duration:" Margin="45,202,0,0" Grid.Column="1" Width="62" Style="{StaticResource LabelStyle}"/>
+        <Label Content="Language:" Margin="45,291,0,0" Grid.Column="1" Width="68" Style="{StaticResource LabelStyle}"/>
+        <Label Content="Capacity:" Margin="45,380,0,0" Grid.Column="1" Width="74" Height="53" Style="{StaticResource LabelStyle}"/>
         <TextBlock Margin="124,118,116,572" RenderTransformOrigin="0.5,0.5" Text="{Binding Path=Selected.Tour.Location,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1"/>
         <TextBlock Margin="124,207,78,473" RenderTransformOrigin="0.5,0.5" Text="{Binding Path=Selected.Tour.Duration,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1"/>
         <TextBlock Margin="124,296,116,381" RenderTransformOrigin="0.5,0.5" Text="{Binding Path=Selected.Tour.Language,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1"/>
         <TextBlock Margin="124,385,78,267" RenderTransformOrigin="0.5,0.5" Text="{Binding Path=Selected.Tour.MaxGuests,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1"/>
+        <Button Content="      CANCEL" Command ="{Binding CancelCommand}" TextElement.FontWeight="Bold" Margin="268,707,51,29" Grid.Column="1"/>
+        <Image Grid.Column="1" Source="/Resources/Images/cancel.png" Margin="277,711,0,33" HorizontalAlignment="Left" Width="17"/>
 
     </Grid>
 </Window>

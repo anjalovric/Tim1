@@ -26,6 +26,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             Accommodation = accommodation;
             Year = year;
             monthStatisticsService = new OwnerMonthStatisticsService();
+            BusiestMonth = monthStatisticsService.GetBusiestMonth(Accommodation, Year);
             StatisticsByMonth = new ObservableCollection<OwnerOneMonthStatisticViewModel>(monthStatisticsService.GetMonthStatistics(Accommodation, Year));
         }
 

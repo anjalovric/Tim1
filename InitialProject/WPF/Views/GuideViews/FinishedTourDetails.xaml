@@ -6,30 +6,30 @@
       xmlns:local="clr-namespace:InitialProject.WPF.Views.GuideViews"
       mc:Ignorable="d" 
       d:DesignHeight="707" d:DesignWidth="1100"
-      Title="FinishedTourDetails" Background="White">
+      Title="FinishedTourDetails" >
     <Page.Resources>
         <DataTemplate x:Key="checkPoints">
-            <Border BorderBrush="Black" BorderThickness="1" CornerRadius="10" Background="LightGray">
+            <Border Style="{DynamicResource Cards}">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="461"/>
+                        <ColumnDefinition Width="460"/>
 
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="15"/>
-                        <RowDefinition Height="15"/>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="20"/>
                         <RowDefinition Height="45"/>
 
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Row="0" Grid.Column="0" >
-                <Run Text="Checkpoint: " FontWeight="Bold"/>
-                <Run Text="{Binding Path=CheckPoint.Name}" FontWeight="Bold" />
+                <Run Text="Checkpoint: " Style="{DynamicResource Run}"/>
+                <Run Text="{Binding Path=CheckPoint.Name}" Style="{DynamicResource Run}" />
                     </TextBlock>
-                    <ListBox Grid.Column="0" Grid.Row="2" BorderThickness="0" ItemsSource="{Binding Path= guest2s}" Background="LightGray">
+                    <ListBox Grid.Column="0" Grid.Row="2" Style="{DynamicResource ListBox}" ItemsSource="{Binding Path= guest2s}">
 
                     </ListBox>
                     <TextBlock Grid.Row="1" Grid.Column="0" >
-                <Run Text="Number of guests: " />
+                <Run Text="Number of guests: " Style="{DynamicResource Run}" />
                 <Run Text="{Binding Path=countGuests}" />
                     </TextBlock>
                 </Grid>
@@ -37,36 +37,99 @@
         </DataTemplate>
     </Page.Resources>
 
-    <Grid>
+    <Grid Style="{DynamicResource Background}">
 
-        <ListBox x:Name="list" ItemsSource="{Binding CheckPointInformations}" ItemTemplate="{StaticResource checkPoints}" Margin="29,100,580,31" ></ListBox>
-        <Border BorderBrush="Black" RenderTransformOrigin="0.355,0.497" Margin="29,100,580,31" BorderThickness="1" CornerRadius="10"/>
-        <Border BorderBrush="Black" BorderThickness="1" Margin="550,100,30,31" CornerRadius="10">
-            <Grid Margin="0,-1,0,-82">
-                <Label Content="Voucher statistics" HorizontalAlignment="Center" Margin="1,0,-2,587" FontSize="15" FontWeight="Bold" Visibility="Visible"/>
+        <ListBox x:Name="list" Style="{DynamicResource ListBoxOut}" ItemsSource="{Binding CheckPointInformations}" ItemTemplate="{StaticResource checkPoints}" Margin="29,100,580,31" ></ListBox>
+        <Border Style="{DynamicResource Border}" RenderTransformOrigin="0.355,0.497" Margin="29,100,580,31" />
+        <Border Style="{DynamicResource Border}" Margin="550,100,30,31">
+            <Grid Margin="0,-1,0,0" Style="{DynamicResource InnerGrid}" Height="574" VerticalAlignment="Top">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.5*"/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition Height="0.5*"/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition Height="0.5*"/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="8*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
 
-                <Label Content="With vouchers"  Margin="1,51,355,537" FontSize="13"/>
-                <Label Content="Without vouchers"  Height="50" Margin="-1,111,356,482" FontSize="13"/>
+                <Border Style="{DynamicResource Border}" Grid.Column="1" Grid.Row="1" Grid.RowSpan="4" >
+                    <Grid Grid.Column="1" Grid.Row="1" Grid.RowSpan="4" Style="{DynamicResource InerInerGrid}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="8*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
 
-                <Label Content="{Binding With}"  Height="50" Margin="167,51,189,549" FontSize="13"/>
-                <Label Content="{Binding Without}"  Height="50" Margin="167,114,189,486" FontSize="13"/>
-                <Rectangle  VerticalAlignment="Top" Fill="Gray" Height="1" Margin="1,163,0,0"/>
-                <Label Content="Age statitsics" HorizontalAlignment="Center" FontSize="15" FontWeight="Bold" Margin="2,179,-2,407"/>
-                <Label  Content="Under 18" FontSize="13" Margin="0,224,356,368"/>
-                <Label  Content="Between 18 and 50" FontSize="13" Height="50" Margin="0,275,355,325"/>
-                <Label  Content="Over 50" Height="50" Margin="0,325,355,275" FontSize="13"/>
+                        </Grid.RowDefinitions>
+                        <Label Content="Voucher statistics" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Style="{DynamicResource StatisticLabel}"/>
+                        <Label Content="With vouchers"  Grid.Column="1" Grid.Row="2" Style="{DynamicResource Label}"/>
+                        <Label Content="Without vouchers"  Style="{DynamicResource Label}" Grid.Column="1" Grid.Row="4"/>
+
+                        <Label Content="{Binding With}"  Grid.Column="1" Grid.Row="2" HorizontalAlignment="Right" Width="170" HorizontalContentAlignment="Left" Style="{DynamicResource Label}"/>
+                        <Label Content="{Binding Without}" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Right" Width="170" HorizontalContentAlignment="Left" Style="{DynamicResource Label}"/>
+
+                    </Grid>
+                </Border>
+
+                <Border Grid.Column="1" Grid.Row="6" Grid.RowSpan="4" Style="{DynamicResource Border}">
+                    <Grid Grid.Row="6" Grid.RowSpan="5" Style="{DynamicResource InerInerGrid}" Grid.Column="1" Height="197"  VerticalAlignment="Top">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="8*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Label Content="Age statitsics" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Style="{DynamicResource StatisticLabel}"/>
+                        <Label  Content="Under 18" Grid.Column="1" Grid.Row="2" Style="{DynamicResource Label}"/>
+                        <Label  Content="Between 18 and 50" Grid.Column="1" Grid.Row="4" Style="{DynamicResource Label}" />
+                        <Label  Content="Over 50" Grid.Row="5" Style="{DynamicResource Label}" Grid.ColumnSpan="3" Margin="41,13,41,0" Grid.RowSpan="2"/>
 
 
-                <Label  Content="{Binding Under}" Height="50" FontSize="13" Margin="180,232,176,368" />
-                <Label  Content="{Binding Between}" FontSize="13" Height="50" Margin="179,282,176,318" />
-                <Label  Content="{Binding Over}" Height="50" Margin="179,337,176,263" FontSize="15" />
-                <Rectangle  VerticalAlignment="Top" Fill="Gray" Height="1.5" Margin="1,392,0,0">
-                </Rectangle>
-
-                <Label Content="Total Attendance" FontSize="15" HorizontalAlignment="Left" FontWeight="Bold" Margin="0,398,355,104" />
-                <Label x:Name="Total" Content="{Binding Attendance}" FontSize="15" FontWeight="Bold" Margin="180,398,175,0" Height="98" VerticalAlignment="Top" />
+                        <Label  Content="{Binding Under}" Grid.Column="1" Grid.Row="2" HorizontalContentAlignment="left" HorizontalAlignment="Right" Style="{DynamicResource Label}" Width="170"/>
+                        <Label  Content="{Binding Between}" Grid.Column="1" Grid.Row="4" HorizontalContentAlignment="left" HorizontalAlignment="Right" Style="{DynamicResource Label}" Width="170" />
+                        <Label  Content="{Binding Over}" Grid.Column="1" Grid.Row="5" HorizontalContentAlignment="left" HorizontalAlignment="Right" Style="{DynamicResource Label}" Width="170" Grid.ColumnSpan="2" Margin="0,13,41,0" Grid.RowSpan="2" />
+                    </Grid>
+                </Border>
+                <Border Grid.Column="1" Grid.Row="11" Style="{DynamicResource Border}">
+                    <Grid Grid.Column="1" Grid.Row="11" Style="{DynamicResource InerInerGrid}">
+                        <Label Content="Total Attendance" Style="{DynamicResource StatisticLabel}" HorizontalAlignment="Left" />
+                        <Label x:Name="Total" Content="{Binding Attendance}" HorizontalAlignment="Left" Width="250" Style="{DynamicResource StatisticLabel}" Height="44" Margin="161,0,0,0"/>
+                    </Grid>
+                </Border>
             </Grid>
         </Border>
-        <Label Content="{Binding Header}" FontSize="25" FontWeight="Bold" HorizontalAlignment="Left" Margin="274,26,0,0" VerticalAlignment="Top" Width="570" Height="40"/>
+
+        <Grid Margin="0,0,0,612" Style="{DynamicResource BackgroundHeader}">
+            <Label Content="{Binding Header}" Style="{DynamicResource Header}" VerticalAlignment="Top" Width="646" Height="61" HorizontalAlignment="Left" Margin="374,10,0,0"/>
+            <Image Width="200" Source="/Resources/Images/LOGO (2).jpg" Margin="1,0,899,0" />
+        </Grid>
+
     </Grid>
 </Page>

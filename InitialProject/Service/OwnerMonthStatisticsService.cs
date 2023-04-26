@@ -27,7 +27,7 @@ namespace InitialProject.Service
             for(int month=1; month <=12; month ++)
             {
                 OwnerOneMonthStatisticViewModel oneMonthViewModel = new OwnerOneMonthStatisticViewModel();
-                oneMonthViewModel.Month = month;
+                oneMonthViewModel.Month = DateTimeFormatInfo.CurrentInfo.GetMonthName(month);
                 oneMonthViewModel.Year = year;
                 oneMonthViewModel.Accommodation = accommodation;
                 oneMonthViewModel.Reservations = GetReservationNumberByMonth(accommodation, year, month);
@@ -86,7 +86,7 @@ namespace InitialProject.Service
                 if (GetBusyDaysNumberInMonth(accommodation, year, month) / daysInMonth > busyness)
                 {
                     busyness = GetBusyDaysNumberInMonth(accommodation, year, month) / daysInMonth;
-                    busiestMonth = year;
+                    busiestMonth = month;
                 }
             }
             return DateTimeFormatInfo.CurrentInfo.GetMonthName(busiestMonth);

@@ -296,7 +296,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         private void SaveNotification()
         {
             OwnerNotificationsService notificationsService = new OwnerNotificationsService();
-            notificationsService.Add(Domain.Model.OwnerNotificationType.ACCOMMODATION_ADDED);
+            notificationsService.Add(Domain.Model.OwnerNotificationType.ACCOMMODATION_ADDED, owner);
         }
 
         public void AddImageFromFileSystem()

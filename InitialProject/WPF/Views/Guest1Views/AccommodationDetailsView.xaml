@@ -3,86 +3,195 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:converters="clr-namespace:InitialProject.WPF.Converters"
       xmlns:local="clr-namespace:InitialProject.View"
-      mc:Ignorable="d" 
-      Height="696" Width="1024"
+      mc:Ignorable="d"
+      d:DesignHeight="696" d:DesignWidth="1024"
       Title="AccommodationDetails">
+    <Page.Resources>
+        <Style TargetType="Grid">
+            <Setter Property="Background" Value="#c99585"></Setter>
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="Foreground" Value="#37492d"></Setter>
+            <Setter Property="FontWeight" Value="Bold"></Setter>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#37492d"></Setter>
+            <Setter Property="FontWeight" Value="Bold"></Setter>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="#8c9d75"></Setter>
+            <Setter Property="Foreground" Value="#22301a"></Setter>
+            <Setter Property="FontWeight" Value="UltraBlack"></Setter>
+            <Setter Property="FontSize" Value="20"></Setter>
+            <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+            <Setter Property="BorderBrush" Value="#22301a"></Setter>
+            <Setter Property="BorderThickness" Value="3,3,3,3"></Setter>
+        </Style>
+        <Style TargetType="{x:Type ListBoxItem}">
+            <!--For disable highlighting on stars rating listbox-->
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                        <Grid Background="{TemplateBinding Background}">
+                            <ContentPresenter 
+                                    ContentTemplate="{TemplateBinding ContentTemplate}"
+                                    Content="{TemplateBinding Content}"
+                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                    Margin="{TemplateBinding Padding}">
+                            </ContentPresenter>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
-    <Grid Background="Cornsilk">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="4*"></RowDefinition>
-            <RowDefinition Height="1*"></RowDefinition>
-            <RowDefinition Height="9*"></RowDefinition>
-            <RowDefinition Height="9*"></RowDefinition>
-        </Grid.RowDefinitions>
+        <converters:IntToImageConverter x:Key="Int2Images"></converters:IntToImageConverter>
+    </Page.Resources>
+    <Grid >
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Label Content="{Binding Path=SelectedAccommodation.Name}" FontSize="24" Margin="0,20,0,0" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Top" Width="Auto" Height="Auto" FontWeight="Bold"></Label>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="0.8*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="15*"></RowDefinition>
+        </Grid.RowDefinitions>
 
-        <Button FontSize="18" FontWeight="Bold" Height="35" Width="94" Margin="10,20,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Command="NavigationCommands.BrowseBack">BACK</Button>
+        <Grid Grid.Column="0" Grid.Row="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+            </Grid.RowDefinitions>
 
-        <Label FontSize="20" FontWeight="Bold" Height="35" Width="80" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">Details</Label>
-        <Label FontSize="20" Height="35" Width="80" Grid.Row="1" HorizontalAlignment="Center" Grid.Column="1" VerticalAlignment="Center">Photos</Label>
+            
+            <Label FontSize="18" Height="35" Width="Auto" Grid.Row="0" HorizontalAlignment="Left"  VerticalAlignment="Center" Margin="84,0,0,0">Name:</Label>
+            <Label FontSize="18" Height="35" Width="Auto" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="84,0,0,0" Content="Country:"/>
+            <Label FontSize="18" Height="36" Width="Auto" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="84,0,0,0" Content="City:"/>
+            <Label FontSize="18" Height="35" Width="Auto" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="84,0,0,0" Content="Type:"/>
+            <Label FontSize="18" Height="35" Width="Auto" Grid.Row="4" HorizontalAlignment="Left"  VerticalAlignment="Center" Margin="84,0,0,0" Content="Capacity:"/>
+            <Label FontSize="18" Height="35" Width="Auto" Grid.Row="5" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="84,0,0,0" Content="Min. days for reservation:"/>
+            <Label FontSize="18" Height="36" Width="Auto" Grid.Row="6" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="84,0,0,0" Content="Min. days to cancel:"/>
+            <TextBlock Height="35" FontSize="18" Margin="0,0,84,0" Grid.Row="0" Text="{Binding Path=SelectedAccommodation.Location.Country}" HorizontalAlignment="Right"/>
+            <TextBlock Height="35" FontSize="18" Margin="0,0,84,0" Grid.Row="1" Text="{Binding Path=SelectedAccommodation.Location.City}" HorizontalAlignment="Right"/>
+            <TextBlock Height="35" FontSize="18" Margin="0,0,84,0" Grid.Row="2" Text="{Binding Path=SelectedAccommodation.Type}" HorizontalAlignment="Right"/>
+            <TextBlock Height="35" FontSize="18" Margin="0,0,84,0" Grid.Row="3" Text="{Binding Path=SelectedAccommodation.Capacity}" HorizontalAlignment="Right"/>
+            <TextBlock Height="35" FontSize="18" Margin="0,0,84,0" Grid.Row="4" Text="{Binding Path=SelectedAccommodation.MinDaysForReservation}" HorizontalAlignment="Right"/>
+            <TextBlock Height="35" FontSize="18" Margin="0,0,84,0" Grid.Row="5" Text="{Binding Path=SelectedAccommodation.MinDaysToCancel}" HorizontalAlignment="Right"/>
+            <TextBlock Height="35" FontSize="18" Margin="0,0,84,0" Grid.Row="6" Text="{Binding Path=SelectedAccommodation.Name}" HorizontalAlignment="Right"/>
 
-        <Label FontSize="18" Height="35" Width="80" Grid.Row="2" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="74,35,0,0">Name:</Label>
-        <Label FontSize="18" Height="35" Width="80" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="74,95,0,0" Content="Country:"/>
-        <Label FontSize="18" Height="36" Width="80" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="74,161,0,0" Content="City:"/>
-        <Label FontSize="18" Height="35" Width="80" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="74,228,0,0" Content="Type:"/>
-        <Label FontSize="18" Height="35" Width="80" Grid.Row="3" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="74,26,0,0" Content="Capacity:"/>
-        <Label FontSize="18" Height="35" Width="213" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="74,89,0,0" Content="Min. days for reservation:"/>
-        <Label FontSize="18" Height="36" Width="200" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="74,157,0,0" Content="Min. days to cancel:"/>
-        <TextBlock Height="35" FontSize="18" Margin="207,100,74,138" Grid.Row="2" Text="{Binding Path=SelectedAccommodation.Location.Country}" HorizontalAlignment="Right"/>
-        <TextBlock Height="35" FontSize="18" Margin="282,166,74,72" Grid.Row="2" Text="{Binding Path=SelectedAccommodation.Location.City}" HorizontalAlignment="Right"/>
-        <TextBlock Height="35" FontSize="18" Margin="0,233,74,5" Grid.Row="2" Text="{Binding Path=SelectedAccommodation.Type}" HorizontalAlignment="Right"/>
-        <TextBlock Height="35" FontSize="18" Margin="282,31,74,206" Grid.Row="3" Text="{Binding Path=SelectedAccommodation.Capacity}" HorizontalAlignment="Right"/>
-        <TextBlock Height="35" FontSize="18" Margin="382,94,74,143" Grid.Row="3" Text="{Binding Path=SelectedAccommodation.MinDaysForReservation}" HorizontalAlignment="Right"/>
-        <TextBlock Height="35" FontSize="18" Margin="382,162,74,75" Grid.Row="3" Text="{Binding Path=SelectedAccommodation.MinDaysToCancel}" HorizontalAlignment="Right"/>
-        <TextBlock Height="35" FontSize="18" Margin="282,40,74,198" Grid.Row="2" Text="{Binding Path=SelectedAccommodation.Name}" HorizontalAlignment="Right"/>
+        </Grid>
+
+        <Grid Grid.Column="1" Grid.Row="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="5*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="5*"></RowDefinition>
+                <RowDefinition Height="2.2*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+             <Image x:Name="accommodationImage" Source="{Binding ImageSource, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0"  Height="150" Width="300" Margin="0,0,0,0"></Image>
+
+            <Button Command="{Binding NextPhotoCommand}" Height="50" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right" Margin="0,0,60,0" VerticalAlignment="Center" Grid.Row="0">
+                <Button.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="360"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Button.RenderTransform>
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle Width="30" Height="14" Stroke="#22301a" Fill="#22301a"/>
+                                <Polygon Points= "0,15 15,22 0,30" Stroke="#22301a" Fill="#22301a" Height="45" Width="30" />
+                            </StackPanel>
+                        </Grid>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <Button Command="{Binding PreviousPhotoCommand}" Height="50" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Margin="60,0,0,0" VerticalAlignment="Center">
+                <Button.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="180"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Button.RenderTransform>
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle Width="30" Height="14" Stroke="#22301a" Fill="#22301a"/>
+                                <Polygon Points= "0,15 15,22 0,30" Stroke="#22301a" Fill="#22301a" Height="45" Width="30" />
+                            </StackPanel>
+                        </Grid>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
 
 
-        <Image x:Name="accommodationImage" Source="{Binding ImageSource, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="1" Height="200" HorizontalAlignment="Center" Margin="52,36,52,37"/>
-        <Button Command="{Binding PreviousPhotoCommand}" Height="50" Margin="12,111,441,112" RenderTransformOrigin="0.5,0.5" Grid.Row="2" Grid.Column="1">
-            <Button.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="180"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Button.RenderTransform>
-            <Button.Template>
-                <ControlTemplate TargetType="{x:Type Button}">
-                    <Grid>
-                        <StackPanel Orientation="Horizontal">
-                            <Rectangle Width="30" Height="14" Stroke="DeepPink" Fill="DeepPink"/>
-                            <Polygon Points= "0,15 15,22 0,30" Stroke="DeepPink" Fill="DeepPink" Height="45" Width="30" />
-                        </StackPanel>
-                    </Grid>
-                </ControlTemplate>
-            </Button.Template>
+            <Button x:Name="Reserve" Content="Reserve" Grid.Row="3" Command="{Binding ReserveCommand}" FontWeight="Bold" Margin="0,0,20,40" VerticalAlignment="Bottom" Width="94" Height="35" HorizontalAlignment="Right" FontSize="18"/>
+
+
+        </Grid>
+
+        <Label Content="{Binding Path=SelectedAccommodation.Name}" FontWeight="Bold" FontSize="24" Margin="0,20,0,0" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center"  FontFamily="Baskerville Old Face" VerticalAlignment="Top" Width="Auto" Height="Auto"></Label>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="2">
+            <ListBox Grid.Row="1" Background="#c99585" BorderBrush="Transparent" BorderThickness="0" Width="Auto" ItemsSource="{Binding AverageRating, Converter={StaticResource Int2Images}}"  Height="Auto" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Image Source="{Binding}" Height="20" Width="20"></Image>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel></WrapPanel>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+            </ListBox>
+        </StackPanel>
+
+        <TextBlock FontSize="20" Background="Transparent" HorizontalAlignment="Center" Grid.Row="2" Grid.ColumnSpan="2" Width="Auto" Height="35" VerticalAlignment="Top" FontWeight="Normal" Margin="0,0,0,0">
+                <Run Text="{Binding ReviewsNumber}"/>
+                <Run Text="Reviews"/>
+        </TextBlock>
+        <Label FontSize="20" FontWeight="Bold" Height="35" Width="80" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">Details</Label>
+
+        <Label FontSize="20" Height="35" FontWeight="Bold" Width="80" HorizontalAlignment="Center" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center">Photos</Label>
+
+
+        <Button FontWeight="Bold" IsEnabled="True" Height="35" BorderBrush="#22301a" BorderThickness="3,3,3,3" Width="94" Margin="10,20,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Command="NavigationCommands.BrowseBack">
+            <Grid Background="#8c9d75" Width="94" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Image Source="/Resources/Images/back.png" HorizontalAlignment="Left" Margin="10,0,0,0" Width="26" Height="22" Grid.Column="0"/>
+                <TextBlock Text="BACK" Grid.Column="1" VerticalAlignment="Center" FontSize="16"  Foreground="#22301a" FontWeight="Bold" HorizontalAlignment="Center" Width="Auto"/>
+            </Grid>
         </Button>
-        <Button Command="{Binding NextPhotoCommand}" Height="50" Margin="443,111,10,112" RenderTransformOrigin="0.5,0.5" Grid.Row="2" Grid.Column="1">
-            <Button.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="360"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Button.RenderTransform>
-            <Button.Template>
-                <ControlTemplate TargetType="{x:Type Button}">
-                    <Grid>
-                        <StackPanel Orientation="Horizontal">
-                            <Rectangle Width="30" Height="14" Stroke="DeepPink" Fill="DeepPink"/>
-                            <Polygon Points= "0,15 15,22 0,30" Stroke="DeepPink" Fill="DeepPink" Height="45" Width="30" />
-                        </StackPanel>
-                    </Grid>
-                </ControlTemplate>
-            </Button.Template>
-        </Button>
+
+        
+
+
+        
 
 
 

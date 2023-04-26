@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:InitialProject.WPF.Views"
       mc:Ignorable="d" 
       d:DesignHeight="630" d:DesignWidth="430"
-      Title="My Accommodation" Background="LightBlue">
+      Title="My Accommodation" Background="#b3cee5">
     <Page.Resources>
         <DataTemplate x:Key="accommodations">
             <Border BorderBrush="DarkGray" BorderThickness="1" Margin="0,0,0,0" Background="LightGray" CornerRadius="15">
@@ -27,8 +27,8 @@
                         </Button>
                         <TextBlock Text="{Binding Path=Name}" Margin="0, 5, 0, 0" Grid.Column="1" Grid.Row="0" Padding="1" />
                         <TextBlock Text="{Binding Path=Location}" Grid.Column="1" Grid.Row="2" Padding="1" />
-                        <Button Content="Statistics" Margin="0, 5, 5, 0" Grid.Column="2" Grid.Row="0" Padding="1" Command="{Binding Path=DataContext.StatisticsCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}"/>
-                        <Button Content="Remove" Margin="0, 0, 5, 0" Grid.Column="2" Grid.Row="2" Padding="1"/>
+                        <Button Content="Statistics" Margin="0, 5, 5, 0" Grid.Column="2" Grid.Row="0" Padding="1" Command="{Binding Path=DataContext.StatisticsCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" Background="AliceBlue"/>
+                        <Button Content="Remove" Margin="0, 0, 5, 0" Grid.Column="2" Grid.Row="2" Padding="1" Background="AliceBlue"/>
                     </Grid>
                     <Grid Margin="0,60,0,0">
                         <Grid.ColumnDefinitions>
@@ -64,7 +64,7 @@
     </Page.Resources>
 
     <Grid>
-        <ListBox Name="AccommodationListBox" ItemsSource="{Binding Path=Accommodations}" ItemTemplate="{StaticResource accommodations}" SelectedItem="{Binding SelectedAccommodation, UpdateSourceTrigger=PropertyChanged}" IsSynchronizedWithCurrentItem="True" SelectionMode="Single" Height="421" VerticalAlignment="Top" Margin="30,31,30,0">
+        <ListBox Name="AccommodationListBox" ItemsSource="{Binding Path=Accommodations}" ItemTemplate="{StaticResource accommodations}" SelectedItem="{Binding SelectedAccommodation, UpdateSourceTrigger=PropertyChanged}" IsSynchronizedWithCurrentItem="True" SelectionMode="Single" Height="421" VerticalAlignment="Top" Margin="30,31,30,0" Style="{StaticResource ListBoxStyle}">
             <ListBox.Resources>
                 <Style TargetType="ListBoxItem">
                     <Style.Triggers>
@@ -75,8 +75,8 @@
                 </Style>
             </ListBox.Resources>
         </ListBox>
-        <Button Command="{Binding NewAccommodationCommand}" Name="NewAccommodationButton" Content="New Accommodation" HorizontalAlignment="Center" Margin="30,474,30,0"  Width="355" Height="43" VerticalAlignment="Top"/>
-        <Button Content="My Renovations" HorizontalAlignment="Center" Margin="30,540,30,0"  Width="355" Height="43" VerticalAlignment="Top"/>
+        <Button Command="{Binding NewAccommodationCommand}" Name="NewAccommodationButton" Content="New Accommodation" HorizontalAlignment="Center" Margin="31,474,31,0"  Width="354" Height="43" VerticalAlignment="Top" Background="AliceBlue" BorderBrush="DarkGray"/>
+        <Button Content="My Renovations" HorizontalAlignment="Center" Margin="31,540,31,0"  Width="354" Height="43" VerticalAlignment="Top" Background="AliceBlue" BorderBrush="DarkGray"/>
         <StackPanel Margin="0,-7,0,528" Background="LightGray" Visibility="{Binding Path=StackPanelVisibility, UpdateSourceTrigger=PropertyChanged}">
             <Grid Height="100">
                 <Grid.ColumnDefinitions>

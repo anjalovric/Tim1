@@ -2,7 +2,6 @@
 using InitialProject.Model;
 using InitialProject.Service;
 using System.Collections.ObjectModel;
-
 namespace InitialProject.WPF.ViewModels
 {
     public class FinishedTourDetailsViewModel
@@ -17,15 +16,11 @@ namespace InitialProject.WPF.ViewModels
 
         TourInstance selectedInstance;
         public ObservableCollection<CheckPointInformation> CheckPointInformations { get; set; }
-
         public FinishedTourDetailsViewModel(TourInstance selected)
         {
-            selectedInstance = selected;
-            
+            selectedInstance = selected;          
             CheckPointInformations = new ObservableCollection<CheckPointInformation>();
-
             UnitReport(selected);
-
         }
         public void UnitReport(TourInstance selected)
         {
@@ -37,7 +32,7 @@ namespace InitialProject.WPF.ViewModels
         }
         private void MakeHeader(TourInstance selected)
         {
-            Header = selected.Tour.Name.ToString().ToUpper() + ", " + selected.StartDate.ToString().Split(" ")[0] + ", " + selected.StartClock.ToString();          
+            Header = selected.Tour.Name.ToString().ToUpper() + ", " + selected.StartDate.ToString();          
         }
 
         private void ComposeReport()
@@ -67,7 +62,6 @@ namespace InitialProject.WPF.ViewModels
             else
                 Without=0 + "%";
         }
-
         private void WriteAgePrecentacge(int selectedId)
         {
             TourDetailsService detailsService = new TourDetailsService();
@@ -84,7 +78,6 @@ namespace InitialProject.WPF.ViewModels
             else
                 Over = 0 + "%";
         }
-
         private void ShowGuestsOnPoint(int currentPointId, CheckPointInformation pointInformation)
         {
             TourDetailsService detailsService=new TourDetailsService();

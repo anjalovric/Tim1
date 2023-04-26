@@ -17,7 +17,7 @@ namespace InitialProject.WPF.Validations.GuideValidations
                 string stringValue = value as string;
                 Regex r = new Regex(@"^[A-Za-z]+(\s[A-Za-z]+)*$");
 
-                if (stringValue.Length == 0)
+                if (String.IsNullOrWhiteSpace(stringValue))
                 {
                     return new ValidationResult(false, "This field can't be empty");
                 }

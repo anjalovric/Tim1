@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using InitialProject.Model;
+using System.Collections.Generic;
 
 namespace InitialProject.Domain.RepositoryInterfaces
 {

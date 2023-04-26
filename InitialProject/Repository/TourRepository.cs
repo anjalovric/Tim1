@@ -33,7 +33,6 @@ namespace InitialProject.Repository
         }
         public Tour Save(Tour tour)
         {
-
             tour.Id = NextId();
             _tours = _serializer.FromCSV(FilePath);
             _tours.Add(tour);

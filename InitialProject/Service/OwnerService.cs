@@ -34,12 +34,28 @@ namespace InitialProject.Service
             OwnerReviewService ownerReviewService = new OwnerReviewService();
             double averageRate = ownerReviewService.CalculateAverageRateByOwner(owner);
             int numberOfReviews = ownerReviewService.GetNumberOfReviewsByOwner(owner);
-            return averageRate >= 4.5 && numberOfReviews >= 50;
+            bool isSuperOwner = averageRate >= 4.5 && numberOfReviews >= 2;
+            MakeNewSuperOwnerNotification(owner, isSuperOwner);
+            return isSuperOwner;
         }
 
         public Owner GetById(int id)
         {
             return ownerRepository.GetById(id);
+        }
+
+        private void MakeNewSuperOwnerNotification(Owner owner, bool isSuperOwner)
+        {
+            if(owner.IsSuperOwner != isSuperOwner)
+            {
+                owner.IsSuperOwner = isSuperOwner;
+                ownerRepository.Update(owner);
+                if(isSuperOwner)
+                {
+                    OwnerNotificationsService notificationsService = new OwnerNotificationsService();
+                    notificationsService.Add(Domain.Model.OwnerNotificationType.SUPEROWNER, owner);
+                }
+            }
         }
     }
 }

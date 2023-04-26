@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
         Title="Guest2Overview" Height="768" Width="1024" WindowStartupLocation="CenterScreen" WindowState="Maximized">
-    <Grid Background="#2E333A">
+    <Grid Background="#1e2e44">
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -19,59 +19,60 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
-        <Border Grid.Column="0" Grid.Row="0" BorderBrush="Black" Background="#525965"/>
-        <Image Source="/Resources/Images/account.png" Grid.Column="0" Grid.Row="0" Height="171" Width="247"/>
-        <Border Grid.Column="0" Grid.Row="1" BorderBrush="Black" Background="#525965"/>
-        <Menu HorizontalAlignment="Center" Width="256" Background="#525965" Grid.Row="1">
+        <Border Grid.Column="0" Grid.Row="0" BorderBrush="Black" Background="#1e2e44" Margin="0,0,0,501" Grid.RowSpan="2"/>
+        <Image Source="{Binding ImageSource, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Grid.Row="0" Height="171" Width="247"/>
+        <Border Grid.Column="0" Grid.Row="1" BorderBrush="Black" Background="#1e2e44"/>
+        <Menu HorizontalAlignment="Center" Width="256" Background="#1e2e44" Grid.Row="1">
             <Menu.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <StackPanel Width="NaN" Margin="3,14,1,0" Background="#525965" />
+                    <StackPanel Width="NaN" Margin="3,14,1,0" Background="#1e2e44" />
                 </ItemsPanelTemplate>
             </Menu.ItemsPanel>
-            <MenuItem Header="Profile" FontSize="20" Foreground="White" FontWeight="Bold">
+            <MenuItem Header="Profile" Foreground="Gray" FontSize="20" FontWeight="Bold" Command="{Binding ProfileCommand}">
                 <MenuItem.Icon>
                     <Image Source="/Resources/Images/profile.png" Height="15" Width="20"/>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="Show" FontSize="20" Foreground="White" FontWeight="Bold">
-                <MenuItem Header="All tours" Background="#525965" Command="{Binding ShowCommand}"/>
-                <MenuItem Header="Active tours" Background="#525965" Command="{Binding ActiveToursCommand}"/>
+            <MenuItem Header="Show" Foreground="Gray" FontSize="20" FontWeight="Bold">
+                <MenuItem Header="All tours" Background="#1e2e44" Command="{Binding ShowCommand}"/>
+                <MenuItem Header="Active tours" Background="#1e2e44" Command="{Binding ActiveToursCommand}"/>
                 <MenuItem.Icon>
                     <Image Source="/Resources/Images/home.png" Height="15" Width="20"/>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="Grade tours and guide" FontSize="20" Foreground="White" FontWeight="Bold" Command="{Binding FinishedToursCommand}" Width="302">
+            <MenuItem Header="Grade tours and guide" Foreground="Gray" FontSize="20" FontWeight="Bold" Command="{Binding FinishedToursCommand}" Width="302">
                 <MenuItem.Icon>
                     <Image Source="/Resources/Images/icons8-christmas-star-96.png" Height="15" Width="20"/>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="Notifications" FontSize="20" Foreground="White" FontWeight="Bold">
+            <MenuItem Header="Notifications" Foreground="Gray" FontSize="20" FontWeight="Bold">
                 <MenuItem.Icon>
                     <Image Source="/Resources/Images/bell.png" Height="15" Width="20"/>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="My requests" FontSize="20" Foreground="White" FontWeight="Bold">
+            <MenuItem Header="My requests" Foreground="Gray" FontSize="20" FontWeight="Bold" Command="{Binding RequestsCommand}">
                 <MenuItem.Icon>
                     <Image Source="/Resources/Images/tasks.png" Height="15" Width="20"/>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="Vouchers" FontSize="20" Foreground="White" FontWeight="Bold" Command="{Binding VouchersCommand}">
+            <MenuItem Header="Vouchers" Foreground="Gray" FontSize="20" FontWeight="Bold" Command="{Binding VouchersCommand}">
                 <MenuItem.Icon>
                     <Image Source="/Resources/Images/voucher.png" Height="15" Width="20"/>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="Help" FontSize="20" Foreground="White" FontWeight="Bold">
+            
+            <MenuItem Header="Help" Foreground="Gray" FontSize="20" FontWeight="Bold">
                 <MenuItem.Icon>
                     <Image Source="/Resources/Images/help.png" Height="15" Width="20"/>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="Sign out" FontSize="20" Foreground="White" FontWeight="Bold" Command="{Binding SignOutCommand}">
+            <MenuItem Header="Sign out" Foreground="Gray" FontSize="20" FontWeight="Bold" Command="{Binding SignOutCommand}">
                 <MenuItem.Icon>
                     <Image Source="/Resources/Images/signout.png" Height="15" Width="20"/>
                 </MenuItem.Icon>
             </MenuItem>
         </Menu>
 
-        <ContentControl x:Name="CC" Background="#2E333A" Grid.Column="1" Grid.RowSpan="2"/>
+        <ContentControl x:Name="CC" Grid.Column="1" Background="#151f2d" Grid.RowSpan="2"/>
     </Grid>
 </Window>

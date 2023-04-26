@@ -6,14 +6,11 @@
       xmlns:local="clr-namespace:InitialProject.WPF.Views.GuideViews"
       mc:Ignorable="d" 
       d:DesignHeight="707" d:DesignWidth="1100"
-      Title="CancelView" Background="White">
+      Title="CancelView">
 
-    <Grid>
-        <Grid.Background>
-            <ImageBrush ImageSource="/Resources/Images/sky.jpg"/>
-        </Grid.Background>
+    <Grid Style="{DynamicResource Background}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="1.5*"/>
             <RowDefinition Height="8*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
@@ -22,72 +19,36 @@
             <ColumnDefinition Width="10*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <DataGrid Grid.Row="1" Grid.Column="1" x:Name="TourListDataGrid" ItemsSource="{Binding Path=TourInstances,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=Selected}" IsReadOnly="True" AutoGenerateColumns="False"  HorizontalContentAlignment="Center" BorderThickness="4">
+        <DataGrid HeadersVisibility="Column" ColumnHeaderStyle="{DynamicResource CenterGridHeaderStyle}" Grid.Row="1" Grid.Column="1" x:Name="TourListDataGrid" ItemsSource="{Binding Path=TourInstances,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=Selected}" Style="{DynamicResource Tables}">
             <DataGrid.Columns>
                 <DataGridTemplateColumn x:Name="Cover"  Width="0.7*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Image Source="{Binding CoverBitmap}" Stretch="Fill"/>
+                            <Image Source="{Binding CoverBitmap}" Height="30" Stretch="Fill"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTextColumn Header="Tour name" Width="1*" Binding="{Binding Tour.Name}">
-                    <DataGridColumn.HeaderStyle>
-                        <Style TargetType="DataGridColumnHeader">
-                            <Setter Property="FontWeight" Value="Bold"/>
-                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                            <Setter Property="Height" Value="30"/>
-                        </Style>
-                    </DataGridColumn.HeaderStyle>
                 </DataGridTextColumn>
                 <DataGridTextColumn Header="Location" Width="1*" Binding="{Binding Tour.Location}">
-                    <DataGridColumn.HeaderStyle>
-                        <Style TargetType="DataGridColumnHeader">
-                            <Setter Property="FontWeight" Value="Bold"/>
-                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                        </Style>
-                    </DataGridColumn.HeaderStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="StartDate" Width="1*" Binding="{Binding Date}">
-                    <DataGridColumn.HeaderStyle>
-                        <Style TargetType="DataGridColumnHeader">
-                            <Setter Property="FontWeight" Value="Bold"/>
-                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                        </Style>
-                    </DataGridColumn.HeaderStyle>
+                <DataGridTextColumn Header="StartDate" Width="2*" Binding="{Binding StartDate}" />
+                <DataGridTextColumn  Width="1*" Header="Capacity" Binding="{Binding Tour.MaxGuests}" >
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="StartHour" Width="1*" Binding="{Binding StartClock}">
-                    <DataGridColumn.HeaderStyle>
-                        <Style TargetType="DataGridColumnHeader">
-                            <Setter Property="FontWeight" Value="Bold"/>
-                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                        </Style>
-                    </DataGridColumn.HeaderStyle>
-                </DataGridTextColumn>
-                <DataGridTextColumn  Width="1*" Header="Capacity" Binding="{Binding Tour.MaxGuests}">
-                    <DataGridColumn.HeaderStyle>
-                        <Style TargetType="DataGridColumnHeader">
-                            <Setter Property="FontWeight" Value="Bold"/>
-                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                        </Style>
-                    </DataGridColumn.HeaderStyle>
-                </DataGridTextColumn>
-                <DataGridTemplateColumn x:Name="cancelation" Header="Cancel"  Width="1*">
+                <DataGridTemplateColumn x:Name="cancelation" Header="Cancel"  Width="1*" >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Name="cancelButton" Content="CANCEL" TextElement.FontWeight="ExtraBold" Command="{Binding Path=DataContext.CancelCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
+                            <Button Name="cancelButton" Content="CANCEL" Style="{DynamicResource ButtonTable}" TextElement.FontWeight="ExtraBold" Command="{Binding Path=DataContext.CancelCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
-                    <DataGridColumn.HeaderStyle>
-                        <Style TargetType="DataGridColumnHeader">
-                            <Setter Property="FontWeight" Value="Bold"/>
-                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                        </Style>
-                    </DataGridColumn.HeaderStyle>
+
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
 
-        <Label  Height="40"  FontSize="25" FontWeight="Bold" Grid.Column="1" Grid.Row="0" HorizontalContentAlignment="Center" HorizontalAlignment="Center">CANCEL TOUR</Label>
+        <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Style="{DynamicResource BackgroundHeader}">
+            <Label  Style="{DynamicResource Header}" Grid.Column="1" Grid.Row="0" Margin="0,31,0,10" Width="247">CANCEL TOUR</Label>
+            <Image Source="/Resources/Images/LOGO (2).jpg" Margin="0,0,899,0"/>
+        </Grid>
     </Grid>
 </Page>

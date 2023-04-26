@@ -10,5 +10,6 @@ namespace InitialProject.Domain.RepositoryInterfaces
 {
     public interface IAccommodationTypeRepository : IGenericRepository<AccommodationType>
     {
+
     }
 }
