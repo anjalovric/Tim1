@@ -113,12 +113,14 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             OwnerReviewService ownerReviewService = new OwnerReviewService();
             if (ownerReviewService.HasReview(SelectedCompletedReservation))
             {
-                MessageBox.Show("This reservation is already reviewed.");
+                Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("This reservation is already reviewed.", "/Resources/Images/exclamation.png");
+                messageBox.Show();
                 return;
             }
             if (!ownerReviewService.IsReservationValidToReview(SelectedCompletedReservation))
             {
-                MessageBox.Show("You can't rate this reservation because 5 days have passed since its departure.");
+                Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("You can't rate this reservation because 5 days have passed since its departure.", "/Resources/Images/exclamation.png");
+                messageBox.Show();
                 return;
             }
             ShowReviewForm();
@@ -131,23 +133,27 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 
         }
 
-        private void CancelReservation_Executed(object sender)
+        private async void CancelReservation_Executed(object sender)
         {
             if(cancelledAccommodationReservationService.HasReservationStarted(SelectedNotCompletedReservation))
             {
-                MessageBox.Show("You can't cancel this reservation because it has already started.");
+                Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("You can't cancel this reservation because it has already started.", "/Resources/Images/exclamation.png");
+                messageBox.Show();
                 return;
             }
 
             if (!cancelledAccommodationReservationService.IsCancellationAllowed(SelectedNotCompletedReservation))
             {
-                MessageBox.Show("You can't cancel this reservation because the cancellation period has expired.");
+                Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("You can't cancel this reservation because the cancellation period has expired.", "/Resources/Images/exclamation.png");
+                messageBox.Show();
                 return;
             }
-            if (cancelledAccommodationReservationService.ConfirmCancellationMessageBox() == MessageBoxResult.Yes)
-            {
+            
+            Task<bool> result = cancelledAccommodationReservationService.ConfirmCancellationMessageBox();
+            bool IsYesClicked = await result;
+            if (IsYesClicked)
                 ConfirmCancellation();
-            }
+            
 
 
         }
@@ -162,7 +168,8 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         {
             if (cancelledAccommodationReservationService.HasReservationStarted(SelectedNotCompletedReservation))
             {
-                MessageBox.Show("You can't reschedule this reservation because it has already started.");
+                Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("You can't reschedule this reservation because it has already started.", "/Resources/Images/exclamation.png");
+                messageBox.Show();
             }
             else
             {

@@ -27,6 +27,11 @@
         <Setter Property="Foreground" Value="White"></Setter>
     </Style>
 
+    <Style x:Key="TextBlock" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Foreground" Value="White"/>
+    </Style>
     <Style x:Key="tb" TargetType="TextBox">
         <Setter Property="Background" Value="{StaticResource TableBorder}"></Setter>
         <Setter Property="Foreground" Value="White"></Setter>
@@ -37,7 +42,7 @@
 
     </Style>
 
-    <Style x:Key="dt" TargetType="tk:DateTimePicker">
+    <Style x:Key="dt" TargetType="tk:TimePicker">
         <Setter Property="Background" Value="{StaticResource TableBorder}"></Setter>
         <Setter Property="Foreground" Value="White"></Setter>
 
@@ -165,12 +170,32 @@
 
         <!--CALENDAR-->
         <Style x:Key="Calendar" TargetType="Calendar">
-            <Setter Property="Background" Value="LightGray"/>
+            <Setter Property="Background" Value="{StaticResource TableBorder}"/>
             <Setter Property="BorderThickness" Value="2.5"/>
             <Setter Property="BorderBrush" Value="blue"/>
             <Setter Property="Foreground" Value="{StaticResource CalendarBlue}"/>
         </Style>
+    <Style x:Key="Calendar1" TargetType="Calendar">
+        <Setter Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
 
+                    <GradientStop Color="#4169E1" Offset="0"/>
+
+                    <GradientStop Color="#6495ED" Offset="0.2"/>
+
+                    <GradientStop Color="#B0E0E6" Offset="0.1"/>
+
+                    <GradientStop Color="LightGray" Offset="1"/>
+
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="BorderThickness" Value="2.5"/>
+        <Setter Property="BorderBrush" Value="blue"/>
+        <Setter Property="Foreground" Value="{StaticResource CalendarBlue}"/>
+    </Style>
+   
         <Style x:Key="ButtonTable" TargetType="Button">
             <Setter Property="Background" Value="DarkBlue"/>
         <Setter Property="Foreground" Value="AliceBlue"/>
@@ -198,13 +223,18 @@
             <Setter Property="Background" Value="{StaticResource RoyalBlue}"/>
         </Style>
 
-        <Style x:Key="ListBox" TargetType="ListBox">
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Background" Value="DarkBlue"/>
-            <Setter Property="Foreground" Value="AliceBlue"/>
+    <Style x:Key="ListBox" TargetType="ListBox">
+        <Setter Property="Background" Value="DarkBlue"/>
+        <Setter Property="Foreground" Value="AliceBlue"/>
+    </Style>
+    <Style x:Key="ListBoxForm" TargetType="ListBox">
+        <Setter Property="Background" Value="DarkBlue"/>
+        <Setter Property="Foreground" Value="AliceBlue"/>
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="BorderBrush" Value="LightBlue"/>
     </Style>
 
-        <Style x:Key="Run" TargetType="Run">
+    <Style x:Key="Run" TargetType="Run">
             <Setter Property="Foreground" Value="white"/>
             <Setter Property="FontFamily" Value="Yu Gothic"/>
             <Setter Property="FontSize" Value="13"/>
@@ -274,9 +304,14 @@
 
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="LightGray" />
-                            </Trigger>
-                        </ControlTemplate.Triggers>
+                            <Setter Property="Background" Value="LightGray" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Background" Value="LightBlue" />
+                            <Setter Property="Foreground" Value="lightGray"/>
+                            <Setter Property="BorderBrush" Value="lightGray"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -456,6 +491,7 @@
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter Property="Foreground" Value="#888888"/>
+                            <Setter Property="Background" Value="AliceBlue"/>
                         </Trigger>
                         <Trigger Property="IsGrouping" Value="true">
                             <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>

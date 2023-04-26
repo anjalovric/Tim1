@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows;
 using InitialProject.Domain;
 using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Model;
+using InitialProject.WPF.Views.Guest1Views;
 
 namespace InitialProject.Service
 {
@@ -102,25 +104,35 @@ namespace InitialProject.Service
             }
             return reservationsToReview;
         }
-        public MessageBoxResult ConfirmReservation()
+        public async Task<bool> ConfirmReservation()
         {
-            string sMessageBoxText = $"Do you want to make a reservation?\n";
+            var result = new TaskCompletionSource<bool>();
+            Guest1YesNoMessageBoxView messageBox = new Guest1YesNoMessageBoxView("Do you want to make a reservation?", "/Resources/Images/qm.png", result);
+            messageBox.Show();
+            var returnedResult = await result.Task;
+            return returnedResult;
+
+           /* string sMessageBoxText = $"Do you want to make a reservation?\n";
             string sCaption = "Confirm reservation";
             MessageBoxButton btnMessageBox = MessageBoxButton.YesNo;
             MessageBoxImage icnMessageBox = MessageBoxImage.Question;
             MessageBoxResult result = MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
-            return result;
+            return result;*/
         }
 
-        public int GetReservationsNumberByGuestInPrevousYear(Guest1 guest1)
+        public int GetReservationsNumberByGuestInLastYear(Guest1 guest1)
         {
             int counter = 0;
             foreach(AccommodationReservation reservation in reservations)
             {
-                if (reservation.Guest.Id == guest1.Id)
+                if (reservation.Guest.Id == guest1.Id && IsLastYearReservationCompleted(reservation))
                     counter++;
             }
             return counter;
+        }
+        public bool IsLastYearReservationCompleted(AccommodationReservation reservation)
+        {
+            return reservation.Arrival <= DateTime.Now && reservation.Departure <= DateTime.Now && reservation.Arrival > DateTime.Now.AddYears(-1) && reservation.Arrival <=DateTime.Now;
         }
 
     }

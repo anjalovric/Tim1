@@ -14,6 +14,12 @@
             <Setter Property="Background" Value="#151f2d"/>
             <Setter Property="Foreground" Value="White"/>
         </Style>
+        <Style x:Key="TextStyle" TargetType="TextBlock">
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
     </Window.Resources>
     <Grid Background="#151f2d">
         <Grid.ColumnDefinitions>
@@ -33,25 +39,25 @@
 
         <TextBlock TextWrapping="Wrap" Background="#151f2d" Text="Ovdje mozete vidjeti statistiku zahtjeva za ture generalno za sva vremena.&#xD;&#xA;Medju njima su prihvaceni i odbijeni zahtjevi, kao i prosjecan broj ljudi u prihvacenim zahtjevima &#xD;&#xA;" Foreground="#7166f9" FontSize="18" HorizontalAlignment="Left" Margin="66,24,0,0" VerticalAlignment="Top" Width="866" Height="78" Grid.ColumnSpan="3" Grid.Row="1"/>
         <Border BorderBrush="#7166f9" BorderThickness="2,2,2,2" Margin="66,5,10,119" CornerRadius="25,25,25,25" Grid.Row="2"/>
-        <TextBlock Text="ACCEPTED REQUESTS" Margin="90,12,26,170" Grid.Row="2" Style="{StaticResource FontStyle}"/>
+        <TextBlock Text="PERCENT OF ACCEPTED REQUESTS" Margin="90,12,26,170" Grid.Row="2" Style="{StaticResource FontStyle}"/>
         <Border BorderBrush="#7166f9" BorderThickness="2,2,2,2" Margin="67,5,9,119" CornerRadius="25,25,25,25" Grid.Column="1" Grid.Row="2"/>
-        <TextBlock Text="INVALID REQUESTS" Margin="95,10,25,182" Grid.Column="1" Grid.Row="2" Style="{StaticResource FontStyle}"/>
+        <TextBlock Text="PERCENT OF INVALID REQUESTS" Margin="95,10,25,170" Grid.Column="1" Grid.Row="2" Style="{StaticResource FontStyle}"/>
         <Border BorderBrush="#7166f9" BorderThickness="2,2,2,2" Margin="68,5,92,5" CornerRadius="25,25,25,25" Grid.Column="2" Grid.Row="2"/>
-        <TextBlock Text="AVERAGE NUMBER OF PEOPLE IN ACCEPTED REQUESTS" Margin="110,16,151,169" Grid.Column="2" Grid.Row="2" Style="{StaticResource FontStyle}"/>
+        <TextBlock Text="AVERAGE NUMBER OF PEOPLE IN ACCEPTED REQUESTS" Margin="110,16,128,169" Grid.Column="2" Grid.Row="2" Style="{StaticResource FontStyle}"/>
         <Label Content="Ukoliko zelite da vidite za odredjenu godinu popunite tekstualno polje i predjite na sljedecu stranicu." Foreground="#7166f9" FontSize="18" HorizontalAlignment="Left" Margin="66,32,0,0" VerticalAlignment="Top" Width="900" Height="55" Grid.ColumnSpan="3" Grid.Row="3"/>
-        <TextBox TextWrapping="Wrap" Margin="66,28,26,56" Grid.Row="4"/>
+        <TextBox x:Name="year" TextWrapping="Wrap" Margin="66,28,26,56" Grid.Row="4"/>
         <Label Content="Unesite godinu: " Foreground="#7166f9" FontSize="15" HorizontalAlignment="Left" Margin="66,111,0,0" VerticalAlignment="Top" Width="900" Height="43" Grid.ColumnSpan="3" Grid.RowSpan="2" Grid.Row="3"/>
-        <Button Content="SEARCH" HorizontalContentAlignment="Right" Margin="240,28,194,56" FontWeight="Bold" Grid.Row="4" Grid.ColumnSpan="2"/>
+        <Button Content="SEARCH" HorizontalContentAlignment="Right" Margin="240,28,194,56" FontWeight="Bold" Grid.Row="4" Grid.ColumnSpan="2" Command="{Binding SearchCommand}"/>
         <Image Margin="248,32,244,61" Source="/Resources/Images/search.png" Grid.Row="4" Grid.ColumnSpan="2"/>
         <Border BorderBrush="#7166f9" BorderThickness="2,2,2,2" Margin="66,119,10,5" CornerRadius="25,25,25,25" Grid.Row="2"/>
         <TextBlock Text="NUMBER OF REQUEST BY LANGUAGE" Margin="90,126,26,56" Grid.Row="2" Style="{StaticResource FontStyle}"/>
         <Border BorderBrush="#7166f9" BorderThickness="2,2,2,2" Margin="67,119,9,5" CornerRadius="25,25,25,25" Grid.Row="2" Grid.Column="1"/>
         <TextBlock Text="NUMBER OF REQUESTS BY LOCATION" Margin="91,126,25,56" Grid.Row="2" Grid.Column="1" Style="{StaticResource FontStyle}"/>
-        <TextBlock TextWrapping="Wrap" Margin="100,36,60,132" Grid.Row="2"/>
-        <TextBlock TextWrapping="Wrap" Margin="109,36,51,132" Grid.Row="2" Grid.Column="1"/>
-        <TextBlock TextWrapping="Wrap" Margin="100,163,60,10" Grid.Row="2"/>
-        <TextBlock TextWrapping="Wrap" Margin="115,168,45,10" Grid.Row="2" Grid.Column="1"/>
-        <TextBlock TextWrapping="Wrap" Margin="188,92,228,76" Grid.Row="2" Grid.Column="2"/>
+        <TextBlock TextWrapping="Wrap" Margin="100,49,60,119" Grid.Row="2" Text="{Binding Path=acceptedRequest}" Style="{StaticResource TextStyle}"/>
+        <TextBlock TextWrapping="Wrap" Margin="109,49,51,119" Grid.Row="2" Grid.Column="1" Text="{Binding Path=invalidRequest}" Style="{StaticResource TextStyle}"/>
+        <TextBlock TextWrapping="Wrap" Margin="100,163,60,10" Grid.Row="2" Style="{StaticResource TextStyle}"/>
+        <TextBlock TextWrapping="Wrap" Margin="115,163,45,10" Grid.Row="2" Grid.Column="1" Style="{StaticResource TextStyle}"/>
+        <TextBlock Margin="188,92,213,76" Grid.Row="2" Grid.Column="2" Text="{Binding Path=averageNumberOfPeople}" Style="{StaticResource TextStyle}"/>
 
     </Grid>
 </Window>

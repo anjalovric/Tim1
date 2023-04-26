@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:InitialProject.WPF.Views"
       mc:Ignorable="d" 
       d:DesignHeight="630" d:DesignWidth="430"
-      Title="Menu" Background="LightBlue">
+      Title="Menu" Background="#b3cee5">
     <Page.Resources>
         <Style x:Key="MenuButtonStyle" TargetType="{x:Type Button}">
             <Setter Property="FontSize" Value="13" />
@@ -34,6 +34,11 @@
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="10"/>
                 </Style>
+                <Style TargetType="Button" >
+                    <Setter Property="Background" Value="Gray" />
+                    <Setter Property="BorderThickness" Value="2" />
+                    <Setter Property="BorderBrush" Value="AliceBlue" />
+                </Style>
             </Button.Resources>
         </Button>
         <Button Command="{Binding MyAccommodationCommand}" HorizontalContentAlignment="Left" HorizontalAlignment="Center" VerticalAlignment="Top" Width="350" Height="45" Margin="0,216,0,0">
@@ -47,6 +52,11 @@
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+                <Style TargetType="Button" >
+                    <Setter Property="Background" Value="Gray" />
+                    <Setter Property="BorderThickness" Value="2" />
+                    <Setter Property="BorderBrush" Value="AliceBlue" />
                 </Style>
             </Button.Resources>
         </Button>
@@ -62,6 +72,11 @@
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="10"/>
                 </Style>
+                <Style TargetType="Button" >
+                    <Setter Property="Background" Value="Gray" />
+                    <Setter Property="BorderThickness" Value="2" />
+                    <Setter Property="BorderBrush" Value="AliceBlue" />
+                </Style>
             </Button.Resources>
         </Button>
         <Button Command="{Binding MyProfileCommand}"  HorizontalContentAlignment="Left" Name="MyProfileButton" HorizontalAlignment="Center" Margin="0,317,0,0" VerticalAlignment="Top" Width="350" Height="45">
@@ -76,9 +91,14 @@
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="10"/>
                 </Style>
+                <Style TargetType="Button" >
+                    <Setter Property="Background" Value="Gray" />
+                    <Setter Property="BorderThickness" Value="2" />
+                    <Setter Property="BorderBrush" Value="AliceBlue" />
+                </Style>
             </Button.Resources>
         </Button>
-        <Image Source="/Resources/Images/logo.jpg" HorizontalAlignment="Left" Height="100" Margin="134,53,0,0" VerticalAlignment="Top" Width="139" RenderTransformOrigin="0.468,0.174" />
+        <Image Source="/Resources/Images/logoMyTravel.png" Stretch="Fill" HorizontalAlignment="Left" Height="100" Margin="134,53,0,0" VerticalAlignment="Top" Width="139" RenderTransformOrigin="0.468,0.174" />
         <Button Command="{Binding SignOutCommand}" Name="SignOutButton" HorizontalContentAlignment="Left" HorizontalAlignment="Center" Margin="0,575,0,0" VerticalAlignment="Top" Width="210" Height="45">
             <Button.Content>
                 <StackPanel Orientation="Horizontal" Width="200">
@@ -91,10 +111,22 @@
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="10"/>
                 </Style>
+                <Style TargetType="Button" >
+                    <Setter Property="Background" Value="Gray" />
+                    <Setter Property="BorderThickness" Value="2" />
+                    <Setter Property="BorderBrush" Value="AliceBlue" />
+                </Style>
             </Button.Resources>
         </Button>
         <Button Command="NavigationCommands.BrowseBack" Name="BackButton" HorizontalAlignment="Left" Margin="310,10,0,0" VerticalAlignment="Top" Width="80" Height="35">
-            <Image Source="/Resources/Images/arrow.png" />
+            <Image Source="/Resources/Images/arrow.png" Width="48"/>
+            <Button.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="Background" Value="Gray" />
+                    <Setter Property="BorderThickness" Value="2" />
+                    <Setter Property="BorderBrush" Value="AliceBlue" />
+                </Style>
+            </Button.Resources>
         </Button>
         <Button  HorizontalContentAlignment="Left" HorizontalAlignment="Center" Margin="0,367,0,0" VerticalAlignment="Top" Width="350" Height="45">
             <Button.Content>
@@ -107,6 +139,11 @@
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+                <Style TargetType="Button" >
+                    <Setter Property="Background" Value="Gray" />
+                    <Setter Property="BorderThickness" Value="2" />
+                    <Setter Property="BorderBrush" Value="AliceBlue" />
                 </Style>
             </Button.Resources>
         </Button>
@@ -122,6 +159,11 @@
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="10"/>
                 </Style>
+                <Style TargetType="Button" >
+                    <Setter Property="Background" Value="Gray" />
+                    <Setter Property="BorderThickness" Value="2" />
+                    <Setter Property="BorderBrush" Value="AliceBlue" />
+                </Style>
             </Button.Resources>
         </Button>
         <Button Command="{Binding MyRequestsCommand}" HorizontalContentAlignment="Left" HorizontalAlignment="Center" Margin="0,467,0,0" VerticalAlignment="Top" Width="350" Height="45">
@@ -136,12 +178,22 @@
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="10"/>
                 </Style>
+                <Style TargetType="Button" >
+                    <Setter Property="Background" Value="Gray" />
+                    <Setter Property="BorderThickness" Value="2" />
+                    <Setter Property="BorderBrush" Value="AliceBlue" />
+                </Style>
             </Button.Resources>
         </Button>
         <Button Command="{Binding GuestReviewsCommand}" HorizontalContentAlignment="Left" HorizontalAlignment="Center" Margin="0,517,0,0" VerticalAlignment="Top" Width="350" Height="45">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+                <Style TargetType="Button" >
+                    <Setter Property="Background" Value="Gray" />
+                    <Setter Property="BorderThickness" Value="2" />
+                    <Setter Property="BorderBrush" Value="AliceBlue" />
                 </Style>
             </Button.Resources>
             <StackPanel Orientation="Horizontal" Width="234">

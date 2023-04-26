@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:InitialProject.WPF.Views"
       mc:Ignorable="d" 
       d:DesignHeight="630" d:DesignWidth="430"
-      Title="Requests For Rescheduling" Background="LightBlue">
+      Title="Requests For Rescheduling" Background="#b3cee5">
 
     <Page.Resources>
         <DataTemplate x:Key="requests">
@@ -57,8 +57,8 @@
                     </Border>
 
                     <TextBlock Grid.Row="5" Grid.Column="0" Text="{Binding Path=Availability}" ></TextBlock>
-                    <Button Command="{Binding DataContext.DeclineCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" Name="DeclineButton" Content="Decline" Grid.Column="1" Grid.Row="5"></Button>
-                    <Button Command="{Binding DataContext.ApproveCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" Name="ApproveButton" Content="Approve" Grid.Column="3" Grid.Row="5"></Button>
+                    <Button Command="{Binding DataContext.DeclineCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" Name="DeclineButton" Content="Decline" Grid.Column="1" Grid.Row="5" Background="AliceBlue"></Button>
+                    <Button Command="{Binding DataContext.ApproveCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" Name="ApproveButton" Content="Approve" Grid.Column="3" Grid.Row="5" Background="AliceBlue"></Button>
 
                 </Grid>
             </Border>
@@ -67,7 +67,7 @@
     
     
     <Grid Margin="0,0,0,0">
-        <ListBox ItemsSource="{Binding Path= Requests}" ItemTemplate="{StaticResource requests}" IsSynchronizedWithCurrentItem="True" SelectedValue="{Binding Path=SelectedRequest, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" Margin="10,40,10,40">
+        <ListBox ItemsSource="{Binding Path= Requests}" ItemTemplate="{StaticResource requests}" IsSynchronizedWithCurrentItem="True" SelectedValue="{Binding Path=SelectedRequest, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" Margin="10,40,10,40" Style="{StaticResource ListBoxStyle}">
             <ListBox.Resources>
                 <Style TargetType="ListBoxItem">
                     <Style.Triggers>

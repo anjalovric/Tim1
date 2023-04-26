@@ -5,64 +5,87 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:InitialProject.WPF.Views"
       mc:Ignorable="d" 
-      d:DesignHeight="630" d:DesignWidth="430"
-      Title="My Profile" Background="LightGray">
+      d:DesignHeight="590" d:DesignWidth="430"
+      Title="My Profile">
 
-    <Grid>
-        <Rectangle Fill="Gray" HorizontalAlignment="Center" Height="30" Stroke="Black" VerticalAlignment="Top" Width="430"/>
-        <Button Command="NavigationCommands.BrowseBack" Name="ExitButton" Content="x" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="384,5,0,0" VerticalAlignment="Top" Height="25" Width="27">
-            <Button.Resources>
-                <Style TargetType="{x:Type Border}">
-                    <Setter Property="CornerRadius" Value="100"/>
-                </Style>
-            </Button.Resources>
-        </Button>
-        <Label Content="Review" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" RenderTransformOrigin="0,0.401" Width="134" Height="28" VerticalContentAlignment="Center">
-            <Label.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="0.171"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Label.RenderTransform>
-        </Label>
-        <Label Content="{Binding Path=OwnerReview.Reservation.Guest, Mode=OneWay}" FontSize="15" HorizontalAlignment="Left" Margin="35,69,0,0" VerticalAlignment="Top" Height="28" Width="138"/>
-        <TextBlock HorizontalAlignment="Left" Margin="35,115,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Height="28" Width="363">
+    <Grid Margin="0, 20, 0, 20" Background="white">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.3*"/>
+            <RowDefinition Height="0.3*"/>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="0.4*"/>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0">
+            <Rectangle Fill="LightGray" HorizontalAlignment="Center" Height="30" Stroke="DarkGray" VerticalAlignment="Top" Width="430"/>
+            <Button Command="NavigationCommands.BrowseBack" Name="ExitButton" Content="x" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="384,5,0,0" VerticalAlignment="Top" Height="25" Width="27" Background="AliceBlue" BorderBrush="DarkGray" Foreground="DarkGray">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="100"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Label Content="Review" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" RenderTransformOrigin="0,0.401" Width="134" Height="28" VerticalContentAlignment="Center">
+            </Label>
+        </Grid>
+
+        <Label Content="{Binding Path=OwnerReview.Reservation.Guest, Mode=OneWay}" VerticalContentAlignment="Center" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" FontSize="15" HorizontalAlignment="Left" Width="381" Margin="20,0,0,50" Grid.RowSpan="2" />
+        <TextBlock Padding="3, 0, 0, 0" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center" TextWrapping="Wrap" Margin="20,0,20,0" >
         <Run Text="Accommodation: " />
         <Run Text="{Binding Path= OwnerReview.Reservation.Accommodation.Name}" />
         </TextBlock>
-        <Label Content="Date:" HorizontalAlignment="Left" Margin="35,148,0,0" VerticalAlignment="Top" Height="28" Width="138"/>
-        <Grid Margin="216,143,34,454">
+        <Grid Grid.Column="0" Grid.Row="3" Margin="20,0,29,0" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
+                <ColumnDefinition Width="31*"/>
+                <ColumnDefinition Width="96*" />
             </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition />
-            </Grid.RowDefinitions>
-            <Image  Grid.Column="1" Grid.Row="0" Source="/Resources/Images/calendarIcon.png" Margin="69,0,0,0" />
-            <Border Grid.Column="0" BorderBrush="Black" BorderThickness="0.5" Height="33" VerticalAlignment="Center" Margin="0,0,26,0" Grid.ColumnSpan="2">
-                <TextBlock Text="{Binding Path=OwnerReview.Reservation.Arrival}" HorizontalAlignment="Left"  VerticalAlignment="Center" Height="32" Width="156"/>
-            </Border>
+            <Label Content="Date:"  VerticalContentAlignment="Center" Grid.Column="0"/>
+            <Grid Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Image  Grid.Column="1" Grid.Row="0" Source="/Resources/Images/calendarIcon.png"  HorizontalAlignment="Right" Width="21" >
+                </Image>
+                <Border Grid.Column="0" BorderBrush="DarkGray" BorderThickness="0.5" Height="33" VerticalAlignment="Center" Margin="10,0,26,0" Grid.ColumnSpan="2">
+                    <TextBlock Text="{Binding Path=OwnerReview.Reservation.Arrival}" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="0,3, 0, 0" Height="25" Width="146" Margin="10,0,0,0"/>
+                </Border>
+            </Grid>
         </Grid>
-        <TextBlock HorizontalAlignment="Left" Margin="35,197,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Height="28" Width="112"><Run Text="Cleanliness: " /><Run Text=" "/><Run Text="{Binding OwnerReview.Cleanliness}" /></TextBlock>
-        <TextBlock HorizontalAlignment="Left" Margin="215,196,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Height="28" Width="145"><Run Text="Owner's correctness: " /><Run Text=" "/><Run Text="{Binding OwnerReview.Correctness}" /></TextBlock>
-        <Label Content="Comment"  HorizontalAlignment="Left" Margin="35,230,0,0" VerticalAlignment="Top" Height="28" Width="138"/>
-        <Border Background="White" Height="97" Width="363" BorderBrush="Black" BorderThickness="0.5">
-            <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding Path=OwnerReview.Comment}" VerticalAlignment="Center" Height="98" Width="364"/>
+        <TextBlock Padding="3, 0, 0, 0" HorizontalAlignment="left" Grid.Row="4" TextWrapping="Wrap" Margin="20,0,0,49" Grid.RowSpan="2" Width="176" VerticalAlignment="Center"><Run Text="Cleanliness: " /><Run Text=" "/><Run Text="{Binding OwnerReview.Cleanliness}" /></TextBlock>
+        <TextBlock HorizontalAlignment="Left" Grid.Row="4" Grid.Column="1" TextWrapping="Wrap" Padding="3, 0, 0, 0" Margin="0,0,0,49" Grid.RowSpan="2" Width="186" VerticalAlignment="Center"><Run Text="Owner's correctness: " /><Run Text=" "/><Run Text="{Binding OwnerReview.Correctness}" /></TextBlock>
+        <Label Content="Comment"  HorizontalAlignment="Left" Grid.Row="5" Grid.ColumnSpan="2" Width="350" Margin="20,0,0,10"/>
+        <Border Background="White" BorderBrush="DarkGray" BorderThickness="1" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Margin="20,0,20,10">
+            <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding Path=OwnerReview.Comment}" Width="390" Margin="0,-1,0,9"/>
         </Border>
-        <Image Source="{Binding Path= ImageUrl, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="138" Margin="125,425,0,0" VerticalAlignment="Top" Width="168"/>
-        <Button Command="{Binding NextImageCommand}" Name="NextImageButton" HorizontalAlignment="Left" Margin="26,470,0,0" VerticalAlignment="Top" Height="32" Width="78">
-            <Button.Content>
-                <Image Source="/Resources/Images/back_arrow.png"/>
-            </Button.Content>
-        </Button>
-        <Button Command="{Binding PreviousImageCommand}" Name="PreviousImageButton" HorizontalAlignment="Left" Height="32" Width="74" Margin="324,470,0,0" VerticalAlignment="Top">
-            <Button.Content>
-                <Image Source="/Resources/Images/arrow.png" />
-            </Button.Content>
-        </Button>
+        <Grid Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.4*"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="0.4*"/>
+            </Grid.ColumnDefinitions>
+            <Image Grid.Column="1" Source="{Binding Path= ImageUrl, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,5" />
+            <Button Grid.Column="0" Command="{Binding NextImageCommand}" Name="NextImageButton" HorizontalAlignment="Left" Margin="5, 0, 0, 0"  Height="32" Width="70" Background="AliceBlue" BorderBrush="DarkGray">
+                <Button.Content>
+                    <Image Source="/Resources/Images/back_arrow.png"/>
+                </Button.Content>
+            </Button>
+            <Button Grid.Column="2" Command="{Binding PreviousImageCommand}" Name="PreviousImageButton" HorizontalAlignment="Right" Margin="0, 0, 5, 0"  Height="32" Width="70" Background="AliceBlue" BorderBrush="DarkGray">
+                <Button.Content>
+                    <Image Source="/Resources/Images/arrow.png" />
+                </Button.Content>
+            </Button>
+        </Grid>
 
     </Grid>
 </Page>
