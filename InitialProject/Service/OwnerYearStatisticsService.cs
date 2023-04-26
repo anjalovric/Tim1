@@ -13,11 +13,13 @@ namespace InitialProject.Service
         private AccommodationReservationService reservationService;
         private CancelledAccommodationReservationService cancelledReservationService;
         private ReschedulingAccommodationRequestService requestService;
+        private AccommodationRenovationSuggestionService suggestionService;
         public OwnerYearStatisticsService()
         {
             reservationService = new AccommodationReservationService();
             cancelledReservationService = new CancelledAccommodationReservationService();
             requestService = new ReschedulingAccommodationRequestService();
+            suggestionService = new AccommodationRenovationSuggestionService();
         }
 
         public List<OwnerOneYearStatisticsViewModel> GetStatisticsByYear(Accommodation accommodation)
@@ -31,6 +33,7 @@ namespace InitialProject.Service
                 oneYearViewModel.Reservations = GetReservationNumberByYear(accommodation,year);
                 oneYearViewModel.Cancellations = GetCancelledNumberByYear(accommodation,year);
                 oneYearViewModel.Reschedulings = GetRequestNumberByYear(accommodation, year);
+                oneYearViewModel.RenovationSuggestions = GetSuggestionNumberByYear(accommodation, year);
                 result.Add(oneYearViewModel);
             }
             return result;
@@ -44,6 +47,8 @@ namespace InitialProject.Service
             datesService.GetAllYearsWithCancellations(accommodation, years);
 
             datesService.GetAllYearsWithRequests(accommodation, years);
+
+            datesService.GetAllYearsWithRenovationSuggestions(accommodation, years);
             return years.OrderBy(x => x).ToList();
         }
 
@@ -80,6 +85,16 @@ namespace InitialProject.Service
             return counter;
         }
 
+        private int GetSuggestionNumberByYear(Accommodation accommodation, int year)
+        {
+            int counter = 0;
+            foreach (var suggestion in suggestionService.GetByAccommodation(accommodation))
+            {
+                if (suggestion.Reservation.Arrival.Year == year)
+                    counter++;
+            }
+            return counter;
+        }
         public int GetBusiestYear(Accommodation accommodation)
         {
             double busyness = 0;

@@ -59,7 +59,7 @@
                 <DataGridTextColumn Header="Reservations" Width="*" Binding="{Binding Path=Reservations, UpdateSourceTrigger=PropertyChanged}"/>
                 <DataGridTextColumn Header="Cancellations" Width="*" Binding="{Binding Path=Cancellations, UpdateSourceTrigger=PropertyChanged}"/>
                 <DataGridTextColumn Header="Rescheduling" Width="*" Binding="{Binding Path=Reschedulings, UpdateSourceTrigger=PropertyChanged}"/>
-                <DataGridTextColumn Header="Renovation&#x0a;Suggestions"/>
+                <DataGridTextColumn Header="Renovation&#x0a;Suggestions" Binding="{Binding Path=RenovationSuggestions, UpdateSourceTrigger=PropertyChanged}"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

@@ -14,11 +14,13 @@ namespace InitialProject.Service
         private AccommodationReservationService reservationService;
         private CancelledAccommodationReservationService cancelledReservationService;
         private ReschedulingAccommodationRequestService requestService;
+        private AccommodationRenovationSuggestionService suggestionService;
         public OwnerMonthStatisticsService()
         {
             reservationService = new AccommodationReservationService();
             cancelledReservationService = new CancelledAccommodationReservationService();
             requestService = new ReschedulingAccommodationRequestService();
+            suggestionService = new AccommodationRenovationSuggestionService();
         }
 
         public List<OwnerOneMonthStatisticViewModel> GetMonthStatistics(Accommodation accommodation, int year)
@@ -33,6 +35,7 @@ namespace InitialProject.Service
                 oneMonthViewModel.Reservations = GetReservationNumberByMonth(accommodation, year, month);
                 oneMonthViewModel.Cancellations = GetCancelledNumberByMonth(accommodation, year, month);
                 oneMonthViewModel.Reschedulings = GetRequestNumberByMonth(accommodation, year, month);
+                oneMonthViewModel.RenovationSuggestions = GetSuggestionNumberByMonth(accommodation, year, month);
                 result.Add(oneMonthViewModel);
             }
             return result;
@@ -76,6 +79,16 @@ namespace InitialProject.Service
             return counter;
         }
 
+        private int GetSuggestionNumberByMonth(Accommodation accommodation, int year, int month)
+        {
+            int counter = 0;
+            foreach (var suggestion in suggestionService.GetByAccommodation(accommodation))
+            {
+                if (suggestion.Reservation.Arrival.Year == year && suggestion.Reservation.Arrival.Month == month)
+                    counter++;
+            }
+            return counter;
+        }
         public string GetBusiestMonth(Accommodation accommodation, int year)
         {
             double busyness = 0;

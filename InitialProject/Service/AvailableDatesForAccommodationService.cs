@@ -66,5 +66,14 @@ namespace InitialProject.Service
                 years.Add(reservation.Arrival.Year);
             }
         }
+
+        public void GetAllYearsWithRenovationSuggestions(Accommodation accommodation, HashSet<int> years)
+        {
+            AccommodationRenovationSuggestionService suggestionService = new AccommodationRenovationSuggestionService();
+            foreach (var suggestion in suggestionService.GetByAccommodation(accommodation))
+            {
+                years.Add(suggestion.Reservation.Arrival.Year);
+            }
+        }
     }
 }
