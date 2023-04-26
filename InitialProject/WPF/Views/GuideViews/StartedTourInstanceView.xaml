@@ -47,8 +47,8 @@
             <Button Style="{DynamicResource ButtonToast}"  Command="NavigationCommands.BrowseBack" Content="OK"/>
         </StackPanel>
         <Rectangle HorizontalAlignment="Left" Height="467" Margin="699,122,0,0" Style="{DynamicResource Rectangle}" />
-        <Label HorizontalAlignment="Left" Margin="780,158,0,0" VerticalAlignment="Top" Height="151" Width="216" Style="{DynamicResource StatisticLabel}">
-            <TextBlock Height="151" Width="206">
+        <Label HorizontalAlignment="Left" Margin="780,158,0,0" VerticalAlignment="Top" Height="151" Width="241" Style="{DynamicResource StatisticLabel}">
+            <TextBlock Style="{DynamicResource TextBlock}" Height="151" Width="223">
             Press FINISH TOUR
             <LineBreak></LineBreak>
                 if you want to finish tour

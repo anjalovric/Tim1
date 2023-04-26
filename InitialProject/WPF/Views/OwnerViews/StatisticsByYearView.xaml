@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:InitialProject.WPF.Views.OwnerViews"
       mc:Ignorable="d" 
       d:DesignHeight="630" d:DesignWidth="430"
-      Title="Statistics By Year" Background="LightBlue">
+      Title="Statistics By Year" Background="#b3cee5">
     <Grid Margin="29.5, 30, 29.5, 0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -15,7 +15,7 @@
             <RowDefinition Height="150"/>
             <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
-        <Border Grid.Column="0" Grid.Row="0" BorderBrush="DarkGray" BorderThickness="0.5" Margin="0, 0, 0,0" Background="Gray">
+        <Border Grid.Column="0" Grid.Row="0" BorderBrush="DarkGray" BorderThickness="0.5" Margin="0, 0, 0,0" Background="AliceBlue">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1.65*"/>
@@ -47,7 +47,7 @@
             </Grid>
         </Border>
 
-        <DataGrid Name="StatisticsDataGrid" Grid.Row="1" Grid.Column="0" Margin="0, 30, 0, 0" ItemsSource="{Binding Path= StatisticsByYear}" SelectedItem="{Binding SelectedYear, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" BorderBrush="DarkGray" IsReadOnly="True">
+        <DataGrid Name="StatisticsDataGrid" Grid.Row="1" Grid.Column="0" Margin="0, 30, 0, 0" ItemsSource="{Binding Path= StatisticsByYear}" SelectedItem="{Binding SelectedYear, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" IsReadOnly="True" Style="{StaticResource DataGridStyle}">
             <DataGrid.Columns>
                 <DataGridTemplateColumn  Header="Year" Width="0.5*" >
                     <DataGridTemplateColumn.CellTemplate>

@@ -3,51 +3,111 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
-        Title="AccommodationReservationForm" Height="501" Width="420" WindowStartupLocation="CenterScreen">
-    <Grid Background="Cornsilk">
-        <Label Content="Arrival date:" Margin="65,20,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" TextElement.FontWeight="DemiBold">
-            <Label.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform AngleX="0"/>
-                    <RotateTransform/>
-                    <TranslateTransform X="0"/>
-                </TransformGroup>
-            </Label.RenderTransform>
-        </Label>
-        <Calendar x:Name="CalendarStart" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,50,0,0" SelectedDate="{Binding Path=Arrival, Mode=TwoWay}"></Calendar>
-        <Calendar x:Name="CalendarEnd" SelectedDate="{Binding Path=Departure, Mode=TwoWay}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,50,10,0"></Calendar>
-        <Label Content="Departure date:" Margin="0,20,65,0" VerticalAlignment="Top" HorizontalAlignment="Right" RenderTransformOrigin="0.5,0.5" TextElement.FontWeight="DemiBold">
-            <Label.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform AngleX="0"/>
-                    <RotateTransform/>
-                    <TranslateTransform X="0"/>
-                </TransformGroup>
-            </Label.RenderTransform>
-        </Label>
+        Title="AccommodationReservationForm" Height="522" Width="660" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <Style TargetType="Grid">
+            <Setter Property="Background" Value="#c99585"></Setter>
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="Foreground" Value="#37492d"></Setter>
+            <Setter Property="FontWeight" Value="ExtraBold"></Setter>
+        </Style>
+        <Style TargetType="Calendar">
+            <Setter Property="BorderBrush" Value="#22301a"></Setter>
+            <Setter Property="BorderThickness" Value="4"></Setter>
+            <Setter Property="Background" Value="#dbc9ab"></Setter>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Background" Value="#dbc9ab"></Setter>
+            <Setter Property="BorderBrush" Value="#22301a"></Setter>
+            <Setter Property="BorderThickness" Value="1"></Setter>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="#8c9d75"></Setter>
+            <Setter Property="Foreground" Value="#22301a"></Setter>
+            <Setter Property="FontWeight" Value="UltraBlack"></Setter>
+            <Setter Property="FontSize" Value="20"></Setter>
+            <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+            <Setter Property="BorderBrush" Value="#22301a"></Setter>
+            <Setter Property="BorderThickness" Value="3"></Setter>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="6*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="3*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Label FontSize="24" HorizontalAlignment="Center" FontFamily="Baskerville Old Face"  VerticalAlignment="Top" Height="43" Width="Auto" Grid.ColumnSpan="2" Grid.Row="0" Margin="0,20,0,0">RESERVATION FORM</Label>
 
-        <TextBlock x:Name="numberOfDays" Text="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="124" TextAlignment="Center" Height="30" Background="#FFDFDCDC" FontSize="16" Margin="0,0,0,162"/>
-        <Button x:Name="incrementNumberOfDays" Click="IncrementDaysNumberButton_Click"  Content="+" TextElement.FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="30" Margin="282,0,0,162" Width="37" Background="#FFDDDDDD"/>
-        <Button x:Name="decrementNumberOfDays" Click="DecrementDaysNumberButton_Click" Content="-" TextElement.FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="30" Width="37" Margin="94,0,0,162"/>
-        <Label Content="Number of days to stay:" Margin="0,242,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" TextElement.FontWeight="DemiBold">
-            <Label.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform AngleX="0"/>
-                    <RotateTransform/>
-                    <TranslateTransform X="0"/>
-                </TransformGroup>
-            </Label.RenderTransform>
-        </Label>
+        <Label Content="Arrival date:" Margin="169,0,0,0" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" TextElement.FontWeight="DemiBold"></Label>
+        <Calendar x:Name="CalendarStart" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="114,0,0,0" SelectedDate="{Binding Path=Arrival, Mode=TwoWay}" Grid.Column="0" Grid.Row="2">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="PreviewMouseUp">
+                    <i:InvokeCommandAction Command="{Binding OnPreviewMouseUpCommand}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </Calendar>
+        <Calendar x:Name="CalendarEnd" SelectedDate="{Binding Path=Departure, Mode=TwoWay}" VerticalAlignment="Top" Margin="31,0,114,0" Grid.Column="1" Grid.Row="2">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="PreviewMouseUp">
+                    <i:InvokeCommandAction Command="{Binding OnPreviewMouseUpCommand}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </Calendar>
+        <Label Content="Departure date:" Margin="76,0,0,0" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" TextElement.FontWeight="DemiBold"></Label>
+
+
+        <TextBlock x:Name="numberOfDaysTextBlock" Text="{Binding NumberOfDays, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="105" TextAlignment="Center" Height="30" Background="#FFDFDCDC" FontSize="16" Grid.Column="0" Grid.Row="4" Margin="154,0,0,0"/>
+        <Button x:Name="incrementNumberOfDays" Command="{Binding IncrementDaysNumberCommand}"  Content="+" TextElement.FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Margin="264,0,0,0" Width="35" Background="#FFDDDDDD" Grid.Column="0" Grid.Row="4"/>
+        <Button x:Name="decrementNumberOfDays" Command="{Binding DecrementDaysNumberCommand}"  Content="-" TextElement.FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Margin="114,0,0,0" Width="35" Background="#FFDDDDDD" Grid.Column="0" Grid.Row="4"/>
+        <Label Content="Number of days to stay:" Grid.Column="0" Grid.Row="3" Margin="136,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" TextElement.FontWeight="DemiBold"/>
+
+        <TextBlock x:Name="numberOfGuestsTextBlock" Text="{Binding NumberOfGuests, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" HorizontalAlignment="Right" VerticalAlignment="Top" Width="105" TextAlignment="Center" Height="30" Background="#FFDFDCDC" FontSize="16" Grid.Column="1" Grid.Row="4" Margin="0,0,154,0"/>
+        <Button x:Name="incrementNumberOfGuests" Command="{Binding IncrementGuestsNumberCommand}"   Content="+" TextElement.FontSize="15" HorizontalAlignment="Right" VerticalAlignment="Top" Height="30" Margin="0,0,114,0" Width="35" Background="#FFDDDDDD" Grid.Column="1" Grid.Row="4"/>
+        <Button x:Name="decrementNumberOfGuests" Command="{Binding DecrementGuestsNumberCommand}"  Content="-" TextElement.FontSize="15" HorizontalAlignment="Right" VerticalAlignment="Top" Height="30" Margin="0,0,264,0" Width="35" Background="#FFDDDDDD" Grid.Column="1" Grid.Row="4"/>
+        <Label Content="Number of guests:" Grid.Column="1" Grid.Row="3" Margin="68,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" TextElement.FontWeight="DemiBold"></Label>
 
 
 
-        <Button Content="OK" TextElement.FontWeight="Bold" HorizontalAlignment="Left" Margin="120,428,0,0" VerticalAlignment="Top" Width="68" Click="OkButton_Click" Height="28"/>
-        <Button Content="Cancel" TextElement.FontWeight="Bold" HorizontalAlignment="Right" Margin="0,429,120,0" VerticalAlignment="Top" Width="68" Click="CancelButton_Click" Height="27"/>
-
+        <Button Grid.Column="1" Grid.Row="5" Width="94" Height="35" FontSize="16" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontWeight="Bold" Margin="0,0,20,45" Command="{Binding NextCommand}">
+            <Grid Background="#8c9d75" Width="94" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Image Source="/Resources/Images/back.png" VerticalAlignment="Center" HorizontalAlignment="Right"  Margin="0,0,0,0" Width="Auto" Height="22" Grid.Column="1" RenderTransformOrigin="0.5,0.5">
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="180"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
+                <TextBlock Background="#8c9d75" Text="NEXT" Grid.Column="0" VerticalAlignment="Center" FontSize="16"  Foreground="#22301a" Margin="10,0,0,0" FontWeight="Bold" HorizontalAlignment="Left" Width="50"/>
+            </Grid>
+        </Button>
+        <Button Height="35" Width="94" FontSize="16" IsEnabled="True" FontWeight="Bold" Grid.Column="0" Grid.Row="0" Margin="20,20,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Command="{Binding BackCommand}">
+            <Grid Background="#8c9d75" Width="94" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Image Source="/Resources/Images/back.png" HorizontalAlignment="Left" Margin="10,0,0,0" Width="26" Height="22" Grid.Column="0"/>
+                <TextBlock Background="#8c9d75" Text="BACK" Grid.Column="1" VerticalAlignment="Center" FontSize="16"  Foreground="#22301a" FontWeight="Bold" HorizontalAlignment="Center" Width="Auto"/>
+            </Grid>
+        </Button>
     </Grid>
 </Window>

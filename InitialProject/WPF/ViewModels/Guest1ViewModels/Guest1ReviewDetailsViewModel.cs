@@ -16,8 +16,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         {
             this.guest1 = guest1;
             SelectedReview = selectedReview;
-            
-
         }
     }
 }

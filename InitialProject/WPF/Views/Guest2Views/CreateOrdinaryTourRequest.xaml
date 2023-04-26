@@ -57,8 +57,8 @@
 
         <TextBlock x:Name="Capacity" Grid.Column="1" Grid.Row="7" Margin="71,23,108,23" Text="1" TextAlignment="Center" Background="White"/>
         <Button Grid.Column="1" Grid.Row="7" Margin="20,20,452,20" Content="-" Command="{Binding DecrementCommand}" BorderBrush="#FF3B0463" BorderThickness="3,3,3,3"/>
-        <tk:DateTimePicker FontSize="9" x:Name="Start" Grid.Column="1" Text="{Binding Path=StartDate,Mode=TwoWay}" Format="FullDateTime" DataContext="{Binding}" Margin="20,25,60,10" Grid.Row="8" BorderBrush="#FF3B0463" BorderThickness="3,3,3,3"/>
-        <tk:DateTimePicker FontSize="9" x:Name="End" Grid.Column="1" Text="{Binding Path=EndDate,Mode=TwoWay}" Format="FullDateTime" DataContext="{Binding}" Margin="20,25,60,10" Grid.Row="9" BorderBrush="#FF3B0463" BorderThickness="3,3,3,3"/>
+        <DatePicker FontSize="9" x:Name="Start" Grid.Column="1" DisplayDateStart="{Binding StartDate}" SelectedDate="{Binding StartDate}" Margin="20,10,60,25" Grid.Row="8" BorderBrush="#FF3B0463" BorderThickness="3,3,3,3"/>
+        <DatePicker FontSize="9" x:Name="End" Grid.Column="1" DisplayDateStart="{Binding StartDate}" SelectedDate="{Binding EndDate}" Margin="20,10,60,25" Grid.Row="9" BorderBrush="#FF3B0463" BorderThickness="3,3,3,3"/>
         <Button x:Name="increment" Grid.Column="1" Grid.Row="7" Margin="412,20,60,20" Content="+"  Command="{Binding IncrementCommand}" BorderBrush="#FF3B0463" BorderThickness="3,3,3,3"/>
         <Button Grid.Column="1" Content="       Confirm" HorizontalAlignment="Left" Margin="315,10,0,0" Grid.Row="10" VerticalAlignment="Top" Command="{Binding ConfirmCommand}" Style="{StaticResource ButtonStyle}" Height="34" Width="83"/>
         <Button Grid.Column="1" Content="   Cancel" HorizontalAlignment="Left" Margin="412,10,0,0" Grid.Row="10" VerticalAlignment="Top" Command="{Binding CancelCommand}" Style="{StaticResource ButtonStyle}" Height="34" Width="83"/>

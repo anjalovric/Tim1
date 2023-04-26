@@ -34,6 +34,8 @@ namespace InitialProject.WPF.ViewModels
         public RelayCommand TourStatisticsCommand { get; set; }
         public RelayCommand ReviewCommand { get; set; }
         public RelayCommand SignOutCommand { get; set; }
+        public RelayCommand OrdinaryRequestCommand { get; set; }
+        public RelayCommand RequestYearlyStatisticsCommand { get; set; }
         public GuideWindowViewModel(User user) 
         {
             tourStatisticsView = new TourStatisticsView(user);
@@ -60,6 +62,8 @@ namespace InitialProject.WPF.ViewModels
             TourStatisticsCommand= new RelayCommand(TourStatitcs_Executed, CanExecute);
             ReviewCommand=new RelayCommand(Review_Executed, CanExecute);
             SignOutCommand = new RelayCommand(SignOut_Executed, CanExecute);
+            OrdinaryRequestCommand= new RelayCommand(OrdinaryRequest_Executed,CanExecute);
+            RequestYearlyStatisticsCommand = new RelayCommand(RequestYearlyStatistic_Executed, CanExecute);
         }
 
         private bool CanExecute(object sender)
@@ -117,12 +121,21 @@ namespace InitialProject.WPF.ViewModels
             TourInstanceReviewView tourInstanceReviewView = new TourInstanceReviewView(loggedUser);
             Application.Current.Windows.OfType<GuideWindow>().FirstOrDefault().Main.Content = tourInstanceReviewView;
         }
-
+        private void RequestYearlyStatistic_Executed(object sender)
+        {
+            RequestsStatistisYearly requestsStatistisYearly = new RequestsStatistisYearly();
+            Application.Current.Windows.OfType<GuideWindow>().FirstOrDefault().Main.Content = requestsStatistisYearly;
+        }
         private void SignOut_Executed(object sender)
         {
             SignInForm signInForm = new SignInForm();
             signInForm.Show();
             Application.Current.Windows.OfType<GuideWindow>().FirstOrDefault().Close();
+        }
+        private void OrdinaryRequest_Executed(object sender)
+        {
+           OrdinaryRequestOverviewView ordinaryRequestOverviewView = new OrdinaryRequestOverviewView(loggedUser, homeView.viewModel.Tours, cancelView.cancelViewModel.TourInstances);
+            Application.Current.Windows.OfType<GuideWindow>().FirstOrDefault().Main.Content = ordinaryRequestOverviewView;
         }
         private void ThemeChanged()
         {
@@ -131,7 +144,6 @@ namespace InitialProject.WPF.ViewModels
                 app.ChangeTheme(new Uri("Resources/DarkTheme.xaml", UriKind.Relative));
             else
                 app.ChangeTheme(new Uri("Resources/LightTheme.xaml", UriKind.Relative));
-           // SetIcons(app);
         }
     }
 }

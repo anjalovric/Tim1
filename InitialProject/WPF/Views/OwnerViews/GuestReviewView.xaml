@@ -6,8 +6,9 @@
       xmlns:local="clr-namespace:InitialProject.WPF.Views.OwnerViews"
       mc:Ignorable="d" 
       d:DesignHeight="630" d:DesignWidth="430"
-      Title="Guest Review" Background="LightBlue">
+      Title="Guest Review" Background="#b3cee5">
     <Page.Resources>
+
         <DataTemplate x:Key="guestToReview">
             <Border BorderBrush="DarkGray" Width="345" BorderThickness="0.5" Background="LightGray">
                 <Grid>
@@ -35,7 +36,7 @@
     </Page.Resources>
 
     <Grid>
-        <Label Content="Guest left to review" FontSize="15" HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top" Width="151"/>
+        <Label Content="Guest left to review" FontSize="15" HorizontalAlignment="Left" Margin="30,10,0,0" VerticalAlignment="Top" Width="141"/>
         <ListBox ItemsSource="{Binding ReservationsToReview}" ItemTemplate="{StaticResource guestToReview}" IsSynchronizedWithCurrentItem="True" SelectedItem="{Binding SelectedReservation, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" Margin="30,45,30,315">
             <ListBox.Resources>
                 <Style TargetType="ListBoxItem">
@@ -47,14 +48,14 @@
                 </Style>
             </ListBox.Resources>
         </ListBox>
-        <Label Content="Review history" FontSize="15" HorizontalAlignment="Left" Margin="20,337,0,0" VerticalAlignment="Top" Width="151"/>
-        <DataGrid Background="LightGray" ItemsSource="{Binding Path= GuestReviews}" Margin="30,372,30,0" AutoGenerateColumns="False" IsReadOnly="True">
+        <Label Content="Review history" FontSize="15" HorizontalAlignment="Left" Margin="30,337,0,0" VerticalAlignment="Top" Width="141"/>
+        <DataGrid ItemsSource="{Binding Path= GuestReviews}" Style="{StaticResource DataGridStyle}" Margin="30,372,30,0" AutoGenerateColumns="False" IsReadOnly="True" HeadersVisibility="Column">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Binding="{Binding Reservation.Guest.Name}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Last Name" Binding="{Binding Reservation.Guest.LastName}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Cleanliness" Binding="{Binding Cleanliness}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Rules Following" Binding="{Binding RulesFollowing}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Comment" Binding="{Binding Comment}" Width="100"></DataGridTextColumn>
+                <DataGridTextColumn Header="Name" Binding="{Binding Reservation.Guest.Name}" Width="0.7*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Last Name" Binding="{Binding Reservation.Guest.LastName}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Cleanliness" Binding="{Binding Cleanliness}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Rules&#x0a;Following" Binding="{Binding RulesFollowing}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Comment" Binding="{Binding Comment}" Width="*" ></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
 

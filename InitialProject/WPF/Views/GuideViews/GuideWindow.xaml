@@ -21,18 +21,21 @@
                         <MenuItem Header="Tours" Height="33" Width="100" >
                             <MenuItem Header="Add" Height="33" Width="150"  Command="{Binding AddCommand}" Style="{DynamicResource MenuItem}">
                                 <MenuItem.Icon>
-                                    <Image Source="/Resources/Images/addBW.png"/>
+                                    <Image Source="/Resources/Images/add.png" Stretch="Fill"/>
+
                                 </MenuItem.Icon>
                             </MenuItem>
                             <MenuItem Header="Cancel" Height="33" Width="150"  Command="{Binding CancelCommand}" Style="{DynamicResource MenuItem}" >
                                 <MenuItem.Icon>
-                                    <Image Source="/Resources/Images/CANC.png"/>
+                                    <Image Source="/Resources/Images/CANC.png" Stretch="Fill"/>
                                 </MenuItem.Icon>
                             </MenuItem>
                             <MenuItem Header="Activated" Height="33" Width="155" Command="{Binding ActivatedCommand}" Style="{DynamicResource MenuItem}" >
-                                <MenuItem.Icon>
-                                    <Image Source="/Resources/Images/continue.png"/>
-                                </MenuItem.Icon>
+
+                                    <MenuItem.Icon>
+                                        <Image Source="/Resources/Images/continue.png" Stretch="Fill"/>
+                                    </MenuItem.Icon>
+
                             </MenuItem>
                         </MenuItem>
                         <MenuItem Header="Statistics" Height="33" Width="100"  >
@@ -43,14 +46,14 @@
                             </MenuItem>
                             <MenuItem Header="Requests" Height="33" Width="150"  Style="{DynamicResource MenuItem}" >
                                 <MenuItem.Icon>
-                                    <Image Source="/Resources/Images/request.png"/>
+                                    <Image Source="/Resources/Images/RR.png" Stretch="Fill"/>
                                 </MenuItem.Icon>
                                 <MenuItem Header="Monthly" Height="33" Width="155"   Style="{DynamicResource MenuItem}">
                                     <MenuItem.Icon>
                                         <Image Source="/Resources/Images/month.png"/>
                                     </MenuItem.Icon>
                                 </MenuItem>
-                                <MenuItem Header="Yearly" Height="33" Width="150"  Style="{DynamicResource MenuItem}">
+                                <MenuItem Header="Yearly" Height="33" Width="150" Command="{Binding RequestYearlyStatisticsCommand}" Style="{DynamicResource MenuItem}">
                                     <MenuItem.Icon>
                                         <Image Source="/Resources/Images/365day.png"/>
                                     </MenuItem.Icon>
@@ -61,21 +64,18 @@
 
                         </MenuItem>
                         <MenuItem Header="Requests" Height="33" Width="100"  >
-
+                            <MenuItem Header="Regular" Height="33" Width="150" Command="{Binding OrdinaryRequestCommand}" Style="{DynamicResource MenuItem}">
+                            </MenuItem>
                         </MenuItem>
                     </Menu>
                 </DockPanel>
                 <DockPanel  Width="175" HorizontalAlignment="Right" Style="{DynamicResource DockPanel}" >
                     <Menu DockPanel.Dock="Top" Width="175" Height="33" HorizontalAlignment="Right" Style="{DynamicResource Menu}">
-                        <MenuItem  Height="33" Width="75"  Command="{Binding SignOutCommand}">
-                            <MenuItem.Icon>
-                                <Image Source="/Resources/Images/signout.png" Width="60" Margin="1,-7,-45,-8"  />
-                            </MenuItem.Icon>
+                        <MenuItem  Height="33" Width="75"  Command="{Binding SignOutCommand}" Header="    ➲" FontSize="20" Style="{DynamicResource MenuItem}">
+                           
                         </MenuItem>
-                        <MenuItem  Height="33" Width="75"  >
-                            <MenuItem.Icon>
-                                <Image Height="28" Source="/Resources/Images/profile.png" Width="60" Margin="1,-7,-45,-8"  />
-                            </MenuItem.Icon>
+                        <MenuItem  Height="33" Width="75" Header="   👤"  Style="{DynamicResource MenuItem}" FontSize="20">
+                           
                         </MenuItem>
 
                     </Menu>
