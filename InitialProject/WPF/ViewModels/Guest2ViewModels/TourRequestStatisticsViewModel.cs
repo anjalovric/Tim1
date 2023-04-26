@@ -14,9 +14,9 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
     public class TourRequestStatisticsViewModel
     {
         public double acceptedRequest { get; set; }
-        private int counter;
         public double invalidRequest { get; set; }
         public double averageNumberOfPeople { get; set; }
+        private RequestStatisticsService requestStatisticsService;
         private OrdinaryTourRequestsService ordinaryTourRequestsService;
         private List<OrdinaryTourRequests> OrdinaryTourRequests;
         private Model.Guest2 Guest2;
@@ -24,15 +24,15 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         private TextBox Year;
         public TourRequestStatisticsViewModel(Model.Guest2 guest2,TextBox year)
         {
-            counter = 0;
             Guest2 = guest2;
             Year = year;
             SearchCommand = new RelayCommand(Search_Executed,CanExecute);
+            requestStatisticsService = new RequestStatisticsService();
             ordinaryTourRequestsService = new OrdinaryTourRequestsService();
             OrdinaryTourRequests = new List<OrdinaryTourRequests>(ordinaryTourRequestsService.GetByGuestId(guest2.Id));
-            acceptedRequest = ordinaryTourRequestsService.ProcentOfAcceptedRequest(OrdinaryTourRequests, Guest2);
-            invalidRequest = ordinaryTourRequestsService.ProcentOfInvalidRequest(OrdinaryTourRequests, Guest2);
-            averageNumberOfPeople = ordinaryTourRequestsService.AverageNumberOfPeopleInAcceptedRequests(OrdinaryTourRequests, Guest2);
+            acceptedRequest = requestStatisticsService.ProcentOfAcceptedRequest(OrdinaryTourRequests, Guest2);
+            invalidRequest = requestStatisticsService.ProcentOfInvalidRequest(OrdinaryTourRequests, Guest2);
+            averageNumberOfPeople = requestStatisticsService.AverageNumberOfPeopleInAcceptedRequests(OrdinaryTourRequests, Guest2);
         }
         private bool CanExecute(object sender)
         {

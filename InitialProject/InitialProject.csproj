@@ -9,6 +9,8 @@
 
   <ItemGroup>
 
+    <None Remove="Resources\Data\checkPoints.csv" />
+
     <None Remove="Resources\Images\365day.png" />
 
     <None Remove="Resources\Images\a1.jpg" />
@@ -384,11 +386,15 @@
   <ItemGroup>
     <PackageReference Include="DotLiquid" Version="2.2.692" />
     <PackageReference Include="Extended.Wpf.Toolkit" Version="4.5.0" />
+    <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
     <PackageReference Include="NPOI" Version="2.6.0" />
     <PackageReference Include="System.Windows.Interactivity.WPF" Version="2.0.20525" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\Data\checkPoints.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Images\black.jpeg" />
     <Resource Include="Resources\Images\blond.jpg" />
     <Resource Include="Resources\Images\brown.jpg" />
