@@ -65,7 +65,7 @@
 
         <Grid Grid.Column="0" Grid.Row="5">
             <Grid.RowDefinitions>
-                <RowDefinition Height="2*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
                 <RowDefinition Height="1*"></RowDefinition>
                 <RowDefinition Height="1*"></RowDefinition>
                 <RowDefinition Height="1*"></RowDefinition>
@@ -76,6 +76,7 @@
                 <RowDefinition Height="1*"></RowDefinition>
             </Grid.RowDefinitions>
 
+            <Border Background="#FFB58578" Grid.RowSpan="7" Width="400" CornerRadius="0 0 20 20" HorizontalAlignment="Center"  Margin="46,0,46,4"/>
 
             <Label FontSize="18" Height="35" Width="Auto" Grid.Row="0" HorizontalAlignment="Left"  VerticalAlignment="Center" Margin="84,0,0,0">Name:</Label>
             <Label FontSize="18" Height="35" Width="Auto" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="84,0,0,0" Content="Country:"/>
@@ -98,13 +99,15 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="170"></RowDefinition>
                 <RowDefinition Height="34"></RowDefinition>
-                <RowDefinition Height="170"></RowDefinition>
-                <RowDefinition></RowDefinition>
+                <RowDefinition Height="189"></RowDefinition>
+                <RowDefinition ></RowDefinition>
             </Grid.RowDefinitions>
 
-            <Image x:Name="accommodationImage" Source="{Binding ImageSource, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0"  Height="150" Width="300" Margin="0,0,0,0"></Image>
+            <Border Background="#FFB58578" Grid.RowSpan="3" Width="400"  CornerRadius="0 0 20 20" Margin="46,0,46,5"/>
 
-            <Button Command="{Binding NextPhotoCommand}" Height="50" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right" Margin="0,0,60,0" VerticalAlignment="Center" Grid.Row="0">
+            <Image x:Name="accommodationImage" Source="{Binding ImageSource, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" Margin="106,10,106,10"/>
+
+            <Button Command="{Binding NextPhotoCommand}" Height="50" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" Margin="392,0,0,0" VerticalAlignment="Center" Width="60">
                 <Button.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -124,7 +127,7 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-            <Button Command="{Binding PreviousPhotoCommand}" Height="50" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Margin="60,0,0,0" VerticalAlignment="Center">
+            <Button Command="{Binding PreviousPhotoCommand}" Height="50" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Margin="60,0,0,0" VerticalAlignment="Center" Width="60">
                 <Button.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -146,7 +149,7 @@
             </Button>
 
 
-            <Button x:Name="Reserve" Grid.Row="3" Command="{Binding ReserveCommand}" FontWeight="Bold" Margin="0,0,20,60" VerticalAlignment="Bottom" Width="100" Height="35" HorizontalAlignment="Right" FontSize="18">
+            <Button x:Name="Reserve" Grid.Row="3" Command="{Binding ReserveCommand}" FontWeight="Bold" Margin="0,0,56,40" VerticalAlignment="Bottom" Width="100" Height="35" HorizontalAlignment="Right" FontSize="18">
                 <Grid Background="#8c9d75" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -190,7 +193,10 @@
                 <Run Text="{Binding ReviewsNumber}"/>
                 <Run Text="Reviews"/>
         </TextBlock>
-        <Label FontSize="20" FontWeight="Bold" Height="34" Width="80" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center">Details</Label>
+        <Border Background="#FFB58578" Grid.Row="4" Width="400" Height="Auto"  CornerRadius="20 20 0 0" HorizontalAlignment="Center"/>
+
+        <Label FontSize="20" FontWeight="Bold" Height="Auto" Width="Auto" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center">Details</Label>
+        <Border Background="#FFB58578" Grid.Column="1" Grid.Row="4" Width="400" Height="Auto"  CornerRadius="20 20 0 0" HorizontalAlignment="Center"/>
 
         <Label FontSize="20" Height="34" FontWeight="Bold" Width="80" HorizontalAlignment="Center" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center">Photos</Label>
 

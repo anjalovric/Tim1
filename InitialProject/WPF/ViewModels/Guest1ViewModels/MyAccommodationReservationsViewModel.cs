@@ -133,10 +133,15 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 
         private void CancelReservation_Executed(object sender)
         {
+            if(cancelledAccommodationReservationService.HasReservationStarted(SelectedNotCompletedReservation))
+            {
+                MessageBox.Show("You can't cancel this reservation because it has already started.");
+                return;
+            }
 
             if (!cancelledAccommodationReservationService.IsCancellationAllowed(SelectedNotCompletedReservation))
             {
-                MessageBox.Show("You can't cancel this reservation.");
+                MessageBox.Show("You can't cancel this reservation because the cancellation period has expired.");
                 return;
             }
             if (cancelledAccommodationReservationService.ConfirmCancellationMessageBox() == MessageBoxResult.Yes)
@@ -155,8 +160,16 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         }
         private void RescheduleReservation_Executed(object sender)
         {
-            ReschedulingAccommodationReservationFormView form = new ReschedulingAccommodationReservationFormView(SelectedNotCompletedReservation);
-            form.Show();    
+            if (cancelledAccommodationReservationService.HasReservationStarted(SelectedNotCompletedReservation))
+            {
+                MessageBox.Show("You can't reschedule this reservation because it has already started.");
+            }
+            else
+            {
+                ReschedulingAccommodationReservationFormView form = new ReschedulingAccommodationReservationFormView(SelectedNotCompletedReservation);
+                form.Show();
+            }
+                
         }
 
     }

@@ -38,6 +38,11 @@ namespace InitialProject.Service
         {
             return DateTime.Now <= SelectedNotCompletedReservation.Arrival.AddHours(-24) && DateTime.Now <= SelectedNotCompletedReservation.Arrival.AddDays(-SelectedNotCompletedReservation.Accommodation.MinDaysToCancel);
         }
+
+        public bool HasReservationStarted(AccommodationReservation SelectedNotCompletedReservation)
+        {
+            return DateTime.Now >= SelectedNotCompletedReservation.Arrival;
+        }
         public MessageBoxResult ConfirmCancellationMessageBox()           
         {
             string sMessageBoxText = $"Do you want to cancel this reservation?\n";
