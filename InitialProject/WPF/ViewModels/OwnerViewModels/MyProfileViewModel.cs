@@ -165,6 +165,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             {
                 Title = "Owner";
                 StarVisibility = "Hidden";
+                StackPanelVisibility = "Hidden";
             }
         }
 

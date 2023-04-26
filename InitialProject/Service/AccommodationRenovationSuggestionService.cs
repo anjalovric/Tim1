@@ -25,6 +25,17 @@ namespace InitialProject.Service
             return suggestions;
         }
 
+        public List<AccommodationRenovationSuggestion> GetByAccommodation(Accommodation accommodation)
+        {
+            List<AccommodationRenovationSuggestion> suggestionsByAccommodation = new List<AccommodationRenovationSuggestion>();
+            foreach(var suggestion in suggestions)
+            {
+                if (suggestion.Reservation.Accommodation.Id == accommodation.Id)
+                    suggestionsByAccommodation.Add(suggestion);
+            }
+            return suggestionsByAccommodation;
+        }
+
         public AccommodationRenovationSuggestion GetById(int id)
         {
             return renovationSuggestionRepository.GetById(id);
