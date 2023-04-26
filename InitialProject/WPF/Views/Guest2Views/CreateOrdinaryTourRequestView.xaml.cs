@@ -25,15 +25,13 @@ namespace InitialProject.WPF.Views.Guest2Views
     /// <summary>
     /// Interaction logic for CreateOrdinaryTourRequest.xaml
     /// </summary>
-    public partial class CreateOrdinaryTourRequest : Window
+    public partial class CreateOrdinaryTourRequestView : Window
     {
-        private int capacity;
-        CreateOrdinaryTourRequestViewModel viewModel;
-        public CreateOrdinaryTourRequest(Model.Guest2 guest2)
+        private CreateOrdinaryTourRequestViewModel viewModel;
+        public CreateOrdinaryTourRequestView(Model.Guest2 guest2)
         {
             InitializeComponent();
-            capacity = 1;
-            viewModel = new CreateOrdinaryTourRequestViewModel(Capacity, Name,guest2, Language, Description, countryInput, cityInput);
+            viewModel = new CreateOrdinaryTourRequestViewModel(Capacity, Name,guest2, Description, countryInput, cityInput);
             DataContext = viewModel;
         }
         private void CountryInput_SelectionChanged(object sender, SelectionChangedEventArgs e)

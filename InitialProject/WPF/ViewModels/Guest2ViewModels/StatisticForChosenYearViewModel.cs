@@ -1,6 +1,7 @@
 ﻿using InitialProject.Domain.Model;
 using InitialProject.Model;
 using InitialProject.Service;
+using MathNet.Numerics;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,6 +13,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
 {
     public class StatisticForChosenYearViewModel
     {
+        private RequestStatisticsService requestStatisticsService;
         private OrdinaryTourRequestsService ordinaryTourRequestsService;
         public List<OrdinaryTourRequests> ordinaryTours;
         private int Year;
@@ -28,6 +30,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             acceptedRequest = 0;
             invalidRequest = 0;
             averageNumberOfPeople = 0;
+            requestStatisticsService = new RequestStatisticsService();
             ordinaryTourRequestsService = new OrdinaryTourRequestsService();
             ordinaryTours = new List<OrdinaryTourRequests>();
             StatisticsForChoosenYear();
@@ -35,9 +38,9 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         private void StatisticsForChoosenYear()
         {
             GetRequestsForChosenYear(Year, Guest2);
-            acceptedRequest = ordinaryTourRequestsService.ProcentOfAcceptedRequest(ordinaryTours, Guest2);
-            invalidRequest = ordinaryTourRequestsService.ProcentOfInvalidRequest(ordinaryTours, Guest2);
-            averageNumberOfPeople = ordinaryTourRequestsService.AverageNumberOfPeopleInAcceptedRequests(ordinaryTours, Guest2);
+            acceptedRequest = requestStatisticsService.ProcentOfAcceptedRequest(ordinaryTours, Guest2).Round(2);
+            invalidRequest = requestStatisticsService.ProcentOfInvalidRequest(ordinaryTours, Guest2).Round(2);
+            averageNumberOfPeople = requestStatisticsService.AverageNumberOfPeopleInAcceptedRequests(ordinaryTours, Guest2).Round(2);
         }
         public List<OrdinaryTourRequests> GetRequestsForChosenYear(int year, Guest2 guest)
         {
