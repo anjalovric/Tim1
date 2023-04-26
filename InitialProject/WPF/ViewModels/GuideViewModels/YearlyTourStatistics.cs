@@ -1,8 +1,11 @@
 ﻿using InitialProject.Model;
 using InitialProject.Service;
+using InitialProject.WPF.Views.GuideViews;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Windows;
 
 namespace InitialProject.WPF.ViewModels.GuideViewModels
 {
@@ -20,6 +23,18 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             {
                 if (value != selectedLanguage)
                     selectedLanguage = value;
+                Toast = "Hidden";
+                OnPropertyChanged();
+            }
+        }
+        private GuideOneYearRequestStatisticViewModel selectedYear;
+        public GuideOneYearRequestStatisticViewModel SelectedYear
+        {
+            get { return selectedYear; }
+            set
+            {
+                if (value != selectedYear)
+                    selectedYear = value;
                 Toast = "Hidden";
                 OnPropertyChanged();
             }
@@ -47,7 +62,8 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
                 if (value != city)
                 {
                     city = value;
-                    ToastLocation = "Hidden"
+                    ToastLocation = "Hidden";
+                        ToastCity = "Hidden";
 ;                    OnPropertyChanged();
                 }
             }
@@ -62,6 +78,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
                 {
                     country = value;
                     ToastLocation = "Hidden";
+                    City = null;
                     OnPropertyChanged();
                 }
             }
@@ -73,6 +90,9 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         public RelayCommand ResetLanguageCommand { get; set; }
         public RelayCommand SearchLocationCommand { get; set; }
         public RelayCommand ResetLocationCommand { get; set; }
+        public RelayCommand MonthlyStatisticCommand { get;set; }
+        public RelayCommand MonthlyStatisticLocationCommand { get; set; }
+
 
         private string toastLocation;
         public string ToastLocation
@@ -96,7 +116,17 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
                     toast = value;
                 OnPropertyChanged();
             }
-
+        }
+        private string toastCity;
+        public string ToastCity
+        {
+            get { return toastCity; }
+            set
+            {
+                if (value != toastCity)
+                    toastCity = value;
+                OnPropertyChanged();
+            }
         }
         public YearlyTourStatistics() 
         {
@@ -107,6 +137,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             SelectedLanguage = null;
             Toast = "Hidden";
             ToastLocation = "Hidden";
+            ToastCity = "Hidden";
             MakeListOfLocations();
         }
         private bool CanExecute(object sender)
@@ -124,12 +155,26 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             ResetLanguageCommand = new RelayCommand(ResetLanguage_Executed, CanExecute);
             SearchLocationCommand= new RelayCommand(SearchLocation_Executed, CanExecute);
             ResetLocationCommand=new RelayCommand(ResetLocation_Executed,CanExecute);
+            MonthlyStatisticCommand = new RelayCommand(MonthlyStatisticLanguage_Executed, CanExecute);
+            MonthlyStatisticLocationCommand = new RelayCommand(MonthlyStatisticLocation_Executed, CanExecute);
         }
         private void ResetLanguage_Executed(object sender)
         {
             SelectedLanguage = null;
             Statistics.Clear();
             Toast = "Hidden";
+        }
+        private void MonthlyStatisticLanguage_Executed(object sender)
+        {
+            RequestStatisticsMonthly requestStatisticsMonthly = new RequestStatisticsMonthly(SelectedLanguage,SelectedYear);
+            Application.Current.Windows.OfType<GuideWindow>().FirstOrDefault().Main.Content = requestStatisticsMonthly;
+        }
+        private void MonthlyStatisticLocation_Executed(object sender)
+        {
+            LocationService locationService = new LocationService();
+            Location location = locationService.GetByCityAndCountry(Country, City);
+            RequestStatisticMonthlyLocatiovView requestStatisticsMonthly = new RequestStatisticMonthlyLocatiovView(location, SelectedYear);
+            Application.Current.Windows.OfType<GuideWindow>().FirstOrDefault().Main.Content = requestStatisticsMonthly;
         }
         private void ResetLocation_Executed(object sender)
         {
@@ -138,6 +183,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             StatisticsLocation.Clear();
             ToastLocation = "Hidden";
             IsComboBoxCityEnabled = false;
+            ToastCity = "Hidden";
         }
         private void SearchLanguage_Executed(object sender)
         {
@@ -146,10 +192,8 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             Statistics.Clear();
             if (SelectedLanguage != null)
                 if (tourRequestStatisticYearlyService.GetYearStatistic(SelectedLanguage).Count > 0)
-                {
                     foreach (GuideOneYearRequestStatisticViewModel tourRequest in tourRequestStatisticYearlyService.GetYearStatistic(SelectedLanguage))
                         Statistics.Add(tourRequest);
-                }
                 else
                     Toast = "Visible";
         }
@@ -163,14 +207,14 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
                 Location searchedLocation = locationService.GetByCityAndCountry(Country, City);
 
                 if (tourRequestStatisticYearlyService.GetYearStatistic(searchedLocation).Count > 0)
-                {
                     foreach (GuideOneYearRequestStatisticViewModel tourRequest in tourRequestStatisticYearlyService.GetYearStatistic(searchedLocation))
                         StatisticsLocation.Add(tourRequest);
-                }
                 else
                     ToastLocation = "Visible";
 
             }
+            else if (Country != null && City == null)
+                ToastCity = "Visible";
         }
         private void AddLanguages()
         {
