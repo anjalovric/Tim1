@@ -19,7 +19,7 @@ namespace InitialProject.Service
         public bool IsAvailableInDateRange(AccommodationReservation reservation, DateTime startDate, DateTime endDate)
         {
             DateTime date = startDate;
-            while (date <= endDate)
+            while (date.Date <= endDate.Date)
             {
                 if (!IsAvailableOnDate(reservation, date))
                     return false;
@@ -74,6 +74,37 @@ namespace InitialProject.Service
             {
                 years.Add(suggestion.Reservation.Arrival.Year);
             }
+        }
+
+        public List<AvailableDatesForAccommodation> GetAvailableDateRanges(DateTime startDate, DateTime endDate, int duration, Accommodation accommodation)
+        {
+            List<AvailableDatesForAccommodation> ranges = new List<AvailableDatesForAccommodation>();
+            duration --;
+            foreach(var reservation in reservations.FindAll(n => n.Accommodation.Id == accommodation.Id))
+            {
+                DateTime date = startDate;
+                while (date.AddDays(duration).Date <= endDate.Date)
+                {
+                    if (IsAvailableInDateRange(reservation, date, date.AddDays(duration)) && ranges.Find(n => n.Arrival.Date == date.Date && n.Departure.Date==date.AddDays(duration).Date)==null)
+                        ranges.Add(new AvailableDatesForAccommodation(date.Date, date.AddDays(duration).Date));
+                    date = date.AddDays(1);
+                }
+            }
+            if (reservations.FindAll(n => n.Accommodation.Id == accommodation.Id).Count == 0)
+                ranges = GetWithoutReservations(startDate, endDate, duration, accommodation);
+            return ranges;
+        }
+
+        private List<AvailableDatesForAccommodation> GetWithoutReservations(DateTime startDate, DateTime endDate, int duration, Accommodation accommodation)
+        {
+            List<AvailableDatesForAccommodation> ranges = new List<AvailableDatesForAccommodation>();
+            DateTime date = startDate;
+            while (date.AddDays(duration).Date <= endDate.Date)
+            {
+                ranges.Add(new AvailableDatesForAccommodation(date.Date, date.AddDays(duration).Date));
+                date = date.AddDays(1);
+            }
+            return ranges;
         }
     }
 }

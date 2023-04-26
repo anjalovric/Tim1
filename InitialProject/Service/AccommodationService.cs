@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using InitialProject.Domain;
+using InitialProject.Domain.Model;
 using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Model;
 
@@ -34,7 +35,7 @@ namespace InitialProject.Service
             AddOwners();
             AddLocations();
             AddTypes();
-            SetAccommodationCoverImages(); 
+            SetAccommodationCoverImages();
         }
 
         private void SetAccommodationCoverImages()
