@@ -49,7 +49,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         private void MakeCommands()
         {
             CancelCommand = new RelayCommand(Cancel_Executed, CanExecute);
-            OkCommand = new RelayCommand(Ok_Executed, CanExecute);
+            OkCommand = new RelayCommand(Ok_Executed, OKCanExecute);
             AddImageCommand = new RelayCommand(AddImage_Executed, CanExecute);
             RemoveImageCommand = new RelayCommand(RemoveImage_Executed, CanExecute);
             NextImageCommand = new RelayCommand(NextImage_Executed, CanExecute);
@@ -61,11 +61,21 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             Type = new AccommodationType();
             minDaysToCancel = 1;
             minDaysForReservation = 1;
+            capacity = 1;
         }
 
         private bool CanExecute(object sender)
         {
             return true;
+        }
+
+        private bool OKCanExecute(object sender)
+        {
+            if(!string.IsNullOrEmpty(Name) && !string.IsNullOrEmpty(Location.City) && Type.Id!=0 && Images.Count > 0)
+            {
+                return true;
+            }
+            return false;
         }
         private void Cancel_Executed(object sender)
         {

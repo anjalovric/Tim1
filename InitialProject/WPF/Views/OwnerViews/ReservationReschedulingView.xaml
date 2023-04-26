@@ -28,11 +28,11 @@
                         <RowDefinition Height="40"/>
                     </Grid.RowDefinitions>
                     <TextBlock VerticalAlignment="Bottom" Grid.Column="0" Grid.Row="0">Guest:</TextBlock>
-                    <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding Path=AccommodationReservation.Guest}" FontSize="15"></TextBlock>
+                    <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding Path=AccommodationReservation.Guest}" FontSize="15" FontWeight="Bold"></TextBlock>
 
                     <TextBlock VerticalAlignment="Bottom" Grid.Column="0" Grid.Row="2">Accommodation:</TextBlock>
-                    <TextBlock Grid.Column="0" Grid.Row="3" Text="{Binding Path=AccommodationReservation.Accommodation.Name}" FontSize="15"></TextBlock>
-                    <TextBlock Grid.Column="0" Grid.Row="4" Text="{Binding Path= AccommodationReservation.Accommodation.Location}"></TextBlock>
+                    <TextBlock Grid.Column="0" Grid.Row="3" Text="{Binding Path=AccommodationReservation.Accommodation.Name}" FontSize="15" FontWeight="Bold"></TextBlock>
+                    <TextBlock Grid.Column="0" Grid.Row="4" Text="{Binding Path= AccommodationReservation.Accommodation.Location}" FontWeight="Bold"></TextBlock>
 
                     <TextBlock VerticalAlignment="Bottom" Grid.Column="1" Grid.Row="0" Text="Old date range"></TextBlock>
                     <TextBlock VerticalAlignment="Bottom" Grid.Column="1" Grid.Row="2" Text="New date range"></TextBlock>
@@ -56,7 +56,20 @@
                     <TextBlock Text="{Binding Path = Request.NewDepartureDate}"></TextBlock>
                     </Border>
 
-                    <TextBlock Grid.Row="5" Grid.Column="0" Text="{Binding Path=Availability}" ></TextBlock>
+                    <TextBlock Grid.Row="5" Grid.Column="0" Text="{Binding Path=Availability}" >
+                        <TextBlock.Style>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsAccommodationAvailable}" Value="True">
+                                        <Setter Property="Foreground" Value="Green"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding IsAccommodationAvailable}" Value="False">
+                                        <Setter Property="Foreground" Value="Red"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
                     <Button Command="{Binding DataContext.DeclineCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" Name="DeclineButton" Content="Decline" Grid.Column="1" Grid.Row="5" Background="AliceBlue"></Button>
                     <Button Command="{Binding DataContext.ApproveCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" Name="ApproveButton" Content="Approve" Grid.Column="3" Grid.Row="5" Background="AliceBlue"></Button>
 
