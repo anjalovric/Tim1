@@ -23,28 +23,52 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         private DateTime endDate;
         private int duration;
         private string description;
+        private AvailableDatesForAccommodation selectedDateRange;
         public ObservableCollection<Accommodation> Accommodations { get; set; }
+        public ObservableCollection<AvailableDatesForAccommodation> DatesSuggestions { get; set; }
         public RelayCommand CancelCommand { get; set; }
         public RelayCommand ConfirmCommand { get; set; }
         public ScheduleRenovationViewModel(Owner owner)
         {
             this.owner = owner;
-            StartDate = DateTime.Now;
-            EndDate = DateTime.Now;
+            InitializeProperties();
+            DatesSuggestions = new ObservableCollection<AvailableDatesForAccommodation>();
             MakeListOfAccommodation(owner);
             MakeCommands();
+        }
+
+        private void InitializeProperties()
+        {
+            StartDate = DateTime.Now.AddDays(1);
+            EndDate = DateTime.Now.AddDays(1);
+            Duration = 1;
         }
 
         private void MakeCommands()
         {
             CancelCommand = new RelayCommand(Cancel_Executed, CanExecute);
-            ConfirmCommand = new RelayCommand(Confirm_Executed, CanExecute);
+            ConfirmCommand = new RelayCommand(Confirm_Executed, CanExecuteConfirm);
         }
 
         private void MakeListOfAccommodation(Owner owner)
         {
             AccommodationService accommodationService = new AccommodationService();
             Accommodations = new ObservableCollection<Accommodation>(accommodationService.GetAllByOwner(owner));
+        }
+        private void MakeDatesSuggestions()
+        {
+            if(SelectedAccommodation != null && StartDate>DateTime.Now && EndDate>=StartDate && Duration!=0)
+            {
+                AvailableDatesForAccommodationService datesService = new AvailableDatesForAccommodationService();
+                DatesSuggestions.Clear();
+                foreach (var suggestion in datesService.GetAvailableDateRanges(StartDate, EndDate, Duration, SelectedAccommodation))
+                    DatesSuggestions.Add(suggestion);
+            }
+            else
+            {
+                if(DatesSuggestions != null)
+                    DatesSuggestions.Clear();
+            }
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -61,6 +85,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
                 if (value != selectedAccommodation)
                 {
                     selectedAccommodation = value;
+                    MakeDatesSuggestions();
                     OnPropertyChanged();
                 }
             }
@@ -74,6 +99,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
                 if (value != startDate)
                 {
                     startDate = value;
+                    MakeDatesSuggestions();
                     OnPropertyChanged();
                 }
             }
@@ -87,6 +113,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
                 if (value != endDate)
                 {
                     endDate = value;
+                    MakeDatesSuggestions();
                     OnPropertyChanged();
                 }
             }
@@ -100,6 +127,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
                 if (value != duration)
                 {
                     duration = value;
+                    MakeDatesSuggestions();
                     OnPropertyChanged();
                 }
             }
@@ -118,11 +146,31 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
         }
 
+        public AvailableDatesForAccommodation SelectedDateRange
+        {
+            get { return selectedDateRange; }
+            set
+            {
+                if (value != selectedDateRange)
+                {
+                    selectedDateRange = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         private bool CanExecute(object sender)
         {
             return true;
         }
 
+        private bool CanExecuteConfirm(object sender)
+        {
+            if (SelectedDateRange != null)
+                return true;
+            else
+                return false;
+        }
         private void Cancel_Executed(object sender)
         {
             MyRenovationsView myRenovationsView = new MyRenovationsView(owner);

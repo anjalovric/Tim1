@@ -23,6 +23,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         public RelayCommand NewAccommodationCommand { get; set; }
         public RelayCommand ViewImagesCommand { get; set; }
         public RelayCommand OKCommand { get; set; }
+        public RelayCommand MyRenovationsCommand { get; set; }
         public RelayCommand StatisticsCommand { get; set; }
         private Accommodation selectedAccommodation;
         private string stackPanelVisibility;
@@ -34,11 +35,19 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         {
             profileOwner = owner;
             accommodationService = new AccommodationService();
-            Accommodations = new ObservableCollection<Accommodation>(accommodationService.GetAllByOwner(profileOwner));
+            MakeAccommodations();
             InitializeSelectedAccommodation();
             MakeCommands();
             DisplayNotificationPanel();
 
+        }
+
+        private void MakeAccommodations()
+        {
+            List<Accommodation> accommodations = accommodationService.GetAllByOwner(profileOwner);
+            AccommodationRenovationService renovationService = new AccommodationRenovationService();
+            renovationService.AreRenovated(accommodations);
+            Accommodations = new ObservableCollection<Accommodation>(accommodations);
         }
 
         public Accommodation SelectedAccommodation
@@ -96,6 +105,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             ViewImagesCommand = new RelayCommand(ViewImages_Executed, CanExecute);
             OKCommand = new RelayCommand(OK_Executed, CanExecute);
             StatisticsCommand = new RelayCommand(Statistics_Executed, CanExecute);
+            MyRenovationsCommand = new RelayCommand(MyRenovations_Executed, CanExecute);
         }
 
         private bool CanExecute(object sender)
@@ -109,6 +119,11 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = accommodationInputFormView;
         }
 
+        private void MyRenovations_Executed(object sender)
+        {
+            MyRenovationsView myRenovationsView = new MyRenovationsView(profileOwner);
+            Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = myRenovationsView;
+        }
         private void ViewImages_Executed(object sender)
         {
             if (SelectedAccommodation != null)

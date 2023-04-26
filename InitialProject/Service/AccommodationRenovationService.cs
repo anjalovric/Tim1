@@ -42,5 +42,17 @@ namespace InitialProject.Service
         {
             accommodationRenovationRepository.Add(renovation);
         }
+
+        public void AreRenovated(List<Accommodation> accommodations)
+        {
+            foreach(var accommodation in accommodations)
+            {
+                AccommodationRenovation renovation = renovations.Find(n => n.Accommodation.Id == accommodation.Id);
+                if (renovation != null && (DateTime.Now.Year - renovation.EndDate.Year) <= 1)
+                    accommodation.IsRenovated = true;
+                else
+                    accommodation.IsRenovated = false;
+            }
+        }
     }
 }
