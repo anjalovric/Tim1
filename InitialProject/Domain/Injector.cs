@@ -40,7 +40,8 @@ namespace InitialProject.Domain
         { typeof(IOwnerNotificationRepository), new OwnerNotificationRepository() },
         { typeof(IAccommodationRenovationSuggestionRepository), new AccommodationRenovationSuggestionRepository() },
         { typeof(IOrdinaryTourRequestsRepository), new OrdinaryTourRequestsRepository()},
-        { typeof(ISuperGuestTitleRepository), new SuperGuestTitleRepository() }
+        { typeof(ISuperGuestTitleRepository), new SuperGuestTitleRepository() },
+        {typeof(IAccommodationRenovationRepository), new AccommodationRenovationRepository() }
         };
 
         public static T CreateInstance<T>()

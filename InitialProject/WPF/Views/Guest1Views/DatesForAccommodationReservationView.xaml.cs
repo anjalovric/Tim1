@@ -27,7 +27,7 @@ namespace InitialProject.WPF.Views.Guest1Views
     public partial class DatesForAccommodationReservationView : Window
     {
         private DatesForAccommodationReservationViewModel datesForAccommodationReservationViewModel;
-        public DatesForAccommodationReservationView(Accommodation currentAccommodation, Guest1 guest1, List<AvailableDatesForAccommodationReservation> availableDates)
+        public DatesForAccommodationReservationView(Accommodation currentAccommodation, Guest1 guest1, List<AvailableDatesForAccommodation> availableDates)
         {
             InitializeComponent();
             datesForAccommodationReservationViewModel = new DatesForAccommodationReservationViewModel(guest1, currentAccommodation, availableDates);

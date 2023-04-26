@@ -173,7 +173,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         {
             SuggestedDatesForAccommodationReservationService suggestedDatesForAccommodationReservationService = new SuggestedDatesForAccommodationReservationService();
             suggestedDatesForAccommodationReservationService.TakeInputParameters(Arrival, Departure, NumberOfDays, NumberOfGuests);
-            List<AvailableDatesForAccommodationReservation> availableDates = new List<AvailableDatesForAccommodationReservation>(suggestedDatesForAccommodationReservationService.GetAvailableDates(currentAccommodation, guest1));
+            List<AvailableDatesForAccommodation> availableDates = new List<AvailableDatesForAccommodation>(suggestedDatesForAccommodationReservationService.GetAvailableDates(currentAccommodation, guest1));
             DatesForAccommodationReservationView datesForAccommodationReservationView = new DatesForAccommodationReservationView(currentAccommodation, guest1, availableDates);
             datesForAccommodationReservationView.Show();
         }

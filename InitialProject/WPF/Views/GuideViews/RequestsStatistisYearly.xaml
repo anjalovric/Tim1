@@ -16,28 +16,35 @@
         <TabControl Margin="90,129,108,41">
             <TabItem Header="Language">
                 <Grid Style="{DynamicResource InerInerGrid}">
-                    <Border Style="{DynamicResource Border}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="83*"/>
+                        <ColumnDefinition Width="23*"/>
+                        <ColumnDefinition Width="790*"/>
+                    </Grid.ColumnDefinitions>
+                    <Border Style="{DynamicResource Border}" Grid.ColumnSpan="3">
 
                     </Border>
-                    <Button Content="CREATE" Style="{DynamicResource Button}" Margin="645,292,62,151"/>
-                    <TextBlock Style="{DynamicResource TextBlock}" Height="63" Width="215" HorizontalAlignment="Left" Margin="645,53,0,0" VerticalAlignment="Top">
+                    <Button Content="CREATE" Style="{DynamicResource Button}" Margin="539,292,55,151" Grid.Column="2"/>
+                    <TextBlock Style="{DynamicResource TextBlock}" Height="63" Width="215" HorizontalAlignment="Left" Margin="539,53,0,0" VerticalAlignment="Top" Grid.Column="2">
                         The most wanted
                         <LineBreak></LineBreak>
                         language in last year
                     </TextBlock>
 
-                    <TextBlock Style="{DynamicResource TextBlock}" Height="86" Width="215" HorizontalAlignment="Left" Margin="645,201,0,0" VerticalAlignment="Top">
+                    <TextBlock Style="{DynamicResource TextBlock}" Height="86" Width="215" HorizontalAlignment="Left" Margin="539,201,0,0" VerticalAlignment="Top" Grid.Column="2">
                         Create tour on
                         <LineBreak></LineBreak>
                         the most wanted 
                         <LineBreak></LineBreak>
                         language in last year
                     </TextBlock>
-                    <Label Content="Do not exists requests for that language!" Visibility="{Binding Toast}" Style="{DynamicResource StatisticLabel}" Foreground="Red" Margin="63,141,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="76" Width="351"/>
+                    <Label Content="Do not exist requests for that location!" Visibility="{Binding Toast}" Style="{DynamicResource LabelToast}" Foreground="Red" Margin="63,141,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="76" Width="351" Grid.ColumnSpan="3">
 
-                    <Grid Style="{DynamicResource InnerGrid}" Margin="32,23,287,340">
+                    </Label>
+
+                    <Grid Style="{DynamicResource Grid}" Margin="32,23,287,340" Grid.ColumnSpan="3">
                         <Border Style="{DynamicResource Border}"/>
-                        <Label Style="{DynamicResource LabelToast}" HorizontalAlignment="Left" Margin="28,0,0,0" VerticalAlignment="Top">Choose:</Label>
+                        <Label Style="{DynamicResource Label }" FontSize="16" FontWeight="Heavy" HorizontalAlignment="Left" Margin="28,0,0,0" VerticalAlignment="Top">Choose:</Label>
                         <ComboBox ItemsSource="{Binding Languages}" Text="{Binding SelectedLanguage,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedLanguage}" HorizontalAlignment="Center" Style="{DynamicResource ComboBoxStyle}" VerticalAlignment="Top" Width="146" Height="28" Margin="0,36,0,0"/>
                         <Label Content="Language" Style="{DynamicResource StatisticLabel}" HorizontalAlignment="Left" Margin="94,31,0,0" Width="116" Height="48" VerticalAlignment="Top"/>
                         <Button Content="▼" Command="{Binding SearchLanguageCommand}" Style="{DynamicResource Button}" HorizontalAlignment="Left" Margin="423,81,0,0" VerticalAlignment="Top" Width="47" Height="25"/>
@@ -45,13 +52,20 @@
                     </Grid>
 
 
-                    <DataGrid ItemsSource="{Binding Path=Statistics,UpdateSourceTrigger=PropertyChanged}" ColumnHeaderStyle="{DynamicResource CenterGridHeaderStyle}" Style="{DynamicResource Tables }" HeadersVisibility="Column" Margin="32,178,287,25">
+                    <DataGrid SelectedItem="{Binding Path=SelectedYear}" ItemsSource="{Binding Path=Statistics,UpdateSourceTrigger=PropertyChanged}" ColumnHeaderStyle="{DynamicResource CenterGridHeaderStyle}" Style="{DynamicResource Tables }" HeadersVisibility="Column" Margin="32,178,287,25" Grid.ColumnSpan="3">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Year" Width="1*" Binding="{Binding Year}"/>
                             <DataGridTextColumn Header="Number of requests" Width="1*" Binding="{Binding Number}"/>
+                            <DataGridTemplateColumn x:Name="cancelation"  Width="0.5*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Name="cancelButton" Style="{DynamicResource ButtonTable}" Content="MONTHLY" TextElement.FontWeight="ExtraBold" Command="{Binding Path=DataContext.MonthlyStatisticCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <TextBox Style="{DynamicResource tb}" HorizontalAlignment="Left" Margin="645,121,0,0" TextWrapping="Wrap" Text="{Binding YearLanguage}" VerticalAlignment="Top" Width="189" Height="40"/>
+                    <TextBox Style="{DynamicResource TB1}"  HorizontalAlignment="Left" Margin="539,121,0,0" TextWrapping="Wrap" Text="{Binding YearLanguage}" VerticalAlignment="Top" Width="189" Height="40" Grid.Column="2"/>
 
                 </Grid>
             </TabItem>
@@ -64,6 +78,8 @@
                     <Border Style="{DynamicResource Border}" Grid.ColumnSpan="2">
 
                     </Border>
+                    <Label Content="Please select city" Visibility="{Binding ToastCity}" Margin="64,138,0,0" VerticalAlignment="Top" Height="93" Width="350" Foreground="Red"  Style="{DynamicResource StatisticLabel}" Grid.ColumnSpan="2" HorizontalAlignment="Left"/>
+
                     <Button Content="CREATE" Style="{DynamicResource Button}" Margin="564,292,62,151" Grid.Column="1"/>
                     <TextBlock Style="{DynamicResource TextBlock}" Height="63" Width="215" HorizontalAlignment="Left" Margin="564,53,0,0" VerticalAlignment="Top" Grid.Column="1">
                         The most wanted
@@ -79,12 +95,12 @@
                         <LineBreak></LineBreak>
                         location in last year
                     </TextBlock>
-                    <Grid Style="{DynamicResource InnerGrid}" Margin="32,23,287,340" Grid.ColumnSpan="2">
+                    <Grid Style="{DynamicResource Grid}" Margin="32,23,287,340" Grid.ColumnSpan="2">
                         <Border Style="{DynamicResource Border}">
 
                         </Border>
                         <Label Content="City" Style="{DynamicResource StatisticLabel}" HorizontalAlignment="Left" Margin="94,69,0,0" VerticalAlignment="Top"/>
-                        <Label Style="{DynamicResource LabelToast}" HorizontalAlignment="Left" Margin="28,0,0,0" VerticalAlignment="Top">Choose:</Label>
+                        <Label Style="{DynamicResource Label}" FontSize="16" FontWeight="Heavy" HorizontalAlignment="Left" Margin="28,0,0,0" VerticalAlignment="Top">Choose:</Label>
                         <ComboBox  ItemsSource="{Binding Countries}" SelectedItem="{Binding Country,UpdateSourceTrigger=PropertyChanged}" Text="{Binding Country,UpdateSourceTrigger=PropertyChanged}" SelectionChanged="ComboBoxCountry_SelectionChanged" HorizontalAlignment="Center" Style="{DynamicResource ComboBoxStyle}" VerticalAlignment="Top" Width="146" Height="28" Margin="0,36,0,0"/>
                         <Label Content="Country" Style="{DynamicResource StatisticLabel}" HorizontalAlignment="Left" Margin="94,31,0,0" Width="116" Height="48" VerticalAlignment="Top"/>
                         <Button Content="▼" Command="{Binding SearchLocationCommand}" Style="{DynamicResource Button}" HorizontalAlignment="Left" Margin="423,81,0,0" VerticalAlignment="Top" Width="47" Height="25"/>
@@ -92,13 +108,20 @@
                     </Grid>
 
 
-                    <DataGrid ItemsSource="{Binding Path=StatisticsLocation,UpdateSourceTrigger=PropertyChanged}" ColumnHeaderStyle="{DynamicResource CenterGridHeaderStyle}" Style="{DynamicResource Tables }" HeadersVisibility="Column" Margin="32,178,287,25" Grid.ColumnSpan="2">
+                    <DataGrid SelectedItem="{Binding Path=SelectedYear}" ItemsSource="{Binding Path=StatisticsLocation,UpdateSourceTrigger=PropertyChanged}" ColumnHeaderStyle="{DynamicResource CenterGridHeaderStyle}" Style="{DynamicResource Tables }" HeadersVisibility="Column" Margin="32,178,287,25" Grid.ColumnSpan="2">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Year" Width="1*" Binding="{Binding Year}"/>
                             <DataGridTextColumn Header="Number of requests" Width="1*" Binding="{Binding Number}"/>
+                            <DataGridTemplateColumn  Width="0.5*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Name="cancelButton" Style="{DynamicResource ButtonTable}" Content="MONTHLY" TextElement.FontWeight="ExtraBold" Command="{Binding Path=DataContext.MonthlyStatisticLocationCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <TextBox Style="{DynamicResource tb}" HorizontalAlignment="Left" Margin="564,121,0,0" TextWrapping="Wrap" Text="{Binding YearLanguage}" VerticalAlignment="Top" Width="189" Height="40" Grid.Column="1"/>
+                    <TextBox Style="{DynamicResource TB1}" HorizontalAlignment="Left" Margin="564,121,0,0" TextWrapping="Wrap" Text="{Binding YearLocation}" VerticalAlignment="Top" Width="189" Height="40" Grid.Column="1"/>
                     <ComboBox Text="{Binding City}" IsEnabled="{Binding IsComboBoxCityEnabled}" Style="{DynamicResource ComboBoxStyle}" ItemsSource="{Binding CitiesByCountry}" SelectedItem="{Binding City,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="160,101,0,0" VerticalAlignment="Top" Width="147" Height="26" Grid.Column="1"/>
 
                 </Grid>

@@ -44,7 +44,6 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
                 }
             }
         }
-        //public DateTime EndDate { get; set; }
         public DateTime NowDate { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -55,25 +54,38 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         public RelayCommand CancelCommand { get; set; }
         public RelayCommand IncrementCommand { get; set; }
         public RelayCommand DecrementCommand { get; set; }
+        public ObservableCollection<string> Languages { get; set; }
         private ComboBox Country;
         private ComboBox City;
-        private TextBox Language;
         private TextBox Description;
         private Model.Guest2 Guest2;
-        
+        private string language;
+        public string SelectedLanguage
+        {
+            get => language;
+            set
+            {
+                if (value != language)
+                {
+                    language = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         private TextBox Name;
-        public CreateOrdinaryTourRequestViewModel(TextBlock capacity, TextBox name,Model.Guest2 guest2, TextBox language, TextBox description,ComboBox country,ComboBox city)
+        public CreateOrdinaryTourRequestViewModel(TextBlock capacity, TextBox name,Model.Guest2 guest2, TextBox description,ComboBox country,ComboBox city)
         {
             Capacity = capacity;
             Country=country;
             City = city;  
-            Language = language;
             StartDate = DateTime.Now;
             EndDate = DateTime.Now;
             Description = description;
             Name = name;
             Guest2=guest2;
             MakeCommands();
+            AddLanguages();
             locationRepository = new LocationRepository();
             Countries = new ObservableCollection<string>(locationRepository.GetAllCountries());
             CitiesByCountry = new ObservableCollection<string>();
@@ -87,13 +99,23 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             IncrementCommand = new RelayCommand(Increment_Executed, CanExecute);
             DecrementCommand = new RelayCommand(Decrement_Executed, CanExecute);
         }
+        private void AddLanguages()
+        {
+            Languages = new ObservableCollection<string>();
+            Languages.Add("english");
+            Languages.Add("spanish");
+            Languages.Add("russian");
+            Languages.Add("arabic");
+            Languages.Add("serbian");
+            Languages.Add("italian");
+        }
         private bool CanExecute(object sender)
         {
             return true;
         }
         private void Cancel_Executed(object sender)
         {
-            Application.Current.Windows.OfType<CreateOrdinaryTourRequest>().FirstOrDefault().Close();
+            Application.Current.Windows.OfType<CreateOrdinaryTourRequestView>().FirstOrDefault().Close();
         }
 
         private void Increment_Executed(object sender)
@@ -126,9 +148,9 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
                 MessageBox.Show("Niste dobro popunili polja!");
                 return;
             }
-            OrdinaryTourRequests request = new OrdinaryTourRequests(Name.Text,Guest2.Id, Convert.ToInt32(Capacity.Text), newLocation, Description.Text, Language.Text, Convert.ToDateTime(Start), Convert.ToDateTime(End), false, "On waiting",Start.ToString().Split(" ")[0],End.ToString().Split(" ")[0],-1,createDate,false,-1);
+            OrdinaryTourRequests request = new OrdinaryTourRequests(Name.Text,Guest2.Id, Convert.ToInt32(Capacity.Text), newLocation, Description.Text, SelectedLanguage, Convert.ToDateTime(Start), Convert.ToDateTime(End), false, "On waiting",Start.ToString().Split(" ")[0],End.ToString().Split(" ")[0],-1,createDate,false,-1);
             requestService.Save(request);
-            Application.Current.Windows.OfType<CreateOrdinaryTourRequest>().FirstOrDefault().Close();
+            Application.Current.Windows.OfType<CreateOrdinaryTourRequestView>().FirstOrDefault().Close();
         }
         public void CountryInput_SelectionChanged()
         {

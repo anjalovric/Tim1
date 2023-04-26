@@ -81,12 +81,12 @@ namespace InitialProject.Service
             this.NumberOfDays = NumberOfDays;
             this.NumberOfGuests = NumberOfGuests;
         }
-        public List<AvailableDatesForAccommodationReservation> GetAvailableDates(Accommodation currentAccommodation, Guest1 guest1)
+        public List<AvailableDatesForAccommodation> GetAvailableDates(Accommodation currentAccommodation, Guest1 guest1)
         {
             InitializeAvailableDatesLists();
             lengthOfStay = Departure.Subtract(Arrival);
             FillDateRangesList(currentAccommodation.Id);
-            List<AvailableDatesForAccommodationReservation> availableDatesForAccommodations = new List<AvailableDatesForAccommodationReservation>();
+            List<AvailableDatesForAccommodation> availableDatesForAccommodations = new List<AvailableDatesForAccommodation>();
             if (availableDateRanges.Count > 0 && AvailableDateRangeExists(ref availableDatesForAccommodations))
                 return availableDatesForAccommodations;
             
@@ -106,7 +106,7 @@ namespace InitialProject.Service
                 start = start.AddDays(1);
             }
         }
-        private bool AvailableDateRangeExists(ref List<AvailableDatesForAccommodationReservation> availableDatesForAccommodations)
+        private bool AvailableDateRangeExists(ref List<AvailableDatesForAccommodation> availableDatesForAccommodations)
         {
             bool existed = false;
             foreach (List<DateTime> dates in availableDateRanges)
@@ -116,7 +116,7 @@ namespace InitialProject.Service
                     existed = true;
                     DateTime arrival = dates[0];
                     DateTime departure = dates[NumberOfDays - 1];
-                    AvailableDatesForAccommodationReservation newAvailableDate = new AvailableDatesForAccommodationReservation(arrival, departure);
+                    AvailableDatesForAccommodation newAvailableDate = new AvailableDatesForAccommodation(arrival, departure);
                     availableDatesForAccommodations.Add(newAvailableDate);
                 }
             }
@@ -140,14 +140,16 @@ namespace InitialProject.Service
                 start = start.AddDays(1);
             }
         }
-        private List<AvailableDatesForAccommodationReservation> GetAvailableDatesOutRange(Accommodation currentAccommodation, Guest1 guest1)
+        private List<AvailableDatesForAccommodation> GetAvailableDatesOutRange(Accommodation currentAccommodation, Guest1 guest1)
         {
-            List<AvailableDatesForAccommodationReservation> availableDatesForAccommodations = new List<AvailableDatesForAccommodationReservation>();
+
+            List<AvailableDatesForAccommodation> availableDatesForAccommodations = new List<AvailableDatesForAccommodation>();
+
             foreach (List<DateTime> dates in availableDateRanges)
             {
                 DateTime arrival = dates[0];
                 DateTime departure = dates[NumberOfDays - 1];
-                AvailableDatesForAccommodationReservation newAvailableDate = new AvailableDatesForAccommodationReservation(arrival, departure);
+                AvailableDatesForAccommodation newAvailableDate = new AvailableDatesForAccommodation(arrival, departure);
                 availableDatesForAccommodations.Add(newAvailableDate);
             }
             return availableDatesForAccommodations;

@@ -19,7 +19,7 @@ namespace InitialProject.Service
         public bool IsAvailableInDateRange(AccommodationReservation reservation, DateTime startDate, DateTime endDate)
         {
             DateTime date = startDate;
-            while (date <= endDate)
+            while (date.Date <= endDate.Date)
             {
                 if (!IsAvailableOnDate(reservation, date))
                     return false;
@@ -38,6 +38,73 @@ namespace InitialProject.Service
                     isAvailable = isAvailable && !(date.Date >= reservation.Arrival.Date && date.Date <= reservation.Departure.Date);
             }
             return isAvailable;
+        }
+
+        public void GetAllYearsWithRequests(Accommodation accommodation, HashSet<int> years)
+        {
+            ReschedulingAccommodationRequestService requestService = new ReschedulingAccommodationRequestService(); 
+            foreach (var request in requestService.GetAll().FindAll(n => n.Reservation.Accommodation.Id == accommodation.Id))
+            {
+                years.Add(request.Reservation.Arrival.Year);
+            }
+        }
+
+        public void GetAllYearsWithCancellations(Accommodation accommodation, HashSet<int> years)
+        {
+            CancelledAccommodationReservationService cancelledReservationService = new CancelledAccommodationReservationService();
+            foreach (var reservation in cancelledReservationService.GetAll().FindAll(n => n.Accommodation.Id == accommodation.Id))
+            {
+                years.Add(reservation.Arrival.Year);
+            }
+        }
+
+        public void GetAllYearsWithReservations(Accommodation accommodation, HashSet<int> years)
+        {
+            AccommodationReservationService reservationService = new AccommodationReservationService();
+            foreach (var reservation in reservationService.GetAll().FindAll(n => n.Accommodation.Id == accommodation.Id))
+            {
+                years.Add(reservation.Arrival.Year);
+            }
+        }
+
+        public void GetAllYearsWithRenovationSuggestions(Accommodation accommodation, HashSet<int> years)
+        {
+            AccommodationRenovationSuggestionService suggestionService = new AccommodationRenovationSuggestionService();
+            foreach (var suggestion in suggestionService.GetByAccommodation(accommodation))
+            {
+                years.Add(suggestion.Reservation.Arrival.Year);
+            }
+        }
+
+        public List<AvailableDatesForAccommodation> GetAvailableDateRanges(DateTime startDate, DateTime endDate, int duration, Accommodation accommodation)
+        {
+            List<AvailableDatesForAccommodation> ranges = new List<AvailableDatesForAccommodation>();
+            duration --;
+            foreach(var reservation in reservations.FindAll(n => n.Accommodation.Id == accommodation.Id))
+            {
+                DateTime date = startDate;
+                while (date.AddDays(duration).Date <= endDate.Date)
+                {
+                    if (IsAvailableInDateRange(reservation, date, date.AddDays(duration)) && ranges.Find(n => n.Arrival.Date == date.Date && n.Departure.Date==date.AddDays(duration).Date)==null)
+                        ranges.Add(new AvailableDatesForAccommodation(date.Date, date.AddDays(duration).Date));
+                    date = date.AddDays(1);
+                }
+            }
+            if (reservations.FindAll(n => n.Accommodation.Id == accommodation.Id).Count == 0)
+                ranges = GetWithoutReservations(startDate, endDate, duration, accommodation);
+            return ranges;
+        }
+
+        private List<AvailableDatesForAccommodation> GetWithoutReservations(DateTime startDate, DateTime endDate, int duration, Accommodation accommodation)
+        {
+            List<AvailableDatesForAccommodation> ranges = new List<AvailableDatesForAccommodation>();
+            DateTime date = startDate;
+            while (date.AddDays(duration).Date <= endDate.Date)
+            {
+                ranges.Add(new AvailableDatesForAccommodation(date.Date, date.AddDays(duration).Date));
+                date = date.AddDays(1);
+            }
+            return ranges;
         }
     }
 }

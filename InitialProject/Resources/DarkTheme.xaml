@@ -15,11 +15,25 @@
         <SolidColorBrush x:Key="ListBoxBackground">#e6ffff</SolidColorBrush>
         <SolidColorBrush x:Key="MenuBlue">#203354</SolidColorBrush>
         <SolidColorBrush x:Key="InerIner">#296d98</SolidColorBrush>
+     <SolidColorBrush x:Key="GridBlue">#1F456E</SolidColorBrush>
 
     <Style x:Key="LabelToast" TargetType="Label">
         <Setter Property="Foreground" Value="{StaticResource MenuBlue}"/>
         <Setter Property="FontWeight" Value="Heavy"/>
         <Setter Property="FontSize" Value="16"/>
+    </Style>
+    <Style x:Key="Grid" TargetType="Grid">
+        <Setter Property="Background" Value="{StaticResource GridBlue}"/>
+    </Style>
+    
+    <Style x:Key="TB1" TargetType="{x:Type TextBox}">
+        <Setter Property="Background" Value="DarkBlue"/>
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontFamily" Value="Yu Gothic"/>
     </Style>
 
     <Style x:Key="i" TargetType="tk:IntegerUpDown">
@@ -257,7 +271,8 @@
             <Setter Property="FontSize" Value="16"/>
             <Setter Property="FontFamily" Value="Yu Gothic"/>
             <Setter Property="FontWeight" Value="Bold"/>
-        </Style>
+            <Setter Property="Foreground" Value="White"/>
+    </Style>
 
         <Style x:Key="RectangleDashed" TargetType="Rectangle">
             <Setter Property="StrokeDashArray" Value="4"/>

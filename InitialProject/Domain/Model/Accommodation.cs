@@ -18,6 +18,7 @@ namespace InitialProject.Model
         public int MinDaysToCancel { get; set; }
         public Owner Owner { get; set; }
         public AccommodationImage CoverImage { get; set; }
+        public bool IsRenovated { get; set; }
 
         public Accommodation() {}
 
