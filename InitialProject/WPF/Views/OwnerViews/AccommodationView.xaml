@@ -56,7 +56,7 @@
                             <Run Text="Days before to cancel: " />
                             <Run Text="{Binding Path=MinDaysToCancel}"/>
                         </TextBlock>
-                        <CheckBox Grid.Row="1" Grid.Column="0" IsChecked="False" IsEnabled="False">Renovated</CheckBox>
+                        <CheckBox IsChecked="{Binding Path=IsRenovated}" Grid.Row="1" Grid.Column="0" IsEnabled="False">Renovated</CheckBox>
                     </Grid>
                 </Grid>
             </Border>
@@ -76,7 +76,7 @@
             </ListBox.Resources>
         </ListBox>
         <Button Command="{Binding NewAccommodationCommand}" Name="NewAccommodationButton" Content="New Accommodation" HorizontalAlignment="Center" Margin="31,474,31,0"  Width="354" Height="43" VerticalAlignment="Top" Background="AliceBlue" BorderBrush="DarkGray"/>
-        <Button Content="My Renovations" HorizontalAlignment="Center" Margin="31,540,31,0"  Width="354" Height="43" VerticalAlignment="Top" Background="AliceBlue" BorderBrush="DarkGray"/>
+        <Button Command="{Binding MyRenovationsCommand}" Content="My Renovations" HorizontalAlignment="Center" Margin="31,540,31,0"  Width="354" Height="43" VerticalAlignment="Top" Background="AliceBlue" BorderBrush="DarkGray"/>
         <StackPanel Margin="0,-7,0,528" Background="LightGray" Visibility="{Binding Path=StackPanelVisibility, UpdateSourceTrigger=PropertyChanged}">
             <Grid Height="100">
                 <Grid.ColumnDefinitions>

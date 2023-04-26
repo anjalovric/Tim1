@@ -25,5 +25,4 @@
         <Setter Property="BorderBrush" Value="DarkGray" />
         <Setter Property="BorderThickness" Value="1" />
     </Style>
-    
 </ResourceDictionary>

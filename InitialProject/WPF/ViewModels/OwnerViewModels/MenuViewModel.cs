@@ -22,6 +22,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         public RelayCommand SignOutCommand { get; set; }
         public RelayCommand MyRequestsCommand { get; set; }
         public RelayCommand GuestReviewsCommand { get; set; }
+        public RelayCommand MyRenovationsCommand { get; set; }
         public MenuViewModel(Owner owner)
         {
             this.owner = owner;
@@ -36,6 +37,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             SignOutCommand = new RelayCommand(SignOut_Executed, CanExecute);
             MyRequestsCommand = new RelayCommand(MyRequests_Executed, CanExecute);
             GuestReviewsCommand = new RelayCommand(GuestReviews_Executed, CanExecute);
+            MyRenovationsCommand = new RelayCommand(MyRenovations_Executed, CanExecute);
         }
         private bool CanExecute(object sender)
         {
@@ -79,6 +81,13 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
             GuestReviewView guestReviewView = new GuestReviewView(owner);
             Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = guestReviewView;
+        }
+
+        private void MyRenovations_Executed(object sender)
+        {
+
+            MyRenovationsView myRenovationsView = new MyRenovationsView(owner);
+            Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = myRenovationsView;
         }
     }
 }

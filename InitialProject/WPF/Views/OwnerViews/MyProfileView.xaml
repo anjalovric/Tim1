@@ -52,11 +52,11 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
                 <Image Source="/Resources/Images/User_icon_2.svg.png" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="0" Grid.RowSpan="4" Stretch="Fill" VerticalAlignment="Top"/>
-                <Label Content="Full name:" Grid.Row="0" Grid.Column="1" VerticalAlignment="Top" Margin="0, 5, 0, 0"/>
+                <Label Content="Full name:" Grid.Row="0" Grid.Column="1" VerticalAlignment="Top" Margin="0, 4, 0, 0"/>
                 <Label Content="Age:" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top"/>
                 <Label Content="Email:" Grid.Row="2" Grid.Column="1" VerticalAlignment="Top"/>
                 <Label Content="Title:"  Grid.Row="3" Grid.Column="1" VerticalAlignment="Top"/>
-                <Label Content="{Binding ProfileOwner, UpdateSourceTrigger=PropertyChanged}" Margin="0, 5, 0, 0" Grid.Row="0" Grid.Column="3" />
+                <Label Content="{Binding ProfileOwner, UpdateSourceTrigger=PropertyChanged}" Margin="0, 4, 0, 0" Grid.Row="0" Grid.Column="3" />
                 <Label Content="{Binding ProfileOwner.Age, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="3" />
                 <Label Content="{Binding ProfileOwner.Email, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="3"/>
                 <Label Content="{Binding Title, UpdateSourceTrigger=PropertyChanged}" FontWeight="Bold" Grid.Row="3" Grid.Column="3" />
