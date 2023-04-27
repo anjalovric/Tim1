@@ -19,6 +19,7 @@
         <Setter Property="ColumnHeaderStyle" Value="{StaticResource DataGridHeaderStyle}" />
         <Setter Property="CellStyle" Value="{StaticResource DataGridCellStyle}" />
         <Setter Property="HeadersVisibility" Value="Column" />
+        <Setter Property="AutoGenerateColumns" Value="False" />
     </Style>
 
     <Style TargetType="ListBox" x:Key="ListBoxStyle">

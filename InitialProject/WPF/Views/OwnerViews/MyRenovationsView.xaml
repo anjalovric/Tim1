@@ -29,20 +29,20 @@
                 </Grid.RowDefinitions>
                 <Label Content="Upcoming renovations" Grid.Column="0" Grid.Row="0" VerticalAlignment="Bottom" Margin="10, 0, 0, 0"/>
                 <Label Content="Renovated objects" Grid.Column="1" Grid.Row="0" VerticalAlignment="Bottom" Margin="20, 0, 0, 0"/>
-                <Label Content="1" FontWeight="Bold" FontSize="42" Grid.Column="0" Grid.Row="1" VerticalAlignment="Top" Margin="10, 0, 0, 0"/>
-                <Label Content="1" FontWeight="Bold" FontSize="42" Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" Margin="20, 0, 0, 0"/>
+                <Label Content="{Binding Path=UpcomingRenovations, UpdateSourceTrigger=PropertyChanged}" FontWeight="Bold" FontSize="42" Grid.Column="0" Grid.Row="1" VerticalAlignment="Top" Margin="10, 0, 0, 0"/>
+                <Label Content="{Binding Path=RenovatedObjects, UpdateSourceTrigger=PropertyChanged}" FontWeight="Bold" FontSize="42" Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" Margin="20, 0, 0, 0"/>
             </Grid>
         </Border>
-        <DataGrid ItemsSource="{Binding Renovations}" Grid.Column="0" Grid.Row="2" Style="{StaticResource DataGridStyle}">
+        <DataGrid ItemsSource="{Binding Renovations}" Grid.Column="0" Grid.Row="2" Style="{StaticResource DataGridStyle}" IsReadOnly="True">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Width="*"/>
-                <DataGridTextColumn Header="Location" Width="*"/>
-                <DataGridTextColumn Header="Start Date" Width="*"/>
-                <DataGridTextColumn Header="End Date" Width="*"/>
+                <DataGridTextColumn Header="Name" Width="*" Binding="{Binding Path=Accommodation.Name, UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTextColumn Header="Location" Width="*" Binding="{Binding Path=Accommodation.Location, UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTextColumn Header="Start Date" Width="*" Binding="{Binding Path=StartDate, UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTextColumn Header="End Date" Width="*" Binding="{Binding Path=EndDate, UpdateSourceTrigger=PropertyChanged}"/>
                 <DataGridTemplateColumn Header="Cancel" Width="0.6*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Background="AliceBlue" BorderBrush="DarkGray">Cancel</Button>
+                            <Button Background="AliceBlue" BorderBrush="DarkGray" IsEnabled="{Binding Path=CanBeCancelled, UpdateSourceTrigger=PropertyChanged}">Cancel</Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

@@ -59,5 +59,15 @@ namespace InitialProject.Service
         {
             accommodationRenovationRepository.Delete(renovation);
         }
+
+        public int CountUpcomingRenovations(Owner owner)
+        {
+            return renovations.FindAll(n => n.Accommodation.Owner.Id == owner.Id && !n.Accommodation.IsRenovated).Count();
+        }
+
+        public int CountRenovatedObjects(Owner owner)
+        {
+            return renovations.FindAll(n => n.Accommodation.Owner.Id == owner.Id && n.Accommodation.IsRenovated).Count();
+        }
     }
 }
