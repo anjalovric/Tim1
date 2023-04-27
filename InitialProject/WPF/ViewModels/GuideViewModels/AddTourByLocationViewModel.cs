@@ -265,6 +265,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         public RelayCommand PreviousImageCommand { get; set; }
         public RelayCommand AddImageCommand { get; set; }
         public RelayCommand DeleteCheckPointCommand { get; set; }
+        public RelayCommand CloseToastAvailability { get;set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -304,6 +305,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             PreviousImageCommand = new RelayCommand(PreviousImage_Executed, CanExecute);
             AddImageCommand = new RelayCommand(AddTourImage_Executed, CanExecute);
             DeleteCheckPointCommand = new RelayCommand(CancelCheckPoint_Executed, CanExecute);
+            CloseToastAvailability= new RelayCommand(CloseToastAvailability_Executed, CanExecute);  
         }
         private void AddLanguages()
         {
@@ -392,6 +394,11 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
                 return false;
             }
             return true;
+        }
+        private void CloseToastAvailability_Executed(object sender)
+        {
+            IsErrorMessageVisible = "Hidden";
+            DateMessage = "Hidden";
         }
         private void CancelTime_Executed(object sender)
         {

@@ -3,11 +3,10 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:InitialProject.WPF.Views.GuideViews"
+      xmlns:local="clr-namespace:InitialProject.WPF.Views.GuideViews" 
       mc:Ignorable="d" 
       d:DesignHeight="707" d:DesignWidth="1100"
       Title="TourInstanceReviewView" >
-
     <Grid Style="{DynamicResource Background}">
         <DataGrid x:Name="TourListDataGrid" ColumnHeaderStyle="{DynamicResource CenterGridHeaderStyle}" SelectedItem="{Binding Path=Selected}" HorizontalAlignment="Left" Height="470" Margin="59,128,0,0" VerticalAlignment="Top" Width="967" ItemsSource="{Binding Path=Reviews}" HeadersVisibility="Column" Style="{DynamicResource Tables}">
 
@@ -15,27 +14,72 @@
                 <DataGridTemplateColumn Width="80" >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Image Source="{Binding TourInstance.CoverBitmap}" Width="100" Height="40" VerticalAlignment="Top" Visibility="Visible"/>
+                            <Image Source="{Binding TourInstance.CoverBitmap}" Width="100" Height="30" VerticalAlignment="Top" Visibility="Visible"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Width="80" Header="Validity">
+                <DataGridTextColumn Width="80" Header="Validity" Binding="{Binding ValidationImage}" >
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Foreground" Value="Black"/>
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
 
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Image Source="{Binding ValidationImage,UpdateSourceTrigger=PropertyChanged}" Width="100" Height="40" VerticalAlignment="Top" Visibility="Visible"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Guest's name" Binding="{Binding Guest2.Name}" Width="105" >
+                            <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Valid}" Value="True">
+                                        <Setter Property="Foreground" Value="Green"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Valid}" Value="False">
+                                        <Setter Property="Foreground" Value="Red"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Guest's name" Binding="{Binding Guest2.Name}" Width="105">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
                 <DataGridTextColumn Header="Guest's surname" Binding="{Binding Guest2.LastName}" Width="150" >
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
                 <DataGridTextColumn Header="Tour name" Binding="{Binding TourInstance.Tour.Name}" Width="100" >
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
                 <DataGridTextColumn Header="Location" Binding="{Binding TourInstance.Tour.Location}" Width="175" >
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Start date" Binding="{Binding TourInstance.StartDate}" Width="170" >
+                <DataGridTextColumn Header="Start date" Binding="{Binding TourInstance.StartDate}" Width="188.5" >
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
                 <DataGridTemplateColumn x:Name="cancelation" Header="Review"  Width="80" >
                     <DataGridTemplateColumn.CellTemplate>

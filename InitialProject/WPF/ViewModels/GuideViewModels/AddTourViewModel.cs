@@ -1,6 +1,7 @@
 ﻿using InitialProject.Model;
 using InitialProject.Service;
 using Microsoft.Win32;
+using Org.BouncyCastle.Asn1.Mozilla;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -265,6 +266,8 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         public RelayCommand AddImageCommand { get; set; }   
         public RelayCommand DeleteCheckPointCommand { get; set; }
 
+        public RelayCommand OkToastCommand { get; set; }
+
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
@@ -321,6 +324,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             PreviousImageCommand = new RelayCommand(PreviousImage_Executed, CanExecute);
             AddImageCommand = new RelayCommand(AddTourImage_Executed, CanExecute);
             DeleteCheckPointCommand = new RelayCommand(CancelCheckPoint_Executed, CanExecute);
+            OkToastCommand=new RelayCommand(OkToast_Executed , CanExecute);
         }
         private void Confirm_Executed(object sender)
         {
@@ -496,6 +500,11 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             }
             else
                 Image = null;
+        }
+        private void OkToast_Executed(object sender) 
+        {
+            IsAvailable = "Hidden";
+            IsErrorMessageVisible = "Hidden";
         }
     }
 }

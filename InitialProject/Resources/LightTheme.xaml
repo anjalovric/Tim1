@@ -131,6 +131,8 @@
         <Setter Property="BorderThickness" Value="4"/>
         <Setter Property="AutoGenerateColumns" Value="False"/>
         <Setter Property="UseLayoutRounding" Value="False"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
     </Style>
     
     <!--DATAGRIDHEADER-->
@@ -370,8 +372,38 @@
         <Setter Property="Foreground" Value="Black"/>
         <Setter Property="FontWeight" Value="Heavy"/>
         <Setter Property="FontSize" Value="16"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
     </Style>
 
+    <Style x:Key="Tab" TargetType="TabItem">
+        <Setter Property="Background" Value="{StaticResource CalendarBlue}"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="BorderBrush" Value="{StaticResource RoyalBlue}"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TabItem">
+                    <Border Name="Border" BorderThickness="1,1,1,0" BorderBrush="Gainsboro" CornerRadius="4,4,0,0" Margin="2,0">
+                        <ContentPresenter x:Name="ContentSite"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        ContentSource="Header"
+                                        Margin="10,2"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="#6495ED" />
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="False">
+                            <Setter TargetName="Border" Property="Background" Value="lightskyblue" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
     <Style x:Key="i" TargetType="tk:IntegerUpDown">
         <Setter Property="Background" Value="{StaticResource CalendarBlue}"></Setter>
         <Setter Property="Foreground" Value="black"></Setter>

@@ -12,23 +12,7 @@ namespace InitialProject.Service
     {
         public AvailableDatesForTour() 
         {
-            tourInstanceService = new TourInstanceService();
-            TourInstances= new List<TourInstance>();
         }
-
-        public List<TourInstance> GetInstancesStartingLaterThanStartDate(DateTime StartDate)
-        {
-            List<TourInstance> tourInstances = new List<TourInstance>();
-            foreach(TourInstance instance in tourInstanceService.GetAll())
-            {
-                if(instance.StartDate >= StartDate)
-                    tourInstances.Add(instance);
-            }
-            SetTours(tourInstances);
-            return tourInstances;
-        }
-        public List<TourInstance> TourInstances;
-        private TourInstanceService tourInstanceService;
 
         public List<TourInstance> ScheduledInstances(TourInstance newinstance,DateTime StartDate,DateTime EndDate,double duration)
         {
@@ -38,19 +22,28 @@ namespace InitialProject.Service
             DateTime newdays=actual.StartDate.AddHours(duration);
             if (newdays <= EndDate)
             {
-                foreach (TourInstance instance in tourInstanceService.GetAll())
+                List<TourInstance> tours = tourInstanceService.GetAll();
+                foreach (TourInstance instance in SetTours(tours))
                 {
-                    TourInstance copied = instance;
-                    DateTime newDate = copied.StartDate.AddHours(instance.Tour.Duration);
-                    if (newDate <= newdays && !(instance.StartDate>= newdays) && !(newinstance.StartDate>newDate))
-                        instances.Add(copied);
+                    if (instance.Finished == false && instance.Canceled == false)
+                    {
+                        TourInstance copied = instance;
+                        DateTime newDate = copied.StartDate.AddHours(instance.Tour.Duration);
+                        if ((newDate >= newdays) && !(instance.StartDate >= newdays) && !(newinstance.StartDate > newDate))
+                        {
+                            instances.Add(copied);
+                            return instances;
+                        }
+                        else if(!(instance.StartDate >= newdays) && !(newinstance.StartDate > newDate) && (newinstance.StartDate<newDate))
+                            instances.Add(copied);
+                    }
                 }
             }
             else
                 instances.Add(newinstance);
             return instances;
         }
-        private void SetTours(List<TourInstance> requests) 
+        private List<TourInstance> SetTours(List<TourInstance> requests) 
         {
             TourService tourService = new TourService();
             foreach(TourInstance instance in requests)
@@ -59,6 +52,7 @@ namespace InitialProject.Service
                     if(tour.Id==instance.Tour.Id)
                         instance.Tour = tour;
             }
+            return requests;
         }
     }
 }

@@ -27,6 +27,19 @@ namespace InitialProject.WPF.ViewModels
                 }
             }
         }
+        private string toast;
+        public string Toast
+        {
+            get => toast;
+            set
+            {
+                if (!value.Equals(toast))
+                {
+                    toast = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         private ObservableCollection<TourInstance> instances;
         public ObservableCollection<TourInstance> Instances
         {
@@ -59,6 +72,7 @@ namespace InitialProject.WPF.ViewModels
             instanceService = new TourInstanceService();
             instanceService.SetFinishedInstances(Instances,guideService.GetByUsername(user.Username));
             ToastVisibility = "Hidden";
+            Toast = "Hidden";
             MakeCommands();
         }
         private void MakeCommands()
@@ -86,16 +100,20 @@ namespace InitialProject.WPF.ViewModels
         }
         public void MostVisitedForYearExecuted(object sender)
         {
-            if (Year > 2019 && Year < 2024)
+            if (Year != null)
             {
-                if (instanceService.FindMostVisitedForChosenYear(Year, guideService.GetByUsername(loggedUser.Username)) != null)
+                if (Year > 2019 && Year < 2024)
                 {
-                    FinishedTourDetails finishedTourDetails = new FinishedTourDetails(instanceService.FindMostVisitedForChosenYear(Year, guideService.GetByUsername(loggedUser.Username)));
-                    Application.Current.Windows.OfType<GuideWindow>().FirstOrDefault().Main.Content = finishedTourDetails;
+                    if (instanceService.FindMostVisitedForChosenYear(Year, guideService.GetByUsername(loggedUser.Username)) != null)
+                    {
+                        FinishedTourDetails finishedTourDetails = new FinishedTourDetails(instanceService.FindMostVisitedForChosenYear(Year, guideService.GetByUsername(loggedUser.Username)));
+                        Application.Current.Windows.OfType<GuideWindow>().FirstOrDefault().Main.Content = finishedTourDetails;
+                    }
                 }
+                else
+                    ToastVisibility = "Visible";
             }
-            else
-                ToastVisibility = "Visible";
+            Toast = "Visible";
             ChosenYear.Clear();
         }
         public event PropertyChangedEventHandler PropertyChanged;
@@ -106,7 +124,8 @@ namespace InitialProject.WPF.ViewModels
         }
         public void OKExecuted(object sender)
         {
-                ToastVisibility = "Hidden";    
+                ToastVisibility = "Hidden";
+                Toast = "Hidden";
         }
     }
 }
