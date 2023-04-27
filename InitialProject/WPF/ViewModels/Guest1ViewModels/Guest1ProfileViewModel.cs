@@ -13,11 +13,14 @@ using System.Windows.Navigation;
 using InitialProject.Model;
 using InitialProject.Service;
 using InitialProject.WPF.Views.Guest1Views;
+using InitialProject.Domain.Model;
 
 namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 {
     public class Guest1ProfileViewModel : INotifyPropertyChanged
     {
+        public bool IsSuperGuest {get;set;}
+        public SuperGuestTitle SuperGuest { get; set; }
         public Guest1 Guest1 { get; set; }
         private BitmapImage imageSource;
         public BitmapImage ImageSource
@@ -46,7 +49,16 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             ImageSource = new BitmapImage(new Uri(relative, UriKind.Relative));
             GetAverageRating();
             GetReviewsNumber();
+            ShowSuperGuest();
         }
+
+        private void ShowSuperGuest()
+        {
+            SuperGuestTitleService superGuestTitleService = new SuperGuestTitleService();
+            SuperGuest = superGuestTitleService.MakeSuperGuest(Guest1);         ///da li ce pucati zbog null?
+            IsSuperGuest = superGuestTitleService.IsAlreadySuperGuest(Guest1);
+        }
+       
         private void GetReviewsNumber()
         {
             GuestAverageReviewService guestAverageReviewService = new GuestAverageReviewService();

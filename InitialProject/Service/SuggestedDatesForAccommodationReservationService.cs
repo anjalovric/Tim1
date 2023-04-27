@@ -128,7 +128,6 @@ namespace InitialProject.Service
             DateTime start = Departure;
             while (IsDateAvailable(currentAccommodationId, start))
                 start = start.AddDays(-1);
-
             start = start.AddDays(1);
             FillDatesOutRangeList(ref start, currentAccommodationId);
         }
@@ -137,17 +136,15 @@ namespace InitialProject.Service
             while (availableDateRanges.Count < 3)
             {
                 if (IsDateAvailable(currentAccommodationId, start))
-                {
                     AddAvailableDateOutRangeToList(start);
-                }
                 start = start.AddDays(1);
             }
         }
         private List<AvailableDatesForAccommodation> GetAvailableDatesOutRange(Accommodation currentAccommodation, Guest1 guest1)
         {
+
             List<AvailableDatesForAccommodation> availableDatesForAccommodations = new List<AvailableDatesForAccommodation>();
 
-            //suggestedDates.Owner = this;
             foreach (List<DateTime> dates in availableDateRanges)
             {
                 DateTime arrival = dates[0];
@@ -163,6 +160,5 @@ namespace InitialProject.Service
             availableDatesHelp = new List<DateTime>();
             availableDateRanges = new List<List<DateTime>>();
         }
-
     }
 }

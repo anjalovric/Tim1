@@ -143,10 +143,10 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             else
             foreach (System.Windows.Documents.Hyperlink link in links)
             {
-                if (link.Tag.Equals(0))
-                    StoredNotifications.Add(new MenuItem { Header = link, IsCheckable = false, Width = 300, Background = System.Windows.Media.Brushes.PaleGreen, BorderBrush = System.Windows.Media.Brushes.Black, BorderThickness = new Thickness(2), Icon = new Image { Source = new BitmapImage(new Uri("/Resources/Images/greenCorect.png", UriKind.Relative)) } }) ;
+                    if (link.Tag.Equals(0))
+                        StoredNotifications.Add(new MenuItem { Header = link, IsCheckable = false, Width = 300, Background = System.Windows.Media.Brushes.PaleGreen, BorderBrush = System.Windows.Media.Brushes.Black, BorderThickness = new Thickness(2), Icon = new Image { Source = new BitmapImage(new Uri("/Resources/Images/done.png", UriKind.Relative)), Margin = new Thickness(0,-10,-7,-3), VerticalAlignment = System.Windows.VerticalAlignment.Bottom } }); 
                 else
-                    StoredNotifications.Add(new MenuItem { Header = link, IsCheckable = false, Width = 300, Background = System.Windows.Media.Brushes.LightCoral, BorderBrush = System.Windows.Media.Brushes.Black, BorderThickness = new Thickness(2), Icon = new Image { Source = new BitmapImage(new Uri("/Resources/Images/redIncorect.png", UriKind.Relative)) } });
+                    StoredNotifications.Add(new MenuItem { Header = link, IsCheckable = false, Width = 300, Background = System.Windows.Media.Brushes.LightCoral, BorderBrush = System.Windows.Media.Brushes.Black, BorderThickness = new Thickness(2), Icon = new Image { Source = new BitmapImage(new Uri("/Resources/Images/no.png", UriKind.Relative)), Margin = new Thickness(0, -10, -7, -3), VerticalAlignment = System.Windows.VerticalAlignment.Bottom } });
             }
         }
 

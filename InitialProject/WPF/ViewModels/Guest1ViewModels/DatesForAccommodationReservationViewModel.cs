@@ -60,17 +60,19 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             Application.Current.Windows.OfType<DatesForAccommodationReservationView>().FirstOrDefault().Close();
         }
         
-        private void ChooseDate_Executed(object sender)
+        private async void ChooseDate_Executed(object sender)
         {
-            MessageBoxResult result = accommodationReservationService.ConfirmReservation();
-            if (result == MessageBoxResult.Yes)
+            Task<bool> result = accommodationReservationService.ConfirmReservation();
+            bool IsYesClicked = await result;
+            if(IsYesClicked)
                 MakeNewReservation();
         }
         private void MakeNewReservation()
         { 
             AccommodationReservation newReservation = new AccommodationReservation(guest1, currentAccommodation, selectedDateRange.Arrival, selectedDateRange.Departure);
             accommodationReservationService.Add(newReservation);
-            MessageBox.Show("Successfully done!");
+            Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("Successfully done!", "/Resources/Images/done.png");
+            messageBox.Show();
             Application.Current.Windows.OfType<DatesForAccommodationReservationView>().FirstOrDefault().Close();
             Application.Current.Windows.OfType<AccommodationReservationFormView>().FirstOrDefault().Close();
             

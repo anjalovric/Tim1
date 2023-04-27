@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using InitialProject.Domain.Model;
 using InitialProject.Model;
+using InitialProject.Domain.Model;
 
 namespace InitialProject.Domain.RepositoryInterfaces
 {
-    public interface IGuest1Repository : IGenericRepository<Guest1>
+    public interface ISuperGuestTitleRepository : IGenericRepository<SuperGuestTitle>
     {
-        public Guest1 GetByUsername(string userName);
-        public void Update(Guest1 guest1);
+        public void Add(SuperGuestTitle superGuestTitle);
     }
 }

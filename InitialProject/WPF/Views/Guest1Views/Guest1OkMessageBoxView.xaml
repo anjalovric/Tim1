@@ -1,0 +1,34 @@
+﻿<Window x:Class="InitialProject.WPF.Views.Guest1Views.Guest1OkMessageBoxView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InitialProject.WPF.Views.Guest1Views"
+        mc:Ignorable="d"
+        Title="Guest1MessageBoxView" Height="240" Width="380" WindowStartupLocation="CenterScreen" WindowStyle="None">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Foreground" Value="#22301a"></Setter>
+            <Setter Property="FontWeight" Value="Bold"></Setter>
+            <Setter Property="FontSize" Value="18"></Setter>
+            <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+            <Setter Property="BorderBrush" Value="#22301a"></Setter>
+            <Setter Property="BorderThickness" Value="3,3,3,3"></Setter>
+        </Style>
+    </Window.Resources>
+
+
+    <Grid Background="#8c9d75">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="150" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Image Grid.Row="0" Source="{Binding Image, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Height="66" Width="40" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="20,32,0,0"/>
+
+        <TextBlock Grid.Row="0" Text="{Binding Path=Text}" Margin="0,32,0,0" Height="Auto" Width="218" VerticalAlignment="Top" TextAlignment="Center" FontSize="19" HorizontalAlignment="Center" Background="Transparent" TextWrapping="Wrap" Foreground="#22301a" />
+        <StackPanel Grid.Row="1" VerticalAlignment="Top" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,0">
+            <Button Name="YesButton" Content="OK" Margin="0,0,0,0" Width="100" VerticalAlignment="Center" Command="{Binding OkCommand}" Height="35" Background="#FFFCECB9" />
+        </StackPanel>
+
+    </Grid>
+</Window>

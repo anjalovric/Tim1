@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows;
 using InitialProject.Domain;
 using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Model;
+using InitialProject.WPF.Views.Guest1Views;
 
 namespace InitialProject.Service
 {
@@ -38,14 +40,18 @@ namespace InitialProject.Service
         {
             return DateTime.Now <= SelectedNotCompletedReservation.Arrival.AddHours(-24) && DateTime.Now <= SelectedNotCompletedReservation.Arrival.AddDays(-SelectedNotCompletedReservation.Accommodation.MinDaysToCancel);
         }
-        public MessageBoxResult ConfirmCancellationMessageBox()           
+
+        public bool HasReservationStarted(AccommodationReservation SelectedNotCompletedReservation)
         {
-            string sMessageBoxText = $"Do you want to cancel this reservation?\n";
-            string sCaption = "Cancel reservation";
-            MessageBoxButton btnMessageBox = MessageBoxButton.YesNo;
-            MessageBoxImage icnMessageBox = MessageBoxImage.Question;
-            MessageBoxResult result = MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
-            return result;
+            return DateTime.Now >= SelectedNotCompletedReservation.Arrival;
+        }
+        public async Task<bool> ConfirmCancellationMessageBox()
+        {
+            var result = new TaskCompletionSource<bool>();
+            Guest1YesNoMessageBoxView messageBox = new Guest1YesNoMessageBoxView("Do you want to cancel this reservation?", "/Resources/Images/qm.png", result);
+            messageBox.Show();
+            var returnedResult = await result.Task;
+            return returnedResult;
         }
         public bool IsCancelled(AccommodationReservation reservation)
         {

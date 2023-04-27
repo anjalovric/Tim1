@@ -149,11 +149,23 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             lengthOfStay = Departure.Subtract(Arrival);
 
             if (!IsValidDateInput())
-                MessageBox.Show("Non valid input, please enter values again!");
+            {
+                Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("Non valid input, please enter values again!", "/Resources/Images/exclamation.png");
+                messageBox.Show();
+            }
+
             else if (!IsEnteredCorrectDateRange())
-                MessageBox.Show("The minimum number of days for booking this accommodation is " + currentAccommodation.MinDaysForReservation.ToString() + ".");
+            {
+                Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("The minimum number of days for booking this accommodation is " + currentAccommodation.MinDaysForReservation.ToString() + ".", "/Resources/Images/exclamation.png");
+                messageBox.Show();
+            }
+           
             else if (!IsEnteredCorrectGuestsNumber())
-                MessageBox.Show("The maximum number of guests for this accommodation is " + currentAccommodation.Capacity.ToString() + ".");
+            {
+                Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("The maximum number of guests for this accommodation is " + currentAccommodation.Capacity.ToString() + ".", "/Resources/Images/exclamation.png");
+                messageBox.Show();
+            }
+                
             else
                 OpenWindowWithAvailableDates();                 
         }

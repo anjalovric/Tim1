@@ -57,11 +57,13 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             { 
                 StoreRequest();
                 Application.Current.Windows.OfType<ReschedulingAccommodationReservationFormView>().FirstOrDefault().Close();
-                MessageBox.Show("Request successfully sent!");
+                Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("Request successfully sent!", "/Resources/Images/done.png");
+                messageBox.Show();
             }
             else
             {
-                MessageBox.Show("Please enter valid dates!");
+                Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("Please enter valid dates!", "/Resources/Images/exclamation.png");
+                messageBox.Show();
             }
         }
 

@@ -19,7 +19,6 @@ namespace InitialProject.Model
        public Location Location { get; set; }
        public string Email { get; set; }
        public int ReviewsNumber { get; set; }
-       public bool IsSuperGuest { get; set; }
 
        public string ImagePath { get; set; }
 
@@ -41,14 +40,13 @@ namespace InitialProject.Model
            Location.Id = Convert.ToInt32(values[5]);
            Email = values[6];
            ReviewsNumber = Convert.ToInt32(values[7]);
-           IsSuperGuest = Convert.ToBoolean(values[8]);
-           ImagePath = values[9];
+           ImagePath = values[8];
 
        }
 
        public string[] ToCSV()
        {
-           string[] csvValues = { Id.ToString(), Name, LastName, Username, PhoneNumber, Location.Id.ToString(), Email, ReviewsNumber.ToString(), IsSuperGuest.ToString(), ImagePath };
+           string[] csvValues = { Id.ToString(), Name, LastName, Username, PhoneNumber, Location.Id.ToString(), Email, ReviewsNumber.ToString(), ImagePath };
            return csvValues;
        }
 

@@ -77,15 +77,22 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         private void Send_Executed(object sender)
         {
             if (!IsImageUploadValid())
-                MessageBox.Show("You must upload at least one photo!");
+            {
+                Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("You must upload at least one photo!", "/Resources/Images/exclamation.png");
+                messageBox.Show();
+            }
             else if (!IsRenovationSuggestionValid())
-                MessageBox.Show("You must fill all fields for renovation suggestion!");
+            {
+                Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("You must fill all fields for renovation suggestion!", "/Resources/Images/exclamation.png");
+                messageBox.Show();
+            }
             else
             {
                 StoreReview();
                 StoreImages();
                 StoreRenovationSuggestion();
-                MessageBox.Show("Successfully sent!");
+                Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("Successfully sent!", "/Resources/Images/done.png");
+                messageBox.Show();
                 Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = new MyAccommodationReservationsView(guest1);
             }
         }
