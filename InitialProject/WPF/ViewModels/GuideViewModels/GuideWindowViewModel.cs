@@ -123,7 +123,7 @@ namespace InitialProject.WPF.ViewModels
         }
         private void RequestYearlyStatistic_Executed(object sender)
         {
-            RequestsStatistisYearly requestsStatistisYearly = new RequestsStatistisYearly();
+            RequestsStatistisYearly requestsStatistisYearly = new RequestsStatistisYearly(homeView.viewModel.Tours,loggedUser, cancelView.cancelViewModel.TourInstances);
             Application.Current.Windows.OfType<GuideWindow>().FirstOrDefault().Main.Content = requestsStatistisYearly;
         }
         private void SignOut_Executed(object sender)

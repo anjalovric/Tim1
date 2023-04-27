@@ -6,20 +6,22 @@ using System.Windows.Controls;
 namespace InitialProject.WPF.Views.GuideViews
 {
     /// <summary>
-    /// Interaction logic for RequestsStatistisYearly.xaml
+    /// Interaction logic for AddTourByLanguageView.xaml
     /// </summary>
-    public partial class RequestsStatistisYearly : Page
+    public partial class AddTourByLanguageView : Page
     {
-        public YearlyTourStatistics viewModel;
-        public RequestsStatistisYearly(ObservableCollection<TourInstance> todayInstances,User loggedUser,ObservableCollection<TourInstance>futureInstances)
+        public AddTourByLanguageViewModel viewModel;
+        public AddTourByLanguageView(ObservableCollection<TourInstance> todayInstances, User user, ObservableCollection<TourInstance> futureInstances, string selectedLanguage)
         {
+            viewModel = new AddTourByLanguageViewModel(todayInstances, user, futureInstances, selectedLanguage);
             InitializeComponent();
-            viewModel = new YearlyTourStatistics(todayInstances,loggedUser,futureInstances );
             DataContext = viewModel;
         }
+
         private void ComboBoxCountry_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             viewModel.ComboBoxCountry_SelectionChanged();
         }
+
     }
 }
