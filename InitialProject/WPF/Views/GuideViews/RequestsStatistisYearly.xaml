@@ -24,7 +24,7 @@
                     <Border Style="{DynamicResource Border}" Grid.ColumnSpan="3">
 
                     </Border>
-                    <Button Content="CREATE" Style="{DynamicResource Button}" Margin="539,292,55,151" Grid.Column="2"/>
+                    <Button Content="CREATE" Style="{DynamicResource Button}" Margin="539,292,55,151" Grid.Column="2" Command="{Binding CreateTourByLanguageCommand}"/>
                     <TextBlock Style="{DynamicResource TextBlock}" Height="63" Width="215" HorizontalAlignment="Left" Margin="539,53,0,0" VerticalAlignment="Top" Grid.Column="2">
                         The most wanted
                         <LineBreak></LineBreak>
@@ -80,7 +80,7 @@
                     </Border>
                     <Label Content="Please select city" Visibility="{Binding ToastCity}" Margin="64,138,0,0" VerticalAlignment="Top" Height="93" Width="350" Foreground="Red"  Style="{DynamicResource StatisticLabel}" Grid.ColumnSpan="2" HorizontalAlignment="Left"/>
 
-                    <Button Content="CREATE" Style="{DynamicResource Button}" Margin="564,292,62,151" Grid.Column="1"/>
+                    <Button Command="{Binding CreateTourByLocationCommand}" Content="CREATE" Style="{DynamicResource Button}" Margin="564,292,62,151" Grid.Column="1"/>
                     <TextBlock Style="{DynamicResource TextBlock}" Height="63" Width="215" HorizontalAlignment="Left" Margin="564,53,0,0" VerticalAlignment="Top" Grid.Column="1">
                         The most wanted
                         <LineBreak></LineBreak>

@@ -59,5 +59,13 @@ namespace InitialProject.Repository
             _serializer.ToCSV(FilePath, _requests);
             return updatedRequest;
         }
+
+        public void Delete(ReschedulingAccommodationRequest request)
+        {
+            _requests = _serializer.FromCSV(FilePath);
+            ReschedulingAccommodationRequest founded = _requests.Find(c => c.Id == request.Id);
+            _requests.Remove(founded);
+            _serializer.ToCSV(FilePath, _requests);
+        }
     }
 }

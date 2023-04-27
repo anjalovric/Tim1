@@ -5,6 +5,7 @@
       xmlns:tk="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit.NET5" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:InitialProject.WPF.Views"
+      xmlns:val="clr-namespace:InitialProject.WPF.Validations.OwnerValidations"
       mc:Ignorable="d" 
       d:DesignHeight="630" d:DesignWidth="430"
       Title="Enter Accommodation" Background="White">
@@ -13,7 +14,31 @@
     <ScrollViewer>
         <Grid Height="780" >
             <Label Content="Name" Margin="23,57,183,667"/>
-            <TextBox HorizontalAlignment="Center" Margin="0,89,0,0" TextWrapping="Wrap" Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="363" Height="31"/>
+            
+            <TextBox HorizontalAlignment="Center" Margin="0,89,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="363" Height="31">
+                <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <val:StringValidationRule ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+                <Validation.ErrorTemplate>
+                    <ControlTemplate>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+
+                            <AdornedElementPlaceholder  Grid.Column="0" Grid.Row="0"/>
+                            <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Validation.ErrorTemplate>
+            </TextBox>
+            
             <Label Content="Country" Margin="23,140,207,584"/>
             <Label Content="City" Margin="225,140,26,584"/>
             <Label Content="Type" Margin="23,207,206,517"/>

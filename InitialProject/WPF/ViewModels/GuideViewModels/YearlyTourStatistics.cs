@@ -1,6 +1,7 @@
 ﻿using InitialProject.Model;
 using InitialProject.Service;
 using InitialProject.WPF.Views.GuideViews;
+using NPOI.XSSF.UserModel;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -13,7 +14,11 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
     {
         public ObservableCollection<GuideOneYearRequestStatisticViewModel> Statistics { get; set; }
         public ObservableCollection<GuideOneYearRequestStatisticViewModel> StatisticsLocation { get; set; }
+        public ObservableCollection<TourInstance> todayInstances { get; set; }
+        public ObservableCollection<TourInstance> futureInstances { get; set; }
         public ObservableCollection<string> Languages { get; set; }
+
+        private User loggedUser;
         
         private string yearLanguage;
         public string YearLanguage
@@ -114,6 +119,8 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         public RelayCommand ResetLocationCommand { get; set; }
         public RelayCommand MonthlyStatisticCommand { get;set; }
         public RelayCommand MonthlyStatisticLocationCommand { get; set; }
+        public RelayCommand CreateTourByLanguageCommand { get; set; }
+        public RelayCommand CreateTourByLocationCommand { get; set; }
 
 
         private string toastLocation;
@@ -150,7 +157,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
                 OnPropertyChanged();
             }
         }
-        public YearlyTourStatistics() 
+        public YearlyTourStatistics(ObservableCollection<TourInstance> todayinstances, User user, ObservableCollection<TourInstance> futureinstances) 
         {
             Statistics=new ObservableCollection<GuideOneYearRequestStatisticViewModel>();
             StatisticsLocation = new ObservableCollection<GuideOneYearRequestStatisticViewModel>();
@@ -161,6 +168,9 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             ToastLocation = "Hidden";
             ToastCity = "Hidden";
             MakeListOfLocations();
+            loggedUser = user;
+            todayInstances = todayinstances;
+            futureInstances = futureinstances;
             LanguageSuggestService languageSuggestService = new LanguageSuggestService();
             YearLanguage = languageSuggestService.GetMostWantedLanguage();
             SuggestedLocationService suggestedLocationService = new SuggestedLocationService();
@@ -183,6 +193,8 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             ResetLocationCommand=new RelayCommand(ResetLocation_Executed,CanExecute);
             MonthlyStatisticCommand = new RelayCommand(MonthlyStatisticLanguage_Executed, CanExecute);
             MonthlyStatisticLocationCommand = new RelayCommand(MonthlyStatisticLocation_Executed, CanExecute);
+            CreateTourByLanguageCommand = new RelayCommand(CreateTourByLanguage_Executed, CanExecute);
+            CreateTourByLocationCommand = new RelayCommand(CreateTourByLocation_Executed,CanExecute);
         }
         private void ResetLanguage_Executed(object sender)
         {
@@ -271,6 +283,17 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             Countries = new ObservableCollection<string>(locationService.GetAllCountries());
             CitiesByCountry = new ObservableCollection<string>();
             IsComboBoxCityEnabled = false;
+        }
+        private void CreateTourByLanguage_Executed(object sender)
+        {
+            AddTourByLanguageView addTourByLanguageView = new AddTourByLanguageView(todayInstances, loggedUser, futureInstances, YearLanguage);
+            Application.Current.Windows.OfType<GuideWindow>().FirstOrDefault().Main.Content = addTourByLanguageView;
+        }
+        private void CreateTourByLocation_Executed(object sender)
+        {
+            SuggestedLocationService suggestedLocationService = new SuggestedLocationService();
+            AddTourByLocation addTourByLanguageView = new AddTourByLocation(todayInstances, loggedUser, futureInstances, suggestedLocationService.GetMostWantedLocation());
+            Application.Current.Windows.OfType<GuideWindow>().FirstOrDefault().Main.Content = addTourByLanguageView;
         }
     }
 }

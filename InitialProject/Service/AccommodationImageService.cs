@@ -37,5 +37,10 @@ namespace InitialProject.Service
             }
             return images;
         }
+
+        public void Delete(AccommodationImage image)
+        {
+            accommodationImageRepository.Delete(image);
+        }
     }
 }

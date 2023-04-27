@@ -11,5 +11,6 @@ namespace InitialProject.Domain.RepositoryInterfaces
     {
         public void Add(ReschedulingAccommodationRequest request);
         public ReschedulingAccommodationRequest Update(ReschedulingAccommodationRequest updatedRequest);
+        public void Delete(ReschedulingAccommodationRequest request);
     }
 }

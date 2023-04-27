@@ -78,5 +78,9 @@ namespace InitialProject.Service
             return filteredRequests;
         }
         
+        public void Delete(CompletedAccommodationReschedulingRequest request)
+        {
+           completedRequestRepository.Delete(request);
+        }
     }
 }

@@ -36,7 +36,7 @@ namespace InitialProject.Service
             TourInstanceService tourInstanceService= new TourInstanceService();
             TourInstance actual = newinstance;
             DateTime newdays=actual.StartDate.AddHours(duration);
-            if (newdays < EndDate)
+            if (newdays <= EndDate)
             {
                 foreach (TourInstance instance in tourInstanceService.GetAll())
                 {

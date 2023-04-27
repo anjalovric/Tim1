@@ -47,6 +47,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
                 if (value != startDate)
                 {
                     startDate = value;
+                    IsErrorMessageVisible = "Hidden";
                     OnPropertyChanged();
                 }
             }
@@ -222,6 +223,19 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
                 }
             }
         }
+        private string isAvailable;
+        public string IsAvailable
+        {
+            get => isAvailable;
+            set
+            {
+                if (value != isAvailable)
+                {
+                    isAvailable = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         private bool isComboBoxCityEnabled;
         public bool IsComboBoxCityEnabled
         {
@@ -270,6 +284,8 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             MakeCommands();
             MakeListOfLocations();
             Start=DateTime.Now;
+            Date= DateTime.Now;
+            IsAvailable = "Hidden";
         }
 
         private void MakeListOfLocations()
@@ -371,19 +387,31 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
                 newInstance.Date = InstanceStartDate.ToString().Split(' ')[0];
                 newInstance.Guide = guideService.GetByUsername(loggedInUser.Username);
                 newInstance.CoverImage = "";
-            if (IsTimeValid())
+            if (IsTimeValid() && IsGuideAvailable(newInstance))
             {
                 Instances.Add(newInstance);
                 IsErrorMessageVisible = "Hidden";
-            }
-            else
-                IsErrorMessageVisible = "Visible";
+                IsAvailable = "Hidden";
+            }       
         }
         private bool IsTimeValid()
         {
-            if (newInstance.StartDate.Date > DateTime.Now.Date || (InstanceStartDate.Date == DateTime.Now.Date && InstanceStartDate > DateTime.Now))
-                return true;
-            return false; ;
+            if (!(newInstance.StartDate.Date > DateTime.Now.Date || (InstanceStartDate.Date == DateTime.Now.Date && InstanceStartDate > DateTime.Now)))
+            {
+                IsErrorMessageVisible = "Visible";
+                return false;
+            }
+            return true;
+        }
+        private bool IsGuideAvailable(TourInstance instance)
+        {
+            AvailableDatesForTour availableDatesForTour = new AvailableDatesForTour();
+            if (Duration >= 0.1 && availableDatesForTour.ScheduledInstances(instance, instance.StartDate, instance.StartDate.AddHours(Duration), Duration).Count > 0)
+            {
+                IsAvailable = "Visible";
+                return false;
+            }
+            return true;
         }
         private void CancelTime_Executed(object sender)
         {
