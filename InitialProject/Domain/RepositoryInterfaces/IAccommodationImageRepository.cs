@@ -11,5 +11,6 @@ namespace InitialProject.Domain.RepositoryInterfaces
     {
         public int Add(AccommodationImage image);
         public List<string> GetUrlByAccommodationId(int id);
+        public void Delete(AccommodationImage image);
     }
 }

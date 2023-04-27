@@ -57,6 +57,11 @@ namespace InitialProject.Service
             foreach (AccommodationRenovationSuggestion suggestion in suggestions)
                 suggestion.Reservation = storedReservations.Find(n => n.Id == suggestion.Reservation.Id);
         }
+
+        public void Delete(AccommodationRenovationSuggestion suggestion)
+        {
+            renovationSuggestionRepository.Delete(suggestion);
+        }
     }
 }
 //napuniti rezervacije

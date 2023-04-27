@@ -7,6 +7,7 @@ using InitialProject.Domain.Model;
 using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Model;
 using InitialProject.Serializer;
+using Org.BouncyCastle.Asn1.Ocsp;
 
 namespace InitialProject.Repository
 {
@@ -49,6 +50,14 @@ namespace InitialProject.Repository
         public CompletedAccommodationReschedulingRequest GetById(int id)
         {
             return _completedRequests.Find(n => n.Id == id);
+        }
+
+        public void Delete(CompletedAccommodationReschedulingRequest request)
+        {
+            _completedRequests = _serializer.FromCSV(FilePath);
+            CompletedAccommodationReschedulingRequest founded = _completedRequests.Find(c => c.Id == request.Id);
+            _completedRequests.Remove(founded);
+            _serializer.ToCSV(FilePath, _completedRequests);
         }
     }
 }

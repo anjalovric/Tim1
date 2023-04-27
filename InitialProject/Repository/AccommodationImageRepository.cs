@@ -62,5 +62,12 @@ namespace InitialProject.Repository
         {
             return _accommodationImages.Find(n => n.Id == id);
         }
+        public void Delete(AccommodationImage image)
+        {
+            _accommodationImages = _serializer.FromCSV(FilePath);
+            AccommodationImage founded = _accommodationImages.Find(c => c.Id == image.Id);
+            _accommodationImages.Remove(founded);
+            _serializer.ToCSV(FilePath, _accommodationImages);
+        }
     }
 }

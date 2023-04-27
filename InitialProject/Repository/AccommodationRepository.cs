@@ -49,5 +49,13 @@ namespace InitialProject.Repository
         {
             return _accommodations.Find(n => n.Id == id);
         }
+
+        public void Delete(Accommodation accommodation)
+        {
+            _accommodations = _serializer.FromCSV(FilePath);
+            Accommodation founded = _accommodations.Find(c => c.Id == accommodation.Id);
+            _accommodations.Remove(founded);
+            _serializer.ToCSV(FilePath, _accommodations);
+        }
     }
 }

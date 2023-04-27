@@ -54,5 +54,10 @@ namespace InitialProject.Service
                     accommodation.IsRenovated = false;
             }
         }
+
+        public void Delete(AccommodationRenovation renovation)
+        {
+            accommodationRenovationRepository.Delete(renovation);
+        }
     }
 }

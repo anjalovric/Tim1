@@ -92,6 +92,11 @@ namespace InitialProject.Service
             return accommodationsByOwner;
         }
 
+        public void Delete(Accommodation accommodation)
+        {
+            accommodationRepository.Delete(accommodation);
+        }
+
         public List<Accommodation> SearchName(Accommodation accommodation, string Name)
         {
             if (!accommodation.Name.ToLower().Contains(Name.ToLower()))
