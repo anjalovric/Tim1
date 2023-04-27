@@ -18,6 +18,8 @@ namespace InitialProject.Service
         {
             renovations = accommodationRenovationRepository.GetAll();
             SetAccommodations();
+            SetCanBeCancelled();
+            SetIsInProgress();
         }
 
         private void SetAccommodations()
@@ -35,7 +37,9 @@ namespace InitialProject.Service
 
         public List<AccommodationRenovation> GetAllByOwner(Owner owner)
         {
-            return renovations.FindAll(n => n.Accommodation.Owner.Id == owner.Id);
+            List<AccommodationRenovation> renovationsByOwner = renovations.FindAll(n => n.Accommodation.Owner.Id == owner.Id);
+            renovationsByOwner = renovationsByOwner.OrderByDescending(r => r.StartDate.Date).ToList();
+            return renovationsByOwner;
         }
 
         public void Add(AccommodationRenovation renovation)
@@ -62,12 +66,34 @@ namespace InitialProject.Service
 
         public int CountUpcomingRenovations(Owner owner)
         {
-            return renovations.FindAll(n => n.Accommodation.Owner.Id == owner.Id && !n.Accommodation.IsRenovated).Count();
+            return renovations.FindAll(n => n.Accommodation.Owner.Id == owner.Id && n.StartDate>DateTime.Now.Date && !n.IsInProgress).Count();
         }
 
         public int CountRenovatedObjects(Owner owner)
         {
-            return renovations.FindAll(n => n.Accommodation.Owner.Id == owner.Id && n.Accommodation.IsRenovated).Count();
+            return renovations.FindAll(n => n.Accommodation.Owner.Id == owner.Id && n.EndDate.Date<DateTime.Now.Date).Count();
+        }
+
+        private void SetCanBeCancelled()
+        {
+            foreach(var renovation in renovations)
+            {
+                if (renovation.StartDate.Date > DateTime.Now.Date.AddDays(5))
+                    renovation.CanBeCancelled = true;
+                else
+                    renovation.CanBeCancelled = false;
+            }
+        }
+
+        private void SetIsInProgress()
+        {
+            foreach (var renovation in renovations)
+            {
+                if (renovation.StartDate.Date <= DateTime.Now.Date && renovation.EndDate >=DateTime.Now.Date)
+                    renovation.IsInProgress = true;
+                else
+                    renovation.IsInProgress = false;
+            }
         }
     }
 }

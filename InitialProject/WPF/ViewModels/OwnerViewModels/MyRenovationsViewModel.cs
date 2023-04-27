@@ -21,16 +21,19 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         private AccommodationRenovationService renovationService;
         private int upcomingRenovations;
         private int renovatedObjects;
+        private AccommodationRenovation selectedRenovation;
 
         public event PropertyChangedEventHandler? PropertyChanged;
         public ObservableCollection<AccommodationRenovation> Renovations { get; set; }
         public RelayCommand NewRenovationCommand { get; set; }
+        public RelayCommand CancelCommand { get; set; }
         public MyRenovationsViewModel(Owner owner)
         {
             this.owner = owner;
             renovationService = new AccommodationRenovationService();
             Renovations = new ObservableCollection<AccommodationRenovation>(renovationService.GetAllByOwner(owner));
             NewRenovationCommand = new RelayCommand(NewRenovation_Executed, CanExecute);
+            CancelCommand = new RelayCommand(Cancel_Executed, CanExecute);
         }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -48,6 +51,13 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = scheduleRenovationView;
         }
 
+        private void Cancel_Executed(object sender)
+        {
+            selectedRenovation = sender as AccommodationRenovation;
+            Renovations.Remove(selectedRenovation);
+            renovationService.Delete(selectedRenovation);
+            UpdateRenovationsNumber();
+        }
         public int UpcomingRenovations
         {
             get => renovationService.CountUpcomingRenovations(owner);
@@ -72,6 +82,12 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
                     OnPropertyChanged();
                 }
             }
+        }
+
+        private void UpdateRenovationsNumber()
+        {
+            UpcomingRenovations = renovationService.CountUpcomingRenovations(owner);
+            RenovatedObjects = renovationService.CountRenovatedObjects(owner);
         }
     }
 }

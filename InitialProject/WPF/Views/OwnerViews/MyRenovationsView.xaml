@@ -33,20 +33,29 @@
                 <Label Content="{Binding Path=RenovatedObjects, UpdateSourceTrigger=PropertyChanged}" FontWeight="Bold" FontSize="42" Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" Margin="20, 0, 0, 0"/>
             </Grid>
         </Border>
-        <DataGrid ItemsSource="{Binding Renovations}" Grid.Column="0" Grid.Row="2" Style="{StaticResource DataGridStyle}" IsReadOnly="True">
+        <DataGrid Name="RenovationsDataGrid" ItemsSource="{Binding Renovations}" Grid.Column="0" Grid.Row="2" Style="{StaticResource DataGridStyle}" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Width="*" Binding="{Binding Path=Accommodation.Name, UpdateSourceTrigger=PropertyChanged}"/>
                 <DataGridTextColumn Header="Location" Width="*" Binding="{Binding Path=Accommodation.Location, UpdateSourceTrigger=PropertyChanged}"/>
-                <DataGridTextColumn Header="Start Date" Width="*" Binding="{Binding Path=StartDate, UpdateSourceTrigger=PropertyChanged}"/>
-                <DataGridTextColumn Header="End Date" Width="*" Binding="{Binding Path=EndDate, UpdateSourceTrigger=PropertyChanged}"/>
-                <DataGridTemplateColumn Header="Cancel" Width="0.6*">
+                <DataGridTextColumn Header="Start Date" Width="0.8*" Binding="{Binding Path=StartDate, UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTextColumn Header="End Date" Width="0.8*" Binding="{Binding Path=EndDate, UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTemplateColumn Header="Cancel" Width="0.8*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Background="AliceBlue" BorderBrush="DarkGray" IsEnabled="{Binding Path=CanBeCancelled, UpdateSourceTrigger=PropertyChanged}">Cancel</Button>
+                            <Button Background="AliceBlue" BorderBrush="DarkGray" IsEnabled="{Binding Path=CanBeCancelled, UpdateSourceTrigger=PropertyChanged}" Command="{Binding Path=DataContext.CancelCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding SelectedItem, ElementName=RenovationsDataGrid, UpdateSourceTrigger=PropertyChanged}">Cancel</Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell">
+                    <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsInProgress}" Value="True">
+                                <Setter Property="Background" Value="Green" />
+                            </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.CellStyle>
         </DataGrid>
         <Button Command="{Binding NewRenovationCommand}" Grid.Row="3" Height="41" Background="AliceBlue" BorderBrush="DarkGray"> New Renovation</Button>
     </Grid>
