@@ -14,7 +14,29 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         public ObservableCollection<GuideOneYearRequestStatisticViewModel> Statistics { get; set; }
         public ObservableCollection<GuideOneYearRequestStatisticViewModel> StatisticsLocation { get; set; }
         public ObservableCollection<string> Languages { get; set; }
-
+        
+        private string yearLanguage;
+        public string YearLanguage
+        {
+            get { return yearLanguage; }
+            set
+            {
+                if (value != yearLanguage)
+                    yearLanguage = value;
+                OnPropertyChanged();
+            }
+        }
+        private string yearLocation;
+        public string YearLocation
+        {
+            get { return yearLocation; }
+            set
+            {
+                if (value != yearLocation)
+                    yearLocation = value;
+                OnPropertyChanged();
+            }
+        }
         private string selectedLanguage;
         public string SelectedLanguage
         {
@@ -139,6 +161,10 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             ToastLocation = "Hidden";
             ToastCity = "Hidden";
             MakeListOfLocations();
+            LanguageSuggestService languageSuggestService = new LanguageSuggestService();
+            YearLanguage = languageSuggestService.GetMostWantedLanguage();
+            SuggestedLocationService suggestedLocationService = new SuggestedLocationService();
+            YearLocation = suggestedLocationService.GetMostWantedLocation().Country + ", " + suggestedLocationService.GetMostWantedLocation().City;
         }
         private bool CanExecute(object sender)
         {

@@ -39,25 +39,15 @@
                             </MenuItem>
                         </MenuItem>
                         <MenuItem Header="Statistics" Height="33" Width="100"  >
-                            <MenuItem Header="Tours" Height="33" Width="150" Command="{Binding TourStatisticsCommand}" Style="{DynamicResource MenuItem}">
+                            <MenuItem Header="Tours" Height="33" Width="160" Command="{Binding TourStatisticsCommand}" Style="{DynamicResource MenuItem}">
                                 <MenuItem.Icon>
                                     <Image Source="/Resources/Images/tour.jpg"/>
                                 </MenuItem.Icon>
                             </MenuItem>
-                            <MenuItem Header="Requests" Height="33" Width="150"  Style="{DynamicResource MenuItem}" >
+                            <MenuItem Header="Requests" Height="33" Width="160"  Command="{Binding RequestYearlyStatisticsCommand}" Style="{DynamicResource MenuItem}" >
                                 <MenuItem.Icon>
-                                    <Image Source="/Resources/Images/RR.png" Stretch="Fill"/>
+                                    <Image Source="/Resources/Images/RR.png"/>
                                 </MenuItem.Icon>
-                                <MenuItem Header="Monthly" Height="33" Width="155"   Style="{DynamicResource MenuItem}">
-                                    <MenuItem.Icon>
-                                        <Image Source="/Resources/Images/month.png"/>
-                                    </MenuItem.Icon>
-                                </MenuItem>
-                                <MenuItem Header="Yearly" Height="33" Width="150" Command="{Binding RequestYearlyStatisticsCommand}" Style="{DynamicResource MenuItem}">
-                                    <MenuItem.Icon>
-                                        <Image Source="/Resources/Images/365day.png"/>
-                                    </MenuItem.Icon>
-                                </MenuItem>
                             </MenuItem>
                         </MenuItem>
                         <MenuItem Header="Reviews" Height="33" Width="100"  Command="{Binding ReviewCommand}">
