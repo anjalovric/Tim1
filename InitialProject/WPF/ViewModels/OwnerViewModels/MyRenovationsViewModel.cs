@@ -19,9 +19,10 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
     {
         private Owner owner;
         private AccommodationRenovationService renovationService;
+        private int upcomingRenovations;
+        private int renovatedObjects;
 
         public event PropertyChangedEventHandler? PropertyChanged;
-
         public ObservableCollection<AccommodationRenovation> Renovations { get; set; }
         public RelayCommand NewRenovationCommand { get; set; }
         public MyRenovationsViewModel(Owner owner)
@@ -45,6 +46,32 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         {
             ScheduleRenovationView scheduleRenovationView = new ScheduleRenovationView(owner);
             Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = scheduleRenovationView;
+        }
+
+        public int UpcomingRenovations
+        {
+            get => renovationService.CountUpcomingRenovations(owner);
+            set
+            {
+                if (value != upcomingRenovations)
+                {
+                    upcomingRenovations = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public int RenovatedObjects
+        {
+            get => renovationService.CountRenovatedObjects(owner);
+            set
+            {
+                if (value != renovatedObjects)
+                {
+                    renovatedObjects = value;
+                    OnPropertyChanged();
+                }
+            }
         }
     }
 }

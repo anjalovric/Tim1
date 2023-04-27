@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using InitialProject.Domain.Model;
 using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Model;
 using InitialProject.Serializer;
@@ -54,6 +55,14 @@ namespace InitialProject.Repository
         public OwnerReview GetById(int id)
         {
             return _reviews.Find(n => n.Id == id);
+        }
+
+        public void Delete(OwnerReview review)
+        {
+            _reviews = _serializer.FromCSV(FilePath);
+            OwnerReview founded = _reviews.Find(c => c.Id == review.Id);
+            _reviews.Remove(founded);
+            _serializer.ToCSV(FilePath, _reviews);
         }
     }
 }

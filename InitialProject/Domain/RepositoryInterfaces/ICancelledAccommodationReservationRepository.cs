@@ -12,5 +12,6 @@ namespace InitialProject.Domain.RepositoryInterfaces
     {
         public void Add(AccommodationReservation reservation);
         public int GetMaxId();
+        public void Delete(AccommodationReservation reservation);
     }
 }

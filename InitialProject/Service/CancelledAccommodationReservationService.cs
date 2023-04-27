@@ -51,5 +51,10 @@ namespace InitialProject.Service
         {
             return cancelledReservations.Find(n => n.Id == reservation.Id) != null;
         }
+
+        public void Delete(AccommodationReservation reservation)
+        {
+            cancelledAccommodationReservationRepository.Delete(reservation);
+        }
     }
 }

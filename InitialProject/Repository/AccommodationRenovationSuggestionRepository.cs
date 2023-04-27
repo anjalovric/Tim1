@@ -51,5 +51,13 @@ namespace InitialProject.Repository
         {
             return _suggestions.Find(n => n.Id == id);
         }
+
+        public void Delete(AccommodationRenovationSuggestion suggestion)
+        {
+            _suggestions = _serializer.FromCSV(FilePath);
+            AccommodationRenovationSuggestion founded = _suggestions.Find(c => c.Id == suggestion.Id);
+            _suggestions.Remove(founded);
+            _serializer.ToCSV(FilePath, _suggestions);
+        }
     }
 }

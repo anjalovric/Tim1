@@ -94,6 +94,10 @@ namespace InitialProject.Service
             return stayedLessThan5DaysAgo && !alreadyReviewed && isThisOwner;
         }
 
+        public void Delete(GuestReview review)
+        {
+            guestReviewRepository.Delete(review);
+        }
        
 
     }

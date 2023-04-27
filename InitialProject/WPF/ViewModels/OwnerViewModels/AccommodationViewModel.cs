@@ -25,6 +25,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         public RelayCommand OKCommand { get; set; }
         public RelayCommand MyRenovationsCommand { get; set; }
         public RelayCommand StatisticsCommand { get; set; }
+        public RelayCommand RemoveCommand { get; set; }
         private Accommodation selectedAccommodation;
         private string stackPanelVisibility;
         private string stackPanelMessage;
@@ -106,6 +107,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             OKCommand = new RelayCommand(OK_Executed, CanExecute);
             StatisticsCommand = new RelayCommand(Statistics_Executed, CanExecute);
             MyRenovationsCommand = new RelayCommand(MyRenovations_Executed, CanExecute);
+            RemoveCommand = new RelayCommand(Remove_Executed, CanExecute);
         }
 
         private bool CanExecute(object sender)
@@ -139,6 +141,23 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         {
             if (SelectedAccommodation != null)
                 Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = new StatisticsByYearView(SelectedAccommodation);
+        }
+
+        private void Remove_Executed(object sender)
+        {
+            DeletingAccommodationService deletingAccommodationService = new DeletingAccommodationService();
+            if (SelectedAccommodation != null)
+            {
+                Accommodation accommodationToDelete = SelectedAccommodation;
+                if (MessageBox.Show("Are you sure you want to remove this accommodation?",
+                    "Remove Accommodation",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    Accommodations.Remove(accommodationToDelete);
+                    deletingAccommodationService.Delete(accommodationToDelete);
+                }
+            }
         }
         private void DisplayNotificationPanel()
         {

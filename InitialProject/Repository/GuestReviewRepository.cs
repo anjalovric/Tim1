@@ -52,5 +52,12 @@ namespace InitialProject.Repository
             return _reviews.Find(n => n.Id == id);
            
         }
+        public void Delete(GuestReview review)
+        {
+            _reviews = _serializer.FromCSV(FilePath);
+            GuestReview founded = _reviews.Find(c => c.Id == review.Id);
+            _reviews.Remove(founded);
+            _serializer.ToCSV(FilePath, _reviews);
+        }
     }
 }

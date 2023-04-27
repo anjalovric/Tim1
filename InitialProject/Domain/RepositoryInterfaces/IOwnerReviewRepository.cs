@@ -11,5 +11,6 @@ namespace InitialProject.Domain.RepositoryInterfaces
     {
         public bool HasReview(AccommodationReservation reservation);
         public void Add(OwnerReview review);
+        public void Delete(OwnerReview review);
     }
 }

@@ -51,9 +51,9 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             CancelCommand = new RelayCommand(Cancel_Executed, CanExecute);
             OkCommand = new RelayCommand(Ok_Executed, OKCanExecute);
             AddImageCommand = new RelayCommand(AddImage_Executed, CanExecute);
-            RemoveImageCommand = new RelayCommand(RemoveImage_Executed, CanExecute);
-            NextImageCommand = new RelayCommand(NextImage_Executed, CanExecute);
-            PreviousImageCommand = new RelayCommand(PreviousImage_Executed, CanExecute);
+            RemoveImageCommand = new RelayCommand(RemoveImage_Executed, RemoveImageCanExecute);
+            NextImageCommand = new RelayCommand(NextImage_Executed, ChangeImageCanExecute);
+            PreviousImageCommand = new RelayCommand(PreviousImage_Executed, ChangeImageCanExecute);
         }
         private void InitializeAccommodation()
         {
@@ -75,6 +75,20 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             {
                 return true;
             }
+            return false;
+        }
+
+        private bool ChangeImageCanExecute(object sender)
+        {
+            if (Images.Count > 1)
+                return true;
+            return false;
+        }
+
+        private bool RemoveImageCanExecute(object sender)
+        {
+            if (Images.Count > 1)
+                return true;
             return false;
         }
         private void Cancel_Executed(object sender)
@@ -106,8 +120,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
                         break;
                     }
                 }
-                imageCounter -= 1;
-                NextImage_Executed(sender);
+                ImageUrl = Images[0].Url;
             }
         }
 

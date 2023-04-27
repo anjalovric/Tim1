@@ -11,5 +11,6 @@ namespace InitialProject.Domain.RepositoryInterfaces
     public interface IAccommodationRenovationSuggestionRepository : IGenericRepository<AccommodationRenovationSuggestion>
     {
         public void Add(AccommodationRenovationSuggestion suggestion);
+        public void Delete(AccommodationRenovationSuggestion suggestion);
     }
 }

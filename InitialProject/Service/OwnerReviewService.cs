@@ -105,5 +105,10 @@ namespace InitialProject.Service
         {
             return SelectedCompletedReservation.Departure >= DateTime.Now.AddDays(-5);
         }
+
+        public void Delete(OwnerReview review)
+        {
+            ownerReviewRepository.Delete(review);
+        }
     }
 }

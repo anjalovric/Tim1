@@ -90,5 +90,10 @@ namespace InitialProject.Service
             request.Reservation.Departure = request.NewDepartureDate;
             accommodationReservationService.Update(request.Reservation);
         }
+
+        public void Delete(ReschedulingAccommodationRequest request)
+        {
+            requestRepository.Delete(request);
+        }
     }
 }
