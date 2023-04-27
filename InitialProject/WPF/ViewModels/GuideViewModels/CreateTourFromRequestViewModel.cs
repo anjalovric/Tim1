@@ -378,8 +378,8 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             SaveInputs(savedTour);
             Toast = "Visible";
             UpdateRequests();
+            SetNotifications(tourId);
         }
-
         private void UpdateRequests()
         {
             GuideService guideService = new GuideService();
@@ -538,7 +538,26 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             else
                 Image = null;
         }
-
-
+        private Guest2 FindGuest2()
+        {
+            Guest2Service guest2Service = new Guest2Service();
+            List<Guest2> Guests = new List<Guest2>(guest2Service.GetAll());
+            return Guests.Find(c => c.Id == tourRequests.GuestId);
+        }
+        private void SetNotifications(int tourId)
+        {
+            TourInstance tourInstance = new TourInstance();
+            Guest2NotificationService guest2NotificationService = new Guest2NotificationService();
+            foreach (TourInstance TourInstance in FutureInstances)
+            {
+                if (TourInstance.Tour.Id == tourId)
+                {
+                    tourInstance = TourInstance;
+                    Guest2Notification guest2Notification = new Guest2Notification(FindGuest2(), "Your tour request has been accepted. Click on details for more. You can delete it.", Guest2NotificationType.REQUEST_ACCEPTED, tourInstance, false);
+                    guest2NotificationService.Save(guest2Notification);
+                }
+            }
+           
+        }
     }
 }
