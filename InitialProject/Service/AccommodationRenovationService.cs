@@ -89,7 +89,7 @@ namespace InitialProject.Service
         {
             foreach (var renovation in renovations)
             {
-                if (renovation.StartDate.Date <= DateTime.Now.Date && renovation.EndDate >=DateTime.Now.Date)
+                if (renovation.StartDate.Date <= DateTime.Now.Date && renovation.EndDate.Date >=DateTime.Now.Date)
                     renovation.IsInProgress = true;
                 else
                     renovation.IsInProgress = false;

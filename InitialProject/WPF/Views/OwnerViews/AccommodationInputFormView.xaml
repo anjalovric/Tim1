@@ -14,7 +14,7 @@
     <ScrollViewer>
         <Grid Height="780" >
             <Label Content="Name" Margin="23,57,183,667"/>
-            
+
             <TextBox HorizontalAlignment="Center" Margin="0,89,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="363" Height="31">
                 <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -38,7 +38,7 @@
                     </ControlTemplate>
                 </Validation.ErrorTemplate>
             </TextBox>
-            
+
             <Label Content="Country" Margin="23,140,207,584"/>
             <Label Content="City" Margin="225,140,26,584"/>
             <Label Content="Type" Margin="23,207,206,517"/>
@@ -65,10 +65,16 @@
                     <Image Source="/Resources/Images/arrow.png" />
                 </Button.Content>
             </Button>
-            <Button Command="{Binding CancelCommand}" Name="CancelButton" Content="Cancel" HorizontalAlignment="Left" Margin="25,720,0,0" VerticalAlignment="Top" Width="136" Height="41"/>
-            <Button Command="{Binding OkCommand}" Name="OkButton" Content="OK" Margin="251,724,0,20" HorizontalAlignment="Left" Width="136"/>
+            <Grid Margin="0,670,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Button Command="{Binding CancelCommand}" Grid.Column="0" Name="CancelButton" Content="Cancel" Margin="30, 0, 0, 0" HorizontalAlignment="Left" Width="136" Height="41"/>
+                <Button Command="{Binding OkCommand}" Grid.Column="1" Name="OkButton" Content="OK" Margin="0, 0, 25, 0" HorizontalAlignment="Right" Width="136" Height="41"/>
+            </Grid>
             <Image Source="/Resources/Images/logoMyTravel.png" Margin="252,10,27,702"/>
-            <Label Content="*All fields are required!" Foreground="Red" HorizontalAlignment="Left" Margin="24,630,0,0" VerticalAlignment="Center" Width="188">
+            <Label Content="*All fields are required!" Foreground="Red" HorizontalAlignment="Left" Margin="24,605,0,0" VerticalAlignment="Center" Width="188">
                 <Label.Style>
                     <Style TargetType="Label">
                         <Style.Triggers>
