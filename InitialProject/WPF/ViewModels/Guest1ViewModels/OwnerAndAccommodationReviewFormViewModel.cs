@@ -29,6 +29,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         public RelayCommand NextPhotoCommand { get; set; }
         public RelayCommand PreviousPhotoCommand { get; set; }
         public RelayCommand DeletePhotoCommand { get; set; }
+        public RelayCommand ResetComboBoxCommand { get; set; }
         public int AccommodationCleanliness { get; set; }
         public int OwnerCorrectness { get; set; }
         public string Comments { get; set; }
@@ -44,9 +45,58 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             }
 
         }
+        private int levelOfUrgencyIndex;
+        public int LevelOfUrgencyIndex
+        {
+            get { return levelOfUrgencyIndex; }
+            set
+            {
+                if (value != levelOfUrgencyIndex)
+                    levelOfUrgencyIndex = value;
+                OnPropertyChanged("LevelOfUrgencyIndex");
+            }
+
+        }
 
         public string ConditionsOfAccommodation { get; set; }
         public string LevelOfUrgency { get; set; }
+        private bool isResetEnabled;
+        public bool IsResetEnabled
+        {
+            get { return isResetEnabled; }
+            set
+            {
+                if (value != isResetEnabled)
+                    isResetEnabled = value;
+                OnPropertyChanged("IsResetEnabled");
+            }
+
+        }
+        private bool isNextEnabled;
+        public bool IsNextEnabled
+        {
+            get { return isNextEnabled; }
+            set
+            {
+                if (value != isNextEnabled)
+                    isNextEnabled = value;
+                OnPropertyChanged("IsNextEnabled");
+            }
+
+        }
+        private bool isDeleteEnabled;
+        public bool IsDeleteEnabled
+        {
+            get { return isDeleteEnabled; }
+            set
+            {
+                if (value != isDeleteEnabled)
+                    isDeleteEnabled = value;
+                OnPropertyChanged("IsDeleteEnabled");
+            }
+
+        }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -54,12 +104,24 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         private Guest1 guest1;
+        public RelayCommand UrgencySelectionChangedCommand { get; set; }
         public OwnerAndAccommodationReviewFormViewModel(Guest1 guest1,AccommodationReservation SelectedCompletedReservation)
         {
             this.reservation = SelectedCompletedReservation;
             this.guest1 = guest1;
             images = new List<AccommodationReviewImage>();
+            LevelOfUrgencyIndex = -1;
+            IsResetEnabled = false;
+            IsNextEnabled = false;
+            IsDeleteEnabled = false;
+
             MakeCommands();
+        }
+        private void ResetComboBox_Executed(object sender)
+        {
+            LevelOfUrgencyIndex = -1;
+            LevelOfUrgency = null;
+            IsResetEnabled=false;
         }
         private bool CanExecute(object sender)
         {
@@ -73,18 +135,27 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             NextPhotoCommand = new RelayCommand(NextPhoto_Executed, CanExecute);
             PreviousPhotoCommand = new RelayCommand(PreviousPhoto_Executed, CanExecute);
             DeletePhotoCommand = new RelayCommand(DeletePhoto_Executed, CanExecute);
+            ResetComboBoxCommand = new RelayCommand(ResetComboBox_Executed, CanExecute);
+            UrgencySelectionChangedCommand = new RelayCommand(UrgencySelectionChanged_Executed, CanExecute);
+        }
+        private void UrgencySelectionChanged_Executed(object sender)
+        {
+            if (LevelOfUrgencyIndex != -1)
+                IsResetEnabled = true;
         }
         private void Send_Executed(object sender)
         {
             if (!IsImageUploadValid())
             {
                 Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("You must upload at least one photo!", "/Resources/Images/exclamation.png");
-                messageBox.Show();
+                messageBox.Owner = Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault();
+                messageBox.ShowDialog();
             }
             else if (!IsRenovationSuggestionValid())
             {
                 Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("You must fill all fields for renovation suggestion!", "/Resources/Images/exclamation.png");
-                messageBox.Show();
+                messageBox.Owner = Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault();
+                messageBox.ShowDialog();
             }
             else
             {
@@ -92,7 +163,8 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                 StoreImages();
                 StoreRenovationSuggestion();
                 Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("Successfully sent!", "/Resources/Images/done.png");
-                messageBox.Show();
+                messageBox.Owner = Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault();
+                messageBox.ShowDialog();
                 Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = new MyAccommodationReservationsView(guest1);
             }
         }
@@ -119,10 +191,11 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                 if (LevelOfUrgency == null)
                     LevelOfUrgency = "";
 
-                AccommodationRenovationSuggestion suggestion = new AccommodationRenovationSuggestion(reservation,LevelOfUrgency,ConditionsOfAccommodation);
+                AccommodationRenovationSuggestion suggestion = new AccommodationRenovationSuggestion(reservation,LevelOfUrgencyIndex+1,ConditionsOfAccommodation);
                 accommodationRenovationSuggestionService.Add(suggestion);
             }
         }
+
 
         private void StoreImages()
         {
@@ -165,6 +238,14 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                 AccommodationReviewImage accommodationReviewImage = new AccommodationReviewImage(reservation, relative);
                 images.Add(accommodationReviewImage);
             }
+            if (images.Count >= 2)
+                IsNextEnabled = true;
+            else
+                IsNextEnabled = false;
+            if(images.Count >= 1)
+                IsDeleteEnabled = true;
+            else
+                IsDeleteEnabled = false;
         }
         private String MakeRelativePath(OpenFileDialog openFileDialog)
         {
@@ -196,6 +277,14 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                     }
                 }
             }
+            if (images.Count >= 2)
+                IsNextEnabled = true;
+            else
+                IsNextEnabled = false;
+            if (images.Count >= 1)
+                IsDeleteEnabled = true;
+            else
+                IsDeleteEnabled = false;
         }
         private void NextPhoto_Executed(object sender)
         {

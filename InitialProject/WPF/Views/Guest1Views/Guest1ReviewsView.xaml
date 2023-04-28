@@ -16,6 +16,9 @@
             <Setter Property="Foreground" Value="#d9c7b3"></Setter>
             <Setter Property="FontWeight" Value="Medium"></Setter>
         </Style>
+        <Style TargetType="ScrollBar">
+            <Setter Property="Background" Value="#FFFCECB9"></Setter>
+        </Style>
         <Style TargetType="TextBox">
             <Setter Property="Background" Value="#FFFCECB9"></Setter>
             <Setter Property="BorderBrush" Value="#22301a"></Setter>
@@ -123,7 +126,17 @@
             <Slider x:Name="CleanlinessSlider" Minimum="1" Maximum="5" TickFrequency="0.1" AutoToolTipPlacement="BottomRight"   Width="120" Grid.Row="4" IsEnabled="False" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,130,0" Value="{Binding AverageCleanliness, Mode=OneWay}"></Slider>
             <Slider x:Name="FollowingRulesSlider" Width="120" Minimum="1" Maximum="5" Grid.Row="5" IsEnabled="False" TickFrequency="0.1" HorizontalAlignment="Right" AutoToolTipPlacement="BottomRight" VerticalAlignment="Center" Margin="0,0,130,0"  Value="{Binding AverageFollowingRules, Mode=OneWay}"></Slider>
             <Label FontSize="18" Grid.Row="6" Width="Auto" Height="35" HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Margin="70,0,0,0">Average ratings report:</Label>
-            <Button Grid.Row="6" HorizontalAlignment="Left" VerticalAlignment="Center" Height="35" Width="100" FontWeight="Bold" Margin="342,0,0,0" FontSize="18">Report</Button>
+            <Button Grid.Row="6" HorizontalAlignment="Left" VerticalAlignment="Center" Height="35" Width="100" FontWeight="Bold" Margin="342,0,0,0" FontSize="18">
+                <Grid Background="#8c9d75" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="/Resources/Images/report.png" VerticalAlignment="Center" HorizontalAlignment="Right"  Margin="3,0,0,0" Width="Auto" Height="22" Grid.Column="1" RenderTransformOrigin="0.5,0.5">
+                    </Image>
+                    <TextBlock Background="#8c9d75" Text="Report" Grid.Column="0" VerticalAlignment="Center" FontSize="18"  Foreground="#22301a" Margin="10,0,0,0" FontWeight="Bold" HorizontalAlignment="Left" Width="58"/>
+                </Grid>
+            </Button>
 
             <Label FontSize="18" Grid.Row="8" Width="Auto" Height="35" HorizontalAlignment="Center" VerticalAlignment="Top" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Margin="0,0,0,0">Change of average ratings:</Label>
 

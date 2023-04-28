@@ -324,7 +324,8 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         {
             Accommodation currentAccommodation = ((Button)sender).DataContext as Accommodation;
             AccommodationReservationFormView accommodationReservationForm = new AccommodationReservationFormView(currentAccommodation, guest1);
-            accommodationReservationForm.Show();
+            accommodationReservationForm.Owner = Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault();
+            accommodationReservationForm.ShowDialog();
         }
         private bool IsNumberOfDaysValid()  //dodati normalnu validaciju
         {

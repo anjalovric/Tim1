@@ -16,7 +16,6 @@ using System.Windows.Documents;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Drawing;
 using System.Windows.Media;
 using Color = System.Windows.Media.Color;
 using NPOI.SS.UserModel;
@@ -25,6 +24,7 @@ using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using Image = System.Windows.Controls.Image;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 {
@@ -144,9 +144,9 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             foreach (System.Windows.Documents.Hyperlink link in links)
             {
                     if (link.Tag.Equals(0))
-                        StoredNotifications.Add(new MenuItem { Header = link, IsCheckable = false, Width = 300, Background = System.Windows.Media.Brushes.PaleGreen, BorderBrush = System.Windows.Media.Brushes.Black, BorderThickness = new Thickness(2), Icon = new Image { Source = new BitmapImage(new Uri("/Resources/Images/done.png", UriKind.Relative)), Margin = new Thickness(0,-10,-7,-3), VerticalAlignment = System.Windows.VerticalAlignment.Bottom } }); 
+                        StoredNotifications.Add(new MenuItem { Header = link, FontWeight = FontWeights.SemiBold, IsCheckable = false, Width = 300, Background = System.Windows.Media.Brushes.PaleGreen, BorderBrush = System.Windows.Media.Brushes.Black, BorderThickness = new Thickness(3), Margin = new Thickness(1),  Icon = new Image { Source = new BitmapImage(new Uri("/Resources/Images/done.png", UriKind.Relative)), Margin = new Thickness(0,-10,-7,-3), VerticalAlignment = System.Windows.VerticalAlignment.Bottom } }); 
                 else
-                    StoredNotifications.Add(new MenuItem { Header = link, IsCheckable = false, Width = 300, Background = System.Windows.Media.Brushes.LightCoral, BorderBrush = System.Windows.Media.Brushes.Black, BorderThickness = new Thickness(2), Icon = new Image { Source = new BitmapImage(new Uri("/Resources/Images/no.png", UriKind.Relative)), Margin = new Thickness(0, -10, -7, -3), VerticalAlignment = System.Windows.VerticalAlignment.Bottom } });
+                    StoredNotifications.Add(new MenuItem { Header = link,  FontWeight = FontWeights.SemiBold, IsCheckable = false, Width = 300, Background = System.Windows.Media.Brushes.LightCoral, BorderBrush = System.Windows.Media.Brushes.Black, BorderThickness = new Thickness(3), Margin = new Thickness(1), Icon = new Image { Source = new BitmapImage(new Uri("/Resources/Images/no.png", UriKind.Relative)), Margin = new Thickness(0, -10, -7, -3), VerticalAlignment = System.Windows.VerticalAlignment.Bottom } });
             }
         }
 
@@ -205,8 +205,9 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         }
         public String GenerateNotification(CompletedAccommodationReschedulingRequest completedRequest)
         {
-            return "Request status - " + completedRequest.Request.state.ToString().ToUpper() + "\nOwner: " + completedRequest.Request.Reservation.Accommodation.Owner.Name + " " + completedRequest.Request.Reservation.Accommodation.Owner.LastName + "\n"
-                + "Name: " + completedRequest.Request.Reservation.Accommodation.Name
+            return "Request status - " + completedRequest.Request.state.ToString().ToUpper()
+                + "\nName: " + completedRequest.Request.Reservation.Accommodation.Name
+                + "\nOwner: " + completedRequest.Request.Reservation.Accommodation.Owner.Name + " " + completedRequest.Request.Reservation.Accommodation.Owner.LastName
                 + "\nFor: " + completedRequest.Request.NewArrivalDate.ToString("d") + " - " + completedRequest.Request.NewDepartureDate.ToString("d");
         }
 

@@ -151,19 +151,22 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             if (!IsValidDateInput())
             {
                 Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("Non valid input, please enter values again!", "/Resources/Images/exclamation.png");
-                messageBox.Show();
+                messageBox.Owner = Application.Current.Windows.OfType<AccommodationReservationFormView>().FirstOrDefault();
+                messageBox.ShowDialog();
             }
 
             else if (!IsEnteredCorrectDateRange())
             {
                 Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("The minimum number of days for booking this accommodation is " + currentAccommodation.MinDaysForReservation.ToString() + ".", "/Resources/Images/exclamation.png");
-                messageBox.Show();
+                messageBox.Owner = Application.Current.Windows.OfType<AccommodationReservationFormView>().FirstOrDefault();
+                messageBox.ShowDialog();
             }
            
             else if (!IsEnteredCorrectGuestsNumber())
             {
                 Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("The maximum number of guests for this accommodation is " + currentAccommodation.Capacity.ToString() + ".", "/Resources/Images/exclamation.png");
-                messageBox.Show();
+                messageBox.Owner = Application.Current.Windows.OfType<AccommodationReservationFormView>().FirstOrDefault();
+                messageBox.ShowDialog();
             }
                 
             else
@@ -175,7 +178,8 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             suggestedDatesForAccommodationReservationService.TakeInputParameters(Arrival, Departure, NumberOfDays, NumberOfGuests);
             List<AvailableDatesForAccommodation> availableDates = new List<AvailableDatesForAccommodation>(suggestedDatesForAccommodationReservationService.GetAvailableDates(currentAccommodation, guest1));
             DatesForAccommodationReservationView datesForAccommodationReservationView = new DatesForAccommodationReservationView(currentAccommodation, guest1, availableDates);
-            datesForAccommodationReservationView.Show();
+            datesForAccommodationReservationView.Owner = Application.Current.Windows.OfType<AccommodationReservationFormView>().FirstOrDefault();
+            datesForAccommodationReservationView.ShowDialog();
         }
 
 

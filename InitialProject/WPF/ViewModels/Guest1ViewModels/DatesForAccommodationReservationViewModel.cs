@@ -71,11 +71,11 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         { 
             AccommodationReservation newReservation = new AccommodationReservation(guest1, currentAccommodation, selectedDateRange.Arrival, selectedDateRange.Departure);
             accommodationReservationService.Add(newReservation);
-            Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("Successfully done!", "/Resources/Images/done.png");
-            messageBox.Show();
             Application.Current.Windows.OfType<DatesForAccommodationReservationView>().FirstOrDefault().Close();
             Application.Current.Windows.OfType<AccommodationReservationFormView>().FirstOrDefault().Close();
-            
+            Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("Successfully done!", "/Resources/Images/done.png");
+            messageBox.Owner = Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault();
+            messageBox.ShowDialog();            
         }
         
        

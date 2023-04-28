@@ -109,6 +109,7 @@
     <None Remove="Resources\Images\report.png" />
     <None Remove="Resources\Images\request.png" />
     <None Remove="Resources\Images\reserve.png" />
+    <None Remove="Resources\Images\reset.png" />
     <None Remove="Resources\Images\RR.png" />
     <None Remove="Resources\Images\search.png" />
     <None Remove="Resources\Images\sent2.png" />
@@ -478,6 +479,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\red.jpg" />
+    <Resource Include="Resources\Images\reset.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Images\search.png" />
   </ItemGroup>
 

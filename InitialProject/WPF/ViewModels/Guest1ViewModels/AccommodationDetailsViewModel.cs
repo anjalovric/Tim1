@@ -71,7 +71,8 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         private void Reserve_Executed(object sender)
         {
             AccommodationReservationFormView accommodationReservationForm = new AccommodationReservationFormView(SelectedAccommodation, guest1);
-            accommodationReservationForm.Show();
+            accommodationReservationForm.Owner = Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault();
+            accommodationReservationForm.ShowDialog();
         }
         private bool CanExecute(object sender)
         {

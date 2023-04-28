@@ -10,6 +10,9 @@
         <Style TargetType="Grid">
             <Setter Property="Background" Value="#37492d"></Setter>
         </Style>
+        <Style TargetType="ScrollBar">
+            <Setter Property="Background" Value="#FFFCECB9"></Setter>
+        </Style>
         <Style TargetType="Label">
             <Setter Property="Foreground" Value="#d9c7b3"></Setter>
             <Setter Property="FontWeight" Value="Medium"></Setter>

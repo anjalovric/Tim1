@@ -35,17 +35,31 @@
         </Style>
         <Style TargetType="DataGrid">
             <Setter Property="BorderBrush" Value="#22301a"></Setter>
-            <Setter Property="BorderThickness" Value="4"></Setter>
-            <Setter Property="Background" Value="#FFFCECB9"></Setter>
-            <Setter Property="ColumnHeaderHeight" Value="35"></Setter>
+            <Setter Property="BorderThickness" Value="4,4,3,4"></Setter>
+            <Setter Property="Background" Value="#FFF9ECC5"></Setter>
+            <Setter Property="ColumnHeaderHeight" Value="40"></Setter>
+            <Setter Property="RowHeight" Value="30"></Setter>
+            <Setter Property="FontWeight" Value="Medium"></Setter>
+            <Setter Property="RowBackground" Value="#FFFCECB9"></Setter>
         </Style>
         <Style TargetType="DataGridColumnHeader">
             <Setter Property="TextElement.Foreground" Value="#22301a"></Setter>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="BorderThickness" Value="0,0,1,4"/>
+            <Setter Property="BorderBrush" Value="#22301a"/>
+            <Setter Property="Background" Value="#dbc9ab"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+        <Style TargetType="DataGridCell">
+            <Setter Property="TextBlock.TextAlignment" Value="Center"></Setter>
+        </Style>
+        <Style TargetType="ScrollBar">
+            <Setter Property="Background" Value="#FFFCECB9"></Setter>
         </Style>
     </Window.Resources>
     <Grid>
         <Label Content="SELECT DESIRED DATE" Height="Auto" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" Margin="0,20,0,0" FontWeight="Bold" FontFamily="Baskerville Old Face" TextElement.FontSize="24"></Label>
-        <DataGrid x:Name="AvailableDates" FontSize="16" SelectedItem="{Binding SelectedDateRange, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" ItemsSource="{Binding Path=availableDatesForAccommodations,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"  AutoGenerateColumns="False" Margin="0,20,0,0" IsReadOnly="True" VerticalAlignment="Center" HorizontalAlignment="Center" Height="320" Width="520">
+        <DataGrid x:Name="AvailableDates" HeadersVisibility="Column" FontSize="16" SelectedItem="{Binding SelectedDateRange, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" ItemsSource="{Binding Path=availableDatesForAccommodations,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"  AutoGenerateColumns="False" Margin="0,20,0,0" IsReadOnly="True" VerticalAlignment="Center" HorizontalAlignment="Center" Height="320" Width="520">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Arrival date" Width="2*" Binding="{Binding Arrival, Mode=OneWay}"/>
                 <DataGridTextColumn Header="Departure date" Width="2*" Binding="{Binding Departure, Mode=OneWay}"/>

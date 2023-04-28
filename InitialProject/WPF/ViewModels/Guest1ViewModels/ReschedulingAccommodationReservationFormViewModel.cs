@@ -58,12 +58,14 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                 StoreRequest();
                 Application.Current.Windows.OfType<ReschedulingAccommodationReservationFormView>().FirstOrDefault().Close();
                 Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("Request successfully sent!", "/Resources/Images/done.png");
-                messageBox.Show();
+                messageBox.Owner = Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault();
+                messageBox.ShowDialog();
             }
             else
             {
                 Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("Please enter valid dates!", "/Resources/Images/exclamation.png");
-                messageBox.Show();
+                messageBox.Owner = Application.Current.Windows.OfType<ReschedulingAccommodationReservationFormView>().FirstOrDefault();
+                messageBox.ShowDialog();
             }
         }
 

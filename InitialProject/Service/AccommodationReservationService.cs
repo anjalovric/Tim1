@@ -111,13 +111,6 @@ namespace InitialProject.Service
             messageBox.Show();
             var returnedResult = await result.Task;
             return returnedResult;
-
-           /* string sMessageBoxText = $"Do you want to make a reservation?\n";
-            string sCaption = "Confirm reservation";
-            MessageBoxButton btnMessageBox = MessageBoxButton.YesNo;
-            MessageBoxImage icnMessageBox = MessageBoxImage.Question;
-            MessageBoxResult result = MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
-            return result;*/
         }
 
         public int GetReservationsNumberByGuestInLastYear(Guest1 guest1)
