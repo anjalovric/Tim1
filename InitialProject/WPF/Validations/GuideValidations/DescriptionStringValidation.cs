@@ -12,21 +12,15 @@ namespace InitialProject.WPF.Validations.GuideValidations
     {
         public override ValidationResult Validate(object value, System.Globalization.CultureInfo cultureInfo)
         {
-            try
-            {
+           
                 string stringValue = value as string;
-                if (stringValue.Length == 0)
+                if (string.IsNullOrEmpty(stringValue))
                 {
-                    return new ValidationResult(false, "This field can't be empty");
+                    return new ValidationResult(false, "This field is required");
                 }
 
-
-                return new ValidationResult(true, "");
-            }
-            catch
-            {
-                return new ValidationResult(false, "Invalid");
-            }
+                else
+                    return new ValidationResult(true, "");
         }
     }
 }
