@@ -84,6 +84,8 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 
             CompletedReservations = new ObservableCollection<AccommodationReservation>(accommodationReservationService.GetCompletedReservations(guest1));
             NotCompletedReservations = new ObservableCollection<AccommodationReservation>(accommodationReservationService.GetNotCompletedReservations(guest1));
+            NotCompletedReservations = new ObservableCollection<AccommodationReservation>(NotCompletedReservations.OrderByDescending(x => x.Arrival > DateTime.Now).ToList());    //group: first will be shown reservations which haven't started yet
+
             MakeCommands();
 
         }
@@ -153,13 +155,23 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                 return;
             }
             
-            Task<bool> result = cancelledAccommodationReservationService.ConfirmCancellationMessageBox();
+            Task<bool> result = ConfirmCancellationMessageBox();
             bool IsYesClicked = await result;
             if (IsYesClicked)
                 ConfirmCancellation();
             
 
 
+        }
+
+        public async Task<bool> ConfirmCancellationMessageBox()
+        {
+            var result = new TaskCompletionSource<bool>();
+            Guest1YesNoMessageBoxView messageBox = new Guest1YesNoMessageBoxView("Do you want to cancel this reservation?", "/Resources/Images/qm.png", result);
+            messageBox.Owner = Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault();
+            messageBox.ShowDialog();
+            var returnedResult = await result.Task;
+            return returnedResult;
         }
         private void ConfirmCancellation()
         {

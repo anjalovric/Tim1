@@ -45,14 +45,7 @@ namespace InitialProject.Service
         {
             return DateTime.Now >= SelectedNotCompletedReservation.Arrival;
         }
-        public async Task<bool> ConfirmCancellationMessageBox()
-        {
-            var result = new TaskCompletionSource<bool>();
-            Guest1YesNoMessageBoxView messageBox = new Guest1YesNoMessageBoxView("Do you want to cancel this reservation?", "/Resources/Images/qm.png", result);
-            messageBox.Show();
-            var returnedResult = await result.Task;
-            return returnedResult;
-        }
+        
         public bool IsCancelled(AccommodationReservation reservation)
         {
             return cancelledReservations.Find(n => n.Id == reservation.Id) != null;

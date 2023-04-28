@@ -104,14 +104,7 @@ namespace InitialProject.Service
             }
             return reservationsToReview;
         }
-        public async Task<bool> ConfirmReservation()
-        {
-            var result = new TaskCompletionSource<bool>();
-            Guest1YesNoMessageBoxView messageBox = new Guest1YesNoMessageBoxView("Do you want to make a reservation?", "/Resources/Images/qm.png", result);
-            messageBox.Show();
-            var returnedResult = await result.Task;
-            return returnedResult;
-        }
+        
 
         public int GetReservationsNumberByGuestInLastYear(Guest1 guest1)
         {

@@ -6,7 +6,7 @@
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
-        Title="AccommodationReservationForm" Height="522" Width="660" WindowStartupLocation="CenterScreen" WindowStyle="None">
+        Title="AccommodationReservationForm" Height="522" Width="660" AllowsTransparency="True"  WindowStartupLocation="CenterScreen" WindowStyle="None">
     <Window.Resources>
         <Style TargetType="Grid">
             <Setter Property="Background" Value="#c99585"></Setter>

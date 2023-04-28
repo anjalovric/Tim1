@@ -172,7 +172,10 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         {
             this.guest1 = guest1;
             accommodationService = new AccommodationService();
-            Accommodations = new ObservableCollection<Accommodation>(accommodationService.GetAll());
+            AccommodationRenovationService accommodationRenovationService = new AccommodationRenovationService();
+            List<Accommodation> storedAccommodation = new List<Accommodation>(accommodationService.GetAll());
+            accommodationRenovationService.AreRenovated(storedAccommodation);
+            Accommodations = new ObservableCollection<Accommodation>(storedAccommodation);
             SortAccommodationBySuperOwners();
             NumberOfDays = "";
             NumberOfGuests = "";
@@ -327,46 +330,28 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             accommodationReservationForm.Owner = Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault();
             accommodationReservationForm.ShowDialog();
         }
-        private bool IsNumberOfDaysValid()  //dodati normalnu validaciju
+        private bool IsNumberOfDaysValid() 
         {
             var content = NumberOfDays;
             Match match = CreateValidationNumberRegex(content);
-            bool isValid = false;
+            bool isValid;
             if (!match.Success && NumberOfDays != "")
-                ShowNumberOfDaysValidationMessages();
+                isValid = false;
             else
-            {
                 isValid = true;
-                //numberOfDays.BorderBrush = Brushes.Green;
-               // numberOfDaysLabel.Content = string.Empty;
-            }
             return isValid;
         }
-        private void ShowNumberOfDaysValidationMessages()
-        {
-            //numberOfDays.BorderBrush = Brushes.Red;
-            //numberOfDaysLabel.Content = "This field should be positive integer number";
-            //numberOfDays.BorderThickness = new Thickness(1);
-        }
-        private void ShowNumberOfGuestsValidationMessages()
-        {
-            //numberOfGuests.BorderBrush = Brushes.Red;
-            //numberOfGuestsLabel.Content = "This field should be positive integer number";
-            //numberOfGuests.BorderThickness = new Thickness(1);
-        }
+        
+        
         private bool IsNumberOfGuestsValid()
         {
             var content = NumberOfGuests;
             Match match = CreateValidationNumberRegex(content);
             bool isValid = false;
             if (!match.Success && NumberOfGuests != "")
-                ShowNumberOfGuestsValidationMessages();
+                isValid = false;
             else
-            {
                 isValid = true;
-                //numberOfGuests.BorderBrush = Brushes.Green;   //dodati validaciju1!!!!!!!
-                //numberOfGuestsLabel.Content = string.Empty;
-            }
             return isValid;
         }
         private Match CreateValidationNumberRegex(string content)
