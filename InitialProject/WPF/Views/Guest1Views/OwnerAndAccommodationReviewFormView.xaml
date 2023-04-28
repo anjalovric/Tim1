@@ -15,11 +15,6 @@
             <Setter Property="Foreground" Value="#37492d"></Setter>
             <Setter Property="FontWeight" Value="Bold"></Setter>
         </Style>
-        <Style TargetType="Calendar">
-            <Setter Property="BorderBrush" Value="#22301a"></Setter>
-            <Setter Property="BorderThickness" Value="4"></Setter>
-            <Setter Property="Background" Value="#dbc9ab"></Setter>
-        </Style>
         <Style TargetType="TextBox">
             <Setter Property="Background" Value="#dbc9ab"></Setter>
             <Setter Property="BorderBrush" Value="#22301a"></Setter>
@@ -34,6 +29,11 @@
             <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
             <Setter Property="BorderBrush" Value="#22301a"></Setter>
             <Setter Property="BorderThickness" Value="3"></Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
         <Style TargetType="TextBlock">
             <Setter Property="Background" Value="#dbc9ab"></Setter>
@@ -77,8 +77,28 @@
             </Button>
             <Label HorizontalContentAlignment="Left" FontSize="18" Grid.Row="1" Grid.Column="0" Margin="65,0,0,0" VerticalAlignment="Center">Cleanliness:</Label>
             <Label HorizontalContentAlignment="Left" FontSize="18" Grid.Row="2" Grid.Column="0" Margin="65,0,0,0" VerticalAlignment="Center">Owner's correctness:</Label>
-            <Slider x:Name="CleanlinessSlider"  Minimum="1" Maximum="5" Grid.Row="1" Grid.Column="1" Margin="0,0,100,0" Width="130" VerticalAlignment="Center" TickFrequency="1" IsSnapToTickEnabled="True" AutoToolTipPlacement="BottomRight" Value="{Binding Path=AccommodationCleanliness}"/>
-            <Slider x:Name="CorrectnessSlider" Minimum="1" Maximum="5" Grid.Row="2" Grid.Column="1" Margin="0,0,100,0" Width="130" VerticalAlignment="Center" TickFrequency="1" IsSnapToTickEnabled="True" AutoToolTipPlacement="BottomRight" Value="{Binding Path=OwnerCorrectness}"/>
+            <Slider x:Name="CleanlinessSlider"  Minimum="1" Maximum="5" Grid.Row="1" Grid.Column="1" Margin="0,0,100,0" Width="130" VerticalAlignment="Center" TickFrequency="1" IsSnapToTickEnabled="True" AutoToolTipPlacement="BottomRight" Value="{Binding Path=AccommodationCleanliness}">
+                <Slider.Style>
+                    <Style TargetType="Slider">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Cursor" Value="Hand"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Slider.Style>
+            </Slider>
+            <Slider x:Name="CorrectnessSlider" Minimum="1" Maximum="5" Grid.Row="2" Grid.Column="1" Margin="0,0,100,0" Width="130" VerticalAlignment="Center" TickFrequency="1" IsSnapToTickEnabled="True" AutoToolTipPlacement="BottomRight" Value="{Binding Path=OwnerCorrectness}">
+                <Slider.Style>
+                    <Style TargetType="Slider">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Cursor" Value="Hand"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Slider.Style>
+            </Slider>
             <TextBlock Text="{Binding ElementName=CleanlinessSlider,Path=Value}" Grid.Row="1" Grid.Column="1" Height="24" VerticalAlignment="Center" Width="30" FontSize="16" HorizontalAlignment="Right" Margin="0,0,65,0"  TextAlignment="Center"/>
             <TextBlock Text="{Binding ElementName=CorrectnessSlider,Path=Value}"  Grid.Row="2" Grid.Column="1" Height="24" VerticalAlignment="Center" Width="30" HorizontalAlignment="Right" FontSize="16" Margin="0,0,65,0" TextAlignment="Center"/>
             <Label HorizontalContentAlignment="Left" Grid.Column="0" Grid.Row="3" FontSize="18" Height="37" VerticalContentAlignment="Top" VerticalAlignment="Top" Margin="65,58,0,0" Content="Add photos:"/>
@@ -122,25 +142,28 @@
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid>
                             <StackPanel Orientation="Horizontal">
-                                <Rectangle x:Name="ArrowRectangle" Width="30" Height="14" Stroke="#22301a" Fill="#8c9d75"/>
-                                <Polygon x:Name="ArrowPolygon" Points= "0,15 15,22 0,30" Stroke="#22301a" Fill="#8c9d75" Height="45" Width="30" />
+                                <Rectangle x:Name="ArrowRectangle" Width="30" Height="14" Stroke="#22301a" Fill="#22301a"/>
+                                <Polygon x:Name="ArrowPolygon" Points= "0,15 15,22 0,30" Stroke="#22301a" Fill="#22301a" Height="45" Width="30" />
                             </StackPanel>
                         </Grid>
                         <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" Value="0.5"/>
+                            </Trigger>
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter TargetName="ArrowRectangle" Property="Stroke" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
                                 <Setter TargetName="ArrowPolygon" Property="Stroke" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
 
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
-                                <Setter TargetName="ArrowRectangle" Property="Fill" Value="#8c9d75"/>
-                                <Setter TargetName="ArrowPolygon" Property="Fill" Value="#8c9d75"/>
+                                <Setter TargetName="ArrowRectangle" Property="Fill" Value="#22301a"/>
+                                <Setter TargetName="ArrowPolygon" Property="Fill" Value="#22301a"/>
                                 <Setter TargetName="ArrowRectangle" Property="Stroke" Value="#004661"/>
                                 <Setter TargetName="ArrowPolygon" Property="Stroke" Value="#004661"/>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="False">
-                                <Setter TargetName="ArrowRectangle" Property="Fill" Value="#8c9d75"/>
-                                <Setter TargetName="ArrowPolygon" Property="Fill" Value="#8c9d75"/>
+                                <Setter TargetName="ArrowRectangle" Property="Fill" Value="#22301a"/>
+                                <Setter TargetName="ArrowPolygon" Property="Fill" Value="#22301a"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -165,20 +188,23 @@
                             </StackPanel>
                         </Grid>
                         <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" Value="0.5"/>
+                            </Trigger>
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter TargetName="ArrowRectangle" Property="Stroke" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
                                 <Setter TargetName="ArrowPolygon" Property="Stroke" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
 
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
-                                <Setter TargetName="ArrowRectangle" Property="Fill" Value="#8c9d75"/>
-                                <Setter TargetName="ArrowPolygon" Property="Fill" Value="#8c9d75"/>
+                                <Setter TargetName="ArrowRectangle" Property="Fill" Value="#22301a"/>
+                                <Setter TargetName="ArrowPolygon" Property="Fill" Value="#22301a"/>
                                 <Setter TargetName="ArrowRectangle" Property="Stroke" Value="#004661"/>
                                 <Setter TargetName="ArrowPolygon" Property="Stroke" Value="#004661"/>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="False">
-                                <Setter TargetName="ArrowRectangle" Property="Fill" Value="#8c9d75"/>
-                                <Setter TargetName="ArrowPolygon" Property="Fill" Value="#8c9d75"/>
+                                <Setter TargetName="ArrowRectangle" Property="Fill" Value="#22301a"/>
+                                <Setter TargetName="ArrowPolygon" Property="Fill" Value="#22301a"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -276,6 +302,19 @@
                         <i:InvokeCommandAction Command="{Binding UrgencySelectionChangedCommand}"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
+                <ComboBox.Style>
+                    <Style TargetType="ComboBox">
+                        <Setter Property="Cursor" Value="Arrow"></Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Cursor" Value="Hand"/>
+                            </Trigger>
+                            <Trigger Property="IsDropDownOpen" Value="True">
+                                <Setter Property="Cursor" Value="Arrow"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ComboBox.Style>
                 <ComboBox.ItemContainerStyle>
                     <Style TargetType="ComboBoxItem">
                         <Setter Property="Width" Value="472"></Setter>
@@ -294,6 +333,11 @@
                         <Setter Property="Foreground" Value="#22301a"></Setter>
                         <Setter Property="FontWeight" Value="DemiBold"></Setter>
                         <Setter Property="FontSize" Value="18"></Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Cursor" Value="Hand"/>
+                            </Trigger>
+                        </Style.Triggers>
                     </Style>
                 </ComboBox.ItemContainerStyle>
                 <ComboBoxItem>Level 1 - it would be nice to renovate some small things, but everything works as it should without it</ComboBoxItem>

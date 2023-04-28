@@ -73,12 +73,24 @@
                             <TextBlock Text="Reserve" Grid.Column="0" VerticalAlignment="Center" FontSize="18" Margin="8,0,0,0"  Foreground="#22301a" FontWeight="Bold" HorizontalAlignment="Left" Width="Auto"/>
                         </Grid>
                     </Button>
-                    <Image Source="/Resources/Images/superOwner.png" Height="20" Width="20" Grid.Row="1" Grid.Column="6" VerticalAlignment="Center" Margin="0,0,150,0" HorizontalAlignment="Center">
+                    <Image Source="/Resources/Images/superOwner.png" Height="30" Width="30" Grid.Row="1" Grid.Column="6" VerticalAlignment="Center" Margin="0,0,150,0" HorizontalAlignment="Center">
                         <Image.Style>
                             <Style TargetType="Image">
                                 <Setter Property="Visibility" Value="Collapsed"/>
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding Owner.IsSuperOwner}" Value="True">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                    <Image Source="/Resources/Images/renovation (1).png" Height="30" Width="30" Grid.Row="1" Grid.Column="5" VerticalAlignment="Center" Margin="20,0,0,0" HorizontalAlignment="Center">
+                        <Image.Style>
+                            <Style TargetType="Image">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsRenovated}" Value="True">
                                         <Setter Property="Visibility" Value="Visible"/>
                                     </DataTrigger>
                                 </Style.Triggers>
@@ -103,6 +115,11 @@
             <Setter Property="Foreground" Value="#d9c7b3"></Setter>
             <Setter Property="FontWeight" Value="Medium"></Setter>
             <Setter Property="Background" Value="#FFFCECB9"></Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
         <Style TargetType="TextBox">
             <Setter Property="Background" Value="#FFFCECB9"></Setter>
@@ -121,6 +138,11 @@
             <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
             <Setter Property="BorderBrush" Value="#22301a"></Setter>
             <Setter Property="BorderThickness" Value="3,3,3,3"></Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
 
     </Page.Resources>
@@ -189,8 +211,26 @@
                     <Setter Property="Foreground" Value="#22301a"></Setter>
                     <Setter Property="FontWeight" Value="Medium"></Setter>
                     <Setter Property="FontSize" Value="18"></Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Cursor" Value="Hand"/>
+                        </Trigger>
+                    </Style.Triggers>
                 </Style>
             </ComboBox.ItemContainerStyle>
+            <ComboBox.Style>
+                <Style TargetType="ComboBox">
+                    <Setter Property="Cursor" Value="Arrow"></Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Cursor" Value="Hand"/>
+                        </Trigger>
+                        <Trigger Property="IsDropDownOpen" Value="True">
+                            <Setter Property="Cursor" Value="Arrow"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </ComboBox.Style>
         </ComboBox>
         <Border BorderBrush="#22301a" BorderThickness="3" HorizontalAlignment="Center" Width="258" Height="40" Margin="0,35,0,0" Grid.Row="1" Grid.Column="1"></Border>
 
@@ -214,9 +254,26 @@
                     <Setter Property="Foreground" Value="#22301a"></Setter>
                     <Setter Property="FontWeight" Value="Medium"></Setter>
                     <Setter Property="FontSize" Value="18"></Setter>
-
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Cursor" Value="Hand"/>
+                        </Trigger>
+                    </Style.Triggers>
                 </Style>
             </ComboBox.ItemContainerStyle>
+            <ComboBox.Style>
+                <Style TargetType="ComboBox">
+                    <Setter Property="Cursor" Value="Arrow"></Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Cursor" Value="Hand"/>
+                        </Trigger>
+                        <Trigger Property="IsDropDownOpen" Value="True">
+                            <Setter Property="Cursor" Value="Arrow"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </ComboBox.Style>
         </ComboBox>
         <Border BorderBrush="#22301a" BorderThickness="3" HorizontalAlignment="Center" Width="258" Height="40" Margin="0,35,0,0" Grid.Row="1" Grid.Column="2"></Border>
 
@@ -257,8 +314,8 @@
         <Label x:Name="numberOfDaysLabel" HorizontalAlignment="Left" Width="246" Height="22" Margin="54,88,0,0" VerticalAlignment="Top" Grid.Column="1" Grid.Row="2"/>
         <Label x:Name="numberOfGuestsLabel" HorizontalAlignment="Left" Width="246" Height="22" Margin="49,88,0,0" VerticalAlignment="Top" Grid.Column="2" Grid.Row="2"/>
 
-        
-        <ListBox x:Name="accommodationList" ScrollViewer.VerticalScrollBarVisibility="Auto" IsSynchronizedWithCurrentItem="True" SelectionMode="Single" HorizontalAlignment="Center" ItemsSource="{Binding Path=Accommodations,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" ItemTemplate="{StaticResource accommodationTemplate}" Grid.ColumnSpan="3" Grid.Row="3" Margin="0,0,0,50" VerticalAlignment="Bottom" Width="944" Background="#37492d" BorderThickness="5,5,5,5"  BorderBrush="#8c9d75" Height="265">
+
+        <ListBox x:Name="accommodationList" ScrollViewer.VerticalScrollBarVisibility="Visible" IsSynchronizedWithCurrentItem="True" SelectionMode="Single" HorizontalAlignment="Center" ItemsSource="{Binding Path=Accommodations,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" ItemTemplate="{StaticResource accommodationTemplate}" Grid.ColumnSpan="3" Grid.Row="3" Margin="0,0,0,50" VerticalAlignment="Bottom" Width="944" Background="#37492d" BorderThickness="5,5,5,5"  BorderBrush="#8c9d75" Height="265">
             <ListBox.Resources>
                 <Style TargetType="ListViewItem">
                     <Style.Triggers>
@@ -269,7 +326,6 @@
                 </Style>
             </ListBox.Resources>
         </ListBox>
-
 
     </Grid>
 </Page>

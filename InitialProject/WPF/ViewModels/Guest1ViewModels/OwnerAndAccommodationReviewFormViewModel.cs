@@ -111,6 +111,8 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             this.guest1 = guest1;
             images = new List<AccommodationReviewImage>();
             LevelOfUrgencyIndex = -1;
+            AccommodationCleanliness = 1;
+            OwnerCorrectness = 1;
             IsResetEnabled = false;
             IsNextEnabled = false;
             IsDeleteEnabled = false;
@@ -208,10 +210,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         private void StoreReview()
         {
             OwnerReviewService ownerReviewService = new OwnerReviewService();
-            if (OwnerCorrectness == 0)
-                OwnerCorrectness = 1;
-            if (AccommodationCleanliness == 0)
-                AccommodationCleanliness = 1;
             OwnerReview ownerReview = new OwnerReview(reservation, AccommodationCleanliness, OwnerCorrectness, Comments);
             ownerReviewService.Add(ownerReview);
         }

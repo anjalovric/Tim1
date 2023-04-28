@@ -14,16 +14,6 @@
             <Setter Property="Foreground" Value="#37492d"></Setter>
             <Setter Property="FontWeight" Value="ExtraBold"></Setter>
         </Style>
-        <Style TargetType="Calendar">
-            <Setter Property="BorderBrush" Value="#22301a"></Setter>
-            <Setter Property="BorderThickness" Value="4"></Setter>
-            <Setter Property="Background" Value="#dbc9ab"></Setter>
-        </Style>
-        <Style TargetType="TextBox">
-            <Setter Property="Background" Value="#dbc9ab"></Setter>
-            <Setter Property="BorderBrush" Value="#22301a"></Setter>
-            <Setter Property="BorderThickness" Value="1"></Setter>
-        </Style>
         <Style TargetType="Button">
             <Setter Property="Background" Value="#8c9d75"></Setter>
             <Setter Property="Foreground" Value="#22301a"></Setter>
@@ -32,6 +22,11 @@
             <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
             <Setter Property="BorderBrush" Value="#22301a"></Setter>
             <Setter Property="BorderThickness" Value="3"></Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
         <Style TargetType="DataGrid">
             <Setter Property="BorderBrush" Value="#22301a"></Setter>
