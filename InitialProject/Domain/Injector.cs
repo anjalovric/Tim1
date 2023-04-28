@@ -41,7 +41,8 @@ namespace InitialProject.Domain
         { typeof(IAccommodationRenovationSuggestionRepository), new AccommodationRenovationSuggestionRepository() },
         { typeof(IOrdinaryTourRequestsRepository), new OrdinaryTourRequestsRepository()},
         { typeof(ISuperGuestTitleRepository), new SuperGuestTitleRepository() },
-        {typeof(IAccommodationRenovationRepository), new AccommodationRenovationRepository() }
+        { typeof(IAccommodationRenovationRepository), new AccommodationRenovationRepository() },
+        { typeof(IGuest2NotificationRepository), new Guest2NotificationRepository() }
         };
 
         public static T CreateInstance<T>()
