@@ -26,4 +26,15 @@
         <Setter Property="BorderBrush" Value="DarkGray" />
         <Setter Property="BorderThickness" Value="1" />
     </Style>
+    <Style TargetType="Button" x:Key="ButtonForImages">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+    </Style>
+
+    <Style TargetType="Button" x:Key="BasicButton">
+        <Setter Property="Background" Value="AliceBlue"/>
+        <Setter Property="BorderBrush" Value="DarkGray" />
+        <Setter Property="BorderThickness" Value="1" />
+    </Style>
+   
 </ResourceDictionary>

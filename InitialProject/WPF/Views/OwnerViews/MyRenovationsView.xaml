@@ -70,7 +70,7 @@
                 </Style>
             </DataGrid.CellStyle>
         </DataGrid>
-        <Button Command="{Binding NewRenovationCommand}" Grid.Row="3" Height="41" Background="AliceBlue" BorderBrush="DarkGray">New Renovation</Button>
+        <Button Command="{Binding NewRenovationCommand}" Grid.Row="3" Height="41" Style="{StaticResource BasicButton}">New Renovation</Button>
         <StackPanel Margin="-29.5,-30,-29.5,75" Background="LightGray" Visibility="{Binding Path=StackPanelVisibility, UpdateSourceTrigger=PropertyChanged}">
             <Grid Height="100">
                 <Grid.ColumnDefinitions>
@@ -83,7 +83,7 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
                 <Label Content="{Binding Path=StackPanelMessage, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" FontSize="15" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
-                <Button Command="{Binding OKCommand}" Grid.Row="2" Grid.Column="1" Content="OK" Margin="0,0,31,0" />
+                <Button Command="{Binding OKCommand}" Grid.Row="2" Grid.Column="1" Content="OK" Margin="0,0,31,0" Background="AliceBlue"/>
             </Grid>
         </StackPanel>
 
