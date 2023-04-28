@@ -22,14 +22,12 @@ namespace InitialProject.Model
 
         public bool Valid { get; set; }
 
-        public string ValidationUri { get; set; }   
-        public BitmapImage ValidationImage { get; set; }
+        public string ValidationImage { get; set; }
         public GuideAndTourReview()
         {
             TourInstance = new TourInstance();
             Valid = true;
-            ValidationUri = "Resources/Images/transparentGREEN.jpg";
-            ValidationImage = new BitmapImage(new Uri("/" + ValidationUri, UriKind.Relative));
+            ValidationImage= "✔";
         }
         public GuideAndTourReview(int guideId, Guest2 guest,TourInstance tourInstance, int language, int interestingFacts, int knowledge, String comment)
         {
@@ -42,12 +40,11 @@ namespace InitialProject.Model
             Knowledge = knowledge;
             Comment = comment;
             Valid = true;
-            ValidationUri = "Resources/Images/transparentGREEN.jpg";
-            ValidationImage = new BitmapImage(new Uri("/" + ValidationUri, UriKind.Relative));
+            ValidationImage = "✔";
         }
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), GuideId.ToString(), Guest2.Id.ToString(), Language.ToString(),InterestingFacts.ToString(),Knowledge.ToString(), Comment, TourInstance.Id.ToString(),Valid.ToString(),ValidationUri};
+            string[] csvValues = { Id.ToString(), GuideId.ToString(), Guest2.Id.ToString(), Language.ToString(),InterestingFacts.ToString(),Knowledge.ToString(), Comment, TourInstance.Id.ToString(),Valid.ToString()};
             return csvValues;
         }
 
@@ -63,8 +60,10 @@ namespace InitialProject.Model
             TourInstance = new TourInstance();
             TourInstance.Id = Convert.ToInt32(values[7]);
             Valid = Convert.ToBoolean(values[8]);
-            ValidationUri = values[9];
-            ValidationImage =  new BitmapImage(new Uri("/" + ValidationUri, UriKind.Relative));
+            if (Valid)
+                ValidationImage = "✔";
+            else
+                ValidationImage = "❌";
         }
     }
 }

@@ -108,12 +108,12 @@
                         </Grid.RowDefinitions>
                         <Label Content="Age statitsics" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Style="{DynamicResource StatisticLabel}"/>
                         <Label  Content="Under 18" Grid.Column="1" Grid.Row="2" Style="{DynamicResource Label}"/>
-                        <Label  Content="Between 18 and 50" Grid.Column="1" Grid.Row="4" Style="{DynamicResource Label}" />
+                        <Label  Content="Between 18 and 50" Grid.Row="3" Style="{DynamicResource Label}" Grid.ColumnSpan="3" Margin="40,19,40,10" Grid.RowSpan="2" />
                         <Label  Content="Over 50" Grid.Row="5" Style="{DynamicResource Label}" Grid.ColumnSpan="3" Margin="41,13,41,0" Grid.RowSpan="2"/>
 
 
                         <Label  Content="{Binding Under}" Grid.Column="1" Grid.Row="2" HorizontalContentAlignment="left" HorizontalAlignment="Right" Style="{DynamicResource Label}" Width="170"/>
-                        <Label  Content="{Binding Between}" Grid.Column="1" Grid.Row="4" HorizontalContentAlignment="left" HorizontalAlignment="Right" Style="{DynamicResource Label}" Width="170" />
+                        <Label  Content="{Binding Between}" Grid.Column="1" Grid.Row="3" HorizontalContentAlignment="left" HorizontalAlignment="Right" Style="{DynamicResource Label}" Width="170" Grid.ColumnSpan="2" Margin="0,19,40,9" Grid.RowSpan="2" />
                         <Label  Content="{Binding Over}" Grid.Column="1" Grid.Row="5" HorizontalContentAlignment="left" HorizontalAlignment="Right" Style="{DynamicResource Label}" Width="170" Grid.ColumnSpan="2" Margin="0,13,41,0" Grid.RowSpan="2" />
                     </Grid>
                 </Border>

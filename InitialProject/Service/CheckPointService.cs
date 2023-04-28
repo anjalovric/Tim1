@@ -38,12 +38,14 @@ namespace InitialProject.Service
             for (int i = 0; i < orderCounter; i++)
             {
                 points[i].Checked = true;
+                points[i].Check = "✔";
                 repository.Update(points[i]);
                 AllPoints.Add(points[i]);
             }
             for (int i = orderCounter; i < pointSize; i++)
             {
                 points[i].Checked = false;
+                points[i].Check = "❌";
                 repository.Update(points[i]);
                 AllPoints.Add(points[i]);
             }
@@ -69,13 +71,9 @@ namespace InitialProject.Service
             AlertGuest2Service alertGuest2Service = new AlertGuest2Service();
             List<string> pointsName = new List<string>();
             foreach (CheckPoint checkPoint in GetByInstance(instance.Tour.Id))
-            {
                 foreach (AlertGuest2 alert in alertGuest2Service.GetByInstanceIdAndGuestId(instance.Id, guest2Id))
-                {
                     if (alert.Availability && alert.CheckPointId == checkPoint.Id)
                         pointsName.Add(checkPoint.Name);
-                }
-            }
             return pointsName;
         }
         public void UpdateCheckPoints(int tourId,ObservableCollection<CheckPoint> TourPoints)

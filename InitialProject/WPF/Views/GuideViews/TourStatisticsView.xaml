@@ -21,14 +21,49 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTextColumn Header="Name" Binding="{Binding Tour.Name}" Width="*"  >
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
                 <DataGridTextColumn Header="Location" Binding="{Binding Tour.Location}" Width="1.5*" >
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
                 <DataGridTextColumn Header="StartDate" Binding="{Binding StartDate}" Width="1.6*" >
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
                 <DataGridTextColumn Header="Duration" Binding="{Binding Tour.Duration}" Width="*" >
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
                 <DataGridTextColumn Header="Capacity" Binding="{Binding Tour.MaxGuests}" Width="*" >
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
                 <DataGridTemplateColumn x:Name="cancelation" Header="Details"  Width="*" >
                     <DataGridTemplateColumn.CellTemplate>
@@ -44,6 +79,10 @@
 
         <StackPanel x:Name="Toast" HorizontalAlignment="Left"   VerticalAlignment="Top" Style="{DynamicResource Toast}" Visibility="{Binding ToastVisibility}" Margin="750,557,0,0" >
             <Label Style="{StaticResource LabelToast}" HorizontalAlignment="Center">There are no tours for this year</Label>
+            <Button Style="{DynamicResource ButtonToast}" Command="{Binding OKCommand}">OK</Button>
+        </StackPanel>
+        <StackPanel  HorizontalAlignment="Left"   VerticalAlignment="Top" Style="{DynamicResource Toast}" Visibility="{Binding Toast}" Margin="750,557,0,0" >
+            <Label Style="{StaticResource LabelToast}" HorizontalAlignment="Center">Input year first</Label>
             <Button Style="{DynamicResource ButtonToast}" Command="{Binding OKCommand}">OK</Button>
         </StackPanel>
         <Grid Margin="829,159,59,391" Style="{DynamicResource InerInerGrid}">

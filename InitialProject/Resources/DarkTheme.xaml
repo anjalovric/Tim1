@@ -16,7 +16,35 @@
         <SolidColorBrush x:Key="MenuBlue">#203354</SolidColorBrush>
         <SolidColorBrush x:Key="InerIner">#296d98</SolidColorBrush>
      <SolidColorBrush x:Key="GridBlue">#1F456E</SolidColorBrush>
-
+    
+    <Style x:Key="Tab" TargetType="TabItem">
+        <Setter Property="Background" Value="{StaticResource RoyalBlue}"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="BorderBrush" Value="AliceBlue"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TabItem">
+                    <Border Name="Border" BorderThickness="1,1,1,0" BorderBrush="Gainsboro" CornerRadius="4,4,0,0" Margin="2,0">
+                        <ContentPresenter x:Name="ContentSite"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        ContentSource="Header"
+                                        Margin="10,2"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="#6495ED" />
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="False">
+                            <Setter TargetName="Border" Property="Background" Value="darkblue" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
     <Style x:Key="LabelToast" TargetType="Label">
         <Setter Property="Foreground" Value="{StaticResource MenuBlue}"/>
         <Setter Property="FontWeight" Value="Heavy"/>

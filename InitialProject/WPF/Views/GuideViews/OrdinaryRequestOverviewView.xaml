@@ -66,11 +66,51 @@
         </Grid>
         <DataGrid Style="{DynamicResource Tables}" SelectedItem="{Binding Path=Selected}" ItemsSource="{Binding Requests,UpdateSourceTrigger=PropertyChanged}"  Grid.Column="1" Grid.Row="4" ColumnHeaderStyle="{DynamicResource CenterGridHeaderStyle}" HeadersVisibility="Column" >
             <DataGrid.Columns>
-                <DataGridTextColumn Width="1*" Header="Language" Binding="{Binding Language}" />
-                <DataGridTextColumn Width="1.5*" Header="Location" Binding="{Binding Location}"/>
-                <DataGridTextColumn Width="1*" Header="StartDate" Binding="{Binding Start}"/>
-                <DataGridTextColumn Width="1*" Header="EndDate" Binding="{Binding End}"/>
-                <DataGridTextColumn Width="1*" Header="Capacity" Binding="{Binding MaxGuests}"/>
+                <DataGridTextColumn Width="1*" Header="Language" Binding="{Binding Language}" >
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Width="1.5*" Header="Location" Binding="{Binding Location}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Width="1*" Header="StartDate" Binding="{Binding Start}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Width="1*" Header="EndDate" Binding="{Binding End}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Width="1*" Header="Capacity" Binding="{Binding MaxGuests}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
                 <DataGridTemplateColumn x:Name="cancelation"   Width="1*" >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

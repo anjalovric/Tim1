@@ -88,6 +88,7 @@ namespace InitialProject.Repository
                 if (point.Order == 1)
                 {
                     point.Checked = true;
+                    point.Check = "✔";
                     Update(point);
                 }
             }

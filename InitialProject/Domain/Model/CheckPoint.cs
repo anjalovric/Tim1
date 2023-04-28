@@ -22,6 +22,8 @@ namespace InitialProject.Model
 
         public int Order { get; set; }
 
+        public string Check { get; set; }
+
         public CheckPoint() { }
 
         public CheckPoint( string name, bool @checked, int tourId, int order)
@@ -30,6 +32,7 @@ namespace InitialProject.Model
             Checked = @checked;
             TourId = tourId;
             Order = order;
+            Check = "❌";
         }
 
         
@@ -40,6 +43,10 @@ namespace InitialProject.Model
             Checked = Convert.ToBoolean(values[2]);
             TourId = Convert.ToInt32(values[3]);
             Order = Convert.ToInt32(values[4]);
+            if (Checked)
+                Check = "✔";
+            else
+                Check = "❌";
 
         }
 

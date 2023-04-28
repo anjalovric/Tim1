@@ -45,7 +45,7 @@
                     <Image Source="/Resources/Images/icons8-christmas-star-96.png" Height="15" Width="20"/>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="Notifications" Foreground="Gray" FontSize="20" FontWeight="Bold">
+            <MenuItem Header="Notifications" Foreground="Gray" FontSize="20" FontWeight="Bold" Command="{Binding NotificationsCommand}">
                 <MenuItem.Icon>
                     <Image Source="/Resources/Images/bell.png" Height="15" Width="20"/>
                 </MenuItem.Icon>
@@ -60,7 +60,7 @@
                     <Image Source="/Resources/Images/voucher.png" Height="15" Width="20"/>
                 </MenuItem.Icon>
             </MenuItem>
-            
+
             <MenuItem Header="Help" Foreground="Gray" FontSize="20" FontWeight="Bold">
                 <MenuItem.Icon>
                     <Image Source="/Resources/Images/help.png" Height="15" Width="20"/>
@@ -72,7 +72,16 @@
                 </MenuItem.Icon>
             </MenuItem>
         </Menu>
-
+        <Button Margin="75,229,75,10" Background="#1e2e44" BorderBrush="#1e2e44" Command="{Binding ProfileCommand}"/>
+        <TextBlock FontSize="20" Height="35" Width="Auto" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,231,0,0" Foreground="Gray" FontWeight="Bold" Grid.RowSpan="2" >
+            <TextBlock.Text>
+                <MultiBinding StringFormat="{}{0} {1}">
+                    <Binding Path="guest2.Name" />
+                    <Binding Path="guest2.LastName" />
+                </MultiBinding>
+            </TextBlock.Text>
+        </TextBlock>
         <ContentControl x:Name="CC" Grid.Column="1" Background="#151f2d" Grid.RowSpan="2"/>
+
     </Grid>
 </Window>

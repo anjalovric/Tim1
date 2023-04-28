@@ -176,7 +176,15 @@
                     <!--CHECKPOINTS-->
                     <DataGrid HeadersVisibility="Column" ColumnHeaderStyle="{DynamicResource CenterGridHeaderStyle}" Grid.Row="0" Grid.RowSpan="2" x:Name="PointsGrid"  SelectedItem="{Binding SelectedCheckPoint}" ItemsSource="{Binding Path=TourPoints,UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource  Tables}"  HorizontalAlignment="Center" Margin="0,10,0,0">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Checkpoint Name" Binding="{Binding Name}" Width="1*" ></DataGridTextColumn>
+                            <DataGridTextColumn Header="Checkpoint Name" Binding="{Binding Name}" Width="1*" >
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                                        <Setter Property="VerticalAlignment" Value="Center"/>
+
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
                         </DataGrid.Columns>
                     </DataGrid>
                     <Button Grid.Column="1" Grid.Row="1" Height="25" Width="60" Command="{Binding AddCheckPointCommand}" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="34,22,0,0" Style="{DynamicResource  Button}" Grid.ColumnSpan="2">ADD</Button>
@@ -353,7 +361,7 @@
         <StackPanel x:Name="ToastCant" HorizontalAlignment="Left"  Margin="700,458,0,0" VerticalAlignment="Top" Visibility="{Binding IsAvailable}" Grid.Column="1" Grid.Row="1" Style="{DynamicResource  Toast}" Grid.ColumnSpan="2" Grid.RowSpan="2">
             <Label Style="{DynamicResource  LabelToast}">Guide already has tour at this time!
             </Label>
-            <Button Style="{DynamicResource  ButtonToast}" Command="{Binding CloceToastAvailability}" Content="OK"/>
+            <Button Style="{DynamicResource  ButtonToast}" Command="{Binding OkToastCommand}" Content="OK"/>
         </StackPanel>
     </Grid>
 </Page>

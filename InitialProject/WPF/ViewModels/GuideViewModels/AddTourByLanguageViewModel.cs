@@ -263,6 +263,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         public RelayCommand PreviousImageCommand { get; set; }
         public RelayCommand AddImageCommand { get; set; }
         public RelayCommand DeleteCheckPointCommand { get; set; }
+        public RelayCommand CloceToastAvailability { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -310,6 +311,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             PreviousImageCommand = new RelayCommand(PreviousImage_Executed, CanExecute);
             AddImageCommand = new RelayCommand(AddTourImage_Executed, CanExecute);
             DeleteCheckPointCommand = new RelayCommand(CancelCheckPoint_Executed, CanExecute);
+            CloceToastAvailability = new RelayCommand(CloceToastAvailability_Executed, CanExecute);
         }
         private void Confirm_Executed(object sender)
         {
@@ -323,7 +325,11 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             SaveInputs(savedTour);
             Toast = "Visible";
         }
-
+        private void CloceToastAvailability_Executed(object sender)
+        {
+            IsErrorMessageVisible = "Hidden";
+            DateMessage = "Hidden";
+        }
         private void SaveInputs(Tour savedTour)
         {
             CheckPointService checkPointService = new CheckPointService();
@@ -409,7 +415,6 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         }
         private void OKCheckPoint_Executed(object sender)
         {
-            CheckPointService checkPointService = new CheckPointService();
             CheckPoint newCheckPoint = new CheckPoint(NameT, false, -1, -1);
             TourPoints.Add(newCheckPoint);
             NameT = "";

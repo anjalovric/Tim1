@@ -39,9 +39,33 @@
             </Grid.RowDefinitions>
             <DataGrid Style="{DynamicResource Tables}" ColumnHeaderStyle="{DynamicResource CenterGridHeaderStyle}" HeadersVisibility="Column" ItemsSource="{Binding Statistics ,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="2">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Width="0.2*" Binding="{Binding MonthNumber}"/>
-                    <DataGridTextColumn Header="Month" Width="1*" Binding="{Binding Month}"/>
-                    <DataGridTextColumn Header="Number of requests" Width="1*" Binding="{Binding Number}"/>
+                    <DataGridTextColumn Width="0.2*" Binding="{Binding MonthNumber}">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Month" Width="1*" Binding="{Binding Month}">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Number of requests" Width="1*" Binding="{Binding Number}">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
 
                 </DataGrid.Columns>
             </DataGrid>

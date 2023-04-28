@@ -106,15 +106,18 @@ namespace InitialProject.WPF.ViewModels
         public void ValidExecuted(object sender)
         {
             if(currentReview.Valid)
-                ChangeValidationState(false, "Resources/Images/transparentRED.png");
+                ChangeValidationState(false);
             else
-                ChangeValidationState(true, "Resources/Images/transparentGREEN.jpg");
+                ChangeValidationState(true);
         }
-        private void ChangeValidationState(bool state,string url)
+        private void ChangeValidationState(bool state)
         {
                 GuideAndTourReviewService guideAndTourReviewService = new GuideAndTourReviewService();
                 currentReview.Valid = state;
-                currentReview.ValidationUri = url;
+                if (currentReview.Valid)
+                    currentReview.ValidationImage = "✔";
+                else
+                    currentReview.ValidationImage = "❌";
                 guideAndTourReviewService.Update(currentReview);
                 ReplaceReview();
                 ToastVisibility = "Visible";
