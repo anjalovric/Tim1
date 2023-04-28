@@ -20,7 +20,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
     public class Guest2OverviewViewModel:INotifyPropertyChanged
     {
         public Model.Guest2 WindowGuest2 { get; set; }
-        private Guest2 guest2;
+        public Guest2 guest2 { get; set; }
         private Guest2Repository guest2Repository;
         public RelayCommand ShowCommand { get; set; }
         public RelayCommand VouchersCommand { get; set; }
@@ -29,7 +29,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         public RelayCommand ProfileCommand { get; set; }
         public RelayCommand FinishedToursCommand { get; set; }
         public RelayCommand RequestsCommand { get; set; }
-        //public RelayCommand StatisticsCommand { get; set; }
+        public RelayCommand NotificationsCommand { get; set; }
         private ContentControl ContentControl;
         private BitmapImage imageSource;
         public BitmapImage ImageSource
@@ -72,7 +72,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             FinishedToursCommand = new RelayCommand(ShowFinished_Executed, CanExecute);
             ProfileCommand = new RelayCommand(Profile_Executed, CanExecute);
             RequestsCommand = new RelayCommand(Requests_Executed, CanExecute);
-            //StatisticsCommand = new RelayCommand(Statistics_Executed, CanExecute);
+            NotificationsCommand = new RelayCommand(Notifications_Executed, CanExecute);
         }
         private bool CanExecute(object sender)
         {
@@ -82,10 +82,10 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         {
             ContentControl.Content=new ShowToursView(guest2);
         }
-        /*private void Statistics_Executed(object sender)
+        private void Notifications_Executed(object sender)
         {
-            ContentControl.Content = new TourRequestStatisticsView(guest2);
-        }*/
+            ContentControl.Content = new NotificationsFormView(guest2);
+        }
         private void Requests_Executed(object sender)
         {
             ContentControl.Content = new MyRequestsFormView(guest2);

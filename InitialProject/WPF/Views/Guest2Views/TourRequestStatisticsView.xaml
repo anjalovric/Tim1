@@ -51,9 +51,9 @@
         <Button Content="SEARCH" HorizontalContentAlignment="Right" Margin="240,28,194,56" FontWeight="Bold" Grid.Row="4" Grid.ColumnSpan="2" Command="{Binding SearchCommand}"/>
         <Image Margin="248,32,244,61" Source="/Resources/Images/search.png" Grid.Row="4" Grid.ColumnSpan="2"/>
         <Border BorderBrush="#7166f9" BorderThickness="2,2,2,2" Margin="208,5,306,5" CornerRadius="25,25,25,25" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"/>
-        <TextBlock Text="NUMBER OF REQUEST BY LANGUAGE" Margin="16,10,356,172" Grid.Row="2" Style="{StaticResource FontStyle}" Grid.Column="2"/>
-        <Border BorderBrush="#7166f9" BorderThickness="2,2,2,2" Margin="218,3,30,5" CornerRadius="25,25,25,25" Grid.Row="2" Grid.Column="2"/>
-        <TextBlock Text="NUMBER OF REQUESTS BY LOCATION" Margin="298,10,74,172" Grid.Row="2" Grid.Column="2" Style="{StaticResource FontStyle}"/>
+        <TextBlock Text="NUMBER OF REQUEST BY LANGUAGE" Margin="10,10,362,172" Grid.Row="2" Style="{StaticResource FontStyle}" Grid.Column="2"/>
+        <Border BorderBrush="#7166f9" BorderThickness="2,2,2,2" Margin="218,5,30,5" CornerRadius="25,25,25,25" Grid.Row="2" Grid.Column="2"/>
+        <TextBlock Text="NUMBER OF REQUESTS BY LOCATION" Margin="270,10,92,175" Grid.Row="2" Grid.Column="2" Style="{StaticResource FontStyle}"/>
         <TextBlock TextWrapping="Wrap" Margin="100,49,60,119" Grid.Row="2" Text="{Binding Path=acceptedRequest}" Style="{StaticResource TextStyle}"/>
         <TextBlock TextWrapping="Wrap" Margin="49,49,111,119" Grid.Row="2" Grid.Column="1" Text="{Binding Path=invalidRequest}" Style="{StaticResource TextStyle}"/>
         <TextBlock TextWrapping="Wrap" Margin="370,49,46,124" Grid.Row="2" Grid.Column="2" Style="{StaticResource TextStyle}"/>
