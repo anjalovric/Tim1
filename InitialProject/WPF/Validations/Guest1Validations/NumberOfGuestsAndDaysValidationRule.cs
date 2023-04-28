@@ -6,11 +6,18 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Data;
 
 namespace InitialProject.WPF.Validations.Guest1Validations
 {
     public class NumberOfGuestsAndDaysValidationRule : ValidationRule
     {
+        public enum ValidationResultType
+        {
+            Valid,
+            Invalid,
+            ValidWithWarning
+        }
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
             string content = value as string;
@@ -22,5 +29,6 @@ namespace InitialProject.WPF.Validations.Guest1Validations
             else
                 return ValidationResult.ValidResult;
         }
+          
     }
 }

@@ -102,6 +102,8 @@
 
     <None Remove="Resources\Images\newLogo.jpg" />
 
+    <None Remove="Resources\Images\olive.jpg" />
+
     <None Remove="Resources\Images\orange.jpg" />
     <None Remove="Resources\Images\plus.png" />
     <None Remove="Resources\Images\profile.png" />
@@ -480,6 +482,9 @@
     </Resource>
     <Resource Include="Resources\Images\notes.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\olive.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\orange.jpg" />
     <Resource Include="Resources\Images\qm.png">

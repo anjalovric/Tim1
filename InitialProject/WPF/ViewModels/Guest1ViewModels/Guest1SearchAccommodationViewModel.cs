@@ -16,7 +16,7 @@ using System.Windows.Interactivity;
 
 namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 {
-    public class Guest1SearchAccommodationViewModel : INotifyPropertyChanged
+    public class Guest1SearchAccommodationViewModel : INotifyPropertyChanged, IDataErrorInfo
     {
         private Guest1 guest1;
         public ObservableCollection<string> Countries { get; set; }
@@ -35,6 +35,8 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             }
 
         }
+        public string NumberOfDaysError {get;set;}
+        public string NumberOfGuestsError { get; set; }
         private string name;
         public string Name
         {
@@ -57,7 +59,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                 if (!value.Equals(numberOfDays))
                 {
                     numberOfDays = value;
-                    OnPropertyChanged();
+                    OnPropertyChanged("NumberOfDays");
                 }
             }
         }
@@ -70,7 +72,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                 if (!value.Equals(numberOfGuests))
                 {
                     numberOfGuests = value;
-                    OnPropertyChanged();
+                    OnPropertyChanged("NumberOfGuests");
                 }
             }
         }
@@ -168,6 +170,100 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         public RelayCommand DecrementGuestsNumberCommand { get; set; }
         public RelayCommand DecrementDaysNumberCommand { get; set; }
         public RelayCommand CountryInputSelectionChangedCommand { get; set; }
+        public string Error => null;
+        public bool IsValid
+        {
+            get
+            {
+                foreach (var property in _validatedProperties)
+                {
+                    if (this[property] != null)
+                        return false;
+                }
+
+                return true;
+            }
+        }
+        private bool isInputValid;
+        public bool IsInputValid {
+            get { return isInputValid; }
+            set
+            {
+                if (value != isInputValid)
+                {
+                    isInputValid = value;
+                    OnPropertyChanged("IsInputValid");
+                }
+            }
+        }
+        private bool isNumberOfDaysValid;
+        public bool IsNumberOfDaysValid
+        {
+            get { return isNumberOfDaysValid; }
+            set
+            {
+                if (value != isNumberOfDaysValid)
+                {
+                    isNumberOfDaysValid = value;
+                    OnPropertyChanged("IsNumberOfDaysValid");
+                }
+            }
+        }
+        private bool isNumberOfGuestsValid;
+        public bool IsNumberOfGuestsValid
+        {
+            get { return isNumberOfGuestsValid; }
+            set
+            {
+                if (value != isNumberOfGuestsValid)
+                {
+                    isNumberOfGuestsValid = value;
+                    OnPropertyChanged("IsNumberOfGuestsValid");
+                }
+            }
+        }
+
+
+        public override string ToString()
+        {
+            return $"{NumberOfDays} {NumberOfGuests}";
+        }
+        private readonly string[] _validatedProperties = { "NumberOfDays", "NumberOfGuests" };
+        public string this[string columnName]
+        {
+            get
+            {
+                if (columnName == "NumberOfDays")
+                {
+                    var content = NumberOfDays;
+                    Match match = CreateValidationNumberRegex(content);
+                    if (!match.Success && NumberOfDays != "")
+                    {
+                        IsInputValid = false;
+                        IsNumberOfDaysValid = false;
+                        return "Enter an integer greater than zero.";
+                    }
+                    IsNumberOfDaysValid = true;
+                    IsInputValid = true;
+                }
+
+                if (columnName == "NumberOfGuests")
+                {
+                    var content = NumberOfGuests;
+                    Match match = CreateValidationNumberRegex(content);
+                    if (!match.Success && NumberOfGuests != "")
+                    {
+                        IsInputValid = false;
+                        IsNumberOfGuestsValid = false;
+                        return "Enter an integer greater than zero.";
+                    }
+                    
+                    IsNumberOfGuestsValid = true;
+                    IsInputValid = true;
+                }
+                return null;
+            }
+        }
         public Guest1SearchAccommodationViewModel(Guest1 guest1)
         {
             this.guest1 = guest1;
@@ -180,6 +276,9 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             NumberOfDays = "";
             NumberOfGuests = "";
             Name = "";
+            IsInputValid = true;
+            IsNumberOfDaysValid = true;
+            IsNumberOfGuestsValid = true;
             GetLocations();
             MakeCommands();
         }
@@ -233,7 +332,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         }
         private void Search_Executed(object sender)
         {
-            if (IsNumberOfDaysValid() && IsNumberOfGuestsValid())
+            if (IsValid)
             {
                 accommodationService = new AccommodationService();
                 List<Accommodation> storedAccommodation = accommodationService.GetAll();
@@ -273,8 +372,13 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             ApartmentChecked = false;
             HouseChecked = false;
             CottageChecked = false;
+            //NumberOfDays = "1";             ////////dodala sam ovo jer ga validacija postavi na "", a ostane vrijednost u textboxu i nmg da je resetujem.
+            //NumberOfGuests = "1";
             NumberOfDays = "";
             NumberOfGuests = "";
+            IsInputValid = true;
+            IsNumberOfDaysValid = true;
+            IsNumberOfGuestsValid = true;
         }
         private void DecrementGuestsNumber_Executed(object sender)
         {
@@ -330,15 +434,23 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             accommodationReservationForm.Owner = Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault();
             accommodationReservationForm.ShowDialog();
         }
-        private bool IsNumberOfDaysValid() 
+        /*private bool IsNumberOfDaysValid() 
         {
             var content = NumberOfDays;
             Match match = CreateValidationNumberRegex(content);
             bool isValid;
             if (!match.Success && NumberOfDays != "")
+            {
+                NumberOfDaysError = "Enter an integer greater than zero.";
                 isValid = false;
+            }
+                
             else
+            {
+                NumberOfDaysError = "";
                 isValid = true;
+            }
+                
             return isValid;
         }
         
@@ -349,11 +461,17 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             Match match = CreateValidationNumberRegex(content);
             bool isValid = false;
             if (!match.Success && NumberOfGuests != "")
+            {
+                NumberOfGuestsError = "Enter an integer greater than zero.";
                 isValid = false;
+            }
             else
+            {
+                NumberOfGuestsError = "";
                 isValid = true;
+            }
             return isValid;
-        }
+        }*/
         private Match CreateValidationNumberRegex(string content)
         {
             var regex = "^([1-9][0-9]*)$";
