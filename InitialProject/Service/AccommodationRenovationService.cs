@@ -20,6 +20,7 @@ namespace InitialProject.Service
             SetAccommodations();
             SetCanBeCancelled();
             SetIsInProgress();
+            SetIsFinished();
         }
 
         private void SetAccommodations()
@@ -45,13 +46,15 @@ namespace InitialProject.Service
         public void Add(AccommodationRenovation renovation)
         {
             accommodationRenovationRepository.Add(renovation);
+            OwnerNotificationsService notificationService = new OwnerNotificationsService();
+            notificationService.Add(OwnerNotificationType.RENOVATION_SCHEDULED, renovation.Accommodation.Owner);
         }
 
         public void AreRenovated(List<Accommodation> accommodations)
         {
             foreach(var accommodation in accommodations)
             {
-                AccommodationRenovation renovation = renovations.Find(n => n.Accommodation.Id == accommodation.Id);
+                AccommodationRenovation renovation = renovations.Find(n => n.Accommodation.Id == accommodation.Id && n.EndDate.Date<DateTime.Now.Date);
                 if (renovation != null && (DateTime.Now.Year - renovation.EndDate.Year) <= 1)
                     accommodation.IsRenovated = true;
                 else
@@ -99,6 +102,17 @@ namespace InitialProject.Service
         public bool IsRenovationOnDate(Accommodation accommodation, DateTime date)
         {
             return renovations.Find(n => n.Accommodation.Id == accommodation.Id && n.StartDate <= date && n.EndDate >= date) != null;
+        }
+
+        private void SetIsFinished()
+        {
+            foreach (var renovation in renovations)
+            {
+                if (renovation.EndDate < DateTime.Now)
+                    renovation.IsFinished = true;
+                else
+                    renovation.IsFinished = false;
+            }
         }
     }
 }

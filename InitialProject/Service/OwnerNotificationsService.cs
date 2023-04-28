@@ -36,7 +36,7 @@ namespace InitialProject.Service
         }
         public bool HasGuestToReview(Owner owner)
         {
-            AccommodationReservationService accommodationReservationService = new AccommodationReservationService();
+           AccommodationReservationService accommodationReservationService = new AccommodationReservationService();
            return accommodationReservationService.GetAllForReviewByOwner(owner).Count != 0;
         }
 
@@ -50,6 +50,18 @@ namespace InitialProject.Service
         {
             OwnerNotification notification = notificationRepository.GetAll().Find(n => n.Type == OwnerNotificationType.SUPEROWNER && n.Owner.Id == owner.Id);
             return notification != null;
+        }
+
+        public bool IsRenovationScheduled(Owner owner)
+        {
+            List<OwnerNotification> notifications = notificationRepository.GetAll();
+            return notifications.Find(n => n.Owner.Id == owner.Id && n.Type.Equals(OwnerNotificationType.RENOVATION_SCHEDULED)) != null;
+        }
+
+        public bool IsRenovationCancelled(Owner owner)
+        {
+            List<OwnerNotification> notifications = notificationRepository.GetAll();
+            return notifications.Find(n => n.Owner.Id == owner.Id && n.Type.Equals(OwnerNotificationType.RENOVATION_CANCELLED)) != null;
         }
     }
 }
