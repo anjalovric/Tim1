@@ -37,24 +37,46 @@
                     <TextBlock VerticalAlignment="Bottom" Grid.Column="1" Grid.Row="0" Text="Old date range"></TextBlock>
                     <TextBlock VerticalAlignment="Bottom" Grid.Column="1" Grid.Row="2" Text="New date range"></TextBlock>
 
-
-                    <Border Grid.Column="1" Grid.Row="1" BorderBrush="Black" BorderThickness="0.5">
-                        <TextBlock  Text="{Binding Path = Request.OldArrivalDate}"></TextBlock>
-                     </Border>
-                    <Image  Grid.Column="2" Grid.Row="1" Source="/Resources/Images/calendarIcon.png" Width="14"/>
-                    <Image  Grid.Column="4" Grid.Row="1" Source="/Resources/Images/calendarIcon.png" Width="14" />
-                    <Border Grid.Column="3" Grid.Row="1" BorderBrush="Black" BorderThickness="0.5">
-                        <TextBlock Text="{Binding Path = Request.OldDepartureDate}"></TextBlock>
-                     </Border>
-
-                    <Border Grid.Column="1" Grid.Row="3" BorderBrush="Black" BorderThickness="0.5">
-                    <TextBlock Text="{Binding Path = Request.NewArrivalDate}"></TextBlock>
-                    </Border>
-                    <Image  Grid.Column="2" Grid.Row="3" Source="/Resources/Images/calendarIcon.png" Width="14"/>
-                    <Image  Grid.Column="4" Grid.Row="3" Source="/Resources/Images/calendarIcon.png" Width="14"/>
-                    <Border  Grid.Column="3" Grid.Row="3" BorderBrush="Black" BorderThickness="0.5">
-                    <TextBlock Text="{Binding Path = Request.NewDepartureDate}"></TextBlock>
-                    </Border>
+                    <Grid Grid.Column="1" Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="4*"/>
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Border Grid.Column="0"  BorderBrush="Black" BorderThickness="0.5" >
+                            <TextBlock  Text="{Binding Path = OldArrival}" Padding="3,0,0,0"></TextBlock>
+                         </Border>
+                        <Image  Grid.Column="1" Source="/Resources/Images/calendarIcon.png" Width="14"/>
+                    </Grid>
+                    <Grid Grid.Column="3" Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="4*"/>
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Image  Grid.Column="1" Source="/Resources/Images/calendarIcon.png" Width="14" />
+                        <Border Grid.Column="0" BorderBrush="Black" BorderThickness="0.5">
+                            <TextBlock Text="{Binding Path = OldDeparture}" Padding="3,0,0,0"></TextBlock>
+                        </Border>
+                    </Grid>
+                    <Grid Grid.Column="1" Grid.Row="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="4*"/>
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Border Grid.Column="0" BorderBrush="Black" BorderThickness="0.5">
+                            <TextBlock Text="{Binding Path = NewArrival}" Padding="3,0,0,0"></TextBlock>
+                        </Border>
+                        <Image  Grid.Column="1" Source="/Resources/Images/calendarIcon.png" Width="14"/>
+                    </Grid>
+                    <Grid  Grid.Column="3" Grid.Row="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="4*"/>
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Image  Grid.Column="1"  Source="/Resources/Images/calendarIcon.png" Width="14"/>
+                        <Border  Grid.Column="0" BorderBrush="Black" BorderThickness="0.5">
+                            <TextBlock Text="{Binding Path = NewDeparture}" Padding="3,0,0,0"></TextBlock>
+                        </Border>
+                    </Grid>
 
                     <TextBlock Grid.Row="5" Grid.Column="0" Text="{Binding Path=Availability}" >
                         <TextBlock.Style>
