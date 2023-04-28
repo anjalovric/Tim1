@@ -13,26 +13,27 @@ namespace InitialProject.WPF.Validations.GuideValidations
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            try
+            string stringValue = value as string;
+
+            if (!string.IsNullOrEmpty(stringValue))
             {
-                string stringValue = value as string;
-                Regex r = new Regex(@"^[1-9][0-9]*$");
-
-                if (stringValue.Length == 0)
-                {
-                    return new ValidationResult(false, "Can't be empty");
-                }
-
-                if (r.IsMatch(stringValue))
-                {
-                    return new ValidationResult(true, null);
-                }
-
-                return new ValidationResult(false, "This field should contants only digits!");
+                return ValidationResult.ValidResult;
             }
-            catch
+            else if(string.IsNullOrEmpty(stringValue))
             {
-                return new ValidationResult(false, "Enter capacity as decimal number");
+                return new ValidationResult(false, "This field is required");
+            }
+            else if (Convert.ToInt32(stringValue) == 0)
+            {
+                return new ValidationResult(false, "This field is required");
+            }
+            else if (Convert.ToInt32(stringValue) < 1)
+            { 
+                return new ValidationResult(false, "Number must be positive and whole");
+            }
+                else
+            {
+                return new ValidationResult(false, "This field is required");
             }
         }
     }
