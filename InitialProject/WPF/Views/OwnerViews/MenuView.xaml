@@ -64,7 +64,7 @@
             <Button.Content>
                 <StackPanel Orientation="Horizontal" Width="234">
                     <Label Width="20"></Label>
-                    <Image Source="/Resources/Images/tools.png" Height="20"/>
+                    <Image Source="/Resources/Images/toolImage.png" Height="20"/>
                     <Label>My Renovations</Label>
                 </StackPanel>
             </Button.Content>

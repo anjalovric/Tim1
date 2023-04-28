@@ -156,6 +156,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
                 {
                     Accommodations.Remove(accommodationToDelete);
                     deletingAccommodationService.Delete(accommodationToDelete);
+                    MakeDeletedNotification();
                 }
             }
         }
@@ -168,10 +169,23 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
                 StackPanelVisibility = "Visible";
                 notificationsService.Delete(Domain.Model.OwnerNotificationType.ACCOMMODATION_ADDED, profileOwner);
             }
+            else if(notificationsService.IsAccommodationDeleted(profileOwner))
+            {
+                StackPanelMessage = "Accommodation successfully removed!";
+                StackPanelVisibility = "Visible";
+                notificationsService.Delete(Domain.Model.OwnerNotificationType.ACCOMMODATION_DELETED, profileOwner);
+            }
             else
             {
                 StackPanelVisibility = "Hidden";
             }
+        }
+
+        private void MakeDeletedNotification()
+        {
+            OwnerNotificationsService notificationsService = new OwnerNotificationsService();
+            notificationsService.Add(Domain.Model.OwnerNotificationType.ACCOMMODATION_DELETED, profileOwner);
+            DisplayNotificationPanel();
         }
     }
 }

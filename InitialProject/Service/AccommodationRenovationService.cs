@@ -95,5 +95,10 @@ namespace InitialProject.Service
                     renovation.IsInProgress = false;
             }
         }
+
+        public bool IsRenovationOnDate(Accommodation accommodation, DateTime date)
+        {
+            return renovations.Find(n => n.Accommodation.Id == accommodation.Id && n.StartDate <= date && n.EndDate >= date) != null;
+        }
     }
 }

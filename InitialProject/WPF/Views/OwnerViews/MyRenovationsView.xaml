@@ -50,9 +50,12 @@
             <DataGrid.CellStyle>
                 <Style TargetType="DataGridCell">
                     <Style.Triggers>
-                            <DataTrigger Binding="{Binding IsInProgress}" Value="True">
-                                <Setter Property="Background" Value="Green" />
-                            </DataTrigger>
+                        <DataTrigger Binding="{Binding CanBeCancelled}" Value="False">
+                            <Setter Property="Background" Value="LightGray" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding IsInProgress}" Value="True">
+                            <Setter Property="Background" Value="Green" />
+                        </DataTrigger>
                     </Style.Triggers>
                 </Style>
             </DataGrid.CellStyle>
