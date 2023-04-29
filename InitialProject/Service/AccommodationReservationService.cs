@@ -6,6 +6,7 @@ using InitialProject.Domain;
 using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Model;
 using InitialProject.WPF.Views.Guest1Views;
+using System.Linq;
 
 namespace InitialProject.Service
 {
@@ -106,19 +107,35 @@ namespace InitialProject.Service
         }
         
 
-        public int GetReservationsNumberByGuestInLastYear(Guest1 guest1)
+        public DateTime GetNewSuperGuestActivationDateIfPossible(Guest1 guest1)
         {
             int counter = 0;
+            List<DateTime> departureDates = new List<DateTime>();
             foreach(AccommodationReservation reservation in reservations)
             {
                 if (reservation.Guest.Id == guest1.Id && IsLastYearReservationCompleted(reservation))
+                {
                     counter++;
+                    departureDates.Add(reservation.Departure);
+                }
+                    
             }
-            return counter;
+            if (counter >= 10)
+            {
+                var tenthDeparture = departureDates.OrderBy(d => d).ElementAtOrDefault(9);
+                return tenthDeparture;
+            }
+                
+            else
+                return DateTime.MinValue;
         }
         public bool IsLastYearReservationCompleted(AccommodationReservation reservation)
         {
             return reservation.Arrival <= DateTime.Now && reservation.Departure <= DateTime.Now && reservation.Arrival > DateTime.Now.AddYears(-1) && reservation.Arrival <=DateTime.Now;
+        }
+        public int GetLastYearReservationsNumberByGuest(Guest1 guest1, DateTime activationDate)
+        {
+            return reservations.FindAll(n =>n.Guest.Id==guest1.Id && n.Arrival > activationDate && n.Arrival <= activationDate.AddYears(1) && n.Departure > activationDate && n.Departure <= activationDate.AddYears(1)).Count;
         }
 
     }
