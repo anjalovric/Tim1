@@ -75,12 +75,12 @@
                 <ColumnDefinition Width="0.4*"/>
             </Grid.ColumnDefinitions>
             <Image Grid.Column="1" Source="{Binding Path= ImageUrl, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,5" />
-            <Button Grid.Column="0" Command="{Binding NextImageCommand}" Name="NextImageButton" HorizontalAlignment="Left" Margin="5, 0, 0, 0"  Height="32" Width="70" Background="AliceBlue" BorderBrush="DarkGray">
+            <Button Grid.Column="0" Command="{Binding NextImageCommand}" Name="NextImageButton" HorizontalAlignment="Left" Margin="5, 0, 0, 0"  Height="32" Width="70" Style="{StaticResource ButtonForImages}">
                 <Button.Content>
                     <Image Source="/Resources/Images/back_arrow.png"/>
                 </Button.Content>
             </Button>
-            <Button Grid.Column="2" Command="{Binding PreviousImageCommand}" Name="PreviousImageButton" HorizontalAlignment="Right" Margin="0, 0, 5, 0"  Height="32" Width="70" Background="AliceBlue" BorderBrush="DarkGray">
+            <Button Grid.Column="2" Command="{Binding PreviousImageCommand}" Name="PreviousImageButton" HorizontalAlignment="Right" Margin="0, 0, 5, 0"  Height="32" Width="70" Style="{StaticResource ButtonForImages}">
                 <Button.Content>
                     <Image Source="/Resources/Images/arrow.png" />
                 </Button.Content>

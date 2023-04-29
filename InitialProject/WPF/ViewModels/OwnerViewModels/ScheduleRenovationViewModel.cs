@@ -188,8 +188,8 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         {
             AccommodationRenovation renovation = new AccommodationRenovation();
             renovation.Accommodation = SelectedAccommodation;
-            renovation.StartDate = StartDate;
-            renovation.EndDate = EndDate;
+            renovation.StartDate = SelectedDateRange.Arrival;
+            renovation.EndDate = SelectedDateRange.Departure;
             renovation.Description = Description;
 
             AccommodationRenovationService renovationService = new AccommodationRenovationService();

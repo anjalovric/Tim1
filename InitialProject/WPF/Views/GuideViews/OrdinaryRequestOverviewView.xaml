@@ -52,7 +52,8 @@
             <Label Content="Language" Style="{DynamicResource StatisticLabel}" Grid.Column="2" Height="35" Grid.Row="1" Width="97" HorizontalAlignment="Left" Margin="42,15,0,0" Grid.ColumnSpan="2" VerticalAlignment="Top"/>
             <tk:IntegerUpDown Grid.Column="3" AllowTextInput="True" Text="{Binding Capacity}" Grid.Row="0" Height="30" Minimum="1" VerticalAlignment="Bottom" Width="122" HorizontalAlignment="Right" Style="{DynamicResource i}"/>
             <ComboBox Text="{Binding Language}" Grid.Column="3" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" ItemsSource="{Binding Languages}" SelectedItem="{Binding Language,UpdateSourceTrigger=PropertyChanged}"  Style="{DynamicResource ComboBoxStyle}" Height="30" HorizontalAlignment="right" VerticalAlignment="Center" Grid.Row="1"  Width="111"/>
-            <DatePicker Height="30" Grid.Column="5" Text="{Binding Start}"  Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="126" />
+            <DatePicker Height="30"   Grid.Column="5" Text="{Binding Start}"  Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="126" >
+            </DatePicker>
             <Label Grid.Column="5" Content="Start" Style="{DynamicResource StatisticLabel}" HorizontalAlignment="Left" Margin="10,39,0,0" VerticalAlignment="Top"/>
             <DatePicker Grid.Column="5" Text="{Binding End}" HorizontalAlignment="Left" Margin="84,19,0,0" Grid.Row="1" VerticalAlignment="Top" Width="126" Height="30"/>
             <Label Content="Finish" Style="{DynamicResource StatisticLabel}" Grid.Column="5" Grid.Row="1" Height="30" Width="82" HorizontalAlignment="Left" Margin="10,18,0,0" VerticalAlignment="Top"/>

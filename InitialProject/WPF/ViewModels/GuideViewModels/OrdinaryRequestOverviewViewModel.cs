@@ -216,6 +216,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         }
         private void Search_Executed(object sender)
         {
+            appropriateRequests.Clear();
             Search_Country();
             Search_City();
             Search_Capacity();
@@ -235,6 +236,10 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             String date = "1/1/0001 12:00:00 AM";
             Start = Convert.ToDateTime(date);
             End = Convert.ToDateTime(date);
+            Requests.Clear();
+            OrdinaryTourRequestsService ordinaryTourRequestsService = new OrdinaryTourRequestsService();
+            foreach(OrdinaryTourRequests request in ordinaryTourRequestsService.GetOnWaitingRequests())
+                Requests.Add(request);
         }
 
         private void CreateTour_Executed(object sender)

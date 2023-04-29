@@ -157,7 +157,6 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         }
 
         private int maxGuests;
-
         public int MaxGuests
         {
             get => maxGuests;
@@ -166,6 +165,32 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
                 if (value != maxGuests)
                 {
                     maxGuests = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private int listCount;
+        public int ListCount
+        {
+            get => listCount;
+            set
+            {
+                if (value != listCount)
+                {
+                    listCount = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private int datesCount;
+        public int DatesCount
+        {
+            get => datesCount;
+            set
+            {
+                if (value != datesCount)
+                {
+                    datesCount = value;
                     OnPropertyChanged();
                 }
             }
@@ -286,6 +311,8 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             DateMessage = "Hidden";
             LanguageT = selectedLanguage;
             Date=DateTime.Now;
+            DatesCount = 0;
+            ListCount = 0;
         }
 
         private void MakeListOfLocations()
@@ -387,6 +414,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
                 Instances.Add(newInstance);
                 IsErrorMessageVisible = "Hidden";
                 DateMessage = "Hidden";
+                DatesCount++;
             }
         }
         private bool IsPastTime()
@@ -412,17 +440,20 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         {
             if (selectedInstance != null)
                 Instances.Remove(selectedInstance);
+            DatesCount--;
         }
         private void OKCheckPoint_Executed(object sender)
         {
             CheckPoint newCheckPoint = new CheckPoint(NameT, false, -1, -1);
             TourPoints.Add(newCheckPoint);
             NameT = "";
+            ListCount++;
         }
         private void CancelCheckPoint_Executed(object sender)
         {
             if (SelectedCheckPoint != null)
                 TourPoints.Remove(SelectedCheckPoint);
+            ListCount--;
         }
         private void NextImage_Executed(object sender)
         {

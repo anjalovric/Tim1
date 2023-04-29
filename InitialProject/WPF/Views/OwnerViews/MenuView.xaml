@@ -7,19 +7,6 @@
       mc:Ignorable="d" 
       d:DesignHeight="630" d:DesignWidth="430"
       Title="Menu" Background="#b3cee5">
-    <Page.Resources>
-        <Style x:Key="MenuButtonStyle" TargetType="{x:Type Button}">
-            <Setter Property="FontSize" Value="13" />
-            <Setter Property="FontStyle" Value="Normal" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="10"></Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </Page.Resources>
 
     <Grid>
         <Button Command ="{Binding HomePageCommand}" HorizontalContentAlignment="Left" HorizontalAlignment="Center" Margin="0,167,0,0" VerticalAlignment="Top" Width="350" Height="45">
@@ -64,7 +51,7 @@
             <Button.Content>
                 <StackPanel Orientation="Horizontal" Width="234">
                     <Label Width="20"></Label>
-                    <Image Source="/Resources/Images/tools.png" Height="20"/>
+                    <Image Source="/Resources/Images/toolImage.png" Height="20"/>
                     <Label>My Renovations</Label>
                 </StackPanel>
             </Button.Content>

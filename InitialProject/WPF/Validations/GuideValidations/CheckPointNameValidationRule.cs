@@ -7,20 +7,21 @@ using System.Windows.Controls;
 
 namespace InitialProject.WPF.Validations.GuideValidations
 {
-    public class CheckPointCountValidationRule:ValidationRule
+    public class CheckPointNameValidationRule:ValidationRule
     {
         public override ValidationResult Validate(object value, System.Globalization.CultureInfo cultureInfo)
         {
 
-            if (Convert.ToInt32(value)>1)
+            string stringValue = value as string;
+
+            if (!string.IsNullOrEmpty(stringValue))
             {
                 return ValidationResult.ValidResult;
             }
             else
             {
-                return new ValidationResult(false, "At least 2 points are required");
+                return new ValidationResult(false, "Enter point name");
             }
         }
     }
-
 }

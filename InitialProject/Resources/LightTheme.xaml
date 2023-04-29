@@ -16,6 +16,7 @@
     <SolidColorBrush x:Key="ListBoxBackground">#e6ffff</SolidColorBrush>
     <SolidColorBrush x:Key="MenuBlue">#B6D0E2</SolidColorBrush>
 
+    
     <Style x:Key="Menu" TargetType="Menu">
         <Setter Property="FontSize" Value="15"/>
 
@@ -318,9 +319,9 @@
 
                     <DockPanel x:Name="dockPanel">
                         <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" ContentTemplate="{TemplateBinding ContentTemplate}" RecognizesAccessKey="True" VerticalAlignment="Center"/>
-                        <Grid Margin="5,5,0,5" Width="60" Background="#FFC0CCD9">
-                            <TextBlock Text="LIGHT" TextWrapping="Wrap" FontWeight="Bold" FontSize="12" HorizontalAlignment="Right" Margin="0,0,3,0"/>
-                            <TextBlock HorizontalAlignment="Left" Margin="2,0,0,0" FontSize="12" FontWeight="Bold" Text="OFF" TextWrapping="Wrap"/>
+                        <Grid Margin="5,5,0,5" Width="53" Background="{StaticResource CalendarBlue}">
+                            <TextBlock Text="" TextWrapping="Wrap" FontWeight="Bold" FontSize="12" HorizontalAlignment="Right" Margin="0,0,3,0"/>
+                            <TextBlock HorizontalAlignment="Left" Margin="2,0,0,0" FontSize="12" FontWeight="Bold" Text="" TextWrapping="Wrap"/>
                             <Border HorizontalAlignment="Left" x:Name="slider" Width="23" BorderThickness="1,1,1,1" CornerRadius="3,3,3,3" RenderTransformOrigin="0.5,0.5" Margin="1,1,1,1">
                                 <Border.RenderTransform>
                                     <TransformGroup>
@@ -338,7 +339,7 @@
                                 </Border.BorderBrush>
                                 <Border.Background>
                                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                        <GradientStop Color="#FF8AB4FF" Offset="1"/>
+                                        <GradientStop Color="AliceBlue" Offset="1"/>
                                         <GradientStop Color="#FFD1E2FF" Offset="0"/>
                                     </LinearGradientBrush>
                                 </Border.Background>
@@ -407,12 +408,14 @@
     <Style x:Key="i" TargetType="tk:IntegerUpDown">
         <Setter Property="Background" Value="{StaticResource CalendarBlue}"></Setter>
         <Setter Property="Foreground" Value="black"></Setter>
+        <Setter Property="TextAlignment" Value="Left"></Setter>
 
     </Style>
 
     <Style x:Key="d" TargetType="tk:DoubleUpDown">
         <Setter Property="Background" Value="{StaticResource CalendarBlue}"></Setter>
         <Setter Property="Foreground" Value="black"></Setter>
+        <Setter Property="TextAlignment" Value="Left"></Setter>
 
     </Style>
 
@@ -536,8 +539,10 @@
                             <Setter TargetName="DropDownBorder" Property="MinHeight" Value="95"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="Foreground" Value="LightCyan"/>
+                            <Setter Property="Foreground" Value="#888888"/>
                             <Setter Property="Background" Value="AliceBlue"/>
+                            <Setter Property="BorderBrush" Value="AliceBlue"/>
+                            <Setter Property="Opacity" Value="0.5"/>
                         </Trigger>
                         <Trigger Property="IsGrouping" Value="true">
                             <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>

@@ -215,7 +215,6 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         }
 
         private int maxGuests;
-
         public int MaxGuests
         {
             get => maxGuests;
@@ -224,6 +223,33 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
                 if (value != maxGuests)
                 {
                     maxGuests = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private int pointsCount;
+        public int PointsCount
+        {
+            get => pointsCount;
+            set
+            {
+                if (value != pointsCount)
+                {
+                    pointsCount = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private int datesCount;
+        public int DatesCount
+        {
+            get => datesCount;
+            set
+            {
+                if (value != datesCount)
+                {
+                    datesCount = value;
                     OnPropertyChanged();
                 }
             }
@@ -438,6 +464,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
                 ToastAvailability = "Hidden";
                 AddEnabled = false;
                 DeleteEnabled = false;
+                DatesCount++;
             }
             else
                 ToastAvailability = "Visible";
@@ -453,6 +480,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         {
             if (selectedInstance != null)
                 Instances.Remove(selectedInstance);
+            DatesCount--;
         }
         private void CloseToastAvailability_Executed(object sender)
         {
@@ -464,11 +492,13 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             CheckPoint newCheckPoint = new CheckPoint(NameT, false, -1, -1);
             TourPoints.Add(newCheckPoint);
             NameT = "";
+            PointsCount++;
         }
         private void CancelCheckPoint_Executed(object sender)
         {
             if (SelectedCheckPoint != null)
                 TourPoints.Remove(SelectedCheckPoint);
+            PointsCount--;
         }
         private void NextImage_Executed(object sender)
         {

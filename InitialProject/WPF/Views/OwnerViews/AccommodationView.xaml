@@ -75,9 +75,9 @@
                 </Style>
             </ListBox.Resources>
         </ListBox>
-        <Button Command="{Binding NewAccommodationCommand}" Name="NewAccommodationButton" Content="New Accommodation" HorizontalAlignment="Center" Margin="31,474,31,0"  Width="354" Height="43" VerticalAlignment="Top" Background="AliceBlue" BorderBrush="DarkGray"/>
-        <Button Command="{Binding MyRenovationsCommand}" Content="My Renovations" HorizontalAlignment="Center" Margin="31,540,31,0"  Width="354" Height="43" VerticalAlignment="Top" Background="AliceBlue" BorderBrush="DarkGray"/>
-        <StackPanel Margin="0,-7,0,528" Background="LightGray" Visibility="{Binding Path=StackPanelVisibility, UpdateSourceTrigger=PropertyChanged}">
+        <Button Command="{Binding NewAccommodationCommand}" Name="NewAccommodationButton" Content="New Accommodation" HorizontalAlignment="Center" Margin="31,474,31,0"  Width="354" Height="43" VerticalAlignment="Top" Style="{StaticResource BasicButton}"/>
+        <Button Command="{Binding MyRenovationsCommand}" Content="My Renovations" HorizontalAlignment="Center" Margin="31,540,31,0"  Width="354" Height="43" VerticalAlignment="Top" Style="{StaticResource BasicButton}"/>
+        <StackPanel Margin="0,0,0,525" Background="LightGray" Visibility="{Binding Path=StackPanelVisibility, UpdateSourceTrigger=PropertyChanged}">
             <Grid Height="100">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
@@ -88,8 +88,8 @@
                     <RowDefinition />
                     <RowDefinition />
                 </Grid.RowDefinitions>
-                <Label Content="{Binding Path=StackPanelMessage, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
-                <Button Command="{Binding OKCommand}" Grid.Row="2" Grid.Column="1" Content="OK" />
+                <Label Content="{Binding Path=StackPanelMessage, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" FontSize="15" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+                <Button Command="{Binding OKCommand}" Grid.Row="2" Grid.Column="1" Content="OK" Margin="0,0,31,0" Background="AliceBlue"/>
             </Grid>
         </StackPanel>
     </Grid>

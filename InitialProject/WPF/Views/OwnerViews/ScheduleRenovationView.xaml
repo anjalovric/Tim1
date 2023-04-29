@@ -9,7 +9,7 @@
       mc:Ignorable="d" 
       xmlns:val="clr-namespace:InitialProject.WPF.Validations.OwnerValidations"
       d:DesignHeight="630" d:DesignWidth="430"
-      Title="Schedule Renovation" Background="White">
+      Title="Schedule Renovation" Background="#b3cee5">
 
     <Grid Margin="25, 5, 25, 5">
         <Grid.ColumnDefinitions>
@@ -106,7 +106,7 @@
         </ListBox>
         <Label Content="Description" VerticalContentAlignment="Bottom" Grid.Row="8" Grid.Column="0"  />
         <tk:WatermarkTextBox Text="{Binding Path= Description, UpdateSourceTrigger=PropertyChanged}" Watermark="Enter description here" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="9"/>
-        <Button Command="{Binding CancelCommand}" Content="Cancel" Grid.Column="0" Grid.Row="10" Height="41" Width="136"/>
-        <Button Command="{Binding ConfirmCommand}" Content="Confirm" Grid.Column="1" Grid.Row="10" Height="41" Width="136"/>
+        <Button Command="{Binding CancelCommand}" Content="Cancel" Grid.Column="0" Grid.Row="10" Height="41" Width="136" HorizontalAlignment="Left" Style="{StaticResource BasicButton}"/>
+        <Button Command="{Binding ConfirmCommand}" Content="Confirm" Grid.Column="1" Grid.Row="10" Height="41" Width="136" HorizontalAlignment="Right" Style="{StaticResource BasicButton}"/>
     </Grid>
 </Page>

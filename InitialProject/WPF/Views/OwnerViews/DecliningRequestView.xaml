@@ -22,6 +22,6 @@
         <Label Content="{Binding Path= ReschedulingAccommodationRequest.Reservation.Guest}" FontSize="15" HorizontalAlignment="Left" Margin="41,82,0,0" VerticalAlignment="Top" Width="174" Height="30"/>
         <Label Content="Explanation (optional): " HorizontalAlignment="Left" Margin="41,169,0,0" VerticalAlignment="Top" Width="174"/>
         <TextBox HorizontalAlignment="Center" Text="{Binding Path= Explanation, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Center" Height="162" Width="348" BorderThickness="1" BorderBrush="DarkGray"/>
-        <Button Command="{Binding ConfirmCommand}" Name="ConfirmButton" Content="Confirm" HorizontalAlignment="Left" Margin="265,429,0,0" VerticalAlignment="Top" Width="124" Height="41" Background="AliceBlue" BorderBrush="DarkGray"/>
+        <Button Command="{Binding ConfirmCommand}" Name="ConfirmButton" Content="Confirm" HorizontalAlignment="Left" Margin="265,429,0,0" VerticalAlignment="Top" Width="124" Height="41" Style="{StaticResource BasicButton}"/>
     </Grid>
 </Page>

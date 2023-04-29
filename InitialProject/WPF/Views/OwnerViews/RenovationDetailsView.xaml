@@ -1,0 +1,67 @@
+﻿<Page x:Class="InitialProject.WPF.Views.OwnerViews.RenovationDetailsView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:InitialProject.WPF.Views.OwnerViews"
+      mc:Ignorable="d" 
+      d:DesignHeight="590" d:DesignWidth="430"
+      Title="My Renovations">
+
+    <Grid Margin="0, 20, 0, 20" Background="White">
+        <Rectangle Fill="LightGray" HorizontalAlignment="Center" Height="30" Stroke="DarkGray" VerticalAlignment="Top" Width="430"/>
+        <Button Foreground="DarkGray" Command="NavigationCommands.BrowseBack" Name="ExitButton" Content="x" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="384,5,0,0" VerticalAlignment="Top" Height="25" Width="27" Background="AliceBlue" BorderBrush="DarkGray">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="100"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Label Content="Renovation" Foreground="DarkGray" HorizontalAlignment="Left" Margin="0,-1,0,0" VerticalAlignment="Top" RenderTransformOrigin="0,0.401" Width="134" Height="28" VerticalContentAlignment="Bottom">
+        </Label>
+        <Grid Margin="30,35,30,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.8*"/>
+                <RowDefinition Height="0.3*"/>
+                <RowDefinition Height="0.4*"/>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="1.5*"/>
+                <RowDefinition Height="2*" />
+            </Grid.RowDefinitions>
+            <Label Content="{Binding Path= Renovation.Accommodation.Name}" VerticalContentAlignment="Center" FontSize="15" Grid.Column="0" Grid.Row="0" Margin="-2,0,0,0"/>
+            <Image Grid.Column="1" Grid.Row="0" Source="/Resources/Images/toolImage.png" Margin="0, 0, -30, 0"/>
+            <Label Content="From:" Grid.Row="1" Grid.Column="0" Margin="-3,0,0,0" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Left"/>
+            <Label Content="To:" Grid.Row="1" Grid.Column="1" Margin="17, 0, 0, 0" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Left"/>
+            <Grid Grid.Row="2" Grid.Column="0" Margin="0,10,20,0" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="0.5*"/>
+                </Grid.ColumnDefinitions>
+                <Border Grid.Column="0" BorderBrush="Black" BorderThickness="0.5">
+                    <TextBlock Text="{Binding Path=StartDate}"/>
+                </Border>
+                <Image Source="/Resources/Images/calendarIcon.png" Height="20" Grid.Column="1"/>
+            </Grid>
+            <Grid Grid.Row="2" Grid.Column="1" Margin="20,10,0,0" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="0.5*"/>
+                </Grid.ColumnDefinitions>
+                <Border Grid.Column="0" BorderBrush="Black" BorderThickness="0.5">
+                    <TextBlock Text="{Binding Path= EndDate}"/>
+                </Border>
+                <Image Source="/Resources/Images/calendarIcon.png" Height="20" Grid.Column="1"/>
+            </Grid>
+            <Label Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Content="Description:" Margin="-2,0,0,0" VerticalContentAlignment="Bottom"/>
+            <Border Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="4" Margin="0,2,0,10" BorderBrush="Black" BorderThickness="0.5">
+                <TextBlock Text="{Binding Renovation.Description}" Margin="0,0,0,-1"/>
+            </Border>
+            <Image Source="/Resources/Images/renovation2.jpg" Stretch="Fill" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="5" Margin="-30,0,-30,0"/>
+        </Grid>
+
+    </Grid>
+</Page>
