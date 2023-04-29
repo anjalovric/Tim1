@@ -305,18 +305,44 @@
                             </DataGridTextColumn>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <Button Grid.Column="1" Grid.Row="1" Height="25" Width="60" Command="{Binding AddCheckPointCommand}" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="34,22,0,0" Style="{DynamicResource  Button}" Grid.ColumnSpan="2">ADD</Button>
-                    <Button Grid.Column="2" Grid.Row="1" Height="25" Width="60"  Command="{Binding DeleteCheckPointCommand}" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,22,0,0" Style="{DynamicResource  Button}">DELETE</Button>
-                    <TextBox Style="{DynamicResource tb}" Grid.Column="1" Grid.Row="0" x:Name="CheckPointName" Height="47" VerticalAlignment="Top" Text="{Binding Path=NameT,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="29,34,0,0" Grid.RowSpan="2" Grid.ColumnSpan="2"  />
-                    <Label Grid.Column="2" Grid.Row="0" Content="Add checkpoints  " Style="{DynamicResource  Label}" VerticalAlignment="Top" Height="30" Margin="0,4,0,0" />
+                    <Button Grid.Column="1" Grid.Row="1" Height="25" Width="60" Command="{Binding AddCheckPointCommand}" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="29,31,0,0" Style="{DynamicResource  Button}" Grid.ColumnSpan="2">ADD</Button>
+                    <Button Grid.Column="2" Grid.Row="1" Height="25" Width="60"  Command="{Binding DeleteCheckPointCommand}" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,31,0,0" Style="{DynamicResource  Button}">DELETE</Button>
+                    <TextBox Style="{DynamicResource tb}" Grid.Column="1" Grid.Row="0" x:Name="CheckPointName" Height="47" VerticalAlignment="Top"  Margin="29,34,0,0" Grid.RowSpan="2" Grid.ColumnSpan="2" >
+
+                        <TextBox.Text>
+                            <Binding Path="NameT" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <val:CheckPointNameValidationRule  ValidationStep="RawProposedValue"></val:CheckPointNameValidationRule>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                        <Validation.ErrorTemplate>
+                            <ControlTemplate>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
+                                    <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                                </Grid>
+                            </ControlTemplate>
+                        </Validation.ErrorTemplate>
+                    </TextBox>
+                    <Label Grid.Column="1" Grid.Row="0" Content="Add checkpoints  " Style="{DynamicResource  Label}" VerticalAlignment="Top" Height="30" Margin="25,8,10,0" Grid.ColumnSpan="2" />
 
 
                     <!--DATEANDTIME-->
                     <ListBox x:Name="DateTimeBox" ItemsSource="{Binding Path=Instances}" Grid.Column="0" Grid.Row="2" Grid.RowSpan="3" SelectedItem="{Binding selectedInstance}" Style="{DynamicResource  ListBoxForm}" Grid.ColumnSpan="2" Margin="0,38,35,4"/>
                     <tk:TimePicker Style="{DynamicResource dt}"  FontSize="9" x:Name="DT" Grid.Column="1"  Grid.Row="5" Text="{Binding Path=InstanceStartDate,Mode=TwoWay}" Format="LongTime" DataContext="{Binding}" Margin="28,0,0,45" Grid.ColumnSpan="2" />
-                    <Button Grid.Column="1" Grid.Row="5" Command="{Binding AddDateTimeCommand}"   Height="25" Width="60" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="34,0,0,2" Style="{DynamicResource  Button}" Grid.ColumnSpan="2">ADD</Button>
+                    <Button Grid.Column="1" Grid.Row="5" Command="{Binding AddDateTimeCommand}"   Height="25" Width="60" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="28,0,0,2" Style="{DynamicResource  Button}" Grid.ColumnSpan="2">ADD</Button>
                     <Button Grid.Column="2" Grid.Row="5"   Height="25" Width="60" Command="{Binding DeleteDateTimeCommand}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,0,2" Style="{DynamicResource  Button}">DELETE</Button>
-                    <Label Grid.Column="2" Content="Add date and time "  HorizontalAlignment="Left"  Grid.Row="2" VerticalAlignment="Center" Width="175" Style="{DynamicResource  Label}"/>
+                    <Label Grid.Column="1" Content="Add date and time "  HorizontalAlignment="Left"  Grid.Row="2" VerticalAlignment="Center" Width="175" Style="{DynamicResource  Label}" Grid.ColumnSpan="2" Margin="25,0,0,0"/>
                     <Label Grid.Column="2" Content="Cant't select time from past!" Visibility="{Binding IsErrorMessageVisible}" FontSize="13" Foreground="REd" HorizontalAlignment="Center" Grid.Row="4" VerticalAlignment="Top" Width="175"/>
                     <Calendar Grid.Column="1" SelectedDate="{Binding Date}" DisplayDateStart="{Binding Start}" Style="{DynamicResource Calendar}" HorizontalAlignment="Left" Margin="10,44,0,0" Grid.Row="2" VerticalAlignment="Top" Height="172" Grid.RowSpan="3" Width="211" Grid.ColumnSpan="2"/>
                     <TextBox x:Name="DatesList" HorizontalAlignment="Left" Margin="0,72,0,0" Grid.Row="4" TextWrapping="Wrap" Height="0" Background="Transparent" Foreground="Transparent" BorderThickness="0" VerticalAlignment="Top" Width="120">
@@ -375,6 +401,11 @@
                                         <ControlTemplate.Triggers>
                                             <Trigger Property="IsMouseOver" Value="True">
                                                 <Setter Property="Background" Value="{StaticResource HorizontalTable}" />
+                                            </Trigger>
+                                            <Trigger Property="IsEnabled" Value="False">
+                                                <Setter Property="Background" Value="AliceBlue"></Setter>
+                                                <Setter Property="BorderBrush" Value="LightGray" ></Setter>
+                                                <Setter Property="Foreground" Value="LightGray"></Setter>
                                             </Trigger>
                                         </ControlTemplate.Triggers>
                                     </ControlTemplate>
@@ -451,7 +482,7 @@
                     </Grid.RowDefinitions>
 
 
-                    <Image x:Name="imagePicture" Grid.Row="2" Grid.ColumnSpan="4"  Grid.Column="1" Stretch="Fill"  Margin="29,17,23,7">
+                    <Image x:Name="imagePicture" Height="135" Grid.Row="2" Grid.ColumnSpan="4"  Grid.Column="1" Stretch="Fill"  Margin="29,17,23,7">
                         <Image.Source>
                             <Binding Path="Image" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
                                 <Binding.ValidationRules>
@@ -461,18 +492,10 @@
                         </Image.Source>
                         <Validation.ErrorTemplate>
                             <ControlTemplate>
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="140" />
-                                        <RowDefinition Height="140"/>
-                                    </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
+                                <Grid  Grid.Column="0" Grid.Row="0" Margin="29,17,23,7">
 
-                                        <ColumnDefinition Width="Auto" />
-                                    </Grid.ColumnDefinitions>
-
-                                    <AdornedElementPlaceholder Grid.Column="0" Grid.Row="1" x:Name="textBox"/>
-                                    <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                                    <AdornedElementPlaceholder  x:Name="textBox"/>
+                                    <TextBlock Margin="-57,-13,0,0" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
                                 </Grid>
                             </ControlTemplate>
                         </Validation.ErrorTemplate>
@@ -510,9 +533,9 @@
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
-                    <Label Content="Images of tour " Style="{DynamicResource Label}" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Left" VerticalAlignment="Top" Height="36" Width="138" RenderTransformOrigin="0.505,0.781" Margin="0,44,0,0" Grid.RowSpan="3"/>
-                    <Button Command="{Binding AddImageCommand}" Height="24" Width="60"  Grid.Column="2" Grid.ColumnSpan="3" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="25,5,0,0" Style="{DynamicResource  Button}" Grid.Row="1" Grid.RowSpan="2" >ADD</Button>
-                    <Button Content="DELETE" HorizontalAlignment="Left" Grid.Column="4" Grid.ColumnSpan="2" VerticalAlignment="Top"  Command="{Binding RemoveImageCommand}" Margin="95,5,0,0" Width="60" Height="24" Style="{DynamicResource  Button}" Grid.Row="1" Grid.RowSpan="2"/>
+                    <Label Content="Images of tour " Style="{DynamicResource Label}" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Left" VerticalAlignment="Top" Height="36" Width="138" RenderTransformOrigin="0.505,0.781" Margin="0,3,0,0" Grid.RowSpan="2" Grid.Row="1"/>
+                    <Button Command="{Binding AddImageCommand}" Height="24" Width="60"  Grid.Column="2" Grid.ColumnSpan="3" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="25,10,0,0" Style="{DynamicResource  Button}" Grid.Row="1" Grid.RowSpan="2" >ADD</Button>
+                    <Button Content="DELETE" HorizontalAlignment="Left" Grid.Column="4" Grid.ColumnSpan="2" VerticalAlignment="Top"  Command="{Binding RemoveImageCommand}" Margin="95,10,0,0" Width="60" Height="24" Style="{DynamicResource  Button}" Grid.Row="1" Grid.RowSpan="2"/>
                 </Grid>
 
 

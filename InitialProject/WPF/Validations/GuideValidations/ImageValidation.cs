@@ -23,7 +23,7 @@ namespace InitialProject.WPF.Validations.GuideValidations
             }
             else
             {
-                return new ValidationResult(false, "This field is required");
+                return new ValidationResult(false, "At least 1 image is required");
             }
         }
 

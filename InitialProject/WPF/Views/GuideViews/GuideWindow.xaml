@@ -9,9 +9,10 @@
     <Grid>
         <DockPanel>
             <Grid DockPanel.Dock="Top" Height="33" Style="{DynamicResource GridMenu}">
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="0" Margin="812,0,0,0">
-                    <Label  Style="{DynamicResource Label}" Margin="0,0,5,0" Width="23"/>
-                    <CheckBox  x:Name="themeCheckBox" Style="{DynamicResource CheckBoxStyle1}" IsChecked="{Binding ThemeIsChecked}" Width="80" />
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="0" Margin="763,0,0,0" Width="190">
+                    <Label  Content="LIGHT" Style="{DynamicResource Label}" Width="47"/>
+                    <CheckBox  x:Name="themeCheckBox" Style="{DynamicResource CheckBoxStyle1}" IsChecked="{Binding ThemeIsChecked}" Width="57" />
+                    <Label Content="DARK" Style="{DynamicResource Label}" Width="58"/>
                 </StackPanel>
                 <DockPanel  Width="500" HorizontalAlignment="Left">
                     <Menu DockPanel.Dock="Top" Width="500" Height="40" HorizontalAlignment="Left" Style="{DynamicResource Menu}">
@@ -32,9 +33,9 @@
                             </MenuItem>
                             <MenuItem Header="Activated" Height="33" Width="155" Command="{Binding ActivatedCommand}" Style="{DynamicResource MenuItem}" >
 
-                                    <MenuItem.Icon>
-                                        <Image Source="/Resources/Images/continue.png" Stretch="Fill"/>
-                                    </MenuItem.Icon>
+                                <MenuItem.Icon>
+                                    <Image Source="/Resources/Images/continue.png" Stretch="Fill"/>
+                                </MenuItem.Icon>
 
                             </MenuItem>
                         </MenuItem>
@@ -61,11 +62,11 @@
                 </DockPanel>
                 <DockPanel  Width="175" HorizontalAlignment="Right" Style="{DynamicResource DockPanel}" >
                     <Menu DockPanel.Dock="Top" Width="175" Height="33" HorizontalAlignment="Right" Style="{DynamicResource Menu}">
-                        <MenuItem  Height="33" Width="75"  Command="{Binding SignOutCommand}" Header="    ➲" FontSize="20" Style="{DynamicResource MenuItem}">
-                           
+                        <MenuItem  Height="33" Width="87.5"  Command="{Binding SignOutCommand}" Header="     ➲" FontSize="20" Style="{DynamicResource MenuItem}">
+
                         </MenuItem>
-                        <MenuItem  Height="33" Width="75" Header="   👤"  Style="{DynamicResource MenuItem}" FontSize="20">
-                           
+                        <MenuItem  Height="33" Width="87.5" Header="    👤"  Style="{DynamicResource MenuItem}" FontSize="20">
+
                         </MenuItem>
 
                     </Menu>
