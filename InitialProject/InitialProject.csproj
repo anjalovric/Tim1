@@ -64,6 +64,8 @@
 
     <None Remove="Resources\Images\goldStar1.png" />
 
+    <None Remove="Resources\Images\green.png" />
+
     <None Remove="Resources\Images\greenCorect.png" />
 
     <None Remove="Resources\Images\guest1Menu.jpeg" />
@@ -457,6 +459,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\flowers.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\green.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\guest1Menu.jpeg">

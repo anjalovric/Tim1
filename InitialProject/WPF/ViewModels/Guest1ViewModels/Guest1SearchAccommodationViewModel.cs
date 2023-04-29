@@ -239,12 +239,13 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                     Match match = CreateValidationNumberRegex(content);
                     if (!match.Success && NumberOfDays != "")
                     {
-                        IsInputValid = false;
                         IsNumberOfDaysValid = false;
+                        IsInputValid = false;
                         return "Enter an integer greater than zero.";
                     }
                     IsNumberOfDaysValid = true;
-                    IsInputValid = true;
+                    if (IsNumberOfGuestsValid)
+                        IsInputValid = true;
                 }
 
                 if (columnName == "NumberOfGuests")
@@ -253,13 +254,14 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                     Match match = CreateValidationNumberRegex(content);
                     if (!match.Success && NumberOfGuests != "")
                     {
-                        IsInputValid = false;
+                        IsInputValid=false;
                         IsNumberOfGuestsValid = false;
                         return "Enter an integer greater than zero.";
                     }
                     
                     IsNumberOfGuestsValid = true;
-                    IsInputValid = true;
+                    if (IsNumberOfDaysValid)
+                        IsInputValid = true;
                 }
                 return null;
             }

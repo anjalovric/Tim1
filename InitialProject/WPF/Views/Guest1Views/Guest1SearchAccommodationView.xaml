@@ -92,7 +92,7 @@
                             <TextBlock Text="Reserve" Grid.Column="0" VerticalAlignment="Center" FontSize="18" Margin="8,0,0,0"  Foreground="#22301a" FontWeight="Bold" HorizontalAlignment="Left" Width="Auto"/>
                         </Grid>
                     </Button>
-                    <Image Source="/Resources/Images/superOwner.png" Height="30" Width="30" Grid.Row="1" Grid.Column="6" VerticalAlignment="Center" Margin="0,0,150,0" HorizontalAlignment="Center">
+                    <Image Source="/Resources/Images/green.png" Height="25" Width="25" Grid.Row="1" Grid.Column="6" VerticalAlignment="Center" Margin="0,0,150,0" HorizontalAlignment="Center">
                         <Image.Style>
                             <Style TargetType="Image">
                                 <Setter Property="Visibility" Value="Collapsed"/>
@@ -104,7 +104,7 @@
                             </Style>
                         </Image.Style>
                     </Image>
-                    <Image Source="/Resources/Images/renovation (1).png" Height="30" Width="30" Grid.Row="1" Grid.Column="5" VerticalAlignment="Center" Margin="20,0,0,0" HorizontalAlignment="Center">
+                    <Image Source="/Resources/Images/renovation (1).png" Height="25" Width="25" Grid.Row="1" Grid.Column="5" VerticalAlignment="Center" Margin="20,0,0,0" HorizontalAlignment="Center">
                         <Image.Style>
                             <Style TargetType="Image">
                                 <Setter Property="Visibility" Value="Collapsed"/>
@@ -160,6 +160,9 @@
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Opacity" Value="0.5"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
@@ -321,6 +324,7 @@
                 <Image Source="/Resources/Images/search.png" VerticalAlignment="Center" HorizontalAlignment="Right"  Margin="0,0,0,0" Width="Auto" Height="22" Grid.Column="1" RenderTransformOrigin="0.5,0.5"></Image>
                 <TextBlock Background="#8c9d75" Text="Search" Grid.Column="0" VerticalAlignment="Center" FontSize="18"  Foreground="#22301a" Margin="10,0,0,0" FontWeight="Bold" HorizontalAlignment="Left" Width="58"/>
             </Grid>
+            
         </Button>
 
         <Button FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="92,15,0,0" Command="{Binding ShowAllCommand}" Width="100" Height="35" Grid.Row="3" Grid.Column="2" BorderBrush="#FF22301A" BorderThickness="3,3,3,3">
@@ -332,6 +336,7 @@
                 <Image Source="/Resources/Images/reset.png" VerticalAlignment="Center" HorizontalAlignment="Right"  Margin="0,0,0,0" Width="Auto" Height="22" Grid.Column="1" RenderTransformOrigin="0.5,0.5">                </Image>
                 <TextBlock Background="#8c9d75" Text="Reset" Grid.Column="0" VerticalAlignment="Center" FontSize="18"  Foreground="#22301a" Margin="10,0,0,0" FontWeight="Bold" HorizontalAlignment="Left" Width="58"/>
             </Grid>
+            
         </Button>
 
 
