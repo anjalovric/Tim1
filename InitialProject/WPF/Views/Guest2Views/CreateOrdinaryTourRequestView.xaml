@@ -8,20 +8,41 @@
         mc:Ignorable="d"
         Title="CreateOrdinaryTourRequest" Height="800" Width="1024" d:DesignHeight="800" d:DesignWidth="1024" WindowStartupLocation="CenterScreen">
     <Window.Resources>
+        <Style x:Key="button" TargetType="Button">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Height" Value="54"/>
+            <Setter Property="Width" Value="95"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="25" BorderThickness="1" BorderBrush="White" Background="White" Padding="15" Margin="0,4,0,0">
+                            <ContentPresenter HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="LightGray"/>
+                    <Setter Property="Foreground" Value="DimGray"/>
+                </Trigger>
+                <Trigger Property="IsMouseCaptured" Value="True">
+                    <Setter Property="Background" Value="LightGray"/>
+                    <Setter Property="Foreground" Value="DimGray"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
         <Style x:Key="LabelStyle" TargetType="Label">
             <Setter Property="FontSize" Value="15"/>
-            <Setter Property="Foreground" Value="#FF3B0463"/>
+            <Setter Property="Foreground" Value="White"/>
             <Setter Property="FontWeight" Value="Black"/>
         </Style>
-        <Style x:Key="ButtonStyle" TargetType="Button">
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="BorderBrush" Value="#FF3B0463"/>
-            <Setter Property="BorderThickness" Value="3,3,3,3"/>
-            <Setter Property="Background" Value="LightGray"/>
-            <Setter Property="Foreground" Value="#FF3B0463"/>
-        </Style>
     </Window.Resources>
-    <Grid Background="#FF4F5E73">
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
@@ -39,8 +60,16 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Border BorderBrush="#FF3B0463" BorderThickness="3,3,3,3" Margin="10,6,10,71" Grid.RowSpan="9" Grid.Row="2" Grid.ColumnSpan="2"/>
-        <Label Content="Creating request of the tour" FontSize="20" FontWeight="Bold" Foreground="White" Margin="3,10,50,19" Grid.Column="0" Grid.Row="0"/>
+        <Border Grid.ColumnSpan="4" Grid.RowSpan="11">
+            <Border.Background>
+                <LinearGradientBrush>
+                    <GradientStop Color="#e3e3e3" Offset="0.0"/>
+                    <GradientStop Color="#5d6874" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+        
+        <Label Content="CREATING REQUEST OF THE TOUR" FontSize="20" FontWeight="Bold" Foreground="White" Margin="40,10,13,19" Grid.Column="0" Grid.Row="0"/>
         <Label Grid.Row="2" Grid.Column="0" Content="Name" Margin="40,25,0,10" Style="{StaticResource LabelStyle}"/>
         <Label Content="Country" Grid.Row="3" Grid.Column="0" Margin="40,25,0,1" Style="{StaticResource LabelStyle}" RenderTransformOrigin="0.5,0.5"/>
         <Label Content="Language" Grid.Row="5" Grid.Column="0" Margin="40,25,0,0" Style="{StaticResource LabelStyle}"/>
@@ -48,24 +77,24 @@
         <Label Content="Capacity" Grid.Row="7" Grid.Column="0" Margin="40,25,0,78" Grid.RowSpan="2" Style="{StaticResource LabelStyle}"/>
         <Label Content="Start Date" Grid.Row="8" Grid.Column="0" Margin="40,25,0,78" Grid.RowSpan="2" Style="{StaticResource LabelStyle}"/>
         <Label Content="End Date" Grid.Row="9" Grid.Column="0" Margin="40,25,0,78" Grid.RowSpan="2" Style="{StaticResource LabelStyle}"/>
-        <TextBox x:Name="Name" Grid.Column="1" Grid.Row="2" Margin="20,25,60,10" BorderBrush="#FF3B0463" BorderThickness="3,3,3,3"/>
-        <ComboBox x:Name="cityInput" BorderBrush="#FF3B0463" BorderThickness="3,3,3,3" ItemsSource="{Binding CitiesByCountry}" SelectedItem="{Binding Location.City}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" HorizontalAlignment="Left" Margin="20,25,0,0" VerticalAlignment="Top" Width="425" Height="37" Grid.Column="1" Grid.Row="4"/>
-        <ComboBox x:Name="Language" Grid.Column="1" ItemsSource="{Binding Languages}" SelectedItem="{Binding Path=SelectedLanguage}"  IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" Grid.Row="5" Margin="20,25,60,10" BorderBrush="#FF3B0463" BorderThickness="3,3,3,3"/>
-        <TextBox x:Name="Description" Grid.Column="1" Grid.Row="6" Margin="20,25,60,10" BorderBrush="#FF3B0463" BorderThickness="3,3,3,3"/>
-        <Border Grid.Column="1" Grid.Row="7" Margin="68,20,105,20" BorderBrush="#FF3B0463" BorderThickness="3,3,3,3"/>
+        <TextBox x:Name="Name" Grid.Column="1" Grid.Row="2" Margin="20,25,60,10" BorderBrush="White" BorderThickness="3,3,3,3"/>
+        <ComboBox x:Name="cityInput" BorderBrush="White" BorderThickness="3,3,3,3" ItemsSource="{Binding CitiesByCountry}" SelectedItem="{Binding Location.City}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" HorizontalAlignment="Left" Margin="20,25,0,0" VerticalAlignment="Top" Width="425" Height="37" Grid.Column="1" Grid.Row="4"/>
+        <ComboBox x:Name="Language" Grid.Column="1" ItemsSource="{Binding Languages}" SelectedItem="{Binding Path=SelectedLanguage}"  IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" Grid.Row="5" Margin="20,25,60,10" BorderBrush="#FF3C3D63" BorderThickness="3,3,3,3"/>
+        <TextBox x:Name="Description" Grid.Column="1" Grid.Row="6" Margin="20,25,60,10" BorderBrush="White" BorderThickness="3,3,3,3"/>
+        <Border Grid.Column="1" Grid.Row="7" Margin="68,20,105,20" BorderBrush="White" BorderThickness="3,3,3,3"/>
 
 
         <TextBlock x:Name="Capacity" Grid.Column="1" Grid.Row="7" Margin="71,23,108,23" Text="1" TextAlignment="Center" Background="White"/>
-        <Button Grid.Column="1" Grid.Row="7" Margin="20,20,452,20" Content="-" Command="{Binding DecrementCommand}" BorderBrush="#FF3B0463" BorderThickness="3,3,3,3"/>
-        <DatePicker FontSize="9" x:Name="Start" Grid.Column="1" DisplayDateStart="{Binding StartDate}" SelectedDate="{Binding StartDate}" Margin="20,10,60,25" Grid.Row="8" BorderBrush="#FF3B0463" BorderThickness="3,3,3,3"/>
-        <DatePicker FontSize="9" x:Name="End" Grid.Column="1" DisplayDateStart="{Binding StartDate}" SelectedDate="{Binding EndDate}" Margin="20,10,60,25" Grid.Row="9" BorderBrush="#FF3B0463" BorderThickness="3,3,3,3"/>
-        <Button x:Name="increment" Grid.Column="1" Grid.Row="7" Margin="412,20,60,20" Content="+"  Command="{Binding IncrementCommand}" BorderBrush="#FF3B0463" BorderThickness="3,3,3,3"/>
-        <Button Grid.Column="1" Content="       Confirm" HorizontalAlignment="Left" Margin="315,10,0,0" Grid.Row="10" VerticalAlignment="Top" Command="{Binding ConfirmCommand}" Style="{StaticResource ButtonStyle}" Height="34" Width="83"/>
-        <Button Grid.Column="1" Content="   Cancel" HorizontalAlignment="Left" Margin="412,10,0,0" Grid.Row="10" VerticalAlignment="Top" Command="{Binding CancelCommand}" Style="{StaticResource ButtonStyle}" Height="34" Width="83"/>
+        <Button Grid.Column="1" Grid.Row="7" Margin="20,20,452,20" Content="-" Command="{Binding DecrementCommand}" BorderBrush="White" BorderThickness="3,3,3,3"/>
+        <DatePicker FontSize="9" x:Name="Start" Grid.Column="1" DisplayDateStart="{Binding StartDate}" SelectedDate="{Binding StartDate}" Margin="20,10,60,25" Grid.Row="8" BorderBrush="White" BorderThickness="3,3,3,3"/>
+        <DatePicker FontSize="9" x:Name="End" Grid.Column="1" DisplayDateStart="{Binding StartDate}" SelectedDate="{Binding EndDate}" Margin="20,10,60,25" Grid.Row="9" BorderBrush="White" BorderThickness="3,3,3,3"/>
+        <Button x:Name="increment" Grid.Column="1" Grid.Row="7" Margin="412,20,60,20" Content="+"  Command="{Binding IncrementCommand}" BorderBrush="White" BorderThickness="3,3,3,3"/>
+        <Button Grid.Column="1" Content="  Confirm" Margin="238,0,171,0" Grid.Row="10" Command="{Binding ConfirmCommand}" Style="{StaticResource button}"/>
+        <Button Grid.Column="1" Content=" Cancel" Margin="342,0,60,0" Grid.Row="10" Command="{Binding CancelCommand}" Style="{StaticResource button}"/>
         <Label Content="City" Grid.Row="4" Grid.Column="0" Margin="40,25,0,0" RenderTransformOrigin="0.5,0.5" Style="{StaticResource LabelStyle}"/>
-        <ComboBox x:Name="countryInput" ItemsSource="{Binding Countries}" BorderBrush="#FF3B0463" BorderThickness="3,3,3,3" SelectedItem="{Binding Location.Country}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" HorizontalAlignment="Left" Margin="20,25,0,0" VerticalAlignment="Center" Width="425" SelectionChanged="CountryInput_SelectionChanged" Height="37" Grid.Column="1" Grid.Row="3"/>
-        <Label Content="Potrebno je popuniti sva navedena polja." FontSize="18" Margin="3,15,50,15" Grid.Column="0" Grid.Row="1" Foreground="White"/>
-        <Image Margin="320,11,160,28" Grid.Column="1" Grid.Row="10" Source="/Resources/Images/ok.png"/>
-        <Image Margin="416,11,64,28" Grid.Column="1" Grid.Row="10" Source="/Resources/Images/cancel.png"/>
+        <ComboBox x:Name="countryInput" ItemsSource="{Binding Countries}" BorderBrush="#FF3C3D63" BorderThickness="3,3,3,3" SelectedItem="{Binding Location.Country}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" HorizontalAlignment="Left" Margin="20,25,0,0" VerticalAlignment="Center" Width="425" SelectionChanged="CountryInput_SelectionChanged" Height="37" Grid.Column="1" Grid.Row="3"/>
+        <Label Content="Potrebno je popuniti sva navedena polja." FontSize="18" Margin="40,15,13,15" Grid.Column="0" Grid.Row="1" Foreground="White"/>
+        <Image Margin="242,13,238,25" Grid.Column="1" Grid.Row="10" Source="/Resources/Images/ok.png"/>
+        <Image Margin="356,11,124,23" Grid.Column="1" Grid.Row="10" Source="/Resources/Images/cancel.png"/>
     </Grid>
 </Window>

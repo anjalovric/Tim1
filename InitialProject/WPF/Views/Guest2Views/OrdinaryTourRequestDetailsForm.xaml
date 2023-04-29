@@ -5,8 +5,36 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.WPF.Views.Guest2Views"
         mc:Ignorable="d"
-        Title="OrdinaryTourRequestDetailsForm" Height="450" Width="700" WindowStartupLocation="CenterScreen">
+        Title="Details" Height="450" Width="700" WindowStartupLocation="CenterScreen">
     <Window.Resources>
+        <Style x:Key="button" TargetType="Button">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Height" Value="54"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Width" Value="90"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="25" BorderThickness="1" BorderBrush="White" Padding="15" Background="White" Margin="0,3,0,0">
+                            <ContentPresenter HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#E8E8E8"/>
+                    <Setter Property="Foreground" Value="DimGray"/>
+                </Trigger>
+                <Trigger Property="IsMouseCaptured" Value="True">
+                    <Setter Property="Background" Value="#d9d9d9"/>
+                    <Setter Property="Foreground" Value="DimGray"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
         <Style x:Key="LabelStyle" TargetType="Label">
             <Setter Property="FontSize" Value="15"/>
         </Style>
@@ -14,8 +42,9 @@
             <Setter Property="FontSize" Value="15"/>
         </Style>
     </Window.Resources>
-    <Grid>
+    <Grid Background="LightGray">
         <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
@@ -31,22 +60,31 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Label Content="Information" Margin="106,30,107,19" FontSize="20" FontWeight="Bold" Grid.RowSpan="2"/>
+        <Border Grid.ColumnSpan="4" Grid.RowSpan="11">
+            <Border.Background>
+                <LinearGradientBrush>
+                    <GradientStop Color="#e3e3e3" Offset="0.0"/>
+                    <GradientStop Color="#5d6874" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+        <Label Content="Information" Margin="106,27,107,19" FontSize="20" FontWeight="Bold" Grid.RowSpan="2" FontFamily="Kanit"/>
         <Label Content="Location" Grid.Row="2" Grid.Column="0" Margin="62,0,0,0" Style="{StaticResource LabelStyle}"/>
-        <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Path=TourInstance.Tour.Location}" Margin="10,10,35,10" Style="{StaticResource FontStyle}"/>
+        <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Path=TourInstance.Tour.Location}" Margin="10,10,65,10" Style="{StaticResource FontStyle}"/>
         <Label Content="Language" Grid.Row="3" Grid.Column="0" Margin="62,43,0,43" Grid.RowSpan="3" Style="{StaticResource LabelStyle}"/>
         <Label Content="Capacity" Grid.Row="4" Grid.Column="0" Margin="62,43,0,43" Grid.RowSpan="3" Style="{StaticResource LabelStyle}"/>
         <Label Content="StartDate" Grid.Row="5" Grid.Column="0" Margin="62,43,0,43" Grid.RowSpan="3" Style="{StaticResource LabelStyle}"/>
         <Label Content="EndDate" Grid.Row="6" Grid.Column="0" Margin="62,43,0,43" Grid.RowSpan="3" Style="{StaticResource LabelStyle}"/>
         <Label Content="Description" Grid.Row="7" Grid.Column="0" Margin="62,43,0,43" Grid.RowSpan="3" Style="{StaticResource LabelStyle}"/>
         <Label Content="Duration" Grid.Row="2" Grid.Column="0" Margin="62,43,0,43" Grid.RowSpan="3" Style="{StaticResource LabelStyle}"/>
-        <Button Grid.Column="1" Content="Close" Grid.Row="9" Margin="268,10,10,10" Command="{Binding CloseCommand}"/>
-        <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding TourInstance.Tour.Duration}" Margin="10,10,35,10" Style="{StaticResource FontStyle}"/>
-        <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding TourInstance.Tour.Language}" Margin="10,10,35,10" Style="{StaticResource FontStyle}"/>
-        <TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding TourInstance.Tour.MaxGuests}" Margin="10,10,35,10" Style="{StaticResource FontStyle}"/>
-        <TextBlock Grid.Row="6" Grid.Column="1" Text="{Binding StartDate}" Margin="10,10,35,10" Style="{StaticResource FontStyle}"/>
-        <TextBlock Grid.Row="7" Grid.Column="1" Text="{Binding TourInstance.Date}" Margin="10,10,35,10" Style="{StaticResource FontStyle}"/>
-        <TextBlock Grid.Row="8" Grid.Column="1" Text="{Binding TourInstance.Tour.Description}" Margin="10,10,35,10" Style="{StaticResource FontStyle}"/>
-        <Image Source="/Resources/Images/information.png" Margin="60,27,243,16" Grid.RowSpan="2"/>
+        <Button Grid.Column="1" Grid.Row="9" Grid.RowSpan="2" Content="CLOSE" Style="{StaticResource button}" Margin="192,10,55,0" Command="{Binding CloseCommand}" Height="51" />
+        <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding TourInstance.Tour.Duration}" Margin="10,10,65,10" Style="{StaticResource FontStyle}"/>
+        <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding TourInstance.Tour.Language}" Margin="10,10,65,10" Style="{StaticResource FontStyle}"/>
+        <TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding TourInstance.Tour.MaxGuests}" Margin="10,10,65,10" Style="{StaticResource FontStyle}"/>
+        <TextBlock Grid.Row="6" Grid.Column="1" Text="{Binding StartDate}" Margin="10,10,65,10" Style="{StaticResource FontStyle}"/>
+        <TextBlock Grid.Row="7" Grid.Column="1" Text="{Binding TourInstance.Date}" Margin="10,10,65,10" Style="{StaticResource FontStyle}"/>
+        <TextBlock Grid.Row="8" Grid.Column="1" Text="{Binding TourInstance.Tour.Description}" Margin="10,10,65,10" Style="{StaticResource FontStyle}"/>
+        <Image Source="/Resources/Images/information.png" Margin="60,23,243,20" Grid.RowSpan="2"/>
+        <Image Source="/Resources/Images/cancel.png" Grid.Column="1" Grid.Row="9" Margin="204,19,117,17" Grid.RowSpan="2"/>
     </Grid>
 </Window>

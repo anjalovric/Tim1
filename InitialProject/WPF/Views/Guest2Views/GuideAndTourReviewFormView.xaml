@@ -7,7 +7,37 @@
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
         Title="RateTourAndGuide" Height="600" Width="990" WindowStartupLocation="CenterScreen">
-    <Grid Background="LightGray">
+    <Window.Resources>
+        <Style x:Key="button" TargetType="Button">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Height" Value="54"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Width" Value="91"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="25" BorderThickness="1" BorderBrush="White" Background="White" Padding="15" Margin="0,4,0,0">
+                            <ContentPresenter HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#E8E8E8"/>
+                    <Setter Property="Foreground" Value="DimGray"/>
+                </Trigger>
+                <Trigger Property="IsMouseCaptured" Value="True">
+                    <Setter Property="Background" Value="#d9d9d9"/>
+                    <Setter Property="Foreground" Value="DimGray"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Grid Background="#FFB0B9C7">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
@@ -21,24 +51,32 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+        <Border Grid.ColumnSpan="4" Grid.RowSpan="11">
+            <Border.Background>
+                <LinearGradientBrush>
+                    <GradientStop Color="#e3e3e3" Offset="0.0"/>
+                    <GradientStop Color="#5d6874" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
         <Label Content="Guide knowledge" Margin="34,16,306,15" Grid.Row="1"/>
         <Label Content="Guide language" Margin="34,13,281,1" Grid.Row="2"/>
         <Label Content="Interesting facts of tour" Margin="34,10,266,13" Grid.Row="3"/>
-        <TextBlock x:Name="interestingFacts" Text="1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="330" TextAlignment="Center" Height="28" Background="#FFFCECB9" Margin="58,18,0,0" Grid.Column="1" Grid.Row="3" />
-        <TextBlock x:Name="language" Text="1" HorizontalAlignment="Left" VerticalAlignment="Center" Width="330" TextAlignment="Center" Height="28" Background="#FFFCECB9" Margin="58,0,0,0" Grid.Column="1" Grid.Row="2" />
-        <TextBlock x:Name="knowledge" Text="1" HorizontalAlignment="Left" VerticalAlignment="Center" Width="330" TextAlignment="Center" Height="28" Background="#FFFCECB9" Grid.Column="1" Grid.Row="1" Margin="58,0,0,0" />
-        <Button x:Name="dekrementNumber1" Content="-" Command="{Binding Facts_Decrement_Command}" HorizontalAlignment="Left" Margin="10,18,0,0" VerticalAlignment="Top" Width="30" Height="28" BorderBrush="Gray" Background="#FFFCECB9" BorderThickness="1" Grid.Column="1" Grid.Row="3"/>
-        <Button x:Name="inkrementNumber" Content="+" Command="{Binding Facts_Increment_Command}" HorizontalAlignment="Left" Margin="401,18,0,0" VerticalAlignment="Top" Width="30" RenderTransformOrigin="-1.284,0.612" Height="28" Background="#FFFCECB9" BorderBrush="Gray" BorderThickness="1" Grid.Column="1" Grid.Row="3"/>
-        <Button x:Name="inkrementNumber1" Command="{Binding Language_Increment_Command}" Content="+" HorizontalAlignment="Left" Margin="401,0,0,0" VerticalAlignment="Center" Width="30" RenderTransformOrigin="-1.284,0.612" Height="28" Background="#FFFCECB9" BorderBrush="Gray" BorderThickness="1" Grid.Column="1" Grid.Row="2"/>
-        <Button x:Name="inkrementNumber2" Content="+" HorizontalAlignment="Left" Command="{Binding Knowledge_Increment_Command}" Margin="401,0,0,0" VerticalAlignment="Center" Width="30" RenderTransformOrigin="-1.284,0.612" Height="28" Background="#FFFCECB9" BorderBrush="Gray" BorderThickness="1" Grid.Column="1" Grid.Row="1"/>
-        <Button x:Name="dekrementNumber" Content="-" HorizontalAlignment="Left" Command="{Binding Language_Decrement_Command}" Margin="10,0,0,0" VerticalAlignment="Center" Width="30"  Height="28" BorderBrush="Gray" Background="#FFFCECB9" BorderThickness="1" Grid.Column="1" Grid.Row="2"/>
-        <Button x:Name="dekrementNumber2" Content="-" HorizontalAlignment="Left" Command="{Binding Knowledge_Decrement_Command}" Margin="10,0,0,0" VerticalAlignment="Center" Width="30"  Height="28" BorderBrush="Gray" Background="#FFFCECB9" BorderThickness="1" Grid.Column="1" Grid.Row="1"/>
+        <TextBlock x:Name="interestingFacts" Text="1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="330" TextAlignment="Center" Height="28" Background="LightGray" Margin="58,18,0,0" Grid.Column="1" Grid.Row="3"/>
+        <TextBlock x:Name="language" Text="1" HorizontalAlignment="Left" VerticalAlignment="Center" Width="330" TextAlignment="Center" Height="28" Background="LightGray" Margin="58,0,0,0" Grid.Column="1" Grid.Row="2" />
+        <TextBlock x:Name="knowledge" Text="1" HorizontalAlignment="Left" VerticalAlignment="Center" Width="330" TextAlignment="Center" Height="28" Background="LightGray" Grid.Column="1" Grid.Row="1" Margin="58,0,0,0" />
+        <Button x:Name="dekrementNumber1" Content="-" Command="{Binding Facts_Decrement_Command}" HorizontalAlignment="Left" Margin="10,18,0,0" VerticalAlignment="Top" Width="30" Height="28" BorderBrush="Gray" Background="LightGray" BorderThickness="1" Grid.Column="1" Grid.Row="3"/>
+        <Button x:Name="inkrementNumber" Content="+" Command="{Binding Facts_Increment_Command}" HorizontalAlignment="Left" Margin="401,18,0,0" VerticalAlignment="Top" Width="30" RenderTransformOrigin="-1.284,0.612" Height="28" Background="LightGray" BorderBrush="Gray" BorderThickness="1" Grid.Column="1" Grid.Row="3"/>
+        <Button x:Name="inkrementNumber1" Command="{Binding Language_Increment_Command}" Content="+" HorizontalAlignment="Left" Margin="401,0,0,0" VerticalAlignment="Center" Width="30" RenderTransformOrigin="-1.284,0.612" Height="28" Background="LightGray" BorderBrush="Gray" BorderThickness="1" Grid.Column="1" Grid.Row="2"/>
+        <Button x:Name="inkrementNumber2" Content="+" HorizontalAlignment="Left" Command="{Binding Knowledge_Increment_Command}" Margin="401,0,0,0" VerticalAlignment="Center" Width="30" RenderTransformOrigin="-1.284,0.612" Height="28" Background="LightGray" BorderBrush="Gray" BorderThickness="1" Grid.Column="1" Grid.Row="1"/>
+        <Button x:Name="dekrementNumber" Content="-" HorizontalAlignment="Left" Command="{Binding Language_Decrement_Command}" Margin="10,0,0,0" VerticalAlignment="Center" Width="30"  Height="28" BorderBrush="Gray" Background="LightGray" BorderThickness="1" Grid.Column="1" Grid.Row="2"/>
+        <Button x:Name="dekrementNumber2" Content="-" HorizontalAlignment="Left" Command="{Binding Knowledge_Decrement_Command}" Margin="10,0,0,0" VerticalAlignment="Center" Width="30"  Height="28" BorderBrush="Gray" Background="LightGray" BorderThickness="1" Grid.Column="1" Grid.Row="1"/>
         <Label Content="Add comment" FontWeight="Bold" FontSize="20" Margin="34,6,266,7" Grid.Row="4"/>
         <Label Content="Add photos" FontWeight="Bold" FontSize="20" Margin="10,9,286,11" Grid.Column="1" Grid.Row="4"/>
         <tk:WatermarkTextBox x:Name="comment" TextWrapping="Wrap" Margin="34,15,30,15" Watermark="Enter comment here" BorderBrush="Gray" BorderThickness="1" Grid.Row="5"/>
-        <Button Content="  Confirm" Background="#FFFCECB9" Command="{Binding ConfirmCommand}" Margin="230,5,128,16" FontWeight="Bold" BorderBrush="Gray" BorderThickness="4,4,4,4" Grid.Column="1" Grid.Row="6"/>
-        <Image Source="/Resources/Images/ok.png" Grid.Row="6" Grid.Column="1" Margin="234,8,213,18"/>
-        <Button Content="  Cancel" Background="#FFFCECB9" Command="{Binding CancelCommand}" Margin="337,5,29,16" FontWeight="Bold" BorderBrush="Gray" BorderThickness="4,4,4,4" Grid.Column="1" Grid.Row="6"/>
+        <Button Content="  Confirm" Grid.Column="1" Grid.Row="6" Style="{StaticResource button}" Margin="233,0,154,0" Command="{Binding ConfirmCommand}"/>
+        <Image Source="/Resources/Images/ok.png" Grid.Row="6" Grid.Column="1" Margin="233,16,218,16"/>
+        <Button Content="  Cancel" Grid.Column="1" Grid.Row="6" Style="{StaticResource button}" Margin="348,0,48,0" Command="{Binding CancelCommand}"/>
         <Border Background="White" BorderBrush="Gray" Margin="50,15,50,15" Visibility="Visible" BorderThickness="1" Grid.Column="1" Grid.Row="5"/>
         <Button Command="{Binding UploadImageCommand}" BorderBrush="White" Background="White" HorizontalAlignment="Left" Margin="367,176,0,22" FontWeight="Bold" Grid.Column="1" Grid.Row="5" Width="29">
             <Image Source="/Resources/Images/icons8-upload-64.png" Height="22" Width="20"/>
@@ -89,6 +127,6 @@
         <Button Command="{Binding DeleteCommand}" BorderBrush="White" Background="White" Margin="422,176,42,22" FontWeight="Bold" Grid.Row="5">
             <Image Source="/Resources/Images/icons8-delete-67.png" Height="22" Width="20"/>
         </Button>
-        <Image Source="/Resources/Images/cancel.png" Grid.Row="6" Grid.Column="1" Margin="346,8,109,18"/>
+        <Image Source="/Resources/Images/cancel.png" Grid.Row="6" Grid.Column="1" Margin="355,16,107,16"/>
     </Grid>
 </Window>

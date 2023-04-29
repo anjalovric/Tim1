@@ -7,18 +7,53 @@
         mc:Ignorable="d"
         Title="TourDetails" Height="800" Width="820" d:Height="800" d:Width="820" WindowStartupLocation="CenterScreen">
     <Window.Resources>
+        <Style x:Key="button" TargetType="Button">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Height" Value="54"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Width" Value="90"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="25" BorderThickness="1" BorderBrush="White" Padding="15" Background="White" Margin="0,3,0,6">
+                            <ContentPresenter HorizontalAlignment="Right" VerticalAlignment="Center" Height="20"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#E8E8E8"/>
+                    <Setter Property="Foreground" Value="DimGray"/>
+                </Trigger>
+                <Trigger Property="IsMouseCaptured" Value="True">
+                    <Setter Property="Background" Value="#d9d9d9"/>
+                    <Setter Property="Foreground" Value="DimGray"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
         <Style x:Key="LabelStyle" TargetType="Label">
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="VerticalAlignment" Value="Top"/>
         </Style>
     </Window.Resources>
-    <Grid Background="LightGray">
+    <Grid Background="#FFB0B9C7">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-
+        <Border Grid.ColumnSpan="4" Grid.RowSpan="11">
+            <Border.Background>
+                <LinearGradientBrush>
+                    <GradientStop Color="#e3e3e3" Offset="0.0"/>
+                    <GradientStop Color="#5d6874" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
         <Image x:Name="tourImage" Source="{Binding ImageSource, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Left" Width="312" Margin="35,150,0,332">
 
         </Image>
@@ -75,8 +110,8 @@
         <TextBlock Margin="124,207,78,473" RenderTransformOrigin="0.5,0.5" Text="{Binding Path=Selected.Tour.Duration,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1"/>
         <TextBlock Margin="124,296,116,381" RenderTransformOrigin="0.5,0.5" Text="{Binding Path=Selected.Tour.Language,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1"/>
         <TextBlock Margin="124,385,78,267" RenderTransformOrigin="0.5,0.5" Text="{Binding Path=Selected.Tour.MaxGuests,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1"/>
-        <Button Content="      CANCEL" Command ="{Binding CancelCommand}" TextElement.FontWeight="Bold" Margin="268,707,51,29" Grid.Column="1"/>
-        <Image Grid.Column="1" Source="/Resources/Images/cancel.png" Margin="277,711,0,33" HorizontalAlignment="Left" Width="17"/>
+        <Button Content="CANCEL" Command ="{Binding CancelCommand}" TextElement.FontWeight="Bold" Margin="256,686,51,0" Grid.Column="1" Style="{StaticResource button}"/>
+        <Image Grid.Column="1" Source="/Resources/Images/cancel.png" Margin="262,703,0,41" HorizontalAlignment="Left" Width="46"/>
 
     </Grid>
 </Window>
