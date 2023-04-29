@@ -6,11 +6,8 @@
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
-        Title="AccommodationReservationForm" Height="522" Width="660" AllowsTransparency="True"  WindowStartupLocation="CenterScreen" WindowStyle="None">
+        Title="AccommodationReservationForm" Height="522" Background="Transparent" Width="660" AllowsTransparency="True"  WindowStartupLocation="CenterScreen" WindowStyle="None">
     <Window.Resources>
-        <Style TargetType="Grid">
-            <Setter Property="Background" Value="#c99585"></Setter>
-        </Style>
         <Style TargetType="Label">
             <Setter Property="Foreground" Value="#37492d"></Setter>
             <Setter Property="FontWeight" Value="ExtraBold"></Setter>
@@ -40,7 +37,20 @@
             </Style.Triggers>
         </Style>
     </Window.Resources>
-    <Border BorderBrush="#22301a" BorderThickness="2" Padding="6" Background="#22301a">
+    <Border BorderThickness="4" Padding="6" CornerRadius="25">
+        <Border.BorderBrush>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="Black" Offset="0"></GradientStop>
+                <GradientStop Color="#22301a" Offset="1"></GradientStop>
+            </LinearGradientBrush>
+        </Border.BorderBrush>
+        <Border.Background>
+            <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
+                <GradientStop Color="#c99585" Offset="0.1"></GradientStop>
+                <GradientStop Color="#FFF9ECC5" Offset="0.4"></GradientStop>
+                <GradientStop Color="#c99585" Offset="0.9"></GradientStop>
+            </LinearGradientBrush>
+        </Border.Background>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
