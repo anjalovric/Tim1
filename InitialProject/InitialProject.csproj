@@ -114,12 +114,9 @@
     <None Remove="Resources\Images\Red-incorrect-icon-design-on-transparent-background-PNG.png" />
     <None Remove="Resources\Images\red.jpg" />
     <None Remove="Resources\Images\redIncorect.png" />
-<<<<<<< HEAD
     <None Remove="Resources\Images\renovation %281%29.png" />
-=======
     <None Remove="Resources\Images\renovation.png" />
     <None Remove="Resources\Images\renovation2.jpg" />
->>>>>>> develop
     <None Remove="Resources\Images\report.png" />
     <None Remove="Resources\Images\request.png" />
     <None Remove="Resources\Images\reserve.png" />
