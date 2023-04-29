@@ -10,10 +10,12 @@ namespace InitialProject.Service
     public class AvailableDatesForAccommodationService
     {
         private List<AccommodationReservation> reservations;
+        private AccommodationRenovationService renovationService;
         public AvailableDatesForAccommodationService()
         {
             AccommodationReservationService accommodationReservationService = new AccommodationReservationService();
             reservations = accommodationReservationService.GetAll();
+            renovationService = new AccommodationRenovationService();
         }
 
         public bool IsAvailableInDateRange(AccommodationReservation reservation, DateTime startDate, DateTime endDate)
@@ -34,8 +36,9 @@ namespace InitialProject.Service
             {
                 bool isSameAccommodation = reservation.Accommodation.Id == reservationToCheck.Accommodation.Id;
                 bool isSameReservation = reservation.Id == reservationToCheck.Id;
+                bool isInRenovation = renovationService.IsRenovationOnDate(reservation.Accommodation, date);
                 if (isSameAccommodation && !isSameReservation)
-                    isAvailable = isAvailable && !(date.Date >= reservation.Arrival.Date && date.Date <= reservation.Departure.Date);
+                    isAvailable = isAvailable && !(date.Date >= reservation.Arrival.Date && date.Date <= reservation.Departure.Date) && !isInRenovation;
             }
             return isAvailable;
         }

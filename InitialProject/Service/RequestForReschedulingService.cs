@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using InitialProject.Model;
 using InitialProject.WPF.ViewModels;
 using InitialProject.WPF.ViewModels.OwnerViewModels;
@@ -35,6 +36,10 @@ namespace InitialProject.Service
             RequestForReshcedulingViewModel requestForReshcedulingViewModel = new RequestForReshcedulingViewModel(owner);
             requestForReshcedulingViewModel.Request = request;
             requestForReshcedulingViewModel.AccommodationReservation = request.Reservation;
+            requestForReshcedulingViewModel.OldArrival = DateOnly.FromDateTime(request.OldArrivalDate);
+            requestForReshcedulingViewModel.OldDeparture = DateOnly.FromDateTime(request.OldDepartureDate);
+            requestForReshcedulingViewModel.NewArrival = DateOnly.FromDateTime(request.NewArrivalDate);
+            requestForReshcedulingViewModel.NewDeparture = DateOnly.FromDateTime(request.NewDepartureDate);
             requestForReshcedulingViewModel.SetAvailability();
             requestsViewModel.Add(requestForReshcedulingViewModel);
         }

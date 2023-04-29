@@ -145,18 +145,10 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         private void Remove_Executed(object sender)
         {
-            DeletingAccommodationService deletingAccommodationService = new DeletingAccommodationService();
             if (SelectedAccommodation != null)
             {
-                Accommodation accommodationToDelete = SelectedAccommodation;
-                if (MessageBox.Show("Are you sure you want to remove this accommodation?",
-                    "Remove Accommodation",
-                    MessageBoxButton.YesNo,
-                    MessageBoxImage.Question) == MessageBoxResult.Yes)
-                {
-                    Accommodations.Remove(accommodationToDelete);
-                    deletingAccommodationService.Delete(accommodationToDelete);
-                }
+                DeletingAccommodationView deletingView = new DeletingAccommodationView(SelectedAccommodation);
+                deletingView.Show();
             }
         }
         private void DisplayNotificationPanel()
@@ -167,6 +159,12 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
                 StackPanelMessage = "New accommodation successfully added!";
                 StackPanelVisibility = "Visible";
                 notificationsService.Delete(Domain.Model.OwnerNotificationType.ACCOMMODATION_ADDED, profileOwner);
+            }
+            else if(notificationsService.IsAccommodationDeleted(profileOwner))
+            {
+                StackPanelMessage = "Accommodation successfully removed!";
+                StackPanelVisibility = "Visible";
+                notificationsService.Delete(Domain.Model.OwnerNotificationType.ACCOMMODATION_DELETED, profileOwner);
             }
             else
             {

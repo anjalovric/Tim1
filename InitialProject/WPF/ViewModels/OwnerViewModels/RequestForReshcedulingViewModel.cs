@@ -12,6 +12,10 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
     {
         private ReschedulingAccommodationRequest request;
         private AccommodationReservation accommodationReservation;
+        private DateOnly oldArrival;
+        private DateOnly newArrival;
+        private DateOnly oldDeparture;
+        private DateOnly newDeparture;
         private bool isAccommodationAvailable;
         private string availability;
         private Owner profileOwner;
@@ -54,6 +58,58 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
                 if (!value.Equals(accommodationReservation))
                 {
                     accommodationReservation = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public DateOnly OldArrival
+        {
+            get => oldArrival;
+            set
+            {
+                if (!value.Equals(oldArrival))
+                {
+                    oldArrival = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public DateOnly OldDeparture
+        {
+            get => oldDeparture;
+            set
+            {
+                if (!value.Equals(oldDeparture))
+                {
+                    oldDeparture = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public DateOnly NewArrival
+        {
+            get => newArrival;
+            set
+            {
+                if (!value.Equals(newArrival))
+                {
+                    newArrival = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public DateOnly NewDeparture
+        {
+            get => newDeparture;
+            set
+            {
+                if (!value.Equals(newDeparture))
+                {
+                    newDeparture = value;
                     OnPropertyChanged();
                 }
             }
