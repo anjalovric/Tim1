@@ -3,6 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
       xmlns:local="clr-namespace:InitialProject.View"
       mc:Ignorable="d"
       Title="OwnerAndAccommodationReviewForm" d:DesignHeight="696" d:DesignWidth="1024">
@@ -13,11 +14,6 @@
         <Style TargetType="Label">
             <Setter Property="Foreground" Value="#37492d"></Setter>
             <Setter Property="FontWeight" Value="Bold"></Setter>
-        </Style>
-        <Style TargetType="Calendar">
-            <Setter Property="BorderBrush" Value="#22301a"></Setter>
-            <Setter Property="BorderThickness" Value="4"></Setter>
-            <Setter Property="Background" Value="#dbc9ab"></Setter>
         </Style>
         <Style TargetType="TextBox">
             <Setter Property="Background" Value="#dbc9ab"></Setter>
@@ -33,6 +29,11 @@
             <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
             <Setter Property="BorderBrush" Value="#22301a"></Setter>
             <Setter Property="BorderThickness" Value="3"></Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
         <Style TargetType="TextBlock">
             <Setter Property="Background" Value="#dbc9ab"></Setter>
@@ -76,8 +77,28 @@
             </Button>
             <Label HorizontalContentAlignment="Left" FontSize="18" Grid.Row="1" Grid.Column="0" Margin="65,0,0,0" VerticalAlignment="Center">Cleanliness:</Label>
             <Label HorizontalContentAlignment="Left" FontSize="18" Grid.Row="2" Grid.Column="0" Margin="65,0,0,0" VerticalAlignment="Center">Owner's correctness:</Label>
-            <Slider x:Name="CleanlinessSlider"  Minimum="1" Maximum="5" Grid.Row="1" Grid.Column="1" Margin="0,0,100,0" Width="130" VerticalAlignment="Center" TickFrequency="1" IsSnapToTickEnabled="True" AutoToolTipPlacement="BottomRight" Value="{Binding Path=AccommodationCleanliness}"/>
-            <Slider x:Name="CorrectnessSlider" Minimum="1" Maximum="5" Grid.Row="2" Grid.Column="1" Margin="0,0,100,0" Width="130" VerticalAlignment="Center" TickFrequency="1" IsSnapToTickEnabled="True" AutoToolTipPlacement="BottomRight" Value="{Binding Path=OwnerCorrectness}"/>
+            <Slider x:Name="CleanlinessSlider"  Minimum="1" Maximum="5" Grid.Row="1" Grid.Column="1" Margin="0,0,100,0" Width="130" VerticalAlignment="Center" TickFrequency="1" IsSnapToTickEnabled="True" AutoToolTipPlacement="BottomRight" Value="{Binding Path=AccommodationCleanliness}">
+                <Slider.Style>
+                    <Style TargetType="Slider">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Cursor" Value="Hand"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Slider.Style>
+            </Slider>
+            <Slider x:Name="CorrectnessSlider" Minimum="1" Maximum="5" Grid.Row="2" Grid.Column="1" Margin="0,0,100,0" Width="130" VerticalAlignment="Center" TickFrequency="1" IsSnapToTickEnabled="True" AutoToolTipPlacement="BottomRight" Value="{Binding Path=OwnerCorrectness}">
+                <Slider.Style>
+                    <Style TargetType="Slider">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Cursor" Value="Hand"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Slider.Style>
+            </Slider>
             <TextBlock Text="{Binding ElementName=CleanlinessSlider,Path=Value}" Grid.Row="1" Grid.Column="1" Height="24" VerticalAlignment="Center" Width="30" FontSize="16" HorizontalAlignment="Right" Margin="0,0,65,0"  TextAlignment="Center"/>
             <TextBlock Text="{Binding ElementName=CorrectnessSlider,Path=Value}"  Grid.Row="2" Grid.Column="1" Height="24" VerticalAlignment="Center" Width="30" HorizontalAlignment="Right" FontSize="16" Margin="0,0,65,0" TextAlignment="Center"/>
             <Label HorizontalContentAlignment="Left" Grid.Column="0" Grid.Row="3" FontSize="18" Height="37" VerticalContentAlignment="Top" VerticalAlignment="Top" Margin="65,58,0,0" Content="Add photos:"/>
@@ -85,7 +106,7 @@
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
                         <Grid>
-                            <Ellipse Stroke="#22301a" 
+                            <Ellipse x:Name="Ellipse" Stroke="#22301a" 
                        StrokeThickness="3">
                                 <Ellipse.Fill>
                                     <RadialGradientBrush>
@@ -96,6 +117,19 @@
                             <ContentPresenter HorizontalAlignment="Center"  
                                 VerticalAlignment="Center"/>
                         </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Ellipse" Property="Stroke" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="Ellipse" Property="Fill" Value="#8c9d75"/>
+                                <Setter TargetName="Ellipse" Property="Stroke" Value="#004661"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="False">
+                                <Setter TargetName="Ellipse" Property="Fill" Value="#8c9d75"/>
+                                <Setter TargetName="Ellipse" Property="Fill" Value="#8c9d75"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Button.Template>
             </Button>
@@ -103,19 +137,40 @@
                 <Image x:Name="imagePicture" Width="172" Height="134" Grid.Column="1" Grid.Row="3" Source="{Binding ImageSource, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
             </Border>
 
-            <Button Command="{Binding NextPhotoCommand}" Height="50" Margin="0,20,18,0" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1" Grid.Row="3">
+            <Button Command="{Binding NextPhotoCommand}" IsEnabled="{Binding Path=IsNextEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="50" Margin="0,20,18,0" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1" Grid.Row="3">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid>
                             <StackPanel Orientation="Horizontal">
-                                <Rectangle Width="30" Height="14" Stroke="#22301a" Fill="#22301a"/>
-                                <Polygon Points= "0,15 15,22 0,30" Stroke="#22301a" Fill="#22301a" Height="45" Width="30" />
+                                <Rectangle x:Name="ArrowRectangle" Width="30" Height="14" Stroke="#22301a" Fill="#22301a"/>
+                                <Polygon x:Name="ArrowPolygon" Points= "0,15 15,22 0,30" Stroke="#22301a" Fill="#22301a" Height="45" Width="30" />
                             </StackPanel>
                         </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" Value="0.5"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="ArrowRectangle" Property="Stroke" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                                <Setter TargetName="ArrowPolygon" Property="Stroke" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="ArrowRectangle" Property="Fill" Value="#22301a"/>
+                                <Setter TargetName="ArrowPolygon" Property="Fill" Value="#22301a"/>
+                                <Setter TargetName="ArrowRectangle" Property="Stroke" Value="#004661"/>
+                                <Setter TargetName="ArrowPolygon" Property="Stroke" Value="#004661"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="False">
+                                <Setter TargetName="ArrowRectangle" Property="Fill" Value="#22301a"/>
+                                <Setter TargetName="ArrowPolygon" Property="Fill" Value="#22301a"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Button.Template>
+
             </Button>
-            <Button Command="{Binding PreviousPhotoCommand}" Height="50"  Margin="0,20,220,0" HorizontalAlignment="Right" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2" Grid.Row="3">
+            <Button Command="{Binding PreviousPhotoCommand}" IsEnabled="{Binding Path=IsNextEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="50"  Margin="0,20,224,0" HorizontalAlignment="Right" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2" Grid.Row="3">
                 <Button.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -128,19 +183,74 @@
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid>
                             <StackPanel Orientation="Horizontal">
-                                <Rectangle Width="30" Height="14" Stroke="#22301a" Fill="#22301a"/>
-                                <Polygon Points= "0,15 15,22 0,30" Stroke="#22301a"  Fill="#22301a" Height="45" Width="30" />
+                                <Rectangle  x:Name="ArrowRectangle" Width="30" Height="14" Stroke="#22301a" Fill="#22301a"/>
+                                <Polygon  x:Name="ArrowPolygon" Points= "0,15 15,22 0,30" Stroke="#22301a"  Fill="#22301a" Height="45" Width="30" />
                             </StackPanel>
                         </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" Value="0.5"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="ArrowRectangle" Property="Stroke" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                                <Setter TargetName="ArrowPolygon" Property="Stroke" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="ArrowRectangle" Property="Fill" Value="#22301a"/>
+                                <Setter TargetName="ArrowPolygon" Property="Fill" Value="#22301a"/>
+                                <Setter TargetName="ArrowRectangle" Property="Stroke" Value="#004661"/>
+                                <Setter TargetName="ArrowPolygon" Property="Stroke" Value="#004661"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="False">
+                                <Setter TargetName="ArrowRectangle" Property="Fill" Value="#22301a"/>
+                                <Setter TargetName="ArrowPolygon" Property="Fill" Value="#22301a"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
                     </ControlTemplate>
+
                 </Button.Template>
             </Button>
-            <Button Background="Transparent" Height="30" Width="30" Grid.Row="3" VerticalAlignment="Top" BorderThickness="0" Margin="0,62,66,0" Grid.Column="1" HorizontalAlignment="Right" Command="{Binding DeletePhotoCommand}">
-                <Grid FlowDirection="LeftToRight" HorizontalAlignment="Left" IsEnabled="True" ShowGridLines="False" VerticalAlignment="Center" Background="Transparent" >
-                    <Line Stroke="Red" StrokeThickness="2" X1="0"  X2="25" Y1="0" Y2="25"/>
-                    <Line Stroke="Red" StrokeThickness="2" X1="0" X2="25" Y1="25" Y2="0"/>
-                </Grid>
+            <Button Height="30" Width="30" Grid.Row="3" VerticalAlignment="Top" BorderThickness="0" Margin="162,62,64,0" Grid.Column="1" Command="{Binding DeletePhotoCommand}">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Grid Background="{TemplateBinding Background}">
+                                        <Grid>
+                                            <Line x:Name="Iks1" Stroke="Red" StrokeThickness="2" X1="0"  X2="25" Y1="0" Y2="25"/>
+                                            <Line x:Name="Iks2" Stroke="Red" StrokeThickness="2" X1="0" X2="25" Y1="25" Y2="0"/>
+                                        </Grid>
+                                    </Grid>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsEnabled" Value="False">
+                                            <Setter Property="Opacity" Value="0.5"/>
+                                        </Trigger>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="Iks1" Property="Stroke" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                                            <Setter TargetName="Iks2" Property="Stroke" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+
+                                        </Trigger>
+                                        <Trigger Property="IsPressed" Value="True">
+                                            <Setter TargetName="Iks1" Property="Stroke" Value="#004661"/>
+                                            <Setter TargetName="Iks2" Property="Stroke" Value="#004661"/>
+                                        </Trigger>
+                                        <Trigger Property="IsPressed" Value="False">
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+                <Button.IsEnabled>
+                    <Binding Path="IsDeleteEnabled" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"/>
+                </Button.IsEnabled>
             </Button>
+
+
             <Label HorizontalContentAlignment="Left" Grid.Row="4" Grid.Column="0"  VerticalAlignment="Center" FontSize="18" Margin="65,0,0,0" Content="Comments:"/>
 
             <TextBox x:Name="Comments" Margin="71,10,71,46" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Path=Comments}"/>
@@ -159,13 +269,54 @@
                 <RowDefinition Height="4*"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <Label HorizontalAlignment="Center" Margin="0,20,0,0" Grid.Row="0" Grid.Column="0"  VerticalAlignment="Top" Height="43" FontFamily="Baskerville Old Face"  FontSize="24" FontWeight="Bold">SUGGESTIONS FOR RENOVATION</Label>
+            <Label HorizontalAlignment="Center" Margin="0,42,0,0" Grid.Row="0" Grid.Column="0"  VerticalAlignment="Top" Height="Auto"  FontSize="16" FontWeight="Medium">(optional)</Label>
+
+            <Label HorizontalAlignment="Center" Margin="0,20,0,0" Grid.Row="0" Grid.Column="0"  VerticalAlignment="Top" Height="Auto" FontFamily="Baskerville Old Face"  FontSize="24" FontWeight="Bold">SUGGESTIONS FOR RENOVATION</Label>
             <Label  Margin="20,0,0,0"  Grid.Row="1" Height="Auto" FontSize="18" Grid.Column="0"  VerticalAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Left">Condition of accommodation:</Label>
 
             <TextBox Text="{Binding Path=ConditionsOfAccommodation}" Width="472" Height="150" Margin="10,0,0,0"  Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Top"/>
 
             <Label  Margin="20,0,0,0"  Grid.Row="4" Height="Auto" FontSize="18" Grid.Column="0"  VerticalAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Left">Level of urgency:</Label>
-            <ComboBox Height="50" FontSize="16" Grid.Row="5" SelectedValuePath="Content" Grid.Column="0" VerticalAlignment="Top" Margin="20,0,20,0" SelectedValue="{Binding LevelOfUrgency}" DisplayMemberPath="">
+
+
+            <Button Grid.Column="0" Grid.Row="4" Width="94" Height="35" IsEnabled="{Binding Path=IsResetEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="16" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Margin="0,0,20,0" Command="{Binding ResetComboBoxCommand}">
+                <Grid Background="#8c9d75" Width="94" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="/Resources/Images/cancel.png" VerticalAlignment="Center" HorizontalAlignment="Right"  Margin="0,0,0,0" Width="Auto" Height="22" Grid.Column="1" RenderTransformOrigin="0.5,0.5">
+                        <Image.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="180"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Image.RenderTransform>
+                    </Image>
+                    <TextBlock Background="#8c9d75" Text="RESET" Grid.Column="0" VerticalAlignment="Center" FontSize="16"  Foreground="#22301a" Margin="10,0,0,0" FontWeight="Bold" HorizontalAlignment="Left" Width="50"/>
+                </Grid>
+            </Button>
+            <ComboBox Height="50" FontSize="16" VerticalContentAlignment="Center" FontWeight="DemiBold" Grid.Row="5" SelectedValuePath="Content" Grid.Column="0" VerticalAlignment="Top" Margin="20,0,20,0" SelectedValue="{Binding LevelOfUrgency}" SelectedIndex="{Binding LevelOfUrgencyIndex, Mode=TwoWay}" DisplayMemberPath="">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding UrgencySelectionChangedCommand}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <ComboBox.Style>
+                    <Style TargetType="ComboBox">
+                        <Setter Property="Cursor" Value="Arrow"></Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Cursor" Value="Hand"/>
+                            </Trigger>
+                            <Trigger Property="IsDropDownOpen" Value="True">
+                                <Setter Property="Cursor" Value="Arrow"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ComboBox.Style>
                 <ComboBox.ItemContainerStyle>
                     <Style TargetType="ComboBoxItem">
                         <Setter Property="Width" Value="472"></Setter>
@@ -181,6 +332,14 @@
                         <Setter Property="BorderBrush" Value="#22301a"></Setter>
                         <Setter Property="BorderThickness" Value="1"></Setter>
                         <Setter Property="Background" Value="#dbc9ab"></Setter>
+                        <Setter Property="Foreground" Value="#22301a"></Setter>
+                        <Setter Property="FontWeight" Value="DemiBold"></Setter>
+                        <Setter Property="FontSize" Value="18"></Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Cursor" Value="Hand"/>
+                            </Trigger>
+                        </Style.Triggers>
                     </Style>
                 </ComboBox.ItemContainerStyle>
                 <ComboBoxItem>Level 1 - it would be nice to renovate some small things, but everything works as it should without it</ComboBoxItem>
@@ -221,6 +380,7 @@
 
 
         <Border Grid.Column="1" BorderThickness="1 0 1 0" Width="1" HorizontalAlignment="Left" BorderBrush="#22301a" />
+
 
     </Grid>
 </Page>

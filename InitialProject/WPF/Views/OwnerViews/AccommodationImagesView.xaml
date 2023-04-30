@@ -20,12 +20,12 @@
         <Label Content="Images" Foreground="DarkGray" HorizontalAlignment="Left" Margin="0,-1,0,0" VerticalAlignment="Top" RenderTransformOrigin="0,0.401" Width="134" Height="28" VerticalContentAlignment="Bottom">
         </Label>
         <Image Source="{Binding Path=ImageUrl, UpdateSourceTrigger=PropertyChanged}" Stretch="Fill" HorizontalAlignment="Left" Height="298" Margin="80,170,0,0" VerticalAlignment="Top" Width="259"/>
-        <Button Command="{Binding NextImageCommand}" Name="NextImageButton" HorizontalAlignment="Left" Margin="5,315,0,0" VerticalAlignment="Top" Height="32" Width="70" Background="AliceBlue" BorderBrush="DarkGray">
+        <Button Command="{Binding NextImageCommand}" Name="NextImageButton" HorizontalAlignment="Left" Margin="5,315,0,0" VerticalAlignment="Top" Height="32" Width="70" Style="{StaticResource ButtonForImages}">
             <Button.Content>
                 <Image Source="/Resources/Images/back_arrow.png"/>
             </Button.Content>
         </Button>
-        <Button Command="{Binding PreviousImageCommand}" Name="PreviousImageButton" HorizontalAlignment="Left" Height="32" Width="70" Margin="343,315,0,0" VerticalAlignment="Top" Background="AliceBlue" BorderBrush="DarkGray">
+        <Button Command="{Binding PreviousImageCommand}" Name="PreviousImageButton" HorizontalAlignment="Left" Height="32" Width="70" Margin="343,315,0,0" VerticalAlignment="Top" Style="{StaticResource ButtonForImages}">
             <Button.Content>
                 <Image Source="/Resources/Images/arrow.png" />
             </Button.Content>

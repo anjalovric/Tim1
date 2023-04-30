@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using InitialProject.Model;
 using InitialProject.Service;
 
@@ -52,6 +53,9 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             }
 
         }
+
+       
+
         public SentAccommodationReservationRequestsViewModel(Guest1 guest1)
         {
             this.guest1 = guest1;
@@ -59,10 +63,15 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             ApprovedRequests = new ObservableCollection<ReschedulingAccommodationRequest>(requestForReschedulingService.GetApprovedRequests(guest1));
             PendingRequests = new ObservableCollection<ReschedulingAccommodationRequest>(requestForReschedulingService.GetPendingRequests(guest1));
             DeclinedRequests = new ObservableCollection<ReschedulingAccommodationRequest>(requestForReschedulingService.GetDeclinedRequests(guest1));
-
+            
         }
         public event PropertyChangedEventHandler PropertyChanged;
 
+       
+        private bool CanExecute(object sender)
+        {
+            return true;
+        }
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

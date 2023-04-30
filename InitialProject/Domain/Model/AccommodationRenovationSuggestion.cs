@@ -12,7 +12,7 @@ namespace InitialProject.Domain.Model
     {
         public int Id { get; set; }
         public AccommodationReservation Reservation { get; set; }
-        public string LevelOfUrgency { get; set; }
+        public int LevelOfUrgency { get; set; }
         public string ConditionsOfAccommodation { get; set; }
 
         public AccommodationRenovationSuggestion() 
@@ -20,7 +20,7 @@ namespace InitialProject.Domain.Model
             Reservation = new AccommodationReservation();
         }
 
-        public AccommodationRenovationSuggestion(AccommodationReservation reservation, string levelOfUrgency, string conditionsOfAccommodation)
+        public AccommodationRenovationSuggestion(AccommodationReservation reservation, int levelOfUrgency, string conditionsOfAccommodation)
         {
             Reservation = reservation;
             LevelOfUrgency = levelOfUrgency;
@@ -33,11 +33,11 @@ namespace InitialProject.Domain.Model
             Reservation = new AccommodationReservation();
             Reservation.Id = Convert.ToInt32(values[1]);
             ConditionsOfAccommodation = values[2];
-            LevelOfUrgency = values[3];
+            LevelOfUrgency = Convert.ToInt32(values[3]);
         }
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), Reservation.Id.ToString(), ConditionsOfAccommodation, LevelOfUrgency};
+            string[] csvValues = { Id.ToString(), Reservation.Id.ToString(), ConditionsOfAccommodation, LevelOfUrgency.ToString()};
             return csvValues;
         }
     }

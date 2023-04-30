@@ -38,6 +38,7 @@
     <None Remove="Resources\Images\clock.png" />
     <None Remove="Resources\Images\congratulations.png" />
     <None Remove="Resources\Images\congratulations2.png" />
+    <None Remove="Resources\Images\congratulations3.png" />
     <None Remove="Resources\Images\continue.png" />
     <None Remove="Resources\Images\corect.png" />
     <None Remove="Resources\Images\black.jpeg" />
@@ -63,6 +64,8 @@
     <None Remove="Resources\Images\goldStar.png" />
 
     <None Remove="Resources\Images\goldStar1.png" />
+
+    <None Remove="Resources\Images\green.png" />
 
     <None Remove="Resources\Images\greenCorect.png" />
 
@@ -102,6 +105,8 @@
 
     <None Remove="Resources\Images\newLogo.jpg" />
 
+    <None Remove="Resources\Images\olive.jpg" />
+
     <None Remove="Resources\Images\orange.jpg" />
     <None Remove="Resources\Images\plus.png" />
     <None Remove="Resources\Images\profile.png" />
@@ -109,9 +114,13 @@
     <None Remove="Resources\Images\Red-incorrect-icon-design-on-transparent-background-PNG.png" />
     <None Remove="Resources\Images\red.jpg" />
     <None Remove="Resources\Images\redIncorect.png" />
+    <None Remove="Resources\Images\renovation %281%29.png" />
+    <None Remove="Resources\Images\renovation.png" />
+    <None Remove="Resources\Images\renovation2.jpg" />
     <None Remove="Resources\Images\report.png" />
     <None Remove="Resources\Images\request.png" />
     <None Remove="Resources\Images\reserve.png" />
+    <None Remove="Resources\Images\reset.png" />
     <None Remove="Resources\Images\RR.png" />
     <None Remove="Resources\Images\search.png" />
     <None Remove="Resources\Images\sent2.png" />
@@ -147,6 +156,7 @@
     <None Remove="Resources\Images\sent.png" />
     <None Remove="Resources\Images\signout.png" />
     <None Remove="Resources\Images\star.png" />
+    <None Remove="Resources\Images\toolImage.png" />
     <None Remove="Resources\Images\tools.png" />
     <None Remove="Resources\Images\tour.jpg" />
     <None Remove="Resources\Images\transparentGREEN.jpg" />
@@ -318,6 +328,12 @@
 
 
     </Content>
+    <Content Include="Resources\Images\renovation.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\renovation2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Images\report.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -326,6 +342,9 @@
     </Content>
     <Content Include="Resources\Images\sky.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\toolImage.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\tour.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -455,6 +474,9 @@
     <Resource Include="Resources\Images\flowers.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\Images\green.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Images\guest1Menu.jpeg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -479,11 +501,20 @@
     <Resource Include="Resources\Images\notes.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\Images\olive.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Images\orange.jpg" />
     <Resource Include="Resources\Images\qm.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\red.jpg" />
+    <Resource Include="Resources\Images\renovation (1).png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\reset.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Images\search.png" />
   </ItemGroup>
 

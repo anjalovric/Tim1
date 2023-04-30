@@ -5,10 +5,29 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:local="clr-namespace:InitialProject.View"
+        xmlns:val="clr-namespace:InitialProject.WPF.Validations.Guest1Validations"
         mc:Ignorable="d"
         Title="Home"
       d:DesignHeight="696" d:DesignWidth="1024">
     <Page.Resources>
+        <ControlTemplate x:Key="ValidationTemplate">
+            <StackPanel>
+                <!-- Placeholder for the TextBox itself -->
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <AdornedElementPlaceholder  Grid.Column="0" Grid.Row="0"/>
+                    <TextBlock Grid.Column="0" Grid.Row="1" FontSize="15" TextAlignment="Center" Width="157" TextWrapping="Wrap" FontWeight="Medium" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                </Grid>
+            </StackPanel>
+
+        </ControlTemplate>
         <DataTemplate x:Key="accommodationTemplate" x:Name="accommodationCard">
             <Border BorderBrush="#37492d" BorderThickness="5"  Margin="1" HorizontalAlignment="Center" Width="902" Height="120">
                 <Grid HorizontalAlignment="Center" Grid.ColumnSpan="3" Height="111" Width="910" VerticalAlignment="Center" Background="#FFFCECB9">
@@ -49,9 +68,9 @@
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <Image Source="/Resources/Images/info.png" VerticalAlignment="Center" HorizontalAlignment="Right"  Margin="8,0,0,0" Width="Auto" Height="22" Grid.Column="1" RenderTransformOrigin="0.5,0.5">
+                            <Image Source="/Resources/Images/info.png" VerticalAlignment="Center" HorizontalAlignment="Right"  Margin="6,0,0,0" Width="Auto" Height="22" Grid.Column="1" RenderTransformOrigin="0.5,0.5">
                             </Image>
-                            <TextBlock Text="Details" Grid.Column="0" VerticalAlignment="Center" FontSize="18" Margin="5,0,0,0"  Foreground="#22301a" FontWeight="Bold" HorizontalAlignment="Left" Width="Auto"/>
+                            <TextBlock Text="Details" Grid.Column="0" VerticalAlignment="Center" FontSize="18" Margin="8,0,0,0"  Foreground="#22301a" FontWeight="Bold" HorizontalAlignment="Left" Width="Auto"/>
                         </Grid>
                     </Button>
                     <Button x:Name="Reserve"  Command="{Binding Path=DataContext.ReserveCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" FontWeight="Bold" Grid.Row="1" Grid.Column="6" VerticalAlignment="Center" Width="100" Height="35" HorizontalAlignment="Center" FontSize="18">
@@ -60,7 +79,7 @@
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <Image Source="/Resources/Images/back.png" VerticalAlignment="Center" HorizontalAlignment="Right"  Margin="3,0,0,0" Width="Auto" Height="22" Grid.Column="1" RenderTransformOrigin="0.5,0.5">
+                            <Image Source="/Resources/Images/back.png" VerticalAlignment="Center" HorizontalAlignment="Right"  Margin="0,0,0,0" Width="Auto" Height="22" Grid.Column="1" RenderTransformOrigin="0.5,0.5">
                                 <Image.RenderTransform>
                                     <TransformGroup>
                                         <ScaleTransform/>
@@ -70,10 +89,10 @@
                                     </TransformGroup>
                                 </Image.RenderTransform>
                             </Image>
-                            <TextBlock Text="Reserve" Grid.Column="0" VerticalAlignment="Center" FontSize="18" Margin="5,0,0,0"  Foreground="#22301a" FontWeight="Bold" HorizontalAlignment="Left" Width="Auto"/>
+                            <TextBlock Text="Reserve" Grid.Column="0" VerticalAlignment="Center" FontSize="18" Margin="8,0,0,0"  Foreground="#22301a" FontWeight="Bold" HorizontalAlignment="Left" Width="Auto"/>
                         </Grid>
                     </Button>
-                    <Image Source="/Resources/Images/superOwner.png" Height="20" Width="20" Grid.Row="1" Grid.Column="6" VerticalAlignment="Center" Margin="0,0,150,0" HorizontalAlignment="Center">
+                    <Image Source="/Resources/Images/green.png" Height="25" Width="25" Grid.Row="1" Grid.Column="6" VerticalAlignment="Center" Margin="0,0,150,0" HorizontalAlignment="Center">
                         <Image.Style>
                             <Style TargetType="Image">
                                 <Setter Property="Visibility" Value="Collapsed"/>
@@ -85,9 +104,25 @@
                             </Style>
                         </Image.Style>
                     </Image>
+                    <Image Source="/Resources/Images/renovation (1).png" Height="25" Width="25" Grid.Row="1" Grid.Column="5" VerticalAlignment="Center" Margin="20,0,0,0" HorizontalAlignment="Center">
+                        <Image.Style>
+                            <Style TargetType="Image">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsRenovated}" Value="True">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
                 </Grid>
             </Border>
         </DataTemplate>
+        <Style TargetType="ScrollBar">
+            <Setter Property="Background" Value="#FFFCECB9"></Setter>
+        </Style>
+
         <Style TargetType="Grid">
             <Setter Property="Background" Value="#37492d"></Setter>
         </Style>
@@ -99,21 +134,37 @@
             <Setter Property="Foreground" Value="#d9c7b3"></Setter>
             <Setter Property="FontWeight" Value="Medium"></Setter>
             <Setter Property="Background" Value="#FFFCECB9"></Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
         <Style TargetType="TextBox">
             <Setter Property="Background" Value="#FFFCECB9"></Setter>
             <Setter Property="BorderBrush" Value="#22301a"></Setter>
             <Setter Property="BorderThickness" Value="3"></Setter>
+            <Setter Property="Foreground" Value="#22301a"></Setter>
+            <Setter Property="FontSize" Value="18"></Setter>
+            <Setter Property="FontWeight" Value="Medium"></Setter>
         </Style>
 
         <Style TargetType="Button">
             <Setter Property="Background" Value="#8c9d75"></Setter>
             <Setter Property="Foreground" Value="#22301a"></Setter>
             <Setter Property="FontWeight" Value="UltraBlack"></Setter>
-            <Setter Property="FontSize" Value="20"></Setter>
+            <Setter Property="FontSize" Value="18"></Setter>
             <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
             <Setter Property="BorderBrush" Value="#22301a"></Setter>
             <Setter Property="BorderThickness" Value="3,3,3,3"></Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Opacity" Value="0.5"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
 
     </Page.Resources>
@@ -149,26 +200,103 @@
             </Label.Style>
         </Label>
 
-        <Label x:Name="Name" Content="Name:" HorizontalContentAlignment="Left" HorizontalAlignment="Center" FontSize="18" Width="258" Grid.Row="1" Margin="0,0,0,45" Grid.Column="0" Height="35"/>
+        <Label x:Name="Name" Content="Name:" HorizontalContentAlignment="Left" HorizontalAlignment="Center" FontSize="18" Width="258" Grid.Row="1" Margin="0,10,0,55" Height="35"/>
         <Label x:Name="City" Content="City:" Margin="0,0,0,45" FontSize="18" Width="258" Grid.Column="2" Grid.Row="1" Height="35" />
         <Label x:Name="Country" Content="Country:" HorizontalContentAlignment="Left" HorizontalAlignment="Center" Margin="0,0,0,45" Width="258" FontSize="18" Height="35" Grid.Row="1" Grid.Column="1"/>
 
-        <Label x:Name="NumberOfDays" Grid.Row="2" Grid.Column="1" Content="Number of days:" Margin="46,5,38,70" FontSize="18" Height="35" Width="258"/>
+        <Label x:Name="NumberOfDays" Grid.Row="2" Grid.Column="1" Content="Number of days:" Margin="41,5,38,70" FontSize="18" Height="35" HorizontalContentAlignment="Left" Width="258"/>
         <Label x:Name="NumberOfGuests" Content="Number of guests:" Margin="41,2,42,70" FontSize="18" Grid.Row="2" Grid.Column="2" Height="38" Width="258"/>
 
 
         <TextBox x:Name="nameInput" Height="40" HorizontalAlignment="Center" Width="258" FontSize="18"  Grid.Row="1" Grid.Column="0" Margin="0,35,0,0" Background="#FFFCECB9" Text="{Binding Path=Name,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-        <ComboBox x:Name="countryInput" ItemsSource="{Binding Countries}" SelectedItem="{Binding LocationCountry, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" HorizontalAlignment="Center" Width="258" Height="40" FontSize="18" Margin="0,35,0,0" Grid.Row="1" Grid.Column="1">
+        <ComboBox x:Name="countryInput" FontWeight="Medium" ItemsSource="{Binding Countries}" VerticalContentAlignment="Center" SelectedItem="{Binding LocationCountry, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" HorizontalAlignment="Center" Width="258" Height="40" FontSize="18" Margin="0,35,0,0" Foreground="#22301a" Grid.Row="1" Grid.Column="1">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
                     <i:InvokeCommandAction Command="{Binding CountryInputSelectionChangedCommand}"/>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
+            <ComboBox.ItemContainerStyle>
+                <Style TargetType="ComboBoxItem">
+                    <Setter Property="Width" Value="258"></Setter>
+                    <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                    <Setter Property="ContentTemplate">
+                        <Setter.Value>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding}" TextWrapping="Wrap"/>
+                            </DataTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="BorderBrush" Value="#22301a"></Setter>
+                    <Setter Property="BorderThickness" Value="1"></Setter>
+                    <Setter Property="Background" Value="#FFFCECB9"></Setter>
+                    <Setter Property="Foreground" Value="#22301a"></Setter>
+                    <Setter Property="FontWeight" Value="Medium"></Setter>
+                    <Setter Property="FontSize" Value="18"></Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Cursor" Value="Hand"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </ComboBox.ItemContainerStyle>
+            <ComboBox.Style>
+                <Style TargetType="ComboBox">
+                    <Setter Property="Cursor" Value="Arrow"></Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Cursor" Value="Hand"/>
+                        </Trigger>
+                        <Trigger Property="IsDropDownOpen" Value="True">
+                            <Setter Property="Cursor" Value="Arrow"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </ComboBox.Style>
         </ComboBox>
         <Border BorderBrush="#22301a" BorderThickness="3" HorizontalAlignment="Center" Width="258" Height="40" Margin="0,35,0,0" Grid.Row="1" Grid.Column="1"></Border>
 
 
-        <ComboBox x:Name="cityInput" ItemsSource="{Binding CitiesByCountry}" SelectedItem="{Binding LocationCity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsTextSearchEnabled="True" IsEnabled="{Binding Path=IsCityComboBoxEnabled}" IsTextSearchCaseSensitive="False" HorizontalAlignment="Center" Width="258" Height="40" Margin="0,35,0,0" FontSize="18" Grid.Row="1" Grid.Column="2"/>
+        <ComboBox x:Name="cityInput" ItemsSource="{Binding CitiesByCountry}" VerticalContentAlignment="Center" FontWeight="Medium" Foreground="#22301a" SelectedItem="{Binding LocationCity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsTextSearchEnabled="True" IsEnabled="{Binding Path=IsCityComboBoxEnabled}" IsTextSearchCaseSensitive="False" HorizontalAlignment="Center" Width="258" Height="40" Margin="0,35,0,0" FontSize="18" Grid.Row="1" Grid.Column="2">
+            <ComboBox.ItemContainerStyle>
+                <Style TargetType="ComboBoxItem">
+                    <Setter Property="Width" Value="258"></Setter>
+                    <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                    <Setter Property="ContentTemplate">
+                        <Setter.Value>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding}" TextWrapping="Wrap"/>
+                            </DataTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="BorderBrush" Value="#22301a"></Setter>
+                    <Setter Property="BorderThickness" Value="1"></Setter>
+                    <Setter Property="Background" Value="#FFFCECB9"></Setter>
+                    <Setter Property="Foreground" Value="#22301a"></Setter>
+                    <Setter Property="FontWeight" Value="Medium"></Setter>
+                    <Setter Property="FontSize" Value="18"></Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Cursor" Value="Hand"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </ComboBox.ItemContainerStyle>
+            <ComboBox.Style>
+                <Style TargetType="ComboBox">
+                    <Setter Property="Cursor" Value="Arrow"></Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Cursor" Value="Hand"/>
+                        </Trigger>
+                        <Trigger Property="IsDropDownOpen" Value="True">
+                            <Setter Property="Cursor" Value="Arrow"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </ComboBox.Style>
+        </ComboBox>
         <Border BorderBrush="#22301a" BorderThickness="3" HorizontalAlignment="Center" Width="258" Height="40" Margin="0,35,0,0" Grid.Row="1" Grid.Column="2"></Border>
 
 
@@ -176,22 +304,43 @@
         <CheckBox x:Name="house" VerticalContentAlignment="Center" Content="House" IsChecked="{Binding HouseChecked, Mode=TwoWay}" Margin="42,40,149,40" FontSize="18" Grid.Row="2" Grid.Column="0" Height="30" BorderBrush="#22301a" BorderThickness="3"/>
         <CheckBox x:Name="cottage" VerticalContentAlignment="Center" IsChecked="{Binding CottageChecked, Mode=TwoWay}" Content="Cottage" Margin="42,70,149,10" FontSize="18" Grid.Row="2" Grid.Column="0" Height="30" BorderBrush="#22301a" BorderThickness="3"/>
 
-        <TextBox x:Name="numberOfDaysInput" HorizontalAlignment="Center" Text="{Binding Path=NumberOfDays,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Width="157" TextAlignment="Center" Height="40" FontSize="18" Grid.Column="1" Grid.Row="2" Margin="0,10,0,0"  />
-        <Button x:Name="incrementNumberOfDays" Command="{Binding IncrementDaysNumberCommand}" Content="+"  HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" Grid.Column="1" Grid.Row="2" Margin="208,10,0,0" Width="45"/>
-        <Button x:Name="decrementNumberOfDays" Command="{Binding DecrementDaysNumberCommand}"  Content="-"  HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,208,0" Grid.Column="1" Grid.Row="2" Height="40" Width="45"/>
+        <TextBox x:Name="numberOfDaysInput" Text="{Binding NumberOfDays, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="157" TextAlignment="Center" Height="40" FontSize="18" Grid.Column="1" Grid.Row="2" Margin="0,10,0,0"  >
+           
+        </TextBox>
+        <Button x:Name="incrementNumberOfDays" IsEnabled="{Binding Path=IsNumberOfDaysValid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Command="{Binding IncrementDaysNumberCommand}" Content="+"  HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" Grid.Column="1" Grid.Row="2" Margin="208,10,0,0" Width="45"/>
+        <Button x:Name="decrementNumberOfDays"  IsEnabled="{Binding Path=IsNumberOfDaysValid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Command="{Binding DecrementDaysNumberCommand}"  Content="-"  HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,208,0" Grid.Column="1" Grid.Row="2" Height="40" Width="45"/>
 
-        <TextBox x:Name="numberOfGuestsInput" Text="{Binding Path=NumberOfGuests,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="40" TextAlignment="Center"  FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center" Width="157" Margin="0,10,0,0"  Grid.Column="2" Grid.Row="2"/>
-        <Button x:Name="incrementNumberOfGuests" Command="{Binding IncrementGuestsNumberCommand}" Height="40" Content="+"  VerticalAlignment="Center" HorizontalAlignment="Center" Margin="208,10,0,0" Grid.Column="2" Grid.Row="2" Width="45"/>
-        <Button x:Name="decrementNumberOfGuests" Command="{Binding DecrementGuestsNumberCommand}" Height="40" Content="-"  VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,10,208,0" Grid.Column="2" Grid.Row="2" Width="45"/>
-        <Button x:Name="Search" Content="Search" FontWeight="Bold" HorizontalAlignment="Left" Margin="197,10,0,0" Height="35" Width="100" Command="{Binding SearchCommand}"  VerticalAlignment="Top" FontSize="18" Grid.Column="2" Grid.Row="3" BorderBrush="#FF22301A" BorderThickness="3,3,3,3"/>
+        <TextBox x:Name="numberOfGuestsInput" Text="{Binding NumberOfGuests, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Height="40" TextAlignment="Center"  FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center" Width="157" Margin="0,10,0,0"  Grid.Column="2" Grid.Row="2">
+            
+        </TextBox>
+        <Button x:Name="incrementNumberOfGuests" IsEnabled="{Binding Path=IsNumberOfGuestsValid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Command="{Binding IncrementGuestsNumberCommand}" Height="40" Content="+"  VerticalAlignment="Center" HorizontalAlignment="Center" Margin="208,10,0,0" Grid.Column="2" Grid.Row="2" Width="45"/>
+        <Button x:Name="decrementNumberOfGuests" IsEnabled="{Binding Path=IsNumberOfGuestsValid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Command="{Binding DecrementGuestsNumberCommand}" Height="40" Content="-"  VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,10,208,0" Grid.Column="2" Grid.Row="2" Width="45"/>
+        <Button x:Name="Search" FontWeight="Bold" IsEnabled="{Binding Path=IsInputValid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="197,15,0,0" Height="35" Width="100" Command="{Binding SearchCommand}"  VerticalAlignment="Top" FontSize="18" Grid.Column="2" Grid.Row="3" BorderBrush="#FF22301A" BorderThickness="3,3,3,3">
+            <Grid Background="#8c9d75" Width="100"  HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Image Source="/Resources/Images/search.png" VerticalAlignment="Center" HorizontalAlignment="Right"  Margin="0,0,0,0" Width="Auto" Height="22" Grid.Column="1" RenderTransformOrigin="0.5,0.5"></Image>
+                <TextBlock Background="#8c9d75" Text="Search" Grid.Column="0" VerticalAlignment="Center" FontSize="18"  Foreground="#22301a" Margin="10,0,0,0" FontWeight="Bold" HorizontalAlignment="Left" Width="58"/>
+            </Grid>
+            
+        </Button>
 
-        <Button FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="92,10,0,0" Command="{Binding ShowAllCommand}" Width="100" Height="35" Grid.Row="3" Grid.Column="2" FontSize="18" BorderBrush="#FF22301A" BorderThickness="3,3,3,3">Show all</Button>
+        <Button FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="92,15,0,0" Command="{Binding ShowAllCommand}" Width="100" Height="35" Grid.Row="3" Grid.Column="2" BorderBrush="#FF22301A" BorderThickness="3,3,3,3">
+            <Grid Background="#8c9d75" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Image Source="/Resources/Images/reset.png" VerticalAlignment="Center" HorizontalAlignment="Right"  Margin="0,0,0,0" Width="Auto" Height="22" Grid.Column="1" RenderTransformOrigin="0.5,0.5">                </Image>
+                <TextBlock Background="#8c9d75" Text="Reset" Grid.Column="0" VerticalAlignment="Center" FontSize="18"  Foreground="#22301a" Margin="10,0,0,0" FontWeight="Bold" HorizontalAlignment="Left" Width="58"/>
+            </Grid>
+            
+        </Button>
 
-        <Label x:Name="numberOfDaysLabel" HorizontalAlignment="Left" Width="246" Height="22" Margin="54,88,0,0" VerticalAlignment="Top" Grid.Column="1" Grid.Row="2"/>
-        <Label x:Name="numberOfGuestsLabel" HorizontalAlignment="Left" Width="246" Height="22" Margin="49,88,0,0" VerticalAlignment="Top" Grid.Column="2" Grid.Row="2"/>
 
-
-        <ListBox x:Name="accommodationList" IsSynchronizedWithCurrentItem="True" SelectionMode="Single" HorizontalAlignment="Center" ItemsSource="{Binding Path=Accommodations,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" ItemTemplate="{StaticResource accommodationTemplate}" Grid.ColumnSpan="3" Grid.Row="3" Margin="0,0,0,50" VerticalAlignment="Bottom" Width="944" Background="#37492d" BorderThickness="5,5,5,5"  BorderBrush="#8c9d75" Height="265">
+        <ListBox x:Name="accommodationList" ScrollViewer.VerticalScrollBarVisibility="Visible" IsSynchronizedWithCurrentItem="True" SelectionMode="Single" HorizontalAlignment="Center" ItemsSource="{Binding Path=Accommodations,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" ItemTemplate="{StaticResource accommodationTemplate}" Grid.ColumnSpan="3" Grid.Row="3" Margin="0,0,0,50" VerticalAlignment="Bottom" Width="944" Background="#37492d" BorderThickness="5,5,5,5"  BorderBrush="#8c9d75" Height="265">
             <ListBox.Resources>
                 <Style TargetType="ListViewItem">
                     <Style.Triggers>
@@ -202,7 +351,6 @@
                 </Style>
             </ListBox.Resources>
         </ListBox>
-
 
     </Grid>
 </Page>

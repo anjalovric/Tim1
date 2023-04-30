@@ -8,13 +8,13 @@
       xmlns:val="clr-namespace:InitialProject.WPF.Validations.OwnerValidations"
       mc:Ignorable="d" 
       d:DesignHeight="630" d:DesignWidth="430"
-      Title="Enter Accommodation" Background="White">
+      Title="Enter Accommodation" Background="#b3cee5">
 
 
     <ScrollViewer>
         <Grid Height="780" >
             <Label Content="Name" Margin="23,57,183,667"/>
-            
+
             <TextBox HorizontalAlignment="Center" Margin="0,89,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="363" Height="31">
                 <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -38,7 +38,7 @@
                     </ControlTemplate>
                 </Validation.ErrorTemplate>
             </TextBox>
-            
+
             <Label Content="Country" Margin="23,140,207,584"/>
             <Label Content="City" Margin="225,140,26,584"/>
             <Label Content="Type" Margin="23,207,206,517"/>
@@ -52,23 +52,29 @@
             <tk:IntegerUpDown AllowTextInput="True" DisplayDefaultValueOnEmptyText="True" Minimum="1" HorizontalAlignment="Left" Margin="249,343,0,0" Text="{Binding Path=MinDaysForReservation, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="137" Height="31"/>
             <tk:IntegerUpDown AllowTextInput="True" DisplayDefaultValueOnEmptyText="True" Minimum="0" HorizontalAlignment="Left" Margin="250,398,0,0" Text="{Binding Path=MinDaysToCancel, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="137" Height="31"/>
             <Label Content="Images" HorizontalAlignment="Left" Margin="20,458,0,0" VerticalAlignment="Top" Width="190"/>
-            <Button Command="{Binding AddImageCommand}" Name="AddImageButton" Content="+" FontSize="20" HorizontalAlignment="Left" Margin="25,498,0,0" VerticalAlignment="Top" Width="110" Height="34"/>
-            <Button Command="{Binding RemoveImageCommand}" Name="RemoveImageButton" Content="-" FontSize="20" HorizontalAlignment="Left" Margin="278,498,0,0" VerticalAlignment="Top" Width="110" Height="34"/>
+            <Button Command="{Binding AddImageCommand}" Name="AddImageButton" Content="+" FontSize="20" HorizontalAlignment="Left" Margin="25,498,0,0" VerticalAlignment="Top" Width="110" Height="34" BorderBrush="DarkGray" BorderThickness="3"/>
+            <Button Command="{Binding RemoveImageCommand}" Name="RemoveImageButton" Content="-" FontSize="20" HorizontalAlignment="Left" Margin="278,498,0,0" VerticalAlignment="Top" Width="110" Height="34"  BorderBrush="DarkGray" BorderThickness="3"/>
             <Image Source="{Binding Path=ImageUrl, UpdateSourceTrigger=PropertyChanged}" Stretch="Fill" HorizontalAlignment="Left" Height="100" Margin="120,584,0,0" VerticalAlignment="Top" Width="183"/>
-            <Button Command="{Binding PreviousImageCommand}" Name="PreviousImageButton" HorizontalAlignment="Left" Margin="35,625,0,0" VerticalAlignment="Top" Height="31" Width="71">
+            <Button Command="{Binding PreviousImageCommand}" Name="PreviousImageButton" HorizontalAlignment="Left" Margin="35,625,0,0" VerticalAlignment="Top" Height="31" Width="71" Style="{StaticResource ButtonForImages}">
                 <Button.Content>
                     <Image Source="/Resources/Images/back_arrow.png" />
                 </Button.Content>
             </Button>
-            <Button Command="{Binding NextImageCommand}" Name ="NextImageButton" HorizontalAlignment="Left" Margin="317,625,0,0" VerticalAlignment="Top" Height="31" Width="71">
+            <Button Command="{Binding NextImageCommand}" Name ="NextImageButton" HorizontalAlignment="Left" Margin="317,625,0,0" VerticalAlignment="Top" Height="31" Width="71" Style="{StaticResource ButtonForImages}">
                 <Button.Content>
                     <Image Source="/Resources/Images/arrow.png" />
                 </Button.Content>
             </Button>
-            <Button Command="{Binding CancelCommand}" Name="CancelButton" Content="Cancel" HorizontalAlignment="Left" Margin="25,720,0,0" VerticalAlignment="Top" Width="136" Height="41"/>
-            <Button Command="{Binding OkCommand}" Name="OkButton" Content="OK" Margin="251,724,0,20" HorizontalAlignment="Left" Width="136"/>
+            <Grid Margin="0,670,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Button Command="{Binding CancelCommand}" Grid.Column="0" Name="CancelButton" Content="Cancel" Margin="30, 0, 0, 0" HorizontalAlignment="Left" Width="136" Height="41" Style="{StaticResource BasicButton}"/>
+                <Button Command="{Binding OkCommand}" Grid.Column="1" Name="OkButton" Content="OK" Margin="0, 0, 25, 0" HorizontalAlignment="Right" Width="136" Height="41" Style="{StaticResource BasicButton}"/>
+            </Grid>
             <Image Source="/Resources/Images/logoMyTravel.png" Margin="252,10,27,702"/>
-            <Label Content="*All fields are required!" Foreground="Red" HorizontalAlignment="Left" Margin="24,630,0,0" VerticalAlignment="Center" Width="188">
+            <Label Content="*All fields are required!" Foreground="Red" HorizontalAlignment="Left" Margin="24,605,0,0" VerticalAlignment="Center" Width="188">
                 <Label.Style>
                     <Style TargetType="Label">
                         <Style.Triggers>

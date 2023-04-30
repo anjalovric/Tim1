@@ -18,6 +18,14 @@
             <Setter Property="BorderBrush" Value="#22301a"></Setter>
             <Setter Property="BorderThickness" Value="3"></Setter>
         </Style>
+        
+        <Style TargetType="Button">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </Window.Resources>
 
     <Grid>
@@ -25,7 +33,7 @@
             <Menu.Background>
                 <ImageBrush ImageSource="/Resources/Images/guest1Menu.jpeg" Opacity="0.9"></ImageBrush>
             </Menu.Background>
-            
+
 
             <MenuItem Height="72" Width="148" VerticalAlignment="Center">
                 <MenuItem.Header>
@@ -58,6 +66,12 @@
                 </MenuItem.Header>
             </MenuItem>
             <MenuItem x:Name="NotificationsList" Width="115" Command="{Binding NotificationsCommand}"  ItemsSource="{Binding Path=StoredNotifications,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontSize="16">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SubmenuOpened">
+                        <i:InvokeCommandAction Command="{Binding SubmenuOpenedCommand}"
+                CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type MenuItem}}}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
                 <MenuItem.Header>
                     <Image Source="/Resources/Images/bell.png" Margin="23,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Height="48" Width="55"/>
                 </MenuItem.Header>

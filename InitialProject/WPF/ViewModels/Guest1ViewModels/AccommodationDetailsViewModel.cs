@@ -32,6 +32,18 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             }
 
         }
+        private bool isNextEnabled;
+        public bool IsNextEnabled
+        {
+            get { return isNextEnabled; }
+            set
+            {
+                if (value != isNextEnabled)
+                    isNextEnabled = value;
+                OnPropertyChanged("IsNextEnabled");
+            }
+
+        }
         public Accommodation SelectedAccommodation { get; set; }
         private List<AccommodationImage> images;
 
@@ -55,6 +67,14 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             SetFirstImage();
             MakeCommands();
             SetRating();
+            SetButtonEnableProperty();
+        }
+        private void SetButtonEnableProperty()
+        {
+            if (images.Count >= 2)
+                IsNextEnabled = true;
+            else
+                IsNextEnabled = false;
         }
         private void SetRating()
         {
@@ -71,7 +91,8 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         private void Reserve_Executed(object sender)
         {
             AccommodationReservationFormView accommodationReservationForm = new AccommodationReservationFormView(SelectedAccommodation, guest1);
-            accommodationReservationForm.Show();
+            accommodationReservationForm.Owner = Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault();
+            accommodationReservationForm.ShowDialog();
         }
         private bool CanExecute(object sender)
         {

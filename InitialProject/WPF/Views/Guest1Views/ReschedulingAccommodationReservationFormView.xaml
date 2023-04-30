@@ -6,11 +6,8 @@
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
-        Title="ReschedulingAccommodationReservationForm" Height="522" Width="660" WindowStartupLocation="CenterScreen" WindowStyle="None">
+        Title="ReschedulingAccommodationReservationForm" AllowsTransparency="True" Background="Transparent"  Height="522" Width="660" WindowStartupLocation="CenterScreen" WindowStyle="None">
     <Window.Resources>
-        <Style TargetType="Grid">
-            <Setter Property="Background" Value="#c99585"></Setter>
-        </Style>
         <Style TargetType="Label">
             <Setter Property="Foreground" Value="#37492d"></Setter>
             <Setter Property="FontWeight" Value="ExtraBold"></Setter>
@@ -29,65 +26,84 @@
             <Setter Property="Background" Value="#8c9d75"></Setter>
             <Setter Property="Foreground" Value="#22301a"></Setter>
             <Setter Property="FontWeight" Value="UltraBlack"></Setter>
-            <Setter Property="FontSize" Value="20"></Setter>
+            <Setter Property="FontSize" Value="18"></Setter>
             <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
             <Setter Property="BorderBrush" Value="#22301a"></Setter>
             <Setter Property="BorderThickness" Value="3"></Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
     </Window.Resources>
+    <Border BorderThickness="4" Padding="6" CornerRadius="25">
+        <Border.BorderBrush>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="Black" Offset="0"></GradientStop>
+                <GradientStop Color="#22301a" Offset="1"></GradientStop>
+            </LinearGradientBrush>
+        </Border.BorderBrush>
+        <Border.Background>
+            <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
+                <GradientStop Color="#c99585" Offset="0.1"></GradientStop>
+                <GradientStop Color="#FFF9ECC5" Offset="0.4"></GradientStop>
+                <GradientStop Color="#c99585" Offset="0.9"></GradientStop>
+            </LinearGradientBrush>
+        </Border.Background>
+        <Grid>
+            <Label FontSize="24" HorizontalAlignment="Center" FontFamily="Baskerville Old Face"  VerticalAlignment="Top" Height="43" Width="402" Margin="0,20,0,0">CHANGING RESERVATION DATE</Label>
+            <Label FontSize="18" HorizontalAlignment="Left" Margin="160,0,0,300" FontWeight="DemiBold" Height="40" Width="110">Arrival date:</Label>
 
-    <Grid>
-        <Label FontSize="24" HorizontalAlignment="Center" FontFamily="Baskerville Old Face"  VerticalAlignment="Top" Height="43" Width="402" Margin="0,20,0,0">CHANGING RESERVATION DATE</Label>
-        <Label FontSize="18" HorizontalAlignment="Left" Margin="160,0,0,300" FontWeight="DemiBold" Height="40" Width="110">Arrival date:</Label>
+            <Calendar x:Name="ArrivalDate" Width="196" Margin="120,119,0,196" HorizontalAlignment="Left" SelectedDate="{Binding Path=Arrival, Mode=TwoWay}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="PreviewMouseUp">
+                        <i:InvokeCommandAction Command="{Binding OnPreviewMouseUpCommand}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Calendar>
+            <Calendar x:Name="DepartureDate" Width="197" Margin="0,119,120,196" HorizontalAlignment="Right" SelectedDate="{Binding Path=Departure, Mode=TwoWay}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="PreviewMouseUp">
+                        <i:InvokeCommandAction Command="{Binding OnPreviewMouseUpCommand}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Calendar>
+            <Label FontSize="18" Height="40" Width="140" HorizontalAlignment="Right" FontWeight="DemiBold" Margin="0,0,150,300" Content="Departure date:"/>
 
-        <Calendar x:Name="ArrivalDate" Width="196" Margin="120,119,0,196" HorizontalAlignment="Left" SelectedDate="{Binding Path=Arrival, Mode=TwoWay}">
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="PreviewMouseUp">
-                    <i:InvokeCommandAction Command="{Binding OnPreviewMouseUpCommand}"/>
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-        </Calendar>
-        <Calendar x:Name="DepartureDate" Width="197" Margin="0,119,120,196" HorizontalAlignment="Right" SelectedDate="{Binding Path=Departure, Mode=TwoWay}">
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="PreviewMouseUp">
-                    <i:InvokeCommandAction Command="{Binding OnPreviewMouseUpCommand}"/>
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-        </Calendar>
-        <Label FontSize="18" Height="40" Width="140" HorizontalAlignment="Right" FontWeight="DemiBold" Margin="0,0,150,300" Content="Departure date:"/>
+            <Label FontSize="18" HorizontalAlignment="Center" Margin="0,180,0,0" VerticalAlignment="Center" FontWeight="DemiBold" Width="224" Content="Reasons for rescheduling:"/>
+            <TextBox x:Name="Reasons" HorizontalAlignment="Center" Height="80" Width="420" Margin="0,300,0,0" Text="{Binding Path=Reason, Mode=TwoWay}"/>
 
-        <Label FontSize="18" HorizontalAlignment="Center" Margin="0,180,0,0" VerticalAlignment="Center" FontWeight="DemiBold" Width="224" Content="Reasons for rescheduling:"/>
-        <TextBox x:Name="Reasons" HorizontalAlignment="Center" Height="80" Width="420" Margin="0,300,0,0" Text="{Binding Path=Reason, Mode=TwoWay}"/>
+            <Button Height="35" Width="100" FontSize="18" FontWeight="Bold"  Margin="10,20,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="True" Command="{Binding BackCommand}">
+                <Grid Background="#8c9d75" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="/Resources/Images/back.png" HorizontalAlignment="Left" Margin="10,0,0,0" Width="26" Height="22" Grid.Column="0"/>
+                    <TextBlock Background="#8c9d75" Text="BACK" Grid.Column="1" VerticalAlignment="Center" FontSize="18" Margin="8,0,0,0"  Foreground="#22301a" FontWeight="Bold" HorizontalAlignment="Center" Width="Auto"/>
+                </Grid>
+            </Button>
+            <Button Height="35" Width="100" FontSize="16" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,20" Command="{Binding SendCommand}">
+                <Grid Background="#8c9d75" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="/Resources/Images/back.png" VerticalAlignment="Center" HorizontalAlignment="Right"  Margin="0,0,0,0" Width="Auto" Height="22" Grid.Column="1" RenderTransformOrigin="0.5,0.5">
+                        <Image.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="180"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Image.RenderTransform>
+                    </Image>
+                    <TextBlock Background="#8c9d75" Text="SEND" Grid.Column="0" VerticalAlignment="Center" FontSize="18"  Foreground="#22301a" Margin="10,0,0,0" FontWeight="Bold" HorizontalAlignment="Left" Width="58"/>
+                </Grid>
+            </Button>
 
-        <Button Height="35" Width="100" FontSize="18" FontWeight="Bold"  Margin="20,20,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="True" Command="{Binding BackCommand}">
-            <Grid Background="#8c9d75" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" >
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <Image Source="/Resources/Images/back.png" HorizontalAlignment="Left" Margin="10,0,0,0" Width="26" Height="22" Grid.Column="0"/>
-                <TextBlock Background="#8c9d75" Text="BACK" Grid.Column="1" VerticalAlignment="Center" FontSize="18" Margin="8,0,0,0"  Foreground="#22301a" FontWeight="Bold" HorizontalAlignment="Center" Width="Auto"/>
-            </Grid>
-        </Button>
-        <Button Height="35" Width="100" FontSize="16" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,20" Command="{Binding SendCommand}">
-            <Grid Background="#8c9d75" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" >
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <Image Source="/Resources/Images/back.png" VerticalAlignment="Center" HorizontalAlignment="Right"  Margin="0,0,0,0" Width="Auto" Height="22" Grid.Column="1" RenderTransformOrigin="0.5,0.5">
-                    <Image.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform/>
-                            <RotateTransform Angle="180"/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </Image.RenderTransform>
-                </Image>
-                <TextBlock Background="#8c9d75" Text="SEND" Grid.Column="0" VerticalAlignment="Center" FontSize="18"  Foreground="#22301a" Margin="10,0,0,0" FontWeight="Bold" HorizontalAlignment="Left" Width="58"/>
-            </Grid>
-        </Button>
-
-    </Grid>
+        </Grid>
+    </Border>
 </Window>
