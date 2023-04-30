@@ -269,7 +269,9 @@
                 <RowDefinition Height="4*"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <Label HorizontalAlignment="Center" Margin="0,20,0,0" Grid.Row="0" Grid.Column="0"  VerticalAlignment="Top" Height="43" FontFamily="Baskerville Old Face"  FontSize="24" FontWeight="Bold">SUGGESTIONS FOR RENOVATION</Label>
+            <Label HorizontalAlignment="Center" Margin="0,42,0,0" Grid.Row="0" Grid.Column="0"  VerticalAlignment="Top" Height="Auto"  FontSize="16" FontWeight="Medium">(optional)</Label>
+
+            <Label HorizontalAlignment="Center" Margin="0,20,0,0" Grid.Row="0" Grid.Column="0"  VerticalAlignment="Top" Height="Auto" FontFamily="Baskerville Old Face"  FontSize="24" FontWeight="Bold">SUGGESTIONS FOR RENOVATION</Label>
             <Label  Margin="20,0,0,0"  Grid.Row="1" Height="Auto" FontSize="18" Grid.Column="0"  VerticalAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Left">Condition of accommodation:</Label>
 
             <TextBox Text="{Binding Path=ConditionsOfAccommodation}" Width="472" Height="150" Margin="10,0,0,0"  Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Top"/>

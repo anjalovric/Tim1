@@ -32,10 +32,6 @@ namespace InitialProject.Service
         {
             superGuestTitleRepository.Add(superGuestTitle);
         }
-        public SuperGuestTitle GetByGuest(Guest1 guest1)
-        {
-            return superGuests.Find(n => n.Guest.Id == guest1.Id);
-        }
         public bool IsAlreadySuperGuest(Guest1 guest1)
         {
              return superGuestTitleRepository.GetAll().Find(n => n.Guest.Id == guest1.Id)!=null;
@@ -61,7 +57,7 @@ namespace InitialProject.Service
             {
                 SuperGuestTitle newSuperGuestTitle = new SuperGuestTitle(guest1, 5, activationDate);
                 Add(newSuperGuestTitle);
-                MakeSuperGuests(); ;
+                MakeSuperGuests(); 
                 return newSuperGuestTitle;
             }
             MakeSuperGuests();
@@ -76,16 +72,14 @@ namespace InitialProject.Service
         {
             SuperGuestTitle superGuest = superGuests.Find(n => n.Guest.Id == guest1.Id);
             AccommodationReservationService accommodationReservationService=new AccommodationReservationService();
-            int reservationsNumber = accommodationReservationService.GetLastYearReservationsNumberByGuest(guest1, superGuest.ActivationDate);
-            if (reservationsNumber >= 10)
+            DateTime newActivationDate = accommodationReservationService.GetProlongActivationDate(guest1, superGuest.ActivationDate);
+            if (newActivationDate != DateTime.MinValue) //can prolog title
             {
-                DateTime newActivationFate = superGuest.ActivationDate.AddYears(1);
-                //obrisati starog supergosta i dodati novog
+                //delete previous and add new title
                 Delete(superGuest);
-                Add(new SuperGuestTitle(guest1, 5, newActivationFate));
-               
+                Add(new SuperGuestTitle(guest1, 5, newActivationDate));
             } 
-            else
+            else if(DateTime.Now > superGuest.ActivationDate.AddYears(1))  //1 year has passed
                 //obrisati starog supergosta
                 Delete(superGuest);
             MakeSuperGuests();
@@ -93,12 +87,12 @@ namespace InitialProject.Service
             return superGuests.Find(n=>n.Guest.Id == guest1.Id);    //new superguest or null
         }
 
-        public bool HasSuperGuestTitleExpired(Guest1 guest1)    //return TRUE if expired or Isn't already superguest
+        public bool IsSuperGuestTitleExpiredOrPossibleToProlong(Guest1 guest1)    //return TRUE if expired or Isn't already superguest
         {
             if(IsAlreadySuperGuest(guest1))
             {
                 MakeSuperGuests();
-                if (DateTime.Now > superGuests.Find(n => n.Guest.Id == guest1.Id).ActivationDate.AddYears(1))
+                if (DateTime.Now > superGuests.Find(n => n.Guest.Id == guest1.Id).ActivationDate)
                 {
                     return true;
                 }

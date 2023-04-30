@@ -54,19 +54,14 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 
         private void ShowSuperGuest()
         {
-
             SuperGuestTitleService superGuestTitleService = new SuperGuestTitleService();
-            if (superGuestTitleService.HasSuperGuestTitleExpired(Guest1))   //must put here, if 10th reservation expires when user logged in
+            superGuestTitleService.DeleteTitleIfManyYearsPassed(Guest1);
+            if (superGuestTitleService.IsAlreadySuperGuest(Guest1))
             {
-                superGuestTitleService.DeleteTitleIfManyYearsPassed(Guest1);
-                if (superGuestTitleService.IsAlreadySuperGuest(Guest1))
-                {
-                    SuperGuest = superGuestTitleService.ProlongSuperGuestTitle(Guest1);  //add new or delete previous title.
-                }
-                SuperGuest = superGuestTitleService.MakeNewSuperGuest(Guest1);
+                SuperGuest = superGuestTitleService.ProlongSuperGuestTitle(Guest1);  //add new or delete previous title.
             }
+            SuperGuest = superGuestTitleService.MakeNewSuperGuest(Guest1);
             IsSuperGuest = superGuestTitleService.IsAlreadySuperGuest(Guest1);
-            SuperGuest = superGuestTitleService.GetByGuest(Guest1);
         }
        
         private void GetReviewsNumber()

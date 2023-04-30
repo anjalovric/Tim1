@@ -65,18 +65,19 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             Guest1SearchAccommodationView guest1SearchAccommodationView = new Guest1SearchAccommodationView(guest1);
             Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = guest1SearchAccommodationView;
             StoredNotifications = new ObservableCollection<MenuItem>();
-            SuperGuestTitleService superGuestTitleService = new SuperGuestTitleService();
-            if(superGuestTitleService.HasSuperGuestTitleExpired(guest1))
-            {
-                superGuestTitleService.DeleteTitleIfManyYearsPassed(guest1);
-                if (superGuestTitleService.IsAlreadySuperGuest(guest1))
-                {
-                    superGuestTitleService.ProlongSuperGuestTitle(guest1);  //add new or delete previous title.
-                    //if title existed but expired and deleted, try make new title
-                }
-                superGuestTitleService.MakeNewSuperGuest(this.guest1);
-            }
+            ShowSuperGuest();
             MakeCommands();
+        }
+        private void ShowSuperGuest()
+        {
+            SuperGuestTitleService superGuestTitleService = new SuperGuestTitleService();
+            superGuestTitleService.DeleteTitleIfManyYearsPassed(guest1);
+            if (superGuestTitleService.IsAlreadySuperGuest(guest1))
+            {
+                superGuestTitleService.ProlongSuperGuestTitle(guest1);  //add new or delete previous title.
+            }
+            superGuestTitleService.MakeNewSuperGuest(guest1);
+            superGuestTitleService.IsAlreadySuperGuest(guest1);
         }
 
         private void MakeCommands()

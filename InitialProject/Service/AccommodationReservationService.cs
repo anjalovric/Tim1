@@ -131,11 +131,27 @@ namespace InitialProject.Service
         }
         public bool IsLastYearReservationCompleted(AccommodationReservation reservation)
         {
-            return reservation.Arrival <= DateTime.Now && reservation.Departure <= DateTime.Now && reservation.Arrival > DateTime.Now.AddYears(-1) && reservation.Arrival <=DateTime.Now;
+            return reservation.Departure <= DateTime.Now && reservation.Departure > DateTime.Now.AddYears(-1);
         }
-        public int GetLastYearReservationsNumberByGuest(Guest1 guest1, DateTime activationDate)
+        /*public int GetLastYearReservationsNumberByGuest(Guest1 guest1, DateTime activationDate)
         {
-            return reservations.FindAll(n =>n.Guest.Id==guest1.Id && n.Arrival > activationDate && n.Arrival <= activationDate.AddYears(1) && n.Departure > activationDate && n.Departure <= activationDate.AddYears(1)).Count;
+            return reservations.FindAll(n =>n.Guest.Id==guest1.Id && n.Departure > activationDate && n.Departure <= activationDate.AddYears(1)).Count;
+        }*/
+        public DateTime GetProlongActivationDate(Guest1 guest1, DateTime activationDate)
+        {
+            //number of reservations in next year from activationDate
+            List<AccommodationReservation> completedReservations = reservations.FindAll(n => n.Guest.Id == guest1.Id && n.Departure > activationDate && n.Departure <= activationDate.AddYears(1));
+            int counter = completedReservations.Count;
+            if(counter >= 10)
+            {
+                List<DateTime> departureDates = new List<DateTime>();
+                foreach (AccommodationReservation reservation in completedReservations)
+                    departureDates.Add(reservation.Departure);
+                var tenthDeparture = departureDates.OrderBy(d => d).ElementAtOrDefault(9);
+                return tenthDeparture;
+
+            }
+            return DateTime.MinValue;   //if expired(<10 reservations) or not expired(<10 reservations but 1 year hasn't passed)
         }
 
     }
