@@ -136,7 +136,7 @@
         </ListBox>
         <Label Content="Description" VerticalContentAlignment="Bottom" Grid.Row="8" Grid.Column="0" Margin="-3, 0, 0, 0" />
         <tk:WatermarkTextBox Text="{Binding Path= Description, UpdateSourceTrigger=PropertyChanged}" Watermark="Enter description here" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="9"/>
-        <Button Command="{Binding CancelCommand}" Content="Cancel" Grid.Column="0" Grid.Row="10" Height="41" Width="136" HorizontalAlignment="Left" Style="{StaticResource BasicButton}"/>
+        <Button Command="{Binding CancelCommand}" Content="Cancel" Grid.Column="0" Grid.Row="10" Height="41" Width="136" HorizontalAlignment="Left" Style="{StaticResource CancelButton}"/>
         <Button Command="{Binding ConfirmCommand}" Content="Confirm" Grid.Column="1" Grid.Row="10" Height="41" Width="136" HorizontalAlignment="Right" Style="{StaticResource BasicButton}"/>
     </Grid>
 </Page>

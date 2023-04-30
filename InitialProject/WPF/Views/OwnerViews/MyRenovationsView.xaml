@@ -17,7 +17,7 @@
             <RowDefinition Height="2.4*"/>
             <RowDefinition />
         </Grid.RowDefinitions>
-        <Border Grid.Column="0" Grid.Row="0" BorderBrush="DarkGray" BorderThickness="0.5" Margin="0, 0, 0,0" Background="AliceBlue">
+        <Border Grid.Column="0" Grid.Row="0" BorderBrush="LightGray" BorderThickness="2" Margin="0, 0, 0,0" Background="#005A9C">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
@@ -27,10 +27,10 @@
                     <RowDefinition />
                     <RowDefinition Height="2*"/>
                 </Grid.RowDefinitions>
-                <Label Content="Upcoming renovations" Grid.Column="0" Grid.Row="0" VerticalAlignment="Bottom" Margin="10, 0, 0, 0"/>
-                <Label Content="Renovated objects" Grid.Column="1" Grid.Row="0" VerticalAlignment="Bottom" Margin="20, 0, 0, 0"/>
-                <Label Content="{Binding Path=UpcomingRenovations, UpdateSourceTrigger=PropertyChanged}" FontWeight="Bold" FontSize="42" Grid.Column="0" Grid.Row="1" VerticalAlignment="Top" Margin="10, 0, 0, 0"/>
-                <Label Content="{Binding Path=RenovatedObjects, UpdateSourceTrigger=PropertyChanged}" FontWeight="Bold" FontSize="42" Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" Margin="20, 0, 0, 0"/>
+                <Label Content="Upcoming renovations" Foreground="LightGray" Grid.Column="0" Grid.Row="0" VerticalAlignment="Bottom" Margin="10, 0, 0, 0"/>
+                <Label Content="Renovated objects" Foreground="LightGray" Grid.Column="1" Grid.Row="0" VerticalAlignment="Bottom" Margin="20, 0, 0, 0"/>
+                <Label Content="{Binding Path=UpcomingRenovations, UpdateSourceTrigger=PropertyChanged}" FontWeight="Bold" FontSize="42"  Foreground="LightGray" Grid.Column="0" Grid.Row="1" VerticalAlignment="Top" Margin="10, 0, 0, 0"/>
+                <Label Content="{Binding Path=RenovatedObjects, UpdateSourceTrigger=PropertyChanged}" FontWeight="Bold" FontSize="42"  Foreground="LightGray" Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" Margin="20, 0, 0, 0"/>
             </Grid>
         </Border>
         <DataGrid Name="RenovationsDataGrid" ItemsSource="{Binding Renovations}" SelectedItem="{Binding Path=SelectedRenovation, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Grid.Row="2" Style="{StaticResource DataGridStyle}" IsReadOnly="True">

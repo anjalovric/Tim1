@@ -10,21 +10,21 @@
       Title="Review Guest" Background="#b3cee5">
 
     <Grid Margin="0, 20, 0, 0">
-        <Border Background="AliceBlue" HorizontalAlignment="Center" Height="144" BorderThickness="1" VerticalAlignment="Top" Width="380" BorderBrush="DarkGray">
+        <Border Background="#005A9C" HorizontalAlignment="Center" Height="144" BorderThickness="1" VerticalAlignment="Top" Width="380" BorderBrush="DarkGray">
             <Grid Margin="9,0,-1,-1">
                 <Image Source="/Resources/Images/User_icon_2.svg.png" HorizontalAlignment="Left" Height="104"  VerticalAlignment="Top" Width="100" Margin="4,29,0,0"/>
-                <Label Content="Guest info" HorizontalAlignment="Left" Margin="5,3,0,0" VerticalAlignment="Top" Width="99"/>
-                <Label Content="Name" HorizontalAlignment="Left" Margin="119,38,0,0" VerticalAlignment="Top" Width="80" FontSize="15" VerticalContentAlignment="Bottom"/>
-                <Label Content="Last Name" HorizontalAlignment="Left" Margin="119,72,0,0" VerticalAlignment="Top" Width="80" VerticalContentAlignment="Bottom"/>
-                <Label Content="Username" HorizontalAlignment="Left" Margin="119,104,0,0" VerticalAlignment="Top" Width="80" VerticalContentAlignment="Bottom"/>
-                <Border BorderBrush="Black" BorderThickness="0, 0, 0, 0.5" Margin="193,25,10,84">
-                    <Label Content="{Binding Path = Guest.Name}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="169" Height="26"/>
+                <Label Content="Guest info" Foreground="LightGray" HorizontalAlignment="Left" Margin="5,3,0,0" VerticalAlignment="Top" Width="99"/>
+                <Label Content="Name" Foreground="LightGray" HorizontalAlignment="Left" Margin="119,38,0,0" VerticalAlignment="Top" Width="80" FontSize="15" VerticalContentAlignment="Bottom"/>
+                <Label Content="Last Name" Foreground="LightGray" HorizontalAlignment="Left" Margin="119,72,0,0" VerticalAlignment="Top" Width="80" VerticalContentAlignment="Bottom"/>
+                <Label Content="Username" Foreground="LightGray" HorizontalAlignment="Left" Margin="119,104,0,0" VerticalAlignment="Top" Width="80" VerticalContentAlignment="Bottom"/>
+                <Border BorderBrush="LightGray" BorderThickness="0, 0, 0, 0.5" Margin="193,25,10,84">
+                    <Label Content="{Binding Path = Guest.Name}" Foreground="LightGray" FontSize="13" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" Width="169" Height="26"/>
                 </Border>
-                <Border BorderBrush="Black" BorderThickness="0, 0, 0, 0.5" Margin="194,95,10,14">
-                    <Label Content="{Binding Path = Guest.Username}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="168" Height="26"/>
+                <Border BorderBrush="LightGray" BorderThickness="0, 0, 0, 0.5" Margin="194,95,10,14">
+                    <Label Content="{Binding Path = Guest.Username}" Foreground="LightGray" FontSize="13" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" Width="168" Height="26"/>
                 </Border>
-                <Border BorderBrush="Black" BorderThickness="0, 0, 0, 0.5" Margin="194,61,10,48">
-                    <Label Content="{Binding Path = Guest.LastName}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="168" Height="26"/>
+                <Border BorderBrush="LightGray" BorderThickness="0, 0, 0, 0.5" Margin="194,61,10,48">
+                    <Label Content="{Binding Path = Guest.LastName}" Foreground="LightGray" FontSize="13" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" Width="168" Height="26"/>
                 </Border>
 
 
@@ -36,7 +36,7 @@
         <Label Content="(Optional)" HorizontalAlignment="Left" Margin="275,0,0,0" VerticalAlignment="Center" Width="128" HorizontalContentAlignment="Right"/>
         <tk:WatermarkTextBox HorizontalAlignment="Center" Margin="2,323,0,0" TextWrapping="Wrap" Text="{Binding Path = GuestReview.Comment}" Watermark="Enter comment here" VerticalAlignment="Top" Width="382" Height="161">
         </tk:WatermarkTextBox>
-        <Button Command="NavigationCommands.BrowseBack" Content="Cancel" HorizontalAlignment="Left" Margin="20,546,0,0" VerticalAlignment="Top" Height="41" Width="140" Style="{StaticResource BasicButton}"/>
+        <Button Command="NavigationCommands.BrowseBack" Content="Cancel" HorizontalAlignment="Left" Margin="20,546,0,0" VerticalAlignment="Top" Height="41" Width="140" Style="{StaticResource CancelButton}"/>
         <Button Command="{Binding ConfirmCommand}" Content="Confirm" IsEnabled="{Binding Path= IsOkButtonEnabled}" HorizontalAlignment="Left" Margin="260,546,0,0" VerticalAlignment="Top" Height="41" Width="140" Style="{StaticResource BasicButton}"/>
 
         <RadioButton Command="{Binding SelectCleanlinessCommand}" CommandParameter="1" GroupName="Cleanliness" Name="Cleanliness1" Content="1" HorizontalAlignment="Left" Margin="200,200,0,0" VerticalAlignment="Top" Height="21" Width="34" FontSize="16"/>
