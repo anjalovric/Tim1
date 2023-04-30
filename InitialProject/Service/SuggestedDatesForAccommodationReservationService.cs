@@ -20,6 +20,7 @@ namespace InitialProject.Service
         private DateTime Arrival;
         private DateTime Departure;
         private TimeSpan lengthOfStay;
+        
         public SuggestedDatesForAccommodationReservationService()
         {
             AccommodationReservationService accommodationReservationService = new AccommodationReservationService();
@@ -27,7 +28,7 @@ namespace InitialProject.Service
         }
         private bool IsDateAvailable(int currentAccommodationId, DateTime date)
         {
-            foreach (AccommodationReservation reservation in reservations)
+            foreach (AccommodationReservation reservation in reservations)  //if reserved on Date "date"
             {
                 if (currentAccommodationId == reservation.Accommodation.Id)
                 {
@@ -37,7 +38,9 @@ namespace InitialProject.Service
                     }
                 }
             }
-            return true;
+            AccommodationRenovationService accommodationRenovationService = new AccommodationRenovationService();
+            return accommodationRenovationService.IsDateAvailableForReservation(currentAccommodationId, date);
+
         }
         private void AddAvailableDateToList(DateTime date)
         {
