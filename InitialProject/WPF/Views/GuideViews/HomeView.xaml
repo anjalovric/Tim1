@@ -44,7 +44,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Name" Binding="{Binding Tour.Name}" Width="*" >
+                <DataGridTextColumn Header="{ns:Loc Name}" Binding="{Binding Tour.Name}" Width="*" >
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="{x:Type TextBlock}">
                             <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -53,7 +53,7 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Duration" Binding="{Binding Tour.Duration}" Width="*" >
+                <DataGridTextColumn Header="{ns:Loc Duration}" Binding="{Binding Tour.Duration}" Width="*" >
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="{x:Type TextBlock}">
                             <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -62,7 +62,7 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Location" Binding="{Binding Tour.Location}" Width="1.8*" >
+                <DataGridTextColumn Header="{ns:Loc Location}" Binding="{Binding Tour.Location}" Width="1.8*" >
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="{x:Type TextBlock}">
                             <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -71,7 +71,7 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Capacity" Binding="{Binding Tour.MaxGuests}" Width="0.9*" >
+                <DataGridTextColumn Header="{ns:Loc Capacity}" Binding="{Binding Tour.MaxGuests}" Width="0.9*" >
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="{x:Type TextBlock}">
                             <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -80,7 +80,7 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="StartDate" Binding="{Binding StartDate}" Width="1.9*" >
+                <DataGridTextColumn Header="{ns:Loc StartDate}" Binding="{Binding StartDate}" Width="1.9*" >
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="{x:Type TextBlock}">
                             <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -89,7 +89,7 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Language" Binding="{Binding Tour.Language}" Width="*" >
+                <DataGridTextColumn Header="{ns:Loc Language}" Binding="{Binding Tour.Language}" Width="*" >
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="{x:Type TextBlock}">
                             <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -98,7 +98,7 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Description" Binding="{Binding Tour.Description}" Width="*" >
+                <DataGridTextColumn Header="{ns:Loc Description}" Binding="{Binding Tour.Description}" Width="*" >
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="{x:Type TextBlock}">
                             <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -110,14 +110,14 @@
                 <DataGridTemplateColumn x:Name="cancelation"  Width="*" >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Name="cancelButton" Style="{DynamicResource ButtonTable}" Content="START" TextElement.FontWeight="ExtraBold" Command="{Binding Path=DataContext.StartCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
+                            <Button Name="cancelButton" Style="{DynamicResource ButtonTable}" Content="{ns:Loc START}" TextElement.FontWeight="ExtraBold" Command="{Binding Path=DataContext.StartCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
 
-        <Label Content="Today's tours:" Style="{DynamicResource Label}" Grid.Column="3" Grid.Row="2" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Top" Width="295" FontWeight="DemiBold" Grid.ColumnSpan="2"/>
+        <Label Content="{ns:Loc Todays}" Style="{DynamicResource Label}" Grid.Column="3" Grid.Row="2" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Top" Width="295" FontWeight="DemiBold" Grid.ColumnSpan="2"/>
         <Calendar Style="{DynamicResource Calendar}" Grid.Column="1"  Grid.Row="7" Grid.RowSpan="4" HorizontalAlignment="Left"  VerticalAlignment="Top" Height="216" Width="218"/>
 
         <Grid Grid.Row="0" Grid.RowSpan="15" Grid.Column="0" Grid.ColumnSpan="2" Style="{DynamicResource InnerGrid}">
@@ -151,7 +151,7 @@
         <Grid Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="0" Grid.RowSpan="2" Style="{DynamicResource BackgroundHeader }">
 
             <Image HorizontalAlignment="Left"  VerticalAlignment="Top"  Source="/Resources/Images/LOGO (2).jpg" Width="220" Height="120"   />
-            <Label Content="HOME PAGE" Style="{DynamicResource Header}"   VerticalAlignment="Center"  />
+            <Label Content="{ns:Loc HomePage}" Style="{DynamicResource Header}"   VerticalAlignment="Center"  />
 
         </Grid>
     </Grid>

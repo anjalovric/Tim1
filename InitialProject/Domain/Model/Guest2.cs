@@ -48,7 +48,7 @@ namespace InitialProject.Model
 
         public override string ToString()
         {
-            return "Guests from reservation made by "+Name + " " + LastName;
+            return Name + " " + LastName;
         }
     }
 }
