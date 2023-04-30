@@ -30,6 +30,6 @@
                 <Image Source="/Resources/Images/arrow.png" />
             </Button.Content>
         </Button>
-        <Label Content="{Binding Path=Accommodation.Name}" HorizontalAlignment="Left" Margin="80,89,0,0" VerticalAlignment="Top" Width="138" Height="30"/>
+        <Label Content="{Binding Path=Accommodation.Name}" HorizontalAlignment="Left" Margin="80,89,0,0" FontSize="15" FontWeight="SemiBold" VerticalAlignment="Top" Width="138" Height="30"/>
     </Grid>
 </Page>

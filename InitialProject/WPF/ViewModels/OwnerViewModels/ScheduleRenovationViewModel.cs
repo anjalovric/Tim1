@@ -28,6 +28,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         public ObservableCollection<AvailableDatesForAccommodation> DatesSuggestions { get; set; }
         public RelayCommand CancelCommand { get; set; }
         public RelayCommand ConfirmCommand { get; set; }
+        public RelayCommand UpdateEndDateCommand { get; set; }
         public ScheduleRenovationViewModel(Owner owner)
         {
             this.owner = owner;
@@ -48,6 +49,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         {
             CancelCommand = new RelayCommand(Cancel_Executed, CanExecute);
             ConfirmCommand = new RelayCommand(Confirm_Executed, CanExecuteConfirm);
+            UpdateEndDateCommand = new RelayCommand(UpdateEndDate_Executed, CanExecute);
         }
 
         private void MakeListOfAccommodation(Owner owner)
@@ -183,7 +185,10 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             MyRenovationsView myRenovationsView = new MyRenovationsView(owner);
             Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = myRenovationsView;
         }
-
+        private void UpdateEndDate_Executed(object sender)
+        {
+            EndDate = StartDate;
+        }
         private void ScheduleRenovation()
         {
             AccommodationRenovation renovation = new AccommodationRenovation();

@@ -32,8 +32,7 @@
                 <RowDefinition Height="1.5*"/>
                 <RowDefinition Height="2*" />
             </Grid.RowDefinitions>
-            <Label Content="{Binding Path= Renovation.Accommodation.Name}" VerticalContentAlignment="Center" FontSize="15" Grid.Column="0" Grid.Row="0" Margin="-2,0,0,0"/>
-            <Image Grid.Column="1" Grid.Row="0" Source="/Resources/Images/toolImage.png" Margin="0, 0, -30, 0"/>
+            <Label Content="{Binding Path= Renovation.Accommodation.Name}" VerticalContentAlignment="Center" FontSize="15" FontWeight="SemiBold" Grid.Column="0" Grid.Row="0" Margin="-2,0,0,0"/>
             <Label Content="From:" Grid.Row="1" Grid.Column="0" Margin="-3,0,0,0" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Left"/>
             <Label Content="To:" Grid.Row="1" Grid.Column="1" Margin="17, 0, 0, 0" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Left"/>
             <Grid Grid.Row="2" Grid.Column="0" Margin="0,10,20,0" >

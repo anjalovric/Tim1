@@ -21,10 +21,5 @@ namespace InitialProject.WPF.Views
             formViewModel = new AccommodationInputFormViewModel(owner);
             DataContext = formViewModel;
         }
-
-        private void ComboBoxCountry_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            formViewModel.EnableCityComboBox();
-        }
     }
 }

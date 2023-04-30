@@ -42,7 +42,7 @@
                     </Grid.RowDefinitions>
                     <Image Source="/Resources/Images/star.png" Grid.Column="0" Grid.Row="0" Height="30" VerticalAlignment="Bottom"/>
                     <Label Content="Busiest year" Grid.Column="1"  Grid.Row="0" VerticalContentAlignment="Bottom" />
-                    <Label Content="{Binding Path=BusiestYear, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" HorizontalAlignment="Center" FontSize="32" FontWeight="Bold"/>
+                    <Label Content="{Binding Path=BusiestYear, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" FontSize="32" FontWeight="Bold"/>
                 </Grid>
             </Grid>
         </Border>

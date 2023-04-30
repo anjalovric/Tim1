@@ -82,7 +82,14 @@
                     <RowDefinition />
                     <RowDefinition />
                 </Grid.RowDefinitions>
-                <Label Content="{Binding Path=StackPanelMessage, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" FontSize="15" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+                <Grid Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="5*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="0" Height="30" Source="/Resources/Images/success.png" />
+                    <Label Grid.Column="1" Content="{Binding Path=StackPanelMessage, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center"  FontSize="15"/>
+                </Grid>
                 <Button Command="{Binding OKCommand}" Grid.Row="2" Grid.Column="1" Content="OK" Margin="0,0,31,0" Background="AliceBlue"/>
             </Grid>
         </StackPanel>
