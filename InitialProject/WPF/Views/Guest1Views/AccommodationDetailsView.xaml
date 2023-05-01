@@ -4,7 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:converters="clr-namespace:InitialProject.WPF.Converters"
-      xmlns:local="clr-namespace:InitialProject.View"
+      xmlns:local="clr-namespace:InitialProject.WPF.Views.Guest1Views"
       mc:Ignorable="d"
       d:DesignHeight="696" d:DesignWidth="1024"
       Title="AccommodationDetails">
@@ -51,7 +51,6 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
         <converters:IntToImageConverter x:Key="Int2Images"></converters:IntToImageConverter>
     </Page.Resources>
     <Grid >
@@ -90,13 +89,13 @@
             <Label FontSize="18" Height="35" Width="Auto" Grid.Row="4" HorizontalAlignment="Left"  VerticalAlignment="Center" Margin="84,0,0,0" Content="Capacity:"/>
             <Label FontSize="18" Height="35" Width="Auto" Grid.Row="5" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="84,0,0,0" Content="Min. days for reservation:"/>
             <Label FontSize="18" Height="36" Width="Auto" Grid.Row="6" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="84,0,0,0" Content="Min. days to cancel:"/>
-            <TextBlock Height="35" FontSize="18" Margin="0,0,84,0" Grid.Row="0" Text="{Binding Path=SelectedAccommodation.Location.Country}" HorizontalAlignment="Right"/>
-            <TextBlock Height="35" FontSize="18" Margin="0,0,84,0" Grid.Row="1" Text="{Binding Path=SelectedAccommodation.Location.City}" HorizontalAlignment="Right"/>
-            <TextBlock Height="35" FontSize="18" Margin="0,0,84,0" Grid.Row="2" Text="{Binding Path=SelectedAccommodation.Type}" HorizontalAlignment="Right"/>
-            <TextBlock Height="35" FontSize="18" Margin="0,0,84,0" Grid.Row="3" Text="{Binding Path=SelectedAccommodation.Capacity}" HorizontalAlignment="Right"/>
-            <TextBlock Height="35" FontSize="18" Margin="0,0,84,0" Grid.Row="4" Text="{Binding Path=SelectedAccommodation.MinDaysForReservation}" HorizontalAlignment="Right"/>
-            <TextBlock Height="35" FontSize="18" Margin="0,0,84,0" Grid.Row="5" Text="{Binding Path=SelectedAccommodation.MinDaysToCancel}" HorizontalAlignment="Right"/>
-            <TextBlock Height="35" FontSize="18" Margin="0,0,84,0" Grid.Row="6" Text="{Binding Path=SelectedAccommodation.Name}" HorizontalAlignment="Right"/>
+            <TextBlock Height="35" FontSize="18" Margin="0,0,84,0" Grid.Row="0" Text="{Binding Path=SelectedAccommodation.Name}" HorizontalAlignment="Right"/>
+            <TextBlock Height="35" FontSize="18" Margin="0,0,84,0" Grid.Row="1" Text="{Binding Path=SelectedAccommodation.Location.Country}" HorizontalAlignment="Right"/>
+            <TextBlock Height="35" FontSize="18" Margin="0,0,84,0" Grid.Row="2" Text="{Binding Path=SelectedAccommodation.Location.City}" HorizontalAlignment="Right"/>
+            <TextBlock Height="35" FontSize="18" Margin="0,0,84,0" Grid.Row="3" Text="{Binding Path=SelectedAccommodation.Type}" HorizontalAlignment="Right"/>
+            <TextBlock Height="35" FontSize="18" Margin="0,0,84,0" Grid.Row="4" Text="{Binding Path=SelectedAccommodation.Capacity}" HorizontalAlignment="Right"/>
+            <TextBlock Height="35" FontSize="18" Margin="0,0,84,0" Grid.Row="5" Text="{Binding Path=SelectedAccommodation.MinDaysForReservation}" HorizontalAlignment="Right"/>
+            <TextBlock Height="35" FontSize="18" Margin="0,0,84,0" Grid.Row="6" Text="{Binding Path=SelectedAccommodation.MinDaysToCancel}" HorizontalAlignment="Right"/>
 
             
 

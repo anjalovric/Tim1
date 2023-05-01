@@ -43,6 +43,8 @@
     <None Remove="Resources\Images\cancel1.png" />
     <None Remove="Resources\Images\CG.png" />
     <None Remove="Resources\Images\changedate.png" />
+    <None Remove="Resources\Images\choose.png" />
+    <None Remove="Resources\Images\choose1.png" />
     <None Remove="Resources\Images\clock.png" />
     <None Remove="Resources\Images\congratulations.png" />
     <None Remove="Resources\Images\congratulations2.png" />
@@ -246,6 +248,9 @@
     </Resource>
     <Resource Include="Resources\Images\changedate.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\choose.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\cottage1.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -686,6 +691,12 @@
     <Content Include="Resources\Images\voucher.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Images\choose1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>

@@ -18,7 +18,7 @@
         <Style TargetType="TextBox">
             <Setter Property="Background" Value="#dbc9ab"></Setter>
             <Setter Property="BorderBrush" Value="#22301a"></Setter>
-            <Setter Property="BorderThickness" Value="1"></Setter>
+            <Setter Property="BorderThickness" Value="3"></Setter>
         </Style>
 
         <Style TargetType="Button">
@@ -36,7 +36,8 @@
             </Style.Triggers>
         </Style>
         <Style TargetType="TextBlock">
-            <Setter Property="Background" Value="#dbc9ab"></Setter>
+            <Setter Property="Foreground" Value="#dbc9ab"></Setter>
+            <Setter Property="Background" Value="#22301a"></Setter>
             <Setter Property="HorizontalAlignment" Value="Center"></Setter>
         </Style>
     </Page.Resources>
@@ -133,7 +134,7 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-            <Border BorderBrush="#37492d" Grid.Column="1" Grid.Row="3"  Width="178" Height="140" Margin="14,58,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Visibility="Visible" BorderThickness="3">
+            <Border BorderBrush="#22301a" Grid.Column="1" Grid.Row="3"  Width="178" Height="140" Margin="0,58,65,0" VerticalAlignment="Top" HorizontalAlignment="Right" Visibility="Visible" BorderThickness="3">
                 <Image x:Name="imagePicture" Stretch="Fill" Width="172" Height="134" Grid.Column="1" Grid.Row="3" Source="{Binding ImageSource, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
             </Border>
 
@@ -253,7 +254,7 @@
 
             <Label HorizontalContentAlignment="Left" Grid.Row="4" Grid.Column="0"  VerticalAlignment="Center" FontSize="18" Margin="65,0,0,0" Content="Comments:"/>
 
-            <TextBox x:Name="Comments" Margin="71,10,71,46" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Path=Comments}"/>
+            <TextBox x:Name="Comments" Margin="65,10,65,46" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Path=Comments}"/>
 
 
         </Grid>
@@ -272,11 +273,11 @@
             <Label HorizontalAlignment="Center" Margin="0,42,0,0" Grid.Row="0" Grid.Column="0"  VerticalAlignment="Top" Height="Auto"  FontSize="16" FontWeight="Medium">(optional)</Label>
 
             <Label HorizontalAlignment="Center" Margin="0,20,0,0" Grid.Row="0" Grid.Column="0"  VerticalAlignment="Top" Height="Auto" FontFamily="Baskerville Old Face"  FontSize="24" FontWeight="Bold">SUGGESTIONS FOR RENOVATION</Label>
-            <Label  Margin="20,0,0,0"  Grid.Row="1" Height="Auto" FontSize="18" Grid.Column="0"  VerticalAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Left">Condition of accommodation:</Label>
+            <Label  Margin="20,0,0,0"  Grid.Row="1" Height="Auto" FontSize="18" Grid.Column="0"  VerticalAlignment="Center" HorizontalContentAlignment="Left" HorizontalAlignment="Left">Condition of accommodation:</Label>
 
-            <TextBox Text="{Binding Path=ConditionsOfAccommodation}" Width="472" Height="150" Margin="10,0,0,0"  Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <TextBox Text="{Binding Path=ConditionsOfAccommodation}" Width="466" Height="150" Margin="0,0,0,0"  Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Top"/>
 
-            <Label  Margin="20,0,0,0"  Grid.Row="4" Height="Auto" FontSize="18" Grid.Column="0"  VerticalAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Left">Level of urgency:</Label>
+            <Label  Margin="20,0,0,0"  Grid.Row="4" Height="Auto" FontSize="18" Grid.Column="0"  VerticalAlignment="Center" HorizontalContentAlignment="Left" HorizontalAlignment="Left">Level of urgency:</Label>
 
 
             <Button Grid.Column="0" Grid.Row="4" Width="94" Height="35" IsEnabled="{Binding Path=IsResetEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="16" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Margin="0,0,20,0" Command="{Binding ResetComboBoxCommand}">
@@ -298,7 +299,7 @@
                     <TextBlock Background="#8c9d75" Text="RESET" Grid.Column="0" VerticalAlignment="Center" FontSize="16"  Foreground="#22301a" Margin="10,0,0,0" FontWeight="Bold" HorizontalAlignment="Left" Width="50"/>
                 </Grid>
             </Button>
-            <ComboBox Height="50" FontSize="16" VerticalContentAlignment="Center" FontWeight="DemiBold" Grid.Row="5" SelectedValuePath="Content" Grid.Column="0" VerticalAlignment="Top" Margin="20,0,20,0" SelectedValue="{Binding LevelOfUrgency}" SelectedIndex="{Binding LevelOfUrgencyIndex, Mode=TwoWay}" DisplayMemberPath="">
+            <ComboBox Height="50" FontSize="16" VerticalContentAlignment="Center" Width="466" FontWeight="DemiBold" Grid.Row="5" HorizontalAlignment="Center" SelectedValuePath="Content" Grid.Column="0" VerticalAlignment="Top" Margin="20,0,20,0" SelectedValue="{Binding LevelOfUrgency}" SelectedIndex="{Binding LevelOfUrgencyIndex, Mode=TwoWay}" DisplayMemberPath="">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">
                         <i:InvokeCommandAction Command="{Binding UrgencySelectionChangedCommand}"/>
@@ -347,8 +348,9 @@
                 <ComboBoxItem>Level 3 - a few things that were really annoying should be renovated</ComboBoxItem>
                 <ComboBoxItem>Level 4 - there are a lot of bad things and renovation is really necessary</ComboBoxItem>
                 <ComboBoxItem>Level 5 - the accommodation is in a very bad condition and is not worth renting at all if not is renovating</ComboBoxItem>
-
             </ComboBox>
+            <Border BorderBrush="#22301a" BorderThickness="3" Width="466" Height="50" Grid.Row="5" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,0,0,0"></Border>
+
 
 
 

@@ -69,10 +69,20 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Arrival date" Width="2*" Binding="{Binding Arrival, Mode=OneWay}"/>
                     <DataGridTextColumn Header="Departure date" Width="2*" Binding="{Binding Departure, Mode=OneWay}"/>
-                    <DataGridTemplateColumn x:Name="SelectDate" Header="Choose date" Width="1*">
+                    <DataGridTemplateColumn x:Name="SelectDate" Header="Choose date" Width="100">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Name="chooseDateButton" Content="CHOOSE" Background="#c99585" TextElement.FontWeight="Medium" Command="{Binding DataContext.ChooseDateCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" FontSize="16"/>
+                                <Button Name="chooseDateButton" Background="#c99585" TextElement.FontWeight="Medium" Command="{Binding DataContext.ChooseDateCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" FontSize="16">
+                                    <Grid Background="#c99585" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" >
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Image Source="/Resources/Images/choose.png" VerticalAlignment="Center" HorizontalAlignment="Right"  Margin="0,0,15,0" Width="Auto" Height="22" Grid.Column="1" RenderTransformOrigin="0.5,0.5">
+                                        </Image>
+                                        <TextBlock Text="Choose" Grid.Column="0" VerticalAlignment="Center" FontSize="16"  Foreground="#22301a" Margin="15,0,0,0" FontWeight="Bold" HorizontalAlignment="Left" Width="55"/>
+                                    </Grid>
+                                </Button>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>

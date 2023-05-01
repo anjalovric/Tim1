@@ -205,10 +205,19 @@
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
-                    <DataGridTemplateColumn x:Name="Review" Header="Review details" Width="2.5*">
+                    <DataGridTemplateColumn x:Name="Review" Header="Review details" Width="120">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Name="ReviewButton" FontSize="16" FontWeight="DemiBold"  Background="#c99585" Content="Details" Command="{Binding DataContext.ShowReviewDetailsCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
+                                <Button Name="ReviewButton" FontSize="16" FontWeight="DemiBold"  Background="#c99585" Command="{Binding DataContext.ShowReviewDetailsCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}">
+                                    <Grid Background="#c99585" Width="120" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" >
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Image Source="/Resources/Images/info.png" HorizontalAlignment="Right" Margin="0,0,15,0" Width="Auto" Height="22" Grid.Column="1"/>
+                                        <TextBlock Background="#c99585" Text="Details" Grid.Column="0" VerticalAlignment="Center" FontSize="16" Margin="15,0,0,0"  Foreground="#22301a" FontWeight="Bold" HorizontalAlignment="Left" Width="60"/>
+                                    </Grid>
+                                </Button>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
