@@ -4,9 +4,10 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:InitialProject.WPF.Views.GuideViews"
+      xmlns:ns="clr-namespace:InitialProject"
       mc:Ignorable="d" 
       d:DesignHeight="707" d:DesignWidth="1100"
-      Title="FinishedTourDetails" >
+      Title="{ns:Loc FinishedTourDetails}" >
     <Page.Resources>
         <DataTemplate x:Key="checkPoints">
             <Border Style="{DynamicResource Cards}">
@@ -18,18 +19,23 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="20"/>
                         <RowDefinition Height="20"/>
+                        <RowDefinition Height="20"/>
                         <RowDefinition Height="45"/>
 
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Row="0" Grid.Column="0" >
-                <Run Text="Checkpoint: " Style="{DynamicResource Run}"/>
+                <Run Text="{ns:Loc Checkpoints}" Style="{DynamicResource Run}"/>
+
                 <Run Text="{Binding Path=CheckPoint.Name}" Style="{DynamicResource Run}" />
                     </TextBlock>
-                    <ListBox Grid.Column="0" Grid.Row="2" Style="{DynamicResource ListBox}" ItemsSource="{Binding Path= guest2s}">
+                    <TextBlock Grid.Column="0" Grid.Row="2">
+                         <Run Text="{ns:Loc GuestsReservations}" Style="{DynamicResource Run}"/>
+                    </TextBlock>
+                    <ListBox Grid.Column="0" Grid.Row="3" Style="{DynamicResource ListBox}" ItemsSource="{Binding Path= guest2s}">
 
                     </ListBox>
                     <TextBlock Grid.Row="1" Grid.Column="0" >
-                <Run Text="Number of guests: " Style="{DynamicResource Run}" />
+                <Run Text="{ns:Loc NumberOfGuests}" Style="{DynamicResource Run}" />
                 <Run Text="{Binding Path=countGuests}" />
                     </TextBlock>
                 </Grid>
@@ -80,9 +86,9 @@
                             <RowDefinition/>
 
                         </Grid.RowDefinitions>
-                        <Label Content="Voucher statistics" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Style="{DynamicResource StatisticLabel}"/>
-                        <Label Content="With vouchers"  Grid.Column="1" Grid.Row="2" Style="{DynamicResource Label}"/>
-                        <Label Content="Without vouchers"  Style="{DynamicResource Label}" Grid.Column="1" Grid.Row="4"/>
+                        <Label Content="{ns:Loc VoucherStatistics}" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Style="{DynamicResource StatisticLabel}"/>
+                        <Label Content="{ns:Loc WithVouchers}"  Grid.Column="1" Grid.Row="2" Style="{DynamicResource Label}"/>
+                        <Label Content="{ns:Loc WithoutVouchers}"  Style="{DynamicResource Label}" Grid.Column="1" Grid.Row="4"/>
 
                         <Label Content="{Binding With}"  Grid.Column="1" Grid.Row="2" HorizontalAlignment="Right" Width="170" HorizontalContentAlignment="Left" Style="{DynamicResource Label}"/>
                         <Label Content="{Binding Without}" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Right" Width="170" HorizontalContentAlignment="Left" Style="{DynamicResource Label}"/>
@@ -106,10 +112,10 @@
                             <RowDefinition/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
-                        <Label Content="Age statitsics" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Style="{DynamicResource StatisticLabel}"/>
-                        <Label  Content="Under 18" Grid.Column="1" Grid.Row="2" Style="{DynamicResource Label}"/>
-                        <Label  Content="Between 18 and 50" Grid.Row="3" Style="{DynamicResource Label}" Grid.ColumnSpan="3" Margin="40,19,40,10" Grid.RowSpan="2" />
-                        <Label  Content="Over 50" Grid.Row="5" Style="{DynamicResource Label}" Grid.ColumnSpan="3" Margin="41,13,41,0" Grid.RowSpan="2"/>
+                        <Label Content="{ns:Loc AgeStatistics}" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Style="{DynamicResource StatisticLabel}"/>
+                        <Label  Content="{ns:Loc Under18}" Grid.Column="1" Grid.Row="2" Style="{DynamicResource Label}"/>
+                        <Label  Content="{ns:Loc Between18and}" Grid.Row="3" Style="{DynamicResource Label}" Grid.ColumnSpan="3" Margin="40,19,40,10" Grid.RowSpan="2" />
+                        <Label  Content="{ns:Loc Over50}" Grid.Row="5" Style="{DynamicResource Label}" Grid.ColumnSpan="3" Margin="41,13,41,0" Grid.RowSpan="2"/>
 
 
                         <Label  Content="{Binding Under}" Grid.Column="1" Grid.Row="2" HorizontalContentAlignment="left" HorizontalAlignment="Right" Style="{DynamicResource Label}" Width="170"/>
@@ -119,7 +125,7 @@
                 </Border>
                 <Border Grid.Column="1" Grid.Row="11" Style="{DynamicResource Border}">
                     <Grid Grid.Column="1" Grid.Row="11" Style="{DynamicResource InerInerGrid}">
-                        <Label Content="Total Attendance" Style="{DynamicResource StatisticLabel}" HorizontalAlignment="Left" />
+                        <Label Content="{ns:Loc TotalAttendance}" Style="{DynamicResource StatisticLabel}" HorizontalAlignment="Left" />
                         <Label x:Name="Total" Content="{Binding Attendance}" HorizontalAlignment="Left" Width="250" Style="{DynamicResource StatisticLabel}" Height="44" Margin="161,0,0,0"/>
                     </Grid>
                 </Border>

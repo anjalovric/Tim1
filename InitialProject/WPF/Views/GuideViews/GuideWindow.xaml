@@ -4,34 +4,35 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.WPF.Views.GuideViews"
+        xmlns:ns="clr-namespace:InitialProject"
         mc:Ignorable="d"
-        Title="GuideWindow" Height="750" Width="1100" WindowStartupLocation="CenterScreen">
+        Title="{ns:Loc GuideWindow}" Height="750" Width="1100" WindowStartupLocation="CenterScreen">
     <Grid>
         <DockPanel>
             <Grid DockPanel.Dock="Top" Height="33" Style="{DynamicResource GridMenu}">
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="0" Margin="763,0,0,0" Width="190">
-                    <Label  Content="LIGHT" Style="{DynamicResource Label}" Width="47"/>
-                    <CheckBox  x:Name="themeCheckBox" Style="{DynamicResource CheckBoxStyle1}" IsChecked="{Binding ThemeIsChecked}" Width="57" />
-                    <Label Content="DARK" Style="{DynamicResource Label}" Width="58"/>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="0" Margin="738,0,0,0" Width="215">
+                    <Label  Content="{ns:Loc LIGHT}" Style="{DynamicResource Label}" HorizontalContentAlignment="Right" Width="64"/>
+                    <CheckBox  x:Name="themeCheckBox" Style="{DynamicResource CheckBoxStyle1}" IsChecked="{Binding ThemeIsChecked}" Width="56" />
+                    <Label Content="{ns:Loc DARK}"  Style="{DynamicResource Label}" Width="85"/>
                 </StackPanel>
                 <DockPanel  Width="500" HorizontalAlignment="Left">
                     <Menu DockPanel.Dock="Top" Width="500" Height="40" HorizontalAlignment="Left" Style="{DynamicResource Menu}">
-                        <MenuItem Header="Home" Height="33" Width="100"  Command="{Binding HomeCommand}" >
+                        <MenuItem Header="{ns:Loc Home}"  Height="33" Width="100"  Command="{Binding HomeCommand}" >
 
                         </MenuItem>
-                        <MenuItem Header="Tours" Height="33" Width="100" >
-                            <MenuItem Header="Add" Height="33" Width="150"  Command="{Binding AddCommand}" Style="{DynamicResource MenuItem}">
+                        <MenuItem Header="{ns:Loc Tours}" Height="33" Width="100" >
+                            <MenuItem Header="{ns:Loc Add}" Height="33" Width="150"  Command="{Binding AddCommand}" Style="{DynamicResource MenuItem}">
                                 <MenuItem.Icon>
                                     <Image Source="/Resources/Images/add.png" Stretch="Fill"/>
 
                                 </MenuItem.Icon>
                             </MenuItem>
-                            <MenuItem Header="Cancel" Height="33" Width="150"  Command="{Binding CancelCommand}" Style="{DynamicResource MenuItem}" >
+                            <MenuItem Header="{ns:Loc Cancel}" Height="33" Width="150"  Command="{Binding CancelCommand}" Style="{DynamicResource MenuItem}" >
                                 <MenuItem.Icon>
                                     <Image Source="/Resources/Images/CANC.png" Stretch="Fill"/>
                                 </MenuItem.Icon>
                             </MenuItem>
-                            <MenuItem Header="Activated" Height="33" Width="155" Command="{Binding ActivatedCommand}" Style="{DynamicResource MenuItem}" >
+                            <MenuItem Header="{ns:Loc Activated}" Height="33" Width="155" Command="{Binding ActivatedCommand}" Style="{DynamicResource MenuItem}" >
 
                                 <MenuItem.Icon>
                                     <Image Source="/Resources/Images/continue.png" Stretch="Fill"/>
@@ -39,23 +40,23 @@
 
                             </MenuItem>
                         </MenuItem>
-                        <MenuItem Header="Statistics" Height="33" Width="100"  >
-                            <MenuItem Header="Tours" Height="33" Width="160" Command="{Binding TourStatisticsCommand}" Style="{DynamicResource MenuItem}">
+                        <MenuItem Header="{ns:Loc Statistics}" Height="33" Width="100"  >
+                            <MenuItem Header="{ns:Loc Tours}" Height="33" Width="160" Command="{Binding TourStatisticsCommand}" Style="{DynamicResource MenuItem}">
                                 <MenuItem.Icon>
                                     <Image Source="/Resources/Images/tour.jpg"/>
                                 </MenuItem.Icon>
                             </MenuItem>
-                            <MenuItem Header="Requests" Height="33" Width="160"  Command="{Binding RequestYearlyStatisticsCommand}" Style="{DynamicResource MenuItem}" >
+                            <MenuItem Header="{ns:Loc Requests}" Height="33" Width="160"  Command="{Binding RequestYearlyStatisticsCommand}" Style="{DynamicResource MenuItem}" >
                                 <MenuItem.Icon>
                                     <Image Source="/Resources/Images/RR.png"/>
                                 </MenuItem.Icon>
                             </MenuItem>
                         </MenuItem>
-                        <MenuItem Header="Reviews" Height="33" Width="100"  Command="{Binding ReviewCommand}">
+                        <MenuItem Header="{ns:Loc Reviews}" Height="33" Width="100"  Command="{Binding ReviewCommand}">
 
                         </MenuItem>
-                        <MenuItem Header="Requests" Height="33" Width="100"  >
-                            <MenuItem Header="Regular" Height="33" Width="150" Command="{Binding OrdinaryRequestCommand}" Style="{DynamicResource MenuItem}">
+                        <MenuItem Header="{ns:Loc Requests}" Height="33" Width="100"  >
+                            <MenuItem Header="{ns:Loc Regular}" Height="33" Width="150" Command="{Binding OrdinaryRequestCommand}" Style="{DynamicResource MenuItem}">
                             </MenuItem>
                         </MenuItem>
                     </Menu>
@@ -72,6 +73,7 @@
                     </Menu>
 
                 </DockPanel>
+                <ComboBox Text="{Binding SelectedLanguage}" ItemsSource="{Binding Languages}" SelectedItem="{Binding SelectedLanguage}" HorizontalAlignment="Left" Margin="668,0,0,0" VerticalAlignment="Center" Width="60" Style="{DynamicResource ComboBoxStyle1}"/>
             </Grid>
 
             <Frame x:Name="Main" Margin="0,0,0,0" NavigationUIVisibility="Hidden"/>

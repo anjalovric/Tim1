@@ -4,9 +4,10 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:InitialProject.WPF.Views.GuideViews"
+      xmlns:ns="clr-namespace:InitialProject"
       mc:Ignorable="d" 
       d:DesignHeight="717" d:DesignWidth="1100"
-      Title="RequestStatisticsMonthly">
+      Title="{ns:Loc MonthlyStatistic}">
 
     <Grid Style="{DynamicResource Background }">
         <Grid.RowDefinitions>
@@ -21,7 +22,7 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid Style="{DynamicResource BackgroundHeader}" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3">
-            <Label Style="{DynamicResource Header}" VerticalAlignment="Center" Content="MONTHLY REQUEST STATISTIC"/>
+            <Label Style="{DynamicResource Header}" VerticalAlignment="Center" Content="{ns:Loc MONTHLYREQUESTSSTATISTIC}"/>
             <Image Source="/Resources/Images/LOGO (2).jpg" Margin="0,0,850,0"/>
         </Grid>
 
@@ -48,7 +49,7 @@
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="Month" Width="1*" Binding="{Binding Month}">
+                    <DataGridTextColumn Header="{ns:Loc Month}" Width="1*" Binding="{Binding Month}">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="{x:Type TextBlock}">
                                 <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -57,7 +58,7 @@
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="Number of requests" Width="1*" Binding="{Binding Number}">
+                    <DataGridTextColumn Header="{ns:Loc NumberRequests}" Width="1*" Binding="{Binding Number}">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="{x:Type TextBlock}">
                                 <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -69,9 +70,9 @@
 
                 </DataGrid.Columns>
             </DataGrid>
-            <Label Style="{DynamicResource StatisticLabel}" HorizontalAlignment="Left" Content="Monthly statistic for requests on language:" Width="350" Grid.Column="1" Margin="10,40,0,0" VerticalAlignment="Top"/>
+            <Label Style="{DynamicResource StatisticLabel}" HorizontalAlignment="Left" Content="{ns:Loc MonthlyLanguage}" Width="350" Grid.Column="1" Margin="10,40,0,0" VerticalAlignment="Top"/>
             <TextBox Text="{Binding Language}" Style="{DynamicResource TB1}" Grid.Column="1" HorizontalAlignment="Left" Margin="372,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="125" Height="35"/>
-            <Label Grid.Column="1" Content="in" Style="{DynamicResource StatisticLabel}" HorizontalAlignment="Left" Margin="524,40,0,0" VerticalAlignment="Top" Width="36"/>
+            <Label Grid.Column="1" Content="{ns:Loc in}" Style="{DynamicResource StatisticLabel}" HorizontalAlignment="Left" Margin="524,40,0,0" VerticalAlignment="Top" Width="36"/>
             <TextBox Grid.Column="1" Style="{DynamicResource TB1}" HorizontalAlignment="Left" Margin="578,40,0,0" TextWrapping="Wrap" Text="{Binding Year}" VerticalAlignment="Top" Width="80" Height="36"/>
             <Button Content="⬅" Command="NavigationCommands.BrowseBack" HorizontalAlignment="Left" Style="{DynamicResource Button}" Margin="34,10,0,0" VerticalAlignment="Top" Width="46"/>
 

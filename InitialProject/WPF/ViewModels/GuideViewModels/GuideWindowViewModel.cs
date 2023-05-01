@@ -2,6 +2,7 @@
 using InitialProject.Service;
 using InitialProject.WPF.Views.GuideViews;
 using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -11,6 +12,7 @@ namespace InitialProject.WPF.ViewModels
 {
     public class GuideWindowViewModel:INotifyPropertyChanged
     {
+        public ObservableCollection<string> Languages { get; set; }
         private HomeView homeView;
         private AddTourView addTourView;
         private CancelView cancelView;
@@ -25,6 +27,17 @@ namespace InitialProject.WPF.ViewModels
                 themeIsChecked = value;
                 OnPropertyChanged("ThemeIsChecked");
                 ThemeChanged();
+            }
+        }
+        private string selectedLanguage;
+        public string SelectedLanguage
+        {
+            get { return selectedLanguage; }
+            set
+            {
+                selectedLanguage = value;
+                OnPropertyChanged("selectedLanguage");
+                ComboBox_SelectionChanged();
             }
         }
         public RelayCommand HomeCommand { get; set; }
@@ -46,8 +59,15 @@ namespace InitialProject.WPF.ViewModels
 
             SwitchFirstPage(loggedUser);
             MakeCommands();
+            AddLanguages();
         }
-
+        private void AddLanguages()
+        {
+            Languages = new ObservableCollection<string>();
+            Languages.Add("ENG");
+            Languages.Add("SRB");
+            SelectedLanguage = "ENG";
+        }
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
@@ -144,6 +164,18 @@ namespace InitialProject.WPF.ViewModels
                 app.ChangeTheme(new Uri("Resources/DarkTheme.xaml", UriKind.Relative));
             else
                 app.ChangeTheme(new Uri("Resources/LightTheme.xaml", UriKind.Relative));
+        }
+        private void ComboBox_SelectionChanged()
+        {
+            var app = (App)Application.Current;
+            if (SelectedLanguage.Equals("SRB"))
+            {
+                app.ChangeLanguage("sr-LATN");
+            }
+            else
+            {
+                app.ChangeLanguage("en-US");
+            }
         }
     }
 }

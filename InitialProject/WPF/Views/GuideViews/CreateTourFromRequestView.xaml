@@ -6,9 +6,10 @@
        xmlns:tk="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit.NET5" 
       xmlns:val="clr-namespace:InitialProject.WPF.Validations.GuideValidations"
       xmlns:local="clr-namespace:InitialProject.WPF.Views.GuideViews"
+      xmlns:ns="clr-namespace:InitialProject"
       mc:Ignorable="d" 
       d:DesignHeight="717" d:DesignWidth="1100"
-      Title="CreateTourFromRequestView">
+      Title="{ns:Loc CreateTourFromRequest}">
 
     <Grid Style="{DynamicResource Background}">
         <Grid.RowDefinitions>
@@ -64,13 +65,13 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Label Grid.Row="0" Grid.Column="0" Margin="0,10,0,10"  Style="{DynamicResource  Label}">Name</Label>
-                    <Label Grid.Row="1" Grid.Column="0" Margin="0,10,0,10"  Style="{DynamicResource  Label}">Maximum number of guests</Label>
-                    <Label Grid.Row="2" Grid.Column="0" Margin="0,10,0,10"  Style="{DynamicResource  Label}">Duration of tour in hours</Label>
-                    <Label Grid.Row="4" Grid.Column="0" Margin="0,10,0,10"  Style="{DynamicResource  Label}">City</Label>
-                    <Label Grid.Row="3" Grid.Column="0" Margin="0,12,0,8"  Style="{DynamicResource  Label}">Country</Label>
-                    <Label Grid.Row="6" Grid.Column="0" Margin="0,6,0,14"  Style="{DynamicResource  Label}">Description</Label>
-                    <Label Grid.Row="5" Grid.Column="0" Margin="0,10,0,10"  Style="{DynamicResource  Label}">Language</Label>
+                    <Label Grid.Row="0" Grid.Column="0" Margin="0,10,0,10"  Style="{DynamicResource  Label}" Content="{ns:Loc Name}"/>
+                    <Label Grid.Row="1" Grid.Column="0" Margin="0,10,0,10"  Style="{DynamicResource  Label}" Content="{ns:Loc Capacity}"/>
+                    <Label Grid.Row="2" Grid.Column="0" Margin="0,10,0,10"  Style="{DynamicResource  Label}" Content="{ns:Loc DurationInHours}"/>
+                    <Label Grid.Row="4" Grid.Column="0" Margin="0,10,0,10"  Style="{DynamicResource  Label}" Content="{ns:Loc City}"/>
+                    <Label Grid.Row="3" Grid.Column="0" Margin="0,12,0,8"  Style="{DynamicResource  Label}" Content="{ns:Loc Country}"/>
+                    <Label Grid.Row="6" Grid.Column="0" Margin="0,6,0,14"  Style="{DynamicResource  Label}" Content="{ns:Loc Description}"/>
+                    <Label Grid.Row="5" Grid.Column="0" Margin="0,10,0,10"  Style="{DynamicResource  Label}" Content="{ns:Loc Language}"/>
 
 
                     <TextBox x:Name="TourNameTB" Grid.Row="0" Grid.Column="1"  Margin="0,10,0,10" Style="{DynamicResource tb}">
@@ -179,7 +180,7 @@
                     <!--CHECKPOINTS-->
                     <DataGrid HeadersVisibility="Column" ColumnHeaderStyle="{DynamicResource CenterGridHeaderStyle}" Grid.Row="0" Grid.RowSpan="2" x:Name="PointsGrid"  SelectedItem="{Binding SelectedCheckPoint}" ItemsSource="{Binding Path=TourPoints,UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource  Tables}"  HorizontalAlignment="Center" Margin="0,10,0,0">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Checkpoint Name" Binding="{Binding Name}" Width="1*" >
+                            <DataGridTextColumn Header="{ns:Loc CheckpointName}" Binding="{Binding Name}" Width="1*" >
                                 <DataGridTextColumn.ElementStyle>
                                     <Style TargetType="{x:Type TextBlock}">
                                         <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -190,8 +191,8 @@
                             </DataGridTextColumn>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <Button Grid.Column="2" Grid.Row="1" Height="25" Width="60" Command="{Binding AddCheckPointCommand}" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,31,0,0" Style="{DynamicResource  Button}">ADD</Button>
-                    <Button Grid.Column="2" Grid.Row="1" Height="25" Width="60"  Command="{Binding DeleteCheckPointCommand}" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="112,31,0,0" Style="{DynamicResource  Button}">DELETE</Button>
+                    <Button Grid.Column="2" Grid.Row="1" Height="25" Width="60" Command="{Binding AddCheckPointCommand}" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,31,0,0" Style="{DynamicResource  Button}" Content="{ns:Loc ADDBUTTON}"/>
+                    <Button Grid.Column="2" Grid.Row="1" Height="25" Width="60"  Command="{Binding DeleteCheckPointCommand}" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="112,31,0,0" Style="{DynamicResource  Button}" Content="{ns:Loc DELETE}"/>
                     <TextBox Style="{DynamicResource tb}" Grid.Column="1" Grid.Row="0" x:Name="CheckPointName" Height="47" VerticalAlignment="Top"  Margin="32,34,0,0" Grid.RowSpan="2" Grid.ColumnSpan="2">
                         <TextBox.Text>
                             <Binding Path="NameT" UpdateSourceTrigger="PropertyChanged">
@@ -218,15 +219,15 @@
                             </ControlTemplate>
                         </Validation.ErrorTemplate>
                     </TextBox>
-                    <Label Grid.Column="1" Grid.Row="0" Content="Add checkpoints " Style="{DynamicResource  Label}" VerticalAlignment="Top" Height="30" Margin="25,4,10,0" Grid.ColumnSpan="2" />
+                    <Label Grid.Column="1" Grid.Row="0" Content="{ns:Loc AddCheckpoints}" Style="{DynamicResource  Label}" VerticalAlignment="Top" Height="30" Margin="25,4,10,0" Grid.ColumnSpan="2" />
 
 
                     <!--DATEANDTIME-->
                     <tk:TimePicker Style="{DynamicResource dt}" FontSize="9" x:Name="DT"  Text="{Binding Path=InstanceStartDate,Mode=TwoWay}" Format="LongTime" DataContext="{Binding}" Grid.Column="1" Margin="32,0,-9,46" Grid.Row="5" RenderTransformOrigin="0.502,0.586" Grid.ColumnSpan="2"  />
                     <ListBox x:Name="DateTimeBox" ItemsSource="{Binding Path=Instances}" Grid.Column="0" Grid.Row="2" Grid.RowSpan="4" SelectedItem="{Binding selectedInstance}" Style="{DynamicResource  ListBoxForm}" Grid.ColumnSpan="2" Margin="1,38,35,76"/>
-                    <Button IsEnabled="{Binding AddEnabled}" Grid.Column="2" Grid.Row="5" Command="{Binding AddDateTimeCommand}"   Height="25" Width="60" VerticalAlignment="Top" HorizontalAlignment="Left" Style="{DynamicResource  Button}" Margin="0,49,0,0">ADD</Button>
-                    <Button IsEnabled="{Binding DeleteEnabled}" Grid.Column="2" Grid.Row="5" Height="25" Width="60" Command="{Binding DeleteDateTimeCommand}" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="112,49,0,0" Style="{DynamicResource  Button}">DELETE</Button>
-                    <Label Grid.Column="1" Width="180" Grid.ColumnSpan="2" Content="Add date and time"  HorizontalAlignment="Left"  Grid.Row="2" VerticalAlignment="Top"  Style="{DynamicResource  Label}" Margin="25,15,0,0" Height="35" />
+                    <Button IsEnabled="{Binding AddEnabled}" Grid.Column="2" Grid.Row="5" Command="{Binding AddDateTimeCommand}"   Height="25" Width="60" VerticalAlignment="Top" HorizontalAlignment="Left" Style="{DynamicResource  Button}" Margin="0,49,0,0" Content="{ns:Loc ADDBUTTON}"/>
+                    <Button IsEnabled="{Binding DeleteEnabled}" Grid.Column="2" Grid.Row="5" Height="25" Width="60" Command="{Binding DeleteDateTimeCommand}" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="112,49,0,0" Style="{DynamicResource  Button}" Content="{ns:Loc DELETE}"/>
+                    <Label Grid.Column="1" Width="180" Grid.ColumnSpan="2" Content="{ns:Loc AddDateAndTime}"  HorizontalAlignment="Left"  Grid.Row="2" VerticalAlignment="Top"  Style="{DynamicResource  Label}" Margin="25,15,0,0" Height="35" />
                     <TextBox x:Name="DatesList" HorizontalAlignment="Left" Margin="0,72,0,0" Grid.Row="4" TextWrapping="Wrap" Height="0" Background="Transparent" Foreground="Transparent" BorderThickness="0" VerticalAlignment="Top" Width="120">
                         <TextBox.Text>
                             <Binding Path="DatesCount" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
@@ -262,7 +263,7 @@
 
                 <!--TOUR_CONFIRM_CANCEL-->
 
-                <Button Grid.Column="3" Grid.Row="4" Width="160" x:Name="AddNewTour"  Command="{Binding ConfirmCommand}" HorizontalAlignment="Left" Margin="85,37,0,21" Content="CONFIRM" >
+                <Button Grid.Column="3" Grid.Row="4" Width="160" x:Name="AddNewTour"  Command="{Binding ConfirmCommand}" HorizontalAlignment="Left" Margin="85,37,0,21" Content="{ns:Loc CONFIRM}" >
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
                             <Setter Property="IsEnabled" Value="True" />
@@ -315,7 +316,7 @@
                     </Button.Style>
                 </Button>
 
-                <Button Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="4" Width="160" x:Name="Cancel" Command="NavigationCommands.BrowseBack" HorizontalAlignment="Left" Margin="281,37,0,21"  Content="CANCEL">
+                <Button Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="4" Width="160" x:Name="Cancel" Command="NavigationCommands.BrowseBack" HorizontalAlignment="Left" Margin="281,37,0,21"  Content="{ns:Loc CANCELBUTTON}">
                     <Button.Style >
                         <Style TargetType="Button">
                             <Setter Property="Background" Value="LightBlue"/>
@@ -414,9 +415,9 @@
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
-                    <Label Content="Images of tour " Style="{DynamicResource Label}" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Left" VerticalAlignment="Top" Height="36" Width="138" RenderTransformOrigin="0.505,0.781" Grid.RowSpan="2"/>
-                    <Button Command="{Binding AddImageCommand}" Height="24" Width="60"  Grid.Column="2" Grid.ColumnSpan="3" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="25,3,0,0" Grid.RowSpan="2" Style="{DynamicResource  Button}" Grid.Row="1" >ADD</Button>
-                    <Button Content="DELETE" HorizontalAlignment="Left" Grid.Column="4" Grid.ColumnSpan="2" VerticalAlignment="Top"  Command="{Binding RemoveImageCommand}" Margin="104,3,0,0" Width="60" Height="24" Grid.RowSpan="2" Style="{DynamicResource  Button}" Grid.Row="1"/>
+                    <Label Content="{ns:Loc ImagesOfTour}" Style="{DynamicResource Label}" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Left" VerticalAlignment="Top" Height="36" Width="138" RenderTransformOrigin="0.505,0.781" Grid.RowSpan="2"/>
+                    <Button Command="{Binding AddImageCommand}" Height="24" Width="60"  Grid.Column="2" Grid.ColumnSpan="3" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="25,3,0,0" Grid.RowSpan="2" Style="{DynamicResource  Button}" Grid.Row="1" Content="{ns:Loc ADDBUTTON}"/>
+                    <Button Content="{ns:Loc DELETE}" HorizontalAlignment="Left" Grid.Column="4" Grid.ColumnSpan="2" VerticalAlignment="Top"  Command="{Binding RemoveImageCommand}" Margin="104,3,0,0" Width="60" Height="24" Grid.RowSpan="2" Style="{DynamicResource  Button}" Grid.Row="1"/>
                 </Grid>
 
 
@@ -466,12 +467,11 @@
         </Border>
         <!--TOAST_MESSAGE-->
         <StackPanel x:Name="Toast" HorizontalAlignment="Left"  Margin="700,458,0,0" VerticalAlignment="Top" Visibility="{Binding Toast}" Grid.Column="1" Grid.Row="1" Style="{DynamicResource  Toast}" Grid.ColumnSpan="2" Grid.RowSpan="2">
-            <Label Style="{DynamicResource  LabelToast}">Tour is succesfully created!</Label>
+            <Label Style="{DynamicResource  LabelToast}" Content="{ns:Loc TOURCREATED}"/>
             <Button Style="{DynamicResource  ButtonToast}" Command="NavigationCommands.BrowseBack" Content="OK"/>
         </StackPanel>
         <StackPanel x:Name="ToastCant" HorizontalAlignment="Left"  Margin="700,458,0,0" VerticalAlignment="Top" Visibility="{Binding ToastAvailability}" Grid.Column="1" Grid.Row="1" Style="{DynamicResource  Toast}" Grid.ColumnSpan="2" Grid.RowSpan="2">
-            <Label Style="{DynamicResource  LabelToast}">Guide already has tour at this time!
-            </Label>
+            <Label Style="{DynamicResource  LabelToast}" Content="{ns:Loc GUIDEALREADYHASTOUR}"/>
             <Button Style="{DynamicResource  ButtonToast}" Command="{Binding CloceToastAvailability}" Content="OK"/>
         </StackPanel>
     </Grid>

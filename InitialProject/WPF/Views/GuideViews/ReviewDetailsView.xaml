@@ -17,13 +17,14 @@
             <ColumnDefinition Width="0.4*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="9*"/>
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height="118*"/>
+            <RowDefinition Height="401*"/>
+            <RowDefinition Height="129*"/>
+            <RowDefinition Height="59*"/>
         </Grid.RowDefinitions>
 
         <!--LEFT GRID-->
-        <Grid  Grid.Column="1" Grid.Row="1" Style="{DynamicResource InnerGrid}">
+        <Grid Grid.Row="1" Style="{DynamicResource InnerGrid}" Grid.ColumnSpan="3" Margin="33,0,33,0" Grid.RowSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="1.5*"></RowDefinition>
@@ -45,7 +46,7 @@
             <Label Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Width="150" Style="{DynamicResource Label}">Language</Label>
             <Label Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Width="150" Style="{DynamicResource Label}">Start Date</Label>
 
-            <Label Grid.Row="5"  Style="{DynamicResource Label}" HorizontalAlignment="Center" Width="186" Grid.ColumnSpan="2" Margin="0,14,218,73">Guest was on points:</Label>
+            <Label Grid.Row="5"  Style="{DynamicResource Label}" HorizontalAlignment="Center" Width="175" Grid.ColumnSpan="2" Margin="0,14,218,73">Guest was on points:</Label>
 
             <Label x:Name="Name" Grid.Row="1" Grid.Column="1"  Style="{DynamicResource Labels}" Content="{Binding Name}"/>
             <Label x:Name="Location" Grid.Row="2" Grid.Column="1" Style="{DynamicResource Labels}" Width="215" Content="{Binding Location}"/>
@@ -56,7 +57,7 @@
         </Grid>
 
         <!--RIGHT GRID-->
-        <Grid Style="{DynamicResource InnerGrid}" Grid.Column="3" Grid.Row="1">
+        <Grid Style="{DynamicResource InnerGrid}" Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="3" Margin="33,0,33,0" Grid.RowSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="1.5*"></RowDefinition>
@@ -74,14 +75,14 @@
             <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource Label}" Width="150">Guide's knowledge</Label>
             <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource Label}" Width="150">Knoledge of language</Label>
             <Label Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource Label}"  Width="150">Interestigness of tour</Label>
-            <Label Grid.Row="4" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource Label}" Width="150">Comment</Label>
-            <Label Grid.Row="5" Grid.Column="0" Width="210" Height="210" Style="{DynamicResource LabelComent}" VerticalAlignment="Top"/>
+            <Label Grid.Row="4" Grid.Column="0" Width="70" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource Label}">Comment</Label>
+            <Label Grid.Row="5" Grid.Column="0" Width="210" Height="200" Style="{DynamicResource LabelComent}" VerticalAlignment="Top"/>
 
 
             <Label x:Name="Guide" Grid.Row="1" Grid.Column="1" Style="{DynamicResource Labels}" Content="{Binding Guide}"/>
             <Label x:Name="LangugaeKnowledge" Grid.Row="2" Grid.Column="1" Style="{DynamicResource Labels}" Content="{Binding LanguageKnowledge}"/>
             <Label x:Name="Interestigness" Grid.Row="3" Grid.Column="1" Style="{DynamicResource Labels}" Content="{Binding Interestigness}"/>
-            <Label x:Name="Images" Grid.Row="4" Content="Images" Grid.Column="1" Style="{DynamicResource Label}" VerticalAlignment="Center" Width="150"/>
+            <Label x:Name="Images" Grid.Row="4" Content="Images" Grid.Column="1" Style="{DynamicResource Label}" VerticalAlignment="Center" Width="70"/>
             <Label Content="{Binding Comment}" Grid.Column="0" Grid.Row="5" Width="210" Style="{DynamicResource LabelComentStatistic}" ></Label>
             <Grid Grid.Column="1" Grid.Row="5">
                 <Grid.ColumnDefinitions>
@@ -126,20 +127,18 @@
                 </Button>
             </Grid>
 
-            <Border Style="{DynamicResource Border}" Grid.RowSpan="6" Grid.ColumnSpan="2" >
-
-            </Border>
+            <Border Style="{DynamicResource Border}" Grid.RowSpan="6" Grid.ColumnSpan="2" />
 
         </Grid>
-        <Border  Grid.Column="1" Grid.Row="1"  Style="{DynamicResource Border}"/>
+        <Border Grid.Row="1"  Style="{DynamicResource Border}" Grid.ColumnSpan="3" Margin="33,0,33,0" Grid.RowSpan="2"/>
 
-        <Button Content="CHANGE VALIDITY" Height="35" Style="{DynamicResource Button}" HorizontalAlignment="Right" Grid.Column="3" Grid.Row="2" VerticalAlignment="Center" Width="195" Command="{Binding ValidCommand}"/>
-        <StackPanel x:Name="Toast" Margin="146,439,0,0"  Visibility="{Binding ToastVisibility}" Grid.Column="3" Grid.ColumnSpan="2" Grid.RowSpan="2" Grid.Row="1" Style="{DynamicResource Toast}" >
+        <Button Content="CHANGE VALIDITY" Height="35" Style="{DynamicResource Button}" HorizontalAlignment="Left" Grid.Column="3" Grid.Row="3" VerticalAlignment="Center" Width="195" Command="{Binding ValidCommand}" Grid.ColumnSpan="2" Margin="268,0,0,0"/>
+        <StackPanel x:Name="Toast" Margin="146,38,0,0"  Visibility="{Binding ToastVisibility}" Grid.Column="3" Grid.ColumnSpan="2" Grid.RowSpan="2" Grid.Row="2" Style="{DynamicResource Toast}" >
             <Label Content="Validity is changed!" Width="186" Height="46" Style="{StaticResource LabelToast}" FontWeight="Heavy" HorizontalAlignment="Center"/>
             <Button Command="NavigationCommands.BrowseBack" Style="{DynamicResource ButtonToast}">OK</Button>
         </StackPanel>
 
-        <Grid Style="{DynamicResource BackgroundHeader}" Grid.ColumnSpan="5" Margin="0,0,0,530" Grid.RowSpan="2">
+        <Grid Style="{DynamicResource BackgroundHeader}" Grid.ColumnSpan="5" Margin="0,0,0,401" Grid.RowSpan="2">
             <Label Content="{Binding Guest}" Style="{DynamicResource Header}"  Width="394" Margin="0,29,0,10"/>
             <Image Source="/Resources/Images/LOGO (2).jpg" Margin="0,0,804,0"/>
         </Grid>
