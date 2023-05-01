@@ -134,7 +134,7 @@
                 </Button.Template>
             </Button>
             <Border BorderBrush="#37492d" Grid.Column="1" Grid.Row="3"  Width="178" Height="140" Margin="14,58,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Visibility="Visible" BorderThickness="3">
-                <Image x:Name="imagePicture" Width="172" Height="134" Grid.Column="1" Grid.Row="3" Source="{Binding ImageSource, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <Image x:Name="imagePicture" Stretch="Fill" Width="172" Height="134" Grid.Column="1" Grid.Row="3" Source="{Binding ImageSource, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
             </Border>
 
             <Button Command="{Binding NextPhotoCommand}" IsEnabled="{Binding Path=IsNextEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="50" Margin="0,20,18,0" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1" Grid.Row="3">
@@ -194,7 +194,7 @@
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter TargetName="ArrowRectangle" Property="Stroke" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
                                 <Setter TargetName="ArrowPolygon" Property="Stroke" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
-
+                                <Setter Property="Cursor" Value="Hand"/>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
                                 <Setter TargetName="ArrowRectangle" Property="Fill" Value="#22301a"/>
@@ -231,7 +231,7 @@
                                         <Trigger Property="IsMouseOver" Value="True">
                                             <Setter TargetName="Iks1" Property="Stroke" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
                                             <Setter TargetName="Iks2" Property="Stroke" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
-
+                                            <Setter Property="Cursor" Value="Hand"></Setter>
                                         </Trigger>
                                         <Trigger Property="IsPressed" Value="True">
                                             <Setter TargetName="Iks1" Property="Stroke" Value="#004661"/>
@@ -260,7 +260,7 @@
 
         <Grid Grid.Column="1" Grid.Row="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="1.5*"></RowDefinition>
+                <RowDefinition Height="2*"></RowDefinition>
                 <RowDefinition Height="1*"></RowDefinition>
                 <RowDefinition Height="3.5*"></RowDefinition>
                 <RowDefinition Height="0.7*"></RowDefinition>

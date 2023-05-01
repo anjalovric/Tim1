@@ -46,6 +46,7 @@ namespace InitialProject.Service
                     CompletedReservations.Add(reservation);
                 }
             }
+            CompletedReservations.Reverse();
             return CompletedReservations;
         }
         public List<AccommodationReservation> GetNotCompletedReservations(Guest1 guest1)
@@ -58,6 +59,7 @@ namespace InitialProject.Service
                     NotCompletedReservations.Add(reservation);
                 }
             }
+            NotCompletedReservations.Reverse();
             return NotCompletedReservations;
         }
        
