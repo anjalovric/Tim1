@@ -5,7 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:local="clr-namespace:InitialProject.View"
-        xmlns:val="clr-namespace:InitialProject.WPF.Validations.Guest1Validations"
         mc:Ignorable="d"
         Title="Home"
       d:DesignHeight="696" d:DesignWidth="1024">
