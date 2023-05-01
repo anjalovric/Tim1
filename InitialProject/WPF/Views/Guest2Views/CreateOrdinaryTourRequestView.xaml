@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:val="clr-namespace:InitialProject.WPF.Validations.Guest2Validations" 
         xmlns:local="clr-namespace:InitialProject.WPF.Views.Guest2Views"
         xmlns:tk="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit.NET5" 
         mc:Ignorable="d"
@@ -77,22 +78,247 @@
         <Label Content="Capacity" Grid.Row="7" Grid.Column="0" Margin="40,25,0,78" Grid.RowSpan="2" Style="{StaticResource LabelStyle}"/>
         <Label Content="Start Date" Grid.Row="8" Grid.Column="0" Margin="40,25,0,78" Grid.RowSpan="2" Style="{StaticResource LabelStyle}"/>
         <Label Content="End Date" Grid.Row="9" Grid.Column="0" Margin="40,25,0,78" Grid.RowSpan="2" Style="{StaticResource LabelStyle}"/>
-        <TextBox x:Name="Name" Grid.Column="1" Grid.Row="2" Margin="20,25,60,10" BorderBrush="White" BorderThickness="3,3,3,3"/>
-        <ComboBox x:Name="cityInput" BorderBrush="White" BorderThickness="3,3,3,3" ItemsSource="{Binding CitiesByCountry}" SelectedItem="{Binding Location.City}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" HorizontalAlignment="Left" Margin="20,25,0,0" VerticalAlignment="Top" Width="425" Height="37" Grid.Column="1" Grid.Row="4"/>
-        <ComboBox x:Name="Language" Grid.Column="1" ItemsSource="{Binding Languages}" SelectedItem="{Binding Path=SelectedLanguage}"  IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" Grid.Row="5" Margin="20,25,60,10" BorderBrush="#FF3C3D63" BorderThickness="3,3,3,3"/>
-        <TextBox x:Name="Description" Grid.Column="1" Grid.Row="6" Margin="20,25,60,10" BorderBrush="White" BorderThickness="3,3,3,3"/>
+        <TextBox x:Name="NameT" Grid.Column="1" Grid.Row="2" Margin="20,25,60,10" BorderBrush="White" BorderThickness="3,3,3,3">
+            <TextBox.Text>
+                <Binding Path="Name" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
+                    <Binding.ValidationRules>
+                        <val:StringTourNameValidationRule ValidatesOnTargetUpdated="True" ValidationStep="RawProposedValue"></val:StringTourNameValidationRule>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+            <Validation.ErrorTemplate>
+                <ControlTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                    </Grid>
+                </ControlTemplate>
+            </Validation.ErrorTemplate>
+        </TextBox>
+        <ComboBox x:Name="CityT" BorderBrush="White" BorderThickness="3,3,3,3" ItemsSource="{Binding CitiesByCountry}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" HorizontalAlignment="Left" Margin="20,25,0,0" VerticalAlignment="Top" Width="425" Height="37" Grid.Column="1" Grid.Row="4" IsEnabled="{Binding IsComboBoxCityEnabled}">
+            <ComboBox.SelectedItem>
+                <Binding Path="City" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
+                    <Binding.ValidationRules>
+                        <val:DescriptionStringValidation ValidatesOnTargetUpdated="True"  ValidationStep="RawProposedValue"></val:DescriptionStringValidation>
+                    </Binding.ValidationRules>
+                </Binding>
+            </ComboBox.SelectedItem>
+            <Validation.ErrorTemplate>
+                <ControlTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                    </Grid>
+                </ControlTemplate>
+            </Validation.ErrorTemplate>
+        </ComboBox>
+        <ComboBox x:Name="LanguageT" Grid.Column="1" ItemsSource="{Binding Languages}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" Grid.Row="5" Margin="20,25,60,10" BorderBrush="#FF3C3D63" BorderThickness="3,3,3,3">
+            <ComboBox.SelectedItem>
+                <Binding Path="SelectedLanguage" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
+                    <Binding.ValidationRules>
+                        <val:DescriptionStringValidation ValidatesOnTargetUpdated="True"  ValidationStep="RawProposedValue"></val:DescriptionStringValidation>
+                    </Binding.ValidationRules>
+                </Binding>
+            </ComboBox.SelectedItem>
+            <Validation.ErrorTemplate>
+                <ControlTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                    </Grid>
+                </ControlTemplate>
+            </Validation.ErrorTemplate>
+        </ComboBox>
+        <TextBox x:Name="DescriptionT" Grid.Column="1" Grid.Row="6" Margin="20,25,60,10" BorderBrush="White" BorderThickness="3,3,3,3">
+            <TextBox.Text>
+                <Binding Path="Description" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <val:DescriptionStringValidation ValidatesOnTargetUpdated="True" ValidationStep="RawProposedValue"></val:DescriptionStringValidation>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+            <Validation.ErrorTemplate>
+                <ControlTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                    </Grid>
+                </ControlTemplate>
+            </Validation.ErrorTemplate>
+        </TextBox>
         <Border Grid.Column="1" Grid.Row="7" Margin="68,20,105,20" BorderBrush="White" BorderThickness="3,3,3,3"/>
 
 
         <TextBlock x:Name="Capacity" Grid.Column="1" Grid.Row="7" Margin="71,23,108,23" Text="1" TextAlignment="Center" Background="White"/>
         <Button Grid.Column="1" Grid.Row="7" Margin="20,20,452,20" Content="-" Command="{Binding DecrementCommand}" BorderBrush="White" BorderThickness="3,3,3,3"/>
-        <DatePicker FontSize="9" x:Name="Start" Grid.Column="1" DisplayDateStart="{Binding StartDate}" SelectedDate="{Binding StartDate}" Margin="20,10,60,25" Grid.Row="8" BorderBrush="White" BorderThickness="3,3,3,3"/>
-        <DatePicker FontSize="9" x:Name="End" Grid.Column="1" DisplayDateStart="{Binding StartDate}" SelectedDate="{Binding EndDate}" Margin="20,10,60,25" Grid.Row="9" BorderBrush="White" BorderThickness="3,3,3,3"/>
+        <DatePicker FontSize="9" x:Name="Start" Grid.Column="1" DisplayDateStart="{Binding Path=StartDate, UpdateSourceTrigger=PropertyChanged}" DisplayDate="{Binding Path=NowDate}" Margin="20,10,60,25" Grid.Row="8" BorderBrush="White" BorderThickness="3,3,3,3">
+            <DatePicker.SelectedDate>
+                <Binding Path="StartDate" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True" NotifyOnValidationError="True">
+                    <Binding.ValidationRules>
+                        <val:StartDateValidation ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </DatePicker.SelectedDate>
+
+            <Validation.ErrorTemplate>
+                <ControlTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <AdornedElementPlaceholder  Grid.Column="0" Grid.Row="0"/>
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                    </Grid>
+                </ControlTemplate>
+            </Validation.ErrorTemplate>
+        </DatePicker>
+
+        <DatePicker FontSize="9" x:Name="End" Grid.Column="1" DisplayDateStart="{Binding ElementName=Start, Path=SelectedDate, UpdateSourceTrigger=PropertyChanged}" Margin="20,10,60,25" Grid.Row="9" BorderBrush="White" BorderThickness="3,3,3,3">
+            <DatePicker.SelectedDate>
+                <Binding Path="EndDate" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True" NotifyOnValidationError="True">
+                    <Binding.ValidationRules>
+                        <val:EndDateValidation ValidationStep="ConvertedProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </DatePicker.SelectedDate>
+
+            <Validation.ErrorTemplate>
+                <ControlTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <AdornedElementPlaceholder  Grid.Column="0" Grid.Row="0"/>
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                    </Grid>
+                </ControlTemplate>
+            </Validation.ErrorTemplate>
+        </DatePicker>
         <Button x:Name="increment" Grid.Column="1" Grid.Row="7" Margin="412,20,60,20" Content="+"  Command="{Binding IncrementCommand}" BorderBrush="White" BorderThickness="3,3,3,3"/>
-        <Button Grid.Column="1" Content="  Confirm" Margin="238,0,171,0" Grid.Row="10" Command="{Binding ConfirmCommand}" Style="{StaticResource button}"/>
+        <Button Grid.Column="1" Content="   Confirm" Margin="238,0,171,0" Grid.Row="10" Command="{Binding ConfirmCommand}">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="IsEnabled" Value="True"/>
+                    <Setter Property="FontSize" Value="14"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="Height" Value="54"/>
+                    <Setter Property="Width" Value="95"/>
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                    <Setter Property="VerticalAlignment" Value="Top"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border CornerRadius="25" BorderThickness="1" BorderBrush="White" Background="White" Padding="15" Margin="0,4,0,0">
+                                    <ContentPresenter HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="LightGray"/>
+                                        <Setter Property="Foreground" Value="DimGray"/>
+                                    </Trigger>
+                                    <Trigger Property="IsEnabled" Value="False">
+                                        <Setter Property="Background" Value="AliceBlue"></Setter>
+                                        <Setter Property="BorderBrush" Value="LightGray" ></Setter>
+                                        <Setter Property="Foreground" Value="LightGray"></Setter>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                            
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="IsEnabled" Value="false" />
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding ElementName=NameT, Path=(Validation.HasError)}" Value="false" />
+                                <Condition Binding="{Binding ElementName=CountryT, Path=(Validation.HasError)}" Value="false" />
+                                <Condition Binding="{Binding ElementName=CityT, Path=(Validation.HasError)}" Value="false" />
+                                <Condition Binding="{Binding ElementName=LanguageT, Path=(Validation.HasError)}" Value="false" />
+                                <Condition Binding="{Binding ElementName=DescriptionT, Path=(Validation.HasError)}" Value="false" />
+                                <Condition Binding="{Binding ElementName=Start, Path=(Validation.HasError)}" Value="false"/>
+                                <Condition Binding="{Binding ElementName=End, Path=(Validation.HasError)}" Value="false"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="IsEnabled" Value="true" />
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
         <Button Grid.Column="1" Content=" Cancel" Margin="342,0,60,0" Grid.Row="10" Command="{Binding CancelCommand}" Style="{StaticResource button}"/>
         <Label Content="City" Grid.Row="4" Grid.Column="0" Margin="40,25,0,0" RenderTransformOrigin="0.5,0.5" Style="{StaticResource LabelStyle}"/>
-        <ComboBox x:Name="countryInput" ItemsSource="{Binding Countries}" BorderBrush="#FF3C3D63" BorderThickness="3,3,3,3" SelectedItem="{Binding Location.Country}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" HorizontalAlignment="Left" Margin="20,25,0,0" VerticalAlignment="Center" Width="425" SelectionChanged="CountryInput_SelectionChanged" Height="37" Grid.Column="1" Grid.Row="3"/>
+        <ComboBox x:Name="CountryT" ItemsSource="{Binding Countries}" BorderBrush="#FF3C3D63" BorderThickness="3,3,3,3" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" HorizontalAlignment="Left" Margin="20,25,0,0" VerticalAlignment="Center" Width="425" SelectionChanged="CountryInput_SelectionChanged" Height="37" Grid.Column="1" Grid.Row="3">
+            <ComboBox.SelectedItem>
+                <Binding Path="Country" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
+                    <Binding.ValidationRules>
+                        <val:DescriptionStringValidation ValidatesOnTargetUpdated="True"  ValidationStep="RawProposedValue"></val:DescriptionStringValidation>
+                    </Binding.ValidationRules>
+                </Binding>
+            </ComboBox.SelectedItem>
+            <Validation.ErrorTemplate>
+                <ControlTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                    </Grid>
+                </ControlTemplate>
+            </Validation.ErrorTemplate>
+        </ComboBox>
         <Label Content="Potrebno je popuniti sva navedena polja." FontSize="18" Margin="40,15,13,15" Grid.Column="0" Grid.Row="1" Foreground="White"/>
         <Image Margin="242,13,238,25" Grid.Column="1" Grid.Row="10" Source="/Resources/Images/ok.png"/>
         <Image Margin="356,11,124,23" Grid.Column="1" Grid.Row="10" Source="/Resources/Images/cancel.png"/>
