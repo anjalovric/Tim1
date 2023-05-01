@@ -31,7 +31,7 @@ namespace InitialProject.WPF.Views.Guest2Views
         public CreateOrdinaryTourRequestView(Model.Guest2 guest2)
         {
             InitializeComponent();
-            viewModel = new CreateOrdinaryTourRequestViewModel(Capacity, Name,guest2, Description, countryInput, cityInput);
+            viewModel = new CreateOrdinaryTourRequestViewModel(Capacity,guest2);
             DataContext = viewModel;
         }
         private void CountryInput_SelectionChanged(object sender, SelectionChangedEventArgs e)

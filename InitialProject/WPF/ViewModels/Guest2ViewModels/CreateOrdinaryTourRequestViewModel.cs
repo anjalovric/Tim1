@@ -18,6 +18,19 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         public ObservableCollection<string> Countries { get; set; }
         public ObservableCollection<string> CitiesByCountry { get; set; }
         private LocationRepository locationRepository;
+        private string name;
+        public string Name
+        {
+            get => name;
+            set
+            {
+                if (value != name)
+                {
+                    name = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         private DateTime Start;
         public DateTime StartDate
         {
@@ -44,6 +57,46 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
                 }
             }
         }
+        
+        private string city;
+        public string City
+        {
+            get => city;
+            set
+            {
+                if (value != city)
+                {
+                    city = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private bool isComboBoxCityEnabled;
+        public bool IsComboBoxCityEnabled
+        {
+            get => isComboBoxCityEnabled;
+            set
+            {
+                if (value != isComboBoxCityEnabled)
+                {
+                    isComboBoxCityEnabled = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private string country;
+        public string Country
+        {
+            get => country;
+            set
+            {
+                if (value != country)
+                {
+                    country = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         public DateTime NowDate { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -55,9 +108,19 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         public RelayCommand IncrementCommand { get; set; }
         public RelayCommand DecrementCommand { get; set; }
         public ObservableCollection<string> Languages { get; set; }
-        private ComboBox Country;
-        private ComboBox City;
-        private TextBox Description;
+        private string description;
+        public string Description
+        {
+            get => description;
+            set
+            {
+                if (value != description)
+                {
+                    description = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         private Model.Guest2 Guest2;
         private string language;
         public string SelectedLanguage
@@ -72,25 +135,48 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
                 }
             }
         }
+        private double duration;
+        public double Duration
+        {
+            get => duration;
+            set
+            {
+                if (value != duration)
+                {
+                    duration = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
-        private TextBox Name;
-        public CreateOrdinaryTourRequestViewModel(TextBlock capacity, TextBox name,Model.Guest2 guest2, TextBox description,ComboBox country,ComboBox city)
+        private int maxGuests;
+
+        public int MaxGuests
+        {
+            get => maxGuests;
+            set
+            {
+                if (value != maxGuests)
+                {
+                    maxGuests = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public CreateOrdinaryTourRequestViewModel(TextBlock capacity,Model.Guest2 guest2)
         {
             Capacity = capacity;
-            Country=country;
-            City = city;  
-            StartDate = DateTime.Now;
-            EndDate = DateTime.Now;
-            Description = description;
-            Name = name;
+            NowDate = DateTime.Now;
+            StartDate = NowDate; ;
+            EndDate = StartDate;
             Guest2=guest2;
             MakeCommands();
             AddLanguages();
             locationRepository = new LocationRepository();
             Countries = new ObservableCollection<string>(locationRepository.GetAllCountries());
             CitiesByCountry = new ObservableCollection<string>();
-            city.IsEnabled = false;
-            
+            IsComboBoxCityEnabled = false;
+
         }
         private void MakeCommands()
         {
@@ -140,28 +226,28 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         private void Confirm_Executed(object sender)
         {
             LocationService locationService = new LocationService();
-            Model.Location newLocation = locationService.GetByCityAndCountry(Country.SelectedValue.ToString(), City.SelectedValue.ToString());
+            Model.Location newLocation = locationService.GetByCityAndCountry(Country.ToString(), City.ToString());
             OrdinaryTourRequestsService requestService = new OrdinaryTourRequestsService();
             DateTime createDate=DateTime.Now;
-            if (EndDate < StartDate)
+            if (End < StartDate)
             {
                 MessageBox.Show("Niste dobro popunili polja!");
                 return;
             }
-            OrdinaryTourRequests request = new OrdinaryTourRequests(Name.Text,Guest2.Id, Convert.ToInt32(Capacity.Text), newLocation, Description.Text, SelectedLanguage, Convert.ToDateTime(Start), Convert.ToDateTime(End), false, "On waiting",Start.ToString().Split(" ")[0],End.ToString().Split(" ")[0],-1,createDate,false,-1);
+            OrdinaryTourRequests request = new OrdinaryTourRequests(Name,Guest2.Id, Convert.ToInt32(Capacity.Text), newLocation, Description, SelectedLanguage, Convert.ToDateTime(Start), Convert.ToDateTime(End), false, "On waiting",Start.ToString().Split(" ")[0],End.ToString().Split(" ")[0],-1,createDate,false,-1);
             requestService.Save(request);
             Application.Current.Windows.OfType<CreateOrdinaryTourRequestView>().FirstOrDefault().Close();
         }
         public void CountryInput_SelectionChanged()
         {
-            if (Country.SelectedItem != null)
+            if (Country != null)
             {
                 CitiesByCountry.Clear();
-                foreach (string city in locationRepository.GetCitiesByCountry((string)Country.SelectedItem))
+                foreach (string city in locationRepository.GetCitiesByCountry((string)Country))
                 {
                     CitiesByCountry.Add(city);
                 }
-                City.IsEnabled = true;
+                IsComboBoxCityEnabled = true;
             }
         }
     }

@@ -52,7 +52,7 @@
         </DataGrid>
         <ComboBox x:Name="cityInput" BorderBrush="#7166f9" BorderThickness="3,3,3,3" ItemsSource="{Binding CitiesByCountry}" SelectedItem="{Binding Location.City}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" HorizontalAlignment="Left" Margin="463,130,0,0" VerticalAlignment="Top" Width="152" Height="22"/>
         <TextBox x:Name="durationInput" Style="{StaticResource BorderStyle}" Background="#FFFCECB9" HorizontalAlignment="Left" Margin="828,130,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="151" Height="22" RenderTransformOrigin="0.496,0.294"/>
-        <TextBox x:Name="languageInput" Style="{StaticResource BorderStyle}" Background="#FFFCECB9" HorizontalAlignment="Left" Margin="80,201,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="151" Height="22" RenderTransformOrigin="-0.983,1.416"/>
+        <ComboBox x:Name="languageInput" BorderBrush="#7166f9" ItemsSource="{Binding Languages}" SelectedItem="{Binding SelectedLanguage}" BorderThickness="3,3,3,3" Background="#FFFCECB9" HorizontalAlignment="Left" Margin="80,201,0,0" VerticalAlignment="Top" Width="151" Height="22" RenderTransformOrigin="-0.983,1.416"/>
         <Border BorderBrush="#7166f9" BorderThickness="3,3,3,3" Margin="492,201,434,545">
             <TextBlock x:Name="capacityNumber" Text="1" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Top" Width="98" TextAlignment="Center" Height="20" Background="#FFFCECB9" Margin="0,-1,0,0" />
         </Border>
@@ -69,7 +69,7 @@
         <Button Content="Search" Style="{StaticResource borderStyle}" FontWeight="Bold" HorizontalAlignment="Left" Margin="828,201,0,0" VerticalAlignment="Top" Height="22" Click="Search_Click" Width="76"/>
         <Label x:Name="Label" Grid.Row="0" Foreground="White" Content="Showing all tours: " FontSize="20" Margin="80,279,0,0" Height="71" Style="{StaticResource LabelStyle}"/>
         <Button x:Name="Restart" Style="{StaticResource borderStyle}" Width="76" Content="Restart" HorizontalAlignment="Left" Margin="903,201,0,0" VerticalAlignment="Top" TextElement.FontWeight="Bold" Click="Restart_Click" Height="22"/>
-        <Label x:Name="DurationLabel" HorizontalAlignment="Left" Margin="874,158,0,0" VerticalAlignment="Top" Height="25" Width="150"/>
+        <Label x:Name="DurationLabel" HorizontalAlignment="Left" Margin="874,158,0,0" VerticalAlignment="Top" Height="25" Width="150" Foreground="Red"/>
         <Label Content="Searching tours" FontSize="20" Foreground="White" Margin="80,38,0,0" Style="{StaticResource LabelStyle}"/>
         
 
