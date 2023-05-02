@@ -10,15 +10,17 @@
       Title="AccommodationDetails">
     <Page.Resources>
         <Style TargetType="Grid">
+
             <Setter Property="Background" Value="#c99585"></Setter>
         </Style>
         <Style TargetType="Label">
             <Setter Property="Foreground" Value="#37492d"></Setter>
-            <Setter Property="FontWeight" Value="Bold"></Setter>
+            <Setter Property="FontWeight" Value="Medium"></Setter>
         </Style>
         <Style TargetType="TextBlock">
             <Setter Property="Foreground" Value="#37492d"></Setter>
-            <Setter Property="FontWeight" Value="Bold"></Setter>
+            <Setter Property="FontSize" Value="18"></Setter>
+            <Setter Property="FontWeight" Value="Medium"></Setter>
         </Style>
         <Style TargetType="Button">
             <Setter Property="Background" Value="#8c9d75"></Setter>
@@ -53,7 +55,7 @@
         </Style>
         <converters:IntToImageConverter x:Key="Int2Images"></converters:IntToImageConverter>
     </Page.Resources>
-    <Grid >
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
@@ -78,26 +80,45 @@
                 <RowDefinition Height="1*"></RowDefinition>
                 <RowDefinition Height="1*"></RowDefinition>
                 <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <Border Background="#FFB58578" Grid.RowSpan="7" Width="400" CornerRadius="0 0 20 20" HorizontalAlignment="Center"  Margin="46,0,46,4"/>
+            <Border Grid.RowSpan="9" Width="400" BorderThickness="3,0,3,3" BorderBrush="#22301a" CornerRadius="0 0 20 20" HorizontalAlignment="Center" Height="395" VerticalAlignment="Top">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="#FFB58578" Offset="0"/>
+                        <GradientStop Color="#FFB58578" Offset="0.1"></GradientStop>
+                        <GradientStop Color="#c99585" Offset="0.4"/>
+                        <GradientStop Color="#c99585" Offset="0.5"/>
+                        <GradientStop Color="#c99585" Offset="0.6"/>
+                        <GradientStop Color="#FFB58578" Offset="0.9"></GradientStop>
+                        <GradientStop Color="#FFB58578" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
 
-            <Label FontSize="18" Height="35" Width="Auto" Grid.Row="0" HorizontalAlignment="Left"  VerticalAlignment="Center" Margin="84,0,0,0">Name:</Label>
-            <Label FontSize="18" Height="35" Width="Auto" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="84,0,0,0" Content="Country:"/>
-            <Label FontSize="18" Height="36" Width="Auto" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="84,0,0,0" Content="City:"/>
-            <Label FontSize="18" Height="35" Width="Auto" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="84,0,0,0" Content="Type:"/>
-            <Label FontSize="18" Height="35" Width="Auto" Grid.Row="4" HorizontalAlignment="Left"  VerticalAlignment="Center" Margin="84,0,0,0" Content="Capacity:"/>
-            <Label FontSize="18" Height="35" Width="Auto" Grid.Row="5" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="84,0,0,0" Content="Min. days for reservation:"/>
-            <Label FontSize="18" Height="36" Width="Auto" Grid.Row="6" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="84,0,0,0" Content="Min. days to cancel:"/>
-            <TextBlock Height="35" FontSize="18" Margin="0,0,84,0" Grid.Row="0" Text="{Binding Path=SelectedAccommodation.Name}" HorizontalAlignment="Right"/>
-            <TextBlock Height="35" FontSize="18" Margin="0,0,84,0" Grid.Row="1" Text="{Binding Path=SelectedAccommodation.Location.Country}" HorizontalAlignment="Right"/>
-            <TextBlock Height="35" FontSize="18" Margin="0,0,84,0" Grid.Row="2" Text="{Binding Path=SelectedAccommodation.Location.City}" HorizontalAlignment="Right"/>
-            <TextBlock Height="35" FontSize="18" Margin="0,0,84,0" Grid.Row="3" Text="{Binding Path=SelectedAccommodation.Type}" HorizontalAlignment="Right"/>
-            <TextBlock Height="35" FontSize="18" Margin="0,0,84,0" Grid.Row="4" Text="{Binding Path=SelectedAccommodation.Capacity}" HorizontalAlignment="Right"/>
-            <TextBlock Height="35" FontSize="18" Margin="0,0,84,0" Grid.Row="5" Text="{Binding Path=SelectedAccommodation.MinDaysForReservation}" HorizontalAlignment="Right"/>
-            <TextBlock Height="35" FontSize="18" Margin="0,0,84,0" Grid.Row="6" Text="{Binding Path=SelectedAccommodation.MinDaysToCancel}" HorizontalAlignment="Right"/>
+            <Label FontSize="18" Height="35" Width="Auto" Grid.Row="0" HorizontalAlignment="Left"  VerticalAlignment="Center" Margin="95,0,0,0">Name:</Label>
+            <Label FontSize="18" Height="35" Width="Auto" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="95,0,0,0" Content="Country:"/>
+            <Label FontSize="18" Height="36" Width="Auto" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="95,0,0,0" Content="City:"/>
+            <Label FontSize="18" Height="35" Width="Auto" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="95,0,0,0" Content="Type:"/>
+            <Label FontSize="18" Height="35" Width="Auto" Grid.Row="4" HorizontalAlignment="Left"  VerticalAlignment="Center" Margin="95,0,0,0" Content="Capacity:"/>
+            <Label FontSize="18" Height="35" Width="Auto" Grid.Row="5" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="95,0,0,0" Content="Min. days for reservation:"/>
+            <Label FontSize="18" Height="36" Width="Auto" Grid.Row="6" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="95,0,0,0" Content="Min. days to cancel:"/>
+            <Label FontSize="18" Height="36" Width="Auto" Grid.Row="7" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="95,0,0,0" Content="Owner:"/>
 
-            
+            <TextBlock Height="35" FontSize="18" Margin="0,0,95,0" Grid.Row="0" Text="{Binding Path=SelectedAccommodation.Name}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <TextBlock Height="35" FontSize="18" Margin="0,0,95,0" Grid.Row="1" Text="{Binding Path=SelectedAccommodation.Location.Country}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <TextBlock Height="35" FontSize="18" Margin="0,0,95,0" Grid.Row="2" Text="{Binding Path=SelectedAccommodation.Location.City}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <TextBlock Height="35" FontSize="18" Margin="0,0,95,0" Grid.Row="3" Text="{Binding Path=SelectedAccommodation.Type}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <TextBlock Height="35" FontSize="18" Margin="0,0,95,0" Grid.Row="4" Text="{Binding Path=SelectedAccommodation.Capacity}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <TextBlock Height="35" FontSize="18" Margin="0,0,95,0" Grid.Row="5" Text="{Binding Path=SelectedAccommodation.MinDaysForReservation}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <TextBlock Height="35" FontSize="18" Margin="0,0,95,0" Grid.Row="6" Text="{Binding Path=SelectedAccommodation.MinDaysToCancel}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <TextBlock Height="35" FontSize="18" Margin="0,0,95,0" Grid.Row="7" HorizontalAlignment="Right">
+                <Run Text="{Binding SelectedAccommodation.Owner.Name}"/>
+                <Run Text="{Binding SelectedAccommodation.Owner.LastName}"/>
+            </TextBlock>
+
+
 
         </Grid>
 
@@ -109,9 +130,23 @@
                 <RowDefinition ></RowDefinition>
             </Grid.RowDefinitions>
 
-            <Border Background="#FFB58578" Grid.RowSpan="3" Width="400"  CornerRadius="0 0 20 20" Margin="46,0,46,5"/>
+            <Border Grid.RowSpan="4" Width="400" BorderBrush="#22301a" BorderThickness="3,0,3,3" HorizontalAlignment="Center" Height="395" VerticalAlignment="Top"  CornerRadius="0 0 20 20">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="#FFB58578" Offset="0"/>
+                        <GradientStop Color="#FFB58578" Offset="0.1"></GradientStop>
+                        <GradientStop Color="#c99585" Offset="0.4"/>
+                        <GradientStop Color="#c99585" Offset="0.5"/>
+                        <GradientStop Color="#c99585" Offset="0.6"/>
+                        <GradientStop Color="#FFB58578" Offset="0.9"></GradientStop>
+                        <GradientStop Color="#FFB58578" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
 
             <Image x:Name="accommodationImage" Source="{Binding ImageSource, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" Margin="106,10,106,10" Stretch="Fill"/>
+
+            <Border Grid.Row="0" Margin="106,10,106,10" BorderBrush="#22301a" BorderThickness="3"/>
 
             <Button Command="{Binding NextPhotoCommand}" IsEnabled="{Binding Path=IsNextEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="50" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right" Margin="0,0,60,0" VerticalAlignment="Center" Width="60">
                 <Button.Template>
@@ -188,7 +223,7 @@
             </Button>
 
 
-            <Button x:Name="Reserve" Grid.Row="3" Command="{Binding ReserveCommand}" FontWeight="Bold" Margin="0,0,56,40" VerticalAlignment="Bottom" Width="100" Height="35" HorizontalAlignment="Right" FontSize="18">
+            <Button x:Name="Reserve" Grid.Row="3" Command="{Binding ReserveCommand}" FontWeight="Bold" Margin="0,0,56,30" VerticalAlignment="Bottom" Width="100" Height="35" HorizontalAlignment="Right" FontSize="18">
                 <Grid Background="#8c9d75" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -207,7 +242,9 @@
                     <TextBlock Text="Reserve" Grid.Column="0" VerticalAlignment="Center" FontSize="18" Margin="5,0,0,0"  Foreground="#22301a" FontWeight="Bold" HorizontalAlignment="Left" Width="Auto"/>
                 </Grid>
             </Button>
-
+            
+            <Label FontSize="20" Height="34" FontWeight="Bold" Width="Auto" HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Top" Content="Attendance" Margin="0,0,0,0"/>
+            <Image Source="/Resources/Images/diagram.png" Grid.Row="2" Stretch="Fill" HorizontalAlignment="Center" Width="250" Height="150"></Image>
 
         </Grid>
 
@@ -252,14 +289,38 @@
             </ListBox>
         </StackPanel>
 
-        <TextBlock FontSize="20" Background="Transparent" HorizontalAlignment="Center" Grid.Row="2" Grid.ColumnSpan="2" Width="Auto" Height="35" VerticalAlignment="Top" FontWeight="Normal" Margin="0,0,0,0">
+        <TextBlock FontSize="16" Background="Transparent" HorizontalAlignment="Center" Grid.Row="2" Grid.ColumnSpan="2" Width="Auto" Height="35" VerticalAlignment="Top" FontWeight="Normal" Margin="0,0,0,0">
                 <Run Text="{Binding ReviewsNumber}"/>
                 <Run Text="Reviews"/>
         </TextBlock>
-        <Border Background="#FFB58578" Grid.Row="4" Width="400" Height="Auto"  CornerRadius="20 20 0 0" HorizontalAlignment="Center"/>
+        <Border Grid.Row="3" Width="400" Height="45" Grid.RowSpan="2" BorderThickness="3,3,3,0" BorderBrush="#22301a" VerticalAlignment="Bottom" CornerRadius="20 20 0 0" HorizontalAlignment="Center">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                    <GradientStop Color="#FFB58578" Offset="0"/>
+                    <GradientStop Color="#FFB58578" Offset="0.1"></GradientStop>
+                    <GradientStop Color="#c99585" Offset="0.4"/>
+                    <GradientStop Color="#c99585" Offset="0.5"/>
+                    <GradientStop Color="#c99585" Offset="0.6"/>
+                    <GradientStop Color="#FFB58578" Offset="0.9"></GradientStop>
+                    <GradientStop Color="#FFB58578" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
 
         <Label FontSize="20" FontWeight="Bold" Height="Auto" Width="Auto" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center">Details</Label>
-        <Border Background="#FFB58578" Grid.Column="1" Grid.Row="4" Width="400" Height="Auto"  CornerRadius="20 20 0 0" HorizontalAlignment="Center"/>
+        <Border Grid.Column="1" Grid.Row="3" BorderBrush="#22301a" BorderThickness="3,3,3,0" Width="400" Height="45" VerticalAlignment="Bottom" Grid.RowSpan="2" CornerRadius="20 20 0 0" HorizontalAlignment="Center">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                    <GradientStop Color="#FFB58578" Offset="0"/>
+                    <GradientStop Color="#FFB58578" Offset="0.1"></GradientStop>
+                    <GradientStop Color="#c99585" Offset="0.4"/>
+                    <GradientStop Color="#c99585" Offset="0.5"/>
+                    <GradientStop Color="#c99585" Offset="0.6"/>
+                    <GradientStop Color="#FFB58578" Offset="0.9"></GradientStop>
+                    <GradientStop Color="#FFB58578" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
 
         <Label FontSize="20" Height="34" FontWeight="Bold" Width="80" HorizontalAlignment="Center" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center">Photos</Label>
 
@@ -274,7 +335,7 @@
                 <TextBlock Background="#8c9d75" Text="BACK" Grid.Column="1" Margin="8,0,0,0" VerticalAlignment="Center" FontSize="18"  Foreground="#22301a" FontWeight="Bold" HorizontalAlignment="Center" Width="Auto"/>
             </Grid>
         </Button>
-
+        
 
 
 

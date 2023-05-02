@@ -41,6 +41,15 @@
             <Setter Property="BorderBrush" Value="#22301a"/>
             <Setter Property="Background" Value="#dbc9ab"/>
             <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="#FFB58578" Offset="0"/>
+                        <GradientStop Color="#FFF9ECC5" Offset="0.5"/>
+                        <GradientStop Color="#FFB58578" Offset="1"></GradientStop>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
         </Style>
         <Style TargetType="DataGridCell">
             <Setter Property="TextBlock.TextAlignment" Value="Center"></Setter>
@@ -49,19 +58,12 @@
             <Setter Property="Background" Value="#FFFCECB9"></Setter>
         </Style>
     </Window.Resources>
-    <Border BorderThickness="4" Padding="6" CornerRadius="25">
-        <Border.BorderBrush>
-            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                <GradientStop Color="Black" Offset="0"></GradientStop>
-                <GradientStop Color="#22301a" Offset="1"></GradientStop>
-            </LinearGradientBrush>
-        </Border.BorderBrush>
+    <Border BorderThickness="4" Padding="6" CornerRadius="25" BorderBrush="#22301a">
         <Border.Background>
-            <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
-                <GradientStop Color="#c99585" Offset="0.1"></GradientStop>
-                <GradientStop Color="#FFF9ECC5" Offset="0.4"></GradientStop>
-                <GradientStop Color="#c99585" Offset="0.9"></GradientStop>
-            </LinearGradientBrush>
+            <RadialGradientBrush GradientOrigin="0.5,0.5" Center="0.5,0.5" RadiusX="0.5" RadiusY="0.5">
+                <GradientStop Color="#FFF9ECC5" Offset="0.1"></GradientStop>
+                <GradientStop Color="#c99585" Offset="1"></GradientStop>
+            </RadialGradientBrush>
         </Border.Background>
         <Grid>
             <Label Content="SELECT DESIRED DATE" Height="Auto" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" Margin="0,20,0,0" FontWeight="Bold" FontFamily="Baskerville Old Face" TextElement.FontSize="24"></Label>
@@ -69,18 +71,18 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Arrival date" Width="2*" Binding="{Binding Arrival, Mode=OneWay}"/>
                     <DataGridTextColumn Header="Departure date" Width="2*" Binding="{Binding Departure, Mode=OneWay}"/>
-                    <DataGridTemplateColumn x:Name="SelectDate" Header="Choose date" Width="100">
+                    <DataGridTemplateColumn x:Name="SelectDate" Header="Choose date" Width="130">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Button Name="chooseDateButton" Background="#c99585" TextElement.FontWeight="Medium" Command="{Binding DataContext.ChooseDateCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" FontSize="16">
-                                    <Grid Background="#c99585" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" >
+                                    <Grid Background="#c99585" Width="130" HorizontalAlignment="Center" VerticalAlignment="Center" >
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="Auto"/>
                                             <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
                                         <Image Source="/Resources/Images/choose.png" VerticalAlignment="Center" HorizontalAlignment="Right"  Margin="0,0,15,0" Width="Auto" Height="22" Grid.Column="1" RenderTransformOrigin="0.5,0.5">
                                         </Image>
-                                        <TextBlock Text="Choose" Grid.Column="0" VerticalAlignment="Center" FontSize="16"  Foreground="#22301a" Margin="15,0,0,0" FontWeight="Bold" HorizontalAlignment="Left" Width="55"/>
+                                        <TextBlock Text="Choose" Grid.Column="0" VerticalAlignment="Center" FontSize="16"  Foreground="#22301a" Margin="30,0,0,0" FontWeight="Bold" HorizontalAlignment="Left" Width="55"/>
                                     </Grid>
                                 </Button>
                             </DataTemplate>

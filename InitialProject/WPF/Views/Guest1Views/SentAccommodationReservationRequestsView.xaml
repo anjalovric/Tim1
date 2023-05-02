@@ -30,19 +30,37 @@
         <Style TargetType="DataGrid">
             <Setter Property="BorderBrush" Value="#22301a"></Setter>
             <Setter Property="BorderThickness" Value="4,4,3,4"></Setter>
-            <Setter Property="Background" Value="#FFF9ECC5"></Setter>
             <Setter Property="ColumnHeaderHeight" Value="40"></Setter>
             <Setter Property="RowHeight" Value="30"></Setter>
             <Setter Property="FontWeight" Value="Medium"></Setter>
             <Setter Property="RowBackground" Value="#FFFCECB9"></Setter>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="#dbc9ab" Offset="0.1"/>
+                        <GradientStop Color="#FFF9ECC5" Offset="0.4"/>
+                        <GradientStop Color="#FFF9ECC5" Offset="0.5"/>
+                        <GradientStop Color="#FFF9ECC5" Offset="0.6"/>
+                        <GradientStop Color="#dbc9ab" Offset="0.9"></GradientStop>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
         </Style>
         <Style TargetType="DataGridColumnHeader">
             <Setter Property="TextElement.Foreground" Value="#22301a"></Setter>
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
             <Setter Property="BorderThickness" Value="0,0,1,4"/>
             <Setter Property="BorderBrush" Value="#22301a"/>
-            <Setter Property="Background" Value="#dbc9ab"/>
             <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="#dbc9ab" Offset="0"/>
+                        <GradientStop Color="#FFF9ECC5" Offset="0.5"/>
+                        <GradientStop Color="#dbc9ab" Offset="1"></GradientStop>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
         </Style>
         <Style TargetType="DataGridCell">
             <Setter Property="TextBlock.TextAlignment" Value="Center"></Setter>
@@ -75,7 +93,8 @@
 
                 <Grid>
                     <Label FontSize="24" FontWeight="Bold" VerticalContentAlignment="Center" Height="Auto" VerticalAlignment="Top" Margin="0,10,0,0" HorizontalAlignment="Center">APPROVED REQUESTS</Label>
-                    <DataGrid x:Name="ApprovedRequestsDataGrid" FontSize="16" VerticalContentAlignment="Center" VerticalScrollBarVisibility="Auto" Margin="0,40,0,0" RowBackground="#CDFFCC" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Left" ItemsSource="{Binding Path=ApprovedRequests,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" IsReadOnly="True" Height="322" Width="950" UseLayoutRounding="False" HeadersVisibility="Column">
+                    <DataGrid x:Name="ApprovedRequestsDataGrid" FontSize="16" VerticalContentAlignment="Center" VerticalScrollBarVisibility="Auto" Margin="0,40,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Left" ItemsSource="{Binding Path=ApprovedRequests,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" IsReadOnly="True" RowBackground="#CDFFCC" Height="322" Width="950" UseLayoutRounding="False" HeadersVisibility="Column">
+
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Name" Width="1.5*" Binding="{Binding Reservation.Accommodation.Name}">
                                 <DataGridTextColumn.ElementStyle>
@@ -132,7 +151,7 @@
                                     </Style>
                                 </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
-                            <DataGridTextColumn Header="New departure date" Width="2*" Binding="{Binding NewDepartureDate}">
+                            <DataGridTextColumn Header="New departure date" Width="2.2*" Binding="{Binding NewDepartureDate}">
                                 <DataGridTextColumn.ElementStyle>
                                     <Style TargetType="{x:Type TextBlock}">
                                         <Setter Property="ToolTip" Value="{Binding NewDepartureDate}" />
@@ -205,7 +224,7 @@
                                     </Style>
                                 </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
-                            <DataGridTextColumn Header="New departure date" Width="2*" Binding="{Binding NewDepartureDate}">
+                            <DataGridTextColumn Header="New departure date" Width="2.2*" Binding="{Binding NewDepartureDate}">
                                 <DataGridTextColumn.ElementStyle>
                                     <Style TargetType="{x:Type TextBlock}">
                                         <Setter Property="ToolTip" Value="{Binding NewDepartureDate}" />

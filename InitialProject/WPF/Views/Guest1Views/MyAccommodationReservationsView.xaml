@@ -29,10 +29,20 @@
         <Style TargetType="DataGrid">
             <Setter Property="BorderBrush" Value="#22301a"></Setter>
             <Setter Property="BorderThickness" Value="4,4,3,4"></Setter>
-            <Setter Property="Background" Value="#FFF9ECC5"></Setter>
             <Setter Property="ColumnHeaderHeight" Value="40"></Setter>
             <Setter Property="RowBackground" Value="#FFFCECB9"></Setter>
             <Setter Property="RowHeight" Value="30"></Setter>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="#dbc9ab" Offset="0.1"/>
+                        <GradientStop Color="#FFF9ECC5" Offset="0.4"/>
+                        <GradientStop Color="#FFF9ECC5" Offset="0.5"/>
+                        <GradientStop Color="#FFF9ECC5" Offset="0.6"/>
+                        <GradientStop Color="#dbc9ab" Offset="0.9"></GradientStop>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
         </Style>
         <Style TargetType="Button">
             <Setter Property="Background" Value="#8c9d75"></Setter>
@@ -53,8 +63,16 @@
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
             <Setter Property="BorderThickness" Value="0,0,1,4"/>
             <Setter Property="BorderBrush" Value="#22301a"/>
-            <Setter Property="Background" Value="#dbc9ab"/>
             <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="#dbc9ab" Offset="0"/>
+                        <GradientStop Color="#FFF9ECC5" Offset="0.5"/>
+                        <GradientStop Color="#dbc9ab" Offset="1"></GradientStop>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
         </Style>
         <Style TargetType="DataGridCell">
             <Setter Property="TextBlock.TextAlignment" Value="Center"></Setter>

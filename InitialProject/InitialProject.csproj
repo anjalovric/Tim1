@@ -67,6 +67,8 @@
 
     <None Remove="Resources\Images\decline.jpg" />
 
+    <None Remove="Resources\Images\diagram.png" />
+
     <None Remove="Resources\Images\done.png" />
 
     <None Remove="Resources\Images\dreams1.jpeg" />
@@ -257,6 +259,9 @@
     </Resource>
     <Resource Include="Resources\Images\cottage3.jpeg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\diagram.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\dreams1.jpeg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
