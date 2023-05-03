@@ -16,11 +16,12 @@
                 <RowDefinition Height="2*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Button Command="{Binding CancelCommand}" Content="NO" Grid.Column="0" Grid.Row="1" Foreground="blue" Background="Transparent" FontWeight="Bold" FontSize="15">
+            <Button Command="{Binding CancelCommand}" Content="NO" Grid.Column="0" Grid.Row="1" Foreground="#005A9C" Background="Transparent" FontWeight="Bold" FontSize="15">
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="BorderThickness" Value="1" />
                         <Setter Property="CornerRadius" Value="0, 0, 0,20" />
+                        <Setter Property="BorderBrush" Value="#005A9C" />
                     </Style>
                 </Button.Resources>
             </Button>
@@ -29,6 +30,7 @@
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="BorderThickness" Value="1" />
                         <Setter Property="CornerRadius" Value="0, 0, 20, 0" />
+                        <Setter Property="BorderBrush" Value="#005A9C" />
                     </Style>
                 </Button.Resources>
             </Button>
