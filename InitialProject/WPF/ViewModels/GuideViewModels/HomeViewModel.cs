@@ -27,6 +27,18 @@ namespace InitialProject.WPF.ViewModels
             }
 
         }
+        private string reviewCount;
+        public string ReviewCount
+        {
+            get { return reviewCount; }
+            set
+            {
+                if (value != reviewCount)
+                    reviewCount = value;
+                OnPropertyChanged();
+            }
+
+        }
         private string clock;
         public string Clock
         {
@@ -55,16 +67,22 @@ namespace InitialProject.WPF.ViewModels
         private GuideService guideService = new GuideService();
         private TourInstanceService tourInstanceService;
         private Guide loggedGuide;
+        private User loggedUser;
         public RelayCommand StartCommand { get; set; }
+        public RelayCommand ViewReview { get; set; }    
         public HomeViewModel(User user, ObservableCollection<TourInstance> Instances)
         {
             loggedGuide = guideService.GetByUsername(user.Username);
             FinishedInstances = Instances;
+            loggedUser= user;
             tourInstanceService = new TourInstanceService();
             Tours = new ObservableCollection<TourInstance>(tourInstanceService.GetByStart(loggedGuide));
             SetTitle(user);
             StartCommand = new RelayCommand(StartTour_Executed, CanExecute);
             SetClock();
+            ReviewNotificationService reviewNotificationService = new ReviewNotificationService();
+            ReviewCount=reviewNotificationService.GetNewReviewCount(user).ToString();
+            ViewReview=new RelayCommand(ViewReview_Executed, CanExecute);
         }
         private void SetClock()
         {
@@ -95,6 +113,12 @@ namespace InitialProject.WPF.ViewModels
                 StartedTourInstanceView startedTourInstanceView = new StartedTourInstanceView(Selected, Tours, FinishedInstances);
                 Application.Current.Windows.OfType<GuideWindow>().FirstOrDefault().Main.Content = startedTourInstanceView;
             }
+        }
+        private void ViewReview_Executed(object sender)
+        {
+            TourInstanceReviewView tourInstanceReviewView = new TourInstanceReviewView(loggedUser);
+            Application.Current.Windows.OfType<GuideWindow>().FirstOrDefault().Main.Content = tourInstanceReviewView;
+            ReviewCount = "0";
         }
         void timer_Tick(object sender, EventArgs e)
         {

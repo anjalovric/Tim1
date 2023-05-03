@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace InitialProject.WPF.Validations.GuideValidations
@@ -20,7 +21,13 @@ namespace InitialProject.WPF.Validations.GuideValidations
             }
             else
             {
-                return new ValidationResult(false, "Enter point name");
+                var app = (App)Application.Current;
+                string Message = "";
+                if (app.Lang.Equals("en-US"))
+                    Message = "Enter point name";
+                else
+                    Message = "Unesi naziv tačke";
+                return new ValidationResult(false, Message);
             }
         }
     }

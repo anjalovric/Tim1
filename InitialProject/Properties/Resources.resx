@@ -336,6 +336,9 @@
   <data name="Name" xml:space="preserve">
     <value>Name</value>
   </data>
+  <data name="NewReviews" xml:space="preserve">
+    <value>New reviews:</value>
+  </data>
   <data name="NumberOfGuests" xml:space="preserve">
     <value>Number of presence guests:</value>
   </data>

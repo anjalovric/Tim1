@@ -718,6 +718,15 @@ namespace InitialProject.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to New reviews:.
+        /// </summary>
+        internal static string NewReviews {
+            get {
+                return ResourceManager.GetString("NewReviews", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Number of presence guests:.
         /// </summary>
         internal static string NumberOfGuests {

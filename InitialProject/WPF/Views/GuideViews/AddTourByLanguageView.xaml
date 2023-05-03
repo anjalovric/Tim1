@@ -514,7 +514,7 @@
                 <Label Grid.Column="4" Content="📌" Style="{DynamicResource Label}" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.511,0.09" Height="48"/>
                 <Label Grid.Column="4" Content="📆" Style="{DynamicResource Label}" FontSize="25" HorizontalAlignment="Left" Margin="12,112,0,0" Grid.Row="1" VerticalAlignment="Top" RenderTransformOrigin="0.217,-0.018" Grid.RowSpan="2"/>
                 <Label Grid.Column="4" Content="🕘" Style="{DynamicResource Label}" FontSize="25" HorizontalAlignment="Left" Grid.Row="3" VerticalAlignment="Center" Margin="12,0,0,0"/>
-                <Label Grid.Column="3" Content="Can't choose time from past" Foreground="Red" Visibility="{Binding DateMessage}" HorizontalAlignment="Left" Margin="204,57,0,0" Grid.Row="3" VerticalAlignment="Top"/>
+                <Label Grid.Column="3" Content="{Binding PastError}" Foreground="Red" Visibility="{Binding DateMessage}" HorizontalAlignment="Left" Margin="200,57,0,0" Grid.Row="3" VerticalAlignment="Top"/>
                 <TextBox x:Name="CP" Grid.Column="2" HorizontalAlignment="Left" Margin="76,0,0,70" Grid.Row="1" TextWrapping="Wrap" BorderThickness="0" Height="0"  VerticalAlignment="Bottom" Width="120" Background="Transparent" BorderBrush="Transparent" Foreground="Transparent" Grid.ColumnSpan="2">
                     <TextBox.Text>
                         <Binding Path="ListCount" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">

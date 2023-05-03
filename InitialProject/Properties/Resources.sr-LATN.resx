@@ -336,6 +336,9 @@
   <data name="Name" xml:space="preserve">
     <value>Naziv</value>
   </data>
+  <data name="NewReviews" xml:space="preserve">
+    <value>Novih recenzija:</value>
+  </data>
   <data name="NumberOfGuests" xml:space="preserve">
     <value>Broj prisutnih gostiju:</value>
   </data>
