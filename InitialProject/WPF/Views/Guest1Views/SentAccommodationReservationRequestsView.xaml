@@ -67,7 +67,11 @@
         </Style>
     </Page.Resources>
     <Grid>
-        <TabControl x:Name="RequestsTabControl" Height="430" VerticalAlignment="Top">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="430"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <TabControl x:Name="RequestsTabControl" Height="430" VerticalAlignment="Top" Grid.Row="0">
             <TabControl.TabStripPlacement>Top</TabControl.TabStripPlacement>
             <TabControl.Template>
                 <ControlTemplate TargetType="{x:Type TabControl}">
@@ -81,8 +85,8 @@
                    IsItemsHost="True" 
                    HorizontalAlignment="Center" />
                         <Border Grid.Row="1" 
-                 BorderBrush="#22301a" 
-                 BorderThickness="0,4,0,0">
+                 
+                 BorderThickness="0,7,0,7" BorderBrush="#22301a">
                             <ContentPresenter Content="{TemplateBinding SelectedContent}" />
                         </Border>
                     </Grid>
@@ -92,8 +96,19 @@
             <TabItem Header="Approved requests" FontSize="16" HorizontalAlignment="Center">
 
                 <Grid>
+                    <Grid.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                            <GradientStop Color="#22301a" Offset="0"/>
+                            <GradientStop Color="#37492d" Offset="0.2"></GradientStop>
+                            <GradientStop Color="#37492d" Offset="0.4"/>
+                            <GradientStop Color="#37492d" Offset="0.5"/>
+                            <GradientStop Color="#37492d" Offset="0.6"/>
+                            <GradientStop Color="#37492d" Offset="0.8"></GradientStop>
+                            <GradientStop Color="#22301a" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Grid.Background>                  
                     <Label FontSize="24" FontWeight="Bold" VerticalContentAlignment="Center" Height="Auto" VerticalAlignment="Top" Margin="0,10,0,0" HorizontalAlignment="Center">APPROVED REQUESTS</Label>
-                    <DataGrid x:Name="ApprovedRequestsDataGrid" FontSize="16" VerticalContentAlignment="Center" VerticalScrollBarVisibility="Auto" Margin="0,40,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Left" ItemsSource="{Binding Path=ApprovedRequests,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" IsReadOnly="True" RowBackground="#CDFFCC" Height="322" Width="950" UseLayoutRounding="False" HeadersVisibility="Column">
+                    <DataGrid x:Name="ApprovedRequestsDataGrid" FontSize="16" VerticalContentAlignment="Center" VerticalScrollBarVisibility="Auto" Margin="0,0,0,20" HorizontalAlignment="Center" VerticalAlignment="Bottom" HorizontalContentAlignment="Left" ItemsSource="{Binding Path=ApprovedRequests,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" IsReadOnly="True" RowBackground="#CDFFCC" Height="300" Width="950" UseLayoutRounding="False"  HeadersVisibility="Column">
 
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Name" Width="1.5*" Binding="{Binding Reservation.Accommodation.Name}">
@@ -166,8 +181,19 @@
             </TabItem>
             <TabItem Header="Pending requests" FontSize="16" HorizontalAlignment="Center">
                 <Grid>
+                    <Grid.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                            <GradientStop Color="#22301a" Offset="0"/>
+                            <GradientStop Color="#37492d" Offset="0.2"></GradientStop>
+                            <GradientStop Color="#37492d" Offset="0.4"/>
+                            <GradientStop Color="#37492d" Offset="0.5"/>
+                            <GradientStop Color="#37492d" Offset="0.6"/>
+                            <GradientStop Color="#37492d" Offset="0.8"></GradientStop>
+                            <GradientStop Color="#22301a" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Grid.Background>
                     <Label FontSize="24" VerticalAlignment="Top" VerticalContentAlignment="Center" Height="Auto" FontWeight="Bold" Margin="0,10,0,0" HorizontalAlignment="Center">PENDING REQUESTS</Label>
-                    <DataGrid x:Name="PendingRequestsDataGrid" FontSize="16" VerticalContentAlignment="Center" VerticalScrollBarVisibility="Auto" HeadersVisibility="Column" Margin="0,40,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" ItemsSource="{Binding Path=PendingRequests,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" IsReadOnly="True" Height="322" Width="950" UseLayoutRounding="False">
+                    <DataGrid x:Name="PendingRequestsDataGrid" FontSize="16" VerticalContentAlignment="Center" VerticalScrollBarVisibility="Auto" HeadersVisibility="Column" Margin="0,0,0,20" HorizontalAlignment="Center" VerticalAlignment="Bottom" ItemsSource="{Binding Path=PendingRequests,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" IsReadOnly="True" Height="300" Width="950" UseLayoutRounding="False">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Name" Width="1.5*" Binding="{Binding Reservation.Accommodation.Name}">
                                 <DataGridTextColumn.ElementStyle>
@@ -238,8 +264,19 @@
 
             <TabItem Header="Declined requests" FontSize="16">
                 <Grid>
+                    <Grid.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                            <GradientStop Color="#22301a" Offset="0"/>
+                            <GradientStop Color="#37492d" Offset="0.2"></GradientStop>
+                            <GradientStop Color="#37492d" Offset="0.4"/>
+                            <GradientStop Color="#37492d" Offset="0.5"/>
+                            <GradientStop Color="#37492d" Offset="0.6"/>
+                            <GradientStop Color="#37492d" Offset="0.8"></GradientStop>
+                            <GradientStop Color="#22301a" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Grid.Background>
                     <Label FontSize="24"  FontWeight="Bold" VerticalContentAlignment="Center" VerticalAlignment="Top" Height="Auto" Margin="0,10,0,0" HorizontalAlignment="Center">DECLINED REQUESTS</Label>
-                    <DataGrid  x:Name="DeclinedRequestsDataGrid" FontSize="16" VerticalContentAlignment="Center" Margin="0,40,0,0" HeadersVisibility="Column" RowBackground="#FF8986"  HorizontalAlignment="Center" VerticalAlignment="Center" VerticalScrollBarVisibility="Auto" ItemsSource="{Binding Path=DeclinedRequests,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" IsReadOnly="True" Height="322" Width="950" UseLayoutRounding="False">
+                    <DataGrid  x:Name="DeclinedRequestsDataGrid" FontSize="16" VerticalContentAlignment="Center" Margin="0,0,0,20" HeadersVisibility="Column" RowBackground="#FF8986"  HorizontalAlignment="Center" VerticalAlignment="Bottom" VerticalScrollBarVisibility="Auto" ItemsSource="{Binding Path=DeclinedRequests,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" IsReadOnly="True" Height="300" Width="950" UseLayoutRounding="False">
                         <DataGrid.Columns >
                             <DataGridTextColumn Header="Name" Width="1.4*" Binding="{Binding Reservation.Accommodation.Name}">
                                 <DataGridTextColumn.ElementStyle>
@@ -302,7 +339,25 @@
             </TabItem>
 
         </TabControl>
-        
-        
+
+        <Grid Grid.Row="1">
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                    <GradientStop Color="#22301a" Offset="0"/>
+                    <GradientStop Color="#37492d" Offset="0.2"></GradientStop>
+                    <GradientStop Color="#37492d" Offset="0.4"/>
+                    <GradientStop Color="#37492d" Offset="0.5"/>
+                    <GradientStop Color="#37492d" Offset="0.6"/>
+                    <GradientStop Color="#37492d" Offset="0.8"></GradientStop>
+                    <GradientStop Color="#22301a" Offset="1"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+            <Label FontSize="18" Grid.Row="1" Width="Auto" Height="35" FontFamily="Segoe UI" HorizontalAlignment="Center" VerticalAlignment="Top" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Margin="0,10,0,0">Frequency of making requests:</Label>
+            <Image Source="/Resources/Images/diagram.png" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="1" Height="150" Width="200" Margin="0,60,0,0" Stretch="Fill"></Image>
+
+        </Grid>
+
+
+
     </Grid>
 </Page>
