@@ -30,14 +30,14 @@
 
             </Grid>
         </Border>
-        <Label Content="Cleanliness" HorizontalAlignment="Left" Margin="17,193,0,0" VerticalAlignment="Top" Width="128"/>
-        <Label Content="Following the rules" HorizontalAlignment="Left" Margin="17,238,0,0" VerticalAlignment="Top" Width="128"/>
+        <Label Content="Cleanliness*" HorizontalAlignment="Left" Margin="17,193,0,0" VerticalAlignment="Top" Width="128"/>
+        <Label Content="Following the rules*" HorizontalAlignment="Left" Margin="17,238,0,0" VerticalAlignment="Top" Width="128"/>
         <Label Content="Additional comment" HorizontalAlignment="Left" Margin="16,0,0,0" VerticalAlignment="Center" Width="128"/>
         <Label Content="(Optional)" HorizontalAlignment="Left" Margin="275,0,0,0" VerticalAlignment="Center" Width="128" HorizontalContentAlignment="Right"/>
         <tk:WatermarkTextBox HorizontalAlignment="Center" Margin="2,323,0,0" TextWrapping="Wrap" Text="{Binding Path = GuestReview.Comment}" Watermark="Enter comment here" VerticalAlignment="Top" Width="382" Height="161">
         </tk:WatermarkTextBox>
         <Button Command="NavigationCommands.BrowseBack" Content="Cancel" HorizontalAlignment="Left" Margin="20,546,0,0" VerticalAlignment="Top" Height="41" Width="140" Style="{StaticResource CancelButton}"/>
-        <Button Command="{Binding ConfirmCommand}" Content="Confirm" IsEnabled="{Binding Path= IsOkButtonEnabled}" HorizontalAlignment="Left" Margin="260,546,0,0" VerticalAlignment="Top" Height="41" Width="140" Style="{StaticResource BasicButton}"/>
+        <Button Command="{Binding ConfirmCommand}" Name="ConfirmButton" Content="Confirm" IsEnabled="{Binding Path= IsOkButtonEnabled}" HorizontalAlignment="Left" Margin="260,546,0,0" VerticalAlignment="Top" Height="41" Width="140" Style="{StaticResource BasicButton}"/>
 
         <RadioButton Command="{Binding SelectCleanlinessCommand}" CommandParameter="1" GroupName="Cleanliness" Name="Cleanliness1" Content="1" HorizontalAlignment="Left" Margin="200,200,0,0" VerticalAlignment="Top" Height="21" Width="34" FontSize="16"/>
         <RadioButton Command="{Binding SelectCleanlinessCommand}"  CommandParameter="2" GroupName="Cleanliness" Name="Cleanliness2" Content="2" HorizontalAlignment="Left" Margin="240,200,0,0" VerticalAlignment="Top" Height="21" Width="34" FontSize="16"/>
@@ -49,5 +49,20 @@
         <RadioButton Command="{Binding SelectRulesFollowingCommand}" CommandParameter="4" GroupName="RulesFollowing" Name="RulesFollowing4" Content="4" HorizontalAlignment="Left" Margin="320,245,0,0" VerticalAlignment="Top" Height="21" Width="34" FontSize="16"/>
         <RadioButton Command="{Binding SelectRulesFollowingCommand}" CommandParameter="5" GroupName="RulesFollowing" Name="RulesFollowing5" Content="5" HorizontalAlignment="Left" Margin="360,245,0,0" VerticalAlignment="Top" Height="21" Width="34" FontSize="16"/>
         <RadioButton Command="{Binding SelectRulesFollowingCommand}" CommandParameter="1" GroupName="RulesFollowing" Name="RulesFollowing1" Content="1" HorizontalAlignment="Left" Margin="200,245,0,0" VerticalAlignment="Top" Height="21" Width="34" FontSize="16"/>
+
+        <Label Content="*Required field!" Foreground="red" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="188" Margin="20,0,0,95">
+            <Label.Style>
+                <Style TargetType="Label">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=ConfirmButton, Path=IsEnabled}" Value="True">
+                            <Setter Property="Visibility" Value="Hidden" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding ElementName=ConfirmButton, Path=IsEnabled}" Value="False">
+                            <Setter Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Label.Style>
+        </Label>
     </Grid>
 </Page>

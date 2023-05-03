@@ -16,7 +16,7 @@
                 <RowDefinition Height="2*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Button Command="{Binding CancelCommand}" Content="Cancel" Grid.Column="0" Grid.Row="1" Foreground="blue" Background="Transparent" FontWeight="Bold" FontSize="15">
+            <Button Command="{Binding CancelCommand}" Content="NO" Grid.Column="0" Grid.Row="1" Foreground="blue" Background="Transparent" FontWeight="Bold" FontSize="15">
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="BorderThickness" Value="1" />
@@ -24,7 +24,7 @@
                     </Style>
                 </Button.Resources>
             </Button>
-            <Button Content="Cancel" Command="{Binding CancelRenovationCommand}" Grid.Column="1" Grid.Row="1" Background="Transparent" Foreground="Red" FontWeight="Bold" FontSize="15">
+            <Button Content="YES" Command="{Binding CancelRenovationCommand}" Grid.Column="1" Grid.Row="1" Background="Transparent" Foreground="Red" FontWeight="Bold" FontSize="15">
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="BorderThickness" Value="1" />

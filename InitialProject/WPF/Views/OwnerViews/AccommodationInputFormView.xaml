@@ -13,7 +13,7 @@
 
     <ScrollViewer>
         <Grid Height="800" >
-            <Label Content="Name" Margin="20,39,179,729"/>
+            <Label Content="Name*" Margin="20,39,179,729"/>
 
             <TextBox HorizontalAlignment="Center" Margin="0,71,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="357" Height="31">
                 <Binding Path="Name" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True">
@@ -39,9 +39,9 @@
                 </Validation.ErrorTemplate>
             </TextBox>
 
-            <Label Content="Country" Margin="23,122,203,631"/>
-            <Label Content="City" Margin="226,122,22,631"/>
-            <Label Content="Type" Margin="23,193,203,555"/>
+            <Label Content="Country*" Margin="23,122,203,631"/>
+            <Label Content="City*" Margin="226,122,22,631"/>
+            <Label Content="Type*" Margin="23,193,203,555"/>
             <ComboBox Name="ComboBoxCountry" ItemsSource="{Binding Countries}" SelectedItem="{Binding Location.Country}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" HorizontalAlignment="Left" Margin="28,154,0,0" VerticalAlignment="Top" Width="162">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">
@@ -75,7 +75,7 @@
                 </Validation.ErrorTemplate>
             </ComboBox>
             <ComboBox Name="TypeComboBox" ItemsSource="{Binding Path=AccommodationTypes}" DisplayMemberPath="Name" SelectedItem="{Binding Path=Type}" HorizontalAlignment="Left" Margin="28,225,0,0" VerticalAlignment="Top" Width="162"/>
-            <Label Content="Capacity" Margin="23,273,309,476"/>
+            <Label Content="Capacity*" Margin="23,273,309,476"/>
             <tk:IntegerUpDown AllowTextInput="True" DisplayDefaultValueOnEmptyText="True" TextAlignment="Left" Minimum="1" HorizontalAlignment="Left" Margin="109,273,0,0" VerticalAlignment="Top" Width="81" Height="31">
                 <tk:IntegerUpDown.Text>
                     <Binding Path="Capacity" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True">
@@ -101,8 +101,8 @@
                     </ControlTemplate>
                 </Validation.ErrorTemplate>
             </tk:IntegerUpDown>
-            <Label Content="Min number of days for reservation" Margin="19,334,170,414"/>
-            <Label Content="Number of days before to cancel" Margin="19,390,168,359"/>
+            <Label Content="Min number of days for reservation*" Margin="19,334,170,414"/>
+            <Label Content="Number of days before to cancel*" Margin="19,390,168,359"/>
             <tk:IntegerUpDown AllowTextInput="True" TextAlignment="Left" DisplayDefaultValueOnEmptyText="True" Minimum="1" HorizontalAlignment="Left" Margin="248,335,0,0" VerticalAlignment="Top" Width="137" Height="31">
                 <tk:IntegerUpDown.Text>
                     <Binding Path="MinDaysForReservation" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True">
@@ -155,7 +155,7 @@
                 </Validation.ErrorTemplate>
             </tk:IntegerUpDown>
 
-            <Label Content="Images" HorizontalAlignment="Left" Margin="20,458,0,0" VerticalAlignment="Top" Width="190"/>
+            <Label Content="Images*" HorizontalAlignment="Left" Margin="20,458,0,0" VerticalAlignment="Top" Width="190"/>
             <Button Command="{Binding AddImageCommand}" Name="AddImageButton" Content="+" FontSize="20" HorizontalAlignment="Left" Margin="28,498,0,0" VerticalAlignment="Top" Width="107" Height="34" BorderBrush="DarkGray" BorderThickness="3"/>
 
             <Button Command="{Binding RemoveImageCommand}" Name="RemoveImageButton" Content="-" FontSize="20" HorizontalAlignment="Left" Margin="275,498,0,0" VerticalAlignment="Top" Width="110" Height="34"  BorderBrush="DarkGray" BorderThickness="3"/>
@@ -192,7 +192,7 @@
                 <Button Command="{Binding CancelCommand}" Grid.Column="0" Name="CancelButton" Content="Cancel" Margin="30, 0, 0, 0" HorizontalAlignment="Left" Width="136" Height="41" Style="{StaticResource CancelButton}"/>
                 <Button Command="{Binding OkCommand}" Grid.Column="1" Name="OkButton" Content="OK" Margin="0, 0, 25, 0" HorizontalAlignment="Right" Width="136" Height="41" Style="{StaticResource BasicButton}"/>
             </Grid>
-            <Label Content="*All fields are required!" Foreground="Red" HorizontalAlignment="Left" Margin="24,625,0,0" VerticalAlignment="Center" Width="188">
+            <Label Content="*Required field!" Foreground="red" HorizontalAlignment="Left" Margin="24,625,0,0" VerticalAlignment="Center" Width="188">
                 <Label.Style>
                     <Style TargetType="Label">
                         <Style.Triggers>

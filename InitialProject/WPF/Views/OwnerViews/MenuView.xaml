@@ -85,7 +85,8 @@
                 </Style>
             </Button.Resources>
         </Button>
-        <Image Source="/Resources/Images/logoMyTravel.png" Stretch="Fill" HorizontalAlignment="Left" Height="100" Margin="134,53,0,0" VerticalAlignment="Top" Width="139" RenderTransformOrigin="0.468,0.174" />
+        <Image Source="/Resources/Images/logoMyTravel.png" Stretch="Fill" HorizontalAlignment="Left" Height="100" Margin="134,53,0,0" VerticalAlignment="Top" Width="139" RenderTransformOrigin="0.468,0.174">
+        </Image>
         <Button Command="{Binding SignOutCommand}" Name="SignOutButton" HorizontalContentAlignment="Left" HorizontalAlignment="Center" Margin="0,575,0,0" VerticalAlignment="Top" Width="210" Height="45">
             <Button.Content>
                 <StackPanel Orientation="Horizontal" Width="200">

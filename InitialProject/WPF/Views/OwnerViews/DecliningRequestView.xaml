@@ -9,15 +9,15 @@
       Title="Requests For Rescheduling">
 
     <Grid Margin="0, 30, 0, 30" Background="White">
-        <Rectangle Fill="LightGray" HorizontalAlignment="Center" Height="30" Stroke="DarkGray" VerticalAlignment="Top" Width="430"/>
-        <Button Name="ExitButton" Command="NavigationCommands.BrowseBack" Content="x" Foreground="DarkGray" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="384,5,0,0" VerticalAlignment="Top" Height="25" Width="27" BorderBrush="DarkGray" Background="AliceBlue">
+        <Rectangle Fill="#005A9C" HorizontalAlignment="Center" Height="30" Stroke="LightGray" VerticalAlignment="Top" Width="430"/>
+        <Button Name="ExitButton" Command="NavigationCommands.BrowseBack" Content="x" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="384,5,0,0" VerticalAlignment="Top" Height="25" Width="27" Style="{StaticResource CancelButton}">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="100"/>
                 </Style>
             </Button.Resources>
         </Button>
-        <Label Foreground="DarkGray" Content="Declining Request" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" Width="134" Height="28" VerticalContentAlignment="Center">
+        <Label Foreground="LightGray" Content="Declining Request" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" Width="134" Height="28" VerticalContentAlignment="Center">
         </Label>
         <Label Content="Declining request made by" HorizontalAlignment="Left" Margin="30,82,0,0" VerticalAlignment="Top" Width="156" VerticalContentAlignment="Bottom" Height="30"/>
         <Label Content="{Binding Path= ReschedulingAccommodationRequest.Reservation.Guest}" FontSize="15" FontWeight="SemiBold" HorizontalAlignment="Left" Margin="191,82,0,0"  VerticalAlignment="Top" Width="174" Height="30"/>

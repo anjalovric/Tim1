@@ -28,12 +28,13 @@
             <RowDefinition Height="3*"/>
             <RowDefinition />
             <RowDefinition Height="1.5*"/>
-            <RowDefinition Height="2*"/>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="1.8*"/>
         </Grid.RowDefinitions>
-        <Label Content="Choose accommodation" VerticalContentAlignment="Bottom" Grid.Row="0" Grid.Column="0" Margin="-3, 0, 0, 0" />
+        <Label Content="Choose accommodation*" VerticalContentAlignment="Bottom" Grid.Row="0" Grid.Column="0" Margin="-3, 0, 0, 0" />
         <ComboBox ItemsSource="{Binding Path= Accommodations, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name" SelectedItem="{Binding Path=SelectedAccommodation, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Grid.Row="1"/>
-        <Label Content="From:" VerticalContentAlignment="Bottom" Grid.Row="2" Grid.Column="0" Margin="-3, 0, 0, 0" />
-        <Label Content="To:" Margin="7, 0, 0, 0" VerticalContentAlignment="Bottom" Grid.Row="2" Grid.Column="1" />
+        <Label Content="From*" VerticalContentAlignment="Bottom" Grid.Row="2" Grid.Column="0" Margin="-3, 0, 0, 0" />
+        <Label Content="To*" Margin="7, 0, 0, 0" VerticalContentAlignment="Bottom" Grid.Row="2" Grid.Column="1" />
         <DatePicker Name="StartDatePicker" Grid.Column="0" Grid.Row="3" Margin="0, 0, 10, 0"  DisplayDateStart="{x:Static sys:DateTime.Today}"  DisplayDate="{Binding Path=StartDate, UpdateSourceTrigger=PropertyChanged}">
             <DatePicker.SelectedDate>
                 <Binding Path="StartDate" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True" NotifyOnValidationError="True">
@@ -92,7 +93,7 @@
                 </ControlTemplate>
             </Validation.ErrorTemplate>
         </DatePicker>
-        <Label Content="Duration" VerticalContentAlignment="Bottom" Grid.Row="4" Grid.Column="0" Margin="-3, 0, 0, 0"/>
+        <Label Content="Duration*" VerticalContentAlignment="Bottom" Grid.Row="4" Grid.Column="0" Margin="-3, 0, 0, 0"/>
         <tk:IntegerUpDown Grid.Column="0" Grid.Row="5" Minimum="1" AllowTextInput="True" TextAlignment="Left" DisplayDefaultValueOnEmptyText="True">
             <tk:IntegerUpDown.Text>
                 <Binding Path="Duration" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True">
@@ -119,7 +120,7 @@
             </Validation.ErrorTemplate>
         </tk:IntegerUpDown>
         
-        <Label Content="Suggested Dates" VerticalContentAlignment="Bottom" Grid.Row="6" Grid.Column="0" Margin="-3, 0, 0, 0" />
+        <Label Content="Suggested Dates*" VerticalContentAlignment="Bottom" Grid.Row="6" Grid.Column="0" Margin="-3, 0, 0, 0" />
         <ListBox ItemsSource="{Binding Path= DatesSuggestions, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedDateRange, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="2" AlternationCount="2">
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
@@ -135,8 +136,22 @@
             </ListBox.ItemContainerStyle>
         </ListBox>
         <Label Content="Description" VerticalContentAlignment="Bottom" Grid.Row="8" Grid.Column="0" Margin="-3, 0, 0, 0" />
+        <Label Content="*Required field!" Grid.Column="0" Grid.Row="10" Foreground="red" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="188">
+            <Label.Style>
+                <Style TargetType="Label">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=ConfirmButton, Path=IsEnabled}" Value="True">
+                            <Setter Property="Visibility" Value="Hidden" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding ElementName=ConfirmButton, Path=IsEnabled}" Value="False">
+                            <Setter Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Label.Style>
+        </Label>
         <tk:WatermarkTextBox Text="{Binding Path= Description, UpdateSourceTrigger=PropertyChanged}" Watermark="Enter description here" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="9"/>
-        <Button Command="{Binding CancelCommand}" Content="Cancel" Grid.Column="0" Grid.Row="10" Height="41" Width="136" HorizontalAlignment="Left" Style="{StaticResource CancelButton}"/>
-        <Button Command="{Binding ConfirmCommand}" Content="Confirm" Grid.Column="1" Grid.Row="10" Height="41" Width="136" HorizontalAlignment="Right" Style="{StaticResource BasicButton}"/>
+        <Button Command="{Binding CancelCommand}" Content="Cancel" Grid.Column="0" Grid.Row="11" Height="41" Width="136" HorizontalAlignment="Left" Style="{StaticResource CancelButton}"/>
+        <Button Command="{Binding ConfirmCommand}" Name="ConfirmButton" Content="Confirm" Grid.Column="1" Grid.Row="11" Height="41" Width="136" HorizontalAlignment="Right" Style="{StaticResource BasicButton}"/>
     </Grid>
 </Page>
