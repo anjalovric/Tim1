@@ -117,11 +117,11 @@ namespace InitialProject.Service
             foreach (var reservation in reservationService.GetAll().FindAll(n => n.Accommodation.Id == accommodation.Id))
             {
                 if(reservation.Arrival.Year == year && reservation.Departure.Year == year)
-                    counter += reservation.Departure.Day - reservation.Arrival.Day;
+                    counter += (reservation.Departure.Date - reservation.Arrival.Date).Days;
                 else if(reservation.Arrival.Year == year)
                 {
                     DateTime lastDayOfYear = new DateTime(year, 12, 31);
-                    counter += lastDayOfYear.Day - reservation.Arrival.Day;
+                    counter += (lastDayOfYear.Date - reservation.Arrival.Date).Days;
                 }
             }
             return (double)counter;

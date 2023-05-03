@@ -67,10 +67,8 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         private void Cancel_Executed(object sender)
         {
             selectedRenovation = sender as AccommodationRenovation;
-            Renovations.Remove(selectedRenovation);
-            renovationService.Delete(selectedRenovation);
-            UpdateRenovationsNumber();
-            MakeCancelledNotification();
+            CancellingRenovationView cancellingRenovationView = new CancellingRenovationView(selectedRenovation);
+            cancellingRenovationView.Show();
         }
         private void RenovationDetails_Executed(object sender)
         {
@@ -141,12 +139,6 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
                 }
             }
         }
-        private void UpdateRenovationsNumber()
-        {
-            UpcomingRenovations = renovationService.CountUpcomingRenovations(owner);
-            RenovatedObjects = renovationService.CountRenovatedObjects(owner);
-        }
-
         private void OK_Executed(object sender)
         {
             StackPanelVisibility = "Hidden";
@@ -171,13 +163,6 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             {
                 StackPanelVisibility = "Hidden";
             }
-        }
-
-        private void MakeCancelledNotification()
-        {
-            OwnerNotificationsService notificationsService = new OwnerNotificationsService();
-            notificationsService.Add(OwnerNotificationType.RENOVATION_CANCELLED, owner);
-            DisplayNotificationPanel();
         }
     }
 }

@@ -6,17 +6,17 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:InitialProject.WPF.Views"
       xmlns:val="clr-namespace:InitialProject.WPF.Validations.OwnerValidations"
+      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
       mc:Ignorable="d" 
-      d:DesignHeight="630" d:DesignWidth="430"
+      d:DesignHeight="800" d:DesignWidth="430"
       Title="Enter Accommodation" Background="#b3cee5">
 
-
     <ScrollViewer>
-        <Grid Height="780" >
-            <Label Content="Name" Margin="23,57,183,667"/>
+        <Grid Height="800" >
+            <Label Content="Name*" Margin="20,39,179,729"/>
 
-            <TextBox HorizontalAlignment="Center" Margin="0,89,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="363" Height="31">
-                <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
+            <TextBox HorizontalAlignment="Center" Margin="0,71,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="357" Height="31">
+                <Binding Path="Name" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True">
                     <Binding.ValidationRules>
                         <val:StringValidationRule ValidationStep="RawProposedValue"/>
                     </Binding.ValidationRules>
@@ -39,22 +39,141 @@
                 </Validation.ErrorTemplate>
             </TextBox>
 
-            <Label Content="Country" Margin="23,140,207,584"/>
-            <Label Content="City" Margin="225,140,26,584"/>
-            <Label Content="Type" Margin="23,207,206,517"/>
-            <ComboBox Name="ComboBoxCountry" ItemsSource="{Binding Countries}" SelectedItem="{Binding Location.Country}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" HorizontalAlignment="Left" Margin="24,172,0,0" VerticalAlignment="Top" Width="162" SelectionChanged="ComboBoxCountry_SelectionChanged"/>
-            <ComboBox Name="ComboBoxCity" ItemsSource="{Binding CitiesByCountry}" SelectedItem="{Binding Location.City}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" IsEnabled="{Binding Path=IsCityComboBoxEnabled}" HorizontalAlignment="Left" Margin="225,172,0,0" VerticalAlignment="Top" Width="162"/>
-            <ComboBox Name="TypeComboBox" ItemsSource="{Binding Path=AccommodationTypes}" DisplayMemberPath="Name" SelectedItem="{Binding Path=Type}" HorizontalAlignment="Left" Margin="25,239,0,0" VerticalAlignment="Top" Width="162"/>
-            <Label Content="Capacity" Margin="20,287,312,433"/>
-            <tk:IntegerUpDown AllowTextInput="True" DisplayDefaultValueOnEmptyText="True" Minimum="1" HorizontalAlignment="Left" Margin="106,287,0,0" Text="{Binding Path=Capacity, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="83" Height="31"/>
-            <Label Content="Min number of days for reservation" Margin="20,342,169,377"/>
-            <Label Content="Number of days before to cancel" Margin="20,398,167,322"/>
-            <tk:IntegerUpDown AllowTextInput="True" DisplayDefaultValueOnEmptyText="True" Minimum="1" HorizontalAlignment="Left" Margin="249,343,0,0" Text="{Binding Path=MinDaysForReservation, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="137" Height="31"/>
-            <tk:IntegerUpDown AllowTextInput="True" DisplayDefaultValueOnEmptyText="True" Minimum="0" HorizontalAlignment="Left" Margin="250,398,0,0" Text="{Binding Path=MinDaysToCancel, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="137" Height="31"/>
-            <Label Content="Images" HorizontalAlignment="Left" Margin="20,458,0,0" VerticalAlignment="Top" Width="190"/>
-            <Button Command="{Binding AddImageCommand}" Name="AddImageButton" Content="+" FontSize="20" HorizontalAlignment="Left" Margin="25,498,0,0" VerticalAlignment="Top" Width="110" Height="34" BorderBrush="DarkGray" BorderThickness="3"/>
-            <Button Command="{Binding RemoveImageCommand}" Name="RemoveImageButton" Content="-" FontSize="20" HorizontalAlignment="Left" Margin="278,498,0,0" VerticalAlignment="Top" Width="110" Height="34"  BorderBrush="DarkGray" BorderThickness="3"/>
-            <Image Source="{Binding Path=ImageUrl, UpdateSourceTrigger=PropertyChanged}" Stretch="Fill" HorizontalAlignment="Left" Height="100" Margin="120,584,0,0" VerticalAlignment="Top" Width="183"/>
+            <Label Content="Country*" Margin="23,122,203,631"/>
+            <Label Content="City*" Margin="226,122,22,631"/>
+            <Label Content="Type*" Margin="23,193,203,555"/>
+            <ComboBox Name="ComboBoxCountry" ItemsSource="{Binding Countries}" SelectedItem="{Binding Location.Country}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" HorizontalAlignment="Left" Margin="28,154,0,0" VerticalAlignment="Top" Width="162">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding EnableCityCommand}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </ComboBox>
+            <ComboBox Name="ComboBoxCity" ItemsSource="{Binding CitiesByCountry}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" IsEnabled="{Binding Path=IsCityComboBoxEnabled}" HorizontalAlignment="Left" Margin="229,154,0,0" VerticalAlignment="Top" Width="157">
+                <ComboBox.SelectedItem>
+                    <Binding Path="Location.City" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True">
+                        <Binding.ValidationRules>
+                            <val:ComboBoxValidationRule ValidationStep="RawProposedValue" />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </ComboBox.SelectedItem>
+                <Validation.ErrorTemplate>
+                    <ControlTemplate>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+
+                            <AdornedElementPlaceholder  Grid.Column="0" Grid.Row="0"/>
+                            <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Validation.ErrorTemplate>
+            </ComboBox>
+            <ComboBox Name="TypeComboBox" ItemsSource="{Binding Path=AccommodationTypes}" DisplayMemberPath="Name" SelectedItem="{Binding Path=Type}" HorizontalAlignment="Left" Margin="28,225,0,0" VerticalAlignment="Top" Width="162"/>
+            <Label Content="Capacity*" Margin="23,273,309,476"/>
+            <tk:IntegerUpDown AllowTextInput="True" DisplayDefaultValueOnEmptyText="True" TextAlignment="Left" Minimum="1" HorizontalAlignment="Left" Margin="109,273,0,0" VerticalAlignment="Top" Width="81" Height="31">
+                <tk:IntegerUpDown.Text>
+                    <Binding Path="Capacity" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True">
+                        <Binding.ValidationRules>
+                            <val:IntegerUpDownValidationRule ValidationStep="RawProposedValue" ValidatesOnTargetUpdated="True"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </tk:IntegerUpDown.Text>
+                <Validation.ErrorTemplate>
+                    <ControlTemplate>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+
+                            <AdornedElementPlaceholder  Grid.Column="0" Grid.Row="0"/>
+                            <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Validation.ErrorTemplate>
+            </tk:IntegerUpDown>
+            <Label Content="Min number of days for reservation*" Margin="19,334,170,414"/>
+            <Label Content="Number of days before to cancel*" Margin="19,390,168,359"/>
+            <tk:IntegerUpDown AllowTextInput="True" TextAlignment="Left" DisplayDefaultValueOnEmptyText="True" Minimum="1" HorizontalAlignment="Left" Margin="248,335,0,0" VerticalAlignment="Top" Width="137" Height="31">
+                <tk:IntegerUpDown.Text>
+                    <Binding Path="MinDaysForReservation" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True">
+                        <Binding.ValidationRules>
+                            <val:IntegerUpDownValidationRule ValidationStep="RawProposedValue" ValidatesOnTargetUpdated="True"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </tk:IntegerUpDown.Text>
+                <Validation.ErrorTemplate>
+                    <ControlTemplate>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+
+                            <AdornedElementPlaceholder  Grid.Column="0" Grid.Row="0"/>
+                            <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Validation.ErrorTemplate>
+            </tk:IntegerUpDown>
+
+            <tk:IntegerUpDown AllowTextInput="True" TextAlignment="Left" DisplayDefaultValueOnEmptyText="True" Minimum="0" HorizontalAlignment="Left" Margin="249,390,0,0" VerticalAlignment="Top" Width="137" Height="31">
+                <tk:IntegerUpDown.Text>
+                    <Binding Path="MinDaysToCancel" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True">
+                        <Binding.ValidationRules>
+                            <val:IntegerUpDownValidationRule ValidationStep="RawProposedValue" ValidatesOnTargetUpdated="True"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </tk:IntegerUpDown.Text>
+                <Validation.ErrorTemplate>
+                    <ControlTemplate>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+
+                            <AdornedElementPlaceholder  Grid.Column="0" Grid.Row="0"/>
+                            <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Validation.ErrorTemplate>
+            </tk:IntegerUpDown>
+
+            <Label Content="Images*" HorizontalAlignment="Left" Margin="20,458,0,0" VerticalAlignment="Top" Width="190"/>
+            <Button Command="{Binding AddImageCommand}" Name="AddImageButton" Content="+" FontSize="20" HorizontalAlignment="Left" Margin="28,498,0,0" VerticalAlignment="Top" Width="107" Height="34" BorderBrush="DarkGray" BorderThickness="3"/>
+
+            <Button Command="{Binding RemoveImageCommand}" Name="RemoveImageButton" Content="-" FontSize="20" HorizontalAlignment="Left" Margin="275,498,0,0" VerticalAlignment="Top" Width="110" Height="34"  BorderBrush="DarkGray" BorderThickness="3"/>
+            <Image Stretch="Fill" HorizontalAlignment="Left" Height="100" Margin="120,584,0,0" VerticalAlignment="Top" Width="183">
+                <Image.Source>
+                    <Binding Path="ImageUrl" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True">
+                        <Binding.ValidationRules>
+                            <val:ImageValidationRule ValidationStep="ConvertedProposedValue" ValidatesOnTargetUpdated="True"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </Image.Source>
+                <Validation.ErrorTemplate>
+                    <ControlTemplate>
+                        <Image Height="100" Width="183" Source="{Binding [0].ErrorContent}"/>
+                    </ControlTemplate>
+                </Validation.ErrorTemplate>
+            </Image>
+
             <Button Command="{Binding PreviousImageCommand}" Name="PreviousImageButton" HorizontalAlignment="Left" Margin="35,625,0,0" VerticalAlignment="Top" Height="31" Width="71" Style="{StaticResource ButtonForImages}">
                 <Button.Content>
                     <Image Source="/Resources/Images/back_arrow.png" />
@@ -65,16 +184,15 @@
                     <Image Source="/Resources/Images/arrow.png" />
                 </Button.Content>
             </Button>
-            <Grid Margin="0,670,0,0">
+            <Grid Margin="0,720,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <Button Command="{Binding CancelCommand}" Grid.Column="0" Name="CancelButton" Content="Cancel" Margin="30, 0, 0, 0" HorizontalAlignment="Left" Width="136" Height="41" Style="{StaticResource BasicButton}"/>
+                <Button Command="{Binding CancelCommand}" Grid.Column="0" Name="CancelButton" Content="Cancel" Margin="30, 0, 0, 0" HorizontalAlignment="Left" Width="136" Height="41" Style="{StaticResource CancelButton}"/>
                 <Button Command="{Binding OkCommand}" Grid.Column="1" Name="OkButton" Content="OK" Margin="0, 0, 25, 0" HorizontalAlignment="Right" Width="136" Height="41" Style="{StaticResource BasicButton}"/>
             </Grid>
-            <Image Source="/Resources/Images/logoMyTravel.png" Margin="252,10,27,702"/>
-            <Label Content="*All fields are required!" Foreground="Red" HorizontalAlignment="Left" Margin="24,605,0,0" VerticalAlignment="Center" Width="188">
+            <Label Content="*Required field!" Foreground="red" HorizontalAlignment="Left" Margin="24,625,0,0" VerticalAlignment="Center" Width="188">
                 <Label.Style>
                     <Style TargetType="Label">
                         <Style.Triggers>

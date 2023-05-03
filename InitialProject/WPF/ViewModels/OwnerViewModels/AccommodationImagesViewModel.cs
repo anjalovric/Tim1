@@ -59,7 +59,9 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         }
         private bool CanExecute(object sender)
         {
-            return true;
+            if(Images.Count > 1)
+                return true;
+            return false;
         }
 
         private void NextImage_Executed(object sender)

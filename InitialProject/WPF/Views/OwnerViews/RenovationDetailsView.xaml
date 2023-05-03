@@ -9,8 +9,8 @@
       Title="My Renovations">
 
     <Grid Margin="0, 20, 0, 20" Background="White">
-        <Rectangle Fill="LightGray" HorizontalAlignment="Center" Height="30" Stroke="DarkGray" VerticalAlignment="Top" Width="430"/>
-        <Button Foreground="DarkGray" Command="NavigationCommands.BrowseBack" Name="ExitButton" Content="x" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="384,5,0,0" VerticalAlignment="Top" Height="25" Width="27" Background="AliceBlue" BorderBrush="DarkGray">
+        <Rectangle Fill="#005A9C" HorizontalAlignment="Center" Height="30" Stroke="LightGray" VerticalAlignment="Top" Width="430"/>
+        <Button Command="NavigationCommands.BrowseBack" Name="ExitButton" Content="x" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="384,5,0,0" VerticalAlignment="Top" Height="25" Width="27" Style="{StaticResource CancelButton}">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="100"/>
@@ -32,8 +32,7 @@
                 <RowDefinition Height="1.5*"/>
                 <RowDefinition Height="2*" />
             </Grid.RowDefinitions>
-            <Label Content="{Binding Path= Renovation.Accommodation.Name}" VerticalContentAlignment="Center" FontSize="15" Grid.Column="0" Grid.Row="0" Margin="-2,0,0,0"/>
-            <Image Grid.Column="1" Grid.Row="0" Source="/Resources/Images/toolImage.png" Margin="0, 0, -30, 0"/>
+            <Label Content="{Binding Path= Renovation.Accommodation.Name}" VerticalContentAlignment="Center" FontSize="15" FontWeight="SemiBold" Grid.Column="0" Grid.Row="0" Margin="-2,0,0,0"/>
             <Label Content="From:" Grid.Row="1" Grid.Column="0" Margin="-3,0,0,0" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Left"/>
             <Label Content="To:" Grid.Row="1" Grid.Column="1" Margin="17, 0, 0, 0" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Left"/>
             <Grid Grid.Row="2" Grid.Column="0" Margin="0,10,20,0" >
