@@ -15,5 +15,7 @@ namespace InitialProject.WPF.Views.GuideViews
             InitializeComponent();
             DataContext=new AddTourByLocationViewModel(todayInstances,loggedUser,futureInstances,location);
         }
+
+
     }
 }

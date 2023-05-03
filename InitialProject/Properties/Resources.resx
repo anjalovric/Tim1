@@ -132,11 +132,20 @@
   <data name="AddDateAndTime" xml:space="preserve">
     <value>Add date and time</value>
   </data>
+  <data name="AddTourByLanguageView" xml:space="preserve">
+    <value>Create tour by language</value>
+  </data>
+  <data name="AddTourByLocation" xml:space="preserve">
+    <value>Create tour by location</value>
+  </data>
   <data name="AddTourView" xml:space="preserve">
     <value>Add tour </value>
   </data>
   <data name="AgeStatistics" xml:space="preserve">
     <value>Age statistics</value>
+  </data>
+  <data name="BeforeRegularEnd" xml:space="preserve">
+    <value>before regular end</value>
   </data>
   <data name="Between18and" xml:space="preserve">
     <value>Between 18 and 50</value>
@@ -156,6 +165,9 @@
   <data name="Capacity" xml:space="preserve">
     <value>Capacity</value>
   </data>
+  <data name="Checked" xml:space="preserve">
+    <value>Checked</value>
+  </data>
   <data name="CheckpointName" xml:space="preserve">
     <value>Checkpoint name</value>
   </data>
@@ -167,6 +179,9 @@
   </data>
   <data name="City" xml:space="preserve">
     <value>City</value>
+  </data>
+  <data name="Comment" xml:space="preserve">
+    <value>Comment</value>
   </data>
   <data name="CONFIRM" xml:space="preserve">
     <value>CONFIRM</value>
@@ -185,6 +200,9 @@
   </data>
   <data name="CreateTourFromRequest" xml:space="preserve">
     <value>Create tour from request</value>
+  </data>
+  <data name="CurrentCheckPoint" xml:space="preserve">
+    <value>⟟ Current checkpoint:</value>
   </data>
   <data name="DARK" xml:space="preserve">
     <value>DARK</value>
@@ -222,14 +240,29 @@
   <data name="FinishedTourDetails" xml:space="preserve">
     <value>Finished tour details</value>
   </data>
+  <data name="FINISHTOUR" xml:space="preserve">
+    <value>FINISH TOUR 🏁</value>
+  </data>
+  <data name="GENERATEREPORT" xml:space="preserve">
+    <value>GENERATE REPORT</value>
+  </data>
+  <data name="Grades" xml:space="preserve">
+    <value>Grades</value>
+  </data>
   <data name="Guest" xml:space="preserve">
     <value>Guest</value>
   </data>
   <data name="GuestsReservations" xml:space="preserve">
     <value>Confirmed guests presence from reservations of:</value>
   </data>
+  <data name="GuestWasOnPoints:" xml:space="preserve">
+    <value>Guest was on points:</value>
+  </data>
   <data name="GUIDEALREADYHASTOUR" xml:space="preserve">
     <value>Guide already has tour at this time!</value>
+  </data>
+  <data name="Guidesknowledge" xml:space="preserve">
+    <value>Guide's knowledge</value>
   </data>
   <data name="GuideWindow" xml:space="preserve">
     <value>GuideWindow</value>
@@ -239,6 +272,12 @@
   </data>
   <data name="HomePage" xml:space="preserve">
     <value>HOME PAGE</value>
+  </data>
+  <data name="ifYouWantToFinishTour" xml:space="preserve">
+    <value>if you want to finish tour</value>
+  </data>
+  <data name="Images" xml:space="preserve">
+    <value>Images</value>
   </data>
   <data name="ImagesOfTour" xml:space="preserve">
     <value>Images of tour</value>
@@ -258,11 +297,17 @@
   <data name="LanguageInLastYear" xml:space="preserve">
     <value>language in last year</value>
   </data>
+  <data name="LanguageKnowledge" xml:space="preserve">
+    <value>Knowledge of language</value>
+  </data>
   <data name="langugaeinlastyear" xml:space="preserve">
     <value>language in last year</value>
   </data>
   <data name="LIGHT" xml:space="preserve">
     <value>LIGHT</value>
+  </data>
+  <data name="ListOfCheckpointsForChosenTour" xml:space="preserve">
+    <value>List od checkpoints for chosen tour:</value>
   </data>
   <data name="Location" xml:space="preserve">
     <value>Location</value>
@@ -300,11 +345,17 @@
   <data name="Onthemostwanted" xml:space="preserve">
     <value>on the most wanted</value>
   </data>
+  <data name="Order" xml:space="preserve">
+    <value>Order</value>
+  </data>
   <data name="Over50" xml:space="preserve">
     <value>Over 50</value>
   </data>
   <data name="PleaseSelectCity" xml:space="preserve">
     <value>Please select city</value>
+  </data>
+  <data name="PressFINISHTOUR" xml:space="preserve">
+    <value>Press FINISH TOUR</value>
   </data>
   <data name="Regular" xml:space="preserve">
     <value>Regular</value>
@@ -329,6 +380,9 @@
   </data>
   <data name="ReviewButton" xml:space="preserve">
     <value>REVIEW</value>
+  </data>
+  <data name="ReviewFrom" xml:space="preserve">
+    <value>Review from:</value>
   </data>
   <data name="Reviews" xml:space="preserve">
     <value>Reviews</value>
@@ -366,6 +420,9 @@
   <data name="TheMostWantedLocation" xml:space="preserve">
     <value>The most wanted</value>
   </data>
+  <data name="ThisTourIsFinished" xml:space="preserve">
+    <value>This tour is finished!</value>
+  </data>
   <data name="Todays" xml:space="preserve">
     <value>Today's tours:</value>
   </data>
@@ -375,11 +432,17 @@
   <data name="TOURCREATED" xml:space="preserve">
     <value>Tour is successfully created!</value>
   </data>
+  <data name="TourDetails" xml:space="preserve">
+    <value>Tour Details</value>
+  </data>
   <data name="TourForm" xml:space="preserve">
     <value>TOUR FORM</value>
   </data>
   <data name="TourInstanceReviewView" xml:space="preserve">
     <value>Tour instance reviews overview</value>
+  </data>
+  <data name="TourInterestigness" xml:space="preserve">
+    <value>Interestigness of tour</value>
   </data>
   <data name="TourName" xml:space="preserve">
     <value>Tour name</value>
@@ -398,6 +461,9 @@
   </data>
   <data name="Validity" xml:space="preserve">
     <value>Validity</value>
+  </data>
+  <data name="ValidityChanged" xml:space="preserve">
+    <value>Validity is changed!</value>
   </data>
   <data name="VoucherStatistics" xml:space="preserve">
     <value>Voucher statistics</value>
