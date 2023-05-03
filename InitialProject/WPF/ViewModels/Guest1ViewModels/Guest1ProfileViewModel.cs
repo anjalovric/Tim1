@@ -55,7 +55,12 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         private void ShowSuperGuest()
         {
             SuperGuestTitleService superGuestTitleService = new SuperGuestTitleService();
-            SuperGuest = superGuestTitleService.MakeSuperGuest(Guest1);         ///da li ce pucati zbog null?
+            superGuestTitleService.DeleteTitleIfManyYearsPassed(Guest1);
+            if (superGuestTitleService.IsAlreadySuperGuest(Guest1))
+            {
+                SuperGuest = superGuestTitleService.ProlongSuperGuestTitle(Guest1);  //add new or delete previous title.
+            }
+            SuperGuest = superGuestTitleService.MakeNewSuperGuest(Guest1);
             IsSuperGuest = superGuestTitleService.IsAlreadySuperGuest(Guest1);
         }
        

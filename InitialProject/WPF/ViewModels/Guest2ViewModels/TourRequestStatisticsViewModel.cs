@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -40,8 +41,17 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         }
         private void Search_Executed(object sender)
         {
-            StatisticForChosenYearFormView statisticForChoosenYearFormView = new StatisticForChosenYearFormView(Guest2, Year.Text);
-            statisticForChoosenYearFormView.Show();
+            var regex = "[1-9][0-9]{3}"; //ovo izmijeniti
+            Match match = Regex.Match(Year.Text, regex, RegexOptions.IgnoreCase);
+            if (match.Success)
+            {
+                StatisticForChosenYearFormView statisticForChoosenYearFormView = new StatisticForChosenYearFormView(Guest2, Year.Text);
+                statisticForChoosenYearFormView.Show();
+            }
+            else
+            {
+                MessageBox.Show("Niste dobro unijeli godinu.");
+            }
         }
     }
 }

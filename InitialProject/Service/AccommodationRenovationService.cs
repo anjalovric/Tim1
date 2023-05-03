@@ -23,6 +23,18 @@ namespace InitialProject.Service
             SetIsFinished();
         }
 
+        public bool IsDateAvailableForReservation(int accommodationId, DateTime date)
+        {
+            foreach(AccommodationRenovation renovation in renovations)
+            {
+                if(renovation.Accommodation.Id == accommodationId && date.Date>=renovation.StartDate.Date && date.Date<=renovation.EndDate.Date)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
         private void SetAccommodations()
         {
             AccommodationService accommodationService = new AccommodationService();

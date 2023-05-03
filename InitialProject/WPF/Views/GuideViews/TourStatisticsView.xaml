@@ -5,9 +5,10 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
     xmlns:local="clr-namespace:InitialProject.WPF.Views.GuideViews"
             xmlns:vh="clr-namespace:InitialProject.Model"
+      xmlns:ns="clr-namespace:InitialProject"
       mc:Ignorable="d" 
       d:DesignHeight="707" d:DesignWidth="1100"
-      Title="TourStatisticsView" >
+      Title="{ns:Loc TourStatistics}" >
 
     <Grid Style="{DynamicResource Background}">
         <DataGrid ColumnHeaderStyle="{DynamicResource CenterGridHeaderStyle}" x:Name="TourListDataGrid" SelectedItem="{Binding Path=Selected}" HeadersVisibility="Column" HorizontalAlignment="Left" Height="470" Margin="59,128,0,0" VerticalAlignment="Top" Width="733" Style="{DynamicResource  Tables}" ItemsSource="{Binding Path=Instances}" >
@@ -20,7 +21,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Name" Binding="{Binding Tour.Name}" Width="*"  >
+                <DataGridTextColumn Header="{ns:Loc Name}" Binding="{Binding Tour.Name}" Width="*"  >
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="{x:Type TextBlock}">
                             <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -29,7 +30,7 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Location" Binding="{Binding Tour.Location}" Width="1.5*" >
+                <DataGridTextColumn Header="{ns:Loc Location}" Binding="{Binding Tour.Location}" Width="1.5*" >
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="{x:Type TextBlock}">
                             <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -38,7 +39,7 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="StartDate" Binding="{Binding StartDate}" Width="1.6*" >
+                <DataGridTextColumn Header="{ns:Loc StartDate}" Binding="{Binding StartDate}" Width="1.6*" >
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="{x:Type TextBlock}">
                             <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -47,7 +48,7 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Duration" Binding="{Binding Tour.Duration}" Width="*" >
+                <DataGridTextColumn Header="{ns:Loc Duration}" Binding="{Binding Tour.Duration}" Width="*" >
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="{x:Type TextBlock}">
                             <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -56,7 +57,7 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Capacity" Binding="{Binding Tour.MaxGuests}" Width="*" >
+                <DataGridTextColumn Header="{ns:Loc Capacity}" Binding="{Binding Tour.MaxGuests}" Width="*" >
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="{x:Type TextBlock}">
                             <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -65,10 +66,10 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTemplateColumn x:Name="cancelation" Header="Details"  Width="*" >
+                <DataGridTemplateColumn x:Name="cancelation" Header="{ns:Loc DetailsHeader}"  Width="*" >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Name="cancelButton" Content="DETAILS" Style="{DynamicResource ButtonTable}" TextElement.FontWeight="ExtraBold" Command="{Binding Path=DataContext.ViewDetailsCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
+                            <Button Name="cancelButton" Content="{ns:Loc DETAILS}" Style="{DynamicResource ButtonTable}" TextElement.FontWeight="ExtraBold" Command="{Binding Path=DataContext.ViewDetailsCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -86,18 +87,16 @@
             <Button Style="{DynamicResource ButtonToast}" Command="{Binding OKCommand}">OK</Button>
         </StackPanel>
         <Grid Margin="829,159,59,391" Style="{DynamicResource InerInerGrid}">
-            <Button Content="The most visited tour" HorizontalAlignment="Center"  VerticalAlignment="Top" Height="77" Width="180" Command="{Binding MostVisitedCommand}" Style="{DynamicResource Button}" Margin="0,33,0,0"/>
+            <Button Content="{ns:Loc TheMostVisitedTour}" HorizontalAlignment="Center"  VerticalAlignment="Top" Height="77" Width="180" Command="{Binding MostVisitedCommand}" Style="{DynamicResource Button}" Margin="0,26,0,0"/>
 
         </Grid>
         <Grid Margin="829,338,59,158" Style="{DynamicResource  InerInerGrid}">
             <Button Style="{DynamicResource Button}" HorizontalAlignment="Center"  VerticalAlignment="Top" Height="76" Width="180" Command="{Binding MostVisitedForYearCommand}" Margin="0,72,0,0">
-                <Button.Content >
-                    <TextBlock Width="101" Height="52">
-                    The most visited
-                    <LineBreak>
-                    </LineBreak>
-                    for chosen year
-                    </TextBlock>
+                <Button.Content>
+                    <Grid>
+                        <Label Margin="-64,-18,-76,10" Content="{ns:Loc TheMostVisitedTour}"/>
+                        <Label Margin="-64,7,-65,-17" Content="{ns:Loc TheMostVistedTourYear}"></Label>
+                    </Grid>
                 </Button.Content>
             </Button>
             <TextBox x:Name="ChosenYear"  TextWrapping="Wrap"  VerticalAlignment="Top" Text="{Binding Path=Year,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}" Height="35" Style="{DynamicResource TextBox}" Margin="10,37,10,0"/>
@@ -106,7 +105,7 @@
         </Grid>
         <Rectangle  Style="{DynamicResource RectangleDashed}"  Margin="829,159,59,391" />
         <Grid Margin="0,0,0,584" Style="{DynamicResource BackgroundHeader}">
-            <Label Content="TOUR STATISTICS" VerticalAlignment="Center" Width="308" Height="46" Style="{DynamicResource Header}"/>
+            <Label Content="{ns:Loc TOURSTATISTIC}" HorizontalContentAlignment="Center" VerticalAlignment="Center" Width="403" Height="46" Style="{DynamicResource Header}"/>
             <Image Source="/Resources/Images/LOGO (2).jpg" Margin="0,-10,881,0"/>
         </Grid>
     </Grid>

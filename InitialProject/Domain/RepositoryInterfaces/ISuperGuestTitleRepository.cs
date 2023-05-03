@@ -11,5 +11,7 @@ namespace InitialProject.Domain.RepositoryInterfaces
     public interface ISuperGuestTitleRepository : IGenericRepository<SuperGuestTitle>
     {
         public void Add(SuperGuestTitle superGuestTitle);
+        public void Delete(SuperGuestTitle title);
+        public void DecrementPoints(SuperGuestTitle title);
     }
 }

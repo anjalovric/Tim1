@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.WPF.Views.Guest1Views"
         mc:Ignorable="d"
-        Title="Guest1MessageBoxView" Height="240" Width="380" WindowStartupLocation="CenterScreen" WindowStyle="None">
+        Title="Guest1MessageBoxView" Height="270" Background="Transparent" Width="380" AllowsTransparency="True"  WindowStartupLocation="CenterScreen" WindowStyle="None">
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="Foreground" Value="#22301a"></Setter>
@@ -14,21 +14,52 @@
             <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
             <Setter Property="BorderBrush" Value="#22301a"></Setter>
             <Setter Property="BorderThickness" Value="3,3,3,3"></Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
+
     </Window.Resources>
 
 
-    <Grid Background="#8c9d75">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="150" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <Image Grid.Row="0" Source="{Binding Image, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Height="66" Width="40" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="20,32,0,0"/>
+    <Border BorderThickness="4" Padding="6" CornerRadius="25" Height="240" VerticalAlignment="Bottom">
+        <Border.BorderBrush>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#22301a" Offset="1"></GradientStop>
+            </LinearGradientBrush>
+        </Border.BorderBrush>
+        <Border.Background>
+            <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
+                <GradientStop Color="#37492d" Offset="0.1"></GradientStop>
+                <GradientStop Color="#FFF9ECC5" Offset="0.4"></GradientStop>
+                <GradientStop Color="#37492d" Offset="0.9"></GradientStop>
+            </LinearGradientBrush>
+        </Border.Background>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="163*"/>
+                <ColumnDefinition Width="17*"/>
+            </Grid.ColumnDefinitions>
+            <Polygon Points="0,20 25,0 20,20" Fill="#22301a" StrokeThickness="3" Stretch="Fill" HorizontalAlignment="Left" Margin="241,-39,0,230" Grid.ColumnSpan="2" Width="107"></Polygon>
 
-        <TextBlock Grid.Row="0" Text="{Binding Path=Text}" Margin="0,32,0,0" Height="Auto" Width="218" VerticalAlignment="Top" TextAlignment="Center" FontSize="19" HorizontalAlignment="Center" Background="Transparent" TextWrapping="Wrap" Foreground="#22301a" />
-        <StackPanel Grid.Row="1" VerticalAlignment="Top" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,0">
-            <Button Name="YesButton" Content="OK" Margin="0,0,0,0" Width="100" VerticalAlignment="Center" Command="{Binding OkCommand}" Height="35" Background="#FFFCECB9" />
-        </StackPanel>
 
-    </Grid>
+
+            <Grid Grid.ColumnSpan="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="150" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Image Grid.Row="0" Source="{Binding Image, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Height="66" Width="40" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="20,32,0,0"/>
+
+                <TextBlock Grid.Row="0" Text="{Binding Path=Text}" FontWeight="Black" Margin="0,32,0,0" Height="Auto" Width="218" VerticalAlignment="Top" TextAlignment="Center" FontSize="19" HorizontalAlignment="Center" Background="Transparent" TextWrapping="Wrap" Foreground="#22301a" />
+                <StackPanel Grid.Row="1" VerticalAlignment="Top" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,0">
+                    <Button Name="YesButton" Content="OK" Margin="0,0,0,0" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding OkCommand}" Height="35" Background="#FFFCECB9" />
+                </StackPanel>
+
+            </Grid>
+        </Grid>
+    </Border>
 </Window>
+        

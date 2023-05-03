@@ -40,6 +40,20 @@ namespace InitialProject.WPF.Views.Guest2Views
             }
 
         }
+        public ObservableCollection<string> Languages { get; set; }
+        private string language;
+        public string SelectedLanguage
+        {
+            get => language;
+            set
+            {
+                if (value != language)
+                {
+                    language = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         private ObservableCollection<TourImage> TourImages;
         private ObservableCollection<TourReservation> TourReservations;
         private TourRepository tourRepository;
@@ -69,6 +83,7 @@ namespace InitialProject.WPF.Views.Guest2Views
         {
             InitializeComponent();
             DataContext = this;
+            AddLanguages();
             tourRepository = new TourRepository();
             this.guest2 = guest2;
             tourInstanceRepository = new TourInstanceRepository();
@@ -97,6 +112,16 @@ namespace InitialProject.WPF.Views.Guest2Views
                 if (!tourInstance.Finished && !tourInstance.Canceled)
                     TourInstances.Add(tourInstance);
             }
+        }
+        private void AddLanguages()
+        {
+            Languages = new ObservableCollection<string>();
+            Languages.Add("english");
+            Languages.Add("spanish");
+            Languages.Add("russian");
+            Languages.Add("arabic");
+            Languages.Add("serbian");
+            Languages.Add("italian");
         }
         private void ShowAlertGuestForm()
         {
@@ -201,7 +226,7 @@ namespace InitialProject.WPF.Views.Guest2Views
         }
         private void SearchLanguage(TourInstance tourInstance)
         {
-            if (tourInstance.Tour.Language != null && !tourInstance.Tour.Language.ToLower().Contains(languageInput.Text.ToLower()))
+            if (tourInstance.Tour.Language != null && !tourInstance.Tour.Language.Equals(SelectedLanguage))
             {
                 TourInstances.Remove(tourInstance);
             }
@@ -334,8 +359,10 @@ namespace InitialProject.WPF.Views.Guest2Views
             cityInput.SelectedValue = null;
             cityInput.IsEnabled = false;
             durationInput.Text = "";
-            languageInput.Text = "";
+            languageInput.SelectedValue = null;
             capacityNumber.Text = "1";
+            DurationLabel.Content = "";
+            durationInput.BorderBrush = Brushes.BlueViolet;
         }
         
     }

@@ -28,6 +28,11 @@
             <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
             <Setter Property="BorderBrush" Value="#22301a"></Setter>
             <Setter Property="BorderThickness" Value="3,3,3,3"></Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
         <Style TargetType="{x:Type ListBoxItem}">
             <!--For disable highlighting on stars rating listbox-->
@@ -93,6 +98,8 @@
             <TextBlock Height="35" FontSize="18" Margin="0,0,84,0" Grid.Row="5" Text="{Binding Path=SelectedAccommodation.MinDaysToCancel}" HorizontalAlignment="Right"/>
             <TextBlock Height="35" FontSize="18" Margin="0,0,84,0" Grid.Row="6" Text="{Binding Path=SelectedAccommodation.Name}" HorizontalAlignment="Right"/>
 
+            
+
         </Grid>
 
         <Grid Grid.Column="1" Grid.Row="5">
@@ -105,29 +112,41 @@
 
             <Border Background="#FFB58578" Grid.RowSpan="3" Width="400"  CornerRadius="0 0 20 20" Margin="46,0,46,5"/>
 
-            <Image x:Name="accommodationImage" Source="{Binding ImageSource, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" Margin="106,10,106,10"/>
+            <Image x:Name="accommodationImage" Source="{Binding ImageSource, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" Margin="106,10,106,10" Stretch="Fill"/>
 
-            <Button Command="{Binding NextPhotoCommand}" Height="50" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" Margin="392,0,0,0" VerticalAlignment="Center" Width="60">
-                <Button.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform Angle="360"/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </Button.RenderTransform>
+            <Button Command="{Binding NextPhotoCommand}" IsEnabled="{Binding Path=IsNextEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="50" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right" Margin="0,0,60,0" VerticalAlignment="Center" Width="60">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid>
                             <StackPanel Orientation="Horizontal">
-                                <Rectangle Width="30" Height="14" Stroke="#22301a" Fill="#22301a"/>
-                                <Polygon Points= "0,15 15,22 0,30" Stroke="#22301a" Fill="#22301a" Height="45" Width="30" />
+                                <Rectangle x:Name="ArrowRectangle" Width="30" Height="14" Stroke="#22301a" Fill="#22301a"/>
+                                <Polygon x:Name="ArrowPolygon" Points= "0,15 15,22 0,30" Stroke="#22301a" Fill="#22301a" Height="45" Width="30" />
                             </StackPanel>
                         </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" Value="0.5"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="ArrowRectangle" Property="Stroke" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                                <Setter TargetName="ArrowPolygon" Property="Stroke" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="ArrowRectangle" Property="Fill" Value="#22301a"/>
+                                <Setter TargetName="ArrowPolygon" Property="Fill" Value="#22301a"/>
+                                <Setter TargetName="ArrowRectangle" Property="Stroke" Value="#004661"/>
+                                <Setter TargetName="ArrowPolygon" Property="Stroke" Value="#004661"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="False">
+                                <Setter TargetName="ArrowRectangle" Property="Fill" Value="#22301a"/>
+                                <Setter TargetName="ArrowPolygon" Property="Fill" Value="#22301a"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-            <Button Command="{Binding PreviousPhotoCommand}" Height="50" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Margin="60,0,0,0" VerticalAlignment="Center" Width="60">
+            <Button Command="{Binding PreviousPhotoCommand}" IsEnabled="{Binding Path=IsNextEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="50" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Margin="60,0,0,0" VerticalAlignment="Center" Width="60">
                 <Button.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -140,11 +159,32 @@
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid>
                             <StackPanel Orientation="Horizontal">
-                                <Rectangle Width="30" Height="14" Stroke="#22301a" Fill="#22301a"/>
-                                <Polygon Points= "0,15 15,22 0,30" Stroke="#22301a" Fill="#22301a" Height="45" Width="30" />
+                                <Rectangle  x:Name="ArrowRectangle" Width="30" Height="14" Stroke="#22301a" Fill="#22301a"/>
+                                <Polygon  x:Name="ArrowPolygon" Points= "0,15 15,22 0,30" Stroke="#22301a"  Fill="#22301a" Height="45" Width="30" />
                             </StackPanel>
                         </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" Value="0.5"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="ArrowRectangle" Property="Stroke" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                                <Setter TargetName="ArrowPolygon" Property="Stroke" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="ArrowRectangle" Property="Fill" Value="#22301a"/>
+                                <Setter TargetName="ArrowPolygon" Property="Fill" Value="#22301a"/>
+                                <Setter TargetName="ArrowRectangle" Property="Stroke" Value="#004661"/>
+                                <Setter TargetName="ArrowPolygon" Property="Stroke" Value="#004661"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="False">
+                                <Setter TargetName="ArrowRectangle" Property="Fill" Value="#22301a"/>
+                                <Setter TargetName="ArrowPolygon" Property="Fill" Value="#22301a"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
                     </ControlTemplate>
+
                 </Button.Template>
             </Button>
 
@@ -172,10 +212,34 @@
 
         </Grid>
 
-        <Label Content="{Binding Path=SelectedAccommodation.Name}" FontWeight="Bold" FontSize="24" Margin="0,20,0,0" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center"  FontFamily="Baskerville Old Face" VerticalAlignment="Top" Width="Auto" Height="Auto"></Label>
+        <TextBlock Margin="0,20,0,0" Grid.Row="0"  Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Top" Height="Auto">
+            <Label Content="{Binding Path=SelectedAccommodation.Name}" FontWeight="Bold" FontSize="24"   FontFamily="Baskerville Old Face" Width="Auto" Height="Auto"></Label>
+            <Image Source="/Resources/Images/renovation (1).png" Height="Auto" Width="30" VerticalAlignment="Center">
+                <Image.Style>
+                    <Style TargetType="Image">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding SelectedAccommodation.IsRenovated}" Value="True">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Image.Style>
+            </Image>
+        </TextBlock>
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="2">
             <ListBox Grid.Row="1" Background="#c99585" BorderBrush="Transparent" BorderThickness="0" Width="Auto" ItemsSource="{Binding AverageRating, Converter={StaticResource Int2Images}}"  Height="Auto" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center">
+                <ListBox.Style>
+                    <Style TargetType="ListBox">
+                        <Setter Property="Visibility" Value="Visible"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ReviewsNumber}" Value="0">
+                                <Setter Property="Visibility" Value="Hidden"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ListBox.Style>
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Image Source="{Binding}" Height="20" Width="20"></Image>

@@ -4,13 +4,15 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:InitialProject.WPF.Views.GuideViews"
+      xmlns:ns="clr-namespace:InitialProject"
       mc:Ignorable="d" 
       d:DesignHeight="707" d:DesignWidth="1100"
-      Title="CancelView">
+      Title="{ns:Loc CancelView}">
 
     <Grid Style="{DynamicResource Background}">
         <Grid.RowDefinitions>
             <RowDefinition Height="1.5*"/>
+            <RowDefinition Height="0.8*"/>
             <RowDefinition Height="8*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
@@ -19,7 +21,7 @@
             <ColumnDefinition Width="10*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <DataGrid HeadersVisibility="Column" ColumnHeaderStyle="{DynamicResource CenterGridHeaderStyle}" Grid.Row="1" Grid.Column="1" x:Name="TourListDataGrid" ItemsSource="{Binding Path=TourInstances,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=Selected}" Style="{DynamicResource Tables}">
+        <DataGrid HeadersVisibility="Column" ColumnHeaderStyle="{DynamicResource CenterGridHeaderStyle}" Grid.Row="2" Grid.Column="1" x:Name="TourListDataGrid" ItemsSource="{Binding Path=TourInstances,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=Selected}" Style="{DynamicResource Tables}">
             <DataGrid.Columns>
                 <DataGridTemplateColumn x:Name="Cover"  Width="0.7*">
                     <DataGridTemplateColumn.CellTemplate>
@@ -28,7 +30,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Tour name" Width="1*" Binding="{Binding Tour.Name}">
+                <DataGridTextColumn Header="{ns:Loc TourName}" Width="1*" Binding="{Binding Tour.Name}">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="{x:Type TextBlock}">
                             <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -37,7 +39,7 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Location" Width="1*" Binding="{Binding Tour.Location}">
+                <DataGridTextColumn Header="{ns:Loc Location}" Width="1*" Binding="{Binding Tour.Location}">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="{x:Type TextBlock}">
                             <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -46,7 +48,7 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="StartDate" Width="2*" Binding="{Binding StartDate}" >
+                <DataGridTextColumn Header="{ns:Loc StartDate}" Width="2*" Binding="{Binding StartDate}" >
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="{x:Type TextBlock}">
                             <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -55,7 +57,7 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn  Width="1*" Header="Capacity" Binding="{Binding Tour.MaxGuests}" >
+                <DataGridTextColumn  Width="1*" Header="{ns:Loc Capacity}" Binding="{Binding Tour.MaxGuests}" >
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="{x:Type TextBlock}">
                             <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -64,10 +66,10 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTemplateColumn x:Name="cancelation" Header="Cancel"  Width="1*" >
+                <DataGridTemplateColumn x:Name="cancelation" Header="{ns:Loc Cancel}"  Width="1*" >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Name="cancelButton" Content="CANCEL" Style="{DynamicResource ButtonTable}" TextElement.FontWeight="ExtraBold" Command="{Binding Path=DataContext.CancelCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
+                            <Button Name="cancelButton" Content="{ns:Loc CANCELBUTTON}" Style="{DynamicResource ButtonTable}" TextElement.FontWeight="ExtraBold" Command="{Binding Path=DataContext.CancelCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
 
@@ -76,7 +78,7 @@
         </DataGrid>
 
         <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Style="{DynamicResource BackgroundHeader}">
-            <Label  Style="{DynamicResource Header}" Grid.Column="1" Grid.Row="0" Margin="0,31,0,10" Width="247">CANCEL TOUR</Label>
+            <Label  Style="{DynamicResource Header}" Grid.Column="1" Grid.Row="0" Margin="0,31,0,10" Width="420" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Content="{ns:Loc CancelTour}"/>
             <Image Source="/Resources/Images/LOGO (2).jpg" Margin="0,0,899,0"/>
         </Grid>
     </Grid>
