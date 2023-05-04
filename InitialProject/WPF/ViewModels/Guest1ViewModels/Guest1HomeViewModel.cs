@@ -172,7 +172,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                                 new GradientStop(Color.FromRgb(240, 128, 128), 0.9),
                                 new GradientStop(Color.FromRgb(252, 236, 185), 0.1),
                             },  new Point(0, 0),
-                                new Point(1, 1)), BorderBrush = System.Windows.Media.Brushes.Black, BorderThickness = new Thickness(3), Margin = new Thickness(1), Icon = new Image { Source = new BitmapImage(new Uri("/Resources/Images/no.png", UriKind.Relative)), Margin = new Thickness(0, -10, -7, -3), VerticalAlignment = System.Windows.VerticalAlignment.Bottom } });
+                                new Point(1, 1)), BorderBrush = System.Windows.Media.Brushes.Black, BorderThickness = new Thickness(3), Margin = new Thickness(1), Icon = new Image { Source = new BitmapImage(new Uri("/Resources/Images/delete.png", UriKind.Relative)), Margin = new Thickness(0, -10, -7, -3), VerticalAlignment = System.Windows.VerticalAlignment.Bottom } });
             }
         }
 

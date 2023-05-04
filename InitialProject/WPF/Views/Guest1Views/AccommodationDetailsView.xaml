@@ -308,7 +308,7 @@
         <!-- ACCOMMODATION NAME - TITLE OF PAGE -->
         <TextBlock Margin="0,25,0,0" Grid.Row="0"  Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Top" Height="Auto">
             <Label Content="{Binding Path=SelectedAccommodation.Name}" FontWeight="Bold" FontSize="24"   FontFamily="Baskerville Old Face" Width="Auto" Height="Auto"></Label>
-            <Image Source="/Resources/Images/renovation (1).png" Height="Auto" Width="30" VerticalAlignment="Center">
+            <Image Source="/Resources/Images/renovate.png" Height="Auto" Width="30" VerticalAlignment="Center">
                 <Image.Style>
                     <Style TargetType="Image">
                         <Setter Property="Visibility" Value="Collapsed"/>

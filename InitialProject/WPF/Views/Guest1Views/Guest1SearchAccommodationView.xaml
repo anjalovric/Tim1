@@ -116,7 +116,7 @@
                     </Button>
 
                     <!-- SUPER-OWNER MARK -->
-                    <Image Source="/Resources/Images/green.png" Height="25" Width="25" Grid.Row="1" Grid.Column="6" VerticalAlignment="Center" Margin="0,0,150,0" HorizontalAlignment="Center">
+                    <Image Source="/Resources/Images/super1.png" Height="30" Width="30" Grid.Row="1" Grid.Column="6" VerticalAlignment="Center" Margin="0,0,150,0" HorizontalAlignment="Center">
                         <Image.Style>
                             <Style TargetType="Image">
                                 <Setter Property="Visibility" Value="Collapsed"/>
@@ -130,7 +130,7 @@
                     </Image>
 
                     <!-- RENOVATED MARK -->
-                    <Image Source="/Resources/Images/renovation (1).png" Height="25" Width="25" Grid.Row="1" Grid.Column="5" VerticalAlignment="Center" Margin="20,0,0,0" HorizontalAlignment="Center">
+                    <Image Source="/Resources/Images/renovate.png" Height="30" Width="30" Grid.Row="1" Grid.Column="5" VerticalAlignment="Center" Margin="20,0,0,0" HorizontalAlignment="Center">
                         <Image.Style>
                             <Style TargetType="Image">
                                 <Setter Property="Visibility" Value="Collapsed"/>
