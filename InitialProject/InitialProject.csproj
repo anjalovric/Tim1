@@ -33,6 +33,7 @@
     <None Remove="Resources\Images\best1.jpeg" />
     <None Remove="Resources\Images\best2.jpg" />
     <None Remove="Resources\Images\calend.png" />
+    <None Remove="Resources\Images\calendar1.png" />
     <None Remove="Resources\Images\calendarIcon.png" />
 
 
@@ -105,7 +106,9 @@
     <None Remove="Resources\Images\homeanja3.jpeg" />
     <None Remove="Resources\Images\homeanja4.jpg" />
     <None Remove="Resources\Images\house1.png" />
+    <None Remove="Resources\Images\house2.png" />
     <None Remove="Resources\Images\icons8-christmas-star-96.png" />
+    <None Remove="Resources\Images\inbox.png" />
 
     <None Remove="Resources\Images\info.png" />
     <None Remove="Resources\Images\januar.png" />
@@ -165,7 +168,10 @@
     <None Remove="Resources\Images\RR.png" />
     <None Remove="Resources\Images\search.png" />
     <None Remove="Resources\Images\sent2.png" />
+    <None Remove="Resources\Images\sent3.png" />
+    <None Remove="Resources\Images\sent5.png" />
     <None Remove="Resources\Images\signout.png" />
+    <None Remove="Resources\Images\signOut1.png" />
     <None Remove="Resources\Images\signOutIcon.png" />
     <None Remove="Resources\Images\sky.jpg" />
     <None Remove="Resources\Images\star_yellow.png" />
@@ -209,6 +215,7 @@
     <None Remove="Resources\Images\trebinje.jpg" />
     <None Remove="Resources\Images\user-male-circle.png" />
     <None Remove="Resources\Images\user.jpg" />
+    <None Remove="Resources\Images\user1.png" />
     <None Remove="Resources\Images\User_icon_2.svg.png" />
     <None Remove="Resources\Images\view.png" />
     <None Remove="Resources\Images\voucher.png" />
@@ -252,6 +259,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\best2.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\calendar1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\cancel1.png">
@@ -604,6 +614,12 @@
     <Resource Include="Resources\Images\house1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\Images\house2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\inbox.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Images\info.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -683,7 +699,16 @@
     <Resource Include="Resources\Images\sent2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\Images\sent3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\sent5.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Images\signout.png" />
+    <Resource Include="Resources\Images\signOut1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Images\star1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
@@ -694,6 +719,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\user.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\user1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\wish1.jpeg">
