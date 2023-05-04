@@ -1,9 +1,10 @@
 ﻿<UserControl x:Class="InitialProject.WPF.Views.Guest2Views.ShowToursView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:val="clr-namespace:InitialProject.WPF.Validations.Guest2Validations" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:InitialProject.View"
+             xmlns:local="clr-namespace:InitialProject.View" xmlns:guest2viewmodels="clr-namespace:InitialProject.WPF.ViewModels.Guest2ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="768" d:DesignWidth="1024" Width="1024" Height="768">
     <UserControl.Resources>
@@ -35,14 +36,14 @@
                 <DataGridTemplateColumn x:Name="reservation" Header="Reservation"  Width="1.2*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Name="reservationButton" Content="RESERVE" TextElement.FontWeight="ExtraBold" Click="Reserve"/>
+                            <Button Name="reservationButton" Content="RESERVE" TextElement.FontWeight="ExtraBold" Command="{Binding Path=DataContext.ReserveCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTemplateColumn x:Name="detailsView" Header="Details" Width="0.9*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Name="detailsButton" Content="VIEW" TextElement.FontWeight="ExtraBold" Click="ViewDetails"/>
+                            <Button Name="detailsButton" Content="VIEW" TextElement.FontWeight="ExtraBold" Command="{Binding Path=DataContext.ViewDetailsCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -50,11 +51,61 @@
 
 
         </DataGrid>
-        <ComboBox x:Name="cityInput" BorderBrush="#7166f9" BorderThickness="3,3,3,3" ItemsSource="{Binding CitiesByCountry}" SelectedItem="{Binding Location.City}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" HorizontalAlignment="Left" Margin="463,130,0,0" VerticalAlignment="Top" Width="152" Height="22"/>
-        <TextBox x:Name="durationInput" Style="{StaticResource BorderStyle}" Background="#FFFCECB9" HorizontalAlignment="Left" Margin="828,130,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="151" Height="22" RenderTransformOrigin="0.496,0.294"/>
+        <ComboBox x:Name="cityInput" BorderBrush="#7166f9" BorderThickness="3,3,3,3" ItemsSource="{Binding CitiesByCountry}" SelectedItem="{Binding City}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" HorizontalAlignment="Left" Margin="463,130,0,0" VerticalAlignment="Top" Width="152" Height="22" IsEnabled="{Binding IsComboBoxCityEnabled}"/>
+        <TextBox x:Name="durationInput" Style="{StaticResource BorderStyle}" Background="#FFFCECB9" HorizontalAlignment="Left" Margin="828,130,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="151" Height="22" RenderTransformOrigin="0.496,0.294">
+            <TextBox.Text>
+                <Binding Path="Duration" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <val:DurationValidation ValidatesOnTargetUpdated="True" ValidationStep="RawProposedValue"></val:DurationValidation>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+            <Validation.ErrorTemplate>
+                <ControlTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                    </Grid>
+                </ControlTemplate>
+            </Validation.ErrorTemplate>
+        </TextBox>
         <ComboBox x:Name="languageInput" BorderBrush="#7166f9" ItemsSource="{Binding Languages}" SelectedItem="{Binding SelectedLanguage}" BorderThickness="3,3,3,3" Background="#FFFCECB9" HorizontalAlignment="Left" Margin="80,201,0,0" VerticalAlignment="Top" Width="151" Height="22" RenderTransformOrigin="-0.983,1.416"/>
         <Border BorderBrush="#7166f9" BorderThickness="3,3,3,3" Margin="492,201,434,545">
-            <TextBlock x:Name="capacityNumber" Text="1" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Top" Width="98" TextAlignment="Center" Height="20" Background="#FFFCECB9" Margin="0,-1,0,0" />
+            <TextBox x:Name="capacityNumber" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Top" Width="98" TextAlignment="Center" Height="20" Background="#FFFCECB9" Margin="0,-1,0,0">
+                <TextBox.Text>
+                    <Binding Path="MaxGuests" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay" NotifyOnValidationError="True">
+                        <Binding.ValidationRules>
+                            <val:CapacityValidation ValidatesOnTargetUpdated="True" ValidationStep="RawProposedValue"></val:CapacityValidation>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+                <Validation.ErrorTemplate>
+                    <ControlTemplate>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
+                            <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Validation.ErrorTemplate>
+            </TextBox>
         </Border>
 
 
@@ -62,14 +113,34 @@
         <Label Content="Duration" Grid.Row="0" Margin="828,95,0,0" Style="{StaticResource LabelStyle}" Foreground="#7166f9"/>
         <Label Content="Language" Margin="80,170,0,0" RenderTransformOrigin="0.413,0.366" Style="{StaticResource LabelStyle}" Foreground="#7166f9"/>
         <Label Content="Capacity" Margin="463,170,0,0" Style="{StaticResource LabelStyle}" Foreground="#7166f9"/>
-        <ComboBox x:Name="countryInput" ItemsSource="{Binding Countries}" BorderBrush="#7166f9" BorderThickness="3,3,3,3" SelectedItem="{Binding Location.Country}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" HorizontalAlignment="Left" Margin="80,130,0,0" VerticalAlignment="Top" Width="151" SelectionChanged="CountryInput_SelectionChanged" Height="22"/>
+        <ComboBox x:Name="countryInput" ItemsSource="{Binding Countries}" BorderBrush="#7166f9" BorderThickness="3,3,3,3" SelectedItem="{Binding Country}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" HorizontalAlignment="Left" Margin="80,130,0,0" VerticalAlignment="Top" Width="151" SelectionChanged="CountryInput_SelectionChanged" Height="22"/>
         <Label Content="Country" Margin="80,90,0,0" Style="{StaticResource LabelStyle}" Foreground="#7166f9"/>
-        <Button x:Name="decrementCapacityNumber" Style="{StaticResource borderStyle}" Content="-" HorizontalAlignment="Left" Margin="463,201,0,0" VerticalAlignment="Top" Width="20" Click="DecrementCapacityNumber_Click" Height="22"/>
-        <Button x:Name="incrementCapacityNumber" Style="{StaticResource borderStyle}" Content="+" HorizontalAlignment="Left" Margin="595,201,0,0" VerticalAlignment="Top" Width="20" Click="IncrementCapacityNumber_Click" RenderTransformOrigin="-1.284,0.612" Height="22"/>
-        <Button Content="Search" Style="{StaticResource borderStyle}" FontWeight="Bold" HorizontalAlignment="Left" Margin="828,201,0,0" VerticalAlignment="Top" Height="22" Click="Search_Click" Width="76"/>
-        <Label x:Name="Label" Grid.Row="0" Foreground="White" Content="Showing all tours: " FontSize="20" Margin="80,279,0,0" Height="71" Style="{StaticResource LabelStyle}"/>
-        <Button x:Name="Restart" Style="{StaticResource borderStyle}" Width="76" Content="Restart" HorizontalAlignment="Left" Margin="903,201,0,0" VerticalAlignment="Top" TextElement.FontWeight="Bold" Click="Restart_Click" Height="22"/>
-        <Label x:Name="DurationLabel" HorizontalAlignment="Left" Margin="874,158,0,0" VerticalAlignment="Top" Height="25" Width="150" Foreground="Red"/>
+        <Button x:Name="decrementCapacityNumber" Style="{StaticResource borderStyle}" Content="-" HorizontalAlignment="Left" Margin="463,201,0,0" VerticalAlignment="Top" Width="20" Command="{Binding DecrementCommand}" Height="22"/>
+        <Button x:Name="incrementCapacityNumber" Style="{StaticResource borderStyle}" Content="+" HorizontalAlignment="Left" Margin="595,201,0,0" VerticalAlignment="Top" Width="20" Command="{Binding IncrementCommand}" RenderTransformOrigin="-1.284,0.612" Height="22"/>
+        <Button Content="Search" FontWeight="Bold" Margin="828,201,0,0" Height="22" Command="{Binding SearchCommand}" Width="76">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="BorderBrush" Value="#7166f9"/>
+                    <Setter Property="BorderThickness" Value="3,3,3,3"/>
+                    <Setter Property="Background" Value="#FFFCECB9"/>
+                    <Setter Property="HorizontalAlignment" Value="Left"/>
+                    <Setter Property="VerticalAlignment" Value="Top"/>
+                    <Setter Property="IsEnabled" Value="false" />
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding ElementName=durationInput, Path=(Validation.HasError)}" Value="false" />
+                                <Condition Binding="{Binding ElementName=capacityNumber, Path=(Validation.HasError)}" Value="false" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="IsEnabled" Value="true" />
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Label Grid.Row="0" Foreground="White" Content="{Binding Path=Label,UpdateSourceTrigger=PropertyChanged}" FontSize="20" Margin="80,279,0,0" Height="71" Style="{StaticResource LabelStyle}"/>
+        <Button x:Name="Restart" Style="{StaticResource borderStyle}" Width="76" Content="Restart" HorizontalAlignment="Left" Margin="903,201,0,0" VerticalAlignment="Top" TextElement.FontWeight="Bold" Command="{Binding RestartCommand}" Height="22"/>
+        
         <Label Content="Searching tours" FontSize="20" Foreground="White" Margin="80,38,0,0" Style="{StaticResource LabelStyle}"/>
         
 

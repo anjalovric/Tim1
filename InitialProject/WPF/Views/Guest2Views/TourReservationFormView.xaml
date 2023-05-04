@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:val="clr-namespace:InitialProject.WPF.Validations.Guest2Validations"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
         
@@ -63,12 +64,52 @@
             </Border.Background>
         </Border>
         <Border BorderBrush="#FF4B5154" BorderThickness="3,3,3,3" Margin="302,10,40,25" Grid.Column="2" Grid.Row="4">
-            <TextBlock x:Name="capacityNumber" Grid.Column="2" Grid.Row="4" Text="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="335" TextAlignment="Center" Height="36" Background="LightGray"/>
+            <TextBlock x:Name="capacityNumber" Text="{Binding Capacity, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Column="2" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" Width="335" TextAlignment="Center" Height="36" Background="LightGray"/>
         </Border>
 
         <Button Content="-" Background="LightGray" Grid.Column="2" Grid.Row="4" HorizontalAlignment="Left" TextElement.FontWeight="Bold" Margin="262,10,0,0" VerticalAlignment="Top" Width="36" Command="{Binding Guests_Decrement_Command}" RenderTransformOrigin="0.596,1.286" Height="36" BorderBrush="#FF4B5154" BorderThickness="3,3,3,3"/>
         <Button Content="+" Background="LightGray" Grid.Column="2" Grid.Row="4" HorizontalAlignment="Left" TextElement.FontWeight="Bold" Margin="638,10,0,0" VerticalAlignment="Top" Width="34" Command="{Binding Guests_Increment_Command}" RenderTransformOrigin="7.062,-0.088" Height="36" BorderBrush="#FF4B5154" BorderThickness="3,3,3,3"/>
-        <Button Content=" Confirm" Grid.Column="2" Grid.Row="7" Command="{Binding ConfirmCommand}" Style="{StaticResource button}" Margin="463,1,101,0"/>
+        <Button Content=" Confirm" Grid.Column="2" Grid.Row="7" Command="{Binding ConfirmCommand}" Margin="463,1,101,0">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="FontSize" Value="14"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="Height" Value="54"/>
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Width" Value="91"/>
+                    <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                    <Setter Property="VerticalAlignment" Value="Top"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border CornerRadius="25" BorderThickness="1" BorderBrush="White" Background="White" Padding="15" Margin="0,4,0,0">
+                                    <ContentPresenter HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="IsEnabled" Value="false" />
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding ElementName=ageInput, Path=(Validation.HasError)}" Value="false" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="IsEnabled" Value="true" />
+                        </MultiDataTrigger>
+                    
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#E8E8E8"/>
+                            <Setter Property="Foreground" Value="DimGray"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseCaptured" Value="True">
+                            <Setter Property="Background" Value="#d9d9d9"/>
+                            <Setter Property="Foreground" Value="DimGray"/>
+                        </Trigger>
+                    </Style.Triggers>
+                    
+                </Style>
+            </Button.Style>
+        </Button>
         <Button Content="Cancel" Grid.Column="2" Grid.Row="7" Command="{Binding CloseCommand}" Style="{StaticResource button}" Margin="581,1,0,0"/>
         <Label Content="Reservation" Grid.Row="0" Grid.Column="1" FontSize="20" FontWeight="Bold" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="153" Grid.ColumnSpan="2"/>
         <Label Content="Name: " Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Margin="10,8,0,0" VerticalAlignment="Top" Width="106" Grid.ColumnSpan="2"/>
@@ -79,7 +120,32 @@
 
 
         <Border BorderBrush="#FF4B5154" BorderThickness="3,3,3,3" Grid.Column="2" Margin="262,10,0,21" Grid.Row="3">
-            <TextBox x:Name="ageInput" Background="LightGray" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="2" TextWrapping="Wrap" Text="{Binding Path=Age,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Width="411" Height="40"/>
+            <TextBox x:Name="ageInput" Background="LightGray" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="2" TextWrapping="Wrap" VerticalAlignment="Center" Width="411" Height="40">
+                <TextBox.Text>
+                    <Binding Path="Age" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
+                        <Binding.ValidationRules>
+                            <val:StringToDoubleValidation ValidatesOnTargetUpdated="True" ValidationStep="RawProposedValue"></val:StringToDoubleValidation>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            <Validation.ErrorTemplate>
+                <ControlTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                    </Grid>
+                </ControlTemplate>
+            </Validation.ErrorTemplate>
+           </TextBox>
         </Border>
 
         <DataGrid x:Name="ActivationVoucherDataGrid" Grid.Row="6" ItemsSource="{Binding Path=Vouchers,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=Selected}" IsReadOnly="True" AutoGenerateColumns="False" Margin="10,10,0,71" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2" >

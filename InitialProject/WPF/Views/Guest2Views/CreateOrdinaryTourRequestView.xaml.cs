@@ -28,10 +28,10 @@ namespace InitialProject.WPF.Views.Guest2Views
     public partial class CreateOrdinaryTourRequestView : Window
     {
         private CreateOrdinaryTourRequestViewModel viewModel;
-        public CreateOrdinaryTourRequestView(Model.Guest2 guest2)
+        public CreateOrdinaryTourRequestView(Model.Guest2 guest2,ObservableCollection<OrdinaryTourRequests> ordinaryTourRequests)
         {
             InitializeComponent();
-            viewModel = new CreateOrdinaryTourRequestViewModel(Capacity,guest2);
+            viewModel = new CreateOrdinaryTourRequestViewModel(guest2, ordinaryTourRequests);
             DataContext = viewModel;
         }
         private void CountryInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
