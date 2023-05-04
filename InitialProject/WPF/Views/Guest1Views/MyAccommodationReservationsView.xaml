@@ -108,6 +108,7 @@
 
             <TabItem Header="Not completed reservations" FontSize="16">
                 <Grid>
+                    
                     <Grid.Background>
                         <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
                             <GradientStop Color="#22301a" Offset="0"/>

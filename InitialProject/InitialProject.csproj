@@ -130,6 +130,7 @@
     <None Remove="Resources\Images\nature2.png" />
     <None Remove="Resources\Images\nature3.jpeg" />
     <None Remove="Resources\Images\nature4.jpeg" />
+    <None Remove="Resources\Images\newestt.png" />
     <None Remove="Resources\Images\no.png" />
     <None Remove="Resources\Images\noImage.png" />
     <None Remove="Resources\Images\notes.png" />
@@ -623,6 +624,9 @@
     </Resource>
     <Resource Include="Resources\Images\nature4.jpeg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\newestt.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\no.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
