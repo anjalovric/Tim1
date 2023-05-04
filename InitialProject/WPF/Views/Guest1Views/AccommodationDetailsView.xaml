@@ -49,7 +49,7 @@
             </Style.Triggers>
         </Style>
         <Style TargetType="{x:Type ListBoxItem}">
-            <!--For disable highlighting on stars rating listbox-->
+            <!--To disable highlighting on stars rating listbox-->
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type ListBoxItem}">
@@ -67,6 +67,8 @@
         </Style>
         <converters:IntToImageConverter x:Key="Int2Images"></converters:IntToImageConverter>
     </Page.Resources>
+    
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
@@ -81,6 +83,7 @@
             <RowDefinition Height="15*"></RowDefinition>
         </Grid.RowDefinitions>
 
+        <!-- MAKING SAME BACKGROUND AS REST OF PAGE -->
         <Grid Grid.Row="5" Grid.ColumnSpan="2">
             <Grid.Background>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
@@ -95,7 +98,7 @@
             </Grid.Background>
         </Grid>
 
-
+        <!-- DETAILS VIEW -->
         <Grid Grid.Column="0" Grid.Row="5" Background="Transparent">
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.5*"></RowDefinition>
@@ -148,8 +151,10 @@
                 <Run Text="{Binding SelectedAccommodation.Owner.Name}"/>
                 <Run Text="{Binding SelectedAccommodation.Owner.LastName}"/>
             </TextBlock>
+            
         </Grid>
 
+        <!-- PHOTOS AND DIAGRAM VIEW -->
         <Grid Grid.Column="1" Grid.Row="5" Background="Transparent">
             <Grid.RowDefinitions>
                 <RowDefinition Height="10"></RowDefinition>
@@ -177,10 +182,10 @@
             </Border>
 
             <Image x:Name="accommodationImage" Source="{Binding ImageSource, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Margin="106,10,106,25" Stretch="Fill"/>
-
             <Border Grid.Row="1" Margin="106,10,106,25" BorderBrush="#22301a" BorderThickness="3">
             </Border>
 
+            <!-- NEXT PHOTO BUTTON -->
             <Button Command="{Binding NextPhotoCommand}" IsEnabled="{Binding Path=IsNextEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="50" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" Margin="392,0,0,0" Grid.Row="1" VerticalAlignment="Center" Width="60">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
@@ -213,6 +218,8 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
+
+            <!-- PREVIOUS PHOTO BUTTON -->
             <Button Command="{Binding PreviousPhotoCommand}" Grid.Row="1" IsEnabled="{Binding Path=IsNextEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="50" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Margin="60,0,0,0" VerticalAlignment="Center" Width="60">
                 <Button.RenderTransform>
                     <TransformGroup>
@@ -251,11 +258,10 @@
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
-
                 </Button.Template>
             </Button>
 
-
+            <!-- RESERVE BUTTON -->
             <Button x:Name="Reserve" Grid.Row="4" Command="{Binding ReserveCommand}" FontWeight="Bold" Margin="0,0,56,20" VerticalAlignment="Bottom" Width="100" Height="35" HorizontalAlignment="Right" FontSize="18">
                 <Grid Background="#8c9d75" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35">
                     <Grid.ColumnDefinitions>
@@ -276,6 +282,8 @@
                 </Grid>
             </Button>
 
+            <!-- PLACE FOR DIAGRAM -->
+            <!-- BORDER FOR DIAGRAM TITLE -->
             <Border Grid.Row="2" BorderBrush="#22301a" VerticalAlignment="Bottom" BorderThickness="0" Width="204" Height="30" HorizontalAlignment="Center">
                 <Border.Effect>
                     <DropShadowEffect ShadowDepth="0"  BlurRadius="50"/>
@@ -297,6 +305,7 @@
 
         </Grid>
 
+        <!-- ACCOMMODATION NAME - TITLE OF PAGE -->
         <TextBlock Margin="0,25,0,0" Grid.Row="0"  Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Top" Height="Auto">
             <Label Content="{Binding Path=SelectedAccommodation.Name}" FontWeight="Bold" FontSize="24"   FontFamily="Baskerville Old Face" Width="Auto" Height="Auto"></Label>
             <Image Source="/Resources/Images/renovation (1).png" Height="Auto" Width="30" VerticalAlignment="Center">
@@ -313,6 +322,7 @@
             </Image>
         </TextBlock>
 
+        <!-- ACCOMMODATION RATING STARS -->
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="2">
             <ListBox Grid.Row="1" Background="#c99585" BorderBrush="Transparent" BorderThickness="0" Width="Auto" ItemsSource="{Binding AverageRating, Converter={StaticResource Int2Images}}"  Height="Auto" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center">
                 <ListBox.Style>
@@ -338,10 +348,13 @@
             </ListBox>
         </StackPanel>
 
+        <!-- REVIEWS NUMBER -->
         <TextBlock FontSize="16" FontWeight="Medium" Background="Transparent" HorizontalAlignment="Center" Grid.Row="2" Grid.ColumnSpan="2" Width="Auto" Height="35" VerticalAlignment="Top" Margin="0,0,0,0">
                 <Run Text="{Binding ReviewsNumber}"/>
                 <Run Text="Reviews"/>
         </TextBlock>
+
+        <!-- UPPER BORDER FOR DETAILS -->
         <Border Grid.Row="4" Width="400" Height="60" BorderThickness="3,3,3,0" BorderBrush="#22301a" VerticalAlignment="Bottom" CornerRadius="20 20 0 0" HorizontalAlignment="Center">
             <Border.Effect>
                 <DropShadowEffect ShadowDepth="0"  BlurRadius="50"/>
@@ -359,7 +372,10 @@
             </Border.Background>
         </Border>
 
+        <!-- DETAILS LABEL -->
         <Label FontSize="20" FontWeight="Bold" Height="Auto" Margin="0" Width="Auto" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center">Details</Label>
+
+        <!-- UPPER BORDER FOR "OVERVIEW" -->
         <Border Grid.Column="1" Grid.Row="4" BorderBrush="#22301a" BorderThickness="3,3,3,0" Width="400" Height="60" VerticalAlignment="Bottom" CornerRadius="20 20 0 0" HorizontalAlignment="Center">
             <Border.Effect>
                 <DropShadowEffect ShadowDepth="0"  BlurRadius="50"/>
@@ -377,9 +393,10 @@
             </Border.Background>
         </Border>
 
+        <!-- OVERVIEW LABEL -->
         <Label FontSize="20" Height="34" FontWeight="Bold" Width="Auto" HorizontalAlignment="Center" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center">Overview</Label>
 
-
+        <!-- BACK BUTTON -->
         <Button Height="35" Width="100" FontSize="16" IsEnabled="True" FontWeight="Bold" Grid.Column="0" Grid.Row="0" Margin="56,25,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Command="NavigationCommands.BrowseBack">
             <Grid Background="#8c9d75" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" >
                 <Grid.ColumnDefinitions>
@@ -391,12 +408,6 @@
             </Grid>
         </Button>
 
-
-
-
-
-
-
-
     </Grid>
+    
 </Page>

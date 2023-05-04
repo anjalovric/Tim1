@@ -69,11 +69,16 @@
             <Setter Property="TextBlock.TextAlignment" Value="Center"></Setter>
         </Style>
     </Page.Resources>
+
+
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="430"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
+        
+        
         <TabControl x:Name="RequestsTabControl" Height="430" VerticalAlignment="Top" Grid.Row="0">
             <TabControl.TabStripPlacement>Top</TabControl.TabStripPlacement>
             <TabControl.Template>
@@ -83,21 +88,16 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <TabPanel Grid.Row="0"  Width="Auto"
-                   Margin="0,0,0,0" 
-                   IsItemsHost="True" 
-                   HorizontalAlignment="Center" />
-                        <Border Grid.Row="1" 
-                 
-                 BorderThickness="0,7,0,7" BorderBrush="#22301a">
+                        <TabPanel Grid.Row="0"  Width="Auto" Margin="0,0,0,0" IsItemsHost="True" HorizontalAlignment="Center"/>
+                        <Border Grid.Row="1" BorderThickness="0,7,0,7" BorderBrush="#22301a">
                             <ContentPresenter Content="{TemplateBinding SelectedContent}" />
                         </Border>
                     </Grid>
                 </ControlTemplate>
             </TabControl.Template>
 
+            <!-- APPROVED REQUESTS -->
             <TabItem Header="Approved requests" FontSize="16" HorizontalAlignment="Center">
-
                 <Grid>
                     <Grid.Background>
                         <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
@@ -110,9 +110,10 @@
                             <GradientStop Color="#22301a" Offset="1"/>
                         </LinearGradientBrush>
                     </Grid.Background>
-                    <Label FontSize="24" FontFamily="Baskerville Old Face" FontWeight="Bold" VerticalContentAlignment="Center" Height="Auto" VerticalAlignment="Top" Margin="0,15,0,0" HorizontalAlignment="Center">APPROVED REQUESTS</Label>
-                    <DataGrid x:Name="ApprovedRequestsDataGrid" VerticalContentAlignment="Center" VerticalScrollBarVisibility="Auto" Margin="0,0,0,20" HorizontalAlignment="Center" VerticalAlignment="Bottom" HorizontalContentAlignment="Left" ItemsSource="{Binding Path=ApprovedRequests,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" RowBackground="#96CE9A" Height="300" Width="950">
 
+                    <Label FontSize="24" FontFamily="Baskerville Old Face" FontWeight="Bold" VerticalContentAlignment="Center" Height="Auto" VerticalAlignment="Top" Margin="0,15,0,0" HorizontalAlignment="Center">APPROVED REQUESTS</Label>
+
+                    <DataGrid x:Name="ApprovedRequestsDataGrid" VerticalContentAlignment="Center" VerticalScrollBarVisibility="Auto" Margin="0,0,0,20" HorizontalAlignment="Center" VerticalAlignment="Bottom" HorizontalContentAlignment="Left" ItemsSource="{Binding Path=ApprovedRequests,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" RowBackground="#96CE9A" Height="300" Width="950">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Name" Width="1.5*" Binding="{Binding Reservation.Accommodation.Name}">
                                 <DataGridTextColumn.ElementStyle>
@@ -141,7 +142,7 @@
                                             <Setter.Value>
                                                 <TextBlock>
                                                     <Run Text="{Binding Reservation.Accommodation.Owner.Name}"/>
-                                                    <Run Text="{Binding Reservation.Accommodation.Owner.LastName}"/>    
+                                                    <Run Text="{Binding Reservation.Accommodation.Owner.LastName}"/>
                                                 </TextBlock>
                                             </Setter.Value>
                                         </Setter>
@@ -179,9 +180,9 @@
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
-
-
             </TabItem>
+
+            <!-- PENDING REQUESTS -->
             <TabItem Header="Pending requests" FontSize="16" HorizontalAlignment="Center">
                 <Grid>
                     <Grid.Background>
@@ -195,7 +196,9 @@
                             <GradientStop Color="#22301a" Offset="1"/>
                         </LinearGradientBrush>
                     </Grid.Background>
+                    
                     <Label FontSize="24" VerticalAlignment="Top" FontFamily="Baskerville Old Face" VerticalContentAlignment="Center" Height="Auto" FontWeight="Bold" Margin="0,15,0,0" HorizontalAlignment="Center">PENDING REQUESTS</Label>
+                   
                     <DataGrid x:Name="PendingRequestsDataGrid" VerticalContentAlignment="Center" VerticalScrollBarVisibility="Auto" Margin="0,0,0,20" HorizontalAlignment="Center" VerticalAlignment="Bottom" ItemsSource="{Binding Path=PendingRequests,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Height="300" Width="950">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Name" Width="1.5*" Binding="{Binding Reservation.Accommodation.Name}">
@@ -265,6 +268,7 @@
                 </Grid>
             </TabItem>
 
+            <!-- DECLINED REQUESTS -->
             <TabItem Header="Declined requests" FontSize="16">
                 <Grid>
                     <Grid.Background>
@@ -278,7 +282,9 @@
                             <GradientStop Color="#22301a" Offset="1"/>
                         </LinearGradientBrush>
                     </Grid.Background>
+                    
                     <Label FontSize="24" FontFamily="Baskerville Old Face" FontWeight="Bold" VerticalContentAlignment="Center" VerticalAlignment="Top" Height="Auto" Margin="0,15,0,0" HorizontalAlignment="Center">DECLINED REQUESTS</Label>
+                    
                     <DataGrid  x:Name="DeclinedRequestsDataGrid" VerticalContentAlignment="Center" Margin="0,0,0,20" RowBackground="#F08080"  HorizontalAlignment="Center" VerticalAlignment="Bottom" VerticalScrollBarVisibility="Auto" ItemsSource="{Binding Path=DeclinedRequests,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Height="300" Width="950">
                         <DataGrid.Columns >
                             <DataGridTextColumn Header="Name" Width="1.4*" Binding="{Binding Reservation.Accommodation.Name}">
@@ -343,6 +349,8 @@
 
         </TabControl>
 
+
+        <!-- PLACE FOR DIAGRAM -->
         <Grid Grid.Row="1">
             <Grid.Background>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
@@ -356,8 +364,8 @@
                 </LinearGradientBrush>
             </Grid.Background>
 
-           
             <Label FontSize="18" FontWeight="Medium" Grid.Row="1" Width="Auto" Height="35" HorizontalAlignment="Center" VerticalAlignment="Top" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Margin="0,25,0,0">Frequency of making requests:</Label>
+            
             <Image Source="/Resources/Images/diagram.png" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="1" Height="150" Width="200" Margin="0,60,0,0" Stretch="Fill"></Image>
 
         </Grid>

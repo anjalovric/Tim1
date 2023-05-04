@@ -112,16 +112,17 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
         <converters:IntToImageConverter x:Key="Int2Images"></converters:IntToImageConverter>
     </Page.Resources>
 
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
+        <!-- FIRST COLUMN -->
         <Grid Grid.Column="0" Background="Transparent">
             <Grid.RowDefinitions>
                 <RowDefinition Height="3*"></RowDefinition>
@@ -134,6 +135,7 @@
                 <RowDefinition Height="1*"></RowDefinition>
                 <RowDefinition Height="8*"></RowDefinition>
             </Grid.RowDefinitions>
+
             <Border Grid.Row="0" Grid.RowSpan="9" Grid.Column="0" Width="470" BorderBrush="#22301a" BorderThickness="3"  CornerRadius="20 20 20 20" HorizontalAlignment="Center" Margin="0,10,0,10">
                 <Border.Effect>
                     <DropShadowEffect ShadowDepth="0" BlurRadius="50"/>
@@ -150,11 +152,10 @@
                     </LinearGradientBrush>
                 </Border.Background>
             </Border>
-
-
-
+            
             <Label FontSize="24" HorizontalAlignment="Center" Grid.Row="0" FontFamily="Baskerville Old Face"  VerticalAlignment="Top" Height="43" Width="Auto" FontWeight="Bold" Margin="0,50,0,0">AVERAGE RATINGS</Label>
 
+            <!-- RATING STARS -->
             <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top">
                 <ListBox Grid.Row="1" Background="#37492d" BorderBrush="Transparent" BorderThickness="0" Width="Auto" ItemsSource="{Binding AverageRating, Converter={StaticResource Int2Images}}"  Height="Auto" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center">
                     <ListBox.Style>
@@ -180,19 +181,22 @@
                 </ListBox>
             </StackPanel>
 
-
-
+            <!-- REVIEWS NUMBER -->
             <TextBlock FontSize="16" Foreground="#d9c7b3" FontWeight="Medium" Background="Transparent" HorizontalAlignment="Center" Grid.Row="2" Width="Auto" Height="35" VerticalAlignment="Top" Margin="0,0,0,0">
                 <Run Text="{Binding ReviewsNumber}"/>
                 <Run Text="Reviews"/>
             </TextBlock>
 
-
+            <!-- RATING DATA -->
             <Label FontSize="18" Grid.Row="4" Width="Auto" Height="35" HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Margin="70,0,0,0">Cleanliness:</Label>
             <Label FontSize="18" Grid.Row="5" Width="Auto" Height="35" HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Margin="70,0,0,0">Following rules:</Label>
             <Slider Opacity="0.5" x:Name="CleanlinessSlider" Minimum="1" Maximum="5" TickFrequency="0.1" AutoToolTipPlacement="BottomRight"   Width="120" Grid.Row="4" IsEnabled="False" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,130,0" Value="{Binding AverageCleanliness, Mode=OneWay}"></Slider>
             <Slider Opacity="0.5" x:Name="FollowingRulesSlider" Width="120" Minimum="1" Maximum="5" Grid.Row="5" IsEnabled="False" TickFrequency="0.1" HorizontalAlignment="Right" AutoToolTipPlacement="BottomRight" VerticalAlignment="Center" Margin="0,0,130,0"  Value="{Binding AverageFollowingRules, Mode=OneWay}"></Slider>
+            <TextBlock  Text="{Binding ElementName=CleanlinessSlider,Path=Value}" HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Center" Grid.Row="4" Margin="0,0,70,0" Width="30" Height="24" FontSize="18"></TextBlock>
+            <TextBlock  Text="{Binding ElementName=FollowingRulesSlider,Path=Value}" HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Center" Grid.Row="5" Margin="0,0,70,0" Width="30" Height="24" FontSize="18"></TextBlock>
             <Label FontSize="18" Grid.Row="6" Width="Auto" Height="35" HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Margin="70,0,0,0">Average ratings report:</Label>
+
+            <!-- GENERATE REPORT BUTTON -->
             <Button Grid.Row="6" HorizontalAlignment="Left" VerticalAlignment="Center" Height="35" Width="100" FontWeight="Bold" Margin="342,0,0,0" FontSize="18">
                 <Grid Background="#8c9d75" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" >
                     <Grid.ColumnDefinitions>
@@ -205,15 +209,14 @@
                 </Grid>
             </Button>
 
+            <!-- PLACE FOR DIAGRAM -->
             <Label FontSize="18" Grid.Row="8" Width="Auto" Height="35" HorizontalAlignment="Center" VerticalAlignment="Top" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Margin="0,0,0,0">Change of average ratings:</Label>
             <Image Source="/Resources/Images/diagram.png" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="8" Height="135" Width="140" Margin="0,40,0,0"/>
 
-
-            <TextBlock  Text="{Binding ElementName=CleanlinessSlider,Path=Value}" HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Center" Grid.Row="4" Margin="0,0,70,0" Width="30" Height="24" FontSize="18"></TextBlock>
-            <TextBlock  Text="{Binding ElementName=FollowingRulesSlider,Path=Value}" HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Center" Grid.Row="5" Margin="0,0,70,0" Width="30" Height="24" FontSize="18"></TextBlock>
-
         </Grid>
 
+
+        <!-- SECOND COLUMN -->
         <Grid Grid.Column="1" Background="Transparent">
             <Grid.RowDefinitions>
                 <RowDefinition Height="3*"></RowDefinition>
@@ -236,10 +239,10 @@
                     </LinearGradientBrush>
                 </Border.Background>
             </Border>
+            
             <Label FontSize="24" HorizontalAlignment="Center" FontWeight="Bold" FontFamily="Baskerville Old Face"  VerticalAlignment="Top" Height="43" Width="Auto" Margin="0,50,0,0">REVIEWS</Label>
 
-
-
+            <!-- REVIEWS DATAGRID -->
             <DataGrid VerticalScrollBarVisibility="Auto" SelectedItem="{Binding Path=SelectedReview}" VerticalContentAlignment="Center"  Width="450"  HorizontalAlignment="Center" HorizontalContentAlignment="Center" Grid.Row="1" ItemsSource="{Binding Path=Guest1Reviews,Mode=OneWay}" Height="474" VerticalAlignment="Center" >
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Owner" Width="2*">
@@ -296,9 +299,6 @@
             </DataGrid>
 
         </Grid>
-
-
-
 
     </Grid>
 </Page>

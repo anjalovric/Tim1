@@ -33,6 +33,7 @@
             <RowDefinition Height="72"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
+        
         <Menu VerticalAlignment="Top" Height="72" Grid.Row="0" TextElement.Foreground="#22301a" BorderThickness="5,5,5,5" BorderBrush="#22301a">
             <Menu.Background>
                 <ImageBrush ImageSource="/Resources/Images/guest1Menu.jpeg" Opacity="0.9"></ImageBrush>

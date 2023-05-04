@@ -59,6 +59,8 @@
             <Setter Property="Background" Value="#FFFCECB9"></Setter>
         </Style>
     </Window.Resources>
+    
+    
     <Border BorderThickness="4" Padding="6" CornerRadius="25" BorderBrush="#22301a">
         <Border.Background>
             <RadialGradientBrush GradientOrigin="0.5,0.5" Center="0.5,0.5" RadiusX="0.5" RadiusY="0.5">
@@ -66,8 +68,12 @@
                 <GradientStop Color="#c99585" Offset="1"></GradientStop>
             </RadialGradientBrush>
         </Border.Background>
+        
         <Grid>
+            
             <Label Content="SELECT DESIRED DATE" Foreground="#22301a" Height="Auto" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" Margin="0,25,0,0" FontWeight="Bold" FontFamily="Baskerville Old Face" TextElement.FontSize="24"></Label>
+            
+            <!-- SUGGESTED DATES FOR SELECTED ACCOMMODATION -->
             <DataGrid x:Name="AvailableDates" VerticalContentAlignment="Center" SelectedItem="{Binding SelectedDateRange, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" ItemsSource="{Binding Path=availableDatesForAccommodations,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"  Margin="0,20,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Height="320" Width="520">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Arrival date" Width="2*" Binding="{Binding Arrival, Mode=OneWay}"/>
@@ -92,6 +98,7 @@
                 </DataGrid.Columns>
             </DataGrid>
 
+            <!-- BACK BUTTON -->
             <Button Height="35" Width="100" FontSize="18" FontWeight="Bold"  Margin="20,25,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="True" Command="{Binding BackCommand}">
                 <Grid Background="#8c9d75" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" >
                     <Grid.ColumnDefinitions>

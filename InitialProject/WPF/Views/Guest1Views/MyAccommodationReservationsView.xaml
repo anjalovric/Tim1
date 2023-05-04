@@ -87,6 +87,7 @@
             <RowDefinition Height="430"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
+        
         <TabControl Height="430" VerticalAlignment="Top" Grid.Row="0">
             <TabControl.TabStripPlacement>Top</TabControl.TabStripPlacement>
             <TabControl.Template>
@@ -96,19 +97,15 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <TabPanel Grid.Row="0"  Width="Auto"
-                   Margin="0,0,0,0" 
-                   IsItemsHost="True" 
-                   HorizontalAlignment="Center" />
-                        <Border Grid.Row="1" 
-                 
-                 BorderThickness="0,7,0,7" BorderBrush="#22301a">
+                        <TabPanel Grid.Row="0"  Width="Auto" Margin="0,0,0,0" IsItemsHost="True" HorizontalAlignment="Center"/>
+                        <Border Grid.Row="1" BorderThickness="0,7,0,7" BorderBrush="#22301a">
                             <ContentPresenter Content="{TemplateBinding SelectedContent}" />
                         </Border>
                     </Grid>
                 </ControlTemplate>
             </TabControl.Template>
 
+            <!-- NOT COMPLETED RESERVATIONS -->
             <TabItem Header="Not completed reservations" FontSize="16">
                 <Grid>
                     <Grid.Background>
@@ -122,7 +119,9 @@
                             <GradientStop Color="#22301a" Offset="1"/>
                         </LinearGradientBrush>
                     </Grid.Background>
+                    
                     <Label VerticalAlignment="Top" FontFamily="Baskerville Old Face" VerticalContentAlignment="Center" Height="Auto" FontSize="24" FontWeight="Bold" Margin="0,15,0,0" HorizontalAlignment="Center">NOT COMPLETED RESERVATIONS</Label>
+                    
                     <DataGrid x:Name="NotCompletedReservationsDataGrid" VerticalContentAlignment="Center" Margin="0,0,0,20" HorizontalAlignment="Center" VerticalAlignment="Bottom" ItemsSource="{Binding Path=NotCompletedReservations,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedNotCompletedReservation}" Height="300" Width="970">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Name" Width="2*" Binding="{Binding Accommodation.Name}">
@@ -190,7 +189,6 @@
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-
                             <DataGridTemplateColumn x:Name="Cancel" Header="Cancel" Width="94">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
@@ -213,6 +211,7 @@
                 </Grid>
             </TabItem>
 
+            <!-- COMPLETED RESERVATIONS -->
             <TabItem Header="Completed reservations" FontSize="16">
                 <Grid>
                     <Grid.Background>
@@ -226,7 +225,9 @@
                             <GradientStop Color="#22301a" Offset="1"/>
                         </LinearGradientBrush>
                     </Grid.Background>
+                    
                     <Label FontSize="24" FontFamily="Baskerville Old Face" VerticalAlignment="Top" VerticalContentAlignment="Center" Height="Auto" FontWeight="Bold" Margin="0,15,0,0" HorizontalAlignment="Center">COMPLETED RESERVATIONS</Label>
+                    
                     <DataGrid x:Name="CompletedReservationsDataGrid" VerticalContentAlignment="Center" Margin="0,0,0,20" HorizontalAlignment="Center" VerticalAlignment="Bottom" ItemsSource="{Binding Path=CompletedReservations,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedCompletedReservation}" Height="300" Width="920">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Name" Width="2.5*" Binding="{Binding Accommodation.Name}">
@@ -298,11 +299,12 @@
                     </DataGrid>
                 </Grid>
 
-
             </TabItem>
 
         </TabControl>
 
+
+        <!-- PLACE FOR DIAGRAM -->
         <Grid Grid.Row="1">
             <Grid.Background>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
