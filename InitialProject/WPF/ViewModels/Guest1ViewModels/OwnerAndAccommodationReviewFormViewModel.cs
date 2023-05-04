@@ -145,43 +145,27 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             if (LevelOfUrgencyIndex != -1)
                 IsResetEnabled = true;
         }
+
+        
         private void Send_Executed(object sender)
         {
             if (!IsImageUploadValid())
-            {
-                Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("You must upload at least one photo!", "/Resources/Images/exclamation.png");
-                messageBox.Owner = Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault();
-                messageBox.ShowDialog();
-            }
+                ShowMessageBoxForInvalidPhotoInput();
+
             else if (!IsRenovationSuggestionValid())
-            {
-                Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("You must fill all fields for renovation suggestion!", "/Resources/Images/exclamation.png");
-                messageBox.Owner = Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault();
-                messageBox.ShowDialog();
-            }
+                ShowMessageBoxForInvalidRenovationSuggestion();
+
             else
             {
                 StoreReview();
                 StoreImages();
                 StoreRenovationSuggestion();
-                Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("Successfully sent!", "/Resources/Images/done.png");
-                messageBox.Owner = Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault();
-                messageBox.ShowDialog();
+                ShowMessageBoxForSentReview();
                 Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = new MyAccommodationReservationsView(guest1);
             }
         }
 
-        private bool IsRenovationSuggestionValid()
-        {
-            if ((ConditionsOfAccommodation == null || ConditionsOfAccommodation=="") && LevelOfUrgency == null)
-                return true;
-            if (ConditionsOfAccommodation == null || ConditionsOfAccommodation == "")
-                return false;
-            if (LevelOfUrgency == null)
-                return false;
-            return true;
-            
-        }
+        
 
         private void StoreRenovationSuggestion()
         {
@@ -213,18 +197,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             OwnerReview ownerReview = new OwnerReview(reservation, AccommodationCleanliness, OwnerCorrectness, Comments);
             ownerReviewService.Add(ownerReview);
         }
-        private bool IsImageUploadValid()
-        {
-            if (images.Count >= 1)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-        
+
         private void AddPhoto_Executed(object sender)
         {
             OpenFileDialog openFileDialog = MakeOpenFileDialog();
@@ -340,6 +313,49 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             }
             else
                 ImageSource = null;
+        }
+
+        //Validation for image input
+        private bool IsImageUploadValid()
+        {
+            if (images.Count >= 1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        //Validation for renovation suggestion
+        private bool IsRenovationSuggestionValid()
+        {
+            if ((ConditionsOfAccommodation == null || ConditionsOfAccommodation == "") && LevelOfUrgency == null)
+                return true;
+            if (ConditionsOfAccommodation == null || ConditionsOfAccommodation == "")
+                return false;
+            if (LevelOfUrgency == null)
+                return false;
+            return true;
+        }
+        //Message boxes for validation
+        private void ShowMessageBoxForInvalidPhotoInput()
+        {
+            Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("You must upload at least one photo!", "/Resources/Images/exclamation.png");
+            messageBox.Owner = Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault();
+            messageBox.ShowDialog();
+        }
+        private void ShowMessageBoxForInvalidRenovationSuggestion()
+        {
+            Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("You must fill all fields for renovation suggestion!", "/Resources/Images/exclamation.png");
+            messageBox.Owner = Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault();
+            messageBox.ShowDialog();
+        }
+        private void ShowMessageBoxForSentReview()
+        {
+            Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("Successfully sent!", "/Resources/Images/done.png");
+            messageBox.Owner = Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault();
+            messageBox.ShowDialog();
         }
     }
 }

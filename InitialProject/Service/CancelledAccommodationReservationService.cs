@@ -36,15 +36,9 @@ namespace InitialProject.Service
             return cancelledReservations;
         }
         
-        public bool IsCancellationAllowed(AccommodationReservation SelectedNotCompletedReservation)
-        {
-            return DateTime.Now <= SelectedNotCompletedReservation.Arrival.AddHours(-24) && DateTime.Now <= SelectedNotCompletedReservation.Arrival.AddDays(-SelectedNotCompletedReservation.Accommodation.MinDaysToCancel);
-        }
+        
 
-        public bool HasReservationStarted(AccommodationReservation SelectedNotCompletedReservation)
-        {
-            return DateTime.Now >= SelectedNotCompletedReservation.Arrival;
-        }
+        
         
         public bool IsCancelled(AccommodationReservation reservation)
         {
