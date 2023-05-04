@@ -26,13 +26,11 @@
     </Window.Resources>
 
     <Border BorderThickness="4" Padding="6" CornerRadius="25" Height="240" BorderBrush="#22301a" VerticalAlignment="Bottom">
-
         <Border.Background>
-            <RadialGradientBrush GradientOrigin="0.5,0.5" Center="0.5,0.5" RadiusX="0.5" RadiusY="0.5">
-                    <GradientStop Color="#FFF9ECC5" Offset="-0.5"></GradientStop>
-                    <GradientStop Color="#37492d" Offset="0.9"></GradientStop>
-                    <GradientStop Color="#22301a" Offset="1.2"></GradientStop>
-                </RadialGradientBrush>
+            <RadialGradientBrush GradientOrigin="0.5,0.5" Center="0.5,0.5" RadiusX="1" RadiusY="0.5">
+                <GradientStop Color="#FFF9ECC5" Offset="0.1"></GradientStop>
+                <GradientStop Color="#8c9d75" Offset="0.9"></GradientStop>
+            </RadialGradientBrush>
         </Border.Background>
         <Grid>
             <Grid.ColumnDefinitions>
@@ -48,7 +46,7 @@
                 </Grid.RowDefinitions>
                 <Image Grid.Row="0" Source="{Binding Image, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Height="66" Width="40" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="20,32,0,0"/>
 
-                <TextBlock Grid.Row="0" Text="{Binding Path=Text}" Margin="0,32,0,0" Height="Auto" Width="218" VerticalAlignment="Top" TextAlignment="Center" FontSize="19" HorizontalAlignment="Center" Background="Transparent" FontWeight="Black" TextWrapping="Wrap" Foreground="#22301a" />
+                <TextBlock Grid.Row="0" Text="{Binding Path=Text}" FontFamily="Verdana" Margin="0,32,0,0" Height="Auto" Width="218" VerticalAlignment="Top" TextAlignment="Center" FontSize="19" HorizontalAlignment="Center" Background="Transparent" FontWeight="Black" TextWrapping="Wrap" Foreground="#22301a" />
                 <StackPanel Grid.Row="1" VerticalAlignment="Top" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,0">
                     <Button Name="YesButton" Content="Yes" Margin="0,0,10,0" Width="100" VerticalAlignment="Center" Command="{Binding YesCommand}" Height="35" Background="#FFAAEDA9" />
                     <Button Name="NoButton" Content="No" Width="100" Margin="10,0,0,0" VerticalAlignment="Center" Command="{Binding NoCommand}" Height="35" Background="#FF8986"  />

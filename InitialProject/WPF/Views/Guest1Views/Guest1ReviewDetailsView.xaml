@@ -10,14 +10,14 @@
 
     <Page.Resources>
         <Style TargetType="Grid">
-            <Setter Property="Background" Value="#37492d"></Setter>
+            <Setter Property="Background" Value="#c99585"></Setter>
         </Style>
         <Style TargetType="Label">
-            <Setter Property="Foreground" Value="#d9c7b3"></Setter>
+            <Setter Property="Foreground" Value="#37492d"></Setter>
             <Setter Property="FontWeight" Value="Medium"></Setter>
         </Style>
         <Style TargetType="TextBlock">
-            <Setter Property="Foreground" Value="#d9c7b3"></Setter>
+            <Setter Property="Foreground" Value="#37492d"></Setter>
             <Setter Property="FontWeight" Value="Medium"></Setter>
         </Style>
         <Style TargetType="ScrollBar">
@@ -44,24 +44,41 @@
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.Column="1">
+        <Grid Grid.Column="1" Background="Transparent">
             <Grid.RowDefinitions>
+                <RowDefinition Height="2*"></RowDefinition>
+                <RowDefinition Height="2*"></RowDefinition>
+                <RowDefinition Height="2*"></RowDefinition>
+                <RowDefinition Height="2*"></RowDefinition>
+                <RowDefinition Height="2*"></RowDefinition>
+                <RowDefinition Height="2*"></RowDefinition>
                 <RowDefinition Height="3*"></RowDefinition>
-                <RowDefinition Height="2*"></RowDefinition>
-                <RowDefinition Height="2*"></RowDefinition>
-                <RowDefinition Height="2*"></RowDefinition>
-                <RowDefinition Height="2*"></RowDefinition>
-                <RowDefinition Height="2*"></RowDefinition>
-                <RowDefinition Height="2*"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <Label HorizontalAlignment="Center" VerticalAlignment="Top" HorizontalContentAlignment="Center" Grid.Row="0" FontFamily="Baskerville Old Face" FontSize="24" FontWeight="Bold" Margin="0,20,0,0">RESERVATION DETAILS</Label>
 
-            <Label HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Center" Grid.Row="1" FontSize="18" FontWeight="Bold" Margin="70,0,0,0">Owner:</Label>
-            <Label HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Center" Grid.Row="2" FontSize="18" FontWeight="Bold" Margin="70,0,0,0">Accommodation:</Label>
-            <Label HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Center" Grid.Row="3" FontSize="18" FontWeight="Bold" Margin="70,0,0,0">Location:</Label>
-            <Label HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Center" Grid.Row="4" FontSize="18" FontWeight="Bold" Margin="70,0,0,0">Arrival date:</Label>
-            <Label HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Center" Grid.Row="5" FontSize="18" FontWeight="Bold" Margin="70,0,0,0">Departure date:</Label>
+            <Border Grid.Row="0" Grid.RowSpan="7" Grid.Column="0" Width="490" BorderBrush="#22301a" BorderThickness="3"  CornerRadius="20 20 20 20" HorizontalAlignment="Center" Margin="0,10,0,10">
+                <Border.Effect>
+                    <DropShadowEffect ShadowDepth="0" BlurRadius="50"/>
+                </Border.Effect>
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="#FFB58578" Offset="0"/>
+                        <GradientStop Color="#FFB58578" Offset="0.1"></GradientStop>
+                        <GradientStop Color="#c99585" Offset="0.4"/>
+                        <GradientStop Color="#c99585" Offset="0.5"/>
+                        <GradientStop Color="#c99585" Offset="0.6"/>
+                        <GradientStop Color="#FFB58578" Offset="0.9"></GradientStop>
+                        <GradientStop Color="#FFB58578" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
+            <Label HorizontalAlignment="Center" VerticalAlignment="Top" HorizontalContentAlignment="Center" Grid.Row="0" FontFamily="Baskerville Old Face" FontSize="24" FontWeight="Bold" Margin="0,25,0,0">RESERVATION DETAILS</Label>
+
+            <Label HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Center" Grid.Row="1" FontSize="18"  Margin="70,0,0,0">Owner:</Label>
+            <Label HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Center" Grid.Row="2" FontSize="18"  Margin="70,0,0,0">Accommodation:</Label>
+            <Label HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Center" Grid.Row="3" FontSize="18"  Margin="70,0,0,0">Location:</Label>
+            <Label HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Center" Grid.Row="4" FontSize="18"  Margin="70,0,0,0">Arrival date:</Label>
+            <Label HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Center" Grid.Row="5" FontSize="18"  Margin="70,0,0,0">Departure date:</Label>
 
             <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center"  Grid.Row="1" FontSize="18" FontWeight="Bold" Width="Auto" Margin="0,0,70,0">
                 <Run Text="{Binding SelectedReview.Reservation.Accommodation.Owner.Name}"/>
@@ -81,13 +98,31 @@
 
 
 
-        <Grid Grid.Column="0">
+        <Grid Grid.Column="0" Background="Transparent">
             <Grid.RowDefinitions>
-                <RowDefinition Height="3*"></RowDefinition>
+                <RowDefinition Height="2*"></RowDefinition>
                 <RowDefinition Height="2*"></RowDefinition>
                 <RowDefinition Height="2*"></RowDefinition>
                 <RowDefinition Height="8*"></RowDefinition>
             </Grid.RowDefinitions>
+
+
+            <Border Grid.Row="0" Grid.RowSpan="9" Grid.Column="0" Width="490" BorderBrush="#22301a" BorderThickness="3"  CornerRadius="20 20 20 20" HorizontalAlignment="Center" Margin="0,10,0,10">
+                <Border.Effect>
+                    <DropShadowEffect ShadowDepth="0" BlurRadius="50"/>
+                </Border.Effect>
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="#FFB58578" Offset="0"/>
+                        <GradientStop Color="#FFB58578" Offset="0.1"></GradientStop>
+                        <GradientStop Color="#c99585" Offset="0.4"/>
+                        <GradientStop Color="#c99585" Offset="0.5"/>
+                        <GradientStop Color="#c99585" Offset="0.6"/>
+                        <GradientStop Color="#FFB58578" Offset="0.9"></GradientStop>
+                        <GradientStop Color="#FFB58578" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
             <Button Height="35" Width="100" FontSize="16" IsEnabled="True" FontWeight="Bold" Grid.Column="0" Grid.Row="0" Margin="20,20,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Command="NavigationCommands.BrowseBack">
                 <Grid Background="#8c9d75" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" >
                     <Grid.ColumnDefinitions>
@@ -99,26 +134,52 @@
                 </Grid>
             </Button>
 
-            <Label HorizontalAlignment="Center" VerticalAlignment="Top" HorizontalContentAlignment="Center" Grid.Row="0" FontFamily="Baskerville Old Face" FontSize="24" FontWeight="Bold" Margin="0,20,0,0">REVIEW DETAILS</Label>
 
-            <Label HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Center" Grid.Row="1" FontSize="18" FontWeight="Bold" Margin="70,0,0,0">Cleanliness:</Label>
-            <Label HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Center" Grid.Row="2" FontSize="18" FontWeight="Bold" Margin="70,0,0,0">Following rules:</Label>
-            <Label HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Left" Grid.Row="3" FontSize="18" FontWeight="Bold" Margin="70,32,0,0">Owner's comment:</Label>
-            <Border  Grid.Row="4" Background="#8c9d75" Width="366" Margin="70,20,70,70" HorizontalAlignment="Center" Height="170" BorderBrush="#22301a" BorderThickness="3"/>
+            <Label HorizontalAlignment="Center" VerticalAlignment="Top" HorizontalContentAlignment="Center" Grid.Row="0" FontFamily="Baskerville Old Face" FontSize="24" FontWeight="Bold" Margin="0,25,0,0">REVIEW DETAILS</Label>
 
-            <ScrollViewer Background="#8c9d75" MaxHeight="164" VerticalAlignment="Center" Height="164" Width="366" HorizontalScrollBarVisibility="Hidden"  VerticalScrollBarVisibility="Auto" HorizontalAlignment="Center" Grid.Row="4" Margin="73,23,73,73" >
-                <TextBlock Foreground="#37492d" Margin="3,0,0,0" Height="Auto" Width="340" Text="{Binding Path=SelectedReview.Comment}" TextWrapping="Wrap" FontSize="18"  ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalAlignment="Left" FontWeight="Bold"/>
+            <Label HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Center" Grid.Row="1" FontSize="18"  Margin="70,0,0,0">Cleanliness:</Label>
+            <Label HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Center" Grid.Row="2" FontSize="18"  Margin="70,0,0,0">Following rules:</Label>
+            <Label HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Left" Grid.Row="3" FontSize="18"  Margin="70,32,0,0">Owner's comment:</Label>
+            
+            <ScrollViewer Background="#FFE2BDB2" MaxHeight="164" VerticalAlignment="Center" Height="164" Width="366" HorizontalScrollBarVisibility="Hidden"  VerticalScrollBarVisibility="Auto" HorizontalAlignment="Center" Grid.Row="4" Margin="73,23,73,73" >
+                <TextBlock Foreground="#FFE2BDB2" Margin="3,0,0,0" Height="Auto" Width="340" Text="{Binding Path=SelectedReview.Comment}" TextWrapping="Wrap" FontSize="18"  ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalAlignment="Left" FontWeight="Bold"/>
             </ScrollViewer>
+            <Border  Grid.Row="4" Background="Transparent" Width="366" Margin="70,20,70,70" HorizontalAlignment="Center" Height="170" BorderBrush="#22301a" BorderThickness="3"/>
+
             <Slider x:Name="CleanlinessSlider" Opacity="0.5" Minimum="1" Maximum="5" TickFrequency="1" AutoToolTipPlacement="BottomRight"   Width="120" Grid.Row="1" IsEnabled="False" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,130,0" Value="{Binding SelectedReview.Cleanliness, Mode=OneWay}"></Slider>
             <Slider x:Name="FollowingRulesSlider" Opacity="0.5" Width="120" Minimum="1" Maximum="5" Grid.Row="2" IsEnabled="False" TickFrequency="1" HorizontalAlignment="Right" AutoToolTipPlacement="BottomRight" VerticalAlignment="Center" Margin="0,0,130,0"  Value="{Binding SelectedReview.RulesFollowing, Mode=OneWay}"></Slider>
 
-            <TextBlock Text="{Binding ElementName=CleanlinessSlider,Path=Value}" Foreground="black" FontSize="18" HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Center" Background="#dbc9ab" Grid.Row="1" Margin="0,0,70,0" Width="30" Height="24" FontWeight="Normal"></TextBlock>
-            <TextBlock Text="{Binding ElementName=FollowingRulesSlider,Path=Value}" Foreground="Black" FontSize="18" HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Center"  Background="#dbc9ab" Grid.Row="2" Margin="0,0,70,0" Width="30" Height="24" FontWeight="Normal"></TextBlock>
+            <TextBlock Text="{Binding ElementName=CleanlinessSlider,Path=Value}" Foreground="#22301a" FontSize="18" HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Center"  Grid.Row="1" Margin="0,0,70,0" Width="30" Height="24" FontWeight="Normal">
+                <TextBlock.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="#c99585" Offset="0"/>
+                        <GradientStop Color="#c99585" Offset="0.1"></GradientStop>
+                        <GradientStop Color="#dbc9ab" Offset="0.4"/>
+                        <GradientStop Color="#dbc9ab" Offset="0.5"/>
+                        <GradientStop Color="#dbc9ab" Offset="0.6"/>
+                        <GradientStop Color="#c99585" Offset="0.9"></GradientStop>
+                        <GradientStop Color="#c99585" Offset="1"/>
+                    </LinearGradientBrush>
+                </TextBlock.Background>
+            </TextBlock>
+            <TextBlock Text="{Binding ElementName=FollowingRulesSlider,Path=Value}" Foreground="#22301a" FontSize="18" HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Center"  Grid.Row="2" Margin="0,0,70,0" Width="30" Height="24" FontWeight="Normal">
+                <TextBlock.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="#c99585" Offset="0"/>
+                        <GradientStop Color="#c99585" Offset="0.1"></GradientStop>
+                        <GradientStop Color="#dbc9ab" Offset="0.4"/>
+                        <GradientStop Color="#dbc9ab" Offset="0.5"/>
+                        <GradientStop Color="#dbc9ab" Offset="0.6"/>
+                        <GradientStop Color="#c99585" Offset="0.9"></GradientStop>
+                        <GradientStop Color="#c99585" Offset="1"/>
+                    </LinearGradientBrush>
+                </TextBlock.Background>
+            </TextBlock>
 
 
 
         </Grid>
-        <Border Grid.Column="1" BorderThickness="1 0 1 0" Width="1" HorizontalAlignment="Left" BorderBrush="#22301a" />
+
 
     </Grid>
 </Page>

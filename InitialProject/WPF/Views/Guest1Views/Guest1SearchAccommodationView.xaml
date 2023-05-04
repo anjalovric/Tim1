@@ -135,7 +135,19 @@
         </Style>
 
         <Style TargetType="Grid">
-            <Setter Property="Background" Value="#37492d"></Setter>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="#22301a" Offset="0"/>
+                        <GradientStop Color="#37492d" Offset="0.2"></GradientStop>
+                        <GradientStop Color="#37492d" Offset="0.4"/>
+                        <GradientStop Color="#37492d" Offset="0.5"/>
+                        <GradientStop Color="#37492d" Offset="0.6"/>
+                        <GradientStop Color="#37492d" Offset="0.8"></GradientStop>
+                        <GradientStop Color="#22301a" Offset="1"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
         </Style>
         <Style TargetType="Label">
             <Setter Property="Foreground" Value="#d9c7b3"></Setter>
@@ -199,7 +211,7 @@
         <Image HorizontalAlignment="Left"  VerticalAlignment="Top"  Source="/Resources/Images/LOGO (2).jpg" Grid.Row="0" Margin="10,-4,0,0" Grid.Column="0" Width="180" Height="100" Stretch="Fill" Grid.RowSpan="2"   />
 
 
-        <Label x:Name="bookAccommodation" Foreground="#d9c7b3" VerticalAlignment="Center" Content="BOOKING ACCOMMODATION"  FontWeight="Bold"  VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="24" Margin="0,20,0,0" Grid.ColumnSpan="3" FontFamily="Baskerville Old Face" HorizontalAlignment="Center">
+        <Label x:Name="bookAccommodation" Foreground="#d9c7b3" VerticalAlignment="Center" Content="BOOKING ACCOMMODATION"  FontWeight="Bold"  VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="24" Margin="0,25,0,0" Grid.ColumnSpan="3" FontFamily="Baskerville Old Face" HorizontalAlignment="Center">
             <Label.Style>
                 <Style>
                     <Setter Property="Label.Effect">

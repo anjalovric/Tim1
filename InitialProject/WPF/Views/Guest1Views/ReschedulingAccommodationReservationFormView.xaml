@@ -46,7 +46,7 @@
             </RadialGradientBrush>
         </Border.Background>
         <Grid>
-            <Label FontSize="24" HorizontalAlignment="Center" FontFamily="Baskerville Old Face"  VerticalAlignment="Top" Height="43" Width="402" Margin="0,20,0,0">CHANGING RESERVATION DATE</Label>
+            <Label FontSize="24" HorizontalAlignment="Center" FontFamily="Baskerville Old Face"  VerticalAlignment="Top" Height="43" Width="402" Margin="0,25,0,0">CHANGING RESERVATION DATE</Label>
             <Label FontSize="18" HorizontalAlignment="Left" Margin="160,0,0,300" FontWeight="DemiBold" Height="40" Width="110">Arrival date:</Label>
 
             <Calendar x:Name="ArrivalDate" Margin="120,120,0,196" HorizontalAlignment="Left" SelectedDate="{Binding Path=Arrival, Mode=TwoWay}">
@@ -68,7 +68,7 @@
             <Label FontSize="18" HorizontalAlignment="Center" Margin="0,170,0,0" VerticalAlignment="Center" FontWeight="DemiBold" Width="224" Content="Reasons for rescheduling:"/>
             <TextBox x:Name="Reasons"  Height="80" Margin="120,361,120,61" Text="{Binding Path=Reason, Mode=TwoWay}"/>
 
-            <Button Height="35" Width="100" FontSize="18" FontWeight="Bold"  Margin="10,20,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="True" Command="{Binding BackCommand}">
+            <Button Height="35" Width="100" FontSize="18" FontWeight="Bold"  Margin="10,25,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="True" Command="{Binding BackCommand}">
                 <Grid Background="#8c9d75" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>

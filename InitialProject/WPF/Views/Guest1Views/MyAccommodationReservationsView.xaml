@@ -29,9 +29,9 @@
         <Style TargetType="DataGrid">
             <Setter Property="BorderBrush" Value="#22301a"></Setter>
             <Setter Property="BorderThickness" Value="4,4,3,4"></Setter>
-            <Setter Property="ColumnHeaderHeight" Value="40"></Setter>
+            <Setter Property="ColumnHeaderHeight" Value="45"></Setter>
             <Setter Property="RowBackground" Value="#FFFCECB9"></Setter>
-            <Setter Property="RowHeight" Value="30"></Setter>
+            <Setter Property="RowHeight" Value="35"></Setter>
             <Setter Property="Background">
                 <Setter.Value>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
@@ -80,7 +80,11 @@
     </Page.Resources>
 
     <Grid>
-        <TabControl Height="430" VerticalAlignment="Top" Background="AntiqueWhite">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="430"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <TabControl Height="430" VerticalAlignment="Top" Grid.Row="0">
             <TabControl.TabStripPlacement>Top</TabControl.TabStripPlacement>
             <TabControl.Template>
                 <ControlTemplate TargetType="{x:Type TabControl}">
@@ -94,8 +98,8 @@
                    IsItemsHost="True" 
                    HorizontalAlignment="Center" />
                         <Border Grid.Row="1" 
-                 BorderBrush="#22301a" 
-                 BorderThickness="0,4,0,0">
+                 
+                 BorderThickness="0,7,0,7" BorderBrush="#22301a">
                             <ContentPresenter Content="{TemplateBinding SelectedContent}" />
                         </Border>
                     </Grid>
@@ -104,8 +108,19 @@
 
             <TabItem Header="Not completed reservations" FontSize="16">
                 <Grid>
-                    <Label VerticalAlignment="Top" VerticalContentAlignment="Center" Height="Auto" FontSize="24" FontWeight="Bold" Margin="0,10,0,0" HorizontalAlignment="Center">NOT COMPLETED RESERVATIONS</Label>
-                    <DataGrid x:Name="NotCompletedReservationsDataGrid" VerticalContentAlignment="Center" FontSize="16" Margin="0,30,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" ItemsSource="{Binding Path=NotCompletedReservations,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedNotCompletedReservation}" HeadersVisibility="Column" AutoGenerateColumns="False" IsReadOnly="True" Height="322" Width="970" UseLayoutRounding="False">
+                    <Grid.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                            <GradientStop Color="#22301a" Offset="0"/>
+                            <GradientStop Color="#37492d" Offset="0.2"></GradientStop>
+                            <GradientStop Color="#37492d" Offset="0.4"/>
+                            <GradientStop Color="#37492d" Offset="0.5"/>
+                            <GradientStop Color="#37492d" Offset="0.6"/>
+                            <GradientStop Color="#37492d" Offset="0.8"></GradientStop>
+                            <GradientStop Color="#22301a" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Grid.Background>
+                    <Label VerticalAlignment="Top" VerticalContentAlignment="Center" Height="Auto" FontSize="24" FontWeight="Bold" Margin="0,15,0,0" HorizontalAlignment="Center">NOT COMPLETED RESERVATIONS</Label>
+                    <DataGrid x:Name="NotCompletedReservationsDataGrid" VerticalContentAlignment="Center" FontSize="16" Margin="0,0,0,20" HorizontalAlignment="Center" VerticalAlignment="Bottom" ItemsSource="{Binding Path=NotCompletedReservations,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedNotCompletedReservation}" HeadersVisibility="Column" AutoGenerateColumns="False" IsReadOnly="True" Height="300" Width="970" UseLayoutRounding="False">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Name" Width="2*" Binding="{Binding Accommodation.Name}">
                                 <DataGridTextColumn.ElementStyle>
@@ -158,7 +173,7 @@
                             <DataGridTemplateColumn x:Name="ChangeDate" Header="Reschedule" Width="2.2*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button Name="ChangeDate" Background="#c99585" VerticalAlignment="Center" FontWeight="Bold" Width="Auto" FontSize="16" Command="{Binding DataContext.RescheduleReservationCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}">
+                                        <Button Name="ChangeDate" Background="#c99585"  VerticalAlignment="Center" FontWeight="Bold" Width="Auto" FontSize="16" Command="{Binding DataContext.RescheduleReservationCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}">
                                             <Grid Background="#c99585" Width="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" >
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="Auto"/>
@@ -177,7 +192,7 @@
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <Button Name="Cancel" VerticalContentAlignment="Center" VerticalAlignment="Center" FontSize="16" Background="#c99585" Command="{Binding DataContext.CancelReservationCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" FontWeight="Bold">
-                                            <Grid Background="#c99585" Width="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" >
+                                            <Grid Background="#c99585" Width="Auto" HorizontalAlignment="Center" Height="35" VerticalAlignment="Center" >
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="Auto"/>
                                                     <ColumnDefinition Width="Auto"/>
@@ -197,8 +212,19 @@
 
             <TabItem Header="Completed reservations" FontSize="16">
                 <Grid>
-                    <Label FontSize="24" VerticalAlignment="Top" VerticalContentAlignment="Center" Height="Auto" FontWeight="Bold" Margin="0,10,0,0" HorizontalAlignment="Center">COMPLETED RESERVATIONS</Label>
-                    <DataGrid x:Name="CompletedReservationsDataGrid" HeadersVisibility="Column" VerticalContentAlignment="Center" FontSize="16" Margin="0,30,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" ItemsSource="{Binding Path=CompletedReservations,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedCompletedReservation}" AutoGenerateColumns="False" IsReadOnly="True" Height="322" Width="920" UseLayoutRounding="False">
+                    <Grid.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                            <GradientStop Color="#22301a" Offset="0"/>
+                            <GradientStop Color="#37492d" Offset="0.2"></GradientStop>
+                            <GradientStop Color="#37492d" Offset="0.4"/>
+                            <GradientStop Color="#37492d" Offset="0.5"/>
+                            <GradientStop Color="#37492d" Offset="0.6"/>
+                            <GradientStop Color="#37492d" Offset="0.8"></GradientStop>
+                            <GradientStop Color="#22301a" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Grid.Background>
+                    <Label FontSize="24" VerticalAlignment="Top" VerticalContentAlignment="Center" Height="Auto" FontWeight="Bold" Margin="0,15,0,0" HorizontalAlignment="Center">COMPLETED RESERVATIONS</Label>
+                    <DataGrid x:Name="CompletedReservationsDataGrid" HeadersVisibility="Column" VerticalContentAlignment="Center" FontSize="16" Margin="0,0,0,20" HorizontalAlignment="Center" VerticalAlignment="Bottom" ItemsSource="{Binding Path=CompletedReservations,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedCompletedReservation}" AutoGenerateColumns="False" IsReadOnly="True" Height="300" Width="920" UseLayoutRounding="False">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Name" Width="2.5*" Binding="{Binding Accommodation.Name}">
                                 <DataGridTextColumn.ElementStyle>
@@ -252,7 +278,7 @@
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <Button Name="Rate" VerticalAlignment="Center" Width="Auto" FontWeight="Bold" VerticalContentAlignment="Center" FontSize="16" Background="#c99585" Command="{Binding DataContext.RateOwnerAndAccommodationCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}">
-                                            <Grid Background="#c99585" Width="94" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" >
+                                            <Grid Background="#c99585" Width="94" Height="35" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" >
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="Auto"/>
                                                     <ColumnDefinition Width="Auto"/>
@@ -274,5 +300,23 @@
 
         </TabControl>
 
+        <Grid Grid.Row="1">
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                    <GradientStop Color="#22301a" Offset="0"/>
+                    <GradientStop Color="#37492d" Offset="0.2"></GradientStop>
+                    <GradientStop Color="#37492d" Offset="0.4"/>
+                    <GradientStop Color="#37492d" Offset="0.5"/>
+                    <GradientStop Color="#37492d" Offset="0.6"/>
+                    <GradientStop Color="#37492d" Offset="0.8"></GradientStop>
+                    <GradientStop Color="#22301a" Offset="1"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+           
+            <Label FontSize="16" Grid.Row="1" Width="Auto" Height="35" FontFamily="Segoe UI" HorizontalAlignment="Center" VerticalAlignment="Top" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Margin="0,25,0,0">Frequency of making reservations:</Label>
+
+            <Image Source="/Resources/Images/diagram.png" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="1" Height="150" Width="200" Margin="0,60,0,0" Stretch="Fill"></Image>
+
+        </Grid>
     </Grid>
 </Page>

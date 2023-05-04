@@ -53,7 +53,7 @@
                 <RowDefinition Height="2*"></RowDefinition>
                 <RowDefinition Height="3*"></RowDefinition>
             </Grid.RowDefinitions>
-            <Label FontSize="24" HorizontalAlignment="Center" FontFamily="Baskerville Old Face"  VerticalAlignment="Top" Height="43" Width="Auto" Grid.ColumnSpan="2" Grid.Row="0" Margin="0,20,0,0">RESERVATION FORM</Label>
+            <Label FontSize="24" HorizontalAlignment="Center" FontFamily="Baskerville Old Face"  VerticalAlignment="Top" Height="43" Width="Auto" Grid.ColumnSpan="2" Grid.Row="0" Margin="0,25,0,0">RESERVATION FORM</Label>
 
             <Label Content="Arrival date:" Margin="169,0,0,0" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" TextElement.FontWeight="DemiBold"></Label>
             <Calendar x:Name="CalendarStart" HorizontalAlignment="Left" Width="185" VerticalAlignment="Top" Margin="114,0,0,0" SelectedDate="{Binding Path=Arrival, Mode=TwoWay}" Grid.Column="0" Grid.Row="2">
@@ -108,7 +108,7 @@
                     <TextBlock Background="#8c9d75" Text="NEXT" Grid.Column="0" VerticalAlignment="Center" FontSize="18"  Foreground="#22301a" Margin="10,0,0,0" FontWeight="Bold" HorizontalAlignment="Left" Width="58"/>
                 </Grid>
             </Button>
-            <Button Height="35" Width="100" FontSize="16" IsEnabled="True" FontWeight="Bold" Grid.Column="0" Grid.Row="0" Margin="20,20,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Command="{Binding BackCommand}">
+            <Button Height="35" Width="100" FontSize="16" IsEnabled="True" FontWeight="Bold" Grid.Column="0" Grid.Row="0" Margin="20,25,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Command="{Binding BackCommand}">
                 <Grid Background="#8c9d75" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>

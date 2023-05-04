@@ -26,13 +26,13 @@
 
     <Border BorderThickness="4" Padding="6" CornerRadius="25" Height="240" VerticalAlignment="Bottom" BorderBrush="#22301a">
         <Border.Background>
-            <RadialGradientBrush GradientOrigin="0.5,0.5" Center="0.5,0.5" RadiusX="0.5" RadiusY="0.5">
-                <GradientStop Color="#FFF9ECC5" Offset="-0.5"></GradientStop>
-                <GradientStop Color="#37492d" Offset="0.9"></GradientStop>
-                <GradientStop Color="#22301a" Offset="1.2"></GradientStop>
+            <RadialGradientBrush GradientOrigin="0.5,0.5" Center="0.5,0.5" RadiusX="1" RadiusY="0.5">
+                <GradientStop Color="#FFF9ECC5" Offset="0.1"></GradientStop>
+                <GradientStop Color="#8c9d75" Offset="0.9"></GradientStop>
             </RadialGradientBrush>
         </Border.Background>
         <Grid>
+
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="163*"/>
                 <ColumnDefinition Width="17*"/>
@@ -48,7 +48,7 @@
                 </Grid.RowDefinitions>
                 <Image Grid.Row="0" Source="{Binding Image, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Height="66" Width="40" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="20,32,0,0"/>
 
-                <TextBlock Grid.Row="0" Text="{Binding Path=Text}" FontWeight="Bold" Margin="0,0,0,0" Height="Auto" Width="218" VerticalAlignment="Center" TextAlignment="Center" FontSize="19" HorizontalAlignment="Center" Background="Transparent" TextWrapping="Wrap" Foreground="#22301a" />
+                <TextBlock Grid.Row="0" Text="{Binding Path=Text}" FontWeight="Bold" Margin="0,0,0,0" Height="Auto" Width="218" VerticalAlignment="Center" FontFamily="Verdana" TextAlignment="Center" FontSize="19" HorizontalAlignment="Center" Background="Transparent" TextWrapping="Wrap" Foreground="#22301a" />
                 <StackPanel Grid.Row="1" VerticalAlignment="Top" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,0">
                     <Button Name="YesButton" Content="OK" Margin="0,0,0,0" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding OkCommand}" Height="35" Background="#FFFCECB9" />
                 </StackPanel>

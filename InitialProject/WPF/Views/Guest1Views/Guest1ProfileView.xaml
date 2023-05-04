@@ -9,7 +9,19 @@
       Title="Guest1Profile">
     <Page.Resources>
         <Style TargetType="Grid">
-            <Setter Property="Background" Value="#37492d"></Setter>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="#22301a" Offset="0"/>
+                        <GradientStop Color="#37492d" Offset="0.2"></GradientStop>
+                        <GradientStop Color="#37492d" Offset="0.4"/>
+                        <GradientStop Color="#37492d" Offset="0.5"/>
+                        <GradientStop Color="#37492d" Offset="0.6"/>
+                        <GradientStop Color="#37492d" Offset="0.8"></GradientStop>
+                        <GradientStop Color="#22301a" Offset="1"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
         </Style>
         <Style TargetType="Label">
             <Setter Property="Foreground" Value="#d9c7b3"></Setter>
@@ -69,84 +81,203 @@
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Label FontSize="24" Margin="0,20,0,0" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Top" Width="Auto" Height="Auto" FontWeight="Bold">PROFILE</Label>
+        <Label FontSize="24" Grid.Row="0" Grid.ColumnSpan="2" Height="Auto" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" Margin="0,25,0,0" FontWeight="Bold" FontFamily="Baskerville Old Face" TextElement.FontSize="24">PROFILE</Label>
+
+        <Grid Grid.Row="2" Grid.Column="0" Background="Transparent">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.5*"></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="2*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Border Grid.RowSpan="10" Width="420" BorderThickness="3,0,3,3" BorderBrush="#22301a" CornerRadius="0 0 20 20" HorizontalAlignment="Center" Height="380" VerticalAlignment="Top">
+                <Border.Effect>
+                    <DropShadowEffect ShadowDepth="0" BlurRadius="50"/>
+                </Border.Effect>
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="#FF2A3922" Offset="0"/>
+                        <GradientStop Color="#37492d" Offset="0.2"></GradientStop>
+                        <GradientStop Color="#37492d" Offset="0.4"/>
+                        <GradientStop Color="#37492d" Offset="0.5"/>
+                        <GradientStop Color="#37492d" Offset="0.6"/>
+                        <GradientStop Color="#37492d" Offset="0.8"></GradientStop>
+                        <GradientStop Color="#FF2A3922" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
+            <Label FontSize="18" Height="35" Width="Auto" Grid.Row="1" HorizontalAlignment="Left"  VerticalAlignment="Center" Margin="75,0,0,0">Name:</Label>
+            <Label FontSize="18" Height="35" Width="Auto" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="75,0,0,0" Content="Country:"/>
+            <Label FontSize="18" Height="36" Width="Auto" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="75,0,0,0" Content="City:"/>
+            <Label FontSize="18" Height="35" Width="Auto" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="75,0,0,0" Content="Username:"/>
+            <Label FontSize="18" Height="35" Width="Auto" Grid.Row="5" HorizontalAlignment="Left"  VerticalAlignment="Center" Margin="75,0,0,0" Content="Phone number:"/>
+            <Label FontSize="18" Height="35" Width="Auto" Grid.Row="6" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="75,0,0,0" Content="Email:"/>
+
+            <TextBlock FontSize="18" Height="35" Width="Auto" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,75,0">
+                <TextBlock.Text>
+                    <MultiBinding StringFormat="{}{0} {1}">
+                        <Binding Path="Guest1.Name" />
+                        <Binding Path="Guest1.LastName" />
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
+            <TextBlock FontSize="18" Height="35" Width="Auto" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,75,0" Text="{Binding Path=Guest1.Location.Country}"></TextBlock>
+            <TextBlock FontSize="18" Height="35" Width="Auto" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,75,0" Text="{Binding Path=Guest1.Location.City}"></TextBlock>
+            <TextBlock FontSize="18" Height="35" Width="Auto" Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,75,0" Text="{Binding Path=Guest1.Username}"></TextBlock>
+            <TextBlock FontSize="18" Height="35" Width="Auto" Grid.Row="5" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,75,0" Text="{Binding Path=Guest1.PhoneNumber}"></TextBlock>
+            <TextBlock FontSize="18" Height="35" Width="Auto" Grid.Row="6" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,75,0" Text="{Binding Path=Guest1.Email}"></TextBlock>
+
+        </Grid>
+
+        <Border Grid.Row="1" Grid.Column="0" Width="420" Height="65" BorderThickness="3,3,3,0" BorderBrush="#22301a" VerticalAlignment="Top" CornerRadius="20 20 0 0" HorizontalAlignment="Center" Margin="0,6,0,0" Grid.RowSpan="2">
+            <Border.Effect>
+                <DropShadowEffect ShadowDepth="0"  BlurRadius="50"/>
+            </Border.Effect>
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                    <GradientStop Color="#FF2A3922" Offset="0"/>
+                    <GradientStop Color="#37492d" Offset="0.2"></GradientStop>
+                    <GradientStop Color="#37492d" Offset="0.4"/>
+                    <GradientStop Color="#37492d" Offset="0.5"/>
+                    <GradientStop Color="#37492d" Offset="0.6"/>
+                    <GradientStop Color="#37492d" Offset="0.8"></GradientStop>
+                    <GradientStop Color="#FF2A3922" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+        
+
+        <Label FontSize="20" Height="35" Width="Auto" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Bottom">Personal data</Label>
 
         
-        <Label FontSize="20" Height="35" Width="Auto" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">Personal data</Label>
-        <Image Source="/Resources/Images/medal.png" Width="40" Height="40" Grid.Column="1" Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Center">
+
+        <Grid Grid.Row="2" Grid.Column="1" Background="Transparent">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.8*"></RowDefinition>
+                <RowDefinition Height="3.2*"></RowDefinition>
+                <RowDefinition Height="0.5*"></RowDefinition>
+                <RowDefinition Height="0.5*"></RowDefinition>
+                <RowDefinition Height="1.5*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+
+            <Border Grid.RowSpan="10" Width="420" BorderThickness="3,0,3,3" BorderBrush="#22301a" CornerRadius="0 0 20 20" HorizontalAlignment="Center" Height="380" VerticalAlignment="Top">
+                <Border.Effect>
+                    <DropShadowEffect ShadowDepth="0" BlurRadius="50"/>
+                </Border.Effect>
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="#FF2A3922" Offset="0"/>
+                        <GradientStop Color="#37492d" Offset="0.2"></GradientStop>
+                        <GradientStop Color="#37492d" Offset="0.4"/>
+                        <GradientStop Color="#37492d" Offset="0.5"/>
+                        <GradientStop Color="#37492d" Offset="0.6"/>
+                        <GradientStop Color="#37492d" Offset="0.8"></GradientStop>
+                        <GradientStop Color="#FF2A3922" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
+            
+            <TextBlock Text="Super-guest available points:" Height="Auto" FontSize="19" Foreground="#d9c7b3" FontWeight="DemiBold" Width="Auto" Grid.Row="0" HorizontalAlignment="Left" Margin="81,0,0,0" VerticalAlignment="Bottom">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsSuperGuest}" Value="True">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+
+            <TextBlock Text="{Binding SuperGuest.AvailablePoints}" FontSize="19" FontWeight="DemiBold" Foreground="#d9c7b3" HorizontalAlignment="Right" Margin="0,0,81,0" VerticalAlignment="Bottom">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsSuperGuest}" Value="True">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+
+
+            <Image x:Name="accommodationImage"  Grid.Row="1" Width="350"  Stretch="Fill" Source="{Binding ImageSource, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Height="230" Margin="0,10,0,0"/>
+            <Border  Grid.Row="1" BorderBrush="#22301a" BorderThickness="3" VerticalAlignment="Center" HorizontalAlignment="Center" Width="350" Height="230" Margin="0,10,0,0"/>
+
+
+            <StackPanel Grid.Row="2" Grid.Column="1" VerticalAlignment="Center"  Margin="0,0,0,0" Orientation="Horizontal" HorizontalAlignment="Center">
+                <ListBox Grid.Row="2" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Width="Auto" ItemsSource="{Binding AverageRating, Converter={StaticResource Int2Images}}"  Height="Auto" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center">
+                    <ListBox.Style>
+                        <Style TargetType="ListBox">
+                            <Setter Property="Visibility" Value="Visible"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ReviewsNumber}" Value="0">
+                                    <Setter Property="Visibility" Value="Hidden"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListBox.Style>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding}" Height="20" Width="20"></Image>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel></WrapPanel>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                </ListBox>
+            </StackPanel>
+            <TextBlock Grid.Row="3" Width="Auto" FontWeight="Normal" Height="35" VerticalAlignment="Top" HorizontalAlignment="Center">
+             <Run Text="{Binding ReviewsNumber}" FontSize="16"/>
+             <Run Text="Reviews" FontSize="16"/>
+            </TextBlock>
+        </Grid>
+
+        <Border Grid.Row="1" Grid.Column="1" Width="420" Height="65" BorderThickness="3,3,3,0" BorderBrush="#22301a" VerticalAlignment="Top" CornerRadius="20 20 0 0" HorizontalAlignment="Center" Margin="0,6,0,0" Grid.RowSpan="2">
+            <Border.Effect>
+                <DropShadowEffect ShadowDepth="0"  BlurRadius="50"/>
+            </Border.Effect>
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                    <GradientStop Color="#FF2A3922" Offset="0"/>
+                    <GradientStop Color="#37492d" Offset="0.2"></GradientStop>
+                    <GradientStop Color="#37492d" Offset="0.4"/>
+                    <GradientStop Color="#37492d" Offset="0.5"/>
+                    <GradientStop Color="#37492d" Offset="0.6"/>
+                    <GradientStop Color="#37492d" Offset="0.8"></GradientStop>
+                    <GradientStop Color="#FF2A3922" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+        
+        <TextBlock FontSize="20" Height="Auto" FontWeight="Black" Width="Auto" Grid.Row="1" TextAlignment="Center" HorizontalAlignment="Left" Margin="81,0,0,0" Grid.Column="1" VerticalAlignment="Bottom">Super - guest title:</TextBlock>
+        <Image  Width="40" Height="40" VerticalAlignment="Bottom" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" Margin="0,0,81,0">
             <Image.Style>
                 <Style TargetType="Image">
-                    <Setter Property="Visibility" Value="Collapsed"/>
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding IsSuperGuest}" Value="True">
-                            <Setter Property="Visibility" Value="Visible"/>
+                            <Setter Property="Source" Value="/Resources/Images/medal.png" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding IsSuperGuest}" Value="False">
+                            <Setter Property="Source" Value="/Resources/Images/delete.png" />
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
             </Image.Style>
         </Image>
-        <TextBlock FontSize="20" Height="35" FontWeight="DemiBold" Width="Auto" Grid.Row="1" HorizontalAlignment="Center" Grid.Column="1" VerticalAlignment="Center">
-             <Run Text="SUPER-GUEST BONUS:" FontWeight="DemiBold"/>
-             <Run Text="{Binding SuperGuest.AvailablePoints}" FontWeight="DemiBold"/>
-            <TextBlock.Style>
-                            <Style TargetType="TextBlock">
-                                <Setter Property="Visibility" Value="Collapsed"/>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding IsSuperGuest}" Value="True">
-                                        <Setter Property="Visibility" Value="Visible"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </TextBlock.Style>
-        </TextBlock>
+        
 
-        <Label FontSize="18" Height="35" Width="Auto" Grid.Row="2" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="67,52,0,0" RenderTransformOrigin="0.459,1.354">Name:</Label>
-        <Label FontSize="18" Height="35" Width="Auto" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="67,117,0,0" Content="Country:"/>
-        <Label FontSize="18" Height="36" Width="Auto" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="67,179,0,0" Content="City:"/>
-        <Label FontSize="18" Height="35" Width="Auto" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="67,245,0,0" Content="Username:"/>
-        <Label FontSize="18" Height="35" Width="Auto" Grid.Row="2" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="67,312,0,0" Content="Phone number:"/>
-        <Label FontSize="18" Height="35" Width="Auto" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="67,378,0,0" Content="Email:"/>
-
-        <TextBlock FontSize="18" Height="35" Width="Auto" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,52,67,0">
-            <TextBlock.Text>
-                <MultiBinding StringFormat="{}{0} {1}">
-                    <Binding Path="Guest1.Name" />
-                    <Binding Path="Guest1.LastName" />
-                </MultiBinding>
-            </TextBlock.Text>
-        </TextBlock>
-        <TextBlock FontSize="18" Height="35" Width="Auto" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,117,67,0" Text="{Binding Path=Guest1.Location.Country}"></TextBlock>
-        <TextBlock FontSize="18" Height="35" Width="Auto" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,179,67,0" Text="{Binding Path=Guest1.Location.City}"></TextBlock>
-        <TextBlock FontSize="18" Height="35" Width="Auto" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,245,67,0" Text="{Binding Path=Guest1.Username}"></TextBlock>
-        <TextBlock FontSize="18" Height="35" Width="Auto" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,312,67,0" Text="{Binding Path=Guest1.PhoneNumber}"></TextBlock>
-        <TextBlock FontSize="18" Height="35" Width="Auto" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,378,67,0" Text="{Binding Path=Guest1.Email}"></TextBlock>
-
-        <Image x:Name="accommodationImage" Grid.Row="2" Grid.Column="1" Width="420" Source="{Binding ImageSource, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Margin="46,52,46,239" Height="200"/>
-
-        <StackPanel Grid.Row="2" Grid.Column="1" VerticalAlignment="Bottom"  Margin="0,0,0,200" Orientation="Horizontal" HorizontalAlignment="Center">
-            <ListBox Grid.Row="2" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Width="Auto" ItemsSource="{Binding AverageRating, Converter={StaticResource Int2Images}}"  Height="Auto" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center">
-                <ListBox.Style>
-                    <Style TargetType="ListBox">
-                        <Setter Property="Visibility" Value="Visible"/>
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding ReviewsNumber}" Value="0">
-                                <Setter Property="Visibility" Value="Hidden"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </ListBox.Style>
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Image Source="{Binding}" Height="20" Width="20"></Image>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-                <ListBox.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel></WrapPanel>
-                    </ItemsPanelTemplate>
-                </ListBox.ItemsPanel>
-            </ListBox>
-        </StackPanel>
 
         <Button FontSize="18" FontWeight="Bold" IsEnabled="True" Height="35" Width="100" Margin="20,20,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="0" Grid.Column="0" Command="NavigationCommands.BrowseBack">
             <Grid Background="#8c9d75" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" >
@@ -158,10 +289,7 @@
                 <TextBlock Background="#8c9d75" Text="BACK" Grid.Column="1" VerticalAlignment="Center" FontSize="18" Margin="8,0,0,0"  Foreground="#22301a" FontWeight="Bold" HorizontalAlignment="Center" Width="Auto"/>
             </Grid>
         </Button>
-        <TextBlock  FontSize="20" Grid.Column="1" Grid.Row="3" Width="Auto" FontWeight="Normal" Height="35" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,160">
-             <Run Text="{Binding ReviewsNumber}"/>
-             <Run Text="Reviews"/>
-        </TextBlock>
+
 
     </Grid>
 </Page>

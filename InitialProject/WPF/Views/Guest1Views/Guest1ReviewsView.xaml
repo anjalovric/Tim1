@@ -12,6 +12,22 @@
         <Style TargetType="Grid">
             <Setter Property="Background" Value="#37492d"></Setter>
         </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#22301a"></Setter>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="#37492d" Offset="0"/>
+                        <GradientStop Color="#37492d" Offset="0.1"></GradientStop>
+                        <GradientStop Color="#dbc9ab" Offset="0.4"/>
+                        <GradientStop Color="#dbc9ab" Offset="0.5"/>
+                        <GradientStop Color="#dbc9ab" Offset="0.6"/>
+                        <GradientStop Color="#37492d" Offset="0.9"></GradientStop>
+                        <GradientStop Color="#37492d" Offset="1"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
         <Style TargetType="Label">
             <Setter Property="Foreground" Value="#d9c7b3"></Setter>
             <Setter Property="FontWeight" Value="Medium"></Setter>
@@ -42,8 +58,8 @@
         <Style TargetType="DataGrid">
             <Setter Property="BorderBrush" Value="#22301a"></Setter>
             <Setter Property="BorderThickness" Value="4,4,3,4"></Setter>
-            <Setter Property="ColumnHeaderHeight" Value="40"></Setter>
-            <Setter Property="RowHeight" Value="30"></Setter>
+            <Setter Property="ColumnHeaderHeight" Value="45"></Setter>
+            <Setter Property="RowHeight" Value="35"></Setter>
             <Setter Property="FontWeight" Value="Medium"></Setter>
             <Setter Property="RowBackground" Value="#FFFCECB9"></Setter>
             <Setter Property="Background">
@@ -104,7 +120,7 @@
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.Column="0">
+        <Grid Grid.Column="0" Background="Transparent">
             <Grid.RowDefinitions>
                 <RowDefinition Height="2.5*"></RowDefinition>
                 <RowDefinition Height="1*"></RowDefinition>
@@ -116,9 +132,26 @@
                 <RowDefinition Height="1*"></RowDefinition>
                 <RowDefinition Height="8*"></RowDefinition>
             </Grid.RowDefinitions>
+            <Border Grid.Row="0" Grid.RowSpan="9" Grid.Column="0" Width="470" BorderBrush="#22301a" BorderThickness="3"  CornerRadius="20 20 20 20" HorizontalAlignment="Center" Margin="0,10,0,10">
+                <Border.Effect>
+                    <DropShadowEffect ShadowDepth="0" BlurRadius="50"/>
+                </Border.Effect>
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="#FF2A3922" Offset="0"/>
+                        <GradientStop Color="#37492d" Offset="0.2"></GradientStop>
+                        <GradientStop Color="#37492d" Offset="0.4"/>
+                        <GradientStop Color="#37492d" Offset="0.5"/>
+                        <GradientStop Color="#37492d" Offset="0.6"/>
+                        <GradientStop Color="#37492d" Offset="0.8"></GradientStop>
+                        <GradientStop Color="#FF2A3922" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
 
 
-            <Label FontSize="24" HorizontalAlignment="Center" Grid.Row="0" FontFamily="Baskerville Old Face"  VerticalAlignment="Top" Height="43" Width="Auto" Margin="0,20,0,0">AVERAGE RATINGS</Label>
+
+            <Label FontSize="24" HorizontalAlignment="Center" Grid.Row="0" FontFamily="Baskerville Old Face"  VerticalAlignment="Top" Height="43" Width="Auto" Margin="0,25,0,0">AVERAGE RATINGS</Label>
 
             <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top">
                 <ListBox Grid.Row="1" Background="#37492d" BorderBrush="Transparent" BorderThickness="0" Width="Auto" ItemsSource="{Binding AverageRating, Converter={StaticResource Int2Images}}"  Height="Auto" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center">
@@ -152,7 +185,6 @@
                 <Run Text="Reviews"/>
             </TextBlock>
 
-            <Border Background="#FF2A3922" Grid.Row="3" Grid.RowSpan="6" Width="420"  CornerRadius="20 20 20 20" HorizontalAlignment="Center" Margin="0,30,0,65"/>
 
             <Label FontSize="18" Grid.Row="4" Width="Auto" Height="35" HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Margin="70,0,0,0">Cleanliness:</Label>
             <Label FontSize="18" Grid.Row="5" Width="Auto" Height="35" HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Margin="70,0,0,0">Following rules:</Label>
@@ -172,25 +204,42 @@
             </Button>
 
             <Label FontSize="18" Grid.Row="8" Width="Auto" Height="35" HorizontalAlignment="Center" VerticalAlignment="Top" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Margin="0,0,0,0">Change of average ratings:</Label>
-            <Image Source="/Resources/Images/diagram.png" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="8" Height="113" Width="120" Margin="0,40,0,0"></Image>
+            <Image Source="/Resources/Images/diagram.png" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="8" Height="135" Width="140" Margin="0,40,0,0"/>
 
 
-            <TextBlock Foreground="#d9c7b3" Text="{Binding ElementName=CleanlinessSlider,Path=Value}" HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Center" Background="#22301a" Grid.Row="4" Margin="0,0,70,0" Width="30" Height="24" FontSize="18"></TextBlock>
-            <TextBlock Foreground="#d9c7b3" Text="{Binding ElementName=FollowingRulesSlider,Path=Value}" HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Center" Background="#22301a" Grid.Row="5" Margin="0,0,70,0" Width="30" Height="24" FontSize="18"></TextBlock>
+            <TextBlock  Text="{Binding ElementName=CleanlinessSlider,Path=Value}" HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Center" Grid.Row="4" Margin="0,0,70,0" Width="30" Height="24" FontSize="18"></TextBlock>
+            <TextBlock  Text="{Binding ElementName=FollowingRulesSlider,Path=Value}" HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Center" Grid.Row="5" Margin="0,0,70,0" Width="30" Height="24" FontSize="18"></TextBlock>
 
         </Grid>
 
-        <Grid Grid.Column="1">
+        <Grid Grid.Column="1" Background="Transparent">
             <Grid.RowDefinitions>
                 <RowDefinition Height="2*"></RowDefinition>
                 <RowDefinition Height="16*"></RowDefinition>
             </Grid.RowDefinitions>
-            <Label FontSize="24" HorizontalAlignment="Center" FontFamily="Baskerville Old Face"  VerticalAlignment="Top" Height="43" Width="Auto" Margin="0,20,0,0">REVIEWS</Label>
+
+            <Border Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Width="470" BorderBrush="#22301a" BorderThickness="3"  CornerRadius="20 20 20 20" HorizontalAlignment="Center" Margin="0,10,0,10">
+                <Border.Effect>
+                    <DropShadowEffect ShadowDepth="0" BlurRadius="50"/>
+                </Border.Effect>
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="#FF2A3922" Offset="0"/>
+                        <GradientStop Color="#37492d" Offset="0.2"></GradientStop>
+                        <GradientStop Color="#37492d" Offset="0.4"/>
+                        <GradientStop Color="#37492d" Offset="0.5"/>
+                        <GradientStop Color="#37492d" Offset="0.6"/>
+                        <GradientStop Color="#37492d" Offset="0.8"></GradientStop>
+                        <GradientStop Color="#FF2A3922" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
+            <Label FontSize="24" HorizontalAlignment="Center" FontFamily="Baskerville Old Face"  VerticalAlignment="Top" Height="43" Width="Auto" Margin="0,25,0,0">REVIEWS</Label>
 
 
 
             <DataGrid VerticalScrollBarVisibility="Auto" SelectedItem="{Binding Path=SelectedReview}" VerticalContentAlignment="Center" FontSize="16"  Width="450"  HorizontalAlignment="Center" HorizontalContentAlignment="Center"
-                      IsReadOnly="True" UseLayoutRounding="False" HeadersVisibility="Column" Grid.Row="1" ItemsSource="{Binding Path=Guest1Reviews,Mode=OneWay}" AutoGenerateColumns="False" Margin="0,95,0,0" Height="458.636363636364" VerticalAlignment="Top" >
+                      IsReadOnly="True" UseLayoutRounding="False" HeadersVisibility="Column" Grid.Row="1" ItemsSource="{Binding Path=Guest1Reviews,Mode=OneWay}" AutoGenerateColumns="False" Height="474" VerticalAlignment="Center" >
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Owner" Width="2*">
                         <DataGridTextColumn.Binding>
@@ -250,7 +299,5 @@
 
 
 
-
-        <Border Grid.Column="1" BorderThickness="1 0 1 0" Width="1" HorizontalAlignment="Left" BorderBrush="#22301a" />
     </Grid>
 </Page>
