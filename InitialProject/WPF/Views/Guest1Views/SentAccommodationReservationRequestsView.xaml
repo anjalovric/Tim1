@@ -31,7 +31,7 @@
             <Setter Property="BorderBrush" Value="#22301a"></Setter>
             <Setter Property="BorderThickness" Value="4,4,3,4"></Setter>
             <Setter Property="ColumnHeaderHeight" Value="45"></Setter>
-            <Setter Property="RowHeight" Value="35"></Setter>
+            <Setter Property="RowHeight" Value="30"></Setter>
             <Setter Property="FontWeight" Value="Medium"></Setter>
             <Setter Property="RowBackground" Value="#FFFCECB9"></Setter>
             <Setter Property="Background">

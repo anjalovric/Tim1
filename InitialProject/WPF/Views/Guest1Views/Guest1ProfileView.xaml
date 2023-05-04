@@ -95,7 +95,7 @@
                 <RowDefinition Height="2*"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <Border Grid.RowSpan="10" Width="420" BorderThickness="3,0,3,3" BorderBrush="#22301a" CornerRadius="0 0 20 20" HorizontalAlignment="Center" Height="380" VerticalAlignment="Top">
+            <Border Grid.RowSpan="11" Width="420" BorderThickness="3,0,3,3" BorderBrush="#22301a" CornerRadius="0 0 20 20" HorizontalAlignment="Center" Height="390" VerticalAlignment="Top">
                 <Border.Effect>
                     <DropShadowEffect ShadowDepth="0" BlurRadius="50"/>
                 </Border.Effect>
@@ -159,14 +159,14 @@
         <Grid Grid.Row="2" Grid.Column="1" Background="Transparent">
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.8*"></RowDefinition>
-                <RowDefinition Height="3.2*"></RowDefinition>
+                <RowDefinition Height="3.5*"></RowDefinition>
                 <RowDefinition Height="0.5*"></RowDefinition>
                 <RowDefinition Height="0.5*"></RowDefinition>
                 <RowDefinition Height="1.5*"></RowDefinition>
             </Grid.RowDefinitions>
 
 
-            <Border Grid.RowSpan="10" Width="420" BorderThickness="3,0,3,3" BorderBrush="#22301a" CornerRadius="0 0 20 20" HorizontalAlignment="Center" Height="380" VerticalAlignment="Top">
+            <Border Grid.RowSpan="5" Width="420" BorderThickness="3,0,3,3" BorderBrush="#22301a" CornerRadius="0 0 20 20" HorizontalAlignment="Center" Height="390" VerticalAlignment="Top">
                 <Border.Effect>
                     <DropShadowEffect ShadowDepth="0" BlurRadius="50"/>
                 </Border.Effect>
@@ -210,8 +210,8 @@
             </TextBlock>
 
 
-            <Image x:Name="accommodationImage"  Grid.Row="1" Width="350"  Stretch="Fill" Source="{Binding ImageSource, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Height="230" Margin="0,10,0,0"/>
-            <Border  Grid.Row="1" BorderBrush="#22301a" BorderThickness="3" VerticalAlignment="Center" HorizontalAlignment="Center" Width="350" Height="230" Margin="0,10,0,0"/>
+            <Image x:Name="accommodationImage"  Grid.Row="1" Width="350"  Stretch="Fill" Source="{Binding ImageSource, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Height="240" Margin="0,10,0,0"/>
+            <Border  Grid.Row="1" BorderBrush="#22301a" BorderThickness="3" VerticalAlignment="Center" HorizontalAlignment="Center" Width="350" Height="240" Margin="0,10,0,0"/>
 
 
             <StackPanel Grid.Row="2" Grid.Column="1" VerticalAlignment="Center"  Margin="0,0,0,0" Orientation="Horizontal" HorizontalAlignment="Center">

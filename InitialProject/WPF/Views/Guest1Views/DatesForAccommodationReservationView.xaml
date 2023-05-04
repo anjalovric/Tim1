@@ -30,7 +30,7 @@
             <Setter Property="BorderThickness" Value="4,4,3,4"></Setter>
             <Setter Property="Background" Value="#FFF9ECC5"></Setter>
             <Setter Property="ColumnHeaderHeight" Value="45"></Setter>
-            <Setter Property="RowHeight" Value="35"></Setter>
+            <Setter Property="RowHeight" Value="30"></Setter>
             <Setter Property="FontWeight" Value="Medium"></Setter>
             <Setter Property="RowBackground" Value="#FFFCECB9"></Setter>
         </Style>
@@ -75,7 +75,7 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Button Name="chooseDateButton" Background="#c99585" TextElement.FontWeight="Medium" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding DataContext.ChooseDateCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" FontSize="16">
-                                    <Grid Background="#c99585" Width="130" Height="35" HorizontalAlignment="Center" VerticalAlignment="Center" >
+                                    <Grid Background="#c99585" Width="130" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" >
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="Auto"/>
                                             <ColumnDefinition Width="Auto"/>

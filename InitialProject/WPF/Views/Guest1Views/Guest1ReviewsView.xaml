@@ -59,7 +59,7 @@
             <Setter Property="BorderBrush" Value="#22301a"></Setter>
             <Setter Property="BorderThickness" Value="4,4,3,4"></Setter>
             <Setter Property="ColumnHeaderHeight" Value="45"></Setter>
-            <Setter Property="RowHeight" Value="35"></Setter>
+            <Setter Property="RowHeight" Value="30"></Setter>
             <Setter Property="FontWeight" Value="Medium"></Setter>
             <Setter Property="RowBackground" Value="#FFFCECB9"></Setter>
             <Setter Property="Background">
@@ -279,7 +279,7 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Button Name="ReviewButton" FontSize="16" FontWeight="DemiBold"  Background="#c99585" Command="{Binding DataContext.ShowReviewDetailsCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}">
-                                    <Grid Background="#c99585" Width="120" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" >
+                                    <Grid Background="#c99585" Width="120" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" >
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="Auto"/>
                                             <ColumnDefinition Width="Auto"/>
