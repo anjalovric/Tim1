@@ -9,6 +9,24 @@
         mc:Ignorable="d"
         Title="CreateOrdinaryTourRequest" Height="800" Width="1024" d:DesignHeight="800" d:DesignWidth="1024" WindowStartupLocation="CenterScreen">
     <Window.Resources>
+        <ControlTemplate x:Key="ValidationTemplate">
+            <StackPanel>
+                <!-- Placeholder for the TextBox itself -->
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <AdornedElementPlaceholder  Grid.Column="0" Grid.Row="0"/>
+                    <TextBlock Grid.Column="0" Grid.Row="1" FontSize="15" TextAlignment="Center" Width="157" TextWrapping="Wrap" FontWeight="Medium" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                </Grid>
+            </StackPanel>
+
+        </ControlTemplate>
         <Style x:Key="button" TargetType="Button">
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="FontWeight" Value="Bold"/>
@@ -185,9 +203,34 @@
         <Border Grid.Column="1" Grid.Row="7" Margin="68,20,105,20" BorderBrush="White" BorderThickness="3,3,3,3"/>
 
 
-        <TextBlock x:Name="Capacity" Grid.Column="1" Grid.Row="7" Margin="71,23,108,23" Text="1" TextAlignment="Center" Background="White"/>
+        <TextBox x:Name="Capacity" Grid.Column="1" Grid.Row="7" Margin="71,23,108,23" TextAlignment="Center" Background="White">
+            <TextBox.Text>
+                <Binding Path="MaxGuests" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
+                    <Binding.ValidationRules>
+                        <val:StringToIntValidation ValidatesOnTargetUpdated="True" ValidationStep="RawProposedValue"></val:StringToIntValidation>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+            <Validation.ErrorTemplate>
+                <ControlTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                    </Grid>
+                </ControlTemplate>
+            </Validation.ErrorTemplate>
+        </TextBox>
         <Button Grid.Column="1" Grid.Row="7" Margin="20,20,452,20" Content="-" Command="{Binding DecrementCommand}" BorderBrush="White" BorderThickness="3,3,3,3"/>
-        <DatePicker FontSize="9" x:Name="Start" Grid.Column="1" DisplayDateStart="{Binding Path=StartDate, UpdateSourceTrigger=PropertyChanged}" DisplayDate="{Binding Path=NowDate}" Margin="20,10,60,25" Grid.Row="8" BorderBrush="White" BorderThickness="3,3,3,3">
+        <DatePicker FontSize="9" x:Name="Start" Grid.Column="1" DisplayDateStart="{Binding Path=NowDate, UpdateSourceTrigger=PropertyChanged}" Margin="20,10,60,25" Grid.Row="8" BorderBrush="White" BorderThickness="3,3,3,3">
             <DatePicker.SelectedDate>
                 <Binding Path="StartDate" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True" NotifyOnValidationError="True">
                     <Binding.ValidationRules>
@@ -284,6 +327,7 @@
                                 <Condition Binding="{Binding ElementName=DescriptionT, Path=(Validation.HasError)}" Value="false" />
                                 <Condition Binding="{Binding ElementName=Start, Path=(Validation.HasError)}" Value="false"/>
                                 <Condition Binding="{Binding ElementName=End, Path=(Validation.HasError)}" Value="false"/>
+                                <Condition Binding="{Binding ElementName=Capacity, Path=(Validation.HasError)}" Value="false"/>
                             </MultiDataTrigger.Conditions>
                             <Setter Property="IsEnabled" Value="true" />
                         </MultiDataTrigger>
