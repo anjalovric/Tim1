@@ -21,6 +21,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         private int imageCounter;
         public RelayCommand NextImageCommand { get; set; }
         public RelayCommand PreviousImageCommand { get; set; }
+        public DateOnly Arrival { get; set; }
 
         public event PropertyChangedEventHandler? PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -30,6 +31,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         public OwnerReviewViewModel(OwnerReview ownerReview)
         {
             OwnerReview = ownerReview;
+            Arrival = DateOnly.FromDateTime(OwnerReview.Reservation.Arrival);
             MakeImagesForReview();
             MakeFirstImage();
             imageCounter = 0;
@@ -44,7 +46,10 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         private bool CanExecute(object sender)
         {
-            return true;
+            if (Images.Count > 1)
+                return true;
+            else
+                return false;
         }
 
         private void NextImage_Executed(object sender)

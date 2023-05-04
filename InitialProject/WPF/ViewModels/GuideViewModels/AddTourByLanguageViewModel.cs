@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows;
 using System.Windows.Media.Imaging;
 
 namespace InitialProject.WPF.ViewModels.GuideViewModels
@@ -23,7 +24,20 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         private User loggedInUser;
         public TourInstance selectedInstance { get; set; }
         public CheckPoint SelectedCheckPoint { get; set; }
+        private string pastError;
+        public string PastError
 
+        {
+            get => pastError;
+            set
+            {
+                if (value != pastError)
+                {
+                    pastError = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         private string imageUrl;
         public string ImageUrl
         {
@@ -421,6 +435,12 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         {
             if (!(newInstance.StartDate.Date > DateTime.Now.Date || (InstanceStartDate.Date == DateTime.Now.Date && InstanceStartDate > DateTime.Now)))
             {
+                var app = (App)Application.Current;
+
+                if (app.Lang.Equals("en-US"))
+                    PastError = "Can't choose time from past";
+                else
+                    PastError = "Ne možete odabrati prošlo vreme";
                 DateMessage = "Visible";
                 return false;
             }

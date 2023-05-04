@@ -35,6 +35,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         public RelayCommand RemoveImageCommand { get; set; }
         public RelayCommand NextImageCommand { get; set; }
         public RelayCommand PreviousImageCommand { get; set; }
+        public RelayCommand EnableCityCommand { get; set; }
         public AccommodationInputFormViewModel(Owner owner)
         {
             this.owner = owner;
@@ -54,6 +55,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             RemoveImageCommand = new RelayCommand(RemoveImage_Executed, RemoveImageCanExecute);
             NextImageCommand = new RelayCommand(NextImage_Executed, ChangeImageCanExecute);
             PreviousImageCommand = new RelayCommand(PreviousImage_Executed, ChangeImageCanExecute);
+            EnableCityCommand = new RelayCommand(EnableCityComboBox_Executed, CanExecute);
         }
         private void InitializeAccommodation()
         {
@@ -87,7 +89,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         private bool RemoveImageCanExecute(object sender)
         {
-            if (Images.Count > 1)
+            if (Images.Count >= 1 && !string.IsNullOrEmpty(ImageUrl))
                 return true;
             return false;
         }
@@ -111,16 +113,17 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         private void RemoveImage_Executed(object sender)
         {
             if (Images.Count > 1)
+                ImageUrl = Images[Images.Count - 1].Url;
+            else
+                ImageUrl = "";
+
+            foreach (AccommodationImage image in Images)
             {
-                foreach (AccommodationImage image in Images)
+                if (image.Url.Equals(ImageUrl))
                 {
-                    if (image.Url.Equals(ImageUrl))
-                    {
-                        Images.Remove(image);
-                        break;
-                    }
+                    Images.Remove(image);
+                    break;
                 }
-                ImageUrl = Images[0].Url;
             }
         }
 
@@ -270,7 +273,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public void EnableCityComboBox()
+        private void EnableCityComboBox_Executed(object sender)
         {
             LocationService locationService = new LocationService();
             if (Location.Country != null)

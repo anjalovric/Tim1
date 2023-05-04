@@ -131,6 +131,7 @@
     <None Remove="Resources\Images\nature3.jpeg" />
     <None Remove="Resources\Images\nature4.jpeg" />
     <None Remove="Resources\Images\no.png" />
+    <None Remove="Resources\Images\noImage.png" />
     <None Remove="Resources\Images\notes.png" />
 
     <None Remove="Resources\Images\ok.png" />
@@ -140,6 +141,8 @@
     <None Remove="Resources\Images\olive.jpg" />
 
     <None Remove="Resources\Images\orange.jpg" />
+
+    <None Remove="Resources\Images\pdf.png" />
     <None Remove="Resources\Images\plus.png" />
     <None Remove="Resources\Images\profile.png" />
     <None Remove="Resources\Images\qm.png" />
@@ -164,6 +167,8 @@
     <None Remove="Resources\Images\signout.png" />
     <None Remove="Resources\Images\signOutIcon.png" />
     <None Remove="Resources\Images\sky.jpg" />
+    <None Remove="Resources\Images\star_yellow.png" />
+    <None Remove="Resources\Images\success.png" />
     <None Remove="Resources\Images\star1.png" />
     <None Remove="Resources\Images\stars2.jpeg" />
     <None Remove="Resources\Images\suggestion.png" />
@@ -228,6 +233,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\congratulations2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\pdf.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Resource Include="Resources\Images\art1.jpg">
@@ -409,6 +417,9 @@
     <Content Include="Resources\Images\museum.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Images\noImage.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
 
 
     <Content Include="Resources\Images\ok.png">
@@ -433,6 +444,12 @@
     </Content>
     <Content Include="Resources\Images\sky.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\star_yellow.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\success.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\toolImage.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

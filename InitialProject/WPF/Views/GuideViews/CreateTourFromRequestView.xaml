@@ -156,7 +156,7 @@
                             </ControlTemplate>
                         </Validation.ErrorTemplate>
                     </TextBox>
-                    <TextBox HorizontalAlignment="Center" Style="{DynamicResource tb}" Text="{Binding MaxGuests}" Grid.Row="1" TextWrapping="Wrap"  VerticalAlignment="Center" Width="191" Height="29" Grid.Column="1"/>
+                    <TextBox HorizontalAlignment="Center" Style="{DynamicResource tb}" Text="{Binding MaxGuests}" Grid.Row="1" TextWrapping="Wrap"  VerticalAlignment="Center" Width="188" Height="29" Grid.Column="1"/>
                 </Grid>
 
 
@@ -219,15 +219,15 @@
                             </ControlTemplate>
                         </Validation.ErrorTemplate>
                     </TextBox>
-                    <Label Grid.Column="1" Grid.Row="0" Content="{ns:Loc AddCheckpoints}" Style="{DynamicResource  Label}" VerticalAlignment="Top" Height="30" Margin="25,4,10,0" Grid.ColumnSpan="2" />
+                    <Label Grid.Column="1" Grid.Row="0" Content="{ns:Loc AddCheckpoints}" Style="{DynamicResource  Label}" VerticalAlignment="Top" Height="34" Margin="27,0,8,0" Grid.ColumnSpan="2" />
 
 
                     <!--DATEANDTIME-->
                     <tk:TimePicker Style="{DynamicResource dt}" FontSize="9" x:Name="DT"  Text="{Binding Path=InstanceStartDate,Mode=TwoWay}" Format="LongTime" DataContext="{Binding}" Grid.Column="1" Margin="32,0,-9,46" Grid.Row="5" RenderTransformOrigin="0.502,0.586" Grid.ColumnSpan="2"  />
                     <ListBox x:Name="DateTimeBox" ItemsSource="{Binding Path=Instances}" Grid.Column="0" Grid.Row="2" Grid.RowSpan="4" SelectedItem="{Binding selectedInstance}" Style="{DynamicResource  ListBoxForm}" Grid.ColumnSpan="2" Margin="1,38,35,76"/>
-                    <Button IsEnabled="{Binding AddEnabled}" Grid.Column="2" Grid.Row="5" Command="{Binding AddDateTimeCommand}"   Height="25" Width="60" VerticalAlignment="Top" HorizontalAlignment="Left" Style="{DynamicResource  Button}" Margin="0,49,0,0" Content="{ns:Loc ADDBUTTON}"/>
-                    <Button IsEnabled="{Binding DeleteEnabled}" Grid.Column="2" Grid.Row="5" Height="25" Width="60" Command="{Binding DeleteDateTimeCommand}" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="112,49,0,0" Style="{DynamicResource  Button}" Content="{ns:Loc DELETE}"/>
-                    <Label Grid.Column="1" Width="180" Grid.ColumnSpan="2" Content="{ns:Loc AddDateAndTime}"  HorizontalAlignment="Left"  Grid.Row="2" VerticalAlignment="Top"  Style="{DynamicResource  Label}" Margin="25,15,0,0" Height="35" />
+                    <Button IsEnabled="{Binding AddEnabled}" Grid.Column="2" Grid.Row="5" Command="{Binding AddDateTimeCommand}"   Height="25" Width="60" VerticalAlignment="Top" HorizontalAlignment="Left" Style="{DynamicResource  Button}" Margin="0,45,0,0" Content="{ns:Loc ADDBUTTON}"/>
+                    <Button IsEnabled="{Binding DeleteEnabled}" Grid.Column="2" Grid.Row="5" Height="25" Width="60" Command="{Binding DeleteDateTimeCommand}" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="112,45,0,0" Style="{DynamicResource  Button}" Content="{ns:Loc DELETE}"/>
+                    <Label Grid.Column="1" Width="180" Grid.ColumnSpan="2" Content="{ns:Loc AddDateAndTime}"  HorizontalAlignment="Left"  Grid.Row="2" VerticalAlignment="Center"  Style="{DynamicResource  Label}" Margin="27,0,0,0" Height="35" />
                     <TextBox x:Name="DatesList" HorizontalAlignment="Left" Margin="0,72,0,0" Grid.Row="4" TextWrapping="Wrap" Height="0" Background="Transparent" Foreground="Transparent" BorderThickness="0" VerticalAlignment="Top" Width="120">
                         <TextBox.Text>
                             <Binding Path="DatesCount" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
@@ -427,9 +427,9 @@
 
 
                 <Rectangle Style="{DynamicResource  Rectangle}" Height="500"  Margin="38,26,37,0" Grid.Column="2" Grid.RowSpan="5"/>
-                <TextBox Grid.Column="1" Style="{DynamicResource tb}" HorizontalAlignment="Left" Margin="189,0,0,0" Grid.Row="1" TextWrapping="Wrap" Text="{Binding Country}" VerticalAlignment="Center" Width="191" Height="31"/>
-                <TextBox Grid.Column="1" Style="{DynamicResource tb}" HorizontalAlignment="Left" Height="33" Margin="189,89,0,0" Grid.Row="1" TextWrapping="Wrap" Text="{Binding City}" VerticalAlignment="Top" Width="191" Grid.RowSpan="2"/>
-                <TextBox Grid.Column="1" Style="{DynamicResource tb}" HorizontalAlignment="Left" Margin="189,30,0,0" Grid.Row="2" TextWrapping="Wrap" Text="{Binding LanguageT}" VerticalAlignment="Top" Width="191" Height="31"/>
+                <TextBox Grid.Column="1" Style="{DynamicResource tb}" HorizontalAlignment="Left" Margin="189,0,0,0" Grid.Row="1" TextWrapping="Wrap" Text="{Binding Country}" VerticalAlignment="Center" Width="188" Height="31"/>
+                <TextBox Grid.Column="1" Style="{DynamicResource tb}" HorizontalAlignment="Left" Height="33" Margin="189,89,0,0" Grid.Row="1" TextWrapping="Wrap" Text="{Binding City}" VerticalAlignment="Top" Width="188" Grid.RowSpan="2"/>
+                <TextBox Grid.Column="1" Style="{DynamicResource tb}" HorizontalAlignment="Left" Margin="189,30,0,0" Grid.Row="2" TextWrapping="Wrap" Text="{Binding LanguageT}" VerticalAlignment="Top" Width="188" Height="31"/>
                 <Calendar Style="{DynamicResource Calendar}" Grid.Column="3" SelectedDate="{Binding Date}" DisplayDate="{Binding Start}" DisplayDateStart="{Binding Start}" DisplayDateEnd="{Binding End}" HorizontalAlignment="Left" Margin="204,82,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="168" Grid.RowSpan="3"/>
                 <Label Grid.Column="4" Content="📌" Style="{DynamicResource Label}" HorizontalAlignment="Center" FontSize="25" VerticalAlignment="Center"/>
                 <Label Grid.Column="4" Content="📆" Style="{DynamicResource Label}" HorizontalAlignment="Center" Margin="0,113,0,0" Grid.Row="1" FontSize="25" VerticalAlignment="Top" Width="50" Height="48" Grid.RowSpan="2"/>
