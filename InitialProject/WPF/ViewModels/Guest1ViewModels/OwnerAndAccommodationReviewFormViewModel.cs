@@ -343,4 +343,3 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         }
     }
 }
-//ako postoji ocjena, ali ne i preporuka za renoviranje, da li onda ne moze opet da preporuci (jer pise da se to radi u nastavku ocjenjivanja)???

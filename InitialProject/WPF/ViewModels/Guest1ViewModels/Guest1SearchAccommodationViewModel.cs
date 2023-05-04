@@ -375,8 +375,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             ApartmentChecked = false;
             HouseChecked = false;
             CottageChecked = false;
-            //NumberOfDays = "1";             ////////dodala sam ovo jer ga validacija postavi na "", a ostane vrijednost u textboxu i nmg da je resetujem.
-            //NumberOfGuests = "1";
             NumberOfDays = "";
             NumberOfGuests = "";
             IsInputValid = true;
@@ -437,44 +435,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             accommodationReservationForm.Owner = Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault();
             accommodationReservationForm.ShowDialog();
         }
-        /*private bool IsNumberOfDaysValid() 
-        {
-            var content = NumberOfDays;
-            Match match = CreateValidationNumberRegex(content);
-            bool isValid;
-            if (!match.Success && NumberOfDays != "")
-            {
-                NumberOfDaysError = "Enter an integer greater than zero.";
-                isValid = false;
-            }
-                
-            else
-            {
-                NumberOfDaysError = "";
-                isValid = true;
-            }
-                
-            return isValid;
-        }
-        
-        
-        private bool IsNumberOfGuestsValid()
-        {
-            var content = NumberOfGuests;
-            Match match = CreateValidationNumberRegex(content);
-            bool isValid = false;
-            if (!match.Success && NumberOfGuests != "")
-            {
-                NumberOfGuestsError = "Enter an integer greater than zero.";
-                isValid = false;
-            }
-            else
-            {
-                NumberOfGuestsError = "";
-                isValid = true;
-            }
-            return isValid;
-        }*/
+       
         private Match CreateValidationNumberRegex(string content)
         {
             var regex = "^([1-9][0-9]*)$";
