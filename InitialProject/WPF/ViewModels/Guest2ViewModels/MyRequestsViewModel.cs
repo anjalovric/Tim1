@@ -55,7 +55,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         }
         private void Create_Executed(object sender)
         {
-            CreateOrdinaryTourRequestView createOrdinaryTourRequest = new CreateOrdinaryTourRequestView(Guest2);
+            CreateOrdinaryTourRequestView createOrdinaryTourRequest = new CreateOrdinaryTourRequestView(Guest2,OrdinaryTourRequests);
             createOrdinaryTourRequest.Show();
         }
         private void Statistics_Executed(object sender)

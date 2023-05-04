@@ -203,6 +203,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             set
             {
                 if (value != isNumberOfDaysValid)
+
                 {
                     isNumberOfDaysValid = value;
                     OnPropertyChanged("IsNumberOfDaysValid");

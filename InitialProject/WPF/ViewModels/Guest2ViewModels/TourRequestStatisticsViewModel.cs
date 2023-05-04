@@ -22,11 +22,11 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         private List<OrdinaryTourRequests> OrdinaryTourRequests;
         private Model.Guest2 Guest2;
         public RelayCommand SearchCommand { get; set; }
-        private TextBox Year;
-        public TourRequestStatisticsViewModel(Model.Guest2 guest2,TextBox year)
+        public string Year { get; set; }
+        public TourRequestStatisticsViewModel(Model.Guest2 guest2)
         {
             Guest2 = guest2;
-            Year = year;
+            //Year = year;
             SearchCommand = new RelayCommand(Search_Executed,CanExecute);
             requestStatisticsService = new RequestStatisticsService();
             ordinaryTourRequestsService = new OrdinaryTourRequestsService();
@@ -41,17 +41,9 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         }
         private void Search_Executed(object sender)
         {
-            var regex = "[1-9][0-9]{3}"; //ovo izmijeniti
-            Match match = Regex.Match(Year.Text, regex, RegexOptions.IgnoreCase);
-            if (match.Success)
-            {
-                StatisticForChosenYearFormView statisticForChoosenYearFormView = new StatisticForChosenYearFormView(Guest2, Year.Text);
-                statisticForChoosenYearFormView.Show();
-            }
-            else
-            {
-                MessageBox.Show("Niste dobro unijeli godinu.");
-            }
+            StatisticForChosenYearFormView statisticForChoosenYearFormView = new StatisticForChosenYearFormView(Guest2,Year);
+            statisticForChoosenYearFormView.Show();
+           
         }
     }
 }
