@@ -14,6 +14,7 @@
         </Style>
         <Style TargetType="TextBlock">
             <Setter Property="Foreground" Value="#22301a"></Setter>
+            <Setter Property="FontWeight" Value="Medium"></Setter>
             <Setter Property="Background">
                 <Setter.Value>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
@@ -27,20 +28,16 @@
                     </LinearGradientBrush>
                 </Setter.Value>
             </Setter>
+            <Setter Property="FontSize" Value="18"></Setter>
         </Style>
         <Style TargetType="Label">
             <Setter Property="Foreground" Value="#d9c7b3"></Setter>
             <Setter Property="FontWeight" Value="Medium"></Setter>
+            <Setter Property="FontSize" Value="18"></Setter>
         </Style>
         <Style TargetType="ScrollBar">
             <Setter Property="Background" Value="#FFFCECB9"></Setter>
         </Style>
-        <Style TargetType="TextBox">
-            <Setter Property="Background" Value="#FFFCECB9"></Setter>
-            <Setter Property="BorderBrush" Value="#22301a"></Setter>
-            <Setter Property="BorderThickness" Value="3"></Setter>
-        </Style>
-
         <Style TargetType="Button">
             <Setter Property="Background" Value="#8c9d75"></Setter>
             <Setter Property="Foreground" Value="#22301a"></Setter>
@@ -73,6 +70,11 @@
                     </LinearGradientBrush>
                 </Setter.Value>
             </Setter>
+            <Setter Property="FontSize" Value="16"></Setter>
+            <Setter Property="UseLayoutRounding" Value="False"></Setter>
+            <Setter Property="HeadersVisibility" Value="Column"></Setter>
+            <Setter Property="IsReadOnly" Value="True"></Setter>
+            <Setter Property="AutoGenerateColumns" Value="False"></Setter>
         </Style>
         <Style TargetType="DataGridColumnHeader">
             <Setter Property="TextElement.Foreground" Value="#22301a"></Setter>
@@ -122,10 +124,10 @@
 
         <Grid Grid.Column="0" Background="Transparent">
             <Grid.RowDefinitions>
-                <RowDefinition Height="2.5*"></RowDefinition>
+                <RowDefinition Height="4*"></RowDefinition>
                 <RowDefinition Height="1*"></RowDefinition>
                 <RowDefinition Height="1*"></RowDefinition>
-                <RowDefinition Height="2.5*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="1.5*"></RowDefinition>
                 <RowDefinition Height="1.5*"></RowDefinition>
                 <RowDefinition Height="3*"></RowDefinition>
@@ -151,7 +153,7 @@
 
 
 
-            <Label FontSize="24" HorizontalAlignment="Center" Grid.Row="0" FontFamily="Baskerville Old Face"  VerticalAlignment="Top" Height="43" Width="Auto" Margin="0,25,0,0">AVERAGE RATINGS</Label>
+            <Label FontSize="24" HorizontalAlignment="Center" Grid.Row="0" FontFamily="Baskerville Old Face"  VerticalAlignment="Top" Height="43" Width="Auto" FontWeight="Bold" Margin="0,50,0,0">AVERAGE RATINGS</Label>
 
             <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top">
                 <ListBox Grid.Row="1" Background="#37492d" BorderBrush="Transparent" BorderThickness="0" Width="Auto" ItemsSource="{Binding AverageRating, Converter={StaticResource Int2Images}}"  Height="Auto" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center">
@@ -214,7 +216,7 @@
 
         <Grid Grid.Column="1" Background="Transparent">
             <Grid.RowDefinitions>
-                <RowDefinition Height="2*"></RowDefinition>
+                <RowDefinition Height="4*"></RowDefinition>
                 <RowDefinition Height="16*"></RowDefinition>
             </Grid.RowDefinitions>
 
@@ -234,12 +236,11 @@
                     </LinearGradientBrush>
                 </Border.Background>
             </Border>
-            <Label FontSize="24" HorizontalAlignment="Center" FontFamily="Baskerville Old Face"  VerticalAlignment="Top" Height="43" Width="Auto" Margin="0,25,0,0">REVIEWS</Label>
+            <Label FontSize="24" HorizontalAlignment="Center" FontWeight="Bold" FontFamily="Baskerville Old Face"  VerticalAlignment="Top" Height="43" Width="Auto" Margin="0,50,0,0">REVIEWS</Label>
 
 
 
-            <DataGrid VerticalScrollBarVisibility="Auto" SelectedItem="{Binding Path=SelectedReview}" VerticalContentAlignment="Center" FontSize="16"  Width="450"  HorizontalAlignment="Center" HorizontalContentAlignment="Center"
-                      IsReadOnly="True" UseLayoutRounding="False" HeadersVisibility="Column" Grid.Row="1" ItemsSource="{Binding Path=Guest1Reviews,Mode=OneWay}" AutoGenerateColumns="False" Height="474" VerticalAlignment="Center" >
+            <DataGrid VerticalScrollBarVisibility="Auto" SelectedItem="{Binding Path=SelectedReview}" VerticalContentAlignment="Center"  Width="450"  HorizontalAlignment="Center" HorizontalContentAlignment="Center" Grid.Row="1" ItemsSource="{Binding Path=Guest1Reviews,Mode=OneWay}" Height="474" VerticalAlignment="Center" >
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Owner" Width="2*">
                         <DataGridTextColumn.Binding>

@@ -15,8 +15,6 @@
         </Style>
         <Style TargetType="Label">
             <Setter Property="Foreground" Value="#d9c7b3"></Setter>
-            <Setter Property="FontWeight" Value="Medium"></Setter>
-            <Setter Property="FontFamily" Value="Baskerville Old Face"></Setter>
         </Style>
         <Style TargetType="TabItem">
             <Setter Property="Height" Value="40"></Setter>
@@ -43,6 +41,11 @@
                     </LinearGradientBrush>
                 </Setter.Value>
             </Setter>
+            <Setter Property="FontSize" Value="16"></Setter>
+            <Setter Property="UseLayoutRounding" Value="False"></Setter>
+            <Setter Property="HeadersVisibility" Value="Column"></Setter>
+            <Setter Property="IsReadOnly" Value="True"></Setter>
+            <Setter Property="AutoGenerateColumns" Value="False"></Setter>
         </Style>
         <Style TargetType="Button">
             <Setter Property="Background" Value="#8c9d75"></Setter>
@@ -108,7 +111,6 @@
 
             <TabItem Header="Not completed reservations" FontSize="16">
                 <Grid>
-                    
                     <Grid.Background>
                         <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
                             <GradientStop Color="#22301a" Offset="0"/>
@@ -120,8 +122,8 @@
                             <GradientStop Color="#22301a" Offset="1"/>
                         </LinearGradientBrush>
                     </Grid.Background>
-                    <Label VerticalAlignment="Top" VerticalContentAlignment="Center" Height="Auto" FontSize="24" FontWeight="Bold" Margin="0,15,0,0" HorizontalAlignment="Center">NOT COMPLETED RESERVATIONS</Label>
-                    <DataGrid x:Name="NotCompletedReservationsDataGrid" VerticalContentAlignment="Center" FontSize="16" Margin="0,0,0,20" HorizontalAlignment="Center" VerticalAlignment="Bottom" ItemsSource="{Binding Path=NotCompletedReservations,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedNotCompletedReservation}" HeadersVisibility="Column" AutoGenerateColumns="False" IsReadOnly="True" Height="300" Width="970" UseLayoutRounding="False">
+                    <Label VerticalAlignment="Top" FontFamily="Baskerville Old Face" VerticalContentAlignment="Center" Height="Auto" FontSize="24" FontWeight="Bold" Margin="0,15,0,0" HorizontalAlignment="Center">NOT COMPLETED RESERVATIONS</Label>
+                    <DataGrid x:Name="NotCompletedReservationsDataGrid" VerticalContentAlignment="Center" Margin="0,0,0,20" HorizontalAlignment="Center" VerticalAlignment="Bottom" ItemsSource="{Binding Path=NotCompletedReservations,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedNotCompletedReservation}" Height="300" Width="970">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Name" Width="2*" Binding="{Binding Accommodation.Name}">
                                 <DataGridTextColumn.ElementStyle>
@@ -224,8 +226,8 @@
                             <GradientStop Color="#22301a" Offset="1"/>
                         </LinearGradientBrush>
                     </Grid.Background>
-                    <Label FontSize="24" VerticalAlignment="Top" VerticalContentAlignment="Center" Height="Auto" FontWeight="Bold" Margin="0,15,0,0" HorizontalAlignment="Center">COMPLETED RESERVATIONS</Label>
-                    <DataGrid x:Name="CompletedReservationsDataGrid" HeadersVisibility="Column" VerticalContentAlignment="Center" FontSize="16" Margin="0,0,0,20" HorizontalAlignment="Center" VerticalAlignment="Bottom" ItemsSource="{Binding Path=CompletedReservations,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedCompletedReservation}" AutoGenerateColumns="False" IsReadOnly="True" Height="300" Width="920" UseLayoutRounding="False">
+                    <Label FontSize="24" FontFamily="Baskerville Old Face" VerticalAlignment="Top" VerticalContentAlignment="Center" Height="Auto" FontWeight="Bold" Margin="0,15,0,0" HorizontalAlignment="Center">COMPLETED RESERVATIONS</Label>
+                    <DataGrid x:Name="CompletedReservationsDataGrid" VerticalContentAlignment="Center" Margin="0,0,0,20" HorizontalAlignment="Center" VerticalAlignment="Bottom" ItemsSource="{Binding Path=CompletedReservations,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedCompletedReservation}" Height="300" Width="920">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Name" Width="2.5*" Binding="{Binding Accommodation.Name}">
                                 <DataGridTextColumn.ElementStyle>
@@ -314,7 +316,7 @@
                 </LinearGradientBrush>
             </Grid.Background>
            
-            <Label FontSize="16" Grid.Row="1" Width="Auto" Height="35" FontFamily="Segoe UI" HorizontalAlignment="Center" VerticalAlignment="Top" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Margin="0,25,0,0">Frequency of making reservations:</Label>
+            <Label FontSize="16" FontWeight="Medium" Grid.Row="1" Width="Auto" Height="35" FontFamily="Segoe UI" HorizontalAlignment="Center" VerticalAlignment="Top" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Margin="0,25,0,0">Frequency of making reservations:</Label>
 
             <Image Source="/Resources/Images/diagram.png" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="1" Height="150" Width="200" Margin="0,60,0,0" Stretch="Fill"></Image>
 

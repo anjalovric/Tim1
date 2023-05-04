@@ -20,13 +20,13 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
-
                     <AdornedElementPlaceholder  Grid.Column="0" Grid.Row="0"/>
                     <TextBlock Grid.Column="0" Grid.Row="1" FontSize="15" TextAlignment="Center" Width="157" TextWrapping="Wrap" FontWeight="Medium" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
                 </Grid>
             </StackPanel>
-
         </ControlTemplate>
+
+
         <DataTemplate x:Key="accommodationTemplate" x:Name="accommodationCard">
             <Border BorderBrush="#37492d" BorderThickness="5"  Margin="1" HorizontalAlignment="Center" Width="902" Height="120">
                 <Grid HorizontalAlignment="Center" Grid.ColumnSpan="3" Height="111" Width="910" VerticalAlignment="Center">
@@ -44,10 +44,13 @@
                     <Grid.Resources>
                         <Style TargetType="Label">
                             <Setter Property="Foreground" Value="#37492d"></Setter>
+                            <Setter Property="FontSize" Value="18"></Setter>
+                            <Setter Property="FontWeight" Value="Medium"></Setter>
                         </Style>
                         <Style TargetType="TextBlock">
                             <Setter Property="Foreground" Value="#37492d"></Setter>
                             <Setter Property="FontWeight" Value="UltraBlack"></Setter>
+                            <Setter Property="FontSize" Value="18"></Setter>
                         </Style>
                     </Grid.Resources>
                     <Grid.RowDefinitions>
@@ -64,15 +67,15 @@
                         <ColumnDefinition Width="1.62*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Image x:Name="accommodationImage" Height="Auto" Width="140" HorizontalAlignment="Left" Source="{Binding Path=CoverImage.Url}" Stretch="Fill"  VerticalAlignment="Center" Grid.Column="0" Grid.RowSpan="2" Margin="10,10,0,10"/>
-                    
-                    <Label Content="Name:" FontWeight="Medium" Padding="0,15,0,0" HorizontalAlignment="Left" FontSize="18" Width="67" VerticalAlignment="Center" VerticalContentAlignment="Center" Grid.Row="0" Grid.Column="1"/>
-                    <Label Content="Type:" FontWeight="Medium" FontSize="18" Padding="0,15,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" VerticalContentAlignment="Center" Width="67"  Grid.Row="0" Grid.Column="2"/>
-                    <Label Content="City:" FontWeight="Medium" Padding="0,15,0,0" FontSize="18" VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Left"  Grid.Row="0" Grid.Column="3" Width="63"/>
-                    <Label Content="Capacity:" FontWeight="Medium" Padding="0,15,0,0" FontSize="18" VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Left" Width="90" Grid.Row="0" Grid.Column="4"/>
-                    <TextBlock Text="{Binding Path=Name}" Margin="0,0,0,15" FontSize="18" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Width="Auto" Height="30" HorizontalAlignment="Left"/>
-                    <TextBlock Text="{Binding Path=Type}" Margin="0,0,0,15" FontSize="18" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" Width="Auto" Height="30" HorizontalAlignment="Left"/>
-                    <TextBlock Text="{Binding Path=Location.City}" Margin="0,0,0,15" FontSize="18" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" Width="Auto" Height="30" HorizontalAlignment="Left"/>
-                    <TextBlock Text="{Binding Path=Capacity}" Margin="0,0,0,15" FontSize="18" Grid.Row="1" Grid.Column="4" VerticalAlignment="Center" Width="90" Height="30" HorizontalAlignment="Left"/>
+
+                    <Label Content="Name:" FontWeight="Medium" Padding="0,15,0,0" HorizontalAlignment="Left" Width="67" VerticalAlignment="Center" VerticalContentAlignment="Center" Grid.Row="0" Grid.Column="1"/>
+                    <Label Content="Type:" FontWeight="Medium" Padding="0,15,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" VerticalContentAlignment="Center" Width="67"  Grid.Row="0" Grid.Column="2"/>
+                    <Label Content="City:" FontWeight="Medium" Padding="0,15,0,0" VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Left"  Grid.Row="0" Grid.Column="3" Width="63"/>
+                    <Label Content="Capacity:" FontWeight="Medium" Padding="0,15,0,0" VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Left" Width="90" Grid.Row="0" Grid.Column="4"/>
+                    <TextBlock Text="{Binding Path=Name}" Margin="0,0,0,15" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Width="Auto" Height="30" HorizontalAlignment="Left"/>
+                    <TextBlock Text="{Binding Path=Type}" Margin="0,0,0,15" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" Width="Auto" Height="30" HorizontalAlignment="Left"/>
+                    <TextBlock Text="{Binding Path=Location.City}" Margin="0,0,0,15" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" Width="Auto" Height="30" HorizontalAlignment="Left"/>
+                    <TextBlock Text="{Binding Path=Capacity}" Margin="0,0,0,15" Grid.Row="1" Grid.Column="4" VerticalAlignment="Center" Width="90" Height="30" HorizontalAlignment="Left"/>
                     <Button x:Name="Details"  Command="{Binding Path=DataContext.ViewDetailsCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" FontWeight="Bold" Grid.Row="0" FontSize="18" Grid.Column="6"  VerticalAlignment="Center" Width="100" Height="35" HorizontalAlignment="Center" ClickMode="Press">
                         <Grid Background="#8c9d75" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35">
                             <Grid.ColumnDefinitions>
@@ -152,6 +155,7 @@
         <Style TargetType="Label">
             <Setter Property="Foreground" Value="#d9c7b3"></Setter>
             <Setter Property="FontWeight" Value="Medium"></Setter>
+            <Setter Property="FontSize" Value="18"></Setter>
         </Style>
         <Style TargetType="CheckBox">
             <Setter Property="Foreground" Value="#d9c7b3"></Setter>
@@ -170,6 +174,7 @@
             <Setter Property="Foreground" Value="#22301a"></Setter>
             <Setter Property="FontSize" Value="18"></Setter>
             <Setter Property="FontWeight" Value="Medium"></Setter>
+            <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
         </Style>
 
         <Style TargetType="Button">
@@ -211,27 +216,17 @@
         <Image HorizontalAlignment="Left"  VerticalAlignment="Top"  Source="/Resources/Images/LOGO (2).jpg" Grid.Row="0" Margin="10,-4,0,0" Grid.Column="0" Width="180" Height="100" Stretch="Fill" Grid.RowSpan="2"   />
 
 
-        <Label x:Name="bookAccommodation" Foreground="#d9c7b3" VerticalAlignment="Center" Content="BOOKING ACCOMMODATION"  FontWeight="Bold"  VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="24" Margin="0,25,0,0" Grid.ColumnSpan="3" FontFamily="Baskerville Old Face" HorizontalAlignment="Center">
-            <Label.Style>
-                <Style>
-                    <Setter Property="Label.Effect">
-                        <Setter.Value>
-                            <DropShadowEffect BlurRadius="0" ShadowDepth="0.1" Color="White" Opacity="0.8" />
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </Label.Style>
-        </Label>
+        <Label x:Name="bookAccommodation" Foreground="#d9c7b3" VerticalAlignment="Center" Content="BOOKING ACCOMMODATION"  FontWeight="Bold"  VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="24" Margin="0,25,0,0" Grid.ColumnSpan="3" FontFamily="Baskerville Old Face" HorizontalAlignment="Center"></Label>
 
-        <Label x:Name="Name" Content="Name:" HorizontalContentAlignment="Left" HorizontalAlignment="Center" FontSize="18" Width="258" Grid.Row="1" Margin="0,10,0,55" Height="35"/>
-        <Label x:Name="City" Content="City:" Margin="0,0,0,45" FontSize="18" Width="258" Grid.Column="2" Grid.Row="1" Height="35" />
-        <Label x:Name="Country" Content="Country:" HorizontalContentAlignment="Left" HorizontalAlignment="Center" Margin="0,0,0,45" Width="258" FontSize="18" Height="35" Grid.Row="1" Grid.Column="1"/>
+        <Label x:Name="Name" Content="Name:" HorizontalContentAlignment="Left" HorizontalAlignment="Center" Width="258" Grid.Row="1" Margin="0,10,0,55" Height="35"/>
+        <Label x:Name="City" Content="City:" Margin="0,0,0,45" Width="258" Grid.Column="2" Grid.Row="1" Height="35" />
+        <Label x:Name="Country" Content="Country:" HorizontalContentAlignment="Left" HorizontalAlignment="Center" Margin="0,0,0,45" Width="258" Height="35" Grid.Row="1" Grid.Column="1"/>
 
-        <Label x:Name="NumberOfDays" Grid.Row="2" Grid.Column="1" Content="Number of days:" Margin="41,5,38,70" FontSize="18" Height="35" HorizontalContentAlignment="Left" Width="258"/>
-        <Label x:Name="NumberOfGuests" Content="Number of guests:" Margin="41,2,42,70" FontSize="18" Grid.Row="2" Grid.Column="2" Height="38" Width="258"/>
+        <Label x:Name="NumberOfDays" Grid.Row="2" Grid.Column="1" Content="Number of days:" Margin="41,10,38,70" Height="35" HorizontalContentAlignment="Left" Width="258"/>
+        <Label x:Name="NumberOfGuests" Content="Number of guests:" Margin="41,10,42,70" Grid.Row="2" Grid.Column="2" Height="35" Width="258"/>
 
 
-        <TextBox x:Name="nameInput" Height="40" HorizontalAlignment="Center" Width="258" FontSize="18"  Grid.Row="1" Grid.Column="0" Margin="0,35,0,0" Background="#FFFCECB9" Text="{Binding Path=Name,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox x:Name="nameInput" Height="40" HorizontalAlignment="Right" Width="258" FontSize="18"  Grid.Row="1" Grid.Column="0" Margin="0,48,41,12" Background="#FFFCECB9" Text="{Binding Path=Name,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         <ComboBox x:Name="countryInput" FontWeight="Medium" ItemsSource="{Binding Countries}" VerticalContentAlignment="Center" SelectedItem="{Binding LocationCountry, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" HorizontalAlignment="Center" Width="258" Height="40" FontSize="18" Margin="0,35,0,0" Foreground="#22301a" Grid.Row="1" Grid.Column="1">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
@@ -277,7 +272,7 @@
                 </Style>
             </ComboBox.Style>
         </ComboBox>
-        <Border BorderBrush="#22301a" BorderThickness="3" HorizontalAlignment="Center" Width="258" Height="40" Margin="0,35,0,0" Grid.Row="1" Grid.Column="1"></Border>
+        <Border BorderBrush="#22301a" BorderThickness="3" Height="40" Margin="0,48,42,12" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" Width="258"/>
 
 
         <ComboBox x:Name="cityInput" ItemsSource="{Binding CitiesByCountry}" VerticalContentAlignment="Center" FontWeight="Medium" Foreground="#22301a" SelectedItem="{Binding LocationCity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsTextSearchEnabled="True" IsEnabled="{Binding Path=IsCityComboBoxEnabled}" IsTextSearchCaseSensitive="False" HorizontalAlignment="Center" Width="258" Height="40" Margin="0,35,0,0" FontSize="18" Grid.Row="1" Grid.Column="2">
@@ -320,25 +315,25 @@
                 </Style>
             </ComboBox.Style>
         </ComboBox>
-        <Border BorderBrush="#22301a" BorderThickness="3" HorizontalAlignment="Center" Width="258" Height="40" Margin="0,35,0,0" Grid.Row="1" Grid.Column="2"></Border>
+        <Border BorderBrush="#22301a" BorderThickness="3" Width="258" Height="40" HorizontalAlignment="Center" Margin="0,35,0,0" VerticalAlignment="Center" Grid.Row="1" Grid.Column="2"></Border>
 
 
         <CheckBox x:Name="apartment" VerticalContentAlignment="Center" Content="Apartment" IsChecked="{Binding ApartmentChecked, Mode=TwoWay}" Margin="42,10,149,70"  FontSize="18" Grid.Row="2" Grid.Column="0" Height="30" BorderBrush="#22301a" BorderThickness="3"/>
         <CheckBox x:Name="house" VerticalContentAlignment="Center" Content="House" IsChecked="{Binding HouseChecked, Mode=TwoWay}" Margin="42,40,149,40" FontSize="18" Grid.Row="2" Grid.Column="0" Height="30" BorderBrush="#22301a" BorderThickness="3"/>
         <CheckBox x:Name="cottage" VerticalContentAlignment="Center" IsChecked="{Binding CottageChecked, Mode=TwoWay}" Content="Cottage" Margin="42,70,149,10" FontSize="18" Grid.Row="2" Grid.Column="0" Height="30" BorderBrush="#22301a" BorderThickness="3"/>
 
-        <TextBox x:Name="numberOfDaysInput" Text="{Binding NumberOfDays, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="157" TextAlignment="Center" Height="40" FontSize="18" Grid.Column="1" Grid.Row="2" Margin="0,10,0,0"  >
-           
-        </TextBox>
-        <Button x:Name="incrementNumberOfDays" IsEnabled="{Binding Path=IsNumberOfDaysValid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Command="{Binding IncrementDaysNumberCommand}" Content="+"  HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" Grid.Column="1" Grid.Row="2" Margin="208,10,0,0" Width="45"/>
-        <Button x:Name="decrementNumberOfDays"  IsEnabled="{Binding Path=IsNumberOfDaysValid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Command="{Binding DecrementDaysNumberCommand}"  Content="-"  HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,208,0" Grid.Column="1" Grid.Row="2" Height="40" Width="45"/>
+        <TextBox x:Name="numberOfDaysInput" Text="{Binding NumberOfDays, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" HorizontalAlignment="Center" VerticalAlignment="Top" Width="160" TextAlignment="Center" Height="40" FontSize="18" Grid.Column="1" Grid.Row="2" Margin="0,43,0,0"  >
 
-        <TextBox x:Name="numberOfGuestsInput" Text="{Binding NumberOfGuests, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Height="40" TextAlignment="Center"  FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center" Width="157" Margin="0,10,0,0"  Grid.Column="2" Grid.Row="2">
-            
         </TextBox>
-        <Button x:Name="incrementNumberOfGuests" IsEnabled="{Binding Path=IsNumberOfGuestsValid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Command="{Binding IncrementGuestsNumberCommand}" Height="40" Content="+"  VerticalAlignment="Center" HorizontalAlignment="Center" Margin="208,10,0,0" Grid.Column="2" Grid.Row="2" Width="45"/>
-        <Button x:Name="decrementNumberOfGuests" IsEnabled="{Binding Path=IsNumberOfGuestsValid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Command="{Binding DecrementGuestsNumberCommand}" Height="40" Content="-"  VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,10,208,0" Grid.Column="2" Grid.Row="2" Width="45"/>
-        <Button x:Name="Search" FontWeight="Bold" IsEnabled="{Binding Path=IsInputValid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="197,15,0,0" Height="35" Width="100" Command="{Binding SearchCommand}"  VerticalAlignment="Top" FontSize="18" Grid.Column="2" Grid.Row="3" BorderBrush="#FF22301A" BorderThickness="3,3,3,3">
+        <Button x:Name="incrementNumberOfDays" IsEnabled="{Binding Path=IsNumberOfDaysValid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Command="{Binding IncrementDaysNumberCommand}" Content="+"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Grid.Column="1" Grid.Row="2" Margin="255,43,0,0" Width="45"/>
+        <Button x:Name="decrementNumberOfDays"  IsEnabled="{Binding Path=IsNumberOfDaysValid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Command="{Binding DecrementDaysNumberCommand}"  Content="-"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="42,43,0,0" Grid.Column="1" Grid.Row="2" Height="40" Width="45"/>
+
+        <TextBox x:Name="numberOfGuestsInput" Text="{Binding NumberOfGuests, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Height="40" TextAlignment="Center"  FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Top" Width="160" Margin="0,43,0,0"  Grid.Column="2" Grid.Row="2">
+
+        </TextBox>
+        <Button x:Name="incrementNumberOfGuests" IsEnabled="{Binding Path=IsNumberOfGuestsValid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Command="{Binding IncrementGuestsNumberCommand}" Height="40" Content="+"  VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,43,42,0" Grid.Column="2" Grid.Row="2" Width="45"/>
+        <Button x:Name="decrementNumberOfGuests" IsEnabled="{Binding Path=IsNumberOfGuestsValid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Command="{Binding DecrementGuestsNumberCommand}" Height="40" Content="-"  VerticalAlignment="Top" HorizontalAlignment="Left" Margin="41,43,0,0" Grid.Column="2" Grid.Row="2" Width="45"/>
+        <Button x:Name="Search" FontWeight="Bold" IsEnabled="{Binding Path=IsInputValid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="197,15,42,0" Width="100" HorizontalAlignment="Right" Height="35" Command="{Binding SearchCommand}"  VerticalAlignment="Top" FontSize="18" Grid.Column="2" Grid.Row="3" BorderBrush="#FF22301A" BorderThickness="3,3,3,3">
             <Grid Background="#8c9d75" Width="100"  HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -347,19 +342,19 @@
                 <Image Source="/Resources/Images/search.png" VerticalAlignment="Center" HorizontalAlignment="Right"  Margin="0,0,0,0" Width="Auto" Height="22" Grid.Column="1" RenderTransformOrigin="0.5,0.5"></Image>
                 <TextBlock Background="#8c9d75" Text="Search" Grid.Column="0" VerticalAlignment="Center" FontSize="18"  Foreground="#22301a" Margin="10,0,0,0" FontWeight="Bold" HorizontalAlignment="Left" Width="58"/>
             </Grid>
-            
+
         </Button>
 
-        <Button FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="92,15,0,0" Command="{Binding ShowAllCommand}" Width="100" Height="35" Grid.Row="3" Grid.Column="2" BorderBrush="#FF22301A" BorderThickness="3,3,3,3">
+        <Button FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="92,15,0,0" Command="{Binding ShowAllCommand}" Width="100" Height="35" Grid.Row="3" Grid.Column="2" BorderBrush="#FF22301A" BorderThickness="3,3,3,3">
             <Grid Background="#8c9d75" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <Image Source="/Resources/Images/reset.png" VerticalAlignment="Center" HorizontalAlignment="Right"  Margin="0,0,0,0" Width="Auto" Height="22" Grid.Column="1" RenderTransformOrigin="0.5,0.5">                </Image>
+                <Image Source="/Resources/Images/reset.png" VerticalAlignment="Center" HorizontalAlignment="Right"  Margin="0,0,0,0" Width="Auto" Height="22" Grid.Column="1" RenderTransformOrigin="0.5,0.5"></Image>
                 <TextBlock Background="#8c9d75" Text="Reset" Grid.Column="0" VerticalAlignment="Center" FontSize="18"  Foreground="#22301a" Margin="10,0,0,0" FontWeight="Bold" HorizontalAlignment="Left" Width="58"/>
             </Grid>
-            
+
         </Button>
 
 

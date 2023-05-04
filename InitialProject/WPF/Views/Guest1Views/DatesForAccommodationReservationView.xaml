@@ -7,10 +7,6 @@
         mc:Ignorable="d"
         Title="DatesForAccommodationReservation" Height="522" Width="660" Background="Transparent" AllowsTransparency="True"  WindowStartupLocation="CenterScreen" WindowStyle="None">
     <Window.Resources>
-        <Style TargetType="Label">
-            <Setter Property="Foreground" Value="#37492d"></Setter>
-            <Setter Property="FontWeight" Value="ExtraBold"></Setter>
-        </Style>
         <Style TargetType="Button">
             <Setter Property="Background" Value="#8c9d75"></Setter>
             <Setter Property="Foreground" Value="#22301a"></Setter>
@@ -33,6 +29,11 @@
             <Setter Property="RowHeight" Value="30"></Setter>
             <Setter Property="FontWeight" Value="Medium"></Setter>
             <Setter Property="RowBackground" Value="#FFFCECB9"></Setter>
+            <Setter Property="FontSize" Value="16"></Setter>
+            <Setter Property="UseLayoutRounding" Value="False"></Setter>
+            <Setter Property="HeadersVisibility" Value="Column"></Setter>
+            <Setter Property="IsReadOnly" Value="True"></Setter>
+            <Setter Property="AutoGenerateColumns" Value="False"></Setter>
         </Style>
         <Style TargetType="DataGridColumnHeader">
             <Setter Property="TextElement.Foreground" Value="#22301a"></Setter>
@@ -66,8 +67,8 @@
             </RadialGradientBrush>
         </Border.Background>
         <Grid>
-            <Label Content="SELECT DESIRED DATE" Height="Auto" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" Margin="0,25,0,0" FontWeight="Bold" FontFamily="Baskerville Old Face" TextElement.FontSize="24"></Label>
-            <DataGrid x:Name="AvailableDates" HeadersVisibility="Column" FontSize="16" VerticalContentAlignment="Center" SelectedItem="{Binding SelectedDateRange, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" ItemsSource="{Binding Path=availableDatesForAccommodations,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"  AutoGenerateColumns="False" Margin="0,20,0,0" IsReadOnly="True" VerticalAlignment="Center" HorizontalAlignment="Center" Height="320" Width="520">
+            <Label Content="SELECT DESIRED DATE" Foreground="#22301a" Height="Auto" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" Margin="0,25,0,0" FontWeight="Bold" FontFamily="Baskerville Old Face" TextElement.FontSize="24"></Label>
+            <DataGrid x:Name="AvailableDates" VerticalContentAlignment="Center" SelectedItem="{Binding SelectedDateRange, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" ItemsSource="{Binding Path=availableDatesForAccommodations,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"  Margin="0,20,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Height="320" Width="520">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Arrival date" Width="2*" Binding="{Binding Arrival, Mode=OneWay}"/>
                     <DataGridTextColumn Header="Departure date" Width="2*" Binding="{Binding Departure, Mode=OneWay}"/>

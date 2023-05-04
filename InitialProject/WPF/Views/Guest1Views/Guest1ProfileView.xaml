@@ -26,10 +26,12 @@
         <Style TargetType="Label">
             <Setter Property="Foreground" Value="#d9c7b3"></Setter>
             <Setter Property="FontWeight" Value="Medium"></Setter>
+            <Setter Property="FontSize" Value="18"></Setter>
         </Style>
         <Style TargetType="TextBlock">
             <Setter Property="Foreground" Value="#d9c7b3"></Setter>
             <Setter Property="FontWeight" Value="Medium"></Setter>
+            <Setter Property="FontSize" Value="18"></Setter>
         </Style>
         <Style TargetType="Run">
             <Setter Property="Foreground" Value="#d9c7b3"></Setter>
@@ -81,7 +83,7 @@
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Label FontSize="24" Grid.Row="0" Grid.ColumnSpan="2" Height="Auto" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" Margin="0,25,0,0" FontWeight="Bold" FontFamily="Baskerville Old Face" TextElement.FontSize="24">PROFILE</Label>
+        <Label FontSize="24" Grid.Row="0" Grid.ColumnSpan="2" FontWeight="Bold" Height="Auto" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" Margin="0,25,0,0" FontFamily="Baskerville Old Face" TextElement.FontSize="24">PROFILE</Label>
 
         <Grid Grid.Row="2" Grid.Column="0" Background="Transparent">
             <Grid.RowDefinitions>
@@ -111,14 +113,14 @@
                     </LinearGradientBrush>
                 </Border.Background>
             </Border>
-            <Label FontSize="18" Height="35" Width="Auto" Grid.Row="1" HorizontalAlignment="Left"  VerticalAlignment="Center" Margin="75,0,0,0">Name:</Label>
-            <Label FontSize="18" Height="35" Width="Auto" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="75,0,0,0" Content="Country:"/>
-            <Label FontSize="18" Height="36" Width="Auto" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="75,0,0,0" Content="City:"/>
-            <Label FontSize="18" Height="35" Width="Auto" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="75,0,0,0" Content="Username:"/>
-            <Label FontSize="18" Height="35" Width="Auto" Grid.Row="5" HorizontalAlignment="Left"  VerticalAlignment="Center" Margin="75,0,0,0" Content="Phone number:"/>
-            <Label FontSize="18" Height="35" Width="Auto" Grid.Row="6" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="75,0,0,0" Content="Email:"/>
+            <Label Height="35" Width="Auto" Grid.Row="1" HorizontalAlignment="Left"  VerticalAlignment="Center" Margin="75,0,0,0">Name:</Label>
+            <Label Height="35" Width="Auto" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="75,0,0,0" Content="Country:"/>
+            <Label Height="36" Width="Auto" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="75,0,0,0" Content="City:"/>
+            <Label Height="35" Width="Auto" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="75,0,0,0" Content="Username:"/>
+            <Label Height="35" Width="Auto" Grid.Row="5" HorizontalAlignment="Left"  VerticalAlignment="Center" Margin="75,0,0,0" Content="Phone number:"/>
+            <Label Height="35" Width="Auto" Grid.Row="6" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="75,0,0,0" Content="Email:"/>
 
-            <TextBlock FontSize="18" Height="35" Width="Auto" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,75,0">
+            <TextBlock Height="35" Width="Auto" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,75,0">
                 <TextBlock.Text>
                     <MultiBinding StringFormat="{}{0} {1}">
                         <Binding Path="Guest1.Name" />
@@ -126,11 +128,11 @@
                     </MultiBinding>
                 </TextBlock.Text>
             </TextBlock>
-            <TextBlock FontSize="18" Height="35" Width="Auto" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,75,0" Text="{Binding Path=Guest1.Location.Country}"></TextBlock>
-            <TextBlock FontSize="18" Height="35" Width="Auto" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,75,0" Text="{Binding Path=Guest1.Location.City}"></TextBlock>
-            <TextBlock FontSize="18" Height="35" Width="Auto" Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,75,0" Text="{Binding Path=Guest1.Username}"></TextBlock>
-            <TextBlock FontSize="18" Height="35" Width="Auto" Grid.Row="5" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,75,0" Text="{Binding Path=Guest1.PhoneNumber}"></TextBlock>
-            <TextBlock FontSize="18" Height="35" Width="Auto" Grid.Row="6" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,75,0" Text="{Binding Path=Guest1.Email}"></TextBlock>
+            <TextBlock Height="35" Width="Auto" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,75,0" Text="{Binding Path=Guest1.Location.Country}"></TextBlock>
+            <TextBlock Height="35" Width="Auto" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,75,0" Text="{Binding Path=Guest1.Location.City}"></TextBlock>
+            <TextBlock Height="35" Width="Auto" Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,75,0" Text="{Binding Path=Guest1.Username}"></TextBlock>
+            <TextBlock Height="35" Width="Auto" Grid.Row="5" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,75,0" Text="{Binding Path=Guest1.PhoneNumber}"></TextBlock>
+            <TextBlock  Height="35" Width="Auto" Grid.Row="6" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,75,0" Text="{Binding Path=Guest1.Email}"></TextBlock>
 
         </Grid>
 
@@ -152,7 +154,7 @@
         </Border>
         
 
-        <Label FontSize="20" Height="35" Width="Auto" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Bottom">Personal data</Label>
+        <Label FontSize="20" Height="35" Width="Auto" FontWeight="Bold" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Bottom">Personal data</Label>
 
         
 
@@ -196,7 +198,7 @@
                 </TextBlock.Style>
             </TextBlock>
 
-            <TextBlock Text="{Binding SuperGuest.AvailablePoints}" FontSize="19" FontWeight="DemiBold" Foreground="#d9c7b3" HorizontalAlignment="Right" Margin="0,0,81,0" VerticalAlignment="Bottom">
+            <TextBlock Text="{Binding SuperGuest.AvailablePoints}" FontSize="19" Foreground="#d9c7b3" HorizontalAlignment="Right" Margin="0,0,81,0" VerticalAlignment="Bottom">
                 <TextBlock.Style>
                     <Style TargetType="TextBlock">
                         <Setter Property="Visibility" Value="Collapsed"/>
@@ -238,7 +240,7 @@
                     </ListBox.ItemsPanel>
                 </ListBox>
             </StackPanel>
-            <TextBlock Grid.Row="3" Width="Auto" FontWeight="Normal" Height="35" VerticalAlignment="Top" HorizontalAlignment="Center">
+            <TextBlock Grid.Row="3" Width="Auto" FontWeight="Medium" Height="Auto" VerticalAlignment="Top" HorizontalAlignment="Center">
              <Run Text="{Binding ReviewsNumber}" FontSize="16"/>
              <Run Text="Reviews" FontSize="16"/>
             </TextBlock>
@@ -261,7 +263,7 @@
             </Border.Background>
         </Border>
         
-        <TextBlock FontSize="20" Height="Auto" FontWeight="Black" Width="Auto" Grid.Row="1" TextAlignment="Center" HorizontalAlignment="Left" Margin="81,0,0,0" Grid.Column="1" VerticalAlignment="Bottom">Super - guest title:</TextBlock>
+        <TextBlock FontSize="20" Height="Auto" FontWeight="Bold" Width="Auto" Grid.Row="1" TextAlignment="Center" HorizontalAlignment="Left" Margin="81,0,0,0" Grid.Column="1" VerticalAlignment="Bottom">Super - guest title:</TextBlock>
         <Image  Width="40" Height="40" VerticalAlignment="Bottom" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" Margin="0,0,81,0">
             <Image.Style>
                 <Style TargetType="Image">
@@ -279,7 +281,7 @@
         
 
 
-        <Button FontSize="18" FontWeight="Bold" IsEnabled="True" Height="35" Width="100" Margin="20,20,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="0" Grid.Column="0" Command="NavigationCommands.BrowseBack">
+        <Button FontSize="18" FontWeight="Bold" IsEnabled="True" Height="35" Width="100" Margin="46,20,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="0" Grid.Column="0" Command="NavigationCommands.BrowseBack">
             <Grid Background="#8c9d75" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>

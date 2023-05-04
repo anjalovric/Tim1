@@ -13,12 +13,17 @@
         </Style>
         <Style TargetType="Label">
             <Setter Property="Foreground" Value="#37492d"></Setter>
-            <Setter Property="FontWeight" Value="Bold"></Setter>
+            <Setter Property="FontWeight" Value="Medium"></Setter>
+            <Setter Property="FontSize" Value="18"></Setter>
         </Style>
         <Style TargetType="TextBox">
             <Setter Property="Background" Value="#dbc9ab"></Setter>
             <Setter Property="BorderBrush" Value="#22301a"></Setter>
             <Setter Property="BorderThickness" Value="3"></Setter>
+            <Setter Property="TextWrapping" Value="Wrap"></Setter>
+            <Setter Property="VerticalContentAlignment" Value="Top"></Setter>
+            <Setter Property="FontSize" Value="18"></Setter>
+            <Setter Property="FontWeight" Value="Medium"></Setter>
         </Style>
 
         <Style TargetType="Button">
@@ -32,6 +37,9 @@
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Opacity" Value="0.5"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
@@ -98,7 +106,7 @@
 
 
 
-            <Label HorizontalAlignment="Center" Margin="0,25,0,0" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Top" Height="43" FontFamily="Baskerville Old Face"  FontSize="24" FontWeight="Bold">RATE RESERVATION</Label>
+            <Label HorizontalAlignment="Center" Margin="0,25,0,0" Width="Auto" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Top" Height="Auto" FontFamily="Baskerville Old Face"  FontSize="24" FontWeight="Bold">RATE RESERVATION</Label>
             <Button Height="35" Width="100" FontSize="16" IsEnabled="True" FontWeight="Bold" Grid.Column="0" Grid.Row="0" Margin="20,25,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Command="NavigationCommands.BrowseBack">
                 <Grid Background="#8c9d75" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" >
                     <Grid.ColumnDefinitions>
@@ -109,8 +117,8 @@
                     <TextBlock Background="#8c9d75" Text="BACK" Grid.Column="1" Margin="8,0,0,0" VerticalAlignment="Center" FontSize="18"  Foreground="#22301a" FontWeight="Bold" HorizontalAlignment="Center" Width="Auto"/>
                 </Grid>
             </Button>
-            <Label HorizontalContentAlignment="Left" FontSize="18" Grid.Row="1" Grid.Column="0" Margin="65,0,0,0" VerticalAlignment="Center">Cleanliness:</Label>
-            <Label HorizontalContentAlignment="Left" FontSize="18" Grid.Row="2" Grid.Column="0" Margin="65,0,0,0" VerticalAlignment="Center">Owner's correctness:</Label>
+            <Label HorizontalContentAlignment="Left" Width="Auto" Height="Auto" Grid.Row="1" Grid.Column="0" Margin="65,0,0,0" VerticalAlignment="Center">Cleanliness:</Label>
+            <Label HorizontalContentAlignment="Left" Width="Auto" Height="Auto" Grid.Row="2" Grid.Column="0" Margin="65,0,0,0" VerticalAlignment="Center">Owner's correctness:</Label>
             <Slider x:Name="CleanlinessSlider"  Minimum="1" Maximum="5" Grid.Row="1" Grid.Column="1" Margin="0,0,100,0" Width="130" VerticalAlignment="Center" TickFrequency="1" IsSnapToTickEnabled="True" AutoToolTipPlacement="BottomRight" Value="{Binding Path=AccommodationCleanliness}">
                 <Slider.Style>
                     <Style TargetType="Slider">
@@ -133,7 +141,7 @@
                     </Style>
                 </Slider.Style>
             </Slider>
-            <TextBlock Text="{Binding ElementName=CleanlinessSlider,Path=Value}" Grid.Row="1" Grid.Column="1" Height="24" VerticalAlignment="Center" Width="30" FontSize="16" HorizontalAlignment="Right" Margin="0,0,65,0"  TextAlignment="Center" Foreground="#22301a">
+            <TextBlock Text="{Binding ElementName=CleanlinessSlider,Path=Value}" Grid.Row="1" Grid.Column="1" Height="24" VerticalAlignment="Center" Width="30" FontSize="18" FontWeight="Medium" HorizontalAlignment="Right" Margin="0,0,65,0"  TextAlignment="Center" Foreground="#22301a">
                 <TextBlock.Background>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
                         <GradientStop Color="#c99585" Offset="0"/>
@@ -146,7 +154,7 @@
                     </LinearGradientBrush>
                 </TextBlock.Background>
             </TextBlock>
-            <TextBlock Text="{Binding ElementName=CorrectnessSlider,Path=Value}"  Grid.Row="2" Grid.Column="1" Height="24" VerticalAlignment="Center" Width="30" HorizontalAlignment="Right" FontSize="16" Margin="0,0,65,0" TextAlignment="Center" Foreground="#22301a">
+            <TextBlock Text="{Binding ElementName=CorrectnessSlider,Path=Value}"  Grid.Row="2" FontWeight="Medium" Grid.Column="1" Height="24" VerticalAlignment="Center" Width="30" HorizontalAlignment="Right" FontSize="18" Margin="0,0,65,0" TextAlignment="Center" Foreground="#22301a">
                 <TextBlock.Background>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
                         <GradientStop Color="#c99585" Offset="0"/>
@@ -159,7 +167,7 @@
                     </LinearGradientBrush>
                 </TextBlock.Background>
             </TextBlock>
-            <Label HorizontalContentAlignment="Left" Grid.Column="0" Grid.Row="3" FontSize="18" Height="37" VerticalContentAlignment="Top" VerticalAlignment="Top" Margin="65,58,0,0" Content="Add photos:"/>
+            <Label HorizontalContentAlignment="Left" Grid.Column="0" Grid.Row="3" Width="Auto" Height="Auto" VerticalContentAlignment="Top" VerticalAlignment="Top" Margin="65,58,0,0" Content="Add photos:"/>
             <Button Content="+" Command="{Binding AddPhotoCommand}" FontSize="21" Height="45" Grid.Row="3" Width="45" Margin="0,20,50,0" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="0">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
@@ -321,7 +329,6 @@
                 <RowDefinition Height="2*"></RowDefinition>
                 <RowDefinition Height="1*"></RowDefinition>
                 <RowDefinition Height="3.5*"></RowDefinition>
-                <RowDefinition Height="0.7*"></RowDefinition>
                 <RowDefinition Height="1*"></RowDefinition>
                 <RowDefinition Height="2*"></RowDefinition>
                 <RowDefinition Height="4*"></RowDefinition>
@@ -330,15 +337,15 @@
 
             <Label HorizontalAlignment="Center" Margin="0,47,0,0" Grid.Row="0" Grid.Column="0"  VerticalAlignment="Top" Height="Auto"  FontSize="16" FontWeight="Medium">(optional)</Label>
 
-            <Label HorizontalAlignment="Center" Margin="0,25,0,0" Grid.Row="0" Grid.Column="0"  VerticalAlignment="Top" Height="Auto" FontFamily="Baskerville Old Face"  FontSize="24" FontWeight="Bold">SUGGESTIONS FOR RENOVATION</Label>
+            <Label HorizontalAlignment="Center" Margin="0,25,0,0" Width="Auto" Grid.Row="0" Grid.Column="0"  VerticalAlignment="Top" Height="Auto" FontFamily="Baskerville Old Face"  FontSize="24" FontWeight="Bold">SUGGESTIONS FOR RENOVATION</Label>
             <Label  Margin="20,0,0,0"  Grid.Row="1" Height="Auto" FontSize="18" Grid.Column="0"  VerticalAlignment="Center" HorizontalContentAlignment="Left" HorizontalAlignment="Left">Condition of accommodation:</Label>
 
             <TextBox Text="{Binding Path=ConditionsOfAccommodation}" Width="466" Height="150" Margin="0,0,0,0"  Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Top"/>
 
-            <Label  Margin="20,0,0,0"  Grid.Row="4" Height="Auto" FontSize="18" Grid.Column="0"  VerticalAlignment="Center" HorizontalContentAlignment="Left" HorizontalAlignment="Left">Level of urgency:</Label>
+            <Label  Margin="20,0,0,0"  Grid.Row="3" Height="Auto" FontSize="18" Grid.Column="0"  VerticalAlignment="Center" HorizontalContentAlignment="Left" HorizontalAlignment="Left">Level of urgency:</Label>
 
 
-            <Button Grid.Column="0" Grid.Row="4" Width="94" Height="35" IsEnabled="{Binding Path=IsResetEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="16" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Margin="0,0,20,0" Command="{Binding ResetComboBoxCommand}">
+            <Button Grid.Column="0" Grid.Row="4" Width="94" Height="35" IsEnabled="{Binding Path=IsResetEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontWeight="Bold" Margin="0,0,0,10" Command="{Binding ResetComboBoxCommand}">
                 <Grid Background="#8c9d75" Width="94" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -357,7 +364,7 @@
                     <TextBlock Background="#8c9d75" Text="RESET" Grid.Column="0" VerticalAlignment="Center" FontSize="16"  Foreground="#22301a" Margin="10,0,0,0" FontWeight="Bold" HorizontalAlignment="Left" Width="50"/>
                 </Grid>
             </Button>
-            <ComboBox Height="50" FontSize="16" VerticalContentAlignment="Center" Width="466" FontWeight="DemiBold" Grid.Row="5" HorizontalAlignment="Center" SelectedValuePath="Content" Grid.Column="0" VerticalAlignment="Top" Margin="20,0,20,0" SelectedValue="{Binding LevelOfUrgency}" SelectedIndex="{Binding LevelOfUrgencyIndex, Mode=TwoWay}" DisplayMemberPath="">
+            <ComboBox Height="50" FontSize="16" VerticalContentAlignment="Center" Width="466" FontWeight="Medium" Grid.Row="4" HorizontalAlignment="Center" SelectedValuePath="Content" Grid.Column="0" VerticalAlignment="Top" Margin="20,0,20,0" SelectedValue="{Binding LevelOfUrgency}" SelectedIndex="{Binding LevelOfUrgencyIndex, Mode=TwoWay}" DisplayMemberPath="">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">
                         <i:InvokeCommandAction Command="{Binding UrgencySelectionChangedCommand}"/>
@@ -392,8 +399,8 @@
                         <Setter Property="BorderThickness" Value="1"></Setter>
                         <Setter Property="Background" Value="#dbc9ab"></Setter>
                         <Setter Property="Foreground" Value="#22301a"></Setter>
-                        <Setter Property="FontWeight" Value="DemiBold"></Setter>
-                        <Setter Property="FontSize" Value="18"></Setter>
+                        <Setter Property="FontWeight" Value="Medium"></Setter>
+                        <Setter Property="FontSize" Value="16"></Setter>
                         <Style.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter Property="Cursor" Value="Hand"/>
@@ -407,7 +414,7 @@
                 <ComboBoxItem>Level 4 - there are a lot of bad things and renovation is really necessary</ComboBoxItem>
                 <ComboBoxItem>Level 5 - the accommodation is in a very bad condition and is not worth renting at all if not is renovating</ComboBoxItem>
             </ComboBox>
-            <Border BorderBrush="#22301a" BorderThickness="3" Width="466" Height="50" Grid.Row="5" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,0,0,0"></Border>
+            <Border BorderBrush="#22301a" BorderThickness="3" Width="466" Height="50" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,0,0,0"></Border>
 
 
 

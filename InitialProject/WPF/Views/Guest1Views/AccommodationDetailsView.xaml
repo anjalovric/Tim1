@@ -27,6 +27,7 @@
         <Style TargetType="Label">
             <Setter Property="Foreground" Value="#37492d"></Setter>
             <Setter Property="FontWeight" Value="Medium"></Setter>
+            <Setter Property="FontSize" Value="18"></Setter>
         </Style>
         <Style TargetType="TextBlock">
             <Setter Property="Foreground" Value="#37492d"></Setter>
@@ -127,23 +128,23 @@
                 </Border.Background>
             </Border>
 
-            <Label FontSize="18" Height="35" Width="Auto" Grid.Row="1" HorizontalAlignment="Left"  VerticalAlignment="Center" Margin="95,0,0,0">Name:</Label>
-            <Label FontSize="18" Height="35" Width="Auto" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="95,0,0,0" Content="Country:"/>
-            <Label FontSize="18" Height="36" Width="Auto" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="95,0,0,0" Content="City:"/>
-            <Label FontSize="18" Height="35" Width="Auto" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="95,0,0,0" Content="Type:"/>
-            <Label FontSize="18" Height="35" Width="Auto" Grid.Row="5" HorizontalAlignment="Left"  VerticalAlignment="Center" Margin="95,0,0,0" Content="Capacity:"/>
-            <Label FontSize="18" Height="35" Width="Auto" Grid.Row="6" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="95,0,0,0" Content="Min. days for reservation:"/>
-            <Label FontSize="18" Height="36" Width="Auto" Grid.Row="7" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="95,0,0,0" Content="Min. days to cancel:"/>
-            <Label FontSize="18" Height="36" Width="Auto" Grid.Row="8" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="95,0,0,0" Content="Owner:"/>
+            <Label Height="35" Width="Auto" Grid.Row="1" HorizontalAlignment="Left"  VerticalAlignment="Center" Margin="95,0,0,0">Name:</Label>
+            <Label Height="35" Width="Auto" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="95,0,0,0" Content="Country:"/>
+            <Label Height="36" Width="Auto" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="95,0,0,0" Content="City:"/>
+            <Label Height="35" Width="Auto" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="95,0,0,0" Content="Type:"/>
+            <Label Height="35" Width="Auto" Grid.Row="5" HorizontalAlignment="Left"  VerticalAlignment="Center" Margin="95,0,0,0" Content="Capacity:"/>
+            <Label Height="35" Width="Auto" Grid.Row="6" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="95,0,0,0" Content="Min. days for reservation:"/>
+            <Label Height="36" Width="Auto" Grid.Row="7" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="95,0,0,0" Content="Min. days to cancel:"/>
+            <Label Height="36" Width="Auto" Grid.Row="8" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="95,0,0,0" Content="Owner:"/>
 
-            <TextBlock Height="35" FontSize="18" Margin="0,0,95,0" Grid.Row="1" Text="{Binding Path=SelectedAccommodation.Name}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-            <TextBlock Height="35" FontSize="18" Margin="0,0,95,0" Grid.Row="2" Text="{Binding Path=SelectedAccommodation.Location.Country}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-            <TextBlock Height="35" FontSize="18" Margin="0,0,95,0" Grid.Row="3" Text="{Binding Path=SelectedAccommodation.Location.City}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-            <TextBlock Height="35" FontSize="18" Margin="0,0,95,0" Grid.Row="4" Text="{Binding Path=SelectedAccommodation.Type}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-            <TextBlock Height="35" FontSize="18" Margin="0,0,95,0" Grid.Row="5" Text="{Binding Path=SelectedAccommodation.Capacity}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-            <TextBlock Height="35" FontSize="18" Margin="0,0,95,0" Grid.Row="6" Text="{Binding Path=SelectedAccommodation.MinDaysForReservation}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-            <TextBlock Height="35" FontSize="18" Margin="0,0,95,0" Grid.Row="7" Text="{Binding Path=SelectedAccommodation.MinDaysToCancel}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-            <TextBlock Height="35" FontSize="18" Margin="0,0,95,0" Grid.Row="8" HorizontalAlignment="Right">
+            <TextBlock Height="35" Margin="0,0,95,0" Grid.Row="1" Text="{Binding Path=SelectedAccommodation.Name}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <TextBlock Height="35" Margin="0,0,95,0" Grid.Row="2" Text="{Binding Path=SelectedAccommodation.Location.Country}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <TextBlock Height="35" Margin="0,0,95,0" Grid.Row="3" Text="{Binding Path=SelectedAccommodation.Location.City}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <TextBlock Height="35" Margin="0,0,95,0" Grid.Row="4" Text="{Binding Path=SelectedAccommodation.Type}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <TextBlock Height="35" Margin="0,0,95,0" Grid.Row="5" Text="{Binding Path=SelectedAccommodation.Capacity}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <TextBlock Height="35" Margin="0,0,95,0" Grid.Row="6" Text="{Binding Path=SelectedAccommodation.MinDaysForReservation}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <TextBlock Height="35" Margin="0,0,95,0" Grid.Row="7" Text="{Binding Path=SelectedAccommodation.MinDaysToCancel}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <TextBlock Height="35" Margin="0,0,95,0" Grid.Row="8" HorizontalAlignment="Right">
                 <Run Text="{Binding SelectedAccommodation.Owner.Name}"/>
                 <Run Text="{Binding SelectedAccommodation.Owner.LastName}"/>
             </TextBlock>
@@ -379,7 +380,7 @@
         <Label FontSize="20" Height="34" FontWeight="Bold" Width="Auto" HorizontalAlignment="Center" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center">Overview</Label>
 
 
-        <Button Height="35" Width="100" FontSize="16" IsEnabled="True" FontWeight="Bold" Grid.Column="0" Grid.Row="0" Margin="20,25,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Command="NavigationCommands.BrowseBack">
+        <Button Height="35" Width="100" FontSize="16" IsEnabled="True" FontWeight="Bold" Grid.Column="0" Grid.Row="0" Margin="56,25,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Command="NavigationCommands.BrowseBack">
             <Grid Background="#8c9d75" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
