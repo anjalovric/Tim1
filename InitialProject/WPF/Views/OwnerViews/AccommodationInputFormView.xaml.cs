@@ -12,7 +12,7 @@ namespace InitialProject.WPF.Views
     /// </summary>
     public partial class AccommodationInputFormView : Page
     {
-        private AccommodationInputFormViewModel formViewModel;
+        public AccommodationInputFormViewModel formViewModel;
         private Owner owner;
         public AccommodationInputFormView(Owner owner)
         {

@@ -9,6 +9,7 @@
         Title="OwnerMainWindowView" Height="750" Width="430" Background="#b3cee5" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <converters:ActivePageTitleConverter x:Key="ActivePageTitleConverter" />
+        <converters:ActivePageToDemoCommandConverter x:Key="ActivePateToDemoCommandConverter" />
     </Window.Resources>
 
     <Grid>
@@ -34,12 +35,12 @@
         <Frame JournalOwnership="OwnsJournal" Name="FrameForPages" Margin="0,32,0,34" NavigationUIVisibility="Hidden">
         </Frame>
         <Menu Margin="0,680,0,0" Background="#005A9C" BorderBrush="LightGray">
-            <MenuItem Command="NavigationCommands.BrowseBack" CommandTarget="{Binding ElementName=FrameForPages}" Width="83" Height="30"  HorizontalContentAlignment="Center" BorderBrush="DarkGray">
+            <MenuItem Command="NavigationCommands.BrowseBack" CommandTarget="{Binding ElementName=FrameForPages}" Width="83" Height="30"  HorizontalContentAlignment="Center" BorderBrush="LightGray">
                 <MenuItem.Icon>
                     <Image Source="/Resources/Images/back_arrow.png" Margin="0,-6,-50,-7"/>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Command="{Binding MyAccommodationCommand}" Width="83" Height="30"  HorizontalContentAlignment="Center" BorderBrush="DarkGray">
+            <MenuItem Command="{Binding MyAccommodationCommand}" Width="83" Height="30"  HorizontalContentAlignment="Center" BorderBrush="LightGray">
                 <MenuItem.Icon>
                     <Image Source="/Resources/Images/accommodation.png" Margin="0,-6,-58,-6" />
                 </MenuItem.Icon>
@@ -49,7 +50,7 @@
                     <Image Source="/Resources/Images/home.png" Margin="0,-5,-58,-6" />
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Width="83" Height="30"  HorizontalContentAlignment="Center" BorderBrush="LightGray">
+            <MenuItem Width="83" Height="30" Command="{Binding ElementName=FrameForPages, Path=Content, Converter={StaticResource ActivePateToDemoCommandConverter}}"  HorizontalContentAlignment="Center" BorderBrush="LightGray">
                 <MenuItem.Icon>
                     <Image Source="/Resources/Images/question_mark.png" Margin="0,-6,-57,-7" />
                 </MenuItem.Icon>
