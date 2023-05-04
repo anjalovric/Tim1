@@ -124,7 +124,7 @@
 
         <Grid Grid.Column="0" Background="Transparent">
             <Grid.RowDefinitions>
-                <RowDefinition Height="4*"></RowDefinition>
+                <RowDefinition Height="3*"></RowDefinition>
                 <RowDefinition Height="1*"></RowDefinition>
                 <RowDefinition Height="1*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
@@ -182,7 +182,7 @@
 
 
 
-            <TextBlock FontSize="18" Foreground="#d9c7b3" FontWeight="Normal" Background="Transparent" HorizontalAlignment="Center" Grid.Row="2" Width="Auto" Height="35" VerticalAlignment="Top" Margin="0,0,0,0">
+            <TextBlock FontSize="16" Foreground="#d9c7b3" FontWeight="Medium" Background="Transparent" HorizontalAlignment="Center" Grid.Row="2" Width="Auto" Height="35" VerticalAlignment="Top" Margin="0,0,0,0">
                 <Run Text="{Binding ReviewsNumber}"/>
                 <Run Text="Reviews"/>
             </TextBlock>
@@ -216,7 +216,7 @@
 
         <Grid Grid.Column="1" Background="Transparent">
             <Grid.RowDefinitions>
-                <RowDefinition Height="4*"></RowDefinition>
+                <RowDefinition Height="3*"></RowDefinition>
                 <RowDefinition Height="16*"></RowDefinition>
             </Grid.RowDefinitions>
 

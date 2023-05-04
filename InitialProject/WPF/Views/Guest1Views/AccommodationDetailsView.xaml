@@ -338,7 +338,7 @@
             </ListBox>
         </StackPanel>
 
-        <TextBlock FontSize="16" Background="Transparent" HorizontalAlignment="Center" Grid.Row="2" Grid.ColumnSpan="2" Width="Auto" Height="35" VerticalAlignment="Top" FontWeight="Normal" Margin="0,0,0,0">
+        <TextBlock FontSize="16" FontWeight="Medium" Background="Transparent" HorizontalAlignment="Center" Grid.Row="2" Grid.ColumnSpan="2" Width="Auto" Height="35" VerticalAlignment="Top" Margin="0,0,0,0">
                 <Run Text="{Binding ReviewsNumber}"/>
                 <Run Text="Reviews"/>
         </TextBlock>

@@ -144,7 +144,7 @@
             <Label HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Left" Grid.Row="3"  Margin="70,32,0,0">Owner's comment:</Label>
 
 
-            <Border Margin="0,78,70,0" Grid.Row="3" BorderBrush="#22301a" BorderThickness="3" HorizontalAlignment="Right" Width="372" VerticalAlignment="Top" Background="Transparent" Height="150">
+            <Border Margin="0,78,0,0" Grid.Row="3" BorderBrush="#22301a" BorderThickness="3" HorizontalAlignment="Center" Width="372" VerticalAlignment="Top" Background="Transparent" Height="150">
                 <Border.Style>
                     <Style TargetType="{x:Type Border}">
                         <Style.Triggers>
@@ -155,7 +155,7 @@
                     </Style>
                 </Border.Style>
             </Border>
-            <TextBox x:Name="Comment" Grid.Row="3" HorizontalAlignment="Center" Width="366" Margin="0,81,0,0" Foreground="#22301a" Background="#c99585" Text="{Binding SelectedReview.Comment}" FontSize="18" VerticalContentAlignment="Center" TextWrapping="Wrap" FontWeight="Medium" VerticalAlignment="Top"  Height="144" IsReadOnly="True">
+            <TextBox x:Name="Comment" Grid.Row="3" HorizontalAlignment="Center" Width="366" Margin="0,81,0,0" Foreground="#22301a" Background="#c99585" Text="{Binding SelectedReview.Comment}" FontSize="18" VerticalContentAlignment="Top" TextWrapping="Wrap" FontWeight="Medium" VerticalAlignment="Top"  Height="144" IsReadOnly="True">
             </TextBox>
 
 
