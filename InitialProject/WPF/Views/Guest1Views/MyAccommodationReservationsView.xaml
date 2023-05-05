@@ -3,7 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:InitialProject.View"
+      xmlns:local="clr-namespace:InitialProject.WPF.Views.Guest1Views"
       mc:Ignorable="d"
       Title="MyAccommodationReservations" d:DesignHeight="696" d:DesignWidth="1024">
     <Page.Resources>

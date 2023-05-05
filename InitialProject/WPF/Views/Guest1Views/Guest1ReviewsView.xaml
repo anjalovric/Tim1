@@ -12,24 +12,7 @@
         <Style TargetType="Grid">
             <Setter Property="Background" Value="#37492d"></Setter>
         </Style>
-        <Style TargetType="TextBlock">
-            <Setter Property="Foreground" Value="#22301a"></Setter>
-            <Setter Property="FontWeight" Value="Medium"></Setter>
-            <Setter Property="Background">
-                <Setter.Value>
-                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                        <GradientStop Color="#37492d" Offset="0"/>
-                        <GradientStop Color="#37492d" Offset="0.1"></GradientStop>
-                        <GradientStop Color="#dbc9ab" Offset="0.4"/>
-                        <GradientStop Color="#dbc9ab" Offset="0.5"/>
-                        <GradientStop Color="#dbc9ab" Offset="0.6"/>
-                        <GradientStop Color="#37492d" Offset="0.9"></GradientStop>
-                        <GradientStop Color="#37492d" Offset="1"/>
-                    </LinearGradientBrush>
-                </Setter.Value>
-            </Setter>
-            <Setter Property="FontSize" Value="18"></Setter>
-        </Style>
+        
         <Style TargetType="Label">
             <Setter Property="Foreground" Value="#d9c7b3"></Setter>
             <Setter Property="FontWeight" Value="Medium"></Setter>
@@ -192,8 +175,62 @@
             <Label FontSize="18" Grid.Row="5" Width="Auto" Height="35" HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Margin="70,0,0,0">Following rules:</Label>
             <Slider Opacity="0.5" x:Name="CleanlinessSlider" Minimum="1" Maximum="5" TickFrequency="0.1" AutoToolTipPlacement="BottomRight"   Width="120" Grid.Row="4" IsEnabled="False" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,130,0" Value="{Binding AverageCleanliness, Mode=OneWay}"></Slider>
             <Slider Opacity="0.5" x:Name="FollowingRulesSlider" Width="120" Minimum="1" Maximum="5" Grid.Row="5" IsEnabled="False" TickFrequency="0.1" HorizontalAlignment="Right" AutoToolTipPlacement="BottomRight" VerticalAlignment="Center" Margin="0,0,130,0"  Value="{Binding AverageFollowingRules, Mode=OneWay}"></Slider>
-            <TextBlock  Text="{Binding ElementName=CleanlinessSlider,Path=Value}" HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Center" Grid.Row="4" Margin="0,0,70,0" Width="30" Height="24" FontSize="18"></TextBlock>
-            <TextBlock  Text="{Binding ElementName=FollowingRulesSlider,Path=Value}" HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Center" Grid.Row="5" Margin="0,0,70,0" Width="30" Height="24" FontSize="18"></TextBlock>
+            <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Center" Grid.Row="4" Margin="0,0,70,0" Width="30" Height="24" FontSize="18">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Foreground" Value="#22301a"></Setter>
+                        <Setter Property="FontWeight" Value="Medium"></Setter>
+                        <Setter Property="Background">
+                            <Setter.Value>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                    <GradientStop Color="#37492d" Offset="0"/>
+                                    <GradientStop Color="#37492d" Offset="0.1"></GradientStop>
+                                    <GradientStop Color="#dbc9ab" Offset="0.4"/>
+                                    <GradientStop Color="#dbc9ab" Offset="0.5"/>
+                                    <GradientStop Color="#dbc9ab" Offset="0.6"/>
+                                    <GradientStop Color="#37492d" Offset="0.9"></GradientStop>
+                                    <GradientStop Color="#37492d" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Property="FontSize" Value="18"></Setter>
+                        <Setter Property="Text" Value="{Binding ElementName=CleanlinessSlider, Path=Value}" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ReviewsNumber}" Value="0">
+                                <Setter Property="Text" Value="" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+            <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Center" Grid.Row="5" Margin="0,0,70,0" Width="30" Height="24" FontSize="18">
+                 <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Foreground" Value="#22301a"></Setter>
+                        <Setter Property="FontWeight" Value="Medium"></Setter>
+                        <Setter Property="Background">
+                            <Setter.Value>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                    <GradientStop Color="#37492d" Offset="0"/>
+                                    <GradientStop Color="#37492d" Offset="0.1"></GradientStop>
+                                    <GradientStop Color="#dbc9ab" Offset="0.4"/>
+                                    <GradientStop Color="#dbc9ab" Offset="0.5"/>
+                                    <GradientStop Color="#dbc9ab" Offset="0.6"/>
+                                    <GradientStop Color="#37492d" Offset="0.9"></GradientStop>
+                                    <GradientStop Color="#37492d" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Property="FontSize" Value="18"></Setter>
+                        <Setter Property="Text" Value="{Binding ElementName=FollowingRulesSlider, Path=Value}" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ReviewsNumber}" Value="0">
+                                <Setter Property="Text" Value="" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
             <Label FontSize="18" Grid.Row="6" Width="Auto" Height="35" HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Margin="70,0,0,0">Average ratings report:</Label>
 
             <!-- GENERATE REPORT BUTTON -->
