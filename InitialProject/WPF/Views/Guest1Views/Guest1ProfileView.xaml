@@ -116,13 +116,13 @@
                 </Border.Background>
             </Border>
             
-            <Label Height="35" Width="Auto" Grid.Row="1" HorizontalAlignment="Left"  VerticalAlignment="Center" Margin="75,0,0,0">Name:</Label>
-            <Label Height="35" Width="Auto" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="75,0,0,0" Content="Country:"/>
-            <Label Height="36" Width="Auto" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="75,0,0,0" Content="City:"/>
-            <Label Height="35" Width="Auto" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="75,0,0,0" Content="Username:"/>
-            <Label Height="35" Width="Auto" Grid.Row="5" HorizontalAlignment="Left"  VerticalAlignment="Center" Margin="75,0,0,0" Content="Phone number:"/>
-            <Label Height="35" Width="Auto" Grid.Row="6" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="75,0,0,0" Content="Email:"/>
-            <TextBlock Height="35" Width="Auto" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,75,0">
+            <Label Height="35" Width="Auto" Grid.Row="1" HorizontalAlignment="Left"  VerticalAlignment="Center" Margin="85,0,0,0">Name:</Label>
+            <Label Height="35" Width="Auto" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="85,0,0,0" Content="Country:"/>
+            <Label Height="36" Width="Auto" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="85,0,0,0" Content="City:"/>
+            <Label Height="35" Width="Auto" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="85,0,0,0" Content="Username:"/>
+            <Label Height="35" Width="Auto" Grid.Row="5" HorizontalAlignment="Left"  VerticalAlignment="Center" Margin="85,0,0,0" Content="Phone number:"/>
+            <Label Height="35" Width="Auto" Grid.Row="6" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="85,0,0,0" Content="Email:"/>
+            <TextBlock Height="35" Width="Auto" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,85,0">
                 <TextBlock.Text>
                     <MultiBinding StringFormat="{}{0} {1}">
                         <Binding Path="Guest1.Name" />
@@ -130,11 +130,11 @@
                     </MultiBinding>
                 </TextBlock.Text>
             </TextBlock>
-            <TextBlock Height="35" Width="Auto" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,75,0" Text="{Binding Path=Guest1.Location.Country}"></TextBlock>
-            <TextBlock Height="35" Width="Auto" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,75,0" Text="{Binding Path=Guest1.Location.City}"></TextBlock>
-            <TextBlock Height="35" Width="Auto" Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,75,0" Text="{Binding Path=Guest1.Username}"></TextBlock>
-            <TextBlock Height="35" Width="Auto" Grid.Row="5" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,75,0" Text="{Binding Path=Guest1.PhoneNumber}"></TextBlock>
-            <TextBlock  Height="35" Width="Auto" Grid.Row="6" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,75,0" Text="{Binding Path=Guest1.Email}"></TextBlock>
+            <TextBlock Height="35" Width="Auto" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,85,0" Text="{Binding Path=Guest1.Location.Country}"></TextBlock>
+            <TextBlock Height="35" Width="Auto" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,85,0" Text="{Binding Path=Guest1.Location.City}"></TextBlock>
+            <TextBlock Height="35" Width="Auto" Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,85,0" Text="{Binding Path=Guest1.Username}"></TextBlock>
+            <TextBlock Height="35" Width="Auto" Grid.Row="5" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,85,0" Text="{Binding Path=Guest1.PhoneNumber}"></TextBlock>
+            <TextBlock  Height="35" Width="Auto" Grid.Row="6" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,85,0" Text="{Binding Path=Guest1.Email}"></TextBlock>
 
         </Grid>
 

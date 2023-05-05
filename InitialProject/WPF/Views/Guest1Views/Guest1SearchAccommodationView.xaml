@@ -53,7 +53,7 @@
                             <Setter Property="FontSize" Value="18"></Setter>
                         </Style>
                     </Grid.Resources>
-                    
+
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
@@ -93,7 +93,7 @@
                             <TextBlock Text="Details" Grid.Column="0" VerticalAlignment="Center" FontSize="18" Margin="8,0,0,0"  Foreground="#22301a" FontWeight="Bold" HorizontalAlignment="Left" Width="Auto"/>
                         </Grid>
                     </Button>
-                    
+
                     <!-- RESERVE BUTTON -->
                     <Button x:Name="Reserve"  Command="{Binding Path=DataContext.ReserveCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" FontWeight="Bold" Grid.Row="1" Grid.Column="6" VerticalAlignment="Center" Width="100" Height="35" HorizontalAlignment="Center" FontSize="18">
                         <Grid Background="#8c9d75" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35">
@@ -236,7 +236,7 @@
         <Label x:Name="NumberOfDays" Grid.Row="2" Grid.Column="1" Content="Number of days:" Margin="41,10,38,70" Height="35" HorizontalContentAlignment="Left" Width="258"/>
         <Label x:Name="NumberOfGuests" Content="Number of guests:" Margin="41,10,42,70" Grid.Row="2" Grid.Column="2" Height="35" Width="258"/>
         <TextBox x:Name="nameInput" Height="40" HorizontalAlignment="Right" Width="258" FontSize="18"  Grid.Row="1" Grid.Column="0" Margin="0,48,41,12" Background="#FFFCECB9" Text="{Binding Path=Name,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-        <ComboBox x:Name="countryInput" FontWeight="Medium" ItemsSource="{Binding Countries}" VerticalContentAlignment="Center" SelectedItem="{Binding LocationCountry, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" HorizontalAlignment="Center" Width="258" Height="40" FontSize="18" Margin="0,35,0,0" Foreground="#22301a" Grid.Row="1" Grid.Column="1">
+        <ComboBox x:Name="countryInput" FontWeight="Medium" ItemsSource="{Binding Countries}" VerticalContentAlignment="Center" SelectedItem="{Binding LocationCountry, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" HorizontalAlignment="Left"   Width="252" Height="34" FontSize="18" Margin="45,35,0,0" Foreground="#22301a" Grid.Row="1" Grid.Column="1">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
                     <i:InvokeCommandAction Command="{Binding CountryInputSelectionChangedCommand}"/>
@@ -281,9 +281,9 @@
                 </Style>
             </ComboBox.Style>
         </ComboBox>
-        <Border BorderBrush="#22301a" BorderThickness="3" Height="40" Margin="0,48,42,12" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" Width="258"/>
+        <Border BorderBrush="#22301a" BorderThickness="3" Height="40" Width="258" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="42,35,0,0" Grid.Row="1" Grid.Column="1"/>
 
-        <ComboBox x:Name="cityInput" ItemsSource="{Binding CitiesByCountry}" VerticalContentAlignment="Center" FontWeight="Medium" Foreground="#22301a" SelectedItem="{Binding LocationCity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsTextSearchEnabled="True" IsEnabled="{Binding Path=IsCityComboBoxEnabled}" IsTextSearchCaseSensitive="False" HorizontalAlignment="Center" Width="258" Height="40" Margin="0,35,0,0" FontSize="18" Grid.Row="1" Grid.Column="2">
+        <ComboBox x:Name="cityInput" ItemsSource="{Binding CitiesByCountry}" VerticalContentAlignment="Center" FontWeight="Medium" Foreground="#22301a" SelectedItem="{Binding LocationCity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsTextSearchEnabled="True" IsEnabled="{Binding Path=IsCityComboBoxEnabled}" IsTextSearchCaseSensitive="False" HorizontalAlignment="Left" Width="252" Height="34" Margin="44,35,0,0" FontSize="18" Grid.Row="1" Grid.Column="2">
             <ComboBox.ItemContainerStyle>
                 <Style TargetType="ComboBoxItem">
                     <Setter Property="Width" Value="258"></Setter>
@@ -323,22 +323,22 @@
                 </Style>
             </ComboBox.Style>
         </ComboBox>
-        <Border BorderBrush="#22301a" BorderThickness="3" Width="258" Height="40" HorizontalAlignment="Center" Margin="0,35,0,0" VerticalAlignment="Center" Grid.Row="1" Grid.Column="2"></Border>
+        <Border BorderBrush="#22301a" BorderThickness="3" Width="258" Height="40" HorizontalAlignment="Left" Margin="41,35,0,0" VerticalAlignment="Center" Grid.Row="1" Grid.Column="2"></Border>
 
         <CheckBox x:Name="apartment" VerticalContentAlignment="Center" Content="Apartment" IsChecked="{Binding ApartmentChecked, Mode=TwoWay}" Margin="42,10,149,70"  FontSize="18" Grid.Row="2" Grid.Column="0" Height="30" BorderBrush="#22301a" BorderThickness="3"/>
         <CheckBox x:Name="house" VerticalContentAlignment="Center" Content="House" IsChecked="{Binding HouseChecked, Mode=TwoWay}" Margin="42,40,149,40" FontSize="18" Grid.Row="2" Grid.Column="0" Height="30" BorderBrush="#22301a" BorderThickness="3"/>
         <CheckBox x:Name="cottage" VerticalContentAlignment="Center" IsChecked="{Binding CottageChecked, Mode=TwoWay}" Content="Cottage" Margin="42,70,149,10" FontSize="18" Grid.Row="2" Grid.Column="0" Height="30" BorderBrush="#22301a" BorderThickness="3"/>
 
-        <TextBox x:Name="numberOfDaysInput" Text="{Binding NumberOfDays, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" HorizontalAlignment="Center" VerticalAlignment="Top" Width="160" TextAlignment="Center" Height="40" FontSize="18" Grid.Column="1" Grid.Row="2" Margin="0,43,0,0"/>
+        <TextBox x:Name="numberOfDaysInput" Text="{Binding NumberOfDays, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" VerticalAlignment="Top" TextAlignment="Center" Height="40" FontSize="18" Grid.Column="1" Grid.Row="2" Margin="91,43,87,0"/>
         <Button x:Name="incrementNumberOfDays" IsEnabled="{Binding Path=IsNumberOfDaysValid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Command="{Binding IncrementDaysNumberCommand}" Content="+"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Grid.Column="1" Grid.Row="2" Margin="255,43,0,0" Width="45"/>
         <Button x:Name="decrementNumberOfDays"  IsEnabled="{Binding Path=IsNumberOfDaysValid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Command="{Binding DecrementDaysNumberCommand}"  Content="-"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="42,43,0,0" Grid.Column="1" Grid.Row="2" Height="40" Width="45"/>
 
-        <TextBox x:Name="numberOfGuestsInput" Text="{Binding NumberOfGuests, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Height="40" TextAlignment="Center"  FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Top" Width="160" Margin="0,43,0,0"  Grid.Column="2" Grid.Row="2"/>
+        <TextBox x:Name="numberOfGuestsInput" Text="{Binding NumberOfGuests, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Height="40" TextAlignment="Center"  FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Top" Width="158" Margin="0,43,0,0"  Grid.Column="2" Grid.Row="2"/>
         <Button x:Name="incrementNumberOfGuests" IsEnabled="{Binding Path=IsNumberOfGuestsValid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Command="{Binding IncrementGuestsNumberCommand}" Height="40" Content="+"  VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,43,42,0" Grid.Column="2" Grid.Row="2" Width="45"/>
         <Button x:Name="decrementNumberOfGuests" IsEnabled="{Binding Path=IsNumberOfGuestsValid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Command="{Binding DecrementGuestsNumberCommand}" Height="40" Content="-"  VerticalAlignment="Top" HorizontalAlignment="Left" Margin="41,43,0,0" Grid.Column="2" Grid.Row="2" Width="45"/>
 
         <!-- SEARCH BUTTON -->
-        <Button x:Name="Search" FontWeight="Bold" IsEnabled="{Binding Path=IsInputValid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="197,15,42,0" Width="100" HorizontalAlignment="Right" Height="35" Command="{Binding SearchCommand}"  VerticalAlignment="Top" FontSize="18" Grid.Column="2" Grid.Row="3" BorderBrush="#FF22301A" BorderThickness="3,3,3,3">
+        <Button x:Name="Search" FontWeight="Bold" IsEnabled="{Binding Path=IsInputValid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0,15,42,0" Width="100" HorizontalAlignment="Right" Height="35" Command="{Binding SearchCommand}"  VerticalAlignment="Top" FontSize="18" Grid.Column="2" Grid.Row="3" BorderBrush="#FF22301A" BorderThickness="3,3,3,3">
             <Grid Background="#8c9d75" Width="100"  HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -350,7 +350,7 @@
         </Button>
 
         <!-- SHOW ALL BUTTON -->
-        <Button FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="92,15,0,0" Command="{Binding ShowAllCommand}" Width="100" Height="35" Grid.Row="3" Grid.Column="2" BorderBrush="#FF22301A" BorderThickness="3,3,3,3">
+        <Button FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="90,15,0,0" Command="{Binding ShowAllCommand}" Width="100" Height="35" Grid.Row="3" Grid.Column="2" BorderBrush="#FF22301A" BorderThickness="3,3,3,3">
             <Grid Background="#8c9d75" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
