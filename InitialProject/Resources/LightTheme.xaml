@@ -16,6 +16,14 @@
     <SolidColorBrush x:Key="ListBoxBackground">#e6ffff</SolidColorBrush>
     <SolidColorBrush x:Key="MenuBlue">#B6D0E2</SolidColorBrush>
 
+    <Style x:Key="Run1" TargetType="Run">
+        <Setter Property="Foreground" Value="Blue"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Foreground" Value="Red"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
     
     <Style x:Key="Menu" TargetType="Menu">
         <Setter Property="FontSize" Value="15"/>
@@ -180,7 +188,6 @@
         <Setter Property="BorderBrush" Value="{StaticResource RoyalBlue}"/>
         <Setter Property="FontWeight" Value="Bold"/>
         <Setter Property="FontFamily" Value="Yu Gothic"/>
-        <Setter Property="Cursor" Value="Hand"/>
     </Style>
 
     <Style x:Key="ButtonToast" TargetType="Button">
@@ -272,7 +279,6 @@
         <Setter Property="FontWeight" Value="Bold"/>
         <Setter Property="FontFamily" Value="Yu Gothic"/>
         <Setter Property="Foreground" Value="Black"/>
-        <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">

@@ -172,7 +172,7 @@
     <value>Checkpoint name</value>
   </data>
   <data name="Checkpoints" xml:space="preserve">
-    <value>Checkpoints:</value>
+    <value> Checkpoint:</value>
   </data>
   <data name="Choose" xml:space="preserve">
     <value>Choose:</value>
@@ -212,6 +212,9 @@
   </data>
   <data name="Description" xml:space="preserve">
     <value>Description</value>
+  </data>
+  <data name="DESCRIPTIONBUTTON" xml:space="preserve">
+    <value>DESCRIPTION</value>
   </data>
   <data name="DETAILS" xml:space="preserve">
     <value>DETAILS</value>
@@ -253,7 +256,7 @@
     <value>Guest</value>
   </data>
   <data name="GuestsReservations" xml:space="preserve">
-    <value>Confirmed guests presence from reservations of:</value>
+    <value> Confirmed guests presence from reservations of:</value>
   </data>
   <data name="GuestWasOnPoints:" xml:space="preserve">
     <value>Guest was on points:</value>
@@ -290,6 +293,9 @@
   </data>
   <data name="InLastYearLanguage" xml:space="preserve">
     <value>language in last year</value>
+  </data>
+  <data name="InputYear" xml:space="preserve">
+    <value>Input year:</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Language</value>
@@ -336,11 +342,14 @@
   <data name="Name" xml:space="preserve">
     <value>Name</value>
   </data>
+  <data name="NewRequests" xml:space="preserve">
+    <value>New requests:</value>
+  </data>
   <data name="NewReviews" xml:space="preserve">
     <value>New reviews:</value>
   </data>
   <data name="NumberOfGuests" xml:space="preserve">
-    <value>Number of presence guests:</value>
+    <value> Number of presence guests:</value>
   </data>
   <data name="NumberRequests" xml:space="preserve">
     <value>Number of requests</value>
@@ -364,13 +373,16 @@
     <value>Regular</value>
   </data>
   <data name="REGULARTOURREQUESTS" xml:space="preserve">
-    <value>REGULAT TOUR REQUESTS</value>
+    <value>REGULAR TOUR REQUESTS</value>
   </data>
   <data name="RegularyRequestOverview" xml:space="preserve">
     <value>Regulary tour request overview</value>
   </data>
   <data name="Requests" xml:space="preserve">
     <value>Requests</value>
+  </data>
+  <data name="RequestsList" xml:space="preserve">
+    <value>Requests with waiting status</value>
   </data>
   <data name="RequestsStatisticYearly" xml:space="preserve">
     <value>Requests yearly statistic</value>

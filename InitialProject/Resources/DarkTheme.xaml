@@ -245,16 +245,23 @@
             <Setter Property="BorderBrush" Value="{StaticResource CalendarBlue}"/>
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="FontFamily" Value="Yu Gothic"/>
-            <Setter Property="Cursor" Value="Hand"/>
         </Style>
 
-        <Style x:Key="ButtonToast" TargetType="Button">
+    <Style x:Key="Run1" TargetType="Run">
+        <Setter Property="Foreground" Value="AliceBlue"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Foreground" Value="Red"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="ButtonToast" TargetType="Button">
             <Setter Property="Background" Value="{StaticResource CalendarBlue}"/>
             <Setter Property="BorderThickness" Value="2"/>
             <Setter Property="BorderBrush" Value="{StaticResource RoyalBlue}"/>
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="FontFamily" Value="Yu Gothic"/>
-            <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Width" Value="70"/>
             <Setter Property="Height" Value="40"/>
         </Style>
@@ -337,7 +344,6 @@
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="FontFamily" Value="Yu Gothic"/>
             <Setter Property="Foreground" Value="white"/>
-            <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">

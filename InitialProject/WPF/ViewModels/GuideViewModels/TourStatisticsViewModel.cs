@@ -1,6 +1,7 @@
 ﻿using InitialProject.Model;
 using InitialProject.Service;
 using InitialProject.WPF.Views.GuideViews;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace InitialProject.WPF.ViewModels
 
     public class TourStatisticsViewModel:INotifyPropertyChanged
     {
-        public int Year { get; set; }
+        public string Year { get; set; }
         private string toastVisibility;
         public string ToastVisibility
         {
@@ -100,13 +101,13 @@ namespace InitialProject.WPF.ViewModels
         }
         public void MostVisitedForYearExecuted(object sender)
         {
-            if (Year != null)
+            if (Year != null && Year!="")
             {
-                if (Year > 2019 && Year < 2024)
+                if (Convert.ToInt32(Year) > 2019 && Convert.ToInt32(Year)< 2024)
                 {
-                    if (instanceService.FindMostVisitedForChosenYear(Year, guideService.GetByUsername(loggedUser.Username)) != null)
+                    if (instanceService.FindMostVisitedForChosenYear(Convert.ToInt32(Year), guideService.GetByUsername(loggedUser.Username)) != null)
                     {
-                        FinishedTourDetails finishedTourDetails = new FinishedTourDetails(instanceService.FindMostVisitedForChosenYear(Year, guideService.GetByUsername(loggedUser.Username)));
+                        FinishedTourDetails finishedTourDetails = new FinishedTourDetails(instanceService.FindMostVisitedForChosenYear(Convert.ToInt32(Year), guideService.GetByUsername(loggedUser.Username)));
                         Application.Current.Windows.OfType<GuideWindow>().FirstOrDefault().Main.Content = finishedTourDetails;
                     }
                 }
