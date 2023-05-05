@@ -26,6 +26,7 @@
             <Setter Property="FontWeight" Value="Medium"></Setter>
         </Style>
         <Style TargetType="Button">
+            <Setter Property="Padding" Value="0"></Setter>
             <Setter Property="Background" Value="#8c9d75"></Setter>
             <Setter Property="Foreground" Value="#22301a"></Setter>
             <Setter Property="FontWeight" Value="UltraBlack"></Setter>
@@ -60,6 +61,8 @@
 
         <!-- BORDER FOR FIRST COLUMN -->
         <Border Grid.Column="0" Width="495" BorderThickness="3" BorderBrush="#22301a" CornerRadius="20 20 20 20" HorizontalAlignment="Center" Height="660" VerticalAlignment="Center">
+            <Image Source="/Resources/Images/rating.png" Opacity="0.05" Margin="0,40,0,0" Stretch="Fill"></Image>
+
             <Border.Effect>
                 <DropShadowEffect ShadowDepth="0" BlurRadius="50"/>
             </Border.Effect>
@@ -78,6 +81,8 @@
 
         <!-- BORDER FOR SECOND COLUMN -->
         <Border Grid.Column="1" Width="495" BorderThickness="3" BorderBrush="#22301a" CornerRadius="20 20 20 20" HorizontalAlignment="Center" Height="660" VerticalAlignment="Center">
+            <Image Source="/Resources/Images/ren.png" Opacity="0.05" Margin="0,40,0,0" Stretch="Fill"></Image>
+
             <Border.Effect>
                 <DropShadowEffect ShadowDepth="0" BlurRadius="50"/>
             </Border.Effect>

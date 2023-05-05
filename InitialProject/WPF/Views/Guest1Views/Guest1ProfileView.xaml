@@ -39,6 +39,7 @@
             <Setter Property="FontSize" Value="20"></Setter>
         </Style>
         <Style TargetType="Button">
+            <Setter Property="Padding" Value="0"></Setter>
             <Setter Property="Background" Value="#8c9d75"></Setter>
             <Setter Property="Foreground" Value="#22301a"></Setter>
             <Setter Property="FontWeight" Value="UltraBlack"></Setter>
