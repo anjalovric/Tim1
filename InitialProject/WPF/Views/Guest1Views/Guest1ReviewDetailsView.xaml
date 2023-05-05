@@ -165,7 +165,7 @@
             <Slider x:Name="FollowingRulesSlider" Opacity="0.5" Width="120" Minimum="1" Maximum="5" Grid.Row="2" IsEnabled="False" TickFrequency="1" HorizontalAlignment="Right" AutoToolTipPlacement="BottomRight" VerticalAlignment="Center" Margin="0,0,130,0"  Value="{Binding SelectedReview.RulesFollowing, Mode=OneWay}"></Slider>
             
             <!-- TEXTBLOCKS FOR SLIDER VALUES -->
-            <TextBlock Text="{Binding ElementName=CleanlinessSlider,Path=Value}" Foreground="#22301a" FontSize="18" HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Center"  Grid.Row="1" Margin="0,0,70,0" Width="30" Height="24" FontWeight="Normal">
+            <TextBlock Text="{Binding ElementName=CleanlinessSlider,Path=Value}" Foreground="#22301a" FontSize="18" HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Center"  Grid.Row="1" Margin="0,0,70,0" Width="40" Height="24" FontWeight="Normal">
                 <TextBlock.Background>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
                         <GradientStop Color="#c99585" Offset="0"/>
@@ -178,7 +178,7 @@
                     </LinearGradientBrush>
                 </TextBlock.Background>
             </TextBlock>
-            <TextBlock Text="{Binding ElementName=FollowingRulesSlider,Path=Value}" Foreground="#22301a" FontSize="18" HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Center"  Grid.Row="2" Margin="0,0,70,0" Width="30" Height="24" FontWeight="Normal">
+            <TextBlock Text="{Binding ElementName=FollowingRulesSlider,Path=Value}" Foreground="#22301a" FontSize="18" HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Center"  Grid.Row="2" Margin="0,0,70,0" Width="40" Height="24" FontWeight="Normal">
                 <TextBlock.Background>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
                         <GradientStop Color="#c99585" Offset="0"/>

@@ -151,7 +151,7 @@
                 </Slider.Style>
             </Slider>
             
-            <TextBlock Text="{Binding ElementName=CleanlinessSlider,Path=Value}" Grid.Row="1" Grid.Column="1" Height="24" VerticalAlignment="Center" Width="30" FontSize="18" FontWeight="Medium" HorizontalAlignment="Right" Margin="0,0,65,0"  TextAlignment="Center" Foreground="#22301a">
+            <TextBlock Text="{Binding ElementName=CleanlinessSlider,Path=Value}" Grid.Row="1" Grid.Column="1" Height="24" VerticalAlignment="Center" Width="40" FontSize="18" FontWeight="Medium" HorizontalAlignment="Right" Margin="0,0,65,0"  TextAlignment="Center" Foreground="#22301a">
                 <TextBlock.Background>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
                         <GradientStop Color="#c99585" Offset="0"/>
@@ -165,7 +165,7 @@
                 </TextBlock.Background>
             </TextBlock>
             
-            <TextBlock Text="{Binding ElementName=CorrectnessSlider,Path=Value}"  Grid.Row="2" FontWeight="Medium" Grid.Column="1" Height="24" VerticalAlignment="Center" Width="30" HorizontalAlignment="Right" FontSize="18" Margin="0,0,65,0" TextAlignment="Center" Foreground="#22301a">
+            <TextBlock Text="{Binding ElementName=CorrectnessSlider,Path=Value}"  Grid.Row="2" FontWeight="Medium" Grid.Column="1" Height="24" VerticalAlignment="Center" Width="40" HorizontalAlignment="Right" FontSize="18" Margin="0,0,65,0" TextAlignment="Center" Foreground="#22301a">
                 <TextBlock.Background>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
                         <GradientStop Color="#c99585" Offset="0"/>

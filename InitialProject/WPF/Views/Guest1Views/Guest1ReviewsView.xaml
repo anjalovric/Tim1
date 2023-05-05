@@ -175,7 +175,7 @@
             <Label FontSize="18" Grid.Row="5" Width="Auto" Height="35" HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Margin="70,0,0,0">Following rules:</Label>
             <Slider Opacity="0.5" x:Name="CleanlinessSlider" Minimum="1" Maximum="5" TickFrequency="0.1" AutoToolTipPlacement="BottomRight"   Width="120" Grid.Row="4" IsEnabled="False" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,130,0" Value="{Binding AverageCleanliness, Mode=OneWay}"></Slider>
             <Slider Opacity="0.5" x:Name="FollowingRulesSlider" Width="120" Minimum="1" Maximum="5" Grid.Row="5" IsEnabled="False" TickFrequency="0.1" HorizontalAlignment="Right" AutoToolTipPlacement="BottomRight" VerticalAlignment="Center" Margin="0,0,130,0"  Value="{Binding AverageFollowingRules, Mode=OneWay}"></Slider>
-            <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Center" Grid.Row="4" Margin="0,0,70,0" Width="30" Height="24" FontSize="18">
+            <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Center" Grid.Row="4" Margin="0,0,70,0" Width="40" Height="24" FontSize="18">
                 <TextBlock.Style>
                     <Style TargetType="TextBlock">
                         <Setter Property="Foreground" Value="#22301a"></Setter>
@@ -203,7 +203,7 @@
                     </Style>
                 </TextBlock.Style>
             </TextBlock>
-            <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Center" Grid.Row="5" Margin="0,0,70,0" Width="30" Height="24" FontSize="18">
+            <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Center" Grid.Row="5" Margin="0,0,70,0" Width="40" Height="24" FontSize="18">
                  <TextBlock.Style>
                     <Style TargetType="TextBlock">
                         <Setter Property="Foreground" Value="#22301a"></Setter>
