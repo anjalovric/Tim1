@@ -77,6 +77,14 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             return returnedResult;
         }
        
+        
+        private void ShowMessageBoxForSentReservation()
+        {
+            Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("Successfully done!", "/Resources/Images/done.png");
+            messageBox.Owner = Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault();
+            messageBox.ShowDialog();
+        }
+
         private void MakeNewReservation()
         { 
             AccommodationReservation newReservation = new AccommodationReservation(guest1, currentAccommodation, selectedDateRange.Arrival, selectedDateRange.Departure);
@@ -84,9 +92,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             DecrementSuperGuestPoints();
             Application.Current.Windows.OfType<DatesForAccommodationReservationView>().FirstOrDefault().Close();
             Application.Current.Windows.OfType<AccommodationReservationFormView>().FirstOrDefault().Close();
-            Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("Successfully done!", "/Resources/Images/done.png");
-            messageBox.Owner = Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault();
-            messageBox.ShowDialog();            
+            ShowMessageBoxForSentReservation();           
         }
         private void DecrementSuperGuestPoints()
         {

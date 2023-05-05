@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -14,7 +15,6 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
 {
     public class CreateOrdinaryTourRequestViewModel:INotifyPropertyChanged
     {
-        private TextBlock Capacity;
         public ObservableCollection<string> Countries { get; set; }
         public ObservableCollection<string> CitiesByCountry { get; set; }
         private LocationRepository locationRepository;
@@ -149,9 +149,9 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             }
         }
 
-        private int maxGuests;
+        private string maxGuests;
 
-        public int MaxGuests
+        public string MaxGuests
         {
             get => maxGuests;
             set
@@ -159,24 +159,26 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
                 if (value != maxGuests)
                 {
                     maxGuests = value;
-                    OnPropertyChanged();
+                    OnPropertyChanged("MaxGuests");
                 }
             }
         }
-        public CreateOrdinaryTourRequestViewModel(TextBlock capacity,Model.Guest2 guest2)
+        public ObservableCollection<OrdinaryTourRequests> OrdinaryTourRequests { get; set; }
+        public CreateOrdinaryTourRequestViewModel(Model.Guest2 guest2, ObservableCollection<OrdinaryTourRequests> ordinaryTourRequests)
         {
-            Capacity = capacity;
+            MaxGuests = "";
             NowDate = DateTime.Now;
             StartDate = NowDate; ;
-            EndDate = StartDate;
-            Guest2=guest2;
+            EndDate = NowDate;
+            Guest2 = guest2;
+            OrdinaryTourRequests = ordinaryTourRequests;
             MakeCommands();
             AddLanguages();
             locationRepository = new LocationRepository();
             Countries = new ObservableCollection<string>(locationRepository.GetAllCountries());
             CitiesByCountry = new ObservableCollection<string>();
             IsComboBoxCityEnabled = false;
-
+            OrdinaryTourRequests = ordinaryTourRequests;    
         }
         private void MakeCommands()
         {
@@ -206,21 +208,23 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
 
         private void Increment_Executed(object sender)
         {
-            int changedCapacity;
-            changedCapacity = Convert.ToInt32(Capacity.Text);
-            changedCapacity++;
-            Capacity.Text = changedCapacity.ToString();
+            int changedDaysNumber;
+            if (MaxGuests == "")
+                MaxGuests = "1";
+            else
+            {
+                changedDaysNumber = Convert.ToInt32(MaxGuests) + 1;
+                MaxGuests = changedDaysNumber.ToString();
+            }
         }
         private void Decrement_Executed(object sender)
         {
-            int changedCapacity;
-            changedCapacity = Convert.ToInt32(Capacity.Text);
-            changedCapacity--;
-            if (changedCapacity < 1)
+            int changedDaysNumber;
+            if (MaxGuests != "" && Convert.ToInt32(MaxGuests) > 1)
             {
-                return;
+                changedDaysNumber = Convert.ToInt32(MaxGuests) - 1;
+                MaxGuests = changedDaysNumber.ToString();
             }
-            Capacity.Text = changedCapacity.ToString();
         }
 
         private void Confirm_Executed(object sender)
@@ -240,6 +244,15 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             RequestNotificationService requestNotificationService = new RequestNotificationService();
             requestNotificationService.Save(requestNotification);
             Application.Current.Windows.OfType<CreateOrdinaryTourRequestView>().FirstOrDefault().Close();
+            SetTourRequests();
+        }
+        private void SetTourRequests()
+        {
+            OrdinaryTourRequests.Clear();
+            OrdinaryTourRequestsService requestService = new OrdinaryTourRequestsService();
+            foreach (OrdinaryTourRequests ordinaryTourRequests in requestService.GetByGuestId(Guest2.Id)){
+                OrdinaryTourRequests.Add(ordinaryTourRequests);
+            }
         }
         public void CountryInput_SelectionChanged()
         {
