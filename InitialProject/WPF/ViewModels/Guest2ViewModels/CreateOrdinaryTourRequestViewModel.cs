@@ -238,7 +238,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
                 MessageBox.Show("Niste dobro popunili polja!");
                 return;
             }
-            OrdinaryTourRequests request = new OrdinaryTourRequests(Name,Guest2.Id, Convert.ToInt32(Capacity.Text), newLocation, Description, SelectedLanguage, Convert.ToDateTime(Start), Convert.ToDateTime(End), false, "On waiting",Start.ToString().Split(" ")[0],End.ToString().Split(" ")[0],-1,createDate,false,-1);
+            OrdinaryTourRequests request = new OrdinaryTourRequests(Name,Guest2.Id, Convert.ToInt32(MaxGuests), newLocation, Description, SelectedLanguage, Convert.ToDateTime(Start), Convert.ToDateTime(End), false, "On waiting",Start.ToString().Split(" ")[0],End.ToString().Split(" ")[0],-1,createDate,false,-1);
             OrdinaryTourRequests savedRequest=requestService.Save(request);
             RequestNotification requestNotification = new RequestNotification(savedRequest.Id);
             RequestNotificationService requestNotificationService = new RequestNotificationService();

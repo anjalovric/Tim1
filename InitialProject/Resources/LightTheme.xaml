@@ -76,7 +76,21 @@
     </Style>
     <!--BACKGROUNDHEADER-->
     <Style x:Key="BackgroundHeader" TargetType="Grid">
-        <Setter Property="Background" Value="{StaticResource HeaderGrid}"/>
+        <Setter Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+
+                    <GradientStop Color="#089bd6" Offset="0"/>
+
+                    <GradientStop Color="#9ce1fc" Offset="0.5"/>
+
+                    <GradientStop Color="#9ce1fc" Offset="0.5"/>
+
+                    <GradientStop Color="#20bcf9" Offset="1"/>
+
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
     </Style>
     <!--BACKGROUND-->
     <Style x:Key="Background" TargetType="Grid">
