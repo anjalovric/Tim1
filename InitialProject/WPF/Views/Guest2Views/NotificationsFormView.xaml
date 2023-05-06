@@ -7,9 +7,23 @@
              mc:Ignorable="d" 
              d:DesignHeight="768" d:DesignWidth="1024" Width="1024" Height="768">
     <UserControl.Resources>
+        <Style x:Key="LinkButton" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="Blue"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <TextBlock Text="{TemplateBinding Content}" TextDecorations="Underline"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
         <DataTemplate x:Key="notificationTemplate" x:Name="notificationCard">
             <Border BorderBrush="Black" BorderThickness="3"  Margin="1" HorizontalAlignment="Center" Width="800" Height="30">
                 <Grid HorizontalAlignment="Center" Grid.ColumnSpan="3" Height="30" Width="800" VerticalAlignment="Center" Background="Gray">
+                  
                     <Grid.Resources>
                         <Style TargetType="Label">
                             <Setter Property="Foreground" Value="#37492d"></Setter>
@@ -19,19 +33,24 @@
                             <Setter Property="FontWeight" Value="Bold"></Setter>
                         </Style>
                     </Grid.Resources>
+                    
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="8*"/>
+                        <ColumnDefinition Width="16*"/>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-
-                    <TextBlock Text="{Binding Text}" Width="785" Height="120" Grid.ColumnSpan="2" Foreground="Black" Grid.Row="0"></TextBlock>
-                    <Button x:Name="Details" Content="Details" Command="{Binding Path=DataContext.ViewDetailsCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}"  FontWeight="Bold" Grid.Row="1" FontSize="10" Grid.Column="1"  VerticalAlignment="Center" Width="85" Height="20" HorizontalAlignment="Right" ClickMode="Press"/>
-                    <Button x:Name="Delete" Content="Delete" Command="{Binding Path=DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" FontWeight="Bold" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" Width="85" Height="20" HorizontalAlignment="Right" FontSize="10"/>
+                    
+                    <TextBlock Text="{Binding Text}" Width="785" Height="120" Grid.ColumnSpan="2" Foreground="Black" Grid.Row="0">
+                        
+                    </TextBlock>
+                    <Button x:Name="Details" Content="Details" Command="{Binding Path=DataContext.ViewDetailsCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}"  FontWeight="Bold" Grid.Row="1" FontSize="10" Grid.Column="1"  VerticalAlignment="Center" Width="35" Height="20" ClickMode="Press" Style="{StaticResource LinkButton}">
+                        
+                    </Button>
+                    <Button x:Name="Delete" Content="Delete" Command="{Binding Path=DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" FontWeight="Bold" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" Width="35" Height="20" HorizontalAlignment="Right" FontSize="10" Style="{StaticResource LinkButton}"/>
                 </Grid>
             </Border>
         </DataTemplate>

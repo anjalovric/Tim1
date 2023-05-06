@@ -24,6 +24,7 @@
     <None Remove="Resources\Images\addBW.png" />
     <None Remove="Resources\Images\analytics.png" />
     <None Remove="Resources\Images\andjelkina-kapija.jpg" />
+    <None Remove="Resources\Images\arrow-58-xxl.png" />
     <None Remove="Resources\Images\art1.jpg" />
     <None Remove="Resources\Images\art2.jpg" />
     <None Remove="Resources\Images\art3.jpeg" />
@@ -44,6 +45,7 @@
     <None Remove="Resources\Images\CG.png" />
     <None Remove="Resources\Images\changedate.png" />
     <None Remove="Resources\Images\clock.png" />
+    <None Remove="Resources\Images\close.png" />
     <None Remove="Resources\Images\congratulations.png" />
     <None Remove="Resources\Images\congratulations2.png" />
     <None Remove="Resources\Images\congratulations3.png" />
@@ -66,6 +68,8 @@
     <None Remove="Resources\Images\decline.jpg" />
 
     <None Remove="Resources\Images\done.png" />
+
+    <None Remove="Resources\Images\doneNew.png" />
 
     <None Remove="Resources\Images\dreams1.jpeg" />
 
@@ -102,6 +106,7 @@
     <None Remove="Resources\Images\homeanja4.jpg" />
     <None Remove="Resources\Images\house1.png" />
     <None Remove="Resources\Images\icons8-christmas-star-96.png" />
+    <None Remove="Resources\Images\info-3-xl.png" />
 
     <None Remove="Resources\Images\info.png" />
     <None Remove="Resources\Images\januar.png" />
@@ -224,12 +229,24 @@
     <Content Include="Resources\Images\analytics.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Images\arrow-58-xxl.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\close.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
 
     <Content Include="Resources\Images\congratulations.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\congratulations2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\doneNew.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\info-3-xl.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\pdf.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

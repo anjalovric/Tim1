@@ -80,12 +80,14 @@ namespace InitialProject.WPF.ViewModels
             }
         }
         private HomeView homeView;
-        public ActiveInstanceViewModel(TourInstance active, ObservableCollection<TourInstance> tours, ObservableCollection<TourInstance> finishedInstances,HomeView HomeView)
+        public int GuideId;
+        public ActiveInstanceViewModel(TourInstance active, ObservableCollection<TourInstance> tours, ObservableCollection<TourInstance> finishedInstances,HomeView HomeView,int guideId)
         {
             selected = active;
             FinishedInstances = finishedInstances;
             Tours = tours;
             homeView= HomeView;
+            GuideId = guideId;
             AllPoints = new ObservableCollection<CheckPoint>();
             CurrentPoint = new ObservableCollection<CheckPoint>();
             checkPointService.FindPointsForSelectedInstance(active, AllPoints);
@@ -171,7 +173,7 @@ namespace InitialProject.WPF.ViewModels
                 FinishInstance();
             }
             checkPointService.UpdateAllPointsListToNextPoint(AllPoints, orderCounter);
-            alertGuest2Service.AddAlerts(CurrentPoint[0].Id, selected.Id, selected);
+            alertGuest2Service.AddAlerts(CurrentPoint[0].Id, selected.Id, selected,GuideId);
         }
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
