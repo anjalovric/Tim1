@@ -19,7 +19,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="1.5*"/>
             <RowDefinition Height="0.2*"/>
-            <RowDefinition Height="2.2*"/>
+            <RowDefinition Height="2*"/>
             <RowDefinition Height="0.5*"/>
             <RowDefinition Height="6*"/>
             <RowDefinition Height="0.5*"/>
@@ -46,38 +46,37 @@
 
             <Border Grid.Column="0" Grid.ColumnSpan="9" Grid.Row="0" Grid.RowSpan="2" Style="{DynamicResource Border}"/>
             <ComboBox Style="{DynamicResource ComboBoxStyle}" Text="{Binding Country}"  SelectedItem="{Binding Country,UpdateSourceTrigger=PropertyChanged}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" ItemsSource="{Binding Countries}" SelectionChanged="ComboBoxCountry_SelectionChanged" Grid.Column="1" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
-            <Label Grid.Column="1" Content="{ns:Loc Country}" Style="{DynamicResource StatisticLabel }" HorizontalAlignment="Left" Margin="5,39,0,0" VerticalAlignment="Top" Width="77" Height="33"/>
+            <Label Grid.Column="1" Content="{ns:Loc Country}" Style="{DynamicResource StatisticLabel }" HorizontalAlignment="Left" Margin="6,34,0,0" VerticalAlignment="Top" Width="77" Height="33"/>
             <ComboBox Style="{DynamicResource ComboBoxStyle}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" ItemsSource="{Binding CitiesByCountry}" Text="{Binding City}" SelectedItem="{Binding City,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="1" Height="30" VerticalAlignment="Center" HorizontalAlignment="Right"/>
             <Label Grid.Column="1" Content="{ns:Loc City}" Style="{DynamicResource StatisticLabel  }" HorizontalAlignment="Left" Margin="6,13,0,0" Grid.Row="1" Width="76" VerticalAlignment="Top"/>
-            <Label Grid.Column="2" Height="42" Content="{ns:Loc Capacity}" Style="{DynamicResource StatisticLabel}" HorizontalAlignment="Left" Margin="42,36,0,0" VerticalAlignment="Top" Width="97" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+            <Label Grid.Column="2" Height="42" Content="{ns:Loc Capacity}" Style="{DynamicResource StatisticLabel}" HorizontalAlignment="Left" Margin="42,32,0,0" VerticalAlignment="Top" Width="97" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
             <Label Content="{ns:Loc Language}" Style="{DynamicResource StatisticLabel}" Grid.Column="2" Height="35" Grid.Row="1" Width="97" HorizontalAlignment="Left" Margin="42,15,0,0" Grid.ColumnSpan="2" VerticalAlignment="Top"/>
             <tk:IntegerUpDown Grid.Column="3" AllowTextInput="True" Text="{Binding Capacity}" Grid.Row="0" Height="30" Minimum="1" VerticalAlignment="Bottom" Width="122" HorizontalAlignment="Right" Style="{DynamicResource i}"/>
             <ComboBox Text="{Binding Language}" Grid.Column="3" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" ItemsSource="{Binding Languages}" SelectedItem="{Binding Language,UpdateSourceTrigger=PropertyChanged}"  Style="{DynamicResource ComboBoxStyle}" Height="30" HorizontalAlignment="right" VerticalAlignment="Center" Grid.Row="1"  Width="111"/>
             <DatePicker Height="30"   Grid.Column="5" Text="{Binding Start}"  Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="126" >
             </DatePicker>
-            <Label Grid.Column="5" Content="{ns:Loc StartTime}" Style="{DynamicResource StatisticLabel}" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top" Height="36"/>
-            <DatePicker Grid.Column="5" Text="{Binding End}" HorizontalAlignment="Left" Margin="84,19,0,0" Grid.Row="1" VerticalAlignment="Top" Width="126" Height="30"/>
+            <Label Grid.Column="5" Content="{ns:Loc StartTime}" Style="{DynamicResource StatisticLabel}" HorizontalAlignment="Left" Margin="10,32,0,0" VerticalAlignment="Top" Height="36" Grid.RowSpan="2"/>
+            <DatePicker Grid.Column="5" Text="{Binding End}" HorizontalAlignment="Left" Margin="84,0,0,0" Grid.Row="1" VerticalAlignment="Center" Width="125" Height="30"/>
             <Label Content="{ns:Loc EndTime}" Style="{DynamicResource StatisticLabel}" Grid.Column="5" Grid.Row="1" Height="30" Width="82" HorizontalAlignment="Left" Margin="10,18,0,0" VerticalAlignment="Top"/>
-            <Label Content="{ns:Loc SelectFilters}" Style="{DynamicResource LabelToast}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="3" Height="43" Width="226" Margin="29,5,0,0"/>
-            <Button Content="▼" Command="{Binding SearchCommand}" FontSize="22" Style="{DynamicResource Button}" Grid.Column="7" Grid.Row="1" Height="40" Width="60" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <Button Content="↻" Command="{Binding ResetCommand}" Style="{DynamicResource Button}" FontSize="23" Grid.Column="8" Grid.Row="1" Height="40" Width="60" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label Content="{ns:Loc SelectFilters}" Style="{DynamicResource Labels}" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="43" Width="226" Margin="10,0,0,0"/>
+            <Button Content="▼" Command="{Binding SearchCommand}" FontSize="20" Style="{DynamicResource Button}" Grid.Column="7" Grid.Row="1" Height="37" Width="59" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <Button Content="↻" Command="{Binding ResetCommand}" Style="{DynamicResource Button}" FontSize="20" Grid.Column="8" Grid.Row="1" Height="37" Width="60" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>
         <Grid Style="{DynamicResource BackgroundHeader}" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3">
             <Label Style="{DynamicResource Header}" VerticalAlignment="Center" Content="{ns:Loc REGULARTOURREQUESTS}"/>
             <Image Source="/Resources/Images/LOGO (2).jpg" Margin="0,0,857,0"/>
         </Grid>
-        <DataGrid Style="{DynamicResource Tables}" SelectedItem="{Binding Path=Selected}" ItemsSource="{Binding Requests,UpdateSourceTrigger=PropertyChanged}"  Grid.Column="1" Grid.Row="4" ColumnHeaderStyle="{DynamicResource CenterGridHeaderStyle}" HeadersVisibility="Column" >
+        <DataGrid Style="{DynamicResource Tables}" SelectedItem="{Binding Path=Selected}" ItemsSource="{Binding Requests,UpdateSourceTrigger=PropertyChanged}"  Grid.Column="1" Grid.Row="3" ColumnHeaderStyle="{DynamicResource CenterGridHeaderStyle}" HeadersVisibility="Column" Margin="0,32,0,139" Grid.RowSpan="2" Width="970" >
             <DataGrid.Columns>
-                <DataGridTextColumn Width="1*" Header="{ns:Loc Language}" Binding="{Binding Language}" >
+                <DataGridTextColumn Width="*" Header="{ns:Loc Language}" Binding="{Binding Language}" >
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="{x:Type TextBlock}">
                             <Setter Property="HorizontalAlignment" Value="Center"/>
                             <Setter Property="VerticalAlignment" Value="Center"/>
-
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Width="1.5*" Header="{ns:Loc Location}" Binding="{Binding Location}">
+                <DataGridTextColumn Width="1.3*" Header="{ns:Loc Location}" Binding="{Binding Location}">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="{x:Type TextBlock}">
                             <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -113,7 +112,14 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTemplateColumn x:Name="cancelation"   Width="1*" >
+                <DataGridTemplateColumn x:Name="description"   Width="1.1*" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Name="descriptionButton" Content="{ns:Loc DESCRIPTIONBUTTON}" Style="{DynamicResource ButtonTable}" Command="{Binding Path=DataContext.ViewDescriptionCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn x:Name="cancelation"   Width="1.1*" >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button Name="cancelButton" Content="{ns:Loc CREATE}" Style="{DynamicResource ButtonTable}" Command="{Binding Path=DataContext.CreateCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
@@ -121,6 +127,18 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding New}" Value="🆕">
+                            <Setter Property="Background" Value="LightGreen" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.CellStyle>
         </DataGrid>
+        <TextBox   Style="{DynamicResource TextBox}"  Grid.Row="4" Grid.Column="1"  HorizontalAlignment="Center" FontSize="14" FontWeight="Medium"   TextWrapping="Wrap" Text="{Binding Description}" VerticalAlignment="Top" Width="964" Height="100" Margin="0,279,0,0"/>
+        <Label Grid.Column="1" Content="{ns:Loc RequestsList}" Style="{DynamicResource Labels}" FontSize="16" HorizontalAlignment="Left" Grid.Row="3" VerticalAlignment="Top" Width="268"/>
+        <Label Grid.Column="1" Content="{ns:Loc Description}" Style="{DynamicResource Labels}" FontSize="16" Margin="4,244,0,0" Grid.Row="4" VerticalAlignment="Top" Width="168" Height="35"/>
     </Grid>
 </Page>

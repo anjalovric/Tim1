@@ -171,6 +171,8 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         public RelayCommand DecrementDaysNumberCommand { get; set; }
         public RelayCommand CountryInputSelectionChangedCommand { get; set; }
         public string Error => null;
+
+        //Validation for Number of guests and Number od days fields
         public bool IsValid
         {
             get
@@ -276,14 +278,24 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             accommodationRenovationService.AreRenovated(storedAccommodation);
             Accommodations = new ObservableCollection<Accommodation>(storedAccommodation);
             SortAccommodationBySuperOwners();
+            InitializePage();
+            GetLocations();
+            MakeCommands();
+        }
+        private void InitializePage()
+        {
             NumberOfDays = "";
             NumberOfGuests = "";
             Name = "";
             IsInputValid = true;
             IsNumberOfDaysValid = true;
             IsNumberOfGuestsValid = true;
-            GetLocations();
-            MakeCommands();
+        }
+        private Match CreateValidationNumberRegex(string content)
+        {
+            var regex = "^([1-9][0-9]*)$";
+            Match match = Regex.Match(content, regex, RegexOptions.IgnoreCase);
+            return match;
         }
         private void SortAccommodationBySuperOwners()
         {
@@ -375,8 +387,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             ApartmentChecked = false;
             HouseChecked = false;
             CottageChecked = false;
-            //NumberOfDays = "1";             ////////dodala sam ovo jer ga validacija postavi na "", a ostane vrijednost u textboxu i nmg da je resetujem.
-            //NumberOfGuests = "1";
             NumberOfDays = "";
             NumberOfGuests = "";
             IsInputValid = true;
@@ -437,52 +447,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             accommodationReservationForm.Owner = Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault();
             accommodationReservationForm.ShowDialog();
         }
-        /*private bool IsNumberOfDaysValid() 
-        {
-            var content = NumberOfDays;
-            Match match = CreateValidationNumberRegex(content);
-            bool isValid;
-            if (!match.Success && NumberOfDays != "")
-            {
-                NumberOfDaysError = "Enter an integer greater than zero.";
-                isValid = false;
-            }
-                
-            else
-            {
-                NumberOfDaysError = "";
-                isValid = true;
-            }
-                
-            return isValid;
-        }
-        
-        
-        private bool IsNumberOfGuestsValid()
-        {
-            var content = NumberOfGuests;
-            Match match = CreateValidationNumberRegex(content);
-            bool isValid = false;
-            if (!match.Success && NumberOfGuests != "")
-            {
-                NumberOfGuestsError = "Enter an integer greater than zero.";
-                isValid = false;
-            }
-            else
-            {
-                NumberOfGuestsError = "";
-                isValid = true;
-            }
-            return isValid;
-        }*/
-        private Match CreateValidationNumberRegex(string content)
-        {
-            var regex = "^([1-9][0-9]*)$";
-            Match match = Regex.Match(content, regex, RegexOptions.IgnoreCase);
-            return match;
-        }
-
-
+       
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {

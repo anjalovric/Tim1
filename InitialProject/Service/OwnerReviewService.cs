@@ -101,10 +101,7 @@ namespace InitialProject.Service
             }
         }
         
-        public bool IsReservationValidToReview(AccommodationReservation SelectedCompletedReservation)
-        {
-            return SelectedCompletedReservation.Departure >= DateTime.Now.AddDays(-5);
-        }
+        
 
         public void Delete(OwnerReview review)
         {

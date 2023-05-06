@@ -81,15 +81,16 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             this.guest1 = guest1;
             accommodationReservationService = new AccommodationReservationService();
             cancelledAccommodationReservationService = new CancelledAccommodationReservationService();
-
+            InitializePage();
+            MakeCommands();
+        }
+        private void InitializePage()
+        {
             CompletedReservations = new ObservableCollection<AccommodationReservation>(accommodationReservationService.GetCompletedReservations(guest1));
             NotCompletedReservations = new ObservableCollection<AccommodationReservation>(accommodationReservationService.GetNotCompletedReservations(guest1));
             NotCompletedReservations = new ObservableCollection<AccommodationReservation>(NotCompletedReservations.OrderByDescending(x => x.Arrival > DateTime.Now).ToList());    //group: first will be shown reservations which haven't started yet
 
-            MakeCommands();
-
         }
-
         private void MakeCommands()
         {
             RateOwnerAndAccommodationCommand = new RelayCommand(RateOwnerAndAccommodation_Executed, CanExecute);
@@ -113,22 +114,19 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         private void RateOwnerAndAccommodation_Executed(object sender)
         {
             OwnerReviewService ownerReviewService = new OwnerReviewService();
-            if (ownerReviewService.HasReview(SelectedCompletedReservation))
+            if (ownerReviewService.HasReview(SelectedCompletedReservation))         //Validation- if reservation has review - can't be reviewed again
             {
-                Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("This reservation is already reviewed.", "/Resources/Images/exclamation.png");
-                messageBox.Owner = Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault();
-                messageBox.ShowDialog();
+                ShowMessageBoxForReviewedReservation();
                 return;
             }
-            if (!ownerReviewService.IsReservationValidToReview(SelectedCompletedReservation))
+            if (!IsReservationValidToReview())                                      //if 5 days have passed - can't review
             {
-                Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("You can't rate this reservation because 5 days have passed since its departure.", "/Resources/Images/exclamation.png");
-                messageBox.Owner = Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault();
-                messageBox.ShowDialog();
+                ShowMessageBoxForInvalidReview();
                 return;
             }
             ShowReviewForm();
         }
+        
 
         private void ShowReviewForm()
         {
@@ -136,22 +134,18 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = ownerAndAccommodationReviewForm;
 
         }
-
+        
         private async void CancelReservation_Executed(object sender)
         {
-            if(cancelledAccommodationReservationService.HasReservationStarted(SelectedNotCompletedReservation))
+            if(HasReservationStarted())
             {
-                Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("You can't cancel this reservation because it has already started.", "/Resources/Images/exclamation.png");
-                messageBox.Owner = Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault();
-                messageBox.ShowDialog();
+                ShowMessageBoxForStaredReservationCancellation();
                 return;
             }
 
-            if (!cancelledAccommodationReservationService.IsCancellationAllowed(SelectedNotCompletedReservation))
+            if (!IsCancellationAllowed())
             {
-                Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("You can't cancel this reservation because the cancellation period has expired.", "/Resources/Images/exclamation.png");
-                messageBox.Owner = Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault();
-                messageBox.ShowDialog();
+                ShowMessageBoxForExpiredCancellationPeriod();
                 return;
             }
             
@@ -159,9 +153,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             bool IsYesClicked = await result;
             if (IsYesClicked)
                 ConfirmCancellation();
-            
-
-
         }
 
         public async Task<bool> ConfirmCancellationMessageBox()
@@ -178,24 +169,67 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             cancelledAccommodationReservationService.Add(SelectedNotCompletedReservation);
             accommodationReservationService.Delete(SelectedNotCompletedReservation);
             NotCompletedReservations.Remove(SelectedNotCompletedReservation);
-
         }
         private void RescheduleReservation_Executed(object sender)
         {
-            if (cancelledAccommodationReservationService.HasReservationStarted(SelectedNotCompletedReservation))
-            {
-                Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("You can't reschedule this reservation because it has already started.", "/Resources/Images/exclamation.png");
-                messageBox.Owner = Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault();
-                messageBox.ShowDialog();
-            }
+            if (HasReservationStarted())
+                ShowMessageBoxForReschedulingStartedReservation();
             else
             {
                 ReschedulingAccommodationReservationFormView form = new ReschedulingAccommodationReservationFormView(SelectedNotCompletedReservation);
                 form.Owner = Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault();
                 form.ShowDialog();
-            }
-                
+            }       
         }
+
+        // Validation for review (5 days)
+        public bool IsReservationValidToReview()
+        {
+            return SelectedCompletedReservation.Departure >= DateTime.Now.AddDays(-5);
+        }
+        //Validation - can't cancel or reschedule started reservation
+        private bool HasReservationStarted()
+        {
+            return DateTime.Now >= SelectedNotCompletedReservation.Arrival;
+        }
+        //Validation - Owner's conditions for cancellation
+        private bool IsCancellationAllowed()
+        {
+            return DateTime.Now <= SelectedNotCompletedReservation.Arrival.AddHours(-24) && DateTime.Now <= SelectedNotCompletedReservation.Arrival.AddDays(-SelectedNotCompletedReservation.Accommodation.MinDaysToCancel);
+        }
+
+        //Message boxes for validation
+        private void ShowMessageBoxForReschedulingStartedReservation()
+        {
+            Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("You can't reschedule this reservation because it has already started.", "/Resources/Images/exclamation.png");
+            messageBox.Owner = Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault();
+            messageBox.ShowDialog();
+        }
+        private void ShowMessageBoxForStaredReservationCancellation()
+        {
+            Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("You can't cancel this reservation because it has already started.", "/Resources/Images/exclamation.png");
+            messageBox.Owner = Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault();
+            messageBox.ShowDialog();
+        }
+        private void ShowMessageBoxForExpiredCancellationPeriod()
+        {
+            Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("You can't cancel this reservation because the cancellation period has expired.", "/Resources/Images/exclamation.png");
+            messageBox.Owner = Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault();
+            messageBox.ShowDialog();
+        }
+        private void ShowMessageBoxForReviewedReservation()
+        {
+            Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("This reservation is already reviewed.", "/Resources/Images/exclamation.png");
+            messageBox.Owner = Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault();
+            messageBox.ShowDialog();
+        }
+        private void ShowMessageBoxForInvalidReview()
+        {
+            Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("You can't rate this reservation because 5 days have passed since its departure.", "/Resources/Images/exclamation.png");
+            messageBox.Owner = Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault();
+            messageBox.ShowDialog();
+        }
+
 
     }
 }

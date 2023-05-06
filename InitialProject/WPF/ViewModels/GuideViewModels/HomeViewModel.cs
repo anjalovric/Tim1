@@ -15,6 +15,7 @@ namespace InitialProject.WPF.ViewModels
     {
         System.Windows.Threading.DispatcherTimer Timer = new System.Windows.Threading.DispatcherTimer();
         public string Home { get; set; }
+        public ObservableCollection<TourInstance> Cancelable { get;set; }
         private ObservableCollection<TourInstance> tours;
         public ObservableCollection<TourInstance> Tours
         {
@@ -25,7 +26,6 @@ namespace InitialProject.WPF.ViewModels
                     tours = value;
                 OnPropertyChanged();
             }
-
         }
         private string reviewCount;
         public string ReviewCount
@@ -37,7 +37,17 @@ namespace InitialProject.WPF.ViewModels
                     reviewCount = value;
                 OnPropertyChanged();
             }
-
+        }
+        private string requestCount;
+        public string RequestCount
+        {
+            get { return requestCount; }
+            set
+            {
+                if (value != requestCount)
+                    requestCount = value;
+                OnPropertyChanged();
+            }
         }
         private string clock;
         public string Clock
@@ -49,7 +59,6 @@ namespace InitialProject.WPF.ViewModels
                     clock = value;
                 OnPropertyChanged();
             }
-
         }
         private ObservableCollection<TourInstance> instances;
         public ObservableCollection<TourInstance> FinishedInstances
@@ -69,8 +78,10 @@ namespace InitialProject.WPF.ViewModels
         private Guide loggedGuide;
         private User loggedUser;
         public RelayCommand StartCommand { get; set; }
-        public RelayCommand ViewReview { get; set; }    
-        public HomeViewModel(User user, ObservableCollection<TourInstance> Instances)
+        public RelayCommand ViewReview { get; set; }
+        public RelayCommand ViewRequest { get; set; }
+        
+        public HomeViewModel(User user, ObservableCollection<TourInstance> Instances,ObservableCollection<TourInstance> CancelableInstances)
         {
             loggedGuide = guideService.GetByUsername(user.Username);
             FinishedInstances = Instances;
@@ -83,6 +94,10 @@ namespace InitialProject.WPF.ViewModels
             ReviewNotificationService reviewNotificationService = new ReviewNotificationService();
             ReviewCount=reviewNotificationService.GetNewReviewCount(user).ToString();
             ViewReview=new RelayCommand(ViewReview_Executed, CanExecute);
+            RequestNotificationService requestNotificationService = new RequestNotificationService();
+            RequestCount = requestNotificationService.GetNewRequestCount().ToString();
+            Cancelable = CancelableInstances;
+            ViewRequest=new RelayCommand(ViewRequest_Executed,CanExecute);
         }
         private void SetClock()
         {
@@ -119,6 +134,12 @@ namespace InitialProject.WPF.ViewModels
             TourInstanceReviewView tourInstanceReviewView = new TourInstanceReviewView(loggedUser);
             Application.Current.Windows.OfType<GuideWindow>().FirstOrDefault().Main.Content = tourInstanceReviewView;
             ReviewCount = "0";
+        }
+        private void ViewRequest_Executed(object sender)
+        {
+            OrdinaryRequestOverviewView tourInstanceReviewView = new OrdinaryRequestOverviewView(loggedUser,Tours,Cancelable);
+            Application.Current.Windows.OfType<GuideWindow>().FirstOrDefault().Main.Content = tourInstanceReviewView;
+            RequestCount = "0";
         }
         void timer_Tick(object sender, EventArgs e)
         {

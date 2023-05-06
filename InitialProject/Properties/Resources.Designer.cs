@@ -232,7 +232,7 @@ namespace InitialProject.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Checkpoints:.
+        ///   Looks up a localized string similar to  Checkpoint:.
         /// </summary>
         internal static string Checkpoints {
             get {
@@ -358,6 +358,15 @@ namespace InitialProject.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to DESCRIPTION.
+        /// </summary>
+        internal static string DESCRIPTIONBUTTON {
+            get {
+                return ResourceManager.GetString("DESCRIPTIONBUTTON", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to DETAILS.
         /// </summary>
         internal static string DETAILS {
@@ -475,7 +484,7 @@ namespace InitialProject.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Confirmed guests presence from reservations of:.
+        ///   Looks up a localized string similar to  Confirmed guests presence from reservations of:.
         /// </summary>
         internal static string GuestsReservations {
             get {
@@ -579,6 +588,15 @@ namespace InitialProject.Properties {
         internal static string InLastYearLanguage {
             get {
                 return ResourceManager.GetString("InLastYearLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Input year:.
+        /// </summary>
+        internal static string InputYear {
+            get {
+                return ResourceManager.GetString("InputYear", resourceCulture);
             }
         }
         
@@ -718,6 +736,15 @@ namespace InitialProject.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to New requests:.
+        /// </summary>
+        internal static string NewRequests {
+            get {
+                return ResourceManager.GetString("NewRequests", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New reviews:.
         /// </summary>
         internal static string NewReviews {
@@ -727,7 +754,7 @@ namespace InitialProject.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Number of presence guests:.
+        ///   Looks up a localized string similar to  Number of presence guests:.
         /// </summary>
         internal static string NumberOfGuests {
             get {
@@ -799,7 +826,7 @@ namespace InitialProject.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to REGULAT TOUR REQUESTS.
+        ///   Looks up a localized string similar to REGULAR TOUR REQUESTS.
         /// </summary>
         internal static string REGULARTOURREQUESTS {
             get {
@@ -822,6 +849,15 @@ namespace InitialProject.Properties {
         internal static string Requests {
             get {
                 return ResourceManager.GetString("Requests", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Requests with waiting status.
+        /// </summary>
+        internal static string RequestsList {
+            get {
+                return ResourceManager.GetString("RequestsList", resourceCulture);
             }
         }
         

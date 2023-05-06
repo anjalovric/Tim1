@@ -1,18 +1,53 @@
 ﻿using InitialProject.Domain.Model;
 using InitialProject.Model;
 using InitialProject.Service;
+using LiveCharts;
+using LiveCharts.Wpf;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System.Windows.Media;
+
 namespace InitialProject.WPF.ViewModels
 {
-    public class FinishedTourDetailsViewModel
+    public class FinishedTourDetailsViewModel:INotifyPropertyChanged
     {
-        public string With { get; set; }
-        public string Without { get; set; } 
-        public string Attendance { get; set; }
-        public string Under { get; set; }
-        public string Over { get;set; }
-        public string Between { get; set; }
         public string Header { get; set; }
+        private SeriesCollection totalAttendance;
+        public SeriesCollection TotalAttendance
+        {
+            get { return totalAttendance; }
+            set
+            {
+                if (value != totalAttendance)
+                    totalAttendance = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private SeriesCollection  attendanceVoucherPie;
+        public SeriesCollection AttendanceVoucherPie
+        {
+            get { return attendanceVoucherPie; }
+            set
+            {
+                if (value != attendanceVoucherPie)
+                    attendanceVoucherPie = value;
+                OnPropertyChanged();
+            }
+        }
+        private SeriesCollection attendanceAgePie;
+        public SeriesCollection AttendanceAgePie
+        {
+            get { return attendanceAgePie; }
+            set
+            {
+                if (value != attendanceAgePie)
+                    attendanceAgePie = value;
+                OnPropertyChanged();
+            }
+        }
+
 
         TourInstance selectedInstance;
         public ObservableCollection<CheckPointInformation> CheckPointInformations { get; set; }
@@ -49,34 +84,61 @@ namespace InitialProject.WPF.ViewModels
 
             }
         }
+        public RelayCommand OkToastCommand { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
         private void WriteVoucherPrecentacge(int selectedId)
         {
             TourDetailsService detailsService=new TourDetailsService();
-            if (detailsService.MakeWithVoucherPrecentage(selectedId) > 0)
-                With = detailsService.MakeWithVoucherPrecentage(selectedId).ToString("#.##") + " %";
-            else
-                With = 0 + "%";
-
-            if(detailsService.MakeWithoutVoucherPrecentage(selectedId)>0)
-                Without= detailsService.MakeWithoutVoucherPrecentage(selectedId).ToString("#.##") + " %";
-            else
-                Without=0 + "%";
+          
+            AttendanceVoucherPie = new SeriesCollection();
+            AttendanceVoucherPie.Add(new PieSeries
+            {
+                Title = "WithVoucher",
+                Values = new ChartValues<double> { detailsService.MakeWithVoucherPrecentage(selectedId) },
+                DataLabels = true,
+                Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#228B22"))
+            });
+              AttendanceVoucherPie.Add(new PieSeries
+              {
+                  Title = "WithoutVoucher",
+                  Values = new ChartValues<double> { detailsService.MakeWithoutVoucherPrecentage(selectedId) },
+                  DataLabels = true,
+                  Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#A8A8A8"))
+              }
+             ) ;
         }
         private void WriteAgePrecentacge(int selectedId)
         {
             TourDetailsService detailsService = new TourDetailsService();
-            if (detailsService.MakeUnder18Precentage(selectedId)>0)
-                Under = detailsService.MakeUnder18Precentage(selectedId).ToString("#.##") + " %";
-            else
-                Under = 0 + "%";
-            if(detailsService.MakeBetween18And50Precentage(selectedId) > 0)
-                Between= detailsService.MakeBetween18And50Precentage(selectedId).ToString("#.##") + " %";
-            else
-                Between= 0 + "%";
-            if(detailsService.MakeOver50Precentage(selectedId)>0)
-                Over = detailsService.MakeOver50Precentage(selectedId).ToString("#.##") + " %";
-            else
-                Over = 0 + "%";
+            AttendanceAgePie = new SeriesCollection();
+            AttendanceAgePie.Add(new PieSeries
+            {
+                Title = "Under 18",
+                Values = new ChartValues<double> { detailsService.MakeUnder18Precentage(selectedId) },
+                DataLabels = true,
+                Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#228B22"))
+            });
+            AttendanceAgePie.Add(new PieSeries
+            {
+                Title = "Between 18 and 50",
+                Values = new ChartValues<double> { detailsService.MakeBetween18And50Precentage(selectedId) },
+                DataLabels = true,
+                Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#00A36C"))
+            }
+           );
+            AttendanceAgePie.Add(new PieSeries
+            {
+                Title = "Over 50",
+                Values = new ChartValues<double> { detailsService.MakeOver50Precentage(selectedId) },
+                DataLabels = true,
+                Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#A8A8A8"))
+            }
+          );
         }
         private void ShowGuestsOnPoint(int currentPointId, CheckPointInformation pointInformation)
         {
@@ -93,7 +155,14 @@ namespace InitialProject.WPF.ViewModels
         private void WriteAttendancePrecentacge(int selectedId)
         {
             TourDetailsService detailsService = new TourDetailsService();
-            Attendance = detailsService.MakeAttendancePrecentage(selectedId).ToString("#.##") + " %";
-        }      
+            TotalAttendance = new SeriesCollection();
+            TotalAttendance.Add(new PieSeries
+            {
+                Title = "Total attendance",
+                Values = new ChartValues<double> { detailsService.MakeAttendancePrecentage(selectedId) },
+                DataLabels = true,
+                Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#A8A8A8"))
+            });
+        }  
     }
 }

@@ -40,6 +40,17 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
                  OnPropertyChanged();
             }
         }
+        private string description;
+        public string Description
+        {
+            get { return description; }
+            set
+            {
+                if (value != description)
+                    description = value;
+                OnPropertyChanged();
+            }
+        }
         private string city;
         public string City
         {
@@ -114,6 +125,8 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         public RelayCommand ResetCommand { get; set; }
         public RelayCommand CreateCommand { get; set; }
 
+        public RelayCommand ViewDescriptionCommand { get; set; }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -131,6 +144,20 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             MakeCommands();
             Tours = tours;
             Future= futures;
+            RequestNotificationService requestNotificationService = new RequestNotificationService();
+            requestNotificationService.UpCount();
+            SetNews();
+            Description = "";
+        }
+        private void SetNews()
+        {
+            RequestNotificationService  requestNotificationService = new RequestNotificationService();
+            foreach (OrdinaryTourRequests request in Requests)
+            {
+                foreach (RequestNotification requestNotification in requestNotificationService.GetAll())
+                    if (requestNotification.Count == 1 && request.Id == requestNotification.RequestId)
+                        request.New = "🆕";
+            }
         }
         private void MakeRequestsList()
         {
@@ -143,6 +170,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             SearchCommand = new RelayCommand(Search_Executed, CanExecute);
             ResetCommand= new RelayCommand(Restart, CanExecute);
             CreateCommand = new RelayCommand(CreateTour_Executed, CanExecute);
+            ViewDescriptionCommand=new RelayCommand(ViewDescription_Executed, CanExecute);
         }
         private void MakeListOfLocations()
         {
@@ -247,6 +275,11 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             CreateTourFromRequestView createTourFromRequestView = new CreateTourFromRequestView(Tours,loggedUser,Future,Selected, Requests);
             Application.Current.Windows.OfType<GuideWindow>().FirstOrDefault().Main.Content = createTourFromRequestView;
 
+        }
+
+        private void ViewDescription_Executed(object sender)
+        {
+            Description = Selected.Description;
         }
     }
 }

@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:InitialProject.WPF.Views.GuideViews"
+           xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf" 
       xmlns:ns="clr-namespace:InitialProject"
       mc:Ignorable="d" 
       d:DesignHeight="707" d:DesignWidth="1100"
@@ -45,7 +46,7 @@
 
     <Grid Style="{DynamicResource Background}">
 
-        <ListBox x:Name="list" Style="{DynamicResource ListBoxOut}" ItemsSource="{Binding CheckPointInformations}" ItemTemplate="{StaticResource checkPoints}" Margin="29,100,580,31" ></ListBox>
+        <ListBox x:Name="list" Style="{DynamicResource ListBoxOut}" ItemsSource="{Binding CheckPointInformations}" ItemTemplate="{StaticResource checkPoints}" Margin="29,104,580,31" ></ListBox>
         <Border Style="{DynamicResource Border}" RenderTransformOrigin="0.355,0.497" Margin="29,100,580,31" />
         <Border Style="{DynamicResource Border}" Margin="550,100,30,31">
             <Grid Margin="0,-1,0,0" Style="{DynamicResource InnerGrid}" Height="574" VerticalAlignment="Top">
@@ -54,13 +55,13 @@
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
+                    <RowDefinition Height="0.5*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition Height="0.5*"/>
                     <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition Height="0.5*"/>
+                    <RowDefinition Height="*"/>
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
@@ -70,8 +71,8 @@
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
 
-                <Border Style="{DynamicResource Border}" Grid.Column="1" Grid.Row="1" Grid.RowSpan="4" >
-                    <Grid Grid.Column="1" Grid.Row="1" Grid.RowSpan="4" Style="{DynamicResource InerInerGrid}">
+                <Border Style="{DynamicResource Border}" Grid.Column="1" Grid.Row="1" Grid.RowSpan="3" >
+                    <Grid Grid.Column="1" Grid.Row="1" Grid.RowSpan="4" Style="{DynamicResource Background}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1*"/>
                             <ColumnDefinition Width="8*"/>
@@ -87,17 +88,21 @@
 
                         </Grid.RowDefinitions>
                         <Label Content="{ns:Loc VoucherStatistics}" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Style="{DynamicResource StatisticLabel}"/>
-                        <Label Content="{ns:Loc WithVouchers}"  Grid.Column="1" Grid.Row="2" Style="{DynamicResource Label}"/>
-                        <Label Content="{ns:Loc WithoutVouchers}"  Style="{DynamicResource Label}" Grid.Column="1" Grid.Row="4"/>
-
-                        <Label Content="{Binding With}"  Grid.Column="1" Grid.Row="2" HorizontalAlignment="Right" Width="170" HorizontalContentAlignment="Left" Style="{DynamicResource Label}"/>
-                        <Label Content="{Binding Without}" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Right" Width="170" HorizontalContentAlignment="Left" Style="{DynamicResource Label}"/>
+                        <lvc:PieChart Series="{Binding AttendanceVoucherPie}" Margin="0,17,165,0" Grid.RowSpan="5" Grid.Column="1" Grid.Row="1">
+                            <lvc:PieChart.ChartLegend>
+                                <lvc:DefaultLegend VerticalAlignment="Top" HorizontalAlignment="Right"/>
+                            </lvc:PieChart.ChartLegend>
+                        </lvc:PieChart>
+                        <Label Grid.Column="1" Content="🔳" Foreground="Green" FontSize="14" VerticalContentAlignment="Center" Grid.RowSpan="3"  HorizontalAlignment="Left" Margin="164,23,0,0" Grid.Row="1" VerticalAlignment="Top" Height="28" Width="30"/>
+                        <Label Grid.Column="1" Content="{ns:Loc WithVouchers}" FontSize="12" Style="{DynamicResource Labels}" Margin="199,0,0,0" Grid.Row="2" Height="30" Width="125" Grid.ColumnSpan="2"/>
+                        <Label Grid.Column="1" Content="🔳" Foreground="#A8A8A8" FontSize="14" VerticalContentAlignment="Center" Grid.RowSpan="3"  HorizontalAlignment="Left" Margin="164,23,0,0" Grid.Row="3" VerticalAlignment="Top" Height="28" Width="30"/>
+                        <Label Grid.Column="1" Content="{ns:Loc WithoutVouchers}" FontSize="12" Style="{DynamicResource Labels}" Margin="199,0,0,0" Grid.Row="4" Height="30" Width="125" Grid.ColumnSpan="2"/>
 
                     </Grid>
                 </Border>
 
-                <Border Grid.Column="1" Grid.Row="6" Grid.RowSpan="4" Style="{DynamicResource Border}">
-                    <Grid Grid.Row="6" Grid.RowSpan="5" Style="{DynamicResource InerInerGrid}" Grid.Column="1" Height="197"  VerticalAlignment="Top">
+                <Border Grid.Column="1" Grid.Row="5" Grid.RowSpan="3" Style="{DynamicResource Border}">
+                    <Grid Grid.Row="6" Grid.RowSpan="5" Style="{DynamicResource Background}" Grid.Column="1" Height="197"  VerticalAlignment="Top">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1*"/>
                             <ColumnDefinition Width="8*"/>
@@ -113,20 +118,31 @@
                             <RowDefinition/>
                         </Grid.RowDefinitions>
                         <Label Content="{ns:Loc AgeStatistics}" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Style="{DynamicResource StatisticLabel}"/>
-                        <Label  Content="{ns:Loc Under18}" Grid.Column="1" Grid.Row="2" Style="{DynamicResource Label}"/>
-                        <Label  Content="{ns:Loc Between18and}" Grid.Row="3" Style="{DynamicResource Label}" Grid.ColumnSpan="3" Margin="40,19,40,10" Grid.RowSpan="2" />
-                        <Label  Content="{ns:Loc Over50}" Grid.Row="5" Style="{DynamicResource Label}" Grid.ColumnSpan="3" Margin="41,13,41,0" Grid.RowSpan="2"/>
+                        <Label Content="🔳" Foreground="#A8A8A8" FontSize="14" VerticalContentAlignment="Center"  HorizontalAlignment="Left" Margin="162,10,0,0" VerticalAlignment="Top" Height="28" Width="30" RenderTransformOrigin="0.727,0.716" Grid.Column="1" Grid.RowSpan="2" Grid.Row="1"/>
+                        <Label Content="{ns:Loc Over50}" Style="{DynamicResource Labels}" Margin="198,10,0,0" VerticalAlignment="Top" Width="156" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2" Grid.Row="1" Height="24" />
+                        <Label Content="🔳" Foreground="#00A36C" FontSize="14" VerticalContentAlignment="Center"  HorizontalAlignment="Left" Margin="162,13,0,0" VerticalAlignment="Top" Height="28" Width="30" RenderTransformOrigin="0.727,0.716" Grid.Column="1" Grid.RowSpan="2" Grid.Row="2"/>
+                        <Label Content="{ns:Loc Between18and}" Style="{DynamicResource Labels}" Margin="198,15,0,0" VerticalAlignment="Top" Width="156" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2" Grid.Row="2" Height="24" />
+                        <Label Content="🔳" Foreground="#228B22" FontSize="14" VerticalContentAlignment="Center"  HorizontalAlignment="Left" Margin="162,19,0,0" VerticalAlignment="Top" Height="28" Width="30" RenderTransformOrigin="0.727,0.716" Grid.Column="1" Grid.RowSpan="2" Grid.Row="3"/>
+                        <Label Content="{ns:Loc Under18}" Style="{DynamicResource Labels}" Margin="198,23,0,0" VerticalAlignment="Top" Width="156" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2" Grid.Row="3" Height="24" />
 
-
-                        <Label  Content="{Binding Under}" Grid.Column="1" Grid.Row="2" HorizontalContentAlignment="left" HorizontalAlignment="Right" Style="{DynamicResource Label}" Width="170"/>
-                        <Label  Content="{Binding Between}" Grid.Column="1" Grid.Row="3" HorizontalContentAlignment="left" HorizontalAlignment="Right" Style="{DynamicResource Label}" Width="170" Grid.ColumnSpan="2" Margin="0,19,40,9" Grid.RowSpan="2" />
-                        <Label  Content="{Binding Over}" Grid.Column="1" Grid.Row="5" HorizontalContentAlignment="left" HorizontalAlignment="Right" Style="{DynamicResource Label}" Width="170" Grid.ColumnSpan="2" Margin="0,13,41,0" Grid.RowSpan="2" />
+                        <lvc:PieChart Series="{Binding AttendanceAgePie}" Margin="10,10,167,28" Grid.RowSpan="5" Grid.Row="1" Grid.Column="1">
+                            <lvc:PieChart.ChartLegend>
+                                <lvc:DefaultLegend VerticalAlignment="Top" HorizontalAlignment="Right"/>
+                            </lvc:PieChart.ChartLegend>
+                        </lvc:PieChart>
                     </Grid>
                 </Border>
-                <Border Grid.Column="1" Grid.Row="11" Style="{DynamicResource Border}">
-                    <Grid Grid.Column="1" Grid.Row="11" Style="{DynamicResource InerInerGrid}">
-                        <Label Content="{ns:Loc TotalAttendance}" Style="{DynamicResource StatisticLabel}" HorizontalAlignment="Left" Margin="41,0,0,0" />
-                        <Label x:Name="Total" Content="{Binding Attendance}" HorizontalAlignment="Left" Width="224" Style="{DynamicResource StatisticLabel}" Height="44" Margin="187,0,0,0"/>
+                <Border Grid.Column="1" Grid.Row="9" Grid.RowSpan="3" Style="{DynamicResource Border}" >
+                    <Grid Grid.Column="1" Grid.Row="11" Style="{DynamicResource Background}">
+                        <Label Content="{ns:Loc TotalAttendance}" Style="{DynamicResource StatisticLabel}" Margin="0,10,0,0" VerticalAlignment="Top" />
+                        <Label Content="🔳" Foreground="#A8A8A8" FontSize="14" VerticalContentAlignment="Center"  HorizontalAlignment="Left" Margin="203,71,0,0" VerticalAlignment="Top" Height="28" Width="30" RenderTransformOrigin="0.727,0.716"/>
+                        <Label Content="{ns:Loc TotalAttendance}" FontSize="12" Style="{DynamicResource Labels}" Margin="243,70,0,0" Height="30" Width="125" VerticalAlignment="Top"/>
+
+                        <lvc:PieChart Series="{Binding TotalAttendance}" Margin="10,38,167,0">
+                            <lvc:PieChart.ChartLegend>
+                                <lvc:DefaultLegend VerticalAlignment="Top" HorizontalAlignment="Right"/>
+                            </lvc:PieChart.ChartLegend>
+                        </lvc:PieChart>
                     </Grid>
                 </Border>
             </Grid>
@@ -139,13 +155,14 @@
                 <Button.Content>
                     <Grid>
                         <Image Source="/Resources/Images/pdf.png" HorizontalAlignment="Left" Width="28" Margin="-7,0,0,0"/>
-                        <Label Content="{ns:Loc GENERATEREPORT}" Margin="21,0,-11,0"/>
+                        <Label Content="{ns:Loc GENERATEREPORT}" Margin="21,0,-11,0" Style="{DynamicResource Label}"/>
                     </Grid>
                 </Button.Content>
 
             </Button>
 
         </Grid>
+
 
     </Grid>
 </Page>

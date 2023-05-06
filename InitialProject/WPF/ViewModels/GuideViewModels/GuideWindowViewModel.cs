@@ -52,8 +52,8 @@ namespace InitialProject.WPF.ViewModels
         public GuideWindowViewModel(User user) 
         {
             tourStatisticsView = new TourStatisticsView(user);
-            homeView = new HomeView(user, tourStatisticsView.viewModel.Instances);
             cancelView = new CancelView(user);
+            homeView = new HomeView(user, tourStatisticsView.viewModel.Instances,cancelView.cancelViewModel.TourInstances);
             loggedUser = user;
 
 
