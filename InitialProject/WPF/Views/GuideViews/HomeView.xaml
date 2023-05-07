@@ -44,7 +44,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="{ns:Loc Name}" Binding="{Binding Tour.Name}" Width="*" >
+                <DataGridTextColumn Header="{ns:Loc Name}" Binding="{Binding Tour.Name}" Width="1.3*" >
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="{x:Type TextBlock}">
                             <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -62,7 +62,7 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="{ns:Loc Location}" Binding="{Binding Tour.Location}" Width="1.8*" >
+                <DataGridTextColumn Header="{ns:Loc Location}" Binding="{Binding Tour.Location}" Width="1.4*" >
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="{x:Type TextBlock}">
                             <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -80,7 +80,7 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="{ns:Loc StartDate}" Binding="{Binding StartDate}" Width="1.9*" >
+                <DataGridTextColumn Header="{ns:Loc StartDate}" Binding="{Binding StartDate}" Width="1.7*" >
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="{x:Type TextBlock}">
                             <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -98,15 +98,7 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="{ns:Loc Description}" Binding="{Binding Tour.Description}" Width="*" >
-                    <DataGridTextColumn.ElementStyle>
-                        <Style TargetType="{x:Type TextBlock}">
-                            <Setter Property="HorizontalAlignment" Value="Center"/>
-                            <Setter Property="VerticalAlignment" Value="Center"/>
-
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                </DataGridTextColumn>
+             
                 <DataGridTemplateColumn x:Name="cancelation"  Width="*" >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

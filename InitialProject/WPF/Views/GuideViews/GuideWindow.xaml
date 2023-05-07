@@ -57,6 +57,9 @@
                         </MenuItem>
                         <MenuItem Header="{ns:Loc Requests}" Height="33" Width="100"  >
                             <MenuItem Header="{ns:Loc Regular}" Height="33" Width="150" Command="{Binding OrdinaryRequestCommand}" Style="{DynamicResource MenuItem}">
+                                <MenuItem.Icon>
+                                    <Image Source="/Resources/Images/RR.png"/>
+                                </MenuItem.Icon>
                             </MenuItem>
                         </MenuItem>
                     </Menu>

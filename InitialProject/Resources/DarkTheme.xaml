@@ -291,8 +291,9 @@
         </Style>
 
     <Style x:Key="ListBox" TargetType="ListBox">
-        <Setter Property="Background" Value="DarkBlue"/>
+        <Setter Property="Background" Value="{StaticResource RoyalBlue}"/>
         <Setter Property="Foreground" Value="AliceBlue"/>
+        <Setter Property="BorderThickness" Value="0"/>
     </Style>
     <Style x:Key="ListBoxForm" TargetType="ListBox">
         <Setter Property="Background" Value="DarkBlue"/>
