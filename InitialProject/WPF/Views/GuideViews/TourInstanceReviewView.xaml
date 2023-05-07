@@ -12,22 +12,8 @@
         <DataGrid x:Name="TourListDataGrid" ColumnHeaderStyle="{DynamicResource CenterGridHeaderStyle}" SelectedItem="{Binding Path=Selected}" HorizontalAlignment="Left" Height="470" Margin="59,128,0,0" VerticalAlignment="Top" Width="967" ItemsSource="{Binding Path=Reviews}" HeadersVisibility="Column" Style="{DynamicResource Tables}">
 
             <DataGrid.Columns>
-                <DataGridTextColumn   Width="25">
-                    <DataGridTextColumn.Binding>
-                       
-                            <Binding Path="New"/>
-                        
-                    </DataGridTextColumn.Binding>
-                    <DataGridTextColumn.ElementStyle>
-                        <Style TargetType="{x:Type TextBlock}">
-                            <Setter Property="HorizontalAlignment" Value="Center"/>
-                            <Setter Property="VerticalAlignment" Value="Center"/>
-                            <Setter Property="FontWeight" Value="Heavy"/>
-                            <Setter Property="FontSize" Value="20"/>
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                </DataGridTextColumn>
-                <DataGridTemplateColumn Width="80" >
+   
+                <DataGridTemplateColumn Width="85" >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Image Source="{Binding TourInstance.CoverBitmap}" Width="90" Height="30" VerticalAlignment="Top" Visibility="Visible"/>
@@ -52,7 +38,7 @@
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="{ns:Loc Guest}"  Width="180">
+                <DataGridTextColumn Header="{ns:Loc Guest}"  Width="200">
                     <DataGridTextColumn.Binding>
                         <MultiBinding StringFormat="{}{0} {1}">
                             <Binding Path="Guest2.Name"/>
@@ -104,6 +90,15 @@
                 </DataGridTemplateColumn>
 
             </DataGrid.Columns>
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding New}" Value="🆕">
+                            <Setter Property="Background" Value="LightGreen" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.CellStyle>
         </DataGrid>
 
         <Grid Style="{DynamicResource BackgroundHeader}" Margin="0,0,0,596">

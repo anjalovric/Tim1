@@ -90,17 +90,18 @@
             <Button Content="{ns:Loc TheMostVisitedTour}" HorizontalAlignment="Center"  VerticalAlignment="Top" Height="77" Width="180" Command="{Binding MostVisitedCommand}" Style="{DynamicResource Button}" Margin="0,26,0,0"/>
 
         </Grid>
-        <Grid Margin="829,338,59,158" Style="{DynamicResource  InerInerGrid}">
-            <Button Style="{DynamicResource Button}" HorizontalAlignment="Center"  VerticalAlignment="Top" Height="76" Width="180" Command="{Binding MostVisitedForYearCommand}" Margin="0,72,0,0">
+        <Grid Margin="829,338,59,122" Style="{DynamicResource  InerInerGrid}">
+            <Button Style="{DynamicResource Button}" HorizontalAlignment="Center"  VerticalAlignment="Top" Height="76" Width="180" Command="{Binding MostVisitedForYearCommand}" Margin="0,101,0,0">
                 <Button.Content>
                     <Grid>
-                        <Label Margin="-64,-18,-76,10" Content="{ns:Loc TheMostVisitedTour}"/>
-                        <Label Margin="-64,7,-65,-17" Content="{ns:Loc TheMostVistedTourYear}"></Label>
+                        <Label Margin="-64,-18,-76,10" Content="{ns:Loc TheMostVisitedTour}" Style="{DynamicResource Label}"/>
+                        <Label Margin="-64,7,-65,-17" Content="{ns:Loc TheMostVistedTourYear}" Style="{DynamicResource Label}"></Label>
                     </Grid>
                 </Button.Content>
             </Button>
-            <TextBox x:Name="ChosenYear"  TextWrapping="Wrap"  VerticalAlignment="Top" Text="{Binding Path=Year,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}" Height="35" Style="{DynamicResource TextBox}" Margin="10,37,10,0"/>
+            <TextBox x:Name="ChosenYear"  TextWrapping="Wrap"  VerticalAlignment="Top" Text="{Binding Path=Year,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}" Height="35" Style="{DynamicResource TextBox}" Margin="10,45,10,0"/>
             <Rectangle  Style="{DynamicResource RectangleDashed}"  />
+            <Label Content="{ns:Loc InputYear}" Style="{DynamicResource Labels}" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" Width="180"/>
 
         </Grid>
         <Rectangle  Style="{DynamicResource RectangleDashed}"  Margin="829,159,59,391" />
