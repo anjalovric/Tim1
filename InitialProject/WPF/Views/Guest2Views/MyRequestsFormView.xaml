@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:InitialProject.WPF.Views.Guest2Views"
              xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Royale" xmlns:System="clr-namespace:System;assembly=netstandard" xmlns:sys="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
-             d:DesignHeight="768" d:DesignWidth="1024" Width="1024" Height="768">
+             d:DesignHeight="600" d:DesignWidth="668" Width="668" Height="600">
     <UserControl.Resources>
         <Style x:Key="DataGridRowStyle2" TargetType="{x:Type DataGridRow}">
             <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
@@ -79,7 +79,7 @@
                             <theme:DataGridHeaderBorder Background="White" BorderThickness="0 0 0 5" IsPressed="{TemplateBinding IsPressed}" IsHovered="{TemplateBinding IsMouseOver}" IsClickable="{TemplateBinding CanUserSort}" Padding="25 0 0 10" SortDirection="{TemplateBinding SortDirection}" SeparatorVisibility="{TemplateBinding SeparatorVisibility}" SeparatorBrush="{TemplateBinding SeparatorBrush}">
                                 <ContentPresenter HorizontalAlignment="Left" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                             </theme:DataGridHeaderBorder>
-
+                            <Border BorderBrush="LightGray" BorderThickness="0,0,0,2"/>
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>
@@ -154,29 +154,34 @@
         </Style>
     </UserControl.Resources>
     <Grid>
-        <Border BorderBrush="#151f2d" Background="#151f2d" BorderThickness="4,4,4,4" CornerRadius="25 25 25 25" >
-            <TabControl Margin="90,182,108,106" Style="{DynamicResource TabControlStyle}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Border BorderBrush="#151f2d" Grid.ColumnSpan="3" Background="#151f2d" BorderThickness="4,4,4,4" CornerRadius="25 25 25 25" />
+        <TabControl Margin="0,151,0,106" Style="{DynamicResource TabControlStyle}" Grid.Column="1">
 
-                <TabItem Header="Ordinary">
+            <TabItem Header="Ordinary">
 
-                    <Grid Background="White" Height="428" Margin="0,0,5,0">
+                <Grid Background="White" Height="259" Margin="0,0,5,0">
 
-                        <DataGrid ItemsSource="{Binding Path=OrdinaryTourRequests,UpdateSourceTrigger=PropertyChanged}" BorderBrush="Transparent" IsReadOnly="True" AutoGenerateColumns="False" HorizontalScrollBarVisibility="Hidden" GridLinesVisibility="None" ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle2}" CellStyle="{StaticResource DataGridCellStyle2}" Style="{StaticResource DataGridStyle}" RowStyle="{StaticResource DataGridRowStyle2}" Margin="0,10,0,0">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="Name" Width="1*" Binding="{Binding Name}"/>
-                                <DataGridTextColumn Header="Status" Width="1*" Binding="{Binding Status}"/>
-                            </DataGrid.Columns>
+                    <DataGrid ItemsSource="{Binding Path=OrdinaryTourRequests,UpdateSourceTrigger=PropertyChanged}" BorderBrush="Transparent" IsReadOnly="True" AutoGenerateColumns="False" HorizontalScrollBarVisibility="Hidden" GridLinesVisibility="None" ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle2}" CellStyle="{StaticResource DataGridCellStyle2}" Style="{StaticResource DataGridStyle}" RowStyle="{StaticResource DataGridRowStyle2}" Margin="0,-17,0,0">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Name" Width="1*" Binding="{Binding Name}"/>
+                            <DataGridTextColumn Header="Status" Width="1*" Binding="{Binding Status}"/>
+                        </DataGrid.Columns>
 
-                        </DataGrid>
-                    </Grid>
-                </TabItem>
-                <TabItem Header="Complex">
-                    <Grid Background="White" Height="428" Margin="0,0,5,0"/>
-                </TabItem>
-            </TabControl>
-        </Border>
-        <Label Content="My requests" Foreground="White" Margin="91,80,626,0" Height="46" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="20" FontWeight="Bold"/>
-        <Button HorizontalAlignment="Left" VerticalAlignment="Top" Height="34" Width="172" FontWeight="Bold" Margin="96,682,0,0" FontSize="18" Command="{Binding CreateCommand}">
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Complex">
+                <Grid Background="White" Height="428" Margin="0,0,5,0"/>
+            </TabItem>
+        </TabControl>
+
+        <Label Content="My requests" Grid.Column="1" Foreground="White" Margin="0,36,0,0" Height="46" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="20" FontWeight="Bold" Width="135"/>
+        <Button HorizontalAlignment="Left" Grid.Column="1" VerticalAlignment="Top" Height="34" Width="172" FontWeight="Bold" Margin="0,499,0,0" FontSize="18" Command="{Binding CreateCommand}">
             <Grid Background="White" Width="172" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="16*"/>
@@ -190,7 +195,7 @@
                 <TextBlock Background="White" Text="Create request" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" Width="145" Height="29" Margin="37,3,0,0" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
             </Grid>
         </Button>
-        <Button HorizontalAlignment="Left" VerticalAlignment="Top" Height="34" Width="181" FontWeight="Bold" FontSize="18" Margin="284,682,0,0">
+        <Button HorizontalAlignment="Center" Grid.Column="1" VerticalAlignment="Top" Height="34" Width="182" FontWeight="Bold" FontSize="18" Margin="0,499,0,0">
             <Grid Background="White" Width="177" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="16*"/>
@@ -204,8 +209,8 @@
                 <TextBlock Background="White" Text="Generate report" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" Width="145" Height="29" Margin="37,3,0,0" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
             </Grid>
         </Button>
-        <Label Content="Mozete pogledati sve vase zahtjeve za ture kao i njihov status." Foreground="#7166f9" Margin="91,126,0,0" Height="46" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-        <Button HorizontalAlignment="Left" VerticalAlignment="Top" Height="34" Width="172" FontWeight="Bold" FontSize="18" Command="{Binding StatisticsCommand}" Margin="482,682,0,0">
+        <Label Content="Mozete pogledati sve vase zahtjeve za ture kao i njihov status." Grid.Column="1" Foreground="#7166f9" Margin="0,100,0,0" Height="46" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <Button HorizontalAlignment="Left" Grid.Column="1" VerticalAlignment="Top" Height="34" Width="172" FontWeight="Bold" FontSize="18" Command="{Binding StatisticsCommand}" Margin="384,499,0,0">
             <Grid Background="White" Width="172" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="16*"/>

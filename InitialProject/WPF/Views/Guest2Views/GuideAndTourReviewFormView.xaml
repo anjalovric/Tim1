@@ -41,13 +41,7 @@
     </Window.Resources>
     <Border BorderThickness="4" Padding="6" CornerRadius="25">
 
-        <Border.Background>
-            <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
-                <GradientStop Color="#FF9E98FF" Offset="0.1"></GradientStop>
-                <GradientStop Color="#FFF9F9F9" Offset="0.4"></GradientStop>
-                <GradientStop Color="#FF9E98FF" Offset="0.9"></GradientStop>
-            </LinearGradientBrush>
-        </Border.Background>
+
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
@@ -66,18 +60,27 @@
             <Label Content="Guide knowledge" Margin="34,16,301,10" Grid.Row="1" FontWeight="DemiBold" FontSize="16"/>
             <Label Content="Guide language" Margin="34,13,281,1" Grid.Row="2" FontWeight="DemiBold" FontSize="16"/>
             <Label Content="Interesting facts of tour" Margin="34,10,266,13" Grid.Row="3" FontWeight="DemiBold" FontSize="16"/>
-            <TextBlock x:Name="interestingFacts" Background="#F8F9FE" Text="1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="330" TextAlignment="Center" Height="28" Margin="58,18,0,0" Grid.Column="1" Grid.Row="3"/>
-            <TextBlock x:Name="language" Text="1" HorizontalAlignment="Left" VerticalAlignment="Center" Width="330" TextAlignment="Center" Height="28" Background="#F8F9FE" Margin="58,0,0,0" Grid.Column="1" Grid.Row="2" />
-            <TextBlock x:Name="knowledge" Text="1"  HorizontalAlignment="Left" VerticalAlignment="Center" Width="330" TextAlignment="Center" Height="28" Background="#F8F9FE" Grid.Column="1" Grid.Row="1" Margin="58,0,0,0" />
+            <Border Grid.Column="1" Grid.Row="1" Margin="58,16,97,15" BorderBrush="LightGray" BorderThickness="0,0,0,3">
+                <TextBlock x:Name="knowledge" Text="1"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="330" TextAlignment="Center" Height="24" Background="#F8F9FE" Grid.Column="1" Grid.Row="1" />
+            </Border>
+            <Border Grid.Column="1" Grid.Row="2" BorderBrush="LightGray" BorderThickness="0,0,0,3" Margin="58,15,97,15">
+                <TextBlock x:Name="language" Text="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="330" TextAlignment="Center" Height="24" Background="#F8F9FE" Grid.Column="1" Grid.Row="2" />
+            </Border>
+            <Border Grid.Column="1" Grid.Row="3" BorderBrush="LightGray" BorderThickness="0,0,0,3" Margin="58,18,97,13">
+                <TextBlock x:Name="interestingFacts" Background="#F8F9FE" Text="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="330" TextAlignment="Center" Height="24" Grid.Column="1" Grid.Row="3"/>
+            </Border>
+
+
+
             <Button x:Name="dekrementNumber1" Content="-" Command="{Binding Facts_Decrement_Command}" HorizontalAlignment="Left" Margin="10,18,0,0" VerticalAlignment="Top" Width="30" Height="28"  BorderBrush="#FFAEAEC1"  Background="#F8F9FE" BorderThickness="1" Grid.Column="1" Grid.Row="3"/>
             <Button x:Name="inkrementNumber" Content="+" Command="{Binding Facts_Increment_Command}" HorizontalAlignment="Left" Margin="401,18,0,0" VerticalAlignment="Top" Width="30" RenderTransformOrigin="-1.284,0.612" Height="28" Background="#F8F9FE"  BorderBrush="#FFAEAEC1"  BorderThickness="1" Grid.Column="1" Grid.Row="3"/>
             <Button x:Name="inkrementNumber1" Command="{Binding Language_Increment_Command}" Content="+" HorizontalAlignment="Left" Margin="401,0,0,0" VerticalAlignment="Center" Width="30" RenderTransformOrigin="-1.284,0.612" Height="28" Background="#F8F9FE"  BorderBrush="#FFAEAEC1"  BorderThickness="1" Grid.Column="1" Grid.Row="2"/>
             <Button x:Name="inkrementNumber2" Content="+" HorizontalAlignment="Left" Command="{Binding Knowledge_Increment_Command}" Margin="401,0,0,0" VerticalAlignment="Center" Width="30" RenderTransformOrigin="-1.284,0.612" Height="28" Background="#F8F9FE"  BorderBrush="#FFAEAEC1"  BorderThickness="1" Grid.Column="1" Grid.Row="1"/>
             <Button x:Name="dekrementNumber" Content="-" HorizontalAlignment="Left" Command="{Binding Language_Decrement_Command}" Margin="10,0,0,0" VerticalAlignment="Center" Width="30"  Height="28" BorderBrush="#FFAEAEC1" Background="#F8F9FE" BorderThickness="1" Grid.Column="1" Grid.Row="2"/>
             <Button x:Name="dekrementNumber2" Content="-" HorizontalAlignment="Left" Command="{Binding Knowledge_Decrement_Command}" Margin="10,0,0,0" VerticalAlignment="Center" Width="30"  Height="28" BorderBrush="#FFAEAEC1" Background="#F8F9FE" BorderThickness="1" Grid.Column="1" Grid.Row="1"/>
-            <Label Content="Add comment" FontFamily="Baskerville Old Face" FontWeight="Bold" FontSize="20" Margin="34,6,266,7" Grid.Row="4"/>
-            <Label Content="Add photos" FontFamily="Baskerville Old Face" FontWeight="Bold" FontSize="20" Margin="6,10,290,10" Grid.Column="1" Grid.Row="4"/>
-            <tk:WatermarkTextBox x:Name="comment" TextWrapping="Wrap" Margin="34,15,30,15" Watermark="Enter comment here" BorderBrush="Gray" BorderThickness="1" Grid.Row="5"/>
+            <Label Content="Add comment" FontWeight="Bold" FontSize="20" Margin="34,6,266,7" Grid.Row="4"/>
+            <Label Content="Add photos" FontWeight="Bold" FontSize="20" Margin="6,10,290,10" Grid.Column="1" Grid.Row="4"/>
+            <tk:WatermarkTextBox x:Name="comment" TextWrapping="Wrap" Margin="34,15,30,15" Watermark="Enter comment here" BorderBrush="Gray" BorderThickness="0,0,0,2" Grid.Row="5" Background="#F8F9FE"/>
             <Button HorizontalAlignment="Left" Grid.Row="6" VerticalAlignment="Top"  Height="34" Width="132" FontWeight="Bold" FontSize="18" Command="{Binding ConfirmCommand}" Margin="176,3,0,0" Grid.Column="1">
                 <Grid Background="#FF9E98FF" Width="144" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35">
                     <Grid.RowDefinitions>
@@ -89,11 +92,11 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <Image Source="/Resources/Images/doneNew.png" VerticalAlignment="Top" HorizontalAlignment="Left" Width="26" Height="25" RenderTransformOrigin="0.5,0.5" Margin="10,3,0,0" Grid.RowSpan="2"/>
-                    <TextBlock Background="#FF9E98FF" Text="Confirm" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" Width="109" Height="29" Margin="10,3,0,0" Grid.RowSpan="2" Grid.Column="1"/>
+                    <TextBlock Background="#FF9E98FF" Foreground="White" Text="Confirm" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" Width="109" Height="29" Margin="10,3,0,0" Grid.RowSpan="2" Grid.Column="1"/>
                 </Grid>
 
             </Button>
-            <Button HorizontalAlignment="Left" Grid.Row="6" VerticalAlignment="Top"  Height="34" Width="132" FontWeight="Bold" FontSize="18" Command="{Binding CancelCommand}" Margin="313,3,0,0" Grid.Column="1">
+            <Button HorizontalAlignment="Left" Grid.Row="6" VerticalAlignment="Top" BorderBrush="#FF9E98FF" Height="34" Width="132" FontWeight="Bold" FontSize="18" Command="{Binding CancelCommand}" Margin="313,3,0,0" Grid.Column="1">
                 <Grid Background="White" Width="144" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="16*"/>
@@ -104,14 +107,14 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <Image Source="/Resources/Images/close.png" VerticalAlignment="Top" HorizontalAlignment="Left" Width="26" Height="25" RenderTransformOrigin="0.5,0.5" Margin="10,3,0,0" Grid.RowSpan="2"/>
-                    <TextBlock Background="White" Text="Cancel" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" Width="109" Height="29" Margin="10,3,0,0" Grid.RowSpan="2" Grid.Column="1"/>
+                    <TextBlock Background="White" Foreground="#FF9E98FF" Text="Cancel" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" Width="109" Height="29" Margin="10,3,0,0" Grid.RowSpan="2" Grid.Column="1"/>
                 </Grid>
 
             </Button>
-            <Border Background="White" BorderBrush="Gray" Margin="40,15,54,15" Visibility="Visible" BorderThickness="1" Grid.Column="1" Grid.Row="5"/>
+            <Border Background="#F8F9FE" BorderBrush="Gray" BorderThickness="0,0,0,2" Margin="40,15,54,15" Visibility="Visible" Grid.Column="1" Grid.Row="5"/>
             <Image x:Name="imagePicture" Margin="50,56,63,55" Source="{Binding ImageSource, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="5"/>
 
-            <Label Content="RATE TOUR AND GUIDE" FontFamily="Baskerville Old Face" Margin="32,11,56,0" FontSize="30" FontWeight="Bold"/>
+            <Label Content="RATE TOUR AND GUIDE" Margin="32,11,56,0" FontSize="30" FontWeight="Bold"/>
 
 
 

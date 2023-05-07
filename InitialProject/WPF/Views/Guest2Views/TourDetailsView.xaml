@@ -44,21 +44,15 @@
             <Setter Property="FontSize" Value="15"/>
         </Style>
     </Window.Resources>
-    <Border BorderThickness="4" Padding="6" CornerRadius="25">
+    
 
-        <Border.Background>
-            <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
-                <GradientStop Color="#FF9E98FF" Offset="0.1"></GradientStop>
-
-                <GradientStop Color="#FF9E98FF" Offset="0.9"></GradientStop>
-            </LinearGradientBrush>
-        </Border.Background>
+        
         <Grid Margin="0,10,0,-10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Border BorderBrush="Black" BorderThickness="3" CornerRadius="20" Grid.Column="1" Margin="0,124,0,268"></Border>
+            
             <Image x:Name="tourImage" Source="{Binding ImageSource, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Left" Width="312" Margin="35,150,0,332">
 
             </Image>
@@ -101,10 +95,8 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-            <Border BorderBrush="Black" CornerRadius="20" BorderThickness="4" Margin="0,531,0,78" Grid.ColumnSpan="2">
-
-            </Border>
-            <Border BorderBrush="Black" CornerRadius="20" BorderThickness="4" Margin="0,124,0,268"></Border>
+            
+           
             <Label Content="Description:" Margin="28,531,0,0" RenderTransformOrigin="0.044,0.541" Style="{StaticResource LabelStyle}"/>
             <Label Content="Photos" Margin="28,142,0,0" Style="{StaticResource LabelStyle}"/>
             <Label Content="DETAILS" FontSize="30" FontFamily="Baskerville Old Face" Margin="28,15,0,0" Style="{StaticResource LabelStyle}" Width="172"/>
@@ -133,5 +125,5 @@
             </Button>
 
         </Grid>
-    </Border>
+   
 </Window>
