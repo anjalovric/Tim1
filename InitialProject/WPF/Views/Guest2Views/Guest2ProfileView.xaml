@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:InitialProject.WPF.Views.Guest2Views"
              mc:Ignorable="d" 
-             d:DesignHeight="768" d:DesignWidth="1024" Width="1024" Height="768">
+             d:DesignHeight="600" d:DesignWidth="668" Width="668" Height="600">
     <UserControl.Resources>
         <Style x:Key="LabelStyle" TargetType="Label">
             <Setter Property="Foreground" Value="#7166f9"/>
@@ -33,8 +33,16 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Border Background="#151f2d" BorderBrush="#151f2d" CornerRadius="25 25 25 25" BorderThickness="4,4,4,4" Grid.ColumnSpan="3" Grid.RowSpan="12"/>
-        <Label Content="Ivana Kovacevic" Foreground="White" Grid.Row="0" Grid.Column="0" Margin="58,16,68,10" FontSize="20" FontWeight="Bold"/>
-        <Image Grid.Row="1" Source="{Binding ImageSource, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Margin="52,16,63,32" Grid.RowSpan="3"></Image>
+        <TextBlock Height="34" Width="Auto" FontSize="18" FontWeight="Bold" Foreground="White" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="53,5,0,0">
+            <TextBlock.Text>
+                <MultiBinding StringFormat="{}{0} {1}">
+                    <Binding Path="Guest2.Name" />
+                    <Binding Path="Guest2.LastName" />
+                </MultiBinding>
+            </TextBlock.Text>
+        </TextBlock>
+
+        <Image Grid.Row="1" Source="{Binding ImageSource, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Margin="52,49,63,49" Grid.RowSpan="4"></Image>
         <Label Grid.Row="1" Grid.Column="1" Content="CONTACT INFORMATION" Foreground="White" FontSize="18" FontWeight="Bold"/>
         <Label Grid.Row="2" Grid.Column="1" Content="First name" Style="{StaticResource LabelStyle}"/>
         <TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding Guest2.Name}" FontWeight="Bold" Foreground="White" FontSize="15" Margin="0,10,0,0"/>
@@ -50,6 +58,6 @@
         <TextBlock Grid.Row="7" Grid.Column="2" Text="{Binding Guest2.Location.City}" FontWeight="Bold" Foreground="White" FontSize="15" Margin="0,10,0,0"/>
         <Label Grid.Row="8" Grid.Column="1" Content="Country" Style="{StaticResource LabelStyle}"/>
         <TextBlock Grid.Row="8" Grid.Column="2" Text="{Binding Guest2.Location.Country}" FontWeight="Bold" Foreground="White" FontSize="15" Margin="0,10,0,0"/>
-        
+
     </Grid>
 </UserControl>

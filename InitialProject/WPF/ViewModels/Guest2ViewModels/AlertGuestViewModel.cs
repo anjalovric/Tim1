@@ -27,9 +27,11 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         private TourInstanceService _tourInstanceService;
         private int AlertId;
         private LocationService _locationService;
-        private System.Windows.Controls.Label PointLabel;
+        public string PointLabel { get; set; }
+        private GuideRepository _guideRepository;
         public Action CloseAction { get; set; }
-        public AlertGuestViewModel(int alertId, System.Windows.Controls.Label pointLabel)
+        public string GuideLabel { get; set; }
+        public AlertGuestViewModel(int alertId)
         {
             AlertId = alertId;
             _alertGuest2Service = new AlertGuest2Service();
@@ -37,10 +39,10 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             _tourRepository = new TourRepository();
             _tourInstanceService = new TourInstanceService();
             _locationService = new LocationService();
-            PointLabel = pointLabel;
+            _guideRepository = new GuideRepository();
             MakeCommands();
             alerts = _alertGuest2Service.GetAll();
-            //CreateLabelContent();
+            CreateLabelContent();
         }
         private void MakeCommands()
         {
@@ -80,14 +82,19 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         {
             int pointId = _alertGuest2Service.GetAll().Find(n => n.Id == AlertId).CheckPointId;
             int instanceId = _alertGuest2Service.GetAll().Find(n => n.Id == AlertId).InstanceId;
+            int guideId = _alertGuest2Service.GetAll().Find(n => n.Id == AlertId).GuideId;
             if (_tourInstanceService.GetAll().Count > 0)
             {
                 Tour thisTour;
+                Guide guide;
                 thisTour = _tourInstanceService.GetAll().Find(n => n.Id == instanceId).Tour;
+                //string username=_.
+                guide = _guideRepository.GetById(guideId);
                 SetLocations(thisTour);
                 if (thisTour != null)
-                    PointLabel.Content = "Name: " + thisTour.Name + "\n\nLocation: " + thisTour.Location+"\n\nDuration: "+thisTour.Duration+"\n\nCheckpoint: "+ _checkPointService.GetAll().Find(n => n.Id == pointId).Name;
-
+                    PointLabel = "Name: " + thisTour.Name + "\n\nLocation: " + thisTour.Location+"\n\nDuration: "+thisTour.Duration+"\n\nCheckpoint: "+ _checkPointService.GetAll().Find(n => n.Id == pointId).Name;
+                if (guide != null)
+                    GuideLabel = "Name: " + guide.Name + "\n\nLast name: " + guide.LastName + "\n\nUsername: " + guide.Username;
             }
         }
         public void SetLocations(Tour Tour)
@@ -105,20 +112,8 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
                         Tour.Name = tour.Name;
                         Tour.Duration = tour.Duration;
                     }
-                        //tour.Location = location;
                 }
             }
         }
-        /*public void SetTour(Tour Tour)
-        {
-            List<Tour> tours = _tourRepository.GetAll();
-            foreach (Tour tour in tours)
-            {
-                if (tour.Id == Tour.Id)
-                {
-                    Tour.Name = tour.Name;
-                }
-            }
-        }*/
     }
 }

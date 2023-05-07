@@ -6,20 +6,21 @@
         xmlns:tk="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit.NET5" 
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
-        Title="RateTourAndGuide" Height="600" Width="990" WindowStartupLocation="CenterScreen">
+        Title="RateTourAndGuide" Height="600" Width="990" WindowStartupLocation="CenterScreen" WindowStyle="None">
     <Window.Resources>
         <Style x:Key="button" TargetType="Button">
             <Setter Property="FontSize" Value="14"/>
-            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontWeight" Value="DemiBold"/>
+            <Setter Property="Foreground" Value="#FF9E98FF"/>
             <Setter Property="Height" Value="54"/>
+            <Setter Property="Width" Value="95"/>
             <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Width" Value="91"/>
             <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
             <Setter Property="VerticalAlignment" Value="Top"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border CornerRadius="25" BorderThickness="1" BorderBrush="White" Background="White" Padding="15" Margin="0,4,0,0">
+                        <Border CornerRadius="10" BorderThickness="1" BorderBrush="White" Background="White"  Padding="15" Margin="0,4,0,0">
                             <ContentPresenter HorizontalAlignment="Right" VerticalAlignment="Center"/>
                         </Border>
                     </ControlTemplate>
@@ -27,106 +28,164 @@
             </Setter>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#E8E8E8"/>
+                    <Setter Property="Background" Value="LightGray"/>
                     <Setter Property="Foreground" Value="DimGray"/>
+                    <Setter Property="Cursor" Value="Hand"/>
                 </Trigger>
                 <Trigger Property="IsMouseCaptured" Value="True">
-                    <Setter Property="Background" Value="#d9d9d9"/>
+                    <Setter Property="Background" Value="LightGray"/>
                     <Setter Property="Foreground" Value="DimGray"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
     </Window.Resources>
-    <Grid Background="#FFB0B9C7">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="4*"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Border Grid.ColumnSpan="4" Grid.RowSpan="11">
-            <Border.Background>
-                <LinearGradientBrush>
-                    <GradientStop Color="#e3e3e3" Offset="0.0"/>
-                    <GradientStop Color="#5d6874" Offset="1"/>
-                </LinearGradientBrush>
-            </Border.Background>
-        </Border>
-        <Label Content="Guide knowledge" Margin="34,16,306,15" Grid.Row="1"/>
-        <Label Content="Guide language" Margin="34,13,281,1" Grid.Row="2"/>
-        <Label Content="Interesting facts of tour" Margin="34,10,266,13" Grid.Row="3"/>
-        <TextBlock x:Name="interestingFacts" Text="1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="330" TextAlignment="Center" Height="28" Background="LightGray" Margin="58,18,0,0" Grid.Column="1" Grid.Row="3"/>
-        <TextBlock x:Name="language" Text="1" HorizontalAlignment="Left" VerticalAlignment="Center" Width="330" TextAlignment="Center" Height="28" Background="LightGray" Margin="58,0,0,0" Grid.Column="1" Grid.Row="2" />
-        <TextBlock x:Name="knowledge" Text="1" HorizontalAlignment="Left" VerticalAlignment="Center" Width="330" TextAlignment="Center" Height="28" Background="LightGray" Grid.Column="1" Grid.Row="1" Margin="58,0,0,0" />
-        <Button x:Name="dekrementNumber1" Content="-" Command="{Binding Facts_Decrement_Command}" HorizontalAlignment="Left" Margin="10,18,0,0" VerticalAlignment="Top" Width="30" Height="28" BorderBrush="Gray" Background="LightGray" BorderThickness="1" Grid.Column="1" Grid.Row="3"/>
-        <Button x:Name="inkrementNumber" Content="+" Command="{Binding Facts_Increment_Command}" HorizontalAlignment="Left" Margin="401,18,0,0" VerticalAlignment="Top" Width="30" RenderTransformOrigin="-1.284,0.612" Height="28" Background="LightGray" BorderBrush="Gray" BorderThickness="1" Grid.Column="1" Grid.Row="3"/>
-        <Button x:Name="inkrementNumber1" Command="{Binding Language_Increment_Command}" Content="+" HorizontalAlignment="Left" Margin="401,0,0,0" VerticalAlignment="Center" Width="30" RenderTransformOrigin="-1.284,0.612" Height="28" Background="LightGray" BorderBrush="Gray" BorderThickness="1" Grid.Column="1" Grid.Row="2"/>
-        <Button x:Name="inkrementNumber2" Content="+" HorizontalAlignment="Left" Command="{Binding Knowledge_Increment_Command}" Margin="401,0,0,0" VerticalAlignment="Center" Width="30" RenderTransformOrigin="-1.284,0.612" Height="28" Background="LightGray" BorderBrush="Gray" BorderThickness="1" Grid.Column="1" Grid.Row="1"/>
-        <Button x:Name="dekrementNumber" Content="-" HorizontalAlignment="Left" Command="{Binding Language_Decrement_Command}" Margin="10,0,0,0" VerticalAlignment="Center" Width="30"  Height="28" BorderBrush="Gray" Background="LightGray" BorderThickness="1" Grid.Column="1" Grid.Row="2"/>
-        <Button x:Name="dekrementNumber2" Content="-" HorizontalAlignment="Left" Command="{Binding Knowledge_Decrement_Command}" Margin="10,0,0,0" VerticalAlignment="Center" Width="30"  Height="28" BorderBrush="Gray" Background="LightGray" BorderThickness="1" Grid.Column="1" Grid.Row="1"/>
-        <Label Content="Add comment" FontWeight="Bold" FontSize="20" Margin="34,6,266,7" Grid.Row="4"/>
-        <Label Content="Add photos" FontWeight="Bold" FontSize="20" Margin="10,9,286,11" Grid.Column="1" Grid.Row="4"/>
-        <tk:WatermarkTextBox x:Name="comment" TextWrapping="Wrap" Margin="34,15,30,15" Watermark="Enter comment here" BorderBrush="Gray" BorderThickness="1" Grid.Row="5"/>
-        <Button Content="  Confirm" Grid.Column="1" Grid.Row="6" Style="{StaticResource button}" Margin="233,0,154,0" Command="{Binding ConfirmCommand}"/>
-        <Image Source="/Resources/Images/ok.png" Grid.Row="6" Grid.Column="1" Margin="233,16,218,16"/>
-        <Button Content="  Cancel" Grid.Column="1" Grid.Row="6" Style="{StaticResource button}" Margin="348,0,48,0" Command="{Binding CancelCommand}"/>
-        <Border Background="White" BorderBrush="Gray" Margin="50,15,50,15" Visibility="Visible" BorderThickness="1" Grid.Column="1" Grid.Row="5"/>
-        <Button Command="{Binding UploadImageCommand}" BorderBrush="White" Background="White" HorizontalAlignment="Left" Margin="367,176,0,22" FontWeight="Bold" Grid.Column="1" Grid.Row="5" Width="29">
-            <Image Source="/Resources/Images/icons8-upload-64.png" Height="22" Width="20"/>
-        </Button>
-        <Image x:Name="imagePicture" Margin="50,56,50,55" Source="{Binding ImageSource, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="5"/>
+    <Border BorderThickness="4" Padding="6" CornerRadius="25">
 
-        <Label Content="Rate tour and guide" Margin="32,11,185,0" FontSize="20" FontWeight="Bold"/>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Content="Guide knowledge" Margin="34,16,301,10" Grid.Row="1" FontWeight="DemiBold" FontSize="16"/>
+            <Label Content="Guide language" Margin="34,13,281,1" Grid.Row="2" FontWeight="DemiBold" FontSize="16"/>
+            <Label Content="Interesting facts of tour" Margin="34,10,266,13" Grid.Row="3" FontWeight="DemiBold" FontSize="16"/>
+            <Border Grid.Column="1" Grid.Row="1" Margin="58,16,97,15" BorderBrush="LightGray" BorderThickness="0,0,0,3">
+                <TextBlock x:Name="knowledge" Text="1"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="330" TextAlignment="Center" Height="24" Background="#F8F9FE" Grid.Column="1" Grid.Row="1" />
+            </Border>
+            <Border Grid.Column="1" Grid.Row="2" BorderBrush="LightGray" BorderThickness="0,0,0,3" Margin="58,15,97,15">
+                <TextBlock x:Name="language" Text="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="330" TextAlignment="Center" Height="24" Background="#F8F9FE" Grid.Column="1" Grid.Row="2" />
+            </Border>
+            <Border Grid.Column="1" Grid.Row="3" BorderBrush="LightGray" BorderThickness="0,0,0,3" Margin="58,18,97,13">
+                <TextBlock x:Name="interestingFacts" Background="#F8F9FE" Text="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="330" TextAlignment="Center" Height="24" Grid.Column="1" Grid.Row="3"/>
+            </Border>
 
 
 
+            <Button x:Name="dekrementNumber1" Content="-" Command="{Binding Facts_Decrement_Command}" HorizontalAlignment="Left" Margin="10,18,0,0" VerticalAlignment="Top" Width="30" Height="28"  BorderBrush="#FFAEAEC1"  Background="#F8F9FE" BorderThickness="1" Grid.Column="1" Grid.Row="3"/>
+            <Button x:Name="inkrementNumber" Content="+" Command="{Binding Facts_Increment_Command}" HorizontalAlignment="Left" Margin="401,18,0,0" VerticalAlignment="Top" Width="30" RenderTransformOrigin="-1.284,0.612" Height="28" Background="#F8F9FE"  BorderBrush="#FFAEAEC1"  BorderThickness="1" Grid.Column="1" Grid.Row="3"/>
+            <Button x:Name="inkrementNumber1" Command="{Binding Language_Increment_Command}" Content="+" HorizontalAlignment="Left" Margin="401,0,0,0" VerticalAlignment="Center" Width="30" RenderTransformOrigin="-1.284,0.612" Height="28" Background="#F8F9FE"  BorderBrush="#FFAEAEC1"  BorderThickness="1" Grid.Column="1" Grid.Row="2"/>
+            <Button x:Name="inkrementNumber2" Content="+" HorizontalAlignment="Left" Command="{Binding Knowledge_Increment_Command}" Margin="401,0,0,0" VerticalAlignment="Center" Width="30" RenderTransformOrigin="-1.284,0.612" Height="28" Background="#F8F9FE"  BorderBrush="#FFAEAEC1"  BorderThickness="1" Grid.Column="1" Grid.Row="1"/>
+            <Button x:Name="dekrementNumber" Content="-" HorizontalAlignment="Left" Command="{Binding Language_Decrement_Command}" Margin="10,0,0,0" VerticalAlignment="Center" Width="30"  Height="28" BorderBrush="#FFAEAEC1" Background="#F8F9FE" BorderThickness="1" Grid.Column="1" Grid.Row="2"/>
+            <Button x:Name="dekrementNumber2" Content="-" HorizontalAlignment="Left" Command="{Binding Knowledge_Decrement_Command}" Margin="10,0,0,0" VerticalAlignment="Center" Width="30"  Height="28" BorderBrush="#FFAEAEC1" Background="#F8F9FE" BorderThickness="1" Grid.Column="1" Grid.Row="1"/>
+            <Label Content="Add comment" FontWeight="Bold" FontSize="20" Margin="34,6,266,7" Grid.Row="4"/>
+            <Label Content="Add photos" FontWeight="Bold" FontSize="20" Margin="6,10,290,10" Grid.Column="1" Grid.Row="4"/>
+            <tk:WatermarkTextBox x:Name="comment" TextWrapping="Wrap" Margin="34,15,30,15" Watermark="Enter comment here" BorderBrush="Gray" BorderThickness="0,0,0,2" Grid.Row="5" Background="#F8F9FE"/>
+            <Button HorizontalAlignment="Left" Grid.Row="6" VerticalAlignment="Top"  Height="34" Width="132" FontWeight="Bold" FontSize="18" Command="{Binding ConfirmCommand}" Margin="176,3,0,0" Grid.Column="1">
+                <Grid Background="#FF9E98FF" Width="144" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="16*"/>
+                        <RowDefinition Height="19*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="/Resources/Images/doneNew.png" VerticalAlignment="Top" HorizontalAlignment="Left" Width="26" Height="25" RenderTransformOrigin="0.5,0.5" Margin="10,3,0,0" Grid.RowSpan="2"/>
+                    <TextBlock Background="#FF9E98FF" Foreground="White" Text="Confirm" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" Width="109" Height="29" Margin="10,3,0,0" Grid.RowSpan="2" Grid.Column="1"/>
+                </Grid>
+
+            </Button>
+            <Button HorizontalAlignment="Left" Grid.Row="6" VerticalAlignment="Top" BorderBrush="#FF9E98FF" Height="34" Width="132" FontWeight="Bold" FontSize="18" Command="{Binding CancelCommand}" Margin="313,3,0,0" Grid.Column="1">
+                <Grid Background="White" Width="144" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="16*"/>
+                        <RowDefinition Height="19*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="/Resources/Images/close.png" VerticalAlignment="Top" HorizontalAlignment="Left" Width="26" Height="25" RenderTransformOrigin="0.5,0.5" Margin="10,3,0,0" Grid.RowSpan="2"/>
+                    <TextBlock Background="White" Foreground="#FF9E98FF" Text="Cancel" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" Width="109" Height="29" Margin="10,3,0,0" Grid.RowSpan="2" Grid.Column="1"/>
+                </Grid>
+
+            </Button>
+            <Border Background="#F8F9FE" BorderBrush="Gray" BorderThickness="0,0,0,2" Margin="40,15,54,15" Visibility="Visible" Grid.Column="1" Grid.Row="5"/>
+            <Image x:Name="imagePicture" Margin="50,56,63,55" Source="{Binding ImageSource, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="5"/>
+
+            <Label Content="RATE TOUR AND GUIDE" Margin="32,11,56,0" FontSize="30" FontWeight="Bold"/>
 
 
-        <Button Command="{Binding BackCommand}" Margin="489,85,432,94" RenderTransformOrigin="0.5,0.5" Grid.Row="5" Grid.ColumnSpan="2">
-            <Button.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="180"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Button.RenderTransform>
-            <Button.Template>
-                <ControlTemplate TargetType="{x:Type Button}">
-                    <Grid>
-                        <StackPanel Orientation="Horizontal">
-                            <Rectangle Width="30" Height="15" Stroke="Gray" Fill="Gray"/>
-                            <Polygon Points= "0,15 15,20 0,30" Stroke="Gray" Fill="Gray" Height="45" Width="30" RenderTransformOrigin="0.489,0.551" />
-                        </StackPanel>
-                    </Grid>
-                </ControlTemplate>
-            </Button.Template>
-        </Button>
-        <Button Command="{Binding NextCommand}" Margin="432,88,-24,88" Grid.Column="1" Grid.Row="5">
-            <Button.Template>
-                <ControlTemplate TargetType="Button">
-                    <Grid>
-                        <StackPanel Orientation="Horizontal">
-                            <Rectangle Width="30" Height="14" Stroke="Gray" Fill="Gray"/>
-                            <Polygon Points= "0,15 15,22 0,30" Stroke="Gray" Fill="Gray" Height="45" Width="30" />
-                        </StackPanel>
-                    </Grid>
-                </ControlTemplate>
-            </Button.Template>
-        </Button>
-        <Button Command="{Binding DeletePhotoCommand}" BorderBrush="White" Background="White" Margin="401,176,64,22" FontWeight="Bold" Grid.Column="1" Grid.Row="5">
-            <Image Source="/Resources/Images/icons8-delete-67.png" Height="22" Width="20"/>
-        </Button>
-        <Button Command="{Binding DeleteCommand}" BorderBrush="White" Background="White" Margin="422,176,42,22" FontWeight="Bold" Grid.Row="5">
-            <Image Source="/Resources/Images/icons8-delete-67.png" Height="22" Width="20"/>
-        </Button>
-        <Image Source="/Resources/Images/cancel.png" Grid.Row="6" Grid.Column="1" Margin="355,16,107,16"/>
-    </Grid>
+
+
+
+            <Button HorizontalAlignment="Left" Background="White" BorderBrush="White" Grid.Row="5" VerticalAlignment="Top"  Height="34" Width="34" FontWeight="Bold" FontSize="18" Command="{Binding DeleteCommand}" Margin="412,176,0,0">
+                <Grid Background="White" Width="34" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="16*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="/Resources/Images/icons8-delete-67.png" VerticalAlignment="Center" HorizontalAlignment="Left" Width="26" Height="34" RenderTransformOrigin="0.5,0.5" Margin="3,-3,0,0"/>
+
+                </Grid>
+
+            </Button>
+
+            <Button HorizontalAlignment="Left" Background="Transparent" BorderBrush="Transparent" Grid.Row="5" VerticalAlignment="Center"  Height="34" Width="34" FontWeight="Bold" FontSize="18" Command="{Binding BackCommand}" Margin="6,0,0,0" Grid.Column="1">
+                <Grid Background="Transparent" Width="34" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="16*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="/Resources/Images/back_arrow.png" VerticalAlignment="Top" HorizontalAlignment="Left" Width="31" Height="34" RenderTransformOrigin="0.5,0.5" Margin="3,-1,0,0"/>
+
+                </Grid>
+
+            </Button>
+            <Button HorizontalAlignment="Left" Background="Transparent" BorderBrush="Transparent" Grid.Row="5" VerticalAlignment="Center"  Height="34" Width="34" FontWeight="Bold" FontSize="18" Command="{Binding NextCommand}" Margin="425,0,0,0" Grid.Column="1">
+                <Grid Background="Transparent" Width="34" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="16*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="/Resources/Images/arrow.png" VerticalAlignment="Top" HorizontalAlignment="Center" Width="29" Height="34" RenderTransformOrigin="0.5,0.5" Margin="0,-1,0,0"/>
+
+                </Grid>
+
+            </Button>
+            <Button HorizontalAlignment="Left" Background="White" BorderBrush="White" Grid.Row="5" VerticalAlignment="Top"  Height="34" Width="34" FontWeight="Bold" FontSize="18" Command="{Binding DeletePhotoCommand}" Margin="393,176,0,0" Grid.Column="1">
+                <Grid Background="White" Width="34" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="16*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="/Resources/Images/icons8-delete-67.png" VerticalAlignment="Center" HorizontalAlignment="Left" Width="26" Height="34" RenderTransformOrigin="0.5,0.5" Margin="3,-3,0,0"/>
+
+                </Grid>
+
+            </Button>
+            <Button HorizontalAlignment="Left" Background="White" BorderBrush="White" Grid.Row="5" VerticalAlignment="Top"  Height="34" Width="34" FontWeight="Bold" FontSize="18" Command="{Binding UploadImageCommand}" Margin="354,176,0,0" Grid.Column="1">
+                <Grid Background="White" Width="34" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="16*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="/Resources/Images/icons8-upload-64.png" VerticalAlignment="Center" HorizontalAlignment="Left" Width="26" Height="34" RenderTransformOrigin="0.5,0.5" Margin="3,-3,0,0"/>
+
+                </Grid>
+
+            </Button>
+        </Grid>
+    </Border>
 </Window>

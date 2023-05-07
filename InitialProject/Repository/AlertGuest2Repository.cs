@@ -76,13 +76,13 @@ namespace InitialProject.Repository
         {
             return alerts.Find(c => c.Id == id);
         }
-        public void AddAlerts(int currentPointId, int _callId,TourInstance selected)
+        public void AddAlerts(int currentPointId, int _callId,TourInstance selected,int GuideId)
         {      
             TourReservationService tourReservationService = new TourReservationService();
             List<TourReservation> availableReservations = tourReservationService.GetReservationsForTour(selected);
             foreach (TourReservation tour in availableReservations)
             {
-                AlertGuest2 alertGuest2 = new AlertGuest2(tour.Id, tour.GuestId, currentPointId, selected.Id);
+                AlertGuest2 alertGuest2 = new AlertGuest2(tour.Id, tour.GuestId, currentPointId, selected.Id, GuideId);
                 AlertGuest2 savedAlert = Save(alertGuest2);
             }
         }
