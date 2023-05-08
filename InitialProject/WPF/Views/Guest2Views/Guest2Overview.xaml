@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
-        Title="Guest2Overview" Height="768" Width="1024" WindowStartupLocation="CenterScreen" WindowState="Maximized">
+        Title="Booking" Height="768" Width="1024" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid Background="#1e2e44">
 
         <Grid.ColumnDefinitions>

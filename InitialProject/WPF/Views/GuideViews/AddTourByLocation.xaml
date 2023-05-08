@@ -70,7 +70,7 @@
                     <Label Grid.Row="2" Grid.Column="0" Margin="0,10,0,10"  Style="{DynamicResource  Label}" Content="{ns:Loc DurationInHours}"/>
                     <Label Grid.Row="4" Grid.Column="0" Margin="0,10,0,10"  Style="{DynamicResource  Label}" Content="{ns:Loc City}"/>
                     <Label Grid.Row="3" Grid.Column="0" Margin="0,12,0,8"  Style="{DynamicResource  Label}" Content="{ns:Loc Country}"/>
-                    <Label Grid.Row="6" Grid.Column="0" Margin="0,6,0,14"  Style="{DynamicResource  Label}" Content="{ns:Loc Description}"/>
+                    <Label Grid.Row="5" Grid.Column="0" Margin="0,44,0,18"  Style="{DynamicResource  Label}" Content="{ns:Loc Description}" Grid.RowSpan="2"/>
                     <Label Grid.Row="5" Grid.Column="0" Margin="0,10,0,10"  Style="{DynamicResource  Label}" Content="{ns:Loc Language}"/>
 
 
@@ -158,7 +158,7 @@
                     </tk:DoubleUpDown>
 
 
-                    <TextBox Style="{DynamicResource tb}" x:Name="DescriptionTB" Grid.Row="6" Margin="188,6,0,-26" Grid.ColumnSpan="2">
+                    <TextBox Style="{DynamicResource tb}" x:Name="DescriptionTB" Grid.Row="6" Margin="5,21,0,-38" Grid.ColumnSpan="2">
                         <TextBox.Text>
                             <Binding Path="Description" UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
@@ -445,7 +445,7 @@
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
-                    <Label Content="{ns:Loc ImagesOfTour}" Style="{DynamicResource Label}" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="2" HorizontalAlignment="Left" VerticalAlignment="Top"  Height="36" Width="138"/>
+                    <Label Content="{ns:Loc ImagesOfTour}" Style="{DynamicResource Label}" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="2" HorizontalAlignment="Left" VerticalAlignment="Top"  Height="36" Width="138" Margin="0,7,0,0"/>
                     <Button Command="{Binding AddImageCommand}" Height="24" Width="60"  Grid.Column="2" Grid.ColumnSpan="3" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="25,50,0,0" Grid.RowSpan="3" Style="{DynamicResource  Button}" Content="{ns:Loc ADDBUTTON}"/>
                     <Button Content="{ns:Loc DELETE}" HorizontalAlignment="Left" Grid.Column="4" Grid.ColumnSpan="2" VerticalAlignment="Top"  Command="{Binding RemoveImageCommand}" Margin="103,50,0,0" Width="60" Height="24" Grid.RowSpan="3" Style="{DynamicResource  Button}" />
                 </Grid>
@@ -487,7 +487,7 @@
                         </ControlTemplate>
                     </Validation.ErrorTemplate>
                 </TextBox>
-                <ComboBox Grid.Column="1" Style="{DynamicResource ComboBoxStyle}" ItemsSource="{Binding Languages}"  HorizontalAlignment="Left" Margin="188,23,0,0" Grid.Row="2" VerticalAlignment="Top" Width="187" Height="29">
+                <ComboBox Grid.Column="1" Style="{DynamicResource ComboBoxStyle}" x:Name="LanguageComboBox" ItemsSource="{Binding Languages}"  HorizontalAlignment="Left" Margin="188,23,0,0" Grid.Row="2" VerticalAlignment="Top" Width="187" Height="29">
                     <ComboBox.SelectedItem>
                         <Binding Path="LanguageT" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
                             <Binding.ValidationRules>
@@ -525,7 +525,7 @@
         <StackPanel x:Name="ToastCant" HorizontalAlignment="Left"  Margin="700,458,0,0" VerticalAlignment="Top" Visibility="{Binding IsErrorMessageVisible}" Grid.Column="1" Grid.Row="1" Style="{DynamicResource  Toast}" Grid.ColumnSpan="2" Grid.RowSpan="2">
             <Label Style="{DynamicResource  LabelToast}" Content="{ns:Loc GUIDEALREADYHASTOUR}">
             </Label>
-            <Button Style="{DynamicResource  ButtonToast}" Command="{Binding CloceToastAvailability}" Content="OK"/>
+            <Button Style="{DynamicResource  ButtonToast}" Command="{Binding CloseToastAvailability}" Content="OK"/>
         </StackPanel>
     </Grid>
 </Page>

@@ -1,7 +1,6 @@
 ﻿using InitialProject.Model;
 using InitialProject.Service;
 using InitialProject.WPF.Views.GuideViews;
-using NPOI.XSSF.UserModel;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -65,7 +64,6 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
                 Toast = "Hidden";
                 OnPropertyChanged();
             }
-
         }
         private bool isComboBoxCityEnabled;
         public bool IsComboBoxCityEnabled
@@ -249,7 +247,6 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
                         StatisticsLocation.Add(tourRequest);
                 else
                     ToastLocation = "Visible";
-
             }
             else if (Country != null && City == null)
                 ToastCity = "Visible";
@@ -271,9 +268,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             {
                 CitiesByCountry.Clear();
                 foreach (string city in locationService.GetCitiesByCountry((string)Country))
-                {
                     CitiesByCountry.Add(city);
-                }
                 IsComboBoxCityEnabled = true;
             }
         }

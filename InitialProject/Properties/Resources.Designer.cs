@@ -934,7 +934,7 @@ namespace InitialProject.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to POČNI.
+        ///   Looks up a localized string similar to START.
         /// </summary>
         internal static string START {
             get {

@@ -29,10 +29,15 @@ namespace InitialProject.WPF.Views.Guest2Views
         {
             InitializeComponent();
             AlertId = alertId;
-            AlertGuestViewModel alertGuestViewModel= new AlertGuestViewModel(AlertId, PointLabel);
+            AlertGuestViewModel alertGuestViewModel= new AlertGuestViewModel(AlertId);
             DataContext = alertGuestViewModel;
             if (alertGuestViewModel.CloseAction == null)
                 alertGuestViewModel.CloseAction = new Action(this.Close);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

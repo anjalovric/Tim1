@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.WPF.Views.Guest2Views"
         mc:Ignorable="d"
-        Title="StatisticForChoosenYear"  d:DesignHeight="800" d:DesignWidth="1024" Width="1024" Height="800" WindowStartupLocation="CenterScreen">
+        Title="StatisticForChoosenYear"  d:DesignHeight="800" d:DesignWidth="1024" Width="1024" Height="800" WindowStartupLocation="CenterScreen" WindowStyle="None">
     <Window.Resources>
         <Style x:Key="FontStyle" TargetType="TextBlock">
             <Setter Property="FontWeight" Value="Bold"/>
@@ -32,6 +32,20 @@
         <TextBlock Margin="697,416,156,268" Text="{Binding averageNumberOfPeople}" Style="{StaticResource TextStyle}"/>
         <Label Content="STATISTICS FOR" Margin="242,96,452,541" Foreground="White" FontWeight="Bold" FontSize="40"/>
         <Label Content="{Binding Path=chosenYear}" Margin="549,96,168,541" Foreground="White" FontWeight="Bold" FontSize="40"/>
+        <Button HorizontalAlignment="Left" Background="#151f2d" BorderBrush="#151f2d" VerticalAlignment="Top"  Height="29" Width="39" FontWeight="Bold" FontSize="18" Command="{Binding ConfirmCommand}" Margin="975,10,0,0" Click="Button_Click">
 
+            <Grid Background="#151f2d" Width="30" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="16*"/>
+
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Image Source="/Resources/Images/close.png" VerticalAlignment="Center" HorizontalAlignment="Left" Width="28" Height="30"  Margin="1,0,0,0"/>
+
+            </Grid>
+
+        </Button>
     </Grid>
 </Window>

@@ -125,7 +125,7 @@ namespace InitialProject.WPF.ViewModels
         {
             if (tourInstanceService.GetByActive(loggedGuide) == null)
             {
-                StartedTourInstanceView startedTourInstanceView = new StartedTourInstanceView(Selected, Tours, FinishedInstances);
+                StartedTourInstanceView startedTourInstanceView = new StartedTourInstanceView(Selected, Tours, FinishedInstances,loggedGuide.Id);
                 Application.Current.Windows.OfType<GuideWindow>().FirstOrDefault().Main.Content = startedTourInstanceView;
             }
         }
