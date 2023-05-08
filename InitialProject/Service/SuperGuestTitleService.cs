@@ -24,10 +24,7 @@ namespace InitialProject.Service
             superGuests = new List<SuperGuestTitle>(superGuestTitleRepository.GetAll());
             SetGuests();
         }
-        public List<SuperGuestTitle> GetAll()
-        {
-            return superGuests;
-        }
+        
         public void Add(SuperGuestTitle superGuestTitle)
         {
             superGuestTitleRepository.Add(superGuestTitle);
@@ -87,20 +84,7 @@ namespace InitialProject.Service
             return superGuests.Find(n=>n.Guest.Id == guest1.Id);    //new superguest or null
         }
 
-        public bool IsSuperGuestTitleExpiredOrPossibleToProlong(Guest1 guest1)    //return TRUE if expired or Isn't already superguest
-        {
-            if(IsAlreadySuperGuest(guest1))
-            {
-                MakeSuperGuests();
-                if (DateTime.Now > superGuests.Find(n => n.Guest.Id == guest1.Id).ActivationDate)
-                {
-                    return true;
-                }
-                else
-                    return false;
-            }
-            return true;
-        }
+        
         public void DeleteTitleIfManyYearsPassed(Guest1 guest1)
         {
             if(superGuests.Find(n => n.Guest.Id == guest1.Id)!=null)
@@ -117,7 +101,7 @@ namespace InitialProject.Service
             {
                 if(title.AvailablePoints>0)
                     title.AvailablePoints -= 1;
-                superGuestTitleRepository.DecrementPoints(title);
+                superGuestTitleRepository.Update(title);
             }
             
         }

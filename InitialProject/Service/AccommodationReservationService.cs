@@ -135,10 +135,7 @@ namespace InitialProject.Service
         {
             return reservation.Departure <= DateTime.Now && reservation.Departure > DateTime.Now.AddYears(-1);
         }
-        /*public int GetLastYearReservationsNumberByGuest(Guest1 guest1, DateTime activationDate)
-        {
-            return reservations.FindAll(n =>n.Guest.Id==guest1.Id && n.Departure > activationDate && n.Departure <= activationDate.AddYears(1)).Count;
-        }*/
+        
         public DateTime GetProlongActivationDate(Guest1 guest1, DateTime activationDate)
         {
             //number of reservations in next year from activationDate
