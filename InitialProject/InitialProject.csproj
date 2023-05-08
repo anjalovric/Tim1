@@ -262,7 +262,7 @@
     </Content>
     <Content Include="Resources\Images\church.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-
+    </Content>
     <Content Include="Resources\Images\arrow-58-xxl.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -280,7 +280,7 @@
 
     <Content Include="Resources\Images\Kalemegdan.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-
+    </Content>
     <Content Include="Resources\Images\doneNew.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
