@@ -1,6 +1,7 @@
 ﻿using InitialProject.Model;
 using InitialProject.Service;
 using Microsoft.Win32;
+using Org.BouncyCastle.Asn1.Esf;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,6 +10,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Media.Imaging;
 
 namespace InitialProject.WPF.ViewModels.GuideViewModels
@@ -75,6 +77,20 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
                 if (value != name)
                 {
                     name = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private string pastError;
+        public string PastError
+
+        {
+            get => pastError;
+            set
+            {
+                if (value != pastError)
+                {
+                    pastError = value;
                     OnPropertyChanged();
                 }
             }
@@ -408,6 +424,12 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         {
             if (!(newInstance.StartDate.Date > DateTime.Now.Date || (InstanceStartDate.Date == DateTime.Now.Date && InstanceStartDate > DateTime.Now)))
             {
+                var app = (App)Application.Current;
+
+                if (app.Lang.Equals("en-US"))
+                    PastError = "Can't choose time from past";
+                else
+                    PastError = "Ne možete odabrati prošlo vreme";
                 DateMessage = "Visible";
                 return false;
             }
@@ -436,11 +458,14 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         }
         private void OKCheckPoint_Executed(object sender)
         {
-            CheckPointService checkPointService = new CheckPointService();
-            CheckPoint newCheckPoint = new CheckPoint(NameT, false, -1, -1);
-            TourPoints.Add(newCheckPoint);
-            NameT = "";
-            PointsCount++;
+            if (NameT != "" && NameT.Length > 1)
+            {
+                CheckPointService checkPointService = new CheckPointService();
+                CheckPoint newCheckPoint = new CheckPoint(NameT, false, -1, -1);
+                TourPoints.Add(newCheckPoint);
+                NameT = "";
+                PointsCount++;
+            }
         }
         private void CancelCheckPoint_Executed(object sender)
         {

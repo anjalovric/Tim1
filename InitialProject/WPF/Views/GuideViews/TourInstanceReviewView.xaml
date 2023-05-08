@@ -12,10 +12,11 @@
         <DataGrid x:Name="TourListDataGrid" ColumnHeaderStyle="{DynamicResource CenterGridHeaderStyle}" SelectedItem="{Binding Path=Selected}" HorizontalAlignment="Left" Height="470" Margin="59,128,0,0" VerticalAlignment="Top" Width="967" ItemsSource="{Binding Path=Reviews}" HeadersVisibility="Column" Style="{DynamicResource Tables}">
 
             <DataGrid.Columns>
-                <DataGridTemplateColumn Width="80" >
+   
+                <DataGridTemplateColumn Width="85" >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Image Source="{Binding TourInstance.CoverBitmap}" Width="100" Height="30" VerticalAlignment="Top" Visibility="Visible"/>
+                            <Image Source="{Binding TourInstance.CoverBitmap}" Width="90" Height="30" VerticalAlignment="Top" Visibility="Visible"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -37,7 +38,7 @@
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="{ns:Loc Guest}"  Width="180">
+                <DataGridTextColumn Header="{ns:Loc Guest}"  Width="200">
                     <DataGridTextColumn.Binding>
                         <MultiBinding StringFormat="{}{0} {1}">
                             <Binding Path="Guest2.Name"/>
@@ -62,7 +63,7 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="{ns:Loc Location}" Binding="{Binding TourInstance.Tour.Location}" Width="220" >
+                <DataGridTextColumn Header="{ns:Loc Location}" Binding="{Binding TourInstance.Tour.Location}" Width="203.5" >
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="{x:Type TextBlock}">
                             <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -71,7 +72,7 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="{ns:Loc StartDate}" Binding="{Binding TourInstance.StartDate}" Width="188.5" >
+                <DataGridTextColumn Header="{ns:Loc StartDate}" Binding="{Binding TourInstance.StartDate}" Width="180" >
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="{x:Type TextBlock}">
                             <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -89,6 +90,15 @@
                 </DataGridTemplateColumn>
 
             </DataGrid.Columns>
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding New}" Value="🆕">
+                            <Setter Property="Background" Value="LightGreen" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.CellStyle>
         </DataGrid>
 
         <Grid Style="{DynamicResource BackgroundHeader}" Margin="0,0,0,596">

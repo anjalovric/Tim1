@@ -488,11 +488,14 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         }
         private void OKCheckPoint_Executed(object sender)
         {
-            CheckPointService checkPointService = new CheckPointService();
-            CheckPoint newCheckPoint = new CheckPoint(NameT, false, -1, -1);
-            TourPoints.Add(newCheckPoint);
-            NameT = "";
-            PointsCount++;
+            if (NameT != "" && NameT.Length > 1)
+            {
+                CheckPointService checkPointService = new CheckPointService();
+                CheckPoint newCheckPoint = new CheckPoint(NameT, false, -1, -1);
+                TourPoints.Add(newCheckPoint);
+                NameT = "";
+                PointsCount++;
+            }
         }
         private void CancelCheckPoint_Executed(object sender)
         {

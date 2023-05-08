@@ -19,19 +19,27 @@
 
     <None Remove="Resources\Images\accommodation.jpg" />
     <None Remove="Resources\Images\account.png" />
+    <None Remove="Resources\Images\Acropolis.jpg" />
     <None Remove="Resources\Images\add-new.png" />
     <None Remove="Resources\Images\add.png" />
     <None Remove="Resources\Images\addBW.png" />
     <None Remove="Resources\Images\analytics.png" />
     <None Remove="Resources\Images\andjelkina-kapija.jpg" />
+    <None Remove="Resources\Images\arrow-58-xxl.png" />
     <None Remove="Resources\Images\art1.jpg" />
     <None Remove="Resources\Images\art2.jpg" />
     <None Remove="Resources\Images\art3.jpeg" />
     <None Remove="Resources\Images\athens.jpg" />
     <None Remove="Resources\Images\back.png" />
+    <None Remove="Resources\Images\Belgrade.png" />
+    <None Remove="Resources\Images\Belgrade1.png" />
     <None Remove="Resources\Images\bell.png" />
     <None Remove="Resources\Images\best1.jpeg" />
     <None Remove="Resources\Images\best2.jpg" />
+
+    <None Remove="Resources\Images\buildings.png" />
+    <None Remove="Resources\Images\Bus.jpg" />
+
     <None Remove="Resources\Images\calend.png" />
     <None Remove="Resources\Images\calendarIcon.png" />
 
@@ -43,7 +51,13 @@
     <None Remove="Resources\Images\cancel1.png" />
     <None Remove="Resources\Images\CG.png" />
     <None Remove="Resources\Images\changedate.png" />
+
+    <None Remove="Resources\Images\choose.png" />
+    <None Remove="Resources\Images\choose1.png" />
+    <None Remove="Resources\Images\church.jpg" />
+
     <None Remove="Resources\Images\clock.png" />
+    <None Remove="Resources\Images\close.png" />
     <None Remove="Resources\Images\congratulations.png" />
     <None Remove="Resources\Images\congratulations2.png" />
     <None Remove="Resources\Images\congratulations3.png" />
@@ -66,6 +80,8 @@
     <None Remove="Resources\Images\decline.jpg" />
 
     <None Remove="Resources\Images\done.png" />
+
+    <None Remove="Resources\Images\doneNew.png" />
 
     <None Remove="Resources\Images\dreams1.jpeg" />
 
@@ -102,11 +118,14 @@
     <None Remove="Resources\Images\homeanja4.jpg" />
     <None Remove="Resources\Images\house1.png" />
     <None Remove="Resources\Images\icons8-christmas-star-96.png" />
+    <None Remove="Resources\Images\info-3-xl.png" />
 
     <None Remove="Resources\Images\info.png" />
     <None Remove="Resources\Images\januar.png" />
 
     <None Remove="Resources\Images\information.png" />
+
+    <None Remove="Resources\Images\Kalemegdan.png" />
     <None Remove="Resources\Images\location.jpg" />
     <None Remove="Resources\Images\icons8-delete-67.png" />
     <None Remove="Resources\Images\icons8-notification-64.png" />
@@ -137,9 +156,13 @@
     <None Remove="Resources\Images\olive.jpg" />
 
     <None Remove="Resources\Images\orange.jpg" />
+
+    <None Remove="Resources\Images\pdf.png" />
     <None Remove="Resources\Images\plus.png" />
     <None Remove="Resources\Images\profile.png" />
     <None Remove="Resources\Images\qm.png" />
+    <None Remove="Resources\Images\rain.jpg" />
+    <None Remove="Resources\Images\raining.jpg" />
     <None Remove="Resources\Images\rate.png" />
     <None Remove="Resources\Images\Red-incorrect-icon-design-on-transparent-background-PNG.png" />
     <None Remove="Resources\Images\red.jpg" />
@@ -156,6 +179,7 @@
     <None Remove="Resources\Images\reserve.png" />
     <None Remove="Resources\Images\reset.png" />
     <None Remove="Resources\Images\RR.png" />
+    <None Remove="Resources\Images\RubbishStreet.png" />
     <None Remove="Resources\Images\search.png" />
     <None Remove="Resources\Images\sent2.png" />
     <None Remove="Resources\Images\signout.png" />
@@ -197,6 +221,7 @@
     <None Remove="Resources\Images\toolImage.png" />
     <None Remove="Resources\Images\tools.png" />
     <None Remove="Resources\Images\tour.jpg" />
+    <None Remove="Resources\Images\touristicGroup.jpg" />
     <None Remove="Resources\Images\transparentGREEN.jpg" />
     <None Remove="Resources\Images\transparentRED.png" />
     <None Remove="Resources\Images\trebinje.jpg" />
@@ -216,11 +241,34 @@
     <Content Include="Resources\Images\365day.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Images\Acropolis.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Images\add-new.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\analytics.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+
+    <Content Include="Resources\Images\Belgrade.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\Belgrade1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\Bus.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\church.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\arrow-58-xxl.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\close.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+
     </Content>
 
     <Content Include="Resources\Images\congratulations.png">
@@ -229,6 +277,37 @@
     <Content Include="Resources\Images\congratulations2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+
+    <Content Include="Resources\Images\Kalemegdan.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\doneNew.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\info-3-xl.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+
+    </Content>
+    <Content Include="Resources\Images\pdf.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+
+    <Content Include="Resources\Images\rain.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\raining.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\RubbishStreet.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\touristicGroup.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="Resources\Images\anytime.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+
     <Resource Include="Resources\Images\art1.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>

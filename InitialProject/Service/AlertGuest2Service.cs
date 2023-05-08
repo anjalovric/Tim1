@@ -37,9 +37,9 @@ namespace InitialProject.Service
 
             return alertGuest2Repository.GetByInstanceIdAndGuestId(instanceId,guestId);
         }
-        public void AddAlerts(int currentPointId, int _callId, TourInstance selected)
+        public void AddAlerts(int currentPointId, int _callId, TourInstance selected,int GuideId)
         {
-            alertGuest2Repository.AddAlerts(currentPointId, _callId, selected);
+            alertGuest2Repository.AddAlerts(currentPointId, _callId, selected, GuideId);
         }
 
         public int CountGuestsOnPoint(int currentPointId, TourInstance selectedInstance)

@@ -14,7 +14,7 @@ namespace InitialProject.Domain.RepositoryInterfaces
         public AlertGuest2 Update(AlertGuest2 alert);
         public void Delete(AlertGuest2 alert);
         public List<AlertGuest2> GetByInstanceIdAndGuestId(int instanceId, int guestId);
-        public void AddAlerts(int currentPointId, int _callId, TourInstance selected);
+        public void AddAlerts(int currentPointId, int _callId, TourInstance selected,int GuideId);
 
     }
 }

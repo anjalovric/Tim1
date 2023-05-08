@@ -132,11 +132,20 @@
   <data name="AddDateAndTime" xml:space="preserve">
     <value>Dodaj datum i vreme</value>
   </data>
+  <data name="AddTourByLanguageView" xml:space="preserve">
+    <value>Kreiranje ture spram jezika</value>
+  </data>
+  <data name="AddTourByLocation" xml:space="preserve">
+    <value>Kreiranje ture spram lokacije</value>
+  </data>
   <data name="AddTourView" xml:space="preserve">
     <value>Dodaj turu</value>
   </data>
   <data name="AgeStatistics" xml:space="preserve">
     <value>Statistika o godištu</value>
+  </data>
+  <data name="BeforeRegularEnd" xml:space="preserve">
+    <value>pre redovnog kraja</value>
   </data>
   <data name="Between18and" xml:space="preserve">
     <value>Između 18 i 50</value>
@@ -156,17 +165,23 @@
   <data name="Capacity" xml:space="preserve">
     <value>Kapacitet</value>
   </data>
+  <data name="Checked" xml:space="preserve">
+    <value>Posećena</value>
+  </data>
   <data name="CheckpointName" xml:space="preserve">
     <value>Naziv ključne tačke</value>
   </data>
   <data name="Checkpoints" xml:space="preserve">
-    <value>Ključne tačke:</value>
+    <value> Ključna tačka:</value>
   </data>
   <data name="Choose" xml:space="preserve">
     <value>Odaberi:</value>
   </data>
   <data name="City" xml:space="preserve">
     <value>Grad</value>
+  </data>
+  <data name="Comment" xml:space="preserve">
+    <value>Komentar</value>
   </data>
   <data name="CONFIRM" xml:space="preserve">
     <value>POTVRDI</value>
@@ -186,6 +201,9 @@
   <data name="CreateTourFromRequest" xml:space="preserve">
     <value>Kreiranje ture spram zahteva</value>
   </data>
+  <data name="CurrentCheckPoint" xml:space="preserve">
+    <value>⟟ Trenutna ključna tačka:</value>
+  </data>
   <data name="DARK" xml:space="preserve">
     <value>TAMNO</value>
   </data>
@@ -194,6 +212,9 @@
   </data>
   <data name="Description" xml:space="preserve">
     <value>Opis</value>
+  </data>
+  <data name="DESCRIPTIONBUTTON" xml:space="preserve">
+    <value>OPIS</value>
   </data>
   <data name="DETAILS" xml:space="preserve">
     <value>DETALJI</value>
@@ -222,14 +243,29 @@
   <data name="FinishedTourDetails" xml:space="preserve">
     <value>Detalji završene ture</value>
   </data>
+  <data name="FINISHTOUR" xml:space="preserve">
+    <value>ZAVRŠI TURU 🏁</value>
+  </data>
+  <data name="GENERATEREPORT" xml:space="preserve">
+    <value>GENERIŠI IZVEŠTAJ</value>
+  </data>
+  <data name="Grades" xml:space="preserve">
+    <value>Ocene</value>
+  </data>
   <data name="Guest" xml:space="preserve">
     <value>Gost</value>
   </data>
   <data name="GuestsReservations" xml:space="preserve">
-    <value>Potvrđena prisutnost gostiju sa rezervacija od:</value>
+    <value> Potvrđena prisutnost gostiju sa rezervacija od:</value>
+  </data>
+  <data name="GuestWasOnPoints:" xml:space="preserve">
+    <value>Gost je bio na tačkama:</value>
   </data>
   <data name="GUIDEALREADYHASTOUR" xml:space="preserve">
     <value>Vodič već ima zakazanu turu tada!</value>
+  </data>
+  <data name="Guidesknowledge" xml:space="preserve">
+    <value>Znanje vodiča</value>
   </data>
   <data name="GuideWindow" xml:space="preserve">
     <value>Vodičev prozor</value>
@@ -239,6 +275,12 @@
   </data>
   <data name="HomePage" xml:space="preserve">
     <value>POČETNA STRANA</value>
+  </data>
+  <data name="ifYouWantToFinishTour" xml:space="preserve">
+    <value>ako želite da završite turu</value>
+  </data>
+  <data name="Images" xml:space="preserve">
+    <value>Slike</value>
   </data>
   <data name="ImagesOfTour" xml:space="preserve">
     <value>Slike ture</value>
@@ -252,17 +294,26 @@
   <data name="InLastYearLanguage" xml:space="preserve">
     <value>jezik u prošloj godini</value>
   </data>
+  <data name="InputYear" xml:space="preserve">
+    <value>Unesi godinu:</value>
+  </data>
   <data name="Language" xml:space="preserve">
     <value>Jezik</value>
   </data>
   <data name="LanguageInLastYear" xml:space="preserve">
     <value>jezik u prethodnoj godini</value>
   </data>
+  <data name="LanguageKnowledge" xml:space="preserve">
+    <value>Znanje jezika</value>
+  </data>
   <data name="langugaeinlastyear" xml:space="preserve">
     <value>jeziku u prošloj godini</value>
   </data>
   <data name="LIGHT" xml:space="preserve">
     <value>SVETLO</value>
+  </data>
+  <data name="ListOfCheckpointsForChosenTour" xml:space="preserve">
+    <value>Lista ključnih tačaka za odabranu turu:</value>
   </data>
   <data name="Location" xml:space="preserve">
     <value>Lokacija</value>
@@ -291,8 +342,14 @@
   <data name="Name" xml:space="preserve">
     <value>Naziv</value>
   </data>
+  <data name="NewRequests" xml:space="preserve">
+    <value>Novih zahteva:</value>
+  </data>
+  <data name="NewReviews" xml:space="preserve">
+    <value>Novih recenzija:</value>
+  </data>
   <data name="NumberOfGuests" xml:space="preserve">
-    <value>Broj prisutnih gostiju:</value>
+    <value> Broj prisutnih gostiju:</value>
   </data>
   <data name="NumberRequests" xml:space="preserve">
     <value>Broj zahteva</value>
@@ -300,11 +357,17 @@
   <data name="Onthemostwanted" xml:space="preserve">
     <value>na najpoželjnijoj</value>
   </data>
+  <data name="Order" xml:space="preserve">
+    <value>Redosled</value>
+  </data>
   <data name="Over50" xml:space="preserve">
     <value>Preko 50</value>
   </data>
   <data name="PleaseSelectCity" xml:space="preserve">
     <value>Odaberite jezik</value>
+  </data>
+  <data name="PressFINISHTOUR" xml:space="preserve">
+    <value>Pritisnite  ZAVRŠI TURU</value>
   </data>
   <data name="Regular" xml:space="preserve">
     <value>Obični</value>
@@ -318,6 +381,9 @@
   <data name="Requests" xml:space="preserve">
     <value>Zahtevi</value>
   </data>
+  <data name="RequestsList" xml:space="preserve">
+    <value>Zahtevi na čekanju</value>
+  </data>
   <data name="RequestsStatisticYearly" xml:space="preserve">
     <value>Godišnje statistika zahteva</value>
   </data>
@@ -330,6 +396,9 @@
   <data name="ReviewButton" xml:space="preserve">
     <value>RECENZIJA</value>
   </data>
+  <data name="ReviewFrom" xml:space="preserve">
+    <value>Rezenzija od:</value>
+  </data>
   <data name="Reviews" xml:space="preserve">
     <value>Recenzije</value>
   </data>
@@ -340,7 +409,7 @@
     <value>Odaberite filtere:</value>
   </data>
   <data name="START" xml:space="preserve">
-    <value>START</value>
+    <value>POČNI</value>
   </data>
   <data name="StartDate" xml:space="preserve">
     <value>Datum početka</value>
@@ -366,6 +435,9 @@
   <data name="TheMostWantedLocation" xml:space="preserve">
     <value>Najpoželjnija lokacija </value>
   </data>
+  <data name="ThisTourIsFinished" xml:space="preserve">
+    <value>Ova tura je završena!</value>
+  </data>
   <data name="Todays" xml:space="preserve">
     <value>Današnje ture:</value>
   </data>
@@ -375,11 +447,17 @@
   <data name="TOURCREATED" xml:space="preserve">
     <value>Tura je uspešno kreirana!</value>
   </data>
+  <data name="TourDetails" xml:space="preserve">
+    <value>Detalji ture</value>
+  </data>
   <data name="TourForm" xml:space="preserve">
     <value>FORMA ZA TURU</value>
   </data>
   <data name="TourInstanceReviewView" xml:space="preserve">
     <value>Pregled recenzija za ture</value>
+  </data>
+  <data name="TourInterestigness" xml:space="preserve">
+    <value>Zanimljivost ture</value>
   </data>
   <data name="TourName" xml:space="preserve">
     <value>Naziv ture</value>
@@ -398,6 +476,9 @@
   </data>
   <data name="Validity" xml:space="preserve">
     <value>Validnost</value>
+  </data>
+  <data name="ValidityChanged" xml:space="preserve">
+    <value>Validnost je promenjena!</value>
   </data>
   <data name="VoucherStatistics" xml:space="preserve">
     <value>Statistika o vaučerima</value>

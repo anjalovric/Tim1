@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows;
 using System.Windows.Media.Imaging;
 
 namespace InitialProject.WPF.ViewModels.GuideViewModels
@@ -62,6 +63,20 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
                 if (value != namet)
                 {
                     namet = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private string pastError;
+        public string PastError
+
+        {
+            get => pastError;
+            set
+            {
+                if (value != pastError)
+                {
+                    pastError = value;
                     OnPropertyChanged();
                 }
             }
@@ -432,6 +447,12 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         {
             if (!(newInstance.StartDate.Date > DateTime.Now.Date || (InstanceStartDate.Date == DateTime.Now.Date && InstanceStartDate > DateTime.Now)))
             {
+                var app = (App)Application.Current;
+                if (app.Lang.Equals("en-US"))
+                    PastError = "Can't choose time from past";
+                else
+                    PastError = "Ne možete odabrati prošlo vreme";
+
                 IsErrorMessageVisible = "Visible";
                 return false;
             }
@@ -455,10 +476,13 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         }
         private void OKCheckPoint_Executed(object sender)
         {
-               CheckPoint newCheckPoint = new CheckPoint(NameT, false, -1, -1);
-               TourPoints.Add(newCheckPoint);
-               NameT = "";
-            PointsCount++;
+            if (!NameT.Equals("") && NameT.Length>1)
+            {
+                CheckPoint newCheckPoint = new CheckPoint(NameT, false, -1, -1);
+                TourPoints.Add(newCheckPoint);
+                NameT = "";
+                PointsCount++;
+            }
         }
         private void CancelCheckPoint_Executed(object sender)
         {

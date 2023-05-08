@@ -26,7 +26,7 @@
                 <DataGridTemplateColumn x:Name="Cover"  Width="0.7*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Image Source="{Binding CoverBitmap}" Height="30" Stretch="Fill"/>
+                            <Image Source="{Binding CoverBitmap}" Height="30" Stretch="Uniform"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

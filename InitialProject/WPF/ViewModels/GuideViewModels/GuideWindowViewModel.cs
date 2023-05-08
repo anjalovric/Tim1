@@ -52,8 +52,8 @@ namespace InitialProject.WPF.ViewModels
         public GuideWindowViewModel(User user) 
         {
             tourStatisticsView = new TourStatisticsView(user);
-            homeView = new HomeView(user, tourStatisticsView.viewModel.Instances);
             cancelView = new CancelView(user);
+            homeView = new HomeView(user, tourStatisticsView.viewModel.Instances,cancelView.cancelViewModel.TourInstances);
             loggedUser = user;
 
 
@@ -101,7 +101,7 @@ namespace InitialProject.WPF.ViewModels
             }
             else
             {
-                ActiveInstanceView activeInstanceView = new ActiveInstanceView(tourInstanceService.GetByActive(guide), homeView.viewModel.Tours, tourStatisticsView.viewModel.Instances,homeView);
+                ActiveInstanceView activeInstanceView = new ActiveInstanceView(tourInstanceService.GetByActive(guide), homeView.viewModel.Tours, tourStatisticsView.viewModel.Instances,homeView,guide.Id);
                 Application.Current.Windows.OfType<GuideWindow>().FirstOrDefault().Main.Content = activeInstanceView;
             }
         }
@@ -117,7 +117,7 @@ namespace InitialProject.WPF.ViewModels
             Guide guide = guideService.GetByUsername(loggedUser.Username);
             if (tourInstanceService.GetByActive(guide) != null)
             {
-                ActiveInstanceView activeInstanceView = new ActiveInstanceView(tourInstanceService.GetByActive(guide), homeView.viewModel.Tours, tourStatisticsView.viewModel.Instances, homeView);
+                ActiveInstanceView activeInstanceView = new ActiveInstanceView(tourInstanceService.GetByActive(guide), homeView.viewModel.Tours, tourStatisticsView.viewModel.Instances, homeView,guide.Id);
                 Application.Current.Windows.OfType<GuideWindow>().FirstOrDefault().Main.Content = activeInstanceView;
             }
         }

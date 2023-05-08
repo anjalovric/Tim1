@@ -96,7 +96,7 @@ namespace InitialProject.WPF.ViewModels
             Interestigness = review.InterestingFacts + " /5★";
             LanguageKnowledge = review.Language + " /5★";
             Comment = review.Comment;
-            Guest = review.Guest2.Name + " " + review.Guest2.LastName + "'s review";
+            Guest = review.Guest2.Name + " " + review.Guest2.LastName;
         }
         private void FindCheckPoints(GuideAndTourReview review)
         {

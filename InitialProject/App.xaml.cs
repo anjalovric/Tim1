@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -11,10 +13,26 @@ namespace InitialProject
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
-    public partial class App : Application
+    public partial class App : Application,INotifyPropertyChanged
     {
         private bool darkTheme = false;
+        public event PropertyChangedEventHandler PropertyChanged;
 
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        private string lang;
+        public string Lang
+        {
+            get { return lang; }
+            set
+            {
+                lang = value;
+                OnPropertyChanged("");
+            }
+        }
+        
         public bool DarkTheme
         {
             get { return darkTheme; }
@@ -37,6 +55,7 @@ namespace InitialProject
 
         public void ChangeLanguage(string currLang)
         {
+            Lang= currLang;
             if (currLang.Equals("en-US"))
             {
                 TranslationSource.Instance.CurrentCulture = new System.Globalization.CultureInfo("en-US");

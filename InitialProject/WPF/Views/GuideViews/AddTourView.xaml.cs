@@ -21,6 +21,6 @@ namespace InitialProject.WPF.Views.GuideViews
         {
             viewModel.ComboBoxCountry_SelectionChanged();
         }
-   
+
     }
 }
