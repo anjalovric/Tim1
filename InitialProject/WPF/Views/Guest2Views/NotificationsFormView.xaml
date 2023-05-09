@@ -21,8 +21,8 @@
             </Setter>
         </Style>
         <DataTemplate x:Key="notificationTemplate" x:Name="notificationCard">
-            <Border BorderBrush="Black" BorderThickness="3"  Margin="1" HorizontalAlignment="Center" Width="800" Height="30">
-                <Grid HorizontalAlignment="Center" Grid.ColumnSpan="3" Height="30" Width="800" VerticalAlignment="Center" Background="Gray">
+            <Border BorderBrush="Black" BorderThickness="3"  Margin="1" HorizontalAlignment="Center" Width="530" Height="30">
+                <Grid HorizontalAlignment="Center" Grid.ColumnSpan="3" Height="30" Width="530" VerticalAlignment="Center" Background="Gray">
 
                     <Grid.Resources>
                         <Style TargetType="Label">
@@ -39,18 +39,18 @@
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="16*"/>
+                        <ColumnDefinition Width="14*"/>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Text="{Binding Text}" Width="785" Height="120" Grid.ColumnSpan="2" Foreground="Black" Grid.Row="0">
+                    <TextBlock Text="{Binding Text}" Width="530" Height="120" Grid.ColumnSpan="2" Foreground="Black" Grid.Row="0" Margin="3,0,0,0">
 
                     </TextBlock>
-                    <Button x:Name="Details" Content="Details" Command="{Binding Path=DataContext.ViewDetailsCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}"  FontWeight="Bold" Grid.Row="1" FontSize="10" Grid.Column="1"  VerticalAlignment="Center" Width="35" Height="20" ClickMode="Press" Style="{StaticResource LinkButton}">
+                    <Button x:Name="Details" Content="Details" Command="{Binding Path=DataContext.ViewDetailsCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}"  FontWeight="Bold" Grid.Row="1" FontSize="10" Grid.Column="1"  VerticalAlignment="Center" Width="33" Height="20" ClickMode="Press" Style="{StaticResource LinkButton}" Margin="0,0,0,0">
 
                     </Button>
-                    <Button x:Name="Delete" Content="Delete" Command="{Binding Path=DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" FontWeight="Bold" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" Width="35" Height="20" HorizontalAlignment="Right" FontSize="10" Style="{StaticResource LinkButton}"/>
+                    <Button x:Name="Delete" Content="Delete" Command="{Binding Path=DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" FontWeight="Bold" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" Width="33" Height="20" HorizontalAlignment="Right" FontSize="10" Style="{StaticResource LinkButton}" Margin="0,0,0,0"/>
                 </Grid>
             </Border>
         </DataTemplate>
@@ -62,7 +62,7 @@
             <ColumnDefinition Width="10*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Border BorderBrush="#151f2d" Grid.ColumnSpan="3" Background="#151f2d" BorderThickness="4,4,4,4" CornerRadius="25 25 25 25" />
+        <Border BorderBrush="#0C3B2E" Grid.ColumnSpan="3" Background="#0C3B2E" BorderThickness="4,4,4,4" CornerRadius="25 25 25 25" />
         <Label Content="All notifications" Grid.Column="1" Foreground="White" Margin="0,36,0,0" Height="46" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="20" FontWeight="Bold" RenderTransformOrigin="0.5,0.5" Width="238"/>
         <ListBox x:Name="notificationList" Grid.Column="1" IsSynchronizedWithCurrentItem="True" SelectionMode="Single" HorizontalAlignment="Center" ItemsSource="{Binding Path=Notifications,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" ItemTemplate="{StaticResource notificationTemplate}" Margin="0,134,0,0" VerticalAlignment="Top" Width="556" Background="WhiteSmoke" BorderThickness="5,5,5,5"  BorderBrush="#8c9d75" Height="399">
             <ListBox.Resources>

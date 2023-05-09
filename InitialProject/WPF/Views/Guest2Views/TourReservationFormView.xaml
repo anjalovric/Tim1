@@ -8,7 +8,7 @@
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
         
-        Title="TourReservationForm" Height="650" Width="668" d:DesignHeight="650" d:DesignWidth="668" WindowStartupLocation="CenterScreen" WindowStyle="None">
+        Title="TourReservationForm" Height="650" Width="668" d:DesignHeight="650" d:DesignWidth="668" Padding="0" WindowStartupLocation="CenterScreen" WindowStyle="None">
     <Window.Resources>
         <Style x:Key="DataGridRowStyle2" TargetType="{x:Type DataGridRow}">
             <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
@@ -120,9 +120,8 @@
             </Style.Triggers>
         </Style>
     </Window.Resources>
-    <Border BorderThickness="4" Padding="6" CornerRadius="25">
-
-        <Grid >
+    <Border BorderBrush="#48a878" Padding="6" BorderThickness="3">
+        <Grid Margin="-9,-9,-9,-9">
             <Grid.RowDefinitions>
                 <RowDefinition Height="2*"/>
                 <RowDefinition Height="*"/>
@@ -131,7 +130,7 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="3*"/>
                 <RowDefinition Height="7*"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="2*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -139,19 +138,28 @@
                 <ColumnDefinition Width="6*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                    <GradientStop Color="#6d9773" Offset="0"/>
+
+                    <GradientStop Color="#FF96BD9B" Offset="0.3"/>
+                    <GradientStop Color="#FF96BD9B" Offset="0.5"/>
+                    <GradientStop Color="#6d9773" Offset="1"/>
+                </LinearGradientBrush>
+            </Grid.Background>
             <Border BorderBrush="LightGray" BorderThickness="0 0 0 1" Grid.ColumnSpan="4" Margin="10,0,10,21"/>
-            <Border BorderBrush="LightGray" BorderThickness="0,0,0,3" Margin="278,37,43,18" Grid.Column="2" Grid.Row="3" Background="#F8F9FE" Grid.RowSpan="2">
-                <TextBlock x:Name="capacityNumber" Text="{Binding Capacity, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Column="2" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Top" Width="112" TextAlignment="Center" Height="20" />
+            <Border BorderBrush="LightGray" BorderThickness="0,0,0,3" Margin="268,5,50,12" Grid.Column="2" Grid.Row="4" Background="#F8F9FE">
+                <TextBlock x:Name="capacityNumber" Text="{Binding Capacity, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Column="2" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Top" Width="105" TextAlignment="Center" Height="20" Margin="6,0,0,0" />
             </Border>
 
-            <Button Background="#F8F9FE" Grid.Column="2" Grid.Row="3" HorizontalAlignment="Left" TextElement.FontWeight="Bold" Margin="232,37,0,18" VerticalAlignment="Top" Width="41" Command="{Binding Guests_Decrement_Command}" RenderTransformOrigin="0.596,1.286" Height="19" BorderBrush="LightGray" BorderThickness="0,0,0,3" Content="-" Grid.RowSpan="2"/>
-            <Button Background="#F8F9FE" Grid.Column="2" Grid.Row="3" HorizontalAlignment="Left" TextElement.FontWeight="Bold" Margin="394,37,0,18" VerticalAlignment="Top" Width="38" Command="{Binding Guests_Increment_Command}" RenderTransformOrigin="7.062,-0.088" Height="19" BorderBrush="LightGray" BorderThickness="0,0,0,3" Content="+" Grid.RowSpan="2"/>
-            <Label Content="RESERVATION FORM" Grid.Column="1"  FontSize="30" FontWeight="Bold" HorizontalAlignment="Left" Margin="10,-20,0,0" VerticalAlignment="Center" Width="436" Grid.ColumnSpan="2" Height="51"/>
-            <Label Content="Name: " Grid.Column="1" HorizontalAlignment="Left" Margin="10,71,0,0" VerticalAlignment="Top" Width="106" Grid.ColumnSpan="2" FontWeight="DemiBold" Grid.RowSpan="2"/>
-            <Label Content="Average of years: " FontWeight="DemiBold" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" Margin="10,34,0,0" VerticalAlignment="Top" Width="118" Grid.ColumnSpan="2" Height="40" RenderTransformOrigin="0.5,0.5" Grid.RowSpan="2"/>
-            <Label Content="Number of guests: " FontWeight="DemiBold" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" Margin="10,34,0,0" VerticalAlignment="Top" Width="118" Grid.ColumnSpan="2" Height="53" RenderTransformOrigin="0.5,0.5" Grid.RowSpan="3"/>
+            <Button Background="#F8F9FE" Grid.Column="2" Grid.Row="4" HorizontalAlignment="Left" TextElement.FontWeight="Bold" Margin="232,5,0,0" VerticalAlignment="Top" Width="31" Command="{Binding Guests_Decrement_Command}" RenderTransformOrigin="0.596,1.286" Height="19" BorderBrush="LightGray" BorderThickness="0,0,0,3" Content="-"/>
+            <Button Background="#F8F9FE" Grid.Column="2" Grid.Row="4" HorizontalAlignment="Left" TextElement.FontWeight="Bold" Margin="401,5,0,0" VerticalAlignment="Top" Width="31" Command="{Binding Guests_Increment_Command}" RenderTransformOrigin="7.062,-0.088" Height="19" BorderBrush="LightGray" BorderThickness="0,0,0,3" Content="+"/>
+            <Label Content="RESERVATION FORM"  Grid.Column="1"  FontSize="30" FontWeight="Bold" HorizontalAlignment="Left" Margin="10,-20,0,0" VerticalAlignment="Center" Width="436" Grid.ColumnSpan="2" Height="51" Foreground="White"/>
+            <Label Content="Name: " Grid.Column="1" FontSize="15" Foreground="White" HorizontalAlignment="Left" Margin="10,71,0,0" VerticalAlignment="Top" Width="106" Grid.ColumnSpan="2" FontWeight="DemiBold" Grid.RowSpan="2"/>
+            <Label Content="Average of years: "  FontSize="15" Foreground="White" FontWeight="DemiBold" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Width="140" Grid.ColumnSpan="2" Height="40" RenderTransformOrigin="0.5,0.5"/>
+            <Label Content="Number of guests: "  FontSize="15" Foreground="White" FontWeight="DemiBold" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" Margin="10,34,0,0" VerticalAlignment="Top" Width="140" Grid.ColumnSpan="2" Height="53" RenderTransformOrigin="0.5,0.5" Grid.RowSpan="3"/>
 
-            <TextBlock Grid.Column="2" Margin="232,74,0,17" Text="{Binding Path=guest2.Name}" FontWeight="Bold" Grid.RowSpan="2"/>
+            <TextBlock Grid.Column="2" FontSize="15" Foreground="White" Margin="232,2,74,12" Text="{Binding Path=guest2.Name}" FontWeight="Bold" Grid.ColumnSpan="2" Grid.Row="1"/>
 
 
 
@@ -182,7 +190,7 @@
                 </Validation.ErrorTemplate>
             </TextBox>
 
-            <Rectangle Fill="White" RadiusX="10" RadiusY="10" Grid.Row="5" Margin="10,70,0,0" Grid.ColumnSpan="2" Grid.RowSpan="2" Grid.Column="1"/>
+            <Rectangle Fill="White" RadiusX="10" RadiusY="10" Grid.Row="5" Margin="10,115,74,4" Grid.ColumnSpan="3" Grid.RowSpan="2" Grid.Column="1"/>
             <DataGrid x:Name="ActivationVoucherDataGrid" Background="#F8F9FE" BorderBrush="Transparent" Grid.Row="6" ItemsSource="{Binding Path=Vouchers,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=Selected}" IsReadOnly="True" AutoGenerateColumns="False" Margin="10,10,0,10" Grid.Column="1" Grid.ColumnSpan="2" HorizontalScrollBarVisibility="Hidden" GridLinesVisibility="None" ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle2}" CellStyle="{StaticResource DataGridCellStyle2}" Style="{StaticResource DataGridStyle}" RowStyle="{StaticResource DataGridRowStyle2}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Voucher" Width="1*" Binding="{Binding Id}"/>
@@ -220,18 +228,18 @@
                     </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
-            <Label Content="Last Name: " Grid.Row="1" FontWeight="DemiBold" Grid.Column="1" HorizontalAlignment="Left" Margin="10,34,0,0" VerticalAlignment="Top" Width="106" Grid.ColumnSpan="2" Height="39" RenderTransformOrigin="0.5,0.5" Grid.RowSpan="2"/>
-            <TextBlock Grid.Row="1" Grid.Column="2" Margin="232,37,0,15" Text="{Binding guest2.LastName}" FontWeight="Bold" Grid.RowSpan="2"/>
+            <Label Content="Last Name: " Grid.Row="1" FontSize="15" Foreground="White" FontWeight="DemiBold" Grid.Column="1" HorizontalAlignment="Left" Margin="10,34,0,0" VerticalAlignment="Top" Width="106" Grid.ColumnSpan="2" Height="39" RenderTransformOrigin="0.5,0.5" Grid.RowSpan="2"/>
+            <TextBlock Grid.Row="1" FontSize="15" Foreground="White" Grid.Column="2" Margin="232,37,0,15" Text="{Binding guest2.LastName}" FontWeight="Bold" Grid.RowSpan="2"/>
             <Label x:Name="AgeLabel" Grid.Row="1" Grid.Column="2" Margin="302,233,191,58"/>
-            <TextBlock HorizontalAlignment="Left" TextElement.FontSize="15" Margin="15,35,0,0" Grid.Row="5" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Column="1" Grid.ColumnSpan="3" Width="530" FontWeight="Bold" Height="50"><Run Text="Ovdje se nalaze svi vauceri koje mozes iskoristiti za "/><LineBreak/><Run Text="svoju rezervaciju ture"/></TextBlock>
-            <Button Grid.Row="7" HorizontalAlignment="Left" VerticalAlignment="Center" Height="35" Width="101" FontWeight="Bold" Margin="201,0,0,0" FontSize="18" Grid.Column="2" Command="{Binding ConfirmCommand}">
-                <Grid Background="#FF9E98FF" Width="99" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35">
+            <TextBlock  Foreground="White" HorizontalAlignment="Left" TextElement.FontSize="15" Margin="15,35,0,0" Grid.Row="5" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Column="1" Grid.ColumnSpan="3" Width="530" FontWeight="Bold" Height="50"><Run Text="Ovdje se nalaze svi vauceri koje mozes iskoristiti za "/><LineBreak/><Run Text="svoju rezervaciju ture"/></TextBlock>
+            <Button Grid.Row="7" HorizontalAlignment="Left" BorderBrush="#b46617" BorderThickness="1" Background="#b46617" VerticalAlignment="Top" Height="35" Width="101" FontWeight="Bold" Margin="202,27,0,0" FontSize="18" Grid.Column="2" Command="{Binding ConfirmCommand}">
+                <Grid Background="#b46617" Width="99" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <Image Source="/Resources/Images/doneNew.png" VerticalAlignment="Top" HorizontalAlignment="Center" Width="24" Height="20" RenderTransformOrigin="0.5,0.5" Margin="0,5,0,0"/>
-                    <TextBlock Background="#FF9E98FF" Text="Reserve" VerticalAlignment="Center" FontSize="18" Grid.Column="1"  Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" Width="68" Height="28"/>
+                    <TextBlock Background="#b46617" Text="Reserve" VerticalAlignment="Center" FontSize="18" Grid.Column="1"  Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" Width="68" Height="28"/>
                 </Grid>
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">
@@ -247,14 +255,14 @@
                     </Style>
                 </Button.Style>
             </Button>
-            <Button Grid.Row="7" HorizontalAlignment="Left" BorderBrush="#FF9E98FF" VerticalAlignment="Center" Height="35" Width="101" FontWeight="Bold" Margin="321,0,0,0" FontSize="18" Grid.Column="2" Command="{Binding CloseCommand}">
+            <Button Grid.Row="7" HorizontalAlignment="Left" BorderBrush="#48a878" VerticalAlignment="Top" Height="35" Width="101" FontWeight="Bold" Margin="331,27,0,0" FontSize="18" Grid.Column="2" Command="{Binding CloseCommand}">
                 <Grid Background="White" Width="99" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <Image Source="/Resources/Images/close.png" VerticalAlignment="Top" HorizontalAlignment="Center" Width="24" Height="20" RenderTransformOrigin="0.5,0.5" Margin="0,5,0,0"/>
-                    <TextBlock Background="White" Text="Cancel" VerticalAlignment="Center" FontSize="18" Grid.Column="1"  Foreground="#FF9E98FF" FontWeight="Bold" HorizontalAlignment="Center" Width="68" Height="28"/>
+                    <TextBlock Background="White" Text="Cancel" VerticalAlignment="Center" FontSize="18" Grid.Column="1"  Foreground="#b46617" FontWeight="Bold" HorizontalAlignment="Center" Width="68" Height="28"/>
                 </Grid>
 
             </Button>
