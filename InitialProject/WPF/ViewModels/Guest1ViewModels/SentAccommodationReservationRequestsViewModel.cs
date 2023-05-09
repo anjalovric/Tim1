@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using InitialProject.Model;
+using LiveCharts;
+using LiveCharts.Wpf;
 using InitialProject.Service;
 
 
@@ -15,9 +17,12 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 {
     public class SentAccommodationReservationRequestsViewModel : INotifyPropertyChanged
     {
+        private DateTime currentDate;
         private RequestForReschedulingService requestForReschedulingService;
         private ObservableCollection<ReschedulingAccommodationRequest> approvedRequests;
         private Guest1 guest1;
+        //diagram
+       
         public ObservableCollection<ReschedulingAccommodationRequest> ApprovedRequests
         {
             get { return approvedRequests; }
@@ -62,6 +67,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             DeclinedRequests = new ObservableCollection<ReschedulingAccommodationRequest>(requestForReschedulingService.GetDeclinedRequests(guest1));
             
         }
+        
         public event PropertyChangedEventHandler PropertyChanged;  
         private bool CanExecute(object sender)
         {
