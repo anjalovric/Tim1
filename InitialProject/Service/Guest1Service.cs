@@ -14,9 +14,7 @@ namespace InitialProject.Service
     {
         private IGuest1Repository guest1Repository = Injector.CreateInstance<IGuest1Repository>();
 
-        public Guest1Service()
-        {
-        }
+        public Guest1Service() { }
 
         public List<Guest1> GetAll()
         {

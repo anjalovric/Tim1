@@ -53,9 +53,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             }
 
         }
-
-       
-
         public SentAccommodationReservationRequestsViewModel(Guest1 guest1)
         {
             this.guest1 = guest1;
@@ -65,9 +62,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             DeclinedRequests = new ObservableCollection<ReschedulingAccommodationRequest>(requestForReschedulingService.GetDeclinedRequests(guest1));
             
         }
-        public event PropertyChangedEventHandler PropertyChanged;
-
-       
+        public event PropertyChangedEventHandler PropertyChanged;  
         private bool CanExecute(object sender)
         {
             return true;

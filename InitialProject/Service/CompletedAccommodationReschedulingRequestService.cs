@@ -18,12 +18,10 @@ namespace InitialProject.Service
             SetRequests();
             requestService = new ReschedulingAccommodationRequestService();
         }
-
         public List<CompletedAccommodationReschedulingRequest> GetAll()
         {
             return completedRequests;
         }
-
         public void DeclineRequest(ReschedulingAccommodationRequest requestToDecline)
         {
             requestToDecline = requestService.ChangeState(requestToDecline, State.Declined);
@@ -31,7 +29,6 @@ namespace InitialProject.Service
             completedRequests.Add(completedRequest);
             completedRequestRepository.Add(completedRequest);
         }
-
         public void ApproveRequest(ReschedulingAccommodationRequest requestToApprove)
         {
             requestToApprove = requestService.ChangeState(requestToApprove, State.Approved);
@@ -39,7 +36,6 @@ namespace InitialProject.Service
             completedRequests.Add(completedRequest);
             completedRequestRepository.Add(completedRequest);
         }
-
         private static CompletedAccommodationReschedulingRequest MakeCompletedRequest(ReschedulingAccommodationRequest requestToComplete)
         {
             CompletedAccommodationReschedulingRequest completedRequest = new CompletedAccommodationReschedulingRequest();
@@ -47,7 +43,6 @@ namespace InitialProject.Service
            
             return completedRequest;
         }
-
         private void SetRequests()
         {
             ReschedulingAccommodationRequestService requestService = new ReschedulingAccommodationRequestService();
@@ -61,9 +56,7 @@ namespace InitialProject.Service
                     completedRequest.Request = request;
                 }
             }
-
         }
-
         public List<CompletedAccommodationReschedulingRequest> GetRequestsByGuest(Guest1 guest1)
         {
             List<CompletedAccommodationReschedulingRequest> storedRequests = new List<CompletedAccommodationReschedulingRequest>(completedRequestRepository.GetAll());
@@ -76,8 +69,7 @@ namespace InitialProject.Service
             }
 
             return filteredRequests;
-        }
-        
+        }       
         public void Delete(CompletedAccommodationReschedulingRequest request)
         {
            completedRequestRepository.Delete(request);
