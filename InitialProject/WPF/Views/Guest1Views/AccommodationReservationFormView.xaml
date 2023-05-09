@@ -20,6 +20,7 @@
             <Setter Property="Width" Value="185"></Setter>
         </Style>
         <Style TargetType="Button">
+            
             <Setter Property="Background" Value="#8c9d75"></Setter>
             <Setter Property="Foreground" Value="#22301a"></Setter>
             <Setter Property="FontWeight" Value="UltraBlack"></Setter>
@@ -56,7 +57,8 @@
                 <RowDefinition Height="2*"></RowDefinition>
                 <RowDefinition Height="3*"></RowDefinition>
             </Grid.RowDefinitions>
-            
+
+            <Image Source="/Resources/Images/locations.png" Opacity="0.1" Grid.RowSpan="6" Grid.ColumnSpan="2" Stretch="Fill"></Image>
             <Label FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" FontFamily="Baskerville Old Face"  VerticalAlignment="Top" Height="Auto" Width="Auto" Grid.ColumnSpan="2" Grid.Row="0" Margin="0,25,0,0">RESERVATION FORM</Label>
 
             <!-- INPUT FORM -->

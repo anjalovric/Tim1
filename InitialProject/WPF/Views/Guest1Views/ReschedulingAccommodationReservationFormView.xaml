@@ -20,6 +20,7 @@
             <Setter Property="Width" Value="185"></Setter>
         </Style>
         <Style TargetType="Button">
+            <Setter Property="Padding" Value="0"></Setter>
             <Setter Property="Background" Value="#8c9d75"></Setter>
             <Setter Property="Foreground" Value="#22301a"></Setter>
             <Setter Property="FontWeight" Value="UltraBlack"></Setter>
@@ -45,6 +46,8 @@
         </Border.Background>
         
         <Grid>
+
+            <Image Source="/Resources/Images/locations.png" Opacity="0.1"  Stretch="Fill"></Image>
 
             <!-- INPUT FORM -->
             <Label FontSize="24" HorizontalAlignment="Center" FontWeight="Bold" FontFamily="Baskerville Old Face"  VerticalAlignment="Top" Height="Auto" Width="Auto" Margin="0,25,0,0">CHANGING RESERVATION DATE</Label>

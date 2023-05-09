@@ -56,7 +56,7 @@ namespace InitialProject.Repository
             _superGuests.Remove(founded);
             _serializer.ToCSV(FilePath, _superGuests);
         }
-        public void DecrementPoints(SuperGuestTitle title)
+        public void Update(SuperGuestTitle title)
         {
             _superGuests = _serializer.FromCSV(FilePath);
             SuperGuestTitle current = _superGuests.Find(c => c.Id == title.Id);

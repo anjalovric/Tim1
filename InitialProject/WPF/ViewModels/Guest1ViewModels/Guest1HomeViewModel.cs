@@ -151,7 +151,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             System.Windows.Documents.Hyperlink[] links = MakeNotifications();
             StoredNotifications.Clear();
             if (links.Length == 0)
-                StoredNotifications.Add(new MenuItem { Header = "No recent notifications." });
+                StoredNotifications.Add(new MenuItem { Header = "No recent notifications.", FontWeight = FontWeights.SemiBold, IsCheckable = false, Width = 300, BorderBrush = System.Windows.Media.Brushes.Black, Background = System.Windows.Media.Brushes.BlanchedAlmond, BorderThickness = new Thickness(3), Margin = new Thickness(1), VerticalAlignment = System.Windows.VerticalAlignment.Center, Height = 40, Icon = new Image { Source = new BitmapImage(new Uri("/Resources/Images/nothing.png", UriKind.Relative)), Margin = new Thickness(0, -10, -7, -3), VerticalAlignment = System.Windows.VerticalAlignment.Bottom }});
             else
             foreach (System.Windows.Documents.Hyperlink link in links)
             {
