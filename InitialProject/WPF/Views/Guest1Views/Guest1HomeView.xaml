@@ -20,6 +20,7 @@
         </Style>
         
         <Style TargetType="Button">
+            <Setter Property="Padding" Value="0"></Setter>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Cursor" Value="Hand"/>
@@ -46,7 +47,7 @@
                 </MenuItem.Header>
                 <MenuItem Header="BOOK ACCOMMODATION" Height="55"  FontSize="18" Command="{Binding BookingCommand}" Style="{StaticResource ResourceKey=SubMenuItem}" BorderThickness="3,3,3,0">
                     <MenuItem.Icon>
-                        <Image Source="/Resources/Images/buildings.png" Margin="0,-10,-7,-3" VerticalAlignment="Bottom"/>
+                        <Image Source="/Resources/Images/buildings1.png" Margin="0,-10,-7,-3" VerticalAlignment="Bottom"/>
                     </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="ANYWHERE/ANYTIME" Height="55" FontSize="18" Style="{StaticResource ResourceKey=SubMenuItem}">
@@ -89,21 +90,21 @@
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
                 <MenuItem.Header>
-                    <Image Source="/Resources/Images/account.png" Margin="21,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Height="48" Width="50"/>
+                    <Image Source="/Resources/Images/account1.png" Margin="21,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Height="48" Width="50"/>
                 </MenuItem.Header>
                 <MenuItem Header="MY PROFILE" Height="55"  FontSize="18" Command="{Binding MyProfileCommand}" Style="{StaticResource ResourceKey=SubMenuItem}" BorderThickness="3,3,3,0">
                     <MenuItem.Icon>
-                        <Image Source="/Resources/Images/profile1.png" Margin="0,-10,-7,-3" VerticalAlignment="Bottom"/>
+                        <Image Source="/Resources/Images/profile11.png" Margin="0,-10,-7,-3" VerticalAlignment="Bottom"/>
                     </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="SENT REQUESTS" Height="55" FontSize="18" Command="{Binding SentRequestsCommand}" Style="{StaticResource ResourceKey=SubMenuItem}" BorderThickness="3,3,3,0">
                     <MenuItem.Icon>
-                        <Image Source="/Resources/Images/sent5.png" Margin="0,-10,-7,-3" VerticalAlignment="Bottom"/>
+                        <Image Source="/Resources/Images/sent51.png" Margin="0,-10,-7,-3" VerticalAlignment="Bottom"/>
                     </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="SIGN OUT" Height="55" FontSize="18" Command="{Binding SignOutCommand}" Style="{StaticResource ResourceKey=SubMenuItem}">
                     <MenuItem.Icon>
-                        <Image Source="/Resources/Images/signOut2.png" Margin="0,-10,-7,-3" VerticalAlignment="Bottom"/>
+                        <Image Source="/Resources/Images/signOut21.png" Margin="0,-10,-7,-3" VerticalAlignment="Bottom"/>
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>

@@ -26,6 +26,7 @@
             <Setter Property="FontWeight" Value="Medium"></Setter>
         </Style>
         <Style TargetType="Button">
+            <Setter Property="Padding" Value="0"></Setter>
             <Setter Property="Background" Value="#8c9d75"></Setter>
             <Setter Property="Foreground" Value="#22301a"></Setter>
             <Setter Property="FontWeight" Value="UltraBlack"></Setter>
@@ -60,6 +61,8 @@
 
         <!-- BORDER FOR FIRST COLUMN -->
         <Border Grid.Column="0" Width="495" BorderThickness="3" BorderBrush="#22301a" CornerRadius="20 20 20 20" HorizontalAlignment="Center" Height="660" VerticalAlignment="Center">
+            <Image Source="/Resources/Images/rating.png" Opacity="0.05" Margin="0,40,0,0" Stretch="Fill"></Image>
+
             <Border.Effect>
                 <DropShadowEffect ShadowDepth="0" BlurRadius="50"/>
             </Border.Effect>
@@ -78,6 +81,8 @@
 
         <!-- BORDER FOR SECOND COLUMN -->
         <Border Grid.Column="1" Width="495" BorderThickness="3" BorderBrush="#22301a" CornerRadius="20 20 20 20" HorizontalAlignment="Center" Height="660" VerticalAlignment="Center">
+            <Image Source="/Resources/Images/ren.png" Opacity="0.05" Margin="0,40,0,0" Stretch="Fill"></Image>
+
             <Border.Effect>
                 <DropShadowEffect ShadowDepth="0" BlurRadius="50"/>
             </Border.Effect>
@@ -151,7 +156,7 @@
                 </Slider.Style>
             </Slider>
             
-            <TextBlock Text="{Binding ElementName=CleanlinessSlider,Path=Value}" Grid.Row="1" Grid.Column="1" Height="24" VerticalAlignment="Center" Width="30" FontSize="18" FontWeight="Medium" HorizontalAlignment="Right" Margin="0,0,65,0"  TextAlignment="Center" Foreground="#22301a">
+            <TextBlock Text="{Binding ElementName=CleanlinessSlider,Path=Value}" Grid.Row="1" Grid.Column="1" Height="24" VerticalAlignment="Center" Width="40" FontSize="18" FontWeight="Medium" HorizontalAlignment="Right" Margin="0,0,65,0"  TextAlignment="Center" Foreground="#22301a">
                 <TextBlock.Background>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
                         <GradientStop Color="#c99585" Offset="0"/>
@@ -165,7 +170,7 @@
                 </TextBlock.Background>
             </TextBlock>
             
-            <TextBlock Text="{Binding ElementName=CorrectnessSlider,Path=Value}"  Grid.Row="2" FontWeight="Medium" Grid.Column="1" Height="24" VerticalAlignment="Center" Width="30" HorizontalAlignment="Right" FontSize="18" Margin="0,0,65,0" TextAlignment="Center" Foreground="#22301a">
+            <TextBlock Text="{Binding ElementName=CorrectnessSlider,Path=Value}"  Grid.Row="2" FontWeight="Medium" Grid.Column="1" Height="24" VerticalAlignment="Center" Width="40" HorizontalAlignment="Right" FontSize="18" Margin="0,0,65,0" TextAlignment="Center" Foreground="#22301a">
                 <TextBlock.Background>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
                         <GradientStop Color="#c99585" Offset="0"/>

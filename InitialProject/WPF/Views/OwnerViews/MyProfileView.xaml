@@ -56,7 +56,7 @@
                 <Label Content="Age:" Foreground="LightGray" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top"/>
                 <Label Content="Email:" Foreground="LightGray" Grid.Row="2" Grid.Column="1" VerticalAlignment="Top"/>
                 <Label Content="Title:" Foreground="LightGray" Grid.Row="3" Grid.Column="1" VerticalAlignment="Top"/>
-                <Label Content="{Binding ProfileOwner, UpdateSourceTrigger=PropertyChanged}" Foreground="LightGray" FontSize="13" FontWeight="SemiBold" Margin="0, 4, 0, 0" Grid.Row="0" Grid.Column="3" />
+                <Label Content="{Binding ProfileOwner, UpdateSourceTrigger=PropertyChanged}" Foreground="LightGray" FontSize="13" FontWeight="SemiBold" Grid.Row="0" Grid.Column="3" />
                 <Label Content="{Binding ProfileOwner.Age, UpdateSourceTrigger=PropertyChanged}"  Foreground="LightGray" FontSize="13" FontWeight="SemiBold" Grid.Row="1" Grid.Column="3" />
                 <Label Content="{Binding ProfileOwner.Email, UpdateSourceTrigger=PropertyChanged}"  Foreground="LightGray" FontSize="13" FontWeight="SemiBold" Grid.Row="2" Grid.Column="3"/>
                 <Label Content="{Binding Title, UpdateSourceTrigger=PropertyChanged}"  Foreground="LightGray" FontSize="13" FontWeight="Bold" Grid.Row="3" Grid.Column="3" />
@@ -67,7 +67,7 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="3*"/>
                     </Grid.ColumnDefinitions>
-                    <Label Name="AverageReview" Grid.Column="0" Content="{Binding AverageRate, UpdateSourceTrigger=PropertyChanged}"  Foreground="LightGray" FontSize="13" FontWeight="SemiBold" HorizontalContentAlignment="Right"/>
+                    <Label Name="AverageReview" Grid.Column="0" Content="{Binding AverageRate, UpdateSourceTrigger=PropertyChanged}"  Foreground="LightGray" FontSize="13" FontWeight="SemiBold" HorizontalContentAlignment="Left"/>
                     <TextBlock VerticalAlignment="Center" Foreground="LightGray" Grid.Column="1">
                         <Run Text="(" />
                         <Run Text ="{Binding Path=NumberOfRates, UpdateSourceTrigger=PropertyChanged }" />
@@ -105,7 +105,7 @@
                 </Grid.RowDefinitions>
                 <Image Source="/Resources/Images/congratulations3.png" Stretch="Fill" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" />
                 <Label Content="You have just become SUPER OWNER!" FontSize="15" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" VerticalContentAlignment="Bottom"/>
-                <Button Command="{Binding OKCommand}" Grid.Row="1" Grid.Column="1" Content="OK" Margin="0,28,38,0" Grid.RowSpan="2" Background="AliceBlue"/>
+                <Button Command="{Binding OKCommand}" Grid.Row="1" Grid.Column="1" Content="OK" Margin="0,28,38,0" Grid.RowSpan="2" Style="{StaticResource DataTemplateButton}"/>
             </Grid>
         </StackPanel>
     </Grid>

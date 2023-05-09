@@ -42,7 +42,18 @@
                     </Grid.RowDefinitions>
                     <Image Source="/Resources/Images/star.png" Grid.Column="0" Grid.Row="0" Height="30" VerticalAlignment="Bottom"/>
                     <Label Foreground="LightGray" Content="Busiest year" Grid.Column="1"  Grid.Row="0" VerticalContentAlignment="Bottom" />
-                    <Label Foreground="LightGray" Content="{Binding Path=BusiestYear, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" FontSize="32" FontWeight="Bold"/>
+                    <Label Foreground="LightGray" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" FontSize="32" FontWeight="Bold">
+                        <Label.Style>
+                            <Style TargetType="Label">
+                                <Setter Property="Content" Value="{Binding Path=BusiestYear, UpdateSourceTrigger=PropertyChanged}" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Path=BusiestYear, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                                        <Setter Property="Content" Value=" " />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Label.Style>
+                    </Label>
                 </Grid>
             </Grid>
         </Border>
