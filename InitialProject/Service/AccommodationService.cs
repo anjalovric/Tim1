@@ -11,7 +11,7 @@ namespace InitialProject.Service
     {
         private IAccommodationRepository accommodationRepository = Injector.CreateInstance<IAccommodationRepository>();
         private List<Accommodation> accommodations;
-        private List<Accommodation> Accommodations;
+        private List<Accommodation> Accommodations;//for search
         public AccommodationService()
         {
             MakeAccommodations();
@@ -37,7 +37,6 @@ namespace InitialProject.Service
             AddTypes();
             SetAccommodationCoverImages();
         }
-
         private void SetAccommodationCoverImages()
         {
             AccommodationImageService accommodationImageService = new AccommodationImageService();
@@ -91,12 +90,10 @@ namespace InitialProject.Service
             }
             return accommodationsByOwner;
         }
-
         public void Delete(Accommodation accommodation)
         {
             accommodationRepository.Delete(accommodation);
         }
-
         public List<Accommodation> SearchName(Accommodation accommodation, string Name)
         {
             if (!accommodation.Name.ToLower().Contains(Name.ToLower()))

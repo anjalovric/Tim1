@@ -14,9 +14,7 @@ namespace InitialProject.Service
     {
         private IAccommodationTypeRepository accommodationTypeRepository = Injector.CreateInstance<IAccommodationTypeRepository>();
 
-        public AccommodationTypeService()
-        {
-        }
+        public AccommodationTypeService() { }
 
         public List<AccommodationType> GetAll()
         {

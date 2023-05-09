@@ -64,10 +64,9 @@ namespace InitialProject.Service
             return counter;
         }
 
-        public int GetAverageRating(Guest1 guest1)  //pitati da li je ok da ovako dobijem prosj.ocjenu
+        public int GetAverageRating(Guest1 guest1)
         {
             return Convert.ToInt32((GetAverageCleanlinessReview(guest1) + GetAverageFollowingRulesReview(guest1)) / 2);
-            //da li ako nema ocjena da prikazem onda 1 zvjezdu i da sve bude na 1(Slideri), svakako prikazujem i broj reviews
         }
     }
 }

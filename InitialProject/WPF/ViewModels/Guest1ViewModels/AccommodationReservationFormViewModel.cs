@@ -51,16 +51,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             }
 
         }
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-        private bool CanExecute(object sender)
-        {
-            return true;
-        }
-
         public RelayCommand DecrementDaysNumberCommand { get; set; }
         public RelayCommand IncrementDaysNumberCommand { get; set; }
         public RelayCommand DecrementGuestsNumberCommand { get; set; }
@@ -75,6 +65,10 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             this.currentAccommodation = currentAccommodation;
             InitializeForm();
             MakeCommands();
+        }
+        private bool CanExecute(object sender)
+        {
+            return true;
         }
         private void Back_Executed(object sender)
         {
@@ -98,8 +92,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             BackCommand = new RelayCommand(Back_Executed, CanExecute);
             OnPreviewMouseUpCommand = new RelayCommand(OnPreviewMouseUp_Executed, CanExecute);
         }
-        
-        
         private void DecrementDaysNumber_Executed(object sender)
         {
             int changedDaysNumber;
@@ -167,7 +159,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             messageBox.Owner = Application.Current.Windows.OfType<AccommodationReservationFormView>().FirstOrDefault();
             messageBox.ShowDialog();
         }
-
         private void Next_Executed(object sender)
         {
             lengthOfStay = Departure.Subtract(Arrival);
@@ -183,9 +174,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                 
             else
                 OpenWindowWithAvailableDates();                 
-        }
-
-        
+        }        
         private void OpenWindowWithAvailableDates()
         {
             SuggestedDatesForAccommodationReservationService suggestedDatesForAccommodationReservationService = new SuggestedDatesForAccommodationReservationService();
@@ -195,8 +184,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             datesForAccommodationReservationView.Owner = Application.Current.Windows.OfType<AccommodationReservationFormView>().FirstOrDefault();
             datesForAccommodationReservationView.ShowDialog();
         }
-
-
         private void OnPreviewMouseUp_Executed(Object sender)
         {
             OnPreviewMouseUp(null);
@@ -207,6 +194,11 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             {
                 Mouse.Capture(null);
             }
+        }
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

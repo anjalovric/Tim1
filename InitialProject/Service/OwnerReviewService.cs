@@ -27,7 +27,6 @@ namespace InitialProject.Service
         public List<OwnerReview> GetAllToDisplay(Owner owner)
         {
             List<OwnerReview> reviewsToDisplay = new List<OwnerReview>();
-
             foreach (OwnerReview ownerReview in ownerReviews)
             {
                 AccommodationReservation reservationToReview = ownerReview.Reservation;
@@ -35,9 +34,7 @@ namespace InitialProject.Service
                 bool isThisOwner = reservationToReview.Accommodation.Owner.Id == owner.Id;
 
                 if (IsReviewForDisplay(reservationToReview) && isThisOwner)
-                {
                     reviewsToDisplay.Add(ownerReview);
-                }
             }
             return reviewsToDisplay;
         }
@@ -45,7 +42,6 @@ namespace InitialProject.Service
         private bool IsReviewForDisplay(AccommodationReservation reservationToReview)
         {
             GuestReviewService guestReviewService = new GuestReviewService();
-
             bool isGuestReviewed = guestReviewService.HasReview(reservationToReview);
             bool fiveDaysPassed = (DateTime.Now.Date - reservationToReview.Departure.Date).TotalDays > 5;
             return isGuestReviewed || fiveDaysPassed;
@@ -80,9 +76,7 @@ namespace InitialProject.Service
             List<OwnerReview> reviewsToDisplay = GetAllToDisplay(owner);
             int numberOfReviews = 0;
             foreach (OwnerReview review in reviewsToDisplay)
-            {
                 numberOfReviews++;
-            }
             return numberOfReviews;
         }
         private void MakeReservations()
@@ -90,19 +84,13 @@ namespace InitialProject.Service
             AccommodationReservationService accommodationReservationService = new AccommodationReservationService();
             List<AccommodationReservation> accommodationReservations = new List<AccommodationReservation>();
             accommodationReservations = accommodationReservationService.GetAll();
-
             foreach (OwnerReview review in ownerReviews)
             {
                 AccommodationReservation ownerReservation = accommodationReservations.Find(n => n.Id == review.Reservation.Id);
                 if (ownerReservation != null)
-                {
                     review.Reservation = ownerReservation;
-                }
             }
         }
-        
-        
-
         public void Delete(OwnerReview review)
         {
             ownerReviewRepository.Delete(review);

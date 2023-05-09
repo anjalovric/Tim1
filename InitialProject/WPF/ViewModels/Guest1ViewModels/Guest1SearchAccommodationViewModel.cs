@@ -158,8 +158,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                 }
             }
         }
-
-
         public RelayCommand SearchCommand { get; set; }
         public RelayCommand ShowAllCommand { get; set; }
         public RelayCommand ReserveCommand { get; set; }
@@ -225,8 +223,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                 }
             }
         }
-
-
         public override string ToString()
         {
             return $"{NumberOfDays} {NumberOfGuests}";

@@ -86,7 +86,5 @@ namespace InitialProject.Service
             pendingRequests.Reverse();
             return pendingRequests;
         }
-
-
     }
 }

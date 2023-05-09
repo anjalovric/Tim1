@@ -86,7 +86,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             Model.ReschedulingAccommodationRequest newRequest = new Model.ReschedulingAccommodationRequest(Reservation, Arrival, Departure, Reason);
             requestService.Add(newRequest);
         }
-
         private void OnPreviewMouseUp_Executed(Object sender)
         {
             OnPreviewMouseUp(null);
