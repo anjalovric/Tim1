@@ -110,6 +110,8 @@
 
     <None Remove="Resources\Images\guest1Menu.jpeg" />
 
+    <None Remove="Resources\Images\hand.png" />
+
 
     
     
@@ -365,6 +367,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\dreams4.jpeg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\hand.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\homeanja4.jpg">

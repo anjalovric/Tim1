@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:converters="clr-namespace:InitialProject.WPF.Converters"
+      xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
       xmlns:local="clr-namespace:InitialProject.WPF.Views.Guest1Views"
       mc:Ignorable="d"
       d:DesignHeight="696" d:DesignWidth="1024"
@@ -159,9 +160,9 @@
         <Grid Grid.Column="1" Grid.Row="5" Background="Transparent">
             <Grid.RowDefinitions>
                 <RowDefinition Height="10"></RowDefinition>
-                <RowDefinition Height="190"></RowDefinition>
-                <RowDefinition Height="45"></RowDefinition>
-                <RowDefinition Height="136"></RowDefinition>
+                <RowDefinition Height="160"></RowDefinition>
+                <RowDefinition Height="40"></RowDefinition>
+                <RowDefinition Height="170"></RowDefinition>
                 <RowDefinition ></RowDefinition>
             </Grid.RowDefinitions>
 
@@ -182,8 +183,8 @@
                 </Border.Background>
             </Border>
 
-            <Image x:Name="accommodationImage" Source="{Binding ImageSource, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Margin="106,10,106,25" Stretch="Fill"/>
-            <Border Grid.Row="1" Margin="106,10,106,25" BorderBrush="#22301a" BorderThickness="3">
+            <Image x:Name="accommodationImage" Source="{Binding ImageSource, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Margin="106,10,106,0" VerticalAlignment="Top" Height="145" Stretch="Fill"/>
+            <Border Grid.Row="1" Margin="106,10,106,0" Height="145" BorderBrush="#22301a" BorderThickness="3" VerticalAlignment="Top">
             </Border>
 
             <!-- NEXT PHOTO BUTTON -->
@@ -285,24 +286,47 @@
 
             <!-- PLACE FOR DIAGRAM -->
             <!-- BORDER FOR DIAGRAM TITLE -->
-            <Border Grid.Row="2" BorderBrush="#22301a" VerticalAlignment="Bottom" BorderThickness="0" Width="204" Height="30" HorizontalAlignment="Center">
-                <Border.Effect>
-                    <DropShadowEffect ShadowDepth="0"  BlurRadius="50"/>
-                </Border.Effect>
-                <Border.Background>
-                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                        <GradientStop Color="#FFB58578" Offset="0"/>
-                        <GradientStop Color="#FFB58578" Offset="0.1"></GradientStop>
-                        <GradientStop Color="#c99585" Offset="0.4"/>
-                        <GradientStop Color="#c99585" Offset="0.5"/>
-                        <GradientStop Color="#c99585" Offset="0.6"/>
-                        <GradientStop Color="#FFB58578" Offset="0.9"></GradientStop>
-                        <GradientStop Color="#FFB58578" Offset="1"/>
-                    </LinearGradientBrush>
-                </Border.Background>
-            </Border>
-            <Label FontSize="16" Height="30" FontWeight="Bold" Width="Auto" VerticalContentAlignment="Center" HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Bottom" Content="Attendance"/>
-            <Image Source="/Resources/Images/diagram.png" Grid.Row="3" Stretch="Fill" HorizontalAlignment="Center" Width="204" Margin="0,5,0,10"/>
+           
+            <Label FontSize="16" Height="30" FontWeight="Medium" Width="Auto" VerticalContentAlignment="Center" HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Bottom" Content="Attendance (previous year)"/>
+
+
+             <Grid Background="Transparent" Grid.Row="3" HorizontalAlignment="Center" Width="360" Margin="0,0,0,30" Height="140">
+                                  
+                <lvc:CartesianChart Series="{Binding SeriesCollection}" LegendLocation="None">
+                    <lvc:CartesianChart.SeriesColors>
+                        <lvc:ColorsCollection>
+                            <Color>#22301a</Color>
+                        </lvc:ColorsCollection>
+                    </lvc:CartesianChart.SeriesColors>
+                    <lvc:CartesianChart.AxisX>
+                        <lvc:Axis Labels="{Binding Labels}" Foreground="#22301a" FontWeight="Medium" ShowLabels="True" MinValue="1" MaxValue="14">
+                            <lvc:Axis.Separator>
+                                <lvc:Separator Step="1">
+                                    <lvc:Separator.Resources>
+                                        <Style TargetType="lvc:Separator">
+                                            <Setter Property="StrokeThickness" Value="0"/>
+                                        </Style>
+                                    </lvc:Separator.Resources>
+                                </lvc:Separator>
+                            </lvc:Axis.Separator>
+                        </lvc:Axis>
+                    </lvc:CartesianChart.AxisX>
+                    <lvc:CartesianChart.AxisY>
+                        <lvc:Axis MinValue="0" Foreground="#22301a" FontWeight="Medium">
+                            <lvc:Axis.Separator>
+                                <lvc:Separator>
+                                    <lvc:Separator.Resources>
+                                        <Style TargetType="lvc:Separator">
+                                            <Setter Property="StrokeThickness" Value="1"/>
+                                            <Setter Property="Stroke" Value="#22301a"/>
+                                        </Style>
+                                    </lvc:Separator.Resources>
+                                </lvc:Separator>
+                            </lvc:Axis.Separator>
+                        </lvc:Axis>
+                    </lvc:CartesianChart.AxisY>
+                </lvc:CartesianChart>
+            </Grid>
 
         </Grid>
 

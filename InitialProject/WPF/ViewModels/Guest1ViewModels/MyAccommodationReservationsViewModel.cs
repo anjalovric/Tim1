@@ -97,7 +97,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             DateTime lastYear = currentDate.AddMonths(-13);
             while (lastYear <= currentDate)
             {
-                values.Add(lastYearAccommodationReservationsService.GetReservationsNumberByMonth(lastYear));
+                values.Add(lastYearAccommodationReservationsService.GetReservationsNumberByMonthForGuest(lastYear, guest1, currentDate));
                 Labels.Add(lastYear.ToString("MMM").ToUpper());
                 lastYear = lastYear.AddMonths(1);
             }
@@ -108,7 +108,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             {
                 ChartValues<int> columnValues = new ChartValues<int> { values[i] };
                 columnSeries.Values.Add(values[i]);
-                columnSeries.Title = "Reservations number";
+                columnSeries.Title = "Reservations";
             }
             SeriesCollection.Add(columnSeries);
         }
