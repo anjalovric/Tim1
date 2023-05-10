@@ -413,7 +413,6 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             TourRequests.Remove(tourRequests);
             tourRequests.Status = "Accepted";
             tourRequests.GuideId = guideService.GetByUsername(loggedInUser.Username).Id;
-            tourRequests.NewAccepted = true;
             tourRequests.InstanceId = savednsatnceId;
             ordinaryTourRequestsService.Update(tourRequests);
 
@@ -585,7 +584,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
                 if (TourInstance.Tour.Id == tourId)
                 {
                     tourInstance = TourInstance;
-                    Guest2Notification guest2Notification = new Guest2Notification(FindGuest2(), "Your tour request has been accepted. Click on details for more. You can delete it.", Guest2NotificationType.REQUEST_ACCEPTED, tourInstance, false);
+                    Guest2Notification guest2Notification = new Guest2Notification(FindGuest2(), "Your tour request has been accepted. Click on details for more. You can delete it.", Guest2NotificationType.REQUEST_ACCEPTED, tourInstance,false,-1);
                     guest2NotificationService.Save(guest2Notification);
                 }
             }

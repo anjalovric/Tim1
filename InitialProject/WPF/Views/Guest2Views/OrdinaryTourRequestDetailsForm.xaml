@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.WPF.Views.Guest2Views"
         mc:Ignorable="d"
-        Title="Details" Height="450" Width="700" WindowStartupLocation="CenterScreen" WindowStyle="None">
+        Title="Details" Height="450" Width="700" WindowStartupLocation="CenterScreen" Background="Transparent" AllowsTransparency="True" WindowStyle="None">
     <Window.Resources>
         <Style x:Key="button" TargetType="Button">
             <Setter Property="FontSize" Value="14"/>
@@ -84,9 +84,9 @@
             <Label Content="EndDate" FontWeight="DemiBold" Grid.Row="6" Grid.Column="0" Margin="62,43,0,43" Grid.RowSpan="3" Style="{StaticResource LabelStyle}"/>
             <Label Content="Description" FontWeight="DemiBold" Grid.Row="7" Grid.Column="0" Margin="62,43,0,43" Grid.RowSpan="3" Style="{StaticResource LabelStyle}"/>
             <Label Content="Duration" FontWeight="DemiBold" Grid.Row="2" Grid.Column="0" Margin="62,43,0,43" Grid.RowSpan="3" Style="{StaticResource LabelStyle}"/>
-        <Button HorizontalAlignment="Left" Grid.Row="9" BorderBrush="#FF9E98FF" BorderThickness="3" VerticalAlignment="Top"  Height="34" Width="132" FontWeight="Bold" FontSize="18" Command="{Binding CloseCommand}" Margin="190,41,0,0" Grid.Column="1" Grid.RowSpan="2">
+        <Button HorizontalAlignment="Left" Grid.Row="9" BorderBrush="#ffba00" Background="#ffba00" BorderThickness="3" VerticalAlignment="Top"  Height="34" Width="132" FontWeight="Bold" FontSize="18" Command="{Binding CloseCommand}" Margin="190,41,0,0" Grid.Column="1" Grid.RowSpan="2">
 
-                <Grid Background="#FF9E98FF" Width="132" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35">
+            <Grid Background="#ffba00" Width="132" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="16*"/>
                         <RowDefinition Height="19*"/>
@@ -96,7 +96,7 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <Image Source="/Resources/Images/close.png" VerticalAlignment="Top" HorizontalAlignment="Left" Width="26" Height="25" RenderTransformOrigin="0.5,0.5" Margin="10,3,0,0" Grid.RowSpan="2"/>
-                    <TextBlock Background="#FF9E98FF" Text="Close" Foreground="White" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" Width="78" Height="22" Margin="10,3,0,0" Grid.RowSpan="2" Grid.Column="1"/>
+                <TextBlock Background="#ffba00" Text="Close" Foreground="Black" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" Width="78" Height="22" Margin="10,3,0,0" Grid.RowSpan="2" Grid.Column="1"/>
                 </Grid>
 
             </Button>
@@ -104,7 +104,7 @@
             <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding TourInstance.Tour.Language}" Margin="10,10,65,10" Style="{StaticResource FontStyle}"/>
             <TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding TourInstance.Tour.MaxGuests}" Margin="10,10,65,10" Style="{StaticResource FontStyle}"/>
             <TextBlock Grid.Row="6" Grid.Column="1" Text="{Binding StartDate}" Margin="10,10,65,10" Style="{StaticResource FontStyle}"/>
-            <TextBlock Grid.Row="7" Grid.Column="1" Text="{Binding TourInstance.Date}" Margin="10,10,65,10" Style="{StaticResource FontStyle}"/>
+            <TextBlock Grid.Row="7" Grid.Column="1" Text="{Binding EndDate}" Margin="10,10,65,10" Style="{StaticResource FontStyle}"/>
             <TextBlock Grid.Row="8" Grid.Column="1" Text="{Binding TourInstance.Tour.Description}" Margin="10,10,65,10" Style="{StaticResource FontStyle}"/>
             <Image Source="/Resources/Images/information.png" Margin="61,20,242,23" Grid.RowSpan="2"/>
         </Grid>

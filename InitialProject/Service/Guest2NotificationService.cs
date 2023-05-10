@@ -35,15 +35,5 @@ namespace InitialProject.Service
         {
             return notificationRepository.GetByGuestId(id);
         }
-        public bool IsRequestAccepted(Guest2 guest)
-        {
-            List<Guest2Notification> notifications = notificationRepository.GetAll();
-            return notifications.Find(n => n.Type.Equals(Guest2NotificationType.REQUEST_ACCEPTED) && n.Guest2.Id == guest.Id) != null;
-        }
-        public bool IsConfirmPresence(Guest2 guest)
-        {
-            List<Guest2Notification> notifications = notificationRepository.GetAll();
-            return notifications.Find(n => n.Type.Equals(Guest2NotificationType.CONFIRM_PRESENCE) && n.Guest2.Id == guest.Id) != null;
-        }
     }
 }

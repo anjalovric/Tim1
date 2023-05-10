@@ -250,7 +250,10 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         {
             OrdinaryTourRequests.Clear();
             OrdinaryTourRequestsService requestService = new OrdinaryTourRequestsService();
-            OrdinaryTourRequests = requestService.GetByGuestId(Guest2.Id);
+            foreach(OrdinaryTourRequests ordinaryTourRequests in requestService.GetByGuestId(Guest2.Id))
+            {
+                 OrdinaryTourRequests.Add(ordinaryTourRequests);
+            }
         }
         public void CountryInput_SelectionChanged()
         {

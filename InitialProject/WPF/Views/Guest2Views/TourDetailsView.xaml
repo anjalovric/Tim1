@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
-        Title="TourDetails" Height="600" Width="668" d:Height="600" d:Width="668" WindowStartupLocation="CenterScreen" WindowStyle="None">
+        Title="TourDetails" Height="600" Width="668" d:Height="600" d:Width="668" Background="Transparent" AllowsTransparency="True" WindowStartupLocation="CenterScreen" WindowStyle="None">
     <Window.Resources>
         <Style x:Key="button" TargetType="Button">
             <Setter Property="FontSize" Value="14"/>
@@ -114,7 +114,7 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <Image Source="/Resources/Images/close.png" VerticalAlignment="Top" HorizontalAlignment="Left" Width="20" Height="20" RenderTransformOrigin="0.5,0.5" Margin="0,6,0,0" Grid.RowSpan="2"/>
-                <TextBlock Background="White" Foreground="#b46617" Text="CANCEL" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" Width="68" Height="29" Margin="20,3,0,0" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
+                <TextBlock Background="White" Foreground="Black" Text="Close" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" Width="68" Height="29" Margin="25,3,0,0" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
             </Grid>
         </Button>
         <Label Content="Start date:" Margin="48,335.5,0,0" Grid.Column="1" Width="90" Height="52" Style="{StaticResource LabelStyle}"/>

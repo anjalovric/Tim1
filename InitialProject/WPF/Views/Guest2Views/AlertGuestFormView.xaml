@@ -4,8 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View"
-        mc:Ignorable="d"
-        Title="Confirm" d:Height="450" d:Width="700" Height="450" Width="691" WindowStartupLocation="CenterScreen" WindowStyle="None">
+        mc:Ignorable="d" 
+        Title="Confirm" d:Height="450" d:Width="700" Height="450" Width="691" Background="Transparent" AllowsTransparency="True" WindowStartupLocation="CenterScreen" WindowStyle="None">
     <Window.Resources>
         <ImageBrush x:Key="cancel_icon" ImageSource="/Resources/Images/cancel.png"/>
         <Style x:Key="button" TargetType="Button">
@@ -33,57 +33,44 @@
             <RowDefinition Height="231*"/>
             <RowDefinition Height="56*"/>
         </Grid.RowDefinitions>
-        <Border BorderThickness="1 1 1 1" BorderBrush="White" CornerRadius="15" Grid.ColumnSpan="4" Grid.RowSpan="6" Margin="-12,-10,-13,-11" Background="White"/>
-        <Border BorderBrush="Gray" Background="Gray" BorderThickness="0 0 0 2" Grid.Row="0" Grid.ColumnSpan="4" Margin="-12,0,-13,10"/>
-        <Border BorderBrush="LightGray" BorderThickness="0 0 0 3" Grid.ColumnSpan="4" Margin="-12,51,-13,9" Grid.RowSpan="2"/>
-        <Label Content=" Confirmation" Background="Gray" Foreground="Black" Grid.Row="0" FontSize="20" FontWeight="Bold" Grid.ColumnSpan="4" Margin="0,0,0,20"/>
-        <TextBlock Text="   You can see more information about the tour below. Are you sure you want to confirm your presence?" Background="White" Foreground="Black" Grid.ColumnSpan="4" Margin="43,10,-13,18" Grid.Row="1"/>
-        <Image Source="/Resources/Images/help.png" Grid.Column="0" Margin="10,0,68,20" Grid.Row="1"/>
+        <Border BorderThickness="1 1 1 1" BorderBrush="#FF14503F" CornerRadius="15" Grid.ColumnSpan="4" Grid.RowSpan="6" Margin="-12,-10,-13,-11" Background="#FF14503F"/>
+        <Border BorderBrush="#0C3B2E" Background="#0C3B2E" BorderThickness="0 0 0 2" Grid.Row="0" Grid.ColumnSpan="4" Margin="-12,0,-13,10"/>
+        <Border BorderBrush="#FF14503F" Background="#FF14503F" BorderThickness="0 0 0 3" Grid.ColumnSpan="4" Margin="-12,51,-13,1" Grid.RowSpan="3"/>
+        <Label Content=" Confirmation" Background="#0C3B2E" Foreground="White" Grid.Row="0" FontSize="30" FontWeight="Bold" Grid.ColumnSpan="4" Margin="0,0,0,5"/>
+        <TextBlock FontSize="20" Background="#FF14503F" Foreground="White" Grid.ColumnSpan="4" Margin="43,0,-13,1" Grid.Row="1" Grid.RowSpan="2"><Run Text="   You can see more information about the tour below. Are you sure you "/><LineBreak/><Run Text="   want to confirm your presence?"/></TextBlock>
+        <Image Source="/Resources/Images/help.png" Grid.Column="0" Margin="9,10,69,10" Grid.Row="1"/>
         <Button Grid.Column="3" Grid.Row="0" Margin="0,8,10,20" HorizontalAlignment="Right" BorderBrush="Transparent" Width="32" Click="Button_Click" Style="{StaticResource button}">
             <Button.Background>
                 <ImageBrush ImageSource="/Resources/Images/close.png"/>
             </Button.Background>
         </Button>
 
-        <Button Content="   YES"   Command ="{Binding ConfirmCommand}" TextElement.FontWeight="Bold"  Margin="204,19,80,10" Grid.Row="5" Grid.Column="3">
-            <Button.Style>
-                <Style TargetType="Button">
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="Button">
-                                <Border CornerRadius="10" BorderThickness="1" BorderBrush="LightBlue" Background="LightBlue" Margin="0,-1,0,0">
-                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Border>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </Button.Style>
+        <Button   Command ="{Binding ConfirmCommand}" Background="#ffba00" TextElement.FontWeight="Bold"  Margin="204,19,80,10" Grid.Row="5" Grid.Column="3">
+            <Grid Background="#ffba00" Width="99" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Image Source="/Resources/Images/doneNew.png" VerticalAlignment="Top" HorizontalAlignment="Center" Width="24" Height="20" RenderTransformOrigin="0.5,0.5" Margin="0,2,0,0"/>
+                <TextBlock Background="#ffba00" Text="YES" VerticalAlignment="Top" FontSize="15" Grid.Column="1"  Foreground="Black" FontWeight="Bold" HorizontalAlignment="Left" Width="55" Height="26" Margin="3,2,0,0"/>
+            </Grid>
         </Button>
-        <Button Content="  NO" Command ="{Binding CancelCommand}" TextElement.FontWeight="Bold" Margin="275,19,10,10" Grid.Row="5" Grid.Column="3" >
-            <Button.Style>
-                <Style TargetType="Button">
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="Button">
-                                <Border CornerRadius="10" BorderThickness="1" BorderBrush="LightBlue" Background="LightBlue" Margin="0,-1,0,0">
-                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Border>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </Button.Style>
-        </Button>
-        <Border BorderBrush="White" Background="LightGray" BorderThickness="4,4,4,4" Grid.ColumnSpan="3" Margin="-12,43,2,49" Grid.RowSpan="5" Grid.Row="1"/>
-        <Label Content="Tour" Background="LightGray" Foreground="Black"  Grid.Column="0" Grid.Row="1" FontWeight="Bold" Margin="0,43,0,219" Grid.ColumnSpan="3" Grid.RowSpan="4"/>
-        <Label BorderBrush="White" x:Name="PointLabel" Foreground="Black" HorizontalAlignment="Center" Content="{Binding PointLabel}"  VerticalAlignment="Top" Height="216" Width="310" Grid.Row="4" Margin="0,4,0,0" Grid.ColumnSpan="3"/>
+        <Label Content="Tour" Background="#FF14503F" Foreground="White" FontSize="20"  Grid.Column="0" Grid.Row="3" FontWeight="Bold" Margin="20,9,0,219" Grid.ColumnSpan="3" Grid.RowSpan="2"/>
+        <Label BorderBrush="#FF14503F" x:Name="PointLabel" FontSize="20"  Foreground="White" HorizontalAlignment="Center" Content="{Binding PointLabel}" Background="#FF14503F"  VerticalAlignment="Top" Height="216" Width="310" Grid.Row="4" Margin="0,4,0,0" Grid.ColumnSpan="3"/>
         <Image Grid.Row="5" Grid.Column="3" Source="/Resources/Images/cancel.png" Margin="275,18,48,9" RenderTransformOrigin="0.477,0.347"/>
-        <Image Grid.Row="5" Grid.Column="3" Source="/Resources/Images/ok.png" Margin="204,18,118,9"/>
-        <Border BorderBrush="Gray" BorderThickness="2,0,0,0" Grid.Column="2" Grid.Row="1" Background="LightGray" Margin="189,43,0,0" Grid.RowSpan="4" Grid.ColumnSpan="2"/>
-        <Label Content="Guide" Foreground="Black" Background="LightGray"  Grid.Column="2" Grid.Row="1" FontWeight="Bold" Margin="196,43,-3,220" Grid.RowSpan="4" Grid.ColumnSpan="2"/>
-        <Label BorderBrush="White" x:Name="GuideLabel" Foreground="Black" Content="{Binding GuideLabel}" HorizontalAlignment="Center"  VerticalAlignment="Top" Height="216" Width="330" Grid.Row="4" Margin="0,4,0,0" Grid.Column="3"/>
-        <Border BorderBrush="LightGray" BorderThickness="0 3 0 0" Grid.Row="4" Grid.ColumnSpan="4" Margin="-12,230,-13,0" Grid.RowSpan="2"/>
+        <Image Grid.Row="5" Grid.Column="3" Source="/Resources/Images/doneNew.png" Margin="204,19,118,9"/>
+        <Label Content="Guide" Foreground="White" FontSize="20"  Background="#FF14503F"  Grid.Column="3" Grid.Row="3" FontWeight="Bold" Margin="10,10,-18,220" Grid.RowSpan="2"/>
+        <Label BorderBrush="#FF14503F" x:Name="GuideLabel" Foreground="White" FontSize="20" Content="{Binding GuideLabel}" HorizontalAlignment="Center"  VerticalAlignment="Top" Height="216" Width="330" Grid.Row="4" Margin="0,4,0,0" Grid.Column="3"/>
+        <Button Background="#ffba00" Command="{Binding CancelCommand}" Grid.Column="3" Grid.Row="5" Margin="275,19,0,9">
+            <Grid Background="#ffba00" Width="99" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Image Source="/Resources/Images/cancel.png" VerticalAlignment="Top" HorizontalAlignment="Center" Width="24" Height="20" RenderTransformOrigin="0.5,0.5" Margin="0,2,0,0"/>
+                <TextBlock Background="#ffba00" Text="NO" VerticalAlignment="Top" FontSize="15" Grid.Column="1"  Foreground="Black" FontWeight="Bold" HorizontalAlignment="Left" Width="55" Height="26" Margin="3,2,0,0"/>
+            </Grid>
+        </Button>
 
     </Grid>
 </Window>

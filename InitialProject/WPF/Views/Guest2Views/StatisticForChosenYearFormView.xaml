@@ -10,7 +10,7 @@
         <Style x:Key="FontStyle" TargetType="TextBlock">
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="TextWrapping" Value="Wrap"/>
-            <Setter Property="Background" Value="#151f2d"/>
+            <Setter Property="Background" Value="#0C3B2E"/>
             <Setter Property="Foreground" Value="White"/>
         </Style>
         <Style x:Key="TextStyle" TargetType="TextBlock">
@@ -20,21 +20,21 @@
             <Setter Property="Foreground" Value="White"/>
         </Style>
     </Window.Resources>
-    <Grid Background="#151f2d">
-        <Border BorderBrush="#7166f9" BorderThickness="2,2,2,2" Margin="44,344,729,233" CornerRadius="25,25,25,25"/>
+    <Grid Background="#0C3B2E">
+        <Border BorderBrush="#6d9773" BorderThickness="2,2,2,2" Margin="44,344,729,233" CornerRadius="25,25,25,25"/>
         <TextBlock Text="PERCENT OF ACCEPTED REQUESTS" Margin="74,352,743,368" Style="{StaticResource FontStyle}"/>
-        <Border BorderBrush="#7166f9" BorderThickness="2,2,2,2" Margin="310,344,475,233" CornerRadius="25,25,25,25"/>
+        <Border BorderBrush="#6d9773" BorderThickness="2,2,2,2" Margin="310,344,475,233" CornerRadius="25,25,25,25"/>
         <TextBlock Text="PERCENT OF INVALID REQUESTS" Margin="340,352,489,372" Style="{StaticResource FontStyle}"/>
-        <Border BorderBrush="#7166f9" BorderThickness="2,2,2,2" Margin="583,344,42,233" CornerRadius="25,25,25,25"/>
+        <Border BorderBrush="#6d9773" BorderThickness="2,2,2,2" Margin="583,344,42,233" CornerRadius="25,25,25,25"/>
         <TextBlock Text="AVERAGE NUMBER OF PEOPLE IN ACCEPTED REQUESTS" Margin="613,372,72,372" Style="{StaticResource FontStyle}"/>
         <TextBlock TextWrapping="Wrap" Margin="81,416,743,268" Text="{Binding acceptedRequest}" Style="{StaticResource TextStyle}"/>
         <TextBlock TextWrapping="Wrap" Margin="340,412,489,268" Text="{Binding invalidRequest}" Style="{StaticResource TextStyle}"/>
         <TextBlock Margin="697,416,156,268" Text="{Binding averageNumberOfPeople}" Style="{StaticResource TextStyle}"/>
         <Label Content="STATISTICS FOR" Margin="242,96,452,541" Foreground="White" FontWeight="Bold" FontSize="40"/>
         <Label Content="{Binding Path=chosenYear}" Margin="549,96,168,541" Foreground="White" FontWeight="Bold" FontSize="40"/>
-        <Button HorizontalAlignment="Left" Background="#151f2d" BorderBrush="#151f2d" VerticalAlignment="Top"  Height="29" Width="39" FontWeight="Bold" FontSize="18" Command="{Binding ConfirmCommand}" Margin="975,10,0,0" Click="Button_Click">
+        <Button HorizontalAlignment="Left" Background="#0C3B2E" BorderBrush="#0C3B2E" VerticalAlignment="Top"  Height="29" Width="39" FontWeight="Bold" FontSize="18" Command="{Binding ConfirmCommand}" Margin="975,10,0,0" Click="Button_Click">
 
-            <Grid Background="#151f2d" Width="30" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25">
+            <Grid Background="#0C3B2E" Width="30" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="16*"/>
 

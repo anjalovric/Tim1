@@ -11,6 +11,8 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows;
 using System.ComponentModel;
+using InitialProject.Domain.Model;
+using InitialProject.Service;
 
 namespace InitialProject.WPF.ViewModels.Guest2ViewModels
 {
@@ -186,7 +188,8 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             locationRepository = new LocationRepository();
             Location = new Location();
             SetTours(TourInstances);
-            ShowAlertGuestForm();
+            SetNotifications();
+            //ShowAlertGuestForm();
             Countries = new ObservableCollection<string>(locationRepository.GetAllCountries());
             CitiesByCountry = new ObservableCollection<string>();
             IsComboBoxCityEnabled = false;
@@ -419,6 +422,52 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
                 }
                 IsComboBoxCityEnabled = true;
             }
+        }
+        private Guest2 FindGuest2()
+        {
+            Guest2Service guest2Service = new Guest2Service();
+            List<Guest2> Guests = new List<Guest2>(guest2Service.GetAll());
+            Guest2NotificationService guest2NotificationService = new Guest2NotificationService();
+            if (Alerts.Count() != 0)
+            {
+                foreach (AlertGuest2 alert in Alerts)
+                {
+                    foreach(Guest2 guest in Guests)
+                    {
+                        if (alert.Guest2Id == guest2.Id)
+                            return guest2;
+                    }
+                }
+            }
+            return null;
+        }
+        private void SetNotifications()
+        {
+           
+            List<TourInstance> TourInstances = new List<TourInstance>();
+            Guest2NotificationService guest2NotificationService = new Guest2NotificationService();
+            TourInstances = tourInstanceRepository.GetAll();
+            Alerts = alertGuest2Repository.GetAll();
+            CheckPointService checkPointService = new CheckPointService();
+            List<CheckPoint> checkPoints = new List<CheckPoint>(checkPointService.GetAll());
+            if (Alerts.Count() != 0)
+            {
+                foreach (AlertGuest2 alert in Alerts)
+                {
+                    foreach(TourInstance TourInstance in TourInstances)
+                    {
+                        if (alert.Guest2Id == guest2.Id && alert.Informed == false && TourInstance.Id==alert.InstanceId)
+                        {
+                            Guest2Notification guest2Notification = new Guest2Notification(FindGuest2(), "You reserved this tour. Confirm your presence.", Guest2NotificationType.CONFIRM_PRESENCE,TourInstance, false,alert.Id);
+                            guest2NotificationService.Save(guest2Notification);
+                            alert.Informed = true;
+                            alertGuest2Repository.Update(alert);
+                        }
+                    }
+
+                }
+            }
+
         }
     }
 }
