@@ -1,18 +1,12 @@
 ﻿using InitialProject.Domain.Model;
 using InitialProject.Model;
 using InitialProject.Service;
-using InitialProject.WPF.Views.GuideViews;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
-using System.Windows.Input;
 using System.Windows.Media.Imaging;
 
 namespace InitialProject.WPF.ViewModels.GuideViewModels
@@ -414,9 +408,8 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             tourRequests.Status = "Accepted";
             tourRequests.GuideId = guideService.GetByUsername(loggedInUser.Username).Id;
             tourRequests.NewAccepted = true;
-            tourRequests.InstanceId = savednsatnceId;
+            tourRequests.TourInstanceId = savednsatnceId;
             ordinaryTourRequestsService.Update(tourRequests);
-
         }
         private void SaveInputs(Tour savedTour)
         {
@@ -588,8 +581,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
                     Guest2Notification guest2Notification = new Guest2Notification(FindGuest2(), "Your tour request has been accepted. Click on details for more. You can delete it.", Guest2NotificationType.REQUEST_ACCEPTED, tourInstance, false);
                     guest2NotificationService.Save(guest2Notification);
                 }
-            }
-           
+            }           
         }
     }
 }

@@ -21,9 +21,9 @@ namespace InitialProject.Domain.Model
         public string End { get; set; }  
         public int GuideId { get; set; }
         public DateTime CreateDate { get; set; }
-        public int InstanceId { get; set; }
+        public int TourInstanceId { get; set; }
         public bool NewAccepted { get; set; } 
-        public string New { get; set; }
+        public string IsNew { get; set; }
         public OrdinaryTourRequests()
         {
 
@@ -45,8 +45,8 @@ namespace InitialProject.Domain.Model
             GuideId = guideId;
             CreateDate = createDate;
             NewAccepted = newAccepted;
-            InstanceId = instanceId;
-            New = "";
+            TourInstanceId = instanceId;
+            IsNew = "";
         }
         public void FromCSV(string[] values)
         {
@@ -66,11 +66,11 @@ namespace InitialProject.Domain.Model
             GuideId= Convert.ToInt32(values[13]);
             CreateDate = Convert.ToDateTime(values[14]);
             NewAccepted= Convert.ToBoolean(values[15]);
-            InstanceId= Convert.ToInt32(values[16]);
+            TourInstanceId= Convert.ToInt32(values[16]);
         }
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(),Name,GuestId.ToString(), MaxGuests.ToString(), Location.Id.ToString(), Description, Language, StartDate.ToString(),EndDate.ToString(),Informed.ToString(),Status,Start,End,GuideId.ToString(),CreateDate.ToString(),NewAccepted.ToString(),InstanceId.ToString()};
+            string[] csvValues = { Id.ToString(),Name,GuestId.ToString(), MaxGuests.ToString(), Location.Id.ToString(), Description, Language, StartDate.ToString(),EndDate.ToString(),Informed.ToString(),Status,Start,End,GuideId.ToString(),CreateDate.ToString(),NewAccepted.ToString(),TourInstanceId.ToString()};
             return csvValues;
         }
     }
