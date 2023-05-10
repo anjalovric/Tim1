@@ -9,14 +9,13 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Service
 {
-    public class RequestStatisticsService
+    public class YearlyRequestStatisticsService
     {
-        public double AverageNumberOfPeopleInAcceptedRequests(Guest2 Guest2)
+        public double AverageNumberOfPeopleInAcceptedRequests(int year, Guest2 Guest2)
         {
             int counter = 0;
             double averageNumberOfPeople = 0;
-            OrdinaryTourRequestsService ordinaryTourRequestsService=new OrdinaryTourRequestsService();
-            List<OrdinaryTourRequests> ordinaryTours=new List<OrdinaryTourRequests>(ordinaryTourRequestsService.GetByGuestId(Guest2.Id));
+            List<OrdinaryTourRequests> ordinaryTours=GetRequestsForChosenYear(year, Guest2);
             foreach (OrdinaryTourRequests request in ordinaryTours)
             {
                 if (request.Status == "Accepted" && request.GuestId == Guest2.Id)
@@ -29,11 +28,10 @@ namespace InitialProject.Service
                 return averageNumberOfPeople;
             return (averageNumberOfPeople /= counter).Round(2);
         }
-        public double ProcentOfInvalidRequest(Guest2 Guest2)
+        public double ProcentOfInvalidRequest(int year, Guest2 Guest2)
         {
             double invalidRequest = 0;
-            OrdinaryTourRequestsService ordinaryTourRequestsService = new OrdinaryTourRequestsService();
-            List<OrdinaryTourRequests> ordinaryTours = new List<OrdinaryTourRequests>(ordinaryTourRequestsService.GetByGuestId(Guest2.Id));
+            List<OrdinaryTourRequests> ordinaryTours = GetRequestsForChosenYear(year, Guest2);
             foreach (OrdinaryTourRequests request in ordinaryTours)
             {
                 if (request.Status == "Invalid" && request.GuestId == Guest2.Id)
@@ -46,11 +44,10 @@ namespace InitialProject.Service
             invalidRequest /= ordinaryTours.Count();
             return invalidRequest *= 100;
         }
-        public double ProcentOfAcceptedRequest(Guest2 Guest2)
+        public double ProcentOfAcceptedRequest(int year, Guest2 Guest2)
         {
             double acceptedRequest = 0;
-            OrdinaryTourRequestsService ordinaryTourRequestsService = new OrdinaryTourRequestsService();
-            List<OrdinaryTourRequests> ordinaryTours = new List<OrdinaryTourRequests>(ordinaryTourRequestsService.GetByGuestId(Guest2.Id));
+            List<OrdinaryTourRequests> ordinaryTours = GetRequestsForChosenYear(year, Guest2);
             foreach (OrdinaryTourRequests request in ordinaryTours)
             {
                 if (request.Status == "Accepted" && request.GuestId == Guest2.Id)
@@ -62,6 +59,17 @@ namespace InitialProject.Service
                 return acceptedRequest;
             acceptedRequest /= ordinaryTours.Count();
             return acceptedRequest *= 100;
+        }
+        public List<OrdinaryTourRequests> GetRequestsForChosenYear(int year, Guest2 guest)
+        {
+            List<OrdinaryTourRequests> ordinaryTours = new List<OrdinaryTourRequests>();
+            OrdinaryTourRequestsService ordinaryTourRequestsService = new OrdinaryTourRequestsService();
+            foreach (OrdinaryTourRequests request in ordinaryTourRequestsService.GetByGuestId(guest.Id))
+            {
+                if (request.StartDate.Year == year)
+                    ordinaryTours.Add(request);
+            }
+            return ordinaryTours;
         }
     }
 }
