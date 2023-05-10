@@ -84,7 +84,7 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <Image Source="/Resources/Images/back.png" HorizontalAlignment="Left" Margin="10,0,0,0" Width="26" Height="22" Grid.Column="0"/>
-                    <TextBlock Background="#8c9d75" Text="BACK" Grid.Column="1" VerticalAlignment="Center" FontSize="18" Margin="8,0,0,0"  Foreground="#22301a" FontWeight="Bold" HorizontalAlignment="Center" Width="Auto"/>
+                    <TextBlock Background="#8c9d75" Text="Back" Grid.Column="1" VerticalAlignment="Center" FontSize="18" Margin="8,0,0,0"  Foreground="#22301a" FontWeight="Bold" HorizontalAlignment="Center" Width="Auto"/>
                 </Grid>
             </Button>
 
@@ -105,7 +105,7 @@
                             </TransformGroup>
                         </Image.RenderTransform>
                     </Image>
-                    <TextBlock Background="#8c9d75" Text="SEND" Grid.Column="0" VerticalAlignment="Center" FontSize="18"  Foreground="#22301a" Margin="10,0,0,0" FontWeight="Bold" HorizontalAlignment="Left" Width="58"/>
+                    <TextBlock Background="#8c9d75" Text="Send" Grid.Column="0" VerticalAlignment="Center" FontSize="18"  Foreground="#22301a" Margin="10,0,0,0" FontWeight="Bold" HorizontalAlignment="Left" Width="58"/>
                 </Grid>
             </Button>
 

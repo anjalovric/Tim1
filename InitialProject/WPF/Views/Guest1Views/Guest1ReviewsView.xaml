@@ -44,6 +44,10 @@
             <Setter Property="RowHeight" Value="30"></Setter>
             <Setter Property="FontWeight" Value="Medium"></Setter>
             <Setter Property="RowBackground" Value="#FFFCECB9"></Setter>
+            <Setter Property="CanUserReorderColumns" Value="False"></Setter>
+            <Setter Property="CanUserResizeColumns" Value="False"></Setter>
+            <Setter Property="CanUserResizeRows" Value="False"></Setter>
+            <Setter Property="CanUserSortColumns" Value="False"></Setter>
             <Setter Property="Background">
                 <Setter.Value>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
