@@ -18,6 +18,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
 {
     public class ShowToursViewModel:INotifyPropertyChanged
     {
+        public RelayCommand CountryInputSelectionChangedCommand { get; set; }
         private ObservableCollection<TourInstance> tourInstances;
         public ObservableCollection<TourInstance> TourInstances
         {
@@ -205,7 +206,8 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             RestartCommand = new RelayCommand(Restart_Executed, CanExecute);
             IncrementCommand=new RelayCommand(IncrementCapacityNumber_Executed,CanExecute);
             DecrementCommand=new RelayCommand(DecrementCapacityNumber_Executed, CanExecute);
-            ViewDetailsCommand=new RelayCommand(ViewDetails_Executed,CanExecute);    
+            ViewDetailsCommand=new RelayCommand(ViewDetails_Executed,CanExecute);
+            CountryInputSelectionChangedCommand = new RelayCommand(CountryInputSelectionChanged_Executed, CanExecute);
         }
         private void SetTourInstances(ObservableCollection<TourInstance> TourInstances)
         {
@@ -411,7 +413,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             SelectedLanguage = null;
             MaxGuests = "";
         }
-        public void CountryInput_SelectionChanged()
+        public void CountryInputSelectionChanged_Executed(object sender)
         {
             if (Country != null)
             {

@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using System.Printing;
 using System.DirectoryServices.ActiveDirectory;
+using InitialProject.Serializer;
 
 namespace InitialProject.Service
 {
@@ -36,6 +37,10 @@ namespace InitialProject.Service
         public ObservableCollection<Guest2Notification> GetByGuestId(int id)
         {
             return notificationRepository.GetByGuestId(id);
+        }
+        public void Update(Guest2Notification notification)
+        {
+            notificationRepository.Update(notification);
         }
     }
 }

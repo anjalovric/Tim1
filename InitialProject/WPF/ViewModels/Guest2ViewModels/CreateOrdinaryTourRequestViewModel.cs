@@ -15,6 +15,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
 {
     public class CreateOrdinaryTourRequestViewModel:INotifyPropertyChanged
     {
+        public RelayCommand CountryInputSelectionChangedCommand { get; set; }
         public ObservableCollection<string> Countries { get; set; }
         public ObservableCollection<string> CitiesByCountry { get; set; }
         private LocationRepository locationRepository;
@@ -186,6 +187,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             CancelCommand = new RelayCommand(Cancel_Executed, CanExecute);
             IncrementCommand = new RelayCommand(Increment_Executed, CanExecute);
             DecrementCommand = new RelayCommand(Decrement_Executed, CanExecute);
+            CountryInputSelectionChangedCommand = new RelayCommand(CountryInputSelectionChanged_Executed, CanExecute);
         }
         private void AddLanguages()
         {
@@ -255,7 +257,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
                  OrdinaryTourRequests.Add(ordinaryTourRequests);
             }
         }
-        public void CountryInput_SelectionChanged()
+        public void CountryInputSelectionChanged_Executed(object sender)
         {
             if (Country != null)
             {

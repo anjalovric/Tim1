@@ -76,5 +76,14 @@ namespace InitialProject.Repository
             }
             return notifications;
         }
+        public void Update(Guest2Notification notification)
+        {
+            _notifications = _serializer.FromCSV(FilePath);
+            Guest2Notification current = _notifications.Find(c => c.Id == notification.Id);
+            int index = _notifications.IndexOf(current);
+            _notifications.Remove(current);
+            _notifications.Insert(index, notification);
+            _serializer.ToCSV(FilePath, _notifications);
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using InitialProject.Domain.Model;
 using InitialProject.Model;
 using InitialProject.Service;
+using InitialProject.WPF.Views.Guest2Views;
 using MathNet.Numerics;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace InitialProject.WPF.ViewModels.Guest2ViewModels
 {
@@ -22,11 +24,13 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         public double invalidRequest { get; set; }
         public double averageNumberOfPeople { get; set; }
         public int chosenYear { get; set; }
+        public RelayCommand CloseCommand { get; set; }
         public StatisticForChosenYearViewModel(Model.Guest2 guest2, string year)
         {
             Year = Convert.ToInt32(year);
             chosenYear = Convert.ToInt32(year);    
             Guest2 = guest2;
+            CloseCommand = new RelayCommand(Close_Executed,CanExecute);
             acceptedRequest = 0;
             invalidRequest = 0;
             averageNumberOfPeople = 0;
@@ -34,6 +38,14 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             ordinaryTourRequestsService = new OrdinaryTourRequestsService();
             ordinaryTours = new List<OrdinaryTourRequests>();
             StatisticsForChoosenYear();
+        }
+        private bool CanExecute(object sender)
+        {
+            return true;
+        }
+        private void Close_Executed(object sender)
+        {
+            Application.Current.Windows.OfType<StatisticForChosenYearFormView>().FirstOrDefault().Close();
         }
         private void StatisticsForChoosenYear()
         {

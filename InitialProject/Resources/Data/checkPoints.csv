@@ -29,8 +29,8 @@
 29|k2|False|10|2
 30|k3|False|10|3
 31|p1|True|11|1
-32|p2|False|11|2
-33|p3|False|11|3
+32|p2|True|11|2
+33|p3|True|11|3
 34|u1|False|12|1
 35|u2|False|12|2
 36|u3|False|12|3

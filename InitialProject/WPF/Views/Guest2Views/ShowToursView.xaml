@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:val="clr-namespace:InitialProject.WPF.Validations.Guest2Validations" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
               xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Royale" xmlns:System="clr-namespace:System;assembly=netstandard" xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:local="clr-namespace:InitialProject.View" xmlns:guest2viewmodels="clr-namespace:InitialProject.WPF.ViewModels.Guest2ViewModels"
              mc:Ignorable="d" 
@@ -249,7 +250,13 @@
         <Label Content="Duration" Grid.Column="1"  Grid.Row="0" Margin="414,90,0,0" Style="{StaticResource LabelStyle}" Foreground="White" Width="98"/>
         <Label Content="Language" Grid.Column="1"  Margin="0,170,0,0" RenderTransformOrigin="0.413,0.366" Style="{StaticResource LabelStyle}" Foreground="White"/>
         <Label Content="Capacity" Grid.Column="1"  Margin="211,170,0,0" Style="{StaticResource LabelStyle}" Foreground="White"/>
-        <ComboBox x:Name="countryInput"  ItemsSource="{Binding Countries}" BorderBrush="#7166f9" BorderThickness="3,3,3,3" SelectedItem="{Binding Country}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" HorizontalAlignment="Left" Margin="55,130,0,0" VerticalAlignment="Top" Width="134" SelectionChanged="CountryInput_SelectionChanged" Height="22" Grid.ColumnSpan="2"/>
+        <ComboBox x:Name="countryInput"  ItemsSource="{Binding Countries}" BorderBrush="#7166f9" BorderThickness="3,3,3,3" SelectedItem="{Binding Country}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" HorizontalAlignment="Left" Margin="55,130,0,0" VerticalAlignment="Top" Width="134" Height="22" Grid.ColumnSpan="2">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction Command="{Binding CountryInputSelectionChangedCommand}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </ComboBox>
         <Label Content="Country"  Margin="55,90,0,0" Style="{StaticResource LabelStyle}" Foreground="White" Grid.ColumnSpan="2"/>
         <Button x:Name="decrementCapacityNumber" Grid.Column="1"  Style="{StaticResource borderStyle}" Content="-" Margin="211,201,0,0" Width="20" Command="{Binding DecrementCommand}" Height="22"/>
         <Button x:Name="incrementCapacityNumber" Grid.Column="1"  Style="{StaticResource borderStyle}" Content="+" Margin="325,201,0,0" Width="20" Command="{Binding IncrementCommand}" RenderTransformOrigin="-1.284,0.612" Height="22"/>

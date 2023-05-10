@@ -14,5 +14,6 @@ namespace InitialProject.Domain.RepositoryInterfaces
         public Guest2Notification Save(Guest2Notification notification);
         public void Delete(Guest2Notification notification);
         public ObservableCollection<Guest2Notification> GetByGuestId(int id);
+        public void Update(Guest2Notification notification);
     }
 }
