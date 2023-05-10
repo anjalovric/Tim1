@@ -10,6 +10,7 @@
     </Style>
     <Style TargetType="DataGridCell" x:Key="DataGridCellStyle" >
         <Setter Property="Background" Value="LightGray" />
+        <Setter Property="BorderThickness" Value="0.5, 0.5, 0.5, 0.5" />
     </Style>
     
     <Style TargetType="DataGrid" x:Key="DataGridStyle">
@@ -20,8 +21,10 @@
         <Setter Property="CellStyle" Value="{StaticResource DataGridCellStyle}" />
         <Setter Property="HeadersVisibility" Value="Column" />
         <Setter Property="AutoGenerateColumns" Value="False" />
+        <Setter Property="VerticalGridLinesBrush" Value="Gray" />
+        <Setter Property="HorizontalGridLinesBrush" Value="Gray" />
     </Style>
-
+    
     <Style TargetType="ListBox" x:Key="ListBoxStyle">
         <Setter Property="BorderBrush" Value="LightGray" />
         <Setter Property="BorderThickness" Value="2" />
