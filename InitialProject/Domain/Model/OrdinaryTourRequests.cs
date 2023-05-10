@@ -21,12 +21,13 @@ namespace InitialProject.Domain.Model
         public int GuideId { get; set; }
         public DateTime CreateDate { get; set; }
         public int InstanceId { get; set; }
+        public bool NewAccepted { get; set; } 
         public string New { get; set; }
         public OrdinaryTourRequests()
         {
 
         }
-        public OrdinaryTourRequests(string name,int guestId, int maxGuests, Location location, string description, string language, DateTime startDate, DateTime endDate, bool informed, string status, string start, string end, int guideId, DateTime createDate, bool newAccepted, int instanceId)
+        public OrdinaryTourRequests(string name,int guestId, int maxGuests, Location location, string description, string language, DateTime startDate, DateTime endDate, string status, string start, string end, int guideId, DateTime createDate, bool newAccepted, int instanceId)
         {
             Name = name;
             GuestId = guestId;
@@ -41,6 +42,7 @@ namespace InitialProject.Domain.Model
             End = end;
             GuideId = guideId;
             CreateDate = createDate;
+            NewAccepted = newAccepted;
             InstanceId = instanceId;
             New = "";
         }
@@ -60,11 +62,12 @@ namespace InitialProject.Domain.Model
             End = values[11];
             GuideId= Convert.ToInt32(values[12]);
             CreateDate = Convert.ToDateTime(values[13]);
-            InstanceId= Convert.ToInt32(values[14]);
+            NewAccepted= Convert.ToBoolean(values[14]);
+            InstanceId= Convert.ToInt32(values[15]);
         }
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(),Name,GuestId.ToString(), MaxGuests.ToString(), Location.Id.ToString(), Description, Language, StartDate.ToString(),EndDate.ToString(),Status,Start,End,GuideId.ToString(),CreateDate.ToString(),InstanceId.ToString()};
+            string[] csvValues = { Id.ToString(),Name,GuestId.ToString(), MaxGuests.ToString(), Location.Id.ToString(), Description, Language, StartDate.ToString(),EndDate.ToString(),Status,Start,End,GuideId.ToString(),CreateDate.ToString(),NewAccepted.ToString(),InstanceId.ToString()};
             return csvValues;
         }
     }

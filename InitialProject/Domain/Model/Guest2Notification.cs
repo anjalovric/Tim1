@@ -19,8 +19,9 @@ namespace InitialProject.Domain.Model
         public TourInstance TourInstance { get; set; }
         public int AlertGuest2Id { get; set; }
         public bool Deleted { get; set; }
+        public int RequestId { get; set; }
         public Guest2Notification() { }
-        public Guest2Notification(Guest2 guest2,string text, Guest2NotificationType type,TourInstance tourInstance,bool deleted, int alertId)
+        public Guest2Notification(Guest2 guest2,string text, Guest2NotificationType type,TourInstance tourInstance,bool deleted, int alertId,int requestId)
         {
       
             Guest2 = guest2;
@@ -29,6 +30,7 @@ namespace InitialProject.Domain.Model
             TourInstance = tourInstance;   
             Deleted = deleted;
             AlertGuest2Id = alertId;
+            RequestId = requestId;
         }
 
         public void FromCSV(string[] values)
@@ -42,10 +44,11 @@ namespace InitialProject.Domain.Model
             TourInstance.Id = Convert.ToInt32(values[4]);
             Deleted = Convert.ToBoolean(values[5]);
             AlertGuest2Id = Convert.ToInt32(values[6]);
+            RequestId= Convert.ToInt32(values[7]);
         }
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), Guest2.Id.ToString(),Text, Type.ToString(),TourInstance.Id.ToString(), Deleted.ToString(), AlertGuest2Id.ToString() };
+            string[] csvValues = { Id.ToString(), Guest2.Id.ToString(),Text, Type.ToString(),TourInstance.Id.ToString(), Deleted.ToString(), AlertGuest2Id.ToString(),RequestId.ToString() };
             return csvValues;
         }
     }
