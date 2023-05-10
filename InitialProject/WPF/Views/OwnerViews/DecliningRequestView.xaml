@@ -24,5 +24,7 @@
         <Label Content="Explanation (optional): " HorizontalAlignment="Left" Margin="30,169,0,0" VerticalAlignment="Top" Width="174"/>
         <TextBox HorizontalAlignment="Center" Text="{Binding Path= Explanation, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top" Height="118" Width="348" BorderThickness="1" BorderBrush="DarkGray" Margin="0,200,0,0"/>
         <Button Command="{Binding ConfirmCommand}" Name="ConfirmButton" Content="Confirm" HorizontalAlignment="Left" Margin="265,419,0,0" VerticalAlignment="Top" Width="124" Height="41" Style="{StaticResource BasicButton}"/>
+        <Image Source="/Resources/Images/declineImage.jpg" Stretch="Fill" HorizontalAlignment="Left" Height="222" Margin="0,367,0,0" VerticalAlignment="Top" Width="260" >
+        </Image>
     </Grid>
 </Page>

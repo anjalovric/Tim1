@@ -14,11 +14,11 @@ namespace InitialProject.Service
     public class OrdinaryTourRequestsService
     {
         private IOrdinaryTourRequestsRepository requestRepository;
-        private List<OrdinaryTourRequests> requests;
+       
         public OrdinaryTourRequestsService()
         {
             requestRepository = Injector.CreateInstance<IOrdinaryTourRequestsRepository>();
-            requests = GetAll();
+            
         }
         public OrdinaryTourRequests Save(OrdinaryTourRequests request)
         {

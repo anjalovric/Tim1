@@ -92,7 +92,7 @@
             <ColumnDefinition Width="10*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Border Background="#151f2d" BorderBrush="#151f2d" Grid.ColumnSpan="3" CornerRadius="25 25 25 25" BorderThickness="4,4,4,4"/>
+        <Border Background="#0C3B2E" BorderBrush="#0C3B2E" Grid.ColumnSpan="3" CornerRadius="25 25 25 25" BorderThickness="4,4,4,4"/>
         <Rectangle Fill="White" Grid.Column="1" RadiusX="10" RadiusY="10" Margin="0,193,0,0" Height="360" VerticalAlignment="Top"/>
         <DataGrid x:Name="TourListDataGrid" Grid.Column="1" BorderBrush="Transparent" ItemsSource="{Binding Path=CompletedTours,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=Selected}" IsReadOnly="True" AutoGenerateColumns="False" VerticalAlignment="Top" HorizontalAlignment="Center" Height="343" Width="556" Margin="0,202,0,0" HorizontalScrollBarVisibility="Hidden" GridLinesVisibility="None" ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle2}" CellStyle="{StaticResource DataGridCellStyle2}" Style="{StaticResource DataGridStyle}" RowStyle="{StaticResource DataGridRowStyle2}">
             <DataGrid.Columns>
@@ -136,6 +136,6 @@
 
         </DataGrid>
         <Label Content="Finished tours" Grid.Column="1" Foreground="White" FontWeight="Bold" FontSize="20" HorizontalAlignment="Left" Margin="0,36,0,0" VerticalAlignment="Top" Width="228"/>
-        <TextBlock Foreground="#7166f9" Grid.Column="1" HorizontalAlignment="Left" Margin="0,100,0,0" VerticalAlignment="Top" Width="483" Height="36"><Run Text="U nastavku mozete vidjeti sve ture koje su zavrsene a na kojima ste se pojavili. Iste ture "/><LineBreak/><Run Text="mozete i ocijeniti."/></TextBlock>
+        <TextBlock Foreground="White" Grid.Column="1" HorizontalAlignment="Left" Margin="0,100,0,0" VerticalAlignment="Top" Width="483" Height="36"><Run Text="U nastavku mozete vidjeti sve ture koje su zavrsene a na kojima ste se pojavili. Iste ture "/><LineBreak/><Run Text="mozete i ocijeniti."/></TextBlock>
     </Grid>
 </UserControl>

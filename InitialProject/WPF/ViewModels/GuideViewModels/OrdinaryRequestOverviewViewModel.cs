@@ -148,7 +148,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             {
                 foreach (RequestNotification requestNotification in requestNotificationService.GetAll())
                     if (requestNotification.Count == 1 && request.Id == requestNotification.RequestId)
-                        request.New = "🆕";
+                        request.IsNew = "🆕";
             }
         }
         private void MakeRequestsList()

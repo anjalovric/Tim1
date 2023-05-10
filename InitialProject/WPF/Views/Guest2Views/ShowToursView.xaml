@@ -79,7 +79,7 @@
         <Style x:Key="borderStyle" TargetType="Button">
             <Setter Property="BorderBrush" Value="LightGray"/>
             <Setter Property="BorderThickness" Value="3,3,3,3"/>
-            <Setter Property="Background" Value="#dbc9ab"/>
+            <Setter Property="Background" Value="LightGray"/>
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="VerticalAlignment" Value="Top"/>
         </Style>
@@ -111,7 +111,7 @@
             <ColumnDefinition Width="10*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Border Background="#151f2d" BorderBrush="#151f2d" Grid.ColumnSpan="3" CornerRadius="25 25 25 25" BorderThickness="4,4,4,4"/>
+        <Border Background="#0C3B2E" BorderBrush="#0C3B2E" Grid.ColumnSpan="3" CornerRadius="25 25 25 25" BorderThickness="4,4,4,4"/>
 
         <Rectangle Fill="White" RadiusX="10" Grid.Column="1" RadiusY="10" Margin="0,332,0,28">
         </Rectangle>
@@ -124,8 +124,8 @@
                 <DataGridTemplateColumn x:Name="reservation" Header="Reservation"  Width="1.2*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button FontWeight="Bold" FontSize="12" Width="70" Height="30" Command="{Binding Path=DataContext.ReserveCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}">
-                                <Grid Background="#929195" HorizontalAlignment="Left" VerticalAlignment="Top">
+                            <Button BorderBrush="#ffba00" Background="#ffba00" BorderThickness="3" FontWeight="Bold" FontSize="12" Width="70" Height="30" Command="{Binding Path=DataContext.ReserveCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}">
+                                <Grid Background="#ffba00" HorizontalAlignment="Left" VerticalAlignment="Top">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="16*"/>
                                         <RowDefinition Height="19*"/>
@@ -144,7 +144,7 @@
                                             </TransformGroup>
                                         </Image.RenderTransform>
                                     </Image>
-                                    <TextBlock Background="#929195" Text="Reserve" VerticalAlignment="Top" FontSize="12" FontWeight="Bold" HorizontalAlignment="Left" Width="70" Height="29" Margin="0,3,0,0" Grid.RowSpan="2" Grid.Column="1"/>
+                                    <TextBlock Background="#ffba00" Text="Reserve" VerticalAlignment="Top" FontSize="12" FontWeight="Bold" HorizontalAlignment="Left" Width="70" Height="29" Margin="0,3,0,0" Grid.RowSpan="2" Grid.Column="1"/>
                                 </Grid>
 
                             </Button>
@@ -155,8 +155,8 @@
                 <DataGridTemplateColumn x:Name="detailsView" Header="Details" Width="0.9*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button FontWeight="Bold" FontSize="12" Width="70" Height="30" Command="{Binding Path=DataContext.ViewDetailsCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}">
-                                <Grid Background="#929195" HorizontalAlignment="Left" VerticalAlignment="Top">
+                            <Button FontWeight="Bold" BorderBrush="#ffba00" Background="#ffba00" BorderThickness="3" FontSize="12" Width="70" Height="30" Command="{Binding Path=DataContext.ViewDetailsCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}">
+                                <Grid Background="#ffba00" HorizontalAlignment="Left" VerticalAlignment="Top">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="16*"/>
                                         <RowDefinition Height="19*"/>
@@ -175,7 +175,7 @@
                                             </TransformGroup>
                                         </Image.RenderTransform>
                                     </Image>
-                                    <TextBlock Background="#929195" Text=" View" VerticalAlignment="Top" FontSize="12" FontWeight="Bold" HorizontalAlignment="Left" Width="70" Height="29" Margin="0,3,0,0" Grid.RowSpan="2" Grid.Column="1"/>
+                                    <TextBlock Background="#ffba00" Text=" View" VerticalAlignment="Top" FontSize="12" FontWeight="Bold" HorizontalAlignment="Left" Width="70" Height="29" Margin="0,3,0,0" Grid.RowSpan="2" Grid.Column="1"/>
                                 </Grid>
 
                             </Button>
@@ -188,7 +188,7 @@
 
         </DataGrid>
         <ComboBox x:Name="cityInput" Grid.Column="1"  BorderBrush="#7166f9" BorderThickness="3,3,3,3" ItemsSource="{Binding CitiesByCountry}" SelectedItem="{Binding City}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" HorizontalAlignment="Center" Margin="0,130,0,0" VerticalAlignment="Top" Width="134" Height="22" IsEnabled="{Binding IsComboBoxCityEnabled}"/>
-        <TextBox x:Name="durationInput" Grid.Column="1"  Style="{StaticResource BorderStyle}" Background="#dbc9ab" HorizontalAlignment="Left" Margin="414,130,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="143" Height="22" RenderTransformOrigin="0.496,0.294" Grid.ColumnSpan="2">
+        <TextBox x:Name="durationInput" Grid.Column="1" Background="LightGray"  Style="{StaticResource BorderStyle}" HorizontalAlignment="Left" Margin="414,130,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="143" Height="22" RenderTransformOrigin="0.496,0.294" Grid.ColumnSpan="2">
             <TextBox.Text>
                 <Binding Path="Duration" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -214,9 +214,9 @@
                 </ControlTemplate>
             </Validation.ErrorTemplate>
         </TextBox>
-        <ComboBox x:Name="languageInput" Grid.Column="1"  BorderBrush="LightGray" ItemsSource="{Binding Languages}" SelectedItem="{Binding SelectedLanguage}" BorderThickness="3,3,3,3" Background="#FFFCECB9" HorizontalAlignment="Left" Margin="0,201,0,0" VerticalAlignment="Top" Width="134" Height="22" RenderTransformOrigin="-0.983,1.416"/>
+        <ComboBox x:Name="languageInput" Grid.Column="1"  BorderBrush="LightGray" ItemsSource="{Binding Languages}" SelectedItem="{Binding SelectedLanguage}" BorderThickness="3,3,3,3" Background="LightGray" HorizontalAlignment="Left" Margin="0,201,0,0" VerticalAlignment="Top" Width="134" Height="22" RenderTransformOrigin="-0.983,1.416"/>
         <Border BorderBrush="LightGray" Grid.Column="1"  BorderThickness="3,3,3,3" Margin="236,201,236,377">
-            <TextBox x:Name="capacityNumber" Grid.Column="1"  Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="81" TextAlignment="Center" Height="22" Background="#dbc9ab">
+            <TextBox x:Name="capacityNumber" Grid.Column="1"  Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="81" TextAlignment="Center" Height="22" Background="LightGray">
                 <TextBox.Text>
                     <Binding Path="MaxGuests" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay" NotifyOnValidationError="True">
                         <Binding.ValidationRules>
@@ -245,16 +245,16 @@
         </Border>
 
 
-        <Label Content="City" Grid.Column="1"  Grid.Row="0" Margin="211,90,0,0" RenderTransformOrigin="5.351,0.387" Style="{StaticResource LabelStyle}" Foreground="#7166f9"/>
-        <Label Content="Duration" Grid.Column="1"  Grid.Row="0" Margin="414,90,0,0" Style="{StaticResource LabelStyle}" Foreground="#7166f9" Width="98"/>
-        <Label Content="Language" Grid.Column="1"  Margin="0,170,0,0" RenderTransformOrigin="0.413,0.366" Style="{StaticResource LabelStyle}" Foreground="#7166f9"/>
-        <Label Content="Capacity" Grid.Column="1"  Margin="211,170,0,0" Style="{StaticResource LabelStyle}" Foreground="#7166f9"/>
+        <Label Content="City" Grid.Column="1"  Grid.Row="0" Margin="211,90,0,0" RenderTransformOrigin="5.351,0.387" Style="{StaticResource LabelStyle}" Foreground="White"/>
+        <Label Content="Duration" Grid.Column="1"  Grid.Row="0" Margin="414,90,0,0" Style="{StaticResource LabelStyle}" Foreground="White" Width="98"/>
+        <Label Content="Language" Grid.Column="1"  Margin="0,170,0,0" RenderTransformOrigin="0.413,0.366" Style="{StaticResource LabelStyle}" Foreground="White"/>
+        <Label Content="Capacity" Grid.Column="1"  Margin="211,170,0,0" Style="{StaticResource LabelStyle}" Foreground="White"/>
         <ComboBox x:Name="countryInput"  ItemsSource="{Binding Countries}" BorderBrush="#7166f9" BorderThickness="3,3,3,3" SelectedItem="{Binding Country}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" HorizontalAlignment="Left" Margin="55,130,0,0" VerticalAlignment="Top" Width="134" SelectionChanged="CountryInput_SelectionChanged" Height="22" Grid.ColumnSpan="2"/>
-        <Label Content="Country"  Margin="55,90,0,0" Style="{StaticResource LabelStyle}" Foreground="#7166f9" Grid.ColumnSpan="2"/>
+        <Label Content="Country"  Margin="55,90,0,0" Style="{StaticResource LabelStyle}" Foreground="White" Grid.ColumnSpan="2"/>
         <Button x:Name="decrementCapacityNumber" Grid.Column="1"  Style="{StaticResource borderStyle}" Content="-" Margin="211,201,0,0" Width="20" Command="{Binding DecrementCommand}" Height="22"/>
         <Button x:Name="incrementCapacityNumber" Grid.Column="1"  Style="{StaticResource borderStyle}" Content="+" Margin="325,201,0,0" Width="20" Command="{Binding IncrementCommand}" RenderTransformOrigin="-1.284,0.612" Height="22"/>
-        <Button FontWeight="Bold" Grid.Column="1"  Margin="494,201,0,0" Height="22" Command="{Binding SearchCommand}" Width="62">
-            <Grid Background="#dbc9ab" HorizontalAlignment="Left" VerticalAlignment="Top" Height="15">
+        <Button FontWeight="Bold" Grid.Column="1"  Margin="494,201,0,0" Height="22" Command="{Binding SearchCommand}" Background="#ffba00" BorderBrush="#ffba00" Width="62">
+            <Grid Background="#ffba00" HorizontalAlignment="Left" VerticalAlignment="Top" Height="15">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="16*"/>
                     <RowDefinition Height="19*"/>
@@ -265,7 +265,7 @@
                 </Grid.ColumnDefinitions>
                 <Image Source="/Resources/Images/search.png" VerticalAlignment="Top" HorizontalAlignment="Center" Width="10" Height="12" RenderTransformOrigin="0.5,0.5" Margin="0,3,0,0" Grid.RowSpan="2"/>
 
-                <TextBlock Background="#dbc9ab" Text=" Search" VerticalAlignment="Top" FontSize="12" FontWeight="Bold" HorizontalAlignment="Center" Width="47" Height="16" Margin="0,-1,0,0" Grid.Column="1" Grid.RowSpan="2"/>
+                <TextBlock Background="#ffba00" Text=" Search" VerticalAlignment="Top" FontSize="12" FontWeight="Bold" HorizontalAlignment="Center" Width="47" Height="16" Margin="0,-1,0,0" Grid.Column="1" Grid.RowSpan="2"/>
             </Grid>
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
@@ -289,8 +289,8 @@
 
         </Button>
         <Label Grid.Row="0" Grid.Column="1"  Foreground="White" Content="{Binding Path=Label,UpdateSourceTrigger=PropertyChanged}" FontSize="20" Margin="0,261,0,0" Height="71" Style="{StaticResource LabelStyle}"/>
-        <Button x:Name="Restart" Grid.Column="1"  Style="{StaticResource borderStyle}" Width="62" Margin="414,201,0,0" TextElement.FontWeight="Bold" Command="{Binding RestartCommand}" Height="22">
-            <Grid Background="#dbc9ab" HorizontalAlignment="Left" VerticalAlignment="Top" Height="15">
+        <Button x:Name="Restart" Background="#ffba00" Grid.Column="1" BorderBrush="#ffba00"  Style="{StaticResource borderStyle}" Width="62" Margin="414,201,0,0" TextElement.FontWeight="Bold" Command="{Binding RestartCommand}" Height="22">
+            <Grid Background="#ffba00" HorizontalAlignment="Left" VerticalAlignment="Top" Height="15">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="16*"/>
                     <RowDefinition Height="19*"/>
@@ -301,7 +301,7 @@
                 </Grid.ColumnDefinitions>
                 <Image Source="/Resources/Images/reset.png" VerticalAlignment="Top" HorizontalAlignment="Center" Width="10" Height="12" RenderTransformOrigin="0.5,0.5" Margin="0,3,0,0" Grid.RowSpan="2"/>
 
-                <TextBlock Background="#dbc9ab" Text=" Reset" VerticalAlignment="Top" FontSize="12" FontWeight="Bold" HorizontalAlignment="Center" Width="47" Height="16" Margin="0,-1,0,0" Grid.Column="1" Grid.RowSpan="2"/>
+                <TextBlock Background="#ffba00" Text=" Reset" VerticalAlignment="Top" FontSize="12" FontWeight="Bold" HorizontalAlignment="Center" Width="47" Height="16" Margin="0,-1,0,0" Grid.Column="1" Grid.RowSpan="2"/>
             </Grid>
         </Button>
 

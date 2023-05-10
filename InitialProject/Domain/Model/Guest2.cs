@@ -8,12 +8,11 @@ using System.Xml.Linq;
 using InitialProject.Serializer;
 namespace InitialProject.Model
 {
-    public class Guest2 :ISerializable
+    public class Guest2 : User, ISerializable
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public string LastName { get; set; }
-        public string Username { get; set; }
         public string PhoneNumber { get; set; }
         public string DateOfBirth { get; set; }
         public Location Location { get; set; }

@@ -24,6 +24,7 @@
     <None Remove="Resources\Images\add-new.png" />
     <None Remove="Resources\Images\add.png" />
     <None Remove="Resources\Images\addBW.png" />
+    <None Remove="Resources\Images\air.jpg" />
     <None Remove="Resources\Images\analytics.png" />
     <None Remove="Resources\Images\andjelkina-kapija.jpg" />
     <None Remove="Resources\Images\arrow-58-xxl.png" />
@@ -81,6 +82,8 @@
     <None Remove="Resources\Images\datetime.png" />
 
     <None Remove="Resources\Images\decline.jpg" />
+
+    <None Remove="Resources\Images\declineImage.jpg" />
 
     <None Remove="Resources\Images\done.png" />
 
@@ -191,6 +194,7 @@
     <None Remove="Resources\Images\reschedule.png" />
     <None Remove="Resources\Images\reserve.png" />
     <None Remove="Resources\Images\reset.png" />
+    <None Remove="Resources\Images\reviewImage.jpg" />
     <None Remove="Resources\Images\RR.png" />
     <None Remove="Resources\Images\RubbishStreet.png" />
     <None Remove="Resources\Images\search.png" />
@@ -244,6 +248,7 @@
     <None Remove="Resources\Images\user-male-circle.png" />
     <None Remove="Resources\Images\user.jpg" />
     <None Remove="Resources\Images\User_icon_2.svg.png" />
+    <None Remove="Resources\Images\vacation1.png" />
     <None Remove="Resources\Images\view.png" />
     <None Remove="Resources\Images\voucher.png" />
     <None Remove="Resources\Images\wish1.jpeg" />
@@ -262,6 +267,9 @@
     </Content>
     <Content Include="Resources\Images\add-new.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\air.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\analytics.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -293,6 +301,9 @@
     <Content Include="Resources\Images\congratulations2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Images\declineImage.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
 
     <Content Include="Resources\Images\Kalemegdan.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -314,11 +325,17 @@
     <Content Include="Resources\Images\raining.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Images\reviewImage.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Images\RubbishStreet.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\touristicGroup.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\vacation1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Resource Include="Resources\Images\account1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

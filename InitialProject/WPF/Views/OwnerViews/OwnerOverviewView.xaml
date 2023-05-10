@@ -22,7 +22,8 @@
 
     <Grid>
         <Label Content="WELCOME" FontSize="18" HorizontalAlignment="Left" Margin="120,10,0,0" VerticalAlignment="Top" Width="157" HorizontalContentAlignment="Center"/>
-        <Rectangle Fill="#005A9C" HorizontalAlignment="Center" Height="132"  Stroke="LightGray" VerticalAlignment="Top" StrokeThickness="2" Width="355" Margin="30,49,30,0"/>
+        <Rectangle Fill="#005A9C" HorizontalAlignment="Center" Height="132"  Stroke="LightGray" VerticalAlignment="Top" StrokeThickness="2" Width="355" Margin="30,49,30,0">
+        </Rectangle>
         <Grid Margin="30,49,32,449">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
