@@ -102,7 +102,7 @@ namespace InitialProject.Service
                     busiestMonth = month;
                 }
             }
-            return DateTimeFormatInfo.CurrentInfo.GetMonthName(busiestMonth);
+            return busiestMonth !=0 ? DateTimeFormatInfo.CurrentInfo.GetMonthName(busiestMonth) : "";
         }
 
         private double GetBusyDaysNumberInMonth(Accommodation accommodation, int year, int month)
@@ -111,11 +111,11 @@ namespace InitialProject.Service
             foreach (var reservation in reservationService.GetAll().FindAll(n => n.Accommodation.Id == accommodation.Id))
             {
                 if(reservation.Arrival.Year == year && reservation.Arrival.Month == month && reservation.Departure.Month==month)
-                    counter += reservation.Departure.Day - reservation.Arrival.Day;
+                    counter += reservation.Departure.Day - reservation.Arrival.Day + 1;
                 else if(reservation.Arrival.Year == year && reservation.Arrival.Month == month && reservation.Departure.Year==year)
                 {
                     DateTime lastDayOfMonth = new DateTime(year, month, DateTime.DaysInMonth(year, month));
-                    counter += lastDayOfMonth.Day - reservation.Arrival.Day;
+                    counter += lastDayOfMonth.Day - reservation.Arrival.Day+1;
                 }
             }
             return counter;

@@ -110,7 +110,16 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             voucherService = new VoucherService();
             vouchers = new ObservableCollection<Voucher>();
             Vouchers = new ObservableCollection<Voucher>(voucherService.FindAllVouchers(guest2));
+            VoucherValidity(Vouchers);
         }
+        private void VoucherValidity(ObservableCollection<Voucher> Vouchers)
+        {
+            foreach (Voucher voucher in Vouchers)
+            {
+                voucher.CreateDate = voucher.CreateDate.AddYears(1);
+            }
+        }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 

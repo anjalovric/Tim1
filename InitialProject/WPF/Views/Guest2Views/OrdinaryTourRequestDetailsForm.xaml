@@ -5,20 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.WPF.Views.Guest2Views"
         mc:Ignorable="d"
-        Title="Details" Height="450" Width="700" WindowStartupLocation="CenterScreen">
+        Title="Details" Height="450" Width="700" WindowStartupLocation="CenterScreen" Background="Transparent" AllowsTransparency="True" WindowStyle="None">
     <Window.Resources>
         <Style x:Key="button" TargetType="Button">
             <Setter Property="FontSize" Value="14"/>
-            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontWeight" Value="DemiBold"/>
+            <Setter Property="Foreground" Value="#FF9E98FF"/>
             <Setter Property="Height" Value="54"/>
+            <Setter Property="Width" Value="95"/>
             <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Width" Value="90"/>
             <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
             <Setter Property="VerticalAlignment" Value="Top"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border CornerRadius="25" BorderThickness="1" BorderBrush="White" Padding="15" Background="White" Margin="0,3,0,0">
+                        <Border CornerRadius="10" BorderThickness="1" BorderBrush="White" Background="White" Padding="15" Margin="0,4,0,0">
                             <ContentPresenter HorizontalAlignment="Right" VerticalAlignment="Center"/>
                         </Border>
                     </ControlTemplate>
@@ -26,65 +27,86 @@
             </Setter>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#E8E8E8"/>
+                    <Setter Property="Background" Value="LightGray"/>
                     <Setter Property="Foreground" Value="DimGray"/>
+                    <Setter Property="Cursor" Value="Hand"/>
                 </Trigger>
                 <Trigger Property="IsMouseCaptured" Value="True">
-                    <Setter Property="Background" Value="#d9d9d9"/>
+                    <Setter Property="Background" Value="LightGray"/>
                     <Setter Property="Foreground" Value="DimGray"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
         <Style x:Key="LabelStyle" TargetType="Label">
             <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Foreground" Value="White"/>
         </Style>
         <Style x:Key="FontStyle" TargetType="TextBlock">
             <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Foreground" Value="White"/>
         </Style>
     </Window.Resources>
-    <Grid Background="LightGray">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Border Grid.ColumnSpan="4" Grid.RowSpan="11">
-            <Border.Background>
-                <LinearGradientBrush>
-                    <GradientStop Color="#e3e3e3" Offset="0.0"/>
-                    <GradientStop Color="#5d6874" Offset="1"/>
-                </LinearGradientBrush>
-            </Border.Background>
-        </Border>
-        <Label Content="Information" Margin="106,27,107,19" FontSize="20" FontWeight="Bold" Grid.RowSpan="2" FontFamily="Kanit"/>
-        <Label Content="Location" Grid.Row="2" Grid.Column="0" Margin="62,0,0,0" Style="{StaticResource LabelStyle}"/>
-        <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Path=TourInstance.Tour.Location}" Margin="10,10,65,10" Style="{StaticResource FontStyle}"/>
-        <Label Content="Language" Grid.Row="3" Grid.Column="0" Margin="62,43,0,43" Grid.RowSpan="3" Style="{StaticResource LabelStyle}"/>
-        <Label Content="Capacity" Grid.Row="4" Grid.Column="0" Margin="62,43,0,43" Grid.RowSpan="3" Style="{StaticResource LabelStyle}"/>
-        <Label Content="StartDate" Grid.Row="5" Grid.Column="0" Margin="62,43,0,43" Grid.RowSpan="3" Style="{StaticResource LabelStyle}"/>
-        <Label Content="EndDate" Grid.Row="6" Grid.Column="0" Margin="62,43,0,43" Grid.RowSpan="3" Style="{StaticResource LabelStyle}"/>
-        <Label Content="Description" Grid.Row="7" Grid.Column="0" Margin="62,43,0,43" Grid.RowSpan="3" Style="{StaticResource LabelStyle}"/>
-        <Label Content="Duration" Grid.Row="2" Grid.Column="0" Margin="62,43,0,43" Grid.RowSpan="3" Style="{StaticResource LabelStyle}"/>
-        <Button Grid.Column="1" Grid.Row="9" Grid.RowSpan="2" Content="CLOSE" Style="{StaticResource button}" Margin="192,10,55,0" Command="{Binding CloseCommand}" Height="51" />
-        <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding TourInstance.Tour.Duration}" Margin="10,10,65,10" Style="{StaticResource FontStyle}"/>
-        <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding TourInstance.Tour.Language}" Margin="10,10,65,10" Style="{StaticResource FontStyle}"/>
-        <TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding TourInstance.Tour.MaxGuests}" Margin="10,10,65,10" Style="{StaticResource FontStyle}"/>
-        <TextBlock Grid.Row="6" Grid.Column="1" Text="{Binding StartDate}" Margin="10,10,65,10" Style="{StaticResource FontStyle}"/>
-        <TextBlock Grid.Row="7" Grid.Column="1" Text="{Binding TourInstance.Date}" Margin="10,10,65,10" Style="{StaticResource FontStyle}"/>
-        <TextBlock Grid.Row="8" Grid.Column="1" Text="{Binding TourInstance.Tour.Description}" Margin="10,10,65,10" Style="{StaticResource FontStyle}"/>
-        <Image Source="/Resources/Images/information.png" Margin="60,23,243,20" Grid.RowSpan="2"/>
-        <Image Source="/Resources/Images/cancel.png" Grid.Column="1" Grid.Row="9" Margin="204,19,117,17" Grid.RowSpan="2"/>
-    </Grid>
+    
+        <Grid>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,1" EndPoint="1,1">
+                <GradientStop Color="#6d9773" Offset="0"/>
+
+                <GradientStop Color="#FF96BD9B" Offset="0.3"/>
+                <GradientStop Color="#FF96BD9B" Offset="0.5"/>
+                <GradientStop Color="#6d9773" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Label Content="INFORMATION" Foreground="White" FontFamily="Baskerville Old Face" Margin="106,23,54,19" FontSize="20" FontWeight="Bold" Grid.RowSpan="2"/>
+            <Label Content="Location" FontWeight="DemiBold" Grid.Row="2" Grid.Column="0" Margin="62,0,0,0" Style="{StaticResource LabelStyle}"/>
+            <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Path=TourInstance.Tour.Location}" Margin="10,10,65,10" Style="{StaticResource FontStyle}"/>
+            <Label Content="Language" FontWeight="DemiBold" Grid.Row="3" Grid.Column="0" Margin="62,43,0,43" Grid.RowSpan="3" Style="{StaticResource LabelStyle}"/>
+            <Label Content="Capacity" FontWeight="DemiBold" Grid.Row="4" Grid.Column="0" Margin="62,43,0,43" Grid.RowSpan="3" Style="{StaticResource LabelStyle}"/>
+            <Label Content="StartDate" FontWeight="DemiBold" Grid.Row="5" Grid.Column="0" Margin="62,43,0,43" Grid.RowSpan="3" Style="{StaticResource LabelStyle}"/>
+            <Label Content="EndDate" FontWeight="DemiBold" Grid.Row="6" Grid.Column="0" Margin="62,43,0,43" Grid.RowSpan="3" Style="{StaticResource LabelStyle}"/>
+            <Label Content="Description" FontWeight="DemiBold" Grid.Row="7" Grid.Column="0" Margin="62,43,0,43" Grid.RowSpan="3" Style="{StaticResource LabelStyle}"/>
+            <Label Content="Duration" FontWeight="DemiBold" Grid.Row="2" Grid.Column="0" Margin="62,43,0,43" Grid.RowSpan="3" Style="{StaticResource LabelStyle}"/>
+        <Button HorizontalAlignment="Left" Grid.Row="9" BorderBrush="#ffba00" Background="#ffba00" BorderThickness="3" VerticalAlignment="Top"  Height="34" Width="132" FontWeight="Bold" FontSize="18" Command="{Binding CloseCommand}" Margin="190,41,0,0" Grid.Column="1" Grid.RowSpan="2">
+
+            <Grid Background="#ffba00" Width="132" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="16*"/>
+                        <RowDefinition Height="19*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="/Resources/Images/close.png" VerticalAlignment="Top" HorizontalAlignment="Left" Width="26" Height="25" RenderTransformOrigin="0.5,0.5" Margin="10,3,0,0" Grid.RowSpan="2"/>
+                <TextBlock Background="#ffba00" Text="Close" Foreground="Black" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" Width="78" Height="22" Margin="10,3,0,0" Grid.RowSpan="2" Grid.Column="1"/>
+                </Grid>
+
+            </Button>
+            <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding TourInstance.Tour.Duration}" Margin="10,10,65,10" Style="{StaticResource FontStyle}"/>
+            <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding TourInstance.Tour.Language}" Margin="10,10,65,10" Style="{StaticResource FontStyle}"/>
+            <TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding TourInstance.Tour.MaxGuests}" Margin="10,10,65,10" Style="{StaticResource FontStyle}"/>
+            <TextBlock Grid.Row="6" Grid.Column="1" Text="{Binding StartDate}" Margin="10,10,65,10" Style="{StaticResource FontStyle}"/>
+            <TextBlock Grid.Row="7" Grid.Column="1" Text="{Binding EndDate}" Margin="10,10,65,10" Style="{StaticResource FontStyle}"/>
+            <TextBlock Grid.Row="8" Grid.Column="1" Text="{Binding TourInstance.Tour.Description}" Margin="10,10,65,10" Style="{StaticResource FontStyle}"/>
+            <Image Source="/Resources/Images/information.png" Margin="61,20,242,23" Grid.RowSpan="2"/>
+        </Grid>
+
 </Window>

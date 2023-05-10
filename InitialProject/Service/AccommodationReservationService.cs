@@ -14,24 +14,20 @@ namespace InitialProject.Service
     {
         private List<AccommodationReservation> reservations;
         private IAccommodationReservationRepository accommodationReservationRepository = Injector.CreateInstance<IAccommodationReservationRepository>();
-
         public AccommodationReservationService()
         {
             MakeReservations();
         }
-
         public List<AccommodationReservation> GetAll()
         {
             return reservations;
         }
-
         public void MakeReservations()
         {
             reservations = new List<AccommodationReservation>(accommodationReservationRepository.GetAll());
             SetAccommodations();
             SetGuests();
         }
-
         public void Add(AccommodationReservation reservation)
         {
             accommodationReservationRepository.Add(reservation);
@@ -42,9 +38,7 @@ namespace InitialProject.Service
             foreach (AccommodationReservation reservation in reservations)
             {
                 if (reservation.Departure < DateTime.Now && reservation.Guest.Id == guest1.Id)
-                {
                     CompletedReservations.Add(reservation);
-                }
             }
             CompletedReservations.Reverse();
             return CompletedReservations;
@@ -55,23 +49,17 @@ namespace InitialProject.Service
             foreach (AccommodationReservation reservation in reservations)
             {
                 if (reservation.Departure >= DateTime.Now && reservation.Guest.Id == guest1.Id)
-                {
                     NotCompletedReservations.Add(reservation);
-                }
             }
             NotCompletedReservations.Reverse();
             return NotCompletedReservations;
-        }
-       
+        }    
         private void SetAccommodations()
         {
             AccommodationService accommodationService = new AccommodationService();
             foreach (AccommodationReservation reservation in reservations)
-            {
                 reservation.Accommodation = accommodationService.GetById(reservation.Accommodation.Id);
-            }
-        }
-        
+        } 
         public void Delete(AccommodationReservation accommodationReservation)
         {
             accommodationReservationRepository.Delete(accommodationReservation);
@@ -91,12 +79,10 @@ namespace InitialProject.Service
         {
             accommodationReservationRepository.Update(reservation);
         }
-
         public List<AccommodationReservation> GetAllForReviewByOwner(Owner owner)
         {
             List<AccommodationReservation> reservationsToReview = new List<AccommodationReservation>();
             GuestReviewService guestReviewService = new GuestReviewService();
-
             if (reservations.Count > 0)
             {
                 foreach (AccommodationReservation reservation in reservations)
@@ -106,9 +92,7 @@ namespace InitialProject.Service
                 }
             }
             return reservationsToReview;
-        }
-        
-
+        }      
         public DateTime GetNewSuperGuestActivationDateIfPossible(Guest1 guest1)
         {
             int counter = 0;
@@ -119,30 +103,23 @@ namespace InitialProject.Service
                 {
                     counter++;
                     departureDates.Add(reservation.Departure);
-                }
-                    
+                }                   
             }
             if (counter >= 10)
             {
                 var tenthDeparture = departureDates.OrderBy(d => d).ElementAtOrDefault(9);
                 return tenthDeparture;
-            }
-                
+            }                
             else
                 return DateTime.MinValue;
         }
         public bool IsLastYearReservationCompleted(AccommodationReservation reservation)
         {
             return reservation.Departure <= DateTime.Now && reservation.Departure > DateTime.Now.AddYears(-1);
-        }
-        /*public int GetLastYearReservationsNumberByGuest(Guest1 guest1, DateTime activationDate)
-        {
-            return reservations.FindAll(n =>n.Guest.Id==guest1.Id && n.Departure > activationDate && n.Departure <= activationDate.AddYears(1)).Count;
-        }*/
+        }  
         public DateTime GetProlongActivationDate(Guest1 guest1, DateTime activationDate)
         {
-            //number of reservations in next year from activationDate
-            List<AccommodationReservation> completedReservations = reservations.FindAll(n => n.Guest.Id == guest1.Id && n.Departure > activationDate && n.Departure <= activationDate.AddYears(1));
+            List<AccommodationReservation> completedReservations = reservations.FindAll(n => n.Guest.Id == guest1.Id && n.Departure > activationDate && n.Departure <= activationDate.AddYears(1));//number of reservations in next year from activationDate
             int counter = completedReservations.Count;
             if(counter >= 10)
             {
@@ -151,10 +128,8 @@ namespace InitialProject.Service
                     departureDates.Add(reservation.Departure);
                 var tenthDeparture = departureDates.OrderBy(d => d).ElementAtOrDefault(9);
                 return tenthDeparture;
-
             }
             return DateTime.MinValue;   //if expired(<10 reservations) or not expired(<10 reservations but 1 year hasn't passed)
         }
-
     }
 }

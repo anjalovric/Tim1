@@ -64,7 +64,7 @@
         </Grid>
         <TextBlock Padding="3, 0, 0, 0" HorizontalAlignment="left" Grid.Row="4" TextWrapping="Wrap" Margin="20,0,0,49" Grid.RowSpan="2" Width="176" VerticalAlignment="Center"><Run Text="Cleanliness: " /><Run Text=" "/><Run Text="{Binding OwnerReview.Cleanliness}" /></TextBlock>
         <TextBlock HorizontalAlignment="Left" Grid.Row="4" Grid.Column="1" TextWrapping="Wrap" Padding="3, 0, 0, 0" Margin="0,0,0,49" Grid.RowSpan="2" Width="186" VerticalAlignment="Center"><Run Text="Owner's correctness: " /><Run Text=" "/><Run Text="{Binding OwnerReview.Correctness}" /></TextBlock>
-        <Label Content="Comment"  HorizontalAlignment="Left" Grid.Row="5" Grid.ColumnSpan="2" Width="350" Margin="20,0,0,10"/>
+        <Label Content="Comment"  HorizontalAlignment="Left" Grid.Row="5" Grid.ColumnSpan="2" Width="350" Margin="20,0,0,5"/>
         <Border Background="White" BorderBrush="DarkGray" BorderThickness="1" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Margin="20,30,20,29" Grid.RowSpan="2">
             <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding Path=OwnerReview.Comment}" Width="390" Margin="0,-1,0,9"/>
         </Border>

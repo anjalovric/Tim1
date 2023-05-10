@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
-        Title="Guest2Overview" Height="768" Width="1024" WindowStartupLocation="CenterScreen" WindowState="Maximized">
-    <Grid Background="#1e2e44">
+        Title="Booking" Height="768" Width="1024" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Grid Background="#FF14503F">
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -19,61 +19,61 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
-        <Border Grid.Column="0" Grid.Row="0" BorderBrush="Black" Background="#1e2e44" Margin="0,0,0,501" Grid.RowSpan="2"/>
+        <Border Grid.Column="0" Grid.Row="0" BorderBrush="Black" Background="#FF14503F" Margin="0,0,0,501" Grid.RowSpan="2"/>
         <Image Source="{Binding ImageSource, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Grid.Row="0" Height="171" Width="247"/>
-        <Border Grid.Column="0" Grid.Row="1" BorderBrush="Black" Background="#1e2e44"/>
-        <Menu HorizontalAlignment="Center" Width="256" Background="#1e2e44" Grid.Row="1">
+        <Border Grid.Column="0" Grid.Row="1" BorderBrush="Black" Background="#FF14503F"/>
+        <Menu HorizontalAlignment="Center" Width="256" Background="#FF14503F" Grid.Row="1">
             <Menu.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <StackPanel Width="NaN" Margin="3,14,1,0" Background="#1e2e44" />
+                    <StackPanel Width="NaN" Margin="3,70,1,0" Background="#FF14503F" />
                 </ItemsPanelTemplate>
             </Menu.ItemsPanel>
-            <MenuItem Header="Profile" Foreground="Gray" FontSize="20" FontWeight="Bold" Command="{Binding ProfileCommand}">
+            <MenuItem Header="Profile" Foreground="White" FontSize="20" FontWeight="Bold" Command="{Binding ProfileCommand}">
                 <MenuItem.Icon>
                     <Image Source="/Resources/Images/profile.png" Height="15" Width="20"/>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="Show" Foreground="Gray" FontSize="20" FontWeight="Bold">
-                <MenuItem Header="All tours" Background="#1e2e44" Command="{Binding ShowCommand}"/>
-                <MenuItem Header="Active tours" Background="#1e2e44" Command="{Binding ActiveToursCommand}"/>
+            <MenuItem Header="Show" Foreground="White" FontSize="20" FontWeight="Bold">
+                <MenuItem Header="All tours" Background="#FF14503F" Command="{Binding ShowCommand}"/>
+                <MenuItem Header="Active tours" Background="#FF14503F" Command="{Binding ActiveToursCommand}"/>
                 <MenuItem.Icon>
                     <Image Source="/Resources/Images/home.png" Height="15" Width="20"/>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="Grade tours and guide" Foreground="Gray" FontSize="20" FontWeight="Bold" Command="{Binding FinishedToursCommand}" Width="302">
+            <MenuItem Header="Grade tours and guide" Foreground="White" FontSize="20" FontWeight="Bold" Command="{Binding FinishedToursCommand}" Width="302">
                 <MenuItem.Icon>
                     <Image Source="/Resources/Images/icons8-christmas-star-96.png" Height="15" Width="20"/>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="Notifications" Foreground="Gray" FontSize="20" FontWeight="Bold" Command="{Binding NotificationsCommand}">
+            <MenuItem Header="Notifications" Foreground="White" FontSize="20" FontWeight="Bold" Command="{Binding NotificationsCommand}">
                 <MenuItem.Icon>
                     <Image Source="/Resources/Images/bell.png" Height="15" Width="20"/>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="My requests" Foreground="Gray" FontSize="20" FontWeight="Bold" Command="{Binding RequestsCommand}">
+            <MenuItem Header="My requests" Foreground="White" FontSize="20" FontWeight="Bold" Command="{Binding RequestsCommand}">
                 <MenuItem.Icon>
                     <Image Source="/Resources/Images/tasks.png" Height="15" Width="20"/>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="Vouchers" Foreground="Gray" FontSize="20" FontWeight="Bold" Command="{Binding VouchersCommand}">
+            <MenuItem Header="Vouchers" Foreground="White" FontSize="20" FontWeight="Bold" Command="{Binding VouchersCommand}">
                 <MenuItem.Icon>
                     <Image Source="/Resources/Images/voucher.png" Height="15" Width="20"/>
                 </MenuItem.Icon>
             </MenuItem>
 
-            <MenuItem Header="Help" Foreground="Gray" FontSize="20" FontWeight="Bold">
+            <MenuItem Header="Help" Foreground="White" FontSize="20" FontWeight="Bold">
                 <MenuItem.Icon>
                     <Image Source="/Resources/Images/help.png" Height="15" Width="20"/>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="Sign out" Foreground="Gray" FontSize="20" FontWeight="Bold" Command="{Binding SignOutCommand}">
+            <MenuItem Header="Sign out" Foreground="White" FontSize="20" FontWeight="Bold" Command="{Binding SignOutCommand}">
                 <MenuItem.Icon>
                     <Image Source="/Resources/Images/signout.png" Height="15" Width="20"/>
                 </MenuItem.Icon>
             </MenuItem>
         </Menu>
-        <Button Margin="75,229,75,10" Background="#1e2e44" BorderBrush="#1e2e44" Command="{Binding ProfileCommand}"/>
-        <TextBlock FontSize="20" Height="35" Width="Auto" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,231,0,0" Foreground="Gray" FontWeight="Bold" Grid.RowSpan="2" >
+        <Button Margin="75,229,75,10" Background="#FF14503F" BorderBrush="#FF14503F" Command="{Binding ProfileCommand}"/>
+        <TextBlock FontSize="20" Height="35" Width="Auto" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,231,0,0" Foreground="White" FontWeight="Bold" Grid.RowSpan="2" >
             <TextBlock.Text>
                 <MultiBinding StringFormat="{}{0} {1}">
                     <Binding Path="guest2.Name" />
@@ -81,7 +81,7 @@
                 </MultiBinding>
             </TextBlock.Text>
         </TextBlock>
-        <ContentControl x:Name="CC" Grid.Column="1" Background="#151f2d" Grid.RowSpan="2"/>
+        <ContentControl x:Name="CC" Grid.Column="1" Background="#FF14503F" Grid.RowSpan="2"/>
 
     </Grid>
 </Window>

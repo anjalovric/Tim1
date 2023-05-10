@@ -11,10 +11,10 @@ namespace InitialProject.WPF.Views.GuideViews
     public partial class ActiveInstanceView : Page
     {
         ActiveInstanceViewModel viewModel;
-        public ActiveInstanceView(TourInstance active, ObservableCollection<TourInstance> tours, ObservableCollection<TourInstance> finishedInstances,HomeView homeview)
+        public ActiveInstanceView(TourInstance active, ObservableCollection<TourInstance> tours, ObservableCollection<TourInstance> finishedInstances,HomeView homeview,int guideId)
         {
             InitializeComponent();
-            viewModel = new ActiveInstanceViewModel(active, tours, finishedInstances,homeview);
+            viewModel = new ActiveInstanceViewModel(active, tours, finishedInstances,homeview,guideId);
             DataContext = viewModel;
         }
     }

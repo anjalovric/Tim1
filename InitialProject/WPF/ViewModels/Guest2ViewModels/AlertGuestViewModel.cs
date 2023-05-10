@@ -13,6 +13,8 @@ using InitialProject.Service;
 using InitialProject.WPF.Views.Guest2Views;
 using System.Windows.Controls;
 using InitialProject.WPF.Views.Guest1Views;
+using InitialProject.Domain.Model;
+using System.Collections.ObjectModel;
 
 namespace InitialProject.WPF.ViewModels.Guest2ViewModels
 {
@@ -27,9 +29,11 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         private TourInstanceService _tourInstanceService;
         private int AlertId;
         private LocationService _locationService;
-        private System.Windows.Controls.Label PointLabel;
+        public string PointLabel { get; set; }
+        private GuideRepository _guideRepository;
         public Action CloseAction { get; set; }
-        public AlertGuestViewModel(int alertId, System.Windows.Controls.Label pointLabel)
+        public string GuideLabel { get; set; }
+        public AlertGuestViewModel(int alertId)
         {
             AlertId = alertId;
             _alertGuest2Service = new AlertGuest2Service();
@@ -37,10 +41,10 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             _tourRepository = new TourRepository();
             _tourInstanceService = new TourInstanceService();
             _locationService = new LocationService();
-            PointLabel = pointLabel;
+            _guideRepository = new GuideRepository();
             MakeCommands();
             alerts = _alertGuest2Service.GetAll();
-            //CreateLabelContent();
+            CreateLabelContent();
         }
         private void MakeCommands()
         {
@@ -55,23 +59,37 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         {
             foreach (AlertGuest2 alertGuest2 in alerts)
             {
-                if (alertGuest2.Availability == false && alertGuest2.Id == AlertId)
+                if (alertGuest2.Id == AlertId && alertGuest2.Seen==false)
                 {
                     alertGuest2.Availability = true;
                     alertGuest2.Informed = true;
+                    alertGuest2.Seen = true;
                     _alertGuest2Service.Update(alertGuest2);
+                    DeleteFromNotifications(alertGuest2);
                 }
             }
             CloseAction();
+        }
+        private void DeleteFromNotifications(AlertGuest2 alertGuest2)
+        {
+            Guest2NotificationService guest2NotificationService = new Guest2NotificationService();
+            List<Guest2Notification> notifications = new List<Guest2Notification>(guest2NotificationService.GetAll());
+            foreach(Guest2Notification notification in notifications)
+            {
+                if (notification.AlertGuest2Id == alertGuest2.Id)
+                    guest2NotificationService.Delete(notification);
+            }
         }
         private void Cancel_Executed(object sender)
         {
             foreach (AlertGuest2 alertGuest2 in alerts)
             {
-                if (alertGuest2.Availability == false && alertGuest2.Id == AlertId)
+                if (alertGuest2.Availability == false && alertGuest2.Id == AlertId && alertGuest2.Seen == false)
                 {
                     alertGuest2.Informed = true;
+                    alertGuest2.Seen = true;
                     _alertGuest2Service.Update(alertGuest2);
+                    DeleteFromNotifications(alertGuest2);
                 }
             }
             CloseAction();
@@ -80,14 +98,19 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         {
             int pointId = _alertGuest2Service.GetAll().Find(n => n.Id == AlertId).CheckPointId;
             int instanceId = _alertGuest2Service.GetAll().Find(n => n.Id == AlertId).InstanceId;
+            int guideId = _alertGuest2Service.GetAll().Find(n => n.Id == AlertId).GuideId;
             if (_tourInstanceService.GetAll().Count > 0)
             {
                 Tour thisTour;
+                Guide guide;
                 thisTour = _tourInstanceService.GetAll().Find(n => n.Id == instanceId).Tour;
+                //string username=_.
+                guide = _guideRepository.GetById(guideId);
                 SetLocations(thisTour);
                 if (thisTour != null)
-                    PointLabel.Content = "Name: " + thisTour.Name + "\n\nLocation: " + thisTour.Location+"\n\nDuration: "+thisTour.Duration+"\n\nCheckpoint: "+ _checkPointService.GetAll().Find(n => n.Id == pointId).Name;
-
+                    PointLabel = "Name: " + thisTour.Name + "\n\nLocation: " + thisTour.Location+"\n\nDuration: "+thisTour.Duration+"\n\nCheckpoint: "+ _checkPointService.GetAll().Find(n => n.Id == pointId).Name;
+                if (guide != null)
+                    GuideLabel = "Name: " + guide.Name + "\n\nLast name: " + guide.LastName + "\n\nUsername: " + guide.Username;
             }
         }
         public void SetLocations(Tour Tour)
@@ -105,20 +128,8 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
                         Tour.Name = tour.Name;
                         Tour.Duration = tour.Duration;
                     }
-                        //tour.Location = location;
                 }
             }
         }
-        /*public void SetTour(Tour Tour)
-        {
-            List<Tour> tours = _tourRepository.GetAll();
-            foreach (Tour tour in tours)
-            {
-                if (tour.Id == Tour.Id)
-                {
-                    Tour.Name = tour.Name;
-                }
-            }
-        }*/
     }
 }

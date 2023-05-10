@@ -49,7 +49,7 @@ namespace InitialProject.Service
             datesService.GetAllYearsWithRequests(accommodation, years);
 
             datesService.GetAllYearsWithRenovationSuggestions(accommodation, years);
-            return years.OrderBy(x => x).ToList();
+            return years.OrderByDescending(x => x).ToList();
         }
 
         private int GetReservationNumberByYear(Accommodation accommodation, int year)
@@ -117,11 +117,11 @@ namespace InitialProject.Service
             foreach (var reservation in reservationService.GetAll().FindAll(n => n.Accommodation.Id == accommodation.Id))
             {
                 if(reservation.Arrival.Year == year && reservation.Departure.Year == year)
-                    counter += (reservation.Departure.Date - reservation.Arrival.Date).Days;
+                    counter += (reservation.Departure.Date - reservation.Arrival.Date).Days +1;
                 else if(reservation.Arrival.Year == year)
                 {
                     DateTime lastDayOfYear = new DateTime(year, 12, 31);
-                    counter += (lastDayOfYear.Date - reservation.Arrival.Date).Days;
+                    counter += (lastDayOfYear.Date - reservation.Arrival.Date).Days +1;
                 }
             }
             return (double)counter;

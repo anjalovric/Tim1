@@ -113,6 +113,7 @@
 
                     <Label FontSize="24" FontFamily="Baskerville Old Face" FontWeight="Bold" VerticalContentAlignment="Center" Height="Auto" VerticalAlignment="Top" Margin="0,15,0,0" HorizontalAlignment="Center">APPROVED REQUESTS</Label>
 
+
                     <DataGrid x:Name="ApprovedRequestsDataGrid" VerticalContentAlignment="Center" VerticalScrollBarVisibility="Auto" Margin="0,0,0,20" HorizontalAlignment="Center" VerticalAlignment="Bottom" HorizontalContentAlignment="Left" ItemsSource="{Binding Path=ApprovedRequests,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" RowBackground="#96CE9A" Height="300" Width="950">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Name" Width="1.5*" Binding="{Binding Reservation.Accommodation.Name}">

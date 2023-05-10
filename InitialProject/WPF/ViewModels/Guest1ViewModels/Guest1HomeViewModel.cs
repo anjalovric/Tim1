@@ -37,16 +37,8 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         public RelayCommand SentRequestsCommand { get; set; }
         public RelayCommand SignOutCommand { get; set; }
         public RelayCommand NotificationsCommand { get; set; }
-
         public RelayCommand SubmenuOpenedCommand { get; set; }
         public RelayCommand ReviewsCommand { get; set; }
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
         private ObservableCollection<MenuItem> storedNotifications;
         public ObservableCollection<MenuItem> StoredNotifications
         {
@@ -91,7 +83,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             SubmenuOpenedCommand = new RelayCommand(Submenu_Executed, CanExecute);
             ReviewsCommand = new RelayCommand(Reviews_Executed, CanExecute);
         }
-
         private bool CanExecute(object sender)
         {
             return true;
@@ -151,28 +142,14 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             System.Windows.Documents.Hyperlink[] links = MakeNotifications();
             StoredNotifications.Clear();
             if (links.Length == 0)
-                StoredNotifications.Add(new MenuItem { Header = "No recent notifications." });
+                StoredNotifications.Add(new MenuItem { Header = "No recent notifications.", FontWeight = FontWeights.SemiBold, IsCheckable = false, Width = 300, BorderBrush = System.Windows.Media.Brushes.Black, Background = System.Windows.Media.Brushes.BlanchedAlmond, BorderThickness = new Thickness(3), Margin = new Thickness(1), VerticalAlignment = System.Windows.VerticalAlignment.Center, Height = 40, Icon = new Image { Source = new BitmapImage(new Uri("/Resources/Images/nothing.png", UriKind.Relative)), Margin = new Thickness(0, -10, -7, -3), VerticalAlignment = System.Windows.VerticalAlignment.Bottom }});
             else
             foreach (System.Windows.Documents.Hyperlink link in links)
             {
                     if (link.Tag.Equals(0))
-                        StoredNotifications.Add(new MenuItem { Header = link, FontWeight = FontWeights.SemiBold, IsCheckable = false, Width = 300,
-                            Background = new LinearGradientBrush(
-                                new GradientStopCollection()
-                            {
-                                new GradientStop(Color.FromRgb(150, 206, 154), 0.9),
-                                new GradientStop(Color.FromRgb(252, 236, 185), 0.1),
-                            },  new Point(0, 0), 
-                                new Point(1,1)), BorderBrush = System.Windows.Media.Brushes.Black, BorderThickness = new Thickness(3), Margin = new Thickness(1),  Icon = new Image { Source = new BitmapImage(new Uri("/Resources/Images/done.png", UriKind.Relative)), Margin = new Thickness(0,-10,-7,-3), VerticalAlignment = System.Windows.VerticalAlignment.Bottom } }); 
+                        StoredNotifications.Add(new MenuItem { Header = link, FontWeight = FontWeights.SemiBold, IsCheckable = false, Width = 300,Background = new LinearGradientBrush(new GradientStopCollection(){new GradientStop(Color.FromRgb(150, 206, 154), 0.9),new GradientStop(Color.FromRgb(252, 236, 185), 0.1),},  new Point(0, 0), new Point(1,1)), BorderBrush = System.Windows.Media.Brushes.Black, BorderThickness = new Thickness(3), Margin = new Thickness(1),  Icon = new Image { Source = new BitmapImage(new Uri("/Resources/Images/done.png", UriKind.Relative)), Margin = new Thickness(0,-10,-7,-3), VerticalAlignment = System.Windows.VerticalAlignment.Bottom } }); 
                     else
-                    StoredNotifications.Add(new MenuItem { Header = link,  FontWeight = FontWeights.SemiBold, IsCheckable = false, Width = 300,
-                        Background = new LinearGradientBrush(
-                                new GradientStopCollection()
-                            {
-                                new GradientStop(Color.FromRgb(240, 128, 128), 0.9),
-                                new GradientStop(Color.FromRgb(252, 236, 185), 0.1),
-                            },  new Point(0, 0),
-                                new Point(1, 1)), BorderBrush = System.Windows.Media.Brushes.Black, BorderThickness = new Thickness(3), Margin = new Thickness(1), Icon = new Image { Source = new BitmapImage(new Uri("/Resources/Images/delete.png", UriKind.Relative)), Margin = new Thickness(0, -10, -7, -3), VerticalAlignment = System.Windows.VerticalAlignment.Bottom } });
+                        StoredNotifications.Add(new MenuItem { Header = link,  FontWeight = FontWeights.SemiBold, IsCheckable = false, Width = 300,Background = new LinearGradientBrush(new GradientStopCollection(){new GradientStop(Color.FromRgb(240, 128, 128), 0.9),new GradientStop(Color.FromRgb(252, 236, 185), 0.1),},  new Point(0, 0),new Point(1, 1)), BorderBrush = System.Windows.Media.Brushes.Black, BorderThickness = new Thickness(3), Margin = new Thickness(1), Icon = new Image { Source = new BitmapImage(new Uri("/Resources/Images/delete.png", UriKind.Relative)), Margin = new Thickness(0, -10, -7, -3), VerticalAlignment = System.Windows.VerticalAlignment.Bottom } });
             }
         }
 
@@ -199,7 +176,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                 link.Tag = 1;
             }
         }
-
         private void NavigateToApprovedRequests_Executed(object sender)
         {
             SentAccommodationReservationRequestsView sentAccommodationReservationRequestsView = new SentAccommodationReservationRequestsView(guest1);
@@ -214,7 +190,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = sentAccommodationReservationRequestsView;
             Keyboard.ClearFocus(); //to highlight other controls when mouse on it
         }
-
         private System.Windows.Documents.Hyperlink[] MakeNotifications()
         {
             CompletedAccommodationReschedulingRequestService completedAccommodationReschedulingRequestService = new CompletedAccommodationReschedulingRequestService();
@@ -236,7 +211,10 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                 + "\nOwner: " + completedRequest.Request.Reservation.Accommodation.Owner.Name + " " + completedRequest.Request.Reservation.Accommodation.Owner.LastName
                 + "\nFor: " + completedRequest.Request.NewArrivalDate.ToString("d") + " - " + completedRequest.Request.NewDepartureDate.ToString("d");
         }
-
-
+        public event PropertyChangedEventHandler? PropertyChanged;
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

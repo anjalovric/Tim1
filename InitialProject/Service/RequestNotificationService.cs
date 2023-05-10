@@ -12,45 +12,45 @@ namespace InitialProject.Service
 {
     public class RequestNotificationService
     {
-        private IRequestNotificationRepository reviewNotificationRepository = Injector.CreateInstance<IRequestNotificationRepository>();
+        private IRequestNotificationRepository reguestNotificationRepository = Injector.CreateInstance<IRequestNotificationRepository>();
 
         public RequestNotificationService()
         {
         }
         public List<RequestNotification> GetAll()
         {
-            return reviewNotificationRepository.GetAll();
+            return reguestNotificationRepository.GetAll();
         }
 
-        public RequestNotification Save(RequestNotification review)
+        public RequestNotification Save(RequestNotification request)
         {
-            return reviewNotificationRepository.Save(review);
+            return reguestNotificationRepository.Save(request);
         }
 
         public RequestNotification GetById(int id)
         {
-            return reviewNotificationRepository.GetById(id);
+            return reguestNotificationRepository.GetById(id);
         }
         public RequestNotification Update(RequestNotification request)
         {
 
-            return reviewNotificationRepository.Update(request);
+            return reguestNotificationRepository.Update(request);
         }
         public int GetNewRequestCount()
         {
             int count = 0;
-            foreach (RequestNotification reviewNotification in GetAll())
-                if ( reviewNotification.Count == 0)
+            foreach (RequestNotification requestNotification in GetAll())
+                if (requestNotification.Count == 0)
                     count++;
             return count;
         }
         public void UpCount()
         {
             int count = 0;
-            foreach (RequestNotification reviewNotification in GetAll())
+            foreach (RequestNotification requestNotification in GetAll())
             {
-                    reviewNotification.Count++;
-                Update(reviewNotification);
+                requestNotification.Count++;
+                Update(requestNotification);
             }
         }
     }

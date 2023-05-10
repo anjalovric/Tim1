@@ -18,7 +18,6 @@ namespace InitialProject.Service
             cancelledReservations = new List<AccommodationReservation>(cancelledAccommodationReservationRepository.GetAll());
             SetAccommodations();
         }
-
         private void SetAccommodations()
         {
             AccommodationService accommodationService = new AccommodationService();
@@ -34,12 +33,7 @@ namespace InitialProject.Service
         public List<AccommodationReservation> GetAll()
         {
             return cancelledReservations;
-        }
-        
-        
-
-        
-        
+        }    
         public bool IsCancelled(AccommodationReservation reservation)
         {
             return cancelledReservations.Find(n => n.Id == reservation.Id) != null;

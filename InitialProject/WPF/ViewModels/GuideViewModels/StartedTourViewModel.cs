@@ -1,4 +1,5 @@
-﻿using InitialProject.Model;
+﻿using InitialProject.Domain.Model;
+using InitialProject.Model;
 using InitialProject.Service;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -60,14 +61,16 @@ namespace InitialProject.WPF.ViewModels
 
         public RelayCommand NextCommand { get; set; }
         public RelayCommand FinishCommand { get; set; }
+        public int GuideId { get; set; }
 
-        public StartedTourViewModel(TourInstance active, ObservableCollection<TourInstance> tours, ObservableCollection<TourInstance> finishedInstances)
+        public StartedTourViewModel(TourInstance active, ObservableCollection<TourInstance> tours, ObservableCollection<TourInstance> finishedInstances,int guideId)
         {
             AllPoints = new ObservableCollection<CheckPoint>();
             CurrentPoint = new ObservableCollection<CheckPoint>();
             Tours = tours;
             selected = active;
             FinishedInstances = finishedInstances;
+            GuideId = guideId;
             SetStartState();
             MakeCommands();
         }
@@ -103,7 +106,7 @@ namespace InitialProject.WPF.ViewModels
             if (AllPoints.Count != 0)
             {
                 CurrentPoint.Add(AllPoints.ToList().Find(n => n.Order == orderCounter));
-                alertGuest2Service.AddAlerts(CurrentPoint[0].Id, selected.Id, selected);
+                alertGuest2Service.AddAlerts(CurrentPoint[0].Id, selected.Id, selected,GuideId);
             }
         }
         public void FinishExecuted(object sender)
@@ -145,7 +148,7 @@ namespace InitialProject.WPF.ViewModels
                 FinishInstance();
             }
             checkPointService.UpdateAllPointsListToNextPoint(AllPoints, orderCounter);
-            alertGuest2Service.AddAlerts(CurrentPoint[0].Id, selected.Id, selected);
+            alertGuest2Service.AddAlerts(CurrentPoint[0].Id, selected.Id, selected,GuideId);
         }
         private void ChangeCurrentPointToNextState()
         {

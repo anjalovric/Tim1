@@ -23,11 +23,7 @@ namespace InitialProject.Service
         {
             superGuests = new List<SuperGuestTitle>(superGuestTitleRepository.GetAll());
             SetGuests();
-        }
-        public List<SuperGuestTitle> GetAll()
-        {
-            return superGuests;
-        }
+        }       
         public void Add(SuperGuestTitle superGuestTitle)
         {
             superGuestTitleRepository.Add(superGuestTitle);
@@ -36,7 +32,6 @@ namespace InitialProject.Service
         {
              return superGuestTitleRepository.GetAll().Find(n => n.Guest.Id == guest1.Id)!=null;
         }
-
         public void SetGuests()
         {
             Guest1Service guest1Service = new Guest1Service();
@@ -48,7 +43,6 @@ namespace InitialProject.Service
                     superGuest.Guest = guest;
             }
         }
-
         public SuperGuestTitle MakeNewSuperGuest(Guest1 guest1)
         {
             AccommodationReservationService accommodationReservationService = new AccommodationReservationService();
@@ -67,7 +61,6 @@ namespace InitialProject.Service
         {
             superGuestTitleRepository.Delete(title);
         }
-
         public SuperGuestTitle ProlongSuperGuestTitle(Guest1 guest1)
         {
             SuperGuestTitle superGuest = superGuests.Find(n => n.Guest.Id == guest1.Id);
@@ -75,32 +68,14 @@ namespace InitialProject.Service
             DateTime newActivationDate = accommodationReservationService.GetProlongActivationDate(guest1, superGuest.ActivationDate);
             if (newActivationDate != DateTime.MinValue) //can prolog title
             {
-                //delete previous and add new title
-                Delete(superGuest);
+                Delete(superGuest);     //delete previous and add new title
                 Add(new SuperGuestTitle(guest1, 5, newActivationDate));
             } 
             else if(DateTime.Now > superGuest.ActivationDate.AddYears(1))  //1 year has passed
-                //obrisati starog supergosta
-                Delete(superGuest);
+                Delete(superGuest);     //delete old title
             MakeSuperGuests();
-
             return superGuests.Find(n=>n.Guest.Id == guest1.Id);    //new superguest or null
-        }
-
-        public bool IsSuperGuestTitleExpiredOrPossibleToProlong(Guest1 guest1)    //return TRUE if expired or Isn't already superguest
-        {
-            if(IsAlreadySuperGuest(guest1))
-            {
-                MakeSuperGuests();
-                if (DateTime.Now > superGuests.Find(n => n.Guest.Id == guest1.Id).ActivationDate)
-                {
-                    return true;
-                }
-                else
-                    return false;
-            }
-            return true;
-        }
+        }        
         public void DeleteTitleIfManyYearsPassed(Guest1 guest1)
         {
             if(superGuests.Find(n => n.Guest.Id == guest1.Id)!=null)
@@ -117,9 +92,8 @@ namespace InitialProject.Service
             {
                 if(title.AvailablePoints>0)
                     title.AvailablePoints -= 1;
-                superGuestTitleRepository.DecrementPoints(title);
-            }
-            
+                superGuestTitleRepository.Update(title);
+            }            
         }
     }
 }

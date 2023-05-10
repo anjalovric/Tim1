@@ -11,7 +11,7 @@
         <lvc:CartesianChart FontFamily="Nunito Sans" Series="{Binding SeriesCollection}" LegendLocation="None">
             <lvc:CartesianChart.SeriesColors>
                 <lvc:ColorsCollection>
-                    <Color>#FF9E98FF</Color>
+                    <Color>#6d9773</Color>
                 </lvc:ColorsCollection>
             </lvc:CartesianChart.SeriesColors>
             <lvc:CartesianChart.AxisX>

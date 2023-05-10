@@ -71,7 +71,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             }
 
         }
-
         public RelayCommand RateOwnerAndAccommodationCommand { get; set; }
         public RelayCommand CancelReservationCommand { get; set; }
         public RelayCommand RescheduleReservationCommand { get; set; }
@@ -89,7 +88,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             CompletedReservations = new ObservableCollection<AccommodationReservation>(accommodationReservationService.GetCompletedReservations(guest1));
             NotCompletedReservations = new ObservableCollection<AccommodationReservation>(accommodationReservationService.GetNotCompletedReservations(guest1));
             NotCompletedReservations = new ObservableCollection<AccommodationReservation>(NotCompletedReservations.OrderByDescending(x => x.Arrival > DateTime.Now).ToList());    //group: first will be shown reservations which haven't started yet
-
         }
         private void MakeCommands()
         {
@@ -97,20 +95,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             CancelReservationCommand = new RelayCommand(CancelReservation_Executed, CanExecute);
             RescheduleReservationCommand = new RelayCommand(RescheduleReservation_Executed, CanExecute);
         }
-
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        private bool CanExecute(object sender)
-        {
-            return true;
-        }
-
-
         private void RateOwnerAndAccommodation_Executed(object sender)
         {
             OwnerReviewService ownerReviewService = new OwnerReviewService();
@@ -125,16 +109,12 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                 return;
             }
             ShowReviewForm();
-        }
-        
-
+        }    
         private void ShowReviewForm()
         {
             OwnerAndAccommodationReviewFormView ownerAndAccommodationReviewForm = new OwnerAndAccommodationReviewFormView(guest1, SelectedCompletedReservation);
             Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = ownerAndAccommodationReviewForm;
-
-        }
-        
+        }       
         private async void CancelReservation_Executed(object sender)
         {
             if(HasReservationStarted())
@@ -142,19 +122,16 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                 ShowMessageBoxForStaredReservationCancellation();
                 return;
             }
-
             if (!IsCancellationAllowed())
             {
                 ShowMessageBoxForExpiredCancellationPeriod();
                 return;
-            }
-            
+            }            
             Task<bool> result = ConfirmCancellationMessageBox();
             bool IsYesClicked = await result;
             if (IsYesClicked)
                 ConfirmCancellation();
         }
-
         public async Task<bool> ConfirmCancellationMessageBox()
         {
             var result = new TaskCompletionSource<bool>();
@@ -181,7 +158,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                 form.ShowDialog();
             }       
         }
-
         // Validation for review (5 days)
         public bool IsReservationValidToReview()
         {
@@ -197,7 +173,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         {
             return DateTime.Now <= SelectedNotCompletedReservation.Arrival.AddHours(-24) && DateTime.Now <= SelectedNotCompletedReservation.Arrival.AddDays(-SelectedNotCompletedReservation.Accommodation.MinDaysToCancel);
         }
-
         //Message boxes for validation
         private void ShowMessageBoxForReschedulingStartedReservation()
         {
@@ -229,7 +204,14 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             messageBox.Owner = Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault();
             messageBox.ShowDialog();
         }
-
-
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        private bool CanExecute(object sender)
+        {
+            return true;
+        }
     }
 }

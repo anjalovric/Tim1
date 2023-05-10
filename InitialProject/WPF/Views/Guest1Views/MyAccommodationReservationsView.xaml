@@ -48,6 +48,7 @@
             <Setter Property="AutoGenerateColumns" Value="False"></Setter>
         </Style>
         <Style TargetType="Button">
+            <Setter Property="Padding" Value="0"></Setter>
             <Setter Property="Background" Value="#8c9d75"></Setter>
             <Setter Property="Foreground" Value="#22301a"></Setter>
             <Setter Property="FontWeight" Value="DemiBold"></Setter>
@@ -193,14 +194,14 @@
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <Button Name="Cancel" VerticalContentAlignment="Center" VerticalAlignment="Center" FontSize="16" Background="#c99585" Command="{Binding DataContext.CancelReservationCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" FontWeight="Bold">
-                                            <Grid Background="#c99585" Width="Auto" HorizontalAlignment="Center" Height="35" VerticalAlignment="Center" >
+                                            <Grid Background="#c99585" Width="94" HorizontalAlignment="Center" Height="35" VerticalAlignment="Center" >
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="Auto"/>
                                                     <ColumnDefinition Width="Auto"/>
                                                 </Grid.ColumnDefinitions>
-                                                <Image Source="/Resources/Images/cancel.png" VerticalAlignment="Center" HorizontalAlignment="Right"  Margin="0,0,5,0" Width="Auto" Height="22" Grid.Column="1" RenderTransformOrigin="0.5,0.5">
+                                                <Image Source="/Resources/Images/cancel.png" VerticalAlignment="Center" HorizontalAlignment="Right"  Margin="5,0,5,0" Width="Auto" Height="22" Grid.Column="1" RenderTransformOrigin="0.5,0.5">
                                                 </Image>
-                                                <TextBlock Text="Cancel" Grid.Column="0" VerticalAlignment="Center" FontSize="16"  Foreground="#22301a" Margin="5,0,0,0" FontWeight="Bold" HorizontalAlignment="Left" Width="Auto"/>
+                                                <TextBlock Text="Cancel" Grid.Column="0" VerticalAlignment="Center" FontSize="16"  Foreground="#22301a" Margin="10,0,0,0" FontWeight="Bold" HorizontalAlignment="Left" Width="Auto"/>
                                             </Grid>
                                         </Button>
                                     </DataTemplate>
@@ -287,7 +288,7 @@
                                                     <ColumnDefinition Width="Auto"/>
                                                     <ColumnDefinition Width="Auto"/>
                                                 </Grid.ColumnDefinitions>
-                                                <Image Source="/Resources/Images/star1.png" VerticalAlignment="Center" HorizontalAlignment="Center"  Margin="0,0,15,0" Height="22" Grid.Column="1">
+                                                <Image Source="/Resources/Images/stars.png" VerticalAlignment="Center" HorizontalAlignment="Center"  Margin="5,0,15,0" Height="20" Grid.Column="1">
                                                 </Image>
                                                 <TextBlock Text="Rate" Grid.Column="0" VerticalAlignment="Center" FontSize="16"  Foreground="#22301a" Margin="15,0,0,0" FontWeight="Bold" HorizontalAlignment="Left" Width="40"/>
                                             </Grid>

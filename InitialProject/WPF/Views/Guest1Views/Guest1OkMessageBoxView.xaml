@@ -8,6 +8,7 @@
         Title="Guest1MessageBoxView" Height="270" Background="Transparent" Width="380" AllowsTransparency="True"  WindowStartupLocation="CenterScreen" WindowStyle="None">
     <Window.Resources>
         <Style TargetType="Button">
+            <Setter Property="Padding" Value="0"></Setter>
             <Setter Property="Foreground" Value="#22301a"></Setter>
             <Setter Property="FontWeight" Value="Bold"></Setter>
             <Setter Property="FontSize" Value="18"></Setter>
