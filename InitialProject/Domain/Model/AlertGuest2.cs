@@ -23,6 +23,7 @@ namespace InitialProject.Model
 
         public bool Informed { get; set; }
         public int GuideId { get; set; }
+        public bool Seen { get; set; }
 
         public AlertGuest2() { }
         public AlertGuest2(int reservationId,int guest2Id,int currentPointId,int instanceId,int guideId) 
@@ -34,11 +35,12 @@ namespace InitialProject.Model
             InstanceId = instanceId;
             Informed = false;
             GuideId = guideId;
+            Seen = false ;
         }
 
         public string[] ToCSV()
         {
-           string[] csvValues = { Id.ToString(), ReservationId.ToString(), Guest2Id.ToString(), CheckPointId.ToString(),Availability.ToString(),InstanceId.ToString(),Informed.ToString(), GuideId.ToString() };
+           string[] csvValues = { Id.ToString(), ReservationId.ToString(), Guest2Id.ToString(), CheckPointId.ToString(),Availability.ToString(),InstanceId.ToString(),Informed.ToString(), GuideId.ToString(), Seen.ToString() };
             return csvValues;
         }
 
@@ -52,6 +54,7 @@ namespace InitialProject.Model
             InstanceId = Convert.ToInt32((string)values[5]);
             Informed = Convert.ToBoolean((string)values[6]);
             GuideId = Convert.ToInt32(values[7]);
+            Seen = Convert.ToBoolean((string)values[8]);
         }
     }
 }
