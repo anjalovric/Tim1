@@ -26,14 +26,13 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         public TourRequestStatisticsViewModel(Model.Guest2 guest2)
         {
             Guest2 = guest2;
-            //Year = year;
             SearchCommand = new RelayCommand(Search_Executed,CanExecute);
             requestStatisticsService = new RequestStatisticsService();
             ordinaryTourRequestsService = new OrdinaryTourRequestsService();
             OrdinaryTourRequests = new List<OrdinaryTourRequests>(ordinaryTourRequestsService.GetByGuestId(guest2.Id));
-            acceptedRequest = requestStatisticsService.ProcentOfAcceptedRequest(OrdinaryTourRequests, Guest2);
-            invalidRequest = requestStatisticsService.ProcentOfInvalidRequest(OrdinaryTourRequests, Guest2);
-            averageNumberOfPeople = requestStatisticsService.AverageNumberOfPeopleInAcceptedRequests(OrdinaryTourRequests, Guest2);
+            acceptedRequest = requestStatisticsService.ProcentOfAcceptedRequest( Guest2);
+            invalidRequest = requestStatisticsService.ProcentOfInvalidRequest( Guest2);
+            averageNumberOfPeople = requestStatisticsService.AverageNumberOfPeopleInAcceptedRequests( Guest2);
         }
         private bool CanExecute(object sender)
         {

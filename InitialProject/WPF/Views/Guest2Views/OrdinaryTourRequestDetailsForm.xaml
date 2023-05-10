@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.WPF.Views.Guest2Views"
         mc:Ignorable="d"
-        Title="Details" Height="450" Width="700" WindowStartupLocation="CenterScreen" WindowStyle="None">
+        Title="Details" Height="450" Width="700" WindowStartupLocation="CenterScreen" Background="Transparent" AllowsTransparency="True" WindowStyle="None">
     <Window.Resources>
         <Style x:Key="button" TargetType="Button">
             <Setter Property="FontSize" Value="14"/>
@@ -39,25 +39,14 @@
         </Style>
         <Style x:Key="LabelStyle" TargetType="Label">
             <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Foreground" Value="White"/>
         </Style>
         <Style x:Key="FontStyle" TargetType="TextBlock">
             <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Foreground" Value="White"/>
         </Style>
     </Window.Resources>
-    <Border BorderThickness="4" Padding="6" CornerRadius="25">
-        <Border.BorderBrush>
-            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                <GradientStop Color="Black" Offset="0"></GradientStop>
-                <GradientStop Color="#22301a" Offset="1"></GradientStop>
-            </LinearGradientBrush>
-        </Border.BorderBrush>
-        <Border.Background>
-            <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
-                <GradientStop Color="#FF9E98FF" Offset="0.1"></GradientStop>
-                
-                <GradientStop Color="#FF9E98FF" Offset="0.9"></GradientStop>
-            </LinearGradientBrush>
-        </Border.Background>
+    
         <Grid>
 
             <Grid.RowDefinitions>
@@ -77,8 +66,16 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,1" EndPoint="1,1">
+                <GradientStop Color="#6d9773" Offset="0"/>
 
-            <Label Content="INFORMATION" FontFamily="Baskerville Old Face" Margin="106,23,54,19" FontSize="20" FontWeight="Bold" Grid.RowSpan="2"/>
+                <GradientStop Color="#FF96BD9B" Offset="0.3"/>
+                <GradientStop Color="#FF96BD9B" Offset="0.5"/>
+                <GradientStop Color="#6d9773" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Label Content="INFORMATION" Foreground="White" FontFamily="Baskerville Old Face" Margin="106,23,54,19" FontSize="20" FontWeight="Bold" Grid.RowSpan="2"/>
             <Label Content="Location" FontWeight="DemiBold" Grid.Row="2" Grid.Column="0" Margin="62,0,0,0" Style="{StaticResource LabelStyle}"/>
             <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Path=TourInstance.Tour.Location}" Margin="10,10,65,10" Style="{StaticResource FontStyle}"/>
             <Label Content="Language" FontWeight="DemiBold" Grid.Row="3" Grid.Column="0" Margin="62,43,0,43" Grid.RowSpan="3" Style="{StaticResource LabelStyle}"/>
@@ -87,9 +84,9 @@
             <Label Content="EndDate" FontWeight="DemiBold" Grid.Row="6" Grid.Column="0" Margin="62,43,0,43" Grid.RowSpan="3" Style="{StaticResource LabelStyle}"/>
             <Label Content="Description" FontWeight="DemiBold" Grid.Row="7" Grid.Column="0" Margin="62,43,0,43" Grid.RowSpan="3" Style="{StaticResource LabelStyle}"/>
             <Label Content="Duration" FontWeight="DemiBold" Grid.Row="2" Grid.Column="0" Margin="62,43,0,43" Grid.RowSpan="3" Style="{StaticResource LabelStyle}"/>
-            <Button HorizontalAlignment="Left" Grid.Row="9" BorderBrush="Black" BorderThickness="3" VerticalAlignment="Top"  Height="34" Width="132" FontWeight="Bold" FontSize="18" Command="{Binding CloseCommand}" Margin="190,41,0,0" Grid.Column="1" Grid.RowSpan="2">
+        <Button HorizontalAlignment="Left" Grid.Row="9" BorderBrush="#ffba00" Background="#ffba00" BorderThickness="3" VerticalAlignment="Top"  Height="34" Width="132" FontWeight="Bold" FontSize="18" Command="{Binding CloseCommand}" Margin="190,41,0,0" Grid.Column="1" Grid.RowSpan="2">
 
-                <Grid Background="#FF9E98FF" Width="132" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35">
+            <Grid Background="#ffba00" Width="132" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="16*"/>
                         <RowDefinition Height="19*"/>
@@ -98,8 +95,8 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <Image Source="/Resources/Images/ok.png" VerticalAlignment="Top" HorizontalAlignment="Left" Width="26" Height="25" RenderTransformOrigin="0.5,0.5" Margin="10,3,0,0" Grid.RowSpan="2"/>
-                    <TextBlock Background="#FF9E98FF" Text="Close" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" Width="78" Height="22" Margin="10,3,0,0" Grid.RowSpan="2" Grid.Column="1"/>
+                    <Image Source="/Resources/Images/close.png" VerticalAlignment="Top" HorizontalAlignment="Left" Width="26" Height="25" RenderTransformOrigin="0.5,0.5" Margin="10,3,0,0" Grid.RowSpan="2"/>
+                <TextBlock Background="#ffba00" Text="Close" Foreground="Black" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" Width="78" Height="22" Margin="10,3,0,0" Grid.RowSpan="2" Grid.Column="1"/>
                 </Grid>
 
             </Button>
@@ -107,9 +104,9 @@
             <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding TourInstance.Tour.Language}" Margin="10,10,65,10" Style="{StaticResource FontStyle}"/>
             <TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding TourInstance.Tour.MaxGuests}" Margin="10,10,65,10" Style="{StaticResource FontStyle}"/>
             <TextBlock Grid.Row="6" Grid.Column="1" Text="{Binding StartDate}" Margin="10,10,65,10" Style="{StaticResource FontStyle}"/>
-            <TextBlock Grid.Row="7" Grid.Column="1" Text="{Binding TourInstance.Date}" Margin="10,10,65,10" Style="{StaticResource FontStyle}"/>
+            <TextBlock Grid.Row="7" Grid.Column="1" Text="{Binding EndDate}" Margin="10,10,65,10" Style="{StaticResource FontStyle}"/>
             <TextBlock Grid.Row="8" Grid.Column="1" Text="{Binding TourInstance.Tour.Description}" Margin="10,10,65,10" Style="{StaticResource FontStyle}"/>
             <Image Source="/Resources/Images/information.png" Margin="61,20,242,23" Grid.RowSpan="2"/>
         </Grid>
-    </Border>
+
 </Window>

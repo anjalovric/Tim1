@@ -11,10 +11,12 @@ namespace InitialProject.Service
 {
     public class RequestStatisticsService
     {
-        public double AverageNumberOfPeopleInAcceptedRequests(List<OrdinaryTourRequests> ordinaryTours, Guest2 Guest2)
+        public double AverageNumberOfPeopleInAcceptedRequests(Guest2 Guest2)
         {
             int counter = 0;
             double averageNumberOfPeople = 0;
+            OrdinaryTourRequestsService ordinaryTourRequestsService=new OrdinaryTourRequestsService();
+            List<OrdinaryTourRequests> ordinaryTours=new List<OrdinaryTourRequests>(ordinaryTourRequestsService.GetByGuestId(Guest2.Id));
             foreach (OrdinaryTourRequests request in ordinaryTours)
             {
                 if (request.Status == "Accepted" && request.GuestId == Guest2.Id)
@@ -27,9 +29,11 @@ namespace InitialProject.Service
                 return averageNumberOfPeople;
             return (averageNumberOfPeople /= counter).Round(2);
         }
-        public double ProcentOfInvalidRequest(List<OrdinaryTourRequests> ordinaryTours, Guest2 Guest2)
+        public double ProcentOfInvalidRequest(Guest2 Guest2)
         {
             double invalidRequest = 0;
+            OrdinaryTourRequestsService ordinaryTourRequestsService = new OrdinaryTourRequestsService();
+            List<OrdinaryTourRequests> ordinaryTours = new List<OrdinaryTourRequests>(ordinaryTourRequestsService.GetByGuestId(Guest2.Id));
             foreach (OrdinaryTourRequests request in ordinaryTours)
             {
                 if (request.Status == "Invalid" && request.GuestId == Guest2.Id)
@@ -42,9 +46,11 @@ namespace InitialProject.Service
             invalidRequest /= ordinaryTours.Count();
             return invalidRequest *= 100;
         }
-        public double ProcentOfAcceptedRequest(List<OrdinaryTourRequests> ordinaryTours, Guest2 Guest2)
+        public double ProcentOfAcceptedRequest(Guest2 Guest2)
         {
             double acceptedRequest = 0;
+            OrdinaryTourRequestsService ordinaryTourRequestsService = new OrdinaryTourRequestsService();
+            List<OrdinaryTourRequests> ordinaryTours = new List<OrdinaryTourRequests>(ordinaryTourRequestsService.GetByGuestId(Guest2.Id));
             foreach (OrdinaryTourRequests request in ordinaryTours)
             {
                 if (request.Status == "Accepted" && request.GuestId == Guest2.Id)

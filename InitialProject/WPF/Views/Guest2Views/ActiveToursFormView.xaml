@@ -97,7 +97,7 @@
             <ColumnDefinition Width="10*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Border BorderBrush="#151f2d" Background="#151f2d" BorderThickness="4,4,4,4" CornerRadius="25 25 25 25" Grid.ColumnSpan="3" Grid.RowSpan="3"/>
+        <Border BorderBrush="#0C3B2E" Background="#0C3B2E" BorderThickness="4,4,4,4" CornerRadius="25 25 25 25" Grid.ColumnSpan="3" Grid.RowSpan="3"/>
         <Rectangle Fill="White" RadiusX="10" RadiusY="10" Grid.Column="1" Grid.Row="1"/>
         <DataGrid x:Name="ActiveTourListDataGrid"  Grid.Column="1" BorderBrush="Transparent" ItemsSource="{Binding Path=TourInstances,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=Selected}" IsReadOnly="True" AutoGenerateColumns="False" VerticalAlignment="Center" HorizontalAlignment="Center" Height="240"  Width="537" Grid.Row="1" HorizontalScrollBarVisibility="Hidden" GridLinesVisibility="None" ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle2}" CellStyle="{StaticResource DataGridCellStyle2}" Style="{StaticResource DataGridStyle}" RowStyle="{StaticResource DataGridRowStyle2}">
             <DataGrid.Columns>
@@ -118,7 +118,7 @@
         </DataGrid>
 
         <Label Content="Active tours" FontWeight="Bold" Foreground="White" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" Width="228" Grid.Column="1" Margin="0,36,0,0"/>
-        <TextBlock Text="U nastavku mozete vidjeti sve aktivne ture na koje ste se prijavili i aktivan checkpoint." Foreground="#7166f9" HorizontalAlignment="Left" Margin="5,81,0,0" VerticalAlignment="Top" Width="834" Height="39" Grid.Column="1" Grid.ColumnSpan="2"/>
+        <TextBlock Text="U nastavku mozete vidjeti sve aktivne ture na koje ste se prijavili i aktivan checkpoint." Foreground="White" HorizontalAlignment="Left" Margin="5,81,0,0" VerticalAlignment="Top" Width="834" Height="39" Grid.Column="1" Grid.ColumnSpan="2"/>
 
     </Grid>
 </UserControl>

@@ -12,12 +12,11 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 {
     public class Guest1YesNoMessageBoxViewModel
     {
+        private readonly TaskCompletionSource<bool> _result;
         public string Text { get; set; }
         public BitmapImage Image { get; set; }
         public RelayCommand YesCommand { get; set; }
         public RelayCommand NoCommand { get; set; }
-        private readonly TaskCompletionSource<bool> _result;
-
         public Guest1YesNoMessageBoxViewModel(string messageText, string path, TaskCompletionSource<bool> result)
         {
             _result = result;
@@ -26,7 +25,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             YesCommand = new RelayCommand(Yes_Executed, CanExecute);
             NoCommand = new RelayCommand(No_Executed, CanExecute);
         }
-
         private bool CanExecute(object sender)
         {
             return true;
@@ -36,12 +34,10 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             _result.SetResult(true);
             Application.Current.Windows.OfType<Guest1YesNoMessageBoxView>().FirstOrDefault().Close();
         }
-
         private void No_Executed(object sender)
         {
             _result.SetResult(false);
             Application.Current.Windows.OfType<Guest1YesNoMessageBoxView>().FirstOrDefault().Close();
-
         }
     }
 }

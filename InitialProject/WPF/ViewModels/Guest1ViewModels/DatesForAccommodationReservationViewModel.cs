@@ -33,16 +33,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                 }
             }
         }
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-        private bool CanExecute(object sender)
-        {
-            return true;
-        }
-
         public RelayCommand ChooseDateCommand { get; set; }
         public RelayCommand BackCommand { get; set; }
 
@@ -99,7 +89,15 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             SuperGuestTitleService superGuestTitleService = new SuperGuestTitleService();
             superGuestTitleService.DecrementPoints(guest1);
         }
-        
-       
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        private bool CanExecute(object sender)
+        {
+            return true;
+        }
+
     }
 }

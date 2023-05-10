@@ -1,4 +1,5 @@
-﻿using InitialProject.Model;
+﻿using InitialProject.Domain.Model;
+using InitialProject.Model;
 using InitialProject.Service;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

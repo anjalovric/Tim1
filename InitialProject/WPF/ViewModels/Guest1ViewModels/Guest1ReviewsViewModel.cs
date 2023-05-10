@@ -36,12 +36,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 
         }
         public GuestReview SelectedReview { get; set; }
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
         public RelayCommand ShowReviewDetailsCommand { get; set; }
         public Guest1ReviewsViewModel(Guest1 guest1)
         {
@@ -62,7 +56,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = view;
 
         }
-
         private void SetRatings()
         {
             GuestAverageReviewService guestAverageReviewService = new GuestAverageReviewService();
@@ -73,6 +66,10 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             AverageCleanliness = Math.Round(AverageCleanliness, 1);
             AverageFollowingRules = Math.Round(AverageFollowingRules, 1);
         }
-        
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

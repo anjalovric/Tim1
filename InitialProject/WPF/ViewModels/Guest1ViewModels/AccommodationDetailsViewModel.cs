@@ -20,6 +20,11 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
     {
         private Guest1 guest1;
         private int currentCounter = 0;
+        private List<AccommodationImage> images;
+        public Accommodation SelectedAccommodation { get; set; }
+        public int AverageRating { get; set; }
+        public int ReviewsNumber { get; set; }
+
         private BitmapImage imageSource;
         public BitmapImage ImageSource
         {
@@ -44,18 +49,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             }
 
         }
-        public Accommodation SelectedAccommodation { get; set; }
-        private List<AccommodationImage> images;
-
-        public int AverageRating { get; set; }
-        public int ReviewsNumber { get; set; }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
         public RelayCommand ReserveCommand { get; set; }
 
         public RelayCommand NextPhotoCommand { get; set; }
@@ -119,6 +112,10 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                 currentCounter = 0;
             ImageSource = new BitmapImage(new Uri(images[currentCounter].Url, UriKind.Relative));
         }
-
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

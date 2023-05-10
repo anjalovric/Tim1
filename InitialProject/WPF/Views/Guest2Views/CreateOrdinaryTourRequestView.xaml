@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:InitialProject.WPF.Views.Guest2Views"
         xmlns:tk="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit.NET5" 
         mc:Ignorable="d"
-        Title="CreateOrdinaryTourRequest" Height="600" Width="668" d:DesignHeight="600" d:DesignWidth="668" WindowStartupLocation="CenterScreen" WindowStyle="None">
+        Title="CreateOrdinaryTourRequest" Height="600" Width="668" d:DesignHeight="600" d:DesignWidth="668" Background="Transparent" AllowsTransparency="True" WindowStartupLocation="CenterScreen" WindowStyle="None">
     <Window.Resources>
         <ControlTemplate x:Key="ValidationTemplate">
             <StackPanel>
@@ -60,12 +60,18 @@
         </Style>
         <Style x:Key="LabelStyle" TargetType="Label">
             <Setter Property="FontSize" Value="15"/>
-            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Foreground" Value="White"/>
             <Setter Property="FontWeight" Value="DemiBold"/>
         </Style>
     </Window.Resources>
-    
 
+    <Border BorderThickness="4" Padding="6" CornerRadius="25" BorderBrush="#6d9773">
+        <Border.Background>
+            <RadialGradientBrush GradientOrigin="0.5,0.5" Center="0.5,0.5" RadiusX="0.5" RadiusY="0.5">
+                <GradientStop Color="#FF96BD9B" Offset="0.1"></GradientStop>
+                <GradientStop Color="#6d9773" Offset="1"></GradientStop>
+            </RadialGradientBrush>
+        </Border.Background>
 
         <Grid Width="655" Height="580">
             <Grid.ColumnDefinitions>
@@ -85,8 +91,16 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0,1" EndPoint="1,1">
+                    <GradientStop Color="#6d9773" Offset="0"/>
 
-            <Label Content="CREATING REQUEST OF THE TOUR" FontSize="30" FontWeight="Bold" Foreground="Black" Margin="40,10,76,52" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
+                    <GradientStop Color="#FF96BD9B" Offset="0.3"/>
+                    <GradientStop Color="#FF96BD9B" Offset="0.5"/>
+                    <GradientStop Color="#6d9773" Offset="1"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+            <Label Content="CREATING REQUEST OF THE TOUR" FontSize="30" FontWeight="Bold" Foreground="White" Margin="40,10,76,52" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
             <Label Grid.Row="2" Grid.Column="0" Content="Name" Margin="40,10,0,10" Style="{StaticResource LabelStyle}"/>
             <Label Content="Country" Grid.Row="3" Grid.Column="0" Margin="40,10,0,16" Style="{StaticResource LabelStyle}" RenderTransformOrigin="0.5,0.5"/>
             <Label Content="Language" Grid.Row="5" Grid.Column="0" Margin="40,10,0,0" Style="{StaticResource LabelStyle}"/>
@@ -321,7 +335,7 @@
                     </ControlTemplate>
                 </Validation.ErrorTemplate>
             </ComboBox>
-            <Label Content="Potrebno je popuniti sva navedena polja." FontSize="18" Margin="40,15,237,0" Grid.Column="0" Grid.Row="1" Foreground="Black" Grid.ColumnSpan="2"/>
+            <Label Content="Potrebno je popuniti sva navedena polja." FontSize="18" Margin="40,15,237,0" Grid.Column="0" Grid.Row="1" Foreground="White" Grid.ColumnSpan="2"/>
             <Button HorizontalAlignment="Left" Grid.Row="10" VerticalAlignment="Center"  Height="34" Width="132" FontWeight="Bold" FontSize="18" Command="{Binding ConfirmCommand}" Margin="35,0,0,0" Grid.Column="1" BorderBrush="Transparent">
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">
@@ -343,7 +357,7 @@
                         </Style.Triggers>
                     </Style>
                 </Button.Style>
-                <Grid Background="#FF9E98FF" Width="144" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35">
+                <Grid Background="#ffba00" Width="144" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="16*"/>
                         <RowDefinition Height="19*"/>
@@ -353,12 +367,12 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <Image Source="/Resources/Images/doneNew.png" VerticalAlignment="Top" HorizontalAlignment="Left" Width="26" Height="25" RenderTransformOrigin="0.5,0.5" Margin="10,3,0,0" Grid.RowSpan="2"/>
-                    <TextBlock Background="#FF9E98FF" Foreground="White" Text="Confirm" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" Width="109" Height="29" Margin="10,3,0,0" Grid.RowSpan="2" Grid.Column="1"/>
+                    <TextBlock Background="#ffba00" Foreground="Black" Text="Confirm" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" Width="109" Height="29" Margin="10,3,0,0" Grid.RowSpan="2" Grid.Column="1"/>
                 </Grid>
 
             </Button>
 
-        <Button HorizontalAlignment="Left" Grid.Row="10" VerticalAlignment="Center"  Height="34" Width="132" FontWeight="Bold" FontSize="18" Command="{Binding CancelCommand}" Margin="182,0,0,0" Grid.Column="1" BorderBrush="#FF9E98FF">
+            <Button HorizontalAlignment="Left" Grid.Row="10" VerticalAlignment="Center"  Height="34" Width="132" FontWeight="Bold" FontSize="18" Command="{Binding CancelCommand}" Margin="182,0,0,0" Grid.Column="1" BorderBrush="#FF9E98FF">
                 <Grid Background="White" Width="144" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="16*"/>
@@ -369,9 +383,9 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <Image Source="/Resources/Images/close.png" VerticalAlignment="Top" HorizontalAlignment="Left" Width="26" Height="25" RenderTransformOrigin="0.5,0.5" Margin="10,3,0,0" Grid.RowSpan="2"/>
-                <TextBlock Background="White" Text="Cancel" Foreground="#FF9E98FF" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" Width="109" Height="29" Margin="10,3,0,0" Grid.RowSpan="2" Grid.Column="1"/>
+                    <TextBlock Background="White" Text="Cancel" Foreground="Black" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" Width="109" Height="29" Margin="10,3,0,0" Grid.RowSpan="2" Grid.Column="1"/>
                 </Grid>
             </Button>
         </Grid>
-
+    </Border>
 </Window>

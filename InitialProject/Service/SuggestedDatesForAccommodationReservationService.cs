@@ -19,8 +19,7 @@ namespace InitialProject.Service
         private int NumberOfGuests;
         private DateTime Arrival;
         private DateTime Departure;
-        private TimeSpan lengthOfStay;
-        
+        private TimeSpan lengthOfStay;     
         public SuggestedDatesForAccommodationReservationService()
         {
             AccommodationReservationService accommodationReservationService = new AccommodationReservationService();
@@ -33,9 +32,7 @@ namespace InitialProject.Service
                 if (currentAccommodationId == reservation.Accommodation.Id)
                 {
                     if (date >= reservation.Arrival && date <= reservation.Departure)
-                    {
                         return false;
-                    }
                 }
             }
             AccommodationRenovationService accommodationRenovationService = new AccommodationRenovationService();
@@ -145,9 +142,7 @@ namespace InitialProject.Service
         }
         private List<AvailableDatesForAccommodation> GetAvailableDatesOutRange(Accommodation currentAccommodation, Guest1 guest1)
         {
-
             List<AvailableDatesForAccommodation> availableDatesForAccommodations = new List<AvailableDatesForAccommodation>();
-
             foreach (List<DateTime> dates in availableDateRanges)
             {
                 DateTime arrival = dates[0];

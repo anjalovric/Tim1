@@ -34,12 +34,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             }
 
         }
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
         public int AverageRating { get; set; }
         public int ReviewsNumber { get; set; }
         public Guest1ProfileViewModel(Guest1 guest1)
@@ -78,6 +72,10 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         {
             return Guest1.ImagePath;
         }
-        
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

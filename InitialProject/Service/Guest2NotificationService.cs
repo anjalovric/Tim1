@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
+using System.Printing;
+using System.DirectoryServices.ActiveDirectory;
 
 namespace InitialProject.Service
 {
@@ -34,16 +36,6 @@ namespace InitialProject.Service
         public ObservableCollection<Guest2Notification> GetByGuestId(int id)
         {
             return notificationRepository.GetByGuestId(id);
-        }
-        public bool IsRequestAccepted(Guest2 guest)
-        {
-            List<Guest2Notification> notifications = notificationRepository.GetAll();
-            return notifications.Find(n => n.Type.Equals(Guest2NotificationType.REQUEST_ACCEPTED) && n.Guest2.Id == guest.Id) != null;
-        }
-        public bool IsConfirmPresence(Guest2 guest)
-        {
-            List<Guest2Notification> notifications = notificationRepository.GetAll();
-            return notifications.Find(n => n.Type.Equals(Guest2NotificationType.CONFIRM_PRESENCE) && n.Guest2.Id == guest.Id) != null;
         }
     }
 }
