@@ -35,6 +35,7 @@
             <Label Content="Review" Foreground="LightGray" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" RenderTransformOrigin="0,0.401" Width="134" Height="28" VerticalContentAlignment="Center">
             </Label>
         </Grid>
+        <Image Source="/Resources/Images/reviewImage.jpg" Grid.Column="1" Grid.Row="1" Margin="84,0,0,30" Grid.RowSpan="2"/>
 
         <Label Content="{Binding Path=OwnerReview.Reservation.Guest, Mode=OneWay}" VerticalContentAlignment="Center" Grid.Row="1" Grid.Column="0" FontSize="15" FontWeight="SemiBold" HorizontalAlignment="Left" Width="250" Margin="20,0,0,20" Grid.ColumnSpan="2" />
         <TextBlock Padding="3, 0, 0, 0" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center" TextWrapping="Wrap" Margin="20,0,20,0" >

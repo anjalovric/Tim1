@@ -92,8 +92,32 @@
                             </Style>
                         </TextBlock.Style>
                     </TextBlock>
-                    <Button Command="{Binding DataContext.DeclineCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" Name="DeclineButton" Content="Decline" Grid.Column="1" Grid.Row="5" Style="{StaticResource DeclineButton}"></Button>
-                    <Button Command="{Binding DataContext.ApproveCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" Name="ApproveButton" Content="Approve" Grid.Column="3" Grid.Row="5" Style="{StaticResource DataTemplateButton}"></Button>
+                    <Button Command="{Binding DataContext.DeclineCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" Name="DeclineButton" Grid.Column="1" Grid.Row="5" Style="{StaticResource DeclineButton}">
+                        <Button.Content>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="10"/>
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Decline" Grid.Column="2" VerticalAlignment="Center"/>
+                                <Image Height="25" Source="/Resources/Images/delete.png" Grid.Column="0" HorizontalAlignment="Left"/>
+                            </Grid>
+                        </Button.Content>
+                    </Button>
+                    <Button Command="{Binding DataContext.ApproveCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" Name="ApproveButton" Grid.Column="3" Grid.Row="5" Style="{StaticResource DataTemplateButton}">
+                        <Button.Content>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="10"/>
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Approve" Grid.Column="2" VerticalAlignment="Center" />
+                                <Image Height="25" Source="/Resources/Images/success.png" Grid.Column="0" HorizontalAlignment="Left"/>
+                            </Grid>
+                        </Button.Content>
+                    </Button>
 
                 </Grid>
             </Border>

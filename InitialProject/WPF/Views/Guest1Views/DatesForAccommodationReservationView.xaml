@@ -55,6 +55,20 @@
         </Style>
         <Style TargetType="DataGridCell">
             <Setter Property="TextBlock.TextAlignment" Value="Center"></Setter>
+            <Style.Triggers>
+                <Trigger Property="IsSelected"  Value="True">
+                    <Setter Property="Foreground" Value="seagreen"></Setter>
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="BorderBrush" Value="Transparent"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="DataGridRow">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="SeaGreen"></Setter>
+                </Trigger>
+            </Style.Triggers>
         </Style>
         <Style TargetType="ScrollBar">
             <Setter Property="Background" Value="#FFFCECB9"></Setter>
@@ -90,9 +104,9 @@
                                             <ColumnDefinition Width="Auto"/>
                                             <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
-                                        <Image Source="/Resources/Images/choose.png" VerticalAlignment="Center" HorizontalAlignment="Right"  Margin="0,0,15,0" Width="Auto" Height="22" Grid.Column="1" RenderTransformOrigin="0.5,0.5">
+                                        <Image Source="/Resources/Images/hand.png" VerticalAlignment="Center" HorizontalAlignment="Right"  Margin="10,0,0,0" Width="18" Height="18" Grid.Column="1" RenderTransformOrigin="0.5,0.5">
                                         </Image>
-                                        <TextBlock Text="Choose" Grid.Column="0" VerticalAlignment="Center" FontSize="16"  Foreground="#22301a" Margin="30,0,0,0" FontWeight="Bold" HorizontalAlignment="Left" Width="55"/>
+                                        <TextBlock Text="Choose" Grid.Column="0" VerticalAlignment="Center" FontSize="16"  Foreground="#22301a" Margin="25,0,0,0" FontWeight="Bold" HorizontalAlignment="Left" Width="55"/>
                                     </Grid>
                                 </Button>
                             </DataTemplate>
