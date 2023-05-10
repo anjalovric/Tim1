@@ -188,7 +188,7 @@
             </Border>
 
             <!-- NEXT PHOTO BUTTON -->
-            <Button Command="{Binding NextPhotoCommand}" IsEnabled="{Binding Path=IsNextEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="50" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" Margin="392,0,0,0" Grid.Row="1" VerticalAlignment="Center" Width="60">
+            <Button Command="{Binding NextPhotoCommand}" IsEnabled="{Binding Path=IsNextEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="50" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right" Margin="0,0,60,0" Grid.Row="1" VerticalAlignment="Center" Width="60">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid>
