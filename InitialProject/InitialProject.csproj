@@ -82,6 +82,8 @@
 
     <None Remove="Resources\Images\decline.jpg" />
 
+    <None Remove="Resources\Images\declineImage.jpg" />
+
     <None Remove="Resources\Images\done.png" />
 
     <None Remove="Resources\Images\doneNew.png" />
@@ -189,6 +191,7 @@
     <None Remove="Resources\Images\reschedule.png" />
     <None Remove="Resources\Images\reserve.png" />
     <None Remove="Resources\Images\reset.png" />
+    <None Remove="Resources\Images\reviewImage.jpg" />
     <None Remove="Resources\Images\RR.png" />
     <None Remove="Resources\Images\RubbishStreet.png" />
     <None Remove="Resources\Images\search.png" />
@@ -291,6 +294,9 @@
     <Content Include="Resources\Images\congratulations2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Images\declineImage.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
 
     <Content Include="Resources\Images\Kalemegdan.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -311,6 +317,9 @@
     </Content>
     <Content Include="Resources\Images\raining.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\reviewImage.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\RubbishStreet.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

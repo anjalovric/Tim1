@@ -8,13 +8,11 @@ using InitialProject.Serializer;
 
 namespace InitialProject.Model
 {
-   public class Guest1 : ISerializable
+   public class Guest1 : User, ISerializable
    {
        public int Id { get; set; }
        public string Name { get; set; }
        public string LastName { get; set; }
-       public string Username { get; set; }
-
        public string PhoneNumber { get; set; }
        public Location Location { get; set; }
        public string Email { get; set; }
