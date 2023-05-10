@@ -50,13 +50,21 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         {
             return notificationService.GetAll().Exists(c => c.Guest2.Id == request.GuestId && c.RequestId == request.Id);
         }
+        private bool IsDeleted(int requestId)
+        {
+            List<Guest2Notification> notifications = new List<Guest2Notification>(notificationService.GetByGuestId(guest2.Id));
+            Guest2Notification current = notifications.Find(c => c.RequestId == requestId);
+            if (current == null) { return true; }
+            return false;
+        }
         private void SaveCreateTourNotifications()
         {
             foreach(TourInstance instance in TourInstances)
             {
                 foreach (OrdinaryTourRequests ordinaryTourRequests in OrdinaryTourRequests)
                 {
-                    if (ordinaryTourRequests.NewAccepted == true && ordinaryTourRequests.TourInstanceId == instance.Id && !Exists(ordinaryTourRequests))
+                    if (ordinaryTourRequests.NewAccepted == true && ordinaryTourRequests.TourInstanceId==instance.Id && !Exists(ordinaryTourRequests) && !IsDeleted(ordinaryTourRequests.Id))
+
                     {
                         Guest2Notification guest2Notification = new Guest2Notification(guest2, "Your tour request has been accepted. Click on details for more. You can delete it.", Guest2NotificationType.REQUEST_ACCEPTED, instance, false, -1, ordinaryTourRequests.Id);
                         notificationService.Save(guest2Notification);
@@ -102,6 +110,8 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         {
             Guest2Notification currentNotification = ((Button)sender).DataContext as Guest2Notification;
             Guest2NotificationService guest2NotificationService = new Guest2NotificationService();
+            currentNotification.Deleted = true;
+            guest2NotificationService.Update(currentNotification);
             guest2NotificationService.Delete(currentNotification);
             Notifications.Clear();
             foreach(Guest2Notification guest2Notification in guest2NotificationService.GetByGuestId(guest2.Id))

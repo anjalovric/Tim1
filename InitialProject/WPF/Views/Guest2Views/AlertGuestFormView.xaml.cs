@@ -34,10 +34,5 @@ namespace InitialProject.WPF.Views.Guest2Views
             if (alertGuestViewModel.CloseAction == null)
                 alertGuestViewModel.CloseAction = new Action(this.Close);
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
     }
 }

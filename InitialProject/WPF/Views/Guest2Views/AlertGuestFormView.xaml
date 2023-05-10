@@ -39,7 +39,7 @@
         <Label Content=" Confirmation" Background="#0C3B2E" Foreground="White" Grid.Row="0" FontSize="30" FontWeight="Bold" Grid.ColumnSpan="4" Margin="0,0,0,5"/>
         <TextBlock FontSize="20" Background="#FF14503F" Foreground="White" Grid.ColumnSpan="4" Margin="43,0,-13,1" Grid.Row="1" Grid.RowSpan="2"><Run Text="   You can see more information about the tour below. Are you sure you "/><LineBreak/><Run Text="   want to confirm your presence?"/></TextBlock>
         <Image Source="/Resources/Images/help.png" Grid.Column="0" Margin="9,10,69,10" Grid.Row="1"/>
-        <Button Grid.Column="3" Grid.Row="0" Margin="0,8,10,20" HorizontalAlignment="Right" BorderBrush="Transparent" Width="32" Click="Button_Click" Style="{StaticResource button}">
+        <Button Grid.Column="3" Grid.Row="0" Margin="0,8,10,20" HorizontalAlignment="Right" BorderBrush="Transparent" Width="32" Command="{Binding CloseCommand}" Style="{StaticResource button}">
             <Button.Background>
                 <ImageBrush ImageSource="/Resources/Images/close.png"/>
             </Button.Background>

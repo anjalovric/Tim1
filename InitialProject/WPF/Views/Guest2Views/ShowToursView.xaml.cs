@@ -36,9 +36,5 @@ namespace InitialProject.WPF.Views.Guest2Views
             viewModel=new ShowToursViewModel(guest2);
             DataContext = viewModel;
         }
-        private void CountryInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            viewModel.CountryInput_SelectionChanged();
-        }
     }
 }
