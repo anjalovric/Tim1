@@ -99,7 +99,7 @@
                     </Grid>
                 </Button.Content>
             </Button>
-            <TextBox x:Name="ChosenYear"  TextWrapping="Wrap"  VerticalAlignment="Top" Text="{Binding Path=Year,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}" Height="35" Style="{DynamicResource TextBox}" Margin="10,45,10,0"/>
+            <TextBox x:Name="ChosenYear"  TextWrapping="Wrap"  VerticalAlignment="Top" Text="{Binding Path=Year,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Height="35" Style="{DynamicResource TextBox}" Margin="10,45,10,0"/>
             <Rectangle  Style="{DynamicResource RectangleDashed}"  />
             <Label Content="{ns:Loc InputYear}" Style="{DynamicResource Labels}" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" Width="180"/>
 

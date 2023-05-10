@@ -14,31 +14,31 @@ namespace InitialProject.Repository
     {
         private const string FilePath = "../../../Resources/Data/reviewNotifications.csv";
 
-        private readonly Serializer<ReviewNotification> _serializer;
+        private readonly Serializer<GuideAndTourReviewNotification> _serializer;
 
-        private List<ReviewNotification> _reviews;
+        private List<GuideAndTourReviewNotification> _reviews;
 
         public ReviewNotificationRepository()
         {
-            _serializer = new Serializer<ReviewNotification>();
+            _serializer = new Serializer<GuideAndTourReviewNotification>();
             _reviews = _serializer.FromCSV(FilePath);
         }
-        public ReviewNotification Update(ReviewNotification voucher)
+        public GuideAndTourReviewNotification Update(GuideAndTourReviewNotification voucher)
         {
             _reviews = _serializer.FromCSV(FilePath);
-            ReviewNotification current = _reviews.Find(c => c.Id == voucher.Id);
+            GuideAndTourReviewNotification current = _reviews.Find(c => c.Id == voucher.Id);
             int index = _reviews.IndexOf(current);
             _reviews.Remove(current);
             _reviews.Insert(index, voucher);       // keep ascending order of ids in file 
             _serializer.ToCSV(FilePath, _reviews);
             return voucher;
         }
-        public List<ReviewNotification> GetAll()
+        public List<GuideAndTourReviewNotification> GetAll()
         {
             return _serializer.FromCSV(FilePath);
         }
 
-        public ReviewNotification Save(ReviewNotification review)
+        public GuideAndTourReviewNotification Save(GuideAndTourReviewNotification review)
         {
             review.Id = NextId();
             _reviews = _serializer.FromCSV(FilePath);
@@ -57,7 +57,7 @@ namespace InitialProject.Repository
             return _reviews.Max(c => c.Id) + 1;
         }
 
-        public ReviewNotification GetById(int id)
+        public GuideAndTourReviewNotification GetById(int id)
         {
             return _reviews.Find(c => c.Id == id);
         }

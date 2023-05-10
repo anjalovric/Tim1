@@ -36,13 +36,11 @@ namespace InitialProject.WPF.ViewModels
         private TourInstanceService tourInstanceService;
         private GuideService guideService=new GuideService();
   
-        private DataGrid TourListDataGrid;
         public RelayCommand CancelCommand { get; set; }
 
-        public CancelViewModel(User guide,DataGrid tourListDataGrid)
+        public CancelViewModel(User guide)
         {
             tourInstanceGuide = guide;
-            TourListDataGrid= tourListDataGrid;
 
             tourInstanceService = new TourInstanceService();
             Guide loggdedGuide=guideService.GetByUsername(guide.Username);
@@ -66,7 +64,7 @@ namespace InitialProject.WPF.ViewModels
         public void CancelExecuted(object sender)
         {
             TourInstanceCancelationService service = new TourInstanceCancelationService();
-            TourInstance currentTourInstance = (TourInstance)TourListDataGrid.CurrentItem;
+            TourInstance currentTourInstance = Selected;
             service.CancelTourInstance(currentTourInstance, TourInstances, tourInstanceGuide);
         }
     }

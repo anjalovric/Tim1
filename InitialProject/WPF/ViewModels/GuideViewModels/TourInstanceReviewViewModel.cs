@@ -57,7 +57,7 @@ namespace InitialProject.WPF.ViewModels
             ReviewNotificationService reviewNotificationService = new ReviewNotificationService();
             foreach (GuideAndTourReview review in Reviews)
             {
-                foreach (ReviewNotification reviewNotification in reviewNotificationService.GetAll())
+                foreach (GuideAndTourReviewNotification reviewNotification in reviewNotificationService.GetAll())
                     if (reviewNotification.Count == 1 && review.Id == reviewNotification.GuideAndTourReviewId)
                         review.New = "🆕";
             }

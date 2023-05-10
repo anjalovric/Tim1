@@ -7,18 +7,18 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Domain.Model
 {
-    public class RequestNotification:ISerializable
+    public class OrdinaryRequestNotification:ISerializable
     {
         public int Id { get; set; }
         public int RequestId { get; set; }
         public int Count { get; set; }
 
-        public RequestNotification(int requestId)
+        public OrdinaryRequestNotification(int requestId)
         {
             RequestId = requestId;
             Count = 0;
         }
-        public RequestNotification()
+        public OrdinaryRequestNotification()
         {
             Count = 0;
         }

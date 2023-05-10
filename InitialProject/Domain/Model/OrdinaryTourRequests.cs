@@ -22,7 +22,7 @@ namespace InitialProject.Domain.Model
         public DateTime CreateDate { get; set; }
         public int TourInstanceId { get; set; }
         public bool NewAccepted { get; set; } 
-        public string IsNew { get; set; }
+        public bool IsNew { get; set; }
         public OrdinaryTourRequests()
         {
 
@@ -44,7 +44,7 @@ namespace InitialProject.Domain.Model
             CreateDate = createDate;
             NewAccepted = newAccepted;
             TourInstanceId = instanceId;
-            IsNew = "";
+            IsNew = false;
         }
         public void FromCSV(string[] values)
         {

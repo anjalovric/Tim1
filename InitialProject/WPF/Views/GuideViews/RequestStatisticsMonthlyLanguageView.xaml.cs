@@ -6,12 +6,12 @@ namespace InitialProject.WPF.Views.GuideViews
     /// <summary>
     /// Interaction logic for RequestStatisticsMonthly.xaml
     /// </summary>
-    public partial class RequestStatisticsMonthly : Page
+    public partial class RequestStatisticsMonthlyLanguageView : Page
     {
-        public RequestStatisticsMonthly(string Language,GuideOneYearRequestStatisticViewModel selectedYear)
+        public RequestStatisticsMonthlyLanguageView(string Language,GuideOneYearRequestStatisticViewModel selectedYear)
         {
             InitializeComponent();
-            DataContext=new MonthlyRequestStatisticsViewModel(Language, selectedYear);
+            DataContext=new RequestStatisticMonthlyLanguageViewModel(Language, selectedYear);
         }
     }
 }

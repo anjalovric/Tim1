@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:tk="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit.NET5" 
       xmlns:local="clr-namespace:InitialProject.WPF.Views.GuideViews"
+      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
       xmlns:ns="clr-namespace:InitialProject"
       xmlns:val="clr-namespace:InitialProject.WPF.Validations.GuideValidations" 
       xmlns:viewmodels="clr-namespace:InitialProject.WPF.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:TourInstanceReviewViewModel}"
@@ -187,7 +188,7 @@
                     </ComboBox>
 
 
-                    <TextBox Style="{DynamicResource tb}" x:Name="DescriptionTB" Grid.Row="6" Margin="2,27,0,-38" Grid.ColumnSpan="2">
+                    <TextBox Style="{DynamicResource tb}" x:Name="DescriptionTB" Grid.Row="6" Margin="2,27,0,-38" Grid.ColumnSpan="2" TextWrapping="Wrap">
                         <TextBox.Text>
                             <Binding Path="Description" UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
@@ -241,7 +242,12 @@
                         </Validation.ErrorTemplate>
                     </ComboBox>
 
-                    <ComboBox Style="{DynamicResource ComboBoxStyle}" x:Name="ComboBoxCountry" ItemsSource="{Binding Countries}"  IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" Grid.Row="3" Grid.Column="1" Margin="0,9,0,12" SelectionChanged="ComboBoxCountry_SelectionChanged">
+                    <ComboBox Style="{DynamicResource ComboBoxStyle}" x:Name="ComboBoxCountry" ItemsSource="{Binding Countries}"  IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" Grid.Row="3" Grid.Column="1" Margin="0,9,0,12">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding EnableCityCommand}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
                         <ComboBox.SelectedItem>
                             <Binding Path="Country" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
                                 <Binding.ValidationRules>

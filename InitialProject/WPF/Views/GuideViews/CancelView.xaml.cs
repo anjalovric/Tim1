@@ -13,7 +13,7 @@ namespace InitialProject.WPF.Views.GuideViews
         public CancelView(User guide)
         {
             InitializeComponent();
-            cancelViewModel = new CancelViewModel(guide,this.TourListDataGrid);
+            cancelViewModel = new CancelViewModel(guide);
             DataContext = cancelViewModel;       
         }
     }

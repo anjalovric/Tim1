@@ -1,25 +1,22 @@
 ﻿using InitialProject.Serializer;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace InitialProject.Domain.Model
 {
-   public class ReviewNotification: ISerializable
+    public class GuideAndTourReviewNotification: ISerializable
     {
         public int Id { get; set; }
         public int GuideAndTourReviewId { get; set; }
         public int GuideId { get; set; }
         public int Count { get;set; }
 
-        public ReviewNotification(int reviewId, int guideId)
+        public GuideAndTourReviewNotification(int reviewId, int guideId)
         {
             GuideAndTourReviewId = reviewId;
             GuideId = guideId;
             Count = 0;
         }
-        public ReviewNotification() 
+        public GuideAndTourReviewNotification() 
         {
         Count=0;
         }

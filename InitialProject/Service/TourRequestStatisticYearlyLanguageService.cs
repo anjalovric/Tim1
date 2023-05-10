@@ -4,9 +4,9 @@ using System.Collections.Generic;
 
 namespace InitialProject.Service
 {
-    public class TourRequestStatisticYearlyService
+    public class TourRequestStatisticYearlyLanguageService
     {
-        public TourRequestStatisticYearlyService() { }
+        public TourRequestStatisticYearlyLanguageService() { }
         private List<int> GetYearsForLanguage(string language)
         {
             OrdinaryTourRequestsService ordinaryTourRequests = new OrdinaryTourRequestsService();
@@ -23,7 +23,7 @@ namespace InitialProject.Service
             }
             return years;
         }
-        private int GetByYear(string language,int year) 
+        private int GetRequestsCountByYear(string language,int year) 
         {
             List<OrdinaryTourRequests> ordinaryTourRequests= new List<OrdinaryTourRequests>();
             OrdinaryTourRequestsService ordinaryTourRequestsService = new OrdinaryTourRequestsService();
@@ -33,7 +33,7 @@ namespace InitialProject.Service
                         ordinaryTourRequests.Add(tourRequest);
             return ordinaryTourRequests.Count;
         }
-        public List<GuideOneYearRequestStatisticViewModel> GetYearStatistic(string language) 
+        public List<GuideOneYearRequestStatisticViewModel> GetLanguageYearStatistic(string language) 
         {
             List<GuideOneYearRequestStatisticViewModel> statistics = new List<GuideOneYearRequestStatisticViewModel>();
             if (GetYearsForLanguage(language) != null)
@@ -42,7 +42,7 @@ namespace InitialProject.Service
                 {
                     GuideOneYearRequestStatisticViewModel guideOneYearRequestStatisticViewModel = new GuideOneYearRequestStatisticViewModel();
                     guideOneYearRequestStatisticViewModel.Year = year;
-                    guideOneYearRequestStatisticViewModel.Number= GetByYear(language, year);
+                    guideOneYearRequestStatisticViewModel.Number= GetRequestsCountByYear(language, year);
                     statistics.Add(guideOneYearRequestStatisticViewModel);
                 }
             }

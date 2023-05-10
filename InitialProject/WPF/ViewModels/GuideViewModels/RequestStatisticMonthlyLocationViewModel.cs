@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 
 namespace InitialProject.WPF.ViewModels.GuideViewModels
 {
-    public class MonthlyRequestStatisticLocationViewModel:INotifyPropertyChanged
+    public class RequestStatisticMonthlyLocationViewModel:INotifyPropertyChanged
     {
         private string location;
         public string Location
@@ -31,11 +31,11 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             }
         }
         public ObservableCollection<MonthRequestStatisticViewModel> Statistics { get; set; }
-        public MonthlyRequestStatisticLocationViewModel(Location location, GuideOneYearRequestStatisticViewModel selectedYear)
+        public RequestStatisticMonthlyLocationViewModel(Location location, GuideOneYearRequestStatisticViewModel selectedYear)
         {
             Location = location.Country+", "+location.City;
             Year = selectedYear.Year.ToString();
-            MonthLocationStatisticService monthLocationStatisticService = new MonthLocationStatisticService();
+            TourRequestStatisticMonthlyLocationService monthLocationStatisticService = new TourRequestStatisticMonthlyLocationService();
             Statistics = new ObservableCollection<MonthRequestStatisticViewModel>(monthLocationStatisticService.GetMonthStatistic(location, selectedYear.Year));
         }
         public event PropertyChangedEventHandler PropertyChanged;

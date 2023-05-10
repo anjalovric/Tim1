@@ -36,7 +36,7 @@ namespace InitialProject.Service
         public List<OrdinaryTourRequests> GetByCapacity(List<OrdinaryTourRequests> appropriateRequests, int capacity)
         {
             foreach (OrdinaryTourRequests request in requests)
-                if (request.MaxGuests >= capacity)
+                if (request.MaxGuests == capacity)
                     appropriateRequests.Add(request);
             return Inspect(appropriateRequests);
         }

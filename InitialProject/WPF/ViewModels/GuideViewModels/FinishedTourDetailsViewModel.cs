@@ -3,6 +3,7 @@ using InitialProject.Model;
 using InitialProject.Service;
 using LiveCharts;
 using LiveCharts.Wpf;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -24,7 +25,6 @@ namespace InitialProject.WPF.ViewModels
                 OnPropertyChanged();
             }
         }
-
         private SeriesCollection  attendanceVoucherPie;
         public SeriesCollection AttendanceVoucherPie
         {
@@ -48,7 +48,6 @@ namespace InitialProject.WPF.ViewModels
             }
         }
 
-
         TourInstance selectedInstance;
         public ObservableCollection<CheckPointInformation> CheckPointInformations { get; set; }
         public FinishedTourDetailsViewModel(TourInstance selected)
@@ -69,7 +68,6 @@ namespace InitialProject.WPF.ViewModels
         {
             Header = selected.Tour.Name.ToString().ToUpper() + ", " + selected.StartDate.ToString();          
         }
-
         private void ComposeReport()
         {
             AlertGuest2Service alertGuest2Service = new AlertGuest2Service();
@@ -81,7 +79,6 @@ namespace InitialProject.WPF.ViewModels
                 pointInformation.countGuests = alertGuest2Service.CountGuestsOnPoint(point.Id, selectedInstance);
                 ShowGuestsOnPoint(point.Id, pointInformation);
                 CheckPointInformations.Add(pointInformation);
-
             }
         }
         public RelayCommand OkToastCommand { get; set; }
@@ -99,14 +96,14 @@ namespace InitialProject.WPF.ViewModels
             AttendanceVoucherPie.Add(new PieSeries
             {
                 Title = "WithVoucher",
-                Values = new ChartValues<double> { detailsService.MakeWithVoucherPrecentage(selectedId) },
+                Values = new ChartValues<double> { Math.Round(detailsService.MakeWithVoucherPrecentage(selectedId),2) },
                 DataLabels = true,
                 Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#228B22"))
             });
               AttendanceVoucherPie.Add(new PieSeries
               {
                   Title = "WithoutVoucher",
-                  Values = new ChartValues<double> { detailsService.MakeWithoutVoucherPrecentage(selectedId) },
+                  Values = new ChartValues<double> { Math.Round(detailsService.MakeWithoutVoucherPrecentage(selectedId),2) },
                   DataLabels = true,
                   Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#A8A8A8"))
               }
@@ -119,14 +116,14 @@ namespace InitialProject.WPF.ViewModels
             AttendanceAgePie.Add(new PieSeries
             {
                 Title = "Under 18",
-                Values = new ChartValues<double> { detailsService.MakeUnder18Precentage(selectedId) },
+                Values = new ChartValues<double> { Math.Round(detailsService.MakeUnder18Precentage(selectedId),2) },
                 DataLabels = true,
                 Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#228B22"))
             });
             AttendanceAgePie.Add(new PieSeries
             {
                 Title = "Between 18 and 50",
-                Values = new ChartValues<double> { detailsService.MakeBetween18And50Precentage(selectedId) },
+                Values = new ChartValues<double> { Math.Round(detailsService.MakeBetween18And50Precentage(selectedId),2) },
                 DataLabels = true,
                 Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#00A36C"))
             }
@@ -134,7 +131,7 @@ namespace InitialProject.WPF.ViewModels
             AttendanceAgePie.Add(new PieSeries
             {
                 Title = "Over 50",
-                Values = new ChartValues<double> { detailsService.MakeOver50Precentage(selectedId) },
+                Values = new ChartValues<double> { Math.Round(detailsService.MakeOver50Precentage(selectedId),2) },
                 DataLabels = true,
                 Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#A8A8A8"))
             }
@@ -159,7 +156,7 @@ namespace InitialProject.WPF.ViewModels
             TotalAttendance.Add(new PieSeries
             {
                 Title = "Total attendance",
-                Values = new ChartValues<double> { detailsService.MakeAttendancePrecentage(selectedId) },
+                Values = new ChartValues<double> {Math.Round( detailsService.MakeAttendancePrecentage(selectedId),2) },
                 DataLabels = true,
                 Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#A8A8A8"))
             });

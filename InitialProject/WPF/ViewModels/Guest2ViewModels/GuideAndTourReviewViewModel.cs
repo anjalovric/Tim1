@@ -189,7 +189,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             GuideAndTourReviewService guideAndTourReviewService = new GuideAndTourReviewService();
             GuideAndTourReview guideAndTourReview = new GuideAndTourReview(CurrentTourInstance.Guide.Id, guest2, CurrentTourInstance, Convert.ToInt32(language.Text), Convert.ToInt32(interestingFacts.Text), Convert.ToInt32(knowledge.Text), comment.Text);
             GuideAndTourReview savedReview= guideAndTourReviewService.Save(guideAndTourReview);
-            ReviewNotification reviewNotification = new ReviewNotification(savedReview.Id, savedReview.GuideId);
+            GuideAndTourReviewNotification reviewNotification = new GuideAndTourReviewNotification(savedReview.Id, savedReview.GuideId);
             ReviewNotificationService reviewNotificationService = new ReviewNotificationService();
             reviewNotificationService.Save(reviewNotification);
             return savedReview;

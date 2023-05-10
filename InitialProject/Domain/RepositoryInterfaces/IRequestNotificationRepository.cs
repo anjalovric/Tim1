@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Domain.RepositoryInterfaces
 {
-    public interface IRequestNotificationRepository:IGenericRepository<RequestNotification>
+    public interface IRequestNotificationRepository:IGenericRepository<OrdinaryRequestNotification>
 
     {
-        public RequestNotification Save(RequestNotification request);
-        public RequestNotification Update(RequestNotification request);
+        public OrdinaryRequestNotification Save(OrdinaryRequestNotification request);
+        public OrdinaryRequestNotification Update(OrdinaryRequestNotification request);
     }
 }

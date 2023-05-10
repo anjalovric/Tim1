@@ -5,9 +5,9 @@ using System.Linq;
 
 namespace InitialProject.Service
 {
-    public class LanguageSuggestService
+    public class SuggestedLanguageService
     {
-        private List<OrdinaryTourRequests> GetRequestsInLanstYear()
+        private List<OrdinaryTourRequests> GetRequestsFromLastYear()
         {
             DateTime today=DateTime.Now;
             string yearago=today.Month+"/"+today.Day+"/"+(today.Year-1)+" "+today.ToString().Split(" ")[1]+" "+today.ToString().Split(" ")[2];  
@@ -22,13 +22,13 @@ namespace InitialProject.Service
             return ordinaryTourRequests;
         }
 
-        private List<string> GetLanguages()
+        private List<string> GetRequestsLanguagesFromLastYear()
         {
             List<string> languages = new List<string>();
-            if(GetRequestsInLanstYear().Count > 0)
+            if(GetRequestsFromLastYear().Count > 0)
             {
-                languages.Add(GetRequestsInLanstYear()[0].Language);
-                foreach (OrdinaryTourRequests request in GetRequestsInLanstYear())
+                languages.Add(GetRequestsFromLastYear()[0].Language);
+                foreach (OrdinaryTourRequests request in GetRequestsFromLastYear())
                     if (!languages.Contains(request.Language))
                         languages.Add(request.Language);
             }
@@ -37,26 +37,26 @@ namespace InitialProject.Service
         private int CountRequestForLanguage(string language)
         {
             int count = 0;
-            foreach(OrdinaryTourRequests request in GetRequestsInLanstYear())
+            foreach(OrdinaryTourRequests request in GetRequestsFromLastYear())
                 if (request.Language == language)
                     count++;
             return count;
         }
-        private Dictionary<string,int> GetRequestNumber()
+        private Dictionary<string,int> SetRequestsNumberForLanguage()
         {
             Dictionary<string,int> languagesRequests= new Dictionary<string,int>();
-            if(GetLanguages().Count > 0)
-                foreach (string language in GetLanguages())
+            if(GetRequestsLanguagesFromLastYear().Count > 0)
+                foreach (string language in GetRequestsLanguagesFromLastYear())
                     languagesRequests.Add(language, CountRequestForLanguage(language));
             return languagesRequests;
         }
         public string GetMostWantedLanguage()
         {
             string langugage = null;
-            if (GetRequestNumber().Count > 0)
+            if (SetRequestsNumberForLanguage().Count > 0)
             {
                 int maximum = 0;
-                Dictionary<string,int>languages=GetRequestNumber();
+                Dictionary<string,int>languages=SetRequestsNumberForLanguage();
                 for (int index = 0; index < languages.Count; index++)
                 {
                     var item = languages.ElementAt(index);

@@ -70,7 +70,6 @@ namespace InitialProject.WPF.ViewModels
                     instances = value;
                 OnPropertyChanged("Completed");
             }
-
         }
         public TourInstance Selected { get; set; }
         private GuideService guideService = new GuideService();
