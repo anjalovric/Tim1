@@ -11,10 +11,10 @@ using System.Collections.ObjectModel;
 
 namespace InitialProject.Service
 {
-    public class Guest2NotificationService
+    public class NewTourNotificationService
     {
         private IGuest2NotificationRepository notificationRepository = Injector.CreateInstance<IGuest2NotificationRepository>();
-        public Guest2NotificationService()
+        public NewTourNotificationService()
         {
         }
 

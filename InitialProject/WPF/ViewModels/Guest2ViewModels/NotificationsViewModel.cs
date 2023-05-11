@@ -16,7 +16,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
     public class NotificationsViewModel
     {
         public ObservableCollection<Guest2Notification> Notifications { get; set; }
-        private Guest2NotificationService notificationService;
+        private NewTourNotificationService notificationService;
         private OrdinaryTourRequestsService ordinaryTourRequests;
         private List<OrdinaryTourRequests> OrdinaryTourRequests;
         private List<OrdinaryTourRequests> AcceptedOrdinaryTourRequests;
@@ -29,7 +29,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         public NotificationsViewModel(Guest2 guest2)
         {
             this.guest2 = guest2;
-            notificationService = new Guest2NotificationService();
+            notificationService = new NewTourNotificationService();
             ordinaryTourRequests = new OrdinaryTourRequestsService();
             OrdinaryTourRequests = new List<OrdinaryTourRequests>(ordinaryTourRequests.GetByGuestId(guest2.Id));
             AcceptedOrdinaryTourRequests = new List<OrdinaryTourRequests>();
@@ -65,7 +65,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         private void Delete_Executed(object sender)
         {
             Guest2Notification currentNotification = ((Button)sender).DataContext as Guest2Notification;
-            Guest2NotificationService guest2NotificationService = new Guest2NotificationService();
+            NewTourNotificationService guest2NotificationService = new NewTourNotificationService();
             guest2NotificationService.Delete(currentNotification);
             Notifications.Clear();
             Notifications = new ObservableCollection<Guest2Notification>(notificationService.GetByGuestId(guest2.Id));

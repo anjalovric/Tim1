@@ -546,7 +546,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         private void SetNotifications(int tourId)
         {
             TourInstance tourInstance = new TourInstance();
-            Guest2NotificationService guest2NotificationService = new Guest2NotificationService();
+            NewTourNotificationService guest2NotificationService = new NewTourNotificationService();
             foreach (TourInstance TourInstance in FutureInstances)
             {
                 if (TourInstance.Tour.Id == tourId)
