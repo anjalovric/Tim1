@@ -59,6 +59,7 @@
     <None Remove="Resources\Images\choose.png" />
     <None Remove="Resources\Images\choose1.png" />
     <None Remove="Resources\Images\church.jpg" />
+    <None Remove="Resources\Images\clear.png" />
 
     <None Remove="Resources\Images\clock.png" />
     <None Remove="Resources\Images\close.png" />
@@ -154,8 +155,10 @@
     <None Remove="Resources\Images\nature2.png" />
     <None Remove="Resources\Images\nature3.jpeg" />
     <None Remove="Resources\Images\nature4.jpeg" />
+    <None Remove="Resources\Images\newDelete.png" />
     <None Remove="Resources\Images\no.png" />
     <None Remove="Resources\Images\noImage.png" />
+    <None Remove="Resources\Images\noPhoto.png" />
     <None Remove="Resources\Images\notes.png" />
     <None Remove="Resources\Images\nothing.png" />
 
@@ -168,6 +171,8 @@
     <None Remove="Resources\Images\orange.jpg" />
 
     <None Remove="Resources\Images\pdf.png" />
+
+    <None Remove="Resources\Images\picture.png" />
     <None Remove="Resources\Images\plus.png" />
     <None Remove="Resources\Images\profile.png" />
     <None Remove="Resources\Images\profile11.png" />
@@ -290,6 +295,9 @@
     <Content Include="Resources\Images\arrow-58-xxl.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Images\clear.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Images\close.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 
@@ -315,8 +323,17 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 
     </Content>
+    <Content Include="Resources\Images\newDelete.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\noPhoto.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Images\pdf.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\picture.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
 
     <Content Include="Resources\Images\rain.jpg">

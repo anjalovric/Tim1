@@ -103,27 +103,19 @@
                 <DataGridTemplateColumn x:Name="rate" Header="Rate" Width="0.9*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button FontWeight="Bold" FontSize="18" Command="{Binding Path=DataContext.RateCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}">
-                                <Grid Background="#929195" HorizontalAlignment="Left" VerticalAlignment="Top">
+                            <Button FontWeight="Bold" FontSize="18" Width="65" Height="30" Background="#ffba00" BorderBrush="#ffba00" BorderThickness="2" Command="{Binding Path=DataContext.RateCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}">
+                                <Grid Background="#ffba00" HorizontalAlignment="Left" VerticalAlignment="Top">
                                     <Grid.RowDefinitions>
-                                        <RowDefinition Height="16*"/>
+                                        <RowDefinition Height="15*"/>
                                         <RowDefinition Height="19*"/>
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto"/>
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
-                                    <Image Source="/Resources/Images/star.png" VerticalAlignment="Top" HorizontalAlignment="Left" Width="26" Height="25" RenderTransformOrigin="0.5,0.5" Margin="10,3,0,0" Grid.RowSpan="2">
-                                        <Image.RenderTransform>
-                                            <TransformGroup>
-                                                <ScaleTransform/>
-                                                <SkewTransform/>
-                                                <RotateTransform Angle="180"/>
-                                                <TranslateTransform/>
-                                            </TransformGroup>
-                                        </Image.RenderTransform>
-                                    </Image>
-                                    <TextBlock Background="#929195" Text="Rate" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" Width="109" Height="29" Margin="10,3,0,0" Grid.RowSpan="2" Grid.Column="1"/>
+                                    <Image Source="/Resources/Images/star.png" VerticalAlignment="Top" HorizontalAlignment="Left" Width="15" Height="25" RenderTransformOrigin="0.5,0.5" Margin="5,3,0,0" Grid.RowSpan="2"/>
+
+                                    <TextBlock Background="#ffba00" Text="Rate" VerticalAlignment="Top" FontSize="12" FontWeight="Bold" HorizontalAlignment="Left" Width="65" Height="29" Margin="5,3,0,0" Grid.RowSpan="2" Grid.Column="1"/>
                                 </Grid>
 
                             </Button>

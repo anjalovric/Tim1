@@ -16,8 +16,8 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
 {
     public class NotificationsViewModel
     {
-        public ObservableCollection<Guest2Notification> Notifications { get; set; }
-        private Guest2NotificationService notificationService;
+        public ObservableCollection<NewTourNotification> Notifications { get; set; }
+        private NewTourNotificationService notificationService;
         private OrdinaryTourRequestsService ordinaryTourRequests;
         private List<OrdinaryTourRequests> OrdinaryTourRequests;
         private AlertGuest2Service alertGuest2Service;
@@ -30,7 +30,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         public NotificationsViewModel(Guest2 guest2)
         {
             this.guest2 = guest2;
-            notificationService = new Guest2NotificationService();
+            notificationService = new NewTourNotificationService();
             ordinaryTourRequests = new OrdinaryTourRequestsService();
             OrdinaryTourRequests = new List<OrdinaryTourRequests>(ordinaryTourRequests.GetByGuestId(guest2.Id));
             Alerts = new List<AlertGuest2>();
@@ -38,7 +38,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             tourInstanceService = new TourInstanceService();
             TourInstances = new List<TourInstance>(tourInstanceService.GetAll());
             SaveCreateTourNotifications();
-            Notifications = new ObservableCollection<Guest2Notification>(notificationService.GetByGuestId(guest2.Id));
+            Notifications = new ObservableCollection<NewTourNotification>(notificationService.GetByGuestId(guest2.Id));
             ViewCommand = new RelayCommand(View_Executed, CanExecute);
             DeleteCommand=new RelayCommand(Delete_Executed,CanExecute);
         }
@@ -50,15 +50,23 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         {
             return notificationService.GetAll().Exists(c => c.Guest2.Id == request.GuestId && c.RequestId == request.Id);
         }
+        private bool IsDeleted(int requestId)
+        {
+            List<NewTourNotification> notifications = new List<NewTourNotification>(notificationService.GetByGuestId(guest2.Id));
+            NewTourNotification current = notifications.Find(c => c.RequestId == requestId);
+            if (current == null) { return true; }
+            return false;
+        }
         private void SaveCreateTourNotifications()
         {
             foreach(TourInstance instance in TourInstances)
             {
                 foreach (OrdinaryTourRequests ordinaryTourRequests in OrdinaryTourRequests)
                 {
-                    if (ordinaryTourRequests.NewAccepted == true && ordinaryTourRequests.TourInstanceId == instance.Id && !Exists(ordinaryTourRequests))
+                    if (ordinaryTourRequests.NewAccepted == true && ordinaryTourRequests.TourInstanceId==instance.Id && !Exists(ordinaryTourRequests) && !IsDeleted(ordinaryTourRequests.Id))
+
                     {
-                        Guest2Notification guest2Notification = new Guest2Notification(guest2, "Your tour request has been accepted. Click on details for more. You can delete it.", Guest2NotificationType.REQUEST_ACCEPTED, instance, false, -1, ordinaryTourRequests.Id);
+                        NewTourNotification guest2Notification = new NewTourNotification(guest2, "Your tour request has been accepted. Click on details for more. You can delete it.", Guest2NotificationType.REQUEST_ACCEPTED, instance, false, -1, ordinaryTourRequests.Id);
                         notificationService.Save(guest2Notification);
                     }
                 }
@@ -66,7 +74,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             
         }
 
-        private void ShowAlertGuestForm(Guest2Notification notification)
+        private void ShowAlertGuestForm(NewTourNotification notification)
         {
             Alerts = alertGuest2Service.GetAll();
             CheckPointService checkPointService = new CheckPointService();
@@ -86,7 +94,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
 
         private void View_Executed(object sender)
         {
-            Guest2Notification currentNotification = ((Button)sender).DataContext as Guest2Notification;
+            NewTourNotification currentNotification = ((Button)sender).DataContext as NewTourNotification;
             OrdinaryTourRequestDetailsForm ordinaryTourRequestDetailsForm = new OrdinaryTourRequestDetailsForm(currentNotification, guest2);
             if (currentNotification.Type==Guest2NotificationType.REQUEST_ACCEPTED)
                 ordinaryTourRequestDetailsForm.Show();
@@ -100,11 +108,13 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         }
         private void Delete_Executed(object sender)
         {
-            Guest2Notification currentNotification = ((Button)sender).DataContext as Guest2Notification;
-            Guest2NotificationService guest2NotificationService = new Guest2NotificationService();
-            guest2NotificationService.Delete(currentNotification);
+            NewTourNotification currentNotification = ((Button)sender).DataContext as NewTourNotification;
+
+            NewTourNotificationService notificationService = new NewTourNotificationService();
+            currentNotification.Deleted = true;
+            notificationService.Update(currentNotification);
             Notifications.Clear();
-            foreach(Guest2Notification guest2Notification in guest2NotificationService.GetByGuestId(guest2.Id))
+            foreach(NewTourNotification guest2Notification in notificationService.GetByGuestId(guest2.Id))
             {
                 Notifications.Add(guest2Notification);
             }

@@ -30,10 +30,5 @@ namespace InitialProject.WPF.Views.Guest2Views
             InitializeComponent();
             DataContext = new TourRequestStatisticsViewModel(guest2);
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
     }
 }

@@ -10,7 +10,7 @@ using NPOI.SS.Formula.PTG;
 namespace InitialProject.Domain.Model
 {
     public enum Guest2NotificationType { REQUEST_ACCEPTED, CONFIRM_PRESENCE }
-    public class Guest2Notification:ISerializable
+    public class NewTourNotification:ISerializable
     {
         public int Id { get; set; }
         public Guest2 Guest2 { get; set; }
@@ -20,8 +20,8 @@ namespace InitialProject.Domain.Model
         public int AlertGuest2Id { get; set; }
         public bool Deleted { get; set; }
         public int RequestId { get; set; }
-        public Guest2Notification() { }
-        public Guest2Notification(Guest2 guest2,string text, Guest2NotificationType type,TourInstance tourInstance,bool deleted, int alertId,int requestId)
+        public NewTourNotification() { }
+        public NewTourNotification(Guest2 guest2,string text, Guest2NotificationType type,TourInstance tourInstance,bool deleted, int alertId,int requestId)
         {
       
             Guest2 = guest2;

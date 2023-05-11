@@ -22,17 +22,23 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         private List<OrdinaryTourRequests> OrdinaryTourRequests;
         private Model.Guest2 Guest2;
         public RelayCommand SearchCommand { get; set; }
+        public RelayCommand CloseCommand { get; set; }
         public string Year { get; set; }
         public TourRequestStatisticsViewModel(Model.Guest2 guest2)
         {
             Guest2 = guest2;
-            SearchCommand = new RelayCommand(Search_Executed,CanExecute);
+            MakeCommand();
             requestStatisticsService = new RequestStatisticsService();
             ordinaryTourRequestsService = new OrdinaryTourRequestsService();
             OrdinaryTourRequests = new List<OrdinaryTourRequests>(ordinaryTourRequestsService.GetByGuestId(guest2.Id));
             acceptedRequest = requestStatisticsService.ProcentOfAcceptedRequest( Guest2);
             invalidRequest = requestStatisticsService.ProcentOfInvalidRequest( Guest2);
             averageNumberOfPeople = requestStatisticsService.AverageNumberOfPeopleInAcceptedRequests( Guest2);
+        }
+        private void MakeCommand()
+        {
+            SearchCommand = new RelayCommand(Search_Executed, CanExecute);
+            CloseCommand = new RelayCommand(Close_Executed, CanExecute);
         }
         private bool CanExecute(object sender)
         {
@@ -43,6 +49,10 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             StatisticForChosenYearFormView statisticForChoosenYearFormView = new StatisticForChosenYearFormView(Guest2,Year);
             statisticForChoosenYearFormView.Show();
            
+        }
+        private void Close_Executed(object sender)
+        {
+            Application.Current.Windows.OfType<TourRequestStatisticsView>().FirstOrDefault().Close();
         }
     }
 }
