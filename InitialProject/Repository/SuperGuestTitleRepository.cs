@@ -38,6 +38,7 @@ namespace InitialProject.Repository
             return _superGuests.Find(n => n.Id == id);
         }
         
+        
 
         public int NextId()
         {
@@ -48,6 +49,23 @@ namespace InitialProject.Repository
             }
             return _superGuests.Max(c => c.Id) + 1;
         }
-        
+        public void Delete(SuperGuestTitle title)
+        {
+            _superGuests = _serializer.FromCSV(FilePath);
+            SuperGuestTitle founded = _superGuests.Find(c => c.Id == title.Id);
+            _superGuests.Remove(founded);
+            _serializer.ToCSV(FilePath, _superGuests);
+        }
+        public void Update(SuperGuestTitle title)
+        {
+            _superGuests = _serializer.FromCSV(FilePath);
+            SuperGuestTitle current = _superGuests.Find(c => c.Id == title.Id);
+            int index = _superGuests.IndexOf(current);
+            _superGuests.Remove(current);
+            _superGuests.Insert(index, title);
+            _serializer.ToCSV(FilePath, _superGuests);
+
+        }
+
     }
 }

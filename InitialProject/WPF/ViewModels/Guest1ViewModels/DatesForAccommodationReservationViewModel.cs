@@ -33,16 +33,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                 }
             }
         }
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-        private bool CanExecute(object sender)
-        {
-            return true;
-        }
-
         public RelayCommand ChooseDateCommand { get; set; }
         public RelayCommand BackCommand { get; set; }
 
@@ -62,22 +52,52 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         
         private async void ChooseDate_Executed(object sender)
         {
-            Task<bool> result = accommodationReservationService.ConfirmReservation();
+            Task<bool> result = ConfirmReservationMessageBox();
             bool IsYesClicked = await result;
             if(IsYesClicked)
                 MakeNewReservation();
         }
+        public async Task<bool> ConfirmReservationMessageBox()
+        {
+            var result = new TaskCompletionSource<bool>();
+            Guest1YesNoMessageBoxView messageBox = new Guest1YesNoMessageBoxView("Do you want to make a reservation?", "/Resources/Images/qm.png", result);
+            messageBox.Owner = Application.Current.Windows.OfType<DatesForAccommodationReservationView>().FirstOrDefault();
+            messageBox.ShowDialog();
+            var returnedResult = await result.Task;
+            return returnedResult;
+        }
+       
+        
+        private void ShowMessageBoxForSentReservation()
+        {
+            Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("Successfully done!", "/Resources/Images/done.png");
+            messageBox.Owner = Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault();
+            messageBox.ShowDialog();
+        }
+
         private void MakeNewReservation()
         { 
             AccommodationReservation newReservation = new AccommodationReservation(guest1, currentAccommodation, selectedDateRange.Arrival, selectedDateRange.Departure);
             accommodationReservationService.Add(newReservation);
-            Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("Successfully done!", "/Resources/Images/done.png");
-            messageBox.Show();
+            DecrementSuperGuestPoints();
             Application.Current.Windows.OfType<DatesForAccommodationReservationView>().FirstOrDefault().Close();
             Application.Current.Windows.OfType<AccommodationReservationFormView>().FirstOrDefault().Close();
-            
+            ShowMessageBoxForSentReservation();           
         }
-        
-       
+        private void DecrementSuperGuestPoints()
+        {
+            SuperGuestTitleService superGuestTitleService = new SuperGuestTitleService();
+            superGuestTitleService.DecrementPoints(guest1);
+        }
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        private bool CanExecute(object sender)
+        {
+            return true;
+        }
+
     }
 }

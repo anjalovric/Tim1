@@ -1,19 +1,31 @@
 ﻿using InitialProject.Model;
 using InitialProject.Service;
 using InitialProject.WPF.Views.GuideViews;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
-using System.Windows.Controls;
 
 namespace InitialProject.WPF.ViewModels
 {
 
     public class TourStatisticsViewModel:INotifyPropertyChanged
     {
-        public int Year { get; set; }
+        private string year;
+        public string Year
+        {
+            get => year;
+            set
+            {
+                if (!value.Equals(year))
+                {
+                    year = value;
+                    OnPropertyChanged("Year");
+                }
+            }
+        }
         private string toastVisibility;
         public string ToastVisibility
         {
@@ -23,7 +35,7 @@ namespace InitialProject.WPF.ViewModels
                 if (!value.Equals(toastVisibility))
                 {
                     toastVisibility = value;
-                    OnPropertyChanged();
+                    OnPropertyChanged("ToastVisibility");
                 }
             }
         }
@@ -36,7 +48,7 @@ namespace InitialProject.WPF.ViewModels
                 if (!value.Equals(toast))
                 {
                     toast = value;
-                    OnPropertyChanged();
+                    OnPropertyChanged("Toast");
                 }
             }
         }
@@ -48,26 +60,23 @@ namespace InitialProject.WPF.ViewModels
             {
                 if (value != instances)
                     instances = value;
-                OnPropertyChanged("Completed");
+                    OnPropertyChanged("Completed");
             }
 
         }
         private TourInstanceService instanceService;
         public TourInstance Selected { get; set; }
-
         GuideService guideService = new GuideService();
         private User loggedUser;
-        private TextBox ChosenYear;
 
         public RelayCommand MostVisitedCommand { get; set; }
         public RelayCommand MostVisitedForYearCommand { get;set; }
         public RelayCommand ViewDetailsCommand { get; set; }
         public RelayCommand OKCommand { get; set; }
 
-        public TourStatisticsViewModel(User user,TextBox chosenYear)
+        public TourStatisticsViewModel(User user)
         {
             loggedUser = user;  
-            ChosenYear= chosenYear;
             Instances = new ObservableCollection<TourInstance>();
             instanceService = new TourInstanceService();
             instanceService.SetFinishedInstances(Instances,guideService.GetByUsername(user.Username));
@@ -88,33 +97,33 @@ namespace InitialProject.WPF.ViewModels
         }
         public void ViewDetailsExecuted(object sender)
         {
-            FinishedTourDetails finishedTourDetails = new FinishedTourDetails(Selected);
+            FinishedTourDetailsView finishedTourDetails = new FinishedTourDetailsView(Selected);
             Application.Current.Windows.OfType<GuideWindow>().FirstOrDefault().Main.Content = finishedTourDetails;
 
         }
         public void MostVisitedExecuted(object sender)
         {
-            FinishedTourDetails finishedTourDetails = new FinishedTourDetails(instanceService.FindMostVisited());
+            FinishedTourDetailsView finishedTourDetails = new FinishedTourDetailsView(instanceService.FindMostVisited());
             Application.Current.Windows.OfType<GuideWindow>().FirstOrDefault().Main.Content = finishedTourDetails;
 
         }
         public void MostVisitedForYearExecuted(object sender)
         {
-            if (Year != null)
+            if (Year != null && Year != "")
             {
-                if (Year > 2019 && Year < 2024)
+                if (instanceService.FindMostVisitedForChosenYear(Convert.ToInt32(Year), guideService.GetByUsername(loggedUser.Username)) != null)
                 {
-                    if (instanceService.FindMostVisitedForChosenYear(Year, guideService.GetByUsername(loggedUser.Username)) != null)
-                    {
-                        FinishedTourDetails finishedTourDetails = new FinishedTourDetails(instanceService.FindMostVisitedForChosenYear(Year, guideService.GetByUsername(loggedUser.Username)));
-                        Application.Current.Windows.OfType<GuideWindow>().FirstOrDefault().Main.Content = finishedTourDetails;
-                    }
+                    FinishedTourDetailsView finishedTourDetails = new FinishedTourDetailsView(instanceService.FindMostVisitedForChosenYear(Convert.ToInt32(Year), guideService.GetByUsername(loggedUser.Username)));
+                    Application.Current.Windows.OfType<GuideWindow>().FirstOrDefault().Main.Content = finishedTourDetails;              
                 }
                 else
-                    ToastVisibility = "Visible";
+                   ToastVisibility = "Visible";             
             }
-            Toast = "Visible";
-            ChosenYear.Clear();
+            else
+            {
+                Toast = "Visible";
+            }
+            Year = "";
         }
         public event PropertyChangedEventHandler PropertyChanged;
 

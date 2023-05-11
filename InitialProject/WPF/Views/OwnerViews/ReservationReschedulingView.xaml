@@ -27,36 +27,58 @@
                         <RowDefinition Height="40"/>
                         <RowDefinition Height="40"/>
                     </Grid.RowDefinitions>
-                    <TextBlock VerticalAlignment="Bottom" Grid.Column="0" Grid.Row="0">Guest:</TextBlock>
-                    <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding Path=AccommodationReservation.Guest}" FontSize="15" FontWeight="Bold"></TextBlock>
+                    <TextBlock Padding="2, 0, 0, 0" VerticalAlignment="Bottom" Grid.Column="0" Grid.Row="0">Guest:</TextBlock>
+                    <TextBlock Padding="2, 0, 0, 0" Grid.Column="0" Grid.Row="1" Text="{Binding Path=AccommodationReservation.Guest}" FontSize="15" FontWeight="SemiBold"></TextBlock>
 
-                    <TextBlock VerticalAlignment="Bottom" Grid.Column="0" Grid.Row="2">Accommodation:</TextBlock>
-                    <TextBlock Grid.Column="0" Grid.Row="3" Text="{Binding Path=AccommodationReservation.Accommodation.Name}" FontSize="15" FontWeight="Bold"></TextBlock>
-                    <TextBlock Grid.Column="0" Grid.Row="4" Text="{Binding Path= AccommodationReservation.Accommodation.Location}" FontWeight="Bold"></TextBlock>
+                    <TextBlock Padding="2, 0, 0, 0" VerticalAlignment="Bottom" Grid.Column="0" Grid.Row="2">Accommodation:</TextBlock>
+                    <TextBlock Padding="2, 0, 0, 0" Grid.Column="0" Grid.Row="3" Text="{Binding Path=AccommodationReservation.Accommodation.Name}" FontSize="15" FontWeight="SemiBold"></TextBlock>
+                    <TextBlock Padding="2, 0, 0, 0" Grid.Column="0" Grid.Row="4" Text="{Binding Path= AccommodationReservation.Accommodation.Location}" FontWeight="SemiBold"></TextBlock>
 
                     <TextBlock VerticalAlignment="Bottom" Grid.Column="1" Grid.Row="0" Text="Old date range"></TextBlock>
                     <TextBlock VerticalAlignment="Bottom" Grid.Column="1" Grid.Row="2" Text="New date range"></TextBlock>
 
+                    <Grid Grid.Column="1" Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="4*"/>
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Border Grid.Column="0"  BorderBrush="Black" BorderThickness="0.5" >
+                            <TextBlock  Text="{Binding Path = OldArrival}" Padding="3,0,0,0"></TextBlock>
+                         </Border>
+                        <Image  Grid.Column="1" Source="/Resources/Images/calendarIcon.png" Width="14"/>
+                    </Grid>
+                    <Grid Grid.Column="3" Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="4*"/>
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Image  Grid.Column="1" Source="/Resources/Images/calendarIcon.png" Width="14" />
+                        <Border Grid.Column="0" BorderBrush="Black" BorderThickness="0.5">
+                            <TextBlock Text="{Binding Path = OldDeparture}" Padding="3,0,0,0"></TextBlock>
+                        </Border>
+                    </Grid>
+                    <Grid Grid.Column="1" Grid.Row="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="4*"/>
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Border Grid.Column="0" BorderBrush="Black" BorderThickness="0.5">
+                            <TextBlock Text="{Binding Path = NewArrival}" Padding="3,0,0,0"></TextBlock>
+                        </Border>
+                        <Image  Grid.Column="1" Source="/Resources/Images/calendarIcon.png" Width="14"/>
+                    </Grid>
+                    <Grid  Grid.Column="3" Grid.Row="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="4*"/>
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Image  Grid.Column="1"  Source="/Resources/Images/calendarIcon.png" Width="14"/>
+                        <Border  Grid.Column="0" BorderBrush="Black" BorderThickness="0.5">
+                            <TextBlock Text="{Binding Path = NewDeparture}" Padding="3,0,0,0"></TextBlock>
+                        </Border>
+                    </Grid>
 
-                    <Border Grid.Column="1" Grid.Row="1" BorderBrush="Black" BorderThickness="0.5">
-                        <TextBlock  Text="{Binding Path = Request.OldArrivalDate}"></TextBlock>
-                     </Border>
-                    <Image  Grid.Column="2" Grid.Row="1" Source="/Resources/Images/calendarIcon.png" Width="14"/>
-                    <Image  Grid.Column="4" Grid.Row="1" Source="/Resources/Images/calendarIcon.png" Width="14" />
-                    <Border Grid.Column="3" Grid.Row="1" BorderBrush="Black" BorderThickness="0.5">
-                        <TextBlock Text="{Binding Path = Request.OldDepartureDate}"></TextBlock>
-                     </Border>
-
-                    <Border Grid.Column="1" Grid.Row="3" BorderBrush="Black" BorderThickness="0.5">
-                    <TextBlock Text="{Binding Path = Request.NewArrivalDate}"></TextBlock>
-                    </Border>
-                    <Image  Grid.Column="2" Grid.Row="3" Source="/Resources/Images/calendarIcon.png" Width="14"/>
-                    <Image  Grid.Column="4" Grid.Row="3" Source="/Resources/Images/calendarIcon.png" Width="14"/>
-                    <Border  Grid.Column="3" Grid.Row="3" BorderBrush="Black" BorderThickness="0.5">
-                    <TextBlock Text="{Binding Path = Request.NewDepartureDate}"></TextBlock>
-                    </Border>
-
-                    <TextBlock Grid.Row="5" Grid.Column="0" Text="{Binding Path=Availability}" >
+                    <TextBlock Padding="2, 0, 0, 0" Grid.Row="5" Grid.Column="0" Text="{Binding Path=Availability}" FontWeight="SemiBold" >
                         <TextBlock.Style>
                             <Style TargetType="{x:Type TextBlock}">
                                 <Style.Triggers>
@@ -70,8 +92,32 @@
                             </Style>
                         </TextBlock.Style>
                     </TextBlock>
-                    <Button Command="{Binding DataContext.DeclineCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" Name="DeclineButton" Content="Decline" Grid.Column="1" Grid.Row="5" Background="AliceBlue"></Button>
-                    <Button Command="{Binding DataContext.ApproveCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" Name="ApproveButton" Content="Approve" Grid.Column="3" Grid.Row="5" Background="AliceBlue"></Button>
+                    <Button Command="{Binding DataContext.DeclineCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" Name="DeclineButton" Grid.Column="1" Grid.Row="5" Style="{StaticResource DeclineButton}">
+                        <Button.Content>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="10"/>
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Decline" Grid.Column="2" VerticalAlignment="Center"/>
+                                <Image Height="25" Source="/Resources/Images/delete.png" Grid.Column="0" HorizontalAlignment="Left"/>
+                            </Grid>
+                        </Button.Content>
+                    </Button>
+                    <Button Command="{Binding DataContext.ApproveCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" Name="ApproveButton" Grid.Column="3" Grid.Row="5" Style="{StaticResource DataTemplateButton}">
+                        <Button.Content>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="10"/>
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Approve" Grid.Column="2" VerticalAlignment="Center" />
+                                <Image Height="25" Source="/Resources/Images/success.png" Grid.Column="0" HorizontalAlignment="Left"/>
+                            </Grid>
+                        </Button.Content>
+                    </Button>
 
                 </Grid>
             </Border>

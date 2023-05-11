@@ -17,7 +17,7 @@
             <RowDefinition Height="2.4*"/>
             <RowDefinition />
         </Grid.RowDefinitions>
-        <Border Grid.Column="0" Grid.Row="0" BorderBrush="DarkGray" BorderThickness="0.5" Margin="0, 0, 0,0" Background="AliceBlue">
+        <Border Grid.Column="0" Grid.Row="0" BorderBrush="LightGray" BorderThickness="2" Margin="0, 0, 0,0" Background="#005A9C">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
@@ -27,27 +27,72 @@
                     <RowDefinition />
                     <RowDefinition Height="2*"/>
                 </Grid.RowDefinitions>
-                <Label Content="Upcoming renovations" Grid.Column="0" Grid.Row="0" VerticalAlignment="Bottom" Margin="10, 0, 0, 0"/>
-                <Label Content="Renovated objects" Grid.Column="1" Grid.Row="0" VerticalAlignment="Bottom" Margin="20, 0, 0, 0"/>
-                <Label Content="{Binding Path=UpcomingRenovations, UpdateSourceTrigger=PropertyChanged}" FontWeight="Bold" FontSize="42" Grid.Column="0" Grid.Row="1" VerticalAlignment="Top" Margin="10, 0, 0, 0"/>
-                <Label Content="{Binding Path=RenovatedObjects, UpdateSourceTrigger=PropertyChanged}" FontWeight="Bold" FontSize="42" Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" Margin="20, 0, 0, 0"/>
+                <Label Content="Upcoming renovations" Foreground="LightGray" Grid.Column="0" Grid.Row="0" VerticalAlignment="Bottom" Margin="10, 0, 0, 0"/>
+                <Label Content="Renovated objects" Foreground="LightGray" Grid.Column="1" Grid.Row="0" VerticalAlignment="Bottom" Margin="20, 0, 0, 0"/>
+                <Label Content="{Binding Path=UpcomingRenovations, UpdateSourceTrigger=PropertyChanged}" FontWeight="Bold" FontSize="42"  Foreground="LightGray" Grid.Column="0" Grid.Row="1" VerticalAlignment="Top" Margin="10, 0, 0, 0"/>
+                <Label Content="{Binding Path=RenovatedObjects, UpdateSourceTrigger=PropertyChanged}" FontWeight="Bold" FontSize="42"  Foreground="LightGray" Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" Margin="20, 0, 0, 0"/>
             </Grid>
         </Border>
-        <DataGrid ItemsSource="{Binding Renovations}" Grid.Column="0" Grid.Row="2" Style="{StaticResource DataGridStyle}" IsReadOnly="True">
+        <DataGrid Name="RenovationsDataGrid" ItemsSource="{Binding Renovations}" SelectedItem="{Binding Path=SelectedRenovation, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Grid.Row="2" Style="{StaticResource DataGridStyle}" IsReadOnly="True">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Width="*" Binding="{Binding Path=Accommodation.Name, UpdateSourceTrigger=PropertyChanged}"/>
-                <DataGridTextColumn Header="Location" Width="*" Binding="{Binding Path=Accommodation.Location, UpdateSourceTrigger=PropertyChanged}"/>
-                <DataGridTextColumn Header="Start Date" Width="*" Binding="{Binding Path=StartDate, UpdateSourceTrigger=PropertyChanged}"/>
-                <DataGridTextColumn Header="End Date" Width="*" Binding="{Binding Path=EndDate, UpdateSourceTrigger=PropertyChanged}"/>
-                <DataGridTemplateColumn Header="Cancel" Width="0.6*">
+                <DataGridTemplateColumn  Header="Name" Width="*" >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Background="AliceBlue" BorderBrush="DarkGray" IsEnabled="{Binding Path=CanBeCancelled, UpdateSourceTrigger=PropertyChanged}">Cancel</Button>
+                            <TextBlock>
+                            <Hyperlink Command="{Binding DataContext.RenovationDetailsCommand, RelativeSource={RelativeSource AncestorType={x:Type local:MyRenovationsView}}}" Foreground="Blue">
+                                <Run Text="{Binding Path= Accommodation.Name, UpdateSourceTrigger=PropertyChanged}" />
+                            </Hyperlink>
+                            </TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Location" Width="*" Binding="{Binding Path=Accommodation.Location, UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTextColumn Header="Start Date" Width="0.8*" Binding="{Binding Path=StartDate, UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTextColumn Header="End Date" Width="0.8*" Binding="{Binding Path=EndDate, UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTemplateColumn Header="Cancel" Width="0.8*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Background="AliceBlue" BorderBrush="DarkGray" IsEnabled="{Binding Path=CanBeCancelled, UpdateSourceTrigger=PropertyChanged}" Command="{Binding Path=DataContext.CancelCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding SelectedItem, ElementName=RenovationsDataGrid, UpdateSourceTrigger=PropertyChanged}">Cancel</Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsFinished}" Value="True">
+                            <Setter Property="Background" Value="LightGray" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding IsInProgress}" Value="True">
+                            <Setter Property="Background" Value="LawnGreen" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.CellStyle>
         </DataGrid>
-        <Button Command="{Binding NewRenovationCommand}" Grid.Row="3" Height="41" Background="AliceBlue" BorderBrush="DarkGray"> New Renovation</Button>
+        <Button Command="{Binding NewRenovationCommand}" Grid.Row="3" Height="41" Style="{StaticResource BasicButton}">New Renovation</Button>
+        <StackPanel Margin="-29.5,-30,-29.5,75" Background="LightGray" Visibility="{Binding Path=StackPanelVisibility, UpdateSourceTrigger=PropertyChanged}">
+            <Grid Height="100">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="0.5*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="5*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="0" Height="30" Source="/Resources/Images/success.png" />
+                    <Label Grid.Column="1" Content="{Binding Path=StackPanelMessage, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center"  FontSize="15"/>
+                </Grid>
+                <Button Command="{Binding OKCommand}" Grid.Row="2" Grid.Column="1" Content="OK" Margin="0,0,31,0" Style="{StaticResource DataTemplateButton}"/>
+            </Grid>
+        </StackPanel>
+
     </Grid>
 </Page>

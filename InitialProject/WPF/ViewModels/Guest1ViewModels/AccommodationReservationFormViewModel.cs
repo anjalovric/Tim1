@@ -51,16 +51,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             }
 
         }
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-        private bool CanExecute(object sender)
-        {
-            return true;
-        }
-
         public RelayCommand DecrementDaysNumberCommand { get; set; }
         public RelayCommand IncrementDaysNumberCommand { get; set; }
         public RelayCommand DecrementGuestsNumberCommand { get; set; }
@@ -76,6 +66,10 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             InitializeForm();
             MakeCommands();
         }
+        private bool CanExecute(object sender)
+        {
+            return true;
+        }
         private void Back_Executed(object sender)
         {
             Application.Current.Windows.OfType<AccommodationReservationFormView>().FirstOrDefault().Close();
@@ -86,8 +80,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             NumberOfDays = 1;
             NumberOfGuests = 1;
             AccommodationReservationService accommodationReservationService = new AccommodationReservationService();
-            this.reservations = new List<AccommodationReservation>(accommodationReservationService.GetAll());
-            
+            this.reservations = new List<AccommodationReservation>(accommodationReservationService.GetAll());  
         }
         private void MakeCommands()
         {
@@ -99,8 +92,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             BackCommand = new RelayCommand(Back_Executed, CanExecute);
             OnPreviewMouseUpCommand = new RelayCommand(OnPreviewMouseUp_Executed, CanExecute);
         }
-        
-        
         private void DecrementDaysNumber_Executed(object sender)
         {
             int changedDaysNumber;
@@ -132,53 +123,67 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             changedDaysNumber = NumberOfGuests + 1;
             NumberOfGuests = changedDaysNumber;
         }
+
+        //Validation - date input (calendars and num. of days)
         private bool IsValidDateInput()
         {
             return (Arrival <= Departure && Convert.ToInt32(lengthOfStay.TotalDays) >= (NumberOfDays - 1) && Arrival.Date > DateTime.Now && Arrival != null && Departure != null);
         }
+        //Validation - owner-s conditions for min. num. of days
         private bool IsEnteredCorrectDateRange()
         {
             return ((Convert.ToInt32(lengthOfStay.TotalDays) + 1) >= currentAccommodation.MinDaysForReservation && NumberOfDays >= currentAccommodation.MinDaysForReservation);
         }
+        //Validation owner's conditions for capacity
         private bool IsEnteredCorrectGuestsNumber()
         {
             return NumberOfGuests <= currentAccommodation.Capacity;
+        }
+
+        //Validation Message boxes
+        private void ShowMessageBoxForInvalidDateInput()
+        {
+            Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("Invalid input, please enter values again!", "/Resources/Images/exclamation.png");
+            messageBox.Owner = Application.Current.Windows.OfType<AccommodationReservationFormView>().FirstOrDefault();
+            messageBox.ShowDialog();
+        }
+        private void ShowMessageBoxForIncorrectDateRange()
+        {
+            Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("The minimum number of days for booking this accommodation is " + currentAccommodation.MinDaysForReservation.ToString() + ".", "/Resources/Images/exclamation.png");
+            messageBox.Owner = Application.Current.Windows.OfType<AccommodationReservationFormView>().FirstOrDefault();
+            messageBox.ShowDialog();
+        }
+        private void ShowMessageBoxForIncorrectGuestsNumber()
+        {
+            Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("The maximum number of guests for this accommodation is " + currentAccommodation.Capacity.ToString() + ".", "/Resources/Images/exclamation.png");
+            messageBox.Owner = Application.Current.Windows.OfType<AccommodationReservationFormView>().FirstOrDefault();
+            messageBox.ShowDialog();
         }
         private void Next_Executed(object sender)
         {
             lengthOfStay = Departure.Subtract(Arrival);
 
             if (!IsValidDateInput())
-            {
-                Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("Non valid input, please enter values again!", "/Resources/Images/exclamation.png");
-                messageBox.Show();
-            }
+                ShowMessageBoxForInvalidDateInput();
 
             else if (!IsEnteredCorrectDateRange())
-            {
-                Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("The minimum number of days for booking this accommodation is " + currentAccommodation.MinDaysForReservation.ToString() + ".", "/Resources/Images/exclamation.png");
-                messageBox.Show();
-            }
+                ShowMessageBoxForIncorrectDateRange();
            
             else if (!IsEnteredCorrectGuestsNumber())
-            {
-                Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("The maximum number of guests for this accommodation is " + currentAccommodation.Capacity.ToString() + ".", "/Resources/Images/exclamation.png");
-                messageBox.Show();
-            }
+                ShowMessageBoxForIncorrectGuestsNumber();
                 
             else
                 OpenWindowWithAvailableDates();                 
-        }
+        }        
         private void OpenWindowWithAvailableDates()
         {
             SuggestedDatesForAccommodationReservationService suggestedDatesForAccommodationReservationService = new SuggestedDatesForAccommodationReservationService();
             suggestedDatesForAccommodationReservationService.TakeInputParameters(Arrival, Departure, NumberOfDays, NumberOfGuests);
             List<AvailableDatesForAccommodation> availableDates = new List<AvailableDatesForAccommodation>(suggestedDatesForAccommodationReservationService.GetAvailableDates(currentAccommodation, guest1));
             DatesForAccommodationReservationView datesForAccommodationReservationView = new DatesForAccommodationReservationView(currentAccommodation, guest1, availableDates);
-            datesForAccommodationReservationView.Show();
+            datesForAccommodationReservationView.Owner = Application.Current.Windows.OfType<AccommodationReservationFormView>().FirstOrDefault();
+            datesForAccommodationReservationView.ShowDialog();
         }
-
-
         private void OnPreviewMouseUp_Executed(Object sender)
         {
             OnPreviewMouseUp(null);
@@ -189,6 +194,11 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             {
                 Mouse.Capture(null);
             }
+        }
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

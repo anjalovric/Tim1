@@ -21,14 +21,10 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 {
     public class OwnerAndAccommodationReviewFormViewModel:INotifyPropertyChanged
     {
+        private Guest1 guest1;
+        private List<AccommodationReviewImage> images;
         private AccommodationReservation reservation;
         public Uri RelativeUri { get; set; }
-        private List<AccommodationReviewImage> images;
-        public RelayCommand SendCommand { get; set; }
-        public RelayCommand AddPhotoCommand { get; set; }
-        public RelayCommand NextPhotoCommand { get; set; }
-        public RelayCommand PreviousPhotoCommand { get; set; }
-        public RelayCommand DeletePhotoCommand { get; set; }
         public int AccommodationCleanliness { get; set; }
         public int OwnerCorrectness { get; set; }
         public string Comments { get; set; }
@@ -44,71 +40,123 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             }
 
         }
+        private int levelOfUrgencyIndex;
+        public int LevelOfUrgencyIndex
+        {
+            get { return levelOfUrgencyIndex; }
+            set
+            {
+                if (value != levelOfUrgencyIndex)
+                    levelOfUrgencyIndex = value;
+                OnPropertyChanged("LevelOfUrgencyIndex");
+            }
+
+        }
 
         public string ConditionsOfAccommodation { get; set; }
         public string LevelOfUrgency { get; set; }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        private bool isResetEnabled;
+        public bool IsResetEnabled
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            get { return isResetEnabled; }
+            set
+            {
+                if (value != isResetEnabled)
+                    isResetEnabled = value;
+                OnPropertyChanged("IsResetEnabled");
+            }
+
         }
-        private Guest1 guest1;
+        private bool isNextEnabled;
+        public bool IsNextEnabled
+        {
+            get { return isNextEnabled; }
+            set
+            {
+                if (value != isNextEnabled)
+                    isNextEnabled = value;
+                OnPropertyChanged("IsNextEnabled");
+            }
+
+        }
+        private bool isDeleteEnabled;
+        public bool IsDeleteEnabled
+        {
+            get { return isDeleteEnabled; }
+            set
+            {
+                if (value != isDeleteEnabled)
+                    isDeleteEnabled = value;
+                OnPropertyChanged("IsDeleteEnabled");
+            }
+
+        }
+        public RelayCommand SendCommand { get; set; }
+        public RelayCommand AddPhotoCommand { get; set; }
+        public RelayCommand NextPhotoCommand { get; set; }
+        public RelayCommand PreviousPhotoCommand { get; set; }
+        public RelayCommand DeletePhotoCommand { get; set; }
+        public RelayCommand ResetComboBoxCommand { get; set; }
+       
+        public RelayCommand UrgencySelectionChangedCommand { get; set; }
         public OwnerAndAccommodationReviewFormViewModel(Guest1 guest1,AccommodationReservation SelectedCompletedReservation)
         {
             this.reservation = SelectedCompletedReservation;
             this.guest1 = guest1;
             images = new List<AccommodationReviewImage>();
+            InitializaPage();
             MakeCommands();
+        }
+        private void InitializaPage()
+        {
+            LevelOfUrgencyIndex = -1;
+            AccommodationCleanliness = 1;
+            OwnerCorrectness = 1;
+            IsResetEnabled = false;
+            IsNextEnabled = false;
+            IsDeleteEnabled = false;
+        }
+        private void ResetComboBox_Executed(object sender)
+        {
+            LevelOfUrgencyIndex = -1;
+            LevelOfUrgency = null;
+            IsResetEnabled=false;
         }
         private bool CanExecute(object sender)
         {
             return true;
-        }
-
-        private void MakeCommands()
+        }       private void MakeCommands()
         {
             SendCommand = new RelayCommand(Send_Executed, CanExecute);
             AddPhotoCommand = new RelayCommand(AddPhoto_Executed, CanExecute);
             NextPhotoCommand = new RelayCommand(NextPhoto_Executed, CanExecute);
             PreviousPhotoCommand = new RelayCommand(PreviousPhoto_Executed, CanExecute);
             DeletePhotoCommand = new RelayCommand(DeletePhoto_Executed, CanExecute);
+            ResetComboBoxCommand = new RelayCommand(ResetComboBox_Executed, CanExecute);
+            UrgencySelectionChangedCommand = new RelayCommand(UrgencySelectionChanged_Executed, CanExecute);
         }
+        private void UrgencySelectionChanged_Executed(object sender)
+        {
+            if (LevelOfUrgencyIndex != -1)
+                IsResetEnabled = true;
+        } 
         private void Send_Executed(object sender)
         {
             if (!IsImageUploadValid())
-            {
-                Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("You must upload at least one photo!", "/Resources/Images/exclamation.png");
-                messageBox.Show();
-            }
+                ShowMessageBoxForInvalidPhotoInput();
+
             else if (!IsRenovationSuggestionValid())
-            {
-                Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("You must fill all fields for renovation suggestion!", "/Resources/Images/exclamation.png");
-                messageBox.Show();
-            }
+                ShowMessageBoxForInvalidRenovationSuggestion();
+
             else
             {
                 StoreReview();
                 StoreImages();
                 StoreRenovationSuggestion();
-                Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("Successfully sent!", "/Resources/Images/done.png");
-                messageBox.Show();
+                ShowMessageBoxForSentReview();
                 Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = new MyAccommodationReservationsView(guest1);
             }
         }
-
-        private bool IsRenovationSuggestionValid()
-        {
-            if ((ConditionsOfAccommodation == null || ConditionsOfAccommodation=="") && LevelOfUrgency == null)
-                return true;
-            if (ConditionsOfAccommodation == null || ConditionsOfAccommodation == "")
-                return false;
-            if (LevelOfUrgency == null)
-                return false;
-            return true;
-            
-        }
-
         private void StoreRenovationSuggestion()
         {
             if(ConditionsOfAccommodation!=null && ConditionsOfAccommodation!="" && LevelOfUrgency!=null) //else, dont store renovation suggestion (doesnt exist)
@@ -119,11 +167,10 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                 if (LevelOfUrgency == null)
                     LevelOfUrgency = "";
 
-                AccommodationRenovationSuggestion suggestion = new AccommodationRenovationSuggestion(reservation,LevelOfUrgency,ConditionsOfAccommodation);
+                AccommodationRenovationSuggestion suggestion = new AccommodationRenovationSuggestion(reservation,LevelOfUrgencyIndex+1,ConditionsOfAccommodation);
                 accommodationRenovationSuggestionService.Add(suggestion);
             }
         }
-
         private void StoreImages()
         {
             AccommodationReviewImageService accommodationReviewImageService = new AccommodationReviewImageService();
@@ -135,25 +182,10 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         private void StoreReview()
         {
             OwnerReviewService ownerReviewService = new OwnerReviewService();
-            if (OwnerCorrectness == 0)
-                OwnerCorrectness = 1;
-            if (AccommodationCleanliness == 0)
-                AccommodationCleanliness = 1;
             OwnerReview ownerReview = new OwnerReview(reservation, AccommodationCleanliness, OwnerCorrectness, Comments);
             ownerReviewService.Add(ownerReview);
         }
-        private bool IsImageUploadValid()
-        {
-            if (images.Count >= 1)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-        
+
         private void AddPhoto_Executed(object sender)
         {
             OpenFileDialog openFileDialog = MakeOpenFileDialog();
@@ -165,6 +197,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                 AccommodationReviewImage accommodationReviewImage = new AccommodationReviewImage(reservation, relative);
                 images.Add(accommodationReviewImage);
             }
+            EnableButtonsForPhotos();
         }
         private String MakeRelativePath(OpenFileDialog openFileDialog)
         {
@@ -196,6 +229,18 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                     }
                 }
             }
+            EnableButtonsForPhotos();
+        }
+        private void EnableButtonsForPhotos()
+        {
+            if (images.Count >= 2)
+                IsNextEnabled = true;
+            else
+                IsNextEnabled = false;
+            if (images.Count >= 1)
+                IsDeleteEnabled = true;
+            else
+                IsDeleteEnabled = false;
         }
         private void NextPhoto_Executed(object sender)
         {
@@ -254,6 +299,53 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             else
                 ImageSource = null;
         }
+
+        //Validation for image input
+        private bool IsImageUploadValid()
+        {
+            if (images.Count >= 1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        //Validation for renovation suggestion
+        private bool IsRenovationSuggestionValid()
+        {
+            if ((ConditionsOfAccommodation == null || ConditionsOfAccommodation == "") && LevelOfUrgency == null)
+                return true;
+            if (ConditionsOfAccommodation == null || ConditionsOfAccommodation == "")
+                return false;
+            if (LevelOfUrgency == null)
+                return false;
+            return true;
+        }
+        //Message boxes for validation
+        private void ShowMessageBoxForInvalidPhotoInput()
+        {
+            Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("You must upload at least one photo!", "/Resources/Images/exclamation.png");
+            messageBox.Owner = Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault();
+            messageBox.ShowDialog();
+        }
+        private void ShowMessageBoxForInvalidRenovationSuggestion()
+        {
+            Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("You must fill all fields for renovation suggestion!", "/Resources/Images/exclamation.png");
+            messageBox.Owner = Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault();
+            messageBox.ShowDialog();
+        }
+        private void ShowMessageBoxForSentReview()
+        {
+            Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("Successfully sent!", "/Resources/Images/done.png");
+            messageBox.Owner = Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault();
+            messageBox.ShowDialog();
+        }
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }
-//ako postoji ocjena, ali ne i preporuka za renoviranje, da li onda ne moze opet da preporuci (jer pise da se to radi u nastavku ocjenjivanja)???

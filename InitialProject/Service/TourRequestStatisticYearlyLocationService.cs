@@ -24,7 +24,7 @@ namespace InitialProject.Service
             }
             return years;
         }
-        private int GetByYear(Location location, int year)
+        private int GetRequestsCountByYear(Location location, int year)
         {
             List<OrdinaryTourRequests> ordinaryTourRequests = new List<OrdinaryTourRequests>();
             OrdinaryTourRequestsService ordinaryTourRequestsService = new OrdinaryTourRequestsService();
@@ -34,7 +34,7 @@ namespace InitialProject.Service
                         ordinaryTourRequests.Add(tourRequest);
             return ordinaryTourRequests.Count;
         }
-        public List<GuideOneYearRequestStatisticViewModel> GetYearStatistic(Location location)
+        public List<GuideOneYearRequestStatisticViewModel> GetLocationYearStatistic(Location location)
         {
             List<GuideOneYearRequestStatisticViewModel> statistics = new List<GuideOneYearRequestStatisticViewModel>();
             if (GetYearsForLocation(location) != null)
@@ -43,7 +43,7 @@ namespace InitialProject.Service
                 {
                     GuideOneYearRequestStatisticViewModel guideOneYearRequestStatisticViewModel = new GuideOneYearRequestStatisticViewModel();
                     guideOneYearRequestStatisticViewModel.Year = year;
-                    guideOneYearRequestStatisticViewModel.Number = GetByYear(location, year);
+                    guideOneYearRequestStatisticViewModel.Number = GetRequestsCountByYear(location, year);
                     statistics.Add(guideOneYearRequestStatisticViewModel);
                 }
             }

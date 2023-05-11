@@ -4,10 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:InitialProject.WPF.ViewModels.Guest2ViewModels"
+             xmlns:val="clr-namespace:InitialProject.WPF.Validations.Guest2Validations" 
              xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf" xmlns:local1="clr-namespace:InitialProject.WPF.Views.Guest2Views"
         mc:Ignorable="d" 
              Title="Statistics"
-              d:DesignHeight="800" d:DesignWidth="1024" Width="1024" Height="800" WindowStartupLocation="CenterScreen">
+              d:DesignHeight="800" d:DesignWidth="1024" Width="1024" Height="800" WindowStartupLocation="CenterScreen" WindowStyle="None">
     <Window.Resources>
         <Style x:Key="button" TargetType="Button">
             <Setter Property="FontSize" Value="8"/>
@@ -41,7 +42,7 @@
         <Style x:Key="FontStyle" TargetType="TextBlock">
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="TextWrapping" Value="Wrap"/>
-            <Setter Property="Background" Value="#151f2d"/>
+            <Setter Property="Background" Value="#0C3B2E"/>
             <Setter Property="Foreground" Value="White"/>
         </Style>
         <Style x:Key="TextStyle" TargetType="TextBlock">
@@ -51,7 +52,7 @@
             <Setter Property="Foreground" Value="White"/>
         </Style>
     </Window.Resources>
-    <Grid Background="#151f2d">
+    <Grid Background="#0C3B2E">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
@@ -67,21 +68,68 @@
         </Grid.RowDefinitions>
         <Label Content="Tour request statistics" Grid.Row="0" Grid.Column="0" Foreground="White" FontWeight="Bold" FontSize="20" HorizontalAlignment="Left" Margin="66,25,0,0" VerticalAlignment="Top" Width="228" Grid.ColumnSpan="2" Height="52" RenderTransformOrigin="0.5,0.5"/>
 
-        <TextBlock TextWrapping="Wrap" Background="#151f2d" Text="Ovdje mozete vidjeti statistiku zahtjeva za ture generalno za sva vremena.&#xD;&#xA;Medju njima su prihvaceni i odbijeni zahtjevi, kao i prosjecan broj ljudi u prihvacenim zahtjevima &#xD;&#xA;" Foreground="#7166f9" FontSize="18" HorizontalAlignment="Left" Margin="66,24,0,0" VerticalAlignment="Top" Width="866" Height="78" Grid.ColumnSpan="3" Grid.Row="1"/>
-        <Border BorderBrush="#7166f9" BorderThickness="2,2,2,2" Margin="66,5,10,119" CornerRadius="25,25,25,25" Grid.Row="2"/>
+        <TextBlock TextWrapping="Wrap" Background="#0C3B2E" Text="Ovdje mozete vidjeti statistiku zahtjeva za ture generalno za sva vremena.&#xD;&#xA;Medju njima su prihvaceni i odbijeni zahtjevi, kao i prosjecan broj ljudi u prihvacenim zahtjevima &#xD;&#xA;" Foreground="#b46617" FontSize="18" HorizontalAlignment="Left" Margin="66,24,0,0" VerticalAlignment="Top" Width="866" Height="78" Grid.ColumnSpan="3" Grid.Row="1"/>
+        <Border BorderBrush="#6d9773" BorderThickness="2,2,2,2" Margin="66,5,10,119" CornerRadius="25,25,25,25" Grid.Row="2"/>
         <TextBlock Text="PERCENT OF ACCEPTED REQUESTS" Margin="90,12,26,170" Grid.Row="2" Style="{StaticResource FontStyle}"/>
-        <Border BorderBrush="#7166f9" BorderThickness="2,2,2,2" Margin="7,5,69,119" CornerRadius="25,25,25,25" Grid.Column="1" Grid.Row="2"/>
+        <Border BorderBrush="#6d9773" BorderThickness="2,2,2,2" Margin="7,5,69,119" CornerRadius="25,25,25,25" Grid.Column="1" Grid.Row="2"/>
         <TextBlock Text="PERCENT OF INVALID REQUESTS" Margin="35,10,85,170" Grid.Column="1" Grid.Row="2" Style="{StaticResource FontStyle}"/>
-        <Border BorderBrush="#7166f9" BorderThickness="2,2,2,2" Margin="60,120,69,0" CornerRadius="25,25,25,25" Grid.Row="2" Grid.ColumnSpan="2"/>
+        <Border BorderBrush="#6d9773" BorderThickness="2,2,2,2" Margin="60,120,69,0" CornerRadius="25,25,25,25" Grid.Row="2" Grid.ColumnSpan="2"/>
         <TextBlock Text="AVERAGE NUMBER OF PEOPLE IN ACCEPTED REQUESTS" Margin="90,125,85,69" Grid.Row="2" Style="{StaticResource FontStyle}" Grid.ColumnSpan="2"/>
-        <Label Content="Ukoliko zelite da vidite za odredjenu godinu popunite tekstualno polje i predjite na sljedecu stranicu." Foreground="#7166f9" FontSize="18" HorizontalAlignment="Left" Margin="66,57,0,0" VerticalAlignment="Top" Width="900" Height="55" Grid.ColumnSpan="3" Grid.Row="3"/>
-        <TextBox x:Name="year" TextWrapping="Wrap" Margin="66,28,26,56" Grid.Row="4"/>
-        <Label Content="Unesite godinu: " Foreground="#7166f9" FontSize="15" HorizontalAlignment="Left" Margin="66,111,0,0" VerticalAlignment="Top" Width="900" Height="43" Grid.ColumnSpan="3" Grid.RowSpan="2" Grid.Row="3"/>
-        <Button Content="SEARCH" Margin="241,22,173,0" Grid.Row="4" Grid.ColumnSpan="2" Command="{Binding SearchCommand}" Style="{StaticResource button}" Height="35"/>
-        <Image Margin="251,30,235,58" Source="/Resources/Images/search.png" Grid.Row="4" Grid.ColumnSpan="2"/>
-        <Border BorderBrush="#7166f9" BorderThickness="2,2,2,2" Margin="208,5,306,5" CornerRadius="25,25,25,25" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"/>
+        <Label Content="Ukoliko zelite da vidite za odredjenu godinu popunite tekstualno polje i predjite na sljedecu stranicu." Foreground="#b46617" FontSize="18" HorizontalAlignment="Left" Margin="66,57,0,0" VerticalAlignment="Top" Width="900" Height="55" Grid.ColumnSpan="3" Grid.Row="3"/>
+        <TextBox x:Name="year" TextWrapping="Wrap" Margin="66,28,26,56" Grid.Row="4">
+            <TextBox.Text>
+                <Binding Path="Year" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay" NotifyOnValidationError="True">
+                    <Binding.ValidationRules>
+                        <val:YearValidation ValidatesOnTargetUpdated="True" ValidationStep="RawProposedValue"></val:YearValidation>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+            <Validation.ErrorTemplate>
+                <ControlTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                    </Grid>
+                </ControlTemplate>
+            </Validation.ErrorTemplate>
+        </TextBox>
+        <Label Content="Unesite godinu: " Foreground="#b46617" FontSize="15" HorizontalAlignment="Left" Margin="66,111,0,0" VerticalAlignment="Top" Width="900" Height="43" Grid.ColumnSpan="3" Grid.RowSpan="2" Grid.Row="3"/>
+
+        <Button Grid.Row="4" HorizontalAlignment="Left" BorderBrush="#ffba00" BorderThickness="1" Background="#ffba00" VerticalAlignment="Top" Height="35" Width="90" FontWeight="Bold" Margin="8,24,0,0" FontSize="18" Grid.Column="1" Command="{Binding SearchCommand}">
+            <Grid Background="#ffba00" Width="90" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Image Source="/Resources/Images/SEARCH.png" VerticalAlignment="Center" HorizontalAlignment="Center" Width="17" Height="16" RenderTransformOrigin="0.5,0.5"/>
+                <TextBlock Background="#ffba00" Text="SEARCH" VerticalAlignment="Center" FontSize="18" Grid.Column="1"  Foreground="#22301a" FontWeight="Bold" HorizontalAlignment="Center" Width="68" Height="28"/>
+            </Grid>
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="IsEnabled" Value="false" />
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding ElementName=year, Path=(Validation.HasError)}" Value="false" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="IsEnabled" Value="true" />
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Border BorderBrush="#6d9773" BorderThickness="2,2,2,2" Margin="208,5,306,5" CornerRadius="25,25,25,25" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"/>
         <TextBlock Text="NUMBER OF REQUEST BY LANGUAGE" Margin="10,10,362,172" Grid.Row="2" Style="{StaticResource FontStyle}" Grid.Column="2"/>
-        <Border BorderBrush="#7166f9" BorderThickness="2,2,2,2" Margin="218,5,30,5" CornerRadius="25,25,25,25" Grid.Row="2" Grid.Column="2"/>
+        <Border BorderBrush="#6d9773" BorderThickness="2,2,2,2" Margin="218,5,30,5" CornerRadius="25,25,25,25" Grid.Row="2" Grid.Column="2"/>
         <TextBlock Text="NUMBER OF REQUESTS BY LOCATION" Margin="270,10,92,175" Grid.Row="2" Grid.Column="2" Style="{StaticResource FontStyle}"/>
         <TextBlock TextWrapping="Wrap" Margin="100,49,60,119" Grid.Row="2" Text="{Binding Path=acceptedRequest}" Style="{StaticResource TextStyle}"/>
         <TextBlock TextWrapping="Wrap" Margin="49,49,111,119" Grid.Row="2" Grid.Column="1" Text="{Binding Path=invalidRequest}" Style="{StaticResource TextStyle}"/>
@@ -89,5 +137,20 @@
         <TextBlock Margin="210,155,206,20" Grid.Row="2" Text="{Binding Path=averageNumberOfPeople}" Style="{StaticResource TextStyle}" Grid.ColumnSpan="2"/>
         <local1:GraphForLanguage Grid.Column="1" Margin="224,55,320,10" Grid.Row="2" Grid.ColumnSpan="2"/>
         <local1:GraphForLocation Margin="233,56,46,10" Grid.Column="2" Grid.Row="2"/>
+        <Button HorizontalAlignment="Left" Background="#0C3B2E" BorderBrush="#0C3B2E" VerticalAlignment="Top"  Height="41" Width="39" FontWeight="Bold" FontSize="18" Command="{Binding CloseCommand}" Margin="463,25,0,0" Grid.Column="2">
+
+            <Grid Background="#0C3B2E" Width="30" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="16*"/>
+
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Image Source="/Resources/Images/close.png" VerticalAlignment="Center" HorizontalAlignment="Left" Width="28" Height="30"  Margin="1,0,0,0"/>
+
+            </Grid>
+
+        </Button>
     </Grid>
 </Window>

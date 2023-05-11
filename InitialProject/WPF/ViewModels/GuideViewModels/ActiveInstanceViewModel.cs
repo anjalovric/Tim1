@@ -16,6 +16,8 @@ namespace InitialProject.WPF.ViewModels
         public ObservableCollection<CheckPoint> CurrentPoint { get; set; }
         public ObservableCollection<TourInstance> Tours { get; set; }
         public ObservableCollection<TourInstance> FinishedInstances { get; set; }
+        public ObservableCollection<TourInstance> CancelableTours { get; set; }
+
         private int orderCounter = 0;
         private TourInstance selected;
         private TourInstanceService tourInstanceService = new TourInstanceService();
@@ -36,7 +38,7 @@ namespace InitialProject.WPF.ViewModels
                 if (value != toast)
                 {
                     toast = value;
-                    OnPropertyChanged();
+                    OnPropertyChanged("Toast");
                 }
             }
         }
@@ -49,7 +51,7 @@ namespace InitialProject.WPF.ViewModels
                 if (value != title)
                 {
                     title = value;
-                    OnPropertyChanged();
+                    OnPropertyChanged("Title");
                 }
             }
         }
@@ -62,7 +64,7 @@ namespace InitialProject.WPF.ViewModels
                 if (value != nextEnabled)
                 {
                     nextEnabled = value;
-                    OnPropertyChanged();
+                    OnPropertyChanged("NextEnabled");
                 }
             }
         }
@@ -75,18 +77,19 @@ namespace InitialProject.WPF.ViewModels
                 if (value != finishEnabled)
                 {
                     finishEnabled = value;
-                    OnPropertyChanged();
+                    OnPropertyChanged("FinishEnabled");
                 }
             }
         }
-        private HomeView homeView;
-        public ActiveInstanceViewModel(TourInstance active, ObservableCollection<TourInstance> tours, ObservableCollection<TourInstance> finishedInstances,HomeView HomeView)
+        public User guide;
+        public ActiveInstanceViewModel(TourInstance active,ObservableCollection<TourInstance> finishedInstances,User user, ObservableCollection<TourInstance> tours, ObservableCollection<TourInstance> cancelaleTours)
         {
             selected = active;
             FinishedInstances = finishedInstances;
             Tours = tours;
-            homeView= HomeView;
+            guide= user;
             AllPoints = new ObservableCollection<CheckPoint>();
+            CancelableTours= cancelaleTours;
             CurrentPoint = new ObservableCollection<CheckPoint>();
             checkPointService.FindPointsForSelectedInstance(active, AllPoints);
             SetStartState();
@@ -130,6 +133,7 @@ namespace InitialProject.WPF.ViewModels
         }
         public void HomeExecuted(object sender)
         {
+            HomeView homeView = new HomeView(guide, Tours, CancelableTours);
             Application.Current.Windows.OfType<GuideWindow>().FirstOrDefault().Main.Content = homeView;
         }
         private void FinishInstance()
@@ -138,21 +142,9 @@ namespace InitialProject.WPF.ViewModels
             FinishedInstances.Add(finished);
             CurrentPoint[0].Checked = true;
 
-            FindActive(finished);
             FinishEnabled = false;
             NextEnabled = false;
             Toast = "Visible";
-        }
-        private void FindActive(TourInstance selected)
-        {
-            foreach (TourInstance instance in Tours)
-            {
-                if (instance.Id == selected.Id)
-                {
-                    Tours.Remove(instance);
-                    break;
-                }
-            }
         }
         private void ChangeCurrentPointToNextState()
         {
@@ -171,7 +163,7 @@ namespace InitialProject.WPF.ViewModels
                 FinishInstance();
             }
             checkPointService.UpdateAllPointsListToNextPoint(AllPoints, orderCounter);
-            alertGuest2Service.AddAlerts(CurrentPoint[0].Id, selected.Id, selected);
+            alertGuest2Service.AddAlerts(CurrentPoint[0].Id, selected.Id, selected,guide.Id);
         }
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

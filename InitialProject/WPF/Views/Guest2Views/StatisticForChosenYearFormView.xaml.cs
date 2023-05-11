@@ -28,5 +28,6 @@ namespace InitialProject.WPF.Views.Guest2Views
             InitializeComponent();
             DataContext = new StatisticForChosenYearViewModel(guest2,year);
         }
+
     }
 }

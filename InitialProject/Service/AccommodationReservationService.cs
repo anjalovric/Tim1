@@ -6,6 +6,7 @@ using InitialProject.Domain;
 using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Model;
 using InitialProject.WPF.Views.Guest1Views;
+using System.Linq;
 
 namespace InitialProject.Service
 {
@@ -13,24 +14,20 @@ namespace InitialProject.Service
     {
         private List<AccommodationReservation> reservations;
         private IAccommodationReservationRepository accommodationReservationRepository = Injector.CreateInstance<IAccommodationReservationRepository>();
-
         public AccommodationReservationService()
         {
             MakeReservations();
         }
-
         public List<AccommodationReservation> GetAll()
         {
             return reservations;
         }
-
         public void MakeReservations()
         {
             reservations = new List<AccommodationReservation>(accommodationReservationRepository.GetAll());
             SetAccommodations();
             SetGuests();
         }
-
         public void Add(AccommodationReservation reservation)
         {
             accommodationReservationRepository.Add(reservation);
@@ -41,10 +38,9 @@ namespace InitialProject.Service
             foreach (AccommodationReservation reservation in reservations)
             {
                 if (reservation.Departure < DateTime.Now && reservation.Guest.Id == guest1.Id)
-                {
                     CompletedReservations.Add(reservation);
-                }
             }
+            CompletedReservations.Reverse();
             return CompletedReservations;
         }
         public List<AccommodationReservation> GetNotCompletedReservations(Guest1 guest1)
@@ -53,22 +49,17 @@ namespace InitialProject.Service
             foreach (AccommodationReservation reservation in reservations)
             {
                 if (reservation.Departure >= DateTime.Now && reservation.Guest.Id == guest1.Id)
-                {
                     NotCompletedReservations.Add(reservation);
-                }
             }
+            NotCompletedReservations.Reverse();
             return NotCompletedReservations;
-        }
-       
+        }    
         private void SetAccommodations()
         {
             AccommodationService accommodationService = new AccommodationService();
             foreach (AccommodationReservation reservation in reservations)
-            {
                 reservation.Accommodation = accommodationService.GetById(reservation.Accommodation.Id);
-            }
-        }
-        
+        } 
         public void Delete(AccommodationReservation accommodationReservation)
         {
             accommodationReservationRepository.Delete(accommodationReservation);
@@ -88,12 +79,10 @@ namespace InitialProject.Service
         {
             accommodationReservationRepository.Update(reservation);
         }
-
         public List<AccommodationReservation> GetAllForReviewByOwner(Owner owner)
         {
             List<AccommodationReservation> reservationsToReview = new List<AccommodationReservation>();
             GuestReviewService guestReviewService = new GuestReviewService();
-
             if (reservations.Count > 0)
             {
                 foreach (AccommodationReservation reservation in reservations)
@@ -103,37 +92,44 @@ namespace InitialProject.Service
                 }
             }
             return reservationsToReview;
-        }
-        public async Task<bool> ConfirmReservation()
-        {
-            var result = new TaskCompletionSource<bool>();
-            Guest1YesNoMessageBoxView messageBox = new Guest1YesNoMessageBoxView("Do you want to make a reservation?", "/Resources/Images/qm.png", result);
-            messageBox.Show();
-            var returnedResult = await result.Task;
-            return returnedResult;
-
-           /* string sMessageBoxText = $"Do you want to make a reservation?\n";
-            string sCaption = "Confirm reservation";
-            MessageBoxButton btnMessageBox = MessageBoxButton.YesNo;
-            MessageBoxImage icnMessageBox = MessageBoxImage.Question;
-            MessageBoxResult result = MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
-            return result;*/
-        }
-
-        public int GetReservationsNumberByGuestInLastYear(Guest1 guest1)
+        }      
+        public DateTime GetNewSuperGuestActivationDateIfPossible(Guest1 guest1)
         {
             int counter = 0;
+            List<DateTime> departureDates = new List<DateTime>();
             foreach(AccommodationReservation reservation in reservations)
             {
                 if (reservation.Guest.Id == guest1.Id && IsLastYearReservationCompleted(reservation))
+                {
                     counter++;
+                    departureDates.Add(reservation.Departure);
+                }                   
             }
-            return counter;
+            if (counter >= 10)
+            {
+                var tenthDeparture = departureDates.OrderBy(d => d).ElementAtOrDefault(9);
+                return tenthDeparture;
+            }                
+            else
+                return DateTime.MinValue;
         }
         public bool IsLastYearReservationCompleted(AccommodationReservation reservation)
         {
-            return reservation.Arrival <= DateTime.Now && reservation.Departure <= DateTime.Now && reservation.Arrival > DateTime.Now.AddYears(-1) && reservation.Arrival <=DateTime.Now;
+            return reservation.Departure <= DateTime.Now && reservation.Departure > DateTime.Now.AddYears(-1);
+        }  
+        public DateTime GetProlongActivationDate(Guest1 guest1, DateTime activationDate)
+        {
+            List<AccommodationReservation> completedReservations = reservations.FindAll(n => n.Guest.Id == guest1.Id && n.Departure > activationDate && n.Departure <= activationDate.AddYears(1));//number of reservations in next year from activationDate
+            int counter = completedReservations.Count;
+            if(counter >= 10)
+            {
+                List<DateTime> departureDates = new List<DateTime>();
+                foreach (AccommodationReservation reservation in completedReservations)
+                    departureDates.Add(reservation.Departure);
+                var tenthDeparture = departureDates.OrderBy(d => d).ElementAtOrDefault(9);
+                return tenthDeparture;
+            }
+            return DateTime.MinValue;   //if expired(<10 reservations) or not expired(<10 reservations but 1 year hasn't passed)
         }
-
     }
 }

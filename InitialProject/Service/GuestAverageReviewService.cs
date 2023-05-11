@@ -64,10 +64,23 @@ namespace InitialProject.Service
             return counter;
         }
 
-        public int GetAverageRating(Guest1 guest1)  //pitati da li je ok da ovako dobijem prosj.ocjenu
+        public int GetAverageRating(Guest1 guest1)
         {
             return Convert.ToInt32((GetAverageCleanlinessReview(guest1) + GetAverageFollowingRulesReview(guest1)) / 2);
-            //da li ako nema ocjena da prikazem onda 1 zvjezdu i da sve bude na 1(Slideri), svakako prikazujem i broj reviews
+        }
+
+        public double GetAverageRatingByMonth(DateTime date, Guest1 guest1, DateTime current)
+        {
+            List<GuestReview> reviewsByMonth = guestReviews.FindAll(r => r.Reservation.Guest.Id == guest1.Id &&  r.Reservation.Departure.Date > date.AddDays(-date.Day).Date && r.Reservation.Departure.Date <= date.AddMonths(1).AddDays(-date.Day).Date && r.Reservation.Departure.Date <= current.Date);
+            List<double> averageRatings = new List<double>();
+            foreach(GuestReview review in reviewsByMonth)
+            {
+                averageRatings.Add((review.Cleanliness + review.RulesFollowing) / 2);
+            }
+            if (averageRatings.Count == 0)
+                return 0;
+            return averageRatings.Sum()/averageRatings.Count;
+
         }
     }
 }

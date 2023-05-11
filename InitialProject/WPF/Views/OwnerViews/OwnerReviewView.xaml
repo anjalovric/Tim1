@@ -24,19 +24,20 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <Grid Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0">
-            <Rectangle Fill="LightGray" HorizontalAlignment="Center" Height="30" Stroke="DarkGray" VerticalAlignment="Top" Width="430"/>
-            <Button Command="NavigationCommands.BrowseBack" Name="ExitButton" Content="x" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="384,5,0,0" VerticalAlignment="Top" Height="25" Width="27" Background="AliceBlue" BorderBrush="DarkGray" Foreground="DarkGray">
+            <Rectangle Fill="#005A9C" HorizontalAlignment="Center" Height="30" Stroke="LightGray" VerticalAlignment="Top" Width="430"/>
+            <Button Command="NavigationCommands.BrowseBack" Name="ExitButton" Content="x" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="384,5,0,0" VerticalAlignment="Top" Height="25" Width="27" Style="{StaticResource CancelButton}">
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="100"/>
                     </Style>
                 </Button.Resources>
             </Button>
-            <Label Content="Review" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" RenderTransformOrigin="0,0.401" Width="134" Height="28" VerticalContentAlignment="Center">
+            <Label Content="Review" Foreground="LightGray" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" RenderTransformOrigin="0,0.401" Width="134" Height="28" VerticalContentAlignment="Center">
             </Label>
         </Grid>
+        <Image Source="/Resources/Images/reviewImage.jpg" Grid.Column="1" Grid.Row="1" Margin="84,0,0,30" Grid.RowSpan="2"/>
 
-        <Label Content="{Binding Path=OwnerReview.Reservation.Guest, Mode=OneWay}" VerticalContentAlignment="Center" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" FontSize="15" HorizontalAlignment="Left" Width="381" Margin="20,0,0,50" Grid.RowSpan="2" />
+        <Label Content="{Binding Path=OwnerReview.Reservation.Guest, Mode=OneWay}" VerticalContentAlignment="Center" Grid.Row="1" Grid.Column="0" FontSize="15" FontWeight="SemiBold" HorizontalAlignment="Left" Width="250" Margin="20,0,0,20" Grid.ColumnSpan="2" />
         <TextBlock Padding="3, 0, 0, 0" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center" TextWrapping="Wrap" Margin="20,0,20,0" >
         <Run Text="Accommodation: " />
         <Run Text="{Binding Path= OwnerReview.Reservation.Accommodation.Name}" />
@@ -58,14 +59,14 @@
                 <Image  Grid.Column="1" Grid.Row="0" Source="/Resources/Images/calendarIcon.png"  HorizontalAlignment="Right" Width="21" >
                 </Image>
                 <Border Grid.Column="0" BorderBrush="DarkGray" BorderThickness="0.5" Height="33" VerticalAlignment="Center" Margin="10,0,26,0" Grid.ColumnSpan="2">
-                    <TextBlock Text="{Binding Path=OwnerReview.Reservation.Arrival}" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="0,3, 0, 0" Height="25" Width="146" Margin="10,0,0,0"/>
+                    <TextBlock Text="{Binding Path=Arrival}" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="0,3, 0, 0" Height="25" Width="146" Margin="10,0,0,0"/>
                 </Border>
             </Grid>
         </Grid>
         <TextBlock Padding="3, 0, 0, 0" HorizontalAlignment="left" Grid.Row="4" TextWrapping="Wrap" Margin="20,0,0,49" Grid.RowSpan="2" Width="176" VerticalAlignment="Center"><Run Text="Cleanliness: " /><Run Text=" "/><Run Text="{Binding OwnerReview.Cleanliness}" /></TextBlock>
         <TextBlock HorizontalAlignment="Left" Grid.Row="4" Grid.Column="1" TextWrapping="Wrap" Padding="3, 0, 0, 0" Margin="0,0,0,49" Grid.RowSpan="2" Width="186" VerticalAlignment="Center"><Run Text="Owner's correctness: " /><Run Text=" "/><Run Text="{Binding OwnerReview.Correctness}" /></TextBlock>
-        <Label Content="Comment"  HorizontalAlignment="Left" Grid.Row="5" Grid.ColumnSpan="2" Width="350" Margin="20,0,0,10"/>
-        <Border Background="White" BorderBrush="DarkGray" BorderThickness="1" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Margin="20,0,20,10">
+        <Label Content="Comment"  HorizontalAlignment="Left" Grid.Row="5" Grid.ColumnSpan="2" Width="350" Margin="20,0,0,5"/>
+        <Border Background="White" BorderBrush="DarkGray" BorderThickness="1" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Margin="20,30,20,29" Grid.RowSpan="2">
             <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding Path=OwnerReview.Comment}" Width="390" Margin="0,-1,0,9"/>
         </Border>
         <Grid Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2">
@@ -75,12 +76,12 @@
                 <ColumnDefinition Width="0.4*"/>
             </Grid.ColumnDefinitions>
             <Image Grid.Column="1" Source="{Binding Path= ImageUrl, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,5" />
-            <Button Grid.Column="0" Command="{Binding NextImageCommand}" Name="NextImageButton" HorizontalAlignment="Left" Margin="5, 0, 0, 0"  Height="32" Width="70" Background="AliceBlue" BorderBrush="DarkGray">
+            <Button Grid.Column="0" Command="{Binding NextImageCommand}" Name="NextImageButton" HorizontalAlignment="Left" Margin="5, 0, 0, 0"  Height="32" Width="70" Style="{StaticResource ButtonForImages}">
                 <Button.Content>
                     <Image Source="/Resources/Images/back_arrow.png"/>
                 </Button.Content>
             </Button>
-            <Button Grid.Column="2" Command="{Binding PreviousImageCommand}" Name="PreviousImageButton" HorizontalAlignment="Right" Margin="0, 0, 5, 0"  Height="32" Width="70" Background="AliceBlue" BorderBrush="DarkGray">
+            <Button Grid.Column="2" Command="{Binding PreviousImageCommand}" Name="PreviousImageButton" HorizontalAlignment="Right" Margin="0, 0, 5, 0"  Height="32" Width="70" Style="{StaticResource ButtonForImages}">
                 <Button.Content>
                     <Image Source="/Resources/Images/arrow.png" />
                 </Button.Content>

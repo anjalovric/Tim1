@@ -18,10 +18,6 @@ namespace InitialProject.WPF.Views.GuideViews
             DataContext = viewModel;
         }
 
-        private void ComboBoxCountry_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            viewModel.ComboBoxCountry_SelectionChanged();
-        }
 
     }
 }

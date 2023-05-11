@@ -7,19 +7,6 @@
       mc:Ignorable="d" 
       d:DesignHeight="630" d:DesignWidth="430"
       Title="Menu" Background="#b3cee5">
-    <Page.Resources>
-        <Style x:Key="MenuButtonStyle" TargetType="{x:Type Button}">
-            <Setter Property="FontSize" Value="13" />
-            <Setter Property="FontStyle" Value="Normal" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="10"></Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </Page.Resources>
 
     <Grid>
         <Button Command ="{Binding HomePageCommand}" HorizontalContentAlignment="Left" HorizontalAlignment="Center" Margin="0,167,0,0" VerticalAlignment="Top" Width="350" Height="45">
@@ -27,7 +14,7 @@
                 <StackPanel Orientation="Horizontal" Width="234">
                     <Label Width="20"></Label>
                     <Image Source="/Resources/Images/home.png" Height="20"/>
-                    <Label>Home Page</Label>
+                    <Label Foreground="LightGray" FontWeight="SemiBold">Home Page</Label>
                 </StackPanel>
             </Button.Content>
             <Button.Resources>
@@ -35,9 +22,9 @@
                     <Setter Property="CornerRadius" Value="10"/>
                 </Style>
                 <Style TargetType="Button" >
-                    <Setter Property="Background" Value="Gray" />
+                    <Setter Property="Background" Value="#005A9C" />
                     <Setter Property="BorderThickness" Value="2" />
-                    <Setter Property="BorderBrush" Value="AliceBlue" />
+                    <Setter Property="BorderBrush" Value="LightGray" />
                 </Style>
             </Button.Resources>
         </Button>
@@ -46,7 +33,7 @@
                 <StackPanel Orientation="Horizontal" Width="234">
                     <Label Width="20"></Label>
                     <Image Source="/Resources/Images/accommodation.png" Height="20"/>
-                    <Label>My Accommodation</Label>
+                    <Label Foreground="LightGray" FontWeight="SemiBold">My Accommodation</Label>
                 </StackPanel>
             </Button.Content>
             <Button.Resources>
@@ -54,9 +41,9 @@
                     <Setter Property="CornerRadius" Value="10"/>
                 </Style>
                 <Style TargetType="Button" >
-                    <Setter Property="Background" Value="Gray" />
+                    <Setter Property="Background" Value="#005A9C" />
                     <Setter Property="BorderThickness" Value="2" />
-                    <Setter Property="BorderBrush" Value="AliceBlue" />
+                    <Setter Property="BorderBrush" Value="LightGray" />
                 </Style>
             </Button.Resources>
         </Button>
@@ -64,8 +51,8 @@
             <Button.Content>
                 <StackPanel Orientation="Horizontal" Width="234">
                     <Label Width="20"></Label>
-                    <Image Source="/Resources/Images/tools.png" Height="20"/>
-                    <Label>My Renovations</Label>
+                    <Image Source="/Resources/Images/toolImage.png" Height="20"/>
+                    <Label Foreground="LightGray" FontWeight="SemiBold">My Renovations</Label>
                 </StackPanel>
             </Button.Content>
             <Button.Resources>
@@ -73,9 +60,9 @@
                     <Setter Property="CornerRadius" Value="10"/>
                 </Style>
                 <Style TargetType="Button" >
-                    <Setter Property="Background" Value="Gray" />
+                    <Setter Property="Background" Value="#005A9C" />
                     <Setter Property="BorderThickness" Value="2" />
-                    <Setter Property="BorderBrush" Value="AliceBlue" />
+                    <Setter Property="BorderBrush" Value="LightGray" />
                 </Style>
             </Button.Resources>
         </Button>
@@ -84,7 +71,7 @@
                 <StackPanel Orientation="Horizontal" Width="234">
                     <Label Width="20"></Label>
                     <Image Source="/Resources/Images/profile.png" Height="20"/>
-                    <Label>My Profile</Label>
+                    <Label Foreground="LightGray" FontWeight="SemiBold">My Profile</Label>
                 </StackPanel>
             </Button.Content>
             <Button.Resources>
@@ -92,19 +79,20 @@
                     <Setter Property="CornerRadius" Value="10"/>
                 </Style>
                 <Style TargetType="Button" >
-                    <Setter Property="Background" Value="Gray" />
+                    <Setter Property="Background" Value="#005A9C" />
                     <Setter Property="BorderThickness" Value="2" />
-                    <Setter Property="BorderBrush" Value="AliceBlue" />
+                    <Setter Property="BorderBrush" Value="LightGray" />
                 </Style>
             </Button.Resources>
         </Button>
-        <Image Source="/Resources/Images/logoMyTravel.png" Stretch="Fill" HorizontalAlignment="Left" Height="100" Margin="134,53,0,0" VerticalAlignment="Top" Width="139" RenderTransformOrigin="0.468,0.174" />
+        <Image Source="/Resources/Images/logoMyTravel.png" Stretch="Fill" HorizontalAlignment="Left" Height="100" Margin="134,53,0,0" VerticalAlignment="Top" Width="139" RenderTransformOrigin="0.468,0.174">
+        </Image>
         <Button Command="{Binding SignOutCommand}" Name="SignOutButton" HorizontalContentAlignment="Left" HorizontalAlignment="Center" Margin="0,575,0,0" VerticalAlignment="Top" Width="210" Height="45">
             <Button.Content>
                 <StackPanel Orientation="Horizontal" Width="200">
                     <Label Width="20"></Label>
                     <Image Source="/Resources/Images/signout.png" Height="20"/>
-                    <Label>Sign out</Label>
+                    <Label Foreground="LightGray" FontWeight="SemiBold">Sign out</Label>
                 </StackPanel>
             </Button.Content>
             <Button.Resources>
@@ -112,9 +100,9 @@
                     <Setter Property="CornerRadius" Value="10"/>
                 </Style>
                 <Style TargetType="Button" >
-                    <Setter Property="Background" Value="Gray" />
+                    <Setter Property="Background" Value="#005A9C" />
                     <Setter Property="BorderThickness" Value="2" />
-                    <Setter Property="BorderBrush" Value="AliceBlue" />
+                    <Setter Property="BorderBrush" Value="LightGray" />
                 </Style>
             </Button.Resources>
         </Button>
@@ -122,9 +110,9 @@
             <Image Source="/Resources/Images/arrow.png" Width="48"/>
             <Button.Resources>
                 <Style TargetType="Button">
-                    <Setter Property="Background" Value="Gray" />
+                    <Setter Property="Background" Value="#005A9C" />
                     <Setter Property="BorderThickness" Value="2" />
-                    <Setter Property="BorderBrush" Value="AliceBlue" />
+                    <Setter Property="BorderBrush" Value="LightGray" />
                 </Style>
             </Button.Resources>
         </Button>
@@ -133,7 +121,7 @@
                 <StackPanel Orientation="Horizontal" Width="234">
                     <Label Width="20"></Label>
                     <Image Source="/Resources/Images/forum.png" Height="20"/>
-                    <Label>My Forums</Label>
+                    <Label Foreground="LightGray" FontWeight="SemiBold">My Forums</Label>
                 </StackPanel>
             </Button.Content>
             <Button.Resources>
@@ -141,9 +129,9 @@
                     <Setter Property="CornerRadius" Value="10"/>
                 </Style>
                 <Style TargetType="Button" >
-                    <Setter Property="Background" Value="Gray" />
+                    <Setter Property="Background" Value="#005A9C" />
                     <Setter Property="BorderThickness" Value="2" />
-                    <Setter Property="BorderBrush" Value="AliceBlue" />
+                    <Setter Property="BorderBrush" Value="LightGray" />
                 </Style>
             </Button.Resources>
         </Button>
@@ -152,7 +140,7 @@
                 <StackPanel Orientation="Horizontal" Width="234">
                     <Label Width="20"></Label>
                     <Image Source="/Resources/Images/suggestion.png" Height="20"/>
-                    <Label>My Suggestions</Label>
+                    <Label Foreground="LightGray" FontWeight="SemiBold">My Suggestions</Label>
                 </StackPanel>
             </Button.Content>
             <Button.Resources>
@@ -160,9 +148,9 @@
                     <Setter Property="CornerRadius" Value="10"/>
                 </Style>
                 <Style TargetType="Button" >
-                    <Setter Property="Background" Value="Gray" />
+                    <Setter Property="Background" Value="#005A9C" />
                     <Setter Property="BorderThickness" Value="2" />
-                    <Setter Property="BorderBrush" Value="AliceBlue" />
+                    <Setter Property="BorderBrush" Value="LightGray" />
                 </Style>
             </Button.Resources>
         </Button>
@@ -171,7 +159,7 @@
                 <StackPanel Orientation="Horizontal" Width="234">
                     <Label Width="20"></Label>
                     <Image Source="/Resources/Images/request.png" Height="20"/>
-                    <Label>My Requests For Rescheduling</Label>
+                    <Label Foreground="LightGray" FontWeight="SemiBold">My Requests For Rescheduling</Label>
                 </StackPanel>
             </Button.Content>
             <Button.Resources>
@@ -179,9 +167,9 @@
                     <Setter Property="CornerRadius" Value="10"/>
                 </Style>
                 <Style TargetType="Button" >
-                    <Setter Property="Background" Value="Gray" />
+                    <Setter Property="Background" Value="#005A9C" />
                     <Setter Property="BorderThickness" Value="2" />
-                    <Setter Property="BorderBrush" Value="AliceBlue" />
+                    <Setter Property="BorderBrush" Value="LightGray" />
                 </Style>
             </Button.Resources>
         </Button>
@@ -191,15 +179,15 @@
                     <Setter Property="CornerRadius" Value="10"/>
                 </Style>
                 <Style TargetType="Button" >
-                    <Setter Property="Background" Value="Gray" />
+                    <Setter Property="Background" Value="#005A9C" />
                     <Setter Property="BorderThickness" Value="2" />
-                    <Setter Property="BorderBrush" Value="AliceBlue" />
+                    <Setter Property="BorderBrush" Value="LightGray" />
                 </Style>
             </Button.Resources>
             <StackPanel Orientation="Horizontal" Width="234">
                 <Label Width="20"/>
                 <Image Source="/Resources/Images/clock.png" Height="20"/>
-                <Label Content="Guest Reviews"/>
+                <Label Foreground="LightGray" FontWeight="SemiBold" Content="Guest Reviews"/>
             </StackPanel>
         </Button>
 

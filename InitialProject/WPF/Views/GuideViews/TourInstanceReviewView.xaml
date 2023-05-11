@@ -4,21 +4,23 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:InitialProject.WPF.Views.GuideViews" 
+      xmlns:ns="clr-namespace:InitialProject"
       mc:Ignorable="d" 
       d:DesignHeight="707" d:DesignWidth="1100"
-      Title="TourInstanceReviewView" >
+      Title="{ns:Loc TourInstanceReviewView}" >
     <Grid Style="{DynamicResource Background}">
         <DataGrid x:Name="TourListDataGrid" ColumnHeaderStyle="{DynamicResource CenterGridHeaderStyle}" SelectedItem="{Binding Path=Selected}" HorizontalAlignment="Left" Height="470" Margin="59,128,0,0" VerticalAlignment="Top" Width="967" ItemsSource="{Binding Path=Reviews}" HeadersVisibility="Column" Style="{DynamicResource Tables}">
 
             <DataGrid.Columns>
-                <DataGridTemplateColumn Width="80" >
+   
+                <DataGridTemplateColumn Width="85" >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Image Source="{Binding TourInstance.CoverBitmap}" Width="100" Height="30" VerticalAlignment="Top" Visibility="Visible"/>
+                            <Image Source="{Binding TourInstance.CoverBitmap}" Width="90" Height="30" VerticalAlignment="Top" Visibility="Visible"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Width="80" Header="Validity" Binding="{Binding ValidationImage}" >
+                <DataGridTextColumn Width="80" Header="{ns:Loc Validity}" Binding="{Binding ValidationImage}" >
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="{x:Type TextBlock}">
                                 <Setter Property="Foreground" Value="Black"/>
@@ -36,7 +38,13 @@
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Guest's name" Binding="{Binding Guest2.Name}" Width="105">
+                <DataGridTextColumn Header="{ns:Loc Guest}"  Width="200">
+                    <DataGridTextColumn.Binding>
+                        <MultiBinding StringFormat="{}{0} {1}">
+                            <Binding Path="Guest2.Name"/>
+                            <Binding Path="Guest2.LastName" />
+                        </MultiBinding>
+                    </DataGridTextColumn.Binding>
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="{x:Type TextBlock}">
                             <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -45,7 +53,8 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Guest's surname" Binding="{Binding Guest2.LastName}" Width="150" >
+                
+                <DataGridTextColumn Header="{ns:Loc TourName}" Binding="{Binding TourInstance.Tour.Name}" Width="130" >
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="{x:Type TextBlock}">
                             <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -54,7 +63,7 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Tour name" Binding="{Binding TourInstance.Tour.Name}" Width="100" >
+                <DataGridTextColumn Header="{ns:Loc Location}" Binding="{Binding TourInstance.Tour.Location}" Width="203.5" >
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="{x:Type TextBlock}">
                             <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -63,7 +72,7 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Location" Binding="{Binding TourInstance.Tour.Location}" Width="175" >
+                <DataGridTextColumn Header="{ns:Loc StartDate}" Binding="{Binding TourInstance.StartDate}" Width="180" >
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="{x:Type TextBlock}">
                             <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -72,28 +81,28 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Start date" Binding="{Binding TourInstance.StartDate}" Width="188.5" >
-                    <DataGridTextColumn.ElementStyle>
-                        <Style TargetType="{x:Type TextBlock}">
-                            <Setter Property="HorizontalAlignment" Value="Center"/>
-                            <Setter Property="VerticalAlignment" Value="Center"/>
-
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                </DataGridTextColumn>
-                <DataGridTemplateColumn x:Name="cancelation" Header="Review"  Width="80" >
+                <DataGridTemplateColumn x:Name="cancelation" Header="{ns:Loc Review}"  Width="80" >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Name="cancelButton" Content="REVIEW" TextElement.FontWeight="ExtraBold" Style="{DynamicResource ButtonTable}" Command="{Binding Path=DataContext.ViewReviewCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+                            <Button Name="cancelButton" Content="{ns:Loc ReviewButton}" TextElement.FontWeight="ExtraBold" Style="{DynamicResource ButtonTable}" Command="{Binding Path=DataContext.ViewReviewCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
 
             </DataGrid.Columns>
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding New}" Value="🆕">
+                            <Setter Property="Background" Value="LightGreen" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.CellStyle>
         </DataGrid>
 
         <Grid Style="{DynamicResource BackgroundHeader}" Margin="0,0,0,596">
-            <Label Style="{DynamicResource Header}" Content="REVIEWS" HorizontalAlignment="Left" Margin="494,0,0,0" FontSize="28" FontWeight="Bold" VerticalAlignment="Center" Width="254" Height="61"/>
+            <Label Style="{DynamicResource Header}" Content="{ns:Loc REVIEWSHEADER}" HorizontalAlignment="Center"  HorizontalContentAlignment="Center" FontSize="28" FontWeight="Bold" VerticalAlignment="Center" Width="300" Height="61"/>
             <Image Source="/Resources/Images/LOGO (2).jpg" Margin="0,0,882,0"/>
         </Grid>
 

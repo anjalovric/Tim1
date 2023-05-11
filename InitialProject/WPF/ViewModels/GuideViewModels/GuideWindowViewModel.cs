@@ -2,6 +2,7 @@
 using InitialProject.Service;
 using InitialProject.WPF.Views.GuideViews;
 using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -11,6 +12,7 @@ namespace InitialProject.WPF.ViewModels
 {
     public class GuideWindowViewModel:INotifyPropertyChanged
     {
+        public ObservableCollection<string> Languages { get; set; }
         private HomeView homeView;
         private AddTourView addTourView;
         private CancelView cancelView;
@@ -27,6 +29,17 @@ namespace InitialProject.WPF.ViewModels
                 ThemeChanged();
             }
         }
+        private string selectedLanguage;
+        public string SelectedLanguage
+        {
+            get { return selectedLanguage; }
+            set
+            {
+                selectedLanguage = value;
+                OnPropertyChanged("selectedLanguage");
+                ComboBox_SelectionChanged();
+            }
+        }
         public RelayCommand HomeCommand { get; set; }
         public RelayCommand CancelCommand { get; set; }
         public RelayCommand AddCommand { get; set; }
@@ -39,15 +52,22 @@ namespace InitialProject.WPF.ViewModels
         public GuideWindowViewModel(User user) 
         {
             tourStatisticsView = new TourStatisticsView(user);
-            homeView = new HomeView(user, tourStatisticsView.viewModel.Instances);
             cancelView = new CancelView(user);
+            homeView = new HomeView(user, tourStatisticsView.viewModel.Instances,cancelView.cancelViewModel.TourInstances);
             loggedUser = user;
 
 
             SwitchFirstPage(loggedUser);
             MakeCommands();
+            AddLanguages();
         }
-
+        private void AddLanguages()
+        {
+            Languages = new ObservableCollection<string>();
+            Languages.Add("ENG");
+            Languages.Add("SRB");
+            SelectedLanguage = "ENG";
+        }
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
@@ -81,7 +101,8 @@ namespace InitialProject.WPF.ViewModels
             }
             else
             {
-                ActiveInstanceView activeInstanceView = new ActiveInstanceView(tourInstanceService.GetByActive(guide), homeView.viewModel.Tours, tourStatisticsView.viewModel.Instances,homeView);
+                ActiveInstanceView activeInstanceView = new ActiveInstanceView(tourInstanceService.GetByActive(guide), tourStatisticsView.viewModel.Instances, loggedUser, tourStatisticsView.viewModel.Instances, cancelView.cancelViewModel.TourInstances);
+
                 Application.Current.Windows.OfType<GuideWindow>().FirstOrDefault().Main.Content = activeInstanceView;
             }
         }
@@ -97,7 +118,8 @@ namespace InitialProject.WPF.ViewModels
             Guide guide = guideService.GetByUsername(loggedUser.Username);
             if (tourInstanceService.GetByActive(guide) != null)
             {
-                ActiveInstanceView activeInstanceView = new ActiveInstanceView(tourInstanceService.GetByActive(guide), homeView.viewModel.Tours, tourStatisticsView.viewModel.Instances, homeView);
+                ActiveInstanceView activeInstanceView = new ActiveInstanceView(tourInstanceService.GetByActive(guide), tourStatisticsView.viewModel.Instances,loggedUser, tourStatisticsView.viewModel.Instances, cancelView.cancelViewModel.TourInstances);
+
                 Application.Current.Windows.OfType<GuideWindow>().FirstOrDefault().Main.Content = activeInstanceView;
             }
         }
@@ -123,7 +145,7 @@ namespace InitialProject.WPF.ViewModels
         }
         private void RequestYearlyStatistic_Executed(object sender)
         {
-            RequestsStatistisYearly requestsStatistisYearly = new RequestsStatistisYearly(homeView.viewModel.Tours,loggedUser, cancelView.cancelViewModel.TourInstances);
+            RequestsStatisticsYearlyView requestsStatistisYearly = new RequestsStatisticsYearlyView(homeView.viewModel.Tours,loggedUser, cancelView.cancelViewModel.TourInstances);
             Application.Current.Windows.OfType<GuideWindow>().FirstOrDefault().Main.Content = requestsStatistisYearly;
         }
         private void SignOut_Executed(object sender)
@@ -144,6 +166,18 @@ namespace InitialProject.WPF.ViewModels
                 app.ChangeTheme(new Uri("Resources/DarkTheme.xaml", UriKind.Relative));
             else
                 app.ChangeTheme(new Uri("Resources/LightTheme.xaml", UriKind.Relative));
+        }
+        private void ComboBox_SelectionChanged()
+        {
+            var app = (App)Application.Current;
+            if (SelectedLanguage.Equals("SRB"))
+            {
+                app.ChangeLanguage("sr-LATN");
+            }
+            else
+            {
+                app.ChangeLanguage("en-US");
+            }
         }
     }
 }

@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:converters="clr-namespace:InitialProject.WPF.Converters"
       xmlns:local="clr-namespace:InitialProject.WPF.Views.Guest1Views"
+      xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
       mc:Ignorable="d" 
       d:DesignHeight="696" d:DesignWidth="1024"
       Title="Guest1Reviews">
@@ -12,17 +13,17 @@
         <Style TargetType="Grid">
             <Setter Property="Background" Value="#37492d"></Setter>
         </Style>
+
         <Style TargetType="Label">
             <Setter Property="Foreground" Value="#d9c7b3"></Setter>
             <Setter Property="FontWeight" Value="Medium"></Setter>
+            <Setter Property="FontSize" Value="18"></Setter>
         </Style>
-        <Style TargetType="TextBox">
+        <Style TargetType="ScrollBar">
             <Setter Property="Background" Value="#FFFCECB9"></Setter>
-            <Setter Property="BorderBrush" Value="#22301a"></Setter>
-            <Setter Property="BorderThickness" Value="3"></Setter>
         </Style>
-
         <Style TargetType="Button">
+            <Setter Property="Padding" Value="0"></Setter>
             <Setter Property="Background" Value="#8c9d75"></Setter>
             <Setter Property="Foreground" Value="#22301a"></Setter>
             <Setter Property="FontWeight" Value="UltraBlack"></Setter>
@@ -30,26 +31,68 @@
             <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
             <Setter Property="BorderBrush" Value="#22301a"></Setter>
             <Setter Property="BorderThickness" Value="3,3,3,3"></Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
         <Style TargetType="DataGrid">
             <Setter Property="BorderBrush" Value="#22301a"></Setter>
             <Setter Property="BorderThickness" Value="4,4,3,4"></Setter>
-            <Setter Property="Background" Value="#FFF9ECC5"></Setter>
-            <Setter Property="ColumnHeaderHeight" Value="40"></Setter>
+            <Setter Property="ColumnHeaderHeight" Value="45"></Setter>
             <Setter Property="RowHeight" Value="30"></Setter>
             <Setter Property="FontWeight" Value="Medium"></Setter>
             <Setter Property="RowBackground" Value="#FFFCECB9"></Setter>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="#dbc9ab" Offset="0.1"/>
+                        <GradientStop Color="#FFF9ECC5" Offset="0.4"/>
+                        <GradientStop Color="#FFF9ECC5" Offset="0.5"/>
+                        <GradientStop Color="#FFF9ECC5" Offset="0.6"/>
+                        <GradientStop Color="#dbc9ab" Offset="0.9"></GradientStop>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="FontSize" Value="16"></Setter>
+            <Setter Property="UseLayoutRounding" Value="False"></Setter>
+            <Setter Property="HeadersVisibility" Value="Column"></Setter>
+            <Setter Property="IsReadOnly" Value="True"></Setter>
+            <Setter Property="AutoGenerateColumns" Value="False"></Setter>
         </Style>
         <Style TargetType="DataGridColumnHeader">
             <Setter Property="TextElement.Foreground" Value="#22301a"></Setter>
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
             <Setter Property="BorderThickness" Value="0,0,1,4"/>
             <Setter Property="BorderBrush" Value="#22301a"/>
-            <Setter Property="Background" Value="#dbc9ab"/>
             <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="#dbc9ab" Offset="0"/>
+                        <GradientStop Color="#FFF9ECC5" Offset="0.5"/>
+                        <GradientStop Color="#dbc9ab" Offset="1"></GradientStop>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
         </Style>
         <Style TargetType="DataGridCell">
             <Setter Property="TextBlock.TextAlignment" Value="Center"></Setter>
+            <Style.Triggers>
+                <Trigger Property="IsSelected"  Value="True">
+                    <Setter Property="Foreground" Value="SeaGreen"></Setter>
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="BorderBrush" Value="Transparent"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="DataGridRow">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="SeaGreen"></Setter>
+                </Trigger>
+            </Style.Triggers>
         </Style>
         <Style TargetType="{x:Type ListBoxItem}">
             <!--For disable highlighting on stars rating listbox-->
@@ -68,9 +111,9 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
         <converters:IntToImageConverter x:Key="Int2Images"></converters:IntToImageConverter>
     </Page.Resources>
+
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -78,12 +121,13 @@
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.Column="0">
+        <!-- FIRST COLUMN -->
+        <Grid Grid.Column="0" Background="Transparent">
             <Grid.RowDefinitions>
-                <RowDefinition Height="2.5*"></RowDefinition>
+                <RowDefinition Height="3*"></RowDefinition>
                 <RowDefinition Height="1*"></RowDefinition>
                 <RowDefinition Height="1*"></RowDefinition>
-                <RowDefinition Height="2.5*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="1.5*"></RowDefinition>
                 <RowDefinition Height="1.5*"></RowDefinition>
                 <RowDefinition Height="3*"></RowDefinition>
@@ -91,11 +135,38 @@
                 <RowDefinition Height="8*"></RowDefinition>
             </Grid.RowDefinitions>
 
-            
-            <Label FontSize="24" HorizontalAlignment="Center" Grid.Row="0" FontFamily="Baskerville Old Face"  VerticalAlignment="Top" Height="43" Width="Auto" Margin="0,20,0,0">AVERAGE RATINGS</Label>
+            <Border Grid.Row="0" Grid.RowSpan="9" Grid.Column="0" Width="470" BorderBrush="#22301a" BorderThickness="3"  CornerRadius="20 20 20 20" HorizontalAlignment="Center" Margin="0,10,0,10">
+                <Border.Effect>
+                    <DropShadowEffect ShadowDepth="0" BlurRadius="50"/>
+                </Border.Effect>
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="#FF2A3922" Offset="0"/>
+                        <GradientStop Color="#37492d" Offset="0.2"></GradientStop>
+                        <GradientStop Color="#37492d" Offset="0.4"/>
+                        <GradientStop Color="#37492d" Offset="0.5"/>
+                        <GradientStop Color="#37492d" Offset="0.6"/>
+                        <GradientStop Color="#37492d" Offset="0.8"></GradientStop>
+                        <GradientStop Color="#FF2A3922" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
 
+            <Label FontSize="24" HorizontalAlignment="Center" Grid.Row="0" FontFamily="Baskerville Old Face"  VerticalAlignment="Top" Height="43" Width="Auto" FontWeight="Bold" Margin="0,50,0,0">AVERAGE RATINGS</Label>
+
+            <!-- RATING STARS -->
             <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top">
                 <ListBox Grid.Row="1" Background="#37492d" BorderBrush="Transparent" BorderThickness="0" Width="Auto" ItemsSource="{Binding AverageRating, Converter={StaticResource Int2Images}}"  Height="Auto" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center">
+                    <ListBox.Style>
+                        <Style TargetType="ListBox">
+                            <Setter Property="Visibility" Value="Visible"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ReviewsNumber}" Value="0">
+                                    <Setter Property="Visibility" Value="Hidden"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListBox.Style>
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Image Source="{Binding}" Height="20" Width="20"></Image>
@@ -109,39 +180,159 @@
                 </ListBox>
             </StackPanel>
 
-
-
-            <TextBlock FontSize="18" Foreground="#d9c7b3" FontWeight="Normal" Background="Transparent" HorizontalAlignment="Center" Grid.Row="2" Width="Auto" Height="35" VerticalAlignment="Top" Margin="0,0,0,0">
+            <!-- REVIEWS NUMBER -->
+            <TextBlock FontSize="16" Foreground="#d9c7b3" FontWeight="Medium" Background="Transparent" HorizontalAlignment="Center" Grid.Row="2" Width="Auto" Height="35" VerticalAlignment="Top" Margin="0,0,0,0">
                 <Run Text="{Binding ReviewsNumber}"/>
                 <Run Text="Reviews"/>
             </TextBlock>
 
-            <Border Background="#FF2A3922" Grid.Row="3" Grid.RowSpan="6" Width="420"  CornerRadius="20 20 20 20" Height="420" HorizontalAlignment="Center"/>
-
+            <!-- RATING DATA -->
             <Label FontSize="18" Grid.Row="4" Width="Auto" Height="35" HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Margin="70,0,0,0">Cleanliness:</Label>
             <Label FontSize="18" Grid.Row="5" Width="Auto" Height="35" HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Margin="70,0,0,0">Following rules:</Label>
-            <Slider x:Name="CleanlinessSlider" Minimum="1" Maximum="5" TickFrequency="0.1" AutoToolTipPlacement="BottomRight"   Width="120" Grid.Row="4" IsEnabled="False" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,130,0" Value="{Binding AverageCleanliness, Mode=OneWay}"></Slider>
-            <Slider x:Name="FollowingRulesSlider" Width="120" Minimum="1" Maximum="5" Grid.Row="5" IsEnabled="False" TickFrequency="0.1" HorizontalAlignment="Right" AutoToolTipPlacement="BottomRight" VerticalAlignment="Center" Margin="0,0,130,0"  Value="{Binding AverageFollowingRules, Mode=OneWay}"></Slider>
+            <Slider Opacity="0.5" x:Name="CleanlinessSlider" Minimum="1" Maximum="5" TickFrequency="0.1" AutoToolTipPlacement="BottomRight"   Width="120" Grid.Row="4" IsEnabled="False" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,130,0" Value="{Binding AverageCleanliness, Mode=OneWay}"></Slider>
+            <Slider Opacity="0.5" x:Name="FollowingRulesSlider" Width="120" Minimum="1" Maximum="5" Grid.Row="5" IsEnabled="False" TickFrequency="0.1" HorizontalAlignment="Right" AutoToolTipPlacement="BottomRight" VerticalAlignment="Center" Margin="0,0,130,0"  Value="{Binding AverageFollowingRules, Mode=OneWay}"></Slider>
+            <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Center" Grid.Row="4" Margin="0,0,70,0" Width="40" Height="24" FontSize="18">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Foreground" Value="#22301a"></Setter>
+                        <Setter Property="FontWeight" Value="Medium"></Setter>
+                        <Setter Property="Background">
+                            <Setter.Value>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                    <GradientStop Color="#37492d" Offset="0"/>
+                                    <GradientStop Color="#37492d" Offset="0.1"></GradientStop>
+                                    <GradientStop Color="#dbc9ab" Offset="0.4"/>
+                                    <GradientStop Color="#dbc9ab" Offset="0.5"/>
+                                    <GradientStop Color="#dbc9ab" Offset="0.6"/>
+                                    <GradientStop Color="#37492d" Offset="0.9"></GradientStop>
+                                    <GradientStop Color="#37492d" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Property="FontSize" Value="18"></Setter>
+                        <Setter Property="Text" Value="{Binding ElementName=CleanlinessSlider, Path=Value}" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ReviewsNumber}" Value="0">
+                                <Setter Property="Text" Value="" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+            <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Center" Grid.Row="5" Margin="0,0,70,0" Width="40" Height="24" FontSize="18">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Foreground" Value="#22301a"></Setter>
+                        <Setter Property="FontWeight" Value="Medium"></Setter>
+                        <Setter Property="Background">
+                            <Setter.Value>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                    <GradientStop Color="#37492d" Offset="0"/>
+                                    <GradientStop Color="#37492d" Offset="0.1"></GradientStop>
+                                    <GradientStop Color="#dbc9ab" Offset="0.4"/>
+                                    <GradientStop Color="#dbc9ab" Offset="0.5"/>
+                                    <GradientStop Color="#dbc9ab" Offset="0.6"/>
+                                    <GradientStop Color="#37492d" Offset="0.9"></GradientStop>
+                                    <GradientStop Color="#37492d" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Property="FontSize" Value="18"></Setter>
+                        <Setter Property="Text" Value="{Binding ElementName=FollowingRulesSlider, Path=Value}" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ReviewsNumber}" Value="0">
+                                <Setter Property="Text" Value="" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
             <Label FontSize="18" Grid.Row="6" Width="Auto" Height="35" HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Margin="70,0,0,0">Average ratings report:</Label>
-            <Button Grid.Row="6" HorizontalAlignment="Left" VerticalAlignment="Center" Height="35" Width="100" FontWeight="Bold" Margin="342,0,0,0" FontSize="18">Report</Button>
 
-            <Label FontSize="18" Grid.Row="8" Width="Auto" Height="35" HorizontalAlignment="Center" VerticalAlignment="Top" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Margin="0,0,0,0">Change of average ratings:</Label>
+            <!-- GENERATE REPORT BUTTON -->
+            <Button Grid.Row="6" HorizontalAlignment="Left" VerticalAlignment="Center" Height="35" Width="100" FontWeight="Bold" Margin="342,0,0,0" FontSize="18">
+                <Grid Background="#8c9d75" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="/Resources/Images/report.png" VerticalAlignment="Center" HorizontalAlignment="Right"  Margin="3,0,0,0" Width="Auto" Height="22" Grid.Column="1" RenderTransformOrigin="0.5,0.5">
+                    </Image>
+                    <TextBlock Background="#8c9d75" Text="Report" Grid.Column="0" VerticalAlignment="Center" FontSize="18"  Foreground="#22301a" Margin="10,0,0,0" FontWeight="Bold" HorizontalAlignment="Left" Width="58"/>
+                </Grid>
+            </Button>
 
-            <TextBlock Foreground="#d9c7b3" Text="{Binding ElementName=CleanlinessSlider,Path=Value}" HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Center" Background="#22301a" Grid.Row="4" Margin="0,0,70,0" Width="30" Height="24" FontSize="18"></TextBlock>
-            <TextBlock Foreground="#d9c7b3" Text="{Binding ElementName=FollowingRulesSlider,Path=Value}" HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Center" Background="#22301a" Grid.Row="5" Margin="0,0,70,0" Width="30" Height="24" FontSize="18"></TextBlock>
+            <!-- PLACE FOR DIAGRAM -->
+            <Label FontSize="16" Grid.Row="8" Width="Auto" Height="35" HorizontalAlignment="Center" VerticalAlignment="Top" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Margin="0,0,0,0">Change of average ratings (previous year)</Label>
+            <Image Source="/Resources/Images/diagram.png" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="8" Height="135" Width="140" Margin="0,40,0,0"/>
 
+            <Grid Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="8" Width="372" Height="164" Margin="0,40,0,0">
+                <lvc:CartesianChart Series="{Binding SeriesCollection}" LegendLocation="None">
+                    <lvc:CartesianChart.SeriesColors>
+                        <lvc:ColorsCollection>
+                            <Color>#dbc9ab</Color>
+                        </lvc:ColorsCollection>
+                    </lvc:CartesianChart.SeriesColors>
+                    <lvc:CartesianChart.AxisX>
+                        <lvc:Axis Labels="{Binding Labels}" Foreground="#dbc9ab" FontWeight="Medium" ShowLabels="True" MinValue="1" MaxValue="14">
+                            <lvc:Axis.Separator>
+                                <lvc:Separator Step="1">
+                                    <lvc:Separator.Resources>
+                                        <Style TargetType="lvc:Separator">
+                                            <Setter Property="StrokeThickness" Value="0"/>
+                                        </Style>
+                                    </lvc:Separator.Resources>
+                                </lvc:Separator>
+                            </lvc:Axis.Separator>
+                        </lvc:Axis>
+                    </lvc:CartesianChart.AxisX>
+                    <lvc:CartesianChart.AxisY>
+                        <lvc:Axis MinValue="0" Foreground="#dbc9ab" FontWeight="Medium">
+                            <lvc:Axis.Separator>
+                                <lvc:Separator>
+                                    <lvc:Separator.Resources>
+                                        <Style TargetType="lvc:Separator">
+                                            <Setter Property="StrokeThickness" Value="1"/>
+                                            <Setter Property="Stroke" Value="#dbc9ab"/>
+                                        </Style>
+                                    </lvc:Separator.Resources>
+                                </lvc:Separator>
+                            </lvc:Axis.Separator>
+                        </lvc:Axis>
+                    </lvc:CartesianChart.AxisY>
+                </lvc:CartesianChart>
+            </Grid>
         </Grid>
 
-        <Grid Grid.Column="1">
+
+        <!-- SECOND COLUMN -->
+        <Grid Grid.Column="1" Background="Transparent">
             <Grid.RowDefinitions>
-                <RowDefinition Height="2*"></RowDefinition>
+                <RowDefinition Height="3*"></RowDefinition>
                 <RowDefinition Height="16*"></RowDefinition>
             </Grid.RowDefinitions>
-            <Label FontSize="24" HorizontalAlignment="Center" FontFamily="Baskerville Old Face"  VerticalAlignment="Top" Height="43" Width="Auto" Margin="0,20,0,0">REVIEWS</Label>
 
+            <Border Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Width="470" BorderBrush="#22301a" BorderThickness="3"  CornerRadius="20 20 20 20" HorizontalAlignment="Center" Margin="0,10,0,10">
+                <Border.Effect>
+                    <DropShadowEffect ShadowDepth="0" BlurRadius="50"/>
+                </Border.Effect>
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="#FF2A3922" Offset="0"/>
+                        <GradientStop Color="#37492d" Offset="0.2"></GradientStop>
+                        <GradientStop Color="#37492d" Offset="0.4"/>
+                        <GradientStop Color="#37492d" Offset="0.5"/>
+                        <GradientStop Color="#37492d" Offset="0.6"/>
+                        <GradientStop Color="#37492d" Offset="0.8"></GradientStop>
+                        <GradientStop Color="#FF2A3922" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
 
+            <Label FontSize="24" HorizontalAlignment="Center" FontWeight="Bold" FontFamily="Baskerville Old Face"  VerticalAlignment="Top" Height="43" Width="Auto" Margin="0,50,0,0">REVIEWS</Label>
 
-            <DataGrid VerticalScrollBarVisibility="Auto" SelectedItem="{Binding Path=SelectedReview}" VerticalContentAlignment="Center" FontSize="16"  Width="450" Height="480"  HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Left"   IsReadOnly="True" UseLayoutRounding="False" HeadersVisibility="Column" Grid.Row="1" Grid.Column="0" Margin="20, 52, 20, 50" ItemsSource="{Binding Path=Guest1Reviews,Mode=OneWay}" AutoGenerateColumns="False" >
+            <!-- REVIEWS DATAGRID -->
+            <DataGrid VerticalScrollBarVisibility="Auto" SelectedItem="{Binding Path=SelectedReview}" VerticalContentAlignment="Center"  Width="450"  HorizontalAlignment="Center" HorizontalContentAlignment="Center" Grid.Row="1" ItemsSource="{Binding Path=Guest1Reviews,Mode=OneWay}" Height="474" VerticalAlignment="Center" >
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Owner" Width="2*">
                         <DataGridTextColumn.Binding>
@@ -177,10 +368,19 @@
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
-                    <DataGridTemplateColumn x:Name="Review" Header="Review details" Width="2.5*">
+                    <DataGridTemplateColumn x:Name="Review" Header="Review details" Width="120">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Name="ReviewButton" FontSize="16" FontWeight="DemiBold"  Background="#c99585" Content="Details" Command="{Binding DataContext.ShowReviewDetailsCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
+                                <Button Name="ReviewButton" FontSize="16" FontWeight="DemiBold"  Background="#c99585" Command="{Binding DataContext.ShowReviewDetailsCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}">
+                                    <Grid Background="#c99585" Width="120" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" >
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Image Source="/Resources/Images/info.png" HorizontalAlignment="Right" Margin="0,0,15,0" Width="Auto" Height="22" Grid.Column="1"/>
+                                        <TextBlock Background="#c99585" Text="Details" Grid.Column="0" VerticalAlignment="Center" FontSize="16" Margin="15,0,0,0"  Foreground="#22301a" FontWeight="Bold" HorizontalAlignment="Left" Width="60"/>
+                                    </Grid>
+                                </Button>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
@@ -189,10 +389,5 @@
 
         </Grid>
 
-
-
-
-
-        <Border Grid.Column="1" BorderThickness="1 0 1 0" Width="1" HorizontalAlignment="Left" BorderBrush="#22301a" />
     </Grid>
 </Page>

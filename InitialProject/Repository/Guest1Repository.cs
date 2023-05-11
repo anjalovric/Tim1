@@ -49,7 +49,7 @@ namespace InitialProject.Repository
             }
             return _guests.Max(c => c.Id) + 1;
         }
-        public void Update(Guest1 guest1) //dodati u irepozit., da li ovo treba u repozit?
+        public void Update(Guest1 guest1)
         {
             _guests = _serializer.FromCSV(FilePath);
             Guest1 current = _guests.Find(c => c.Id == guest1.Id);

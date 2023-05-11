@@ -15,6 +15,7 @@ namespace InitialProject.Model
         public string OwnerExplanationForDeclining { get; set; }
         public DateTime OldArrivalDate { get; set; }
         public DateTime OldDepartureDate { get; set; }
+        public DateTime CreatingRequestDate { get; set; }
 
         public ReschedulingAccommodationRequest() {
             Reservation = new AccommodationReservation();
@@ -31,6 +32,7 @@ namespace InitialProject.Model
             this.OldDepartureDate = Reservation.Departure;
             this.Reasons = Reasons;
             this.state = State.Pending;
+            this.CreatingRequestDate = DateTime.Now;
         }
 
         public void FromCSV(string[] values)
@@ -53,10 +55,11 @@ namespace InitialProject.Model
 
             if (state == State.Declined)
                 OwnerExplanationForDeclining = values[8];
+            CreatingRequestDate = Convert.ToDateTime(values[9]);
         }
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), Reservation.Id.ToString(), NewArrivalDate.ToString(), NewDepartureDate.ToString(), Reasons, state.ToString(),OldArrivalDate.ToString(), OldDepartureDate.ToString(), OwnerExplanationForDeclining};
+            string[] csvValues = { Id.ToString(), Reservation.Id.ToString(), NewArrivalDate.ToString(), NewDepartureDate.ToString(), Reasons, state.ToString(),OldArrivalDate.ToString(), OldDepartureDate.ToString(), OwnerExplanationForDeclining, CreatingRequestDate.ToString()};
             return csvValues;
         }
     }

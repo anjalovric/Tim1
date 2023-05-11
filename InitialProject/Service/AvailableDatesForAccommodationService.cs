@@ -10,10 +10,12 @@ namespace InitialProject.Service
     public class AvailableDatesForAccommodationService
     {
         private List<AccommodationReservation> reservations;
+        private AccommodationRenovationService renovationService;
         public AvailableDatesForAccommodationService()
         {
             AccommodationReservationService accommodationReservationService = new AccommodationReservationService();
             reservations = accommodationReservationService.GetAll();
+            renovationService = new AccommodationRenovationService();
         }
 
         public bool IsAvailableInDateRange(AccommodationReservation reservation, DateTime startDate, DateTime endDate)
@@ -34,12 +36,12 @@ namespace InitialProject.Service
             {
                 bool isSameAccommodation = reservation.Accommodation.Id == reservationToCheck.Accommodation.Id;
                 bool isSameReservation = reservation.Id == reservationToCheck.Id;
+                bool isInRenovation = renovationService.IsRenovationOnDate(reservation.Accommodation, date);
                 if (isSameAccommodation && !isSameReservation)
-                    isAvailable = isAvailable && !(date.Date >= reservation.Arrival.Date && date.Date <= reservation.Departure.Date);
+                    isAvailable = isAvailable && !(date.Date >= reservation.Arrival.Date && date.Date <= reservation.Departure.Date) && !isInRenovation;
             }
             return isAvailable;
         }
-
         public void GetAllYearsWithRequests(Accommodation accommodation, HashSet<int> years)
         {
             ReschedulingAccommodationRequestService requestService = new ReschedulingAccommodationRequestService(); 
@@ -48,7 +50,6 @@ namespace InitialProject.Service
                 years.Add(request.Reservation.Arrival.Year);
             }
         }
-
         public void GetAllYearsWithCancellations(Accommodation accommodation, HashSet<int> years)
         {
             CancelledAccommodationReservationService cancelledReservationService = new CancelledAccommodationReservationService();
@@ -66,7 +67,6 @@ namespace InitialProject.Service
                 years.Add(reservation.Arrival.Year);
             }
         }
-
         public void GetAllYearsWithRenovationSuggestions(Accommodation accommodation, HashSet<int> years)
         {
             AccommodationRenovationSuggestionService suggestionService = new AccommodationRenovationSuggestionService();
@@ -94,7 +94,6 @@ namespace InitialProject.Service
                 ranges = GetWithoutReservations(startDate, endDate, duration, accommodation);
             return ranges;
         }
-
         private List<AvailableDatesForAccommodation> GetWithoutReservations(DateTime startDate, DateTime endDate, int duration, Accommodation accommodation)
         {
             List<AvailableDatesForAccommodation> ranges = new List<AvailableDatesForAccommodation>();

@@ -1,12 +1,12 @@
 ﻿using InitialProject.Model;
 using InitialProject.Service;
 using Microsoft.Win32;
-using Org.BouncyCastle.Asn1.Mozilla;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows;
 using System.Windows.Media.Imaging;
 
 namespace InitialProject.WPF.ViewModels.GuideViewModels
@@ -62,6 +62,20 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
                 if (value != namet)
                 {
                     namet = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private string pastError;
+        public string PastError
+
+        {
+            get => pastError;
+            set
+            {
+                if (value != pastError)
+                {
+                    pastError = value;
                     OnPropertyChanged();
                 }
             }
@@ -250,6 +264,32 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
                 }
             }
         }
+        private int pointsCount;
+        public int PointsCount
+        {
+            get => pointsCount;
+            set
+            {
+                if (value != pointsCount)
+                {
+                    pointsCount = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private int datesCount;
+        public int DatesCount
+        {
+            get => datesCount;
+            set
+            {
+                if (value != datesCount)
+                {
+                    datesCount = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         public Uri relativeUri { get; set; }
 
         private List<TourImage> images = new List<TourImage>();
@@ -265,7 +305,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         public RelayCommand PreviousImageCommand { get; set; }
         public RelayCommand AddImageCommand { get; set; }   
         public RelayCommand DeleteCheckPointCommand { get; set; }
-
+        public RelayCommand EnableCityCommand { get; set; }
         public RelayCommand OkToastCommand { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -281,16 +321,21 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             TodayInstances = todayInstances;
             FutureInstances = futureInstances;
             loggedInUser = user;
+            SetStartState();
+        }
+        private void SetStartState()
+        {
             AddLanguages();
             Toast = "Hidden";
             isErrorMessageVisible = "Hidden";
             MakeCommands();
             MakeListOfLocations();
-            Start=DateTime.Now;
-            Date= DateTime.Now;
+            Start = DateTime.Now;
+            Date = DateTime.Now;
             IsAvailable = "Hidden";
+            DatesCount = 0;
+            PointsCount = 0;
         }
-
         private void MakeListOfLocations()
         {
             LocationService locationService = new LocationService();
@@ -325,6 +370,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             AddImageCommand = new RelayCommand(AddTourImage_Executed, CanExecute);
             DeleteCheckPointCommand = new RelayCommand(CancelCheckPoint_Executed, CanExecute);
             OkToastCommand=new RelayCommand(OkToast_Executed , CanExecute);
+            EnableCityCommand= new RelayCommand(EnableCityComboBox_Executed, CanExecute);
         }
         private void Confirm_Executed(object sender)
         {
@@ -368,7 +414,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             TourImage newImage = new TourImage(relative,-1);
             images.Add(newImage);
         }
-        public void ComboBoxCountry_SelectionChanged()
+        public void EnableCityComboBox_Executed(object sender)
         {
             LocationService locationService = new LocationService();
             if (Country != null)
@@ -396,12 +442,19 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
                 Instances.Add(newInstance);
                 IsErrorMessageVisible = "Hidden";
                 IsAvailable = "Hidden";
+                DatesCount++;
             }       
         }
         private bool IsTimeValid()
         {
             if (!(newInstance.StartDate.Date > DateTime.Now.Date || (InstanceStartDate.Date == DateTime.Now.Date && InstanceStartDate > DateTime.Now)))
             {
+                var app = (App)Application.Current;
+                if (app.Lang.Equals("en-US"))
+                    PastError = "Can't choose time from past";
+                else
+                    PastError = "Ne možete odabrati prošlo vreme";
+
                 IsErrorMessageVisible = "Visible";
                 return false;
             }
@@ -421,18 +474,23 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         {
             if (selectedInstance != null)
                 Instances.Remove(selectedInstance);
+            DatesCount--;
         }
         private void OKCheckPoint_Executed(object sender)
         {
-               CheckPointService checkPointService = new CheckPointService();
-               CheckPoint newCheckPoint = new CheckPoint(NameT, false, -1, -1);
-               TourPoints.Add(newCheckPoint);
-               NameT = "";
+            if (!NameT.Equals("") && NameT.Length>1)
+            {
+                CheckPoint newCheckPoint = new CheckPoint(NameT, false, -1, -1);
+                TourPoints.Add(newCheckPoint);
+                NameT = "";
+                PointsCount++;
+            }
         }
         private void CancelCheckPoint_Executed(object sender)
         {
             if (SelectedCheckPoint != null)
                 TourPoints.Remove(SelectedCheckPoint);
+                PointsCount--;
         }
         private void NextImage_Executed(object sender)
         {

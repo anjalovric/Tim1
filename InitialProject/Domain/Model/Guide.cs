@@ -7,13 +7,11 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Model
 {
-    public class Guide:ISerializable
+    public class Guide: User, ISerializable
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public string LastName { get; set; }
-        public string Username { get; set; }
-
 
         public Guide() { }
         public Guide(string name, string lastName,string username)

@@ -19,14 +19,31 @@
 
     <None Remove="Resources\Images\accommodation.jpg" />
     <None Remove="Resources\Images\account.png" />
+    <None Remove="Resources\Images\account1.png" />
+    <None Remove="Resources\Images\Acropolis.jpg" />
     <None Remove="Resources\Images\add-new.png" />
     <None Remove="Resources\Images\add.png" />
     <None Remove="Resources\Images\addBW.png" />
+    <None Remove="Resources\Images\air.jpg" />
     <None Remove="Resources\Images\analytics.png" />
     <None Remove="Resources\Images\andjelkina-kapija.jpg" />
+    <None Remove="Resources\Images\arrow-58-xxl.png" />
+    <None Remove="Resources\Images\art1.jpg" />
+    <None Remove="Resources\Images\art2.jpg" />
+    <None Remove="Resources\Images\art3.jpeg" />
     <None Remove="Resources\Images\athens.jpg" />
     <None Remove="Resources\Images\back.png" />
+    <None Remove="Resources\Images\Belgrade.png" />
+    <None Remove="Resources\Images\Belgrade1.png" />
     <None Remove="Resources\Images\bell.png" />
+    <None Remove="Resources\Images\best1.jpeg" />
+    <None Remove="Resources\Images\best2.jpg" />
+
+    <None Remove="Resources\Images\buildings.png" />
+
+    <None Remove="Resources\Images\buildings1.png" />
+    <None Remove="Resources\Images\Bus.jpg" />
+
     <None Remove="Resources\Images\calend.png" />
     <None Remove="Resources\Images\calendarIcon.png" />
 
@@ -34,10 +51,21 @@
     <None Remove="Resources\Images\cancel.png" />
 
     <None Remove="Resources\Images\CANC.png" />
+
+    <None Remove="Resources\Images\cancel1.png" />
     <None Remove="Resources\Images\CG.png" />
+    <None Remove="Resources\Images\changedate.png" />
+
+    <None Remove="Resources\Images\choose.png" />
+    <None Remove="Resources\Images\choose1.png" />
+    <None Remove="Resources\Images\church.jpg" />
+    <None Remove="Resources\Images\clear.png" />
+
     <None Remove="Resources\Images\clock.png" />
+    <None Remove="Resources\Images\close.png" />
     <None Remove="Resources\Images\congratulations.png" />
     <None Remove="Resources\Images\congratulations2.png" />
+    <None Remove="Resources\Images\congratulations3.png" />
     <None Remove="Resources\Images\continue.png" />
     <None Remove="Resources\Images\corect.png" />
     <None Remove="Resources\Images\black.jpeg" />
@@ -46,13 +74,29 @@
 
     <None Remove="Resources\Images\calendar.png" />
 
+    <None Remove="Resources\Images\cottage1.jpg" />
+
+    <None Remove="Resources\Images\cottage3.jpeg" />
+
     <None Remove="Resources\Images\dates.png" />
 
     <None Remove="Resources\Images\datetime.png" />
 
     <None Remove="Resources\Images\decline.jpg" />
 
+    <None Remove="Resources\Images\declineImage.jpg" />
+
     <None Remove="Resources\Images\done.png" />
+
+    <None Remove="Resources\Images\doneNew.png" />
+
+    <None Remove="Resources\Images\dreams1.jpeg" />
+
+    <None Remove="Resources\Images\dreams2.jpeg" />
+
+    <None Remove="Resources\Images\dreams3.jpeg" />
+
+    <None Remove="Resources\Images\dreams4.jpeg" />
 
     <None Remove="Resources\Images\exclamation.png" />
 
@@ -64,22 +108,33 @@
 
     <None Remove="Resources\Images\goldStar1.png" />
 
+    <None Remove="Resources\Images\green.png" />
+
     <None Remove="Resources\Images\greenCorect.png" />
 
     <None Remove="Resources\Images\guest1Menu.jpeg" />
+
+    <None Remove="Resources\Images\hand.png" />
 
 
     
     
     <None Remove="Resources\Images\help.png" />
     <None Remove="Resources\Images\home.png" />
+    <None Remove="Resources\Images\homeanja1.jpeg" />
+    <None Remove="Resources\Images\homeanja2.jpg" />
+    <None Remove="Resources\Images\homeanja3.jpeg" />
+    <None Remove="Resources\Images\homeanja4.jpg" />
     <None Remove="Resources\Images\house1.png" />
     <None Remove="Resources\Images\icons8-christmas-star-96.png" />
+    <None Remove="Resources\Images\info-3-xl.png" />
 
     <None Remove="Resources\Images\info.png" />
     <None Remove="Resources\Images\januar.png" />
 
     <None Remove="Resources\Images\information.png" />
+
+    <None Remove="Resources\Images\Kalemegdan.png" />
     <None Remove="Resources\Images\location.jpg" />
     <None Remove="Resources\Images\icons8-delete-67.png" />
     <None Remove="Resources\Images\icons8-notification-64.png" />
@@ -88,6 +143,7 @@
     <None Remove="Resources\Images\icons8-upload-64.png" />
     <None Remove="Resources\Images\img_exit.png" />
     <None Remove="Resources\Images\img_home.png" />
+    <None Remove="Resources\Images\locations.png" />
     <None Remove="Resources\Images\LOGO %282%29.jpg" />
     <None Remove="Resources\Images\logo.jpg" />
     <None Remove="Resources\Images\logoMyTravel.png" />
@@ -95,29 +151,69 @@
     <None Remove="Resources\Images\minus.png" />
     <None Remove="Resources\Images\month.png" />
     <None Remove="Resources\Images\museum.jpg" />
+    <None Remove="Resources\Images\nature1.jpg" />
+    <None Remove="Resources\Images\nature2.png" />
+    <None Remove="Resources\Images\nature3.jpeg" />
+    <None Remove="Resources\Images\nature4.jpeg" />
+    <None Remove="Resources\Images\newDelete.png" />
     <None Remove="Resources\Images\no.png" />
+    <None Remove="Resources\Images\noImage.png" />
+    <None Remove="Resources\Images\noPhoto.png" />
     <None Remove="Resources\Images\notes.png" />
+    <None Remove="Resources\Images\nothing.png" />
 
     <None Remove="Resources\Images\ok.png" />
 
     <None Remove="Resources\Images\newLogo.jpg" />
 
+    <None Remove="Resources\Images\olive.jpg" />
+
     <None Remove="Resources\Images\orange.jpg" />
+
+    <None Remove="Resources\Images\pdf.png" />
+
+    <None Remove="Resources\Images\picture.png" />
     <None Remove="Resources\Images\plus.png" />
     <None Remove="Resources\Images\profile.png" />
+    <None Remove="Resources\Images\profile11.png" />
     <None Remove="Resources\Images\qm.png" />
+    <None Remove="Resources\Images\rain.jpg" />
+    <None Remove="Resources\Images\raining.jpg" />
+    <None Remove="Resources\Images\rate.png" />
+    <None Remove="Resources\Images\rating.png" />
     <None Remove="Resources\Images\Red-incorrect-icon-design-on-transparent-background-PNG.png" />
     <None Remove="Resources\Images\red.jpg" />
+    <None Remove="Resources\Images\redflat1.jpg" />
+    <None Remove="Resources\Images\redflat2.jpg" />
+    <None Remove="Resources\Images\redflat3.jpg" />
     <None Remove="Resources\Images\redIncorect.png" />
+    <None Remove="Resources\Images\ren.png" />
+    <None Remove="Resources\Images\renov.png" />
+    <None Remove="Resources\Images\renovate.png" />
+
+    <None Remove="Resources\Images\renovation %281%29.png" />
+    <None Remove="Resources\Images\renovation.png" />
+    <None Remove="Resources\Images\renovation2.jpg" />
     <None Remove="Resources\Images\report.png" />
     <None Remove="Resources\Images\request.png" />
+    <None Remove="Resources\Images\reschedule.png" />
     <None Remove="Resources\Images\reserve.png" />
+    <None Remove="Resources\Images\reset.png" />
+    <None Remove="Resources\Images\reviewImage.jpg" />
     <None Remove="Resources\Images\RR.png" />
+    <None Remove="Resources\Images\RubbishStreet.png" />
     <None Remove="Resources\Images\search.png" />
     <None Remove="Resources\Images\sent2.png" />
+    <None Remove="Resources\Images\sent51.png" />
     <None Remove="Resources\Images\signout.png" />
+    <None Remove="Resources\Images\signOut21.png" />
     <None Remove="Resources\Images\signOutIcon.png" />
     <None Remove="Resources\Images\sky.jpg" />
+    <None Remove="Resources\Images\stars.png" />
+    <None Remove="Resources\Images\star_yellow.png" />
+    <None Remove="Resources\Images\success.png" />
+    <None Remove="Resources\Images\star1.png" />
+    <None Remove="Resources\Images\stars2.jpeg" />
     <None Remove="Resources\Images\suggestion.png" />
     <None Remove="Resources\Images\superOwner.png" />
     <None Remove="Resources\Images\tasks.png" />
@@ -147,16 +243,23 @@
     <None Remove="Resources\Images\sent.png" />
     <None Remove="Resources\Images\signout.png" />
     <None Remove="Resources\Images\star.png" />
+    <None Remove="Resources\Images\toolImage.png" />
     <None Remove="Resources\Images\tools.png" />
     <None Remove="Resources\Images\tour.jpg" />
+    <None Remove="Resources\Images\touristicGroup.jpg" />
     <None Remove="Resources\Images\transparentGREEN.jpg" />
     <None Remove="Resources\Images\transparentRED.png" />
     <None Remove="Resources\Images\trebinje.jpg" />
     <None Remove="Resources\Images\user-male-circle.png" />
     <None Remove="Resources\Images\user.jpg" />
     <None Remove="Resources\Images\User_icon_2.svg.png" />
+    <None Remove="Resources\Images\vacation1.png" />
     <None Remove="Resources\Images\view.png" />
     <None Remove="Resources\Images\voucher.png" />
+    <None Remove="Resources\Images\wish1.jpeg" />
+    <None Remove="Resources\Images\wish2.jpg" />
+    <None Remove="Resources\Images\wish3.jpg" />
+    <None Remove="Resources\Images\wish4.jpg" />
     <None Remove="Resources\Images\yearly.png" />
   </ItemGroup>
 
@@ -164,11 +267,40 @@
     <Content Include="Resources\Images\365day.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Images\Acropolis.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Images\add-new.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Images\air.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Images\analytics.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+
+    <Content Include="Resources\Images\Belgrade.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\Belgrade1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\Bus.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\church.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\arrow-58-xxl.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\clear.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\close.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+
     </Content>
 
     <Content Include="Resources\Images\congratulations.png">
@@ -177,6 +309,106 @@
     <Content Include="Resources\Images\congratulations2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Images\declineImage.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+
+    <Content Include="Resources\Images\Kalemegdan.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\doneNew.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\info-3-xl.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+
+    </Content>
+    <Content Include="Resources\Images\newDelete.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\noPhoto.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\pdf.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\picture.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+
+    <Content Include="Resources\Images\rain.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\raining.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\reviewImage.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\RubbishStreet.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\touristicGroup.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\vacation1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="Resources\Images\account1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\anytime.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+
+    <Resource Include="Resources\Images\art1.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\art2.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\art3.jpeg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\best1.jpeg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\best2.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\buildings1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\cancel1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\changedate.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\cottage1.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\cottage3.jpeg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\dreams1.jpeg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\dreams2.jpeg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\dreams3.jpeg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\dreams4.jpeg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\hand.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\homeanja4.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Content Include="Resources\Images\information.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -308,6 +540,9 @@
     <Content Include="Resources\Images\museum.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Images\noImage.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
 
 
     <Content Include="Resources\Images\ok.png">
@@ -318,6 +553,12 @@
 
 
     </Content>
+    <Content Include="Resources\Images\renovation.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\renovation2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Images\report.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -326,6 +567,15 @@
     </Content>
     <Content Include="Resources\Images\sky.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\star_yellow.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\success.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\toolImage.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\tour.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -455,12 +705,24 @@
     <Resource Include="Resources\Images\flowers.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\Images\green.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Images\guest1Menu.jpeg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Content Include="Resources\Images\newLogo.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Resources\Images\homeanja1.jpeg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\homeanja2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\homeanja3.jpeg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Images\house1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
@@ -470,7 +732,22 @@
     <Resource Include="Resources\Images\januar.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\Images\locations.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Images\medal.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\nature1.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\nature2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\nature3.jpeg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\nature4.jpeg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\no.png">
@@ -479,19 +756,60 @@
     <Resource Include="Resources\Images\notes.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\Images\nothing.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\olive.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Images\orange.jpg" />
+    <Resource Include="Resources\Images\profile11.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Images\qm.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\Images\rate.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\rating.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Images\red.jpg" />
+    <Resource Include="Resources\Images\redflat1.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\redflat2.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\redflat3.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+
+    <Resource Include="Resources\Images\ren.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\renov.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\renovate.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+
+    <Resource Include="Resources\Images\renovation (1).png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\reschedule.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\reset.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Images\search.png" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="Resources\Images\accommodation.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Images\account.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\bell.png" />
@@ -504,12 +822,39 @@
     <Resource Include="Resources\Images\sent2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\Images\sent51.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Images\signout.png" />
+    <Resource Include="Resources\Images\signOut21.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\star1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\stars.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\stars2.jpeg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Images\superOwner.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\user.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\wish1.jpeg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\wish2.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\wish3.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\wish4.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
 
@@ -520,6 +865,21 @@
     <Content Include="Resources\Images\voucher.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>

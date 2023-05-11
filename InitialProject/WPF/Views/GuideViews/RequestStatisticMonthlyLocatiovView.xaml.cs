@@ -25,7 +25,7 @@ namespace InitialProject.WPF.Views.GuideViews
         public RequestStatisticMonthlyLocatiovView(Location location, GuideOneYearRequestStatisticViewModel year)
         {
             InitializeComponent();
-            DataContext = new MonthlyRequestStatisticLocationViewModel(location, year);
+            DataContext = new RequestStatisticMonthlyLocationViewModel(location, year);
         }
     }
 }

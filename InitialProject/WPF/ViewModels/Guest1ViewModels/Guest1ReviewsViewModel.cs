@@ -11,13 +11,18 @@ using System.Windows.Media.Imaging;
 using InitialProject.Model;
 using InitialProject.Service;
 using InitialProject.WPF.Views.Guest1Views;
+using LiveCharts;
+using LiveCharts.Wpf;
 
 namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 {
     public class Guest1ReviewsViewModel :INotifyPropertyChanged
     {
         private Guest1 guest1;
+        private DateTime currentDate;
         GuestReviewService guestReviewService;
+        public List<string> Labels { get; set; }
+        public SeriesCollection SeriesCollection { get; set; }
         public double AverageCleanliness { get; set; }
         public int ReviewsNumber { get; set; }
         public double AverageFollowingRules { get; set; }
@@ -36,21 +41,39 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 
         }
         public GuestReview SelectedReview { get; set; }
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
         public RelayCommand ShowReviewDetailsCommand { get; set; }
         public Guest1ReviewsViewModel(Guest1 guest1)
         {
             this.guest1 = guest1;
             guestReviewService = new GuestReviewService();
             Guest1Reviews = new ObservableCollection<GuestReview>(guestReviewService.GetAllToDisplay(guest1));
+            currentDate = DateTime.Now;
+            SetChartData();
             SetRatings();
-            ShowReviewDetailsCommand = new RelayCommand(ShowReviewDetails_Executed, CanExecute);
-            
+            ShowReviewDetailsCommand = new RelayCommand(ShowReviewDetails_Executed, CanExecute);     
+        }
+        private void SetChartData()
+        {
+            GuestAverageReviewService guestAverageReviewService = new GuestAverageReviewService();
+            List<double> values = new List<double>();
+            Labels = new List<string>();
+            DateTime lastYear = currentDate.AddMonths(-13);
+            while (lastYear <= currentDate)
+            {
+                values.Add(guestAverageReviewService.GetAverageRatingByMonth(lastYear, guest1, currentDate));
+                Labels.Add(lastYear.ToString("MMM").ToUpper());
+                lastYear = lastYear.AddMonths(1);
+            }
+            SeriesCollection = new SeriesCollection();
+            ColumnSeries columnSeries = new ColumnSeries();
+            columnSeries.Values = new ChartValues<double>();
+            for (int i = 0; i < values.Count; i++)
+            {
+                ChartValues<double> columnValues = new ChartValues<double> { values[i] };
+                columnSeries.Values.Add(values[i]);
+                columnSeries.Title = "Average rating";
+            }
+            SeriesCollection.Add(columnSeries);
         }
         private bool CanExecute(object sender)
         {
@@ -62,7 +85,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = view;
 
         }
-
         private void SetRatings()
         {
             GuestAverageReviewService guestAverageReviewService = new GuestAverageReviewService();
@@ -73,6 +95,10 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             AverageCleanliness = Math.Round(AverageCleanliness, 1);
             AverageFollowingRules = Math.Round(AverageFollowingRules, 1);
         }
-        
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

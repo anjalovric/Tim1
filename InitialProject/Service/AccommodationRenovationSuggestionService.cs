@@ -36,10 +36,7 @@ namespace InitialProject.Service
             return suggestionsByAccommodation;
         }
 
-        public AccommodationRenovationSuggestion GetById(int id)
-        {
-            return renovationSuggestionRepository.GetById(id);
-        }
+        
         public void Add(AccommodationRenovationSuggestion suggestion)
         {
             renovationSuggestionRepository.Add(suggestion);
@@ -64,4 +61,3 @@ namespace InitialProject.Service
         }
     }
 }
-//napuniti rezervacije

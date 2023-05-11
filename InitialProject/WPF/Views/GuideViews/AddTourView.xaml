@@ -5,12 +5,14 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:tk="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit.NET5" 
       xmlns:local="clr-namespace:InitialProject.WPF.Views.GuideViews"
+      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+      xmlns:ns="clr-namespace:InitialProject"
       xmlns:val="clr-namespace:InitialProject.WPF.Validations.GuideValidations" 
       xmlns:viewmodels="clr-namespace:InitialProject.WPF.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:TourInstanceReviewViewModel}"
       xmlns:sys="clr-namespace:System;assembly=mscorlib"
       mc:Ignorable="d" 
       d:DesignHeight="717" d:DesignWidth="1100"
-      Title="AddTourView">
+      Title="{ns:Loc AddTourView}">
     <Grid Style="{DynamicResource Background}">
         <Grid.RowDefinitions>
             <RowDefinition Height="1.8*"/>
@@ -25,7 +27,7 @@
 
         <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Style="{DynamicResource BackgroundHeader}">
             <!--TITLE-->
-            <Label Content="TOUR FORM" Style="{DynamicResource Header}"  Grid.Column="0" VerticalAlignment="Center" Width="252" HorizontalAlignment="Left" Margin="453,0,0,0"/>
+            <Label Content="{ns:Loc TourForm}" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Style="{DynamicResource Header}"  Grid.Column="0" VerticalAlignment="Center" Width="400" />
             <Image Source="/Resources/Images/LOGO (2).jpg" Margin="0,0,905,0"/>
         </Grid>
         <Border Style="{DynamicResource Border}" Grid.Row="1" Grid.Column="1">
@@ -65,20 +67,20 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Label Grid.Row="0" Grid.Column="0" Margin="0,10,0,10"  Style="{DynamicResource  Label}">Name *</Label>
-                    <Label Grid.Row="1" Grid.Column="0" Margin="0,10,0,10"  Style="{DynamicResource  Label}">Maximum number of guests *</Label>
-                    <Label Grid.Row="2" Grid.Column="0" Margin="0,10,0,10"  Style="{DynamicResource  Label}">Duration of tour in hours *</Label>
-                    <Label Grid.Row="4" Grid.Column="0" Margin="0,10,0,10"  Style="{DynamicResource  Label}">City *</Label>
-                    <Label Grid.Row="3" Grid.Column="0" Margin="0,12,0,8"  Style="{DynamicResource  Label}">Country *</Label>
-                    <Label Grid.Row="6" Grid.Column="0" Margin="0,6,0,14"  Style="{DynamicResource  Label}">Description *</Label>
-                    <Label Grid.Row="5" Grid.Column="0" Margin="0,10,0,10"  Style="{DynamicResource  Label}">Language *</Label>
+                    <Label Grid.Row="0" Grid.Column="0" Margin="0,10,0,10"  Style="{DynamicResource  Label}" Content="{ns:Loc Name}"/>
+                    <Label Grid.Row="1" Grid.Column="0" Margin="0,10,0,10"  Style="{DynamicResource  Label}" Content="{ns:Loc Capacity}"/>
+                    <Label Grid.Row="2" Grid.Column="0" Margin="0,10,0,10"  Style="{DynamicResource  Label}" Content="{ns:Loc DurationInHours}"/>
+                    <Label Grid.Row="4" Grid.Column="0" Margin="0,10,0,10"  Style="{DynamicResource  Label}" Content="{ns:Loc City}"/>
+                    <Label Grid.Row="3" Grid.Column="0" Margin="0,12,0,8"  Style="{DynamicResource  Label}" Content="{ns:Loc Country}"/>
+                    <Label Grid.Row="6" Grid.Column="0" Margin="0,3,0,17"  Style="{DynamicResource  Label}" Content="{ns:Loc Description}"/>
+                    <Label Grid.Row="5" Grid.Column="0" Margin="0,10,0,10"  Style="{DynamicResource  Label}" Content="{ns:Loc Language}"/>
 
 
-                    <TextBox x:Name="TourNameTB" Grid.Row="0" Grid.Column="1"  Margin="0,10,0,10" Style="{DynamicResource tb}">
+                    <TextBox x:Name="TourNameTB" Grid.Row="0" Grid.Column="1"  Margin="0,10,0,10" Style="{DynamicResource tb}" VerticalContentAlignment="Center">
                         <TextBox.Text>
-                            <Binding Path="NameTU" UpdateSourceTrigger="PropertyChanged">
+                            <Binding Path="NameTU" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
                                 <Binding.ValidationRules>
-                                    <val:StringTourNameValidationRule  ValidationStep="RawProposedValue"></val:StringTourNameValidationRule>
+                                    <val:StringTourNameValidationRule ValidatesOnTargetUpdated="True" ValidationStep="RawProposedValue"></val:StringTourNameValidationRule>
                                 </Binding.ValidationRules>
                             </Binding>
                         </TextBox.Text>
@@ -102,26 +104,42 @@
                     </TextBox>
 
 
-                    <tk:IntegerUpDown Style="{DynamicResource  i}" x:Name="MaxGuestsTB"  Grid.Row="1" Grid.Column="1"  Margin="0,10,0,10" Text="{Binding MaxGuests}" Minimum="1"  AllowTextInput="True">
+                    <tk:IntegerUpDown Style="{DynamicResource  i}" HorizontalContentAlignment="Left" x:Name="MaxGuestsTB"  Grid.Row="1" Grid.Column="1"  Margin="0,10,0,10"  Minimum="1"  AllowTextInput="True">
+                        <tk:IntegerUpDown.Text>
+                            <Binding Path="MaxGuests" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
+                                <Binding.ValidationRules>
+                                    <val:StringToIntegerValidationRule ValidatesOnTargetUpdated="True" ValidationStep="RawProposedValue"></val:StringToIntegerValidationRule>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </tk:IntegerUpDown.Text>
+                        <Validation.ErrorTemplate>
+                            <ControlTemplate>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
 
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
+                                    <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent,UpdateSourceTrigger=PropertyChanged}" Foreground="Red"/>
+                                </Grid>
+                            </ControlTemplate>
+                        </Validation.ErrorTemplate>
                     </tk:IntegerUpDown>
 
 
-                    <tk:DoubleUpDown x:Name="DurationTB" Style="{DynamicResource d}"  Grid.Row="2" Grid.Column="1" Margin="0,10,0,10" Text="{Binding Duration}" Minimum="0.1" AllowTextInput="True" >
-                    </tk:DoubleUpDown>
-
-
-                    <ComboBox Style="{DynamicResource ComboBoxStyle}" x:Name="ComboBoxCity" ItemsSource="{Binding CitiesByCountry}" SelectedItem="{Binding City}"  IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" Grid.Row="4" Grid.Column="1" Margin="0,10,0,10" IsEnabled="{Binding IsComboBoxCityEnabled}"/>
-
-
-                    <TextBox Style="{DynamicResource tb}" x:Name="DescriptionTB" Grid.Row="6" Margin="187,6,0,-26" Grid.ColumnSpan="2">
-                        <TextBox.Text>
-                            <Binding Path="Description" UpdateSourceTrigger="PropertyChanged">
+                    <tk:DoubleUpDown x:Name="DurationTB" Style="{DynamicResource d}"  Grid.Row="2" Grid.Column="1" Margin="0,10,0,10"  Minimum="0.1" AllowTextInput="True" >
+                        <tk:DoubleUpDown.Text>
+                            <Binding Path="Duration" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
                                 <Binding.ValidationRules>
-                                    <val:DescriptionStringValidation  ValidationStep="RawProposedValue"></val:DescriptionStringValidation>
+                                    <val:StringToDoubleValidation ValidatesOnTargetUpdated="True" ValidationStep="RawProposedValue"></val:StringToDoubleValidation>
                                 </Binding.ValidationRules>
                             </Binding>
-                        </TextBox.Text>
+                        </tk:DoubleUpDown.Text>
                         <Validation.ErrorTemplate>
                             <ControlTemplate>
                                 <Grid>
@@ -139,19 +157,121 @@
                                 </Grid>
                             </ControlTemplate>
                         </Validation.ErrorTemplate>
-                    </TextBox>
+                    </tk:DoubleUpDown>
 
-                    <ComboBox Style="{DynamicResource ComboBoxStyle}" Grid.Row="5" ItemsSource="{Binding Languages}" Height="30" Grid.Column="1" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" SelectedItem="{Binding Path=LanguageT}" >
 
-                    </ComboBox>
-                    <ComboBox Style="{DynamicResource ComboBoxStyle}" x:Name="ComboBoxCountry" ItemsSource="{Binding Countries}"  IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" Grid.Row="3" Grid.Column="1" Margin="0,9,0,12" SelectionChanged="ComboBoxCountry_SelectionChanged">
+                    <ComboBox Style="{DynamicResource ComboBoxStyle}" x:Name="ComboBoxCity" ItemsSource="{Binding CitiesByCountry}"  IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" Grid.Row="4" Grid.Column="1" Margin="0,10,0,10" IsEnabled="{Binding IsComboBoxCityEnabled}">
                         <ComboBox.SelectedItem>
-                            <Binding Path="Country" UpdateSourceTrigger="PropertyChanged">
+                            <Binding Path="City" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
                                 <Binding.ValidationRules>
-                                    <val:DescriptionStringValidation  ValidationStep="RawProposedValue"></val:DescriptionStringValidation>
+                                    <val:DescriptionStringValidation ValidatesOnTargetUpdated="True"  ValidationStep="RawProposedValue"></val:DescriptionStringValidation>
                                 </Binding.ValidationRules>
                             </Binding>
                         </ComboBox.SelectedItem>
+                        <Validation.ErrorTemplate>
+                            <ControlTemplate>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
+                                    <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                                </Grid>
+                            </ControlTemplate>
+                        </Validation.ErrorTemplate>
+                    </ComboBox>
+
+
+                    <TextBox Style="{DynamicResource tb}" x:Name="DescriptionTB" Grid.Row="6" Margin="2,27,0,-38" Grid.ColumnSpan="2" TextWrapping="Wrap">
+                        <TextBox.Text>
+                            <Binding Path="Description" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <val:DescriptionStringValidation ValidatesOnTargetUpdated="True" ValidationStep="RawProposedValue"></val:DescriptionStringValidation>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                        <Validation.ErrorTemplate>
+                            <ControlTemplate>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
+                                    <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red" />
+                                </Grid>
+                            </ControlTemplate>
+                        </Validation.ErrorTemplate>
+                    </TextBox>
+
+                    <ComboBox Style="{DynamicResource ComboBoxStyle}" x:Name="LanguageComboBox" Grid.Row="5" ItemsSource="{Binding Languages}" Height="30" Grid.Column="1" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" >
+                        <ComboBox.SelectedItem>
+                            <Binding Path="LanguageT" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
+                                <Binding.ValidationRules>
+                                    <val:DescriptionStringValidation ValidatesOnTargetUpdated="True"  ValidationStep="RawProposedValue"></val:DescriptionStringValidation>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </ComboBox.SelectedItem>
+                        <Validation.ErrorTemplate>
+                            <ControlTemplate>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
+                                    <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                                </Grid>
+                            </ControlTemplate>
+                        </Validation.ErrorTemplate>
+                    </ComboBox>
+
+                    <ComboBox Style="{DynamicResource ComboBoxStyle}" x:Name="ComboBoxCountry" ItemsSource="{Binding Countries}"  IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" Grid.Row="3" Grid.Column="1" Margin="0,9,0,12">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding EnableCityCommand}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <ComboBox.SelectedItem>
+                            <Binding Path="Country" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
+                                <Binding.ValidationRules>
+                                    <val:DescriptionStringValidation ValidatesOnTargetUpdated="True"  ValidationStep="RawProposedValue"></val:DescriptionStringValidation>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </ComboBox.SelectedItem>
+                        <Validation.ErrorTemplate>
+                            <ControlTemplate>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
+                                    <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                                </Grid>
+                            </ControlTemplate>
+                        </Validation.ErrorTemplate>
                     </ComboBox>
                 </Grid>
 
@@ -174,9 +294,14 @@
                     </Grid.RowDefinitions>
 
                     <!--CHECKPOINTS-->
-                    <DataGrid HeadersVisibility="Column" ColumnHeaderStyle="{DynamicResource CenterGridHeaderStyle}" Grid.Row="0" Grid.RowSpan="2" x:Name="PointsGrid"  SelectedItem="{Binding SelectedCheckPoint}" ItemsSource="{Binding Path=TourPoints,UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource  Tables}"  HorizontalAlignment="Center" Margin="0,10,0,0">
+                    <DataGrid HeadersVisibility="Column" ColumnHeaderStyle="{DynamicResource CenterGridHeaderStyle}" Grid.Row="0" Grid.RowSpan="2" x:Name="PointsGrid"  SelectedItem="{Binding SelectedCheckPoint}"  Style="{DynamicResource  Tables}" Margin="0,10,0,0">
+                        <DataGrid.ItemsSource>
+                            <Binding Path="TourPoints" UpdateSourceTrigger="PropertyChanged">
+
+                            </Binding>
+                        </DataGrid.ItemsSource>
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Checkpoint Name" Binding="{Binding Name}" Width="1*" >
+                            <DataGridTextColumn Header="{ns:Loc CheckpointName}" Binding="{Binding Name}" Width="1*" >
                                 <DataGridTextColumn.ElementStyle>
                                     <Style TargetType="{x:Type TextBlock}">
                                         <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -187,20 +312,74 @@
                             </DataGridTextColumn>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <Button Grid.Column="1" Grid.Row="1" Height="25" Width="60" Command="{Binding AddCheckPointCommand}" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="34,22,0,0" Style="{DynamicResource  Button}" Grid.ColumnSpan="2">ADD</Button>
-                    <Button Grid.Column="2" Grid.Row="1" Height="25" Width="60"  Command="{Binding DeleteCheckPointCommand}" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,22,0,0" Style="{DynamicResource  Button}">DELETE</Button>
-                    <TextBox Style="{DynamicResource tb}" Grid.Column="1" Grid.Row="0" x:Name="CheckPointName" Height="47" VerticalAlignment="Top" Text="{Binding Path=NameT,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="29,34,0,0" Grid.RowSpan="2" Grid.ColumnSpan="2"  />
-                    <Label Grid.Column="2" Grid.Row="0" Content="Add checkpoints * " Style="{DynamicResource  Label}" VerticalAlignment="Top" Height="30" Margin="0,4,0,0" />
+                    <Button Grid.Column="1" Grid.Row="1" Height="25" Width="60" Command="{Binding AddCheckPointCommand}" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="29,31,0,0" Style="{DynamicResource  Button}" Grid.ColumnSpan="2" Content="{ns:Loc ADDBUTTON}">
+                    </Button>
+
+                    <Button Grid.Column="2" Grid.Row="1" Height="25" Width="60"  Command="{Binding DeleteCheckPointCommand}" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,31,0,0" Style="{DynamicResource  Button}" Content="{ns:Loc DELETE}"/>
+                    <TextBox Style="{DynamicResource tb}"  Grid.Column="1" Grid.Row="0" x:Name="CheckPointName" Height="47" VerticalAlignment="Top"  Margin="29,34,0,0" Grid.ColumnSpan="2" Grid.RowSpan="2" >
+
+                        <TextBox.Text>
+                            <Binding Path="NameT" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <val:CheckPointNameValidationRule  ValidationStep="RawProposedValue"></val:CheckPointNameValidationRule>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                        <Validation.ErrorTemplate>
+                            <ControlTemplate>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
+                                    <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                                </Grid>
+                            </ControlTemplate>
+                        </Validation.ErrorTemplate>
+                    </TextBox>
+                    <Label Grid.Column="1" Grid.Row="0" Content="{ns:Loc AddCheckpoints}" Style="{DynamicResource  Label}" VerticalAlignment="Top" Height="30" Margin="25,8,10,0" Grid.ColumnSpan="2" />
 
 
                     <!--DATEANDTIME-->
                     <ListBox x:Name="DateTimeBox" ItemsSource="{Binding Path=Instances}" Grid.Column="0" Grid.Row="2" Grid.RowSpan="3" SelectedItem="{Binding selectedInstance}" Style="{DynamicResource  ListBoxForm}" Grid.ColumnSpan="2" Margin="0,38,35,4"/>
                     <tk:TimePicker Style="{DynamicResource dt}"  FontSize="9" x:Name="DT" Grid.Column="1"  Grid.Row="5" Text="{Binding Path=InstanceStartDate,Mode=TwoWay}" Format="LongTime" DataContext="{Binding}" Margin="28,0,0,45" Grid.ColumnSpan="2" />
-                    <Button Grid.Column="1" Grid.Row="5" Command="{Binding AddDateTimeCommand}"   Height="25" Width="60" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="34,0,0,2" Style="{DynamicResource  Button}" Grid.ColumnSpan="2">ADD</Button>
-                    <Button Grid.Column="2" Grid.Row="5"   Height="25" Width="60" Command="{Binding DeleteDateTimeCommand}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,0,2" Style="{DynamicResource  Button}">DELETE</Button>
-                    <Label Grid.Column="2" Content="Add date and time *"  HorizontalAlignment="Left"  Grid.Row="2" VerticalAlignment="Center" Width="175" Style="{DynamicResource  Label}"/>
+                    <Button Grid.Column="1" Grid.Row="5" Command="{Binding AddDateTimeCommand}"   Height="25" Width="60" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="28,0,0,2" Style="{DynamicResource  Button}" Grid.ColumnSpan="2" Content="{ns:Loc ADDBUTTON}"/>
+                    <Button Grid.Column="2" Grid.Row="5"   Height="25" Width="60" Command="{Binding DeleteDateTimeCommand}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,0,2" Style="{DynamicResource  Button}" Content="{ns:Loc DELETE}"/>
+                    <Label Grid.Column="1" Content="{ns:Loc AddDateAndTime}"  HorizontalAlignment="Left"  Grid.Row="2" VerticalAlignment="Center" Width="175" Style="{DynamicResource  Label}" Grid.ColumnSpan="2" Margin="25,0,0,0"/>
                     <Label Grid.Column="2" Content="Cant't select time from past!" Visibility="{Binding IsErrorMessageVisible}" FontSize="13" Foreground="REd" HorizontalAlignment="Center" Grid.Row="4" VerticalAlignment="Top" Width="175"/>
                     <Calendar Grid.Column="1" SelectedDate="{Binding Date}" DisplayDateStart="{Binding Start}" Style="{DynamicResource Calendar}" HorizontalAlignment="Left" Margin="10,44,0,0" Grid.Row="2" VerticalAlignment="Top" Height="172" Grid.RowSpan="3" Width="211" Grid.ColumnSpan="2"/>
+                    <TextBox x:Name="DatesList" HorizontalAlignment="Left" Margin="0,72,0,0" Grid.Row="4" TextWrapping="Wrap" Height="0" Background="Transparent" Foreground="Transparent" BorderThickness="0" VerticalAlignment="Top" Width="120">
+                        <TextBox.Text>
+                            <Binding Path="DatesCount" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
+                                <Binding.ValidationRules>
+                                    <val:DatesCountValidationRule ValidatesOnTargetUpdated="True" ValidationStep="RawProposedValue"></val:DatesCountValidationRule>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                        <Validation.ErrorTemplate>
+                            <ControlTemplate>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
+                                    <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                                </Grid>
+                            </ControlTemplate>
+                        </Validation.ErrorTemplate>
+                    </TextBox>
 
                 </Grid>
 
@@ -210,7 +389,7 @@
 
                 <!--TOUR_CONFIRM_CANCEL-->
 
-                <Button Grid.Column="3" Grid.Row="4" Width="160" x:Name="AddNewTour"  Command="{Binding ConfirmCommand}" HorizontalAlignment="Left" Margin="92,37,0,21" Content="CONFIRM" >
+                <Button Grid.Column="3" Grid.Row="4" Width="160" x:Name="AddNewTour"  Command="{Binding ConfirmCommand}" HorizontalAlignment="Left" Margin="92,37,0,21" Content="{ns:Loc CONFIRM}" >
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
                             <Setter Property="IsEnabled" Value="True" />
@@ -220,7 +399,6 @@
                             <Setter Property="FontWeight" Value="Bold"/>
                             <Setter Property="FontFamily" Value="Yu Gothic"/>
                             <Setter Property="Foreground" Value="Black"/>
-                            <Setter Property="Cursor" Value="Hand"/>
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
@@ -232,26 +410,38 @@
                                             <Trigger Property="IsMouseOver" Value="True">
                                                 <Setter Property="Background" Value="{StaticResource HorizontalTable}" />
                                             </Trigger>
+                                            <Trigger Property="IsEnabled" Value="False">
+                                                <Setter Property="Background" Value="AliceBlue"></Setter>
+                                                <Setter Property="BorderBrush" Value="LightGray" ></Setter>
+                                                <Setter Property="Foreground" Value="LightGray"></Setter>
+                                            </Trigger>
                                         </ControlTemplate.Triggers>
                                     </ControlTemplate>
                                 </Setter.Value>
                             </Setter>
+                            <Setter Property="IsEnabled" Value="false" />
                             <Style.Triggers>
                                 <MultiDataTrigger>
                                     <MultiDataTrigger.Conditions>
-                                        <Condition Binding="{Binding ElementName=TourNameTB, Path=(Validation.HasError)}" Value="True" />
-
+                                        <Condition Binding="{Binding ElementName=TourNameTB, Path=(Validation.HasError)}" Value="false" />
+                                        <Condition Binding="{Binding ElementName=MaxGuestsTB, Path=(Validation.HasError)}" Value="false" />
+                                        <Condition Binding="{Binding ElementName=DurationTB, Path=(Validation.HasError)}" Value="false" />
+                                        <Condition Binding="{Binding ElementName=ComboBoxCountry, Path=(Validation.HasError)}" Value="false" />
+                                        <Condition Binding="{Binding ElementName=ComboBoxCity, Path=(Validation.HasError)}" Value="false" />
+                                        <Condition Binding="{Binding ElementName=LanguageComboBox, Path=(Validation.HasError)}" Value="false" />
+                                        <Condition Binding="{Binding ElementName=DescriptionTB, Path=(Validation.HasError)}" Value="false" />
+                                        <Condition Binding="{Binding ElementName=imagePicture, Path=(Validation.HasError)}" Value="false" />
+                                        <Condition Binding="{Binding ElementName=CP, Path=(Validation.HasError)}" Value="false" />
+                                        <Condition Binding="{Binding ElementName=DatesList, Path=(Validation.HasError)}" Value="false" />
                                     </MultiDataTrigger.Conditions>
-                                    <Setter Property="IsEnabled" Value="False" />
+                                    <Setter Property="IsEnabled" Value="true" />
                                 </MultiDataTrigger>
                             </Style.Triggers>
-
-
                         </Style>
                     </Button.Style>
                 </Button>
 
-                <Button Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="4" Width="160" x:Name="Cancel" Command="NavigationCommands.BrowseBack" HorizontalAlignment="Left" Margin="283,37,0,21"  Content="CANCEL">
+                <Button Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="4" Width="160" x:Name="Cancel" Command="NavigationCommands.BrowseBack" HorizontalAlignment="Left" Margin="283,37,0,21"  Content="{ns:Loc CANCELBUTTON}">
                     <Button.Style >
                         <Style TargetType="Button">
                             <Setter Property="Background" Value="LightBlue"/>
@@ -261,7 +451,6 @@
                             <Setter Property="FontWeight" Value="Bold"/>
                             <Setter Property="FontFamily" Value="Yu Gothic"/>
                             <Setter Property="Foreground" Value="Black"/>
-                            <Setter Property="Cursor" Value="Hand"/>
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
@@ -299,7 +488,25 @@
                     </Grid.RowDefinitions>
 
 
-                    <Image x:Name="imagePicture" Grid.Row="2" Grid.ColumnSpan="4"  Grid.Column="1" Stretch="Fill" Source="{Binding Image}" Margin="29,11,23,13"/>
+                    <Image x:Name="imagePicture" Height="135" Grid.Row="2" Grid.ColumnSpan="4"  Grid.Column="1" Stretch="Fill"  Margin="29,17,23,7">
+                        <Image.Source>
+                            <Binding Path="Image" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
+                                <Binding.ValidationRules>
+                                    <val:ImageValidation ValidatesOnTargetUpdated="True"  ValidationStep="RawProposedValue"></val:ImageValidation>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </Image.Source>
+                        <Validation.ErrorTemplate>
+                            <ControlTemplate>
+                                <Grid  Grid.Column="0" Grid.Row="0" Margin="29,17,23,7">
+
+                                    <AdornedElementPlaceholder  x:Name="textBox"/>
+                                    <TextBlock Margin="-57,-13,0,0" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                                </Grid>
+                            </ControlTemplate>
+                        </Validation.ErrorTemplate>
+
+                    </Image>
                     <Button Grid.Column="4" Grid.Row="2" VerticalAlignment="Top" Command="{Binding NextImageCommand}" Height="50" Content="" Margin="104,55,-11,0" Grid.ColumnSpan="2" RenderTransformOrigin="0.693,0.528" >
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
@@ -312,7 +519,7 @@
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
-                    <Button Content="BACK" Grid.Row="2" Height="50" VerticalAlignment="Top" Command="{Binding PreviousImageCommand}" Margin="25,104,42,0" Grid.Column="1">
+                    <Button Content="BACK" Grid.Row="2" Height="50" VerticalAlignment="Top" Command="{Binding PreviousImageCommand}" Margin="28,104,41,0" Grid.Column="1">
                         <Button.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>
@@ -332,9 +539,9 @@
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
-                    <Label Content="Images of tour *" Style="{DynamicResource Label}" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Left" VerticalAlignment="Center" Height="36" Width="138" RenderTransformOrigin="0.505,0.781"/>
-                    <Button Command="{Binding AddImageCommand}" Height="24" Width="60"  Grid.Column="2" Grid.ColumnSpan="3" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="25,40,0,0" Grid.RowSpan="2" Style="{DynamicResource  Button}" >ADD</Button>
-                    <Button Content="DELETE" HorizontalAlignment="Left" Grid.Column="4" Grid.ColumnSpan="2" VerticalAlignment="Top"  Command="{Binding RemoveImageCommand}" Margin="97,41,0,0" Width="60" Height="24" Grid.RowSpan="2" Style="{DynamicResource  Button}"/>
+                    <Label Content="{ns:Loc ImagesOfTour}" Style="{DynamicResource Label}" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Left" VerticalAlignment="Top" Height="32" Width="138" RenderTransformOrigin="0.505,0.781" Margin="0,10,0,0" Grid.RowSpan="2" Grid.Row="1"/>
+                    <Button Command="{Binding AddImageCommand}" Height="24" Width="60"  Grid.Column="2" Grid.ColumnSpan="3" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="25,10,0,0" Style="{DynamicResource  Button}" Grid.Row="1" Grid.RowSpan="2" Content="{ns:Loc ADDBUTTON}"/>
+                    <Button Content="{ns:Loc DELETE}" HorizontalAlignment="Left" Grid.Column="4" Grid.ColumnSpan="2" VerticalAlignment="Top"  Command="{Binding RemoveImageCommand}" Margin="95,10,0,0" Width="60" Height="24" Style="{DynamicResource  Button}" Grid.Row="1" Grid.RowSpan="2"/>
                 </Grid>
 
 
@@ -347,7 +554,33 @@
                 <Label Grid.Column="4" Content="📌" Style="{DynamicResource Label}" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.511,0.09" Height="48"/>
                 <Label Grid.Column="4" Content="📆" Style="{DynamicResource Label}" FontSize="25" HorizontalAlignment="Left" Margin="12,112,0,0" Grid.Row="1" VerticalAlignment="Top" RenderTransformOrigin="0.217,-0.018" Grid.RowSpan="2"/>
                 <Label Grid.Column="4" Content="🕘" Style="{DynamicResource Label}" FontSize="25" HorizontalAlignment="Left" Grid.Row="3" VerticalAlignment="Center" Margin="12,0,0,0"/>
-                <Label Grid.Column="3" Content="Can't choose time from past" Foreground="red" Visibility="{Binding IsErrorMessageVisible}" HorizontalAlignment="Left" Margin="200,57,0,0" Grid.Row="3" VerticalAlignment="Top" Width="173"/>
+                <Label Grid.Column="3" Content="{Binding PastError}" Foreground="red" Visibility="{Binding IsErrorMessageVisible}" HorizontalAlignment="Left" Margin="193,57,0,0" Grid.Row="3" VerticalAlignment="Top" Width="190" Grid.ColumnSpan="2"/>
+                <TextBox x:Name="CP" Grid.Column="2" HorizontalAlignment="Left" Margin="76,0,0,70" Grid.Row="1" TextWrapping="Wrap" BorderThickness="0" Height="0"  VerticalAlignment="Bottom" Width="120" Background="Transparent" BorderBrush="Transparent" Foreground="Transparent" Grid.ColumnSpan="2">
+                    <TextBox.Text>
+                        <Binding Path="PointsCount" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
+                            <Binding.ValidationRules>
+                                <val:CheckPointCountValidationRule ValidatesOnTargetUpdated="True" ValidationStep="RawProposedValue"></val:CheckPointCountValidationRule>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                    <Validation.ErrorTemplate>
+                        <ControlTemplate>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
+                                <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                            </Grid>
+                        </ControlTemplate>
+                    </Validation.ErrorTemplate>
+                </TextBox>
 
 
 
@@ -355,11 +588,11 @@
         </Border>
         <!--TOAST_MESSAGE-->
         <StackPanel x:Name="Toast" HorizontalAlignment="Left"  Margin="700,458,0,0" VerticalAlignment="Top" Visibility="{Binding Toast}" Grid.Column="1" Grid.Row="1" Style="{DynamicResource  Toast}" Grid.ColumnSpan="2" Grid.RowSpan="2">
-            <Label Style="{DynamicResource LabelToast}" Content="Tour is succesfully created!"/>
+            <Label Style="{DynamicResource LabelToast}" Content="{ns:Loc TOURCREATED}"/>
             <Button Style="{DynamicResource ButtonToast}" Command="NavigationCommands.BrowseBack" Content="OK"/>
         </StackPanel>
         <StackPanel x:Name="ToastCant" HorizontalAlignment="Left"  Margin="700,458,0,0" VerticalAlignment="Top" Visibility="{Binding IsAvailable}" Grid.Column="1" Grid.Row="1" Style="{DynamicResource  Toast}" Grid.ColumnSpan="2" Grid.RowSpan="2">
-            <Label Style="{DynamicResource  LabelToast}">Guide already has tour at this time!
+            <Label Style="{DynamicResource  LabelToast}" Content="{ns:Loc GUIDEALREADYHASTOUR}">
             </Label>
             <Button Style="{DynamicResource  ButtonToast}" Command="{Binding OkToastCommand}" Content="OK"/>
         </StackPanel>

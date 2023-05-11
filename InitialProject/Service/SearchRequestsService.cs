@@ -1,12 +1,10 @@
 ﻿using InitialProject.Domain.Model;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 namespace InitialProject.Service
 {
     public class SearchRequestsService
-    {
-      
+    {      
         private OrdinaryTourRequestsService ordinaryTourRequestsService = new OrdinaryTourRequestsService();
         private List<OrdinaryTourRequests> requests;
         public SearchRequestsService()
@@ -16,7 +14,6 @@ namespace InitialProject.Service
         }
         public List<OrdinaryTourRequests> GetByCountry(List<OrdinaryTourRequests> appropriateRequests, string country)
         {
-
             foreach (OrdinaryTourRequests request in requests)
                 if (request.Location.Country == country)
                     appropriateRequests.Add(request);
@@ -39,7 +36,7 @@ namespace InitialProject.Service
         public List<OrdinaryTourRequests> GetByCapacity(List<OrdinaryTourRequests> appropriateRequests, int capacity)
         {
             foreach (OrdinaryTourRequests request in requests)
-                if (request.MaxGuests >= capacity)
+                if (request.MaxGuests == capacity)
                     appropriateRequests.Add(request);
             return Inspect(appropriateRequests);
         }

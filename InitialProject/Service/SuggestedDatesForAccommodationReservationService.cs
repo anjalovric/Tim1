@@ -19,7 +19,7 @@ namespace InitialProject.Service
         private int NumberOfGuests;
         private DateTime Arrival;
         private DateTime Departure;
-        private TimeSpan lengthOfStay;
+        private TimeSpan lengthOfStay;     
         public SuggestedDatesForAccommodationReservationService()
         {
             AccommodationReservationService accommodationReservationService = new AccommodationReservationService();
@@ -27,17 +27,17 @@ namespace InitialProject.Service
         }
         private bool IsDateAvailable(int currentAccommodationId, DateTime date)
         {
-            foreach (AccommodationReservation reservation in reservations)
+            foreach (AccommodationReservation reservation in reservations)  //if reserved on Date "date"
             {
                 if (currentAccommodationId == reservation.Accommodation.Id)
                 {
                     if (date >= reservation.Arrival && date <= reservation.Departure)
-                    {
                         return false;
-                    }
                 }
             }
-            return true;
+            AccommodationRenovationService accommodationRenovationService = new AccommodationRenovationService();
+            return accommodationRenovationService.IsDateAvailableForReservation(currentAccommodationId, date);
+
         }
         private void AddAvailableDateToList(DateTime date)
         {
@@ -142,9 +142,7 @@ namespace InitialProject.Service
         }
         private List<AvailableDatesForAccommodation> GetAvailableDatesOutRange(Accommodation currentAccommodation, Guest1 guest1)
         {
-
             List<AvailableDatesForAccommodation> availableDatesForAccommodations = new List<AvailableDatesForAccommodation>();
-
             foreach (List<DateTime> dates in availableDateRanges)
             {
                 DateTime arrival = dates[0];

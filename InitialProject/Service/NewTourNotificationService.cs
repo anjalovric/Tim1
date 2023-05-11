@@ -8,42 +8,39 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
+using System.Printing;
+using System.DirectoryServices.ActiveDirectory;
+using InitialProject.Serializer;
 
 namespace InitialProject.Service
 {
     public class NewTourNotificationService
     {
-        private IGuest2NotificationRepository notificationRepository = Injector.CreateInstance<IGuest2NotificationRepository>();
+        private INewTourNotificationRepository notificationRepository = Injector.CreateInstance<INewTourNotificationRepository>();
         public NewTourNotificationService()
         {
         }
 
-        public void Save(Guest2Notification notification)
+        public void Save(NewTourNotification notification)
         {
             notificationRepository.Save(notification);
         }
 
-        public void Delete(Guest2Notification notification)
+        public void Delete(NewTourNotification notification)
         {
             notificationRepository.Delete(notification);
         }
-        public List<Guest2Notification> GetAll()
+        public List<NewTourNotification> GetAll()
         {
             return notificationRepository.GetAll();
         }
-        public ObservableCollection<Guest2Notification> GetByGuestId(int id)
+        public ObservableCollection<NewTourNotification> GetByGuestId(int id)
         {
             return notificationRepository.GetByGuestId(id);
         }
-        public bool IsRequestAccepted(Guest2 guest)
+        public void Update(NewTourNotification notification)
         {
-            List<Guest2Notification> notifications = notificationRepository.GetAll();
-            return notifications.Find(n => n.Type.Equals(Guest2NotificationType.REQUEST_ACCEPTED) && n.Guest2.Id == guest.Id) != null;
-        }
-        public bool IsConfirmPresence(Guest2 guest)
-        {
-            List<Guest2Notification> notifications = notificationRepository.GetAll();
-            return notifications.Find(n => n.Type.Equals(Guest2NotificationType.CONFIRM_PRESENCE) && n.Guest2.Id == guest.Id) != null;
+            notificationRepository.Update(notification);
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace InitialProject.WPF.Validations.GuideValidations
@@ -12,26 +13,21 @@ namespace InitialProject.WPF.Validations.GuideValidations
     {
         public override ValidationResult Validate(object value, System.Globalization.CultureInfo cultureInfo)
         {
-            try
+            string stringValue = value as string;
+            string Message = "";
+            if (!string.IsNullOrEmpty(stringValue))
             {
-                string stringValue = value as string;
-                Regex r = new Regex(@"^([0]//.[1-9]+)|([1-9][0-9]*)|([1-9]//.[0-9])$");
-
-                if (stringValue.Length == 0)
-                {
-                    return new ValidationResult(false, "Can't be empty");
-                }
-
-                if (r.IsMatch(stringValue))
-                {
-                    return new ValidationResult(true, null);
-                }
-
-                return new ValidationResult(false, "Enter capacity!");
+                return ValidationResult.ValidResult;
             }
-            catch
+            else
             {
-                return new ValidationResult(false, "Enter valid number");
+                var app = (App)Application.Current;
+
+                if (app.Lang.Equals("en-US"))
+                    Message = "This field is required";
+                else
+                    Message = "Ovo polje je obavezno";
+                return new ValidationResult(false, Message);
             }
         }
     }

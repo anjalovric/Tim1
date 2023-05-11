@@ -4,23 +4,39 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:converters="clr-namespace:InitialProject.WPF.Converters"
-      xmlns:local="clr-namespace:InitialProject.View"
+      xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+      xmlns:local="clr-namespace:InitialProject.WPF.Views.Guest1Views"
       mc:Ignorable="d"
       d:DesignHeight="696" d:DesignWidth="1024"
       Title="AccommodationDetails">
     <Page.Resources>
         <Style TargetType="Grid">
-            <Setter Property="Background" Value="#c99585"></Setter>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="#FF9D7165" Offset="0"/>
+                        <GradientStop Color="#FFB58578" Offset="0.1"></GradientStop>
+                        <GradientStop Color="#c99585" Offset="0.4"/>
+                        <GradientStop Color="#c99585" Offset="0.5"/>
+                        <GradientStop Color="#c99585" Offset="0.6"/>
+                        <GradientStop Color="#FFB58578" Offset="0.9"></GradientStop>
+                        <GradientStop Color="#FF9D7165" Offset="1"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
         </Style>
         <Style TargetType="Label">
             <Setter Property="Foreground" Value="#37492d"></Setter>
-            <Setter Property="FontWeight" Value="Bold"></Setter>
+            <Setter Property="FontWeight" Value="Medium"></Setter>
+            <Setter Property="FontSize" Value="18"></Setter>
         </Style>
         <Style TargetType="TextBlock">
             <Setter Property="Foreground" Value="#37492d"></Setter>
-            <Setter Property="FontWeight" Value="Bold"></Setter>
+            <Setter Property="FontSize" Value="18"></Setter>
+            <Setter Property="FontWeight" Value="Medium"></Setter>
         </Style>
         <Style TargetType="Button">
+            <Setter Property="Padding" Value="0"></Setter>
             <Setter Property="Background" Value="#8c9d75"></Setter>
             <Setter Property="Foreground" Value="#22301a"></Setter>
             <Setter Property="FontWeight" Value="UltraBlack"></Setter>
@@ -28,9 +44,14 @@
             <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
             <Setter Property="BorderBrush" Value="#22301a"></Setter>
             <Setter Property="BorderThickness" Value="3,3,3,3"></Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
         <Style TargetType="{x:Type ListBoxItem}">
-            <!--For disable highlighting on stars rating listbox-->
+            <!--To disable highlighting on stars rating listbox-->
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type ListBoxItem}">
@@ -46,10 +67,11 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
         <converters:IntToImageConverter x:Key="Int2Images"></converters:IntToImageConverter>
     </Page.Resources>
-    <Grid >
+    
+    
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
@@ -59,12 +81,30 @@
             <RowDefinition Height="1*"></RowDefinition>
             <RowDefinition Height="0.8*"></RowDefinition>
             <RowDefinition Height="1*"></RowDefinition>
-            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
             <RowDefinition Height="15*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Column="0" Grid.Row="5">
+        <!-- MAKING SAME BACKGROUND AS REST OF PAGE -->
+        <Grid Grid.Row="5" Grid.ColumnSpan="2">
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                    <GradientStop Color="#FF9D7165" Offset="0"/>
+                    <GradientStop Color="#FFB58578" Offset="0.1"></GradientStop>
+                    <GradientStop Color="#c99585" Offset="0.4"/>
+                    <GradientStop Color="#c99585" Offset="0.5"/>
+                    <GradientStop Color="#c99585" Offset="0.6"/>
+                    <GradientStop Color="#FFB58578" Offset="0.9"></GradientStop>
+                    <GradientStop Color="#FF9D7165" Offset="1"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+        </Grid>
+
+        <!-- DETAILS VIEW -->
+        <Grid Grid.Column="0" Grid.Row="5" Background="Transparent">
             <Grid.RowDefinitions>
+                <RowDefinition Height="0.5*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
                 <RowDefinition Height="1*"></RowDefinition>
                 <RowDefinition Height="1*"></RowDefinition>
                 <RowDefinition Height="1*"></RowDefinition>
@@ -76,58 +116,113 @@
                 <RowDefinition Height="1*"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <Border Background="#FFB58578" Grid.RowSpan="7" Width="400" CornerRadius="0 0 20 20" HorizontalAlignment="Center"  Margin="46,0,46,4"/>
+            <Border Grid.RowSpan="10" Width="400" BorderThickness="3,0,3,3" BorderBrush="#22301a" CornerRadius="0 0 20 20" HorizontalAlignment="Center" Height="380" VerticalAlignment="Top">
+                <Border.Effect>
+                    <DropShadowEffect ShadowDepth="0" BlurRadius="50"/>
+                </Border.Effect>
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="#FFB58578" Offset="0"/>
+                        <GradientStop Color="#FFB58578" Offset="0.1"></GradientStop>
+                        <GradientStop Color="#c99585" Offset="0.4"/>
+                        <GradientStop Color="#c99585" Offset="0.5"/>
+                        <GradientStop Color="#c99585" Offset="0.6"/>
+                        <GradientStop Color="#FFB58578" Offset="0.9"></GradientStop>
+                        <GradientStop Color="#FFB58578" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
 
-            <Label FontSize="18" Height="35" Width="Auto" Grid.Row="0" HorizontalAlignment="Left"  VerticalAlignment="Center" Margin="84,0,0,0">Name:</Label>
-            <Label FontSize="18" Height="35" Width="Auto" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="84,0,0,0" Content="Country:"/>
-            <Label FontSize="18" Height="36" Width="Auto" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="84,0,0,0" Content="City:"/>
-            <Label FontSize="18" Height="35" Width="Auto" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="84,0,0,0" Content="Type:"/>
-            <Label FontSize="18" Height="35" Width="Auto" Grid.Row="4" HorizontalAlignment="Left"  VerticalAlignment="Center" Margin="84,0,0,0" Content="Capacity:"/>
-            <Label FontSize="18" Height="35" Width="Auto" Grid.Row="5" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="84,0,0,0" Content="Min. days for reservation:"/>
-            <Label FontSize="18" Height="36" Width="Auto" Grid.Row="6" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="84,0,0,0" Content="Min. days to cancel:"/>
-            <TextBlock Height="35" FontSize="18" Margin="0,0,84,0" Grid.Row="0" Text="{Binding Path=SelectedAccommodation.Location.Country}" HorizontalAlignment="Right"/>
-            <TextBlock Height="35" FontSize="18" Margin="0,0,84,0" Grid.Row="1" Text="{Binding Path=SelectedAccommodation.Location.City}" HorizontalAlignment="Right"/>
-            <TextBlock Height="35" FontSize="18" Margin="0,0,84,0" Grid.Row="2" Text="{Binding Path=SelectedAccommodation.Type}" HorizontalAlignment="Right"/>
-            <TextBlock Height="35" FontSize="18" Margin="0,0,84,0" Grid.Row="3" Text="{Binding Path=SelectedAccommodation.Capacity}" HorizontalAlignment="Right"/>
-            <TextBlock Height="35" FontSize="18" Margin="0,0,84,0" Grid.Row="4" Text="{Binding Path=SelectedAccommodation.MinDaysForReservation}" HorizontalAlignment="Right"/>
-            <TextBlock Height="35" FontSize="18" Margin="0,0,84,0" Grid.Row="5" Text="{Binding Path=SelectedAccommodation.MinDaysToCancel}" HorizontalAlignment="Right"/>
-            <TextBlock Height="35" FontSize="18" Margin="0,0,84,0" Grid.Row="6" Text="{Binding Path=SelectedAccommodation.Name}" HorizontalAlignment="Right"/>
+            <Label Height="35" Width="Auto" Grid.Row="1" HorizontalAlignment="Left"  VerticalAlignment="Center" Margin="95,0,0,0">Name:</Label>
+            <Label Height="35" Width="Auto" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="95,0,0,0" Content="Country:"/>
+            <Label Height="36" Width="Auto" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="95,0,0,0" Content="City:"/>
+            <Label Height="35" Width="Auto" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="95,0,0,0" Content="Type:"/>
+            <Label Height="35" Width="Auto" Grid.Row="5" HorizontalAlignment="Left"  VerticalAlignment="Center" Margin="95,0,0,0" Content="Capacity:"/>
+            <Label Height="35" Width="Auto" Grid.Row="6" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="95,0,0,0" Content="Min. days for reservation:"/>
+            <Label Height="36" Width="Auto" Grid.Row="7" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="95,0,0,0" Content="Min. days to cancel:"/>
+            <Label Height="36" Width="Auto" Grid.Row="8" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="95,0,0,0" Content="Owner:"/>
 
+            <TextBlock Height="35" Margin="0,0,95,0" Grid.Row="1" Text="{Binding Path=SelectedAccommodation.Name}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <TextBlock Height="35" Margin="0,0,95,0" Grid.Row="2" Text="{Binding Path=SelectedAccommodation.Location.Country}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <TextBlock Height="35" Margin="0,0,95,0" Grid.Row="3" Text="{Binding Path=SelectedAccommodation.Location.City}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <TextBlock Height="35" Margin="0,0,95,0" Grid.Row="4" Text="{Binding Path=SelectedAccommodation.Type}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <TextBlock Height="35" Margin="0,0,95,0" Grid.Row="5" Text="{Binding Path=SelectedAccommodation.Capacity}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <TextBlock Height="35" Margin="0,0,95,0" Grid.Row="6" Text="{Binding Path=SelectedAccommodation.MinDaysForReservation}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <TextBlock Height="35" Margin="0,0,95,0" Grid.Row="7" Text="{Binding Path=SelectedAccommodation.MinDaysToCancel}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <TextBlock Height="35" Margin="0,0,95,0" Grid.Row="8" HorizontalAlignment="Right">
+                <Run Text="{Binding SelectedAccommodation.Owner.Name}"/>
+                <Run Text="{Binding SelectedAccommodation.Owner.LastName}"/>
+            </TextBlock>
+            
         </Grid>
 
-        <Grid Grid.Column="1" Grid.Row="5">
+        <!-- PHOTOS AND DIAGRAM VIEW -->
+        <Grid Grid.Column="1" Grid.Row="5" Background="Transparent">
             <Grid.RowDefinitions>
+                <RowDefinition Height="10"></RowDefinition>
+                <RowDefinition Height="160"></RowDefinition>
+                <RowDefinition Height="40"></RowDefinition>
                 <RowDefinition Height="170"></RowDefinition>
-                <RowDefinition Height="34"></RowDefinition>
-                <RowDefinition Height="189"></RowDefinition>
                 <RowDefinition ></RowDefinition>
             </Grid.RowDefinitions>
 
-            <Border Background="#FFB58578" Grid.RowSpan="3" Width="400"  CornerRadius="0 0 20 20" Margin="46,0,46,5"/>
+            <Border Grid.RowSpan="5" Width="400" BorderBrush="#22301a" BorderThickness="3,0,3,3" HorizontalAlignment="Center" Height="380" VerticalAlignment="Top"  CornerRadius="0 0 20 20">
+                <Border.Effect>
+                    <DropShadowEffect ShadowDepth="0" BlurRadius="50"/>
+                </Border.Effect>
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="#FFB58578" Offset="0"/>
+                        <GradientStop Color="#FFB58578" Offset="0.1"></GradientStop>
+                        <GradientStop Color="#c99585" Offset="0.4"/>
+                        <GradientStop Color="#c99585" Offset="0.5"/>
+                        <GradientStop Color="#c99585" Offset="0.6"/>
+                        <GradientStop Color="#FFB58578" Offset="0.9"></GradientStop>
+                        <GradientStop Color="#FFB58578" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
 
-            <Image x:Name="accommodationImage" Source="{Binding ImageSource, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" Margin="106,10,106,10"/>
+            <Image x:Name="accommodationImage" Source="{Binding ImageSource, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Margin="106,10,106,0" VerticalAlignment="Top" Height="145" Stretch="Fill"/>
+            <Border Grid.Row="1" Margin="106,10,106,0" Height="145" BorderBrush="#22301a" BorderThickness="3" VerticalAlignment="Top">
+            </Border>
 
-            <Button Command="{Binding NextPhotoCommand}" Height="50" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" Margin="392,0,0,0" VerticalAlignment="Center" Width="60">
-                <Button.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform Angle="360"/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </Button.RenderTransform>
+            <!-- NEXT PHOTO BUTTON -->
+            <Button Command="{Binding NextPhotoCommand}" IsEnabled="{Binding Path=IsNextEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="50" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" Margin="392,0,0,0" Grid.Row="1" VerticalAlignment="Center" Width="60">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid>
                             <StackPanel Orientation="Horizontal">
-                                <Rectangle Width="30" Height="14" Stroke="#22301a" Fill="#22301a"/>
-                                <Polygon Points= "0,15 15,22 0,30" Stroke="#22301a" Fill="#22301a" Height="45" Width="30" />
+                                <Rectangle x:Name="ArrowRectangle" Width="30" Height="14" Stroke="#22301a" Fill="#22301a"/>
+                                <Polygon x:Name="ArrowPolygon" Points= "0,15 15,22 0,30" Stroke="#22301a" Fill="#22301a" Height="45" Width="30" />
                             </StackPanel>
                         </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" Value="0.5"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="ArrowRectangle" Property="Stroke" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                                <Setter TargetName="ArrowPolygon" Property="Stroke" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="ArrowRectangle" Property="Fill" Value="#22301a"/>
+                                <Setter TargetName="ArrowPolygon" Property="Fill" Value="#22301a"/>
+                                <Setter TargetName="ArrowRectangle" Property="Stroke" Value="#004661"/>
+                                <Setter TargetName="ArrowPolygon" Property="Stroke" Value="#004661"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="False">
+                                <Setter TargetName="ArrowRectangle" Property="Fill" Value="#22301a"/>
+                                <Setter TargetName="ArrowPolygon" Property="Fill" Value="#22301a"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-            <Button Command="{Binding PreviousPhotoCommand}" Height="50" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Margin="60,0,0,0" VerticalAlignment="Center" Width="60">
+
+            <!-- PREVIOUS PHOTO BUTTON -->
+            <Button Command="{Binding PreviousPhotoCommand}" Grid.Row="1" IsEnabled="{Binding Path=IsNextEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="50" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Margin="60,0,0,0" VerticalAlignment="Center" Width="60">
                 <Button.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -140,16 +235,36 @@
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid>
                             <StackPanel Orientation="Horizontal">
-                                <Rectangle Width="30" Height="14" Stroke="#22301a" Fill="#22301a"/>
-                                <Polygon Points= "0,15 15,22 0,30" Stroke="#22301a" Fill="#22301a" Height="45" Width="30" />
+                                <Rectangle  x:Name="ArrowRectangle" Width="30" Height="14" Stroke="#22301a" Fill="#22301a"/>
+                                <Polygon  x:Name="ArrowPolygon" Points= "0,15 15,22 0,30" Stroke="#22301a"  Fill="#22301a" Height="45" Width="30" />
                             </StackPanel>
                         </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" Value="0.5"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="ArrowRectangle" Property="Stroke" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                                <Setter TargetName="ArrowPolygon" Property="Stroke" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="ArrowRectangle" Property="Fill" Value="#22301a"/>
+                                <Setter TargetName="ArrowPolygon" Property="Fill" Value="#22301a"/>
+                                <Setter TargetName="ArrowRectangle" Property="Stroke" Value="#004661"/>
+                                <Setter TargetName="ArrowPolygon" Property="Stroke" Value="#004661"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="False">
+                                <Setter TargetName="ArrowRectangle" Property="Fill" Value="#22301a"/>
+                                <Setter TargetName="ArrowPolygon" Property="Fill" Value="#22301a"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Button.Template>
             </Button>
 
-
-            <Button x:Name="Reserve" Grid.Row="3" Command="{Binding ReserveCommand}" FontWeight="Bold" Margin="0,0,56,40" VerticalAlignment="Bottom" Width="100" Height="35" HorizontalAlignment="Right" FontSize="18">
+            <!-- RESERVE BUTTON -->
+            <Button x:Name="Reserve" Grid.Row="4" Command="{Binding ReserveCommand}" FontWeight="Bold" Margin="0,0,56,20" VerticalAlignment="Bottom" Width="100" Height="35" HorizontalAlignment="Right" FontSize="18">
                 <Grid Background="#8c9d75" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -169,13 +284,82 @@
                 </Grid>
             </Button>
 
+            <!-- PLACE FOR DIAGRAM -->
+            <!-- BORDER FOR DIAGRAM TITLE -->
+           
+            <Label FontSize="16" Height="30" FontWeight="Medium" Width="Auto" VerticalContentAlignment="Center" HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Bottom" Content="Attendance (previous year)"/>
+
+
+             <Grid Background="Transparent" Grid.Row="3" HorizontalAlignment="Center" Width="360" Margin="0,0,0,30" Height="140">
+                                  
+                <lvc:CartesianChart Series="{Binding SeriesCollection}" LegendLocation="None">
+                    <lvc:CartesianChart.SeriesColors>
+                        <lvc:ColorsCollection>
+                            <Color>#22301a</Color>
+                        </lvc:ColorsCollection>
+                    </lvc:CartesianChart.SeriesColors>
+                    <lvc:CartesianChart.AxisX>
+                        <lvc:Axis Labels="{Binding Labels}" Foreground="#22301a" FontWeight="Medium" ShowLabels="True" MinValue="1" MaxValue="14">
+                            <lvc:Axis.Separator>
+                                <lvc:Separator Step="1">
+                                    <lvc:Separator.Resources>
+                                        <Style TargetType="lvc:Separator">
+                                            <Setter Property="StrokeThickness" Value="0"/>
+                                        </Style>
+                                    </lvc:Separator.Resources>
+                                </lvc:Separator>
+                            </lvc:Axis.Separator>
+                        </lvc:Axis>
+                    </lvc:CartesianChart.AxisX>
+                    <lvc:CartesianChart.AxisY>
+                        <lvc:Axis MinValue="0" Foreground="#22301a" FontWeight="Medium">
+                            <lvc:Axis.Separator>
+                                <lvc:Separator>
+                                    <lvc:Separator.Resources>
+                                        <Style TargetType="lvc:Separator">
+                                            <Setter Property="StrokeThickness" Value="1"/>
+                                            <Setter Property="Stroke" Value="#22301a"/>
+                                        </Style>
+                                    </lvc:Separator.Resources>
+                                </lvc:Separator>
+                            </lvc:Axis.Separator>
+                        </lvc:Axis>
+                    </lvc:CartesianChart.AxisY>
+                </lvc:CartesianChart>
+            </Grid>
 
         </Grid>
 
-        <Label Content="{Binding Path=SelectedAccommodation.Name}" FontWeight="Bold" FontSize="24" Margin="0,20,0,0" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center"  FontFamily="Baskerville Old Face" VerticalAlignment="Top" Width="Auto" Height="Auto"></Label>
+        <!-- ACCOMMODATION NAME - TITLE OF PAGE -->
+        <TextBlock Margin="0,25,0,0" Grid.Row="0"  Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Top" Height="Auto">
+            <Label Content="{Binding Path=SelectedAccommodation.Name}" FontWeight="Bold" FontSize="24"   FontFamily="Baskerville Old Face" Width="Auto" Height="Auto"></Label>
+            <Image Source="/Resources/Images/renovate.png" Height="Auto" Width="30" VerticalAlignment="Center">
+                <Image.Style>
+                    <Style TargetType="Image">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding SelectedAccommodation.IsRenovated}" Value="True">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Image.Style>
+            </Image>
+        </TextBlock>
 
+        <!-- ACCOMMODATION RATING STARS -->
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="2">
             <ListBox Grid.Row="1" Background="#c99585" BorderBrush="Transparent" BorderThickness="0" Width="Auto" ItemsSource="{Binding AverageRating, Converter={StaticResource Int2Images}}"  Height="Auto" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center">
+                <ListBox.Style>
+                    <Style TargetType="ListBox">
+                        <Setter Property="Visibility" Value="Visible"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ReviewsNumber}" Value="0">
+                                <Setter Property="Visibility" Value="Hidden"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ListBox.Style>
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Image Source="{Binding}" Height="20" Width="20"></Image>
@@ -189,19 +373,56 @@
             </ListBox>
         </StackPanel>
 
-        <TextBlock FontSize="20" Background="Transparent" HorizontalAlignment="Center" Grid.Row="2" Grid.ColumnSpan="2" Width="Auto" Height="35" VerticalAlignment="Top" FontWeight="Normal" Margin="0,0,0,0">
+        <!-- REVIEWS NUMBER -->
+        <TextBlock FontSize="16" FontWeight="Medium" Background="Transparent" HorizontalAlignment="Center" Grid.Row="2" Grid.ColumnSpan="2" Width="Auto" Height="35" VerticalAlignment="Top" Margin="0,0,0,0">
                 <Run Text="{Binding ReviewsNumber}"/>
                 <Run Text="Reviews"/>
         </TextBlock>
-        <Border Background="#FFB58578" Grid.Row="4" Width="400" Height="Auto"  CornerRadius="20 20 0 0" HorizontalAlignment="Center"/>
 
-        <Label FontSize="20" FontWeight="Bold" Height="Auto" Width="Auto" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center">Details</Label>
-        <Border Background="#FFB58578" Grid.Column="1" Grid.Row="4" Width="400" Height="Auto"  CornerRadius="20 20 0 0" HorizontalAlignment="Center"/>
+        <!-- UPPER BORDER FOR DETAILS -->
+        <Border Grid.Row="4" Width="400" Height="60" BorderThickness="3,3,3,0" BorderBrush="#22301a" VerticalAlignment="Bottom" CornerRadius="20 20 0 0" HorizontalAlignment="Center">
+            <Border.Effect>
+                <DropShadowEffect ShadowDepth="0"  BlurRadius="50"/>
+            </Border.Effect>
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                    <GradientStop Color="#FFB58578" Offset="0"/>
+                    <GradientStop Color="#FFB58578" Offset="0.1"></GradientStop>
+                    <GradientStop Color="#c99585" Offset="0.4"/>
+                    <GradientStop Color="#c99585" Offset="0.5"/>
+                    <GradientStop Color="#c99585" Offset="0.6"/>
+                    <GradientStop Color="#FFB58578" Offset="0.9"></GradientStop>
+                    <GradientStop Color="#FFB58578" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
 
-        <Label FontSize="20" Height="34" FontWeight="Bold" Width="80" HorizontalAlignment="Center" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center">Photos</Label>
+        <!-- DETAILS LABEL -->
+        <Label FontSize="20" FontWeight="Bold" Height="Auto" Margin="0" Width="Auto" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center">Details</Label>
 
+        <!-- UPPER BORDER FOR "OVERVIEW" -->
+        <Border Grid.Column="1" Grid.Row="4" BorderBrush="#22301a" BorderThickness="3,3,3,0" Width="400" Height="60" VerticalAlignment="Bottom" CornerRadius="20 20 0 0" HorizontalAlignment="Center">
+            <Border.Effect>
+                <DropShadowEffect ShadowDepth="0"  BlurRadius="50"/>
+            </Border.Effect>
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                    <GradientStop Color="#FFB58578" Offset="0"/>
+                    <GradientStop Color="#FFB58578" Offset="0.1"></GradientStop>
+                    <GradientStop Color="#c99585" Offset="0.4"/>
+                    <GradientStop Color="#c99585" Offset="0.5"/>
+                    <GradientStop Color="#c99585" Offset="0.6"/>
+                    <GradientStop Color="#FFB58578" Offset="0.9"></GradientStop>
+                    <GradientStop Color="#FFB58578" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
 
-        <Button Height="35" Width="100" FontSize="16" IsEnabled="True" FontWeight="Bold" Grid.Column="0" Grid.Row="0" Margin="20,20,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Command="NavigationCommands.BrowseBack">
+        <!-- OVERVIEW LABEL -->
+        <Label FontSize="20" Height="34" FontWeight="Bold" Width="Auto" HorizontalAlignment="Center" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center">Overview</Label>
+
+        <!-- BACK BUTTON -->
+        <Button Height="35" Width="100" FontSize="16" IsEnabled="True" FontWeight="Bold" Grid.Column="0" Grid.Row="0" Margin="56,25,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Command="NavigationCommands.BrowseBack">
             <Grid Background="#8c9d75" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -212,12 +433,6 @@
             </Grid>
         </Button>
 
-
-
-
-
-
-
-
     </Grid>
+    
 </Page>

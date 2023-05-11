@@ -13,11 +13,9 @@ namespace InitialProject.WPF.Views.GuideViews
 
         public TourStatisticsView(User user)
         {
-
             InitializeComponent();
-            viewModel = new TourStatisticsViewModel(user,this.ChosenYear);
+            viewModel = new TourStatisticsViewModel(user);
             DataContext = viewModel;
-
         }
     }
 }

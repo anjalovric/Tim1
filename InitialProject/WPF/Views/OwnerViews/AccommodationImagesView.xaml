@@ -9,8 +9,8 @@
       Title="My Accommodation">
 
     <Grid Margin="0, 20, 0, 20" Background="White">
-        <Rectangle Fill="LightGray" HorizontalAlignment="Center" Height="30" Stroke="DarkGray" VerticalAlignment="Top" Width="430"/>
-        <Button Foreground="DarkGray" Command="NavigationCommands.BrowseBack" Name="ExitButton" Content="x" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="384,5,0,0" VerticalAlignment="Top" Height="25" Width="27" Background="AliceBlue" BorderBrush="DarkGray">
+        <Rectangle Fill="#005A9C" HorizontalAlignment="Center" Height="30" Stroke="LightGray" VerticalAlignment="Top" Width="430"/>
+        <Button  Command="NavigationCommands.BrowseBack" Name="ExitButton" Content="x" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="384,5,0,0" VerticalAlignment="Top" Height="25" Width="27" Style="{StaticResource CancelButton}">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="100"/>
@@ -20,16 +20,17 @@
         <Label Content="Images" Foreground="DarkGray" HorizontalAlignment="Left" Margin="0,-1,0,0" VerticalAlignment="Top" RenderTransformOrigin="0,0.401" Width="134" Height="28" VerticalContentAlignment="Bottom">
         </Label>
         <Image Source="{Binding Path=ImageUrl, UpdateSourceTrigger=PropertyChanged}" Stretch="Fill" HorizontalAlignment="Left" Height="298" Margin="80,170,0,0" VerticalAlignment="Top" Width="259"/>
-        <Button Command="{Binding NextImageCommand}" Name="NextImageButton" HorizontalAlignment="Left" Margin="5,315,0,0" VerticalAlignment="Top" Height="32" Width="70" Background="AliceBlue" BorderBrush="DarkGray">
+        <Button Command="{Binding NextImageCommand}" Name="NextImageButton" HorizontalAlignment="Left" Margin="5,315,0,0" VerticalAlignment="Top" Height="32" Width="70" Style="{StaticResource ButtonForImages}">
             <Button.Content>
-                <Image Source="/Resources/Images/back_arrow.png"/>
+                <Image Source="/Resources/Images/back_arrow.png">
+                </Image>
             </Button.Content>
         </Button>
-        <Button Command="{Binding PreviousImageCommand}" Name="PreviousImageButton" HorizontalAlignment="Left" Height="32" Width="70" Margin="343,315,0,0" VerticalAlignment="Top" Background="AliceBlue" BorderBrush="DarkGray">
+        <Button Command="{Binding PreviousImageCommand}" Name="PreviousImageButton" HorizontalAlignment="Left" Height="32" Width="70" Margin="343,315,0,0" VerticalAlignment="Top" Style="{StaticResource ButtonForImages}">
             <Button.Content>
                 <Image Source="/Resources/Images/arrow.png" />
             </Button.Content>
         </Button>
-        <Label Content="{Binding Path=Accommodation.Name}" HorizontalAlignment="Left" Margin="80,89,0,0" VerticalAlignment="Top" Width="138" Height="30"/>
+        <Label Content="{Binding Path=Accommodation.Name}" HorizontalAlignment="Left" Margin="80,89,0,0" FontSize="15" FontWeight="SemiBold" VerticalAlignment="Top" Width="138" Height="30"/>
     </Grid>
 </Page>

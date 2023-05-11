@@ -16,6 +16,8 @@ namespace InitialProject.Domain.Model
         public DateTime EndDate { get; set; }
         public string Description { get; set; }
         public bool CanBeCancelled { get; set; }
+        public bool IsInProgress { get; set; }
+        public bool IsFinished { get; set; }
         public AccommodationRenovation()
         {
         }

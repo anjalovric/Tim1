@@ -13,13 +13,23 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using InitialProject.Service;
 using System.Windows.Controls;
+using LiveCharts;
+using LiveCharts.Wpf;
 
 namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 {
     public class AccommodationDetailsViewModel :INotifyPropertyChanged
     {
         private Guest1 guest1;
+        private DateTime currentDate;
         private int currentCounter = 0;
+        private List<AccommodationImage> images;
+        public Accommodation SelectedAccommodation { get; set; }
+        public int AverageRating { get; set; }
+        public int ReviewsNumber { get; set; }
+        public List<string> Labels { get; set; }
+        public SeriesCollection SeriesCollection { get; set; }
+
         private BitmapImage imageSource;
         public BitmapImage ImageSource
         {
@@ -32,18 +42,18 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             }
 
         }
-        public Accommodation SelectedAccommodation { get; set; }
-        private List<AccommodationImage> images;
-
-        public int AverageRating { get; set; }
-        public int ReviewsNumber { get; set; }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        private bool isNextEnabled;
+        public bool IsNextEnabled
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+            get { return isNextEnabled; }
+            set
+            {
+                if (value != isNextEnabled)
+                    isNextEnabled = value;
+                OnPropertyChanged("IsNextEnabled");
+            }
 
+        }
         public RelayCommand ReserveCommand { get; set; }
 
         public RelayCommand NextPhotoCommand { get; set; }
@@ -52,9 +62,42 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         {
             this.guest1 = guest1;
             SelectedAccommodation = currentAccommodation;
+            currentDate = DateTime.Now;
+            SetChartData();
             SetFirstImage();
             MakeCommands();
             SetRating();
+            SetButtonEnableProperty();
+        }
+        private void SetChartData()
+        {
+            LastYearAccommodationReservationsService lastYearAccommodationReservationsService = new LastYearAccommodationReservationsService();
+            List<int> values = new List<int>();
+            Labels = new List<string>();
+            DateTime lastYear = currentDate.AddMonths(-13);
+            while (lastYear <= currentDate)
+            {
+                values.Add(lastYearAccommodationReservationsService.GetReservationsNumberByMonthForAccommodation(lastYear, SelectedAccommodation, currentDate));
+                Labels.Add(lastYear.ToString("MMM").ToUpper());
+                lastYear = lastYear.AddMonths(1);
+            }
+            SeriesCollection = new SeriesCollection();
+            ColumnSeries columnSeries = new ColumnSeries();
+            columnSeries.Values = new ChartValues<int>();
+            for (int i = 0; i < values.Count; i++)
+            {
+                ChartValues<int> columnValues = new ChartValues<int> { values[i] };
+                columnSeries.Values.Add(values[i]);
+                columnSeries.Title = "Completed reservations";
+            }
+            SeriesCollection.Add(columnSeries);
+        }
+        private void SetButtonEnableProperty()
+        {
+            if (images.Count >= 2)
+                IsNextEnabled = true;
+            else
+                IsNextEnabled = false;
         }
         private void SetRating()
         {
@@ -71,7 +114,8 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         private void Reserve_Executed(object sender)
         {
             AccommodationReservationFormView accommodationReservationForm = new AccommodationReservationFormView(SelectedAccommodation, guest1);
-            accommodationReservationForm.Show();
+            accommodationReservationForm.Owner = Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault();
+            accommodationReservationForm.ShowDialog();
         }
         private bool CanExecute(object sender)
         {
@@ -98,6 +142,10 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                 currentCounter = 0;
             ImageSource = new BitmapImage(new Uri(images[currentCounter].Url, UriKind.Relative));
         }
-
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

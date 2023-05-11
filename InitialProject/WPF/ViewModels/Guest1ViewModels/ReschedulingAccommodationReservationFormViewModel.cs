@@ -48,25 +48,37 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             Application.Current.Windows.OfType<ReschedulingAccommodationReservationFormView>().FirstOrDefault().Close();
         }
 
-       
-
         private void Send_Executed(object sender)
         {
-
             if (IsValidDateInput())
             { 
                 StoreRequest();
                 Application.Current.Windows.OfType<ReschedulingAccommodationReservationFormView>().FirstOrDefault().Close();
-                Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("Request successfully sent!", "/Resources/Images/done.png");
-                messageBox.Show();
+                ShowMessageBoxForSentRequest();
             }
             else
-            {
-                Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("Please enter valid dates!", "/Resources/Images/exclamation.png");
-                messageBox.Show();
-            }
+                ShowMessageBoxForInvalidDates();
         }
 
+        //Validation for input dates
+        private bool IsValidDateInput()
+        {
+            return (Arrival <= Departure && Arrival.Date > DateTime.Now && Arrival != null && Departure != null);
+        }
+
+        //Message boxes for validation
+        private void ShowMessageBoxForSentRequest()
+        {
+            Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("Request successfully sent!", "/Resources/Images/done.png");
+            messageBox.Owner = Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault();
+            messageBox.ShowDialog();
+        }
+        private void ShowMessageBoxForInvalidDates()
+        {
+            Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("Please enter valid dates!", "/Resources/Images/exclamation.png");
+            messageBox.Owner = Application.Current.Windows.OfType<ReschedulingAccommodationReservationFormView>().FirstOrDefault();
+            messageBox.ShowDialog();
+        }
         private void StoreRequest()
         {
             Service.ReschedulingAccommodationRequestService requestService;
@@ -74,12 +86,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             Model.ReschedulingAccommodationRequest newRequest = new Model.ReschedulingAccommodationRequest(Reservation, Arrival, Departure, Reason);
             requestService.Add(newRequest);
         }
-
-        private bool IsValidDateInput()
-        {
-            return (Arrival <= Departure && Arrival.Date > DateTime.Now && Arrival != null && Departure != null);
-        }
-
         private void OnPreviewMouseUp_Executed(Object sender)
         {
             OnPreviewMouseUp(null);

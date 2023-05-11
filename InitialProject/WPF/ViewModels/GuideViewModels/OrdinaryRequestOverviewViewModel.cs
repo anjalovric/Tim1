@@ -5,12 +5,10 @@ using InitialProject.WPF.Views.GuideViews;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
-using System.Windows.Controls;
 
 namespace InitialProject.WPF.ViewModels.GuideViewModels
 {
@@ -26,7 +24,6 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         private List <OrdinaryTourRequests> appropriateRequests;
 
         private SearchRequestsService searchRequestsService;
-
         public OrdinaryTourRequests Selected { get; set; }
 
         private string country;
@@ -38,6 +35,17 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
                 if (value != country)
                     country = value;
                  OnPropertyChanged();
+            }
+        }
+        private string description;
+        public string Description
+        {
+            get { return description; }
+            set
+            {
+                if (value != description)
+                    description = value;
+                OnPropertyChanged();
             }
         }
         private string city;
@@ -73,7 +81,6 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
                 OnPropertyChanged();
             }
         }
-
         private DateTime start;
         public DateTime Start
         {
@@ -96,7 +103,6 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
                 OnPropertyChanged();
             }
         }
-
         private bool isComboBoxCityEnabled;
         public bool IsComboBoxCityEnabled
         {
@@ -109,13 +115,13 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             }
         }
         private User loggedUser;
-
         public RelayCommand SearchCommand { get; set; }
         public RelayCommand ResetCommand { get; set; }
         public RelayCommand CreateCommand { get; set; }
+        public RelayCommand ViewDescriptionCommand { get; set; }
+        public RelayCommand EnableCityCommand { get; set; } 
 
         public event PropertyChangedEventHandler PropertyChanged;
-
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
@@ -131,18 +137,46 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             MakeCommands();
             Tours = tours;
             Future= futures;
+            RequestNotificationService requestNotificationService = new RequestNotificationService();
+            requestNotificationService.UpCount();
+            SetNews();
+            Description = "";
+        }
+        private void SetNews()
+        {
+            RequestNotificationService  requestNotificationService = new RequestNotificationService();
+            foreach (OrdinaryTourRequests request in Requests)
+            {
+                foreach (OrdinaryRequestNotification requestNotification in requestNotificationService.GetAll())
+                    if (requestNotification.Count == 1 && request.Id == requestNotification.RequestId)
+                        request.IsNew = true;
+            }
+        }
+        public void EnableCityComboBox_Executed(object sender)
+        {
+            LocationService locationService = new LocationService();
+            if (Country != null)
+            {
+                CitiesByCountry.Clear();
+                foreach (string city in locationService.GetCitiesByCountry((string)Country))
+                {
+                    CitiesByCountry.Add(city);
+                }
+                IsComboBoxCityEnabled = true;
+            }
         }
         private void MakeRequestsList()
         {
             OrdinaryTourRequestsService ordinaryTourRequestsService = new OrdinaryTourRequestsService();
             Requests= new ObservableCollection<OrdinaryTourRequests>(ordinaryTourRequestsService.GetOnWaitingRequests());
         }
-
         private void MakeCommands()
         {
             SearchCommand = new RelayCommand(Search_Executed, CanExecute);
             ResetCommand= new RelayCommand(Restart, CanExecute);
             CreateCommand = new RelayCommand(CreateTour_Executed, CanExecute);
+            ViewDescriptionCommand=new RelayCommand(ViewDescription_Executed, CanExecute);
+            EnableCityCommand = new RelayCommand(EnableCityComboBox_Executed, CanExecute);
         }
         private void MakeListOfLocations()
         {
@@ -160,19 +194,6 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             Languages.Add("arabic");
             Languages.Add("serbian");
             Languages.Add("italian");
-        }
-        public void ComboBoxCountry_SelectionChanged()
-        {
-            LocationService locationService = new LocationService();
-            if (Country != null)
-            {
-                CitiesByCountry.Clear();
-                foreach (string city in locationService.GetCitiesByCountry((string)Country))
-                {
-                    CitiesByCountry.Add(city);
-                }
-                IsComboBoxCityEnabled = true;
-            }
         }
         private bool CanExecute(object sender)
         {
@@ -216,6 +237,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         }
         private void Search_Executed(object sender)
         {
+            appropriateRequests.Clear();
             Search_Country();
             Search_City();
             Search_Capacity();
@@ -235,13 +257,19 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             String date = "1/1/0001 12:00:00 AM";
             Start = Convert.ToDateTime(date);
             End = Convert.ToDateTime(date);
+            Requests.Clear();
+            OrdinaryTourRequestsService ordinaryTourRequestsService = new OrdinaryTourRequestsService();
+            foreach(OrdinaryTourRequests request in ordinaryTourRequestsService.GetOnWaitingRequests())
+                Requests.Add(request);
         }
-
         private void CreateTour_Executed(object sender)
         {
             CreateTourFromRequestView createTourFromRequestView = new CreateTourFromRequestView(Tours,loggedUser,Future,Selected, Requests);
             Application.Current.Windows.OfType<GuideWindow>().FirstOrDefault().Main.Content = createTourFromRequestView;
-
+        }
+        private void ViewDescription_Executed(object sender)
+        {
+            Description = Selected.Description;
         }
     }
 }

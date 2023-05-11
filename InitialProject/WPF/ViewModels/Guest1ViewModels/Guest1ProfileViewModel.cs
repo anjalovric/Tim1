@@ -34,12 +34,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             }
 
         }
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
         public int AverageRating { get; set; }
         public int ReviewsNumber { get; set; }
         public Guest1ProfileViewModel(Guest1 guest1)
@@ -55,7 +49,12 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         private void ShowSuperGuest()
         {
             SuperGuestTitleService superGuestTitleService = new SuperGuestTitleService();
-            SuperGuest = superGuestTitleService.MakeSuperGuest(Guest1);         ///da li ce pucati zbog null?
+            superGuestTitleService.DeleteTitleIfManyYearsPassed(Guest1);
+            if (superGuestTitleService.IsAlreadySuperGuest(Guest1))
+            {
+                SuperGuest = superGuestTitleService.ProlongSuperGuestTitle(Guest1);  //add new or delete previous title.
+            }
+            SuperGuest = superGuestTitleService.MakeNewSuperGuest(Guest1);
             IsSuperGuest = superGuestTitleService.IsAlreadySuperGuest(Guest1);
         }
        
@@ -73,6 +72,10 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         {
             return Guest1.ImagePath;
         }
-        
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

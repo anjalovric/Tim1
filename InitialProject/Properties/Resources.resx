@@ -1,0 +1,498 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Activated" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="ADDBUTTON" xml:space="preserve">
+    <value>ADD</value>
+  </data>
+  <data name="AddCheckpoints" xml:space="preserve">
+    <value>Add Checkpoints</value>
+  </data>
+  <data name="AddDateAndTime" xml:space="preserve">
+    <value>Add date and time</value>
+  </data>
+  <data name="AddTourByLanguageView" xml:space="preserve">
+    <value>Create tour by language</value>
+  </data>
+  <data name="AddTourByLocation" xml:space="preserve">
+    <value>Create tour by location</value>
+  </data>
+  <data name="AddTourView" xml:space="preserve">
+    <value>Add tour </value>
+  </data>
+  <data name="AgeStatistics" xml:space="preserve">
+    <value>Age statistics</value>
+  </data>
+  <data name="BeforeRegularEnd" xml:space="preserve">
+    <value>before regular end</value>
+  </data>
+  <data name="Between18and" xml:space="preserve">
+    <value>Between 18 and 50</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="CANCELBUTTON" xml:space="preserve">
+    <value>CANCEL</value>
+  </data>
+  <data name="CancelTour" xml:space="preserve">
+    <value>CANCEL TOUR</value>
+  </data>
+  <data name="CancelView" xml:space="preserve">
+    <value>Tour cancelation</value>
+  </data>
+  <data name="Capacity" xml:space="preserve">
+    <value>Capacity</value>
+  </data>
+  <data name="Checked" xml:space="preserve">
+    <value>Checked</value>
+  </data>
+  <data name="CheckpointName" xml:space="preserve">
+    <value>Checkpoint name</value>
+  </data>
+  <data name="Checkpoints" xml:space="preserve">
+    <value> Checkpoint:</value>
+  </data>
+  <data name="Choose" xml:space="preserve">
+    <value>Choose:</value>
+  </data>
+  <data name="City" xml:space="preserve">
+    <value>City</value>
+  </data>
+  <data name="Comment" xml:space="preserve">
+    <value>Comment</value>
+  </data>
+  <data name="CONFIRM" xml:space="preserve">
+    <value>CONFIRM</value>
+  </data>
+  <data name="Country" xml:space="preserve">
+    <value>Country</value>
+  </data>
+  <data name="CREATE" xml:space="preserve">
+    <value>CREATE</value>
+  </data>
+  <data name="CREATEBUTTON" xml:space="preserve">
+    <value>CREATE</value>
+  </data>
+  <data name="Createtour" xml:space="preserve">
+    <value>Create tour</value>
+  </data>
+  <data name="CreateTourFromRequest" xml:space="preserve">
+    <value>Create tour from request</value>
+  </data>
+  <data name="CurrentCheckPoint" xml:space="preserve">
+    <value>⟟ Current checkpoint:</value>
+  </data>
+  <data name="DARK" xml:space="preserve">
+    <value>DARK</value>
+  </data>
+  <data name="DELETE" xml:space="preserve">
+    <value>DELETE</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="DESCRIPTIONBUTTON" xml:space="preserve">
+    <value>DESCRIPTION</value>
+  </data>
+  <data name="DETAILS" xml:space="preserve">
+    <value>DETAILS</value>
+  </data>
+  <data name="DetailsHeader" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="Donotexistsforlocation" xml:space="preserve">
+    <value>Do not exists request for that location!</value>
+  </data>
+  <data name="Donotexistsforthatlanguage" xml:space="preserve">
+    <value>Do not exists request for that language!</value>
+  </data>
+  <data name="Duration" xml:space="preserve">
+    <value>Duration</value>
+  </data>
+  <data name="DurationInHours" xml:space="preserve">
+    <value>Duration of tour in hours</value>
+  </data>
+  <data name="EndDate" xml:space="preserve">
+    <value>End date</value>
+  </data>
+  <data name="EndTime" xml:space="preserve">
+    <value>Finish</value>
+  </data>
+  <data name="FinishedTourDetails" xml:space="preserve">
+    <value>Finished tour details</value>
+  </data>
+  <data name="FINISHTOUR" xml:space="preserve">
+    <value>FINISH TOUR 🏁</value>
+  </data>
+  <data name="GENERATEREPORT" xml:space="preserve">
+    <value>GENERATE REPORT</value>
+  </data>
+  <data name="Grades" xml:space="preserve">
+    <value>Grades</value>
+  </data>
+  <data name="Guest" xml:space="preserve">
+    <value>Guest</value>
+  </data>
+  <data name="GuestsReservations" xml:space="preserve">
+    <value> Confirmed guests presence from reservations of:</value>
+  </data>
+  <data name="GuestWasOnPoints:" xml:space="preserve">
+    <value>Guest was on points:</value>
+  </data>
+  <data name="GUIDEALREADYHASTOUR" xml:space="preserve">
+    <value>Guide already has tour at this time!</value>
+  </data>
+  <data name="Guidesknowledge" xml:space="preserve">
+    <value>Guide's knowledge</value>
+  </data>
+  <data name="GuideWindow" xml:space="preserve">
+    <value>GuideWindow</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="HomePage" xml:space="preserve">
+    <value>HOME PAGE</value>
+  </data>
+  <data name="ifYouWantToFinishTour" xml:space="preserve">
+    <value>if you want to finish tour</value>
+  </data>
+  <data name="Images" xml:space="preserve">
+    <value>Images</value>
+  </data>
+  <data name="ImagesOfTour" xml:space="preserve">
+    <value>Images of tour</value>
+  </data>
+  <data name="in" xml:space="preserve">
+    <value>in</value>
+  </data>
+  <data name="InLastYear" xml:space="preserve">
+    <value>location in last year</value>
+  </data>
+  <data name="InLastYearLanguage" xml:space="preserve">
+    <value>language in last year</value>
+  </data>
+  <data name="InputYear" xml:space="preserve">
+    <value>Input year:</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="LanguageInLastYear" xml:space="preserve">
+    <value>language in last year</value>
+  </data>
+  <data name="LanguageKnowledge" xml:space="preserve">
+    <value>Knowledge of language</value>
+  </data>
+  <data name="langugaeinlastyear" xml:space="preserve">
+    <value>language in last year</value>
+  </data>
+  <data name="LIGHT" xml:space="preserve">
+    <value>LIGHT</value>
+  </data>
+  <data name="ListOfCheckpointsForChosenTour" xml:space="preserve">
+    <value>List od checkpoints for chosen tour:</value>
+  </data>
+  <data name="Location" xml:space="preserve">
+    <value>Location</value>
+  </data>
+  <data name="LocationInLastYear" xml:space="preserve">
+    <value>location in last year</value>
+  </data>
+  <data name="Month" xml:space="preserve">
+    <value>Month</value>
+  </data>
+  <data name="MONTHLY" xml:space="preserve">
+    <value>MONTHLY</value>
+  </data>
+  <data name="MonthlyLanguage" xml:space="preserve">
+    <value>Monthly statistic for requests on language</value>
+  </data>
+  <data name="MonthlyLocation" xml:space="preserve">
+    <value>Monthly statistic for requests on location</value>
+  </data>
+  <data name="MONTHLYREQUESTSSTATISTIC" xml:space="preserve">
+    <value>MONTHLY REQUESTS STATISTIC</value>
+  </data>
+  <data name="MonthlyStatistic" xml:space="preserve">
+    <value>Monthly requests statistic by language</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="NewRequests" xml:space="preserve">
+    <value>New requests:</value>
+  </data>
+  <data name="NewReviews" xml:space="preserve">
+    <value>New reviews:</value>
+  </data>
+  <data name="NumberOfGuests" xml:space="preserve">
+    <value> Number of presence guests:</value>
+  </data>
+  <data name="NumberRequests" xml:space="preserve">
+    <value>Number of requests</value>
+  </data>
+  <data name="Onthemostwanted" xml:space="preserve">
+    <value>on the most wanted</value>
+  </data>
+  <data name="Order" xml:space="preserve">
+    <value>Order</value>
+  </data>
+  <data name="Over50" xml:space="preserve">
+    <value>Over 50</value>
+  </data>
+  <data name="PleaseSelectCity" xml:space="preserve">
+    <value>Please select city</value>
+  </data>
+  <data name="PressFINISHTOUR" xml:space="preserve">
+    <value>Press FINISH TOUR</value>
+  </data>
+  <data name="Regular" xml:space="preserve">
+    <value>Regular</value>
+  </data>
+  <data name="REGULARTOURREQUESTS" xml:space="preserve">
+    <value>REGULAR TOUR REQUESTS</value>
+  </data>
+  <data name="RegularyRequestOverview" xml:space="preserve">
+    <value>Regulary tour request overview</value>
+  </data>
+  <data name="Requests" xml:space="preserve">
+    <value>Requests</value>
+  </data>
+  <data name="RequestsList" xml:space="preserve">
+    <value>Requests with waiting status</value>
+  </data>
+  <data name="RequestsStatisticYearly" xml:space="preserve">
+    <value>Requests yearly statistic</value>
+  </data>
+  <data name="RequestStatisticMonthlyLocatiovView" xml:space="preserve">
+    <value>Monthly requests statistic by location</value>
+  </data>
+  <data name="Review" xml:space="preserve">
+    <value>Review</value>
+  </data>
+  <data name="ReviewButton" xml:space="preserve">
+    <value>REVIEW</value>
+  </data>
+  <data name="ReviewFrom" xml:space="preserve">
+    <value>Review from:</value>
+  </data>
+  <data name="Reviews" xml:space="preserve">
+    <value>Reviews</value>
+  </data>
+  <data name="REVIEWSHEADER" xml:space="preserve">
+    <value>REVIEWS</value>
+  </data>
+  <data name="SelectFilters" xml:space="preserve">
+    <value>Select filters:</value>
+  </data>
+  <data name="START" xml:space="preserve">
+    <value>START</value>
+  </data>
+  <data name="StartDate" xml:space="preserve">
+    <value>Start date</value>
+  </data>
+  <data name="StartTime" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="Statistics" xml:space="preserve">
+    <value>Statistics</value>
+  </data>
+  <data name="themost" xml:space="preserve">
+    <value>on the most wanted</value>
+  </data>
+  <data name="TheMostVisitedTour" xml:space="preserve">
+    <value>The most visited tour</value>
+  </data>
+  <data name="TheMostVistedTourYear" xml:space="preserve">
+    <value>for chosen year</value>
+  </data>
+  <data name="Themostwanted" xml:space="preserve">
+    <value>The most wanted</value>
+  </data>
+  <data name="TheMostWantedLocation" xml:space="preserve">
+    <value>The most wanted</value>
+  </data>
+  <data name="ThisTourIsFinished" xml:space="preserve">
+    <value>This tour is finished!</value>
+  </data>
+  <data name="Todays" xml:space="preserve">
+    <value>Today's tours:</value>
+  </data>
+  <data name="TotalAttendance" xml:space="preserve">
+    <value>Total attendance</value>
+  </data>
+  <data name="TOURCREATED" xml:space="preserve">
+    <value>Tour is successfully created!</value>
+  </data>
+  <data name="TourDetails" xml:space="preserve">
+    <value>Tour Details</value>
+  </data>
+  <data name="TourForm" xml:space="preserve">
+    <value>TOUR FORM</value>
+  </data>
+  <data name="TourInstanceReviewView" xml:space="preserve">
+    <value>Tour instance reviews overview</value>
+  </data>
+  <data name="TourInterestigness" xml:space="preserve">
+    <value>Interestigness of tour</value>
+  </data>
+  <data name="TourName" xml:space="preserve">
+    <value>Tour name</value>
+  </data>
+  <data name="Tours" xml:space="preserve">
+    <value>Tours</value>
+  </data>
+  <data name="TOURSTATISTIC" xml:space="preserve">
+    <value>TOUR STATISTIC</value>
+  </data>
+  <data name="TourStatistics" xml:space="preserve">
+    <value>Tour statistics</value>
+  </data>
+  <data name="Under18" xml:space="preserve">
+    <value>Under 18</value>
+  </data>
+  <data name="Validity" xml:space="preserve">
+    <value>Validity</value>
+  </data>
+  <data name="ValidityChanged" xml:space="preserve">
+    <value>Validity is changed!</value>
+  </data>
+  <data name="VoucherStatistics" xml:space="preserve">
+    <value>Voucher statistics</value>
+  </data>
+  <data name="WithoutVouchers" xml:space="preserve">
+    <value>Without vouchers</value>
+  </data>
+  <data name="WithVouchers" xml:space="preserve">
+    <value>With vouchers</value>
+  </data>
+  <data name="Year" xml:space="preserve">
+    <value>Year</value>
+  </data>
+  <data name="YEARLYREQUESTSSTATISTC" xml:space="preserve">
+    <value>YEARLY REQUEST STATISTIC</value>
+  </data>
+</root>

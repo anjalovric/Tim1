@@ -11,7 +11,7 @@ namespace InitialProject.Service
     {
         private IAccommodationRepository accommodationRepository = Injector.CreateInstance<IAccommodationRepository>();
         private List<Accommodation> accommodations;
-        private List<Accommodation> Accommodations;
+        private List<Accommodation> Accommodations;//for search
         public AccommodationService()
         {
             MakeAccommodations();
@@ -32,19 +32,18 @@ namespace InitialProject.Service
         private void MakeAccommodations()
         {
             accommodations = accommodationRepository.GetAll();
-            AddOwners();
-            AddLocations();
-            AddTypes();
+            SetOwners();
+            SetLocations();
+            SetTypes();
             SetAccommodationCoverImages();
         }
-
         private void SetAccommodationCoverImages()
         {
             AccommodationImageService accommodationImageService = new AccommodationImageService();
             foreach (Accommodation accommodation in accommodations)
                 accommodation.CoverImage = accommodationImageService.GetCoverImage(accommodation);
         }
-        private void AddOwners()
+        private void SetOwners()
         {
             OwnerService ownerService = new OwnerService();
             List<Owner> allOwners = ownerService.GetAll();
@@ -55,7 +54,7 @@ namespace InitialProject.Service
                     accommodation.Owner = accommodationOwner;
             }
         }
-        private void AddLocations()
+        private void SetLocations()
         {
             LocationService locationService = new LocationService();
             List<Location> allLocations = locationService.GetAll();
@@ -66,7 +65,7 @@ namespace InitialProject.Service
                    accommodation.Location = accommodationLocation;
             }
         }
-        private void AddTypes()
+        private void SetTypes()
         {
             AccommodationTypeService accommodationTypeService = new AccommodationTypeService();
             List<AccommodationType> allTypes = accommodationTypeService.GetAll();
@@ -91,12 +90,10 @@ namespace InitialProject.Service
             }
             return accommodationsByOwner;
         }
-
         public void Delete(Accommodation accommodation)
         {
             accommodationRepository.Delete(accommodation);
         }
-
         public List<Accommodation> SearchName(Accommodation accommodation, string Name)
         {
             if (!accommodation.Name.ToLower().Contains(Name.ToLower()))

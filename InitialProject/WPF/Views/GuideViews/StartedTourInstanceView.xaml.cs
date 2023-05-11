@@ -10,11 +10,11 @@ namespace InitialProject.WPF.Views.GuideViews
     /// </summary>
     public partial class StartedTourInstanceView : Page 
     {
-        StartedTourViewModel viewModel;
-        public StartedTourInstanceView(TourInstance selectedInstance, ObservableCollection<TourInstance> tours, ObservableCollection<TourInstance> finishedInstances)
+        StartedTourInstanceViewModel viewModel;
+        public StartedTourInstanceView(TourInstance selectedInstance, ObservableCollection<TourInstance> tours, ObservableCollection<TourInstance> finishedInstances,int GuideId)
         {
             InitializeComponent();
-            viewModel=new StartedTourViewModel(selectedInstance, tours, finishedInstances);
+            viewModel=new StartedTourInstanceViewModel(selectedInstance, tours, finishedInstances, GuideId);
             DataContext = viewModel;
 
         }

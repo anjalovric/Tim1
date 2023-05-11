@@ -2,6 +2,7 @@
 using InitialProject.Model;
 using InitialProject.Service;
 using InitialProject.WPF.Views.Guest2Views;
+using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -16,7 +17,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
 {
     public class OrdinaryTourRequestDetailsViewModel:INotifyPropertyChanged
     {
-        private Guest2Notification Notification;
+        private NewTourNotification Notification;
         private TourInstance tourInstance;
         private ObservableCollection<TourInstance> TourInstances;
         private TourInstanceService tourInstanceService;
@@ -32,14 +33,16 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
 
         }
         public string StartDate { get; set; }
+        public string EndDate { get; set; }
         public RelayCommand CloseCommand { get; set; }
-        public OrdinaryTourRequestDetailsViewModel(Guest2Notification notification, Model.Guest2 guest2)
+        public OrdinaryTourRequestDetailsViewModel(NewTourNotification notification, Model.Guest2 guest2)
         {
             Notification = notification;
             tourInstanceService = new TourInstanceService();
             TourInstances = new ObservableCollection<TourInstance>(tourInstanceService.GetAll());
             TourInstance = SetTourInstance(Notification.TourInstance);
-            StartDate = TourInstance.StartDate.ToString().Split(" ")[0];
+            StartDate = TourInstance.StartDate.ToString();
+            EndDate= TourInstance.StartDate.AddHours(TourInstance.Tour.Duration).ToString();
             CloseCommand = new RelayCommand(Close_Executed,CanExecute);
         }
         private TourInstance SetTourInstance(TourInstance tourInstance)

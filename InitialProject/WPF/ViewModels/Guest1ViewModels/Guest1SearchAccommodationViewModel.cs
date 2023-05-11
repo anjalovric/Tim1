@@ -16,7 +16,7 @@ using System.Windows.Interactivity;
 
 namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 {
-    public class Guest1SearchAccommodationViewModel : INotifyPropertyChanged
+    public class Guest1SearchAccommodationViewModel : INotifyPropertyChanged, IDataErrorInfo
     {
         private Guest1 guest1;
         public ObservableCollection<string> Countries { get; set; }
@@ -35,6 +35,8 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             }
 
         }
+        public string NumberOfDaysError {get;set;}
+        public string NumberOfGuestsError { get; set; }
         private string name;
         public string Name
         {
@@ -57,7 +59,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                 if (!value.Equals(numberOfDays))
                 {
                     numberOfDays = value;
-                    OnPropertyChanged();
+                    OnPropertyChanged("NumberOfDays");
                 }
             }
         }
@@ -70,7 +72,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                 if (!value.Equals(numberOfGuests))
                 {
                     numberOfGuests = value;
-                    OnPropertyChanged();
+                    OnPropertyChanged("NumberOfGuests");
                 }
             }
         }
@@ -156,8 +158,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                 }
             }
         }
-
-
         public RelayCommand SearchCommand { get; set; }
         public RelayCommand ShowAllCommand { get; set; }
         public RelayCommand ReserveCommand { get; set; }
@@ -168,17 +168,130 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         public RelayCommand DecrementGuestsNumberCommand { get; set; }
         public RelayCommand DecrementDaysNumberCommand { get; set; }
         public RelayCommand CountryInputSelectionChangedCommand { get; set; }
+        public string Error => null;
+
+        //Validation for Number of guests and Number od days fields
+        public bool IsValid
+        {
+            get
+            {
+                foreach (var property in _validatedProperties)
+                {
+                    if (this[property] != null)
+                        return false;
+                }
+
+                return true;
+            }
+        }
+        private bool isInputValid;
+        public bool IsInputValid {
+            get { return isInputValid; }
+            set
+            {
+                if (value != isInputValid)
+                {
+                    isInputValid = value;
+                    OnPropertyChanged("IsInputValid");
+                }
+            }
+        }
+        private bool isNumberOfDaysValid;
+        public bool IsNumberOfDaysValid
+        {
+            get { return isNumberOfDaysValid; }
+            set
+            {
+                if (value != isNumberOfDaysValid)
+
+                {
+                    isNumberOfDaysValid = value;
+                    OnPropertyChanged("IsNumberOfDaysValid");
+                }
+            }
+        }
+        private bool isNumberOfGuestsValid;
+        public bool IsNumberOfGuestsValid
+        {
+            get { return isNumberOfGuestsValid; }
+            set
+            {
+                if (value != isNumberOfGuestsValid)
+                {
+                    isNumberOfGuestsValid = value;
+                    OnPropertyChanged("IsNumberOfGuestsValid");
+                }
+            }
+        }
+        public override string ToString()
+        {
+            return $"{NumberOfDays} {NumberOfGuests}";
+        }
+        private readonly string[] _validatedProperties = { "NumberOfDays", "NumberOfGuests" };
+        public string this[string columnName]
+        {
+            get
+            {
+                if (columnName == "NumberOfDays")
+                {
+                    var content = NumberOfDays;
+                    Match match = CreateValidationNumberRegex(content);
+                    if (!match.Success && NumberOfDays != "")
+                    {
+                        IsNumberOfDaysValid = false;
+                        IsInputValid = false;
+                        return "Enter an integer greater than zero.";
+                    }
+                    IsNumberOfDaysValid = true;
+                    if (IsNumberOfGuestsValid)
+                        IsInputValid = true;
+                }
+
+                if (columnName == "NumberOfGuests")
+                {
+                    var content = NumberOfGuests;
+                    Match match = CreateValidationNumberRegex(content);
+                    if (!match.Success && NumberOfGuests != "")
+                    {
+                        IsInputValid=false;
+                        IsNumberOfGuestsValid = false;
+                        return "Enter an integer greater than zero.";
+                    }
+                    
+                    IsNumberOfGuestsValid = true;
+                    if (IsNumberOfDaysValid)
+                        IsInputValid = true;
+                }
+                return null;
+            }
+        }
         public Guest1SearchAccommodationViewModel(Guest1 guest1)
         {
             this.guest1 = guest1;
             accommodationService = new AccommodationService();
-            Accommodations = new ObservableCollection<Accommodation>(accommodationService.GetAll());
+            AccommodationRenovationService accommodationRenovationService = new AccommodationRenovationService();
+            List<Accommodation> storedAccommodation = new List<Accommodation>(accommodationService.GetAll());
+            accommodationRenovationService.AreRenovated(storedAccommodation);
+            Accommodations = new ObservableCollection<Accommodation>(storedAccommodation);
             SortAccommodationBySuperOwners();
+            InitializePage();
+            GetLocations();
+            MakeCommands();
+        }
+        private void InitializePage()
+        {
             NumberOfDays = "";
             NumberOfGuests = "";
             Name = "";
-            GetLocations();
-            MakeCommands();
+            IsInputValid = true;
+            IsNumberOfDaysValid = true;
+            IsNumberOfGuestsValid = true;
+        }
+        private Match CreateValidationNumberRegex(string content)
+        {
+            var regex = "^([1-9][0-9]*)$";
+            Match match = Regex.Match(content, regex, RegexOptions.IgnoreCase);
+            return match;
         }
         private void SortAccommodationBySuperOwners()
         {
@@ -230,7 +343,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         }
         private void Search_Executed(object sender)
         {
-            if (IsNumberOfDaysValid() && IsNumberOfGuestsValid())
+            if (IsValid)
             {
                 accommodationService = new AccommodationService();
                 List<Accommodation> storedAccommodation = accommodationService.GetAll();
@@ -272,6 +385,9 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             CottageChecked = false;
             NumberOfDays = "";
             NumberOfGuests = "";
+            IsInputValid = true;
+            IsNumberOfDaysValid = true;
+            IsNumberOfGuestsValid = true;
         }
         private void DecrementGuestsNumber_Executed(object sender)
         {
@@ -324,58 +440,10 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         {
             Accommodation currentAccommodation = ((Button)sender).DataContext as Accommodation;
             AccommodationReservationFormView accommodationReservationForm = new AccommodationReservationFormView(currentAccommodation, guest1);
-            accommodationReservationForm.Show();
+            accommodationReservationForm.Owner = Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault();
+            accommodationReservationForm.ShowDialog();
         }
-        private bool IsNumberOfDaysValid()  //dodati normalnu validaciju
-        {
-            var content = NumberOfDays;
-            Match match = CreateValidationNumberRegex(content);
-            bool isValid = false;
-            if (!match.Success && NumberOfDays != "")
-                ShowNumberOfDaysValidationMessages();
-            else
-            {
-                isValid = true;
-                //numberOfDays.BorderBrush = Brushes.Green;
-               // numberOfDaysLabel.Content = string.Empty;
-            }
-            return isValid;
-        }
-        private void ShowNumberOfDaysValidationMessages()
-        {
-            //numberOfDays.BorderBrush = Brushes.Red;
-            //numberOfDaysLabel.Content = "This field should be positive integer number";
-            //numberOfDays.BorderThickness = new Thickness(1);
-        }
-        private void ShowNumberOfGuestsValidationMessages()
-        {
-            //numberOfGuests.BorderBrush = Brushes.Red;
-            //numberOfGuestsLabel.Content = "This field should be positive integer number";
-            //numberOfGuests.BorderThickness = new Thickness(1);
-        }
-        private bool IsNumberOfGuestsValid()
-        {
-            var content = NumberOfGuests;
-            Match match = CreateValidationNumberRegex(content);
-            bool isValid = false;
-            if (!match.Success && NumberOfGuests != "")
-                ShowNumberOfGuestsValidationMessages();
-            else
-            {
-                isValid = true;
-                //numberOfGuests.BorderBrush = Brushes.Green;   //dodati validaciju1!!!!!!!
-                //numberOfGuestsLabel.Content = string.Empty;
-            }
-            return isValid;
-        }
-        private Match CreateValidationNumberRegex(string content)
-        {
-            var regex = "^([1-9][0-9]*)$";
-            Match match = Regex.Match(content, regex, RegexOptions.IgnoreCase);
-            return match;
-        }
-
-
+       
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {

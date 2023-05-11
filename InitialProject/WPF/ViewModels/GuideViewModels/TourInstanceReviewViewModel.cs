@@ -1,4 +1,5 @@
-﻿using InitialProject.Model;
+﻿using InitialProject.Domain.Model;
+using InitialProject.Model;
 using InitialProject.Service;
 using InitialProject.WPF.Views.GuideViews;
 using System.Collections.Generic;
@@ -38,6 +39,9 @@ namespace InitialProject.WPF.ViewModels
             guideService = new GuideService();
             GetGuideReviews(guide);
             ViewReviewCommand = new RelayCommand(ViewDetailsExecuted, CanExecute);
+            ReviewNotificationService reviewNotificationService = new ReviewNotificationService();
+            reviewNotificationService.UpCount(guide);
+            SetNews();
         }
         private void GetGuideReviews(User guide)
         {
@@ -47,6 +51,16 @@ namespace InitialProject.WPF.ViewModels
             List<GuideAndTourReview> filledInstances = guideAndTourReviewService.FillWithInstance(filledGuets);
             List<GuideAndTourReview> filledTours = guideAndTourReviewService.FillWithTour(filledInstances);
             Reviews = new ObservableCollection<GuideAndTourReview>(guideAndTourReviewService.FillWithLocation(filledTours));
+        }
+        private void SetNews()
+        {
+            ReviewNotificationService reviewNotificationService = new ReviewNotificationService();
+            foreach (GuideAndTourReview review in Reviews)
+            {
+                foreach (GuideAndTourReviewNotification reviewNotification in reviewNotificationService.GetAll())
+                    if (reviewNotification.Count == 1 && review.Id == reviewNotification.GuideAndTourReviewId)
+                        review.New = "🆕";
+            }
         }
         private bool CanExecute(object sender)
         {

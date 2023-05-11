@@ -1,11 +1,5 @@
-﻿using InitialProject.Domain.Model;
-using InitialProject.Serializer;
+﻿using InitialProject.Serializer;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Media.Imaging;
 
 namespace InitialProject.Model
 {
@@ -23,11 +17,14 @@ namespace InitialProject.Model
         public bool Valid { get; set; }
 
         public string ValidationImage { get; set; }
+
+        public string New { get; set; }
         public GuideAndTourReview()
         {
             TourInstance = new TourInstance();
             Valid = true;
             ValidationImage= "✔";
+            New = "";
         }
         public GuideAndTourReview(int guideId, Guest2 guest,TourInstance tourInstance, int language, int interestingFacts, int knowledge, String comment)
         {
@@ -41,6 +38,7 @@ namespace InitialProject.Model
             Comment = comment;
             Valid = true;
             ValidationImage = "✔";
+            New= "";
         }
         public string[] ToCSV()
         {

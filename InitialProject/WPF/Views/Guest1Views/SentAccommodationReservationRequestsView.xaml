@@ -3,7 +3,9 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:InitialProject.View"
+      xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+      xmlns:local="clr-namespace:InitialProject.WPF.Views.Guest1Views"
+      xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
       mc:Ignorable="d" 
       Title="SentAccommodationReservationRequests" d:DesignHeight="696" d:DesignWidth="1024">
     <Page.Resources>
@@ -12,8 +14,9 @@
         </Style>
         <Style TargetType="Label">
             <Setter Property="Foreground" Value="#d9c7b3"></Setter>
-            <Setter Property="FontWeight" Value="Medium"></Setter>
-            <Setter Property="FontFamily" Value="Baskerville Old Face"></Setter>
+        </Style>
+        <Style TargetType="ScrollBar">
+            <Setter Property="Background" Value="#FFFCECB9"></Setter>
         </Style>
         <Style TargetType="TabItem">
             <Setter Property="Height" Value="40"></Setter>
@@ -26,26 +29,65 @@
         <Style TargetType="DataGrid">
             <Setter Property="BorderBrush" Value="#22301a"></Setter>
             <Setter Property="BorderThickness" Value="4,4,3,4"></Setter>
-            <Setter Property="Background" Value="#FFF9ECC5"></Setter>
-            <Setter Property="ColumnHeaderHeight" Value="40"></Setter>
+            <Setter Property="ColumnHeaderHeight" Value="45"></Setter>
             <Setter Property="RowHeight" Value="30"></Setter>
             <Setter Property="FontWeight" Value="Medium"></Setter>
             <Setter Property="RowBackground" Value="#FFFCECB9"></Setter>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="#dbc9ab" Offset="0.1"/>
+                        <GradientStop Color="#FFF9ECC5" Offset="0.4"/>
+                        <GradientStop Color="#FFF9ECC5" Offset="0.5"/>
+                        <GradientStop Color="#FFF9ECC5" Offset="0.6"/>
+                        <GradientStop Color="#dbc9ab" Offset="0.9"></GradientStop>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="FontSize" Value="16"></Setter>
+            <Setter Property="UseLayoutRounding" Value="False"></Setter>
+            <Setter Property="HeadersVisibility" Value="Column"></Setter>
+            <Setter Property="IsReadOnly" Value="True"></Setter>
+            <Setter Property="AutoGenerateColumns" Value="False"></Setter>
         </Style>
         <Style TargetType="DataGridColumnHeader">
             <Setter Property="TextElement.Foreground" Value="#22301a"></Setter>
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
             <Setter Property="BorderThickness" Value="0,0,1,4"/>
             <Setter Property="BorderBrush" Value="#22301a"/>
-            <Setter Property="Background" Value="#dbc9ab"/>
             <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="#dbc9ab" Offset="0"/>
+                        <GradientStop Color="#FFF9ECC5" Offset="0.5"/>
+                        <GradientStop Color="#dbc9ab" Offset="1"></GradientStop>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
         </Style>
         <Style TargetType="DataGridCell">
             <Setter Property="TextBlock.TextAlignment" Value="Center"></Setter>
+            <Style.Triggers>
+                <Trigger Property="IsSelected"  Value="True">
+                    <Setter Property="Foreground" Value="#22301a"></Setter>
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="BorderBrush" Value="Transparent"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
     </Page.Resources>
+
+
+
     <Grid>
-        <TabControl x:Name="RequestsTabControl" Height="430" VerticalAlignment="Top">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="430"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        
+        
+        <TabControl x:Name="RequestsTabControl" Height="430" VerticalAlignment="Top" Grid.Row="0">
             <TabControl.TabStripPlacement>Top</TabControl.TabStripPlacement>
             <TabControl.Template>
                 <ControlTemplate TargetType="{x:Type TabControl}">
@@ -54,98 +96,33 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <TabPanel Grid.Row="0"  Width="Auto"
-                   Margin="0,0,0,0" 
-                   IsItemsHost="True" 
-                   HorizontalAlignment="Center" />
-                        <Border Grid.Row="1" 
-                 BorderBrush="#22301a" 
-                 BorderThickness="0,4,0,0">
+                        <TabPanel Grid.Row="0"  Width="Auto" Margin="0,0,0,0" IsItemsHost="True" HorizontalAlignment="Center"/>
+                        <Border Grid.Row="1" BorderThickness="0,7,0,7" BorderBrush="#22301a">
                             <ContentPresenter Content="{TemplateBinding SelectedContent}" />
                         </Border>
                     </Grid>
                 </ControlTemplate>
             </TabControl.Template>
 
+            <!-- APPROVED REQUESTS -->
             <TabItem Header="Approved requests" FontSize="16" HorizontalAlignment="Center">
-
                 <Grid>
-                    <Label FontSize="24" FontWeight="Bold" VerticalContentAlignment="Center" Height="Auto" VerticalAlignment="Top" Margin="0,10,0,0" HorizontalAlignment="Center">APPROVED REQUESTS</Label>
-                    <DataGrid x:Name="ApprovedRequestsDataGrid" FontSize="16" VerticalContentAlignment="Center" VerticalScrollBarVisibility="Auto" Margin="0,40,0,0" RowBackground="#CDFFCC" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Left" ItemsSource="{Binding Path=ApprovedRequests,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" IsReadOnly="True" Height="322" Width="950" UseLayoutRounding="False" HeadersVisibility="Column">
+                    <Grid.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                            <GradientStop Color="#22301a" Offset="0"/>
+                            <GradientStop Color="#37492d" Offset="0.2"></GradientStop>
+                            <GradientStop Color="#37492d" Offset="0.4"/>
+                            <GradientStop Color="#37492d" Offset="0.5"/>
+                            <GradientStop Color="#37492d" Offset="0.6"/>
+                            <GradientStop Color="#37492d" Offset="0.8"></GradientStop>
+                            <GradientStop Color="#22301a" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Grid.Background>
 
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Name" Width="1.5*" Binding="{Binding Reservation.Accommodation.Name}">
-                                <DataGridTextColumn.ElementStyle>
-                                    <Style TargetType="{x:Type TextBlock}">
-                                        <Setter Property="ToolTip" Value="{Binding Reservation.Accommodation.Name}" />
-                                    </Style>
-                                </DataGridTextColumn.ElementStyle>
-                            </DataGridTextColumn>
-                            <DataGridTextColumn Header="Location" Width="1.5*"  Binding="{Binding Reservation.Accommodation.Location}">
-                                <DataGridTextColumn.ElementStyle>
-                                    <Style TargetType="{x:Type TextBlock}">
-                                        <Setter Property="ToolTip" Value="{Binding Reservation.Accommodation.Location}" />
-                                    </Style>
-                                </DataGridTextColumn.ElementStyle>
-                            </DataGridTextColumn>
-                            <DataGridTextColumn Header="Owner" Width="1.5*">
-                                <DataGridTextColumn.Binding>
-                                    <MultiBinding StringFormat="{}{0} {1}">
-                                        <Binding Path="Reservation.Accommodation.Owner.Name"/>
-                                        <Binding Path="Reservation.Accommodation.Owner.LastName" />
-                                    </MultiBinding>
-                                </DataGridTextColumn.Binding>
-                                <DataGridTextColumn.ElementStyle>
-                                    <Style TargetType="{x:Type TextBlock}">
-                                        <Setter Property="ToolTip">
-                                            <Setter.Value>
-                                                <TextBlock>
-                                                    <Run Text="{Binding Reservation.Accommodation.Owner.Name}"/>
-                                                    <Run Text="{Binding Reservation.Accommodation.Owner.LastName}"/>    
-                                                </TextBlock>
-                                            </Setter.Value>
-                                        </Setter>
-                                    </Style>
-                                </DataGridTextColumn.ElementStyle>
-                            </DataGridTextColumn>
-                            <DataGridTextColumn Header="Old arrival date" Width="2*" Binding="{Binding OldArrivalDate}">
-                                <DataGridTextColumn.ElementStyle>
-                                    <Style TargetType="{x:Type TextBlock}">
-                                        <Setter Property="ToolTip" Value="{Binding OldArrivalDate}" />
-                                    </Style>
-                                </DataGridTextColumn.ElementStyle>
-                            </DataGridTextColumn>
-                            <DataGridTextColumn Header="Old departure date" Width="2*" Binding="{Binding OldDepartureDate}">
-                                <DataGridTextColumn.ElementStyle>
-                                    <Style TargetType="{x:Type TextBlock}">
-                                        <Setter Property="ToolTip" Value="{Binding OldDepartureDate}" />
-                                    </Style>
-                                </DataGridTextColumn.ElementStyle>
-                            </DataGridTextColumn>
-                            <DataGridTextColumn Header="New arrival date" Width="2*" Binding="{Binding NewArrivalDate}">
-                                <DataGridTextColumn.ElementStyle>
-                                    <Style TargetType="{x:Type TextBlock}">
-                                        <Setter Property="ToolTip" Value="{Binding NewArrivalDate}" />
-                                    </Style>
-                                </DataGridTextColumn.ElementStyle>
-                            </DataGridTextColumn>
-                            <DataGridTextColumn Header="New departure date" Width="2*" Binding="{Binding NewDepartureDate}">
-                                <DataGridTextColumn.ElementStyle>
-                                    <Style TargetType="{x:Type TextBlock}">
-                                        <Setter Property="ToolTip" Value="{Binding NewDepartureDate}" />
-                                    </Style>
-                                </DataGridTextColumn.ElementStyle>
-                            </DataGridTextColumn>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </Grid>
+                    <Label FontSize="24" FontFamily="Baskerville Old Face" FontWeight="Bold" VerticalContentAlignment="Center" Height="Auto" VerticalAlignment="Top" Margin="0,15,0,0" HorizontalAlignment="Center">APPROVED REQUESTS</Label>
 
 
-            </TabItem>
-            <TabItem Header="Pending requests" FontSize="16" HorizontalAlignment="Center">
-                <Grid>
-                    <Label FontSize="24" VerticalAlignment="Top" VerticalContentAlignment="Center" Height="Auto" FontWeight="Bold" Margin="0,10,0,0" HorizontalAlignment="Center">PENDING REQUESTS</Label>
-                    <DataGrid x:Name="PendingRequestsDataGrid" FontSize="16" VerticalContentAlignment="Center" VerticalScrollBarVisibility="Auto" HeadersVisibility="Column" Margin="0,40,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" ItemsSource="{Binding Path=PendingRequests,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" IsReadOnly="True" Height="322" Width="950" UseLayoutRounding="False">
+                    <DataGrid x:Name="ApprovedRequestsDataGrid" VerticalContentAlignment="Center" VerticalScrollBarVisibility="Auto" Margin="0,0,0,20" HorizontalAlignment="Center" VerticalAlignment="Bottom" HorizontalContentAlignment="Left" ItemsSource="{Binding Path=ApprovedRequests,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" RowBackground="#96CE9A" Height="300" Width="950">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Name" Width="1.5*" Binding="{Binding Reservation.Accommodation.Name}">
                                 <DataGridTextColumn.ElementStyle>
@@ -202,7 +179,7 @@
                                     </Style>
                                 </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
-                            <DataGridTextColumn Header="New departure date" Width="2*" Binding="{Binding NewDepartureDate}">
+                            <DataGridTextColumn Header="New departure date" Width="2.2*" Binding="{Binding NewDepartureDate}">
                                 <DataGridTextColumn.ElementStyle>
                                     <Style TargetType="{x:Type TextBlock}">
                                         <Setter Property="ToolTip" Value="{Binding NewDepartureDate}" />
@@ -214,10 +191,110 @@
                 </Grid>
             </TabItem>
 
+            <!-- PENDING REQUESTS -->
+            <TabItem Header="Pending requests" FontSize="16" HorizontalAlignment="Center">
+                <Grid>
+                    <Grid.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                            <GradientStop Color="#22301a" Offset="0"/>
+                            <GradientStop Color="#37492d" Offset="0.2"></GradientStop>
+                            <GradientStop Color="#37492d" Offset="0.4"/>
+                            <GradientStop Color="#37492d" Offset="0.5"/>
+                            <GradientStop Color="#37492d" Offset="0.6"/>
+                            <GradientStop Color="#37492d" Offset="0.8"></GradientStop>
+                            <GradientStop Color="#22301a" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Grid.Background>
+                    
+                    <Label FontSize="24" VerticalAlignment="Top" FontFamily="Baskerville Old Face" VerticalContentAlignment="Center" Height="Auto" FontWeight="Bold" Margin="0,15,0,0" HorizontalAlignment="Center">PENDING REQUESTS</Label>
+                   
+                    <DataGrid x:Name="PendingRequestsDataGrid" VerticalContentAlignment="Center" VerticalScrollBarVisibility="Auto" Margin="0,0,0,20" HorizontalAlignment="Center" VerticalAlignment="Bottom" ItemsSource="{Binding Path=PendingRequests,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Height="300" Width="950">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Name" Width="1.5*" Binding="{Binding Reservation.Accommodation.Name}">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="ToolTip" Value="{Binding Reservation.Accommodation.Name}" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Location" Width="1.5*"  Binding="{Binding Reservation.Accommodation.Location}">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="ToolTip" Value="{Binding Reservation.Accommodation.Location}" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Owner" Width="1.5*">
+                                <DataGridTextColumn.Binding>
+                                    <MultiBinding StringFormat="{}{0} {1}">
+                                        <Binding Path="Reservation.Accommodation.Owner.Name"/>
+                                        <Binding Path="Reservation.Accommodation.Owner.LastName" />
+                                    </MultiBinding>
+                                </DataGridTextColumn.Binding>
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="ToolTip">
+                                            <Setter.Value>
+                                                <TextBlock>
+                                                    <Run Text="{Binding Reservation.Accommodation.Owner.Name}"/>
+                                                    <Run Text="{Binding Reservation.Accommodation.Owner.LastName}"/>
+                                                </TextBlock>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Old arrival date" Width="2*" Binding="{Binding OldArrivalDate}">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="ToolTip" Value="{Binding OldArrivalDate}" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Old departure date" Width="2*" Binding="{Binding OldDepartureDate}">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="ToolTip" Value="{Binding OldDepartureDate}" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="New arrival date" Width="2*" Binding="{Binding NewArrivalDate}">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="ToolTip" Value="{Binding NewArrivalDate}" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="New departure date" Width="2.2*" Binding="{Binding NewDepartureDate}">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="ToolTip" Value="{Binding NewDepartureDate}" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+
+            <!-- DECLINED REQUESTS -->
             <TabItem Header="Declined requests" FontSize="16">
                 <Grid>
-                    <Label FontSize="24"  FontWeight="Bold" VerticalContentAlignment="Center" VerticalAlignment="Top" Height="Auto" Margin="0,10,0,0" HorizontalAlignment="Center">DECLINED REQUESTS</Label>
-                    <DataGrid  x:Name="DeclinedRequestsDataGrid" FontSize="16" VerticalContentAlignment="Center" Margin="0,40,0,0" HeadersVisibility="Column" RowBackground="#FF8986"  HorizontalAlignment="Center" VerticalAlignment="Center" VerticalScrollBarVisibility="Auto" ItemsSource="{Binding Path=DeclinedRequests,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" IsReadOnly="True" Height="322" Width="950" UseLayoutRounding="False">
+                    <Grid.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                            <GradientStop Color="#22301a" Offset="0"/>
+                            <GradientStop Color="#37492d" Offset="0.2"></GradientStop>
+                            <GradientStop Color="#37492d" Offset="0.4"/>
+                            <GradientStop Color="#37492d" Offset="0.5"/>
+                            <GradientStop Color="#37492d" Offset="0.6"/>
+                            <GradientStop Color="#37492d" Offset="0.8"></GradientStop>
+                            <GradientStop Color="#22301a" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Grid.Background>
+                    
+                    <Label FontSize="24" FontFamily="Baskerville Old Face" FontWeight="Bold" VerticalContentAlignment="Center" VerticalAlignment="Top" Height="Auto" Margin="0,15,0,0" HorizontalAlignment="Center">DECLINED REQUESTS</Label>
+                    
+                    <DataGrid  x:Name="DeclinedRequestsDataGrid" VerticalContentAlignment="Center" Margin="0,0,0,20" RowBackground="#F08080"  HorizontalAlignment="Center" VerticalAlignment="Bottom" VerticalScrollBarVisibility="Auto" ItemsSource="{Binding Path=DeclinedRequests,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Height="300" Width="950">
                         <DataGrid.Columns >
                             <DataGridTextColumn Header="Name" Width="1.4*" Binding="{Binding Reservation.Accommodation.Name}">
                                 <DataGridTextColumn.ElementStyle>
@@ -280,7 +357,66 @@
             </TabItem>
 
         </TabControl>
-        
-        
+
+
+        <!-- PLACE FOR DIAGRAM -->
+        <Grid Grid.Row="1">
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                    <GradientStop Color="#22301a" Offset="0"/>
+                    <GradientStop Color="#37492d" Offset="0.2"></GradientStop>
+                    <GradientStop Color="#37492d" Offset="0.4"/>
+                    <GradientStop Color="#37492d" Offset="0.5"/>
+                    <GradientStop Color="#37492d" Offset="0.6"/>
+                    <GradientStop Color="#37492d" Offset="0.8"></GradientStop>
+                    <GradientStop Color="#22301a" Offset="1"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+
+            <Label FontSize="16" FontWeight="Medium" Grid.Row="1" Width="Auto" Height="35" HorizontalAlignment="Center" VerticalAlignment="Top" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Margin="0,5,0,0">Frequency of making requests (previous year)</Label>
+
+           
+            <Grid VerticalAlignment="Top" Background="Transparent" HorizontalAlignment="Center" Grid.Row="1" Height="170" Width="492" Margin="0,45,0,0">
+                <lvc:CartesianChart Series="{Binding SeriesCollection}" LegendLocation="None">
+                    <lvc:CartesianChart.SeriesColors>
+                        <lvc:ColorsCollection>
+                            <Color>#dbc9ab</Color>
+                        </lvc:ColorsCollection>
+                    </lvc:CartesianChart.SeriesColors>
+                    <lvc:CartesianChart.AxisX>
+                        <lvc:Axis Labels="{Binding Labels}" Foreground="#dbc9ab" FontWeight="Medium" ShowLabels="True" MinValue="1" MaxValue="14">
+                            <lvc:Axis.Separator>
+                                <lvc:Separator Step="1">
+                                    <lvc:Separator.Resources>
+                                        <Style TargetType="lvc:Separator">
+                                            <Setter Property="StrokeThickness" Value="0"/>
+                                        </Style>
+                                    </lvc:Separator.Resources>
+                                </lvc:Separator>
+                            </lvc:Axis.Separator>
+                        </lvc:Axis>
+                    </lvc:CartesianChart.AxisX>
+                    <lvc:CartesianChart.AxisY>
+                        <lvc:Axis MinValue="0" Foreground="#dbc9ab" FontWeight="Medium">
+                            <lvc:Axis.Separator>
+                                <lvc:Separator>
+                                    <lvc:Separator.Resources>
+                                        <Style TargetType="lvc:Separator">
+                                            <Setter Property="StrokeThickness" Value="1"/>
+                                            <Setter Property="Stroke" Value="#dbc9ab"/>
+                                        </Style>
+                                    </lvc:Separator.Resources>
+                                </lvc:Separator>
+                            </lvc:Axis.Separator>
+                        </lvc:Axis>
+                    </lvc:CartesianChart.AxisY>
+                </lvc:CartesianChart>
+            </Grid>
+       
+
+        </Grid>
+
+
+
     </Grid>
 </Page>
