@@ -78,8 +78,15 @@
         </DataGrid>
 
         <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Style="{DynamicResource BackgroundHeader}">
-            <Label  Style="{DynamicResource Header}" Grid.Column="1" Grid.Row="0" Margin="0,31,0,10" Width="420" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Content="{ns:Loc CancelTour}"/>
+            <Label  Style="{DynamicResource Header}" Grid.Column="1" Grid.Row="0" Width="420" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Content="{ns:Loc CancelTour}"/>
             <Image Source="/Resources/Images/LOGO (2).jpg" Margin="0,0,899,0"/>
+        </Grid>
+        <Grid Grid.Column="1" Grid.Row="2" Margin="255,109,215,179" Style="{DynamicResource InnerGrid}" Visibility="{Binding ToastVisibility}" >
+            <Border Style="{DynamicResource Border}"></Border>
+            <Label HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Content="{ns:Loc AreYouSure}" Style="{DynamicResource LabelToast}" Width="503" Margin="0,0,0,153"/>
+            <Label HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Content="{Binding TourName}" Style="{DynamicResource LabelToast}" Margin="0,48,0,98" Width="366" />
+            <Button Content="{ns:Loc YES}" Command="{Binding YesCommand}" Style="{DynamicResource Button}" Margin="101,120,275,46"/>
+            <Button Content="{ns:Loc NO}" Command="{Binding NoCommand}" Style="{DynamicResource Button}" Margin="290,120,86,45"/>
         </Grid>
     </Grid>
 </Page>

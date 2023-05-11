@@ -184,8 +184,8 @@
                             </ControlTemplate>
                         </Validation.ErrorTemplate>
                     </TextBox>
-                    <TextBox Grid.Column="1" Style="{DynamicResource tb}" HorizontalAlignment="Center" Grid.Row="3" TextWrapping="Wrap" Text="{Binding Country}" VerticalAlignment="Center" Width="188" Height="29"/>
-                    <TextBox Grid.Column="1" Style="{DynamicResource tb}" HorizontalAlignment="Center" Grid.Row="4" TextWrapping="Wrap" Text="{Binding City}" VerticalAlignment="Center" Width="187" Height="29"/>
+                    <TextBox VerticalContentAlignment="Center" Grid.Column="1" Style="{DynamicResource tb}" HorizontalAlignment="Center" Grid.Row="3" TextWrapping="Wrap" Text="{Binding Country}" VerticalAlignment="Center" Width="188" Height="29"/>
+                    <TextBox VerticalContentAlignment="Center" Grid.Column="1" Style="{DynamicResource tb}" HorizontalAlignment="Center" Grid.Row="4" TextWrapping="Wrap" Text="{Binding City}" VerticalAlignment="Center" Width="187" Height="29"/>
                 </Grid>
 
 
@@ -255,7 +255,7 @@
 
                     <!--DATEANDTIME-->
                     <ListBox x:Name="DateTimeBox" ItemsSource="{Binding Path=Instances}" Grid.Column="0" Grid.Row="2" Grid.RowSpan="3" SelectedItem="{Binding selectedInstance}" Style="{DynamicResource  ListBoxForm}" Grid.ColumnSpan="2" Margin="0,38,35,4"/>
-                    <tk:TimePicker Style="{DynamicResource dt}"  FontSize="9" x:Name="DT" Grid.Column="1"  Grid.Row="5" Text="{Binding Path=InstanceStartDate,Mode=TwoWay}" Format="LongTime" DataContext="{Binding}" Margin="28,0,0,45" Grid.ColumnSpan="2" />
+                    <tk:TimePicker TextAlignment="Left" Style="{DynamicResource dt}"  FontSize="9" x:Name="DT" Grid.Column="1"  Grid.Row="5" Text="{Binding Path=InstanceStartDate,Mode=TwoWay}" Format="LongTime" DataContext="{Binding}" Margin="28,0,0,45" Grid.ColumnSpan="2" />
                     <Button Grid.Column="1" Grid.Row="5" Command="{Binding AddDateTimeCommand}"   Height="25" Width="60" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="29,0,0,-2" Style="{DynamicResource  Button}" Grid.ColumnSpan="2" Content="{ns:Loc ADDBUTTON}"/>
                     <Button Grid.Column="2" Grid.Row="5"   Height="25" Width="60" Command="{Binding DeleteDateTimeCommand}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,0,-2" Style="{DynamicResource  Button}" Content="{ns:Loc DELETE}"/>
                     <Label Grid.Column="1" Height="40" Content="{ns:Loc AddDateAndTime}" Grid.ColumnSpan="2"  HorizontalAlignment="Center"  Grid.Row="2" VerticalAlignment="Center" Width="165" Style="{DynamicResource  Label}"/>
@@ -394,7 +394,7 @@
                     </Grid.RowDefinitions>
 
 
-                    <Image x:Name="imagePicture" Grid.Row="2" Grid.ColumnSpan="4"  Grid.Column="1" Stretch="Fill"  Margin="29,11,23,13">
+                    <Image x:Name="imagePicture" Grid.Row="2" Grid.ColumnSpan="4"  Grid.Column="1" Stretch="Fill"  Margin="29,12,23,13">
                         <Image.Source>
                             <Binding Path="Image" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
                                 <Binding.ValidationRules>
@@ -407,7 +407,7 @@
                                 <Grid  Grid.Column="0" Grid.Row="0" >
 
                                     <AdornedElementPlaceholder  x:Name="textBox"/>
-                                    <TextBlock Margin="-57,-5,0,0" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                                    <TextBlock Margin="-60,-5,0,0" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
                                 </Grid>
                             </ControlTemplate>
                         </Validation.ErrorTemplate>
@@ -445,9 +445,9 @@
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
-                    <Label Content="{ns:Loc ImagesOfTour}" Style="{DynamicResource Label}" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="2" HorizontalAlignment="Left" VerticalAlignment="Top"  Height="36" Width="138" Margin="0,7,0,0"/>
-                    <Button Command="{Binding AddImageCommand}" Height="24" Width="60"  Grid.Column="2" Grid.ColumnSpan="3" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="25,50,0,0" Grid.RowSpan="3" Style="{DynamicResource  Button}" Content="{ns:Loc ADDBUTTON}"/>
-                    <Button Content="{ns:Loc DELETE}" HorizontalAlignment="Left" Grid.Column="4" Grid.ColumnSpan="2" VerticalAlignment="Top"  Command="{Binding RemoveImageCommand}" Margin="103,50,0,0" Width="60" Height="24" Grid.RowSpan="3" Style="{DynamicResource  Button}" />
+                    <Label Content="{ns:Loc ImagesOfTour}" Style="{DynamicResource Label}" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="2" HorizontalAlignment="Left" VerticalAlignment="Top"  Height="36" Width="138" Margin="0,4,0,0"/>
+                    <Button Command="{Binding AddImageCommand}" Height="24" Width="60"  Grid.Column="2" Grid.ColumnSpan="3" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="25,6,0,0" Grid.RowSpan="2" Style="{DynamicResource  Button}" Content="{ns:Loc ADDBUTTON}" Grid.Row="1"/>
+                    <Button Content="{ns:Loc DELETE}" HorizontalAlignment="Left" Grid.Column="4" Grid.ColumnSpan="2" VerticalAlignment="Top"  Command="{Binding RemoveImageCommand}" Margin="102,6,0,0" Width="60" Height="24" Grid.RowSpan="2" Style="{DynamicResource  Button}" Grid.Row="1" />
                 </Grid>
 
 

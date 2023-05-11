@@ -151,6 +151,15 @@ namespace InitialProject.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to cancel tour:.
+        /// </summary>
+        internal static string AreYouSure {
+            get {
+                return ResourceManager.GetString("AreYouSure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to before regular end.
         /// </summary>
         internal static string BeforeRegularEnd {
@@ -444,6 +453,15 @@ namespace InitialProject.Properties {
         internal static string FinishedTourDetails {
             get {
                 return ResourceManager.GetString("FinishedTourDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Finished tours:.
+        /// </summary>
+        internal static string FinishedTours {
+            get {
+                return ResourceManager.GetString("FinishedTours", resourceCulture);
             }
         }
         
@@ -750,6 +768,15 @@ namespace InitialProject.Properties {
         internal static string NewReviews {
             get {
                 return ResourceManager.GetString("NewReviews", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to NO.
+        /// </summary>
+        internal static string NO {
+            get {
+                return ResourceManager.GetString("NO", resourceCulture);
             }
         }
         
@@ -1191,6 +1218,15 @@ namespace InitialProject.Properties {
         internal static string YEARLYREQUESTSSTATISTC {
             get {
                 return ResourceManager.GetString("YEARLYREQUESTSSTATISTC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to YES.
+        /// </summary>
+        internal static string YES {
+            get {
+                return ResourceManager.GetString("YES", resourceCulture);
             }
         }
     }

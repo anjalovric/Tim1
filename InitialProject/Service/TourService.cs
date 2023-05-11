@@ -60,5 +60,11 @@ namespace InitialProject.Service
                         return true;
             return false;               
         }
+        public void SetTour(TourInstance tourInstance)
+        {
+            foreach(Tour tour in GetAll())
+                if(tour.Id == tourInstance.Tour.Id)
+                    tourInstance.Tour=tour;
+        }
     }
 }
