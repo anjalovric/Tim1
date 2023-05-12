@@ -401,7 +401,7 @@
                         </lvc:Axis>
                     </lvc:CartesianChart.AxisX>
                     <lvc:CartesianChart.AxisY>
-                        <lvc:Axis MinValue="0" Foreground="#dbc9ab" FontWeight="Medium">
+                        <lvc:Axis MinValue="0" LabelFormatter="{Binding YAxisLabelFormatter}" Foreground="#dbc9ab" FontWeight="Medium">
                             <lvc:Axis.Separator>
                                 <lvc:Separator>
                                     <lvc:Separator.Resources>

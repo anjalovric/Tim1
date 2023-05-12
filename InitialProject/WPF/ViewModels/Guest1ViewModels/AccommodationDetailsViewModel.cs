@@ -20,6 +20,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 {
     public class AccommodationDetailsViewModel :INotifyPropertyChanged
     {
+        public Func<double, string> YAxisLabelFormatter => value => value.ToString("N1");
         private Guest1 guest1;
         private DateTime currentDate;
         private int currentCounter = 0;

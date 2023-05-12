@@ -61,8 +61,7 @@
 
         <!-- BORDER FOR FIRST COLUMN -->
         <Border Grid.Column="0" Width="495" BorderThickness="3" BorderBrush="#22301a" CornerRadius="20 20 20 20" HorizontalAlignment="Center" Height="660" VerticalAlignment="Center">
-            <Image Source="/Resources/Images/rating.png" Opacity="0.05" Margin="0,40,0,0" Stretch="Fill"></Image>
-
+            
             <Border.Effect>
                 <DropShadowEffect ShadowDepth="0" BlurRadius="50"/>
             </Border.Effect>
@@ -81,8 +80,7 @@
 
         <!-- BORDER FOR SECOND COLUMN -->
         <Border Grid.Column="1" Width="495" BorderThickness="3" BorderBrush="#22301a" CornerRadius="20 20 20 20" HorizontalAlignment="Center" Height="660" VerticalAlignment="Center">
-            <Image Source="/Resources/Images/ren.png" Opacity="0.05" Margin="0,40,0,0" Stretch="Fill"></Image>
-
+            
             <Border.Effect>
                 <DropShadowEffect ShadowDepth="0" BlurRadius="50"/>
             </Border.Effect>
