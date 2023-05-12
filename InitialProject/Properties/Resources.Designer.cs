@@ -160,6 +160,33 @@ namespace InitialProject.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to At least 1 date is required.
+        /// </summary>
+        internal static string AtLeast1DateIsRequired {
+            get {
+                return ResourceManager.GetString("AtLeast1DateIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to At least 1 image is required.
+        /// </summary>
+        internal static string AtLeast1ImageIsRequired {
+            get {
+                return ResourceManager.GetString("AtLeast1ImageIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to At least 2 checkpoints are required.
+        /// </summary>
+        internal static string AtLeast2CheckpointsAreRequired {
+            get {
+                return ResourceManager.GetString("AtLeast2CheckpointsAreRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to before regular end.
         /// </summary>
         internal static string BeforeRegularEnd {
@@ -448,6 +475,15 @@ namespace InitialProject.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enter point name.
+        /// </summary>
+        internal static string EnterPointName {
+            get {
+                return ResourceManager.GetString("EnterPointName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Finished tour details.
         /// </summary>
         internal static string FinishedTourDetails {
@@ -615,6 +651,15 @@ namespace InitialProject.Properties {
         internal static string InputYear {
             get {
                 return ResourceManager.GetString("InputYear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Input year first.
+        /// </summary>
+        internal static string InputYearFirst {
+            get {
+                return ResourceManager.GetString("InputYearFirst", resourceCulture);
             }
         }
         
@@ -1038,6 +1083,24 @@ namespace InitialProject.Properties {
         internal static string TheMostWantedLocation {
             get {
                 return ResourceManager.GetString("TheMostWantedLocation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are no tours for this year.
+        /// </summary>
+        internal static string ThereAreNoToursForThisYear {
+            get {
+                return ResourceManager.GetString("ThereAreNoToursForThisYear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This filed is required.
+        /// </summary>
+        internal static string ThisFieldIsRequired {
+            get {
+                return ResourceManager.GetString("ThisFieldIsRequired", resourceCulture);
             }
         }
         

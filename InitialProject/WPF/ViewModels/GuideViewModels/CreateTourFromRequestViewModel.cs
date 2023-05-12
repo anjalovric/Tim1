@@ -402,7 +402,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             GuideService guideService = new GuideService();
             OrdinaryTourRequestsService ordinaryTourRequestsService = new OrdinaryTourRequestsService();
             TourRequests.Remove(tourRequests);
-            tourRequests.Status = "Accepted";
+            tourRequests.Status = Status.ACCEPTED;
             tourRequests.GuideId = guideService.GetByUsername(loggedInUser.Username).Id;
             tourRequests.NewAccepted = true;
             tourRequests.TourInstanceId = savednsatnceId;

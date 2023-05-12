@@ -25,7 +25,7 @@
 
         <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Style="{DynamicResource BackgroundHeader}">
             <!--TITLE-->
-            <Label Content="{ns:Loc TourForm}" Style="{DynamicResource Header}"  Grid.Column="0" VerticalAlignment="Center" Width="252" HorizontalAlignment="Left" Margin="453,0,0,0"/>
+            <Label Content="{ns:Loc TourForm}" Style="{DynamicResource Header}"  Grid.Column="0" VerticalAlignment="Center" Width="461" HorizontalContentAlignment="Center"/>
             <Image Source="/Resources/Images/LOGO (2).jpg" Margin="0,0,905,0"/>
         </Grid>
         <Border Style="{DynamicResource Border}" Grid.Row="1" Grid.Column="1">
@@ -95,7 +95,7 @@
                                     </Grid.ColumnDefinitions>
 
                                     <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
-                                    <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                                    <TextBlock Grid.Column="0" Grid.Row="1" Text="{ns:Loc ThisFieldIsRequired}" Foreground="Red"/>
                                 </Grid>
                             </ControlTemplate>
                         </Validation.ErrorTemplate>
@@ -123,7 +123,7 @@
                                     </Grid.ColumnDefinitions>
 
                                     <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
-                                    <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                                    <TextBlock Grid.Column="0" Grid.Row="1" Text="{ns:Loc ThisFieldIsRequired}" Foreground="Red"/>
                                 </Grid>
                             </ControlTemplate>
                         </Validation.ErrorTemplate>
@@ -150,7 +150,7 @@
                                     </Grid.ColumnDefinitions>
 
                                     <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
-                                    <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                                    <TextBlock Grid.Column="0" Grid.Row="1" Text="{ns:Loc ThisFieldIsRequired}" Foreground="Red"/>
                                 </Grid>
                             </ControlTemplate>
                         </Validation.ErrorTemplate>
@@ -178,7 +178,7 @@
                                     </Grid.ColumnDefinitions>
 
                                     <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
-                                    <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                                    <TextBlock Grid.Column="0" Grid.Row="1" Text="{ns:Loc ThisFieldIsRequired}" Foreground="Red"/>
                                 </Grid>
                             </ControlTemplate>
                         </Validation.ErrorTemplate>
@@ -206,7 +206,7 @@
                                     </Grid.ColumnDefinitions>
 
                                     <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
-                                    <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                                    <TextBlock Grid.Column="0" Grid.Row="1" Text="{ns:Loc ThisFieldIsRequired}" Foreground="Red"/>
                                 </Grid>
                             </ControlTemplate>
                         </Validation.ErrorTemplate>
@@ -240,7 +240,7 @@
                                     </Grid.ColumnDefinitions>
 
                                     <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
-                                    <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                                    <TextBlock Grid.Column="0" Grid.Row="1" Text="{ns:Loc ThisFieldIsRequired}" Foreground="Red"/>
                                 </Grid>
                             </ControlTemplate>
                         </Validation.ErrorTemplate>
@@ -302,7 +302,7 @@
                                     </Grid.ColumnDefinitions>
 
                                     <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
-                                    <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                                    <TextBlock Grid.Column="0" Grid.Row="1" Text="{ns:Loc EnterPointName}" Foreground="Red"/>
                                 </Grid>
                             </ControlTemplate>
                         </Validation.ErrorTemplate>
@@ -339,7 +339,7 @@
                                     </Grid.ColumnDefinitions>
 
                                     <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
-                                    <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                                    <TextBlock Grid.Column="0" Grid.Row="1" Text="{ns:Loc AtLeast1DateIsRequired}" Foreground="Red"/>
                                 </Grid>
                             </ControlTemplate>
                         </Validation.ErrorTemplate>
@@ -466,7 +466,7 @@
                                 <Grid  Grid.Column="0" Grid.Row="0" Margin="29,17,23,7">
 
                                     <AdornedElementPlaceholder  x:Name="textBox"/>
-                                    <TextBlock Margin="-60,-5,0,0" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                                    <TextBlock Margin="-65,-7,0,0" Text="{ns:Loc AtLeast1ImageIsRequired}" Foreground="Red"/>
                                 </Grid>
                             </ControlTemplate>
                         </Validation.ErrorTemplate>
@@ -540,7 +540,7 @@
                                 </Grid.ColumnDefinitions>
 
                                 <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
-                                <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                                <TextBlock Grid.Column="0" Grid.Row="1" Text="{ns:Loc AtLeast2CheckpointsAreRequired}" Foreground="Red"/>
                             </Grid>
                         </ControlTemplate>
                     </Validation.ErrorTemplate>

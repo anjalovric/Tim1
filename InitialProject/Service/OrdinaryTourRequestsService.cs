@@ -37,7 +37,7 @@ namespace InitialProject.Service
             List<OrdinaryTourRequests> requests= new List<OrdinaryTourRequests>();
             foreach(OrdinaryTourRequests request in GetAll()) 
             {
-                if(request.Status.Equals("On waiting"))
+                if(request.Status==Status.ONWAITING)
                     requests.Add(request);
             }
             SetLocations(requests);

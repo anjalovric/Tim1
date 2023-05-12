@@ -79,11 +79,11 @@
 
 
         <StackPanel x:Name="Toast" HorizontalAlignment="Left"   VerticalAlignment="Top" Style="{DynamicResource Toast}" Visibility="{Binding ToastVisibility}" Margin="750,557,0,0" >
-            <Label Style="{StaticResource LabelToast}" HorizontalAlignment="Center">There are no tours for this year</Label>
+            <Label Style="{StaticResource LabelToast}" HorizontalAlignment="Center" Content="{ns:Loc ThereAreNoToursForThisYear}"></Label>
             <Button Style="{DynamicResource ButtonToast}" Command="{Binding OKCommand}">OK</Button>
         </StackPanel>
         <StackPanel  HorizontalAlignment="Left"   VerticalAlignment="Top" Style="{DynamicResource Toast}" Visibility="{Binding Toast}" Margin="750,557,0,0" >
-            <Label Style="{StaticResource LabelToast}" HorizontalAlignment="Center">Input year first</Label>
+            <Label Style="{StaticResource LabelToast}" HorizontalAlignment="Center" Content="{ns:Loc InputYearFirst}"></Label>
             <Button Style="{DynamicResource ButtonToast}" Command="{Binding OKCommand}">OK</Button>
         </StackPanel>
         <Grid Margin="829,159,59,391" Style="{DynamicResource InerInerGrid}">

@@ -70,7 +70,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             {
                 if (request.StartDate.Day <= DateTime.Now.Day+2 && request.StartDate.Month==DateTime.Now.Month && request.StartDate.Year==DateTime.Now.Year && request.GuideId==-1)
                 {
-                    request.Status = "Invalid";
+                    request.Status = Domain.Model.Status.INVALID;
                     ordinaryTourRequestsService.Update(request);
                 }
             }
