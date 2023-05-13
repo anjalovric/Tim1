@@ -22,6 +22,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
     {
         public RelayCommand ConfirmCommand { get; set; }
         public RelayCommand CancelCommand { get; set; }
+        public RelayCommand CloseCommand { get; set; }
         private List<AlertGuest2> alerts;
         private AlertGuest2Service _alertGuest2Service;
         private CheckPointService _checkPointService;
@@ -50,6 +51,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         {
             ConfirmCommand = new RelayCommand(Confirm_Executed, CanExecute);
             CancelCommand = new RelayCommand(Cancel_Executed, CanExecute);
+            CloseCommand = new RelayCommand(Close_Executed, CanExecute);
         }
         private bool CanExecute(object sender)
         {
@@ -72,13 +74,17 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         }
         private void DeleteFromNotifications(AlertGuest2 alertGuest2)
         {
-            Guest2NotificationService guest2NotificationService = new Guest2NotificationService();
-            List<Guest2Notification> notifications = new List<Guest2Notification>(guest2NotificationService.GetAll());
-            foreach(Guest2Notification notification in notifications)
+            NewTourNotificationService newTourNotificationService = new NewTourNotificationService();
+            List<NewTourNotification> notifications = new List<NewTourNotification>(newTourNotificationService.GetAll());
+            foreach(NewTourNotification notification in notifications)
             {
                 if (notification.AlertGuest2Id == alertGuest2.Id)
-                    guest2NotificationService.Delete(notification);
+                    newTourNotificationService.Delete(notification);
             }
+        }
+        private void Close_Executed(object sender)
+        {
+            CloseAction();
         }
         private void Cancel_Executed(object sender)
         {

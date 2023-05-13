@@ -14,6 +14,7 @@ namespace InitialProject.Model
         public int RulesFollowing { get; set; }
         public string Comment { get; set; }
         public AccommodationReservation Reservation { get; set; }
+      
         public GuestReview()
         {
             Reservation = new AccommodationReservation();

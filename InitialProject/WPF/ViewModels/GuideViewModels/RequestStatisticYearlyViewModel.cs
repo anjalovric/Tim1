@@ -9,7 +9,7 @@ using System.Windows;
 
 namespace InitialProject.WPF.ViewModels.GuideViewModels
 {
-    public class YearlyTourStatistics:INotifyPropertyChanged
+    public class RequestStatisticYearlyViewModel:INotifyPropertyChanged
     {
         public ObservableCollection<GuideOneYearRequestStatisticViewModel> Statistics { get; set; }
         public ObservableCollection<GuideOneYearRequestStatisticViewModel> StatisticsLocation { get; set; }
@@ -120,7 +120,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         public RelayCommand CreateTourByLanguageCommand { get; set; }
         public RelayCommand CreateTourByLocationCommand { get; set; }
 
-
+        public RelayCommand EnableCityCommand { get; set; }
         private string toastLocation;
         public string ToastLocation
         {
@@ -155,7 +155,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
                 OnPropertyChanged();
             }
         }
-        public YearlyTourStatistics(ObservableCollection<TourInstance> todayinstances, User user, ObservableCollection<TourInstance> futureinstances) 
+        public RequestStatisticYearlyViewModel(ObservableCollection<TourInstance> todayinstances, User user, ObservableCollection<TourInstance> futureinstances) 
         {
             Statistics=new ObservableCollection<GuideOneYearRequestStatisticViewModel>();
             StatisticsLocation = new ObservableCollection<GuideOneYearRequestStatisticViewModel>();
@@ -169,10 +169,11 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             loggedUser = user;
             todayInstances = todayinstances;
             futureInstances = futureinstances;
-            LanguageSuggestService languageSuggestService = new LanguageSuggestService();
+            SuggestedLanguageService languageSuggestService = new SuggestedLanguageService();
             YearLanguage = languageSuggestService.GetMostWantedLanguage();
             SuggestedLocationService suggestedLocationService = new SuggestedLocationService();
-            YearLocation = suggestedLocationService.GetMostWantedLocation().Country + ", " + suggestedLocationService.GetMostWantedLocation().City;
+            if(suggestedLocationService.GetMostWantedLocation()!=null)
+                YearLocation = suggestedLocationService.GetMostWantedLocation().Country + ", " + suggestedLocationService.GetMostWantedLocation().City;
         }
         private bool CanExecute(object sender)
         {
@@ -193,6 +194,8 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             MonthlyStatisticLocationCommand = new RelayCommand(MonthlyStatisticLocation_Executed, CanExecute);
             CreateTourByLanguageCommand = new RelayCommand(CreateTourByLanguage_Executed, CanExecute);
             CreateTourByLocationCommand = new RelayCommand(CreateTourByLocation_Executed,CanExecute);
+            EnableCityCommand = new RelayCommand(EnableCityComboBox_Executed, CanExecute);
+
         }
         private void ResetLanguage_Executed(object sender)
         {
@@ -202,7 +205,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         }
         private void MonthlyStatisticLanguage_Executed(object sender)
         {
-            RequestStatisticsMonthly requestStatisticsMonthly = new RequestStatisticsMonthly(SelectedLanguage,SelectedYear);
+            RequestStatisticsMonthlyLanguageView requestStatisticsMonthly = new RequestStatisticsMonthlyLanguageView(SelectedLanguage,SelectedYear);
             Application.Current.Windows.OfType<GuideWindow>().FirstOrDefault().Main.Content = requestStatisticsMonthly;
         }
         private void MonthlyStatisticLocation_Executed(object sender)
@@ -223,12 +226,12 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         }
         private void SearchLanguage_Executed(object sender)
         {
-            TourRequestStatisticYearlyService tourRequestStatisticYearlyService = new TourRequestStatisticYearlyService();
+            TourRequestStatisticYearlyLanguageService tourRequestStatisticYearlyService = new TourRequestStatisticYearlyLanguageService();
             Toast = "Hidden";
             Statistics.Clear();
             if (SelectedLanguage != null)
-                if (tourRequestStatisticYearlyService.GetYearStatistic(SelectedLanguage).Count > 0)
-                    foreach (GuideOneYearRequestStatisticViewModel tourRequest in tourRequestStatisticYearlyService.GetYearStatistic(SelectedLanguage))
+                if (tourRequestStatisticYearlyService.GetLanguageYearStatistic(SelectedLanguage).Count > 0)
+                    foreach (GuideOneYearRequestStatisticViewModel tourRequest in tourRequestStatisticYearlyService.GetLanguageYearStatistic(SelectedLanguage))
                         Statistics.Add(tourRequest);
                 else
                     Toast = "Visible";
@@ -242,8 +245,8 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             {
                 Location searchedLocation = locationService.GetByCityAndCountry(Country, City);
 
-                if (tourRequestStatisticYearlyService.GetYearStatistic(searchedLocation).Count > 0)
-                    foreach (GuideOneYearRequestStatisticViewModel tourRequest in tourRequestStatisticYearlyService.GetYearStatistic(searchedLocation))
+                if (tourRequestStatisticYearlyService.GetLocationYearStatistic(searchedLocation).Count > 0)
+                    foreach (GuideOneYearRequestStatisticViewModel tourRequest in tourRequestStatisticYearlyService.GetLocationYearStatistic(searchedLocation))
                         StatisticsLocation.Add(tourRequest);
                 else
                     ToastLocation = "Visible";
@@ -261,14 +264,16 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             Languages.Add("serbian");
             Languages.Add("italian");
         }
-        public void ComboBoxCountry_SelectionChanged()
+        public void EnableCityComboBox_Executed(object sender)
         {
             LocationService locationService = new LocationService();
             if (Country != null)
             {
                 CitiesByCountry.Clear();
                 foreach (string city in locationService.GetCitiesByCountry((string)Country))
+                {
                     CitiesByCountry.Add(city);
+                }
                 IsComboBoxCityEnabled = true;
             }
         }
@@ -287,8 +292,8 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         private void CreateTourByLocation_Executed(object sender)
         {
             SuggestedLocationService suggestedLocationService = new SuggestedLocationService();
-            AddTourByLocation addTourByLanguageView = new AddTourByLocation(todayInstances, loggedUser, futureInstances, suggestedLocationService.GetMostWantedLocation());
-            Application.Current.Windows.OfType<GuideWindow>().FirstOrDefault().Main.Content = addTourByLanguageView;
+            AddTourByLocationView addTourByLocationView = new AddTourByLocationView(todayInstances, loggedUser, futureInstances, suggestedLocationService.GetMostWantedLocation());
+            Application.Current.Windows.OfType<GuideWindow>().FirstOrDefault().Main.Content = addTourByLocationView;
         }
     }
 }

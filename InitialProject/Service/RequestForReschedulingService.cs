@@ -86,5 +86,9 @@ namespace InitialProject.Service
             pendingRequests.Reverse();
             return pendingRequests;
         }
+        public int GetRequestsNumberByMonth(DateTime date, Guest1 guest1, DateTime current)
+        {
+            return requestsService.GetAll().FindAll(r => r.CreatingRequestDate.Date > date.AddDays(-date.Day).Date && r.CreatingRequestDate.Date <= date.AddMonths(1).AddDays(-date.Day).Date && r.CreatingRequestDate.Date <= current.Date && r.Reservation.Guest.Id == guest1.Id).Count;
+        }
     }
 }

@@ -4,9 +4,9 @@ using System.Collections.Generic;
 
 namespace InitialProject.Service
 {
-    public class MonthLanguageStatisticService
+    public class TourRequestStatisticMonthlyLanguageService
     {
-        public MonthLanguageStatisticService() { }
+        public TourRequestStatisticMonthlyLanguageService() { }
         private List<int> GetMonthsForLanguage(string language,int year)
         {
             List<int> months = new List<int>();
@@ -19,7 +19,7 @@ namespace InitialProject.Service
                 }
             return months;
         }
-        private int GetByMonth(string language, int month,int year)
+        private int GetRequestsCountByMonth(string language, int month,int year)
         {
             List<OrdinaryTourRequests> ordinaryTourRequests = new List<OrdinaryTourRequests>();
                 foreach (OrdinaryTourRequests tourRequest in GetByYearAndLanguage(language,year))
@@ -35,7 +35,7 @@ namespace InitialProject.Service
                 {
                     MonthRequestStatisticViewModel monthRequestStatisticViewModel = new MonthRequestStatisticViewModel();
                     monthRequestStatisticViewModel.MonthNumber = month+".";
-                    monthRequestStatisticViewModel.Number = GetByMonth(language, month,year);
+                    monthRequestStatisticViewModel.Number = GetRequestsCountByMonth(language, month,year);
                     monthRequestStatisticViewModel.Month = GetMonth(month);
                     statistics.Add(monthRequestStatisticViewModel);
                 }

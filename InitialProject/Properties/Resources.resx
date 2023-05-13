@@ -144,6 +144,18 @@
   <data name="AgeStatistics" xml:space="preserve">
     <value>Age statistics</value>
   </data>
+  <data name="AreYouSure" xml:space="preserve">
+    <value>Are you sure you want to cancel tour:</value>
+  </data>
+  <data name="AtLeast1DateIsRequired" xml:space="preserve">
+    <value>At least 1 date is required</value>
+  </data>
+  <data name="AtLeast1ImageIsRequired" xml:space="preserve">
+    <value>At least 1 image is required</value>
+  </data>
+  <data name="AtLeast2CheckpointsAreRequired" xml:space="preserve">
+    <value>At least 2 checkpoints are required</value>
+  </data>
   <data name="BeforeRegularEnd" xml:space="preserve">
     <value>before regular end</value>
   </data>
@@ -240,8 +252,14 @@
   <data name="EndTime" xml:space="preserve">
     <value>Finish</value>
   </data>
+  <data name="EnterPointName" xml:space="preserve">
+    <value>Enter point name</value>
+  </data>
   <data name="FinishedTourDetails" xml:space="preserve">
     <value>Finished tour details</value>
+  </data>
+  <data name="FinishedTours" xml:space="preserve">
+    <value>Finished tours:</value>
   </data>
   <data name="FINISHTOUR" xml:space="preserve">
     <value>FINISH TOUR 🏁</value>
@@ -297,6 +315,9 @@
   <data name="InputYear" xml:space="preserve">
     <value>Input year:</value>
   </data>
+  <data name="InputYearFirst" xml:space="preserve">
+    <value>Input year first</value>
+  </data>
   <data name="Language" xml:space="preserve">
     <value>Language</value>
   </data>
@@ -347,6 +368,9 @@
   </data>
   <data name="NewReviews" xml:space="preserve">
     <value>New reviews:</value>
+  </data>
+  <data name="NO" xml:space="preserve">
+    <value>NO</value>
   </data>
   <data name="NumberOfGuests" xml:space="preserve">
     <value> Number of presence guests:</value>
@@ -435,6 +459,12 @@
   <data name="TheMostWantedLocation" xml:space="preserve">
     <value>The most wanted</value>
   </data>
+  <data name="ThereAreNoToursForThisYear" xml:space="preserve">
+    <value>There are no tours for this year</value>
+  </data>
+  <data name="ThisFieldIsRequired" xml:space="preserve">
+    <value>This filed is required</value>
+  </data>
   <data name="ThisTourIsFinished" xml:space="preserve">
     <value>This tour is finished!</value>
   </data>
@@ -494,5 +524,8 @@
   </data>
   <data name="YEARLYREQUESTSSTATISTC" xml:space="preserve">
     <value>YEARLY REQUEST STATISTIC</value>
+  </data>
+  <data name="YES" xml:space="preserve">
+    <value>YES</value>
   </data>
 </root>

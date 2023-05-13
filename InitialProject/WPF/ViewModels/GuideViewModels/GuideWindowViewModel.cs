@@ -101,7 +101,8 @@ namespace InitialProject.WPF.ViewModels
             }
             else
             {
-                ActiveInstanceView activeInstanceView = new ActiveInstanceView(tourInstanceService.GetByActive(guide), homeView.viewModel.Tours, tourStatisticsView.viewModel.Instances,homeView,guide.Id);
+                ActiveInstanceView activeInstanceView = new ActiveInstanceView(tourInstanceService.GetByActive(guide), tourStatisticsView.viewModel.Instances, loggedUser, tourStatisticsView.viewModel.Instances, cancelView.cancelViewModel.TourInstances);
+
                 Application.Current.Windows.OfType<GuideWindow>().FirstOrDefault().Main.Content = activeInstanceView;
             }
         }
@@ -117,7 +118,8 @@ namespace InitialProject.WPF.ViewModels
             Guide guide = guideService.GetByUsername(loggedUser.Username);
             if (tourInstanceService.GetByActive(guide) != null)
             {
-                ActiveInstanceView activeInstanceView = new ActiveInstanceView(tourInstanceService.GetByActive(guide), homeView.viewModel.Tours, tourStatisticsView.viewModel.Instances, homeView,guide.Id);
+                ActiveInstanceView activeInstanceView = new ActiveInstanceView(tourInstanceService.GetByActive(guide), tourStatisticsView.viewModel.Instances,loggedUser, tourStatisticsView.viewModel.Instances, cancelView.cancelViewModel.TourInstances);
+
                 Application.Current.Windows.OfType<GuideWindow>().FirstOrDefault().Main.Content = activeInstanceView;
             }
         }
@@ -143,7 +145,7 @@ namespace InitialProject.WPF.ViewModels
         }
         private void RequestYearlyStatistic_Executed(object sender)
         {
-            RequestsStatistisYearly requestsStatistisYearly = new RequestsStatistisYearly(homeView.viewModel.Tours,loggedUser, cancelView.cancelViewModel.TourInstances);
+            RequestsStatisticsYearlyView requestsStatistisYearly = new RequestsStatisticsYearlyView(homeView.viewModel.Tours,loggedUser, cancelView.cancelViewModel.TourInstances);
             Application.Current.Windows.OfType<GuideWindow>().FirstOrDefault().Main.Content = requestsStatistisYearly;
         }
         private void SignOut_Executed(object sender)

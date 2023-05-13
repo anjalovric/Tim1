@@ -1,11 +1,8 @@
 ﻿using InitialProject.Domain.Model;
 using InitialProject.Model;
 using MathNet.Numerics;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace InitialProject.Service
 {
@@ -19,7 +16,7 @@ namespace InitialProject.Service
             List<OrdinaryTourRequests> ordinaryTours=new List<OrdinaryTourRequests>(ordinaryTourRequestsService.GetByGuestId(Guest2.Id));
             foreach (OrdinaryTourRequests request in ordinaryTours)
             {
-                if (request.Status == "Accepted" && request.GuestId == Guest2.Id)
+                if (request.Status == Status.ACCEPTED && request.GuestId == Guest2.Id)
                 {
                     averageNumberOfPeople += request.MaxGuests;
                     counter++;
@@ -36,7 +33,7 @@ namespace InitialProject.Service
             List<OrdinaryTourRequests> ordinaryTours = new List<OrdinaryTourRequests>(ordinaryTourRequestsService.GetByGuestId(Guest2.Id));
             foreach (OrdinaryTourRequests request in ordinaryTours)
             {
-                if (request.Status == "Invalid" && request.GuestId == Guest2.Id)
+                if (request.Status == Status.INVALID && request.GuestId == Guest2.Id)
                 {
                     invalidRequest++;
                 }
@@ -53,7 +50,7 @@ namespace InitialProject.Service
             List<OrdinaryTourRequests> ordinaryTours = new List<OrdinaryTourRequests>(ordinaryTourRequestsService.GetByGuestId(Guest2.Id));
             foreach (OrdinaryTourRequests request in ordinaryTours)
             {
-                if (request.Status == "Accepted" && request.GuestId == Guest2.Id)
+                if (request.Status == Status.ACCEPTED && request.GuestId == Guest2.Id)
                 {
                     acceptedRequest++;
                 }

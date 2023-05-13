@@ -51,5 +51,20 @@ namespace InitialProject.Service
             }
            
         }
+        public bool IsYearAvailable(int year)
+        {
+            TourInstanceService tourInstanceService = new TourInstanceService();
+            if (tourInstanceService.GetAll().Count > 0)
+                foreach (TourInstance tourInstance in tourInstanceService.GetAll())
+                    if (tourInstance.StartDate.Year == year)
+                        return true;
+            return false;               
+        }
+        public void SetTour(TourInstance tourInstance)
+        {
+            foreach(Tour tour in GetAll())
+                if(tour.Id == tourInstance.Tour.Id)
+                    tourInstance.Tour=tour;
+        }
     }
 }

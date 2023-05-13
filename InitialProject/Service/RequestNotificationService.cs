@@ -17,21 +17,21 @@ namespace InitialProject.Service
         public RequestNotificationService()
         {
         }
-        public List<RequestNotification> GetAll()
+        public List<OrdinaryRequestNotification> GetAll()
         {
             return reguestNotificationRepository.GetAll();
         }
 
-        public RequestNotification Save(RequestNotification request)
+        public OrdinaryRequestNotification Save(OrdinaryRequestNotification request)
         {
             return reguestNotificationRepository.Save(request);
         }
 
-        public RequestNotification GetById(int id)
+        public OrdinaryRequestNotification GetById(int id)
         {
             return reguestNotificationRepository.GetById(id);
         }
-        public RequestNotification Update(RequestNotification request)
+        public OrdinaryRequestNotification Update(OrdinaryRequestNotification request)
         {
 
             return reguestNotificationRepository.Update(request);
@@ -39,7 +39,7 @@ namespace InitialProject.Service
         public int GetNewRequestCount()
         {
             int count = 0;
-            foreach (RequestNotification requestNotification in GetAll())
+            foreach (OrdinaryRequestNotification requestNotification in GetAll())
                 if (requestNotification.Count == 0)
                     count++;
             return count;
@@ -47,7 +47,7 @@ namespace InitialProject.Service
         public void UpCount()
         {
             int count = 0;
-            foreach (RequestNotification requestNotification in GetAll())
+            foreach (OrdinaryRequestNotification requestNotification in GetAll())
             {
                 requestNotification.Count++;
                 Update(requestNotification);

@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:val="clr-namespace:InitialProject.WPF.Validations.Guest2Validations" 
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:local="clr-namespace:InitialProject.WPF.Views.Guest2Views"
         xmlns:tk="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit.NET5" 
         mc:Ignorable="d"
@@ -304,7 +305,12 @@
             </DatePicker>
             <Button x:Name="increment" Grid.Column="1" Grid.Row="7" Margin="293,6,5,6" Content="+" TextElement.FontSize="30" Command="{Binding IncrementCommand}" BorderBrush="Transparent" Background="Transparent" BorderThickness="0,0,0,0"/>
             <Label Content="City" Grid.Row="4" Grid.Column="0" Margin="40,12,0,13" RenderTransformOrigin="0.5,0.5" Style="{StaticResource LabelStyle}"/>
-            <ComboBox x:Name="CountryT" IsEditable="True" ItemsSource="{Binding Countries}" Foreground="#555557" BorderBrush="#FFAEAEC1" Background="#F8F9FE" BorderThickness="0,0,0,3" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" HorizontalAlignment="Left" Margin="20,12,0,0" VerticalAlignment="Top" Width="294" SelectionChanged="CountryInput_SelectionChanged" Height="26" Grid.Column="1" Grid.Row="3">
+            <ComboBox x:Name="CountryT" IsEditable="True" ItemsSource="{Binding Countries}" Foreground="#555557" BorderBrush="#FFAEAEC1" Background="#F8F9FE" BorderThickness="0,0,0,3" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" HorizontalAlignment="Left" Margin="20,12,0,0" VerticalAlignment="Top" Width="294" Height="26" Grid.Column="1" Grid.Row="3">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding CountryInputSelectionChangedCommand}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
                 <ComboBox.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="10"/>

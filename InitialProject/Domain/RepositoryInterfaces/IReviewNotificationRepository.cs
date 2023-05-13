@@ -9,10 +9,10 @@ using InitialProject.Serializer;
 
 namespace InitialProject.Domain.RepositoryInterfaces
 {
-    public interface IReviewNotificationRepository:IGenericRepository<ReviewNotification>
+    public interface IReviewNotificationRepository:IGenericRepository<GuideAndTourReviewNotification>
     {
-        public ReviewNotification Save(ReviewNotification review);
-        public ReviewNotification Update(ReviewNotification voucher);
+        public GuideAndTourReviewNotification Save(GuideAndTourReviewNotification review);
+        public GuideAndTourReviewNotification Update(GuideAndTourReviewNotification voucher);
        
     }
 }

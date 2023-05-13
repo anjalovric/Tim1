@@ -7,7 +7,7 @@ using System.Windows.Controls;
 
 namespace InitialProject.WPF.ViewModels
 {
-    public class CancelViewModel
+    public class CancelViewModel:INotifyPropertyChanged
     {
         private ObservableCollection<TourInstance> tourInstances;
         public ObservableCollection<TourInstance> TourInstances
@@ -20,6 +20,7 @@ namespace InitialProject.WPF.ViewModels
                 OnPropertyChanged("TourInstances");
             }
         }
+        
         private TourInstance selected;
         public TourInstance Selected
         {
@@ -31,23 +32,53 @@ namespace InitialProject.WPF.ViewModels
                 OnPropertyChanged();
             }
         }
-
+        private string toastVisibility;
+        public string ToastVisibility
+        {
+            get { return toastVisibility; }
+            set
+            {
+                if (value != toastVisibility)
+                    toastVisibility = value;
+                OnPropertyChanged();
+            }
+        }
+        private string tourName;
+        public string TourName
+        {
+            get { return tourName; }
+            set
+            {
+                if (value != tourName)
+                    tourName = value;
+                OnPropertyChanged();
+            }
+        }
         private User tourInstanceGuide;
         private TourInstanceService tourInstanceService;
         private GuideService guideService=new GuideService();
   
-        private DataGrid TourListDataGrid;
         public RelayCommand CancelCommand { get; set; }
+        public RelayCommand YesCommand { get; set; }
+        public RelayCommand NoCommand { get; set; }
 
-        public CancelViewModel(User guide,DataGrid tourListDataGrid)
+        public CancelViewModel(User guide)
         {
             tourInstanceGuide = guide;
-            TourListDataGrid= tourListDataGrid;
 
             tourInstanceService = new TourInstanceService();
             Guide loggdedGuide=guideService.GetByUsername(guide.Username);
             MakeCancelableTourList(loggdedGuide);
+            MakeCommands();
+            ToastVisibility = "Hidden";
+        }
+
+        private void MakeCommands()
+        {
             CancelCommand = new RelayCommand(CancelExecuted, CanExecute);
+            YesCommand= new RelayCommand(Yes_Executed, CanExecute);
+            NoCommand= new RelayCommand(No_Executed, CanExecute);
+
         }
         private bool CanExecute(object sender)
         {
@@ -63,11 +94,26 @@ namespace InitialProject.WPF.ViewModels
             TourInstanceCancelationService tourInstanceCancelationService = new TourInstanceCancelationService();
             tourInstances = new ObservableCollection<TourInstance>(tourInstanceCancelationService.FindCancelableTours(guide));
         }
-        public void CancelExecuted(object sender)
+        private void CancelExecuted(object sender)
+        {
+            ToastVisibility = "Visible";
+            TourService tourService= new TourService();
+            tourService.SetTour(Selected);
+            TourName=Selected.Tour.Name;
+        }
+
+        private void Yes_Executed(object sender)
         {
             TourInstanceCancelationService service = new TourInstanceCancelationService();
-            TourInstance currentTourInstance = (TourInstance)TourListDataGrid.CurrentItem;
+            TourInstance currentTourInstance = Selected;
             service.CancelTourInstance(currentTourInstance, TourInstances, tourInstanceGuide);
+            ToastVisibility = "Hidden";
         }
+
+        private void No_Executed(object sender)
+        {
+            ToastVisibility = "Hidden";
+        }
+
     }
 }

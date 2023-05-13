@@ -8,7 +8,7 @@ namespace InitialProject.Service
     public class SuggestedLocationService
     {
         public SuggestedLocationService() { }
-        private List<OrdinaryTourRequests> GetRequestsInLanstYear()
+        private List<OrdinaryTourRequests> GetRequestsFromLastYear()
         {
             DateTime today = DateTime.Now;
             string yearago = today.Month + "/" + today.Day + "/" + (today.Year - 1) + " " + today.ToString().Split(" ")[1] + " " + today.ToString().Split(" ")[2];
@@ -24,13 +24,13 @@ namespace InitialProject.Service
             }          
             return ordinaryTourRequests;
         }
-        private List<Location> GetLocations()
+        private List<Location> GetRequestsLocationsFromLastYear()
         {
             List<Location> locations = new List<Location>();
-            if (GetRequestsInLanstYear().Count > 0)
+            if (GetRequestsFromLastYear().Count > 0)
             {
-                locations.Add(GetRequestsInLanstYear()[0].Location);
-                foreach (OrdinaryTourRequests request in GetRequestsInLanstYear())
+                locations.Add(GetRequestsFromLastYear()[0].Location);
+                foreach (OrdinaryTourRequests request in GetRequestsFromLastYear())
                     if (!locations.Contains(request.Location))
                         locations.Add(request.Location);
             }
@@ -39,26 +39,26 @@ namespace InitialProject.Service
         private int CountRequestForLocation(Location location)
         {
             int count = 0;
-            foreach (OrdinaryTourRequests request in GetRequestsInLanstYear())
+            foreach (OrdinaryTourRequests request in GetRequestsFromLastYear())
                 if (request.Location.Id == location.Id)
                     count++;
             return count;
         }
-        private Dictionary<Location, int> GetRequestNumber()
+        private Dictionary<Location, int> SetRequestForLocationNumber()
         {
             Dictionary<Location, int> locationsRequests = new Dictionary<Location, int>();
-            if (GetLocations().Count > 0)
-                foreach (Location location in GetLocations())
+            if (GetRequestsLocationsFromLastYear().Count > 0)
+                foreach (Location location in GetRequestsLocationsFromLastYear())
                     locationsRequests.Add(location, CountRequestForLocation(location));
             return locationsRequests;
         }
         public Location GetMostWantedLocation()
         {
             Location location = null;
-            if (GetRequestNumber().Count > 0)
+            if (SetRequestForLocationNumber().Count > 0)
             {
                 int maximum = 0;
-                Dictionary<Location, int> locations = GetRequestNumber();
+                Dictionary<Location, int> locations = SetRequestForLocationNumber();
                 for (int index = 0; index < locations.Count; index++)
                 {
                     var item = locations.ElementAt(index);

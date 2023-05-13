@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MathNet.Numerics;
+using NPOI.SS.Formula;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,6 +8,8 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using InitialProject;
+using Org.BouncyCastle.Asn1.Ocsp;
 
 namespace InitialProject.WPF.Validations.GuideValidations
 {
@@ -28,7 +32,8 @@ namespace InitialProject.WPF.Validations.GuideValidations
                     Message = "This field is required";
                 else
                     Message = "Ovo polje je obavezno";
-                return new ValidationResult(false, Message);
+                
+                return new ValidationResult(false, Message) ;
             }
         }
     }

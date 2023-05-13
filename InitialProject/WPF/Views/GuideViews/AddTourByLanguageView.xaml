@@ -7,6 +7,7 @@
             xmlns:val="clr-namespace:InitialProject.WPF.Validations.GuideValidations" 
             xmlns:ns="clr-namespace:InitialProject"
       xmlns:local="clr-namespace:InitialProject.WPF.Views.GuideViews"
+      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
       mc:Ignorable="d" 
       d:DesignHeight="717" d:DesignWidth="1100"
       Title="{ns:Loc AddTourByLanguageView}">
@@ -24,7 +25,7 @@
 
         <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Style="{DynamicResource BackgroundHeader}">
             <!--TITLE-->
-            <Label Content="{ns:Loc TourForm}" Style="{DynamicResource Header}"  Grid.Column="0" VerticalAlignment="Center" Width="252" HorizontalAlignment="Left" Margin="453,0,0,0"/>
+            <Label Content="{ns:Loc TourForm}" Style="{DynamicResource Header}"  Grid.Column="0" VerticalAlignment="Center" Width="461" HorizontalContentAlignment="Center"/>
             <Image Source="/Resources/Images/LOGO (2).jpg" Margin="0,0,905,0"/>
         </Grid>
         <Border Style="{DynamicResource Border}" Grid.Row="1" Grid.Column="1">
@@ -94,7 +95,7 @@
                                     </Grid.ColumnDefinitions>
 
                                     <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
-                                    <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                                    <TextBlock Grid.Column="0" Grid.Row="1" Text="{ns:Loc ThisFieldIsRequired}" Foreground="Red"/>
                                 </Grid>
                             </ControlTemplate>
                         </Validation.ErrorTemplate>
@@ -122,7 +123,7 @@
                                     </Grid.ColumnDefinitions>
 
                                     <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
-                                    <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                                    <TextBlock Grid.Column="0" Grid.Row="1" Text="{ns:Loc ThisFieldIsRequired}" Foreground="Red"/>
                                 </Grid>
                             </ControlTemplate>
                         </Validation.ErrorTemplate>
@@ -149,7 +150,7 @@
                                     </Grid.ColumnDefinitions>
 
                                     <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
-                                    <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                                    <TextBlock Grid.Column="0" Grid.Row="1" Text="{ns:Loc ThisFieldIsRequired}" Foreground="Red"/>
                                 </Grid>
                             </ControlTemplate>
                         </Validation.ErrorTemplate>
@@ -177,14 +178,14 @@
                                     </Grid.ColumnDefinitions>
 
                                     <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
-                                    <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                                    <TextBlock Grid.Column="0" Grid.Row="1" Text="{ns:Loc ThisFieldIsRequired}" Foreground="Red"/>
                                 </Grid>
                             </ControlTemplate>
                         </Validation.ErrorTemplate>
                     </ComboBox>
 
 
-                    <TextBox Style="{DynamicResource tb}" x:Name="DescriptionTB" Grid.Row="6" Margin="4,22,0,-29" Grid.ColumnSpan="2">
+                    <TextBox Style="{DynamicResource tb}" x:Name="DescriptionTB" Grid.Row="6" Margin="4,22,0,-29" Grid.ColumnSpan="2" TextWrapping="Wrap">
                         <TextBox.Text>
                             <Binding Path="Description" UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
@@ -205,7 +206,7 @@
                                     </Grid.ColumnDefinitions>
 
                                     <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
-                                    <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                                    <TextBlock Grid.Column="0" Grid.Row="1" Text="{ns:Loc ThisFieldIsRequired}" Foreground="Red"/>
                                 </Grid>
                             </ControlTemplate>
                         </Validation.ErrorTemplate>
@@ -213,7 +214,12 @@
 
 
 
-                    <ComboBox Style="{DynamicResource ComboBoxStyle}" x:Name="ComboBoxCountry" ItemsSource="{Binding Countries}"  IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" Grid.Row="3" Grid.Column="1" Margin="0,9,0,12" SelectionChanged="ComboBoxCountry_SelectionChanged">
+                    <ComboBox Style="{DynamicResource ComboBoxStyle}" x:Name="ComboBoxCountry" ItemsSource="{Binding Countries}"  IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" Grid.Row="3" Grid.Column="1" Margin="0,9,0,12" >
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding EnableCityCommand}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
                         <ComboBox.SelectedItem>
                             <Binding Path="Country" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
                                 <Binding.ValidationRules>
@@ -234,12 +240,12 @@
                                     </Grid.ColumnDefinitions>
 
                                     <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
-                                    <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                                    <TextBlock Grid.Column="0" Grid.Row="1" Text="{ns:Loc ThisFieldIsRequired}" Foreground="Red"/>
                                 </Grid>
                             </ControlTemplate>
                         </Validation.ErrorTemplate>
                     </ComboBox>
-                    <TextBox Style="{DynamicResource tb}" HorizontalAlignment="Center" Grid.Row="5" TextWrapping="Wrap" Text="{Binding LanguageT}" VerticalAlignment="Center" Width="186" Height="29" Grid.Column="1"/>
+                    <TextBox VerticalContentAlignment="Center" Style="{DynamicResource tb}" HorizontalAlignment="Center" Grid.Row="5" TextWrapping="Wrap" Text="{Binding LanguageT}" VerticalAlignment="Center" Width="186" Height="29" Grid.Column="1"/>
                 </Grid>
 
 
@@ -296,7 +302,7 @@
                                     </Grid.ColumnDefinitions>
 
                                     <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
-                                    <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                                    <TextBlock Grid.Column="0" Grid.Row="1" Text="{ns:Loc EnterPointName}" Foreground="Red"/>
                                 </Grid>
                             </ControlTemplate>
                         </Validation.ErrorTemplate>
@@ -306,7 +312,7 @@
 
                     <!--DATEANDTIME-->
                     <ListBox x:Name="DateTimeBox" ItemsSource="{Binding Path=Instances}" Grid.Column="0" Grid.Row="2" Grid.RowSpan="3" SelectedItem="{Binding selectedInstance}" Style="{DynamicResource  ListBoxForm}" Grid.ColumnSpan="2" Margin="0,38,35,4"/>
-                    <tk:TimePicker Style="{DynamicResource dt}"  FontSize="9" x:Name="DT" Grid.Column="1"  Grid.Row="5" Text="{Binding Path=InstanceStartDate,Mode=TwoWay}" Format="LongTime" DataContext="{Binding}" Margin="28,0,0,45" Grid.ColumnSpan="2" />
+                    <tk:TimePicker TextAlignment="Left" Style="{DynamicResource dt}"  FontSize="9" x:Name="DT" Grid.Column="1"  Grid.Row="5" Text="{Binding Path=InstanceStartDate,Mode=TwoWay}" Format="LongTime" DataContext="{Binding}" Margin="28,0,0,45" Grid.ColumnSpan="2" />
                     <Button Grid.Column="1" Grid.Row="5" Command="{Binding AddDateTimeCommand}"   Height="25" Width="60" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="28,0,0,-2" Style="{DynamicResource  Button}" Grid.ColumnSpan="2" RenderTransformOrigin="0.47,0.449" Content="{ns:Loc ADDBUTTON}"/>
                     <Button Grid.Column="2" Grid.Row="5"   Height="25" Width="60" Command="{Binding DeleteDateTimeCommand}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,1,-2" Style="{DynamicResource  Button}" Content="{ns:Loc DELETE}"/>
                     <Label Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" Content="{ns:Loc AddDateAndTime}" Width="165" Height="40"  Grid.Row="2" VerticalAlignment="Center"  Style="{DynamicResource  Label}"/>
@@ -333,7 +339,7 @@
                                     </Grid.ColumnDefinitions>
 
                                     <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
-                                    <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                                    <TextBlock Grid.Column="0" Grid.Row="1" Text="{ns:Loc AtLeast1DateIsRequired}" Foreground="Red"/>
                                 </Grid>
                             </ControlTemplate>
                         </Validation.ErrorTemplate>
@@ -447,7 +453,7 @@
                     </Grid.RowDefinitions>
 
 
-                    <Image x:Name="imagePicture" Grid.Row="2" Grid.ColumnSpan="4"  Grid.Column="1" Stretch="Fill" Margin="29,11,23,13">
+                    <Image x:Name="imagePicture" Grid.Row="2" Grid.ColumnSpan="4"  Grid.Column="1" Stretch="Fill" Margin="26,11,23,13">
                         <Image.Source>
                             <Binding Path="Image" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
                                 <Binding.ValidationRules>
@@ -460,7 +466,7 @@
                                 <Grid  Grid.Column="0" Grid.Row="0" Margin="29,17,23,7">
 
                                     <AdornedElementPlaceholder  x:Name="textBox"/>
-                                    <TextBlock Margin="-57,-5,0,0" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                                    <TextBlock Margin="-65,-7,0,0" Text="{ns:Loc AtLeast1ImageIsRequired}" Foreground="Red"/>
                                 </Grid>
                             </ControlTemplate>
                         </Validation.ErrorTemplate>
@@ -498,8 +504,8 @@
                         </Button.Template>
                     </Button>
                     <Label Content="{ns:Loc ImagesOfTour}" Style="{DynamicResource Label}" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Left" VerticalAlignment="Top" Height="36" Width="138" RenderTransformOrigin="0.505,0.781" Grid.RowSpan="2" Grid.Row="1"/>
-                    <Button Command="{Binding AddImageCommand}" Height="24" Width="60"  Grid.Column="2" Grid.ColumnSpan="3" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="25,3,0,0" Grid.RowSpan="2" Style="{DynamicResource  Button}" Grid.Row="1" Content="{ns:Loc ADDBUTTON}"/>
-                    <Button Content="{ns:Loc DELETE}" HorizontalAlignment="Left" Grid.Column="4" Grid.ColumnSpan="2" VerticalAlignment="Top"  Command="{Binding RemoveImageCommand}" Margin="105,3,0,0" Width="59" Height="24" Grid.RowSpan="2" Style="{DynamicResource  Button}" Grid.Row="1"/>
+                    <Button Command="{Binding AddImageCommand}" Height="24" Width="60"  Grid.Column="2" Grid.ColumnSpan="3" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="25,6,0,0" Grid.RowSpan="2" Style="{DynamicResource  Button}" Grid.Row="1" Content="{ns:Loc ADDBUTTON}"/>
+                    <Button Content="{ns:Loc DELETE}" HorizontalAlignment="Left" Grid.Column="4" Grid.ColumnSpan="2" VerticalAlignment="Top"  Command="{Binding RemoveImageCommand}" Margin="104,6,0,0" Width="59" Height="24" Grid.RowSpan="2" Style="{DynamicResource  Button}" Grid.Row="1"/>
                 </Grid>
 
 
@@ -534,7 +540,7 @@
                                 </Grid.ColumnDefinitions>
 
                                 <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
-                                <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                                <TextBlock Grid.Column="0" Grid.Row="1" Text="{ns:Loc AtLeast2CheckpointsAreRequired}" Foreground="Red"/>
                             </Grid>
                         </ControlTemplate>
                     </Validation.ErrorTemplate>

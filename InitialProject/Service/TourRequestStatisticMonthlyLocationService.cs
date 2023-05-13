@@ -5,9 +5,9 @@ using System.Collections.Generic;
 
 namespace InitialProject.Service
 {
-    public class MonthLocationStatisticService
+    public class TourRequestStatisticMonthlyLocationService
     {
-        public MonthLocationStatisticService() { }
+        public TourRequestStatisticMonthlyLocationService() { }
 
         private List<int> GetMonthsForLocation(Location location, int year)
         {
@@ -21,7 +21,7 @@ namespace InitialProject.Service
             }
             return months;
         }
-        private int GetByMonth(Location location, int month, int year)
+        private int GetRequestsCountByMonth(Location location, int month, int year)
         {
             List<OrdinaryTourRequests> ordinaryTourRequests = new List<OrdinaryTourRequests>();
             foreach (OrdinaryTourRequests tourRequest in GetByYearAndLocation(location, year))
@@ -37,7 +37,7 @@ namespace InitialProject.Service
             {
                 MonthRequestStatisticViewModel monthRequestStatisticViewModel = new MonthRequestStatisticViewModel();
                 monthRequestStatisticViewModel.MonthNumber = month + ".";
-                monthRequestStatisticViewModel.Number = GetByMonth(location, month, year);
+                monthRequestStatisticViewModel.Number = GetRequestsCountByMonth(location, month, year);
                 monthRequestStatisticViewModel.Month = GetMonth(month);
                 statistics.Add(monthRequestStatisticViewModel);
             }

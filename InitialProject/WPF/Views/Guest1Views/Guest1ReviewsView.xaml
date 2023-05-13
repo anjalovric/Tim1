@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:converters="clr-namespace:InitialProject.WPF.Converters"
       xmlns:local="clr-namespace:InitialProject.WPF.Views.Guest1Views"
+      xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
       mc:Ignorable="d" 
       d:DesignHeight="696" d:DesignWidth="1024"
       Title="Guest1Reviews">
@@ -12,7 +13,7 @@
         <Style TargetType="Grid">
             <Setter Property="Background" Value="#37492d"></Setter>
         </Style>
-        
+
         <Style TargetType="Label">
             <Setter Property="Foreground" Value="#d9c7b3"></Setter>
             <Setter Property="FontWeight" Value="Medium"></Setter>
@@ -78,6 +79,20 @@
         </Style>
         <Style TargetType="DataGridCell">
             <Setter Property="TextBlock.TextAlignment" Value="Center"></Setter>
+            <Style.Triggers>
+                <Trigger Property="IsSelected"  Value="True">
+                    <Setter Property="Foreground" Value="SeaGreen"></Setter>
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="BorderBrush" Value="Transparent"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="DataGridRow">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="SeaGreen"></Setter>
+                </Trigger>
+            </Style.Triggers>
         </Style>
         <Style TargetType="{x:Type ListBoxItem}">
             <!--For disable highlighting on stars rating listbox-->
@@ -99,7 +114,7 @@
         <converters:IntToImageConverter x:Key="Int2Images"></converters:IntToImageConverter>
     </Page.Resources>
 
-    
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
@@ -136,7 +151,7 @@
                     </LinearGradientBrush>
                 </Border.Background>
             </Border>
-            
+
             <Label FontSize="24" HorizontalAlignment="Center" Grid.Row="0" FontFamily="Baskerville Old Face"  VerticalAlignment="Top" Height="43" Width="Auto" FontWeight="Bold" Margin="0,50,0,0">AVERAGE RATINGS</Label>
 
             <!-- RATING STARS -->
@@ -205,7 +220,7 @@
                 </TextBlock.Style>
             </TextBlock>
             <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Center" Grid.Row="5" Margin="0,0,70,0" Width="40" Height="24" FontSize="18">
-                 <TextBlock.Style>
+                <TextBlock.Style>
                     <Style TargetType="TextBlock">
                         <Setter Property="Foreground" Value="#22301a"></Setter>
                         <Setter Property="FontWeight" Value="Medium"></Setter>
@@ -248,9 +263,45 @@
             </Button>
 
             <!-- PLACE FOR DIAGRAM -->
-            <Label FontSize="18" Grid.Row="8" Width="Auto" Height="35" HorizontalAlignment="Center" VerticalAlignment="Top" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Margin="0,0,0,0">Change of average ratings:</Label>
+            <Label FontSize="16" Grid.Row="8" Width="Auto" Height="35" HorizontalAlignment="Center" VerticalAlignment="Top" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Margin="0,0,0,0">Change of average ratings (previous year)</Label>
             <Image Source="/Resources/Images/diagram.png" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="8" Height="135" Width="140" Margin="0,40,0,0"/>
 
+            <Grid Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="8" Width="372" Height="164" Margin="0,40,0,0">
+                <lvc:CartesianChart Series="{Binding SeriesCollection}" LegendLocation="None">
+                    <lvc:CartesianChart.SeriesColors>
+                        <lvc:ColorsCollection>
+                            <Color>#dbc9ab</Color>
+                        </lvc:ColorsCollection>
+                    </lvc:CartesianChart.SeriesColors>
+                    <lvc:CartesianChart.AxisX>
+                        <lvc:Axis Labels="{Binding Labels}" Foreground="#dbc9ab" FontWeight="Medium" ShowLabels="True" MinValue="1" MaxValue="14">
+                            <lvc:Axis.Separator>
+                                <lvc:Separator Step="1">
+                                    <lvc:Separator.Resources>
+                                        <Style TargetType="lvc:Separator">
+                                            <Setter Property="StrokeThickness" Value="0"/>
+                                        </Style>
+                                    </lvc:Separator.Resources>
+                                </lvc:Separator>
+                            </lvc:Axis.Separator>
+                        </lvc:Axis>
+                    </lvc:CartesianChart.AxisX>
+                    <lvc:CartesianChart.AxisY>
+                        <lvc:Axis MinValue="0" Foreground="#dbc9ab" FontWeight="Medium">
+                            <lvc:Axis.Separator>
+                                <lvc:Separator>
+                                    <lvc:Separator.Resources>
+                                        <Style TargetType="lvc:Separator">
+                                            <Setter Property="StrokeThickness" Value="1"/>
+                                            <Setter Property="Stroke" Value="#dbc9ab"/>
+                                        </Style>
+                                    </lvc:Separator.Resources>
+                                </lvc:Separator>
+                            </lvc:Axis.Separator>
+                        </lvc:Axis>
+                    </lvc:CartesianChart.AxisY>
+                </lvc:CartesianChart>
+            </Grid>
         </Grid>
 
 
@@ -277,7 +328,7 @@
                     </LinearGradientBrush>
                 </Border.Background>
             </Border>
-            
+
             <Label FontSize="24" HorizontalAlignment="Center" FontWeight="Bold" FontFamily="Baskerville Old Face"  VerticalAlignment="Top" Height="43" Width="Auto" Margin="0,50,0,0">REVIEWS</Label>
 
             <!-- REVIEWS DATAGRID -->

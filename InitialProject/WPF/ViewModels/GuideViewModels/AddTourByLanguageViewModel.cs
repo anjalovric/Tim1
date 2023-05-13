@@ -304,6 +304,8 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         public RelayCommand DeleteCheckPointCommand { get; set; }
         public RelayCommand CloceToastAvailability { get; set; }
 
+        public RelayCommand EnableCityCommand { get; set; }
+
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
@@ -317,18 +319,21 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             TodayInstances = todayInstances;
             FutureInstances = futureInstances;
             loggedInUser = user;
+            LanguageT = selectedLanguage;
+            SetStartState();
+        }
+        private void SetStartState()
+        {
+            Date = DateTime.Now;
+            DatesCount = 0;
+            ListCount = 0;
             Toast = "Hidden";
             isErrorMessageVisible = "Hidden";
             MakeCommands();
             MakeListOfLocations();
             Start = DateTime.Now;
             DateMessage = "Hidden";
-            LanguageT = selectedLanguage;
-            Date=DateTime.Now;
-            DatesCount = 0;
-            ListCount = 0;
         }
-
         private void MakeListOfLocations()
         {
             LocationService locationService = new LocationService();
@@ -353,6 +358,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             AddImageCommand = new RelayCommand(AddTourImage_Executed, CanExecute);
             DeleteCheckPointCommand = new RelayCommand(CancelCheckPoint_Executed, CanExecute);
             CloceToastAvailability = new RelayCommand(CloceToastAvailability_Executed, CanExecute);
+            EnableCityCommand = new RelayCommand(EnableCityComboBox_Executed, CanExecute);
         }
         private void Confirm_Executed(object sender)
         {
@@ -400,7 +406,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             TourImage newImage = new TourImage(relative, -1);
             images.Add(newImage);
         }
-        public void ComboBoxCountry_SelectionChanged()
+        public void EnableCityComboBox_Executed(object sender)
         {
             LocationService locationService = new LocationService();
             if (Country != null)

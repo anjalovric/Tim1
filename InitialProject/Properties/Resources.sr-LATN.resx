@@ -144,6 +144,18 @@
   <data name="AgeStatistics" xml:space="preserve">
     <value>Statistika o godištu</value>
   </data>
+  <data name="AreYouSure" xml:space="preserve">
+    <value>Da li ste sigurni da želite otkazati turu:</value>
+  </data>
+  <data name="AtLeast1DateIsRequired" xml:space="preserve">
+    <value>Obavezno je uneti bar 1 datum</value>
+  </data>
+  <data name="AtLeast1ImageIsRequired" xml:space="preserve">
+    <value>Obavezno je uneti bar 1 sliku</value>
+  </data>
+  <data name="AtLeast2CheckpointsAreRequired" xml:space="preserve">
+    <value>Obavezno je uneti bar 2 ključne tačke</value>
+  </data>
   <data name="BeforeRegularEnd" xml:space="preserve">
     <value>pre redovnog kraja</value>
   </data>
@@ -240,8 +252,14 @@
   <data name="EndTime" xml:space="preserve">
     <value>Kraj</value>
   </data>
+  <data name="EnterPointName" xml:space="preserve">
+    <value>Uneti naziv ključne tačke</value>
+  </data>
   <data name="FinishedTourDetails" xml:space="preserve">
     <value>Detalji završene ture</value>
+  </data>
+  <data name="FinishedTours" xml:space="preserve">
+    <value>Održane ture:</value>
   </data>
   <data name="FINISHTOUR" xml:space="preserve">
     <value>ZAVRŠI TURU 🏁</value>
@@ -297,6 +315,9 @@
   <data name="InputYear" xml:space="preserve">
     <value>Unesi godinu:</value>
   </data>
+  <data name="InputYearFirst" xml:space="preserve">
+    <value>Uneti godinu prvo</value>
+  </data>
   <data name="Language" xml:space="preserve">
     <value>Jezik</value>
   </data>
@@ -347,6 +368,9 @@
   </data>
   <data name="NewReviews" xml:space="preserve">
     <value>Novih recenzija:</value>
+  </data>
+  <data name="NO" xml:space="preserve">
+    <value>NE</value>
   </data>
   <data name="NumberOfGuests" xml:space="preserve">
     <value> Broj prisutnih gostiju:</value>
@@ -435,6 +459,12 @@
   <data name="TheMostWantedLocation" xml:space="preserve">
     <value>Najpoželjnija lokacija </value>
   </data>
+  <data name="ThereAreNoToursForThisYear" xml:space="preserve">
+    <value>Nema tura za tu godinu</value>
+  </data>
+  <data name="ThisFieldIsRequired" xml:space="preserve">
+    <value>Ovo polje je obavezno</value>
+  </data>
   <data name="ThisTourIsFinished" xml:space="preserve">
     <value>Ova tura je završena!</value>
   </data>
@@ -494,5 +524,8 @@
   </data>
   <data name="YEARLYREQUESTSSTATISTC" xml:space="preserve">
     <value>GODIŠNJA STATISTIKA O ZAHTEVIMA</value>
+  </data>
+  <data name="YES" xml:space="preserve">
+    <value>DA</value>
   </data>
 </root>

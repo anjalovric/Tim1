@@ -18,21 +18,21 @@ namespace InitialProject.Service
         public ReviewNotificationService()
         {
         }
-            public List<ReviewNotification> GetAll()
+            public List<GuideAndTourReviewNotification> GetAll()
             {
                 return reviewNotificationRepository.GetAll();
             }
 
-            public ReviewNotification Save(ReviewNotification review)
+            public GuideAndTourReviewNotification Save(GuideAndTourReviewNotification review)
             {
                 return reviewNotificationRepository.Save(review);
             }
 
-            public ReviewNotification GetById(int id)
+            public GuideAndTourReviewNotification GetById(int id)
             {
                 return reviewNotificationRepository.GetById(id);
             }
-            public ReviewNotification Update(ReviewNotification voucher)
+            public GuideAndTourReviewNotification Update(GuideAndTourReviewNotification voucher)
             {
            
                 return reviewNotificationRepository.Update(voucher);
@@ -42,7 +42,7 @@ namespace InitialProject.Service
                 GuideService guideService = new GuideService();
                 int guideId=guideService.GetByUsername(user.Username).Id;
                 int count = 0;
-                foreach(ReviewNotification reviewNotification in GetAll())
+                foreach(GuideAndTourReviewNotification reviewNotification in GetAll())
                     if(reviewNotification.GuideId == guideId && reviewNotification.Count==0)
                         count++;
                 return count;
@@ -52,7 +52,7 @@ namespace InitialProject.Service
                 GuideService guideService = new GuideService();
                 int guideId = guideService.GetByUsername(user.Username).Id;
                 int count = 0;
-                foreach (ReviewNotification reviewNotification in GetAll())
+                foreach (GuideAndTourReviewNotification reviewNotification in GetAll())
                 {
                     if(reviewNotification.GuideId == guideId)
                         reviewNotification.Count++;

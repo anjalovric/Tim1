@@ -119,6 +119,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         public RelayCommand ResetCommand { get; set; }
         public RelayCommand CreateCommand { get; set; }
         public RelayCommand ViewDescriptionCommand { get; set; }
+        public RelayCommand EnableCityCommand { get; set; } 
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -146,9 +147,22 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             RequestNotificationService  requestNotificationService = new RequestNotificationService();
             foreach (OrdinaryTourRequests request in Requests)
             {
-                foreach (RequestNotification requestNotification in requestNotificationService.GetAll())
+                foreach (OrdinaryRequestNotification requestNotification in requestNotificationService.GetAll())
                     if (requestNotification.Count == 1 && request.Id == requestNotification.RequestId)
-                        request.IsNew = "🆕";
+                        request.IsNew = true;
+            }
+        }
+        public void EnableCityComboBox_Executed(object sender)
+        {
+            LocationService locationService = new LocationService();
+            if (Country != null)
+            {
+                CitiesByCountry.Clear();
+                foreach (string city in locationService.GetCitiesByCountry((string)Country))
+                {
+                    CitiesByCountry.Add(city);
+                }
+                IsComboBoxCityEnabled = true;
             }
         }
         private void MakeRequestsList()
@@ -162,6 +176,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             ResetCommand= new RelayCommand(Restart, CanExecute);
             CreateCommand = new RelayCommand(CreateTour_Executed, CanExecute);
             ViewDescriptionCommand=new RelayCommand(ViewDescription_Executed, CanExecute);
+            EnableCityCommand = new RelayCommand(EnableCityComboBox_Executed, CanExecute);
         }
         private void MakeListOfLocations()
         {
@@ -179,17 +194,6 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             Languages.Add("arabic");
             Languages.Add("serbian");
             Languages.Add("italian");
-        }
-        public void ComboBoxCountry_SelectionChanged()
-        {
-            LocationService locationService = new LocationService();
-            if (Country != null)
-            {
-                CitiesByCountry.Clear();
-                foreach (string city in locationService.GetCitiesByCountry((string)Country))
-                    CitiesByCountry.Add(city);
-                IsComboBoxCityEnabled = true;
-            }
         }
         private bool CanExecute(object sender)
         {

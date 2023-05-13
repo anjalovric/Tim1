@@ -40,7 +40,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         private TourReviewImageService tourReviewImageService;
         private Guest2 guest2;
         private TourInstance CurrentTourInstance;
-        private List<TourReviewImage> images;
+        public List<TourReviewImage> images { get; set; }
         private int reviewId;
         public Uri relativeUri { get; set; }
         public TourReviewImage tourReviewImage;
@@ -91,10 +91,10 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             Knowledge_Decrement_Command=new RelayCommand(Knowledge_Decrement_Executed, CanExecute);
             Facts_Decrement_Command = new RelayCommand(Facts_Decrement_Executed,CanExecute);
             UploadImageCommand = new RelayCommand(UploadImage_Executed,CanExecute);
-            ConfirmCommand = new RelayCommand(Confirm_Executed,CanExecute);
+            ConfirmCommand = new RelayCommand(Confirm_Executed, ConfirmCanExecute);
             DeleteCommand = new RelayCommand(Delete_Executed, CanExecute);
-            NextCommand = new RelayCommand(NextPhoto_Executed, CanExecute);
-            BackCommand = new RelayCommand(PreviousPhoto_Executed, CanExecute);
+            NextCommand = new RelayCommand(NextPhoto_Executed, ChangeImageCanExecute);
+            BackCommand = new RelayCommand(PreviousPhoto_Executed, ChangeImageCanExecute);
             DeletePhotoCommand=new RelayCommand(DeletePhoto_Executed,CanExecute);
             CancelCommand = new RelayCommand(Cancel_Executed, CanExecute);
         }
@@ -119,6 +119,12 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
                 changedNumber = Convert.ToInt32(knowledge.Text) + 1;
                 knowledge.Text = changedNumber.ToString();
             }
+        }
+        private bool ChangeImageCanExecute(object sender)
+        {
+            if (images.Count > 1)
+                return true;
+            return false;
         }
         private void Facts_Increment_Executed(object sender)
         {
@@ -161,7 +167,10 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         {
             Application.Current.Windows.OfType<GuideAndTourReviewFormView>().FirstOrDefault().Close();
         }
-
+        private bool ConfirmCanExecute(object sender)
+        {
+            return IsImageUploadValid();
+        }
 
         private void Confirm_Executed(object sender)
         {
@@ -175,6 +184,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             else
                 MessageBox.Show("You must upload at least one photo!");
         }
+
         private void StoreImages(int reviewId)
         {
             TourReviewImageService tourReviewImageService = new TourReviewImageService();
@@ -189,7 +199,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             GuideAndTourReviewService guideAndTourReviewService = new GuideAndTourReviewService();
             GuideAndTourReview guideAndTourReview = new GuideAndTourReview(CurrentTourInstance.Guide.Id, guest2, CurrentTourInstance, Convert.ToInt32(language.Text), Convert.ToInt32(interestingFacts.Text), Convert.ToInt32(knowledge.Text), comment.Text);
             GuideAndTourReview savedReview= guideAndTourReviewService.Save(guideAndTourReview);
-            ReviewNotification reviewNotification = new ReviewNotification(savedReview.Id, savedReview.GuideId);
+            GuideAndTourReviewNotification reviewNotification = new GuideAndTourReviewNotification(savedReview.Id, savedReview.GuideId);
             ReviewNotificationService reviewNotificationService = new ReviewNotificationService();
             reviewNotificationService.Save(reviewNotification);
             return savedReview;

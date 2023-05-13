@@ -14,26 +14,26 @@ using System.Windows.Controls;
 
 namespace InitialProject.Repository
 {
-    public class Guest2NotificationRepository:IGuest2NotificationRepository
+    public class NewTourNotificationRepository:INewTourNotificationRepository
     {
         private const string FilePath = "../../../Resources/Data/guest2Notifications.csv";
 
-        private readonly Serializer<Guest2Notification> _serializer;
+        private readonly Serializer<NewTourNotification> _serializer;
 
-        private List<Guest2Notification> _notifications;
+        private List<NewTourNotification> _notifications;
 
-        public Guest2NotificationRepository()
+        public NewTourNotificationRepository()
         {
-            _serializer = new Serializer<Guest2Notification>();
+            _serializer = new Serializer<NewTourNotification>();
             _notifications = _serializer.FromCSV(FilePath);
         }
 
-        public List<Guest2Notification> GetAll()
+        public List<NewTourNotification> GetAll()
         {
             return _serializer.FromCSV(FilePath);
         }
 
-        public Guest2Notification Save(Guest2Notification notification)
+        public NewTourNotification Save(NewTourNotification notification)
         {
             notification.Id = NextId();
             _notifications.Add(notification);
@@ -51,23 +51,23 @@ namespace InitialProject.Repository
             return _notifications.Max(c => c.Id) + 1;
         }
 
-        public void Delete(Guest2Notification notification)
+        public void Delete(NewTourNotification notification)
         {
             _notifications = _serializer.FromCSV(FilePath);
-            Guest2Notification founded = _notifications.Find(c => c.Id==notification.Id);
+            NewTourNotification founded = _notifications.Find(c => c.Id==notification.Id);
             _notifications.Remove(founded);
             _serializer.ToCSV(FilePath, _notifications);
         }
 
-        public Guest2Notification GetById(int id)
+        public NewTourNotification GetById(int id)
         {
             return _notifications.Find(n => n.Id == id);
         }
-        public ObservableCollection<Guest2Notification> GetByGuestId(int id)
+        public ObservableCollection<NewTourNotification> GetByGuestId(int id)
         {
             _notifications = GetAll();
-            ObservableCollection<Guest2Notification> notifications = new ObservableCollection<Guest2Notification>();
-            foreach (Guest2Notification notification in _notifications)
+            ObservableCollection<NewTourNotification> notifications = new ObservableCollection<NewTourNotification>();
+            foreach (NewTourNotification notification in _notifications)
             {
                 if (notification.Guest2.Id == id)
                 {
@@ -75,6 +75,15 @@ namespace InitialProject.Repository
                 }
             }
             return notifications;
+        }
+        public void Update(NewTourNotification notification)
+        {
+            _notifications = _serializer.FromCSV(FilePath);
+            NewTourNotification current = _notifications.Find(c => c.Id == notification.Id);
+            int index = _notifications.IndexOf(current);
+            _notifications.Remove(current);
+            _notifications.Insert(index, notification);
+            _serializer.ToCSV(FilePath, _notifications);
         }
     }
 }
