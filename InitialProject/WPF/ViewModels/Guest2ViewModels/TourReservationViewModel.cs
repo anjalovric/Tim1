@@ -27,7 +27,6 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         private TourInstance CurrentTourInstance;
         private TourReservationRepository tourReservationRepository;
         private List<TourReservation> tourReservations;
-        private List<TourInstance> tourInstances;
         private TourInstanceRepository tourInstanceRepository;
         private ShowToursViewModel ShowTours;
         private bool withVoucher;
@@ -38,7 +37,6 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         public RelayCommand CloseCommand { get; set; }
         public RelayCommand ActivateCommand { get; set; }
         public ObservableCollection<TourInstance> TourInstances { get; set; }
-        public string Label { get; set; }
         private string age;
         public string Age
         {
@@ -64,13 +62,24 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             }
 
         }
+        private string label;
+        public string Label
+        {
+            get { return label; }
+            set
+            {
+                if (value != label)
+                    label = value;
+                OnPropertyChanged("Label");
+            }
+
+        }
         public Guest2 guest2 { get; set; }
         private VoucherService voucherService;
         private ObservableCollection<Voucher> vouchers;
-        private ObservableCollection<TourInstance> tourInstance;
-        private int capacity;
+        private string capacity;
 
-        public int Capacity
+        public string Capacity
         {
             get { return capacity; }
             set
@@ -91,21 +100,20 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
                 OnPropertyChanged("Vouchers");
             }
         }
-        public TourReservationViewModel(TourInstance currentTourInstance, Guest2 guest2, ObservableCollection<TourInstance> TourInstance, TourInstanceRepository tourInstanceRepository,string Label)
+        public TourReservationViewModel(TourInstance currentTourInstance, Guest2 guest2, ObservableCollection<TourInstance> TourInstance, TourInstanceRepository tourInstanceRepository,string label)
         {
             CurrentTourInstance = currentTourInstance;
             this.TourInstances = TourInstance;
-            this.Label = Label;
             withVoucher = false;
             MakeCommands();
-            Capacity = 1;
+            Capacity = "";
             this.tourInstanceRepository = tourInstanceRepository;
-            tourInstances = tourInstanceRepository.GetAll();
             tourReservationRepository = new TourReservationRepository();
             tourReservations = tourReservationRepository.GetAll();
             ShowTours = new ShowToursViewModel(guest2);
             this.guest2 = guest2;
             GuestId = guest2.Id;
+            Label = label;
             capacityOfThisTour = currentTourInstance.Tour.MaxGuests;
             voucherService = new VoucherService();
             vouchers = new ObservableCollection<Voucher>();
@@ -129,8 +137,8 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         }
         private void MakeCommands()
         {
-            Guests_Increment_Command = new RelayCommand(IncrementGuestsNumber_Executed, CanExecute);
-            Guests_Decrement_Command = new RelayCommand(DecrementGuestsNumber_Executed, CanExecute);
+            Guests_Increment_Command = new RelayCommand(Increment_Executed, CanExecute);
+            Guests_Decrement_Command = new RelayCommand(Decrement_Executed, CanExecute);
             ConfirmCommand = new RelayCommand(Confirm_Executed, CanExecute);
             CloseCommand = new RelayCommand(Cancel_Executed, CanExecute);
             ActivateCommand = new RelayCommand(Activate_Executed, CanExecute);
@@ -139,21 +147,29 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         {
             return true;
         }
-        private void IncrementGuestsNumber_Executed(object sender)
+        private void Increment_Executed(object sender)
         {
-            int changedNumberOfGuests = Capacity + 1;
-            Capacity = changedNumberOfGuests;
-        }
-        private void DecrementGuestsNumber_Executed(object sender)
-        {
-            int changedNumberOfGuests;
-            if (Capacity > 1)
+            int changedDaysNumber;
+            if (Capacity == "")
+                Capacity = "1";
+            else
             {
-                changedNumberOfGuests = Capacity - 1;
-                Capacity = changedNumberOfGuests;
+                changedDaysNumber = Convert.ToInt32(Capacity) + 1;
+                Capacity = changedDaysNumber.ToString();
             }
         }
-        public void FindAvailableTours()
+        private void Decrement_Executed(object sender)
+        {
+            int changedDaysNumber;
+            if (Capacity != "" && Convert.ToInt32(Capacity) > 1)
+            {
+                changedDaysNumber = Convert.ToInt32(Capacity) - 1;
+                Capacity = changedDaysNumber.ToString();
+            }
+        }
+
+    
+    public void FindAvailableTours()
         {
             int suma = 0;
             ObservableCollection<TourInstance> storedTourInstances = new ObservableCollection<TourInstance>(tourInstanceRepository.GetAll());
@@ -177,7 +193,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         private int SumOfAllGuests()
         {
             int totalGuests = 0;
-            GuestsNumber = Capacity;
+            GuestsNumber = Convert.ToInt32(Capacity);
             foreach (TourReservation tourReservation in tourReservations)
             {
                 if (CurrentTourInstance.Id == tourReservation.TourInstanceId)
@@ -201,9 +217,10 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             }
             else if (IsTourCompleted())
             {
+                label = "Showing available tours:";
                 return;
             }
-            TourReservation newTourReservation = new TourReservation(CurrentTourInstance.Id, GuestsNumber, GuestId, Convert.ToDouble(Age), Capacity, withVoucher);
+            TourReservation newTourReservation = new TourReservation(CurrentTourInstance.Id, GuestsNumber, GuestId, Convert.ToDouble(Age), Convert.ToInt32(Capacity), withVoucher);
             tourReservationRepository.Save(newTourReservation);
             Application.Current.Windows.OfType<TourReservationFormView>().FirstOrDefault().Close();
         }
@@ -224,7 +241,6 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             {
                 MessageBox.Show("There is no enough places for choosen number of people. Tour is completed.");
                 FindAvailableTours();
-                Label = "Showing available tours: "; //zasto ovo nece?
                 Application.Current.Windows.OfType<TourReservationFormView>().FirstOrDefault().Close();
                 return true;
             }

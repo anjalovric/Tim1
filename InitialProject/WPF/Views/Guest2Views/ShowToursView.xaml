@@ -246,10 +246,10 @@
         </Border>
 
 
-        <Label Content="City" Grid.Column="1"  Grid.Row="0" Margin="211,90,0,0" RenderTransformOrigin="5.351,0.387" Style="{StaticResource LabelStyle}" Foreground="White"/>
-        <Label Content="Duration" Grid.Column="1"  Grid.Row="0" Margin="414,90,0,0" Style="{StaticResource LabelStyle}" Foreground="White" Width="98"/>
-        <Label Content="Language" Grid.Column="1"  Margin="0,170,0,0" RenderTransformOrigin="0.413,0.366" Style="{StaticResource LabelStyle}" Foreground="White"/>
-        <Label Content="Capacity" Grid.Column="1"  Margin="211,170,0,0" Style="{StaticResource LabelStyle}" Foreground="White"/>
+        <Label Content="City" Grid.Column="1"  Grid.Row="0" Margin="211,90,0,0" RenderTransformOrigin="5.351,0.387" Style="{StaticResource LabelStyle}" Foreground="#b46617"/>
+        <Label Content="Duration" Grid.Column="1"  Grid.Row="0" Margin="414,90,0,0" Style="{StaticResource LabelStyle}" Foreground="#b46617" Width="98"/>
+        <Label Content="Language" Grid.Column="1"  Margin="0,170,0,0" RenderTransformOrigin="0.413,0.366" Style="{StaticResource LabelStyle}" Foreground="#b46617"/>
+        <Label Content="Capacity" Grid.Column="1"  Margin="211,170,0,0" Style="{StaticResource LabelStyle}" Foreground="#b46617"/>
         <ComboBox x:Name="countryInput"  ItemsSource="{Binding Countries}" BorderBrush="#7166f9" BorderThickness="3,3,3,3" SelectedItem="{Binding Country}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" HorizontalAlignment="Left" Margin="55,130,0,0" VerticalAlignment="Top" Width="134" Height="22" Grid.ColumnSpan="2">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
@@ -257,7 +257,7 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </ComboBox>
-        <Label Content="Country"  Margin="55,90,0,0" Style="{StaticResource LabelStyle}" Foreground="White" Grid.ColumnSpan="2"/>
+        <Label Content="Country"  Margin="55,90,0,0" Style="{StaticResource LabelStyle}" Foreground="#b46617" Grid.ColumnSpan="2"/>
         <Button x:Name="decrementCapacityNumber" Grid.Column="1"  Style="{StaticResource borderStyle}" Content="-" Margin="211,201,0,0" Width="20" Command="{Binding DecrementCommand}" Height="22"/>
         <Button x:Name="incrementCapacityNumber" Grid.Column="1"  Style="{StaticResource borderStyle}" Content="+" Margin="325,201,0,0" Width="20" Command="{Binding IncrementCommand}" RenderTransformOrigin="-1.284,0.612" Height="22"/>
         <Button FontWeight="Bold" Grid.Column="1"  Margin="494,201,0,0" Height="22" Command="{Binding SearchCommand}" Background="#ffba00" BorderBrush="#ffba00" Width="62">
@@ -295,7 +295,7 @@
             </Button.Style>
 
         </Button>
-        <Label Grid.Row="0" Grid.Column="1"  Foreground="White" Content="{Binding Path=Label,UpdateSourceTrigger=PropertyChanged}" FontSize="20" Margin="0,261,0,0" Height="71" Style="{StaticResource LabelStyle}"/>
+        <Label Grid.Row="0" Grid.Column="1"  Foreground="White" Content="{Binding Path=Label,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" FontSize="20" Margin="0,261,0,0" Height="71" Style="{StaticResource LabelStyle}"/>
         <Button x:Name="Restart" Background="#ffba00" Grid.Column="1" BorderBrush="#ffba00"  Style="{StaticResource borderStyle}" Width="62" Margin="414,201,0,0" TextElement.FontWeight="Bold" Command="{Binding RestartCommand}" Height="22">
             <Grid Background="#ffba00" HorizontalAlignment="Left" VerticalAlignment="Top" Height="15">
                 <Grid.RowDefinitions>

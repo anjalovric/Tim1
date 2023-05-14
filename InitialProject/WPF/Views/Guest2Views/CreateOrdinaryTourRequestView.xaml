@@ -61,18 +61,12 @@
         </Style>
         <Style x:Key="LabelStyle" TargetType="Label">
             <Setter Property="FontSize" Value="15"/>
-            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Foreground" Value="Black"/>
             <Setter Property="FontWeight" Value="DemiBold"/>
         </Style>
     </Window.Resources>
 
-    <Border BorderThickness="4" Padding="6" CornerRadius="25" BorderBrush="#6d9773">
-        <Border.Background>
-            <RadialGradientBrush GradientOrigin="0.5,0.5" Center="0.5,0.5" RadiusX="0.5" RadiusY="0.5">
-                <GradientStop Color="#FF96BD9B" Offset="0.1"></GradientStop>
-                <GradientStop Color="#6d9773" Offset="1"></GradientStop>
-            </RadialGradientBrush>
-        </Border.Background>
+    <Border BorderThickness="4" Padding="6" CornerRadius="25" BorderBrush="White" Background="White">
 
         <Grid Width="655" Height="580">
             <Grid.ColumnDefinitions>
@@ -92,16 +86,8 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Grid.Background>
-                <LinearGradientBrush StartPoint="0,1" EndPoint="1,1">
-                    <GradientStop Color="#6d9773" Offset="0"/>
-
-                    <GradientStop Color="#FF96BD9B" Offset="0.3"/>
-                    <GradientStop Color="#FF96BD9B" Offset="0.5"/>
-                    <GradientStop Color="#6d9773" Offset="1"/>
-                </LinearGradientBrush>
-            </Grid.Background>
-            <Label Content="CREATING REQUEST OF THE TOUR" FontSize="30" FontWeight="Bold" Foreground="White" Margin="40,10,76,52" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
+          
+            <Label Content="CREATING REQUEST OF THE TOUR" FontSize="30" FontWeight="Bold" Foreground="Black" Margin="40,10,76,52" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
             <Label Grid.Row="2" Grid.Column="0" Content="Name" Margin="40,10,0,10" Style="{StaticResource LabelStyle}"/>
             <Label Content="Country" Grid.Row="3" Grid.Column="0" Margin="40,10,0,16" Style="{StaticResource LabelStyle}" RenderTransformOrigin="0.5,0.5"/>
             <Label Content="Language" Grid.Row="5" Grid.Column="0" Margin="40,10,0,0" Style="{StaticResource LabelStyle}"/>
@@ -341,7 +327,7 @@
                     </ControlTemplate>
                 </Validation.ErrorTemplate>
             </ComboBox>
-            <Label Content="Potrebno je popuniti sva navedena polja." FontSize="18" Margin="40,15,237,0" Grid.Column="0" Grid.Row="1" Foreground="White" Grid.ColumnSpan="2"/>
+            <Label Content="It is necessary to fill in all the specified fields." FontSize="18" Margin="40,15,237,0" Grid.Column="0" Grid.Row="1" Foreground="Black" Grid.ColumnSpan="2"/>
             <Button HorizontalAlignment="Left" Grid.Row="10" VerticalAlignment="Center"  Height="34" Width="132" FontWeight="Bold" FontSize="18" Command="{Binding ConfirmCommand}" Margin="35,0,0,0" Grid.Column="1" BorderBrush="Transparent">
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">
@@ -392,6 +378,7 @@
                     <TextBlock Background="White" Text="Cancel" Foreground="Black" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" Width="109" Height="29" Margin="10,3,0,0" Grid.RowSpan="2" Grid.Column="1"/>
                 </Grid>
             </Button>
+            <Border  BorderThickness="0 0 0 1" BorderBrush="LightGray" Height="33" VerticalAlignment="Top" Grid.ColumnSpan="2" Margin="12,26,11,0" Grid.RowSpan="2"/>
         </Grid>
     </Border>
 </Window>

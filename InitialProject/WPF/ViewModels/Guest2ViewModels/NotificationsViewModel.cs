@@ -54,7 +54,8 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         {
             List<NewTourNotification> notifications = new List<NewTourNotification>(notificationService.GetByGuestId(guest2.Id));
             NewTourNotification current = notifications.Find(c => c.RequestId == requestId);
-            if (current == null) { return true; }
+            if (notifications.Count == 0) return false;
+            else if (current == null) return true; 
             return false;
         }
         private void SaveCreateTourNotifications()
