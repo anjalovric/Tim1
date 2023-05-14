@@ -1,0 +1,12 @@
+1|q1|False|1|1
+2|q2|False|1|2
+3|l1|False|2|1
+4|l2|False|2|2
+5|k1|False|3|1
+6|k2|False|3|2
+7|y1|True|4|1
+8|y2|True|4|2
+9|y3|True|4|3
+10|f1|True|5|1
+11|f2|True|5|2
+12|f3|False|5|3

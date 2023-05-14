@@ -38,7 +38,8 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             tourInstanceService = new TourInstanceService();
             TourInstances = new List<TourInstance>(tourInstanceService.GetAll());
             SaveCreateTourNotifications();
-            Notifications = new ObservableCollection<NewTourNotification>(notificationService.GetByGuestId(guest2.Id));
+            Notifications = new ObservableCollection<NewTourNotification>();
+            SetNotifications();
             ViewCommand = new RelayCommand(View_Executed, CanExecute);
             DeleteCommand=new RelayCommand(Delete_Executed,CanExecute);
         }
@@ -50,13 +51,20 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         {
             return notificationService.GetAll().Exists(c => c.Guest2.Id == request.GuestId && c.RequestId == request.Id);
         }
+        private void SetNotifications()
+        {
+            foreach(NewTourNotification newTourNotification in notificationService.GetByGuestId(guest2.Id))
+            {
+                if (!newTourNotification.Deleted)
+                    Notifications.Add(newTourNotification);
+            }
+        }
         private bool IsDeleted(int requestId)
         {
             List<NewTourNotification> notifications = new List<NewTourNotification>(notificationService.GetByGuestId(guest2.Id));
             NewTourNotification current = notifications.Find(c => c.RequestId == requestId);
-            if (notifications.Count == 0) return false;
-            else if (current == null) return true; 
-            return false;
+            if (notifications.Count == 0 || current==null) return false;
+            else return current.Deleted;
         }
         private void SaveCreateTourNotifications()
         {
@@ -117,7 +125,8 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             Notifications.Clear();
             foreach(NewTourNotification guest2Notification in notificationService.GetByGuestId(guest2.Id))
             {
-                Notifications.Add(guest2Notification);
+                if(!guest2Notification.Deleted)
+                    Notifications.Add(guest2Notification);
             }
         }
     }
