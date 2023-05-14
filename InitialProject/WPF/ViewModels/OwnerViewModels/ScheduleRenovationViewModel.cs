@@ -24,6 +24,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         private int duration;
         private string description;
         private AvailableDatesForAccommodation selectedDateRange;
+        private string durationOutOfRangeVisibility;
         public ObservableCollection<Accommodation> Accommodations { get; set; }
         public ObservableCollection<AvailableDatesForAccommodation> DatesSuggestions { get; set; }
         public RelayCommand CancelCommand { get; set; }
@@ -43,6 +44,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             StartDate = DateTime.Now.AddDays(1);
             EndDate = DateTime.Now.AddDays(1);
             Duration = 1;
+            DurationOutOfRangeVisibility = "Hidden";
         }
 
         private void MakeCommands()
@@ -71,6 +73,11 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
                 if(DatesSuggestions != null)
                     DatesSuggestions.Clear();
             }
+
+            if ((EndDate.Date - StartDate.Date).Days + 1 < Duration)
+                DurationOutOfRangeVisibility = "Visible";
+            else
+                DurationOutOfRangeVisibility = "Hidden";
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -93,6 +100,18 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
         }
 
+        public string DurationOutOfRangeVisibility
+        {
+            get { return durationOutOfRangeVisibility; }
+            set
+            {
+                if (!value.Equals(durationOutOfRangeVisibility))
+                {
+                    durationOutOfRangeVisibility = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         public DateTime StartDate
         {
             get { return startDate; }

@@ -156,10 +156,8 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             set
             {
                 if (value != label)
-                {
                     label = value;
-                    OnPropertyChanged("Label");
-                }
+                OnPropertyChanged("Label");
             }
         }
         public RelayCommand ReserveCommand { get; set; }
@@ -371,7 +369,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
                     Selected = tourInstance;
                 }
             }
-            TourReservationFormView tourReservationForm = new TourReservationFormView(Selected, guest2, TourInstances, tourInstanceRepository,Label);
+            TourReservationFormView tourReservationForm = new TourReservationFormView(Selected, guest2, TourInstances, tourInstanceRepository, label);
             tourReservationForm.Show();
         }
         private void ViewDetails_Executed(object sender)
