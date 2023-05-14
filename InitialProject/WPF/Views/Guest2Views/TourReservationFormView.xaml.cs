@@ -31,10 +31,10 @@ namespace InitialProject.WPF.Views.Guest2Views
     /// </summary>
     public partial class TourReservationFormView : Window
     {
-        public TourReservationFormView(TourInstance currentTourInstance, Guest2 guest2, ObservableCollection<TourInstance> TourInstance, TourInstanceRepository tourInstanceRepository,string Label)
+        public TourReservationFormView(TourInstance currentTourInstance, Guest2 guest2, ObservableCollection<TourInstance> TourInstance, TourInstanceRepository tourInstanceRepository, string label)
         {
             InitializeComponent();
-            DataContext = new TourReservationViewModel(currentTourInstance, guest2, TourInstance, tourInstanceRepository,Label);
+            DataContext = new TourReservationViewModel(currentTourInstance, guest2, TourInstance, tourInstanceRepository, label);
         }
     }
 }

@@ -46,7 +46,7 @@
             <Style.Triggers>
                 <Trigger Property="IsSelected" Value="True">
                     <Setter Property="Background" Value="Transparent"/>
-                    <Setter Property="Foreground" Value="Red"/>
+                    <Setter Property="Foreground" Value="Blue"/>
                     <Setter Property="BorderBrush" Value="Transparent"/>
                 </Trigger>
                 <Trigger Property="IsKeyboardFocusWithin" Value="True">
@@ -96,7 +96,7 @@
         <Rectangle Fill="White" Grid.Column="1" RadiusX="10" RadiusY="10" Margin="0,193,0,0" Height="360" VerticalAlignment="Top"/>
         <DataGrid x:Name="TourListDataGrid" Grid.Column="1" BorderBrush="Transparent" ItemsSource="{Binding Path=CompletedTours,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=Selected}" IsReadOnly="True" AutoGenerateColumns="False" VerticalAlignment="Top" HorizontalAlignment="Center" Height="343" Width="556" Margin="0,202,0,0" HorizontalScrollBarVisibility="Hidden" GridLinesVisibility="None" ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle2}" CellStyle="{StaticResource DataGridCellStyle2}" Style="{StaticResource DataGridStyle}" RowStyle="{StaticResource DataGridRowStyle2}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Location" Width="1*" Binding="{Binding Tour.Location}"/>
+                <DataGridTextColumn Header="Location" Width="1*" Binding="{Binding Tour.Location.City}"/>
                 <DataGridTextColumn Header="Duration" Width="1*" Binding="{Binding Tour.Duration}"/>
                 <DataGridTextColumn Header="Language" Width="1*" Binding="{Binding Tour.Language}"/>
                 <DataGridTextColumn  Width="1*" Header="Capacity" Binding="{Binding Tour.MaxGuests}"/>
@@ -128,6 +128,6 @@
 
         </DataGrid>
         <Label Content="Finished tours" Grid.Column="1" Foreground="White" FontWeight="Bold" FontSize="20" HorizontalAlignment="Left" Margin="0,36,0,0" VerticalAlignment="Top" Width="228"/>
-        <TextBlock Foreground="White" Grid.Column="1" HorizontalAlignment="Left" Margin="0,100,0,0" VerticalAlignment="Top" Width="483" Height="36"><Run Text="U nastavku mozete vidjeti sve ture koje su zavrsene a na kojima ste se pojavili. Iste ture "/><LineBreak/><Run Text="mozete i ocijeniti."/></TextBlock>
+        <TextBlock Foreground="#b46617" FontWeight="DemiBold" Grid.Column="1" FontSize="15" HorizontalAlignment="Left" Margin="0,100,0,0" VerticalAlignment="Top" Width="507" Height="57"><Run Text="Below you can see all the tours that have ended and for which you have"/><LineBreak/><Run Text="signed up. You can rate the same tours."/></TextBlock>
     </Grid>
 </UserControl>

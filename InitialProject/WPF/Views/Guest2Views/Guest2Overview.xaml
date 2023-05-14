@@ -4,10 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View"
+        xmlns:views="clr-namespace:InitialProject.WPF.Views.Guest2Views"
         mc:Ignorable="d"
         Title="Booking" Height="768" Width="1024" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid Background="#FF14503F">
-
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="3*"/>
@@ -28,11 +28,14 @@
                     <StackPanel Width="NaN" Margin="3,70,1,0" Background="#FF14503F" />
                 </ItemsPanelTemplate>
             </Menu.ItemsPanel>
+
             <MenuItem Header="Profile" Foreground="White" FontSize="20" FontWeight="Bold" Command="{Binding ProfileCommand}">
                 <MenuItem.Icon>
-                    <Image Source="/Resources/Images/profile.png" Height="15" Width="20"/>
-                </MenuItem.Icon>
+                        <Image Source="/Resources/Images/profile.png" Height="15" Width="20"/>
+                  </MenuItem.Icon>
             </MenuItem>
+
+            
             <MenuItem Header="Show" Foreground="White" FontSize="20" FontWeight="Bold">
                 <MenuItem Header="All tours" Background="#FF14503F" Command="{Binding ShowCommand}"/>
                 <MenuItem Header="Active tours" Background="#FF14503F" Command="{Binding ActiveToursCommand}"/>
@@ -82,6 +85,5 @@
             </TextBlock.Text>
         </TextBlock>
         <ContentControl x:Name="CC" Grid.Column="1" Background="#FF14503F" Grid.RowSpan="2"/>
-
     </Grid>
 </Window>
