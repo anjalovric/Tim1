@@ -12,49 +12,144 @@ namespace InitialProject.Service
             requests= new List<OrdinaryTourRequests>();
             requests = ordinaryTourRequestsService.GetOnWaitingRequests();
         }
-        public List<OrdinaryTourRequests> GetByCountry(List<OrdinaryTourRequests> appropriateRequests, string country)
+        public List<OrdinaryTourRequests> GetRequestsByCountry(List<OrdinaryTourRequests> appropriateRequests, string country)
         {
-            foreach (OrdinaryTourRequests request in requests)
-                if (request.Location.Country == country)
-                    appropriateRequests.Add(request);
-            return Inspect(appropriateRequests);
+            List<OrdinaryTourRequests> addaptedList = new List<OrdinaryTourRequests>(appropriateRequests);
+            List<OrdinaryTourRequests> temporaryList = new List<OrdinaryTourRequests>();
+            if (appropriateRequests.Count == 0)
+            {
+                foreach (OrdinaryTourRequests request in requests)
+                    if (request.Location.Country == country && !appropriateRequests.Contains(request))
+                        appropriateRequests.Add(request);
+            }
+            else
+            {
+                foreach(OrdinaryTourRequests request in addaptedList)
+                    if(request.Location.Country != country)
+                        temporaryList.Add(request);
+                appropriateRequests.Clear();
+                foreach (OrdinaryTourRequests request in addaptedList)
+                    if (!temporaryList.Contains(request))
+                        appropriateRequests.Add(request);
+
+            }
+            return InspectRequests(appropriateRequests);
         }
-        public List<OrdinaryTourRequests> GetByCity(List<OrdinaryTourRequests> appropriateRequests, string city)
-        { 
-            foreach (OrdinaryTourRequests request in requests)
-                if (request.Location.City == city)
-                    appropriateRequests.Add(request);
-            return Inspect(appropriateRequests);
-        }
-        public List<OrdinaryTourRequests> GetByLanguage(List<OrdinaryTourRequests> appropriateRequests, string language)
+        public List<OrdinaryTourRequests> GetRequestsByCity(List<OrdinaryTourRequests> appropriateRequests, string city)
         {
-            foreach (OrdinaryTourRequests request in requests)
-                if (request.Language == language)
-                    appropriateRequests.Add(request);
-            return Inspect(appropriateRequests);
+            List<OrdinaryTourRequests> addaptedList = new List<OrdinaryTourRequests>(appropriateRequests);
+            List<OrdinaryTourRequests> temporaryList = new List<OrdinaryTourRequests>();
+            if (appropriateRequests.Count == 0)
+            {
+                foreach (OrdinaryTourRequests request in requests)
+                    if (request.Location.City == city && !appropriateRequests.Contains(request))
+                        if (!appropriateRequests.Contains((OrdinaryTourRequests)request))
+                            appropriateRequests.Add(request);
+            }
+            else
+            {
+                foreach(OrdinaryTourRequests request in addaptedList)
+                    if(request.Location.City != city)
+                        temporaryList.Add(request) ;
+                appropriateRequests.Clear();
+                foreach (OrdinaryTourRequests request in addaptedList)
+                    if (!temporaryList.Contains(request))
+                        appropriateRequests.Add(request);
+            }
+            return InspectRequests(appropriateRequests);
         }
-        public List<OrdinaryTourRequests> GetByCapacity(List<OrdinaryTourRequests> appropriateRequests, int capacity)
+        public List<OrdinaryTourRequests> GetRequestsByLanguage(List<OrdinaryTourRequests> appropriateRequests, string language)
         {
-            foreach (OrdinaryTourRequests request in requests)
-                if (request.MaxGuests == capacity)
-                    appropriateRequests.Add(request);
-            return Inspect(appropriateRequests);
+            List<OrdinaryTourRequests> addaptedList=new List<OrdinaryTourRequests>(appropriateRequests);
+            List<OrdinaryTourRequests> temporaryList = new List<OrdinaryTourRequests>();
+            if (appropriateRequests.Count == 0)
+            {
+                foreach (OrdinaryTourRequests request in requests)
+                    if (request.Language == language && !appropriateRequests.Contains(request))
+                            appropriateRequests.Add(request);        
+            }
+            else
+            {
+                foreach(OrdinaryTourRequests request in addaptedList)
+                    if(request.Language != language)
+                       temporaryList.Add(request);
+                appropriateRequests.Clear();
+                foreach(OrdinaryTourRequests request in addaptedList)
+                    if(!temporaryList.Contains(request))    
+                        appropriateRequests.Add(request);
+            }
+            
+            return InspectRequests(appropriateRequests);
         }
-        public List<OrdinaryTourRequests> GetByStart(List<OrdinaryTourRequests> appropriateRequests, DateTime Start)
+        public List<OrdinaryTourRequests> GetRequestsByCapacity(List<OrdinaryTourRequests> appropriateRequests, int capacity)
         {
-            foreach (OrdinaryTourRequests request in requests)
-                if (request.StartDate >= Start)
-                    appropriateRequests.Add(request);
-            return Inspect(appropriateRequests);
+            List<OrdinaryTourRequests> addaptedList = new List<OrdinaryTourRequests>(appropriateRequests);
+            List<OrdinaryTourRequests> temporaryList = new List<OrdinaryTourRequests>();
+            if (appropriateRequests.Count == 0)
+            {
+                foreach (OrdinaryTourRequests request in requests)
+                    if (request.MaxGuests == capacity && !appropriateRequests.Contains(request))
+                        appropriateRequests.Add(request);
+            }else
+            {
+                foreach (OrdinaryTourRequests request in addaptedList )
+                    if (request.MaxGuests != capacity)
+                        temporaryList.Add(request);
+                appropriateRequests.Clear();
+                foreach (OrdinaryTourRequests request in addaptedList)
+                    if (!temporaryList.Contains(request))
+                        appropriateRequests.Add(request);
+            }
+
+            return InspectRequests(appropriateRequests);
         }
-        public List<OrdinaryTourRequests> GetByEnd(List<OrdinaryTourRequests> appropriateRequests, DateTime End)
+        public List<OrdinaryTourRequests> GetRequestsByStart(List<OrdinaryTourRequests> appropriateRequests, DateTime Start)
         {
-            foreach (OrdinaryTourRequests request in requests)
-                if (request.EndDate <= End)
-                    appropriateRequests.Add(request);
-            return Inspect(appropriateRequests);
+            List<OrdinaryTourRequests> addaptedList = new List<OrdinaryTourRequests>(appropriateRequests);
+            List<OrdinaryTourRequests> temporaryList = new List<OrdinaryTourRequests>();
+            if (appropriateRequests.Count == 0)
+            {
+                foreach (OrdinaryTourRequests request in requests)
+                    if (request.StartDate >= Start && !appropriateRequests.Contains(request))
+                            appropriateRequests.Add(request);
+            }
+            else
+            {
+                foreach(OrdinaryTourRequests request in addaptedList)
+                    if(!(request.StartDate >=Start))
+                        temporaryList.Add(request);
+                appropriateRequests.Clear();
+                foreach (OrdinaryTourRequests request in addaptedList)
+                    if (!temporaryList.Contains(request))
+                        appropriateRequests.Add(request);
+
+            }
+            return InspectRequests(appropriateRequests);
         }
-        private List<OrdinaryTourRequests> Inspect(List<OrdinaryTourRequests> requests)
+        public List<OrdinaryTourRequests> GetRequestsByEnd(List<OrdinaryTourRequests> appropriateRequests, DateTime End)
+        {
+            List<OrdinaryTourRequests> addaptedList = new List<OrdinaryTourRequests>(appropriateRequests);
+            List<OrdinaryTourRequests> temporaryList = new List<OrdinaryTourRequests>();
+            if (appropriateRequests.Count == 0)
+            {
+                foreach (OrdinaryTourRequests request in requests)
+                    if (request.EndDate <= End && !appropriateRequests.Contains(request))
+                            appropriateRequests.Add(request);
+            }
+            else
+            {
+                foreach(OrdinaryTourRequests request in addaptedList)
+                    if(!(request.EndDate <= End))
+                        temporaryList.Add(request);
+                appropriateRequests.Clear();
+                foreach (OrdinaryTourRequests request in addaptedList)
+                    if (!temporaryList.Contains(request))
+                        appropriateRequests.Add(request);
+
+            }
+            return InspectRequests(appropriateRequests);
+        }
+        private List<OrdinaryTourRequests> InspectRequests(List<OrdinaryTourRequests> requests)
         {
             for (int i = 0; i <= requests.Count - 2; i++)
             {

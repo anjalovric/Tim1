@@ -92,6 +92,17 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
                 OnPropertyChanged();
             }
         }
+        private DateTime stardate;
+        public DateTime Stardate
+        {
+            get { return stardate; }
+            set
+            {
+                if (value != stardate)
+                    stardate = value;
+                OnPropertyChanged();
+            }
+        }
         private DateTime end;
         public DateTime End
         {
@@ -141,6 +152,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             requestNotificationService.UpCount();
             SetNews();
             Description = "";
+            Stardate= DateTime.Now;
         }
         private void SetNews()
         {
@@ -202,22 +214,22 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         private void Search_Country()
         {
             if(Country != null && !Country.Equals(""))
-                appropriateRequests=searchRequestsService.GetByCountry(appropriateRequests,Country);
+                appropriateRequests=searchRequestsService.GetRequestsByCountry(appropriateRequests,Country);
         }
         private void Search_City()
         {
             if (City != null && !City.Equals(""))
-                appropriateRequests=searchRequestsService.GetByCity(appropriateRequests,City);
+                appropriateRequests=searchRequestsService.GetRequestsByCity(appropriateRequests,City);
         }
         private void Search_Language()
         {
             if (Language != null && !Language.Equals(""))
-               appropriateRequests=searchRequestsService.GetByLanguage(appropriateRequests, Language);
+               appropriateRequests=searchRequestsService.GetRequestsByLanguage(appropriateRequests, Language);
         }
         private void Search_Capacity()
         {
             if (Capacity != null && Capacity != 0)
-               appropriateRequests=searchRequestsService.GetByCapacity(appropriateRequests, Capacity);
+               appropriateRequests=searchRequestsService.GetRequestsByCapacity(appropriateRequests, Capacity);
         }
         private void RefreshResquests()
         {
@@ -228,12 +240,12 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         private void Search_StartDate()
         {
             if (Start != null && !Start.ToString().Equals("1/1/0001 12:00:00 AM"))
-                appropriateRequests = searchRequestsService.GetByStart(appropriateRequests, Start);
+                appropriateRequests = searchRequestsService.GetRequestsByStart(appropriateRequests, Start);
         }
         private void Search_EndDate()
         {
             if (End != null && !End.ToString().Equals("1/1/0001 12:00:00 AM"))
-                appropriateRequests = searchRequestsService.GetByEnd(appropriateRequests, End);
+                appropriateRequests = searchRequestsService.GetRequestsByEnd(appropriateRequests, End);
         }
         private void Search_Executed(object sender)
         {
