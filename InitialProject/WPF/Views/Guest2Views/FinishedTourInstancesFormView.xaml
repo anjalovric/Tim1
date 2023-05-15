@@ -46,7 +46,7 @@
             <Style.Triggers>
                 <Trigger Property="IsSelected" Value="True">
                     <Setter Property="Background" Value="Transparent"/>
-                    <Setter Property="Foreground" Value="Red"/>
+                    <Setter Property="Foreground" Value="Blue"/>
                     <Setter Property="BorderBrush" Value="Transparent"/>
                 </Trigger>
                 <Trigger Property="IsKeyboardFocusWithin" Value="True">
@@ -96,34 +96,26 @@
         <Rectangle Fill="White" Grid.Column="1" RadiusX="10" RadiusY="10" Margin="0,193,0,0" Height="360" VerticalAlignment="Top"/>
         <DataGrid x:Name="TourListDataGrid" Grid.Column="1" BorderBrush="Transparent" ItemsSource="{Binding Path=CompletedTours,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=Selected}" IsReadOnly="True" AutoGenerateColumns="False" VerticalAlignment="Top" HorizontalAlignment="Center" Height="343" Width="556" Margin="0,202,0,0" HorizontalScrollBarVisibility="Hidden" GridLinesVisibility="None" ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle2}" CellStyle="{StaticResource DataGridCellStyle2}" Style="{StaticResource DataGridStyle}" RowStyle="{StaticResource DataGridRowStyle2}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Location" Width="1*" Binding="{Binding Tour.Location}"/>
+                <DataGridTextColumn Header="Location" Width="1*" Binding="{Binding Tour.Location.City}"/>
                 <DataGridTextColumn Header="Duration" Width="1*" Binding="{Binding Tour.Duration}"/>
                 <DataGridTextColumn Header="Language" Width="1*" Binding="{Binding Tour.Language}"/>
                 <DataGridTextColumn  Width="1*" Header="Capacity" Binding="{Binding Tour.MaxGuests}"/>
                 <DataGridTemplateColumn x:Name="rate" Header="Rate" Width="0.9*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button FontWeight="Bold" FontSize="18" Command="{Binding Path=DataContext.RateCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}">
-                                <Grid Background="#929195" HorizontalAlignment="Left" VerticalAlignment="Top">
+                            <Button FontWeight="Bold" FontSize="18" Width="65" Height="30" Background="#ffba00" BorderBrush="#ffba00" BorderThickness="2" Command="{Binding Path=DataContext.RateCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}">
+                                <Grid Background="#ffba00" HorizontalAlignment="Left" VerticalAlignment="Top">
                                     <Grid.RowDefinitions>
-                                        <RowDefinition Height="16*"/>
+                                        <RowDefinition Height="15*"/>
                                         <RowDefinition Height="19*"/>
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto"/>
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
-                                    <Image Source="/Resources/Images/star.png" VerticalAlignment="Top" HorizontalAlignment="Left" Width="26" Height="25" RenderTransformOrigin="0.5,0.5" Margin="10,3,0,0" Grid.RowSpan="2">
-                                        <Image.RenderTransform>
-                                            <TransformGroup>
-                                                <ScaleTransform/>
-                                                <SkewTransform/>
-                                                <RotateTransform Angle="180"/>
-                                                <TranslateTransform/>
-                                            </TransformGroup>
-                                        </Image.RenderTransform>
-                                    </Image>
-                                    <TextBlock Background="#929195" Text="Rate" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" Width="109" Height="29" Margin="10,3,0,0" Grid.RowSpan="2" Grid.Column="1"/>
+                                    <Image Source="/Resources/Images/star.png" VerticalAlignment="Top" HorizontalAlignment="Left" Width="15" Height="25" RenderTransformOrigin="0.5,0.5" Margin="5,3,0,0" Grid.RowSpan="2"/>
+
+                                    <TextBlock Background="#ffba00" Text="Rate" VerticalAlignment="Top" FontSize="12" FontWeight="Bold" HorizontalAlignment="Left" Width="65" Height="29" Margin="5,3,0,0" Grid.RowSpan="2" Grid.Column="1"/>
                                 </Grid>
 
                             </Button>
@@ -136,6 +128,6 @@
 
         </DataGrid>
         <Label Content="Finished tours" Grid.Column="1" Foreground="White" FontWeight="Bold" FontSize="20" HorizontalAlignment="Left" Margin="0,36,0,0" VerticalAlignment="Top" Width="228"/>
-        <TextBlock Foreground="White" Grid.Column="1" HorizontalAlignment="Left" Margin="0,100,0,0" VerticalAlignment="Top" Width="483" Height="36"><Run Text="U nastavku mozete vidjeti sve ture koje su zavrsene a na kojima ste se pojavili. Iste ture "/><LineBreak/><Run Text="mozete i ocijeniti."/></TextBlock>
+        <TextBlock Foreground="#b46617" FontWeight="DemiBold" Grid.Column="1" FontSize="15" HorizontalAlignment="Left" Margin="0,100,0,0" VerticalAlignment="Top" Width="507" Height="57"><Run Text="Below you can see all the tours that have ended and for which you have"/><LineBreak/><Run Text="signed up. You can rate the same tours."/></TextBlock>
     </Grid>
 </UserControl>

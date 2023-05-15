@@ -10,32 +10,37 @@ using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using System.Printing;
 using System.DirectoryServices.ActiveDirectory;
+using InitialProject.Serializer;
 
 namespace InitialProject.Service
 {
-    public class Guest2NotificationService
+    public class NewTourNotificationService
     {
-        private IGuest2NotificationRepository notificationRepository = Injector.CreateInstance<IGuest2NotificationRepository>();
-        public Guest2NotificationService()
+        private INewTourNotificationRepository notificationRepository = Injector.CreateInstance<INewTourNotificationRepository>();
+        public NewTourNotificationService()
         {
         }
 
-        public void Save(Guest2Notification notification)
+        public void Save(NewTourNotification notification)
         {
             notificationRepository.Save(notification);
         }
 
-        public void Delete(Guest2Notification notification)
+        public void Delete(NewTourNotification notification)
         {
             notificationRepository.Delete(notification);
         }
-        public List<Guest2Notification> GetAll()
+        public List<NewTourNotification> GetAll()
         {
             return notificationRepository.GetAll();
         }
-        public ObservableCollection<Guest2Notification> GetByGuestId(int id)
+        public List<NewTourNotification> GetByGuestId(int id)
         {
             return notificationRepository.GetByGuestId(id);
+        }
+        public void Update(NewTourNotification notification)
+        {
+            notificationRepository.Update(notification);
         }
     }
 }

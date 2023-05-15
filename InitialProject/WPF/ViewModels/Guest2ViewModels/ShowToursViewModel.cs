@@ -18,6 +18,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
 {
     public class ShowToursViewModel:INotifyPropertyChanged
     {
+        public RelayCommand CountryInputSelectionChangedCommand { get; set; }
         private ObservableCollection<TourInstance> tourInstances;
         public ObservableCollection<TourInstance> TourInstances
         {
@@ -155,10 +156,8 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             set
             {
                 if (value != label)
-                {
                     label = value;
-                    OnPropertyChanged("Label");
-                }
+                OnPropertyChanged("Label");
             }
         }
         public RelayCommand ReserveCommand { get; set; }
@@ -205,7 +204,8 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             RestartCommand = new RelayCommand(Restart_Executed, CanExecute);
             IncrementCommand=new RelayCommand(IncrementCapacityNumber_Executed,CanExecute);
             DecrementCommand=new RelayCommand(DecrementCapacityNumber_Executed, CanExecute);
-            ViewDetailsCommand=new RelayCommand(ViewDetails_Executed,CanExecute);    
+            ViewDetailsCommand=new RelayCommand(ViewDetails_Executed,CanExecute);
+            CountryInputSelectionChangedCommand = new RelayCommand(CountryInputSelectionChanged_Executed, CanExecute);
         }
         private void SetTourInstances(ObservableCollection<TourInstance> TourInstances)
         {
@@ -369,7 +369,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
                     Selected = tourInstance;
                 }
             }
-            TourReservationFormView tourReservationForm = new TourReservationFormView(Selected, guest2, TourInstances, tourInstanceRepository,Label);
+            TourReservationFormView tourReservationForm = new TourReservationFormView(Selected, guest2, TourInstances, tourInstanceRepository, label);
             tourReservationForm.Show();
         }
         private void ViewDetails_Executed(object sender)
@@ -411,7 +411,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             SelectedLanguage = null;
             MaxGuests = "";
         }
-        public void CountryInput_SelectionChanged()
+        public void CountryInputSelectionChanged_Executed(object sender)
         {
             if (Country != null)
             {
@@ -427,7 +427,6 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         {
             Guest2Service guest2Service = new Guest2Service();
             List<Guest2> Guests = new List<Guest2>(guest2Service.GetAll());
-            Guest2NotificationService guest2NotificationService = new Guest2NotificationService();
             if (Alerts.Count() != 0)
             {
                 foreach (AlertGuest2 alert in Alerts)
@@ -445,7 +444,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         {
            
             List<TourInstance> TourInstances = new List<TourInstance>();
-            Guest2NotificationService guest2NotificationService = new Guest2NotificationService();
+            NewTourNotificationService newTourNotificationService = new NewTourNotificationService();
             TourInstances = tourInstanceRepository.GetAll();
             Alerts = alertGuest2Repository.GetAll();
             CheckPointService checkPointService = new CheckPointService();
@@ -458,8 +457,8 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
                     {
                         if (alert.Guest2Id == guest2.Id && alert.Informed == false && TourInstance.Id==alert.InstanceId)
                         {
-                            Guest2Notification guest2Notification = new Guest2Notification(FindGuest2(), "You reserved this tour. Confirm your presence.", Guest2NotificationType.CONFIRM_PRESENCE,TourInstance, false,alert.Id,-1);
-                            guest2NotificationService.Save(guest2Notification);
+                            NewTourNotification guest2Notification = new NewTourNotification(FindGuest2(), "You reserved this tour. Confirm your presence.", Guest2NotificationType.CONFIRM_PRESENCE,TourInstance, false,alert.Id);
+                            newTourNotificationService.Save(guest2Notification);
                             alert.Informed = true;
                             alertGuest2Repository.Update(alert);
                         }

@@ -7,15 +7,15 @@ namespace InitialProject.WPF.Views.GuideViews
     /// <summary>
     /// Interaction logic for FinishedTourDetails.xaml
     /// </summary>
-    public partial class FinishedTourDetails : Page
+    public partial class FinishedTourDetailsView : Page
     {
        
-        public FinishedTourDetails(TourInstance selected)
+        public FinishedTourDetailsView(TourInstance selected)
         {
             InitializeComponent();
             DataContext = new FinishedTourDetailsViewModel(selected); ;
 
         }
-    
+
     }
 }

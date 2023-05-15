@@ -15,6 +15,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
 {
     public class CreateOrdinaryTourRequestViewModel:INotifyPropertyChanged
     {
+        public RelayCommand CountryInputSelectionChangedCommand { get; set; }
         public ObservableCollection<string> Countries { get; set; }
         public ObservableCollection<string> CitiesByCountry { get; set; }
         private LocationRepository locationRepository;
@@ -186,6 +187,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             CancelCommand = new RelayCommand(Cancel_Executed, CanExecute);
             IncrementCommand = new RelayCommand(Increment_Executed, CanExecute);
             DecrementCommand = new RelayCommand(Decrement_Executed, CanExecute);
+            CountryInputSelectionChangedCommand = new RelayCommand(CountryInputSelectionChanged_Executed, CanExecute);
         }
         private void AddLanguages()
         {
@@ -238,9 +240,9 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
                 MessageBox.Show("Niste dobro popunili polja!");
                 return;
             }
-            OrdinaryTourRequests request = new OrdinaryTourRequests(Name,Guest2.Id, Convert.ToInt32(MaxGuests), newLocation, Description, SelectedLanguage, Convert.ToDateTime(Start), Convert.ToDateTime(End), "On waiting",Start.ToString().Split(" ")[0],End.ToString().Split(" ")[0],-1,createDate,false,-1);
+            OrdinaryTourRequests request = new OrdinaryTourRequests(Name,Guest2.Id, Convert.ToInt32(MaxGuests), newLocation, Description, SelectedLanguage, Convert.ToDateTime(Start), Convert.ToDateTime(End), Status.ONWAITING,Start.ToString().Split(" ")[0],End.ToString().Split(" ")[0],-1,createDate,false,-1);
             OrdinaryTourRequests savedRequest=requestService.Save(request);
-            RequestNotification requestNotification = new RequestNotification(savedRequest.Id);
+            OrdinaryRequestNotification requestNotification = new OrdinaryRequestNotification(savedRequest.Id);
             RequestNotificationService requestNotificationService = new RequestNotificationService();
             requestNotificationService.Save(requestNotification);
             Application.Current.Windows.OfType<CreateOrdinaryTourRequestView>().FirstOrDefault().Close();
@@ -255,7 +257,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
                  OrdinaryTourRequests.Add(ordinaryTourRequests);
             }
         }
-        public void CountryInput_SelectionChanged()
+        public void CountryInputSelectionChanged_Executed(object sender)
         {
             if (Country != null)
             {

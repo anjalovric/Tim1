@@ -29,9 +29,5 @@ namespace InitialProject.WPF.Views.Guest2Views
             DataContext = new StatisticForChosenYearViewModel(guest2,year);
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
     }
 }

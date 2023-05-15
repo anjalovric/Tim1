@@ -1,7 +1,6 @@
 ﻿using InitialProject.Model;
 using InitialProject.Service;
 using Microsoft.Win32;
-using Org.BouncyCastle.Asn1.Mozilla;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -306,7 +305,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         public RelayCommand PreviousImageCommand { get; set; }
         public RelayCommand AddImageCommand { get; set; }   
         public RelayCommand DeleteCheckPointCommand { get; set; }
-
+        public RelayCommand EnableCityCommand { get; set; }
         public RelayCommand OkToastCommand { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -322,19 +321,21 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             TodayInstances = todayInstances;
             FutureInstances = futureInstances;
             loggedInUser = user;
+            SetStartState();
+        }
+        private void SetStartState()
+        {
             AddLanguages();
             Toast = "Hidden";
             isErrorMessageVisible = "Hidden";
             MakeCommands();
             MakeListOfLocations();
-            Start=DateTime.Now;
-            Date= DateTime.Now;
+            Start = DateTime.Now;
+            Date = DateTime.Now;
             IsAvailable = "Hidden";
             DatesCount = 0;
             PointsCount = 0;
-
         }
-
         private void MakeListOfLocations()
         {
             LocationService locationService = new LocationService();
@@ -369,6 +370,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             AddImageCommand = new RelayCommand(AddTourImage_Executed, CanExecute);
             DeleteCheckPointCommand = new RelayCommand(CancelCheckPoint_Executed, CanExecute);
             OkToastCommand=new RelayCommand(OkToast_Executed , CanExecute);
+            EnableCityCommand= new RelayCommand(EnableCityComboBox_Executed, CanExecute);
         }
         private void Confirm_Executed(object sender)
         {
@@ -412,7 +414,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             TourImage newImage = new TourImage(relative,-1);
             images.Add(newImage);
         }
-        public void ComboBoxCountry_SelectionChanged()
+        public void EnableCityComboBox_Executed(object sender)
         {
             LocationService locationService = new LocationService();
             if (Country != null)

@@ -1,8 +1,9 @@
-﻿<Page x:Class="InitialProject.WPF.Views.GuideViews.RequestsStatistisYearly"
+﻿<Page x:Class="InitialProject.WPF.Views.GuideViews.RequestsStatisticsYearlyView"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
       xmlns:local="clr-namespace:InitialProject.WPF.Views.GuideViews"
       xmlns:ns="clr-namespace:InitialProject"
       mc:Ignorable="d" 
@@ -102,7 +103,14 @@
                         </Border>
                         <Label Content="{ns:Loc City}" Style="{DynamicResource StatisticLabel}" HorizontalAlignment="Left" Margin="94,69,0,0" VerticalAlignment="Top"/>
                         <Label Style="{DynamicResource Label}" FontSize="16" FontWeight="Heavy" HorizontalAlignment="Left" Margin="28,0,0,0" VerticalAlignment="Top" Content="{ns:Loc Choose}"/>
-                        <ComboBox  ItemsSource="{Binding Countries}" SelectedItem="{Binding Country,UpdateSourceTrigger=PropertyChanged}" Text="{Binding Country,UpdateSourceTrigger=PropertyChanged}" SelectionChanged="ComboBoxCountry_SelectionChanged" HorizontalAlignment="Center" Style="{DynamicResource ComboBoxStyle}" VerticalAlignment="Top" Width="146" Height="28" Margin="0,36,0,0"/>
+                        <ComboBox  ItemsSource="{Binding Countries}" SelectedItem="{Binding Country,UpdateSourceTrigger=PropertyChanged}" Text="{Binding Country,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" Style="{DynamicResource ComboBoxStyle}" VerticalAlignment="Top" Width="146" Height="28" Margin="0,36,0,0">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectionChanged">
+                                    <i:InvokeCommandAction Command="{Binding EnableCityCommand}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </ComboBox>
+
                         <Label Content="{ns:Loc Country}" Style="{DynamicResource StatisticLabel}" HorizontalAlignment="Left" Margin="94,31,0,0" Width="116" Height="48" VerticalAlignment="Top"/>
                         <Button Content="▼" Command="{Binding SearchLocationCommand}" Style="{DynamicResource Button}" HorizontalAlignment="Left" Margin="423,81,0,0" VerticalAlignment="Top" Width="47" Height="25"/>
                         <Button Content="↻" Command="{Binding ResetLocationCommand}" Style="{DynamicResource Button}" HorizontalAlignment="Left" Margin="500,81,0,0" VerticalAlignment="Top" Height="25" Width="46"/>

@@ -209,7 +209,7 @@
                 <TextBlock Background="#ffba00" Text="Generate report" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" Width="145" Height="29" Margin="37,3,0,0" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
             </Grid>
         </Button>
-        <Label Content="Mozete pogledati sve vase zahtjeve za ture kao i njihov status." Grid.Column="1" Foreground="White" Margin="0,100,0,0" Height="46" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <Label Content="You can view all your requests for tours as well as their status." FontSize="15" Grid.Column="1" FontWeight="DemiBold" Foreground="#b46617" Margin="0,100,0,0" Height="46" VerticalAlignment="Top" HorizontalAlignment="Left"/>
         <Button HorizontalAlignment="Left" Grid.Column="1" VerticalAlignment="Top" Height="34" Width="172" FontWeight="Bold" FontSize="18" Command="{Binding StatisticsCommand}" Margin="384,499,0,0">
             <Grid Background="#ffba00" Width="172" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35">
                 <Grid.RowDefinitions>

@@ -84,7 +84,11 @@
             <Label x:Name="LangugaeKnowledge" Grid.Row="2" Grid.Column="1" Style="{DynamicResource Labels}" Content="{Binding LanguageKnowledge}"/>
             <Label x:Name="Interestigness" Grid.Row="3" Grid.Column="1" Style="{DynamicResource Labels}" Content="{Binding Interestigness}"/>
             <Label x:Name="Images" Grid.Row="4" Content="{ns:Loc Images}" Grid.Column="1" Style="{DynamicResource Label}" VerticalAlignment="Center" Width="70"/>
-            <Label Content="{Binding Comment}" Grid.Column="0" Grid.Row="5" Width="210" Style="{DynamicResource LabelComentStatistic}" ></Label>
+            <Label  Grid.Column="0" Grid.Row="5" Width="210" Style="{DynamicResource LabelComentStatistic}" >
+                <TextBlock TextWrapping="Wrap" Text="{Binding  Comment}">
+
+                </TextBlock>
+            </Label>
             <Grid Grid.Column="1" Grid.Row="5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="2.5*"/>
@@ -139,10 +143,11 @@
             <Button Command="NavigationCommands.BrowseBack" Style="{DynamicResource ButtonToast}">OK</Button>
         </StackPanel>
 
-        <Grid Style="{DynamicResource BackgroundHeader}" Grid.ColumnSpan="5" Margin="0,0,0,401" Grid.RowSpan="2">
-            <Label Content="{Binding Guest}" Style="{DynamicResource Header}" FontSize="25"  Width="394" Margin="500,23,0,-3" HorizontalAlignment="Left"/>
-            <Image Source="/Resources/Images/LOGO (2).jpg" Margin="0,0,804,0"/>
+        <Grid Style="{DynamicResource BackgroundHeader}" Grid.ColumnSpan="5" Margin="0,0,0,30">
+            <Label Content="{Binding Guest}" Style="{DynamicResource Header}" FontSize="25"  Width="394" Margin="500,16,0,4" HorizontalAlignment="Left"/>
+            <Image Source="/Resources/Images/LOGO (2).jpg" Margin="0,0,804,-13"/>
             <Label HorizontalAlignment="Left" Content="{ns:Loc ReviewFrom}" Style="{DynamicResource Label}" FontSize="25" FontFamily="Yu Gothic" FontWeight="Bold" VerticalContentAlignment="Center" Margin="324,0,0,0" VerticalAlignment="Center" Width="228" Height="60"/>
         </Grid>
+        <Button Content="⬅" HorizontalAlignment="Left" Command="NavigationCommands.BrowseBack" Margin="10,88,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Style="{DynamicResource Button}" Width="43" Height="22"/>
     </Grid>
 </Page>

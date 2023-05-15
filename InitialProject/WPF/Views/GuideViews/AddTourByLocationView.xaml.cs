@@ -8,9 +8,9 @@ namespace InitialProject.WPF.Views.GuideViews
     /// <summary>
     /// Interaction logic for AddTourByLocation.xaml
     /// </summary>
-    public partial class AddTourByLocation : Page
+    public partial class AddTourByLocationView : Page
     {
-        public AddTourByLocation(ObservableCollection<TourInstance> todayInstances,User loggedUser,ObservableCollection<TourInstance>futureInstances,Location location)
+        public AddTourByLocationView(ObservableCollection<TourInstance> todayInstances,User loggedUser,ObservableCollection<TourInstance>futureInstances,Location location)
         {
             InitializeComponent();
             DataContext=new AddTourByLocationViewModel(todayInstances,loggedUser,futureInstances,location);

@@ -68,22 +68,28 @@ namespace InitialProject.Service
         }
         public TourInstance FindMostVisitedForChosenYear(int year, Guide guide )
         {
-            GetFinishedInstancesForChoosenYear(year,guide);
-            SetAttendanceToFinishTours();
-            double maximum = 0;
-            TourInstance tour = null;
-            foreach (TourInstance instance in finishedtourInsatncesForChosenYear)
+            TourService tourService = new TourService();
+            if (tourService.IsYearAvailable(year))
             {
-                if (instance.Attendance >= maximum)
+                GetFinishedInstancesForChoosenYear(year, guide);
+                SetAttendanceToFinishTours();
+                double maximum = 0;
+                TourInstance tour = null;
+                foreach (TourInstance instance in finishedtourInsatncesForChosenYear)
                 {
-                    maximum = instance.Attendance;
-                    tour = instance;
+                    if (instance.Attendance >= maximum)
+                    {
+                        maximum = instance.Attendance;
+                        tour = instance;
+                    }
                 }
+                TourInstanceTourLocationService tourInstanceTourLocation = new TourInstanceTourLocationService();
+                if (tour != null)
+                    tourInstanceTourLocation.FillTour(tour);
+                return tour;
             }
-            TourInstanceTourLocationService tourInstanceTourLocation = new TourInstanceTourLocationService();
-            if(tour!=null)
-                tourInstanceTourLocation.FillTour(tour);
-            return tour;
+            else
+                return null;
         }
         public void SetAttendanceToFinishTours()
         {
@@ -171,6 +177,20 @@ namespace InitialProject.Service
         {
             if (instance.StartDate.Date == DateTime.Today.Date && instance.StartDate > DateTime.Now)
                 TodayInstances.Add(instance);
+        }
+        public void SetLanguage(List<TourInstance> TourInstances)
+        {
+            TourService tourService = new TourService();
+            foreach (TourInstance instance in TourInstances)
+            {
+                foreach (Tour tour in tourService.GetAll())
+                {
+                    if (tour.Id == instance.Tour.Id)
+                    {
+                        instance.Tour.Language = tour.Language;
+                    }
+                }
+            }
         }
     }
 }

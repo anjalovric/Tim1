@@ -4,8 +4,10 @@ using System;
 
 namespace InitialProject.Domain.Model
 {
+    public enum Status { ONWAITING,ACCEPTED, INVALID}
     public class OrdinaryTourRequests:ISerializable
     {
+
         public int Id { get; set; }
         public string Name { get; set; }
         public int GuestId { get; set; }
@@ -15,19 +17,19 @@ namespace InitialProject.Domain.Model
         public string Language { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public string Status { get; set; }
+        public Status Status { get; set; }
         public string Start { get;set; }
         public string End { get; set; }  
         public int GuideId { get; set; }
         public DateTime CreateDate { get; set; }
         public int TourInstanceId { get; set; }
         public bool NewAccepted { get; set; } 
-        public string IsNew { get; set; }
+        public bool IsNew { get; set; }
         public OrdinaryTourRequests()
         {
 
         }
-        public OrdinaryTourRequests(string name,int guestId, int maxGuests, Location location, string description, string language, DateTime startDate, DateTime endDate, string status, string start, string end, int guideId, DateTime createDate, bool newAccepted, int instanceId)
+        public OrdinaryTourRequests(string name,int guestId, int maxGuests, Location location, string description, string language, DateTime startDate, DateTime endDate, Status status, string start, string end, int guideId, DateTime createDate, bool newAccepted, int instanceId)
         {
             Name = name;
             GuestId = guestId;
@@ -44,7 +46,7 @@ namespace InitialProject.Domain.Model
             CreateDate = createDate;
             NewAccepted = newAccepted;
             TourInstanceId = instanceId;
-            IsNew = "";
+            IsNew = false;
         }
         public void FromCSV(string[] values)
         {
@@ -57,7 +59,7 @@ namespace InitialProject.Domain.Model
             Language = values[6];
             StartDate = Convert.ToDateTime(values[7]);
             EndDate = Convert.ToDateTime(values[8]);
-            Status= values[9];
+            Status = (Status)Enum.Parse(typeof(Status), values[9]);
             Start = values[10];
             End = values[11];
             GuideId= Convert.ToInt32(values[12]);
@@ -67,7 +69,7 @@ namespace InitialProject.Domain.Model
         }
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(),Name,GuestId.ToString(), MaxGuests.ToString(), Location.Id.ToString(), Description, Language, StartDate.ToString(),EndDate.ToString(),Status,Start,End,GuideId.ToString(),CreateDate.ToString(),NewAccepted.ToString(), TourInstanceId.ToString()};
+            string[] csvValues = { Id.ToString(),Name,GuestId.ToString(), MaxGuests.ToString(), Location.Id.ToString(), Description, Language, StartDate.ToString(),EndDate.ToString(),Status.ToString(),Start,End,GuideId.ToString(),CreateDate.ToString(),NewAccepted.ToString(), TourInstanceId.ToString()};
             return csvValues;
         }
     }

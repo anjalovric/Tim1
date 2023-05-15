@@ -1,5 +1,4 @@
-﻿using InitialProject.Domain.Model;
-using InitialProject.Model;
+﻿using InitialProject.Model;
 using InitialProject.Service;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,7 +8,7 @@ using System.Runtime.CompilerServices;
 
 namespace InitialProject.WPF.ViewModels
 {
-    public class StartedTourViewModel : INotifyPropertyChanged
+    public class StartedTourInstanceViewModel : INotifyPropertyChanged
     {
         public ObservableCollection<CheckPoint> AllPoints { get; set; }
         public ObservableCollection<CheckPoint> CurrentPoint { get; set; }
@@ -63,7 +62,7 @@ namespace InitialProject.WPF.ViewModels
         public RelayCommand FinishCommand { get; set; }
         public int GuideId { get; set; }
 
-        public StartedTourViewModel(TourInstance active, ObservableCollection<TourInstance> tours, ObservableCollection<TourInstance> finishedInstances,int guideId)
+        public StartedTourInstanceViewModel(TourInstance active, ObservableCollection<TourInstance> tours, ObservableCollection<TourInstance> finishedInstances,int guideId)
         {
             AllPoints = new ObservableCollection<CheckPoint>();
             CurrentPoint = new ObservableCollection<CheckPoint>();

@@ -1,4 +1,4 @@
-﻿<Page x:Class="InitialProject.WPF.Views.GuideViews.FinishedTourDetails"
+﻿<Page x:Class="InitialProject.WPF.Views.GuideViews.FinishedTourDetailsView"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -160,8 +160,9 @@
                 </Button.Content>
 
             </Button>
-
+            
         </Grid>
+        <Button Content="⬅" Command="NavigationCommands.BrowseBack" HorizontalAlignment="Left" Margin="5,73,0,0" VerticalAlignment="Top" Style="{DynamicResource Button}" Width="42" Height="22" />
 
 
     </Grid>

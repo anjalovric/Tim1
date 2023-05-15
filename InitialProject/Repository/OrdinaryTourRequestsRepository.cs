@@ -69,10 +69,10 @@ namespace InitialProject.Repository
         {
             return _requests.Find(c => c.Id == id);
         }
-        public ObservableCollection<OrdinaryTourRequests> GetByGuestId(int id)
+        public List<OrdinaryTourRequests> GetByGuestId(int id)
         {
             _requests = GetAll();
-            ObservableCollection<OrdinaryTourRequests> ordinaryTourRequests = new ObservableCollection<OrdinaryTourRequests>();
+            List<OrdinaryTourRequests> ordinaryTourRequests = new List<OrdinaryTourRequests>();
             Guest2Service guest2Service = new Guest2Service();
             foreach(OrdinaryTourRequests request in _requests)
             {

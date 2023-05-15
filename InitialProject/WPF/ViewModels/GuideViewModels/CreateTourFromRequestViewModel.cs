@@ -347,15 +347,12 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             TodayInstances = todayInstances;
             FutureInstances = futureInstances;
             loggedInUser = user;
-            Toast = "Hidden";
-            isErrorMessageVisible = "Hidden";
             tourRequests= request;
             MakeCommands();
             SetDatas(request);
             Date = Start;
             TourRequests = Requests;
         }
-
         private void SetDatas(OrdinaryTourRequests request)
         {
             LanguageT=request.Language;
@@ -367,12 +364,13 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             AddEnabled = true;
             DeleteEnabled= true;
             ToastAvailability = "Hidden";
+            Toast = "Hidden";
+            isErrorMessageVisible = "Hidden";
         }
         private bool CanExecute(object sender)
         {
             return true;
         }
-
         private void MakeCommands()
         {
             ConfirmCommand = new RelayCommand(Confirm_Executed, CanExecute);
@@ -404,7 +402,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             GuideService guideService = new GuideService();
             OrdinaryTourRequestsService ordinaryTourRequestsService = new OrdinaryTourRequestsService();
             TourRequests.Remove(tourRequests);
-            tourRequests.Status = "Accepted";
+            tourRequests.Status = Status.ACCEPTED;
             tourRequests.GuideId = guideService.GetByUsername(loggedInUser.Username).Id;
             tourRequests.NewAccepted = true;
             tourRequests.TourInstanceId = savednsatnceId;

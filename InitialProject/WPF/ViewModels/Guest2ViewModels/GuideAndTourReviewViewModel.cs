@@ -18,6 +18,7 @@ using InitialProject.WPF.Views.Guest2Views;
 using System.Runtime.CompilerServices;
 using System.ComponentModel;
 using InitialProject.WPF.Views.Guest1Views;
+using System.Collections.ObjectModel;
 
 namespace InitialProject.WPF.ViewModels.Guest2ViewModels
 {
@@ -40,15 +41,54 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         private TourReviewImageService tourReviewImageService;
         private Guest2 guest2;
         private TourInstance CurrentTourInstance;
-        private List<TourReviewImage> images;
+        public List<TourReviewImage> images { get; set; }
         private int reviewId;
         public Uri relativeUri { get; set; }
         public TourReviewImage tourReviewImage;
-        private TextBlock knowledge;
-        private TextBlock language;
-        private TextBlock interestingFacts;
-        private Image imagePicture;
-        private TextBox comment;
+        private string knowledge;
+        public string Knowledge
+        {
+            get { return knowledge; }
+            set
+            {
+                if (value != knowledge)
+                    knowledge = value;
+                OnPropertyChanged("Knowledge");
+            }
+        }
+        private string language;
+        public string Language
+        {
+            get { return language; }
+            set
+            {
+                if (value != language)
+                    language = value;
+                OnPropertyChanged("Language");
+            }
+        }
+        private string interestingFacts;
+        public string InterestingFacts
+        {
+            get { return interestingFacts; }
+            set
+            {
+                if (value != interestingFacts)
+                    interestingFacts = value;
+                OnPropertyChanged("InterestingFacts");
+            }
+        }
+        private string comment;
+        public string Comment
+        {
+            get { return comment; }
+            set
+            {
+                if (value != comment)
+                    comment = value;
+                OnPropertyChanged("Comment");
+            }
+        }
         public BitmapImage imageSource { get; set; }
         public BitmapImage ImageSource
         {
@@ -66,7 +106,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-        public GuideAndTourReviewViewModel(TourInstance tourInstance, Guest2 guest2, TextBlock knowledge,TextBlock language,TextBlock interestingFacts,Image imagePicture,TextBox comment)
+        public GuideAndTourReviewViewModel(TourInstance tourInstance, Guest2 guest2)
         {
             reviewId = -1;
             guideAndTourReviewRepository = new GuideAndTourReviewRepository();
@@ -75,11 +115,10 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             CurrentTourInstance = tourInstance;
             images = new List<TourReviewImage>();
             MakeCommands();
-            this.knowledge = knowledge;
-            this.language = language;
-            this.interestingFacts = interestingFacts;
-            this.imagePicture = imagePicture;
-            this.comment = comment;
+            Knowledge = "1";
+            Language = "1";
+            InterestingFacts = "1";
+            Comment = "";
             tourReviewImage = new TourReviewImage();
         }
         private void MakeCommands()
@@ -91,10 +130,10 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             Knowledge_Decrement_Command=new RelayCommand(Knowledge_Decrement_Executed, CanExecute);
             Facts_Decrement_Command = new RelayCommand(Facts_Decrement_Executed,CanExecute);
             UploadImageCommand = new RelayCommand(UploadImage_Executed,CanExecute);
-            ConfirmCommand = new RelayCommand(Confirm_Executed,CanExecute);
+            ConfirmCommand = new RelayCommand(Confirm_Executed, ConfirmCanExecute);
             DeleteCommand = new RelayCommand(Delete_Executed, CanExecute);
-            NextCommand = new RelayCommand(NextPhoto_Executed, CanExecute);
-            BackCommand = new RelayCommand(PreviousPhoto_Executed, CanExecute);
+            NextCommand = new RelayCommand(NextPhoto_Executed, ChangeImageCanExecute);
+            BackCommand = new RelayCommand(PreviousPhoto_Executed, ChangeImageCanExecute);
             DeletePhotoCommand=new RelayCommand(DeletePhoto_Executed,CanExecute);
             CancelCommand = new RelayCommand(Cancel_Executed, CanExecute);
         }
@@ -105,55 +144,61 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         private void Language_Increment_Executed(object sender)
         {
             int changedNumber;
-            if (Convert.ToInt32(language.Text) < 5)
+            if (Convert.ToInt32(Language) < 5)
             {
-                changedNumber = Convert.ToInt32(language.Text) + 1;
-                language.Text = changedNumber.ToString();
+                changedNumber = Convert.ToInt32(Language) + 1;
+                Language = changedNumber.ToString();
             }
         }
         private void Knowledge_Increment_Executed(object sender)
         {
             int changedNumber;
-            if (Convert.ToInt32(knowledge.Text) < 5)
+            if (Convert.ToInt32(Knowledge) < 5)
             {
-                changedNumber = Convert.ToInt32(knowledge.Text) + 1;
-                knowledge.Text = changedNumber.ToString();
+                changedNumber = Convert.ToInt32(Knowledge) + 1;
+                Knowledge = changedNumber.ToString();
             }
+        }
+        private bool ChangeImageCanExecute(object sender)
+        {
+            if (images.Count > 1)
+                return true;
+            return false;
         }
         private void Facts_Increment_Executed(object sender)
         {
             int changedNumber;
-            if (Convert.ToInt32(interestingFacts.Text) < 5)
+            if (Convert.ToInt32(InterestingFacts) < 5)
             {
-                changedNumber = Convert.ToInt32(interestingFacts.Text) + 1;
-                interestingFacts.Text = changedNumber.ToString();
+                changedNumber = Convert.ToInt32(InterestingFacts) + 1;
+                InterestingFacts = changedNumber.ToString();
             }
         }
         private void Language_Decrement_Executed(object sender)
         {
             int changedNumber;
-            if (Convert.ToInt32(language.Text) > 1)
+            if (Convert.ToInt32(Language) > 1)
             {
-                changedNumber = Convert.ToInt32(language.Text) - 1;
-                language.Text = changedNumber.ToString();
+                changedNumber = Convert.ToInt32(Language) - 1;
+                Language = changedNumber.ToString();
             }
         }
         private void Knowledge_Decrement_Executed(object sender)
         {
             int changedNumber;
-            if (Convert.ToInt32(knowledge.Text) > 1)
+            if (Convert.ToInt32(Knowledge) > 1)
             {
-                changedNumber = Convert.ToInt32(knowledge.Text) - 1;
-                knowledge.Text = changedNumber.ToString();
+                changedNumber = Convert.ToInt32(Knowledge) - 1;
+                Knowledge = changedNumber.ToString();
             }
         }
         private void Facts_Decrement_Executed(object sender)
         {
             int changedNumber;
-            if (Convert.ToInt32(interestingFacts.Text) > 1)
+            if (Convert.ToInt32(InterestingFacts) > 1)
             {
-                changedNumber = Convert.ToInt32(interestingFacts.Text) - 1;
-                interestingFacts.Text = changedNumber.ToString();
+                changedNumber = Convert.ToInt32(InterestingFacts) - 1;
+                InterestingFacts = changedNumber.ToString();
             }
         }
 
@@ -161,7 +206,10 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         {
             Application.Current.Windows.OfType<GuideAndTourReviewFormView>().FirstOrDefault().Close();
         }
-
+        private bool ConfirmCanExecute(object sender)
+        {
+            return IsImageUploadValid()&&comment!="";
+        }
 
         private void Confirm_Executed(object sender)
         {
@@ -175,6 +223,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             else
                 MessageBox.Show("You must upload at least one photo!");
         }
+
         private void StoreImages(int reviewId)
         {
             TourReviewImageService tourReviewImageService = new TourReviewImageService();
@@ -187,9 +236,9 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         private GuideAndTourReview StoreReview()
         {
             GuideAndTourReviewService guideAndTourReviewService = new GuideAndTourReviewService();
-            GuideAndTourReview guideAndTourReview = new GuideAndTourReview(CurrentTourInstance.Guide.Id, guest2, CurrentTourInstance, Convert.ToInt32(language.Text), Convert.ToInt32(interestingFacts.Text), Convert.ToInt32(knowledge.Text), comment.Text);
+            GuideAndTourReview guideAndTourReview = new GuideAndTourReview(CurrentTourInstance.Guide.Id, guest2, CurrentTourInstance, Convert.ToInt32(Language), Convert.ToInt32(InterestingFacts), Convert.ToInt32(Knowledge), Comment);
             GuideAndTourReview savedReview= guideAndTourReviewService.Save(guideAndTourReview);
-            ReviewNotification reviewNotification = new ReviewNotification(savedReview.Id, savedReview.GuideId);
+            GuideAndTourReviewNotification reviewNotification = new GuideAndTourReviewNotification(savedReview.Id, savedReview.GuideId);
             ReviewNotificationService reviewNotificationService = new ReviewNotificationService();
             reviewNotificationService.Save(reviewNotification);
             return savedReview;
@@ -253,7 +302,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
 
         private void Delete_Executed(object sender)
         {
-            comment.Text = "";
+            Comment = "";
         }
         private void NextPhoto_Executed(object sender)
         {

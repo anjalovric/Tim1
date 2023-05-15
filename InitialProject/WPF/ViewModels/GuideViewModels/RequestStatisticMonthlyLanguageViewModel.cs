@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 
 namespace InitialProject.WPF.ViewModels.GuideViewModels
 {
-    public class MonthlyRequestStatisticsViewModel:INotifyPropertyChanged
+    public class RequestStatisticMonthlyLanguageViewModel:INotifyPropertyChanged
     {
         private string language;
         public string Language
@@ -30,11 +30,11 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             }
         }
         public ObservableCollection<MonthRequestStatisticViewModel> Statistics { get; set; }
-        public MonthlyRequestStatisticsViewModel(string language,GuideOneYearRequestStatisticViewModel selectedYear) 
+        public RequestStatisticMonthlyLanguageViewModel(string language,GuideOneYearRequestStatisticViewModel selectedYear) 
         {
             Language = language;
             Year=selectedYear.Year.ToString();
-            MonthLanguageStatisticService monthLanguageStatisticService = new MonthLanguageStatisticService();
+            TourRequestStatisticMonthlyLanguageService monthLanguageStatisticService = new TourRequestStatisticMonthlyLanguageService();
             Statistics = new ObservableCollection<MonthRequestStatisticViewModel>(monthLanguageStatisticService.GetMonthStatistic(Language, selectedYear.Year));
         }
         public event PropertyChangedEventHandler PropertyChanged;

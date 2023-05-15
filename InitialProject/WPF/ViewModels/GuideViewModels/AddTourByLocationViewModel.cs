@@ -1,15 +1,11 @@
 ﻿using InitialProject.Model;
 using InitialProject.Service;
 using Microsoft.Win32;
-using Org.BouncyCastle.Asn1.Esf;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Imaging;
 
@@ -321,17 +317,21 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             TodayInstances = todayInstances;
             FutureInstances = futureInstances;
             loggedInUser = user;
+            Country=selectedLocation.Country;
+            City=selectedLocation.City; 
+            SetStartState();
+        }
+        private void SetStartState()
+        {
+            Date = DateTime.Now;
+            AddLanguages();
+            DatesCount = 0;
+            PointsCount = 0;
             Toast = "Hidden";
             isErrorMessageVisible = "Hidden";
             MakeCommands();
             Start = DateTime.Now;
             DateMessage = "Hidden";
-            Country=selectedLocation.Country;
-            City=selectedLocation.City; 
-            Date = DateTime.Now;
-            AddLanguages();
-            DatesCount = 0;
-            PointsCount = 0;
         }
         private bool CanExecute(object sender)
         {

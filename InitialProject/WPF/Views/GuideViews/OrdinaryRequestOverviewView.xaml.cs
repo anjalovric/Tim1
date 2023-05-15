@@ -24,15 +24,11 @@ namespace InitialProject.WPF.Views.GuideViews
     public partial class OrdinaryRequestOverviewView : Page
     {
         public OrdinaryRequestOverviewViewModel viewModel;
-        public OrdinaryRequestOverviewView(User user,ObservableCollection<TourInstance>Tours,ObservableCollection<TourInstance>Future)
+        public OrdinaryRequestOverviewView(User user, ObservableCollection<TourInstance> Tours, ObservableCollection<TourInstance> Future)
         {
             InitializeComponent();
-            viewModel = new OrdinaryRequestOverviewViewModel(user,Tours,Future);
+            viewModel = new OrdinaryRequestOverviewViewModel(user, Tours, Future);
             DataContext = viewModel;
-        }
-        private void ComboBoxCountry_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            viewModel.ComboBoxCountry_SelectionChanged();
         }
     }
 }

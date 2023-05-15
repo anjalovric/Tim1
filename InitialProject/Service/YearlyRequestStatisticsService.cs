@@ -18,7 +18,7 @@ namespace InitialProject.Service
             List<OrdinaryTourRequests> ordinaryTours=GetRequestsForChosenYear(year, Guest2);
             foreach (OrdinaryTourRequests request in ordinaryTours)
             {
-                if (request.Status == "Accepted" && request.GuestId == Guest2.Id)
+                if (request.Status == Status.ACCEPTED && request.GuestId == Guest2.Id)
                 {
                     averageNumberOfPeople += request.MaxGuests;
                     counter++;
@@ -34,7 +34,7 @@ namespace InitialProject.Service
             List<OrdinaryTourRequests> ordinaryTours = GetRequestsForChosenYear(year, Guest2);
             foreach (OrdinaryTourRequests request in ordinaryTours)
             {
-                if (request.Status == "Invalid" && request.GuestId == Guest2.Id)
+                if (request.Status == Status.INVALID && request.GuestId == Guest2.Id)
                 {
                     invalidRequest++;
                 }
@@ -50,7 +50,7 @@ namespace InitialProject.Service
             List<OrdinaryTourRequests> ordinaryTours = GetRequestsForChosenYear(year, Guest2);
             foreach (OrdinaryTourRequests request in ordinaryTours)
             {
-                if (request.Status == "Accepted" && request.GuestId == Guest2.Id)
+                if (request.Status == Status.ACCEPTED && request.GuestId == Guest2.Id)
                 {
                     acceptedRequest++;
                 }
