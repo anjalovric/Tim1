@@ -44,6 +44,10 @@
             <Setter Property="RowHeight" Value="30"></Setter>
             <Setter Property="FontWeight" Value="Medium"></Setter>
             <Setter Property="RowBackground" Value="#FFFCECB9"></Setter>
+            <Setter Property="CanUserReorderColumns" Value="False"></Setter>
+            <Setter Property="CanUserResizeColumns" Value="False"></Setter>
+            <Setter Property="CanUserResizeRows" Value="False"></Setter>
+            <Setter Property="CanUserSortColumns" Value="False"></Setter>
             <Setter Property="Background">
                 <Setter.Value>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
@@ -287,7 +291,7 @@
                         </lvc:Axis>
                     </lvc:CartesianChart.AxisX>
                     <lvc:CartesianChart.AxisY>
-                        <lvc:Axis MinValue="0" Foreground="#dbc9ab" FontWeight="Medium">
+                        <lvc:Axis MinValue="0" LabelFormatter="{Binding YAxisLabelFormatter}" Foreground="#dbc9ab" FontWeight="Medium">
                             <lvc:Axis.Separator>
                                 <lvc:Separator>
                                     <lvc:Separator.Resources>

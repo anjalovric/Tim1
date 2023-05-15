@@ -18,6 +18,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 {
     public class MyAccommodationReservationsViewModel : INotifyPropertyChanged
     {
+        public Func<double, string> YAxisLabelFormatter => value => value.ToString("N1");
         private Guest1 guest1;
         private DateTime currentDate;
         private AccommodationReservationService accommodationReservationService;
