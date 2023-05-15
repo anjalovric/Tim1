@@ -118,7 +118,6 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             {
                 foreach (OrdinaryTourRequests request in ordinaryTourRequestsService.GetInvalidOrWaitingRequests(OrdinaryTourRequests,guest2))
                 {
-                    ordinaryTourRequestsService.SetLocations(ordinaryTourRequestsService.GetInvalidOrWaitingRequests(OrdinaryTourRequests, guest2));
                     foreach (OrdinaryTourRequests tourRequests in ordinaryTourRequestsService.GetAcceptedRequests(OrdinaryTourRequests))
                     {
                         if (tourInstance.Id == tourRequests.TourInstanceId && request.Location.City == tourInstance.Tour.Location.City && request.Location.Country==tourInstance.Tour.Location.Country && !Exists(tourInstance) && !IsDeleted(tourInstance.Id))

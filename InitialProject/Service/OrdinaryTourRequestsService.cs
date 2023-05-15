@@ -43,7 +43,7 @@ namespace InitialProject.Service
             SetLocations(requests);
             return requests;
         }
-        public void SetLocations(List<OrdinaryTourRequests> requests) 
+        private void SetLocations(List<OrdinaryTourRequests> requests) 
         {
             LocationService locationService = new LocationService();
             foreach(OrdinaryTourRequests request in requests)
@@ -86,6 +86,7 @@ namespace InitialProject.Service
                     ordinaryTourRequests.Add(request);
                 }
             }
+            SetLocations(ordinaryTourRequests);
             return ordinaryTourRequests;
         }
         public List<OrdinaryTourRequests> GetAcceptedRequests(List<OrdinaryTourRequests> OrdinaryTourRequests)
@@ -98,6 +99,7 @@ namespace InitialProject.Service
                     ordinaryTourRequests.Add(request);
                 }
             }
+            SetLocations(ordinaryTourRequests);
             return ordinaryTourRequests;
         }
     }
