@@ -126,6 +126,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             }
         }
         private User loggedUser;
+        private bool isEntered = false;
         public RelayCommand SearchCommand { get; set; }
         public RelayCommand ResetCommand { get; set; }
         public RelayCommand CreateCommand { get; set; }
@@ -213,23 +214,36 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         }
         private void Search_Country()
         {
-            if(Country != null && !Country.Equals(""))
-                appropriateRequests=searchRequestsService.GetRequestsByCountry(appropriateRequests,Country);
+            if (Country != null && !Country.Equals(""))
+            { 
+                appropriateRequests = searchRequestsService.GetRequestsByCountry(appropriateRequests, Country, isEntered);
+                isEntered = true;
+            }
         }
         private void Search_City()
         {
             if (City != null && !City.Equals(""))
-                appropriateRequests=searchRequestsService.GetRequestsByCity(appropriateRequests,City);
+            {
+                appropriateRequests = searchRequestsService.GetRequestsByCity(appropriateRequests, City, isEntered);
+                isEntered = true;
+            }
         }
         private void Search_Language()
         {
             if (Language != null && !Language.Equals(""))
-               appropriateRequests=searchRequestsService.GetRequestsByLanguage(appropriateRequests, Language);
+            {
+                appropriateRequests = searchRequestsService.GetRequestsByLanguage(appropriateRequests, Language, isEntered);
+                isEntered = true;
+            }
         }
         private void Search_Capacity()
         {
             if (Capacity != null && Capacity != 0)
-               appropriateRequests=searchRequestsService.GetRequestsByCapacity(appropriateRequests, Capacity);
+            {
+                appropriateRequests = searchRequestsService.GetRequestsByCapacity(appropriateRequests, Capacity, isEntered);
+                isEntered = true;
+            }
+
         }
         private void RefreshResquests()
         {
@@ -240,15 +254,22 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         private void Search_StartDate()
         {
             if (Start != null && !Start.ToString().Equals("1/1/0001 12:00:00 AM"))
-                appropriateRequests = searchRequestsService.GetRequestsByStart(appropriateRequests, Start);
+            {
+                appropriateRequests = searchRequestsService.GetRequestsByStart(appropriateRequests, Start, isEntered);
+                isEntered = true;
+            }
         }
         private void Search_EndDate()
         {
             if (End != null && !End.ToString().Equals("1/1/0001 12:00:00 AM"))
-                appropriateRequests = searchRequestsService.GetRequestsByEnd(appropriateRequests, End);
+            {
+                appropriateRequests = searchRequestsService.GetRequestsByEnd(appropriateRequests, End, isEntered);
+                isEntered = true;
+            }
         }
         private void Search_Executed(object sender)
         {
+           isEntered = false;
             appropriateRequests.Clear();
             Search_Country();
             Search_City();
