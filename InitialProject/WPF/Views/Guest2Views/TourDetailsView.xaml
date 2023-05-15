@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
-        Title="TourDetails" Height="650" Width="730" d:Height="650" d:Width="730" Background="Transparent" AllowsTransparency="True" WindowStartupLocation="CenterScreen" WindowStyle="None">
+        Title="TourDetails" Height="650" Width="750" d:Height="650" d:Width="750" Background="Transparent" AllowsTransparency="True" WindowStartupLocation="CenterScreen" WindowStyle="None">
     <Window.Resources>
         <Style x:Key="button" TargetType="Button">
             <Setter Property="FontSize" Value="14"/>

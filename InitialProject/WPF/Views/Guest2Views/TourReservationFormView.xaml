@@ -141,7 +141,7 @@
             
             <Border BorderBrush="LightGray" BorderThickness="0 0 0 1" Grid.ColumnSpan="2" Margin="10,0,12,21" Grid.Column="1"/>
 
-            <TextBox x:Name="capacityNumber" BorderBrush="LightGray" BorderThickness="0 0 0 3" Grid.Column="2" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Top" Width="104" TextAlignment="Center" Height="20" Margin="280,4,0,0">
+            <TextBox x:Name="capacityNumber" Background="#FFEDEDED" BorderBrush="#FFCAC1C1" BorderThickness="0 0 0 3" Grid.Column="2" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Top" Width="104" TextAlignment="Center" Height="20" Margin="280,4,0,0">
                 <TextBox.Text>
                     <Binding Path="Capacity" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
                         <Binding.ValidationRules>
@@ -168,18 +168,18 @@
                 </Validation.ErrorTemplate>
             </TextBox>
 
-            <Button Background="#F8F9FE" Grid.Column="2" Grid.Row="4" HorizontalAlignment="Left" TextElement.FontWeight="Bold" Margin="232,5,0,0" VerticalAlignment="Top" Width="31" Command="{Binding Guests_Decrement_Command}" RenderTransformOrigin="0.596,1.286" Height="19" BorderBrush="LightGray" BorderThickness="0,0,0,3" Content="-"/>
-            <Button Background="#F8F9FE" Grid.Column="2" Grid.Row="4" HorizontalAlignment="Left" TextElement.FontWeight="Bold" Margin="401,5,0,0" VerticalAlignment="Top" Width="31" Command="{Binding Guests_Increment_Command}" RenderTransformOrigin="7.062,-0.088" Height="19" BorderBrush="LightGray" BorderThickness="0,0,0,3" Content="+"/>
+            <Button Background="#FFEDEDED" Grid.Column="2" Grid.Row="4" HorizontalAlignment="Left" TextElement.FontWeight="Bold" Margin="232,5,0,0" VerticalAlignment="Top" Width="31" Command="{Binding Guests_Decrement_Command}" RenderTransformOrigin="0.596,1.286" Height="19" BorderBrush="#FFCAC1C1" BorderThickness="0,0,0,3" Content="-"/>
+            <Button Background="#FFEDEDED" Grid.Column="2" Grid.Row="4" HorizontalAlignment="Left" TextElement.FontWeight="Bold" Margin="401,5,0,0" VerticalAlignment="Top" Width="31" Command="{Binding Guests_Increment_Command}" RenderTransformOrigin="7.062,-0.088" Height="19" BorderBrush="#FFCAC1C1" BorderThickness="0,0,0,3" Content="+"/>
             <Label Content="RESERVATION FORM"  Grid.Column="1"  FontSize="30" FontWeight="Bold" HorizontalAlignment="Left" Margin="10,-20,0,0" VerticalAlignment="Center" Width="436" Grid.ColumnSpan="2" Height="51"/>
             <Label Content="Name: " Grid.Column="1" FontSize="15" HorizontalAlignment="Left" Margin="10,71,0,0" VerticalAlignment="Top" Width="106" Grid.ColumnSpan="2" FontWeight="DemiBold" Grid.RowSpan="2"/>
             <Label Content="Average of years: "  FontSize="15" FontWeight="DemiBold" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Width="140" Grid.ColumnSpan="2" Height="40" RenderTransformOrigin="0.5,0.5"/>
             <Label Content="Number of guests: "  FontSize="15" FontWeight="DemiBold" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" Margin="10,34,0,0" VerticalAlignment="Top" Width="140" Grid.ColumnSpan="2" Height="53" RenderTransformOrigin="0.5,0.5" Grid.RowSpan="3"/>
 
-            <TextBlock Grid.Column="2" FontSize="15" Foreground="White" Margin="232,2,74,12" Text="{Binding Path=guest2.Name}" FontWeight="Bold" Grid.ColumnSpan="2" Grid.Row="1"/>
+            <TextBlock Grid.Column="2" FontSize="15" Foreground="Black" Margin="232,2,74,12" Text="{Binding Path=guest2.Name}" FontWeight="DemiBold" Grid.ColumnSpan="2" Grid.Row="1"/>
 
 
 
-            <TextBox x:Name="ageInput" Background="#F8F9FE" BorderBrush="LightGray" BorderThickness="0,0,0,3"  Margin="232,37,0,0"  HorizontalAlignment="Left" Grid.Row="2" Grid.Column="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Height="20" Grid.RowSpan="2">
+            <TextBox x:Name="ageInput" Background="#FFEDEDED" BorderBrush="#FFCAC1C1" BorderThickness="0,0,0,3"  Margin="232,37,0,0"  HorizontalAlignment="Left" Grid.Row="2" Grid.Column="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Height="20" Grid.RowSpan="2">
                 <TextBox.Text>
                     <Binding Path="Age" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
                         <Binding.ValidationRules>
@@ -207,7 +207,7 @@
             </TextBox>
 
             <Rectangle Fill="White" RadiusX="10" RadiusY="10" Grid.Row="6" Margin="15,7,12,4" Grid.ColumnSpan="2" Grid.Column="1"/>
-            <DataGrid x:Name="ActivationVoucherDataGrid" Background="#F8F9FE" BorderBrush="Transparent" Grid.Row="6" ItemsSource="{Binding Path=Vouchers,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=Selected}" IsReadOnly="True" AutoGenerateColumns="False" Margin="15,10,12,10" Grid.Column="1" Grid.ColumnSpan="2" HorizontalScrollBarVisibility="Hidden" GridLinesVisibility="None" ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle2}" CellStyle="{StaticResource DataGridCellStyle2}" Style="{StaticResource DataGridStyle}" RowStyle="{StaticResource DataGridRowStyle2}">
+            <DataGrid x:Name="ActivationVoucherDataGrid" Background="#FFEDEDED" BorderBrush="Transparent" Grid.Row="6" ItemsSource="{Binding Path=Vouchers,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=Selected}" IsReadOnly="True" AutoGenerateColumns="False" Margin="15,10,12,10" Grid.Column="1" Grid.ColumnSpan="2" HorizontalScrollBarVisibility="Hidden" GridLinesVisibility="None" ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle2}" CellStyle="{StaticResource DataGridCellStyle2}" Style="{StaticResource DataGridStyle}" RowStyle="{StaticResource DataGridRowStyle2}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Voucher" Width="1*" Binding="{Binding Id}"/>
                     <DataGridTextColumn Header="Valid" Width="1*" Binding="{Binding CreateDate}"/>
@@ -245,7 +245,7 @@
                 </DataGrid.Columns>
             </DataGrid>
             <Label Content="Last Name: " Grid.Row="1" FontSize="15"  FontWeight="DemiBold" Grid.Column="1" HorizontalAlignment="Left" Margin="10,34,0,0" VerticalAlignment="Top" Width="106" Grid.ColumnSpan="2" Height="39" RenderTransformOrigin="0.5,0.5" Grid.RowSpan="2"/>
-            <TextBlock Grid.Row="1" FontSize="15" Foreground="White" Grid.Column="2" Margin="232,37,0,15" Text="{Binding guest2.LastName}" FontWeight="Bold" Grid.RowSpan="2"/>
+            <TextBlock Grid.Row="1" FontSize="15" Foreground="Black" Grid.Column="2" Margin="232,37,0,15" Text="{Binding guest2.LastName}" FontWeight="DemiBold" Grid.RowSpan="2"/>
             <Label x:Name="AgeLabel" Grid.Row="1" Grid.Column="2" Margin="302,233,191,58"/>
             <TextBlock  HorizontalAlignment="Left" TextElement.FontSize="20" Margin="15,20,0,0" Grid.Row="5" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Column="1" Grid.ColumnSpan="3" Width="530" FontWeight="Bold" Height="29"><Run Text="Vouchers"/></TextBlock>
             <Button Grid.Row="7" HorizontalAlignment="Left" BorderBrush="#ffba00" BorderThickness="1" Background="#ffba00" VerticalAlignment="Top" Height="35" Width="101" FontWeight="Bold" Margin="202,27,0,0" FontSize="18" Grid.Column="2" Command="{Binding ConfirmCommand}">

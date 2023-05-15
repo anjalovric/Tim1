@@ -1,6 +1,1 @@
-1|1|Your tour request has been accepted. Click on details for more. You can delete it.|REQUEST_ACCEPTED|1|True|-1|1
-2|1|Your tour request has been accepted. Click on details for more. You can delete it.|REQUEST_ACCEPTED|2|True|-1|2
-3|1|Your tour request has been accepted. Click on details for more. You can delete it.|REQUEST_ACCEPTED|3|False|-1|3
-4|2|You reserved this tour. Confirm your presence.|CONFIRM_PRESENCE|4|True|4|-1
-5|1|You reserved this tour. Confirm your presence.|CONFIRM_PRESENCE|4|True|7|-1
-6|1|You reserved this tour. Confirm your presence.|CONFIRM_PRESENCE|5|False|2|-1
+1|1|Your tour request has been accepted. Click on details for more. You can delete it.|REQUEST_ACCEPTED|8|False|-1|1

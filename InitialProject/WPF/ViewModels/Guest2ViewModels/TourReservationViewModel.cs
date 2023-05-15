@@ -113,13 +113,14 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             ShowTours = new ShowToursViewModel(guest2);
             this.guest2 = guest2;
             GuestId = guest2.Id;
-            Label = label;
+            Label = "Showing available tours";
             capacityOfThisTour = currentTourInstance.Tour.MaxGuests;
             voucherService = new VoucherService();
             vouchers = new ObservableCollection<Voucher>();
             Vouchers = new ObservableCollection<Voucher>(voucherService.FindAllVouchers(guest2));
             VoucherValidity(Vouchers);
         }
+        
         private void VoucherValidity(ObservableCollection<Voucher> Vouchers)
         {
             foreach (Voucher voucher in Vouchers)
