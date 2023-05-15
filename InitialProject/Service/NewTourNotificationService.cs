@@ -34,7 +34,7 @@ namespace InitialProject.Service
         {
             return notificationRepository.GetAll();
         }
-        public ObservableCollection<NewTourNotification> GetByGuestId(int id)
+        public List<NewTourNotification> GetByGuestId(int id)
         {
             return notificationRepository.GetByGuestId(id);
         }
