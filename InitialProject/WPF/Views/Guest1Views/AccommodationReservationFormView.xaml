@@ -62,8 +62,8 @@
             <Label FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" FontFamily="Baskerville Old Face"  VerticalAlignment="Top" Height="Auto" Width="Auto" Grid.ColumnSpan="2" Grid.Row="0" Margin="0,25,0,0">RESERVATION FORM</Label>
 
             <!-- INPUT FORM -->
-            <Label Content="Arrival date:" Margin="152,0,0,0" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" TextElement.FontWeight="DemiBold"></Label>
-            <Label Content="Departure date:" Margin="44,0,0,0" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" TextElement.FontWeight="DemiBold"></Label>
+            <Label Content="Arrival date*" Margin="152,0,0,0" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" TextElement.FontWeight="DemiBold"></Label>
+            <Label Content="Departure date*" Margin="44,0,0,0" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" TextElement.FontWeight="DemiBold"></Label>
 
             <Calendar x:Name="CalendarStart" Height="Auto"  HorizontalAlignment="Left" Width="185" VerticalAlignment="Top" Margin="114,0,0,0" SelectedDate="{Binding Path=Arrival, Mode=TwoWay}" Grid.Column="0" Grid.Row="2">
                 <i:Interaction.Triggers>
@@ -86,13 +86,13 @@
             <Border BorderBrush="#22301a" BorderThickness="3" HorizontalAlignment="Left" VerticalAlignment="Top" Width="105" Height="28" Grid.Column="0" Grid.Row="4" Margin="154,0,0,0"></Border>
             <Button x:Name="incrementNumberOfDays" Background="#dbc9ab" Command="{Binding IncrementDaysNumberCommand}"  Content="+" TextElement.FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Margin="264,0,0,0" Width="35" Grid.Column="0" Grid.Row="4"/>
             <Button x:Name="decrementNumberOfDays" Background="#dbc9ab" Command="{Binding DecrementDaysNumberCommand}"  Content="-" TextElement.FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Margin="114,0,0,0" Width="35" Grid.Column="0" Grid.Row="4"/>
-            <Label Content="Number of days to stay:" Grid.Column="0" Grid.Row="3" Margin="105,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" TextElement.FontWeight="DemiBold"/>
+            <Label Content="Number of days to stay*" Grid.Column="0" Grid.Row="3" Margin="105,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" TextElement.FontWeight="DemiBold"/>
 
             <TextBlock x:Name="numberOfGuestsTextBlock" Background="#dbc9ab" Text="{Binding NumberOfGuests, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" HorizontalAlignment="Right" VerticalAlignment="Top" Width="105"  TextAlignment="Center" Height="28" FontSize="18" Grid.Column="1" Grid.Row="4" FontWeight="Medium" Margin="0,0,154,0"/>
             <Border BorderBrush="#22301a" BorderThickness="3"  HorizontalAlignment="Right" VerticalAlignment="Top" Width="105" Height="28" Grid.Column="1" Grid.Row="4" Margin="0,0,154,0"></Border>
             <Button x:Name="incrementNumberOfGuests" Command="{Binding IncrementGuestsNumberCommand}"   Content="+" TextElement.FontSize="15" HorizontalAlignment="Right" VerticalAlignment="Top" Height="28" Margin="0,0,114,0" Width="35" Background="#dbc9ab" Grid.Column="1" Grid.Row="4"/>
             <Button x:Name="decrementNumberOfGuests" Command="{Binding DecrementGuestsNumberCommand}"  Content="-" TextElement.FontSize="15" HorizontalAlignment="Right" VerticalAlignment="Top" Height="28" Margin="0,0,264,0" Width="35" Background="#dbc9ab" Grid.Column="1" Grid.Row="4"/>
-            <Label Content="Number of guests:" Grid.Column="1" Grid.Row="3" Margin="33,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" TextElement.FontWeight="DemiBold"></Label>
+            <Label Content="Number of guests*" Grid.Column="1" Grid.Row="3" Margin="33,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" TextElement.FontWeight="DemiBold"></Label>
             
             <!-- NEXT BUTTON -->
             <Button Grid.Column="1" Grid.Row="5" Width="100" Height="35" FontSize="18" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontWeight="Bold" Margin="0,0,14,45" Command="{Binding NextCommand}">

@@ -126,9 +126,9 @@
                 </Grid>
             </Button>
             
-            <Label HorizontalContentAlignment="Left" Width="Auto" Height="Auto" Grid.Row="1" Grid.Column="0" Margin="65,0,0,0" VerticalAlignment="Center">Cleanliness:</Label>
+            <Label HorizontalContentAlignment="Left" Width="Auto" Height="Auto" Grid.Row="1" Grid.Column="0" Margin="65,0,0,0" VerticalAlignment="Center">Cleanliness*</Label>
             
-            <Label HorizontalContentAlignment="Left" Width="Auto" Height="Auto" Grid.Row="2" Grid.Column="0" Margin="65,0,0,0" VerticalAlignment="Center">Owner's correctness:</Label>
+            <Label HorizontalContentAlignment="Left" Width="Auto" Height="Auto" Grid.Row="2" Grid.Column="0" Margin="65,0,0,0" VerticalAlignment="Center">Owner's correctness*</Label>
             
             <Slider x:Name="CleanlinessSlider"  Minimum="1" Maximum="5" Grid.Row="1" Grid.Column="1" Margin="0,0,100,0" Width="130" VerticalAlignment="Center" TickFrequency="1" IsSnapToTickEnabled="True" AutoToolTipPlacement="BottomRight" Value="{Binding Path=AccommodationCleanliness}">
                 <Slider.Style>
@@ -182,7 +182,7 @@
                 </TextBlock.Background>
             </TextBlock>
             
-            <Label HorizontalContentAlignment="Left" Grid.Column="0" Grid.Row="3" Width="Auto" Height="Auto" VerticalContentAlignment="Top" VerticalAlignment="Top" Margin="65,58,0,0" Content="Add photos:"/>
+            <Label HorizontalContentAlignment="Left" Grid.Column="0" Grid.Row="3" Width="Auto" Height="Auto" VerticalContentAlignment="Top" VerticalAlignment="Top" Margin="65,58,0,0" Content="Add photos*"/>
             
             <!-- ADD PHOTO BUTTON -->
             <Button Content="+" Command="{Binding AddPhotoCommand}" FontSize="21" Height="45" Grid.Row="3" Width="45" Margin="0,20,50,0" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="0">
