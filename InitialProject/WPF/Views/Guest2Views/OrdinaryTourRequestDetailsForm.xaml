@@ -52,7 +52,6 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -75,7 +74,6 @@
         <Label Content="Capacity:" FontWeight="DemiBold" Grid.Row="5" Grid.Column="0" Margin="62,10,0,43" Grid.RowSpan="2" FontSize="20"/>
         <Label Content="StartDate:" FontWeight="DemiBold" Grid.Row="6" Grid.Column="0" Margin="62,10,0,43" Grid.RowSpan="2" FontSize="20"/>
         <Label Content="EndDate:" FontWeight="DemiBold" Grid.Row="7" Grid.Column="0" Margin="62,10,0,43" Grid.RowSpan="2" FontSize="20"/>
-        <Label Content="Description:" FontWeight="DemiBold" Grid.Row="8" Grid.Column="0" Margin="62,10,0,43" Grid.RowSpan="2" FontSize="20"/>
         <Label Content="Duration:" FontWeight="DemiBold" Grid.Row="3" Grid.Column="0" Margin="62,10,0,43" Grid.RowSpan="2" FontSize="20"/>
         <Button HorizontalAlignment="Left" Grid.Row="10" Background="White" VerticalAlignment="Top"  Height="34" Width="132" FontWeight="Bold" FontSize="18" Command="{Binding CloseCommand}" Margin="208,4,0,0" Grid.Column="1">
 
@@ -98,8 +96,7 @@
         <TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding TourInstance.Tour.MaxGuests}" Margin="10,10,65,10" FontSize="20" FontWeight="DemiBold"/>
         <TextBlock Grid.Row="6" Grid.Column="1" Text="{Binding StartDate}" Margin="10,10,65,10" FontSize="20" FontWeight="DemiBold"/>
         <TextBlock Grid.Row="7" Grid.Column="1" Text="{Binding EndDate}" Margin="10,10,65,10" FontSize="20" FontWeight="DemiBold"/>
-        <TextBlock Grid.Row="8" Grid.Column="1" Text="{Binding TourInstance.Tour.Description}" Margin="10,10,65,10" FontSize="20" FontWeight="DemiBold"/>
-        <Image Source="/Resources/Images/information.png" Margin="62,18,241,25" Grid.RowSpan="2"/>
+        <Image Source="/Resources/Images/information.png" Margin="59,18,244,25" Grid.RowSpan="2"/>
     </Grid>
 
 </Window>

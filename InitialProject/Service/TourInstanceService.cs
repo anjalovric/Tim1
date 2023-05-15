@@ -178,5 +178,19 @@ namespace InitialProject.Service
             if (instance.StartDate.Date == DateTime.Today.Date && instance.StartDate > DateTime.Now)
                 TodayInstances.Add(instance);
         }
+        public void SetLanguage(List<TourInstance> TourInstances)
+        {
+            TourService tourService = new TourService();
+            foreach (TourInstance instance in TourInstances)
+            {
+                foreach (Tour tour in tourService.GetAll())
+                {
+                    if (tour.Id == instance.Tour.Id)
+                    {
+                        instance.Tour.Language = tour.Language;
+                    }
+                }
+            }
+        }
     }
 }

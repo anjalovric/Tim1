@@ -72,6 +72,7 @@
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="FontSize" Value="14"/>
         </Style>
         <Style x:Key="BorderStyle" TargetType="TextBox">
             <Setter Property="BorderBrush" Value="LightGray"/>
@@ -295,7 +296,9 @@
             </Button.Style>
 
         </Button>
-        <Label Grid.Row="0" Grid.Column="1"  Foreground="White" Content="{Binding Path=Label,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" FontSize="20" Margin="0,261,0,0" Height="71" Style="{StaticResource LabelStyle}"/>
+        <Label Grid.Row="0" Grid.Column="1"  Foreground="White" Content="{Binding Path=Label,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" FontSize="20" Margin="0,261,0,0" Height="71" Style="{StaticResource LabelStyle}" >
+            
+        </Label>
         <Button x:Name="Restart" Background="#ffba00" Grid.Column="1" BorderBrush="#ffba00"  Style="{StaticResource borderStyle}" Width="62" Margin="414,201,0,0" TextElement.FontWeight="Bold" Command="{Binding RestartCommand}" Height="22">
             <Grid Background="#ffba00" HorizontalAlignment="Left" VerticalAlignment="Top" Height="15">
                 <Grid.RowDefinitions>

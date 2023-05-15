@@ -17,6 +17,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 {
     public class SentAccommodationReservationRequestsViewModel : INotifyPropertyChanged
     {
+        public Func<double, string> YAxisLabelFormatter => value => value.ToString("N1");
         private DateTime currentDate;
         private RequestForReschedulingService requestForReschedulingService;
         private ObservableCollection<ReschedulingAccommodationRequest> approvedRequests;

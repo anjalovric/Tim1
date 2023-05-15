@@ -46,9 +46,9 @@ namespace InitialProject.Service
                 Voucher savedVoucher = Save(voucher);
             }
         }
-        public ObservableCollection<Voucher> FindAllVouchers(Guest2 guest2)
+        public List<Voucher> FindAllVouchers(Guest2 guest2)
         {
-            ObservableCollection<Voucher> Vouchers = new ObservableCollection<Voucher>();
+            List<Voucher> Vouchers = new List<Voucher>();
             foreach (Voucher voucher in storedVouchers)
             {
                 if (voucher.GuestId == guest2.Id && voucher.Used == false && voucher.CreateDate.AddYears(1)>=DateTime.Now)

@@ -457,7 +457,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
                     {
                         if (alert.Guest2Id == guest2.Id && alert.Informed == false && TourInstance.Id==alert.InstanceId)
                         {
-                            NewTourNotification guest2Notification = new NewTourNotification(FindGuest2(), "You reserved this tour. Confirm your presence.", Guest2NotificationType.CONFIRM_PRESENCE,TourInstance, false,alert.Id,-1);
+                            NewTourNotification guest2Notification = new NewTourNotification(FindGuest2(), "You reserved this tour. Confirm your presence.", Guest2NotificationType.CONFIRM_PRESENCE,TourInstance, false,alert.Id);
                             newTourNotificationService.Save(guest2Notification);
                             alert.Informed = true;
                             alertGuest2Repository.Update(alert);

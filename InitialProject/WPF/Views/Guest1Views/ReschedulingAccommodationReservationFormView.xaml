@@ -52,9 +52,9 @@
             <!-- INPUT FORM -->
             <Label FontSize="24" HorizontalAlignment="Center" FontWeight="Bold" FontFamily="Baskerville Old Face"  VerticalAlignment="Top" Height="Auto" Width="Auto" Margin="0,25,0,0">CHANGING RESERVATION DATE</Label>
             
-            <Label HorizontalAlignment="Left" Margin="160,0,0,300" Height="35" Width="110">Arrival date:</Label>
+            <Label HorizontalAlignment="Left" Margin="154,84,0,384" Height="35" Width="Auto">Arrival date*</Label>
 
-            <Label Height="35" Width="140" HorizontalAlignment="Right" Margin="0,81,142,381" Content="Departure date:"/>
+            <Label Height="35" HorizontalAlignment="Right" Width="Auto" Margin="0,84,142,383" Content="Departure date*"/>
 
             <Calendar x:Name="ArrivalDate" Margin="120,120,0,196" HorizontalAlignment="Left" SelectedDate="{Binding Path=Arrival, Mode=TwoWay}">
                 <i:Interaction.Triggers>
@@ -84,7 +84,7 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <Image Source="/Resources/Images/back.png" HorizontalAlignment="Left" Margin="10,0,0,0" Width="26" Height="22" Grid.Column="0"/>
-                    <TextBlock Background="#8c9d75" Text="BACK" Grid.Column="1" VerticalAlignment="Center" FontSize="18" Margin="8,0,0,0"  Foreground="#22301a" FontWeight="Bold" HorizontalAlignment="Center" Width="Auto"/>
+                    <TextBlock Background="#8c9d75" Text="Back" Grid.Column="1" VerticalAlignment="Center" FontSize="18" Margin="8,0,0,0"  Foreground="#22301a" FontWeight="Bold" HorizontalAlignment="Center" Width="Auto"/>
                 </Grid>
             </Button>
 
@@ -105,7 +105,7 @@
                             </TransformGroup>
                         </Image.RenderTransform>
                     </Image>
-                    <TextBlock Background="#8c9d75" Text="SEND" Grid.Column="0" VerticalAlignment="Center" FontSize="18"  Foreground="#22301a" Margin="10,0,0,0" FontWeight="Bold" HorizontalAlignment="Left" Width="58"/>
+                    <TextBlock Background="#8c9d75" Text="Send" Grid.Column="0" VerticalAlignment="Center" FontSize="18"  Foreground="#22301a" Margin="10,0,0,0" FontWeight="Bold" HorizontalAlignment="Left" Width="58"/>
                 </Grid>
             </Button>
 

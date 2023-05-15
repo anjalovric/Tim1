@@ -13,7 +13,7 @@ namespace InitialProject.Domain.RepositoryInterfaces
     {
         public NewTourNotification Save(NewTourNotification notification);
         public void Delete(NewTourNotification notification);
-        public ObservableCollection<NewTourNotification> GetByGuestId(int id);
+        public List<NewTourNotification> GetByGuestId(int id);
         public void Update(NewTourNotification notification);
     }
 }

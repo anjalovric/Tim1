@@ -63,10 +63,10 @@ namespace InitialProject.Repository
         {
             return _notifications.Find(n => n.Id == id);
         }
-        public ObservableCollection<NewTourNotification> GetByGuestId(int id)
+        public List<NewTourNotification> GetByGuestId(int id)
         {
             _notifications = GetAll();
-            ObservableCollection<NewTourNotification> notifications = new ObservableCollection<NewTourNotification>();
+            List<NewTourNotification> notifications = new List<NewTourNotification>();
             foreach (NewTourNotification notification in _notifications)
             {
                 if (notification.Guest2.Id == id)
