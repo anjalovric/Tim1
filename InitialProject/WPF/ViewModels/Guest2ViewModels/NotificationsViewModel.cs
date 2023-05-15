@@ -89,7 +89,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         }
         public void AddNotificationsByLanguage()
         {
-            SetLanguage();
+            tourInstanceService.SetLanguage(TourInstances);
             foreach (TourInstance tourInstance in TourInstances)
             {
                 foreach (OrdinaryTourRequests request in ordinaryTourRequestsService.GetInvalidOrWaitingRequests(OrdinaryTourRequests,guest2))
@@ -134,20 +134,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
                 }
             }
         }
-        private void SetLanguage()
-        {
-            TourService tourService = new TourService();
-            foreach(TourInstance instance in TourInstances)
-            {
-                foreach(Tour tour in tourService.GetAll())
-                {
-                    if (tour.Id == instance.Tour.Id)
-                    {
-                        instance.Tour.Language = tour.Language;
-                    }
-                }
-            }
-        }
+        
         private void ShowAlertGuestForm(NewTourNotification notification)
         {
             Alerts = alertGuest2Service.GetAll();
