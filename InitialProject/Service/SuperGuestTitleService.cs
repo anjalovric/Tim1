@@ -30,15 +30,15 @@ namespace InitialProject.Service
         }
         public bool IsAlreadySuperGuest(Guest1 guest1)
         {
-             return superGuestTitleRepository.GetAll().Find(n => n.Guest.Id == guest1.Id)!=null;
+             return superGuestTitleRepository.GetById(guest1.Id)!=null;
         }
         public void SetGuests()
         {
             Guest1Service guest1Service = new Guest1Service();
-            List<Guest1> allGuest = guest1Service.GetAll();
+            List<Guest1> allGuests = guest1Service.GetAll();
             foreach (SuperGuestTitle superGuest in superGuests)
             {
-                Guest1 guest = allGuest.Find(n => n.Id == superGuest.Guest.Id);
+                Guest1 guest = allGuests.Find(n => n.Id == superGuest.Guest.Id);
                 if (guest != null)
                     superGuest.Guest = guest;
             }
@@ -52,7 +52,7 @@ namespace InitialProject.Service
                 SuperGuestTitle newSuperGuestTitle = new SuperGuestTitle(guest1, 5, activationDate);
                 Add(newSuperGuestTitle);
                 MakeSuperGuests(); 
-                return newSuperGuestTitle;
+                return newSuperGuestTitle;  //na dijagramu nisam zavrsila ziv.vijek jer ne valja onda u else (ispod)
             }
             MakeSuperGuests();
             return superGuestTitleRepository.GetAll().Find(n => n.Guest.Id == guest1.Id);
@@ -76,14 +76,19 @@ namespace InitialProject.Service
             MakeSuperGuests();
             return superGuests.Find(n=>n.Guest.Id == guest1.Id);    //new superguest or null
         }        
-        public void DeleteTitleIfManyYearsPassed(Guest1 guest1)
+        public void DeleteTitleIfNeeded(Guest1 guest1)
         {
-            if(superGuests.Find(n => n.Guest.Id == guest1.Id)!=null)
-                if (DateTime.Now > superGuests.Find(n => n.Guest.Id == guest1.Id).ActivationDate.AddYears(2))
-                {
-                    Delete(superGuests.Find(n => n.Guest.Id == guest1.Id));
-                    MakeSuperGuests();
-                }
+            if(ShouldDelete(guest1))
+            {
+                Delete(superGuests.Find(n => n.Guest.Id == guest1.Id));
+                //MakeSuperGuests();
+            }
+                    
+        }
+
+        private bool ShouldDelete(Guest1 guest1)
+        {
+            return superGuests.Find(n => n.Guest.Id == guest1.Id) != null && DateTime.Now > superGuests.Find(n => n.Guest.Id == guest1.Id).ActivationDate.AddYears(2);
         }
         public void DecrementPoints(Guest1 guest1)
         {

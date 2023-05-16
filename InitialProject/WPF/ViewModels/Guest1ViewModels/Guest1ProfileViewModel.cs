@@ -49,7 +49,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         private void ShowSuperGuest()
         {
             SuperGuestTitleService superGuestTitleService = new SuperGuestTitleService();
-            superGuestTitleService.DeleteTitleIfManyYearsPassed(Guest1);
+            superGuestTitleService.DeleteTitleIfNeeded(Guest1);
             if (superGuestTitleService.IsAlreadySuperGuest(Guest1))
             {
                 SuperGuest = superGuestTitleService.ProlongSuperGuestTitle(Guest1);  //add new or delete previous title.
