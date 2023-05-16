@@ -14,19 +14,27 @@ namespace InitialProject.Service
     public class AccommodationRenovationSuggestionService
     {
         private IAccommodationRenovationSuggestionRepository renovationSuggestionRepository = Injector.CreateInstance<IAccommodationRenovationSuggestionRepository>();
-        private List<AccommodationRenovationSuggestion> suggestions;
+        private AccommodationReservationService accommodationReservationService;
         public AccommodationRenovationSuggestionService()
         {
-            MakeSuggestions();
+            accommodationReservationService = new AccommodationReservationService();
         }
 
         public List<AccommodationRenovationSuggestion> GetAll()
         {
+            List<AccommodationRenovationSuggestion> suggestions = new List<AccommodationRenovationSuggestion>(renovationSuggestionRepository.GetAll());
+            List<AccommodationReservation> storedReservations = accommodationReservationService.GetAll();
+            foreach (AccommodationRenovationSuggestion suggestion in suggestions)
+                suggestion.Reservation = storedReservations.Find(n => n.Id == suggestion.Reservation.Id);
             return suggestions;
         }
 
         public List<AccommodationRenovationSuggestion> GetByAccommodation(Accommodation accommodation)
         {
+            List< AccommodationRenovationSuggestion> suggestions = new List<AccommodationRenovationSuggestion>(renovationSuggestionRepository.GetAll());
+            List<AccommodationReservation> storedReservations = accommodationReservationService.GetAll();
+            foreach (AccommodationRenovationSuggestion suggestion in suggestions)
+                suggestion.Reservation = storedReservations.Find(n => n.Id == suggestion.Reservation.Id);
             List<AccommodationRenovationSuggestion> suggestionsByAccommodation = new List<AccommodationRenovationSuggestion>();
             foreach(var suggestion in suggestions)
             {
@@ -42,18 +50,7 @@ namespace InitialProject.Service
             renovationSuggestionRepository.Add(suggestion);
         }
 
-        private void MakeSuggestions()
-        {
-            suggestions = new List<AccommodationRenovationSuggestion>(renovationSuggestionRepository.GetAll());
-            SetReservations();
-        }
-        private void SetReservations()
-        {
-            AccommodationReservationService accommodationReservationService = new AccommodationReservationService();
-            List<AccommodationReservation> storedReservations = accommodationReservationService.GetAll();
-            foreach (AccommodationRenovationSuggestion suggestion in suggestions)
-                suggestion.Reservation = storedReservations.Find(n => n.Id == suggestion.Reservation.Id);
-        }
+        
 
         public void Delete(AccommodationRenovationSuggestion suggestion)
         {
