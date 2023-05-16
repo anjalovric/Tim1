@@ -8,11 +8,15 @@ namespace InitialProject.Service
 {
     public class RequestStatisticsService
     {
+        private OrdinaryTourRequestsService ordinaryTourRequestsService;
+        public RequestStatisticsService()
+        {
+            ordinaryTourRequestsService = new OrdinaryTourRequestsService();
+        }
         public double AverageNumberOfPeopleInAcceptedRequests(Guest2 Guest2)
         {
             int counter = 0;
             double averageNumberOfPeople = 0;
-            OrdinaryTourRequestsService ordinaryTourRequestsService=new OrdinaryTourRequestsService();
             List<OrdinaryTourRequests> ordinaryTours=new List<OrdinaryTourRequests>(ordinaryTourRequestsService.GetByGuestId(Guest2.Id));
             foreach (OrdinaryTourRequests request in ordinaryTours)
             {
@@ -29,7 +33,6 @@ namespace InitialProject.Service
         public double ProcentOfInvalidRequest(Guest2 Guest2)
         {
             double invalidRequest = 0;
-            OrdinaryTourRequestsService ordinaryTourRequestsService = new OrdinaryTourRequestsService();
             List<OrdinaryTourRequests> ordinaryTours = new List<OrdinaryTourRequests>(ordinaryTourRequestsService.GetByGuestId(Guest2.Id));
             foreach (OrdinaryTourRequests request in ordinaryTours)
             {
@@ -46,7 +49,6 @@ namespace InitialProject.Service
         public double ProcentOfAcceptedRequest(Guest2 Guest2)
         {
             double acceptedRequest = 0;
-            OrdinaryTourRequestsService ordinaryTourRequestsService = new OrdinaryTourRequestsService();
             List<OrdinaryTourRequests> ordinaryTours = new List<OrdinaryTourRequests>(ordinaryTourRequestsService.GetByGuestId(Guest2.Id));
             foreach (OrdinaryTourRequests request in ordinaryTours)
             {

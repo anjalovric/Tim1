@@ -6,12 +6,15 @@ namespace InitialProject.Service
 {
     public class TourRequestStatisticYearlyLanguageService
     {
-        public TourRequestStatisticYearlyLanguageService() { }
+        private OrdinaryTourRequestsService ordinaryTourRequestsService;
+        public TourRequestStatisticYearlyLanguageService() 
+        {
+            ordinaryTourRequestsService=new OrdinaryTourRequestsService();
+        }
         private List<int> GetYearsForLanguage(string language)
         {
-            OrdinaryTourRequestsService ordinaryTourRequests = new OrdinaryTourRequestsService();
             List<int> years= new List<int>();
-            List<OrdinaryTourRequests> request = ordinaryTourRequests.GetByLanguage(language);
+            List<OrdinaryTourRequests> request = ordinaryTourRequestsService.GetByLanguage(language);
             if (request.Count > 0)
             {
                 years.Add(request[0].StartDate.Year);

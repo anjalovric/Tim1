@@ -12,6 +12,7 @@ using System.Windows.Controls;
 using System.Windows;
 using InitialProject.Repository;
 using Org.BouncyCastle.Asn1.Ocsp;
+using System.Security.Cryptography.Xml;
 
 namespace InitialProject.WPF.ViewModels.Guest2ViewModels
 {
@@ -25,6 +26,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         private List<AlertGuest2> Alerts;
         private TourInstanceService tourInstanceService;
         public List<TourInstance> TourInstances;
+        public TourService tourService;
         private Guest2 guest2;
         public RelayCommand ViewCommand { get; set; }
         public RelayCommand DeleteCommand { get; set; }
@@ -32,6 +34,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         {
             this.guest2 = guest2;
             notificationService = new NewTourNotificationService();
+            tourService = new TourService();
             ordinaryTourRequestsService = new OrdinaryTourRequestsService();
             OrdinaryTourRequests = new List<OrdinaryTourRequests>(ordinaryTourRequestsService.GetAll());
             Alerts = new List<AlertGuest2>();
@@ -89,65 +92,48 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         }
         public void AddNotificationsByLanguage()
         {
-            SetLanguage();
-            foreach (TourInstance tourInstance in TourInstances)
+            tourInstanceService.SetLanguage(TourInstances);
+            foreach (TourInstance tourInstance in GetTourInstance())
             {
                 foreach (OrdinaryTourRequests request in ordinaryTourRequestsService.GetInvalidOrWaitingRequests(OrdinaryTourRequests,guest2))
                 {
-                    foreach (OrdinaryTourRequests tourRequests in ordinaryTourRequestsService.GetAcceptedRequests(OrdinaryTourRequests))
+                    if (request.Language == tourInstance.Tour.Language && !Exists(tourInstance) && !IsDeleted(tourInstance.Id))
                     {
-                        if (tourInstance.Id == tourRequests.TourInstanceId && request.Language == tourInstance.Tour.Language && !Exists(tourInstance) && !IsDeleted(tourInstance.Id))
-                        {
-                            NewTourNotification guest2Notification = new NewTourNotification(guest2, "Your tour request has been accepted. Click on details for more. You can delete it.", Guest2NotificationType.REQUEST_ACCEPTED, tourInstance, false, -1);
-                            notificationService.Save(guest2Notification);
-                        }else if(tourRequests.TourInstanceId==tourInstance.Id && guest2.Id==tourRequests.GuestId && !Exists(tourInstance) && !IsDeleted(tourInstance.Id))
-                        {
-                            NewTourNotification guest2Notification = new NewTourNotification(guest2, "Your tour request has been accepted. Click on details for more. You can delete it.", Guest2NotificationType.REQUEST_ACCEPTED, tourInstance, false, -1);
-                            notificationService.Save(guest2Notification);
-                        }
+                        NewTourNotification guest2Notification = new NewTourNotification(guest2, "Your tour request has been accepted. Click on details for more. You can delete it.", Guest2NotificationType.REQUEST_ACCEPTED, tourInstance, false, -1);
+                        notificationService.Save(guest2Notification);
                     }
                 }
             }
         }
         public void AddNotificationsByLocation()
         {
-            TourService tourService = new TourService();
             tourService.SetTourToTourInstance(TourInstances);
-            tourService.SetLocationToTour(TourInstances);
-            foreach (TourInstance tourInstance in TourInstances)
+            foreach (TourInstance tourInstance in GetTourInstance())
             {
-                foreach (OrdinaryTourRequests request in ordinaryTourRequestsService.GetInvalidOrWaitingRequests(OrdinaryTourRequests,guest2))
+                foreach (OrdinaryTourRequests request in ordinaryTourRequestsService.GetInvalidOrWaitingRequests(OrdinaryTourRequests, guest2))
                 {
-                    ordinaryTourRequestsService.SetLocations(ordinaryTourRequestsService.GetInvalidOrWaitingRequests(OrdinaryTourRequests, guest2));
-                    foreach (OrdinaryTourRequests tourRequests in ordinaryTourRequestsService.GetAcceptedRequests(OrdinaryTourRequests))
+                    if (request.Location.City == tourInstance.Tour.Location.City && request.Location.Country == tourInstance.Tour.Location.Country && !Exists(tourInstance) && !IsDeleted(tourInstance.Id))
                     {
-                        if (tourInstance.Id == tourRequests.TourInstanceId && request.Location.City == tourInstance.Tour.Location.City && request.Location.Country==tourInstance.Tour.Location.Country && !Exists(tourInstance) && !IsDeleted(tourInstance.Id))
-                        {
-                            NewTourNotification guest2Notification = new NewTourNotification(guest2, "Your tour request has been accepted. Click on details for more. You can delete it.", Guest2NotificationType.REQUEST_ACCEPTED, tourInstance, false, -1);
-                            notificationService.Save(guest2Notification);
-                        }
-                        else if (tourRequests.TourInstanceId == tourInstance.Id && guest2.Id == tourRequests.GuestId && !Exists(tourInstance) && !IsDeleted(tourInstance.Id))
-                        {
-                            NewTourNotification guest2Notification = new NewTourNotification(guest2, "Your tour request has been accepted. Click on details for more. You can delete it.", Guest2NotificationType.REQUEST_ACCEPTED, tourInstance, false, -1);
-                            notificationService.Save(guest2Notification);
-                        }
+                        NewTourNotification guest2Notification = new NewTourNotification(guest2, "Your tour request has been accepted. Click on details for more. You can delete it.", Guest2NotificationType.REQUEST_ACCEPTED, tourInstance, false, -1);
+                        notificationService.Save(guest2Notification);
                     }
                 }
             }
         }
-        private void SetLanguage()
+        public List<TourInstance> GetTourInstance()
         {
-            TourService tourService = new TourService();
-            foreach(TourInstance instance in TourInstances)
+            List<TourInstance> Instances = new List<TourInstance>();
+            foreach (TourInstance tourInstance in TourInstances)
             {
-                foreach(Tour tour in tourService.GetAll())
+                foreach (OrdinaryTourRequests tourRequests in ordinaryTourRequestsService.GetAcceptedRequests(OrdinaryTourRequests))
                 {
-                    if (tour.Id == instance.Tour.Id)
+                    if (tourInstance.Id == tourRequests.TourInstanceId)
                     {
-                        instance.Tour.Language = tour.Language;
+                        Instances.Add(tourInstance);
                     }
                 }
             }
+            return Instances;
         }
         private void ShowAlertGuestForm(NewTourNotification notification)
         {

@@ -76,7 +76,7 @@ namespace InitialProject.Service
                         pointsName.Add(checkPoint.Name);
             return pointsName;
         }
-        public void UpdateCheckPoints(int tourId,ObservableCollection<CheckPoint> TourPoints)
+        public void SaveCheckPoints(int tourId,ObservableCollection<CheckPoint> TourPoints)
         {
             int i = 1;
             foreach (CheckPoint checkPoint in TourPoints)
