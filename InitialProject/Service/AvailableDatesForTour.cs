@@ -6,38 +6,37 @@ namespace InitialProject.Service
 {
     public class AvailableDatesForTour
     {
-        public AvailableDatesForTour() 
+        public AvailableDatesForTour() {}
+        public List<TourInstance> ScheduleTourInstances(TourInstance newinstance,DateTime StartDate,DateTime EndDate,double duration)
         {
-        }
-
-        public List<TourInstance> ScheduledInstances(TourInstance newinstance,DateTime StartDate,DateTime EndDate,double duration)
-        {
-            List <TourInstance> instances = new List<TourInstance>();
+            List <TourInstance> overlayTourInstances = new List<TourInstance>();
             TourInstanceService tourInstanceService= new TourInstanceService();
-            TourInstance actual = newinstance;
-            DateTime newdays=actual.StartDate.AddHours(duration);
-            if (newdays <= EndDate)
+            TourInstance newlTourInstance = newinstance;
+            if (newlTourInstance.StartDate.AddHours(duration) <= EndDate)
             {
                 List<TourInstance> tours = tourInstanceService.GetAll();
-                foreach (TourInstance instance in SetTours(tours))
+                foreach (TourInstance tourInstance in SetTours(tours))
                 {
-                    if (instance.Finished == false && instance.Canceled == false)
+                    if (tourInstance.Finished == false && tourInstance.Canceled == false)
                     {
-                        TourInstance copied = instance;
-                        DateTime newDate = copied.StartDate.AddHours(instance.Tour.Duration);
-                        if ((newDate >= newdays) && !(instance.StartDate >= newdays) && !(newinstance.StartDate > newDate))
+                        TourInstance temporaryTourInstance = tourInstance;
+                        if ((temporaryTourInstance.StartDate.AddHours(tourInstance.Tour.Duration) >= newlTourInstance.StartDate.AddHours(duration)) && !(tourInstance.StartDate >= newlTourInstance.StartDate.AddHours(duration)) && !(newinstance.StartDate > temporaryTourInstance.StartDate.AddHours(tourInstance.Tour.Duration)))
                         {
-                            instances.Add(copied);
-                            return instances;
+                            AddTourInstanceToOverlayList(overlayTourInstances, newinstance);
+                            return overlayTourInstances;
                         }
-                        else if(!(instance.StartDate >= newdays) && !(newinstance.StartDate > newDate) && (newinstance.StartDate<newDate))
-                            instances.Add(copied);
+                        else if (!(tourInstance.StartDate >= newlTourInstance.StartDate.AddHours(duration)) && !(newinstance.StartDate > temporaryTourInstance.StartDate.AddHours(tourInstance.Tour.Duration)) && (newinstance.StartDate < temporaryTourInstance.StartDate.AddHours(tourInstance.Tour.Duration)))
+                            AddTourInstanceToOverlayList(overlayTourInstances, newinstance);
                     }
                 }
             }
             else
-                instances.Add(newinstance);
-            return instances;
+                AddTourInstanceToOverlayList(overlayTourInstances, newinstance);
+            return overlayTourInstances;
+        }
+        private void AddTourInstanceToOverlayList(List<TourInstance> overlayTourInstances,TourInstance tourInstance)
+        {
+            overlayTourInstances.Add(tourInstance); 
         }
         private List<TourInstance> SetTours(List<TourInstance> requests) 
         {
