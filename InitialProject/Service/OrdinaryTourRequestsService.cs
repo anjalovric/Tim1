@@ -13,25 +13,25 @@ namespace InitialProject.Service
 {
     public class OrdinaryTourRequestsService
     {
-        private IOrdinaryTourRequestsRepository requestRepository;
+        private IOrdinaryTourRequestsRepository ordinaryTourRequestsRepository;
         private LocationService locationService;
 
         public OrdinaryTourRequestsService()
         {
-            requestRepository = Injector.CreateInstance<IOrdinaryTourRequestsRepository>();
+            ordinaryTourRequestsRepository = Injector.CreateInstance<IOrdinaryTourRequestsRepository>();
             locationService = new LocationService();
         }
         public OrdinaryTourRequests Save(OrdinaryTourRequests request)
         {
-            return requestRepository.Save(request);
+            return ordinaryTourRequestsRepository.Save(request);
         }
         public List<OrdinaryTourRequests> GetAll()
         {
-            return requestRepository.GetAll();
+            return ordinaryTourRequestsRepository.GetAll();
         }
         public List<OrdinaryTourRequests> GetByGuestId(int id)
         {
-            return requestRepository.GetByGuestId(id);
+            return ordinaryTourRequestsRepository.GetByGuestId(id);
         }
         public List<OrdinaryTourRequests> GetOnWaitingRequests()
         {
@@ -57,7 +57,7 @@ namespace InitialProject.Service
         }
         public OrdinaryTourRequests Update(OrdinaryTourRequests request)
         {
-            return requestRepository.Update(request);
+            return ordinaryTourRequestsRepository.Update(request);
         }
 
         public List<OrdinaryTourRequests> GetByLanguage(string language) 

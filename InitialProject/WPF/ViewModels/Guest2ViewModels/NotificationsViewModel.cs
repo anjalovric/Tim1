@@ -108,7 +108,6 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         public void AddNotificationsByLocation()
         {
             tourService.SetTourToTourInstance(TourInstances);
-            tourService.SetLocationToTour(TourInstances);
             foreach (TourInstance tourInstance in GetTourInstance())
             {
                 foreach (OrdinaryTourRequests request in ordinaryTourRequestsService.GetInvalidOrWaitingRequests(OrdinaryTourRequests, guest2))

@@ -13,7 +13,7 @@ namespace InitialProject.Service
 {
     public class YearlyRequestStatisticsService
     {
-        OrdinaryTourRequestsService ordinaryTourRequestsService;
+        private OrdinaryTourRequestsService ordinaryTourRequestsService;
         public YearlyRequestStatisticsService()
         {
             ordinaryTourRequestsService = new OrdinaryTourRequestsService();
