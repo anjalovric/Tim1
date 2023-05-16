@@ -81,7 +81,7 @@ namespace InitialProject.Service
             List<OrdinaryTourRequests> ordinaryTourRequests = new List<OrdinaryTourRequests>();
             foreach (OrdinaryTourRequests request in OrdinaryTourRequests)
             {
-                if (request.Status == Status.ONWAITING || request.Status == Status.INVALID && guest2.Id == request.GuestId)
+                if ((request.Status == Status.ONWAITING || request.Status == Status.INVALID) && guest2.Id == request.GuestId)
                 {
                     ordinaryTourRequests.Add(request);
                 }
