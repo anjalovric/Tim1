@@ -99,8 +99,10 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         public RelayCommand ResetComboBoxCommand { get; set; }
        
         public RelayCommand UrgencySelectionChangedCommand { get; set; }
+        private AccommodationRenovationSuggestionService accommodationRenovationSuggestionService;
         public OwnerAndAccommodationReviewFormViewModel(Guest1 guest1,AccommodationReservation SelectedCompletedReservation)
         {
+            accommodationRenovationSuggestionService = new AccommodationRenovationSuggestionService();
             this.reservation = SelectedCompletedReservation;
             this.guest1 = guest1;
             images = new List<AccommodationReviewImage>();
@@ -160,8 +162,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         private void StoreRenovationSuggestion()
         {
             if(ConditionsOfAccommodation!=null && ConditionsOfAccommodation!="" && LevelOfUrgency!=null) //else, dont store renovation suggestion (doesnt exist)
-            {
-                AccommodationRenovationSuggestionService accommodationRenovationSuggestionService =  new AccommodationRenovationSuggestionService();
+            { 
                 if (ConditionsOfAccommodation == null)
                     ConditionsOfAccommodation = "";
                 if (LevelOfUrgency == null)

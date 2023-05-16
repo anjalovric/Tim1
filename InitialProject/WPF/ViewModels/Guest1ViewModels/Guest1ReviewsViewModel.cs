@@ -65,6 +65,11 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                 Labels.Add(lastYear.ToString("MMM").ToUpper());
                 lastYear = lastYear.AddMonths(1);
             }
+            SetSeriesCollection(values);
+        }
+
+        private void SetSeriesCollection(List<double> values)
+        {
             SeriesCollection = new SeriesCollection();
             ColumnSeries columnSeries = new ColumnSeries();
             columnSeries.Values = new ChartValues<double>();

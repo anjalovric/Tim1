@@ -109,9 +109,8 @@ namespace InitialProject.Service
             {
                 var tenthDeparture = departureDates.OrderBy(d => d).ElementAtOrDefault(9);
                 return tenthDeparture;
-            }                
-            else
-                return DateTime.MinValue;
+            }
+            return DateTime.MinValue;
         }
         public bool IsLastYearReservationCompleted(AccommodationReservation reservation)
         {

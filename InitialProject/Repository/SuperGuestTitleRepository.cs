@@ -67,5 +67,10 @@ namespace InitialProject.Repository
 
         }
 
+        public SuperGuestTitle GetByGuestId(int id)
+        {
+            return _superGuests.Find(n => n.Guest.Id == id);
+        }
+
     }
 }

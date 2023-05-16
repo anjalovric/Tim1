@@ -20,7 +20,10 @@ namespace InitialProject.Service
         {
             return guest1Repository.GetAll();
         }
-
+        public Guest1 GetById(int id)
+        {
+            return guest1Repository.GetById(id);
+        }
         public Guest1 GetByUsername(String username)
         {
             Guest1 guest1 =  guest1Repository.GetByUsername(username);

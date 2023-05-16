@@ -36,11 +36,13 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         }
         public int AverageRating { get; set; }
         public int ReviewsNumber { get; set; }
+        private SuperGuestTitleService superGuestTitleService;
         public Guest1ProfileViewModel(Guest1 guest1)
         {
             this.Guest1 = guest1;
             string relative = FindImageRelativePath();
             ImageSource = new BitmapImage(new Uri(relative, UriKind.Relative));
+            superGuestTitleService = new SuperGuestTitleService();
             GetAverageRating();
             GetReviewsNumber();
             ShowSuperGuest();
@@ -48,7 +50,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 
         private void ShowSuperGuest()
         {
-            SuperGuestTitleService superGuestTitleService = new SuperGuestTitleService();
             superGuestTitleService.DeleteTitleIfNeeded(Guest1);
             if (superGuestTitleService.IsAlreadySuperGuest(Guest1))
             {

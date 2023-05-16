@@ -13,7 +13,6 @@ namespace InitialProject.Service
 {
     public class SuperGuestTitleService
     {
-        //private List<SuperGuestTitle> superGuests;
         private ISuperGuestTitleRepository superGuestTitleRepository = Injector.CreateInstance<ISuperGuestTitleRepository>();
         Guest1Service guest1Service;
         AccommodationReservationService accommodationReservationService;
@@ -25,10 +24,9 @@ namespace InitialProject.Service
         private List<SuperGuestTitle> GetAllSuperGuests()
         {
             List<SuperGuestTitle> superGuests = new List<SuperGuestTitle>(superGuestTitleRepository.GetAll());
-            List<Guest1> allGuests = guest1Service.GetAll();
             foreach (SuperGuestTitle superGuest in superGuests)
             {
-                Guest1 guest = allGuests.Find(n => n.Id == superGuest.Guest.Id);
+                Guest1 guest = guest1Service.GetById(superGuest.Guest.Id);
                 if (guest != null)
                     superGuest.Guest = guest;
             }
@@ -40,7 +38,7 @@ namespace InitialProject.Service
         }
         public bool IsAlreadySuperGuest(Guest1 guest1)
         {
-             return superGuestTitleRepository.GetById(guest1.Id)!=null;
+             return superGuestTitleRepository.GetByGuestId(guest1.Id)!=null;
         }
        
         public SuperGuestTitle MakeNewSuperGuest(Guest1 guest1)
@@ -49,12 +47,10 @@ namespace InitialProject.Service
             if(activationDate!=DateTime.MinValue && !IsAlreadySuperGuest(guest1))
             {
                 SuperGuestTitle newSuperGuestTitle = new SuperGuestTitle(guest1, 5, activationDate);
-                Add(newSuperGuestTitle);
-                //obrisano makesuperguests 
-                return newSuperGuestTitle;  //na dijagramu nisam zavrsila ziv.vijek jer ne valja onda u else (ispod)
+                Add(newSuperGuestTitle); 
+                return newSuperGuestTitle;  
             }
-            //obrisano makesuperguests
-            return superGuestTitleRepository.GetAll().Find(n => n.Guest.Id == guest1.Id);
+            return superGuestTitleRepository.GetByGuestId(guest1.Id);
         }
         public void Delete(SuperGuestTitle title)
         {
@@ -71,26 +67,27 @@ namespace InitialProject.Service
             } 
             else if(DateTime.Now > superGuest.ActivationDate.AddYears(1))  //1 year has passed
                 Delete(superGuest);     //delete old title
-            //obrisano makesuperguests
+
             return GetAllSuperGuests().Find(n=>n.Guest.Id == guest1.Id);    //new superguest or null
         }        
         public void DeleteTitleIfNeeded(Guest1 guest1)
         {
             if(ShouldDelete(guest1))
             {
-                Delete(GetAllSuperGuests().Find(n => n.Guest.Id == guest1.Id));
-                //MakeSuperGuests();
+                Delete(superGuestTitleRepository.GetByGuestId(guest1.Id));
+
             }
                     
         }
 
         private bool ShouldDelete(Guest1 guest1)
         {
-            return GetAllSuperGuests().Find(n => n.Guest.Id == guest1.Id) != null && DateTime.Now > GetAllSuperGuests().Find(n => n.Guest.Id == guest1.Id).ActivationDate.AddYears(2);
+            SuperGuestTitle foundedSuperGuest = superGuestTitleRepository.GetByGuestId(guest1.Id);
+            return foundedSuperGuest != null && DateTime.Now > foundedSuperGuest.ActivationDate.AddYears(2);
         }
         public void DecrementPoints(Guest1 guest1)
         {
-            SuperGuestTitle title = GetAllSuperGuests().Find(n => n.Guest.Id == guest1.Id);
+            SuperGuestTitle title = superGuestTitleRepository.GetByGuestId(guest1.Id);
             if (title!=null)
             {
                 if(title.AvailablePoints>0)
