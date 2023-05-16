@@ -155,24 +155,36 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
                 OnPropertyChanged();
             }
         }
+        private LocationService locationService;
+        private TourRequestStatisticYearlyLanguageService tourRequestStatisticYearlyService;
+        private TourRequestStatisticYearlyLocationService tourRequestStatisticYearlyLocationervice;
+        private SuggestedLocationService suggestedLocationService;
         public RequestStatisticYearlyViewModel(ObservableCollection<TourInstance> todayinstances, User user, ObservableCollection<TourInstance> futureinstances) 
         {
-            Statistics=new ObservableCollection<GuideOneYearRequestStatisticViewModel>();
+            locationService=new LocationService();
+            tourRequestStatisticYearlyService = new TourRequestStatisticYearlyLanguageService();
+            tourRequestStatisticYearlyLocationervice=new TourRequestStatisticYearlyLocationService();
+            suggestedLocationService=new SuggestedLocationService();            
+            Statistics =new ObservableCollection<GuideOneYearRequestStatisticViewModel>();
             StatisticsLocation = new ObservableCollection<GuideOneYearRequestStatisticViewModel>();
             AddLanguages();
             MakeCommands();
             SelectedLanguage = null;
-            Toast = "Hidden";
-            ToastLocation = "Hidden";
-            ToastCity = "Hidden";
             MakeListOfLocations();
             loggedUser = user;
             todayInstances = todayinstances;
             futureInstances = futureinstances;
+            SetDatas();
+        }
+        private void SetDatas()
+        {
+            Toast = "Hidden";
+            ToastLocation = "Hidden";
+            ToastCity = "Hidden";
             SuggestedLanguageService languageSuggestService = new SuggestedLanguageService();
             YearLanguage = languageSuggestService.GetMostWantedLanguage();
             SuggestedLocationService suggestedLocationService = new SuggestedLocationService();
-            if(suggestedLocationService.GetMostWantedLocation()!=null)
+            if (suggestedLocationService.GetMostWantedLocation() != null)
                 YearLocation = suggestedLocationService.GetMostWantedLocation().Country + ", " + suggestedLocationService.GetMostWantedLocation().City;
         }
         private bool CanExecute(object sender)
@@ -195,7 +207,6 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             CreateTourByLanguageCommand = new RelayCommand(CreateTourByLanguage_Executed, CanExecute);
             CreateTourByLocationCommand = new RelayCommand(CreateTourByLocation_Executed,CanExecute);
             EnableCityCommand = new RelayCommand(EnableCityComboBox_Executed, CanExecute);
-
         }
         private void ResetLanguage_Executed(object sender)
         {
@@ -210,7 +221,6 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         }
         private void MonthlyStatisticLocation_Executed(object sender)
         {
-            LocationService locationService = new LocationService();
             Location location = locationService.GetByCityAndCountry(Country, City);
             RequestStatisticMonthlyLocatiovView requestStatisticsMonthly = new RequestStatisticMonthlyLocatiovView(location, SelectedYear);
             Application.Current.Windows.OfType<GuideWindow>().FirstOrDefault().Main.Content = requestStatisticsMonthly;
@@ -226,7 +236,6 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         }
         private void SearchLanguage_Executed(object sender)
         {
-            TourRequestStatisticYearlyLanguageService tourRequestStatisticYearlyService = new TourRequestStatisticYearlyLanguageService();
             Toast = "Hidden";
             Statistics.Clear();
             if (SelectedLanguage != null)
@@ -238,15 +247,13 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         }
         private void SearchLocation_Executed(object sender)
         {
-            TourRequestStatisticYearlyLocationService tourRequestStatisticYearlyService = new TourRequestStatisticYearlyLocationService();
-            LocationService locationService = new LocationService();
             StatisticsLocation.Clear();
             if (Country != null && City != null)
             {
                 Location searchedLocation = locationService.GetByCityAndCountry(Country, City);
 
-                if (tourRequestStatisticYearlyService.GetLocationYearStatistic(searchedLocation).Count > 0)
-                    foreach (GuideOneYearRequestStatisticViewModel tourRequest in tourRequestStatisticYearlyService.GetLocationYearStatistic(searchedLocation))
+                if (tourRequestStatisticYearlyLocationervice.GetLocationYearStatistic(searchedLocation).Count > 0)
+                    foreach (GuideOneYearRequestStatisticViewModel tourRequest in tourRequestStatisticYearlyLocationervice.GetLocationYearStatistic(searchedLocation))
                         StatisticsLocation.Add(tourRequest);
                 else
                     ToastLocation = "Visible";
@@ -266,7 +273,6 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         }
         public void EnableCityComboBox_Executed(object sender)
         {
-            LocationService locationService = new LocationService();
             if (Country != null)
             {
                 CitiesByCountry.Clear();
@@ -279,7 +285,6 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         }
         private void MakeListOfLocations()
         {
-            LocationService locationService = new LocationService();
             Countries = new ObservableCollection<string>(locationService.GetAllCountries());
             CitiesByCountry = new ObservableCollection<string>();
             IsComboBoxCityEnabled = false;
@@ -291,7 +296,6 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         }
         private void CreateTourByLocation_Executed(object sender)
         {
-            SuggestedLocationService suggestedLocationService = new SuggestedLocationService();
             AddTourByLocationView addTourByLocationView = new AddTourByLocationView(todayInstances, loggedUser, futureInstances, suggestedLocationService.GetMostWantedLocation());
             Application.Current.Windows.OfType<GuideWindow>().FirstOrDefault().Main.Content = addTourByLocationView;
         }

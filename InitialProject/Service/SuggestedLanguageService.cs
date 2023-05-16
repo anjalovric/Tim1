@@ -7,13 +7,17 @@ namespace InitialProject.Service
 {
     public class SuggestedLanguageService
     {
+        private OrdinaryTourRequestsService ordinaryTourRequestsService;
+        public SuggestedLanguageService() 
+        {
+            ordinaryTourRequestsService=new OrdinaryTourRequestsService();
+        }
         private List<OrdinaryTourRequests> GetRequestsFromLastYear()
         {
             DateTime today=DateTime.Now;
             string yearago=today.Month+"/"+today.Day+"/"+(today.Year-1)+" "+today.ToString().Split(" ")[1]+" "+today.ToString().Split(" ")[2];  
             DateTime yearAgo=Convert.ToDateTime(yearago);
             List<OrdinaryTourRequests> ordinaryTourRequests = new List<OrdinaryTourRequests>();
-            OrdinaryTourRequestsService ordinaryTourRequestsService = new OrdinaryTourRequestsService();
             if(ordinaryTourRequestsService.GetAll().Count > 0)
                 foreach(OrdinaryTourRequests request in ordinaryTourRequestsService.GetAll())
                     if( request.StartDate >= yearAgo)

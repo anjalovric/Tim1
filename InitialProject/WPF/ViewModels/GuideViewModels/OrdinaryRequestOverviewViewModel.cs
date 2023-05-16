@@ -25,6 +25,9 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
 
         private SearchRequestsService searchRequestsService;
         public OrdinaryTourRequests Selected { get; set; }
+        private OrdinaryTourRequestsService ordinaryTourRequestsService;
+        private RequestNotificationService requestNotificationService;
+        private LocationService locationService;
 
         private string country;
         public string Country
@@ -140,7 +143,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         }
         public OrdinaryRequestOverviewViewModel(User user,ObservableCollection<TourInstance> tours,ObservableCollection<TourInstance> futures)
         {
-            MakeListOfLocations();
+            ordinaryTourRequestsService = new OrdinaryTourRequestsService();
             AddLanguages();
             MakeRequestsList();
             loggedUser = user;
@@ -149,7 +152,9 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             MakeCommands();
             Tours = tours;
             Future= futures;
-            RequestNotificationService requestNotificationService = new RequestNotificationService();
+            requestNotificationService = new RequestNotificationService();
+            locationService = new LocationService();
+            MakeListOfLocations();
             requestNotificationService.UpCount();
             SetNews();
             Description = "";
@@ -157,7 +162,6 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         }
         private void SetNews()
         {
-            RequestNotificationService  requestNotificationService = new RequestNotificationService();
             foreach (OrdinaryTourRequests request in Requests)
             {
                 foreach (OrdinaryRequestNotification requestNotification in requestNotificationService.GetAll())
@@ -167,7 +171,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         }
         public void EnableCityComboBox_Executed(object sender)
         {
-            LocationService locationService = new LocationService();
+
             if (Country != null)
             {
                 CitiesByCountry.Clear();
@@ -180,7 +184,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         }
         private void MakeRequestsList()
         {
-            OrdinaryTourRequestsService ordinaryTourRequestsService = new OrdinaryTourRequestsService();
+
             Requests= new ObservableCollection<OrdinaryTourRequests>(ordinaryTourRequestsService.GetOnWaitingRequests());
         }
         private void MakeCommands()
@@ -193,7 +197,6 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         }
         private void MakeListOfLocations()
         {
-            LocationService locationService = new LocationService();
             Countries = new ObservableCollection<string>(locationService.GetAllCountries());
             CitiesByCountry = new ObservableCollection<string>();
             IsComboBoxCityEnabled = false;
@@ -291,7 +294,6 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             Start = Convert.ToDateTime(date);
             End = Convert.ToDateTime(date);
             Requests.Clear();
-            OrdinaryTourRequestsService ordinaryTourRequestsService = new OrdinaryTourRequestsService();
             foreach(OrdinaryTourRequests request in ordinaryTourRequestsService.GetOnWaitingRequests())
                 Requests.Add(request);
         }

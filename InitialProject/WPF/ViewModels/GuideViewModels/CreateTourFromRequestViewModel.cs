@@ -332,7 +332,12 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         public RelayCommand CloceToastAvailability { get; set; }
 
         private OrdinaryTourRequests tourRequests;
-
+        private LocationService locationService;
+        private TourService tourService;
+        private GuideService guideService;
+        private OrdinaryTourRequestsService ordinaryTourRequestsService;
+        private TourImageService tourImageService;
+        private CheckPointService checkPointService;
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -341,6 +346,12 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         }
         public CreateTourFromRequestViewModel(ObservableCollection<TourInstance> todayInstances, User user, ObservableCollection<TourInstance> futureInstances,OrdinaryTourRequests request,ObservableCollection<OrdinaryTourRequests>Requests)
         {
+            locationService = new LocationService();
+            tourService = new TourService();
+            guideService = new GuideService();
+            ordinaryTourRequestsService = new OrdinaryTourRequestsService();  
+            tourImageService = new TourImageService();
+            checkPointService= new CheckPointService();
             TourPoints = new ObservableCollection<CheckPoint>();
             TourImages = new ObservableCollection<TourImage>();
             Instances = new ObservableCollection<TourInstance>();
@@ -386,10 +397,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         }
         private void Confirm_Executed(object sender)
         {
-            LocationService locationService = new LocationService();
             Location newLocation = locationService.GetByCityAndCountry(Country, City);
-            TourService tourService = new TourService();
-
             Tour newTour = new Tour(namet, MaxGuests, Duration, newLocation, description, LanguageT);
             Tour savedTour = tourService.Save(newTour);
             tourId = savedTour.Id;
@@ -399,8 +407,6 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         }
         private void SendNotification()
         {
-            GuideService guideService = new GuideService();
-            OrdinaryTourRequestsService ordinaryTourRequestsService = new OrdinaryTourRequestsService();
             TourRequests.Remove(tourRequests);
             tourRequests.Status = Status.ACCEPTED;
             tourRequests.GuideId = guideService.GetByUsername(loggedInUser.Username).Id;
@@ -410,12 +416,9 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         }
         private void SaveInputs(Tour savedTour)
         {
-            CheckPointService checkPointService = new CheckPointService();
             checkPointService.SaveCheckPoints(tourId, TourPoints);
-            TourImageService tourImageService = new TourImageService();
             tourImageService.SaveTourImages(tourId, images);
-            TourInstanceService tourInstanceService = new TourInstanceService();
-            List<TourInstance>Saved=tourInstanceService.SaveInstances(savedTour, loggedInUser, FutureInstances, TodayInstances, Instances, images);
+            List<TourInstance>Saved= new TourInstanceService().SaveInstances(savedTour, loggedInUser, FutureInstances, TodayInstances, Instances, images);
             savednsatnceId = Saved[0].Id;
         }
         private void AddTourImage_Executed(object sender)
@@ -440,7 +443,6 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         }
         private void OKDateTime_Executed(object sender)
         {
-            GuideService guideService = new GuideService();
             newInstance = new TourInstance();
             
                 string date = Date.ToString().Split(" ")[0] + " " + InstanceStartDate.ToString().Split(" ")[1] + " " + InstanceStartDate.ToString().Split(" ")[2];
@@ -484,7 +486,6 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         {
             if (NameT != "" && NameT.Length > 1)
             {
-                CheckPointService checkPointService = new CheckPointService();
                 CheckPoint newCheckPoint = new CheckPoint(NameT, false, -1, -1);
                 TourPoints.Add(newCheckPoint);
                 NameT = "";
@@ -537,7 +538,6 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         }
         private void DeleteImage_Executed(object sender)
         {
-            TourImageService tourImageService = new TourImageService();
             if (images.Count != 0)
             {
                 for (int i = 0; i < images.Count; i++)

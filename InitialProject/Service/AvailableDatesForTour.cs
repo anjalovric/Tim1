@@ -6,11 +6,16 @@ namespace InitialProject.Service
 {
     public class AvailableDatesForTour
     {
-        public AvailableDatesForTour() {}
+        private TourInstanceService tourInstanceService;
+        private TourService tourService;
+        public AvailableDatesForTour() 
+        {
+            tourInstanceService=new TourInstanceService();
+            tourService=new TourService();
+        }
         public List<TourInstance> ScheduleTourInstances(TourInstance newinstance,DateTime StartDate,DateTime EndDate,double duration)
         {
             List <TourInstance> overlayTourInstances = new List<TourInstance>();
-            TourInstanceService tourInstanceService= new TourInstanceService();
             TourInstance newlTourInstance = newinstance;
             if (newlTourInstance.StartDate.AddHours(duration) <= EndDate)
             {
@@ -40,7 +45,6 @@ namespace InitialProject.Service
         }
         private List<TourInstance> SetTours(List<TourInstance> requests) 
         {
-            TourService tourService = new TourService();
             foreach(TourInstance instance in requests)
             {
                 foreach(Tour tour in tourService.GetAll())

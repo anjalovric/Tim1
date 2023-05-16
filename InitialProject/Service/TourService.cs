@@ -1,20 +1,16 @@
 ﻿using InitialProject.Domain;
 using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Model;
-using InitialProject.Serializer;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 
 namespace InitialProject.Service
 {
     public class TourService
     {
         private ITourRepository tourRepository;
-        private List<Tour> tours;
         public TourService()
         {
             tourRepository = Injector.CreateInstance<ITourRepository>();
-            tours = GetAll();
         }
         public Tour Save(Tour tour)
         {          
@@ -28,7 +24,7 @@ namespace InitialProject.Service
         {
             foreach (TourInstance tourInstance in tourInstances)
             {
-                foreach (Tour tour in tours)
+                foreach (Tour tour in GetAll())
                 {
                     if (tour.Id == tourInstance.Tour.Id)
                     {
