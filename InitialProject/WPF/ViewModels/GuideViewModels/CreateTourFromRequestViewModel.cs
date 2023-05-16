@@ -395,9 +395,9 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             tourId = savedTour.Id;
             SaveInputs(savedTour);
             Toast = "Visible";
-            UpdateRequests();
+            SendNotification();
         }
-        private void UpdateRequests()
+        private void SendNotification()
         {
             GuideService guideService = new GuideService();
             OrdinaryTourRequestsService ordinaryTourRequestsService = new OrdinaryTourRequestsService();
@@ -411,9 +411,9 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         private void SaveInputs(Tour savedTour)
         {
             CheckPointService checkPointService = new CheckPointService();
-            checkPointService.UpdateCheckPoints(tourId, TourPoints);
+            checkPointService.SaveCheckPoints(tourId, TourPoints);
             TourImageService tourImageService = new TourImageService();
-            tourImageService.AddImages(tourId, images);
+            tourImageService.SaveTourImages(tourId, images);
             TourInstanceService tourInstanceService = new TourInstanceService();
             List<TourInstance>Saved=tourInstanceService.SaveInstances(savedTour, loggedInUser, FutureInstances, TodayInstances, Instances, images);
             savednsatnceId = Saved[0].Id;
@@ -450,7 +450,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
                 newInstance.CoverImage = "";
             if (IsTimeValid(newInstance))
             {
-                Instances.Add(newInstance);
+                AddTourInsatnceToList(newInstance);
                 ToastAvailability = "Hidden";
                 AddEnabled = false;
                 DeleteEnabled = false;
@@ -459,10 +459,14 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             else
                 ToastAvailability = "Visible";
         }
+        private void AddTourInsatnceToList(TourInstance newInstance)
+        {
+            Instances.Add(newInstance);
+        }
         private bool IsTimeValid(TourInstance instance)
         {
             AvailableDatesForTour availableDatesForTour = new AvailableDatesForTour();
-            if (Duration>=0.1 && availableDatesForTour.ScheduledInstances(instance,tourRequests.StartDate,tourRequests.EndDate,Duration).Count>0)
+            if (Duration>=0.1 && availableDatesForTour.ScheduleTourInstances(instance,tourRequests.StartDate,tourRequests.EndDate,Duration).Count>0)
                 return false;
             return true; 
         }
