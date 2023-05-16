@@ -14,11 +14,12 @@ namespace InitialProject.Service
     public class OrdinaryTourRequestsService
     {
         private IOrdinaryTourRequestsRepository requestRepository;
-       
+        private LocationService locationService;
+
         public OrdinaryTourRequestsService()
         {
             requestRepository = Injector.CreateInstance<IOrdinaryTourRequestsRepository>();
-            
+            locationService = new LocationService();
         }
         public OrdinaryTourRequests Save(OrdinaryTourRequests request)
         {
@@ -43,9 +44,8 @@ namespace InitialProject.Service
             SetLocations(requests);
             return requests;
         }
-        private void SetLocations(List<OrdinaryTourRequests> requests) 
-        {
-            LocationService locationService = new LocationService();
+        private void SetLocations(List<OrdinaryTourRequests> requests)
+        { 
             foreach(OrdinaryTourRequests request in requests)
             {
                 foreach(Location location in locationService.GetAll())

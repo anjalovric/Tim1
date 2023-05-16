@@ -14,9 +14,10 @@ namespace InitialProject.Service
     public class ReviewNotificationService
     {
         private IReviewNotificationRepository reviewNotificationRepository = Injector.CreateInstance<IReviewNotificationRepository>();
-
+        private GuideService guideService;
         public ReviewNotificationService()
         {
+            guideService = new GuideService();
         }
             public List<GuideAndTourReviewNotification> GetAll()
             {
@@ -39,7 +40,6 @@ namespace InitialProject.Service
             }
              public int GetNewReviewCount(User user)
             {
-                GuideService guideService = new GuideService();
                 int guideId=guideService.GetByUsername(user.Username).Id;
                 int count = 0;
                 foreach(GuideAndTourReviewNotification reviewNotification in GetAll())
@@ -49,7 +49,6 @@ namespace InitialProject.Service
             }
             public void UpCount(User user)
             {
-                GuideService guideService = new GuideService();
                 int guideId = guideService.GetByUsername(user.Username).Id;
                 int count = 0;
                 foreach (GuideAndTourReviewNotification reviewNotification in GetAll())

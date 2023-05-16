@@ -1,4 +1,6 @@
-﻿using InitialProject.Domain.Model;
+﻿using InitialProject.Domain;
+using InitialProject.Domain.Model;
+using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Model;
 using MathNet.Numerics;
 using System;
@@ -11,6 +13,11 @@ namespace InitialProject.Service
 {
     public class YearlyRequestStatisticsService
     {
+        OrdinaryTourRequestsService ordinaryTourRequestsService;
+        public YearlyRequestStatisticsService()
+        {
+            ordinaryTourRequestsService = new OrdinaryTourRequestsService();
+        }
         public double AverageNumberOfPeopleInAcceptedRequests(int year, Guest2 Guest2)
         {
             int counter = 0;
@@ -63,7 +70,6 @@ namespace InitialProject.Service
         public List<OrdinaryTourRequests> GetRequestsForChosenYear(int year, Guest2 guest)
         {
             List<OrdinaryTourRequests> ordinaryTours = new List<OrdinaryTourRequests>();
-            OrdinaryTourRequestsService ordinaryTourRequestsService = new OrdinaryTourRequestsService();
             foreach (OrdinaryTourRequests request in ordinaryTourRequestsService.GetByGuestId(guest.Id))
             {
                 if (request.StartDate.Year == year)
