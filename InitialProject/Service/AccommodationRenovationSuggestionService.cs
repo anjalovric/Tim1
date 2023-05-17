@@ -31,12 +31,10 @@ namespace InitialProject.Service
 
         public List<AccommodationRenovationSuggestion> GetByAccommodation(Accommodation accommodation)
         {
-            List< AccommodationRenovationSuggestion> suggestions = new List<AccommodationRenovationSuggestion>(renovationSuggestionRepository.GetAll());
-            List<AccommodationReservation> storedReservations = accommodationReservationService.GetAll();
-            foreach (AccommodationRenovationSuggestion suggestion in suggestions)
-                suggestion.Reservation = storedReservations.Find(n => n.Id == suggestion.Reservation.Id);
+            List<AccommodationRenovationSuggestion> suggestions = new List<AccommodationRenovationSuggestion>(renovationSuggestionRepository.GetAll());
+            SetReservations(suggestions);
             List<AccommodationRenovationSuggestion> suggestionsByAccommodation = new List<AccommodationRenovationSuggestion>();
-            foreach(var suggestion in suggestions)
+            foreach (var suggestion in suggestions)
             {
                 if (suggestion.Reservation.Accommodation.Id == accommodation.Id)
                     suggestionsByAccommodation.Add(suggestion);
@@ -44,7 +42,14 @@ namespace InitialProject.Service
             return suggestionsByAccommodation;
         }
 
-        
+        private void SetReservations(List<AccommodationRenovationSuggestion> suggestions)
+        {
+            List<AccommodationReservation> storedReservations = accommodationReservationService.GetAll();
+            foreach (AccommodationRenovationSuggestion suggestion in suggestions)
+                suggestion.Reservation = storedReservations.Find(n => n.Id == suggestion.Reservation.Id);
+        }
+
+
         public void Add(AccommodationRenovationSuggestion suggestion)
         {
             renovationSuggestionRepository.Add(suggestion);
