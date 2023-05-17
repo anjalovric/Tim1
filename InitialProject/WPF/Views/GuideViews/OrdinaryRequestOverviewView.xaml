@@ -58,7 +58,7 @@
             <Label Grid.Column="1" Content="{ns:Loc City}" Style="{DynamicResource StatisticLabel  }" HorizontalAlignment="Left" Margin="6,13,0,0" Grid.Row="1" Width="76" VerticalAlignment="Top"/>
             <Label Grid.Column="2" Height="42" Content="{ns:Loc Capacity}" Style="{DynamicResource StatisticLabel}" HorizontalAlignment="Left" Margin="42,32,0,0" VerticalAlignment="Top" Width="97" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
             <Label Content="{ns:Loc Language}" Style="{DynamicResource StatisticLabel}" Grid.Column="2" Height="35" Grid.Row="1" Width="97" HorizontalAlignment="Left" Margin="42,15,0,0" Grid.ColumnSpan="2" VerticalAlignment="Top"/>
-            <tk:IntegerUpDown Grid.Column="3" AllowTextInput="True" Text="{Binding Capacity}" Grid.Row="0" Height="30" Minimum="1" VerticalAlignment="Bottom" Width="122" HorizontalAlignment="Right" Style="{DynamicResource i}"/>
+            <tk:IntegerUpDown Grid.Column="3" AllowTextInput="True" Text="{Binding Capacity}" Grid.Row="0" Height="30" Minimum="0" VerticalAlignment="Bottom" Width="122" HorizontalAlignment="Right" Style="{DynamicResource i}"/>
             <ComboBox Text="{Binding Language}" Grid.Column="3" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" ItemsSource="{Binding Languages}" SelectedItem="{Binding Language,UpdateSourceTrigger=PropertyChanged}"  Style="{DynamicResource ComboBoxStyle}" Height="30" HorizontalAlignment="right" VerticalAlignment="Center" Grid.Row="1"  Width="111"/>
             <DatePicker Height="30"   Grid.Column="5"  Text="{Binding Start,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"   Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="126" >
             </DatePicker>
