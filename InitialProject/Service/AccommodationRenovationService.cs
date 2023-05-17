@@ -14,9 +14,11 @@ namespace InitialProject.Service
     {
         private IAccommodationRenovationRepository accommodationRenovationRepository = Injector.CreateInstance<IAccommodationRenovationRepository>();
         private List<AccommodationRenovation> renovations;
+        private OwnerNotificationsService notificationService;
         public AccommodationRenovationService()
         {
             renovations = accommodationRenovationRepository.GetAll();
+            notificationService = new OwnerNotificationsService();
             SetAccommodations();
             SetCanBeCancelled();
             SetIsInProgress();
@@ -58,7 +60,6 @@ namespace InitialProject.Service
         public void Add(AccommodationRenovation renovation)
         {
             accommodationRenovationRepository.Add(renovation);
-            OwnerNotificationsService notificationService = new OwnerNotificationsService();
             notificationService.Add(OwnerNotificationType.RENOVATION_SCHEDULED, renovation.Accommodation.Owner);
         }
 
