@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
-        Title="TourDetails" Height="600" Width="668" d:Height="600" d:Width="668" Background="Transparent" AllowsTransparency="True" WindowStartupLocation="CenterScreen" WindowStyle="None">
+        Title="TourDetails" Height="650" Width="750" d:Height="650" d:Width="750" Background="Transparent" AllowsTransparency="True" WindowStartupLocation="CenterScreen" WindowStyle="None">
     <Window.Resources>
         <Style x:Key="button" TargetType="Button">
             <Setter Property="FontSize" Value="14"/>
@@ -41,30 +41,32 @@
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="FontWeight" Value="DemiBold"/>
             <Setter Property="VerticalAlignment" Value="Top"/>
-            <Setter Property="FontSize" Value="15"/>
-            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="Foreground" Value="Black"/>
         </Style>
     </Window.Resources>
 
 
 
     <Grid>
-    
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.Background>
             <LinearGradientBrush StartPoint="0,1" EndPoint="1,1">
-                <GradientStop Color="#6d9773" Offset="0"/>
+                <GradientStop Color="#FFD4979B" Offset="0"/>
 
-                <GradientStop Color="#FF96BD9B" Offset="0.3"/>
-                <GradientStop Color="#FF96BD9B" Offset="0.5"/>
-                <GradientStop Color="#6d9773" Offset="1"/>
+                <GradientStop Color="#FFD2AAAD" Offset="0.3"/>
+                <GradientStop Color="#FFD2AAAD" Offset="0.5"/>
+                <GradientStop Color="#FFD2AAAD" Offset="0.7"/>
+                <GradientStop Color="#FFD4979B" Offset="1"/>
             </LinearGradientBrush>
         </Grid.Background>
+
         <Image x:Name="tourImage" Stretch="Fill"  Source="{Binding ImageSource, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Left" Grid.Column="0" Width="301" Margin="28,154,0,272"/>
-        <Button HorizontalAlignment="Left" Background="Transparent" BorderBrush="Transparent" VerticalAlignment="Top"  Height="34" Width="34" FontWeight="Bold" FontSize="18" Command="{Binding PreviousPhotoCommand}" Margin="0,218,0,0">
+        <Button HorizontalAlignment="Left" Background="Transparent" BorderBrush="Transparent" VerticalAlignment="Top"  Height="34" Width="34" FontWeight="Bold" FontSize="18" Command="{Binding PreviousPhotoCommand}" Margin="0,255,0,0">
             <Grid Background="Transparent" Width="34" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="16*"/>
@@ -77,7 +79,7 @@
             </Grid>
 
         </Button>
-        <Button HorizontalAlignment="Left" Background="Transparent" BorderBrush="Transparent" VerticalAlignment="Top"  Height="34" Width="34" FontWeight="Bold" FontSize="18" Command="{Binding NextPhotoCommand}" Margin="317,218,0,0" Grid.ColumnSpan="2">
+        <Button HorizontalAlignment="Left" Background="Transparent" BorderBrush="Transparent" VerticalAlignment="Top"  Height="34" Width="34" FontWeight="Bold" FontSize="18" Command="{Binding NextPhotoCommand}" Margin="317,255,0,0" Grid.ColumnSpan="2">
             <Grid Background="Transparent" Width="34" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="16*"/>
@@ -94,16 +96,25 @@
         <Label Content="Description:" Margin="28,415,0,0" RenderTransformOrigin="0.044,0.541" Style="{StaticResource LabelStyle}"/>
         <Label Content="Photos" Margin="28,97,0,0" Style="{StaticResource LabelStyle}"/>
         <Label Content="DETAILS" FontSize="30" FontFamily="Baskerville Old Face" Margin="28,15,0,0" Style="{StaticResource LabelStyle}" Width="172"/>
-        <TextBlock HorizontalAlignment="Left" Margin="32,450,0,0" FontSize="15" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Top" Height="89" Width="592" Text="{Binding Path=Selected.Tour.Description,UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="2"/>
-        <Label Content="Location:" Margin="48,97,0,0" Grid.Column="1" Width="74" Style="{StaticResource LabelStyle}"/>
-        <Label Content="Duration:" Margin="48,176.5,0,0" Grid.Column="1" Width="79" Style="{StaticResource LabelStyle}"/>
-        <Label Content="Language:" Margin="48,256,0,0" Grid.Column="1" Width="92" Style="{StaticResource LabelStyle}"/>
-        <Label Content="Capacity:" Margin="48,415,0,0" Grid.Column="1" Width="74" Height="52" Style="{StaticResource LabelStyle}"/>
-        <TextBlock Margin="143,102,10,447"  FontSize="15" Foreground="White" RenderTransformOrigin="0.5,0.5" Text="{Binding Path=Selected.Tour.Location,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1"/>
-        <TextBlock Margin="143,182,10,376" FontSize="15" Foreground="White" RenderTransformOrigin="0.5,0.5" Text="{Binding Path=Selected.Tour.Duration,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1"/>
-        <TextBlock Margin="143,263,10,300" FontSize="15" Foreground="White" RenderTransformOrigin="0.5,0.5" Text="{Binding Path=Selected.Tour.Language,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1"/>
-        <TextBlock Margin="143,420,10,145" FontSize="15" Foreground="White" RenderTransformOrigin="0.5,0.5" Text="{Binding Path=Selected.Tour.MaxGuests,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1"/>
-        <Button HorizontalAlignment="Left" VerticalAlignment="Top" Height="34" Width="95" FontWeight="Bold" Margin="229,544,0,0" FontSize="18" Grid.Column="1" Command="{Binding CancelCommand}">
+        <TextBlock HorizontalAlignment="Left" Margin="32,450,0,0" FontSize="20" FontWeight="DemiBold" TextWrapping="Wrap" VerticalAlignment="Top" Height="159" Width="292" Text="{Binding Path=Selected.Tour.Description,UpdateSourceTrigger=PropertyChanged}"/>
+        <Label Content="Location:" Margin="48,97,0,0" Grid.Column="1" Width="95" Style="{StaticResource LabelStyle}"/>
+        <Label Content="Duration:" Margin="48,176,0,0" Grid.Column="1" Width="119" Style="{StaticResource LabelStyle}"/>
+        <Label Content="Language:" Margin="48,256,0,0" Grid.Column="1" Width="119" Style="{StaticResource LabelStyle}"/>
+        <Label Content="Capacity:" Margin="48,415,0,0" Grid.Column="1" Width="95" Height="52" Style="{StaticResource LabelStyle}"/>
+        <TextBlock Margin="158,102,10,495"  FontSize="20" FontWeight="DemiBold" RenderTransformOrigin="0.5,0.5" Text="{Binding Path=Selected.Tour.Location,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1"/>
+        <TextBlock Margin="158,182,10,415" FontSize="20" FontWeight="DemiBold" RenderTransformOrigin="0.5,0.5" Text="{Binding Path=Selected.Tour.Duration,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1"/>
+        <TextBlock Margin="158,261,10,335" FontSize="20" FontWeight="DemiBold" RenderTransformOrigin="0.5,0.5" Text="{Binding Path=Selected.Tour.Language,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1"/>
+        <TextBlock Margin="158,420,10,173" FontSize="20" FontWeight="DemiBold" RenderTransformOrigin="0.5,0.5" Text="{Binding Path=Selected.Tour.MaxGuests,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleX="-0.659"/>
+                    <RotateTransform/>
+                    <TranslateTransform X="-0.489"/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
+        <Button HorizontalAlignment="Left" VerticalAlignment="Top" Background="White" Height="34" Width="100" FontWeight="Bold" Margin="261,606,0,0" FontSize="18" Grid.Column="1" Command="{Binding CancelCommand}">
             <Grid Background="White" Width="90" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="16*"/>
@@ -114,11 +125,11 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <Image Source="/Resources/Images/close.png" VerticalAlignment="Top" HorizontalAlignment="Left" Width="20" Height="20" RenderTransformOrigin="0.5,0.5" Margin="0,6,0,0" Grid.RowSpan="2"/>
-                <TextBlock Background="White" Foreground="Black" Text="Close" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" Width="68" Height="29" Margin="25,3,0,0" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
+                <TextBlock Background="White" Foreground="Black" Text="Close" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" HorizontalAlignment="Left" Width="68" Height="28" Margin="25,2,0,0" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
             </Grid>
         </Button>
-        <Label Content="Start date:" Margin="48,335.5,0,0" Grid.Column="1" Width="90" Height="52" Style="{StaticResource LabelStyle}"/>
-        <TextBlock Margin="143,344,10,221" FontSize="15" Foreground="White" RenderTransformOrigin="0.5,0.5" Text="{Binding Selected.StartDate, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1"/>
+        <Label Content="Start date:" Margin="48,336,0,0" Grid.Column="1" Width="119" Height="52" Style="{StaticResource LabelStyle}"/>
+        <TextBlock Margin="158,340,0,251" FontSize="20" FontWeight="DemiBold" RenderTransformOrigin="0.5,0.5" Text="{Binding Selected.StartDate, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1"/>
 
 
     </Grid>

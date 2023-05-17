@@ -7,7 +7,12 @@ namespace InitialProject.Service
 {
     public class TourRequestStatisticMonthlyLocationService
     {
-        public TourRequestStatisticMonthlyLocationService() { }
+        private OrdinaryTourRequestsService ordinaryTourRequestsService;
+
+        public TourRequestStatisticMonthlyLocationService() 
+        {
+            ordinaryTourRequestsService=new OrdinaryTourRequestsService();
+        }
 
         private List<int> GetMonthsForLocation(Location location, int year)
         {
@@ -45,7 +50,6 @@ namespace InitialProject.Service
         }
         private List<OrdinaryTourRequests> GetByYearAndLocation(Location location, int year)
         {
-            OrdinaryTourRequestsService ordinaryTourRequestsService = new OrdinaryTourRequestsService();
             List<OrdinaryTourRequests> ordinaryTourRequests = new List<OrdinaryTourRequests>();
             foreach (OrdinaryTourRequests requests in ordinaryTourRequestsService.GetAll())
                 if (requests.Location.Id == location.Id && requests.StartDate.Year == year)

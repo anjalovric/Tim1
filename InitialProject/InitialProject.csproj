@@ -190,6 +190,7 @@
     <None Remove="Resources\Images\ren.png" />
     <None Remove="Resources\Images\renov.png" />
     <None Remove="Resources\Images\renovate.png" />
+    <None Remove="Resources\Images\renovate1.png" />
 
     <None Remove="Resources\Images\renovation %281%29.png" />
     <None Remove="Resources\Images\renovation.png" />
@@ -215,6 +216,7 @@
     <None Remove="Resources\Images\star1.png" />
     <None Remove="Resources\Images\stars2.jpeg" />
     <None Remove="Resources\Images\suggestion.png" />
+    <None Remove="Resources\Images\super11.png" />
     <None Remove="Resources\Images\superOwner.png" />
     <None Remove="Resources\Images\tasks.png" />
 
@@ -792,7 +794,7 @@
     <Resource Include="Resources\Images\renov.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Resources\Images\renovate.png">
+    <Resource Include="Resources\Images\renovate1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
 
@@ -837,6 +839,9 @@
     </Resource>
     <Resource Include="Resources\Images\stars2.jpeg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\super11.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\superOwner.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

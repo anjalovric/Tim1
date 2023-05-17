@@ -13,16 +13,24 @@ namespace InitialProject.Service
 {
     public class SuperGuestTitleService
     {
-        private List<SuperGuestTitle> superGuests;
         private ISuperGuestTitleRepository superGuestTitleRepository = Injector.CreateInstance<ISuperGuestTitleRepository>();
+        Guest1Service guest1Service;
+        AccommodationReservationService accommodationReservationService;
         public SuperGuestTitleService()
         {
-            MakeSuperGuests();
+            guest1Service = new Guest1Service();
+            accommodationReservationService = new AccommodationReservationService();
         }
-        private void MakeSuperGuests()
+        private List<SuperGuestTitle> GetAllSuperGuests()
         {
-            superGuests = new List<SuperGuestTitle>(superGuestTitleRepository.GetAll());
-            SetGuests();
+            List<SuperGuestTitle> superGuests = new List<SuperGuestTitle>(superGuestTitleRepository.GetAll());
+            foreach (SuperGuestTitle superGuest in superGuests)
+            {
+                Guest1 guest = guest1Service.GetById(superGuest.Guest.Id);
+                if (guest != null)
+                    superGuest.Guest = guest;
+            }
+            return superGuests;
         }       
         public void Add(SuperGuestTitle superGuestTitle)
         {
@@ -30,32 +38,19 @@ namespace InitialProject.Service
         }
         public bool IsAlreadySuperGuest(Guest1 guest1)
         {
-             return superGuestTitleRepository.GetAll().Find(n => n.Guest.Id == guest1.Id)!=null;
+             return superGuestTitleRepository.GetByGuestId(guest1.Id)!=null;
         }
-        public void SetGuests()
-        {
-            Guest1Service guest1Service = new Guest1Service();
-            List<Guest1> allGuest = guest1Service.GetAll();
-            foreach (SuperGuestTitle superGuest in superGuests)
-            {
-                Guest1 guest = allGuest.Find(n => n.Id == superGuest.Guest.Id);
-                if (guest != null)
-                    superGuest.Guest = guest;
-            }
-        }
+       
         public SuperGuestTitle MakeNewSuperGuest(Guest1 guest1)
         {
-            AccommodationReservationService accommodationReservationService = new AccommodationReservationService();
             DateTime activationDate = accommodationReservationService.GetNewSuperGuestActivationDateIfPossible(guest1);
             if(activationDate!=DateTime.MinValue && !IsAlreadySuperGuest(guest1))
             {
                 SuperGuestTitle newSuperGuestTitle = new SuperGuestTitle(guest1, 5, activationDate);
-                Add(newSuperGuestTitle);
-                MakeSuperGuests(); 
-                return newSuperGuestTitle;
+                Add(newSuperGuestTitle); 
+                return newSuperGuestTitle;  
             }
-            MakeSuperGuests();
-            return superGuestTitleRepository.GetAll().Find(n => n.Guest.Id == guest1.Id);
+            return superGuestTitleRepository.GetByGuestId(guest1.Id);
         }
         public void Delete(SuperGuestTitle title)
         {
@@ -63,8 +58,7 @@ namespace InitialProject.Service
         }
         public SuperGuestTitle ProlongSuperGuestTitle(Guest1 guest1)
         {
-            SuperGuestTitle superGuest = superGuests.Find(n => n.Guest.Id == guest1.Id);
-            AccommodationReservationService accommodationReservationService=new AccommodationReservationService();
+            SuperGuestTitle superGuest = GetAllSuperGuests().Find(n => n.Guest.Id == guest1.Id);
             DateTime newActivationDate = accommodationReservationService.GetProlongActivationDate(guest1, superGuest.ActivationDate);
             if (newActivationDate != DateTime.MinValue) //can prolog title
             {
@@ -73,21 +67,27 @@ namespace InitialProject.Service
             } 
             else if(DateTime.Now > superGuest.ActivationDate.AddYears(1))  //1 year has passed
                 Delete(superGuest);     //delete old title
-            MakeSuperGuests();
-            return superGuests.Find(n=>n.Guest.Id == guest1.Id);    //new superguest or null
+
+            return GetAllSuperGuests().Find(n=>n.Guest.Id == guest1.Id);    //new superguest or null
         }        
-        public void DeleteTitleIfManyYearsPassed(Guest1 guest1)
+        public void DeleteTitleIfNeeded(Guest1 guest1)
         {
-            if(superGuests.Find(n => n.Guest.Id == guest1.Id)!=null)
-                if (DateTime.Now > superGuests.Find(n => n.Guest.Id == guest1.Id).ActivationDate.AddYears(2))
-                {
-                    Delete(superGuests.Find(n => n.Guest.Id == guest1.Id));
-                    MakeSuperGuests();
-                }
+            if(ShouldDelete(guest1))
+            {
+                Delete(superGuestTitleRepository.GetByGuestId(guest1.Id));
+
+            }
+                    
+        }
+
+        private bool ShouldDelete(Guest1 guest1)
+        {
+            SuperGuestTitle foundedSuperGuest = superGuestTitleRepository.GetByGuestId(guest1.Id);
+            return foundedSuperGuest != null && DateTime.Now > foundedSuperGuest.ActivationDate.AddYears(2);
         }
         public void DecrementPoints(Guest1 guest1)
         {
-            SuperGuestTitle title = superGuests.Find(n => n.Guest.Id == guest1.Id);
+            SuperGuestTitle title = superGuestTitleRepository.GetByGuestId(guest1.Id);
             if (title!=null)
             {
                 if(title.AvailablePoints>0)

@@ -16,31 +16,31 @@ namespace InitialProject.Service
 {
     public class NewTourNotificationService
     {
-        private INewTourNotificationRepository notificationRepository = Injector.CreateInstance<INewTourNotificationRepository>();
+        private INewTourNotificationRepository newTourNotificationRepository = Injector.CreateInstance<INewTourNotificationRepository>();
         public NewTourNotificationService()
         {
         }
 
         public void Save(NewTourNotification notification)
         {
-            notificationRepository.Save(notification);
+            newTourNotificationRepository.Save(notification);
         }
 
         public void Delete(NewTourNotification notification)
         {
-            notificationRepository.Delete(notification);
+            newTourNotificationRepository.Delete(notification);
         }
         public List<NewTourNotification> GetAll()
         {
-            return notificationRepository.GetAll();
+            return newTourNotificationRepository.GetAll();
         }
-        public ObservableCollection<NewTourNotification> GetByGuestId(int id)
+        public List<NewTourNotification> GetByGuestId(int id)
         {
-            return notificationRepository.GetByGuestId(id);
+            return newTourNotificationRepository.GetByGuestId(id);
         }
         public void Update(NewTourNotification notification)
         {
-            notificationRepository.Update(notification);
+            newTourNotificationRepository.Update(notification);
         }
     }
 }

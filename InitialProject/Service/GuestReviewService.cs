@@ -11,8 +11,10 @@ namespace InitialProject.Service
     {
         private IGuestReviewRepository guestReviewRepository = Injector.CreateInstance<IGuestReviewRepository>();
         private List<GuestReview> guestReviews;
+        OwnerReviewService ownerReviewService;
         public GuestReviewService()
         {
+            ownerReviewService = new OwnerReviewService();
             guestReviews = new List<GuestReview>(guestReviewRepository.GetAll());
             SetReservations();
         }
@@ -60,7 +62,6 @@ namespace InitialProject.Service
         }
         private bool IsReviewForDisplay(AccommodationReservation reservationToReview)
         {
-            OwnerReviewService ownerReviewService = new OwnerReviewService();
             bool isOwnerReviewed = ownerReviewService.HasReview(reservationToReview);
             bool fiveDaysPassed = (DateTime.Now.Date - reservationToReview.Departure.Date).TotalDays > 5;
             return isOwnerReviewed || fiveDaysPassed;

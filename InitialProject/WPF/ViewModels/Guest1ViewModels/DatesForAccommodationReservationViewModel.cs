@@ -35,7 +35,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         }
         public RelayCommand ChooseDateCommand { get; set; }
         public RelayCommand BackCommand { get; set; }
-
+        private SuperGuestTitleService superGuestTitleService;
         public DatesForAccommodationReservationViewModel(Guest1 guest1, Accommodation currentAccommodation, List<AvailableDatesForAccommodation> availableDates)
         {
             this.guest1 = guest1;
@@ -44,6 +44,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             availableDatesForAccommodations = new ObservableCollection<AvailableDatesForAccommodation>(availableDates);
             ChooseDateCommand = new RelayCommand(ChooseDate_Executed, CanExecute);
             BackCommand = new RelayCommand(Back_Executed, CanExecute);
+            superGuestTitleService = new SuperGuestTitleService();
         }
         private void Back_Executed(object sender)
         {
@@ -86,7 +87,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         }
         private void DecrementSuperGuestPoints()
         {
-            SuperGuestTitleService superGuestTitleService = new SuperGuestTitleService();
             superGuestTitleService.DecrementPoints(guest1);
         }
         public event PropertyChangedEventHandler PropertyChanged;

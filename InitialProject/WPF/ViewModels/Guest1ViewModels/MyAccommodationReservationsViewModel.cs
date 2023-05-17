@@ -18,6 +18,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 {
     public class MyAccommodationReservationsViewModel : INotifyPropertyChanged
     {
+        public Func<double, string> YAxisLabelFormatter => value => value.ToString("N1");
         private Guest1 guest1;
         private DateTime currentDate;
         private AccommodationReservationService accommodationReservationService;
@@ -101,6 +102,11 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                 Labels.Add(lastYear.ToString("MMM").ToUpper());
                 lastYear = lastYear.AddMonths(1);
             }
+            SetSeriesCollection(values);
+        }
+
+        private void SetSeriesCollection(List<int> values)
+        {
             SeriesCollection = new SeriesCollection();
             ColumnSeries columnSeries = new ColumnSeries();
             columnSeries.Values = new ChartValues<int>();
@@ -112,6 +118,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             }
             SeriesCollection.Add(columnSeries);
         }
+
         private void InitializePage()
         {
             CompletedReservations = new ObservableCollection<AccommodationReservation>(accommodationReservationService.GetCompletedReservations(guest1));

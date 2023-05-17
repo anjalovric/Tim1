@@ -388,9 +388,9 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         private void SaveInputs(Tour savedTour)
         {
             CheckPointService checkPointService = new CheckPointService();
-            checkPointService.UpdateCheckPoints(tourId, TourPoints);
+            checkPointService.SaveCheckPoints(tourId, TourPoints);
             TourImageService tourImageService = new TourImageService();
-            tourImageService.AddImages(tourId, images);
+            tourImageService.SaveTourImages(tourId, images);
             TourInstanceService tourInstanceService = new TourInstanceService();
             tourInstanceService.SaveInstances(savedTour, loggedInUser, FutureInstances, TodayInstances, Instances, images);
         }
@@ -463,7 +463,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         private bool IsGuideAvailable(TourInstance instance)
         {
             AvailableDatesForTour availableDatesForTour = new AvailableDatesForTour();
-            if (Duration >= 0.1 && availableDatesForTour.ScheduledInstances(instance, instance.StartDate, instance.StartDate.AddHours(Duration), Duration).Count > 0)
+            if (Duration >= 0.1 && availableDatesForTour.ScheduleTourInstances(instance, instance.StartDate, instance.StartDate.AddHours(Duration), Duration).Count > 0)
             {
                 IsAvailable = "Visible";
                 return false;

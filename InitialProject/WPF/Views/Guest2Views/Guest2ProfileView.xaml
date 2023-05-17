@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:InitialProject.WPF.Views.Guest2Views"
+             xmlns:viewmodel="clr-namespace:InitialProject.WPF.ViewModels.Guest2ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="668" Width="668" Height="600">
     <UserControl.Resources>

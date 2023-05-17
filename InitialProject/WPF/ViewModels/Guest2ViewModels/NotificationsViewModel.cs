@@ -11,6 +11,8 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows;
 using InitialProject.Repository;
+using Org.BouncyCastle.Asn1.Ocsp;
+using System.Security.Cryptography.Xml;
 
 namespace InitialProject.WPF.ViewModels.Guest2ViewModels
 {
@@ -18,12 +20,13 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
     {
         public ObservableCollection<NewTourNotification> Notifications { get; set; }
         private NewTourNotificationService notificationService;
-        private OrdinaryTourRequestsService ordinaryTourRequests;
+        private OrdinaryTourRequestsService ordinaryTourRequestsService;
         private List<OrdinaryTourRequests> OrdinaryTourRequests;
         private AlertGuest2Service alertGuest2Service;
         private List<AlertGuest2> Alerts;
         private TourInstanceService tourInstanceService;
         public List<TourInstance> TourInstances;
+        public TourService tourService;
         private Guest2 guest2;
         public RelayCommand ViewCommand { get; set; }
         public RelayCommand DeleteCommand { get; set; }
@@ -31,54 +34,110 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         {
             this.guest2 = guest2;
             notificationService = new NewTourNotificationService();
-            ordinaryTourRequests = new OrdinaryTourRequestsService();
-            OrdinaryTourRequests = new List<OrdinaryTourRequests>(ordinaryTourRequests.GetByGuestId(guest2.Id));
+            tourService = new TourService();
+            ordinaryTourRequestsService = new OrdinaryTourRequestsService();
+            OrdinaryTourRequests = new List<OrdinaryTourRequests>(ordinaryTourRequestsService.GetAll());
             Alerts = new List<AlertGuest2>();
             alertGuest2Service = new AlertGuest2Service();
             tourInstanceService = new TourInstanceService();
             TourInstances = new List<TourInstance>(tourInstanceService.GetAll());
-            SaveCreateTourNotifications();
-            Notifications = new ObservableCollection<NewTourNotification>(notificationService.GetByGuestId(guest2.Id));
+            MakeNotifications();
+            Notifications = new ObservableCollection<NewTourNotification>();
+            SetNotifications();
             ViewCommand = new RelayCommand(View_Executed, CanExecute);
             DeleteCommand=new RelayCommand(Delete_Executed,CanExecute);
+        }
+        private void MakeNotifications()
+        {
+            AddNotificationsByLanguage();
+            AddNotificationsByLocation();
+            AddNotifications();
         }
         private bool CanExecute(object sender)
         {
             return true;
         }
-        private bool Exists(OrdinaryTourRequests request)
+        private bool Exists(TourInstance tourInstance)
         {
-            return notificationService.GetAll().Exists(c => c.Guest2.Id == request.GuestId && c.RequestId == request.Id);
+            return notificationService.GetAll().Exists(c => c.Guest2.Id == guest2.Id && c.TourInstance.Id == tourInstance.Id);
         }
-        private bool IsDeleted(int requestId)
+        private void SetNotifications()
+        {
+            foreach(NewTourNotification newTourNotification in notificationService.GetByGuestId(guest2.Id))
+            {
+                if (!newTourNotification.Deleted)
+                    Notifications.Add(newTourNotification);
+            }
+        }
+        private bool IsDeleted(int tourInstanceId)
         {
             List<NewTourNotification> notifications = new List<NewTourNotification>(notificationService.GetByGuestId(guest2.Id));
-            NewTourNotification current = notifications.Find(c => c.RequestId == requestId);
-            if (current == null) { return true; }
-            return false;
+            NewTourNotification current = notifications.Find(c => c.TourInstance.Id == tourInstanceId);
+            if (notifications.Count == 0 || current==null) return false;
+            else return current.Deleted;
         }
-        private void SaveCreateTourNotifications()
+        public void AddNotifications()
         {
-            foreach(TourInstance instance in TourInstances)
+            foreach (TourInstance tourInstance in TourInstances)
             {
-                foreach (OrdinaryTourRequests ordinaryTourRequests in OrdinaryTourRequests)
+                foreach (OrdinaryTourRequests request in ordinaryTourRequestsService.GetAcceptedRequests(OrdinaryTourRequests))
                 {
-                    if (ordinaryTourRequests.NewAccepted == true && ordinaryTourRequests.TourInstanceId==instance.Id && !Exists(ordinaryTourRequests) && !IsDeleted(ordinaryTourRequests.Id))
-
+                    if(request.TourInstanceId==tourInstance.Id && request.GuestId==guest2.Id && !Exists(tourInstance) && !IsDeleted(tourInstance.Id))
                     {
-                        NewTourNotification guest2Notification = new NewTourNotification(guest2, "Your tour request has been accepted. Click on details for more. You can delete it.", Guest2NotificationType.REQUEST_ACCEPTED, instance, false, -1, ordinaryTourRequests.Id);
+                        NewTourNotification guest2Notification = new NewTourNotification(guest2, "Your tour request has been accepted. Click on details for more. You can delete it.", Guest2NotificationType.REQUEST_ACCEPTED, tourInstance, false, -1);
                         notificationService.Save(guest2Notification);
                     }
                 }
             }
-            
         }
-
+        public void AddNotificationsByLanguage()
+        {
+            tourInstanceService.SetLanguage(TourInstances);
+            foreach (TourInstance tourInstance in GetTourInstance())
+            {
+                foreach (OrdinaryTourRequests request in ordinaryTourRequestsService.GetInvalidOrWaitingRequests(OrdinaryTourRequests,guest2))
+                {
+                    if (request.Language == tourInstance.Tour.Language && !Exists(tourInstance) && !IsDeleted(tourInstance.Id))
+                    {
+                        NewTourNotification guest2Notification = new NewTourNotification(guest2, "Your tour request has been accepted. Click on details for more. You can delete it.", Guest2NotificationType.REQUEST_ACCEPTED, tourInstance, false, -1);
+                        notificationService.Save(guest2Notification);
+                    }
+                }
+            }
+        }
+        public void AddNotificationsByLocation()
+        {
+            tourService.SetTourToTourInstance(TourInstances);
+            foreach (TourInstance tourInstance in GetTourInstance())
+            {
+                foreach (OrdinaryTourRequests request in ordinaryTourRequestsService.GetInvalidOrWaitingRequests(OrdinaryTourRequests, guest2))
+                {
+                    if (request.Location.City == tourInstance.Tour.Location.City && request.Location.Country == tourInstance.Tour.Location.Country && !Exists(tourInstance) && !IsDeleted(tourInstance.Id))
+                    {
+                        NewTourNotification guest2Notification = new NewTourNotification(guest2, "Your tour request has been accepted. Click on details for more. You can delete it.", Guest2NotificationType.REQUEST_ACCEPTED, tourInstance, false, -1);
+                        notificationService.Save(guest2Notification);
+                    }
+                }
+            }
+        }
+        public List<TourInstance> GetTourInstance()
+        {
+            List<TourInstance> Instances = new List<TourInstance>();
+            foreach (TourInstance tourInstance in TourInstances)
+            {
+                foreach (OrdinaryTourRequests tourRequests in ordinaryTourRequestsService.GetAcceptedRequests(OrdinaryTourRequests))
+                {
+                    if (tourInstance.Id == tourRequests.TourInstanceId)
+                    {
+                        Instances.Add(tourInstance);
+                    }
+                }
+            }
+            return Instances;
+        }
         private void ShowAlertGuestForm(NewTourNotification notification)
         {
             Alerts = alertGuest2Service.GetAll();
-            CheckPointService checkPointService = new CheckPointService();
-            List<CheckPoint> CheckPoints = checkPointService.GetByInstance(notification.TourInstance.Id);
             if (Alerts.Count() != 0)
             {
                 foreach (AlertGuest2 alert in Alerts)
@@ -99,12 +158,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             if (currentNotification.Type==Guest2NotificationType.REQUEST_ACCEPTED)
                 ordinaryTourRequestDetailsForm.Show();
             else
-            {
-                ShowAlertGuestForm(currentNotification);
-                
-            }
-                
-
+                ShowAlertGuestForm(currentNotification);     
         }
         private void Delete_Executed(object sender)
         {
@@ -116,7 +170,8 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             Notifications.Clear();
             foreach(NewTourNotification guest2Notification in notificationService.GetByGuestId(guest2.Id))
             {
-                Notifications.Add(guest2Notification);
+                if(!guest2Notification.Deleted)
+                    Notifications.Add(guest2Notification);
             }
         }
     }

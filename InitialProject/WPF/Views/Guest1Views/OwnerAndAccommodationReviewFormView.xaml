@@ -61,8 +61,7 @@
 
         <!-- BORDER FOR FIRST COLUMN -->
         <Border Grid.Column="0" Width="495" BorderThickness="3" BorderBrush="#22301a" CornerRadius="20 20 20 20" HorizontalAlignment="Center" Height="660" VerticalAlignment="Center">
-            <Image Source="/Resources/Images/rating.png" Opacity="0.05" Margin="0,40,0,0" Stretch="Fill"></Image>
-
+            
             <Border.Effect>
                 <DropShadowEffect ShadowDepth="0" BlurRadius="50"/>
             </Border.Effect>
@@ -81,8 +80,7 @@
 
         <!-- BORDER FOR SECOND COLUMN -->
         <Border Grid.Column="1" Width="495" BorderThickness="3" BorderBrush="#22301a" CornerRadius="20 20 20 20" HorizontalAlignment="Center" Height="660" VerticalAlignment="Center">
-            <Image Source="/Resources/Images/ren.png" Opacity="0.05" Margin="0,40,0,0" Stretch="Fill"></Image>
-
+            
             <Border.Effect>
                 <DropShadowEffect ShadowDepth="0" BlurRadius="50"/>
             </Border.Effect>
@@ -124,13 +122,13 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <Image Source="/Resources/Images/back.png" HorizontalAlignment="Left" Margin="10,0,0,0" Width="26" Height="22" Grid.Column="0"/>
-                    <TextBlock Background="#8c9d75" Text="BACK" Grid.Column="1" Margin="8,0,0,0" VerticalAlignment="Center" FontSize="18"  Foreground="#22301a" FontWeight="Bold" HorizontalAlignment="Center" Width="Auto"/>
+                    <TextBlock Background="#8c9d75" Text="Back" Grid.Column="1" Margin="8,0,0,0" VerticalAlignment="Center" FontSize="18"  Foreground="#22301a" FontWeight="Bold" HorizontalAlignment="Center" Width="Auto"/>
                 </Grid>
             </Button>
             
-            <Label HorizontalContentAlignment="Left" Width="Auto" Height="Auto" Grid.Row="1" Grid.Column="0" Margin="65,0,0,0" VerticalAlignment="Center">Cleanliness:</Label>
+            <Label HorizontalContentAlignment="Left" Width="Auto" Height="Auto" Grid.Row="1" Grid.Column="0" Margin="65,0,0,0" VerticalAlignment="Center">Cleanliness*</Label>
             
-            <Label HorizontalContentAlignment="Left" Width="Auto" Height="Auto" Grid.Row="2" Grid.Column="0" Margin="65,0,0,0" VerticalAlignment="Center">Owner's correctness:</Label>
+            <Label HorizontalContentAlignment="Left" Width="Auto" Height="Auto" Grid.Row="2" Grid.Column="0" Margin="65,0,0,0" VerticalAlignment="Center">Owner's correctness*</Label>
             
             <Slider x:Name="CleanlinessSlider"  Minimum="1" Maximum="5" Grid.Row="1" Grid.Column="1" Margin="0,0,100,0" Width="130" VerticalAlignment="Center" TickFrequency="1" IsSnapToTickEnabled="True" AutoToolTipPlacement="BottomRight" Value="{Binding Path=AccommodationCleanliness}">
                 <Slider.Style>
@@ -184,7 +182,7 @@
                 </TextBlock.Background>
             </TextBlock>
             
-            <Label HorizontalContentAlignment="Left" Grid.Column="0" Grid.Row="3" Width="Auto" Height="Auto" VerticalContentAlignment="Top" VerticalAlignment="Top" Margin="65,58,0,0" Content="Add photos:"/>
+            <Label HorizontalContentAlignment="Left" Grid.Column="0" Grid.Row="3" Width="Auto" Height="Auto" VerticalContentAlignment="Top" VerticalAlignment="Top" Margin="65,58,0,0" Content="Add photos*"/>
             
             <!-- ADD PHOTO BUTTON -->
             <Button Content="+" Command="{Binding AddPhotoCommand}" FontSize="21" Height="45" Grid.Row="3" Width="45" Margin="0,20,50,0" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="0">
@@ -435,7 +433,7 @@
                             </TransformGroup>
                         </Image.RenderTransform>
                     </Image>
-                    <TextBlock Background="#8c9d75" Text="RESET" Grid.Column="0" VerticalAlignment="Center" FontSize="16"  Foreground="#22301a" Margin="10,0,0,0" FontWeight="Bold" HorizontalAlignment="Left" Width="50"/>
+                    <TextBlock Background="#8c9d75" Text="Reset" Grid.Column="0" VerticalAlignment="Center" FontSize="16"  Foreground="#22301a" Margin="10,0,0,0" FontWeight="Bold" HorizontalAlignment="Left" Width="50"/>
                 </Grid>
             </Button>
 
@@ -456,7 +454,7 @@
                             </TransformGroup>
                         </Image.RenderTransform>
                     </Image>
-                    <TextBlock Background="#8c9d75" Text="SEND" Grid.Column="0" VerticalAlignment="Center" FontSize="16"  Foreground="#22301a" Margin="10,0,0,0" FontWeight="Bold" HorizontalAlignment="Left" Width="50"/>
+                    <TextBlock Background="#8c9d75" Text="Send" Grid.Column="0" VerticalAlignment="Center" FontSize="16"  Foreground="#22301a" Margin="10,0,0,0" FontWeight="Bold" HorizontalAlignment="Left" Width="50"/>
                 </Grid>
             </Button>
 

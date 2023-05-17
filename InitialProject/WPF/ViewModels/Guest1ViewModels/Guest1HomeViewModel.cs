@@ -50,10 +50,12 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                 OnPropertyChanged("StoredNotifications");
             }
         }
+        private SuperGuestTitleService superGuestTitleService;
         public Guest1HomeViewModel(User user)
         {
             Guest1Service guest1Service = new Guest1Service();
             this.guest1 = guest1Service.GetByUsername(user.Username);
+            superGuestTitleService = new SuperGuestTitleService();
             Guest1SearchAccommodationView guest1SearchAccommodationView = new Guest1SearchAccommodationView(guest1);
             Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = guest1SearchAccommodationView;
             StoredNotifications = new ObservableCollection<MenuItem>();
@@ -62,8 +64,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         }
         private void ShowSuperGuest()
         {
-            SuperGuestTitleService superGuestTitleService = new SuperGuestTitleService();
-            superGuestTitleService.DeleteTitleIfManyYearsPassed(guest1);
+            superGuestTitleService.DeleteTitleIfNeeded(guest1);
             if (superGuestTitleService.IsAlreadySuperGuest(guest1))
             {
                 superGuestTitleService.ProlongSuperGuestTitle(guest1);  //add new or delete previous title.

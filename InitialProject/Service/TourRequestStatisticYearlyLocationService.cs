@@ -7,16 +7,19 @@ namespace InitialProject.Service
 {
     public class TourRequestStatisticYearlyLocationService
     {
-        public TourRequestStatisticYearlyLocationService() { }
+        private OrdinaryTourRequestsService ordinaryTourRequestsService;
+        public TourRequestStatisticYearlyLocationService() 
+        {
+            ordinaryTourRequestsService= new OrdinaryTourRequestsService();
+        }
         private List<int> GetYearsForLocation(Location location)
         {
-            OrdinaryTourRequestsService ordinaryTourRequests = new OrdinaryTourRequestsService();
             List<int> years = new List<int>();
-            List<OrdinaryTourRequests> request = ordinaryTourRequests.GetByLocation(location);
-            if (request.Count > 0)
+            List<OrdinaryTourRequests> requests = ordinaryTourRequestsService.GetByLocation(location);
+            if (requests.Count > 0)
             {
-                years.Add(request[0].StartDate.Year);
-                foreach (OrdinaryTourRequests tourRequest in request)
+                years.Add(requests[0].StartDate.Year);
+                foreach (OrdinaryTourRequests tourRequest in requests)
                 {
                     if (!years.Contains(tourRequest.StartDate.Year))
                         years.Add(tourRequest.StartDate.Year);
@@ -27,7 +30,6 @@ namespace InitialProject.Service
         private int GetRequestsCountByYear(Location location, int year)
         {
             List<OrdinaryTourRequests> ordinaryTourRequests = new List<OrdinaryTourRequests>();
-            OrdinaryTourRequestsService ordinaryTourRequestsService = new OrdinaryTourRequestsService();
             if (ordinaryTourRequestsService.GetByLocation(location) != null)
                 foreach (OrdinaryTourRequests tourRequest in ordinaryTourRequestsService.GetByLocation(location))
                     if (tourRequest.StartDate.Year == year)

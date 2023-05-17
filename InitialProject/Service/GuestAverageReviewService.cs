@@ -79,7 +79,7 @@ namespace InitialProject.Service
             }
             if (averageRatings.Count == 0)
                 return 0;
-            return averageRatings.Sum()/averageRatings.Count;
+            return Math.Round(averageRatings.Sum()/averageRatings.Count,2);
 
         }
     }

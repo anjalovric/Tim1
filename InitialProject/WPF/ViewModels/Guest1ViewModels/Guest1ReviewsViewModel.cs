@@ -18,6 +18,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 {
     public class Guest1ReviewsViewModel :INotifyPropertyChanged
     {
+        public Func<double, string> YAxisLabelFormatter => value => value.ToString("N1");
         private Guest1 guest1;
         private DateTime currentDate;
         GuestReviewService guestReviewService;
@@ -64,6 +65,11 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                 Labels.Add(lastYear.ToString("MMM").ToUpper());
                 lastYear = lastYear.AddMonths(1);
             }
+            SetSeriesCollection(values);
+        }
+
+        private void SetSeriesCollection(List<double> values)
+        {
             SeriesCollection = new SeriesCollection();
             ColumnSeries columnSeries = new ColumnSeries();
             columnSeries.Values = new ChartValues<double>();

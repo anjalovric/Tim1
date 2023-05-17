@@ -40,7 +40,7 @@ namespace InitialProject.Service
         {
             return repository.GetByTour(tourId);
         }
-        public void AddImages(int tourId,List<TourImage>images)
+        public void SaveTourImages(int tourId,List<TourImage>images)
         {
             foreach (TourImage image in images)
             {

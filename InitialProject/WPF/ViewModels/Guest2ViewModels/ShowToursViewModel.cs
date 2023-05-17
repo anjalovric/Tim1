@@ -156,10 +156,8 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             set
             {
                 if (value != label)
-                {
                     label = value;
-                    OnPropertyChanged("Label");
-                }
+                OnPropertyChanged("Label");
             }
         }
         public RelayCommand ReserveCommand { get; set; }
@@ -371,7 +369,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
                     Selected = tourInstance;
                 }
             }
-            TourReservationFormView tourReservationForm = new TourReservationFormView(Selected, guest2, TourInstances, tourInstanceRepository,Label);
+            TourReservationFormView tourReservationForm = new TourReservationFormView(Selected, guest2, TourInstances, tourInstanceRepository, label);
             tourReservationForm.Show();
         }
         private void ViewDetails_Executed(object sender)
@@ -459,7 +457,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
                     {
                         if (alert.Guest2Id == guest2.Id && alert.Informed == false && TourInstance.Id==alert.InstanceId)
                         {
-                            NewTourNotification guest2Notification = new NewTourNotification(FindGuest2(), "You reserved this tour. Confirm your presence.", Guest2NotificationType.CONFIRM_PRESENCE,TourInstance, false,alert.Id,-1);
+                            NewTourNotification guest2Notification = new NewTourNotification(FindGuest2(), "You reserved this tour. Confirm your presence.", Guest2NotificationType.CONFIRM_PRESENCE,TourInstance, false,alert.Id);
                             newTourNotificationService.Save(guest2Notification);
                             alert.Informed = true;
                             alertGuest2Repository.Update(alert);

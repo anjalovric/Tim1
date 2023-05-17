@@ -13,5 +13,6 @@ namespace InitialProject.Domain.RepositoryInterfaces
         public void Add(SuperGuestTitle superGuestTitle);
         public void Delete(SuperGuestTitle title);
         public void Update(SuperGuestTitle title);
+        public SuperGuestTitle GetByGuestId(int id);
     }
 }

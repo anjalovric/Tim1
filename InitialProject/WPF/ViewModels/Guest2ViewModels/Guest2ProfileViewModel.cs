@@ -11,7 +11,7 @@ using InitialProject.Model;
 
 namespace InitialProject.WPF.ViewModels.Guest2ViewModels
 {
-    public class Guest2ProfileViewModel:INotifyPropertyChanged
+    public class Guest2ProfileViewModel: INotifyPropertyChanged
     {
         public Model.Guest2 Guest2 { get; set; }
         private BitmapImage imageSource;

@@ -98,8 +98,8 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Border BorderBrush="#0C3B2E" Background="#0C3B2E" BorderThickness="4,4,4,4" CornerRadius="25 25 25 25" Grid.ColumnSpan="3" Grid.RowSpan="3"/>
-        <Rectangle Fill="White" RadiusX="10" RadiusY="10" Grid.Column="1" Grid.Row="1"/>
-        <DataGrid x:Name="ActiveTourListDataGrid"  Grid.Column="1" BorderBrush="Transparent" ItemsSource="{Binding Path=TourInstances,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=Selected}" IsReadOnly="True" AutoGenerateColumns="False" VerticalAlignment="Center" HorizontalAlignment="Center" Height="240"  Width="537" Grid.Row="1" HorizontalScrollBarVisibility="Hidden" GridLinesVisibility="None" ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle2}" CellStyle="{StaticResource DataGridCellStyle2}" Style="{StaticResource DataGridStyle}" RowStyle="{StaticResource DataGridRowStyle2}">
+        <Rectangle Fill="White" RadiusX="10" RadiusY="10" Grid.Column="1" Grid.Row="1" Margin="0,10,0,0"/>
+        <DataGrid x:Name="ActiveTourListDataGrid"  Grid.Column="1" BorderBrush="Transparent" ItemsSource="{Binding Path=TourInstances,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=Selected}" IsReadOnly="True" AutoGenerateColumns="False" VerticalAlignment="Center" HorizontalAlignment="Center" Height="220"  Width="536" Grid.Row="1" HorizontalScrollBarVisibility="Hidden" GridLinesVisibility="None" ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle2}" CellStyle="{StaticResource DataGridCellStyle2}" Style="{StaticResource DataGridStyle}" RowStyle="{StaticResource DataGridRowStyle2}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Location" Width="1*" Binding="{Binding Tour.Location}"/>
                 <DataGridTextColumn Header="Duration" Width="1*" Binding="{Binding Tour.Duration}"/>
@@ -118,7 +118,7 @@
         </DataGrid>
 
         <Label Content="Active tours" FontWeight="Bold" Foreground="White" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" Width="228" Grid.Column="1" Margin="0,36,0,0"/>
-        <TextBlock Text="U nastavku mozete vidjeti sve aktivne ture na koje ste se prijavili i aktivan checkpoint." Foreground="White" HorizontalAlignment="Left" Margin="5,81,0,0" VerticalAlignment="Top" Width="834" Height="39" Grid.Column="1" Grid.ColumnSpan="2"/>
+        <TextBlock FontSize="15" Foreground="#b46617" FontWeight="DemiBold" HorizontalAlignment="Left" Margin="5,81,0,0" VerticalAlignment="Top" Width="551" Height="39" Grid.Column="1"><Run Text="Below you can see all the active tours you have signed up for and the active"/><LineBreak/><Run Text="checkpoint."/></TextBlock>
 
     </Grid>
 </UserControl>

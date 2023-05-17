@@ -7,18 +7,23 @@ namespace InitialProject.Service
 {
     public class SuggestedLocationService
     {
-        public SuggestedLocationService() { }
+        private LocationService locationService;
+        private OrdinaryTourRequestsService ordinaryTourRequestsService;
+        public SuggestedLocationService() 
+        { 
+            locationService = new LocationService();
+            ordinaryTourRequestsService=new OrdinaryTourRequestsService();
+        }
         private List<OrdinaryTourRequests> GetRequestsFromLastYear()
         {
             DateTime today = DateTime.Now;
             string yearago = today.Month + "/" + today.Day + "/" + (today.Year - 1) + " " + today.ToString().Split(" ")[1] + " " + today.ToString().Split(" ")[2];
             List<OrdinaryTourRequests> ordinaryTourRequests = new List<OrdinaryTourRequests>();
-            OrdinaryTourRequestsService ordinaryTourRequestsService = new OrdinaryTourRequestsService();
             if (ordinaryTourRequestsService.GetAll().Count > 0)
             {
                 foreach (OrdinaryTourRequests request in ordinaryTourRequestsService.GetAll())
-                    if (request.StartDate >= Convert.ToDateTime(yearago))
-                        if (request.StartDate <= today)
+                    if (request.CreateDate >= Convert.ToDateTime(yearago))
+                        if (request.CreateDate <= today)
                             ordinaryTourRequests.Add(request);
                 SetLocation(ordinaryTourRequests);
             }          
@@ -73,7 +78,6 @@ namespace InitialProject.Service
         }
         private void SetLocation(List<OrdinaryTourRequests> requests)
         {
-            LocationService locationService = new LocationService();
             foreach (OrdinaryTourRequests request in requests)
                 foreach (Location location in locationService.GetAll())
                     if (location.Id == request.Location.Id)

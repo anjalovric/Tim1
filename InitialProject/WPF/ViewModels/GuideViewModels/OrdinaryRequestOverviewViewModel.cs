@@ -25,6 +25,9 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
 
         private SearchRequestsService searchRequestsService;
         public OrdinaryTourRequests Selected { get; set; }
+        private OrdinaryTourRequestsService ordinaryTourRequestsService;
+        private RequestNotificationService requestNotificationService;
+        private LocationService locationService;
 
         private string country;
         public string Country
@@ -92,6 +95,17 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
                 OnPropertyChanged();
             }
         }
+        private DateTime stardate;
+        public DateTime Stardate
+        {
+            get { return stardate; }
+            set
+            {
+                if (value != stardate)
+                    stardate = value;
+                OnPropertyChanged();
+            }
+        }
         private DateTime end;
         public DateTime End
         {
@@ -115,6 +129,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             }
         }
         private User loggedUser;
+        private bool isEntered = false;
         public RelayCommand SearchCommand { get; set; }
         public RelayCommand ResetCommand { get; set; }
         public RelayCommand CreateCommand { get; set; }
@@ -128,7 +143,8 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         }
         public OrdinaryRequestOverviewViewModel(User user,ObservableCollection<TourInstance> tours,ObservableCollection<TourInstance> futures)
         {
-            MakeListOfLocations();
+            Capacity = 1;
+            ordinaryTourRequestsService = new OrdinaryTourRequestsService();
             AddLanguages();
             MakeRequestsList();
             loggedUser = user;
@@ -137,14 +153,16 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             MakeCommands();
             Tours = tours;
             Future= futures;
-            RequestNotificationService requestNotificationService = new RequestNotificationService();
+            requestNotificationService = new RequestNotificationService();
+            locationService = new LocationService();
+            MakeListOfLocations();
             requestNotificationService.UpCount();
             SetNews();
             Description = "";
+            Stardate= DateTime.Now;
         }
         private void SetNews()
         {
-            RequestNotificationService  requestNotificationService = new RequestNotificationService();
             foreach (OrdinaryTourRequests request in Requests)
             {
                 foreach (OrdinaryRequestNotification requestNotification in requestNotificationService.GetAll())
@@ -154,7 +172,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         }
         public void EnableCityComboBox_Executed(object sender)
         {
-            LocationService locationService = new LocationService();
+
             if (Country != null)
             {
                 CitiesByCountry.Clear();
@@ -167,7 +185,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         }
         private void MakeRequestsList()
         {
-            OrdinaryTourRequestsService ordinaryTourRequestsService = new OrdinaryTourRequestsService();
+
             Requests= new ObservableCollection<OrdinaryTourRequests>(ordinaryTourRequestsService.GetOnWaitingRequests());
         }
         private void MakeCommands()
@@ -180,7 +198,6 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         }
         private void MakeListOfLocations()
         {
-            LocationService locationService = new LocationService();
             Countries = new ObservableCollection<string>(locationService.GetAllCountries());
             CitiesByCountry = new ObservableCollection<string>();
             IsComboBoxCityEnabled = false;
@@ -201,23 +218,36 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         }
         private void Search_Country()
         {
-            if(Country != null && !Country.Equals(""))
-                appropriateRequests=searchRequestsService.GetByCountry(appropriateRequests,Country);
+            if (Country != null && !Country.Equals(""))
+            { 
+                appropriateRequests = searchRequestsService.GetRequestsByCountry(appropriateRequests, Country, isEntered);
+                isEntered = true;
+            }
         }
         private void Search_City()
         {
             if (City != null && !City.Equals(""))
-                appropriateRequests=searchRequestsService.GetByCity(appropriateRequests,City);
+            {
+                appropriateRequests = searchRequestsService.GetRequestsByCity(appropriateRequests, City, isEntered);
+                isEntered = true;
+            }
         }
         private void Search_Language()
         {
             if (Language != null && !Language.Equals(""))
-               appropriateRequests=searchRequestsService.GetByLanguage(appropriateRequests, Language);
+            {
+                appropriateRequests = searchRequestsService.GetRequestsByLanguage(appropriateRequests, Language, isEntered);
+                isEntered = true;
+            }
         }
         private void Search_Capacity()
         {
-            if (Capacity != null && Capacity != 0)
-               appropriateRequests=searchRequestsService.GetByCapacity(appropriateRequests, Capacity);
+            if (Capacity != null && Capacity != 0 && Capacity!=1)
+            {
+                appropriateRequests = searchRequestsService.GetRequestsByCapacity(appropriateRequests, Capacity, isEntered);
+                isEntered = true;
+            }
+
         }
         private void RefreshResquests()
         {
@@ -228,15 +258,22 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         private void Search_StartDate()
         {
             if (Start != null && !Start.ToString().Equals("1/1/0001 12:00:00 AM"))
-                appropriateRequests = searchRequestsService.GetByStart(appropriateRequests, Start);
+            {
+                appropriateRequests = searchRequestsService.GetRequestsByStart(appropriateRequests, Start, isEntered);
+                isEntered = true;
+            }
         }
         private void Search_EndDate()
         {
             if (End != null && !End.ToString().Equals("1/1/0001 12:00:00 AM"))
-                appropriateRequests = searchRequestsService.GetByEnd(appropriateRequests, End);
+            {
+                appropriateRequests = searchRequestsService.GetRequestsByEnd(appropriateRequests, End, isEntered);
+                isEntered = true;
+            }
         }
         private void Search_Executed(object sender)
         {
+           isEntered = false;
             appropriateRequests.Clear();
             Search_Country();
             Search_City();
@@ -244,7 +281,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             Search_StartDate();
             Search_EndDate();
             Search_Language();
-            if (Country == null && City == null && Language == null && Capacity == 0 && Start == Convert.ToDateTime("1/1/0001 12:00:00 AM") && End == Convert.ToDateTime("1/1/0001 12:00:00 AM"))
+            if (Country == null && City == null && Language == null && Capacity == 1 && Start == Convert.ToDateTime("1/1/0001 12:00:00 AM") && End == Convert.ToDateTime("1/1/0001 12:00:00 AM"))
                 appropriateRequests = Requests.ToList();
             RefreshResquests();
         }
@@ -258,7 +295,6 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             Start = Convert.ToDateTime(date);
             End = Convert.ToDateTime(date);
             Requests.Clear();
-            OrdinaryTourRequestsService ordinaryTourRequestsService = new OrdinaryTourRequestsService();
             foreach(OrdinaryTourRequests request in ordinaryTourRequestsService.GetOnWaitingRequests())
                 Requests.Add(request);
         }

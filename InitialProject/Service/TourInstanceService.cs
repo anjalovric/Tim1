@@ -13,10 +13,12 @@ namespace InitialProject.Service
         private ITourInstanceRepository tourInstancerepository=Injector.CreateInstance<ITourInstanceRepository>();
         private List<TourInstance> finishedtourInstances;
         private List<TourInstance> finishedtourInsatncesForChosenYear;
+        private TourService tourService;
         public TourInstanceService() 
         {
             finishedtourInsatncesForChosenYear = new List<TourInstance>();
             finishedtourInstances = new List<TourInstance>();
+            tourService = new TourService();
         }
         public List<TourInstance> GetAll()
         {
@@ -177,6 +179,20 @@ namespace InitialProject.Service
         {
             if (instance.StartDate.Date == DateTime.Today.Date && instance.StartDate > DateTime.Now)
                 TodayInstances.Add(instance);
+        }
+        public void SetLanguage(List<TourInstance> TourInstances)
+        {
+            
+            foreach (TourInstance instance in TourInstances)
+            {
+                foreach (Tour tour in tourService.GetAll())
+                {
+                    if (tour.Id == instance.Tour.Id)
+                    {
+                        instance.Tour.Language = tour.Language;
+                    }
+                }
+            }
         }
     }
 }

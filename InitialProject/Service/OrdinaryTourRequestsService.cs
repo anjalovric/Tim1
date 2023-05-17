@@ -13,24 +13,25 @@ namespace InitialProject.Service
 {
     public class OrdinaryTourRequestsService
     {
-        private IOrdinaryTourRequestsRepository requestRepository;
-       
+        private IOrdinaryTourRequestsRepository ordinaryTourRequestsRepository;
+        private LocationService locationService;
+
         public OrdinaryTourRequestsService()
         {
-            requestRepository = Injector.CreateInstance<IOrdinaryTourRequestsRepository>();
-            
+            ordinaryTourRequestsRepository = Injector.CreateInstance<IOrdinaryTourRequestsRepository>();
+            locationService = new LocationService();
         }
         public OrdinaryTourRequests Save(OrdinaryTourRequests request)
         {
-            return requestRepository.Save(request);
+            return ordinaryTourRequestsRepository.Save(request);
         }
         public List<OrdinaryTourRequests> GetAll()
         {
-            return requestRepository.GetAll();
+            return ordinaryTourRequestsRepository.GetAll();
         }
-        public ObservableCollection<OrdinaryTourRequests> GetByGuestId(int id)
+        public List<OrdinaryTourRequests> GetByGuestId(int id)
         {
-            return requestRepository.GetByGuestId(id);
+            return ordinaryTourRequestsRepository.GetByGuestId(id);
         }
         public List<OrdinaryTourRequests> GetOnWaitingRequests()
         {
@@ -43,9 +44,8 @@ namespace InitialProject.Service
             SetLocations(requests);
             return requests;
         }
-        private void SetLocations(List<OrdinaryTourRequests> requests) 
-        {
-            LocationService locationService = new LocationService();
+        private void SetLocations(List<OrdinaryTourRequests> requests)
+        { 
             foreach(OrdinaryTourRequests request in requests)
             {
                 foreach(Location location in locationService.GetAll())
@@ -57,7 +57,7 @@ namespace InitialProject.Service
         }
         public OrdinaryTourRequests Update(OrdinaryTourRequests request)
         {
-            return requestRepository.Update(request);
+            return ordinaryTourRequestsRepository.Update(request);
         }
 
         public List<OrdinaryTourRequests> GetByLanguage(string language) 
@@ -74,6 +74,32 @@ namespace InitialProject.Service
             foreach (OrdinaryTourRequests request in GetAll())
                 if (request.Location.Id==location.Id)
                     ordinaryTourRequests.Add(request);
+            return ordinaryTourRequests;
+        }
+        public List<OrdinaryTourRequests> GetInvalidOrWaitingRequests(List<OrdinaryTourRequests> OrdinaryTourRequests, Guest2 guest2)
+        {
+            List<OrdinaryTourRequests> ordinaryTourRequests = new List<OrdinaryTourRequests>();
+            foreach (OrdinaryTourRequests request in OrdinaryTourRequests)
+            {
+                if ((request.Status == Status.ONWAITING || request.Status == Status.INVALID) && guest2.Id == request.GuestId)
+                {
+                    ordinaryTourRequests.Add(request);
+                }
+            }
+            SetLocations(ordinaryTourRequests);
+            return ordinaryTourRequests;
+        }
+        public List<OrdinaryTourRequests> GetAcceptedRequests(List<OrdinaryTourRequests> OrdinaryTourRequests)
+        {
+            List<OrdinaryTourRequests> ordinaryTourRequests = new List<OrdinaryTourRequests>();
+            foreach (OrdinaryTourRequests request in OrdinaryTourRequests)
+            {
+                if (request.Status == Status.ACCEPTED)
+                {
+                    ordinaryTourRequests.Add(request);
+                }
+            }
+            SetLocations(ordinaryTourRequests);
             return ordinaryTourRequests;
         }
     }

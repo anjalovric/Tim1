@@ -6,7 +6,11 @@ namespace InitialProject.Service
 {
     public class TourRequestStatisticMonthlyLanguageService
     {
-        public TourRequestStatisticMonthlyLanguageService() { }
+        private OrdinaryTourRequestsService ordinaryTourRequestsService;
+        public TourRequestStatisticMonthlyLanguageService() 
+        {
+            ordinaryTourRequestsService= new OrdinaryTourRequestsService();
+        }
         private List<int> GetMonthsForLanguage(string language,int year)
         {
             List<int> months = new List<int>();
@@ -43,7 +47,6 @@ namespace InitialProject.Service
         }
         private List<OrdinaryTourRequests> GetByYearAndLanguage(string language,int year) 
         {
-            OrdinaryTourRequestsService ordinaryTourRequestsService = new OrdinaryTourRequestsService();
             List<OrdinaryTourRequests> ordinaryTourRequests = new List<OrdinaryTourRequests>();
             foreach(OrdinaryTourRequests requests in ordinaryTourRequestsService.GetAll())
                 if(requests.Language == language && requests.StartDate.Year==year) 
