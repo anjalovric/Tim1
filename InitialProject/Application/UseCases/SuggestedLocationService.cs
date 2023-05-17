@@ -22,8 +22,8 @@ namespace InitialProject.Service
             if (ordinaryTourRequestsService.GetAll().Count > 0)
             {
                 foreach (OrdinaryTourRequests request in ordinaryTourRequestsService.GetAll())
-                    if (request.StartDate >= Convert.ToDateTime(yearago))
-                        if (request.StartDate <= today)
+                    if (request.CreateDate >= Convert.ToDateTime(yearago))
+                        if (request.CreateDate <= today)
                             ordinaryTourRequests.Add(request);
                 SetLocation(ordinaryTourRequests);
             }          

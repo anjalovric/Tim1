@@ -143,6 +143,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         }
         public OrdinaryRequestOverviewViewModel(User user,ObservableCollection<TourInstance> tours,ObservableCollection<TourInstance> futures)
         {
+            Capacity = 0;
             ordinaryTourRequestsService = new OrdinaryTourRequestsService();
             AddLanguages();
             MakeRequestsList();
@@ -241,7 +242,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         }
         private void Search_Capacity()
         {
-            if (Capacity != null && Capacity != 0)
+            if (Capacity != null && Capacity != 0 )
             {
                 appropriateRequests = searchRequestsService.GetRequestsByCapacity(appropriateRequests, Capacity, isEntered);
                 isEntered = true;
@@ -288,7 +289,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         {
             Country = null;
             City = null;
-            Capacity = 1;
+            Capacity =0;
             Language = null;
             String date = "1/1/0001 12:00:00 AM";
             Start = Convert.ToDateTime(date);

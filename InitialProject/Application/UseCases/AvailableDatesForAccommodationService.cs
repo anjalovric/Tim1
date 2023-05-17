@@ -9,12 +9,11 @@ namespace InitialProject.Service
 {
     public class AvailableDatesForAccommodationService
     {
-        private List<AccommodationReservation> reservations;
         private AccommodationRenovationService renovationService;
+        private AccommodationReservationService accommodationReservationService;
         public AvailableDatesForAccommodationService()
         {
-            AccommodationReservationService accommodationReservationService = new AccommodationReservationService();
-            reservations = accommodationReservationService.GetAll();
+            accommodationReservationService = new AccommodationReservationService();
             renovationService = new AccommodationRenovationService();
         }
 
@@ -32,6 +31,7 @@ namespace InitialProject.Service
         private bool IsAvailableOnDate(AccommodationReservation reservationToCheck, DateTime date)
         {
             bool isAvailable = true;
+            List<AccommodationReservation> reservations = accommodationReservationService.GetAll();
             foreach (var reservation in reservations)
             {
                 bool isSameAccommodation = reservation.Accommodation.Id == reservationToCheck.Accommodation.Id;
@@ -79,21 +79,28 @@ namespace InitialProject.Service
         public List<AvailableDatesForAccommodation> GetAvailableDateRanges(DateTime startDate, DateTime endDate, int duration, Accommodation accommodation)
         {
             List<AvailableDatesForAccommodation> ranges = new List<AvailableDatesForAccommodation>();
+            List<AccommodationReservation> reservations = accommodationReservationService.GetAll();
             duration --;
             foreach(var reservation in reservations.FindAll(n => n.Accommodation.Id == accommodation.Id))
             {
-                DateTime date = startDate;
-                while (date.AddDays(duration).Date <= endDate.Date)
-                {
-                    if (IsAvailableInDateRange(reservation, date, date.AddDays(duration)) && ranges.Find(n => n.Arrival.Date == date.Date && n.Departure.Date==date.AddDays(duration).Date)==null)
-                        ranges.Add(new AvailableDatesForAccommodation(date.Date, date.AddDays(duration).Date));
-                    date = date.AddDays(1);
-                }
+                FindDateRanges(startDate, endDate, duration, ranges, reservation);
             }
             if (reservations.FindAll(n => n.Accommodation.Id == accommodation.Id).Count == 0)
                 ranges = GetWithoutReservations(startDate, endDate, duration, accommodation);
             return ranges;
         }
+
+        private void FindDateRanges(DateTime startDate, DateTime endDate, int duration, List<AvailableDatesForAccommodation> ranges, AccommodationReservation reservation)
+        {
+            DateTime date = startDate;
+            while (date.AddDays(duration).Date <= endDate.Date)
+            {
+                if (IsAvailableInDateRange(reservation, date, date.AddDays(duration)) && ranges.Find(n => n.Arrival.Date == date.Date && n.Departure.Date == date.AddDays(duration).Date) == null)
+                    ranges.Add(new AvailableDatesForAccommodation(date.Date, date.AddDays(duration).Date));
+                date = date.AddDays(1);
+            }
+        }
+
         private List<AvailableDatesForAccommodation> GetWithoutReservations(DateTime startDate, DateTime endDate, int duration, Accommodation accommodation)
         {
             List<AvailableDatesForAccommodation> ranges = new List<AvailableDatesForAccommodation>();

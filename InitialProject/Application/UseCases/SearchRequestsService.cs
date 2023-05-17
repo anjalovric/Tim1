@@ -81,7 +81,6 @@ namespace InitialProject.Service
         }
         public List<OrdinaryTourRequests> GetRequestsByCapacity(List<OrdinaryTourRequests> appropriateRequests, int capacity, bool entered)
         {
-            entered = true;
             List<OrdinaryTourRequests> addaptedList = new List<OrdinaryTourRequests>(appropriateRequests);
             List<OrdinaryTourRequests> temporaryList = new List<OrdinaryTourRequests>();
             if (appropriateRequests.Count == 0 && entered == false)

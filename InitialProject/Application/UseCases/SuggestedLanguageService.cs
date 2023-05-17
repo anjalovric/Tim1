@@ -20,8 +20,8 @@ namespace InitialProject.Service
             List<OrdinaryTourRequests> ordinaryTourRequests = new List<OrdinaryTourRequests>();
             if(ordinaryTourRequestsService.GetAll().Count > 0)
                 foreach(OrdinaryTourRequests request in ordinaryTourRequestsService.GetAll())
-                    if( request.StartDate >= yearAgo)
-                       if(request.StartDate <= today)
+                    if( request.CreateDate >= yearAgo)
+                       if(request.CreateDate <= today)
                         ordinaryTourRequests.Add(request);
             return ordinaryTourRequests;
         }
