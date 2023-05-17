@@ -14,8 +14,8 @@ namespace InitialProject.Service
     public class SuperGuestTitleService
     {
         private ISuperGuestTitleRepository superGuestTitleRepository = Injector.CreateInstance<ISuperGuestTitleRepository>();
-        Guest1Service guest1Service;
-        AccommodationReservationService accommodationReservationService;
+        private Guest1Service guest1Service;
+        private AccommodationReservationService accommodationReservationService;
         public SuperGuestTitleService()
         {
             guest1Service = new Guest1Service();

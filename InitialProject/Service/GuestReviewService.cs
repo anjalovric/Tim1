@@ -11,7 +11,7 @@ namespace InitialProject.Service
     {
         private IGuestReviewRepository guestReviewRepository = Injector.CreateInstance<IGuestReviewRepository>();
         private List<GuestReview> guestReviews;
-        OwnerReviewService ownerReviewService;
+        private OwnerReviewService ownerReviewService;
         public GuestReviewService()
         {
             ownerReviewService = new OwnerReviewService();
