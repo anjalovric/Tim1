@@ -103,11 +103,11 @@ namespace InitialProject.WPF.Views.Guest2Views
                 Labels.Add("RUS");
             if (arabCounter != 0)
                 Labels.Add("ARAB");
-            if (itCounter != 0)
-                Labels.Add("ESP");
             if (spCounter != 0)
-                Labels.Add("ENG");
+                Labels.Add("ESP");
             if (engCounter != 0)
+                Labels.Add("ENG");
+            if (itCounter != 0)
                 Labels.Add("ITA");
             return Labels;
         }
