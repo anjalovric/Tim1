@@ -1,17 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using InitialProject.Model;
-using InitialProject.Service;
-using InitialProject.WPF.Views.OwnerViews;
-using InitialProject.WPF.Views;
 using System.Windows;
 using InitialProject.Domain.Model;
+using InitialProject.Model;
+using InitialProject.Service;
+using InitialProject.WPF.Views;
+using InitialProject.WPF.Views.OwnerViews;
 
 namespace InitialProject.WPF.ViewModels.OwnerViewModels
 {

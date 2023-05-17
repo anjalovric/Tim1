@@ -13,20 +13,15 @@ namespace InitialProject.Service
     public class AccommodationRenovationService
     {
         private IAccommodationRenovationRepository accommodationRenovationRepository = Injector.CreateInstance<IAccommodationRenovationRepository>();
-        private List<AccommodationRenovation> renovations;
         private OwnerNotificationsService notificationService;
         public AccommodationRenovationService()
         {
-            renovations = accommodationRenovationRepository.GetAll();
             notificationService = new OwnerNotificationsService();
-            SetAccommodations();
-            SetCanBeCancelled();
-            SetIsInProgress();
-            SetIsFinished();
         }
 
         public bool IsDateAvailableForReservation(int accommodationId, DateTime date)
         {
+            List<AccommodationRenovation> renovations = accommodationRenovationRepository.GetAll();
             foreach(AccommodationRenovation renovation in renovations)
             {
                 if(renovation.Accommodation.Id == accommodationId && date.Date>=renovation.StartDate.Date && date.Date<=renovation.EndDate.Date)
@@ -37,7 +32,7 @@ namespace InitialProject.Service
             return true;
         }
 
-        private void SetAccommodations()
+        private void SetAccommodations(List<AccommodationRenovation> renovations)
         {
             AccommodationService accommodationService = new AccommodationService();
             foreach(var renovation in renovations)
@@ -52,9 +47,20 @@ namespace InitialProject.Service
 
         public List<AccommodationRenovation> GetAllByOwner(Owner owner)
         {
+            List<AccommodationRenovation> renovations = MakeRenovations();
             List<AccommodationRenovation> renovationsByOwner = renovations.FindAll(n => n.Accommodation.Owner.Id == owner.Id);
             renovationsByOwner = renovationsByOwner.OrderByDescending(r => r.StartDate.Date).ToList();
             return renovationsByOwner;
+        }
+
+        private List<AccommodationRenovation> MakeRenovations()
+        {
+            List<AccommodationRenovation> renovations = accommodationRenovationRepository.GetAll();
+            SetAccommodations(renovations);
+            SetIsInProgress(renovations);
+            SetIsFinished(renovations);
+            SetCanBeCancelled(renovations);
+            return renovations;
         }
 
         public void Add(AccommodationRenovation renovation)
@@ -65,7 +71,8 @@ namespace InitialProject.Service
 
         public void AreRenovated(List<Accommodation> accommodations)
         {
-            foreach(var accommodation in accommodations)
+            List<AccommodationRenovation> renovations = MakeRenovations();
+            foreach (var accommodation in accommodations)
             {
                 AccommodationRenovation renovation = renovations.Find(n => n.Accommodation.Id == accommodation.Id && n.EndDate.Date<DateTime.Now.Date);
                 if (renovation != null && (DateTime.Now.Year - renovation.EndDate.Year) <= 1)
@@ -82,15 +89,17 @@ namespace InitialProject.Service
 
         public int CountUpcomingRenovations(Owner owner)
         {
+            List<AccommodationRenovation> renovations = MakeRenovations();
             return renovations.FindAll(n => n.Accommodation.Owner.Id == owner.Id && n.StartDate>DateTime.Now.Date && !n.IsInProgress).Count();
         }
 
         public int CountRenovatedObjects(Owner owner)
         {
+            List<AccommodationRenovation> renovations = MakeRenovations();
             return renovations.FindAll(n => n.Accommodation.Owner.Id == owner.Id && n.EndDate.Date<DateTime.Now.Date).Count();
         }
 
-        private void SetCanBeCancelled()
+        private void SetCanBeCancelled(List<AccommodationRenovation> renovations)
         {
             foreach(var renovation in renovations)
             {
@@ -101,7 +110,7 @@ namespace InitialProject.Service
             }
         }
 
-        private void SetIsInProgress()
+        private void SetIsInProgress(List<AccommodationRenovation> renovations)
         {
             foreach (var renovation in renovations)
             {
@@ -114,10 +123,11 @@ namespace InitialProject.Service
 
         public bool IsRenovationOnDate(Accommodation accommodation, DateTime date)
         {
+            List<AccommodationRenovation> renovations = MakeRenovations();
             return renovations.Find(n => n.Accommodation.Id == accommodation.Id && n.StartDate <= date && n.EndDate >= date) != null;
         }
 
-        private void SetIsFinished()
+        private void SetIsFinished(List<AccommodationRenovation> renovations)
         {
             foreach (var renovation in renovations)
             {
