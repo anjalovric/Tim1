@@ -93,9 +93,12 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         public void AddNotificationsByLanguage()
         {
             tourInstanceService.SetLanguage(TourInstances);
-            foreach (TourInstance tourInstance in GetTourInstance())
+            List<TourInstance> tourInstances = GetTourInstance();
+            List<OrdinaryTourRequests> Requests = ordinaryTourRequestsService.GetInvalidOrWaitingRequests(OrdinaryTourRequests, guest2);
+
+            foreach (TourInstance tourInstance in tourInstances)
             {
-                foreach (OrdinaryTourRequests request in ordinaryTourRequestsService.GetInvalidOrWaitingRequests(OrdinaryTourRequests,guest2))
+                foreach (OrdinaryTourRequests request in Requests)
                 {
                     if (request.Language == tourInstance.Tour.Language && !Exists(tourInstance) && !IsDeleted(tourInstance.Id))
                     {
