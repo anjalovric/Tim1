@@ -1,8 +1,5 @@
-1|Ekskurzija|1|30|11|Kalemegdan, Knez Mihailova|serbian|6/23/2023 12:00:00 AM|6/30/2023 12:00:00 AM|ACCEPTED|6/23/2023|6/30/2023|2|5/17/2023 9:44:08 PM|True|4
-2|Apsolventska|1|20|13|Obilazak Rima|english|7/21/2023 12:00:00 AM|7/28/2023 12:00:00 AM|INVALID|7/21/2023|7/28/2023|-1|5/17/2023 9:44:54 PM|False|-1
-3|Izlet|1|40|12|Obilazak Budimpeste|english|6/1/2023 12:00:00 AM|6/15/2023 12:00:00 AM|INVALID|6/1/2023|6/15/2023|-1|5/17/2023 9:45:49 PM|False|-1
-4|Posjeta Austriji|2|23|7|Novoooo|russian|8/1/2023 12:00:00 AM|8/31/2023 12:00:00 AM|ONWAITING|8/1/2023|8/31/2023|-1|5/17/2023 9:47:44 PM|False|-1
-5|Request 2|2|23|15|Obilazak Moskve|russian|8/5/2023 12:00:00 AM|8/18/2023 12:00:00 AM|INVALID|8/5/2023|8/18/2023|-1|5/17/2023 9:48:31 PM|False|-1
-6|Istanbulom|2|23|1|Bosfor|english|6/30/2023 12:00:00 AM|7/20/2023 12:00:00 AM|ONWAITING|6/30/2023|7/20/2023|2|5/17/2023 9:48:57 PM|False|-1
-7|Novi zahtjev za Rim|2|12|13|sda|serbian|6/1/2023 12:00:00 AM|6/8/2023 12:00:00 AM|ONWAITING|6/1/2023|6/8/2023|2|5/17/2023 9:58:55 PM|False|-1
-8|Novi zahtjev|1|12|14|sda|italian|6/2/2023 12:00:00 AM|6/29/2023 12:00:00 AM|ONWAITING|6/2/2023|6/29/2023|-1|5/18/2023 11:14:15 AM|False|-1
+1|Request 1|1|5|16|We want tour about ancient greeks adapted for all generations|english|7/16/2023 12:00:00 AM|7/20/2023 12:00:00 AM|ONWAITING|7/16/2023|7/20/2023|-1|5/19/2023 7:21:37 PM|False|-1
+2|Request Athens|1|10|16|We want gastronomic tour for young generations|spanish|5/28/2023 12:00:00 AM|5/31/2023 12:00:00 AM|ONWAITING|5/28/2023|5/31/2023|-1|5/19/2023 7:22:39 PM|False|-1
+3|Request 2|1|100|1|We want historical tour with visit to the most famous monuments in Istanbul|arabic|6/1/2023 12:00:00 AM|6/5/2023 12:00:00 AM|ONWAITING|6/1/2023|6/5/2023|-1|5/19/2023 7:23:58 PM|False|-1
+4|School trip|1|150|5|We want trip adapted for 10 years olds|english|5/25/2023 12:00:00 AM|5/27/2023 12:00:00 AM|ONWAITING|5/25/2023|5/27/2023|-1|5/19/2023 7:28:44 PM|False|-1
+5|Summer trip|1|500|16|We want party trip for students|serbian|7/20/2023 12:00:00 AM|7/26/2023 12:00:00 AM|ONWAITING|7/20/2023|7/26/2023|-1|5/19/2023 7:29:39 PM|False|-1
