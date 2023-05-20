@@ -22,9 +22,7 @@ namespace InitialProject.Service
         public List<AccommodationRenovationSuggestion> GetAll()
         {
             List<AccommodationRenovationSuggestion> suggestions = new List<AccommodationRenovationSuggestion>(renovationSuggestionRepository.GetAll());
-            List<AccommodationReservation> storedReservations = accommodationReservationService.GetAll();
-            foreach (AccommodationRenovationSuggestion suggestion in suggestions)
-                suggestion.Reservation = storedReservations.Find(n => n.Id == suggestion.Reservation.Id);
+            SetReservations(suggestions);
             return suggestions;
         }
 
