@@ -44,7 +44,7 @@ namespace InitialProject.Service
             if (invalidRequest == 0)
                 return 0;
             invalidRequest /= ordinaryTours.Count();
-            return invalidRequest *= 100;
+            return (invalidRequest *= 100).Round(2);
         }
         public double ProcentOfAcceptedRequest(Guest2 Guest2)
         {
@@ -60,7 +60,7 @@ namespace InitialProject.Service
             if (acceptedRequest == 0)
                 return acceptedRequest;
             acceptedRequest /= ordinaryTours.Count();
-            return acceptedRequest *= 100;
+            return (acceptedRequest *= 100).Round(2);
         }
     }
 }
