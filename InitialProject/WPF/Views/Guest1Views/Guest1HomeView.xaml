@@ -66,7 +66,7 @@
                     <TextBlock Text="REVIEWS" Margin="-7" FontSize="20" TextAlignment="Center" Width="178" FontWeight="ExtraBlack"/>
                 </MenuItem.Header>
             </MenuItem>
-            <MenuItem FontSize="20" Width="162">
+            <MenuItem FontSize="20" Width="162" Command="{Binding ForumCommand}">
                 <MenuItem.Header>
                     <TextBlock Text="FORUM" Margin="-7" FontSize="20" TextAlignment="Center" Width="162" FontWeight="ExtraBlack"/>
                 </MenuItem.Header>
