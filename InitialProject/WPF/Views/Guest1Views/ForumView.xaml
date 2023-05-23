@@ -166,7 +166,7 @@
             </i:Interaction.Triggers>
             <ComboBox.ItemContainerStyle>
                 <Style TargetType="ComboBoxItem">
-                    <Setter Property="Width" Value="258"></Setter>
+                    <Setter Property="Width" Value="374"></Setter>
                     <Setter Property="HorizontalContentAlignment" Value="Left"/>
                     <Setter Property="VerticalContentAlignment" Value="Center"/>
                     <Setter Property="ContentTemplate">
@@ -210,7 +210,7 @@
         <ComboBox x:Name="cityInput" ItemsSource="{Binding CitiesByCountry}" VerticalContentAlignment="Center" FontWeight="Medium" Foreground="#22301a" SelectedItem="{Binding LocationCity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsTextSearchEnabled="True" IsEnabled="{Binding Path=IsCityComboBoxEnabled}" IsTextSearchCaseSensitive="False" HorizontalAlignment="Right" Width="374" Height="34" Margin="0,35,45,0" FontSize="18" Grid.Row="1" Grid.Column="2">
             <ComboBox.ItemContainerStyle>
                 <Style TargetType="ComboBoxItem">
-                    <Setter Property="Width" Value="258"></Setter>
+                    <Setter Property="Width" Value="374"></Setter>
                     <Setter Property="HorizontalContentAlignment" Value="Left"/>
                     <Setter Property="VerticalContentAlignment" Value="Center"/>
                     <Setter Property="ContentTemplate">
@@ -249,7 +249,7 @@
         </ComboBox>
         <Border BorderBrush="#22301a" BorderThickness="3" Width="380" Height="40" HorizontalAlignment="Right" Margin="0,35,42,0" VerticalAlignment="Center" Grid.Row="1" Grid.Column="2"></Border>
 
-        <Button x:Name="Search" FontWeight="Bold" IsEnabled="{Binding Path=IsInputValid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0,160,42,0" Width="100" HorizontalAlignment="Right" Height="35" Command="{Binding SearchCommand}"  VerticalAlignment="Top" FontSize="18" Grid.Row="1" BorderBrush="#FF22301A" BorderThickness="3,3,3,3">
+        <Button x:Name="Search" FontWeight="Bold" Margin="0,160,42,0" Width="100" HorizontalAlignment="Right" Height="35" Command="{Binding NextCommand}"  VerticalAlignment="Top" FontSize="18" Grid.Row="1" BorderBrush="#FF22301A" BorderThickness="3,3,3,3">
             <Grid Background="#8c9d75" Width="100"  HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
