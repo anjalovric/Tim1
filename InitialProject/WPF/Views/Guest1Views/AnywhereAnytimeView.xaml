@@ -156,7 +156,7 @@
 
         <!-- INPUT FORM -->
         <Label VerticalAlignment="Top" Grid.Row="1" Height="35" Margin="86,8,0,0" HorizontalAlignment="Left" TextElement.FontWeight="DemiBold" Content="Arrival date" Grid.Column="0"/>
-        <Label VerticalAlignment="Top" Grid.Row="1" Height="35" Margin="299,8,0,0" HorizontalAlignment="Left" TextElement.FontWeight="DemiBold" Content="Departure date"/>
+        <Label VerticalAlignment="Top" Grid.Row="1" Height="35" Margin="309,8,0,0" HorizontalAlignment="Left" TextElement.FontWeight="DemiBold" Content="Departure date"/>
 
         <Viewbox Height="180"  HorizontalAlignment="Left" Width="Auto" VerticalAlignment="Top" Margin="42,43,0,0" Grid.Column="0" Grid.Row="1">
             <Calendar x:Name="CalendarStart" SelectedDate="{Binding Arrival, Mode=TwoWay}">
@@ -168,7 +168,7 @@
             </Calendar>
         </Viewbox>
 
-        <Viewbox Margin="270,43,0,0" Height="180" Width="Auto" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Top">
+        <Viewbox Margin="280,43,0,0" Height="180" Width="Auto" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Top">
             <Calendar x:Name="CalendarEnd" SelectedDate="{Binding Departure, Mode=TwoWay}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="PreviewMouseUp">
@@ -177,14 +177,14 @@
                 </i:Interaction.Triggers>
             </Calendar>
         </Viewbox>
-        <TextBox x:Name="numberOfDaysInput" Text="{Binding NumberOfDays, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" VerticalAlignment="Top" TextAlignment="Center" Width="218" Height="40" FontSize="18" Grid.Row="1" HorizontalAlignment="Right" Margin="0,43,92,0"/>
+        <TextBox x:Name="numberOfDaysInput" Text="{Binding NumberOfDays, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" VerticalAlignment="Top" TextAlignment="Center" Width="268" Height="40" FontSize="18" Grid.Row="1" HorizontalAlignment="Right" Margin="0,43,92,0"/>
         <Button x:Name="incrementNumberOfDays" IsEnabled="{Binding IsNumberOfDaysValid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Command="{Binding IncrementDaysNumberCommand}" Content="+" VerticalAlignment="Top" Height="40" Grid.Row="1" HorizontalAlignment="Right" Width="45" Margin="0,43,42,0"/>
-        <Button x:Name="decrementNumberOfDays"  IsEnabled="{Binding IsNumberOfDaysValid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Command="{Binding DecrementDaysNumberCommand}"  Content="-"  HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,43,315,0" Grid.Row="1" Height="40" Width="45"/>
-        <Label VerticalAlignment="Top" Grid.Row="1" Height="35" Margin="664,8,0,0" HorizontalAlignment="Left" TextElement.FontWeight="DemiBold" Content="Number of days:"/>
-        <TextBox x:Name="numberOfDaysInput_Copy" Text="{Binding NumberOfDays, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" VerticalAlignment="Top" TextAlignment="Center" Width="218" Height="40" FontSize="18" Grid.Row="1" HorizontalAlignment="Right" Margin="0,125,92,0"/>
+        <Button x:Name="decrementNumberOfDays"  IsEnabled="{Binding IsNumberOfDaysValid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Command="{Binding DecrementDaysNumberCommand}"  Content="-"  HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,43,365,0" Grid.Row="1" Height="40" Width="45"/>
+        <Label VerticalAlignment="Top" Grid.Row="1" Height="35" Margin="614,8,0,0" HorizontalAlignment="Left" TextElement.FontWeight="DemiBold" Content="Number of days:"/>
+        <TextBox x:Name="numberOfDaysInput_Copy" Text="{Binding NumberOfDays, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" VerticalAlignment="Top" TextAlignment="Center" Width="268" Height="40" FontSize="18" Grid.Row="1" HorizontalAlignment="Right" Margin="0,125,92,0"/>
         <Button x:Name="incrementNumberOfDays_Copy" IsEnabled="{Binding IsNumberOfDaysValid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Command="{Binding IncrementDaysNumberCommand}" Content="+" VerticalAlignment="Top" Height="40" Grid.Row="1" HorizontalAlignment="Right" Width="45" Margin="0,125,42,0"/>
-        <Button x:Name="decrementNumberOfDays_Copy"  IsEnabled="{Binding IsNumberOfDaysValid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Command="{Binding DecrementDaysNumberCommand}"  Content="-"  HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,125,315,0" Grid.Row="1" Height="40" Width="45"/>
-        <Label VerticalAlignment="Top" Grid.Row="1" Height="35" Margin="664,90,0,0" HorizontalAlignment="Left" TextElement.FontWeight="DemiBold" Content="Number of guests:"/>
+        <Button x:Name="decrementNumberOfDays_Copy"  IsEnabled="{Binding IsNumberOfDaysValid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Command="{Binding DecrementDaysNumberCommand}"  Content="-"  HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,125,365,0" Grid.Row="1" Height="40" Width="45"/>
+        <Label VerticalAlignment="Top" Grid.Row="1" Height="35" Margin="614,90,0,0" HorizontalAlignment="Left" TextElement.FontWeight="DemiBold" Content="Number of guests:"/>
         <Button x:Name="Search" FontWeight="Bold" IsEnabled="{Binding Path=IsInputValid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0,185,42,0" Width="100" HorizontalAlignment="Right" Height="35" Command="{Binding SearchCommand}"  VerticalAlignment="Top" FontSize="18" Grid.Row="1" BorderBrush="#FF22301A" BorderThickness="3,3,3,3">
             <Grid Background="#8c9d75" Width="100"  HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" >
                 <Grid.ColumnDefinitions>
