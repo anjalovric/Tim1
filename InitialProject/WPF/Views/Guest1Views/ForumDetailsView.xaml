@@ -1,0 +1,218 @@
+﻿<Page x:Class="InitialProject.WPF.Views.Guest1Views.ForumDetailsView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:InitialProject.WPF.Views.Guest1Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="696" d:DesignWidth="1024"
+      Title="ForumDetailsView">
+    <Page.Resources>
+        <DataTemplate x:Key="forumTemplate" x:Name="forumCard">
+            <Border BorderBrush="#37492d" BorderThickness="5"  Margin="1" HorizontalAlignment="Center" Width="884" Height="120">
+                <Grid HorizontalAlignment="Center" Grid.ColumnSpan="3" Height="111" Width="884" VerticalAlignment="Center">
+                    <Grid.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                            <GradientStop Color="#37492d" Offset="0"/>
+                            <GradientStop Color="#FFFCECB9" Offset="0.1"></GradientStop>
+                            <GradientStop Color="#FFFCECB9" Offset="0.4"/>
+                            <GradientStop Color="#FFFCECB9" Offset="0.5"/>
+                            <GradientStop Color="#FFFCECB9" Offset="0.6"/>
+                            <GradientStop Color="#FFFCECB9" Offset="0.9"></GradientStop>
+                            <GradientStop Color="#37492d" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Grid.Background>
+                    <Grid.Resources>
+                        <Style TargetType="Label">
+                            <Setter Property="Foreground" Value="#37492d"></Setter>
+                            <Setter Property="FontSize" Value="18"></Setter>
+                            <Setter Property="FontWeight" Value="Medium"></Setter>
+                        </Style>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Foreground" Value="#37492d"></Setter>
+                            <Setter Property="FontWeight" Value="UltraBlack"></Setter>
+                            <Setter Property="FontSize" Value="18"></Setter>
+                        </Style>
+                    </Grid.Resources>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                        <ColumnDefinition Width="2*"></ColumnDefinition>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- COVER IMAGE FOR CARD -->
+                    <Image x:Name="forumImage" Height="Auto" Width="136" HorizontalAlignment="Left" Source="{Binding Path=CoverImage.Url}" Stretch="Fill"  VerticalAlignment="Center" Grid.Column="0" Grid.RowSpan="2" Margin="10,10,0,10"/>
+
+                    <!-- MAIN INFO -->
+                    <Label Content="Location:" FontWeight="Medium" Padding="0,15,0,0" HorizontalAlignment="Left" Width="67" VerticalAlignment="Center" VerticalContentAlignment="Center" Grid.Row="0" Grid.Column="1"/>
+                    <Label Content="Comments:" FontWeight="Medium" Padding="0,15,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" VerticalContentAlignment="Center" Width="67"  Grid.Row="0" Grid.Column="2"/>
+                    <TextBlock Text="{Binding Path=Name}" Margin="0,0,0,15" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Width="Auto" Height="30" HorizontalAlignment="Left"/>
+                    <TextBlock Text="{Binding Path=Type}" Margin="0,0,0,15" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" Width="Auto" Height="30" HorizontalAlignment="Left"/>
+
+
+                    <!-- OPEN BUTTON -->
+                    <Button x:Name="Open"  Command="{Binding Path=DataContext.ReserveCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" FontWeight="Bold" Grid.Row="1" Grid.Column="6" VerticalAlignment="Center" Width="100" Height="35" HorizontalAlignment="Center" FontSize="18">
+                        <Grid Background="#8c9d75" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Source="/Resources/Images/back.png" VerticalAlignment="Center" HorizontalAlignment="Right"  Margin="0,0,0,0" Width="Auto" Height="22" Grid.Column="1" RenderTransformOrigin="0.5,0.5">
+                                <Image.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform/>
+                                        <SkewTransform/>
+                                        <RotateTransform Angle="180"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </Image.RenderTransform>
+                            </Image>
+                            <TextBlock Text="Open" Grid.Column="0" VerticalAlignment="Center" FontSize="18" Margin="8,0,0,0"  Foreground="#22301a" FontWeight="Bold" HorizontalAlignment="Left" Width="Auto"/>
+                        </Grid>
+                    </Button>
+
+                    <!-- SUPER-OWNER MARK -->
+                    <Image Source="/Resources/Images/super11.png" Height="30" Width="30" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" Margin="0,0,150,0" HorizontalAlignment="Center">
+                        <Image.Style>
+                            <Style TargetType="Image">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Owner.IsSuperOwner}" Value="True">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                </Grid>
+            </Border>
+        </DataTemplate>
+        <Style TargetType="Button">
+            <Setter Property="Padding" Value="0"></Setter>
+            <Setter Property="Background" Value="#8c9d75"></Setter>
+            <Setter Property="Foreground" Value="#22301a"></Setter>
+            <Setter Property="FontWeight" Value="UltraBlack"></Setter>
+            <Setter Property="FontSize" Value="18"></Setter>
+            <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+            <Setter Property="BorderBrush" Value="#22301a"></Setter>
+            <Setter Property="BorderThickness" Value="3,3,3,3"></Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Opacity" Value="0.5"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="{x:Type Grid}">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="#22301a" Offset="0"/>
+                        <GradientStop Color="#37492d" Offset="0.2"/>
+                        <GradientStop Color="#37492d" Offset="0.4"/>
+                        <GradientStop Color="#37492d" Offset="0.5"/>
+                        <GradientStop Color="#37492d" Offset="0.6"/>
+                        <GradientStop Color="#37492d" Offset="0.8"/>
+                        <GradientStop Color="#22301a" Offset="1"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="Foreground" Value="#d9c7b3"></Setter>
+            <Setter Property="FontWeight" Value="Medium"></Setter>
+            <Setter Property="FontSize" Value="18"></Setter>
+        </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="Background" Value="#FFFCECB9"></Setter>
+            <Setter Property="BorderBrush" Value="#22301a"></Setter>
+            <Setter Property="BorderThickness" Value="3"></Setter>
+            <Setter Property="Foreground" Value="#22301a"></Setter>
+            <Setter Property="FontSize" Value="18"></Setter>
+            <Setter Property="FontWeight" Value="Medium"></Setter>
+            <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+        </Style>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="4*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+
+        <TextBlock Foreground="#d9c7b3" VerticalAlignment="Center" FontWeight="Bold"  Background="Transparent" Grid.Row="0" FontSize="24" Margin="0,25,0,0" FontFamily="Baskerville Old Face" HorizontalAlignment="Center">
+            <Run Text="FORUM - "/>    
+            <Run Text="{Binding Location.City}"/>
+        </TextBlock>
+        <!-- BACK BUTTON -->
+        <Button FontSize="18" FontWeight="Bold" IsEnabled="True" Height="35" Width="100" Margin="42,25,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" Command="NavigationCommands.BrowseBack">
+            <Grid Background="#8c9d75" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Image Source="/Resources/Images/back.png" HorizontalAlignment="Left" Margin="10,0,0,0" Width="26" Height="22" Grid.Column="0"/>
+                <TextBlock Background="#8c9d75" Text="Back" Grid.Column="1" VerticalAlignment="Center" FontSize="18" Margin="8,0,0,0"  Foreground="#22301a" FontWeight="Bold" HorizontalAlignment="Center" Width="Auto"/>
+            </Grid>
+        </Button>
+
+        <Button x:Name="Close" FontWeight="Bold" VerticalAlignment="Center" IsEnabled="{Binding Path=IsInputValid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0,25,42,0" Width="100" HorizontalAlignment="Right" Height="35" Command="{Binding SearchCommand}" FontSize="18" Grid.Row="0" BorderBrush="#FF22301A" BorderThickness="3,3,3,3">
+            <Grid Background="#8c9d75" Width="100"  HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Image Source="/Resources/Images/cancel.png" VerticalAlignment="Center" HorizontalAlignment="Right"  Margin="0,0,0,0" Width="Auto" Height="22" Grid.Column="1" RenderTransformOrigin="0.5,0.5"></Image>
+                <TextBlock Background="#8c9d75" Text="Close" Grid.Column="0" VerticalAlignment="Center" FontSize="18"  Foreground="#22301a" Margin="15,0,0,0" FontWeight="Bold" HorizontalAlignment="Left" Width="54"/>
+            </Grid>
+        </Button>
+
+        <Label Grid.Row="1" Height="35" Margin="42,0,0,20" VerticalAlignment="Center" HorizontalAlignment="Left" Content="Add comment:"/>
+        <TextBox x:Name="comment" Text="{Binding NumberOfDays, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Height="74" FontSize="18" Grid.Row="1" Margin="205,0,42,20"/>
+
+        <Button x:Name="Add" FontWeight="Bold" VerticalAlignment="Bottom" IsEnabled="{Binding Path=IsInputValid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,42,10" Width="100" HorizontalAlignment="Right" Height="35" Command="{Binding SearchCommand}" FontSize="18" Grid.Row="1" BorderBrush="#FF22301A" BorderThickness="3,3,3,3">
+            <Grid Background="#8c9d75" Width="100"  HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Image Source="/Resources/Images/back.png" VerticalAlignment="Center" HorizontalAlignment="Right"  Margin="0,0,0,0" Width="Auto" Height="22" Grid.Column="1" RenderTransformOrigin="0.5,0.5">
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="180"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
+                <TextBlock Background="#8c9d75" Text="Add" Grid.Column="0" VerticalAlignment="Center" FontSize="18"  Foreground="#22301a" Margin="15,0,0,0" FontWeight="Bold" HorizontalAlignment="Left" Width="54"/>
+            </Grid>
+        </Button>
+
+        <ListBox x:Name="commentsList" ScrollViewer.VerticalScrollBarVisibility="Visible" IsSynchronizedWithCurrentItem="True" SelectionMode="Single" ItemsSource="{Binding Path=Accommodations,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" ItemTemplate="{StaticResource forumTemplate}" Grid.ColumnSpan="3" Grid.Row="2" Margin="42,30,42,0" VerticalAlignment="Top" Background="#37492d" BorderThickness="5,5,5,5"  BorderBrush="#8c9d75" Height="300">
+            <ListBox.Resources>
+                <Style TargetType="ListViewItem">
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseCaptured"  Value="True">
+                            <Setter Property="IsSelected" Value="True"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </ListBox.Resources>
+        </ListBox>
+
+    </Grid>
+</Page>

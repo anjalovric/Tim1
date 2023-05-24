@@ -1,0 +1,43 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using InitialProject.Model;
+using InitialProject.Serializer;
+
+namespace InitialProject.Domain.Model
+{
+    public class ForumComment : ISerializable
+    {
+        public int Id { get; set; }
+        public Forum Forum { get; set; }
+        public User User { get; set; }
+        public DateTime CreatingDate { get; set; }
+
+        public ForumComment() { }
+        public ForumComment(Forum forum, User user, DateTime creatingDate)
+        {
+            Forum = forum;
+            User = user;
+            CreatingDate = creatingDate;
+        }
+
+        public void FromCSV(string[] values)
+        {
+            Id = Convert.ToInt32(values[0]);
+            Forum = new Forum();
+            Forum.Id = Convert.ToInt32(values[1]);
+            User = new User();
+            User.Id = Convert.ToInt32(values[2]);
+            CreatingDate = Convert.ToDateTime(values[3]);
+        }
+        public string[] ToCSV()
+        {
+            string[] csvValues = { Id.ToString(), Forum.Id.ToString(), User.Id.ToString(), CreatingDate.ToString() };
+            return csvValues;
+        }
+
+
+    }
+}
