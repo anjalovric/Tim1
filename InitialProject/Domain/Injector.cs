@@ -45,11 +45,11 @@ namespace InitialProject.Domain
         { typeof(INewTourNotificationRepository), new NewTourNotificationRepository() },
         { typeof(IReviewNotificationRepository), new ReviewNotificationRepository() },
         { typeof(IRequestNotificationRepository), new RequestNotificationRepository() },
-<<<<<<< HEAD
-            {typeof(ISuperGuideRepository), new SuperGuideRepository() }
-=======
+
+            {typeof(ISuperGuideRepository), new SuperGuideRepository() },
+
         { typeof(IForumRepository), new ForumRepository() }
->>>>>>> 5fd75e68293b4d56a714e5b3dae34a2c8c54383f
+
         };
 
         public static T CreateInstance<T>()

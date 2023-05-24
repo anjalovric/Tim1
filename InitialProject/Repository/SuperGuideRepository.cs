@@ -52,7 +52,7 @@ namespace InitialProject.Repository
         {
             superGuides = _serializer.FromCSV(FilePath);
             SuperGuide founded = superGuides.Find(c => c.Id == superGuide.Id);
-            superGuides.Remove(superGuide);
+            superGuides.Remove(founded);
             _serializer.ToCSV(FilePath, superGuides);
         }
     }

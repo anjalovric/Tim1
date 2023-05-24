@@ -1,17 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using InitialProject.Model;
+using InitialProject.WPF.ViewModels.GuideViewModels;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace InitialProject.WPF.Views.GuideViews
 {
@@ -20,9 +9,10 @@ namespace InitialProject.WPF.Views.GuideViews
     /// </summary>
     public partial class ProfileView : Page
     {
-        public ProfileView()
+        public ProfileView(User loggedUser)
         {
             InitializeComponent();
+            DataContext = new ProfileViewModel(loggedUser);
         }
     }
 }

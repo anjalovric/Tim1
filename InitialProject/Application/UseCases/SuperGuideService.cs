@@ -8,7 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Input;
 
-namespace InitialProject.Application.UseCases
+namespace InitialProject.APPLICATION.UseCases
 {
     public class SuperGuideService
     {
@@ -45,7 +45,7 @@ namespace InitialProject.Application.UseCases
                 foreach (TourInstance tourInstance in tourInstanceService.GetAll())
                 {
                     tourService.SetTour(tourInstance);
-                    if (!languages.Contains(tourInstance.Tour.Language) && tourInstance.Finished && tourInstance.Guide == guide)
+                    if (!languages.Contains(tourInstance.Tour.Language) && tourInstance.Finished && tourInstance.Guide.Id == guide.Id)
                         languages.Add(tourInstance.Tour.Language);
                 }
             }
@@ -62,12 +62,12 @@ namespace InitialProject.Application.UseCases
             foreach (TourInstance tourInstance in tourInstanceService.GetAll())
             {
                 tourService.SetTour(tourInstance);
-                if (tourInstance.Tour.Language.Equals(language) && tourInstance.Finished && tourInstance.Guide == guide && tourInstance.StartDate >= Convert.ToDateTime(yearago) && tourInstance.StartDate<=DateTime.Now)
+                if (tourInstance.Tour.Language.Equals(language) && tourInstance.Finished && tourInstance.Guide.Id == guide.Id && tourInstance.StartDate >= Convert.ToDateTime(yearago) && tourInstance.StartDate<=DateTime.Now)
                 {
                     tourCount++;
                     GuideAndTourReview guideAndTourReview = guideAndTourReviewService.GetReviewsByGuide(guide.Id).Find(x=>x.TourInstance.Id== tourInstance.Id);
                     if (guideAndTourReview != null)
-                        averageGrade += (guideAndTourReview.Language + guideAndTourReview.InterestingFacts + guideAndTourReview.Knowledge) / 3;
+                        averageGrade += Convert.ToDouble(Convert.ToDouble(guideAndTourReview.Language + guideAndTourReview.InterestingFacts + guideAndTourReview.Knowledge) / Convert.ToDouble(3));
                 }
             }
 
@@ -76,7 +76,7 @@ namespace InitialProject.Application.UseCases
         
         public bool CheckIsSuperGuide(int tourCount, double averageGrade)
         {
-            return (!(tourCount < 20 || averageGrade / tourCount < 4.0));
+            return (!(tourCount < 2 || (averageGrade/tourCount) < 4));
         }
 
         public void CheckSuperGuideStatus(Guide guide)
