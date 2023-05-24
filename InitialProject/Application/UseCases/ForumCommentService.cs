@@ -6,14 +6,21 @@ using System.Threading.Tasks;
 using InitialProject.Domain.Model;
 using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Domain;
+using InitialProject.Model;
+using InitialProject.Service;
+using System.Configuration;
 
 namespace InitialProject.APPLICATION.UseCases
 {
     public class ForumCommentService
     {
         private IForumCommentRepository forumCommentRepository = Injector.CreateInstance<IForumCommentRepository>();
+        private Guest1Service guest1Service;
+        private OwnerService ownerService;
         public ForumCommentService()
         {
+            guest1Service = new Guest1Service();
+            ownerService = new OwnerService();
         }
 
         public List<ForumComment> GetAll()
@@ -28,6 +35,24 @@ namespace InitialProject.APPLICATION.UseCases
         public ForumComment GetById(int id)
         {
             return forumCommentRepository.GetById(id);
+        }
+        private void SetUsers(List<ForumComment> storedForumComments)
+        {
+            foreach (ForumComment comment in storedForumComments)
+            {
+                Guest1 guest1 = guest1Service.GetByUsername(comment.User.Username);
+                if (guest1 != null)
+                    comment.User = guest1;
+                else
+                    comment.User = ownerService.GetByUsername(comment.User.Username);
+            }
+        }
+        public List<ForumComment> GetAllByForumId(int id)
+        {
+            List<ForumComment> storedForumComments = new List<ForumComment>(forumCommentRepository.GetAllByForumId(id));
+            SetUsers(storedForumComments);
+
+            return storedForumComments;
         }
     }
 }

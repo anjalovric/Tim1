@@ -50,5 +50,12 @@ namespace InitialProject.Repository
         {
             return _comments.Find(n => n.Id == id);
         }
+
+        public List<ForumComment> GetAllByForumId(int id)
+        {
+            return _comments.FindAll(n => n.Forum.Id == id);
+        }
+
     }
+
 }

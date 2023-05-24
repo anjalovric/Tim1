@@ -10,5 +10,6 @@ namespace InitialProject.Domain.RepositoryInterfaces
     public interface IForumCommentRepository : IGenericRepository<ForumComment>
     {
         public void Add(ForumComment forumComment);
+        public List<ForumComment> GetAllByForumId(int id);
     }
 }

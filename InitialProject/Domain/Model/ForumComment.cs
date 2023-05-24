@@ -12,15 +12,18 @@ namespace InitialProject.Domain.Model
     {
         public int Id { get; set; }
         public Forum Forum { get; set; }
+        public String Text { get; set; }
         public User User { get; set; }
         public DateTime CreatingDate { get; set; }
 
         public ForumComment() { }
-        public ForumComment(Forum forum, User user, DateTime creatingDate)
+        public ForumComment(Forum forum, User user, DateTime creatingDate, string text)
         {
             Forum = forum;
             User = user;
             CreatingDate = creatingDate;
+            Text = text;    
+
         }
 
         public void FromCSV(string[] values)
@@ -29,12 +32,13 @@ namespace InitialProject.Domain.Model
             Forum = new Forum();
             Forum.Id = Convert.ToInt32(values[1]);
             User = new User();
-            User.Id = Convert.ToInt32(values[2]);
+            User.Username = values[2];
             CreatingDate = Convert.ToDateTime(values[3]);
+            Text = values[4];
         }
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), Forum.Id.ToString(), User.Id.ToString(), CreatingDate.ToString() };
+            string[] csvValues = { Id.ToString(), Forum.Id.ToString(), User.Username, CreatingDate.ToString(), Text };
             return csvValues;
         }
 

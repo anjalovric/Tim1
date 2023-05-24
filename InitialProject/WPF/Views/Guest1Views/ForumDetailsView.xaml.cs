@@ -12,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using InitialProject.Domain.Model;
+using InitialProject.Model;
+using InitialProject.WPF.ViewModels.Guest1ViewModels;
 
 namespace InitialProject.WPF.Views.Guest1Views
 {
@@ -20,9 +23,12 @@ namespace InitialProject.WPF.Views.Guest1Views
     /// </summary>
     public partial class ForumDetailsView : Page
     {
-        public ForumDetailsView()
+        private ForumDetailsViewModel forumDetailsViewModel;
+        public ForumDetailsView(Guest1 guest1, Forum newForum)
         {
             InitializeComponent();
+            forumDetailsViewModel = new ForumDetailsViewModel(guest1, newForum);
+            this.DataContext = forumDetailsViewModel;
         }
     }
 }
