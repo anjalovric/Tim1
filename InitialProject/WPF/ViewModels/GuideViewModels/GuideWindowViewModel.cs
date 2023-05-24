@@ -1,5 +1,6 @@
 ﻿using InitialProject.Model;
 using InitialProject.Service;
+using InitialProject.WPF.Views;
 using InitialProject.WPF.Views.GuideViews;
 using System;
 using System.Collections.ObjectModel;
@@ -49,6 +50,7 @@ namespace InitialProject.WPF.ViewModels
         public RelayCommand SignOutCommand { get; set; }
         public RelayCommand OrdinaryRequestCommand { get; set; }
         public RelayCommand RequestYearlyStatisticsCommand { get; set; }
+        public RelayCommand MyProfileCommand { get; set; }
         public GuideWindowViewModel(User user) 
         {
             tourStatisticsView = new TourStatisticsView(user);
@@ -84,6 +86,7 @@ namespace InitialProject.WPF.ViewModels
             SignOutCommand = new RelayCommand(SignOut_Executed, CanExecute);
             OrdinaryRequestCommand= new RelayCommand(OrdinaryRequest_Executed,CanExecute);
             RequestYearlyStatisticsCommand = new RelayCommand(RequestYearlyStatistic_Executed, CanExecute);
+            MyProfileCommand=new RelayCommand(MyProfile_Executed, CanExecute);
         }
 
         private bool CanExecute(object sender)
@@ -158,6 +161,13 @@ namespace InitialProject.WPF.ViewModels
         {
            OrdinaryRequestOverviewView ordinaryRequestOverviewView = new OrdinaryRequestOverviewView(loggedUser, homeView.viewModel.Tours, cancelView.cancelViewModel.TourInstances);
             Application.Current.Windows.OfType<GuideWindow>().FirstOrDefault().Main.Content = ordinaryRequestOverviewView;
+        }
+
+        private void MyProfile_Executed(object sender)
+        {
+            ProfileView myProfileView = new ProfileView(loggedUser);
+            Application.Current.Windows.OfType<GuideWindow>().FirstOrDefault().Main.Content = myProfileView;
+
         }
         private void ThemeChanged()
         {

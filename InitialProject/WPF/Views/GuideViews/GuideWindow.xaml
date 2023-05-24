@@ -69,7 +69,7 @@
                         <MenuItem  Height="33" Width="87.5"  Command="{Binding SignOutCommand}" Header="     ➲" FontSize="20" Style="{DynamicResource MenuItem}">
 
                         </MenuItem>
-                        <MenuItem  Height="33" Width="87.5" Header="    👤"  Style="{DynamicResource MenuItem}" FontSize="20">
+                        <MenuItem  Height="33" Width="87.5" Header="    👤"  Style="{DynamicResource MenuItem}" FontSize="20" Command="{Binding MyProfileCommand}">
 
                         </MenuItem>
 

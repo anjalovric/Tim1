@@ -141,6 +141,9 @@
   <data name="AddTourView" xml:space="preserve">
     <value>Dodaj turu</value>
   </data>
+  <data name="Age" xml:space="preserve">
+    <value>Godine</value>
+  </data>
   <data name="AgeStatistics" xml:space="preserve">
     <value>Statistika o godištu</value>
   </data>
@@ -246,6 +249,9 @@
   <data name="DurationInHours" xml:space="preserve">
     <value>Trajanje ture u satima</value>
   </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
   <data name="EndDate" xml:space="preserve">
     <value>Datum kraja</value>
   </data>
@@ -263,6 +269,9 @@
   </data>
   <data name="FINISHTOUR" xml:space="preserve">
     <value>ZAVRŠI TURU 🏁</value>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>Ime</value>
   </data>
   <data name="GENERATEREPORT" xml:space="preserve">
     <value>GENERIŠI IZVEŠTAJ</value>
@@ -329,6 +338,9 @@
   </data>
   <data name="langugaeinlastyear" xml:space="preserve">
     <value>jeziku u prošloj godini</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>Prezime</value>
   </data>
   <data name="LIGHT" xml:space="preserve">
     <value>SVETLO</value>
@@ -503,6 +515,9 @@
   </data>
   <data name="Under18" xml:space="preserve">
     <value>Ispod 18</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>Korisničko ime</value>
   </data>
   <data name="Validity" xml:space="preserve">
     <value>Validnost</value>

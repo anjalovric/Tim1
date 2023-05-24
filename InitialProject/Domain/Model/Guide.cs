@@ -12,25 +12,24 @@ namespace InitialProject.Model
         public int Id { get; set; }
         public string Name { get; set; }
         public string LastName { get; set; }
+        public string Email { get; set; }
+        public int Age { get; set; }
+
 
         public Guide() { }
-        public Guide(string name, string lastName,string username)
-        {
-            Name = name;
-            LastName = lastName;
-            Username = username;
-        }
         public void FromCSV(string[] values)
         {
             Id = Convert.ToInt32(values[0]);
             Name = values[1];
             LastName = values[2];
             Username = values[3];
+            Email= values[4];
+            Age = Convert.ToInt32(values[5]);
         }
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), Name, LastName, Username };
+            string[] csvValues = { Id.ToString(), Name, LastName, Username,Email,Age.ToString() };
             return csvValues;
         }
     }

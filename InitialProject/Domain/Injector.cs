@@ -46,7 +46,10 @@ namespace InitialProject.Domain
         { typeof(IReviewNotificationRepository), new ReviewNotificationRepository() },
         { typeof(IRequestNotificationRepository), new RequestNotificationRepository() },
         { typeof(IForumRepository), new ForumRepository() },
-        { typeof(IForumCommentRepository), new ForumCommentRepository() }
+        { typeof(IForumCommentRepository), new ForumCommentRepository() },
+        {typeof(ISuperGuideRepository), new SuperGuideRepository() }
+
+
         };
 
         public static T CreateInstance<T>()
