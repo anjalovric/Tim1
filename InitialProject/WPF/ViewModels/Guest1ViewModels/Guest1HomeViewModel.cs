@@ -38,7 +38,9 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         public RelayCommand SignOutCommand { get; set; }
         public RelayCommand NotificationsCommand { get; set; }
         public RelayCommand SubmenuOpenedCommand { get; set; }
+        public RelayCommand AnywhereAnytimeCommand { get; set; }
         public RelayCommand ReviewsCommand { get; set; }
+        public RelayCommand ForumCommand { get; set; }
         private ObservableCollection<MenuItem> storedNotifications;
         public ObservableCollection<MenuItem> StoredNotifications
         {
@@ -83,16 +85,29 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             NotificationsCommand = new RelayCommand(Notifications_Executed, CanExecute);
             SubmenuOpenedCommand = new RelayCommand(Submenu_Executed, CanExecute);
             ReviewsCommand = new RelayCommand(Reviews_Executed, CanExecute);
+            AnywhereAnytimeCommand = new RelayCommand(AnywhereAnytime_Executed, CanExecute);
+            ForumCommand = new RelayCommand(Forum_Executed, CanExecute);    
         }
         private bool CanExecute(object sender)
         {
             return true;
         }
 
+        private void AnywhereAnytime_Executed(object sender)
+        {
+            AnywhereAnytimeView anywhereAnytimeView = new AnywhereAnytimeView(guest1);
+            Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = anywhereAnytimeView;
+        }
+
         private void Booking_Executed(object sender)
         {
             Guest1SearchAccommodationView guest1SearchAccommodationView = new Guest1SearchAccommodationView(guest1);
             Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = guest1SearchAccommodationView;
+        }
+        private void Forum_Executed(object sender)
+        {
+            ForumView forumView = new ForumView(guest1);
+            Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = forumView;
         }
 
         private void MyReservations_Executed(object sender)

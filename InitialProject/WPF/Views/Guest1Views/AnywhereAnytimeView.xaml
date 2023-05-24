@@ -1,0 +1,286 @@
+﻿<Page
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:InitialProject.WPF.Views.Guest1Views"
+      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" x:Class="InitialProject.WPF.Views.Guest1Views.AnywhereAnytimeView"
+      mc:Ignorable="d" 
+      d:DesignHeight="696" d:DesignWidth="1024"
+      Title="AnywhereAnytimeView">
+    <Page.Resources>
+        <ControlTemplate x:Key="ValidationTemplate">
+            <StackPanel>
+                <!-- Placeholder for the TextBox itself -->
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <AdornedElementPlaceholder  Grid.Column="0" Grid.Row="0"/>
+                    <TextBlock Grid.Column="0" Grid.Row="1" FontSize="15" TextAlignment="Center" Width="157" TextWrapping="Wrap" FontWeight="Medium" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                </Grid>
+            </StackPanel>
+        </ControlTemplate>
+        <Style TargetType="{x:Type Grid}">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="#22301a" Offset="0"/>
+                        <GradientStop Color="#37492d" Offset="0.2"/>
+                        <GradientStop Color="#37492d" Offset="0.4"/>
+                        <GradientStop Color="#37492d" Offset="0.5"/>
+                        <GradientStop Color="#37492d" Offset="0.6"/>
+                        <GradientStop Color="#37492d" Offset="0.8"/>
+                        <GradientStop Color="#22301a" Offset="1"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="DataGrid">
+            <Setter Property="BorderBrush" Value="#22301a"></Setter>
+            <Setter Property="BorderThickness" Value="4,4,3,4"></Setter>
+            <Setter Property="ColumnHeaderHeight" Value="45"></Setter>
+            <Setter Property="RowBackground" Value="#FFFCECB9"></Setter>
+            <Setter Property="RowHeight" Value="30"></Setter>
+            <Setter Property="CanUserReorderColumns" Value="False"></Setter>
+            <Setter Property="CanUserResizeColumns" Value="False"></Setter>
+            <Setter Property="CanUserResizeRows" Value="False"></Setter>
+            <Setter Property="CanUserSortColumns" Value="False"></Setter>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="#dbc9ab" Offset="0.1"/>
+                        <GradientStop Color="#FFF9ECC5" Offset="0.4"/>
+                        <GradientStop Color="#FFF9ECC5" Offset="0.5"/>
+                        <GradientStop Color="#FFF9ECC5" Offset="0.6"/>
+                        <GradientStop Color="#dbc9ab" Offset="0.9"></GradientStop>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="FontSize" Value="16"></Setter>
+            <Setter Property="UseLayoutRounding" Value="False"></Setter>
+            <Setter Property="HeadersVisibility" Value="Column"></Setter>
+            <Setter Property="IsReadOnly" Value="True"></Setter>
+            <Setter Property="AutoGenerateColumns" Value="False"></Setter>
+        </Style>
+        <Style TargetType="DataGridColumnHeader">
+            <Setter Property="TextElement.Foreground" Value="#22301a"></Setter>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="BorderThickness" Value="0,0,1,4"/>
+            <Setter Property="BorderBrush" Value="#22301a"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="#dbc9ab" Offset="0"/>
+                        <GradientStop Color="#FFF9ECC5" Offset="0.5"/>
+                        <GradientStop Color="#dbc9ab" Offset="1"></GradientStop>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="DataGridCell">
+            <Setter Property="TextBlock.TextAlignment" Value="Center"></Setter>
+            <Style.Triggers>
+                <Trigger Property="IsSelected"  Value="True">
+                    <Setter Property="Foreground" Value="SeaGreen"></Setter>
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="BorderBrush" Value="Transparent"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="DataGridRow">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="SeaGreen"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="Foreground" Value="#d9c7b3"></Setter>
+            <Setter Property="FontWeight" Value="Medium"></Setter>
+            <Setter Property="FontSize" Value="18"></Setter>
+        </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="Background" Value="#FFFCECB9"></Setter>
+            <Setter Property="BorderBrush" Value="#22301a"></Setter>
+            <Setter Property="BorderThickness" Value="3"></Setter>
+            <Setter Property="Foreground" Value="#22301a"></Setter>
+            <Setter Property="FontSize" Value="18"></Setter>
+            <Setter Property="FontWeight" Value="Medium"></Setter>
+            <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+        </Style>
+        <Style TargetType="Calendar">
+            <Setter Property="BorderBrush" Value="#22301a"></Setter>
+            <Setter Property="BorderThickness" Value="4"></Setter>
+            <Setter Property="Background" Value="#dbc9ab"></Setter>
+            <Setter Property="Width" Value="185"></Setter>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Padding" Value="0"></Setter>
+            <Setter Property="Background" Value="#8c9d75"></Setter>
+            <Setter Property="Foreground" Value="#22301a"></Setter>
+            <Setter Property="FontWeight" Value="UltraBlack"></Setter>
+            <Setter Property="FontSize" Value="18"></Setter>
+            <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+            <Setter Property="BorderBrush" Value="#22301a"></Setter>
+            <Setter Property="BorderThickness" Value="3,3,3,3"></Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Opacity" Value="0.5"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+    </Page.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="4.5*"/>
+            <RowDefinition Height="5*"/>
+        </Grid.RowDefinitions>
+
+        <Label Foreground="#d9c7b3" VerticalAlignment="Center" Content="ANYWHERE - ANYTIME"  FontWeight="Bold"  VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="24" Margin="0,25,0,0" FontFamily="Baskerville Old Face" HorizontalAlignment="Center"/>
+
+
+        <!-- INPUT FORM -->
+        <Label VerticalAlignment="Top" Grid.Row="1" Height="35" Margin="96,8,0,0" HorizontalAlignment="Left" TextElement.FontWeight="DemiBold" Content="Arrival date" Grid.Column="0"/>
+        <Label VerticalAlignment="Top" Grid.Row="1" Height="35" Margin="339,8,0,0" HorizontalAlignment="Left" TextElement.FontWeight="DemiBold" Content="Departure date"/>
+
+        <Viewbox Height="200"  HorizontalAlignment="Left" Width="Auto" VerticalAlignment="Top" Margin="42,43,0,0" Grid.Column="0" Grid.Row="1">
+            <Calendar x:Name="CalendarStart" SelectedDate="{Binding Arrival, Mode=TwoWay}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="PreviewMouseUp">
+                        <i:InvokeCommandAction Command="{Binding OnPreviewMouseUpCommand}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Calendar>
+        </Viewbox>
+
+        <Viewbox Margin="300,43,0,0" Height="200" Width="Auto" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Top">
+            <Calendar x:Name="CalendarEnd" SelectedDate="{Binding Departure, Mode=TwoWay}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="PreviewMouseUp">
+                        <i:InvokeCommandAction Command="{Binding OnPreviewMouseUpCommand}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Calendar>
+        </Viewbox>
+        <TextBox x:Name="numberOfDaysInput" Text="{Binding NumberOfDays, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" VerticalAlignment="Top" TextAlignment="Center" Width="268" Height="40" FontSize="18" Grid.Row="1" HorizontalAlignment="Right" Margin="0,43,92,0"/>
+        <Button x:Name="incrementNumberOfDays" IsEnabled="{Binding IsNumberOfDaysValid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Command="{Binding IncrementDaysNumberCommand}" Content="+" VerticalAlignment="Top" Height="40" Grid.Row="1" HorizontalAlignment="Right" Width="45" Margin="0,43,42,0"/>
+        <Button x:Name="decrementNumberOfDays"  IsEnabled="{Binding IsNumberOfDaysValid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Command="{Binding DecrementDaysNumberCommand}"  Content="-"  HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,43,365,0" Grid.Row="1" Height="40" Width="45"/>
+        <Label VerticalAlignment="Top" Grid.Row="1" Height="35" Margin="614,8,0,0" HorizontalAlignment="Left" TextElement.FontWeight="DemiBold" Content="Number of days:"/>
+        <TextBox x:Name="numberOfGuests" Text="{Binding NumberOfGuests, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" VerticalAlignment="Top" TextAlignment="Center" Width="268" Height="40" FontSize="18" Grid.Row="1" HorizontalAlignment="Right" Margin="0,150,92,0"/>
+        <Button x:Name="incrementNumberOfGuests" IsEnabled="{Binding IsNumberOfGuestsValid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Command="{Binding IncrementGuestsNumberCommand}" Content="+" VerticalAlignment="Top" Height="40" Grid.Row="1" HorizontalAlignment="Right" Width="45" Margin="0,150,42,0"/>
+        <Button x:Name="decrementNumberOfGuests"  IsEnabled="{Binding IsNumberOfGuestsValid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Command="{Binding DecrementGuestsNumberCommand}"  Content="-"  HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,150,365,0" Grid.Row="1" Height="40" Width="45"/>
+        <Label VerticalAlignment="Top" Grid.Row="1" Height="35" Margin="614,115,0,0" HorizontalAlignment="Left" TextElement.FontWeight="DemiBold" Content="Number of guests:"/>
+        <Button x:Name="Search" FontWeight="Bold" IsEnabled="{Binding Path=IsInputValid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0,236,49,0" Width="100" HorizontalAlignment="Right" Height="35" Command="{Binding SearchCommand}"  VerticalAlignment="Top" FontSize="18" Grid.Row="1" BorderBrush="#FF22301A" BorderThickness="3,3,3,3">
+            <Grid Background="#8c9d75" Width="100"  HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Image Source="/Resources/Images/search.png" VerticalAlignment="Center" HorizontalAlignment="Right"  Margin="0,0,0,0" Width="Auto" Height="22" Grid.Column="1" RenderTransformOrigin="0.5,0.5"></Image>
+                <TextBlock Background="#8c9d75" Text="Search" Grid.Column="0" VerticalAlignment="Center" FontSize="18"  Foreground="#22301a" Margin="10,0,0,0" FontWeight="Bold" HorizontalAlignment="Left" Width="58"/>
+            </Grid>
+        </Button>
+        <Button FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Right"  Margin="0,236,157,0" Command="{Binding ResetCommand}" Width="100" Height="35" Grid.Row="1" BorderBrush="#FF22301A" BorderThickness="3,3,3,3">
+            <Grid Background="#8c9d75" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Image Source="/Resources/Images/reset.png" VerticalAlignment="Center" HorizontalAlignment="Right"  Margin="0,0,0,0" Width="Auto" Height="22" Grid.Column="1" RenderTransformOrigin="0.5,0.5"></Image>
+                <TextBlock Background="#8c9d75" Text="Reset" Grid.Column="0" VerticalAlignment="Center" FontSize="18"  Foreground="#22301a" Margin="10,0,0,0" FontWeight="Bold" HorizontalAlignment="Left" Width="58"/>
+            </Grid>
+        </Button>
+
+        <DataGrid x:Name="SuggestedReservationsDataGrid" VerticalContentAlignment="Center" Margin="42,0,42,0" HorizontalAlignment="Center" VerticalAlignment="Top" ItemsSource="{Binding Path=SuggestedReservations,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SuggestedReservation}" Height="300" Width="Auto" Grid.Row="2">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Width="2*" Binding="{Binding Accommodation.Name}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="ToolTip" Value="{Binding Accommodation.Name}" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Super-owner" Width="2.5*" Binding="{Binding Accommodation.Location}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="ToolTip" Value="{Binding Accommodation.Location}" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Location" Width="2.5*" Binding="{Binding Accommodation.Location}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="ToolTip" Value="{Binding Accommodation.Location}" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Arrival" Width="3.2*" Binding="{Binding Arrival}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="ToolTip" Value="{Binding Arrival}" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Departure" Width="3.2*" Binding="{Binding Departure}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="ToolTip" Value="{Binding Departure}" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+
+                <DataGridTemplateColumn x:Name="Details" Header="Details" Width="2.2*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Name="Details" Background="#c99585"  VerticalAlignment="Center" FontWeight="Bold" Width="Auto" FontSize="16" Command="{Binding DataContext.RescheduleReservationCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}">
+                                <Grid Background="#c99585" Width="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" >
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Image Source="/Resources/Images/changedate.png" VerticalAlignment="Center" HorizontalAlignment="Right"  Margin="0,0,5,0" Width="Auto" Height="22" Grid.Column="1" RenderTransformOrigin="0.5,0.5">
+                                    </Image>
+                                    <TextBlock Text="Details" Grid.Column="0" VerticalAlignment="Center" FontSize="16"  Foreground="#22301a" Margin="5,0,0,0" FontWeight="Bold" HorizontalAlignment="Left" Width="Auto"/>
+                                </Grid>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn x:Name="Reserve" Header="Reserve" Width="94">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Name="Cancel" VerticalContentAlignment="Center" VerticalAlignment="Center" FontSize="16" Background="#c99585" Command="{Binding DataContext.CancelReservationCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" FontWeight="Bold">
+                                <Grid Background="#c99585" Width="94" HorizontalAlignment="Center" Height="35" VerticalAlignment="Center" >
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Image Source="/Resources/Images/cancel.png" VerticalAlignment="Center" HorizontalAlignment="Right"  Margin="5,0,5,0" Width="Auto" Height="22" Grid.Column="1" RenderTransformOrigin="0.5,0.5">
+                                    </Image>
+                                    <TextBlock Text="Reserve" Grid.Column="0" VerticalAlignment="Center" FontSize="16"  Foreground="#22301a" Margin="10,0,0,0" FontWeight="Bold" HorizontalAlignment="Left" Width="Auto"/>
+                                </Grid>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+
+    </Grid>
+</Page>

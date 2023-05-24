@@ -49,6 +49,8 @@ namespace InitialProject.WPF.ViewModels
         public RelayCommand SignOutCommand { get; set; }
         public RelayCommand OrdinaryRequestCommand { get; set; }
         public RelayCommand RequestYearlyStatisticsCommand { get; set; }
+
+        public RelayCommand MyProfileCommand { get; set; }
         public GuideWindowViewModel(User user) 
         {
             tourStatisticsView = new TourStatisticsView(user);

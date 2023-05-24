@@ -7,8 +7,44 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ProfileView">
+    <Page.Resources>
+        <DataTemplate x:Key="titles">
+            <Border Style="{DynamicResource Cards}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150"/>
 
-    <Grid>
-        
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="20"/>
+
+
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Grid.Column="0" >
+                <Run Text="🏅" Style="{DynamicResource Run}"/>
+
+                <Run Text="{Binding Path=CheckPoint.Name}" Style="{DynamicResource Run}" />
+                    </TextBlock>
+
+                    <TextBlock Grid.Row="1" Grid.Column="0" >
+                <Run Text="{Binding Language}" Style="{DynamicResource Run}" />
+                    </TextBlock>
+                </Grid>
+            </Border>
+        </DataTemplate>
+    </Page.Resources>
+    <Grid Style="{DynamicResource Background}">
+        <Grid Style="{DynamicResource BackgroundHeader }" Height="85" Margin="0,0,0,365">
+            <Label Style="{DynamicResource Header}" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">MY PROFILE</Label>
+            <Image HorizontalAlignment="Left"  VerticalAlignment="Center"  Source="/Resources/Images/LOGO (2).jpg" Width="253" Height="120"   />
+
+        </Grid>
+        <ListBox x:Name="list" Style="{DynamicResource ListBoxOut}" ItemsSource="{Binding CheckPointInformations}" Margin="29,104,692,31" ></ListBox>
+        <Border Style="{DynamicResource Border}" CornerRadius="15">
+            <Grid Style="{DynamicResource InnerGrid}" Margin="161,104,235,31">
+                <Label Style="{DynamicResource LabelToast}" Content="👤" FontSize="25" HorizontalContentAlignment="Center" Margin="0,0,0,272" Width="136"></Label>
+            </Grid>
+        </Border>
     </Grid>
 </Page>
