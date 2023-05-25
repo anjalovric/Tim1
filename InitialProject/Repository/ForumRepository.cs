@@ -37,6 +37,7 @@ namespace InitialProject.Repository
         public void Add(Forum forum)
         {
             forum.Id = NextId();
+            forum.CommentsNumber = 1;
             _forums.Add(forum);
             _serializer.ToCSV(FilePath, _forums);
         }
@@ -50,6 +51,16 @@ namespace InitialProject.Repository
         public Forum GetById(int id)
         {
             return _forums.Find(n => n.Id == id);
+        }
+        public void Update(Forum forum)
+        {
+            _forums = _serializer.FromCSV(FilePath);
+            Forum current = _forums.Find(c => c.Id == forum.Id);
+            int index = _forums.IndexOf(current);
+            _forums.Remove(current);
+            _forums.Insert(index, forum);
+            _serializer.ToCSV(FilePath, _forums);
+
         }
        
     }

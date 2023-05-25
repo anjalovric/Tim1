@@ -12,6 +12,7 @@ using InitialProject.WPF.Views.Guest1Views;
 using System.Windows;
 using InitialProject.Domain.Model;
 using InitialProject.APPLICATION.UseCases;
+using System.Windows.Controls;
 
 namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 {
@@ -23,6 +24,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         public RelayCommand CountryInputSelectionChangedCommand { get; set; }
         public RelayCommand NextCommand { get; set; }
         public RelayCommand ResetCommand { get; set; }
+        public RelayCommand OpenCommand { get; set; }
         private bool isCityComboBoxEnabled;
         public bool IsCityComboBoxEnabled
         {
@@ -75,10 +77,29 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                 }
             }
         }
+
+        //za prikaz svih foruma
+
+        private ObservableCollection<Forum> forums;
+        public ObservableCollection<Forum> Forums
+        {
+            get { return forums; }
+            set
+            {
+                if (value != forums)
+                    forums = value;
+                OnPropertyChanged("Forums");
+            }
+
+        }
+
+        private ForumService forumService;
         public ForumViewModel(Guest1 guest1)
         {
             this.guest1 = guest1;
             GetLocations();
+            forumService = new ForumService();
+            Forums = new ObservableCollection<Forum>(forumService.GetAll());
             MakeCommands();
         }
 
@@ -86,7 +107,14 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         {
             CountryInputSelectionChangedCommand = new RelayCommand(CountryInputSelectionChanged_Executed, CanExecute);
             NextCommand = new RelayCommand(Next_Executed, CanExecute);
-            ResetCommand = new RelayCommand(Reset_Executed, CanExecute);    
+            ResetCommand = new RelayCommand(Reset_Executed, CanExecute);
+            OpenCommand = new RelayCommand(Open_Executed, CanExecute);  
+        }
+        private void Open_Executed(object sender)
+        {
+            Forum currentForum = ((Button)sender).DataContext as Forum;
+            ForumDetailsView details = new ForumDetailsView(guest1, currentForum);
+            Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = details;
         }
         private bool CanExecute(object sender)
         {

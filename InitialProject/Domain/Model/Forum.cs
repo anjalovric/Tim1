@@ -17,7 +17,7 @@ namespace InitialProject.Domain.Model
 
         public Guest1 Guest1 { get; set; }
         public bool Opened { get; set; }
-
+        public int CommentsNumber { get; set; }
         public Forum() { }
         public Forum(Location location, Guest1 guest1)
         {
@@ -33,10 +33,11 @@ namespace InitialProject.Domain.Model
             Guest1 = new Guest1();
             Guest1.Id = Convert.ToInt32(values[2]);
             Opened = Convert.ToBoolean(values[3]);
+            CommentsNumber = Convert.ToInt32(values[4]);
         }
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), Location.Id.ToString(), Guest1.Id.ToString(), Opened.ToString() };
+            string[] csvValues = { Id.ToString(), Location.Id.ToString(), Guest1.Id.ToString(), Opened.ToString(), CommentsNumber.ToString() };
             return csvValues;
         }
     }

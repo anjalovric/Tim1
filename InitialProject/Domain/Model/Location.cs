@@ -13,6 +13,7 @@ namespace InitialProject.Model
         public int Id { get; set; }
         public string City { get; set; }
         public string Country { get; set; }
+        public string ImagePath { get; set; }
 
         public Location() { }
 
@@ -27,11 +28,12 @@ namespace InitialProject.Model
             Id = Convert.ToInt32(values[0]);
             City=values[1];
             Country = values[2];
+            ImagePath = values[3];
         }
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), City, Country };
+            string[] csvValues = { Id.ToString(), City, Country, ImagePath };
             return csvValues;
         }
 

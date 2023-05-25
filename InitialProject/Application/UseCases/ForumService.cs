@@ -21,7 +21,7 @@ namespace InitialProject.Service
             locationService = new LocationService();
             guest1Service = new Guest1Service();
         }
-        /*private void SetGuests(List<Forum> forums)
+        private void SetGuests(List<Forum> forums)
         {
             List<Guest1> allGuest = guest1Service.GetAll();
             foreach (Forum forum in forums)
@@ -40,10 +40,13 @@ namespace InitialProject.Service
                 if (location != null)
                     forum.Location = location;
             }
-        }*/
+        }
         public List<Forum> GetAll()
         {
-            return forumRepository.GetAll();
+            List<Forum> forums = forumRepository.GetAll();
+            SetLocations(forums);
+            SetGuests(forums);
+            return forums;
         }
         public void Add(Forum forum)
         {
@@ -55,6 +58,16 @@ namespace InitialProject.Service
            return forumRepository.GetById(id);
        }
 
+        public void Close(Forum forum)
+        {
+            forum.Opened = false;
+            forumRepository.Update(forum);
+        }
+        public void IncrementCommentsNumber(Forum forum)
+        {
+            forum.CommentsNumber += 1;
+            forumRepository.Update(forum);
+        }
 
      
     

@@ -24,10 +24,10 @@ namespace InitialProject.WPF.Views.Guest1Views
     public partial class ForumDetailsView : Page
     {
         private ForumDetailsViewModel forumDetailsViewModel;
-        public ForumDetailsView(Guest1 guest1, Forum newForum)
+        public ForumDetailsView(Guest1 guest1, Forum forum)
         {
             InitializeComponent();
-            forumDetailsViewModel = new ForumDetailsViewModel(guest1, newForum);
+            forumDetailsViewModel = new ForumDetailsViewModel(guest1, forum);
             this.DataContext = forumDetailsViewModel;
         }
     }

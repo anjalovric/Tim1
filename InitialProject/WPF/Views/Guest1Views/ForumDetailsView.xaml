@@ -45,14 +45,14 @@
                     <Image x:Name="userImage" Height="Auto" Width="Auto" HorizontalAlignment="Left" Source="{Binding Path=User.ImagePath}" Stretch="Fill"  VerticalAlignment="Center" Grid.Column="0" Margin="10,10,0,10"/>
 
                     <!-- MAIN INFO -->
-                    <TextBlock Margin="10,5,0,5" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Width="Auto" Height="30" HorizontalAlignment="Right">
+                    <TextBlock Margin="10,5,0,5" Grid.Column="1" VerticalAlignment="Center" Width="Auto" Height="Auto" HorizontalAlignment="Right">
                         <Run Text="{Binding Path=User.Username}"/>
                         <Run Text=": "/>
                     </TextBlock>
-                    <TextBlock Text="{Binding Path=Text}" FontStyle="Italic" FontWeight="Normal" Margin="10,5,10,5" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" Width="Auto" Height="Auto" TextWrapping="Wrap" HorizontalAlignment="Left"/>
+                    <TextBlock Text="{Binding Path=Text}" FontStyle="Italic" FontWeight="Normal" Margin="10,5,10,5" Grid.Column="2" VerticalAlignment="Center" Width="Auto" Height="Auto" TextWrapping="Wrap" HorizontalAlignment="Left"/>
 
 
-                    
+
 
                     <!-- SUPER-OWNER MARK -->
                     <Image Source="/Resources/Images/super11.png" Height="30" Width="30" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" Margin="0,0,150,0" HorizontalAlignment="Center">
@@ -123,8 +123,8 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"></RowDefinition>
-            <RowDefinition Height="2*"></RowDefinition>
             <RowDefinition Height="4*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
         </Grid.RowDefinitions>
 
 
@@ -133,7 +133,7 @@
             <Run Text="{Binding Forum.Location.City}"/>
         </TextBlock>
         <!-- BACK BUTTON -->
-        <Button FontSize="18" FontWeight="Bold" IsEnabled="True" Height="35" Width="100" Margin="42,25,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" Command="NavigationCommands.BrowseBack">
+        <Button FontSize="18" FontWeight="Bold" IsEnabled="True" Height="35" Width="100" Margin="42,25,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" Command="{Binding BackCommand}">
             <Grid Background="#8c9d75" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -144,7 +144,7 @@
             </Grid>
         </Button>
 
-        <Button x:Name="Close" FontWeight="Bold" VerticalAlignment="Center" IsEnabled="{Binding Path=IsInputValid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0,25,42,0" Width="100" HorizontalAlignment="Right" Height="35" Command="{Binding SearchCommand}" FontSize="18" Grid.Row="0" BorderBrush="#FF22301A" BorderThickness="3,3,3,3">
+        <Button x:Name="Close" FontWeight="Bold" VerticalAlignment="Center" Margin="0,25,42,0" Width="100"  IsEnabled="{Binding Path=IsClosingEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" Height="35" Command="{Binding CloseForumCommand}" FontSize="18" Grid.Row="0" BorderBrush="#FF22301A" BorderThickness="3,3,3,3">
             <Grid Background="#8c9d75" Width="100"  HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -155,10 +155,10 @@
             </Grid>
         </Button>
 
-        <Label Grid.Row="1" Height="35" Margin="42,0,0,20" VerticalAlignment="Center" HorizontalAlignment="Left" Content="Add comment:"/>
-        <TextBox x:Name="comment" Text="{Binding NumberOfDays, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Height="74" FontSize="18" Grid.Row="1" Margin="205,0,42,20"/>
+        <Label Grid.Row="2" Height="35" Margin="42,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Content="New comment:"/>
+        <TextBox x:Name="comment" TextWrapping="Wrap" Text="{Binding NewComment, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Top" VerticalAlignment="Top" Height="74" FontSize="18" Grid.Row="2" Margin="42,50,42,0"/>
 
-        <Button x:Name="Add" FontWeight="Bold" VerticalAlignment="Bottom" IsEnabled="{Binding Path=IsInputValid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,42,10" Width="100" HorizontalAlignment="Right" Height="35" Command="{Binding SearchCommand}" FontSize="18" Grid.Row="1" BorderBrush="#FF22301A" BorderThickness="3,3,3,3">
+        <Button x:Name="Add" FontWeight="Bold" VerticalAlignment="Bottom" Margin="0,0,42,22" Width="100" HorizontalAlignment="Right" Height="35" Command="{Binding AddCommentCommand}" FontSize="18" Grid.Row="2" BorderBrush="#FF22301A" BorderThickness="3,3,3,3">
             <Grid Background="#8c9d75" Width="100"  HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -174,11 +174,11 @@
                         </TransformGroup>
                     </Image.RenderTransform>
                 </Image>
-                <TextBlock Background="#8c9d75" Text="Add" Grid.Column="0" VerticalAlignment="Center" FontSize="18"  Foreground="#22301a" Margin="15,0,0,0" FontWeight="Bold" HorizontalAlignment="Left" Width="54"/>
+                <TextBlock Background="#8c9d75" Text="Add" Grid.Column="0" VerticalAlignment="Center" FontSize="18"  Foreground="#22301a" Margin="15,0,0,0" FontWeight="Bold" HorizontalAlignment="Left" Width="48"/>
             </Grid>
         </Button>
 
-        <ListBox x:Name="commentsList" ScrollViewer.VerticalScrollBarVisibility="Visible" IsSynchronizedWithCurrentItem="True" SelectionMode="Single" ItemsSource="{Binding Path=Comments,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" ItemTemplate="{StaticResource commentTemplate}" Grid.ColumnSpan="3" Grid.Row="2" Margin="42,30,42,0" VerticalAlignment="Top" Background="#37492d" BorderThickness="5,5,5,5"  BorderBrush="#8c9d75" Height="300">
+        <ListBox x:Name="commentsList" ScrollViewer.VerticalScrollBarVisibility="Visible" IsSynchronizedWithCurrentItem="True" SelectionMode="Single" ItemsSource="{Binding Path=Comments,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" ItemTemplate="{StaticResource commentTemplate}" Margin="42,0,42,0" VerticalAlignment="Center" Background="#37492d" BorderThickness="5,5,5,5"  BorderBrush="#8c9d75" Height="300" Grid.Row="1">
             <ListBox.Resources>
                 <Style TargetType="ListViewItem">
                     <Style.Triggers>
