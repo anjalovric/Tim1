@@ -38,7 +38,10 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         {
             foreach (Voucher voucher in Vouchers)
             {
-                voucher.CreateDate = voucher.CreateDate.AddYears(1);
+                if (voucher.Type == VoucherType.CANCELED_TOUR)
+                    voucher.CreateDate = voucher.CreateDate.AddYears(1);
+                else
+                    voucher.CreateDate = voucher.CreateDate.AddMonths(6);
             }
         }
         public event PropertyChangedEventHandler PropertyChanged;

@@ -43,8 +43,29 @@ namespace InitialProject.Service
                 voucher.GuestId = reservation.GuestId;
                 voucher.GuideId = guideService.GetByUsername(tourInstanceGuide.Username).Id;
                 voucher.CreateDate = DateTime.Now;
+                voucher.Type = VoucherType.CANCELED_TOUR;
                 Voucher savedVoucher = Save(voucher);
             }
+        }
+        public void SendVoucherForVisitedTours(int guest2Id)
+        { 
+            Voucher voucher = new Voucher();
+            voucher.Used = false;
+            voucher.GuestId = guest2Id;
+            voucher.GuideId = -1;
+            voucher.CreateDate = DateTime.Now;
+            voucher.Type = VoucherType.VISITED_TOUR;
+            Boolean exist = false;
+            foreach (Voucher storedVoucher in GetAll())
+            {
+                if(storedVoucher.GuestId == guest2Id && storedVoucher.Type==VoucherType.VISITED_TOUR)
+                    exist= true;
+            }
+            if (!exist)
+            {
+                Voucher savedVoucher = Save(voucher);
+            }
+           
         }
         public List<Voucher> FindAllVouchers(Guest2 guest2)
         {
