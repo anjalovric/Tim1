@@ -200,6 +200,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                 currentForum = forumService.Open(currentForum);
                 ForumComment newComment = new ForumComment(currentForum, guest1, DateTime.Now, FirstComment);
                 forumCommentService.Add(newComment);
+                forumService.IncrementCommentsNumber(currentForum);
                 ForumDetailsView details = new ForumDetailsView(guest1, currentForum);
                 Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = details;
             }

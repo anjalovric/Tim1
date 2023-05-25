@@ -207,6 +207,8 @@
     <None Remove="Resources\Images\reviewImage.jpg" />
     <None Remove="Resources\Images\RR.png" />
     <None Remove="Resources\Images\RubbishStreet.png" />
+    <None Remove="Resources\Images\satisfaction %281%29.png" />
+    <None Remove="Resources\Images\satisfaction.png" />
     <None Remove="Resources\Images\search.png" />
     <None Remove="Resources\Images\sent2.png" />
     <None Remove="Resources\Images\sent51.png" />
@@ -819,6 +821,12 @@
     </Resource>
     <Resource Include="Resources\Images\reset.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\satisfaction (1).png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\satisfaction.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\search.png" />
   </ItemGroup>

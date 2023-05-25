@@ -56,7 +56,7 @@
 
 
                     <!-- VISITOR - MARK -->
-                    <Image Source="/Resources/Images/pro.png" Height="30" Width="30" Grid.Column="3" VerticalAlignment="Center" Margin="0,0,30,0" HorizontalAlignment="Right">
+                    <Image Source="/Resources/Images/satisfaction (1).png" Height="25" Width="25" Grid.Column="3" VerticalAlignment="Center" Margin="0,0,20,0" HorizontalAlignment="Right">
                         <Image.Style>
                             <Style TargetType="Image">
                                 <Setter Property="Visibility" Value="Collapsed"/>
