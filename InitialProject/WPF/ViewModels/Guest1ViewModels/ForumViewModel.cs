@@ -105,6 +105,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             forumCommentService = new ForumCommentService();
             locationService = new LocationService();
             Forums = new ObservableCollection<Forum>(forumService.GetAll());
+            Forums = new ObservableCollection<Forum>(Forums.Reverse());
             MakeCommands();
         }
 

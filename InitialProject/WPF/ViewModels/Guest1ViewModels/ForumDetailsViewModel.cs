@@ -56,7 +56,21 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                 }
             }
         }
-        public string NewComment { get; set; }
+
+       
+        public string NewComment
+        {
+            get { return newComment; }
+            set
+            {
+                if (value != newComment)
+                {
+                    newComment = value;
+                    OnPropertyChanged("NewComment");
+                }
+            }
+        }
+        private string newComment;
         public RelayCommand CloseForumCommand { get; set; }
         public RelayCommand BackCommand { get; set; } 
         public RelayCommand AddCommentCommand { get; set; }
@@ -76,6 +90,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             MakeCommands();
             forumService = new ForumService();
             Comments = new ObservableCollection<ForumComment>(forumCommentService.GetAllByForumId(Forum.Id));
+            Comments = new ObservableCollection<ForumComment>(Comments.Reverse());
 
         }
         private void AddComment_Executed(object sender)
@@ -85,7 +100,9 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                 ForumComment newComment = new ForumComment(Forum, guest1, DateTime.Now, NewComment);
                 forumCommentService.Add(newComment);
                 forumService.IncrementCommentsNumber(Forum);
-                Comments.Add(newComment);
+                Comments = new ObservableCollection<ForumComment>(forumCommentService.GetAllByForumId(Forum.Id));
+                Comments = new ObservableCollection<ForumComment>(Comments.Reverse());
+                NewComment = "";
 
             }
             else

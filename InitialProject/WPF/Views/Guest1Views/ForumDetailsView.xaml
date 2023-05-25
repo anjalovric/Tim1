@@ -13,13 +13,13 @@
                 <Grid HorizontalAlignment="Center" Grid.ColumnSpan="3" Height="61" Width="884" VerticalAlignment="Center">
                     <Grid.Background>
                         <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                            <GradientStop Color="#37492d" Offset="0"/>
+                            <GradientStop Color="#22301a" Offset="0"/>
                             <GradientStop Color="#8c9d75" Offset="0.1"></GradientStop>
                             <GradientStop Color="#8c9d75" Offset="0.4"/>
                             <GradientStop Color="#8c9d75" Offset="0.5"/>
                             <GradientStop Color="#8c9d75" Offset="0.6"/>
                             <GradientStop Color="#8c9d75" Offset="0.9"></GradientStop>
-                            <GradientStop Color="#37492d" Offset="1"/>
+                            <GradientStop Color="#22301a" Offset="1"/>
                         </LinearGradientBrush>
                     </Grid.Background>
                     <Grid.Resources>
