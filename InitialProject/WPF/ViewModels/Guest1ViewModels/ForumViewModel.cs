@@ -13,6 +13,7 @@ using System.Windows;
 using InitialProject.Domain.Model;
 using InitialProject.APPLICATION.UseCases;
 using System.Windows.Controls;
+using System.Reflection;
 
 namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 {
@@ -94,11 +95,15 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         }
 
         private ForumService forumService;
+        private LocationService locationService;
+        private ForumCommentService forumCommentService;
         public ForumViewModel(Guest1 guest1)
         {
             this.guest1 = guest1;
             GetLocations();
             forumService = new ForumService();
+            forumCommentService = new ForumCommentService();
+            locationService = new LocationService();
             Forums = new ObservableCollection<Forum>(forumService.GetAll());
             MakeCommands();
         }
@@ -140,16 +145,27 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                 IsCityComboBoxEnabled = true;
             }
         }
+        private bool IsInputValid()
+        {
+            return LocationCity != null && LocationCountry != null && FirstComment != null && FirstComment != "";
+        }
         private void Next_Executed(object sender)
         {
-            if (LocationCity != null && LocationCountry != null && FirstComment != null && FirstComment != "")
+            if (IsInputValid())
             {
-                //dodati provjeru dal vec postoji ta lokacija za forum !!!!!!!!!!!!!
-                CreateForum();
+                if(forumService.ExistsOnLocation(LocationCountry, LocationCity))
+                {
+                    ShowMessageBoxForExistingForum();
+                }
+
+                else
+                    CreateForum();
             }
             else
                 ShowMessageBoxForInvalidInput();
         }
+
+
         private void Reset_Executed(object sender)
         {
             //Accommodations.Clear();
@@ -173,13 +189,37 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             messageBox.Owner = Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault();
             messageBox.ShowDialog();
         }
+        private async void ShowMessageBoxForExistingForum()
+        {
+            Task<bool> result = ConfirmOpeningForumMessageBox();
+            bool IsYesClicked = await result;
+            if (IsYesClicked)
+            {
+                Forum currentForum = forumService.GetByLocation(LocationCountry, LocationCity);
+                currentForum = forumService.Open(currentForum);
+                ForumComment newComment = new ForumComment(currentForum, guest1, DateTime.Now, FirstComment);
+                forumCommentService.Add(newComment);
+                ForumDetailsView details = new ForumDetailsView(guest1, currentForum);
+                Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = details;
+            }
+
+
+               
+        }
+        public async Task<bool> ConfirmOpeningForumMessageBox()
+        {
+            var result = new TaskCompletionSource<bool>();
+            Guest1YesNoMessageBoxView messageBox = new Guest1YesNoMessageBoxView("Forum - " + LocationCity + " is locked. Click YES to unlock it and put your comment on it.", "/Resources/Images/info.png", result);
+            messageBox.Owner = Application.Current.Windows.OfType<DatesForAccommodationReservationView>().FirstOrDefault();
+            messageBox.ShowDialog();
+            var returnedResult = await result.Task;
+            return returnedResult;
+        }
 
         private void CreateForum()
         {
-            LocationService locationService = new LocationService();
             Location newLocation = locationService.GetByCityAndCountry(LocationCountry, LocationCity);
             Forum newForum = new Forum(newLocation, guest1);
-            ForumService forumService = new ForumService();
             forumService.Add(newForum);
             CreateFirstComment(newForum);
             ForumDetailsView view = new ForumDetailsView(guest1, newForum);
@@ -187,7 +227,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         }
         private void CreateFirstComment(Forum newForum)
         {
-            ForumCommentService forumCommentService = new ForumCommentService();
             ForumComment comment = new ForumComment(newForum, guest1, DateTime.Now, FirstComment);
             forumCommentService.Add(comment);
         }

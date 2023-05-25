@@ -130,5 +130,9 @@ namespace InitialProject.Service
             }
             return DateTime.MinValue;   //if expired(<10 reservations) or not expired(<10 reservations but 1 year hasn't passed)
         }
+        public bool WasGuestOnLocation(Guest1 guest1, int locationId, DateTime CreatingCommentDate)
+        {
+            return reservations.Find(r => r.Accommodation.Location.Id == locationId && r.Guest.Id == guest1.Id && r.Arrival<CreatingCommentDate) != null;
+        }
     }
 }

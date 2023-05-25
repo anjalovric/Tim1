@@ -63,12 +63,29 @@ namespace InitialProject.Service
             forum.Opened = false;
             forumRepository.Update(forum);
         }
+        public Forum Open(Forum forum)
+        {
+            forum.Opened = true;
+            forumRepository.Update(forum);
+            return forum;
+        }
         public void IncrementCommentsNumber(Forum forum)
         {
             forum.CommentsNumber += 1;
             forumRepository.Update(forum);
         }
 
+        public bool ExistsOnLocation(string locationCountry, string locationCity)
+        {
+            Location location = locationService.GetByCityAndCountry(locationCountry, locationCity);
+            return forumRepository.GetAll().Find(n => n.Location.Id == location.Id) != null; 
+        }
+
+        public Forum GetByLocation(string locationCountry, string locationCity)
+        {
+            Location location = locationService.GetByCityAndCountry(locationCountry, locationCity);
+            return forumRepository.GetAll().Find(n => n.Location.Id == location.Id);
+        }
      
     
     }

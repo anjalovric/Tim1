@@ -66,9 +66,9 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         {
             this.guest1 = guest1;
             this.Forum = forum;
-            if(guest1.Id!=forum.Guest1.Id)
+            if(guest1.Id!=Forum.Guest1.Id)
                 IsClosingEnabled = false;
-            else
+            else if (Forum.Opened == true)
                 IsClosingEnabled = true;
             forumCommentService = new ForumCommentService();
             NewComment = "";

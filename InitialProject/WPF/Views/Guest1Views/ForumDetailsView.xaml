@@ -14,11 +14,11 @@
                     <Grid.Background>
                         <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
                             <GradientStop Color="#37492d" Offset="0"/>
-                            <GradientStop Color="#FFFCECB9" Offset="0.1"></GradientStop>
-                            <GradientStop Color="#FFFCECB9" Offset="0.4"/>
-                            <GradientStop Color="#FFFCECB9" Offset="0.5"/>
-                            <GradientStop Color="#FFFCECB9" Offset="0.6"/>
-                            <GradientStop Color="#FFFCECB9" Offset="0.9"></GradientStop>
+                            <GradientStop Color="#8c9d75" Offset="0.1"></GradientStop>
+                            <GradientStop Color="#8c9d75" Offset="0.4"/>
+                            <GradientStop Color="#8c9d75" Offset="0.5"/>
+                            <GradientStop Color="#8c9d75" Offset="0.6"/>
+                            <GradientStop Color="#8c9d75" Offset="0.9"></GradientStop>
                             <GradientStop Color="#37492d" Offset="1"/>
                         </LinearGradientBrush>
                     </Grid.Background>
@@ -39,6 +39,7 @@
                         <ColumnDefinition Width="1*"></ColumnDefinition>
                         <ColumnDefinition Width="1.2*"></ColumnDefinition>
                         <ColumnDefinition Width="8*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
 
                     <!-- COVER IMAGE FOR CARD -->
@@ -54,13 +55,13 @@
 
 
 
-                    <!-- SUPER-OWNER MARK -->
-                    <Image Source="/Resources/Images/super11.png" Height="30" Width="30" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" Margin="0,0,150,0" HorizontalAlignment="Center">
+                    <!-- VISITOR - MARK -->
+                    <Image Source="/Resources/Images/pro.png" Height="30" Width="30" Grid.Column="3" VerticalAlignment="Center" Margin="0,0,30,0" HorizontalAlignment="Right">
                         <Image.Style>
                             <Style TargetType="Image">
                                 <Setter Property="Visibility" Value="Collapsed"/>
                                 <Style.Triggers>
-                                    <DataTrigger Binding="{Binding Owner.IsSuperOwner}" Value="True">
+                                    <DataTrigger Binding="{Binding WasOnLocation}" Value="True">
                                         <Setter Property="Visibility" Value="Visible"/>
                                     </DataTrigger>
                                 </Style.Triggers>
@@ -123,7 +124,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"></RowDefinition>
-            <RowDefinition Height="4*"></RowDefinition>
+            <RowDefinition Height="3.5*"></RowDefinition>
             <RowDefinition Height="2*"></RowDefinition>
         </Grid.RowDefinitions>
 
@@ -144,7 +145,7 @@
             </Grid>
         </Button>
 
-        <Button x:Name="Close" FontWeight="Bold" VerticalAlignment="Center" Margin="0,25,42,0" Width="100"  IsEnabled="{Binding Path=IsClosingEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" Height="35" Command="{Binding CloseForumCommand}" FontSize="18" Grid.Row="0" BorderBrush="#FF22301A" BorderThickness="3,3,3,3">
+        <Button x:Name="Close" FontWeight="Bold" VerticalAlignment="Center" Margin="0,25,42,0" IsEnabled="{Binding IsClosingEnabled}" Width="100" HorizontalAlignment="Right" Height="35" Command="{Binding CloseForumCommand}" FontSize="18" Grid.Row="0" BorderBrush="#FF22301A" BorderThickness="3,3,3,3">
             <Grid Background="#8c9d75" Width="100"  HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -155,10 +156,10 @@
             </Grid>
         </Button>
 
-        <Label Grid.Row="2" Height="35" Margin="42,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Content="New comment:"/>
-        <TextBox x:Name="comment" TextWrapping="Wrap" Text="{Binding NewComment, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Top" VerticalAlignment="Top" Height="74" FontSize="18" Grid.Row="2" Margin="42,50,42,0"/>
+        <Label Grid.Row="2" Height="35" Margin="42,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Content="New comment:"/>
+        <TextBox x:Name="comment" TextWrapping="Wrap" IsEnabled="{Binding Forum.Opened}" Text="{Binding NewComment, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Top" VerticalAlignment="Top" Height="74" FontSize="18" Grid.Row="2" Margin="42,40,42,0"/>
 
-        <Button x:Name="Add" FontWeight="Bold" VerticalAlignment="Bottom" Margin="0,0,42,22" Width="100" HorizontalAlignment="Right" Height="35" Command="{Binding AddCommentCommand}" FontSize="18" Grid.Row="2" BorderBrush="#FF22301A" BorderThickness="3,3,3,3">
+        <Button x:Name="Add" FontWeight="Bold" IsEnabled="{Binding Forum.Opened}" VerticalAlignment="Bottom" Margin="0,0,42,40" Width="100" HorizontalAlignment="Right" Height="35" Command="{Binding AddCommentCommand}" FontSize="18" Grid.Row="2" BorderBrush="#FF22301A" BorderThickness="3,3,3,3">
             <Grid Background="#8c9d75" Width="100"  HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
