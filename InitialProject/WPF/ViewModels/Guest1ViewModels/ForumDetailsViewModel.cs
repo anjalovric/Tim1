@@ -56,8 +56,47 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                 }
             }
         }
+        private bool isCommentingEnabled;
+        public bool IsCommentingEnabled
+        {
+            get { return isCommentingEnabled; }
+            set
+            {
+                if (value != isCommentingEnabled)
+                {
+                    isCommentingEnabled = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private Visibility isClosingVisible;
+        public Visibility IsClosingVisible
+        {
+            get { return isClosingVisible; }
+            set
+            {
+                if (value != isClosingVisible)
+                {
+                    isClosingVisible = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private Visibility isOpeningVisible;
+        public Visibility IsOpeningVisible
+        {
+            get { return isOpeningVisible; }
+            set
+            {
+                if (value != isOpeningVisible)
+                {
+                    isOpeningVisible = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
-       
+
         public string NewComment
         {
             get { return newComment; }
@@ -72,6 +111,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         }
         private string newComment;
         public RelayCommand CloseForumCommand { get; set; }
+        public RelayCommand OpenForumCommand { get; set; }
         public RelayCommand BackCommand { get; set; } 
         public RelayCommand AddCommentCommand { get; set; }
         private ForumCommentService forumCommentService;
@@ -80,10 +120,23 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         {
             this.guest1 = guest1;
             this.Forum = forum;
+            IsCommentingEnabled = Forum.Opened;
             if(guest1.Id!=Forum.Guest1.Id)
                 IsClosingEnabled = false;
             else if (Forum.Opened == true)
                 IsClosingEnabled = true;
+            if (Forum.Opened == true)
+            {
+                IsClosingVisible = Visibility.Visible;
+                IsOpeningVisible = Visibility.Hidden;
+
+            }
+               
+            else
+            {
+                IsClosingVisible = Visibility.Hidden;
+                IsOpeningVisible = Visibility.Visible;
+            }
             forumCommentService = new ForumCommentService();
             NewComment = "";
 
@@ -91,6 +144,20 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             forumService = new ForumService();
             Comments = new ObservableCollection<ForumComment>(forumCommentService.GetAllByForumId(Forum.Id));
             Comments = new ObservableCollection<ForumComment>(Comments.Reverse());
+
+        }
+        private void OpenForum_Executed(object sender)
+        {
+            Forum=forumService.Open(forum);         
+            IsClosingVisible = Visibility.Visible;
+            IsOpeningVisible = Visibility.Hidden;
+            IsCommentingEnabled = Forum.Opened;
+            if (guest1.Id != Forum.Guest1.Id)
+                IsClosingEnabled = false;
+            else
+                IsClosingEnabled=true;
+            ShowMessageBoxForSuccessfullOpening();
+
 
         }
         private void AddComment_Executed(object sender)
@@ -121,7 +188,8 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         {
             CloseForumCommand = new RelayCommand(CloseForum_Executed, CanExecute);
             BackCommand = new RelayCommand(Back_Executed, CanExecute);  
-            AddCommentCommand = new RelayCommand(AddComment_Executed, CanExecute);  
+            AddCommentCommand = new RelayCommand(AddComment_Executed, CanExecute); 
+            OpenForumCommand = new RelayCommand(OpenForum_Executed, CanExecute);
         }
         private void CloseForum_Executed(object sender)
         {
@@ -130,13 +198,19 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                 forumService.Close(forum);
                 ForumView forumView = new ForumView(guest1);
                 Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = forumView;
-                ShowMessageBoxForSuccess();
+                ShowMessageBoxForSuccessfullClosing();
             }
         }
         
-        private void ShowMessageBoxForSuccess()
+        private void ShowMessageBoxForSuccessfullClosing()
         {
-            Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("Forum successfully closed!", "/Resources/Images/done.png");
+            Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("Forum successfully closed!", "/Resources/Images/lock.png");
+            messageBox.Owner = Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault();
+            messageBox.ShowDialog();
+        }
+        private void ShowMessageBoxForSuccessfullOpening()
+        {
+            Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("Forum successfully opened!", "/Resources/Images/padlock-unlock.png");
             messageBox.Owner = Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault();
             messageBox.ShowDialog();
         }
