@@ -38,25 +38,31 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"></ColumnDefinition>
                         <ColumnDefinition Width="1.2*"></ColumnDefinition>
-                        <ColumnDefinition Width="8*"></ColumnDefinition>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="7*"></ColumnDefinition>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                        <ColumnDefinition Width="0.5*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
 
                     <!-- COVER IMAGE FOR CARD -->
                     <Image x:Name="userImage" Height="Auto" Width="Auto" HorizontalAlignment="Left" Source="{Binding Path=User.ImagePath}" Stretch="Fill"  VerticalAlignment="Center" Grid.Column="0" Margin="10,10,0,10"/>
 
                     <!-- MAIN INFO -->
-                    <TextBlock Margin="10,5,0,5" Grid.Column="1" VerticalAlignment="Center" Width="Auto" Height="Auto" HorizontalAlignment="Left">
+                    <TextBlock Margin="10,5,0,5" Grid.Column="1" VerticalAlignment="Center"  FontWeight="Regular" Width="Auto" Height="Auto" HorizontalAlignment="Left">
                         <Run Text="{Binding Path=User.Username}"/>
                         <Run Text=": "/>
                     </TextBlock>
-                    <TextBlock Text="{Binding Path=Text}" FontStyle="Italic" FontWeight="Normal" Margin="10,5,10,5" Grid.Column="2" VerticalAlignment="Center" Width="Auto" Height="Auto" TextWrapping="Wrap" HorizontalAlignment="Left"/>
+                    <TextBlock Text="{Binding Path=Text}" FontSize="16" FontStyle="Italic" Margin="10,5,10,5" Grid.Column="2" VerticalAlignment="Center" Width="Auto" Height="Auto" TextWrapping="Wrap" HorizontalAlignment="Left"/>
 
+                    <!-- REPORTS NUMBER -->
+                    <TextBlock Margin="5,0,5,0" Grid.Column="3" VerticalAlignment="Center"  FontWeight="Regular" FontSize="15" Width="Auto" Height="Auto" HorizontalAlignment="Center">
+                        <Run Text="{Binding Path=ReportsNumber}"/>
+                        <Run Text="reports "/>
+                    </TextBlock>
 
 
 
                     <!-- VISITOR - MARK -->
-                    <Image Source="/Resources/Images/satisfaction (1).png" Height="25" Width="25" Grid.Column="3" VerticalAlignment="Center" Margin="0,0,20,0" HorizontalAlignment="Right">
+                    <Image Source="/Resources/Images/satisfaction (1).png" Height="25" Width="25" Grid.Column="4" VerticalAlignment="Center" Margin="0,0,20,0" HorizontalAlignment="Right">
                         <Image.Style>
                             <Style TargetType="Image">
                                 <Setter Property="Visibility" Value="Collapsed"/>

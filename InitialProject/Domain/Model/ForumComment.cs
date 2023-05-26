@@ -16,6 +16,7 @@ namespace InitialProject.Domain.Model
         public User User { get; set; }
         public DateTime CreatingDate { get; set; }
         public bool WasOnLocation { get; set; }
+        public int ReportsNumber { get; set; }
 
 
         public ForumComment() { }
@@ -37,10 +38,11 @@ namespace InitialProject.Domain.Model
             CreatingDate = Convert.ToDateTime(values[3]);
             Text = values[4];
             WasOnLocation = Convert.ToBoolean(values[5]);
+            ReportsNumber = Convert.ToInt32(values[6]);
         }
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), Forum.Id.ToString(), User.Username, CreatingDate.ToString(), Text, WasOnLocation.ToString() };
+            string[] csvValues = { Id.ToString(), Forum.Id.ToString(), User.Username, CreatingDate.ToString(), Text, WasOnLocation.ToString(), ReportsNumber.ToString() };
             return csvValues;
         }
 
