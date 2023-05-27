@@ -156,7 +156,11 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             {
                 if(forumService.ExistsOnLocation(LocationCountry, LocationCity))
                 {
-                    ShowMessageBoxForExistingForum();
+                    if (forumService.GetByLocation(LocationCountry, LocationCity).Opened)
+                        ShowMessageBoxForOpenedForum();
+
+                    else
+                        ShowMessageBoxForClosedForum();
                 }
 
                 else
@@ -169,12 +173,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 
         private void Reset_Executed(object sender)
         {
-            //Accommodations.Clear();
-            // foreach (Accommodation accommodation in accommodationService.GetAll())
-            //Accommodations.Add(accommodation);
-
             ResetAllFields();
-            //SortAccommodationBySuperOwners();
         }
         private void ResetAllFields()
         {
@@ -190,9 +189,9 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             messageBox.Owner = Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault();
             messageBox.ShowDialog();
         }
-        private async void ShowMessageBoxForExistingForum()
+        private async void ShowMessageBoxForClosedForum()
         {
-            Task<bool> result = ConfirmOpeningForumMessageBox();
+            Task<bool> result = ConfirmCommentingLockedForumMessageBox();
             bool IsYesClicked = await result;
             if (IsYesClicked)
             {
@@ -208,10 +207,38 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 
                
         }
-        public async Task<bool> ConfirmOpeningForumMessageBox()
+
+        private async void ShowMessageBoxForOpenedForum()
+        {
+            Task<bool> result = ConfirmCommentingOpenedForumMessageBox();
+            bool IsYesClicked = await result;
+            if (IsYesClicked)
+            {
+                Forum currentForum = forumService.GetByLocation(LocationCountry, LocationCity);
+                ForumComment newComment = new ForumComment(currentForum, guest1, DateTime.Now, FirstComment);
+                forumCommentService.Add(newComment);
+                forumService.IncrementCommentsNumber(currentForum);
+                ForumDetailsView details = new ForumDetailsView(guest1, currentForum);
+                Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = details;
+            }
+
+
+
+        }
+        public async Task<bool> ConfirmCommentingLockedForumMessageBox()
         {
             var result = new TaskCompletionSource<bool>();
             Guest1YesNoMessageBoxView messageBox = new Guest1YesNoMessageBoxView("Forum - " + LocationCity + " is locked. Click YES to unlock it and put your comment on it.", "/Resources/Images/info.png", result);
+            messageBox.Owner = Application.Current.Windows.OfType<DatesForAccommodationReservationView>().FirstOrDefault();
+            messageBox.ShowDialog();
+            var returnedResult = await result.Task;
+            return returnedResult;
+        }
+
+        public async Task<bool> ConfirmCommentingOpenedForumMessageBox()
+        {
+            var result = new TaskCompletionSource<bool>();
+            Guest1YesNoMessageBoxView messageBox = new Guest1YesNoMessageBoxView("Forum - " + LocationCity + " already exists. Click YES to put your comment on it.", "/Resources/Images/info.png", result);
             messageBox.Owner = Application.Current.Windows.OfType<DatesForAccommodationReservationView>().FirstOrDefault();
             messageBox.ShowDialog();
             var returnedResult = await result.Task;

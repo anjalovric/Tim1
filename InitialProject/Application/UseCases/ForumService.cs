@@ -80,6 +80,7 @@ namespace InitialProject.Service
             Location location = locationService.GetByCityAndCountry(locationCountry, locationCity);
             return forumRepository.GetAll().Find(n => n.Location.Id == location.Id) != null; 
         }
+        
 
         public Forum GetByLocation(string locationCountry, string locationCity)
         {
