@@ -57,5 +57,17 @@ namespace InitialProject.APPLICATION.UseCases
 
             return storedForumComments;
         }
+
+        public int GetNumberOfGuestComments(Forum forum)
+        {
+            List<ForumComment> forumComments = forumCommentRepository.GetAllByForumId(forum.Id);
+            return forumComments.FindAll(n => n.User.Role == Role.GUEST1).Count();
+        }
+
+        public int GetNumberOfOwnerComments(Forum forum)
+        {
+            List<ForumComment> forumComments = forumCommentRepository.GetAllByForumId(forum.Id);
+            return forumComments.FindAll(n => n.User.Role == Role.OWNER).Count();
+        }
     }
 }

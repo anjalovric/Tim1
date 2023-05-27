@@ -143,6 +143,7 @@
     <None Remove="Resources\Images\icons8-upload-64.png" />
     <None Remove="Resources\Images\img_exit.png" />
     <None Remove="Resources\Images\img_home.png" />
+    <None Remove="Resources\Images\location.png" />
     <None Remove="Resources\Images\locations.png" />
     <None Remove="Resources\Images\lock.png" />
     <None Remove="Resources\Images\LOGO %282%29.jpg" />
@@ -332,6 +333,9 @@
     <Content Include="Resources\Images\info-3-xl.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 
+    </Content>
+    <Content Include="Resources\Images\location.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\newDelete.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

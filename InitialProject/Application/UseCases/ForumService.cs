@@ -8,6 +8,8 @@ using InitialProject.Domain.Model;
 using InitialProject.Domain;
 using InitialProject.Model;
 using InitialProject.Domain.RepositoryInterfaces;
+using InitialProject.WPF.ViewModels.OwnerViewModels;
+using InitialProject.APPLICATION.UseCases;
 
 namespace InitialProject.Service
 {
@@ -16,10 +18,14 @@ namespace InitialProject.Service
         private IForumRepository forumRepository = Injector.CreateInstance<IForumRepository>();
         LocationService locationService;
         Guest1Service guest1Service;
+        ForumCommentService forumCommentService;
+        OwnerService ownerService;
         public ForumService()
         {
             locationService = new LocationService();
             guest1Service = new Guest1Service();
+            forumCommentService = new ForumCommentService();
+            ownerService = new OwnerService();
         }
         private void SetGuests(List<Forum> forums)
         {
@@ -50,6 +56,7 @@ namespace InitialProject.Service
         }
         public void Add(Forum forum)
         {
+            forum.IsNewForOwner = true;
             forumRepository.Add(forum);
         }
 
@@ -88,6 +95,34 @@ namespace InitialProject.Service
             return forumRepository.GetAll().Find(n => n.Location.Id == location.Id);
         }
      
+        public List<OneForumViewModel> getAllForOwnerDisplay(Owner owner)
+        {
+            List<Forum> forums = GetAll();
+            List<OneForumViewModel> result = new List<OneForumViewModel>();
+            foreach(Forum forum in forums)
+            {
+                OneForumViewModel forumViewModel = new OneForumViewModel();
+                forumViewModel.Forum = forum;
+                forumViewModel.GuestComments = forumCommentService.GetNumberOfGuestComments(forum);
+                forumViewModel.OwnerComments = forumCommentService.GetNumberOfOwnerComments(forum);
+                forumViewModel.OwnerHasLocation = ownerService.HasAccommodationOnLocation(owner, forum.Location);
+                result.Add(forumViewModel);
+            }
+            return result;
+        }
     
+        public List<OneForumViewModel> getNewForOwnerDisplay(Owner owner)
+        {
+            return getAllForOwnerDisplay(owner).FindAll(n => n.Forum.IsNewForOwner == true);
+        }
+
+        public void MakeForumsOld(List<OneForumViewModel> forumViewModels)
+        {
+            foreach(var forum in forumViewModels)
+            {
+                forum.Forum.IsNewForOwner = false;
+                forumRepository.Update(forum.Forum);
+            }
+        }
     }
 }
