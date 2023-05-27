@@ -15,6 +15,9 @@ namespace InitialProject.Domain.Model
         public String Text { get; set; }
         public User User { get; set; }
         public DateTime CreatingDate { get; set; }
+        public bool WasOnLocation { get; set; }
+        public int ReportsNumber { get; set; }
+
 
         public ForumComment() { }
         public ForumComment(Forum forum, User user, DateTime creatingDate, string text)
@@ -22,9 +25,8 @@ namespace InitialProject.Domain.Model
             Forum = forum;
             User = user;
             CreatingDate = creatingDate;
-            Text = text;    
-
-        }
+            Text = text;
+         }
 
         public void FromCSV(string[] values)
         {
@@ -35,10 +37,12 @@ namespace InitialProject.Domain.Model
             User.Username = values[2];
             CreatingDate = Convert.ToDateTime(values[3]);
             Text = values[4];
+            WasOnLocation = Convert.ToBoolean(values[5]);
+            ReportsNumber = Convert.ToInt32(values[6]);
         }
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), Forum.Id.ToString(), User.Username, CreatingDate.ToString(), Text };
+            string[] csvValues = { Id.ToString(), Forum.Id.ToString(), User.Username, CreatingDate.ToString(), Text, WasOnLocation.ToString(), ReportsNumber.ToString() };
             return csvValues;
         }
 

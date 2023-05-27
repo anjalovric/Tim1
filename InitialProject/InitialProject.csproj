@@ -144,6 +144,7 @@
     <None Remove="Resources\Images\img_exit.png" />
     <None Remove="Resources\Images\img_home.png" />
     <None Remove="Resources\Images\locations.png" />
+    <None Remove="Resources\Images\lock.png" />
     <None Remove="Resources\Images\LOGO %282%29.jpg" />
     <None Remove="Resources\Images\logo.jpg" />
     <None Remove="Resources\Images\logoMyTravel.png" />
@@ -170,10 +171,15 @@
 
     <None Remove="Resources\Images\orange.jpg" />
 
+    <None Remove="Resources\Images\padlock-unlock.png" />
+
+    <None Remove="Resources\Images\padlock.png" />
+
     <None Remove="Resources\Images\pdf.png" />
 
     <None Remove="Resources\Images\picture.png" />
     <None Remove="Resources\Images\plus.png" />
+    <None Remove="Resources\Images\pro.png" />
     <None Remove="Resources\Images\profile.png" />
     <None Remove="Resources\Images\profile11.png" />
     <None Remove="Resources\Images\qm.png" />
@@ -203,6 +209,8 @@
     <None Remove="Resources\Images\reviewImage.jpg" />
     <None Remove="Resources\Images\RR.png" />
     <None Remove="Resources\Images\RubbishStreet.png" />
+    <None Remove="Resources\Images\satisfaction %281%29.png" />
+    <None Remove="Resources\Images\satisfaction.png" />
     <None Remove="Resources\Images\search.png" />
     <None Remove="Resources\Images\sent2.png" />
     <None Remove="Resources\Images\sent51.png" />
@@ -737,6 +745,9 @@
     <Resource Include="Resources\Images\locations.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\Images\lock.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Images\medal.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -765,6 +776,15 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\orange.jpg" />
+    <Resource Include="Resources\Images\padlock-unlock.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\padlock.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\pro.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Images\profile11.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
@@ -806,6 +826,12 @@
     </Resource>
     <Resource Include="Resources\Images\reset.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\satisfaction (1).png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\satisfaction.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\search.png" />
   </ItemGroup>

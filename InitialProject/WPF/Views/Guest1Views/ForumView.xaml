@@ -51,6 +51,20 @@
                     <!-- COVER IMAGE FOR CARD -->
                     <Image x:Name="forumImage" Height="Auto" Width="Auto" HorizontalAlignment="Left" Source="{Binding Path=Location.ImagePath}" Stretch="Fill"  VerticalAlignment="Center" Grid.Column="0" Grid.RowSpan="2" Margin="10,10,0,10"/>
 
+                    <Image x:Name="lockImage" Height="Auto" Width="Auto" HorizontalAlignment="Left" Source="/Resources/Images/lock.png" Stretch="Fill"  VerticalAlignment="Center" Grid.Column="0" Grid.RowSpan="2" Margin="45,32,35,32">
+                        <Image.Style>
+                            <Style TargetType="Image">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Opened}" Value="False">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+
+                     
                     <!-- MAIN INFO -->
                     <Label Content="Location:" FontWeight="Medium" Padding="20,15,0,0" HorizontalAlignment="Left" Width="Auto" VerticalAlignment="Center" VerticalContentAlignment="Center" Grid.Row="0" Grid.Column="1"/>
                     <Label Content="Comments:" FontWeight="Medium" Padding="20,15,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" VerticalContentAlignment="Center" Width="Auto"  Grid.Row="0" Grid.Column="2"/>
@@ -59,7 +73,7 @@
 
 
                     <!-- OPEN BUTTON -->
-                    <Button x:Name="Open"  Command="{Binding Path=DataContext.OpenCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" FontWeight="Bold" Grid.Row="1" Grid.Column="6" VerticalAlignment="Center" Width="100" Height="35" HorizontalAlignment="Center" FontSize="18">
+                    <Button x:Name="View"  Command="{Binding Path=DataContext.OpenCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" FontWeight="Bold" Grid.RowSpan="2" Grid.Column="4" VerticalAlignment="Center" Width="100" Height="35" HorizontalAlignment="Center" FontSize="18">
                         <Grid Background="#8c9d75" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -75,23 +89,11 @@
                                     </TransformGroup>
                                 </Image.RenderTransform>
                             </Image>
-                            <TextBlock Text="Open" Grid.Column="0" VerticalAlignment="Center" FontSize="18" Margin="12,0,0,0"  Foreground="#22301a" FontWeight="Bold" HorizontalAlignment="Left" Width="Auto"/>
+                            <TextBlock Text="View" Grid.Column="0" VerticalAlignment="Center" FontSize="18" Margin="18,0,0,0"  Foreground="#22301a" FontWeight="Bold" HorizontalAlignment="Left" Width="Auto"/>
                         </Grid>
                     </Button>
 
-                    <!-- SUPER-OWNER MARK -->
-                    <Image Source="/Resources/Images/super11.png" Height="30" Width="30" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" Margin="0,0,150,0" HorizontalAlignment="Center">
-                        <Image.Style>
-                            <Style TargetType="Image">
-                                <Setter Property="Visibility" Value="Collapsed"/>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding Owner.IsSuperOwner}" Value="True">
-                                        <Setter Property="Visibility" Value="Visible"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Image.Style>
-                    </Image>
+                    
                 </Grid>
             </Border>
         </DataTemplate>

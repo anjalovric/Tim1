@@ -17,10 +17,12 @@ namespace InitialProject.APPLICATION.UseCases
         private IForumCommentRepository forumCommentRepository = Injector.CreateInstance<IForumCommentRepository>();
         private Guest1Service guest1Service;
         private OwnerService ownerService;
+        private AccommodationReservationService accommodationReservationService;
         public ForumCommentService()
         {
             guest1Service = new Guest1Service();
             ownerService = new OwnerService();
+            accommodationReservationService = new AccommodationReservationService();
         }
 
         public List<ForumComment> GetAll()
@@ -29,6 +31,7 @@ namespace InitialProject.APPLICATION.UseCases
         }
         public void Add(ForumComment forumComment)
         {
+            forumComment.WasOnLocation = accommodationReservationService.WasGuestOnLocation(((Guest1)forumComment.User), forumComment.Forum.Location.Id, forumComment.CreatingDate);
             forumCommentRepository.Add(forumComment);
         }
 

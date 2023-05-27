@@ -60,7 +60,6 @@ namespace InitialProject.Repository
             _forums.Remove(current);
             _forums.Insert(index, forum);
             _serializer.ToCSV(FilePath, _forums);
-
         }
        
     }
