@@ -75,7 +75,7 @@
         <Label Content="StartDate:" FontWeight="DemiBold" Grid.Row="6" Grid.Column="0" Margin="62,10,0,43" Grid.RowSpan="2" FontSize="20"/>
         <Label Content="EndDate:" FontWeight="DemiBold" Grid.Row="7" Grid.Column="0" Margin="62,10,0,43" Grid.RowSpan="2" FontSize="20"/>
         <Label Content="Duration:" FontWeight="DemiBold" Grid.Row="3" Grid.Column="0" Margin="62,10,0,43" Grid.RowSpan="2" FontSize="20"/>
-        <Button HorizontalAlignment="Left" Grid.Row="10" Background="White" VerticalAlignment="Top"  Height="34" Width="132" FontWeight="Bold" FontSize="18" Command="{Binding CloseCommand}" Margin="208,4,0,0" Grid.Column="1">
+        <Button HorizontalAlignment="Left" Grid.Row="10" Background="White" VerticalAlignment="Top"  Height="34" Width="132" FontWeight="Bold" FontSize="18" Command="{Binding CloseCommand}" Margin="208,4,0,0" Grid.Column="1" ToolTipService.ShowDuration="5000">
 
             <Grid Width="132" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35">
                 <Grid.RowDefinitions>
@@ -89,7 +89,13 @@
                 <Image Source="/Resources/Images/close.png" VerticalAlignment="Top" HorizontalAlignment="Left" Width="26" Height="20" RenderTransformOrigin="0.5,0.5" Margin="19,5,0,0" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
                 <TextBlock Text="Close" Foreground="Black" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" HorizontalAlignment="Left" Width="78" Height="22" Margin="44,0,0,0" Grid.RowSpan="2" Grid.Column="1"/>
             </Grid>
-
+            <Button.ToolTip>
+                <ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold">Exit the tour request details window.</TextBlock>
+                    </StackPanel>
+                </ToolTip>
+            </Button.ToolTip>
         </Button>
         <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding TourInstance.Tour.Duration}" FontWeight="DemiBold" Margin="10,10,65,10" FontSize="20"/>
         <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding TourInstance.Tour.Language}" Margin="10,10,65,10" FontWeight="DemiBold" FontSize="20"/>

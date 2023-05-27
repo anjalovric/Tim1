@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Media;
 using System.Runtime.CompilerServices;
 using System.ComponentModel;
+using System.Windows.Controls.Primitives;
 
 namespace InitialProject.WPF.ViewModels.Guest2ViewModels
 {
@@ -43,15 +44,17 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             }
 
         }
+        
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-        public Guest2OverviewViewModel(User user,ContentControl contentControl)
+        public Guest2OverviewViewModel(User user,ContentControl contentControl  )
         {
             guest2Repository = new Guest2Repository();
             guest2 = new Model.Guest2();
+           
             GetGuest2ByUser(user);
             string relative = FindImageRelativePath();
             ImageSource = new BitmapImage(new Uri(relative, UriKind.Relative));
@@ -73,11 +76,14 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             ProfileCommand = new RelayCommand(Profile_Executed, CanExecute);
             RequestsCommand = new RelayCommand(Requests_Executed, CanExecute);
             NotificationsCommand = new RelayCommand(Notifications_Executed, CanExecute);
+            
         }
+
         private bool CanExecute(object sender)
         {
             return true;
         }
+        
         private void Show_Executed(object sender)
         {
             ContentControl.Content=new ShowToursView(guest2);
@@ -118,5 +124,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         {
             guest2 = guest2Repository.GetByUsername(user.Username);
         }
+      
+       
     }
 }

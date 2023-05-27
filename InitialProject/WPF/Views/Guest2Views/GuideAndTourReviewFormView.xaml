@@ -93,7 +93,7 @@
             <Label Content="Add comment" Foreground="Black" FontWeight="Bold" FontSize="20" Margin="10,29,176,216" Grid.Row="4" Grid.Column="1" Grid.RowSpan="2"/>
             <Label Content="Add photos" Foreground="Black" FontWeight="Bold" FontSize="20" Margin="10,29,176,223" Grid.Column="2" Grid.Row="4" Grid.RowSpan="2"/>
             <tk:WatermarkTextBox x:Name="comment" Text="{Binding Path=Comment, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Margin="10,15,30,15" Grid.Column="1" Watermark="Enter comment here" BorderBrush="#FFCAC1C1" BorderThickness="0,0,0,2" Grid.Row="5" Background="#FFEDEDED"/>
-            <Button HorizontalAlignment="Left" Grid.Row="6" VerticalAlignment="Top"  Height="34" Width="132" FontWeight="Bold" FontSize="18" Command="{Binding ConfirmCommand}" Margin="84,10,0,0" Grid.Column="2" Background="#ffba00">
+            <Button HorizontalAlignment="Left" Grid.Row="6" VerticalAlignment="Top"  Height="34" Width="132" FontWeight="Bold" FontSize="18" Command="{Binding ConfirmCommand}" Margin="84,10,0,0" Grid.Column="2" Background="#ffba00" ToolTipService.ShowDuration="5000">
                 <Grid Background="#ffba00" Width="144" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="16*"/>
@@ -106,9 +106,15 @@
                     <Image Source="/Resources/Images/doneNew.png" VerticalAlignment="Top" HorizontalAlignment="Left" Width="26" Height="25" RenderTransformOrigin="0.5,0.5" Margin="10,3,0,0" Grid.RowSpan="2"/>
                     <TextBlock Background="#ffba00" Foreground="Black" Text="Confirm" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" Width="109" Height="29" Margin="10,3,0,0" Grid.RowSpan="2" Grid.Column="1"/>
                 </Grid>
-
+                <Button.ToolTip>
+                    <ToolTip>
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold">This tour will be reviewed.</TextBlock>
+                        </StackPanel>
+                    </ToolTip>
+                </Button.ToolTip>
             </Button>
-            <Button HorizontalAlignment="Left" Grid.Row="6" VerticalAlignment="Top" BorderBrush="#FF9E98FF" Height="34" Width="132" FontWeight="Bold" FontSize="18" Command="{Binding CancelCommand}" Margin="221,10,0,0" Grid.Column="2">
+            <Button HorizontalAlignment="Left" Grid.Row="6" VerticalAlignment="Top" BorderBrush="#FF9E98FF" Height="34" Width="132" FontWeight="Bold" FontSize="18" Command="{Binding CancelCommand}" Margin="221,10,0,0" Grid.Column="2" ToolTipService.ShowDuration="5000">
                 <Grid Background="White" Width="144" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="16*"/>
@@ -121,7 +127,13 @@
                     <Image Source="/Resources/Images/close.png" VerticalAlignment="Top" HorizontalAlignment="Left" Width="26" Height="25" RenderTransformOrigin="0.5,0.5" Margin="10,3,0,0" Grid.RowSpan="2"/>
                     <TextBlock Background="White" Foreground="Black" Text="Cancel" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" Width="109" Height="29" Margin="10,3,0,0" Grid.RowSpan="2" Grid.Column="1"/>
                 </Grid>
-
+                <Button.ToolTip>
+                    <ToolTip>
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold">This tour won't be reviewed.</TextBlock>
+                        </StackPanel>
+                    </ToolTip>
+                </Button.ToolTip>
             </Button>
             <Border Background="Transparent" BorderBrush="#FFCAC1C1" BorderThickness="2,2,2,2" Margin="10,15,10,15" Visibility="Visible" Grid.Column="2" Grid.Row="5"/>
 

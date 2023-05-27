@@ -181,7 +181,7 @@
         </TabControl>
 
         <Label Content="My requests" Grid.Column="1" Foreground="White" Margin="0,36,0,0" Height="46" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="20" FontWeight="Bold" Width="135"/>
-        <Button HorizontalAlignment="Left" Grid.Column="1" VerticalAlignment="Top" Height="34" Width="172" FontWeight="Bold" Margin="0,499,0,0" FontSize="18" Command="{Binding CreateCommand}">
+        <Button HorizontalAlignment="Left" Grid.Column="1" VerticalAlignment="Top" Height="34" Width="172" FontWeight="Bold" Margin="0,499,0,0" FontSize="18" Command="{Binding CreateCommand}" ToolTipService.ShowDuration="5000">
             <Grid Background="#ffba00" Width="172" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="16*"/>
@@ -194,6 +194,13 @@
                 <Image Source="/Resources/Images/add-new.png" VerticalAlignment="Top" HorizontalAlignment="Left" Width="26" Height="25" RenderTransformOrigin="0.5,0.5" Margin="10,3,0,0" Grid.RowSpan="2"/>
                 <TextBlock Background="#ffba00" Text="Create request" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" Width="145" Height="29" Margin="37,3,0,0" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
             </Grid>
+            <Button.ToolTip>
+                <ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold">Creating tour request</TextBlock>
+                    </StackPanel>
+                </ToolTip>
+            </Button.ToolTip>
         </Button>
         <Button HorizontalAlignment="Center" Grid.Column="1" VerticalAlignment="Top" Height="34" Width="182" FontWeight="Bold" FontSize="18" Margin="0,499,0,0">
             <Grid Background="#ffba00" Width="177" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35">
@@ -210,7 +217,7 @@
             </Grid>
         </Button>
         <Label Content="You can view all your requests for tours as well as their status." FontSize="15" Grid.Column="1" FontWeight="DemiBold" Foreground="#b46617" Margin="0,100,0,0" Height="46" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-        <Button HorizontalAlignment="Left" Grid.Column="1" VerticalAlignment="Top" Height="34" Width="172" FontWeight="Bold" FontSize="18" Command="{Binding StatisticsCommand}" Margin="384,499,0,0">
+        <Button HorizontalAlignment="Left" Grid.Column="1" VerticalAlignment="Top" Height="34" Width="172" FontWeight="Bold" FontSize="18" Command="{Binding StatisticsCommand}" Margin="384,499,0,0" ToolTipService.ShowDuration="5000">
             <Grid Background="#ffba00" Width="172" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="16*"/>
@@ -223,6 +230,13 @@
                 <Image Source="/Resources/Images/analytics.png" VerticalAlignment="Top" HorizontalAlignment="Left" Width="26" Height="25" RenderTransformOrigin="0.5,0.5" Margin="10,3,0,0" Grid.RowSpan="2"/>
                 <TextBlock Background="#ffba00" Text="Statistics" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" Width="109" Height="29" Margin="10,3,0,0" Grid.RowSpan="2" Grid.Column="1"/>
             </Grid>
+            <Button.ToolTip>
+                <ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold">Showing statistics about all requests.</TextBlock>
+                    </StackPanel>
+                </ToolTip>
+            </Button.ToolTip>
         </Button>
 
 

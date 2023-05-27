@@ -39,5 +39,13 @@ namespace InitialProject.WPF.Views.Guest2Views
             this.user = user;
             DataContext = new Guest2OverviewViewModel(user,CC);
         }
+
+        private void button_Checked(object sender, RoutedEventArgs e)
+        {
+            ToolTipManager toolTipManager = (ToolTipManager)Application.Current.Resources["ToolTipManager"];
+            toolTipManager.IsToolTipEnabled = !toolTipManager.IsToolTipEnabled;
+            
+        }
+       
     }
 }

@@ -45,6 +45,16 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
                 }
             }
         }
+        private bool _isToolTipEnabled = false;
+        public bool IsToolTipEnabled
+        {
+            get { return _isToolTipEnabled; }
+            set
+            {
+                _isToolTipEnabled = value;
+                OnPropertyChanged(nameof(IsToolTipEnabled));
+            }
+        }
         private ObservableCollection<TourImage> TourImages;
         private ObservableCollection<TourReservation> TourReservations;
         private TourRepository tourRepository;
