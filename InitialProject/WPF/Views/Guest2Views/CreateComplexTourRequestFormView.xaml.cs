@@ -1,11 +1,10 @@
 ﻿using InitialProject.Domain.Model;
-using InitialProject.Service;
+using InitialProject.Model;
+using InitialProject.WPF.ViewModels.Guest2ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -15,22 +14,21 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using InitialProject.WPF.ViewModels.Guest2ViewModels;
 
 namespace InitialProject.WPF.Views.Guest2Views
 {
     /// <summary>
-    /// Interaction logic for MyRequestsFormView.xaml
+    /// Interaction logic for CreateComplexTourRequestFormView.xaml
     /// </summary>
-    public partial class MyRequestsFormView : UserControl
+    public partial class CreateComplexTourRequestView : Window
     {
-        public MyRequestsFormView(Model.Guest2 guest2)
+        public CreateComplexTourRequestView(Guest2 guest2, ObservableCollection<ComplexTourRequests> complexTourRequests)
         {
             InitializeComponent();
-            this.DataContext = new MyRequestsViewModel(guest2);
+            this.DataContext = new CreateComplexTourRequestViewModel(guest2, complexTourRequests);
         }
 
+      
     }
 }

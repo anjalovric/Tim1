@@ -11,6 +11,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace InitialProject.WPF.ViewModels.Guest2ViewModels
 {
@@ -29,9 +30,23 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
                 }
             }
         }
+        private ObservableCollection<ComplexTourRequests> complexTourRequests;
+        public ObservableCollection<ComplexTourRequests> ComplexTourRequests
+        {
+            get => complexTourRequests;
+            set
+            {
+                if (value != complexTourRequests)
+                {
+                    complexTourRequests = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         public string Status { get; set; }
         public string Name { get; set; }
         private OrdinaryTourRequestsService ordinaryTourRequestsService { get; set; }
+        private APPLICATION.UseCases.ComplexTourRequestsService complexTourRequestsService { get; set; }
         public RelayCommand CreateCommand { get; set; }
         public RelayCommand StatisticsCommand { get; set; }
         private Guest2 Guest2;
@@ -40,11 +55,23 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+        private int selectedTabIndex;
+        public int SelectedTabIndex
+        {
+            get { return selectedTabIndex; }
+            set
+            {
+                selectedTabIndex = value;
+                OnPropertyChanged(nameof(SelectedTabIndex));
+            }
+        }
         public MyRequestsViewModel(Model.Guest2 guest2)
         {
             Guest2 = guest2;
             ordinaryTourRequestsService = new OrdinaryTourRequestsService();
-            OrdinaryTourRequests = new ObservableCollection<OrdinaryTourRequests>(ordinaryTourRequestsService.GetByGuestId(Guest2.Id));
+            complexTourRequestsService = new APPLICATION.UseCases.ComplexTourRequestsService();
+            OrdinaryTourRequests = new ObservableCollection<OrdinaryTourRequests>(ordinaryTourRequestsService.GetOnlyOrdinaryRequestsByGuestId(Guest2.Id));
+            ComplexTourRequests = new ObservableCollection<ComplexTourRequests>(complexTourRequestsService.GetByGuestId(Guest2.Id));
             CreateCommand = new RelayCommand(Create_Executed, CanExecute);
             StatisticsCommand = new RelayCommand(Statistics_Executed, CanExecute);
             InvalidStatus();
@@ -53,10 +80,19 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         {
             return true;
         }
+
         private void Create_Executed(object sender)
         {
-            CreateOrdinaryTourRequestView createOrdinaryTourRequest = new CreateOrdinaryTourRequestView(Guest2,OrdinaryTourRequests);
-            createOrdinaryTourRequest.Show();
+            if (SelectedTabIndex==0)
+            {
+                CreateOrdinaryTourRequestView createOrdinaryTourRequest = new CreateOrdinaryTourRequestView(Guest2, OrdinaryTourRequests);
+                createOrdinaryTourRequest.Show();
+            }
+            else if (SelectedTabIndex == 1)
+            {
+                CreateComplexTourRequestView createComplexTourRequest = new CreateComplexTourRequestView(Guest2,ComplexTourRequests);
+                createComplexTourRequest.Show();
+            }  
         }
         private void Statistics_Executed(object sender)
         {

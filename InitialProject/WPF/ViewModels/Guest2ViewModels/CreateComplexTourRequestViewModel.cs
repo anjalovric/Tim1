@@ -1,8 +1,11 @@
-﻿using InitialProject.Domain.Model;
+﻿using InitialProject.APPLICATION.UseCases;
+using InitialProject.Domain.Model;
 using InitialProject.Repository;
 using InitialProject.Service;
+using InitialProject.WPF.Validations.Guest2Validations;
 using InitialProject.WPF.Views.Guest2Views;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -10,10 +13,11 @@ using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
+using Type = InitialProject.Domain.Model.Type;
 
 namespace InitialProject.WPF.ViewModels.Guest2ViewModels
 {
-    public class CreateOrdinaryTourRequestViewModel:INotifyPropertyChanged
+    public class CreateComplexTourRequestViewModel : INotifyPropertyChanged
     {
         public RelayCommand CountryInputSelectionChangedCommand { get; set; }
         public ObservableCollection<string> Countries { get; set; }
@@ -28,6 +32,19 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
                 if (value != name)
                 {
                     name = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private string complexName;
+        public string ComplexName
+        {
+            get => complexName;
+            set
+            {
+                if (value != complexName)
+                {
+                    complexName = value;
                     OnPropertyChanged();
                 }
             }
@@ -58,7 +75,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
                 }
             }
         }
-        
+
         private string city;
         public string City
         {
@@ -108,6 +125,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         public RelayCommand CancelCommand { get; set; }
         public RelayCommand IncrementCommand { get; set; }
         public RelayCommand DecrementCommand { get; set; }
+        public RelayCommand DodajCommand { get; set; }
         public ObservableCollection<string> Languages { get; set; }
         private string description;
         public string Description
@@ -165,21 +183,26 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             }
         }
         public ObservableCollection<OrdinaryTourRequests> OrdinaryTourRequests { get; set; }
-        public CreateOrdinaryTourRequestViewModel(Model.Guest2 guest2, ObservableCollection<OrdinaryTourRequests> ordinaryTourRequests)
+        public ObservableCollection<ComplexTourRequests> TourRequests;
+        private APPLICATION.UseCases.ComplexTourRequestsService ComplexTourRequestsService;
+        public CreateComplexTourRequestViewModel(Model.Guest2 guest2, ObservableCollection<ComplexTourRequests> complexTourRequests)
         {
             MaxGuests = "";
             NowDate = DateTime.Now;
             StartDate = NowDate; ;
             EndDate = NowDate;
             Guest2 = guest2;
-            OrdinaryTourRequests = ordinaryTourRequests;
+            ComplexTourRequestsService = new ComplexTourRequestsService();
+            TourRequests = complexTourRequests;
+            OrdinaryTourRequests = new ObservableCollection<OrdinaryTourRequests>();
+            OrdinaryTourRequests.Clear();
             MakeCommands();
             AddLanguages();
             locationRepository = new LocationRepository();
             Countries = new ObservableCollection<string>(locationRepository.GetAllCountries());
             CitiesByCountry = new ObservableCollection<string>();
             IsComboBoxCityEnabled = false;
-            OrdinaryTourRequests = ordinaryTourRequests;    
+           // OrdinaryTourRequests = ordinaryTourRequests;
         }
         private void MakeCommands()
         {
@@ -188,6 +211,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             IncrementCommand = new RelayCommand(Increment_Executed, CanExecute);
             DecrementCommand = new RelayCommand(Decrement_Executed, CanExecute);
             CountryInputSelectionChangedCommand = new RelayCommand(CountryInputSelectionChanged_Executed, CanExecute);
+            DodajCommand= new RelayCommand(Dodaj, CanExecute);
         }
         private void AddLanguages()
         {
@@ -205,7 +229,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         }
         private void Cancel_Executed(object sender)
         {
-            Application.Current.Windows.OfType<CreateOrdinaryTourRequestView>().FirstOrDefault().Close();
+            Application.Current.Windows.OfType<CreateComplexTourRequestView>().FirstOrDefault().Close();
         }
 
         private void Increment_Executed(object sender)
@@ -234,29 +258,45 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             LocationService locationService = new LocationService();
             Model.Location newLocation = locationService.GetByCityAndCountry(Country.ToString(), City.ToString());
             OrdinaryTourRequestsService requestService = new OrdinaryTourRequestsService();
-            DateTime createDate=DateTime.Now;
+            DateTime createDate = DateTime.Now;
             if (End < StartDate)
             {
                 MessageBox.Show("Niste dobro popunili polja!");
                 return;
             }
-            OrdinaryTourRequests request = new OrdinaryTourRequests(Name,Guest2.Id, Convert.ToInt32(MaxGuests), newLocation, Description, SelectedLanguage, Convert.ToDateTime(Start), Convert.ToDateTime(End), Status.ONWAITING,Start.ToString().Split(" ")[0],End.ToString().Split(" ")[0],-1,createDate,false,-1,-1);
-            OrdinaryTourRequests savedRequest=requestService.Save(request);
-            OrdinaryRequestNotification requestNotification = new OrdinaryRequestNotification(savedRequest.Id);
-            RequestNotificationService requestNotificationService = new RequestNotificationService();
-            requestNotificationService.Save(requestNotification);
-            Application.Current.Windows.OfType<CreateOrdinaryTourRequestView>().FirstOrDefault().Close();
+            OrdinaryTourRequests request = new OrdinaryTourRequests(Name, Guest2.Id, Convert.ToInt32(MaxGuests), newLocation, Description, SelectedLanguage, Convert.ToDateTime(Start), Convert.ToDateTime(End), Status.ONWAITING, Start.ToString().Split(" ")[0], End.ToString().Split(" ")[0], -1, createDate, false, -1,TourRequests.Count+1);
+            OrdinaryTourRequests savedRequest = requestService.Save(request);
+            OrdinaryTourRequests.Add(request);
+            ResetAllFields();
+        }
+        private void ResetAllFields()
+        {
+            Name = "";
+            Country = null;
+            City = null;
+            Description = "";
+            SelectedLanguage = null;
+            StartDate = DateTime.Now;
+            EndDate = DateTime.Now;
+            MaxGuests = "";
+        }
+        private void Dodaj(object sender)
+        {
+            ComplexTourRequests request = new ComplexTourRequests(ComplexName, Guest2, Type.ONWAITING);
+            ComplexTourRequests savedRequest = ComplexTourRequestsService.Save(request);
+            Application.Current.Windows.OfType<CreateComplexTourRequestView>().FirstOrDefault().Close();
             SetTourRequests();
         }
         private void SetTourRequests()
         {
-            OrdinaryTourRequests.Clear();
-            OrdinaryTourRequestsService requestService = new OrdinaryTourRequestsService();
-            foreach(OrdinaryTourRequests ordinaryTourRequests in requestService.GetByGuestId(Guest2.Id))
+            TourRequests.Clear();
+            ComplexTourRequestsService requestService = new ComplexTourRequestsService();
+            foreach (ComplexTourRequests complexTourRequests in requestService.GetByGuestId(Guest2.Id))
             {
-                 OrdinaryTourRequests.Add(ordinaryTourRequests);
+                TourRequests.Add(complexTourRequests);
             }
         }
+ 
         public void CountryInputSelectionChanged_Executed(object sender)
         {
             if (Country != null)

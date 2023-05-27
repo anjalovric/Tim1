@@ -25,11 +25,12 @@ namespace InitialProject.Domain.Model
         public int TourInstanceId { get; set; }
         public bool NewAccepted { get; set; } 
         public bool IsNew { get; set; }
+        public int ComplexId { get; set; }
         public OrdinaryTourRequests()
         {
 
         }
-        public OrdinaryTourRequests(string name,int guestId, int maxGuests, Location location, string description, string language, DateTime startDate, DateTime endDate, Status status, string start, string end, int guideId, DateTime createDate, bool newAccepted, int instanceId)
+        public OrdinaryTourRequests(string name,int guestId, int maxGuests, Location location, string description, string language, DateTime startDate, DateTime endDate, Status status, string start, string end, int guideId, DateTime createDate, bool newAccepted, int instanceId, int complexId)
         {
             Name = name;
             GuestId = guestId;
@@ -47,6 +48,7 @@ namespace InitialProject.Domain.Model
             NewAccepted = newAccepted;
             TourInstanceId = instanceId;
             IsNew = false;
+            ComplexId = complexId;
         }
         public void FromCSV(string[] values)
         {
@@ -66,10 +68,11 @@ namespace InitialProject.Domain.Model
             CreateDate = Convert.ToDateTime(values[13]);
             NewAccepted= Convert.ToBoolean(values[14]);
             TourInstanceId = Convert.ToInt32(values[15]);
+            ComplexId = Convert.ToInt32(values[16]);
         }
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(),Name,GuestId.ToString(), MaxGuests.ToString(), Location.Id.ToString(), Description, Language, StartDate.ToString(),EndDate.ToString(),Status.ToString(),Start,End,GuideId.ToString(),CreateDate.ToString(),NewAccepted.ToString(), TourInstanceId.ToString()};
+            string[] csvValues = { Id.ToString(),Name,GuestId.ToString(), MaxGuests.ToString(), Location.Id.ToString(), Description, Language, StartDate.ToString(),EndDate.ToString(),Status.ToString(),Start,End,GuideId.ToString(),CreateDate.ToString(),NewAccepted.ToString(), TourInstanceId.ToString(),ComplexId.ToString()};
             return csvValues;
         }
     }
