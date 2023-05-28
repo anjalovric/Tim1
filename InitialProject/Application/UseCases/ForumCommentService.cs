@@ -48,6 +48,7 @@ namespace InitialProject.APPLICATION.UseCases
                     comment.User = guest1;
                 else
                     comment.User = ownerService.GetByUsername(comment.User.Username);
+                comment.IsOwnerComment = comment.User.Role == Role.OWNER;
             }
         }
         public List<ForumComment> GetAllByForumId(int id)
