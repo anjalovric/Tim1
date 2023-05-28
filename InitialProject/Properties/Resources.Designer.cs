@@ -160,6 +160,15 @@ namespace InitialProject.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to quit a job?.
+        /// </summary>
+        internal static string Alert {
+            get {
+                return ResourceManager.GetString("Alert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to cancel tour:.
         /// </summary>
         internal static string AreYouSure {
@@ -192,6 +201,15 @@ namespace InitialProject.Properties {
         internal static string AtLeast2CheckpointsAreRequired {
             get {
                 return ResourceManager.GetString("AtLeast2CheckpointsAreRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If you no longer want to be part of our system press button DISMISSAL. After that you would not be able to use system as guide..
+        /// </summary>
+        internal static string Attention {
+            get {
+                return ResourceManager.GetString("Attention", resourceCulture);
             }
         }
         
@@ -426,6 +444,15 @@ namespace InitialProject.Properties {
         internal static string DetailsHeader {
             get {
                 return ResourceManager.GetString("DetailsHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DISMISSAL.
+        /// </summary>
+        internal static string dismissal {
+            get {
+                return ResourceManager.GetString("dismissal", resourceCulture);
             }
         }
         

@@ -245,7 +245,7 @@
             </i:Interaction.Triggers>
             <ComboBox.ItemContainerStyle>
                 <Style TargetType="ComboBoxItem">
-                    <Setter Property="Width" Value="258"></Setter>
+                    <Setter Property="Width" Value="250"></Setter>
                     <Setter Property="HorizontalContentAlignment" Value="Left"/>
                     <Setter Property="VerticalContentAlignment" Value="Center"/>
                     <Setter Property="ContentTemplate">
@@ -287,7 +287,7 @@
         <ComboBox x:Name="cityInput" ItemsSource="{Binding CitiesByCountry}" VerticalContentAlignment="Center" FontWeight="Medium" Foreground="#22301a" SelectedItem="{Binding LocationCity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsTextSearchEnabled="True" IsEnabled="{Binding Path=IsCityComboBoxEnabled}" IsTextSearchCaseSensitive="False" HorizontalAlignment="Left" Width="252" Height="34" Margin="44,35,0,0" FontSize="18" Grid.Row="1" Grid.Column="2">
             <ComboBox.ItemContainerStyle>
                 <Style TargetType="ComboBoxItem">
-                    <Setter Property="Width" Value="258"></Setter>
+                    <Setter Property="Width" Value="250"></Setter>
                     <Setter Property="HorizontalContentAlignment" Value="Left"/>
                     <Setter Property="VerticalContentAlignment" Value="Center"/>
                     <Setter Property="ContentTemplate">

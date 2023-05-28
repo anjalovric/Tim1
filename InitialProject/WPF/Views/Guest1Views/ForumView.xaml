@@ -49,23 +49,37 @@
                     </Grid.ColumnDefinitions>
 
                     <!-- COVER IMAGE FOR CARD -->
-                    <Image x:Name="forumImage" Height="Auto" Width="136" HorizontalAlignment="Left" Source="{Binding Path=CoverImage.Url}" Stretch="Fill"  VerticalAlignment="Center" Grid.Column="0" Grid.RowSpan="2" Margin="10,10,0,10"/>
+                    <Image x:Name="forumImage" Height="Auto" Width="Auto" HorizontalAlignment="Left" Source="{Binding Path=Location.ImagePath}" Stretch="Fill"  VerticalAlignment="Center" Grid.Column="0" Grid.RowSpan="2" Margin="10,10,0,10"/>
 
+                    <Image x:Name="lockImage" Height="Auto" Width="Auto" HorizontalAlignment="Left" Source="/Resources/Images/lock.png" Stretch="Fill"  VerticalAlignment="Center" Grid.Column="0" Grid.RowSpan="2" Margin="45,32,35,32">
+                        <Image.Style>
+                            <Style TargetType="Image">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Opened}" Value="False">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+
+                     
                     <!-- MAIN INFO -->
-                    <Label Content="Location:" FontWeight="Medium" Padding="0,15,0,0" HorizontalAlignment="Left" Width="67" VerticalAlignment="Center" VerticalContentAlignment="Center" Grid.Row="0" Grid.Column="1"/>
-                    <Label Content="Comments:" FontWeight="Medium" Padding="0,15,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" VerticalContentAlignment="Center" Width="67"  Grid.Row="0" Grid.Column="2"/>
-                    <TextBlock Text="{Binding Path=Name}" Margin="0,0,0,15" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Width="Auto" Height="30" HorizontalAlignment="Left"/>
-                    <TextBlock Text="{Binding Path=Type}" Margin="0,0,0,15" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" Width="Auto" Height="30" HorizontalAlignment="Left"/>
+                    <Label Content="Location:" FontWeight="Medium" Padding="20,15,0,0" HorizontalAlignment="Left" Width="Auto" VerticalAlignment="Center" VerticalContentAlignment="Center" Grid.Row="0" Grid.Column="1"/>
+                    <Label Content="Comments:" FontWeight="Medium" Padding="20,15,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" VerticalContentAlignment="Center" Width="Auto"  Grid.Row="0" Grid.Column="2"/>
+                    <TextBlock Text="{Binding Path=Location.City}" Margin="20,0,0,15" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Width="Auto" Height="30" HorizontalAlignment="Left"/>
+                    <TextBlock Text="{Binding Path=CommentsNumber}" Margin="20,0,0,15" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" Width="Auto" Height="30" HorizontalAlignment="Left"/>
 
 
                     <!-- OPEN BUTTON -->
-                    <Button x:Name="Open"  Command="{Binding Path=DataContext.ReserveCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" FontWeight="Bold" Grid.Row="1" Grid.Column="6" VerticalAlignment="Center" Width="100" Height="35" HorizontalAlignment="Center" FontSize="18">
+                    <Button x:Name="View"  Command="{Binding Path=DataContext.OpenCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" FontWeight="Bold" Grid.RowSpan="2" Grid.Column="4" VerticalAlignment="Center" Width="100" Height="35" HorizontalAlignment="Center" FontSize="18">
                         <Grid Background="#8c9d75" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <Image Source="/Resources/Images/back.png" VerticalAlignment="Center" HorizontalAlignment="Right"  Margin="0,0,0,0" Width="Auto" Height="22" Grid.Column="1" RenderTransformOrigin="0.5,0.5">
+                            <Image Source="/Resources/Images/back.png" VerticalAlignment="Center" HorizontalAlignment="Right"  Margin="10,0,0,0" Width="Auto" Height="22" Grid.Column="1" RenderTransformOrigin="0.5,0.5">
                                 <Image.RenderTransform>
                                     <TransformGroup>
                                         <ScaleTransform/>
@@ -75,23 +89,11 @@
                                     </TransformGroup>
                                 </Image.RenderTransform>
                             </Image>
-                            <TextBlock Text="Open" Grid.Column="0" VerticalAlignment="Center" FontSize="18" Margin="8,0,0,0"  Foreground="#22301a" FontWeight="Bold" HorizontalAlignment="Left" Width="Auto"/>
+                            <TextBlock Text="View" Grid.Column="0" VerticalAlignment="Center" FontSize="18" Margin="18,0,0,0"  Foreground="#22301a" FontWeight="Bold" HorizontalAlignment="Left" Width="Auto"/>
                         </Grid>
                     </Button>
 
-                    <!-- SUPER-OWNER MARK -->
-                    <Image Source="/Resources/Images/super11.png" Height="30" Width="30" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" Margin="0,0,150,0" HorizontalAlignment="Center">
-                        <Image.Style>
-                            <Style TargetType="Image">
-                                <Setter Property="Visibility" Value="Collapsed"/>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding Owner.IsSuperOwner}" Value="True">
-                                        <Setter Property="Visibility" Value="Visible"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Image.Style>
-                    </Image>
+                    
                 </Grid>
             </Border>
         </DataTemplate>
@@ -158,7 +160,7 @@
         <Label Content="Country:" Grid.Row="1" VerticalAlignment="Top" Margin="42,60,0,0" HorizontalAlignment="Left"></Label>
 
 
-        <ComboBox x:Name="countryInput" FontWeight="Medium" ItemsSource="{Binding Countries}" VerticalContentAlignment="Center" SelectedItem="{Binding LocationCountry, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" HorizontalAlignment="Left"   Width="374" Height="34" FontSize="18" Margin="45,35,0,0" Foreground="#22301a" Grid.Row="1" Grid.Column="1">
+        <ComboBox x:Name="countryInput" FontWeight="Medium" ItemsSource="{Binding Countries}" VerticalContentAlignment="Center" SelectedItem="{Binding LocationCountry, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" HorizontalAlignment="Left"   Width="252" Height="34" FontSize="18" Margin="45,105,0,0" Foreground="#22301a" VerticalAlignment="Top" Grid.Row="1">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
                     <i:InvokeCommandAction Command="{Binding CountryInputSelectionChangedCommand}"/>
@@ -166,7 +168,7 @@
             </i:Interaction.Triggers>
             <ComboBox.ItemContainerStyle>
                 <Style TargetType="ComboBoxItem">
-                    <Setter Property="Width" Value="374"></Setter>
+                    <Setter Property="Width" Value="250"></Setter>
                     <Setter Property="HorizontalContentAlignment" Value="Left"/>
                     <Setter Property="VerticalContentAlignment" Value="Center"/>
                     <Setter Property="ContentTemplate">
@@ -203,14 +205,14 @@
                 </Style>
             </ComboBox.Style>
         </ComboBox>
-        <Border BorderBrush="#22301a" BorderThickness="3" Height="40" Width="380" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="42,35,0,0" Grid.Row="1" Grid.Column="1"/>
+        <Border BorderBrush="#22301a" BorderThickness="3" Height="40" Width="258" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="42,102,0,0" Grid.Row="1"/>
 
-        <Label Content="City:" Grid.Row="1" VerticalAlignment="Top" Margin="0,60,373,0" HorizontalAlignment="Right"></Label>
+        <Label Content="City:" Grid.Row="1" VerticalAlignment="Top" Margin="0,60,592,0" HorizontalAlignment="Right"></Label>
 
-        <ComboBox x:Name="cityInput" ItemsSource="{Binding CitiesByCountry}" VerticalContentAlignment="Center" FontWeight="Medium" Foreground="#22301a" SelectedItem="{Binding LocationCity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsTextSearchEnabled="True" IsEnabled="{Binding Path=IsCityComboBoxEnabled}" IsTextSearchCaseSensitive="False" HorizontalAlignment="Right" Width="374" Height="34" Margin="0,35,45,0" FontSize="18" Grid.Row="1" Grid.Column="2">
+        <ComboBox x:Name="cityInput" ItemsSource="{Binding CitiesByCountry}" VerticalContentAlignment="Center" FontWeight="Medium" Foreground="#22301a" SelectedItem="{Binding LocationCity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsTextSearchEnabled="True" IsEnabled="{Binding Path=IsCityComboBoxEnabled}" IsTextSearchCaseSensitive="False" HorizontalAlignment="Center" Width="252" Height="34" Margin="0,105,0,0" VerticalAlignment="Top" FontSize="18" Grid.Row="1">
             <ComboBox.ItemContainerStyle>
                 <Style TargetType="ComboBoxItem">
-                    <Setter Property="Width" Value="374"></Setter>
+                    <Setter Property="Width" Value="250"></Setter>
                     <Setter Property="HorizontalContentAlignment" Value="Left"/>
                     <Setter Property="VerticalContentAlignment" Value="Center"/>
                     <Setter Property="ContentTemplate">
@@ -247,7 +249,7 @@
                 </Style>
             </ComboBox.Style>
         </ComboBox>
-        <Border BorderBrush="#22301a" BorderThickness="3" Width="380" Height="40" HorizontalAlignment="Right" Margin="0,35,42,0" VerticalAlignment="Center" Grid.Row="1" Grid.Column="2"></Border>
+        <Border BorderBrush="#22301a" BorderThickness="3" Width="258" Height="40" HorizontalAlignment="Center" Margin="0,102,0,0" VerticalAlignment="Top" Grid.Row="1"/>
 
         <Button x:Name="Search" FontWeight="Bold" Margin="0,160,42,0" Width="100" HorizontalAlignment="Right" Height="35" Command="{Binding NextCommand}"  VerticalAlignment="Top" FontSize="18" Grid.Row="1" BorderBrush="#FF22301A" BorderThickness="3,3,3,3">
             <Grid Background="#8c9d75" Width="100"  HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" >
@@ -269,9 +271,22 @@
             </Grid>
         </Button>
 
+        <!-- SHOW ALL BUTTON -->
+        <Button FontWeight="Bold" Margin="0,160,155,0" Width="100" HorizontalAlignment="Right" VerticalAlignment="Top" Command="{Binding ResetCommand}" Height="35" Grid.Row="1" BorderBrush="#FF22301A" BorderThickness="3,3,3,3">
+            <Grid Background="#8c9d75" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Image Source="/Resources/Images/reset.png" VerticalAlignment="Center" HorizontalAlignment="Right"  Margin="0,0,0,0" Width="Auto" Height="22" Grid.Column="1" RenderTransformOrigin="0.5,0.5"></Image>
+                <TextBlock Background="#8c9d75" Text="Reset" Grid.Column="0" VerticalAlignment="Center" FontSize="18"  Foreground="#22301a" Margin="10,0,0,0" FontWeight="Bold" HorizontalAlignment="Left" Width="58"/>
+            </Grid>
+        </Button>
+
+        <TextBox x:Name="firstComment" Height="40" HorizontalAlignment="Right" Width="258" FontSize="18" VerticalAlignment="Top" Grid.Row="1" Grid.Column="0" Margin="0,102,42,6" Background="#FFFCECB9" Text="{Binding Path=FirstComment,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
 
-        <ListBox x:Name="accommodationList" ScrollViewer.VerticalScrollBarVisibility="Visible" IsSynchronizedWithCurrentItem="True" SelectionMode="Single" ItemsSource="{Binding Path=Accommodations,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" ItemTemplate="{StaticResource forumTemplate}" Grid.ColumnSpan="3" Grid.Row="3" Margin="42,80,42,0" VerticalAlignment="Top" Background="#37492d" BorderThickness="5,5,5,5"  BorderBrush="#8c9d75" Height="265">
+        <ListBox x:Name="forumsList" ScrollViewer.VerticalScrollBarVisibility="Visible" IsSynchronizedWithCurrentItem="True" SelectionMode="Single" ItemsSource="{Binding Path=Forums,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" ItemTemplate="{StaticResource forumTemplate}" Grid.ColumnSpan="3" Grid.Row="3" Margin="42,80,42,0" VerticalAlignment="Top" Background="#37492d" BorderThickness="5,5,5,5"  BorderBrush="#8c9d75" Height="265">
             <ListBox.Resources>
                 <Style TargetType="ListViewItem">
                     <Style.Triggers>
@@ -283,8 +298,9 @@
             </ListBox.Resources>
         </ListBox>
         <Label Content="Previous topics" FontWeight="Bold" FontSize="22" Grid.Row="2" VerticalAlignment="Top" Margin="0,31,0,0" HorizontalAlignment="Center"/>
+        <Label Content="First comment:" Grid.Row="1" VerticalAlignment="Top" Margin="0,60,168,0" HorizontalAlignment="Right"/>
 
 
-        
+
     </Grid>
 </Page>

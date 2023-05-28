@@ -2,6 +2,7 @@
 using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Model;
 using InitialProject.Repository;
+using InitialProject.Serializer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,11 @@ namespace InitialProject.Service
                     foundedGuide = guide;
             }
             return foundedGuide;
+        }
+
+        public Guide Update(Guide guide)
+        {
+            return guideRepository.Update(guide);
         }
     }
 }

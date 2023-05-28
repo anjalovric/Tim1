@@ -45,10 +45,10 @@ namespace InitialProject.Domain
         { typeof(INewTourNotificationRepository), new NewTourNotificationRepository() },
         { typeof(IReviewNotificationRepository), new ReviewNotificationRepository() },
         { typeof(IRequestNotificationRepository), new RequestNotificationRepository() },
-
-            {typeof(ISuperGuideRepository), new SuperGuideRepository() },
-
-        { typeof(IForumRepository), new ForumRepository() }
+        { typeof(IForumRepository), new ForumRepository() },
+        { typeof(IForumCommentRepository), new ForumCommentRepository() },
+        {typeof(ISuperGuideRepository), new SuperGuideRepository() },
+        { typeof(IComplexTourRequestsRepository), new ComplexTourRequestsRepository()}
 
         };
 

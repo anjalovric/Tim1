@@ -31,5 +31,6 @@ namespace InitialProject.WPF.Views.Guest2Views
             InitializeComponent();
             this.DataContext = new MyRequestsViewModel(guest2);
         }
+
     }
 }

@@ -22,7 +22,16 @@ namespace InitialProject.Repository
             _serializer = new Serializer<Guide>();
             guides = _serializer.FromCSV(FilePath);
         }
-
+        public Guide Update(Guide guide)
+        {
+            guides = _serializer.FromCSV(FilePath);
+            Guide current = guides.Find(c => c.Id == guide.Id);
+            int index = guides.IndexOf(current);
+            guides.Remove(current);
+            guides.Insert(index, guide);       // keep ascending order of ids in file 
+            _serializer.ToCSV(FilePath, guides);
+            return guide;
+        }
         public List<Guide> GetAll()
         {
             return _serializer.FromCSV(FilePath); ;

@@ -204,6 +204,14 @@
         <Setter Property="FontFamily" Value="Yu Gothic"/>
     </Style>
 
+    <Style x:Key="ButtonDismissal" TargetType="Button">
+        <Setter Property="Background" Value="{StaticResource InnerBlue}"/>
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="BorderBrush" Value="{StaticResource RoyalBlue}"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="FontFamily" Value="Yu Gothic"/>
+    </Style>
+
     <Style x:Key="ButtonToast" TargetType="Button">
         <Setter Property="Background" Value="{StaticResource CalendarBlue}"/>
         <Setter Property="BorderThickness" Value="2"/>

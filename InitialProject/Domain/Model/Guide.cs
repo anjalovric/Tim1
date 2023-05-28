@@ -1,6 +1,7 @@
 ﻿using InitialProject.Serializer;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +15,7 @@ namespace InitialProject.Model
         public string LastName { get; set; }
         public string Email { get; set; }
         public int Age { get; set; }
+        public Boolean Active { get; set; }
 
 
         public Guide() { }
@@ -25,11 +27,12 @@ namespace InitialProject.Model
             Username = values[3];
             Email= values[4];
             Age = Convert.ToInt32(values[5]);
+            Active = Convert.ToBoolean(values[6]);
         }
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), Name, LastName, Username,Email,Age.ToString() };
+            string[] csvValues = { Id.ToString(), Name, LastName, Username,Email,Age.ToString(),Active.ToString() };
             return csvValues;
         }
     }

@@ -11,6 +11,7 @@ namespace InitialProject.Model
         public int Age { get; set; }
         public string Email { get; set; }
         public bool IsSuperOwner { get; set; }
+        public String ImagePath { get; set; }
 
         public Owner() { }
 
@@ -29,11 +30,12 @@ namespace InitialProject.Model
             Age = Convert.ToInt32(values[4]);
             Email = values[5];
             IsSuperOwner = Convert.ToBoolean(values[6]);
+            ImagePath = values[7];
         }
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), Name, LastName, Username, Age.ToString(), Email, IsSuperOwner.ToString() };
+            string[] csvValues = { Id.ToString(), Name, LastName, Username, Age.ToString(), Email, IsSuperOwner.ToString(), ImagePath };
             return csvValues;
         }
         public override string ToString()

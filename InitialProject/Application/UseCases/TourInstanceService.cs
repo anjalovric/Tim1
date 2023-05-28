@@ -1,6 +1,7 @@
 ﻿using InitialProject.Domain;
 using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Model;
+using InitialProject.WPF.ViewModels.Guest2ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -138,6 +139,7 @@ namespace InitialProject.Service
             tourInstancerepository.Update(selected);
             TourInstanceTourLocationService tourInstanceTourLocation = new TourInstanceTourLocationService();
             tourInstanceTourLocation.FillTour(selected);
+            
             return selected;
         }
         public void ActivateTour(TourInstance selected)

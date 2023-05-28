@@ -33,6 +33,18 @@ namespace InitialProject.Service
         {
             return ordinaryTourRequestsRepository.GetByGuestId(id);
         }
+        public List<OrdinaryTourRequests> GetOnlyOrdinaryRequestsByGuestId(int id)
+        {
+            List<OrdinaryTourRequests> requests = new List<OrdinaryTourRequests>();
+            foreach(OrdinaryTourRequests request in GetByGuestId(id))
+            {
+                if (request.ComplexId == -1)
+                {
+                    requests.Add(request);
+                }
+            }
+            return requests;
+        }
         public List<OrdinaryTourRequests> GetOnWaitingRequests()
         {
             List<OrdinaryTourRequests> requests= new List<OrdinaryTourRequests>();

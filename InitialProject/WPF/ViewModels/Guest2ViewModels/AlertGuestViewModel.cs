@@ -15,6 +15,7 @@ using System.Windows.Controls;
 using InitialProject.WPF.Views.Guest1Views;
 using InitialProject.Domain.Model;
 using System.Collections.ObjectModel;
+using System.Security.Principal;
 
 namespace InitialProject.WPF.ViewModels.Guest2ViewModels
 {
@@ -34,6 +35,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         private GuideRepository _guideRepository;
         public Action CloseAction { get; set; }
         public string GuideLabel { get; set; }
+        private WinningAVoucher WinningAVoucher;
         public AlertGuestViewModel(int alertId)
         {
             AlertId = alertId;
@@ -68,6 +70,8 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
                     alertGuest2.Seen = true;
                     _alertGuest2Service.Update(alertGuest2);
                     DeleteFromNotifications(alertGuest2);
+                    WinningAVoucher winningAVoucher = new WinningAVoucher(alertGuest2.Guest2Id);
+                    winningAVoucher.CountOfTours();
                 }
             }
             CloseAction();
@@ -96,6 +100,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
                     alertGuest2.Seen = true;
                     _alertGuest2Service.Update(alertGuest2);
                     DeleteFromNotifications(alertGuest2);
+                   
                 }
             }
             CloseAction();

@@ -5,20 +5,20 @@ using System.Text;
 using System.Threading.Tasks;
 using InitialProject.Model;
 
-namespace InitialProject.Domain.Model
+namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 {
-    public class SuggestedAccommodationReservation
+    public class SuggestedReservationViewModel
     {
         public Accommodation Accommodation { get; set; }
         public DateTime Arrival { get; set; }
         public DateTime Departure { get; set; }
 
-        public SuggestedAccommodationReservation(Accommodation accommodation, DateTime arrival, DateTime departure)
-        {
-            this.Accommodation = accommodation;
+        public SuggestedReservationViewModel(Accommodation accommodation, DateTime arrival, DateTime departure)
+        {   
+            Accommodation = accommodation;
             Arrival = arrival;
             Departure = departure;
-        }
 
+        }
     }
 }

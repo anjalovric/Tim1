@@ -43,8 +43,29 @@ namespace InitialProject.Service
                 voucher.GuestId = reservation.GuestId;
                 voucher.GuideId = guideService.GetByUsername(tourInstanceGuide.Username).Id;
                 voucher.CreateDate = DateTime.Now;
+                voucher.Type = VoucherType.CANCELED_TOUR;
                 Voucher savedVoucher = Save(voucher);
             }
+        }
+        public void SendVoucherForVisitedTours(int guest2Id)
+        { 
+            Voucher voucher = new Voucher();
+            voucher.Used = false;
+            voucher.GuestId = guest2Id;
+            voucher.GuideId = -1;
+            voucher.CreateDate = DateTime.Now;
+            voucher.Type = VoucherType.VISITED_TOUR;
+            Boolean exist = false;
+            foreach (Voucher storedVoucher in GetAll())
+            {
+                if(storedVoucher.GuestId == guest2Id && storedVoucher.Type==VoucherType.VISITED_TOUR)
+                    exist= true;
+            }
+            if (!exist)
+            {
+                Voucher savedVoucher = Save(voucher);
+            }
+           
         }
         public List<Voucher> FindAllVouchers(Guest2 guest2)
         {
@@ -57,6 +78,37 @@ namespace InitialProject.Service
                 }
             }
             return Vouchers;
+        }
+
+        public void SendVoucher(int guideId)
+        {
+            TourInstanceService tourInstanceService = new TourInstanceService();
+            TourReservationService tourReservationService = new TourReservationService();
+            foreach(TourInstance tourInstance in tourInstanceService.GetAll())
+            {
+                if(tourInstance.StartDate>DateTime.Now && tourInstance.Finished==false && tourInstance.Canceled == false && tourInstance.Guide.Id==guideId)
+                {
+                    if (tourReservationService.GetAll().Find(x => x.TourInstanceId == tourInstance.Id) != null)
+                    {
+                        TourReservation tourReservation = tourReservationService.GetAll().Find(x => x.TourInstanceId == tourInstance.Id);
+                        CreateVoucher(tourReservation.GuestId);
+                    }
+                    tourInstance.Canceled = true;
+                    tourInstanceService.Update(tourInstance);
+                }
+            }
+
+        }
+        private void CreateVoucher(int guest2Id)
+        {
+            Voucher voucher = new Voucher();    
+            voucher.GuestId = guest2Id;
+            voucher.CreateDate = DateTime.Now;
+            voucher.GuideId = -1;
+            voucher.Used = false;
+            voucher.Type = VoucherType.DISMISSAL_GUIDE;
+            Save(voucher);
+
         }
     }
 }

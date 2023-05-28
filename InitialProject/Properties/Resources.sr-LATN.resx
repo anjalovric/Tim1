@@ -147,6 +147,9 @@
   <data name="AgeStatistics" xml:space="preserve">
     <value>Statistika o godištu</value>
   </data>
+  <data name="Alert" xml:space="preserve">
+    <value>Da li ste sigurni da želite da date otkaz?</value>
+  </data>
   <data name="AreYouSure" xml:space="preserve">
     <value>Da li ste sigurni da želite otkazati turu:</value>
   </data>
@@ -158,6 +161,9 @@
   </data>
   <data name="AtLeast2CheckpointsAreRequired" xml:space="preserve">
     <value>Obavezno je uneti bar 2 ključne tačke</value>
+  </data>
+  <data name="Attention" xml:space="preserve">
+    <value>Ako više ne želite da budete deo našeg sistema, pritisnite dugme OTKAZ. Nakon toga više nećete moći da pristupite sistemu kao vodič.</value>
   </data>
   <data name="BeforeRegularEnd" xml:space="preserve">
     <value>pre redovnog kraja</value>
@@ -236,6 +242,9 @@
   </data>
   <data name="DetailsHeader" xml:space="preserve">
     <value>Detalji</value>
+  </data>
+  <data name="dismissal" xml:space="preserve">
+    <value>OTKAZ</value>
   </data>
   <data name="Donotexistsforlocation" xml:space="preserve">
     <value>Ne postoji zahtev za tu lokaciju!</value>

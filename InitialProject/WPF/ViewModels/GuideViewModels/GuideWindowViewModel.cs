@@ -168,6 +168,12 @@ namespace InitialProject.WPF.ViewModels
             signInForm.Show();
             Application.Current.Windows.OfType<GuideWindow>().FirstOrDefault().Close();
         }
+        public void SignOut()
+        {
+            SignInForm signInForm = new SignInForm();
+            signInForm.Show();
+            Application.Current.Windows.OfType<GuideWindow>().FirstOrDefault().Close();
+        }
         private void OrdinaryRequest_Executed(object sender)
         {
            OrdinaryRequestOverviewView ordinaryRequestOverviewView = new OrdinaryRequestOverviewView(loggedUser, homeView.viewModel.Tours, cancelView.cancelViewModel.TourInstances);

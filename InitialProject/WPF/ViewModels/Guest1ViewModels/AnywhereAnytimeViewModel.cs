@@ -23,6 +23,19 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         private Guest1 guest1;
         public DateTime Arrival { get; set; }
         public DateTime Departure { get; set; }
+        private ObservableCollection<SuggestedReservationViewModel> suggestedReservations;
+        public ObservableCollection<SuggestedReservationViewModel> SuggestedReservations
+        {
+            get { return suggestedReservations; }
+            set
+            {
+                if (value != suggestedReservations)
+                {
+                    suggestedReservations = value;
+                    OnPropertyChanged("SuggestedReservations");
+                }
+            }
+        }
         private string numberOfDays;
         public string NumberOfDays
         {
@@ -51,7 +64,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         }
 
 
-        //Validation for Number of guests and Number od days fields\
+        //Validation for Number of guests and Number od days fields
         public string Error => null;
         public bool IsValid
         {
@@ -149,6 +162,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             }
         }
         public RelayCommand ResetCommand { get; set; }
+        public RelayCommand SearchCommand { get; set; }
         public RelayCommand IncrementGuestsNumberCommand { get; set; }
 
         public RelayCommand IncrementDaysNumberCommand { get; set; }
@@ -177,6 +191,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             DecrementDaysNumberCommand = new RelayCommand(DecrementDaysNumber_Executed, CanExecute);
             DecrementGuestsNumberCommand = new RelayCommand(DecrementGuestsNumber_Executed, CanExecute);
             OnPreviewMouseUpCommand = new RelayCommand(OnPreviewMouseUp_Executed, CanExecute);
+            SearchCommand = new RelayCommand(Search_Executed, CanExecute);
         }
 
         private void OnPreviewMouseUp_Executed(Object sender)
@@ -253,11 +268,48 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             IsNumberOfDaysValid = true;
             IsNumberOfGuestsValid = true;
         }
+        private void Search_Executed(object sender)
+        {
+            if (AreAllFieldsEmpty())
+                ShowMessageBoxEmptyAll();
+            else if(IsOnlyCalendarFilled())
+            {
+
+            }
+
+        }
+
+        
+        private bool IsOnlyCalendarFilled()
+        {
+            return (Arrival != null || Departure != null) && NumberOfDays == "" && NumberOfGuests == "";
+        }
+        
+
+        //Validation for textboxes
         private Match CreateValidationNumberRegex(string content)
         {
             var regex = "^([1-9][0-9]*)$";
             Match match = Regex.Match(content, regex, RegexOptions.IgnoreCase);
             return match;
+        }
+        //Validation - date input (calendars and num. of days)
+        private bool IsValidDateInput() //if only calendar are filled (treba prije poziva ove metode provjera da li je bar 1 kalendar selektovan)
+        {
+            return (Arrival != null && Departure != null && Arrival <= Departure && Arrival.Date > DateTime.Now);
+        }
+        //Validation - all fields are empty
+        private bool AreAllFieldsEmpty()
+        {
+            return Arrival == null && Departure == null && NumberOfGuests == "" && NumberOfDays == "";
+        }
+
+        //Message box - all fields are empty
+        private void ShowMessageBoxEmptyAll()
+        {
+            Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("Please enter data in fields!", "/Resources/Images/exclamation.png");
+            messageBox.Owner = Application.Current.Windows.OfType<AccommodationReservationFormView>().FirstOrDefault();
+            messageBox.ShowDialog();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

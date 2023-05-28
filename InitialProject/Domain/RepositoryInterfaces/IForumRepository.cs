@@ -9,6 +9,7 @@ namespace InitialProject.Domain.RepositoryInterfaces
 {
     public interface IForumRepository : IGenericRepository<Forum>
     {
-        public void Add(Forum forum) { }
+        public void Add(Forum forum);
+        public void Update(Forum forum);
     }
 }
