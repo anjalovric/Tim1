@@ -22,9 +22,14 @@ namespace InitialProject.WPF.ViewModels
         private bool themeIsChecked;
         public bool ThemeIsChecked
         {
-            get { return themeIsChecked; }
+            get {
+                themeIsChecked = Properties.Settings.Default.theme;
+                return themeIsChecked;
+            }
             set
             {
+                Properties.Settings.Default.theme = value;
+                Properties.Settings.Default.Save();
                 themeIsChecked = value;
                 OnPropertyChanged("ThemeIsChecked");
                 ThemeChanged();
@@ -33,9 +38,13 @@ namespace InitialProject.WPF.ViewModels
         private string selectedLanguage;
         public string SelectedLanguage
         {
-            get { return selectedLanguage; }
+            get {
+                selectedLanguage = Properties.Settings.Default.language;
+                return selectedLanguage; }
             set
             {
+                Properties.Settings.Default.language = value;
+                Properties.Settings.Default.Save();
                 selectedLanguage = value;
                 OnPropertyChanged("selectedLanguage");
                 ComboBox_SelectionChanged();
@@ -62,13 +71,15 @@ namespace InitialProject.WPF.ViewModels
             SwitchFirstPage(loggedUser);
             MakeCommands();
             AddLanguages();
+            ThemeChanged();
+            ComboBox_SelectionChanged();
         }
         private void AddLanguages()
         {
             Languages = new ObservableCollection<string>();
             Languages.Add("ENG");
             Languages.Add("SRB");
-            SelectedLanguage = "ENG";
+           // SelectedLanguage = "ENG";
         }
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

@@ -8,6 +8,7 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
 
+
 namespace InitialProject
 {
     /// <summary>
@@ -35,8 +36,15 @@ namespace InitialProject
         
         public bool DarkTheme
         {
-            get { return darkTheme; }
-            set { darkTheme = value; }
+            get {
+              //  darkTheme = Properties.Settings.Default.theme;
+                return darkTheme; }
+            set {
+                darkTheme = value;
+              //  Properties.Settings.Default.theme = darkTheme;
+              //  Properties.Settings.Default.Save();
+            }
+
         }
 
 
