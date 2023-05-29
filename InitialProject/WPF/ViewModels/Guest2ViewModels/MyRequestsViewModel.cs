@@ -30,6 +30,19 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
                 }
             }
         }
+        private ObservableCollection<OrdinaryTourRequests> requests;
+        public ObservableCollection<OrdinaryTourRequests> Requests
+        {
+            get => requests;
+            set
+            {
+                if (value != requests)
+                {
+                    requests = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         private ObservableCollection<ComplexTourRequests> complexTourRequests;
         public ObservableCollection<ComplexTourRequests> ComplexTourRequests
         {
@@ -70,12 +83,14 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             Guest2 = guest2;
             ordinaryTourRequestsService = new OrdinaryTourRequestsService();
             complexTourRequestsService = new APPLICATION.UseCases.ComplexTourRequestsService();
+            Requests = new ObservableCollection<OrdinaryTourRequests>(ordinaryTourRequestsService.GetOrdinaryTourRequestsForComplexRequest(Guest2.Id));
             OrdinaryTourRequests = new ObservableCollection<OrdinaryTourRequests>(ordinaryTourRequestsService.GetOnlyOrdinaryRequestsByGuestId(Guest2.Id));
             ComplexTourRequests = new ObservableCollection<ComplexTourRequests>(complexTourRequestsService.GetByGuestId(Guest2.Id));
             CreateCommand = new RelayCommand(Create_Executed, CanExecute);
             StatisticsCommand = new RelayCommand(Statistics_Executed, CanExecute);
             InvalidStatus();
         }
+        
         private bool CanExecute(object sender)
         {
             return true;

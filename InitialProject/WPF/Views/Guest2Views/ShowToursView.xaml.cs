@@ -21,6 +21,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using InitialProject.WPF.ViewModels.Guest2ViewModels;
+using InitialProject.Help;
 
 namespace InitialProject.WPF.Views.Guest2Views
 {
@@ -36,5 +37,17 @@ namespace InitialProject.WPF.Views.Guest2Views
             viewModel=new ShowToursViewModel(guest2);
             DataContext = viewModel;
         }
+        private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            IInputElement focusedControl = FocusManager.GetFocusedElement(Application.Current.Windows[0]);
+            if (focusedControl is DependencyObject)
+            {
+                string str = ShowToursHelp.GetHelpKey((DependencyObject)focusedControl);
+                ShowToursHelp.ShowHelp(str, this);
+            }
+        }
+
+        
+
     }
 }

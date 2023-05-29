@@ -161,9 +161,9 @@
         </Grid.ColumnDefinitions>
         <Border BorderBrush="#0C3B2E" Grid.ColumnSpan="3" Background="#0C3B2E" BorderThickness="4,4,4,4" CornerRadius="25 25 25 25" />
         <TabControl x:Name="TabControl" Margin="0,151,0,106" Style="{DynamicResource TabControlStyle}" Grid.Column="1" SelectedIndex="{Binding SelectedTabIndex, Mode=TwoWay}">
-            
+
             <TabItem x:Name="Ordinary" Header="Ordinary">
-                
+
                 <Grid Background="White" Height="259" Margin="0,0,5,0">
 
                     <DataGrid ItemsSource="{Binding Path=OrdinaryTourRequests,UpdateSourceTrigger=PropertyChanged}" BorderBrush="Transparent" IsReadOnly="True" AutoGenerateColumns="False" HorizontalScrollBarVisibility="Hidden" GridLinesVisibility="None" ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle2}" CellStyle="{StaticResource DataGridCellStyle2}" Style="{StaticResource DataGridStyle}" RowStyle="{StaticResource DataGridRowStyle2}" Margin="0,-17,0,0">
@@ -171,10 +171,8 @@
                             <DataGridTextColumn Header="Name" Width="1*" Binding="{Binding Name}"/>
                             <DataGridTextColumn Header="Status" Width="1*" Binding="{Binding Status}"/>
                         </DataGrid.Columns>
-
                     </DataGrid>
                 </Grid>
-
             </TabItem>
             <TabItem x:Name="Complex" Header="Complex">
                 <Grid Background="White" Height="428" Margin="0,0,5,0">
@@ -183,7 +181,6 @@
                             <DataGridTextColumn Header="Name" Width="1*" Binding="{Binding Name}"/>
                             <DataGridTextColumn Header="Status" Width="1*" Binding="{Binding Status}"/>
                         </DataGrid.Columns>
-
                     </DataGrid>
                 </Grid>
             </TabItem>
@@ -233,7 +230,5 @@
                 <TextBlock Background="#ffba00" Text="Statistics" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" Width="109" Height="29" Margin="10,3,0,0" Grid.RowSpan="2" Grid.Column="1"/>
             </Grid>
         </Button>
-
-
     </Grid>
 </UserControl>

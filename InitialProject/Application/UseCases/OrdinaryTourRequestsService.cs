@@ -1,4 +1,5 @@
-﻿using InitialProject.Domain;
+﻿using InitialProject.APPLICATION.UseCases;
+using InitialProject.Domain;
 using InitialProject.Domain.Model;
 using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Model;
@@ -42,6 +43,23 @@ namespace InitialProject.Service
                 {
                     requests.Add(request);
                 }
+            }
+            return requests;
+        }
+        public List<OrdinaryTourRequests> GetOrdinaryTourRequestsForComplexRequest(int id)
+        {
+            List<OrdinaryTourRequests> requests = new List<OrdinaryTourRequests>();
+            ComplexTourRequestsService complexTourRequestsService = new ComplexTourRequestsService();
+            foreach (OrdinaryTourRequests request in GetByGuestId(id))
+            {
+                foreach(ComplexTourRequests complexTourRequests in complexTourRequestsService.GetByGuestId(id))
+                {
+                    if (request.ComplexId == complexTourRequests.Id)
+                    {
+                        requests.Add(request);
+                    }
+                }
+                
             }
             return requests;
         }

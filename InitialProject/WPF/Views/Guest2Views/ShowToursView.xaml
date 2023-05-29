@@ -4,11 +4,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:val="clr-namespace:InitialProject.WPF.Validations.Guest2Validations" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:l="clr-namespace:InitialProject.Help"
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
               xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Royale" xmlns:System="clr-namespace:System;assembly=netstandard" xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:local="clr-namespace:InitialProject.View" xmlns:guest2viewmodels="clr-namespace:InitialProject.WPF.ViewModels.Guest2ViewModels"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="668" Width="668" Height="600">
+             d:DesignHeight="600" d:DesignWidth="668" Width="668" Height="600" l:ShowToursHelp.HelpKey="Forma">
+    <UserControl.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Help" Executed="CommandBinding_Executed"/>
+    </UserControl.CommandBindings>
     <UserControl.Resources>
         <Style x:Key="DataGridRowStyle2" TargetType="{x:Type DataGridRow}">
             <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
@@ -190,7 +194,7 @@
 
         </DataGrid>
         <ComboBox x:Name="cityInput" Grid.Column="1"  BorderBrush="#7166f9" BorderThickness="3,3,3,3" ItemsSource="{Binding CitiesByCountry}" SelectedItem="{Binding City}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" HorizontalAlignment="Center" Margin="0,130,0,0" VerticalAlignment="Top" Width="134" Height="22" IsEnabled="{Binding IsComboBoxCityEnabled}"/>
-        <TextBox x:Name="durationInput" Grid.Column="1" Background="LightGray"  Style="{StaticResource BorderStyle}" HorizontalAlignment="Left" Margin="414,130,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="143" Height="22" RenderTransformOrigin="0.496,0.294" Grid.ColumnSpan="2">
+        <TextBox x:Name="durationInput" Grid.Column="1" Background="LightGray"  Style="{StaticResource BorderStyle}" HorizontalAlignment="Left" Margin="414,130,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="143" Height="22" RenderTransformOrigin="0.496,0.294" Grid.ColumnSpan="2" l:ShowToursHelp.HelpKey="novo">
             <TextBox.Text>
                 <Binding Path="Duration" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
