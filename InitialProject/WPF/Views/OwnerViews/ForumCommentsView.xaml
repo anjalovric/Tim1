@@ -13,14 +13,14 @@
             <Border Background="LightGray" BorderBrush="DarkGray" BorderThickness="0.5" Margin="0,0,0,0" >
                 <Grid Margin="0, 0, 0, 0">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="2.5*"/>
-                        <ColumnDefinition Width="2*"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="40"/>
+                        <ColumnDefinition Width="140"/>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="60"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="20"/>
-                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
                     </Grid.RowDefinitions>
                     <Image Grid.Column="0" Grid.Row="0" Height="25" Grid.RowSpan="2" VerticalAlignment="Center">
                         <Image.Style>
@@ -34,14 +34,14 @@
                             </Style>
                         </Image.Style>
                     </Image>
-                    <TextBlock Grid.Column="1" Grid.Row="0" Margin="2, 2, 0, 0" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+                    <TextBlock Grid.Column="1" Grid.Row="0" Margin="5, 2, 0, 0" FontWeight="SemiBold" FontSize="13" VerticalAlignment="Bottom" HorizontalAlignment="Left">
                         <Run Text="{Binding Path= User.Name}" />
                         <Run Text=" " />
                         <Run Text="{Binding Path=User.LastName}" />
                         <Run Text=":" />
                     </TextBlock>
-                    <TextBlock Text="{Binding Path=Text, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.ColumnSpan="2"  Grid.Row="1" ></TextBlock>
-                    <TextBlock Grid.Column="2" Grid.Row="0">
+                    <TextBlock Text="{Binding Path=Text, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Margin="5, 0, 0,0" Grid.Column="1" Grid.ColumnSpan="2"  Grid.Row="1"></TextBlock>
+                    <TextBlock Grid.Column="2" Grid.Row="0" VerticalAlignment="Bottom" Foreground="Red">
                         <Run Text="Reports: " />
                         <Run Text="{Binding Path=ReportsNumber, UpdateSourceTrigger=PropertyChanged}" />
                         <TextBlock.Style>
@@ -55,7 +55,7 @@
                             </Style>
                         </TextBlock.Style>
                     </TextBlock>
-                    <Button Command="{Binding Path=DataContext.ReportCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" Name="ReportButton" Content="Repost"  Grid.Column="3" Grid.Row="0" Grid.RowSpan="2" Height="20" HorizontalContentAlignment="Center" Margin="0, 0, 2,0">
+                    <Button Command="{Binding Path=DataContext.ReportCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" Name="ReportButton" Content="Report"  Grid.Column="3" Grid.Row="0" Grid.RowSpan="2" Height="20" HorizontalContentAlignment="Center" Margin="0, 0, 2,0">
                         <Button.Style>
                             <Style TargetType="Button" BasedOn="{StaticResource DataTemplateButton}">
                                 <Setter Property="Visibility" Value="Visible"/>

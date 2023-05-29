@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using InitialProject.Model;
 using InitialProject.WPF.ViewModels.OwnerViewModels;
 
 namespace InitialProject.WPF.Views.OwnerViews
@@ -22,10 +23,10 @@ namespace InitialProject.WPF.Views.OwnerViews
     public partial class ForumCommentsView : Page
     {
         public ForumCommentsViewModel viewModel { get; set; }
-        public ForumCommentsView(OneForumViewModel forum)
+        public ForumCommentsView(OneForumViewModel forum, Owner owner)
         {
             InitializeComponent();
-            viewModel = new ForumCommentsViewModel(forum);
+            viewModel = new ForumCommentsViewModel(forum, owner);
             this.DataContext = viewModel;
         }
     }

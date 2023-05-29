@@ -21,7 +21,18 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="40"/>
                     </Grid.RowDefinitions>
-                    <Image Source="/Resources/Images/location.png" Grid.Column="0" Grid.Row="0" Height="25" Grid.RowSpan="2" VerticalAlignment="Center"/>
+                    <Image Grid.Column="0" Grid.Row="0" Height="25" Grid.RowSpan="2" VerticalAlignment="Center">
+                        <Image.Style>
+                            <Style TargetType="Image">
+                                <Setter Property="Source" Value="/Resources/Images/location.png"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding OwnerHasLocation}" Value="True">
+                                        <Setter Property="Source" Value="/Resources/Images/location.jpg"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
                     <TextBlock Grid.Row="0" Grid.Column="1" VerticalAlignment="Center">
                         <Run Text="Location: "/>
                         <Run Text="{Binding Path=Forum.Location.City}" FontSize="15"/>
@@ -46,7 +57,7 @@
 
         <Label Grid.Row="0" FontSize="15">New forums</Label>
         <Label Grid.Row="2" FontSize="15">All forums</Label>
-        <ListBox Grid.Row="1" ItemsSource="{Binding Path=NewForums}" ItemTemplate="{StaticResource forum}" IsSynchronizedWithCurrentItem="True" SelectedItem="{Binding SelectedOwnerReview, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" SelectionMode="Single" HorizontalContentAlignment="Stretch" Style="{StaticResource ListBoxStyle}">
+        <ListBox Grid.Row="1" ItemsSource="{Binding Path=NewForums}" ItemTemplate="{StaticResource forum}" IsSynchronizedWithCurrentItem="True" SelectedItem="{Binding SelectedForum, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" SelectionMode="Single" HorizontalContentAlignment="Stretch" Style="{StaticResource ListBoxStyle}">
             <ListBox.Resources>
                 <Style TargetType="ListBoxItem">
                     <Style.Triggers>
@@ -57,7 +68,7 @@
                 </Style>
             </ListBox.Resources>
         </ListBox>
-        <ListBox Grid.Row="3" ItemsSource="{Binding Path=Forums}" ItemTemplate="{StaticResource forum}" IsSynchronizedWithCurrentItem="True" SelectedItem="{Binding SelectedOwnerReview, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" SelectionMode="Single" HorizontalContentAlignment="Stretch" Style="{StaticResource ListBoxStyle}">
+        <ListBox Grid.Row="3" ItemsSource="{Binding Path=Forums}" ItemTemplate="{StaticResource forum}" IsSynchronizedWithCurrentItem="True" SelectedItem="{Binding SelectedForum, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" SelectionMode="Single" HorizontalContentAlignment="Stretch" Style="{StaticResource ListBoxStyle}">
             <ListBox.Resources>
                 <Style TargetType="ListBoxItem">
                     <Style.Triggers>

@@ -11,6 +11,7 @@ using InitialProject.APPLICATION.UseCases;
 using InitialProject.Domain.Model;
 using InitialProject.Model;
 using InitialProject.WPF.Views;
+using InitialProject.WPF.Views.OwnerViews;
 
 namespace InitialProject.WPF.ViewModels.OwnerViewModels
 {
@@ -21,9 +22,11 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         private ForumComment selectedComment;
         public RelayCommand ReportCommand { get; set;}
         public RelayCommand NewCommentCommand { get; set; }
-        public ForumCommentsViewModel(OneForumViewModel forum)
+        public Owner Owner { get; set; }
+        public ForumCommentsViewModel(OneForumViewModel forum, Owner owner)
         {
             Forum = forum;
+            Owner = owner;
             MakeComments();
             ReportCommand = new RelayCommand(Report_Executed, CanExecute);
             NewCommentCommand = new RelayCommand(NewComment_Executed, CanExecute);
@@ -84,8 +87,8 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         private void NewComment_Executed(object sender)
         {
-            // AccommodationInputFormView accommodationInputFormView = new AccommodationInputFormView(profileOwner);
-            //Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = accommodationInputFormView;
+            AddCommentView addCommentView = new AddCommentView(Forum, Owner);
+            Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = addCommentView;
         }
     }
 }

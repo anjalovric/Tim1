@@ -37,7 +37,7 @@
                 <Run Text=", " />
                 <Run Text="{Binding Path=Forum.Forum.Location.Country, UpdateSourceTrigger=PropertyChanged}" />
             </TextBlock>
-            <TextBox Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" HorizontalAlignment="Center" Text="{Binding Path= Explanation, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top" Height="250" Width="348" BorderThickness="1" BorderBrush="DarkGray" Margin="0,50,0,0"/>
+            <TextBox Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" HorizontalAlignment="Center" Text="{Binding Path= CommentText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top" Height="250" Width="348" BorderThickness="1" BorderBrush="DarkGray" Margin="0,50,0,0"/>
             <Button Grid.Column="1" Grid.Row="1" Command="{Binding ConfirmCommand}" Name="ConfirmButton" Content="Confirm" HorizontalAlignment="Left" VerticalAlignment="Top" Width="124" Height="41" Style="{StaticResource BasicButton}" Margin="50,367,0,0" Grid.RowSpan="2"/>
         </Grid>
     </Grid>

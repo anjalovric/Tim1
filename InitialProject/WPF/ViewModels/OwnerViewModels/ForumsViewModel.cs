@@ -60,13 +60,16 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         }
         private bool CanExecute(object sender)
         {
-            return SelectedForum != null;
+            return true;
         }
 
         private void View_Executed(object sender)
         {
-            ForumCommentsView forumCommentsView = new ForumCommentsView(SelectedForum);
-            Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = forumCommentsView;
+            if(SelectedForum != null)
+            {
+                ForumCommentsView forumCommentsView = new ForumCommentsView(SelectedForum, profileOwner);
+                Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = forumCommentsView;
+            }
         }
     }
 }

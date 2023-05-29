@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using InitialProject.Model;
+using InitialProject.WPF.ViewModels.OwnerViewModels;
 
 namespace InitialProject.WPF.Views.OwnerViews
 {
@@ -20,9 +22,12 @@ namespace InitialProject.WPF.Views.OwnerViews
     /// </summary>
     public partial class AddCommentView : Page
     {
-        public AddCommentView()
+        public AddCommentViewModel viewModel { get; set; }
+        public AddCommentView(OneForumViewModel forum, Owner owner)
         {
             InitializeComponent();
+            viewModel = new AddCommentViewModel(forum, owner);
+            this.DataContext = viewModel;
         }
     }
 }
