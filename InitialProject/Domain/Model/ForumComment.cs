@@ -17,6 +17,7 @@ namespace InitialProject.Domain.Model
         public DateTime CreatingDate { get; set; }
         public bool WasOnLocation { get; set; }
         public int ReportsNumber { get; set; }
+        public bool IsOwnerComment { get; set; }
 
 
         public ForumComment() { }

@@ -57,5 +57,24 @@ namespace InitialProject.Service
                 }
             }
         }
+
+        public List<Owner> getAllByLocation(Location location)
+        {
+            List<Owner> ownersByLocation = new List<Owner>();
+            AccommodationService accommodationService = new AccommodationService();
+            foreach(Accommodation accommodation in accommodationService.GetAll())
+            {
+                bool isAlreadyInList = ownersByLocation.Find(n => n.Id == accommodation.Owner.Id) != null;
+                if (accommodation.Location == location && !isAlreadyInList)
+                    ownersByLocation.Add(accommodation.Owner);
+            }
+            return ownersByLocation;
+        }
+
+        public bool HasAccommodationOnLocation(Owner owner, Location location)
+        {
+            AccommodationService accommodationService = new AccommodationService();
+            return accommodationService.GetAllByOwner(owner).Find(n => n.Location.Id == location.Id) != null;
+        }
     }
 }

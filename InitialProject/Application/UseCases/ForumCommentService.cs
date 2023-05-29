@@ -31,7 +31,8 @@ namespace InitialProject.APPLICATION.UseCases
         }
         public void Add(ForumComment forumComment)
         {
-            forumComment.WasOnLocation = accommodationReservationService.WasGuestOnLocation(((Guest1)forumComment.User), forumComment.Forum.Location.Id, forumComment.CreatingDate);
+            if(!forumComment.IsOwnerComment)
+                forumComment.WasOnLocation = accommodationReservationService.WasGuestOnLocation(((Guest1)forumComment.User), forumComment.Forum.Location.Id, forumComment.CreatingDate);
             forumCommentRepository.Add(forumComment);
         }
 
@@ -43,11 +44,17 @@ namespace InitialProject.APPLICATION.UseCases
         {
             foreach (ForumComment comment in storedForumComments)
             {
+                
                 Guest1 guest1 = guest1Service.GetByUsername(comment.User.Username);
                 if (guest1 != null)
+                {
                     comment.User = guest1;
+                    comment.User.Role = Role.GUEST1;
+                }
                 else
                     comment.User = ownerService.GetByUsername(comment.User.Username);
+                
+                comment.IsOwnerComment = comment.User.Role == Role.OWNER;
             }
         }
         public List<ForumComment> GetAllByForumId(int id)
@@ -56,6 +63,18 @@ namespace InitialProject.APPLICATION.UseCases
             SetUsers(storedForumComments);
 
             return storedForumComments;
+        }
+
+        public int GetNumberOfGuestComments(Forum forum)
+        {
+            List<ForumComment> forumComments = forumCommentRepository.GetAllByForumId(forum.Id);
+            return forumComments.FindAll(n => n.User.Role == Role.GUEST1).Count();
+        }
+
+        public int GetNumberOfOwnerComments(Forum forum)
+        {
+            List<ForumComment> forumComments = forumCommentRepository.GetAllByForumId(forum.Id);
+            return forumComments.FindAll(n => n.User.Role == Role.OWNER).Count();
         }
     }
 }
