@@ -23,12 +23,14 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         public RelayCommand ReportCommand { get; set;}
         public RelayCommand NewCommentCommand { get; set; }
         public Owner Owner { get; set; }
+        private ForumCommentService forumCommentService;
         public ForumCommentsViewModel(OneForumViewModel forum, Owner owner)
         {
             Forum = forum;
             Owner = owner;
+            SelectedComment = new ForumComment();
             MakeComments();
-            ReportCommand = new RelayCommand(Report_Executed, CanExecute);
+            ReportCommand = new RelayCommand(Report_Executed, ReportCanExecute);
             NewCommentCommand = new RelayCommand(NewComment_Executed, CanExecute);
         }
 
@@ -66,8 +68,8 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         private void MakeComments()
         {
-            ForumCommentService forumCommentService = new ForumCommentService();
-            Comments = new ObservableCollection<ForumComment>(forumCommentService.GetAllByForumId(Forum.Forum.Id));
+            forumCommentService = new ForumCommentService();
+            Comments = new ObservableCollection<ForumComment>(forumCommentService.GetAllByForumIdForOwner(Owner, Forum.Forum.Id));
         }
 
         private bool CanExecute(object sender)
@@ -75,20 +77,34 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             return true;
         }
 
+        private bool ReportCanExecute(object sender)
+        {
+            if(SelectedComment != null)
+                return !SelectedComment.IsAlreadyReportedByThisOwner && Forum.OwnerHasLocation && !SelectedComment.WasOnLocation;
+            return false;
+        }
         private void Report_Executed(object sender)
         {
             if(SelectedComment != null)
             {
-
+                forumCommentService.Report(SelectedComment, Owner);
+                UpdateComments();
             }
-           // AccommodationInputFormView accommodationInputFormView = new AccommodationInputFormView(profileOwner);
-            //Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = accommodationInputFormView;
         }
 
         private void NewComment_Executed(object sender)
         {
             AddCommentView addCommentView = new AddCommentView(Forum, Owner);
             Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = addCommentView;
+        }
+
+        private void UpdateComments()
+        {
+            foreach(ForumComment comment in Comments)
+            {
+                if (comment.Id == SelectedComment.Id)
+                    comment.ReportsNumber++;
+            }
         }
     }
 }

@@ -18,6 +18,7 @@ namespace InitialProject.Domain.Model
         public bool WasOnLocation { get; set; }
         public int ReportsNumber { get; set; }
         public bool IsOwnerComment { get; set; }
+        public bool IsAlreadyReportedByThisOwner { get; set; }
 
 
         public ForumComment() { }
