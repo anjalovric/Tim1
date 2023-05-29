@@ -148,7 +148,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         }
         private void OpenForum_Executed(object sender)
         {
-            Forum=forumService.Open(forum);         
+            Forum=forumService.Open(forum, guest1);  //provjeriti       
             IsClosingVisible = Visibility.Visible;
             IsOpeningVisible = Visibility.Hidden;
             IsCommentingEnabled = Forum.Opened;

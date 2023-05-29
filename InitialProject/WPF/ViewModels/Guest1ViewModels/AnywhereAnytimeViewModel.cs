@@ -262,6 +262,8 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         }
         private void ResetAllSearchingFields()
         {
+            Arrival = DateTime.MinValue;
+            Departure = DateTime.MinValue;
             NumberOfDays = "";
             NumberOfGuests = "";
             IsInputValid = true;
@@ -274,10 +276,18 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             {
                 if(Arrival!=null || Departure!=null)    //if calendar is selected
                 {
-                    if(IsValidDateInput())
+                    if(IsValidDateInput())  //all fields are filled
                     {
 
                     }
+                    else
+                    {
+                        ShowMessageBoxForInvalidDateInput();
+                    }
+                }
+                else //only textbox input 
+                {
+                    
                 }
             }
             else
@@ -313,6 +323,14 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         private void ShowMessageBoxForInvalidInput()
         {
             Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("Please enter number of days and guests (and/or choose dates)!", "/Resources/Images/exclamation.png");
+            messageBox.Owner = Application.Current.Windows.OfType<AccommodationReservationFormView>().FirstOrDefault();
+            messageBox.ShowDialog();
+        }
+
+        //Message box - invalid date input
+        private void ShowMessageBoxForInvalidDateInput()
+        {
+            Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("Please enter valid dates in calendar!", "/Resources/Images/exclamation.png");
             messageBox.Owner = Application.Current.Windows.OfType<AccommodationReservationFormView>().FirstOrDefault();
             messageBox.ShowDialog();
         }
