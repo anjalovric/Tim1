@@ -72,8 +72,8 @@
                     <TextBlock Text="{Binding Path=CommentsNumber}" Margin="20,0,0,15" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" Width="Auto" Height="30" HorizontalAlignment="Left"/>
 
 
-                    <!-- OPEN BUTTON -->
-                    <Button x:Name="View"  Command="{Binding Path=DataContext.OpenCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" FontWeight="Bold" Grid.RowSpan="2" Grid.Column="4" VerticalAlignment="Center" Width="100" Height="35" HorizontalAlignment="Center" FontSize="18">
+                    <!-- VIEW FORUM BUTTON -->
+                    <Button x:Name="View"  Command="{Binding Path=DataContext.OpenCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" FontWeight="Bold" Grid.RowSpan="2" Grid.Column="4" VerticalAlignment="Bottom" Width="100" Height="35" HorizontalAlignment="Center" FontSize="18">
                         <Grid Background="#8c9d75" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>

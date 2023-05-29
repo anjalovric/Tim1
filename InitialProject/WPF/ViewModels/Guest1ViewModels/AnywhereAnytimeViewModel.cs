@@ -270,20 +270,25 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         }
         private void Search_Executed(object sender)
         {
-            if (AreAllFieldsEmpty())
-                ShowMessageBoxEmptyAll();
-            else if(IsOnlyCalendarFilled())
+            if (AreTextboxesDataValid())
             {
+                if(Arrival!=null || Departure!=null)    //if calendar is selected
+                {
+                    if(IsValidDateInput())
+                    {
 
+                    }
+                }
+            }
+            else
+            {
+                ShowMessageBoxForInvalidInput();
             }
 
         }
 
         
-        private bool IsOnlyCalendarFilled()
-        {
-            return (Arrival != null || Departure != null) && NumberOfDays == "" && NumberOfGuests == "";
-        }
+       
         
 
         //Validation for textboxes
@@ -299,15 +304,15 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             return (Arrival != null && Departure != null && Arrival <= Departure && Arrival.Date > DateTime.Now);
         }
         //Validation - all fields are empty
-        private bool AreAllFieldsEmpty()
+        private bool AreTextboxesDataValid()
         {
-            return Arrival == null && Departure == null && NumberOfGuests == "" && NumberOfDays == "";
+            return NumberOfGuests != "" && NumberOfDays != "";
         }
 
         //Message box - all fields are empty
-        private void ShowMessageBoxEmptyAll()
+        private void ShowMessageBoxForInvalidInput()
         {
-            Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("Please enter data in fields!", "/Resources/Images/exclamation.png");
+            Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("Please enter number of days and guests (and/or choose dates)!", "/Resources/Images/exclamation.png");
             messageBox.Owner = Application.Current.Windows.OfType<AccommodationReservationFormView>().FirstOrDefault();
             messageBox.ShowDialog();
         }

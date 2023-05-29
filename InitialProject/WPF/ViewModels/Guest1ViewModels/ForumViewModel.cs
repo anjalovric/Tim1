@@ -196,7 +196,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             if (IsYesClicked)
             {
                 Forum currentForum = forumService.GetByLocation(LocationCountry, LocationCity);
-                currentForum = forumService.Open(currentForum);
+                currentForum = forumService.Open(currentForum, guest1);
                 ForumComment newComment = new ForumComment(currentForum, guest1, DateTime.Now, FirstComment);
                 forumCommentService.Add(newComment);
                 forumService.IncrementCommentsNumber(currentForum);

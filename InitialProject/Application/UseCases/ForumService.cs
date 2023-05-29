@@ -63,9 +63,10 @@ namespace InitialProject.Service
             forum.Opened = false;
             forumRepository.Update(forum);
         }
-        public Forum Open(Forum forum)
+        public Forum Open(Forum forum, Guest1 guest1)
         {
             forum.Opened = true;
+            forum.Guest1 = guest1;
             forumRepository.Update(forum);
             return forum;
         }
@@ -74,6 +75,7 @@ namespace InitialProject.Service
             forum.CommentsNumber += 1;
             forumRepository.Update(forum);
         }
+        
 
         public bool ExistsOnLocation(string locationCountry, string locationCity)
         {
