@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using InitialProject.Domain.RepositoryInterfaces;
-using InitialProject.Domain.Model;
-using InitialProject.Domain;
-using InitialProject.Model;
-using InitialProject.Domain.RepositoryInterfaces;
-using InitialProject.WPF.ViewModels.OwnerViewModels;
+﻿using System.Collections.Generic;
 using InitialProject.APPLICATION.UseCases;
+using InitialProject.Domain;
+using InitialProject.Domain.Model;
+using InitialProject.Domain.RepositoryInterfaces;
+using InitialProject.Model;
+using InitialProject.WPF.ViewModels.OwnerViewModels;
 
 namespace InitialProject.Service
 {
@@ -52,6 +47,7 @@ namespace InitialProject.Service
             List<Forum> forums = forumRepository.GetAll();
             SetLocations(forums);
             SetGuests(forums);
+            SetIsVeryUseful(forums);
             return forums;
         }
         public void Add(Forum forum)
@@ -62,7 +58,10 @@ namespace InitialProject.Service
 
        public Forum GetById(int id)
        {
-           return forumRepository.GetById(id);
+            Forum forum = forumRepository.GetById(id);
+            forum.Location = locationService.GetById(forum.Location.Id);
+            forum.IsVeryUseful = IsVeryUseful(forum);
+            return forum;
        }
 
         public void Close(Forum forum)
@@ -103,6 +102,7 @@ namespace InitialProject.Service
             {
                 OneForumViewModel forumViewModel = new OneForumViewModel();
                 forumViewModel.Forum = forum;
+                forumViewModel.Forum.IsVeryUseful = IsVeryUseful(forumViewModel.Forum);
                 forumViewModel.GuestComments = forumCommentService.GetNumberOfGuestComments(forum);
                 forumViewModel.OwnerComments = forumCommentService.GetNumberOfOwnerComments(forum);
                 forumViewModel.OwnerHasLocation = ownerService.HasAccommodationOnLocation(owner, forum.Location);
@@ -123,6 +123,19 @@ namespace InitialProject.Service
                 forum.Forum.IsNewForOwner = false;
                 forumRepository.Update(forum.Forum);
             }
+        }
+
+        private bool IsVeryUseful(Forum forum)
+        {
+            int ownerComments = forumCommentService.GetNumberOfOwnerComments(forum);
+            int guestComments = forumCommentService.GetNumberOfGuestComments(forum);
+            return ownerComments >= 10 && guestComments >= 20;
+        }
+
+        private void SetIsVeryUseful(List<Forum> forums)
+        {
+            foreach (Forum forum in forums)
+                forum.IsVeryUseful = IsVeryUseful(forum);
         }
     }
 }

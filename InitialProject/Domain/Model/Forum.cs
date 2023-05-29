@@ -19,6 +19,8 @@ namespace InitialProject.Domain.Model
         public bool Opened { get; set; }
         public int CommentsNumber { get; set; }
         public bool IsNewForOwner { get; set; }
+
+        public bool IsVeryUseful { get; set; }
         public Forum() { }
         public Forum(Location location, Guest1 guest1)
         {
