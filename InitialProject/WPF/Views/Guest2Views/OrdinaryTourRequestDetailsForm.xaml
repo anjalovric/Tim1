@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.WPF.Views.Guest2Views"
+        xmlns:properties="clr-namespace:InitialProject.Properties"
         mc:Ignorable="d"
         Title="Details" Height="600" Width="700" WindowStartupLocation="CenterScreen" Background="Transparent" AllowsTransparency="True" WindowStyle="None">
     <Window.Resources>
@@ -75,7 +76,7 @@
         <Label Content="StartDate:" FontWeight="DemiBold" Grid.Row="6" Grid.Column="0" Margin="62,10,0,43" Grid.RowSpan="2" FontSize="20"/>
         <Label Content="EndDate:" FontWeight="DemiBold" Grid.Row="7" Grid.Column="0" Margin="62,10,0,43" Grid.RowSpan="2" FontSize="20"/>
         <Label Content="Duration:" FontWeight="DemiBold" Grid.Row="3" Grid.Column="0" Margin="62,10,0,43" Grid.RowSpan="2" FontSize="20"/>
-        <Button HorizontalAlignment="Left" Grid.Row="10" Background="White" VerticalAlignment="Top"  Height="34" Width="132" FontWeight="Bold" FontSize="18" Command="{Binding CloseCommand}" Margin="208,4,0,0" Grid.Column="1" ToolTipService.ShowDuration="5000">
+        <Button HorizontalAlignment="Left" Grid.Row="10" Background="White" VerticalAlignment="Top"  Height="34" Width="132" FontWeight="Bold" FontSize="18" Command="{Binding CloseCommand}" Margin="208,4,0,0" Grid.Column="1" ToolTipService.ShowDuration="5000" ToolTipService.IsEnabled="{Binding Source={x:Static properties:Settings.Default}, Path=IsToolTipEnabled}">
 
             <Grid Width="132" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35">
                 <Grid.RowDefinitions>

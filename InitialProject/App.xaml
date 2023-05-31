@@ -5,7 +5,6 @@
              StartupUri="View/SignInForm.xaml">
     <Application.Resources>
         <ResourceDictionary>
-            <local:ToolTipManager x:Key="ToolTipManager" />
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary x:Name="ThemeDictionary">
                     <ResourceDictionary.MergedDictionaries>

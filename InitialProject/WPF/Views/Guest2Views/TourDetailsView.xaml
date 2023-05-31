@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:properties="clr-namespace:InitialProject.Properties"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
         Title="TourDetails" Height="650" Width="750" d:Height="650" d:Width="750" Background="Transparent" AllowsTransparency="True" WindowStartupLocation="CenterScreen" WindowStyle="None">
@@ -114,7 +115,7 @@
                 </TransformGroup>
             </TextBlock.RenderTransform>
         </TextBlock>
-        <Button HorizontalAlignment="Left" VerticalAlignment="Top" Background="White" Height="34" Width="100" FontWeight="Bold" Margin="261,606,0,0" FontSize="18" Grid.Column="1" Command="{Binding CancelCommand}" ToolTipService.ShowDuration="5000">
+        <Button HorizontalAlignment="Left" VerticalAlignment="Top" Background="White" Height="34" Width="100" FontWeight="Bold" Margin="261,606,0,0" FontSize="18" Grid.Column="1" Command="{Binding CancelCommand}" ToolTipService.ShowDuration="5000" ToolTipService.IsEnabled="{Binding Source={x:Static properties:Settings.Default}, Path=IsToolTipEnabled}">
             <Grid Background="White" Width="90" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="16*"/>

@@ -1,21 +1,25 @@
 ﻿<UserControl x:Class="InitialProject.WPF.Views.Guest2Views.ShowToursView"
+             x:Name="ShowTours"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:val="clr-namespace:InitialProject.WPF.Validations.Guest2Validations" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:l="clr-namespace:InitialProject.Help"
+             xmlns:properties="clr-namespace:InitialProject.Properties"
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
               xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Royale" xmlns:System="clr-namespace:System;assembly=netstandard" xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:local="clr-namespace:InitialProject.View" xmlns:guest2viewmodels="clr-namespace:InitialProject.WPF.ViewModels.Guest2ViewModels"
              xmlns:local1="clr-namespace:InitialProject"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="668" Width="668" Height="600">
+             Loaded="Page_Loaded"
+             d:DesignHeight="600" d:DesignWidth="668" Width="668" Height="600" l:ShowToursHelp.HelpKey="showTours" Focusable="True">
     <UserControl.CommandBindings>
         <CommandBinding Command="ApplicationCommands.Help" Executed="CommandBinding_Executed"/>
     </UserControl.CommandBindings>
     <UserControl.Resources>
-        <local1:ToolTipManager x:Key="ToolTipManager" />
-       
+        
+
         <Style x:Key="DataGridRowStyle2" TargetType="{x:Type DataGridRow}">
             <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
             <Setter Property="SnapsToDevicePixels" Value="true"/>
@@ -132,7 +136,7 @@
                 <DataGridTemplateColumn x:Name="reservation" Header="Reservation"  Width="1.2*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button BorderBrush="#ffba00" Background="#ffba00" BorderThickness="3" FontWeight="Bold" FontSize="12" Width="70" Height="30" Command="{Binding Path=DataContext.ReserveCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" ToolTipService.ShowDuration="5000" ToolTipService.IsEnabled="{Binding IsToolTipEnabled, Source={StaticResource ToolTipManager}}">
+                            <Button BorderBrush="#ffba00" Background="#ffba00" BorderThickness="3" FontWeight="Bold" FontSize="12" Width="70" Height="30" Command="{Binding Path=DataContext.ReserveCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" ToolTipService.IsEnabled="{Binding Source={x:Static properties:Settings.Default}, Path=IsToolTipEnabled}">
                                 <Grid Background="#ffba00" HorizontalAlignment="Left" VerticalAlignment="Top">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="16*"/>
@@ -169,7 +173,7 @@
                 <DataGridTemplateColumn x:Name="detailsView" Header="Details" Width="0.9*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button FontWeight="Bold" BorderBrush="#ffba00" Background="#ffba00" BorderThickness="3" FontSize="12" Width="70" Height="30" Command="{Binding Path=DataContext.ViewDetailsCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" ToolTipService.ShowDuration="5000">
+                            <Button FontWeight="Bold" BorderBrush="#ffba00" Background="#ffba00" BorderThickness="3" FontSize="12" Width="70" Height="30" Command="{Binding Path=DataContext.ViewDetailsCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" ToolTipService.ShowDuration="5000" ToolTipService.IsEnabled="{Binding Source={x:Static properties:Settings.Default}, Path=IsToolTipEnabled}">
                                 <Grid Background="#ffba00" HorizontalAlignment="Left" VerticalAlignment="Top">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="16*"/>
@@ -208,7 +212,9 @@
 
         </DataGrid>
         <ComboBox x:Name="cityInput" Grid.Column="1"  BorderBrush="#7166f9" BorderThickness="3,3,3,3" ItemsSource="{Binding CitiesByCountry}" SelectedItem="{Binding City}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" HorizontalAlignment="Center" Margin="0,130,0,0" VerticalAlignment="Top" Width="134" Height="22" IsEnabled="{Binding IsComboBoxCityEnabled}"/>
-        <TextBox x:Name="durationInput" Grid.Column="1" Background="LightGray"  Style="{StaticResource BorderStyle}" HorizontalAlignment="Left" Margin="414,130,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="143" Height="22" RenderTransformOrigin="0.496,0.294" Grid.ColumnSpan="2" xmlns:HelpProvider.HelpKey="Novo">
+
+        <TextBox x:Name="durationInput" Grid.Column="1" Background="LightGray"  Style="{StaticResource BorderStyle}" HorizontalAlignment="Left" Margin="414,130,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="143" Height="22" RenderTransformOrigin="0.496,0.294" Grid.ColumnSpan="2" l:ShowToursHelp.HelpKey="duration">
+
             <TextBox.Text>
                 <Binding Path="Duration" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -279,7 +285,7 @@
         <Label Content="Country"  Margin="55,90,0,0" Style="{StaticResource LabelStyle}" Foreground="#b46617" Grid.ColumnSpan="2"/>
         <Button x:Name="decrementCapacityNumber" Grid.Column="1"  Style="{StaticResource borderStyle}" Content="-" Margin="211,201,0,0" Width="20" Command="{Binding DecrementCommand}" Height="22"/>
         <Button x:Name="incrementCapacityNumber" Grid.Column="1"  Style="{StaticResource borderStyle}" Content="+" Margin="325,201,0,0" Width="20" Command="{Binding IncrementCommand}" RenderTransformOrigin="-1.284,0.612" Height="22"/>
-        <Button x:Name="Search" FontWeight="Bold" Grid.Column="1"  Margin="494,201,0,0" Height="22" Command="{Binding SearchCommand}" Background="#ffba00" BorderBrush="#ffba00" Width="62" ToolTipService.IsEnabled="{Binding IsToolTipEnabled, Source={StaticResource ToolTipManager}}" >
+        <Button x:Name="Search" FontWeight="Bold" Grid.Column="1"  Margin="494,201,0,0" Height="22" Command="{Binding SearchCommand}" Background="#ffba00" BorderBrush="#ffba00" Width="62" ToolTipService.IsEnabled="{Binding Source={x:Static properties:Settings.Default}, Path=IsToolTipEnabled}">
             <Grid Background="#ffba00" HorizontalAlignment="Left" VerticalAlignment="Top" Height="15">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="16*"/>
@@ -324,7 +330,7 @@
         <Label Grid.Row="0" Grid.Column="1"  Foreground="White" Content="{Binding Path=Label,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" FontSize="20" Margin="0,261,0,0" Height="71" Style="{StaticResource LabelStyle}" >
             
         </Label>
-        <Button x:Name="Restart" Background="#ffba00" Grid.Column="1" BorderBrush="#ffba00"  Style="{StaticResource borderStyle}" Width="62" Margin="414,201,0,0" TextElement.FontWeight="Bold" Command="{Binding RestartCommand}" Height="22">
+        <Button x:Name="Restart" Background="#ffba00" Grid.Column="1" BorderBrush="#ffba00"  Style="{StaticResource borderStyle}" Width="62" Margin="414,201,0,0" TextElement.FontWeight="Bold" Command="{Binding RestartCommand}" Height="22" ToolTipService.ShowDuration="5000" ToolTipService.IsEnabled="{Binding Source={x:Static properties:Settings.Default}, Path=IsToolTipEnabled}">
             <Grid Background="#ffba00" HorizontalAlignment="Left" VerticalAlignment="Top" Height="15">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="16*"/>
@@ -340,6 +346,7 @@
             </Grid>
             <Button.ToolTip>
                 <ToolTip>
+                    
                     <StackPanel>
                         <TextBlock FontWeight="Bold">Showing all tours.</TextBlock>
                     </StackPanel>

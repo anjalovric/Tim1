@@ -1,4 +1,5 @@
-﻿using InitialProject.Domain;
+﻿using InitialProject.APPLICATION.UseCases;
+using InitialProject.Domain;
 using InitialProject.Domain.Model;
 using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Model;
@@ -32,6 +33,48 @@ namespace InitialProject.Service
         public List<OrdinaryTourRequests> GetByGuestId(int id)
         {
             return ordinaryTourRequestsRepository.GetByGuestId(id);
+        }
+        public List<OrdinaryTourRequests> GetOnlyOrdinaryRequestsByGuestId(int id)
+        {
+            List<OrdinaryTourRequests> requests = new List<OrdinaryTourRequests>();
+            foreach(OrdinaryTourRequests request in GetByGuestId(id))
+            {
+                if (request.ComplexId == -1)
+                {
+                    requests.Add(request);
+                }
+            }
+            return requests;
+        }
+        public List<OrdinaryTourRequests> GetOrdinaryTourRequestsForComplexRequest(int id)
+        {
+            List<OrdinaryTourRequests> requests = new List<OrdinaryTourRequests>();
+            ComplexTourRequestsService complexTourRequestsService = new ComplexTourRequestsService();
+            foreach (OrdinaryTourRequests request in GetByGuestId(id))
+            {
+                foreach(ComplexTourRequests complexTourRequests in complexTourRequestsService.GetByGuestId(id))
+                {
+                    if (request.ComplexId == complexTourRequests.Id)
+                    {
+                        requests.Add(request);
+                    }
+                }
+                
+            }
+            return requests;
+        }
+        public List<OrdinaryTourRequests> GetOrdinaryTourRequestsByComplex(int complexId)
+        {
+            List<OrdinaryTourRequests> requests = new List<OrdinaryTourRequests>();
+            foreach (OrdinaryTourRequests request in GetAll())
+            {
+                if (request.ComplexId == complexId)
+                {
+                    requests.Add(request);
+                }
+            }
+
+            return requests;
         }
         public List<OrdinaryTourRequests> GetOnWaitingRequests()
         {

@@ -21,6 +21,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using InitialProject.WPF.ViewModels.Guest2ViewModels;
+using InitialProject.Help;
 
 namespace InitialProject.WPF.Views.Guest2Views
 {
@@ -30,6 +31,7 @@ namespace InitialProject.WPF.Views.Guest2Views
     public partial class ShowToursView : UserControl
     {
         private ShowToursViewModel viewModel;
+
         public ShowToursView(Guest2 guest2)
         {
             InitializeComponent();
@@ -41,11 +43,15 @@ namespace InitialProject.WPF.Views.Guest2Views
             IInputElement focusedControl = FocusManager.GetFocusedElement(Application.Current.Windows[0]);
             if (focusedControl is DependencyObject)
             {
-                string str = HelpProvider.GetHelpKey((DependencyObject)focusedControl);
-                HelpProvider.ShowHelp(str, this);
+                string str = ShowToursHelp.GetHelpKey((DependencyObject)focusedControl);
+                ShowToursHelp.ShowHelp(str, this);
             }
         }
-        
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            FocusManager.SetFocusedElement(this, this);
+        }
 
     }
 

@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:val="clr-namespace:InitialProject.WPF.Validations.Guest2Validations"
+        xmlns:properties="clr-namespace:InitialProject.Properties"
         xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Royale" xmlns:System="clr-namespace:System;assembly=netstandard" xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
@@ -254,7 +255,7 @@
             <TextBlock Grid.Row="1" FontSize="15" Foreground="Black" Grid.Column="2" Margin="232,37,0,15" Text="{Binding guest2.LastName}" FontWeight="DemiBold" Grid.RowSpan="2"/>
             <Label x:Name="AgeLabel" Grid.Row="1" Grid.Column="2" Margin="302,233,191,58"/>
             <TextBlock  HorizontalAlignment="Left" TextElement.FontSize="20" Margin="15,20,0,0" Grid.Row="5" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Column="1" Grid.ColumnSpan="3" Width="530" FontWeight="Bold" Height="29"><Run Text="Vouchers"/></TextBlock>
-            <Button Grid.Row="7" HorizontalAlignment="Left" BorderBrush="#ffba00" BorderThickness="1" Background="#ffba00" VerticalAlignment="Top" Height="35" Width="101" FontWeight="Bold" Margin="202,27,0,0" FontSize="18" Grid.Column="2" Command="{Binding ConfirmCommand}" ToolTipService.ShowDuration="5000">
+            <Button Grid.Row="7" HorizontalAlignment="Left" BorderBrush="#ffba00" BorderThickness="1" Background="#ffba00" VerticalAlignment="Top" Height="35" Width="101" FontWeight="Bold" Margin="202,27,0,0" FontSize="18" Grid.Column="2" Command="{Binding ConfirmCommand}" ToolTipService.ShowDuration="5000" ToolTipService.IsEnabled="{Binding Source={x:Static properties:Settings.Default}, Path=IsToolTipEnabled}">
                 <Grid Background="#ffba00" Width="99" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -285,7 +286,7 @@
                     </ToolTip>
                 </Button.ToolTip>
             </Button>
-            <Button Grid.Row="7" HorizontalAlignment="Left"  VerticalAlignment="Top" Height="35" Width="101" FontWeight="Bold" Margin="331,27,0,0" FontSize="18" Grid.Column="2" Command="{Binding CloseCommand}" ToolTipService.ShowDuration="5000">
+            <Button Grid.Row="7" HorizontalAlignment="Left"  VerticalAlignment="Top" Height="35" Width="101" FontWeight="Bold" Margin="331,27,0,0" FontSize="18" Grid.Column="2" Command="{Binding CloseCommand}" ToolTipService.ShowDuration="5000" ToolTipService.IsEnabled="{Binding Source={x:Static properties:Settings.Default}, Path=IsToolTipEnabled}">
                 <Grid Background="White" Width="99" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>

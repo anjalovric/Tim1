@@ -1,4 +1,5 @@
-﻿using InitialProject.Model;
+﻿using InitialProject.Help;
+using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.Service;
 using InitialProject.View;
@@ -36,6 +37,19 @@ namespace InitialProject.WPF.Views.Guest2Views
             InitializeComponent();
             this.guest2 = guest2;
             DataContext = new FinishedTourInstancesViewModel(guest2);
+        }
+        private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            IInputElement focusedControl = FocusManager.GetFocusedElement(Application.Current.Windows[0]);
+            if (focusedControl is DependencyObject)
+            {
+                string str = ShowToursHelp.GetHelpKey((DependencyObject)focusedControl);
+                ShowToursHelp.ShowHelpForFinished(str, this);
+            }
+        }
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            FocusManager.SetFocusedElement(this, this);
         }
     }
 }

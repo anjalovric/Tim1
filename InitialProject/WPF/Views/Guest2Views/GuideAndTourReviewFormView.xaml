@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:tk="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit.NET5" 
+        xmlns:properties="clr-namespace:InitialProject.Properties"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
         Title="RateTourAndGuide" Height="600" Width="890" d:Width="890" WindowStartupLocation="CenterScreen" Background="Transparent" AllowsTransparency="True" WindowStyle="None">
@@ -93,7 +94,7 @@
             <Label Content="Add comment" Foreground="Black" FontWeight="Bold" FontSize="20" Margin="10,29,176,216" Grid.Row="4" Grid.Column="1" Grid.RowSpan="2"/>
             <Label Content="Add photos" Foreground="Black" FontWeight="Bold" FontSize="20" Margin="10,29,176,223" Grid.Column="2" Grid.Row="4" Grid.RowSpan="2"/>
             <tk:WatermarkTextBox x:Name="comment" Text="{Binding Path=Comment, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Margin="10,15,30,15" Grid.Column="1" Watermark="Enter comment here" BorderBrush="#FFCAC1C1" BorderThickness="0,0,0,2" Grid.Row="5" Background="#FFEDEDED"/>
-            <Button HorizontalAlignment="Left" Grid.Row="6" VerticalAlignment="Top"  Height="34" Width="132" FontWeight="Bold" FontSize="18" Command="{Binding ConfirmCommand}" Margin="84,10,0,0" Grid.Column="2" Background="#ffba00" ToolTipService.ShowDuration="5000">
+            <Button HorizontalAlignment="Left" Grid.Row="6" VerticalAlignment="Top"  Height="34" Width="132" FontWeight="Bold" FontSize="18" Command="{Binding ConfirmCommand}" Margin="84,10,0,0" Grid.Column="2" Background="#ffba00" ToolTipService.ShowDuration="5000" ToolTipService.IsEnabled="{Binding Source={x:Static properties:Settings.Default}, Path=IsToolTipEnabled}">
                 <Grid Background="#ffba00" Width="144" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="16*"/>
@@ -114,7 +115,7 @@
                     </ToolTip>
                 </Button.ToolTip>
             </Button>
-            <Button HorizontalAlignment="Left" Grid.Row="6" VerticalAlignment="Top" BorderBrush="#FF9E98FF" Height="34" Width="132" FontWeight="Bold" FontSize="18" Command="{Binding CancelCommand}" Margin="221,10,0,0" Grid.Column="2" ToolTipService.ShowDuration="5000">
+            <Button HorizontalAlignment="Left" Grid.Row="6" VerticalAlignment="Top" BorderBrush="#FF9E98FF" Height="34" Width="132" FontWeight="Bold" FontSize="18" Command="{Binding CancelCommand}" Margin="221,10,0,0" Grid.Column="2" ToolTipService.ShowDuration="5000" ToolTipService.IsEnabled="{Binding Source={x:Static properties:Settings.Default}, Path=IsToolTipEnabled}">
                 <Grid Background="White" Width="144" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="16*"/>
