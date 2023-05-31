@@ -20,6 +20,7 @@ namespace InitialProject.Service
         }
         public List<AccommodationReservation> GetAll()
         {
+            MakeReservations();
             return reservations;
         }
         public void MakeReservations()

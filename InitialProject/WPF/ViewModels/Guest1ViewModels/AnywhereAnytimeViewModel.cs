@@ -8,19 +8,23 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using InitialProject.Model;
+using InitialProject.Domain.Model;
 using InitialProject.Service;
 using InitialProject.WPF.Views.Guest1Views;
 using System.Windows.Controls;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Controls.Primitives;
-
+using InitialProject.APPLICATION.UseCases;
 
 namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 {
     public class AnywhereAnytimeViewModel : INotifyPropertyChanged, IDataErrorInfo
     {
         private Guest1 guest1;
+        private AnywhereAnytimeSuggestedReservationService anywhereAnytimeSuggestedReservationService;
+        private AccommodationReservationService accommodationReservationService;
+        private SuperGuestTitleService superGuestTitleService;
         public DateTime Arrival { get; set; }
         public DateTime Departure { get; set; }
         private ObservableCollection<SuggestedReservationViewModel> suggestedReservations;
@@ -161,6 +165,9 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                 return null;
             }
         }
+        private TimeSpan lengthOfStay;
+        public RelayCommand ReserveCommand { get; set; }
+        public RelayCommand DetailsCommand { get; set; }
         public RelayCommand ResetCommand { get; set; }
         public RelayCommand SearchCommand { get; set; }
         public RelayCommand IncrementGuestsNumberCommand { get; set; }
@@ -179,6 +186,9 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             IsInputValid = true;
             IsNumberOfDaysValid = true;
             IsNumberOfGuestsValid = true;
+            anywhereAnytimeSuggestedReservationService = new AnywhereAnytimeSuggestedReservationService();
+            accommodationReservationService = new AccommodationReservationService();
+            superGuestTitleService = new SuperGuestTitleService();
             MakeCommands();
         }
 
@@ -192,6 +202,64 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             DecrementGuestsNumberCommand = new RelayCommand(DecrementGuestsNumber_Executed, CanExecute);
             OnPreviewMouseUpCommand = new RelayCommand(OnPreviewMouseUp_Executed, CanExecute);
             SearchCommand = new RelayCommand(Search_Executed, CanExecute);
+            ReserveCommand = new RelayCommand(Reserve_Executed, CanExecute);
+            DetailsCommand = new RelayCommand(Details_Executed, CanExecute);
+        }
+
+        private void SortSuggestedReservationsBySuperOwners()
+        {
+            SuggestedReservations = new ObservableCollection<SuggestedReservationViewModel>(SuggestedReservations.OrderByDescending(x => x.Accommodation.Owner.IsSuperOwner).ToList());
+        }
+
+        private void Details_Executed(object sender)
+        {
+                Accommodation currentAccommodation = (((Button)sender).DataContext as SuggestedReservationViewModel).Accommodation;
+                AccommodationDetailsView details = new AccommodationDetailsView(currentAccommodation, guest1);
+                Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = details;
+ 
+        }
+        private async void Reserve_Executed(object sender)
+        {
+            Task<bool> result = ConfirmReservationMessageBox();
+            bool IsYesClicked = await result;
+            if (IsYesClicked)
+            {
+                Accommodation currentAccommodation = (((Button)sender).DataContext as SuggestedReservationViewModel).Accommodation;
+                DateTime arrival = (((Button)sender).DataContext as SuggestedReservationViewModel).Arrival;
+                DateTime departure = (((Button)sender).DataContext as SuggestedReservationViewModel).Departure;
+                MakeNewReservation(currentAccommodation, arrival, departure);
+                UpdateSuggestedReservations();   //update suggested reservations list
+                ShowMessageBoxForSentReservation();
+            }
+            
+        }
+        public async Task<bool> ConfirmReservationMessageBox()
+        {
+            var result = new TaskCompletionSource<bool>();
+            Guest1YesNoMessageBoxView messageBox = new Guest1YesNoMessageBoxView("Do you want to make a reservation?", "/Resources/Images/qm.png", result);
+            messageBox.Owner = Application.Current.Windows.OfType<DatesForAccommodationReservationView>().FirstOrDefault();
+            messageBox.ShowDialog();
+            var returnedResult = await result.Task;
+            return returnedResult;
+        }
+
+
+        private void ShowMessageBoxForSentReservation()
+        {
+            Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("Successfully done!", "/Resources/Images/done.png");
+            messageBox.Owner = Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault();
+            messageBox.ShowDialog();
+        }
+
+        private void MakeNewReservation(Accommodation currentAccommodation, DateTime arrival, DateTime departure)
+        {
+            AccommodationReservation newReservation = new AccommodationReservation(guest1, currentAccommodation, arrival, departure);
+            accommodationReservationService.Add(newReservation);
+            DecrementSuperGuestPoints();
+        }
+        private void DecrementSuperGuestPoints()
+        {
+            superGuestTitleService.DecrementPoints(guest1);
         }
 
         private void OnPreviewMouseUp_Executed(Object sender)
@@ -253,32 +321,21 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 
         private void Reset_Executed(object sender)
         {
-            //Accommodations.Clear();
-            // foreach (Accommodation accommodation in accommodationService.GetAll())
-            //Accommodations.Add(accommodation);
+            AnywhereAnytimeView view = new AnywhereAnytimeView(guest1);
+            Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = view;
 
-            ResetAllSearchingFields();
-            //SortAccommodationBySuperOwners();
         }
-        private void ResetAllSearchingFields()
-        {
-            Arrival = DateTime.MinValue;
-            Departure = DateTime.MinValue;
-            NumberOfDays = "";
-            NumberOfGuests = "";
-            IsInputValid = true;
-            IsNumberOfDaysValid = true;
-            IsNumberOfGuestsValid = true;
-        }
+
         private void Search_Executed(object sender)
         {
             if (AreTextboxesDataValid())
             {
                 if(Arrival!=null || Departure!=null)    //if calendar is selected
                 {
-                    if(IsValidDateInput())  //all fields are filled
+                    lengthOfStay = Departure.Subtract(Arrival);
+                    if (IsValidDateInput())  //all fields are filled
                     {
-
+                        UpdateSuggestedReservations();
                     }
                     else
                     {
@@ -297,7 +354,17 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 
         }
 
-        
+        private void UpdateSuggestedReservations()
+        {
+            SuggestedReservations = new ObservableCollection<SuggestedReservationViewModel>();
+            SuggestedReservations.Clear();
+            List<Tuple<Accommodation, AvailableDatesForAccommodation>> allSuggestedDates = anywhereAnytimeSuggestedReservationService.GetAvailableDates(Arrival, Departure, Convert.ToInt32(NumberOfDays), Convert.ToInt32(NumberOfGuests));
+            foreach (Tuple<Accommodation, AvailableDatesForAccommodation> suggested in allSuggestedDates)
+            {
+                SuggestedReservations.Add(new SuggestedReservationViewModel(suggested.Item1, suggested.Item2.Arrival, suggested.Item2.Departure));
+            }
+            SortSuggestedReservationsBySuperOwners();
+        }
        
         
 
@@ -311,7 +378,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         //Validation - date input (calendars and num. of days)
         private bool IsValidDateInput() //if only calendar are filled (treba prije poziva ove metode provjera da li je bar 1 kalendar selektovan)
         {
-            return (Arrival != null && Departure != null && Arrival <= Departure && Arrival.Date > DateTime.Now);
+            return (Arrival != null && Departure != null && Arrival <= Departure && Arrival.Date > DateTime.Now && Convert.ToInt32(lengthOfStay.TotalDays) >= (Convert.ToInt32(NumberOfDays) - 1));
         }
         //Validation - all fields are empty
         private bool AreTextboxesDataValid()

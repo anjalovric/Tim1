@@ -19,10 +19,11 @@ namespace InitialProject.Service
         private int NumberOfGuests;
         private DateTime Arrival;
         private DateTime Departure;
-        private TimeSpan lengthOfStay;     
+        private TimeSpan lengthOfStay;
+        AccommodationReservationService accommodationReservationService;
         public SuggestedDatesForAccommodationReservationService()
         {
-            AccommodationReservationService accommodationReservationService = new AccommodationReservationService();
+            accommodationReservationService = new AccommodationReservationService();
             reservations = accommodationReservationService.GetAll();
         }
         private bool IsDateAvailable(int currentAccommodationId, DateTime date)
@@ -157,6 +158,17 @@ namespace InitialProject.Service
             availableDates = new List<DateTime>();
             availableDatesHelp = new List<DateTime>();
             availableDateRanges = new List<List<DateTime>>();
+        }
+        public List<AvailableDatesForAccommodation> GetAvailableDatesForAnywhereSearch(Accommodation currentAccommodation)
+        {
+            reservations = accommodationReservationService.GetAll();
+            InitializeAvailableDatesLists();
+            lengthOfStay = Departure.Subtract(Arrival);
+            FillDateRangesList(currentAccommodation.Id);
+            List<AvailableDatesForAccommodation> availableDatesForAccommodations = new List<AvailableDatesForAccommodation>();
+            if (availableDateRanges.Count > 0 && AvailableDateRangeExists(ref availableDatesForAccommodations))
+                return availableDatesForAccommodations;
+            return null;
         }
     }
 }

@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:InitialProject.WPF.Views.Guest1Views"
         mc:Ignorable="d"
         Title="ReschedulingAccommodationReservationForm" AllowsTransparency="True" Background="Transparent"  Height="522" Width="660" WindowStartupLocation="CenterScreen" WindowStyle="None">
@@ -57,6 +58,9 @@
             <Label Height="35" HorizontalAlignment="Right" Width="Auto" Margin="0,84,142,383" Content="Departure date*"/>
 
             <Calendar x:Name="ArrivalDate" Margin="120,120,0,196" HorizontalAlignment="Left" SelectedDate="{Binding Path=Arrival, Mode=TwoWay}">
+                <Calendar.BlackoutDates>
+                    <CalendarDateRange Start="1900-01-01" End="{x:Static sys:DateTime.Today}" />
+                </Calendar.BlackoutDates>
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="PreviewMouseUp">
                         <i:InvokeCommandAction Command="{Binding OnPreviewMouseUpCommand}"/>
@@ -65,6 +69,9 @@
             </Calendar>
             
             <Calendar x:Name="DepartureDate" Margin="0,120,120,196" HorizontalAlignment="Right" SelectedDate="{Binding Path=Departure, Mode=TwoWay}">
+                <Calendar.BlackoutDates>
+                    <CalendarDateRange Start="1900-01-01" End="{x:Static sys:DateTime.Today}" />
+                </Calendar.BlackoutDates>
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="PreviewMouseUp">
                         <i:InvokeCommandAction Command="{Binding OnPreviewMouseUpCommand}"/>
