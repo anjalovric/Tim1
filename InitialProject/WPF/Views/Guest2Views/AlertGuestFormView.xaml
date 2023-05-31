@@ -45,7 +45,7 @@
             </Button.Background>
         </Button>
 
-        <Button   Command ="{Binding ConfirmCommand}" Background="#ffba00" TextElement.FontWeight="Bold"  Margin="204,19,80,10" Grid.Row="5" Grid.Column="3">
+        <Button   Command ="{Binding ConfirmCommand}" Background="#ffba00" TextElement.FontWeight="Bold"  Margin="204,19,80,10" Grid.Row="5" Grid.Column="3" ToolTipService.ShowDuration="5000">
             <Grid Background="#ffba00" Width="99" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -54,6 +54,14 @@
                 <Image Source="/Resources/Images/doneNew.png" VerticalAlignment="Top" HorizontalAlignment="Center" Width="24" Height="20" RenderTransformOrigin="0.5,0.5" Margin="0,2,0,0"/>
                 <TextBlock Background="#ffba00" Text="YES" VerticalAlignment="Top" FontSize="15" Grid.Column="1"  Foreground="Black" FontWeight="Bold" HorizontalAlignment="Left" Width="55" Height="26" Margin="3,2,0,0"/>
             </Grid>
+            <Button.ToolTip>
+                <ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold">Confirming presence on tour</TextBlock>
+                    </StackPanel>
+                </ToolTip>
+            </Button.ToolTip>
+            
         </Button>
         <Label Content="Tour" Background="#FF14503F" Foreground="White" FontSize="20"  Grid.Column="0" Grid.Row="3" FontWeight="Bold" Margin="20,9,0,219" Grid.ColumnSpan="3" Grid.RowSpan="2"/>
         <Label BorderBrush="#FF14503F" x:Name="PointLabel" FontSize="20"  Foreground="White" HorizontalAlignment="Center" Content="{Binding PointLabel}" Background="#FF14503F"  VerticalAlignment="Top" Height="216" Width="310" Grid.Row="4" Margin="0,4,0,0" Grid.ColumnSpan="3"/>
@@ -61,7 +69,7 @@
         <Image Grid.Row="5" Grid.Column="3" Source="/Resources/Images/doneNew.png" Margin="204,19,118,9"/>
         <Label Content="Guide" Foreground="White" FontSize="20"  Background="#FF14503F"  Grid.Column="3" Grid.Row="3" FontWeight="Bold" Margin="10,10,-18,220" Grid.RowSpan="2"/>
         <Label BorderBrush="#FF14503F" x:Name="GuideLabel" Foreground="White" FontSize="20" Content="{Binding GuideLabel}" HorizontalAlignment="Center"  VerticalAlignment="Top" Height="216" Width="330" Grid.Row="4" Margin="0,4,0,0" Grid.Column="3"/>
-        <Button Background="#ffba00" Command="{Binding CancelCommand}" Grid.Column="3" Grid.Row="5" Margin="275,19,0,9">
+        <Button Background="#ffba00" Command="{Binding CancelCommand}" Grid.Column="3" Grid.Row="5" Margin="275,19,0,9" ToolTipService.ShowDuration="5000">
             <Grid Background="#ffba00" Width="99" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -70,6 +78,13 @@
                 <Image Source="/Resources/Images/cancel.png" VerticalAlignment="Top" HorizontalAlignment="Center" Width="24" Height="20" RenderTransformOrigin="0.5,0.5" Margin="0,2,0,0"/>
                 <TextBlock Background="#ffba00" Text="NO" VerticalAlignment="Top" FontSize="15" Grid.Column="1"  Foreground="Black" FontWeight="Bold" HorizontalAlignment="Left" Width="55" Height="26" Margin="3,2,0,0"/>
             </Grid>
+            <Button.ToolTip>
+                <ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold">Canceling presence on tour</TextBlock>
+                    </StackPanel>
+                </ToolTip>
+            </Button.ToolTip>
         </Button>
 
     </Grid>

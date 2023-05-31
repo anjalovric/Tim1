@@ -923,6 +923,23 @@
   </ItemGroup>
 
   <ItemGroup>
+
+    <None Update="Help\activeTours.htm">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Help\finishedTours.htm">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Help\notifications.htm">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Help\requests.htm">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Help\vouchers.htm">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+
     <None Update="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

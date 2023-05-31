@@ -4,8 +4,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:InitialProject.WPF.Views.Guest2Views"
+             xmlns:l="clr-namespace:InitialProject.Help"
+             xmlns:properties="clr-namespace:InitialProject.Properties"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="668" Width="668" Height="600">
+             Loaded="Page_Loaded"
+             d:DesignHeight="600" d:DesignWidth="668" Width="668" Height="600" l:ShowToursHelp.HelpKey="notifications" Focusable="True">
+    <UserControl.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Help" Executed="CommandBinding_Executed"/>
+    </UserControl.CommandBindings>
     <UserControl.Resources>
         <Style x:Key="LinkButton" TargetType="Button">
             <Setter Property="Background" Value="Transparent"/>
@@ -47,10 +53,24 @@
                     <TextBlock Text="{Binding Text}" Width="530" Height="120" Grid.ColumnSpan="2" Foreground="White" Grid.Row="0" Margin="3,0,0,0">
 
                     </TextBlock>
-                    <Button x:Name="View" Content="View" Command="{Binding Path=DataContext.ViewCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}"  FontWeight="Bold" Grid.Row="1" FontSize="10" Grid.Column="1"  VerticalAlignment="Center" Width="33" Height="20" ClickMode="Press" Style="{StaticResource LinkButton}" Margin="0,0,0,0">
-
+                    <Button x:Name="View" Content="View" Command="{Binding Path=DataContext.ViewCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}"  FontWeight="Bold" Grid.Row="1" FontSize="10" Grid.Column="1"  VerticalAlignment="Center" Width="33" Height="20" ClickMode="Press" Style="{StaticResource LinkButton}" Margin="0,0,0,0" ToolTipService.ShowDuration="5000" ToolTipService.IsEnabled="{Binding Source={x:Static properties:Settings.Default}, Path=IsToolTipEnabled}">
+                        <Button.ToolTip>
+                            <ToolTip>
+                                <StackPanel>
+                                    <TextBlock FontWeight="Bold">Notification details will be opened.</TextBlock>
+                                </StackPanel>
+                            </ToolTip>
+                        </Button.ToolTip>
                     </Button>
-                    <Button x:Name="Delete" Content="Delete" Command="{Binding Path=DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" FontWeight="Bold" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" Width="33" Height="20" HorizontalAlignment="Right" FontSize="10" Style="{StaticResource LinkButton}" Margin="0,0,0,0"/>
+                    <Button x:Name="Delete" Content="Delete" Command="{Binding Path=DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" FontWeight="Bold" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" Width="33" Height="20" HorizontalAlignment="Right" FontSize="10" Style="{StaticResource LinkButton}" Margin="0,0,0,0" ToolTipService.ShowDuration="5000" ToolTipService.IsEnabled="{Binding Source={x:Static properties:Settings.Default}, Path=IsToolTipEnabled}">
+                        <Button.ToolTip>
+                            <ToolTip>
+                                <StackPanel>
+                                    <TextBlock FontWeight="Bold">Notification will be deleted.</TextBlock>
+                                </StackPanel>
+                            </ToolTip>
+                        </Button.ToolTip>
+                    </Button>
                 </Grid>
             </Border>
         </DataTemplate>

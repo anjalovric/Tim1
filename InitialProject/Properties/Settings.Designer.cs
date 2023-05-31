@@ -46,5 +46,17 @@ namespace InitialProject.Properties {
                 this["language"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool IsToolTipEnabled {
+            get {
+                return ((bool)(this["IsToolTipEnabled"]));
+            }
+            set {
+                this["IsToolTipEnabled"] = value;
+            }
+        }
     }
 }

@@ -8,5 +8,8 @@
     <Setting Name="language" Type="System.String" Scope="User">
       <Value Profile="(Default)">ENG</Value>
     </Setting>
+    <Setting Name="IsToolTipEnabled" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:val="clr-namespace:InitialProject.WPF.Validations.Guest2Validations"
+        xmlns:properties="clr-namespace:InitialProject.Properties"
         xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Royale" xmlns:System="clr-namespace:System;assembly=netstandard" xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
@@ -214,7 +215,7 @@
                     <DataGridTemplateColumn x:Name="reservation" Header="Activation"  Width="1.2*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button FontWeight="Bold" Width="85" Height="30" Background="#ffba00" HorizontalAlignment="Left" FontSize="18" Command="{Binding Path=DataContext.ActivateCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}">
+                                <Button FontWeight="Bold" Width="85" Height="30" Background="#ffba00" HorizontalAlignment="Left" FontSize="18" Command="{Binding Path=DataContext.ActivateCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" ToolTipService.ShowDuration="5000">
                                     <Grid Background="#ffba00" HorizontalAlignment="Left" VerticalAlignment="Top">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="16*"/>
@@ -236,7 +237,13 @@
                                         </Image>
                                         <TextBlock Background="#ffba00" Text="Activate" VerticalAlignment="Top" FontSize="12" FontWeight="Bold" HorizontalAlignment="Left" Width="85" Height="30" Margin="3,3,0,0" Grid.RowSpan="2" Grid.Column="1"/>
                                     </Grid>
-
+                                    <Button.ToolTip>
+                                        <ToolTip>
+                                            <StackPanel>
+                                                <TextBlock FontWeight="Bold">Voucher will be activated for this tour reservation.</TextBlock>
+                                            </StackPanel>
+                                        </ToolTip>
+                                    </Button.ToolTip>
                                 </Button>
 
                             </DataTemplate>
@@ -248,7 +255,7 @@
             <TextBlock Grid.Row="1" FontSize="15" Foreground="Black" Grid.Column="2" Margin="232,37,0,15" Text="{Binding guest2.LastName}" FontWeight="DemiBold" Grid.RowSpan="2"/>
             <Label x:Name="AgeLabel" Grid.Row="1" Grid.Column="2" Margin="302,233,191,58"/>
             <TextBlock  HorizontalAlignment="Left" TextElement.FontSize="20" Margin="15,20,0,0" Grid.Row="5" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Column="1" Grid.ColumnSpan="3" Width="530" FontWeight="Bold" Height="29"><Run Text="Vouchers"/></TextBlock>
-            <Button Grid.Row="7" HorizontalAlignment="Left" BorderBrush="#ffba00" BorderThickness="1" Background="#ffba00" VerticalAlignment="Top" Height="35" Width="101" FontWeight="Bold" Margin="202,27,0,0" FontSize="18" Grid.Column="2" Command="{Binding ConfirmCommand}">
+            <Button Grid.Row="7" HorizontalAlignment="Left" BorderBrush="#ffba00" BorderThickness="1" Background="#ffba00" VerticalAlignment="Top" Height="35" Width="101" FontWeight="Bold" Margin="202,27,0,0" FontSize="18" Grid.Column="2" Command="{Binding ConfirmCommand}" ToolTipService.ShowDuration="5000" ToolTipService.IsEnabled="{Binding Source={x:Static properties:Settings.Default}, Path=IsToolTipEnabled}">
                 <Grid Background="#ffba00" Width="99" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -270,8 +277,16 @@
                         </Style.Triggers>
                     </Style>
                 </Button.Style>
+                <Button.ToolTip>
+                    <ToolTip>
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold">Reserving tour</TextBlock>
+                            <TextBlock>This tour will be reserved.</TextBlock>
+                        </StackPanel>
+                    </ToolTip>
+                </Button.ToolTip>
             </Button>
-            <Button Grid.Row="7" HorizontalAlignment="Left"  VerticalAlignment="Top" Height="35" Width="101" FontWeight="Bold" Margin="331,27,0,0" FontSize="18" Grid.Column="2" Command="{Binding CloseCommand}">
+            <Button Grid.Row="7" HorizontalAlignment="Left"  VerticalAlignment="Top" Height="35" Width="101" FontWeight="Bold" Margin="331,27,0,0" FontSize="18" Grid.Column="2" Command="{Binding CloseCommand}" ToolTipService.ShowDuration="5000" ToolTipService.IsEnabled="{Binding Source={x:Static properties:Settings.Default}, Path=IsToolTipEnabled}">
                 <Grid Background="White" Width="99" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -280,7 +295,14 @@
                     <Image Source="/Resources/Images/close.png" VerticalAlignment="Top" HorizontalAlignment="Center" Width="24" Height="20" RenderTransformOrigin="0.5,0.5" Margin="0,5,0,0"/>
                     <TextBlock Background="White" Text="Cancel" VerticalAlignment="Center" FontSize="18" Grid.Column="1"  Foreground="Black" FontWeight="Bold" HorizontalAlignment="Center" Width="68" Height="28"/>
                 </Grid>
-
+                <Button.ToolTip>
+                    <ToolTip>
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold">Exiting the booking form</TextBlock>
+                            <TextBlock>This tour won't be reserved.</TextBlock>
+                        </StackPanel>
+                    </ToolTip>
+                </Button.ToolTip>
             </Button>
             <Border Grid.Row="5" BorderBrush="LightGray" BorderThickness="0 0 0 1" Margin="10,0,12,54" Grid.Column="1" Grid.ColumnSpan="2"/>
             <TextBlock HorizontalAlignment="Left" TextElement.FontSize="15" Margin="15,69,0,0" Grid.Row="5" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Column="1" Grid.ColumnSpan="3" Width="530" FontWeight="Bold" Height="29"><Run Text="Here are all the vouchers that you can use for your reservation."/></TextBlock>
