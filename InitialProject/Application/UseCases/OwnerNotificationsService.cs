@@ -9,9 +9,11 @@ namespace InitialProject.Service
 {
     public class OwnerNotificationsService
     {
+        private OwnerService ownerService;
         private IOwnerNotificationRepository notificationRepository = Injector.CreateInstance<IOwnerNotificationRepository>();
         public OwnerNotificationsService()
         {
+            ownerService = new OwnerService();
         }
 
         public void Add(OwnerNotificationType type, Owner owner)
@@ -63,5 +65,15 @@ namespace InitialProject.Service
             List<OwnerNotification> notifications = notificationRepository.GetAll();
             return notifications.Find(n => n.Owner.Id == owner.Id && n.Type.Equals(OwnerNotificationType.RENOVATION_CANCELLED)) != null;
         }
+
+        public void AddNewForumNotification(Location location)
+        {
+            List<Owner> owners = ownerService.getAllByLocation(location);
+            foreach(Owner owner in owners)
+            {
+                notificationRepository.Add(OwnerNotificationType.FORUM_ADDED, owner);
+            }
+        }
+
     }
 }

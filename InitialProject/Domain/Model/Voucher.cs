@@ -9,7 +9,7 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace InitialProject.Model
 {
-    public enum VoucherType { CANCELED_TOUR, VISITED_TOUR }
+    public enum VoucherType { CANCELED_TOUR, VISITED_TOUR, DISMISSAL_GUIDE }
     public class Voucher:ISerializable
     {
         public int Id { get; set; }

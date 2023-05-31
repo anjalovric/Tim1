@@ -7,6 +7,7 @@ using Org.BouncyCastle.Asn1.Cms;
 using System;
 using System.Collections.Generic;
 using System.Windows.Input;
+using System.Windows.Media.Animation;
 
 namespace InitialProject.APPLICATION.UseCases
 {
@@ -56,6 +57,7 @@ namespace InitialProject.APPLICATION.UseCases
         {
             int tourCount = 0;
             double averageGrade = 0;
+            int reviews = 0;
             List<double> grades = new List<double>();
             DateTime today = DateTime.Now;
             string yearago = today.Month + "/" + today.Day + "/" + (today.Year - 1) + " " + today.ToString().Split(" ")[1] + " " + today.ToString().Split(" ")[2];
@@ -67,16 +69,21 @@ namespace InitialProject.APPLICATION.UseCases
                     tourCount++;
                     GuideAndTourReview guideAndTourReview = guideAndTourReviewService.GetReviewsByGuide(guide.Id).Find(x=>x.TourInstance.Id== tourInstance.Id);
                     if (guideAndTourReview != null)
+                    {
+                        reviews++;
                         averageGrade += Convert.ToDouble(Convert.ToDouble(guideAndTourReview.Language + guideAndTourReview.InterestingFacts + guideAndTourReview.Knowledge) / Convert.ToDouble(3));
-                }
+                    }
+                 }
             }
 
-            return CheckIsSuperGuide(tourCount, averageGrade);
+            return CheckIsSuperGuide(tourCount, averageGrade,reviews);
         }    
         
-        public bool CheckIsSuperGuide(int tourCount, double averageGrade)
+        public bool CheckIsSuperGuide(int tourCount, double averageGrade,int reviews)
         {
-            return (!(tourCount < 2 || (averageGrade/tourCount) < 4));
+            if ((tourCount>=2) && ((averageGrade/reviews) >= 4))
+            return true;
+            return false;
         }
 
         public void CheckSuperGuideStatus(Guide guide)

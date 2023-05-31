@@ -16,7 +16,16 @@
         <SolidColorBrush x:Key="MenuBlue">#203354</SolidColorBrush>
         <SolidColorBrush x:Key="InerIner">#296d98</SolidColorBrush>
      <SolidColorBrush x:Key="GridBlue">#1F456E</SolidColorBrush>
-    
+
+
+
+    <Style x:Key="ButtonDismissal" TargetType="Button">
+        <Setter Property="Background" Value="{StaticResource TableBorder}"/>
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="BorderBrush" Value="{StaticResource InnerBlue}"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="FontFamily" Value="Yu Gothic"/>
+    </Style>
     <Style x:Key="Tab" TargetType="TabItem">
         <Setter Property="Background" Value="{StaticResource RoyalBlue}"/>
         <Setter Property="Foreground" Value="White"/>

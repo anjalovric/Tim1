@@ -4,9 +4,17 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:InitialProject.WPF.Views.Guest2Views"
+             xmlns:l="clr-namespace:InitialProject.Help"
+             xmlns:tk="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit.NET5" 
+             xmlns:properties="clr-namespace:InitialProject.Properties"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Royale" xmlns:System="clr-namespace:System;assembly=netstandard" xmlns:sys="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="668" Width="668" Height="600">
+             Loaded="Page_Loaded"
+             d:DesignHeight="600" d:DesignWidth="668" Width="668" Height="600" l:ShowToursHelp.HelpKey="requests" Focusable="True">
+    <UserControl.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Help" Executed="CommandBinding_Executed"/>
+    </UserControl.CommandBindings>
     <UserControl.Resources>
         <Style x:Key="DataGridRowStyle2" TargetType="{x:Type DataGridRow}">
             <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
@@ -160,9 +168,9 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Border BorderBrush="#0C3B2E" Grid.ColumnSpan="3" Background="#0C3B2E" BorderThickness="4,4,4,4" CornerRadius="25 25 25 25" />
-        <TabControl Margin="0,151,0,106" Style="{DynamicResource TabControlStyle}" Grid.Column="1">
+        <TabControl x:Name="TabControl" Margin="0,151,0,106" Style="{DynamicResource TabControlStyle}" Grid.Column="1" SelectedIndex="{Binding SelectedTabIndex, Mode=TwoWay}">
 
-            <TabItem Header="Ordinary">
+            <TabItem x:Name="Ordinary" Header="Ordinary" l:ShowToursHelp.HelpKey="requests">
 
                 <Grid Background="White" Height="259" Margin="0,0,5,0">
 
@@ -171,17 +179,46 @@
                             <DataGridTextColumn Header="Name" Width="1*" Binding="{Binding Name}"/>
                             <DataGridTextColumn Header="Status" Width="1*" Binding="{Binding Status}"/>
                         </DataGrid.Columns>
-
                     </DataGrid>
                 </Grid>
             </TabItem>
-            <TabItem Header="Complex">
-                <Grid Background="White" Height="428" Margin="0,0,5,0"/>
+            <TabItem x:Name="Complex" Header="Complex" l:ShowToursHelp.HelpKey="requests">
+                <Grid Background="White" Height="428" Margin="0,0,5,0">
+                    <DataGrid ItemsSource="{Binding Path=ComplexTourRequests,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedItem,Mode=TwoWay}" BorderBrush="Transparent" IsReadOnly="True" AutoGenerateColumns="False" HorizontalScrollBarVisibility="Hidden" GridLinesVisibility="None" ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle2}" CellStyle="{StaticResource DataGridCellStyle2}" Style="{StaticResource DataGridStyle}" RowStyle="{StaticResource DataGridRowStyle2}" Margin="0,0,0,129">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Name" Width="1*" Binding="{Binding Name}"/>
+                            <DataGridTextColumn Header="Status" Width="1*" Binding="{Binding Status}"/>
+                            <DataGridTemplateColumn x:Name="rate" Header="Parts" Width="0.9*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button FontWeight="Bold" FontSize="18" Width="65" Height="30" Background="#ffba00" BorderBrush="#ffba00" BorderThickness="2" Command="{Binding Path=DataContext.ViewCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}">
+                                            <Grid Background="#ffba00" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="15*"/>
+                                                    <RowDefinition Height="19*"/>
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Image Source="/Resources/Images/star.png" VerticalAlignment="Top" HorizontalAlignment="Left" Width="15" Height="25" RenderTransformOrigin="0.5,0.5" Margin="5,3,0,0" Grid.RowSpan="2"/>
+
+                                                <TextBlock Background="#ffba00" Text="Parts" VerticalAlignment="Top" FontSize="12" FontWeight="Bold" HorizontalAlignment="Left" Width="65" Height="29" Margin="5,3,0,0" Grid.RowSpan="2" Grid.Column="1"/>
+                                            </Grid>
+                                            
+                                        </Button>
+
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
             </TabItem>
         </TabControl>
 
         <Label Content="My requests" Grid.Column="1" Foreground="White" Margin="0,36,0,0" Height="46" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="20" FontWeight="Bold" Width="135"/>
-        <Button HorizontalAlignment="Left" Grid.Column="1" VerticalAlignment="Top" Height="34" Width="172" FontWeight="Bold" Margin="0,499,0,0" FontSize="18" Command="{Binding CreateCommand}">
+        <Button HorizontalAlignment="Left" Grid.Column="1" VerticalAlignment="Top" Height="34" Width="172" FontWeight="Bold" Margin="0,499,0,0" FontSize="18" Command="{Binding CreateCommand}" ToolTipService.ShowDuration="5000" ToolTipService.IsEnabled="{Binding Source={x:Static properties:Settings.Default}, Path=IsToolTipEnabled}">
             <Grid Background="#ffba00" Width="172" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="16*"/>
@@ -194,6 +231,13 @@
                 <Image Source="/Resources/Images/add-new.png" VerticalAlignment="Top" HorizontalAlignment="Left" Width="26" Height="25" RenderTransformOrigin="0.5,0.5" Margin="10,3,0,0" Grid.RowSpan="2"/>
                 <TextBlock Background="#ffba00" Text="Create request" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" Width="145" Height="29" Margin="37,3,0,0" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
             </Grid>
+            <Button.ToolTip>
+                <ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold">Creating tour request</TextBlock>
+                    </StackPanel>
+                </ToolTip>
+            </Button.ToolTip>
         </Button>
         <Button HorizontalAlignment="Center" Grid.Column="1" VerticalAlignment="Top" Height="34" Width="182" FontWeight="Bold" FontSize="18" Margin="0,499,0,0">
             <Grid Background="#ffba00" Width="177" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35">
@@ -210,7 +254,7 @@
             </Grid>
         </Button>
         <Label Content="You can view all your requests for tours as well as their status." FontSize="15" Grid.Column="1" FontWeight="DemiBold" Foreground="#b46617" Margin="0,100,0,0" Height="46" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-        <Button HorizontalAlignment="Left" Grid.Column="1" VerticalAlignment="Top" Height="34" Width="172" FontWeight="Bold" FontSize="18" Command="{Binding StatisticsCommand}" Margin="384,499,0,0">
+        <Button HorizontalAlignment="Left" Grid.Column="1" VerticalAlignment="Top" Height="34" Width="172" FontWeight="Bold" FontSize="18" Command="{Binding StatisticsCommand}" Margin="384,499,0,0" ToolTipService.ShowDuration="5000" ToolTipService.IsEnabled="{Binding Source={x:Static properties:Settings.Default}, Path=IsToolTipEnabled}">
             <Grid Background="#ffba00" Width="172" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="16*"/>
@@ -223,8 +267,13 @@
                 <Image Source="/Resources/Images/analytics.png" VerticalAlignment="Top" HorizontalAlignment="Left" Width="26" Height="25" RenderTransformOrigin="0.5,0.5" Margin="10,3,0,0" Grid.RowSpan="2"/>
                 <TextBlock Background="#ffba00" Text="Statistics" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" Width="109" Height="29" Margin="10,3,0,0" Grid.RowSpan="2" Grid.Column="1"/>
             </Grid>
+            <Button.ToolTip>
+                <ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold">Showing statistics about all requests.</TextBlock>
+                    </StackPanel>
+                </ToolTip>
+            </Button.ToolTip>
         </Button>
-
-
     </Grid>
 </UserControl>

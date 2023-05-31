@@ -63,16 +63,23 @@ namespace InitialProject
                 {
                     if(user.Role==Model.Role.OWNER)
                     {
-                        //OwnerOverview ownerOverview = new OwnerOverview(user);
-                        //ownerOverview.Show();
                         OwnerMainWindowView ownerMainWindow = new OwnerMainWindowView(user);
                         ownerMainWindow.Show();
                         Close();
                     }else if(user.Role == Model.Role.GUIDE)
                     {
-                        GuideWindow guideMainWindow = new GuideWindow(user);
-                        guideMainWindow.Show();
-                        Close();
+                        GuideService guideService = new GuideService();
+                        Guide guide=guideService.GetByUsername(Username);
+                        if (guide.Active)
+                        {
+                            GuideWindow guideMainWindow = new GuideWindow(user);
+                            guideMainWindow.Show();
+                            Close();
+                        }
+                        else
+                        {
+                            MessageBox.Show("There isn't user with that username!");
+                        }
                     }
                     else if (user.Role == Model.Role.GUEST1)
                     {

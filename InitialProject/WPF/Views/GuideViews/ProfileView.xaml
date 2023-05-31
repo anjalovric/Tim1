@@ -87,5 +87,22 @@
                 <Label Grid.Row="4" Grid.Column="1" Content="{Binding Email}" HorizontalContentAlignment="Center" Style="{DynamicResource Labels}"></Label>
             </Grid>
         </Grid>
+        <Border Style="{DynamicResource Border}" Background="LightBlue" Grid.Column="4" Margin="38,42,5,45" Grid.Row="2" Width="1.2">
+
+
+        </Border>
+        <Button Command="{Binding DismissCommand}" Grid.Column="5" Content="{ns:Loc dismissal}" Style="{DynamicResource ButtonDismissal}" HorizontalAlignment="Left" Margin="65,280,0,0" Grid.Row="2" VerticalAlignment="Top" Height="44" Width="103" />
+        <TextBlock Grid.Column="5" Text="{ns:Loc Attention}" FontSize="17" TextWrapping="Wrap" Style="{DynamicResource TextBlock}" HorizontalAlignment="Left" Margin="26,87,0,0" Grid.Row="2" VerticalAlignment="Top" Height="208" Width="181"/>
+
+        <Grid Visibility="{Binding ToastVisibility}" Height="165" Width="300" Style="{DynamicResource InnerGrid}" Grid.Column="3" Margin="50,76,10,142" Grid.Row="2">
+            <Border Style="{DynamicResource Border}">
+
+            </Border>
+            <Label Style="{DynamicResource LabelToast}" HorizontalAlignment="Center"  Content="⚠️" Margin="0,5,0,127"/>
+            <TextBlock HorizontalAlignment="Center" FontSize="15" Style="{DynamicResource TextBlock}" TextWrapping="Wrap" Text="{ns:Loc Alert}" Margin="0,43,0,66"/>
+            <Button Command="{Binding YesCommand}" Content="{ns:Loc YES}" Style="{DynamicResource Button}" Width="60" Height="30" Margin="22,112,182,19"></Button>
+            <Button Command="{Binding NoCommand}" Content="{ns:Loc NO}" Style="{DynamicResource Button}" Width="60" Height="30" Margin="173,112,31,19"></Button>
+
+        </Grid>
     </Grid>
 </Page>

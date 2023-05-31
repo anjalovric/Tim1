@@ -16,6 +16,19 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
 {
     public class ProfileViewModel:INotifyPropertyChanged
     {
+        private string toastVisibility;
+        public string ToastVisibility
+        {
+            get => toastVisibility;
+            set
+            {
+                if (value != toastVisibility)
+                {
+                    toastVisibility = value;
+                    OnPropertyChanged("ToastVisibility");
+                }
+            }
+        }
         private string name;
         public string Name
         {
@@ -89,15 +102,33 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         private Guide loggedGuide;
         private GuideService guideService;
         private SuperGuideService superGuideService;
+        private VoucherService voucherService;
+        private User loggedUser;
         public ObservableCollection<SuperGuide> supreGuideTitles { get; set; }
+        public RelayCommand YesCommand { get; set; }
+        public RelayCommand NoCommand { get; set; }
+        public RelayCommand DismissCommand { get; set; }
         public ProfileViewModel(User user)
         {
             guideService = new GuideService();
+            voucherService= new VoucherService();
             loggedGuide = guideService.GetByUsername(user.Username);
-
+            loggedUser = user;
             superGuideService = new SuperGuideService();
             SetUserData();
             supreGuideTitles = new ObservableCollection<SuperGuide>(superGuideService.UpdateSuperGuideStatus(loggedGuide));
+            ToastVisibility = "hidden";
+            MakeCommands();
+        }
+        private bool CanExecute(object sender)
+        {
+            return true;
+        }
+        private void MakeCommands()
+        {
+            YesCommand = new RelayCommand(Yes_Executed, CanExecute);
+            NoCommand = new RelayCommand(No_Executed, CanExecute);
+            DismissCommand = new RelayCommand(DismissExecuted, CanExecute);
         }
 
         private void SetUserData()
@@ -107,6 +138,31 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             Username = loggedGuide.Username;
             Age=loggedGuide.Age;
             Email= loggedGuide.Email;
+        }
+
+        private void Dismissal()
+        {
+            loggedGuide.Active = false;
+            guideService.Update(loggedGuide);
+
+            voucherService.SendVoucher(loggedGuide.Id);
+
+            GuideWindowViewModel guideWindowViewModel=new GuideWindowViewModel(loggedUser);
+            guideWindowViewModel.SignOut();
+
+        }
+        private void Yes_Executed(object sender)
+        {
+            Dismissal();
+        }
+        private void No_Executed(object sender)
+        {
+            ToastVisibility = "hidden";
+        }
+
+        private void DismissExecuted(object sender)
+        {
+            ToastVisibility = "visible";
         }
     }
 }

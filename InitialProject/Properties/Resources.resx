@@ -147,6 +147,9 @@
   <data name="AgeStatistics" xml:space="preserve">
     <value>Age statistics</value>
   </data>
+  <data name="Alert" xml:space="preserve">
+    <value>Are you sure you want to quit a job?</value>
+  </data>
   <data name="AreYouSure" xml:space="preserve">
     <value>Are you sure you want to cancel tour:</value>
   </data>
@@ -158,6 +161,9 @@
   </data>
   <data name="AtLeast2CheckpointsAreRequired" xml:space="preserve">
     <value>At least 2 checkpoints are required</value>
+  </data>
+  <data name="Attention" xml:space="preserve">
+    <value>If you no longer want to be part of our system press button DISMISSAL. After that you would not be able to use system as guide.</value>
   </data>
   <data name="BeforeRegularEnd" xml:space="preserve">
     <value>before regular end</value>
@@ -236,6 +242,9 @@
   </data>
   <data name="DetailsHeader" xml:space="preserve">
     <value>Details</value>
+  </data>
+  <data name="dismissal" xml:space="preserve">
+    <value>DISMISSAL</value>
   </data>
   <data name="Donotexistsforlocation" xml:space="preserve">
     <value>Do not exists request for that location!</value>
