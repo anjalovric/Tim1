@@ -14,8 +14,10 @@ namespace InitialProject.Service
     {
         private List<AccommodationReservation> reservations;
         private IAccommodationReservationRepository accommodationReservationRepository = Injector.CreateInstance<IAccommodationReservationRepository>();
+        private Guest1Service guest1Service;
         public AccommodationReservationService()
         {
+            guest1Service = new Guest1Service();
             MakeReservations();
         }
         public List<AccommodationReservation> GetAll()
@@ -67,7 +69,7 @@ namespace InitialProject.Service
         }
         private void SetGuests()
         {
-            Guest1Service guest1Service = new Guest1Service();
+            
             List<Guest1> allGuest = guest1Service.GetAll(); 
             foreach(AccommodationReservation reservation in reservations)
             {
@@ -134,6 +136,11 @@ namespace InitialProject.Service
         public bool WasGuestOnLocation(Guest1 guest1, int locationId, DateTime CreatingCommentDate)
         {
             return reservations.Find(r => r.Accommodation.Location.Id == locationId && r.Guest.Id == guest1.Id && r.Arrival<CreatingCommentDate) != null;
+        }
+        public bool HadReservationOnLocation(String username, Location location)
+        {
+            MakeReservations();
+            return reservations.Find(r => r.Accommodation.Location.Id == location.Id && r.Guest.Username == username && r.Departure < DateTime.Now) != null;
         }
     }
 }

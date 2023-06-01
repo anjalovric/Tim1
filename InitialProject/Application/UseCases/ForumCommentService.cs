@@ -18,11 +18,13 @@ namespace InitialProject.APPLICATION.UseCases
         private Guest1Service guest1Service;
         private OwnerService ownerService;
         private AccommodationReservationService accommodationReservationService;
+        private AccommodationService accommodationService;
         public ForumCommentService()
         {
             guest1Service = new Guest1Service();
             ownerService = new OwnerService();
             accommodationReservationService = new AccommodationReservationService();
+            accommodationService = new AccommodationService();
         }
 
         public List<ForumComment> GetAll()
@@ -68,13 +70,36 @@ namespace InitialProject.APPLICATION.UseCases
         public int GetNumberOfGuestComments(Forum forum)
         {
             List<ForumComment> forumComments = forumCommentRepository.GetAllByForumId(forum.Id);
-            return forumComments.FindAll(n => n.User.Role == Role.GUEST1).Count();
+            SetUsers(forumComments);
+            int total = 0;
+            foreach(ForumComment comment in forumComments)
+            {
+                if(comment.User.Role==Role.GUEST1 && accommodationReservationService.HadReservationOnLocation(comment.User.Username, forum.Location))
+                {
+                    total++;
+                }
+            }
+            return total;
         }
 
-        public int GetNumberOfOwnerComments(Forum forum)
+        /*public int GetNumberOfOwnerComments(Forum forum)
         {
             List<ForumComment> forumComments = forumCommentRepository.GetAllByForumId(forum.Id);
             return forumComments.FindAll(n => n.User.Role == Role.OWNER).Count();
+        }*/
+        public int GetNumberOfOwnerComments(Forum forum)
+        {
+            List<ForumComment> forumComments = forumCommentRepository.GetAllByForumId(forum.Id);
+            int total = 0;
+            foreach (ForumComment comment in forumComments)
+            {
+                if (comment.User.Role == Role.OWNER && accommodationService.HasAccommodationOnLocation(comment.User.Username, forum.Location))
+                {
+                    total++;
+                }
+            }
+            return total;
         }
+
     }
 }

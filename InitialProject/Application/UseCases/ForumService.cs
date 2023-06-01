@@ -131,7 +131,7 @@ namespace InitialProject.Service
         {
             int ownerComments = forumCommentService.GetNumberOfOwnerComments(forum);
             int guestComments = forumCommentService.GetNumberOfGuestComments(forum);
-            return ownerComments >= 10 && guestComments >= 20;
+            return ownerComments >= 10 || guestComments >= 20;          //promijeniti na &&     !!!!!!!!!!!!!!!!!!!!!!!!!!
         }
 
         private void SetIsVeryUseful(List<Forum> forums)
@@ -139,5 +139,6 @@ namespace InitialProject.Service
             foreach (Forum forum in forums)
                 forum.IsVeryUseful = IsVeryUseful(forum);
         }
+
     }
 }
