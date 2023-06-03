@@ -30,6 +30,19 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             }
 
         }
+
+        private bool isVeryUseful;
+        public bool IsVeryUseful
+        {
+            get { return isVeryUseful; }
+            set
+            {
+                if (value != isVeryUseful)
+                    isVeryUseful = value;
+                OnPropertyChanged("IsVeryUseful");
+            }
+
+        }
         private Forum forum;
         public Forum Forum
         {
@@ -120,6 +133,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         {
             this.guest1 = guest1;
             this.Forum = forum;
+            IsVeryUseful = forum.IsVeryUseful;
             IsCommentingEnabled = Forum.Opened;
             if(guest1.Id!=Forum.Guest1.Id)
                 IsClosingEnabled = false;
@@ -167,6 +181,8 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                 ForumComment newComment = new ForumComment(Forum, guest1, DateTime.Now, NewComment);
                 forumCommentService.Add(newComment);
                 forumService.IncrementCommentsNumber(Forum);
+                Forum = forumService.SetIsVeryUseful(Forum);
+                IsVeryUseful = Forum.IsVeryUseful;
                 Comments = new ObservableCollection<ForumComment>(forumCommentService.GetAllByForumId(Forum.Id));
                 Comments = new ObservableCollection<ForumComment>(Comments.Reverse());
                 NewComment = "";

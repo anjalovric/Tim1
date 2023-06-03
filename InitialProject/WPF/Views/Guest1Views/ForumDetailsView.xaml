@@ -138,6 +138,18 @@
         <TextBlock Foreground="#d9c7b3" VerticalAlignment="Center" FontWeight="Bold"  Background="Transparent" Grid.Row="0" FontSize="24" Margin="0,25,0,0" FontFamily="Baskerville Old Face" HorizontalAlignment="Center">
             <Run Text="FORUM - "/>    
             <Run Text="{Binding Forum.Location.City}"/>
+            <Image Source="/Resources/Images/flag.png" Height="Auto" Width="30" Margin="10,0,0,0" VerticalAlignment="Center">
+                <Image.Style>
+                    <Style TargetType="Image">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsVeryUseful, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Value="True">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Image.Style>
+            </Image>
         </TextBlock>
         <!-- BACK BUTTON -->
         <Button FontSize="18" FontWeight="Bold" IsEnabled="True" Height="35" Width="100" Margin="42,25,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" Command="{Binding BackCommand}">

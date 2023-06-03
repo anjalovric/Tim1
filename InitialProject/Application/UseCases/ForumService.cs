@@ -47,7 +47,7 @@ namespace InitialProject.Service
             List<Forum> forums = forumRepository.GetAll();
             SetLocations(forums);
             SetGuests(forums);
-            SetIsVeryUseful(forums);
+            SetVeryUsefulForums(forums);
             return forums;
         }
         public void Add(Forum forum)
@@ -133,8 +133,13 @@ namespace InitialProject.Service
             int guestComments = forumCommentService.GetNumberOfGuestComments(forum);
             return ownerComments >= 10 || guestComments >= 20;          //promijeniti na &&     !!!!!!!!!!!!!!!!!!!!!!!!!!
         }
+        public Forum SetIsVeryUseful(Forum forum)
+        {
+            forum.IsVeryUseful = IsVeryUseful(forum);
+            return forum;
+        }
 
-        private void SetIsVeryUseful(List<Forum> forums)
+        private void SetVeryUsefulForums(List<Forum> forums)
         {
             foreach (Forum forum in forums)
                 forum.IsVeryUseful = IsVeryUseful(forum);

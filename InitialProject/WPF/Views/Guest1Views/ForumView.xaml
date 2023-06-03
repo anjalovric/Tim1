@@ -73,7 +73,7 @@
 
 
                     <!-- VIEW FORUM BUTTON -->
-                    <Button x:Name="View"  Command="{Binding Path=DataContext.OpenCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" FontWeight="Bold" Grid.RowSpan="2" Grid.Column="4" VerticalAlignment="Bottom" Width="100" Height="35" HorizontalAlignment="Center" FontSize="18">
+                    <Button x:Name="View"  Command="{Binding Path=DataContext.OpenCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" FontWeight="Bold" Grid.RowSpan="2" Grid.Column="4" VerticalAlignment="Bottom" Width="100" Margin="0,0,0,14" Height="35" HorizontalAlignment="Center" FontSize="18">
                         <Grid Background="#8c9d75" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -94,7 +94,7 @@
                     </Button>
                     
                     <!-- VERY USEFUL FORUM ICON-->
-                    <Image Source="/Resources/Images/goldStar.png" Grid.RowSpan="2" Grid.Column="3" VerticalAlignment="Bottom" Height="30" Width="30" HorizontalAlignment="Right" Margin="0,0,0,0">
+                    <Image Source="/Resources/Images/flag.png" Grid.RowSpan="2" Grid.Column="3" VerticalAlignment="Bottom" Height="35" Width="30" HorizontalAlignment="Right" Margin="0,0,0,20">
                         <Image.Style>
                             <Style TargetType="Image">
                                 <Setter Property="Visibility" Value="Collapsed"/>

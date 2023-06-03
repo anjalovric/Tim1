@@ -100,6 +100,8 @@
 
     <None Remove="Resources\Images\exclamation.png" />
 
+    <None Remove="Resources\Images\flag.png" />
+
     <None Remove="Resources\Images\flowers.jpg" />
 
     <None Remove="Resources\Images\forum.png" />
@@ -415,6 +417,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\dreams4.jpeg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\flag.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\hand.png">
