@@ -170,5 +170,31 @@ namespace InitialProject.Service
                 return availableDatesForAccommodations;
             return null;
         }
+
+        public List<AvailableDatesForAccommodation> GetAvailableDatesForAnywhereSearchNoInputDates(Accommodation currentAccommodation, int NumberOfDays, int NumberOfGuests)
+        {
+            this.NumberOfDays = NumberOfDays;
+            this.NumberOfGuests = NumberOfGuests;
+            reservations = accommodationReservationService.GetAll();
+            InitializeAvailableDatesLists();
+
+            FindFirstThreeAvailableDateRanges(currentAccommodation.Id);
+            
+            List<AvailableDatesForAccommodation> availableDatesForAccommodations = new List<AvailableDatesForAccommodation>();
+            AvailableDateRangeExists(ref availableDatesForAccommodations);
+            return availableDatesForAccommodations;
+        }
+
+        private void FindFirstThreeAvailableDateRanges(int currentAccommodationId)
+        {
+            InitializeAvailableDatesLists();
+            DateTime start = DateTime.Now.Date.AddDays(1);  //provjeriti jel ovo ponoc sutra
+            while (availableDateRanges.Count < 3)
+            {
+                if (IsDateAvailable(currentAccommodationId, start))
+                    AddAvailableDateOutRangeToList(start);
+                start = start.AddDays(1);
+            }
+        }
     }
 }

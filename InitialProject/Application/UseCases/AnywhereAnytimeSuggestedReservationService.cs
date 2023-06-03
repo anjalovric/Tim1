@@ -43,6 +43,27 @@ namespace InitialProject.APPLICATION.UseCases
 
             return retDates;
         }
-        
+        public List<Tuple<Accommodation, AvailableDatesForAccommodation>> GetAvailableDatesNoInputDates(int numberOfDays, int numberOfGuests)
+        {
+            List<Tuple<Accommodation, AvailableDatesForAccommodation>> retDates = new List<Tuple<Accommodation, AvailableDatesForAccommodation>>();
+            List<Accommodation> storedAccommodations = new List<Accommodation>(accommodationService.GetAll());
+       
+            foreach (Accommodation accommodation in storedAccommodations)
+            {
+                if (accommodation.Capacity >= numberOfGuests)
+                {
+                    List<AvailableDatesForAccommodation> availableDatesForAccommodations = suggestedDatesForAccommodationReservationService.GetAvailableDatesForAnywhereSearchNoInputDates(accommodation, numberOfDays, numberOfGuests);
+                        foreach (AvailableDatesForAccommodation date in availableDatesForAccommodations)
+                        {
+                            retDates.Add(Tuple.Create(accommodation, date));
+                        }
+                    
+                }
+
+            }
+
+            return retDates;
+        }
+
     }
 }

@@ -228,7 +228,10 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                 DateTime arrival = (((Button)sender).DataContext as SuggestedReservationViewModel).Arrival;
                 DateTime departure = (((Button)sender).DataContext as SuggestedReservationViewModel).Departure;
                 MakeNewReservation(currentAccommodation, arrival, departure);
-                UpdateSuggestedReservations();   //update suggested reservations list
+                if (Arrival != DateTime.MinValue && Departure != DateTime.MinValue)
+                    UpdateSuggestedReservations();   //update suggested reservations list
+                else
+                    UpdateSuggestedReservationsNoInputDates();
                 ShowMessageBoxForSentReservation();
             }
             
@@ -330,7 +333,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         {
             if (AreTextboxesDataValid())
             {
-                if(Arrival!=null || Departure!=null)    //if calendar is selected
+                if(Arrival!=DateTime.MinValue || Departure!=DateTime.MinValue)    //if calendar is selected
                 {
                     lengthOfStay = Departure.Subtract(Arrival);
                     if (IsValidDateInput())  //all fields are filled
@@ -344,7 +347,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                 }
                 else //only textbox input 
                 {
-                    
+                    UpdateSuggestedReservationsNoInputDates();
                 }
             }
             else
@@ -353,6 +356,20 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             }
 
         }
+
+        private void UpdateSuggestedReservationsNoInputDates()
+        {
+            SuggestedReservations = new ObservableCollection<SuggestedReservationViewModel>();
+            SuggestedReservations.Clear();
+            List<Tuple<Accommodation, AvailableDatesForAccommodation>> allSuggestedDates = anywhereAnytimeSuggestedReservationService.GetAvailableDatesNoInputDates(Convert.ToInt32(NumberOfDays), Convert.ToInt32(NumberOfGuests));
+            foreach (Tuple<Accommodation, AvailableDatesForAccommodation> suggested in allSuggestedDates)
+            {
+                SuggestedReservations.Add(new SuggestedReservationViewModel(suggested.Item1, suggested.Item2.Arrival, suggested.Item2.Departure));
+            }
+            SortSuggestedReservationsBySuperOwners();
+        }
+    
+        
 
         private void UpdateSuggestedReservations()
         {
