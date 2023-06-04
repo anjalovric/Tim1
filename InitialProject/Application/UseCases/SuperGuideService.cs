@@ -108,7 +108,7 @@ namespace InitialProject.APPLICATION.UseCases
        public void CheckLostOfTitle(Guide guide)
        {
           List<SuperGuide> superGuides = new List<SuperGuide>();
-            foreach(SuperGuide superGuide  in GetAll())
+            foreach(SuperGuide superGuide  in GetById(guide.Id))
             {
                 if(getGradesForTours(superGuide.Language, guide)==false && superGuide.guideId==guide.Id)
                     Delete(superGuide);
@@ -120,7 +120,16 @@ namespace InitialProject.APPLICATION.UseCases
         {
             CheckSuperGuideStatus(guide);
             CheckLostOfTitle(guide);
-            return GetAll();
+            return GetById(guide.Id);
+        }
+
+        public List<SuperGuide> GetById(int id)
+        {
+            List<SuperGuide> superGuideTitles= new List<SuperGuide>();
+            foreach(SuperGuide superGuideTitle in GetAll())
+                if(superGuideTitle.guideId==id)
+                    superGuideTitles.Add(superGuideTitle);
+            return superGuideTitles;
         }
     }
     

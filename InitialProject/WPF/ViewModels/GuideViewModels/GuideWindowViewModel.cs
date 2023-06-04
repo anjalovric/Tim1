@@ -60,6 +60,7 @@ namespace InitialProject.WPF.ViewModels
         public RelayCommand OrdinaryRequestCommand { get; set; }
         public RelayCommand RequestYearlyStatisticsCommand { get; set; }
         public RelayCommand MyProfileCommand { get; set; }
+        public RelayCommand ComplexRequestCommand { get; private set; }
         public GuideWindowViewModel(User user) 
         {
             tourStatisticsView = new TourStatisticsView(user);
@@ -98,6 +99,7 @@ namespace InitialProject.WPF.ViewModels
             OrdinaryRequestCommand= new RelayCommand(OrdinaryRequest_Executed,CanExecute);
             RequestYearlyStatisticsCommand = new RelayCommand(RequestYearlyStatistic_Executed, CanExecute);
             MyProfileCommand=new RelayCommand(MyProfile_Executed, CanExecute);
+            ComplexRequestCommand = new RelayCommand(ComplexRequestCommand_Executed, CanExecute);
         }
 
         private bool CanExecute(object sender)
@@ -180,6 +182,11 @@ namespace InitialProject.WPF.ViewModels
             Application.Current.Windows.OfType<GuideWindow>().FirstOrDefault().Main.Content = ordinaryRequestOverviewView;
         }
 
+        private void ComplexRequestCommand_Executed(object sender)
+        {
+            ComplexRequestView complexRequestOverviewView = new ComplexRequestView(loggedUser, homeView.viewModel.Tours, cancelView.cancelViewModel.TourInstances);
+            Application.Current.Windows.OfType<GuideWindow>().FirstOrDefault().Main.Content = complexRequestOverviewView;
+        }
         private void MyProfile_Executed(object sender)
         {
             ProfileView myProfileView = new ProfileView(loggedUser);

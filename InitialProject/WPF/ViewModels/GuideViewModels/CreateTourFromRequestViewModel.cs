@@ -450,7 +450,8 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
                 newInstance.Date = InstanceStartDate.ToString().Split(' ')[0];
                 newInstance.Guide = guideService.GetByUsername(loggedInUser.Username);
                 newInstance.CoverImage = "";
-            if (IsTimeValid(newInstance))
+            Guide loggedGuide = guideService.GetByUsername(loggedInUser.Username);
+            if (IsTimeValid(newInstance, loggedGuide.Id))
             {
                 AddTourInsatnceToList(newInstance);
                 ToastAvailability = "Hidden";
@@ -465,10 +466,10 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         {
             Instances.Add(newInstance);
         }
-        private bool IsTimeValid(TourInstance instance)
+        private bool IsTimeValid(TourInstance instance,int guideId)
         {
             AvailableDatesForTour availableDatesForTour = new AvailableDatesForTour();
-            if (Duration>=0.1 && availableDatesForTour.ScheduleTourInstances(instance,tourRequests.StartDate,tourRequests.EndDate,Duration).Count>0)
+            if (Duration>=0.1 && availableDatesForTour.ScheduleTourInstances(instance,tourRequests.StartDate,tourRequests.EndDate,Duration,guideId).Count>0)
                 return false;
             return true; 
         }

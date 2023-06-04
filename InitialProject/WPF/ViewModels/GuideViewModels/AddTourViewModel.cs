@@ -437,7 +437,8 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
                 newInstance.Date = InstanceStartDate.ToString().Split(' ')[0];
                 newInstance.Guide = guideService.GetByUsername(loggedInUser.Username);
                 newInstance.CoverImage = "";
-            if (IsTimeValid() && IsGuideAvailable(newInstance))
+            Guide loggedGuide = guideService.GetByUsername(loggedInUser.Username);
+            if (IsTimeValid() && IsGuideAvailable(newInstance, loggedGuide.Id))
             {
                 Instances.Add(newInstance);
                 IsErrorMessageVisible = "Hidden";
@@ -460,10 +461,10 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             }
             return true;
         }
-        private bool IsGuideAvailable(TourInstance instance)
+        private bool IsGuideAvailable(TourInstance instance,int guideId)
         {
             AvailableDatesForTour availableDatesForTour = new AvailableDatesForTour();
-            if (Duration >= 0.1 && availableDatesForTour.ScheduleTourInstances(instance, instance.StartDate, instance.StartDate.AddHours(Duration), Duration).Count > 0)
+            if (Duration >= 0.1 && availableDatesForTour.ScheduleTourInstances(instance, instance.StartDate, instance.StartDate.AddHours(Duration), Duration,guideId).Count > 0)
             {
                 IsAvailable = "Visible";
                 return false;

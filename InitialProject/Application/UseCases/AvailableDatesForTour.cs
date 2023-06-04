@@ -13,7 +13,7 @@ namespace InitialProject.Service
             tourInstanceService=new TourInstanceService();
             tourService=new TourService();
         }
-        public List<TourInstance> ScheduleTourInstances(TourInstance newinstance,DateTime StartDate,DateTime EndDate,double duration)
+        public List<TourInstance> ScheduleTourInstances(TourInstance newinstance,DateTime StartDate,DateTime EndDate,double duration, int guideId)
         {
             List <TourInstance> overlayTourInstances = new List<TourInstance>();
             TourInstance newlTourInstance = newinstance;
@@ -22,7 +22,7 @@ namespace InitialProject.Service
                 List<TourInstance> tours = tourInstanceService.GetAll();
                 foreach (TourInstance tourInstance in SetTours(tours))
                 {
-                    if (tourInstance.Finished == false && tourInstance.Canceled == false)
+                    if (tourInstance.Finished == false && tourInstance.Canceled == false && tourInstance.Guide.Id==guideId)
                     {
                         TourInstance temporaryTourInstance = tourInstance;
                         if ((temporaryTourInstance.StartDate.AddHours(tourInstance.Tour.Duration) >= newlTourInstance.StartDate.AddHours(duration)) && !(tourInstance.StartDate >= newlTourInstance.StartDate.AddHours(duration)) && !(newinstance.StartDate > temporaryTourInstance.StartDate.AddHours(tourInstance.Tour.Duration)))

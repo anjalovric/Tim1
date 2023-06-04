@@ -1,43 +1,36 @@
-﻿using InitialProject.Model;
+﻿using InitialProject.APPLICATION.UseCases;
+using InitialProject.Domain.Model;
+using InitialProject.Model;
 using InitialProject.Service;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Windows;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 
 namespace InitialProject.WPF.ViewModels.GuideViewModels
 {
-    public class AddTourByLanguageViewModel:INotifyPropertyChanged
+    public class CreateTourFromComplexRequestViewModel:INotifyPropertyChanged
     {
         public ObservableCollection<CheckPoint> TourPoints { get; set; }
         public ObservableCollection<TourImage> TourImages { get; set; }
         public ObservableCollection<TourInstance> Instances { get; set; }
         public ObservableCollection<TourInstance> TodayInstances { get; set; }
         public ObservableCollection<TourInstance> FutureInstances { get; set; }
-        public ObservableCollection<string> Countries { get; set; }
-        public ObservableCollection<string> CitiesByCountry { get; set; }
+        public ObservableCollection<OrdinaryTourRequests> TourRequests { get; set; }
+        public ObservableCollection<ComplexTourRequests> ComplexRequests { get; set; }
+
+        private ComplexTourRequests ComplexTourRequest;
 
         private User loggedInUser;
         public TourInstance selectedInstance { get; set; }
         public CheckPoint SelectedCheckPoint { get; set; }
-        private string pastError;
-        public string PastError
 
-        {
-            get => pastError;
-            set
-            {
-                if (value != pastError)
-                {
-                    pastError = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
         private string imageUrl;
         public string ImageUrl
         {
@@ -60,7 +53,45 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
                 if (value != startDate)
                 {
                     startDate = value;
-                    DateMessage = "Hidden";
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private DateTime date;
+        public DateTime Date
+        {
+            get => date;
+            set
+            {
+                if (value != date)
+                {
+                    date = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private DateTime start;
+        public DateTime Start
+        {
+            get => start;
+            set
+            {
+                if (value != start)
+                {
+                    start = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private DateTime end;
+        public DateTime End
+        {
+            get => end;
+            set
+            {
+                if (value != end)
+                {
+                    end = value;
                     OnPropertyChanged();
                 }
             }
@@ -78,6 +109,32 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
                 }
             }
         }
+        private bool addEnabled;
+        public bool AddEnabled
+        {
+            get => addEnabled;
+            set
+            {
+                if (value != addEnabled)
+                {
+                    addEnabled = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private bool deleteEnabled;
+        public bool DeleteEnabled
+        {
+            get => deleteEnabled;
+            set
+            {
+                if (value != deleteEnabled)
+                {
+                    deleteEnabled = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         private string name;
         public string NameT
         {
@@ -87,19 +144,6 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
                 if (value != name)
                 {
                     name = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-        private DateTime start;
-        public DateTime Start
-        {
-            get => start;
-            set
-            {
-                if (value != start)
-                {
-                    start = value;
                     OnPropertyChanged();
                 }
             }
@@ -183,15 +227,16 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
                 }
             }
         }
-        private int listCount;
-        public int ListCount
+
+        private int pointsCount;
+        public int PointsCount
         {
-            get => listCount;
+            get => pointsCount;
             set
             {
-                if (value != listCount)
+                if (value != pointsCount)
                 {
-                    listCount = value;
+                    pointsCount = value;
                     OnPropertyChanged();
                 }
             }
@@ -235,32 +280,6 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
                 }
             }
         }
-        private string dateMessage;
-        public string DateMessage
-        {
-            get => dateMessage;
-            set
-            {
-                if (value != dateMessage)
-                {
-                    dateMessage = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-        private DateTime date;
-        public DateTime Date
-        {
-            get => date;
-            set
-            {
-                if (value != date)
-                {
-                    date = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
         private string isErrorMessageVisible;
         public string IsErrorMessageVisible
         {
@@ -270,6 +289,19 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
                 if (value != isErrorMessageVisible)
                 {
                     isErrorMessageVisible = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private string toastAvailability;
+        public string ToastAvailability
+        {
+            get => toastAvailability;
+            set
+            {
+                if (value != toastAvailability)
+                {
+                    toastAvailability = value;
                     OnPropertyChanged();
                 }
             }
@@ -292,6 +324,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         private List<TourImage> images = new List<TourImage>();
         private TourInstance newInstance;
         private int tourId;
+        private int savednsatnceId;
 
         public RelayCommand ConfirmCommand { get; set; }
         public RelayCommand AddDateTimeCommand { get; set; }
@@ -304,48 +337,61 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         public RelayCommand DeleteCheckPointCommand { get; set; }
         public RelayCommand CloceToastAvailability { get; set; }
 
-        public RelayCommand EnableCityCommand { get; set; }
+        private OrdinaryTourRequests tourRequests;
+        private LocationService locationService;
+        private TourService tourService;
+        private GuideService guideService;
+        private OrdinaryTourRequestsService ordinaryTourRequestsService;
+        private TourImageService tourImageService;
+        private CheckPointService checkPointService;
+        private ComplexTourRequestsService ComplexTourRequestsService;
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-        public AddTourByLanguageViewModel(ObservableCollection<TourInstance> todayInstances, User user, ObservableCollection<TourInstance> futureInstances,string selectedLanguage)
+        public CreateTourFromComplexRequestViewModel(ObservableCollection<TourInstance> todayInstances, User user, ObservableCollection<TourInstance> futureInstances, OrdinaryTourRequests request, ObservableCollection<OrdinaryTourRequests> Requests, ObservableCollection<ComplexTourRequests> complexRequests, ComplexTourRequests complexRequest)
         {
+            locationService = new LocationService();
+            tourService = new TourService();
+            guideService = new GuideService();
+            ordinaryTourRequestsService = new OrdinaryTourRequestsService();
+            ComplexTourRequestsService= new ComplexTourRequestsService();
+            tourImageService = new TourImageService();
+            checkPointService = new CheckPointService();
             TourPoints = new ObservableCollection<CheckPoint>();
             TourImages = new ObservableCollection<TourImage>();
             Instances = new ObservableCollection<TourInstance>();
             TodayInstances = todayInstances;
             FutureInstances = futureInstances;
             loggedInUser = user;
-            LanguageT = selectedLanguage;
-            SetStartState();
+            tourRequests = request;
+            MakeCommands();
+            SetDatas(request);
+            Date = Start;
+            TourRequests = Requests;
+            ComplexRequests = complexRequests;
+            ComplexTourRequest = complexRequest;
         }
-        private void SetStartState()
+        private void SetDatas(OrdinaryTourRequests request)
         {
-            Date = DateTime.Now;
-            DatesCount = 0;
-            ListCount = 0;
+            LanguageT = request.Language;
+            City = request.Location.City;
+            Country = request.Location.Country;
+            MaxGuests = request.MaxGuests;
+            Start = request.StartDate;
+            End = request.EndDate;
+            AddEnabled = true;
+            DeleteEnabled = true;
+            ToastAvailability = "Hidden";
             Toast = "Hidden";
             isErrorMessageVisible = "Hidden";
-            MakeCommands();
-            MakeListOfLocations();
-            Start = DateTime.Now;
-            DateMessage = "Hidden";
-        }
-        private void MakeListOfLocations()
-        {
-            LocationService locationService = new LocationService();
-            Countries = new ObservableCollection<string>(locationService.GetAllCountries());
-            CitiesByCountry = new ObservableCollection<string>();
-            IsComboBoxCityEnabled = false;
         }
         private bool CanExecute(object sender)
         {
             return true;
         }
-
         private void MakeCommands()
         {
             ConfirmCommand = new RelayCommand(Confirm_Executed, CanExecute);
@@ -357,34 +403,45 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             PreviousImageCommand = new RelayCommand(PreviousImage_Executed, CanExecute);
             AddImageCommand = new RelayCommand(AddTourImage_Executed, CanExecute);
             DeleteCheckPointCommand = new RelayCommand(CancelCheckPoint_Executed, CanExecute);
-            CloceToastAvailability = new RelayCommand(CloceToastAvailability_Executed, CanExecute);
-            EnableCityCommand = new RelayCommand(EnableCityComboBox_Executed, CanExecute);
+            CloceToastAvailability = new RelayCommand(CloseToastAvailability_Executed, CanExecute);
         }
         private void Confirm_Executed(object sender)
         {
-            LocationService locationService = new LocationService();
             Location newLocation = locationService.GetByCityAndCountry(Country, City);
-            TourService tourService = new TourService();
-
             Tour newTour = new Tour(namet, MaxGuests, Duration, newLocation, description, LanguageT);
             Tour savedTour = tourService.Save(newTour);
             tourId = savedTour.Id;
             SaveInputs(savedTour);
             Toast = "Visible";
+            SendNotification();
         }
-        private void CloceToastAvailability_Executed(object sender)
+        private void SendNotification()
         {
-            IsErrorMessageVisible = "Hidden";
-            DateMessage = "Hidden";
+            ComplexRequests.Remove(ComplexTourRequest);
+            TourRequests.Clear();
+            tourRequests.Status = Status.ACCEPTED;
+            tourRequests.GuideId = guideService.GetByUsername(loggedInUser.Username).Id;
+            tourRequests.NewAccepted = true;
+            tourRequests.TourInstanceId = savednsatnceId;
+            ordinaryTourRequestsService.Update(tourRequests);
+            bool acceptedAll = true;
+            foreach(OrdinaryTourRequests ordinaryTourRequests in ordinaryTourRequestsService.GetByComplexId(ComplexTourRequest.Id))
+                if(!ordinaryTourRequests.Status.Equals(Status.ACCEPTED))    
+                    acceptedAll= false;
+            if (acceptedAll)
+            {
+                ComplexTourRequest.Status = Domain.Model.Type.ACCEPTED;
+                ComplexTourRequestsService.Update(ComplexTourRequest);
+            }
+
+
         }
         private void SaveInputs(Tour savedTour)
         {
-            CheckPointService checkPointService = new CheckPointService();
             checkPointService.SaveCheckPoints(tourId, TourPoints);
-            TourImageService tourImageService = new TourImageService();
             tourImageService.SaveTourImages(tourId, images);
-            TourInstanceService tourInstanceService = new TourInstanceService();
-            tourInstanceService.SaveInstances(savedTour, loggedInUser, FutureInstances, TodayInstances, Instances, images);
+            List<TourInstance> Saved = new TourInstanceService().SaveInstances(savedTour, loggedInUser, FutureInstances, TodayInstances, Instances, images);
+            savednsatnceId = Saved[0].Id;
         }
         private void AddTourImage_Executed(object sender)
         {
@@ -406,22 +463,8 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             TourImage newImage = new TourImage(relative, -1);
             images.Add(newImage);
         }
-        public void EnableCityComboBox_Executed(object sender)
-        {
-            LocationService locationService = new LocationService();
-            if (Country != null)
-            {
-                CitiesByCountry.Clear();
-                foreach (string city in locationService.GetCitiesByCountry((string)Country))
-                {
-                    CitiesByCountry.Add(city);
-                }
-                IsComboBoxCityEnabled = true;
-            }
-        }
         private void OKDateTime_Executed(object sender)
         {
-            GuideService guideService = new GuideService();
             newInstance = new TourInstance();
 
             string date = Date.ToString().Split(" ")[0] + " " + InstanceStartDate.ToString().Split(" ")[1] + " " + InstanceStartDate.ToString().Split(" ")[2];
@@ -430,38 +473,27 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             newInstance.Guide = guideService.GetByUsername(loggedInUser.Username);
             newInstance.CoverImage = "";
             Guide loggedGuide = guideService.GetByUsername(loggedInUser.Username);
-            if (IsTimeValid(newInstance, loggedGuide.Id) && IsPastTime())
+            if (IsTimeValid(newInstance,loggedGuide.Id) && CheckOverLappingWithOtherParts(Duration,newInstance.StartDate))
             {
-                Instances.Add(newInstance);
-                IsErrorMessageVisible = "Hidden";
-                DateMessage = "Hidden";
+                AddTourInsatnceToList(newInstance);
+                ToastAvailability = "Hidden";
+                AddEnabled = false;
+                DeleteEnabled = false;
                 DatesCount++;
             }
+            else
+                ToastAvailability = "Visible";
         }
-        private bool IsPastTime()
+        private void AddTourInsatnceToList(TourInstance newInstance)
         {
-            if (!(newInstance.StartDate.Date > DateTime.Now.Date || (InstanceStartDate.Date == DateTime.Now.Date && InstanceStartDate > DateTime.Now)))
-            {
-                var app = (App)Application.Current;
-
-                if (app.Lang.Equals("en-US"))
-                    PastError = "Can't choose time from past";
-                else
-                    PastError = "Ne možete odabrati prošlo vreme";
-                DateMessage = "Visible";
-                return false;
-            }
-            return true;
+            Instances.Add(newInstance);
         }
         private bool IsTimeValid(TourInstance instance,int guideId)
         {
             AvailableDatesForTour availableDatesForTour = new AvailableDatesForTour();
-            if (Duration >= 0.1 && availableDatesForTour.ScheduleTourInstances(instance, instance.StartDate, instance.StartDate.AddHours(Duration), Duration,guideId).Count > 0)
-            {
-                IsErrorMessageVisible = "Visible";
+            if (Duration >= 0.1 && availableDatesForTour.ScheduleTourInstances(instance, tourRequests.StartDate, tourRequests.EndDate, Duration, guideId).Count > 0)
                 return false;
-            }                    
-            return true; 
+            return true;
         }
         private void CancelTime_Executed(object sender)
         {
@@ -469,21 +501,25 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
                 Instances.Remove(selectedInstance);
             DatesCount--;
         }
+        private void CloseToastAvailability_Executed(object sender)
+        {
+            ToastAvailability = "Hidden";
+        }
         private void OKCheckPoint_Executed(object sender)
         {
-            if (NameT.Length > 1 && NameT != "")
+            if (NameT != "" && NameT.Length > 1)
             {
                 CheckPoint newCheckPoint = new CheckPoint(NameT, false, -1, -1);
                 TourPoints.Add(newCheckPoint);
                 NameT = "";
-                ListCount++;
+                PointsCount++;
             }
         }
         private void CancelCheckPoint_Executed(object sender)
         {
             if (SelectedCheckPoint != null)
                 TourPoints.Remove(SelectedCheckPoint);
-            ListCount--;
+            PointsCount--;
         }
         private void NextImage_Executed(object sender)
         {
@@ -525,7 +561,6 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         }
         private void DeleteImage_Executed(object sender)
         {
-            TourImageService tourImageService = new TourImageService();
             if (images.Count != 0)
             {
                 for (int i = 0; i < images.Count; i++)
@@ -551,6 +586,26 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             }
             else
                 Image = null;
+        }
+
+        private bool CheckOverLappingWithOtherParts(double douration,DateTime startTime)
+        {
+            foreach(OrdinaryTourRequests ordinaryTourRequests in ordinaryTourRequestsService.GetByComplexId(ComplexTourRequest.Id))
+            {
+                if(ordinaryTourRequests.Status==Status.ACCEPTED)
+                {
+                   TourInstanceService tourInstanceService = new TourInstanceService();
+                    TourInstance tourInstance = tourInstanceService.GetById(ordinaryTourRequests.TourInstanceId);
+                    tourService.SetTour(tourInstance);
+                        if (startTime >= tourInstance.StartDate && (tourInstance.StartDate.AddHours(tourInstance.Tour.Duration) >= startTime))
+                            return false;
+
+                        if (startTime <= tourInstance.StartDate && (startTime.AddHours(douration)>=tourInstance.StartDate))
+                            return false;
+                    
+                }
+            }
+            return true;
         }
     }
 }

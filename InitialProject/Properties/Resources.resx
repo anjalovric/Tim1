@@ -150,6 +150,9 @@
   <data name="Alert" xml:space="preserve">
     <value>Are you sure you want to quit a job?</value>
   </data>
+  <data name="AlreadyExitsTourAtThisTime" xml:space="preserve">
+    <value>Already exitsts tour at this time</value>
+  </data>
   <data name="AreYouSure" xml:space="preserve">
     <value>Are you sure you want to cancel tour:</value>
   </data>
@@ -203,6 +206,12 @@
   </data>
   <data name="Comment" xml:space="preserve">
     <value>Comment</value>
+  </data>
+  <data name="Complex" xml:space="preserve">
+    <value>Complex</value>
+  </data>
+  <data name="ComplexRequest" xml:space="preserve">
+    <value>COMPLEX REQUESTS</value>
   </data>
   <data name="CONFIRM" xml:space="preserve">
     <value>CONFIRM</value>
@@ -354,8 +363,14 @@
   <data name="LIGHT" xml:space="preserve">
     <value>LIGHT</value>
   </data>
+  <data name="ListodOrdinaryRequests" xml:space="preserve">
+    <value>List of ordinary requests for selected complex request</value>
+  </data>
   <data name="ListOfCheckpointsForChosenTour" xml:space="preserve">
     <value>List od checkpoints for chosen tour:</value>
+  </data>
+  <data name="ListOfComplexRequests" xml:space="preserve">
+    <value>List of complex requests</value>
   </data>
   <data name="Location" xml:space="preserve">
     <value>Location</value>
@@ -536,6 +551,9 @@
   </data>
   <data name="ValidityChanged" xml:space="preserve">
     <value>Validity is changed!</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>VIEW</value>
   </data>
   <data name="VoucherStatistics" xml:space="preserve">
     <value>Voucher statistics</value>

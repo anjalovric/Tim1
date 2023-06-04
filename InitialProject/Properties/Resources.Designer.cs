@@ -169,6 +169,15 @@ namespace InitialProject.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Already exitsts tour at this time.
+        /// </summary>
+        internal static string AlreadyExitsTourAtThisTime {
+            get {
+                return ResourceManager.GetString("AlreadyExitsTourAtThisTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to cancel tour:.
         /// </summary>
         internal static string AreYouSure {
@@ -327,6 +336,24 @@ namespace InitialProject.Properties {
         internal static string Comment {
             get {
                 return ResourceManager.GetString("Comment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Complex.
+        /// </summary>
+        internal static string Complex {
+            get {
+                return ResourceManager.GetString("Complex", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to COMPLEX REQUESTS.
+        /// </summary>
+        internal static string ComplexRequest {
+            get {
+                return ResourceManager.GetString("ComplexRequest", resourceCulture);
             }
         }
         
@@ -772,11 +799,29 @@ namespace InitialProject.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to List of ordinary requests for selected complex request.
+        /// </summary>
+        internal static string ListodOrdinaryRequests {
+            get {
+                return ResourceManager.GetString("ListodOrdinaryRequests", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to List od checkpoints for chosen tour:.
         /// </summary>
         internal static string ListOfCheckpointsForChosenTour {
             get {
                 return ResourceManager.GetString("ListOfCheckpointsForChosenTour", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to List of complex requests.
+        /// </summary>
+        internal static string ListOfComplexRequests {
+            get {
+                return ResourceManager.GetString("ListOfComplexRequests", resourceCulture);
             }
         }
         
@@ -1317,6 +1362,15 @@ namespace InitialProject.Properties {
         internal static string ValidityChanged {
             get {
                 return ResourceManager.GetString("ValidityChanged", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VIEW.
+        /// </summary>
+        internal static string View {
+            get {
+                return ResourceManager.GetString("View", resourceCulture);
             }
         }
         

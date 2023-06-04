@@ -150,6 +150,9 @@
   <data name="Alert" xml:space="preserve">
     <value>Da li ste sigurni da želite da date otkaz?</value>
   </data>
+  <data name="AlreadyExitsTourAtThisTime" xml:space="preserve">
+    <value>Već postoji zakazana tura u to vreme</value>
+  </data>
   <data name="AreYouSure" xml:space="preserve">
     <value>Da li ste sigurni da želite otkazati turu:</value>
   </data>
@@ -203,6 +206,12 @@
   </data>
   <data name="Comment" xml:space="preserve">
     <value>Komentar</value>
+  </data>
+  <data name="Complex" xml:space="preserve">
+    <value>Složeni</value>
+  </data>
+  <data name="ComplexRequest" xml:space="preserve">
+    <value>SLOŽENI ZAHTEVI</value>
   </data>
   <data name="CONFIRM" xml:space="preserve">
     <value>POTVRDI</value>
@@ -354,8 +363,14 @@
   <data name="LIGHT" xml:space="preserve">
     <value>SVETLO</value>
   </data>
+  <data name="ListodOrdinaryRequests" xml:space="preserve">
+    <value>Lista običnih zahteva koji su deo složenog</value>
+  </data>
   <data name="ListOfCheckpointsForChosenTour" xml:space="preserve">
     <value>Lista ključnih tačaka za odabranu turu:</value>
+  </data>
+  <data name="ListOfComplexRequests" xml:space="preserve">
+    <value>Lista složenih zahteva</value>
   </data>
   <data name="Location" xml:space="preserve">
     <value>Lokacija</value>
@@ -536,6 +551,9 @@
   </data>
   <data name="ValidityChanged" xml:space="preserve">
     <value>Validnost je promenjena!</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>PREGLEDAJ</value>
   </data>
   <data name="VoucherStatistics" xml:space="preserve">
     <value>Statistika o vaučerima</value>
