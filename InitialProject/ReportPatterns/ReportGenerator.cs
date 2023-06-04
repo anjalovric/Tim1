@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data;
+using System.Drawing;
 using Syncfusion.Pdf;
 using Syncfusion.Pdf.Graphics;
 using Syncfusion.Pdf.Tables;
-using System.Data;
-using System.Drawing;
 
 namespace InitialProject.ReportPatterns
 {
@@ -67,7 +61,7 @@ namespace InitialProject.ReportPatterns
 
         private void InsertImage(PdfPage page)
         {
-            PdfImage image = PdfImage.FromFile("/Resources/Images/LOGO (2).jpg");
+            PdfImage image = PdfImage.FromFile("Resources/Images/logoMyTravel.png");
             RectangleF bounds = new RectangleF(170, 12, 150, 50);
             page.Graphics.DrawImage(image, bounds);
         }

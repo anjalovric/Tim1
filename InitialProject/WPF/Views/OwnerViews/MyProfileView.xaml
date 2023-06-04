@@ -89,7 +89,7 @@
             </ListBox.Resources>
         </ListBox>
 
-        <Button Content="Generate average review pdf report" HorizontalAlignment="Center" Margin="30,539,30,0" VerticalAlignment="Top" Height="43" Width="355" Style="{StaticResource BasicButton}"/>
+        <Button Command="{Binding GenerateReportCommand}" Content="Generate average review pdf report" HorizontalAlignment="Center" Margin="30,539,30,0" VerticalAlignment="Top" Height="43" Width="355" Style="{StaticResource BasicButton}"/>
         <Label Content="My Reviews" FontSize="15" Margin="30,204,170,380"/>
 
         <StackPanel Margin="0,0,0,525" Background="LightGray" Visibility="{Binding Path=StackPanelVisibility, UpdateSourceTrigger=PropertyChanged}">

@@ -702,7 +702,10 @@
     <PackageReference Include="Extended.Wpf.Toolkit" Version="4.5.0" />
     <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
     <PackageReference Include="NPOI" Version="2.6.0" />
-    <PackageReference Include="Syncfusion.Pdf.AspNet" Version="21.2.8" />
+    <PackageReference Include="Syncfusion.DocIO.Wpf" Version="21.2.8" />
+    <PackageReference Include="Syncfusion.DocToPDFConverter.Wpf" Version="21.2.8" />
+    <PackageReference Include="Syncfusion.Licensing" Version="21.2.8" />
+    <PackageReference Include="Syncfusion.Pdf.Wpf" Version="21.2.8" />
     <PackageReference Include="System.Windows.Interactivity.WPF" Version="2.0.20525" />
   </ItemGroup>
 
@@ -966,6 +969,10 @@
     <None Update="Resources\Images\emptyStar.jpeg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Resources\Reports\" />
   </ItemGroup>
 
 </Project>

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using InitialProject.Model;
+using InitialProject.ReportPatterns;
 using InitialProject.Service;
 using InitialProject.WPF.Views;
 
@@ -27,6 +28,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         private string stackPanelVisibility;
         public RelayCommand ViewCommand { get; set; }
         public RelayCommand OKCommand { get; set; }
+        public RelayCommand GenerateReportCommand { get; set; }
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -38,6 +40,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             InitializeSelectedOwnerReview();
             ViewCommand = new RelayCommand(View_Executed, CanExecute);
             OKCommand = new RelayCommand(OK_Executed, CanExecute);
+            GenerateReportCommand = new RelayCommand(GenerateReport_Executed, CanExecute);
         }
 
         private bool CanExecute(object sender)
@@ -57,6 +60,12 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         private void OK_Executed(object sender)
         {
             StackPanelVisibility = "Hidden";
+        }
+
+        private void GenerateReport_Executed(object sender)
+        {
+            ReportGenerator generator = new OwnerReportPattern();
+            generator.GenerateReport();
         }
         public double AverageRate
         {
