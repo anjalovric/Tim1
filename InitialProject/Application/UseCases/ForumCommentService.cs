@@ -109,9 +109,11 @@ namespace InitialProject.APPLICATION.UseCases
         public void Report(ForumComment comment, Owner owner)
         {
             CommentReport report = new CommentReport();
+            comment.ReportsNumber++;
             report.Owner = owner;
             report.ForumComment = comment;
             commentReportService.Add(report);
+            forumCommentRepository.Report(comment);
         }
     }
 }

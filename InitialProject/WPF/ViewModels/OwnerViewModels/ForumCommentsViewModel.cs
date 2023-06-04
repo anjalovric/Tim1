@@ -66,10 +66,17 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
         }
 
+        private void InitializeSelectedComment()
+        {
+            if (Comments.Count() > 0)
+                SelectedComment = Comments[0];
+        }
+
         private void MakeComments()
         {
             forumCommentService = new ForumCommentService();
             Comments = new ObservableCollection<ForumComment>(forumCommentService.GetAllByForumIdForOwner(Owner, Forum.Forum.Id));
+            InitializeSelectedComment();
         }
 
         private bool CanExecute(object sender)
@@ -79,13 +86,11 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         private bool ReportCanExecute(object sender)
         {
-            if(SelectedComment != null)
-                return !SelectedComment.IsAlreadyReportedByThisOwner && Forum.OwnerHasLocation && !SelectedComment.WasOnLocation;
-            return false;
+            return SelectedComment != null && !SelectedComment.IsAlreadyReportedByThisOwner && Forum.OwnerHasLocation && !SelectedComment.WasOnLocation;
         }
         private void Report_Executed(object sender)
         {
-            if(SelectedComment != null)
+            if(SelectedComment != null && SelectedComment.Id!=0)
             {
                 forumCommentService.Report(SelectedComment, Owner);
                 UpdateComments();
@@ -100,11 +105,12 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         private void UpdateComments()
         {
-            foreach(ForumComment comment in Comments)
+            Comments.Clear();
+            foreach (ForumComment comment in forumCommentService.GetAllByForumIdForOwner(Owner,Forum.Forum.Id))
             {
-                if (comment.Id == SelectedComment.Id)
-                    comment.ReportsNumber++;
+                Comments.Add(comment);
             }
+            InitializeSelectedComment();
         }
     }
 }
