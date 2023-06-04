@@ -40,6 +40,11 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         public Guest1ProfileViewModel(Guest1 guest1)
         {
             this.Guest1 = guest1;
+            Initialize();
+        }
+
+        private void Initialize()
+        {
             string relative = FindImageRelativePath();
             ImageSource = new BitmapImage(new Uri(relative, UriKind.Relative));
             superGuestTitleService = new SuperGuestTitleService();

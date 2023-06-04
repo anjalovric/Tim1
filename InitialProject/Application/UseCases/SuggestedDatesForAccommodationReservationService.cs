@@ -177,9 +177,7 @@ namespace InitialProject.Service
             this.NumberOfGuests = NumberOfGuests;
             reservations = accommodationReservationService.GetAll();
             InitializeAvailableDatesLists();
-
-            FindFirstThreeAvailableDateRanges(currentAccommodation.Id);
-            
+            FindFirstThreeAvailableDateRanges(currentAccommodation.Id);       
             List<AvailableDatesForAccommodation> availableDatesForAccommodations = new List<AvailableDatesForAccommodation>();
             AvailableDateRangeExists(ref availableDatesForAccommodations);
             return availableDatesForAccommodations;

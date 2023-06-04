@@ -34,7 +34,7 @@ namespace InitialProject.APPLICATION.UseCases
         public void Add(ForumComment forumComment)
         {
             if(!forumComment.IsOwnerComment)
-                forumComment.WasOnLocation = accommodationReservationService.WasGuestOnLocation(((Guest1)forumComment.User), forumComment.Forum.Location.Id, forumComment.CreatingDate);
+                forumComment.WasOnLocation = accommodationReservationService.IsGuestCommentSpecial(((Guest1)forumComment.User), forumComment.Forum.Location.Id, forumComment.CreatingDate);
             forumCommentRepository.Add(forumComment);
         }
 
@@ -82,11 +82,7 @@ namespace InitialProject.APPLICATION.UseCases
             return total;
         }
 
-        /*public int GetNumberOfOwnerComments(Forum forum)
-        {
-            List<ForumComment> forumComments = forumCommentRepository.GetAllByForumId(forum.Id);
-            return forumComments.FindAll(n => n.User.Role == Role.OWNER).Count();
-        }*/
+        
         public int GetNumberOfOwnerComments(Forum forum)
         {
             List<ForumComment> forumComments = forumCommentRepository.GetAllByForumId(forum.Id);

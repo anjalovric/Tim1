@@ -268,17 +268,12 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         public Guest1SearchAccommodationViewModel(Guest1 guest1)
         {
             this.guest1 = guest1;
-            accommodationService = new AccommodationService();
-            AccommodationRenovationService accommodationRenovationService = new AccommodationRenovationService();
-            List<Accommodation> storedAccommodation = new List<Accommodation>(accommodationService.GetAll());
-            accommodationRenovationService.AreRenovated(storedAccommodation);
-            Accommodations = new ObservableCollection<Accommodation>(storedAccommodation);
+            Initialize();
             SortAccommodationBySuperOwners();
-            InitializePage();
             GetLocations();
             MakeCommands();
         }
-        private void InitializePage()
+        private void Initialize()
         {
             NumberOfDays = "";
             NumberOfGuests = "";
@@ -286,6 +281,16 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             IsInputValid = true;
             IsNumberOfDaysValid = true;
             IsNumberOfGuestsValid = true;
+            GetAllAccommodation();
+        }
+
+        private void GetAllAccommodation()
+        {
+            accommodationService = new AccommodationService();
+            AccommodationRenovationService accommodationRenovationService = new AccommodationRenovationService();
+            List<Accommodation> storedAccommodation = new List<Accommodation>(accommodationService.GetAll());
+            accommodationRenovationService.AreRenovated(storedAccommodation);
+            Accommodations = new ObservableCollection<Accommodation>(storedAccommodation);
         }
         private Match CreateValidationNumberRegex(string content)
         {

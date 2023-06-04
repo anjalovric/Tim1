@@ -65,8 +65,12 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             SelectedAccommodation = currentAccommodation;
             currentDate = DateTime.Now;
             SetChartData();
-            SetFirstImage();
+            Initialize();
             MakeCommands();
+        }
+        private void Initialize()
+        {
+            SetFirstImage();
             SetRating();
             SetButtonEnableProperty();
         }

@@ -83,12 +83,13 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         public MyAccommodationReservationsViewModel(Guest1 guest1)
         {
             this.guest1 = guest1;
-            accommodationReservationService = new AccommodationReservationService();
-            cancelledAccommodationReservationService = new CancelledAccommodationReservationService();
-            InitializePage();
-            currentDate = DateTime.Now;
+            Initialize();
             SetChartData();
             MakeCommands();
+        }
+        private bool CanExecute(object sender)
+        {
+            return true;
         }
         private void SetChartData()
         {
@@ -119,11 +120,14 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             SeriesCollection.Add(columnSeries);
         }
 
-        private void InitializePage()
+        private void Initialize()
         {
+            accommodationReservationService = new AccommodationReservationService();
+            cancelledAccommodationReservationService = new CancelledAccommodationReservationService();
             CompletedReservations = new ObservableCollection<AccommodationReservation>(accommodationReservationService.GetCompletedReservations(guest1));
             NotCompletedReservations = new ObservableCollection<AccommodationReservation>(accommodationReservationService.GetNotCompletedReservations(guest1));
             NotCompletedReservations = new ObservableCollection<AccommodationReservation>(NotCompletedReservations.OrderByDescending(x => x.Arrival > DateTime.Now).ToList());    //group: first will be shown reservations which haven't started yet
+            currentDate = DateTime.Now;
         }
         private void MakeCommands()
         {
@@ -245,9 +249,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-        private bool CanExecute(object sender)
-        {
-            return true;
-        }
+       
     }
 }

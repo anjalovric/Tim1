@@ -63,13 +63,19 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         public SentAccommodationReservationRequestsViewModel(Guest1 guest1)
         {
             this.guest1 = guest1;
+            Initialize();
+            SetChartData();
+        }
+
+        private void Initialize()
+        {
             requestForReschedulingService = new RequestForReschedulingService();
             ApprovedRequests = new ObservableCollection<ReschedulingAccommodationRequest>(requestForReschedulingService.GetApprovedRequests(guest1));
             PendingRequests = new ObservableCollection<ReschedulingAccommodationRequest>(requestForReschedulingService.GetPendingRequests(guest1));
             DeclinedRequests = new ObservableCollection<ReschedulingAccommodationRequest>(requestForReschedulingService.GetDeclinedRequests(guest1));
             currentDate = DateTime.Now;
-            SetChartData();
         }
+
         private void SetChartData()
         {
             RequestForReschedulingService requestForReschedulingService = new RequestForReschedulingService();
