@@ -81,7 +81,7 @@ namespace InitialProject.Service
             List<OrdinaryTourRequests> requests= new List<OrdinaryTourRequests>();
             foreach(OrdinaryTourRequests request in GetAll()) 
             {
-                if(request.Status==Status.ONWAITING)
+                if(request.Status==Status.ONWAITING && request.ComplexId==-1)
                     requests.Add(request);
             }
             SetLocations(requests);
@@ -145,5 +145,27 @@ namespace InitialProject.Service
             SetLocations(ordinaryTourRequests);
             return ordinaryTourRequests;
         }
+
+        public List<OrdinaryTourRequests> GetByComplexId(int complexId) 
+        {
+            List<OrdinaryTourRequests> ordinaryTourRequests = new List<OrdinaryTourRequests>();
+            foreach(OrdinaryTourRequests ordinaryTourRequest in GetAll())
+                if(ordinaryTourRequest.ComplexId == complexId)
+                    ordinaryTourRequests.Add(ordinaryTourRequest);
+            SetLocations(ordinaryTourRequests);
+            return ordinaryTourRequests;
+
+        }
+        public List<OrdinaryTourRequests> GetOnWaitingRequestByComplexId(int complexId)
+        {
+            List<OrdinaryTourRequests> ordinaryTourRequests = new List<OrdinaryTourRequests>();
+            foreach (OrdinaryTourRequests ordinaryTourRequest in GetAll())
+                if (ordinaryTourRequest.ComplexId == complexId && ordinaryTourRequest.Status==Status.ONWAITING)
+                    ordinaryTourRequests.Add(ordinaryTourRequest);
+            SetLocations(ordinaryTourRequests);
+            return ordinaryTourRequests;
+
+        }
+
     }
 }

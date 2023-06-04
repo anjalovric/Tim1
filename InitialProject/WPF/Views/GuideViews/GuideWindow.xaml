@@ -61,6 +61,11 @@
                                     <Image Source="/Resources/Images/RR.png"/>
                                 </MenuItem.Icon>
                             </MenuItem>
+                            <MenuItem Header="{ns:Loc Complex}" Height="33" Width="150" Command="{Binding ComplexRequestCommand}" Style="{DynamicResource MenuItem}">
+                                <MenuItem.Icon>
+                                    <Image Source="/Resources/Images/RR.png"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
                         </MenuItem>
                     </Menu>
                 </DockPanel>

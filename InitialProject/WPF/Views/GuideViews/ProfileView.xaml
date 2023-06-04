@@ -54,7 +54,7 @@
             <ColumnDefinition Width="2.5*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid Style="{DynamicResource BackgroundHeader }" Grid.Column="0" Grid.ColumnSpan="6" Grid.Row="0"  >
-            <Label Style="{DynamicResource Header}" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">MY PROFILE</Label>
+            <Label Style="{DynamicResource Header}" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Content="{ns:Loc MyProfile}"></Label>
             <Image HorizontalAlignment="Left"  VerticalAlignment="Center"  Source="/Resources/Images/LOGO (2).jpg" Width="253" Height="120"   />
 
         </Grid>
@@ -75,16 +75,16 @@
                     <RowDefinition></RowDefinition>
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
-                <Label Grid.Row="0" Grid.Column="0" Content="{ns:Loc FirstName}" HorizontalContentAlignment="Center" Style="{DynamicResource Labels}"></Label>
-                <Label Grid.Row="1" Grid.Column="0" Content="{ns:Loc LastName}" HorizontalContentAlignment="Center" Style="{DynamicResource Labels}"></Label>
-                <Label Grid.Row="2" Grid.Column="0" Content="{ns:Loc Username}" HorizontalContentAlignment="Center" Style="{DynamicResource Labels}"></Label>
-                <Label Grid.Row="3" Grid.Column="0" Content="{ns:Loc Age}" HorizontalContentAlignment="Center" Style="{DynamicResource Labels}"></Label>
-                <Label Grid.Row="4" Grid.Column="0" Content="{ns:Loc Email}" HorizontalContentAlignment="Center" Style="{DynamicResource Labels}"></Label>
-                <Label Grid.Row="0" Grid.Column="1" Content="{Binding Name}" HorizontalContentAlignment="Center" Style="{DynamicResource Labels}"></Label>
-                <Label Grid.Row="1" Grid.Column="1" Content="{Binding Surname}" HorizontalContentAlignment="Center" Style="{DynamicResource Labels}"></Label>
-                <Label Grid.Row="2" Grid.Column="1" Content="{Binding Username}" HorizontalContentAlignment="Center" Style="{DynamicResource Labels}"></Label>
-                <Label Grid.Row="3" Grid.Column="1" Content="{Binding Age}" HorizontalContentAlignment="Center" Style="{DynamicResource Labels}"></Label>
-                <Label Grid.Row="4" Grid.Column="1" Content="{Binding Email}" HorizontalContentAlignment="Center" Style="{DynamicResource Labels}"></Label>
+                <Label Grid.Row="0" Grid.Column="0" Content="{ns:Loc FirstName}" HorizontalContentAlignment="Left" Style="{DynamicResource Labels}"></Label>
+                <Label Grid.Row="1" Grid.Column="0" Content="{ns:Loc LastName}" HorizontalContentAlignment="Left" Style="{DynamicResource Labels}"></Label>
+                <Label Grid.Row="2" Grid.Column="0" Content="{ns:Loc Username}" HorizontalContentAlignment="Left" Style="{DynamicResource Labels}"></Label>
+                <Label Grid.Row="3" Grid.Column="0" Content="{ns:Loc Age}" HorizontalContentAlignment="Left" Style="{DynamicResource Labels}"></Label>
+                <Label Grid.Row="4" Grid.Column="0" Content="{ns:Loc Email}" HorizontalContentAlignment="Left" Style="{DynamicResource Labels}"></Label>
+                <Label Grid.Row="0" Grid.Column="1" Content="{Binding Name}" HorizontalContentAlignment="Left" Style="{DynamicResource Labels}"></Label>
+                <Label Grid.Row="1" Grid.Column="1" Content="{Binding Surname}" HorizontalContentAlignment="Left" Style="{DynamicResource Labels}"></Label>
+                <Label Grid.Row="2" Grid.Column="1" Content="{Binding Username}" HorizontalContentAlignment="Left" Style="{DynamicResource Labels}"></Label>
+                <Label Grid.Row="3" Grid.Column="1" Content="{Binding Age}" HorizontalContentAlignment="Left" Style="{DynamicResource Labels}"></Label>
+                <Label Grid.Row="4" Grid.Column="1" Content="{Binding Email}" HorizontalContentAlignment="Left" Style="{DynamicResource Labels}"></Label>
             </Grid>
         </Grid>
         <Border Style="{DynamicResource Border}" Background="LightBlue" Grid.Column="4" Margin="38,42,5,45" Grid.Row="2" Width="1.2">

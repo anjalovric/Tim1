@@ -196,5 +196,10 @@ namespace InitialProject.Service
                 }
             }
         }
+
+        public TourInstance GetById(int id)
+        {
+            return tourInstancerepository.GetById(id);
+        }
     }
 }
