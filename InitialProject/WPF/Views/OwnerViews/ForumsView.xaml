@@ -75,6 +75,16 @@
                         <Trigger Property="IsMouseOver"  Value="True">
                             <Setter Property="IsSelected" Value="True"/>
                         </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="FocusManager.FocusedElement" Value="{Binding RelativeSource={RelativeSource Self}}"></Setter>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+                <Style TargetType="ListBox">
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="FocusManager.FocusedElement" Value="{Binding RelativeSource={RelativeSource Self}}"></Setter>
+                        </Trigger>
                     </Style.Triggers>
                 </Style>
             </ListBox.Resources>
@@ -85,6 +95,16 @@
                     <Style.Triggers>
                         <Trigger Property="IsMouseOver"  Value="True">
                             <Setter Property="IsSelected" Value="True"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="FocusManager.FocusedElement" Value="{Binding RelativeSource={RelativeSource Self}}"></Setter>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+                <Style TargetType="ListBox">
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="FocusManager.FocusedElement" Value="{Binding RelativeSource={RelativeSource Self}}"></Setter>
                         </Trigger>
                     </Style.Triggers>
                 </Style>

@@ -48,7 +48,7 @@
                             <Style TargetType="TextBlock">
                                 <Setter Property="Visibility" Value="Visible"/>
                                 <Style.Triggers>
-                                    <DataTrigger Binding="{Binding IsOwnerComment}" Value="True">
+                                    <DataTrigger Binding="{Binding IsOwnerComment, UpdateSourceTrigger=PropertyChanged}" Value="True">
                                         <Setter Property="Visibility" Value="Hidden"/>
                                     </DataTrigger>
                                 </Style.Triggers>
@@ -60,10 +60,10 @@
                             <Style TargetType="Button" BasedOn="{StaticResource DataTemplateButton}">
                                 <Setter Property="Visibility" Value="Visible"/>
                                 <Style.Triggers>
-                                    <DataTrigger Binding="{Binding IsOwnerComment}" Value="True">
+                                    <DataTrigger Binding="{Binding IsOwnerComment, UpdateSourceTrigger=PropertyChanged}" Value="True">
                                         <Setter Property="Visibility" Value="Hidden"/>
                                     </DataTrigger>
-                                    <DataTrigger Binding="{Binding OwnerHasLocation}" Value="False">
+                                    <DataTrigger Binding="{Binding OwnerHasLocation, UpdateSourceTrigger=PropertyChanged}" Value="False">
                                         <Setter Property="Visibility" Value="Hidden"/>
                                     </DataTrigger>
                                 </Style.Triggers>
@@ -126,7 +126,7 @@
                 </Grid>
             </Grid>
         </Border>
-        <ListBox Grid.Row="2" Name="CommentsListBox" ItemsSource="{Binding Path=Comments}" ItemTemplate="{StaticResource comment}" IsSynchronizedWithCurrentItem="True" SelectedItem="{Binding SelectedComment, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" SelectionMode="Single" HorizontalContentAlignment="Stretch" Style="{StaticResource ListBoxStyle}" >
+        <ListBox Grid.Row="2" Name="CommentsListBox" ItemsSource="{Binding Path=Comments}" ItemTemplate="{StaticResource comment}" IsSynchronizedWithCurrentItem="True" SelectedItem="{Binding Path=SelectedComment, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" SelectionMode="Single" HorizontalContentAlignment="Stretch" Style="{StaticResource ListBoxStyle}" >
             <ListBox.Resources>
                 <Style TargetType="ListBoxItem">
                     <Style.Triggers>

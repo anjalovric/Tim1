@@ -56,6 +56,13 @@ namespace InitialProject.Repository
             return _comments.FindAll(n => n.Forum.Id == id);
         }
 
+        public void Report(ForumComment comment)
+        {
+            ForumComment commentToReport = _comments.Find(n => n.Id == comment.Id);
+            commentToReport.ReportsNumber++;
+            _serializer.ToCSV(FilePath, _comments);
+        }
+
     }
 
 }

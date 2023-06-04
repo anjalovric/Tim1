@@ -11,5 +11,6 @@ namespace InitialProject.Domain.RepositoryInterfaces
     {
         public void Add(ForumComment forumComment);
         public List<ForumComment> GetAllByForumId(int id);
+        public void Report(ForumComment comment);
     }
 }
