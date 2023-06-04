@@ -154,6 +154,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         }
         private void DecrementSuperGuestPoints()
         {
+
             superGuestTitleService.DecrementPoints(guest1);
         }
         private void MakeNewReservation()
@@ -187,7 +188,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         }
         private void PreviousPhoto_Executed(object sender)
         {
-            currentCounter--;
+            currentCounter = currentCounter - 1;
             if (currentCounter < 0)
                 currentCounter = images.Count - 1;
             ImageSource = new BitmapImage(new Uri(images[currentCounter].Url, UriKind.Relative));
