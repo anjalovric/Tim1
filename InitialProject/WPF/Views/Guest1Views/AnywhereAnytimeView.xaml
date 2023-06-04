@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:InitialProject.WPF.Views.Guest1Views"
+      xmlns:sys="clr-namespace:System;assembly=mscorlib"
       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" x:Class="InitialProject.WPF.Views.Guest1Views.AnywhereAnytimeView"
       mc:Ignorable="d" 
       d:DesignHeight="696" d:DesignWidth="1024"
@@ -159,7 +160,10 @@
         <Label VerticalAlignment="Top" Grid.Row="1" Height="35" Margin="339,8,0,0" HorizontalAlignment="Left" TextElement.FontWeight="DemiBold" Content="Departure date"/>
 
         <Viewbox Height="200"  HorizontalAlignment="Left" Width="Auto" VerticalAlignment="Top" Margin="42,43,0,0" Grid.Column="0" Grid.Row="1">
-            <Calendar x:Name="CalendarStart" SelectedDate="{Binding Arrival, Mode=TwoWay}">
+            <Calendar x:Name="CalendarStart" SelectedDate="{Binding Arrival, Mode=TwoWay}" >
+                <Calendar.BlackoutDates>
+                    <CalendarDateRange Start="1900-01-01" End="{x:Static sys:DateTime.Today}" />
+                </Calendar.BlackoutDates>
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="PreviewMouseUp">
                         <i:InvokeCommandAction Command="{Binding OnPreviewMouseUpCommand}"/>
@@ -170,6 +174,9 @@
 
         <Viewbox Margin="300,43,0,0" Height="200" Width="Auto" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Top">
             <Calendar x:Name="CalendarEnd" SelectedDate="{Binding Departure, Mode=TwoWay}">
+                <Calendar.BlackoutDates>
+                    <CalendarDateRange Start="1900-01-01" End="{x:Static sys:DateTime.Today}" />
+                </Calendar.BlackoutDates>
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="PreviewMouseUp">
                         <i:InvokeCommandAction Command="{Binding OnPreviewMouseUpCommand}"/>
@@ -185,7 +192,7 @@
         <Button x:Name="incrementNumberOfGuests" IsEnabled="{Binding IsNumberOfGuestsValid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Command="{Binding IncrementGuestsNumberCommand}" Content="+" VerticalAlignment="Top" Height="40" Grid.Row="1" HorizontalAlignment="Right" Width="45" Margin="0,150,42,0"/>
         <Button x:Name="decrementNumberOfGuests"  IsEnabled="{Binding IsNumberOfGuestsValid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Command="{Binding DecrementGuestsNumberCommand}"  Content="-"  HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,150,365,0" Grid.Row="1" Height="40" Width="45"/>
         <Label VerticalAlignment="Top" Grid.Row="1" Height="35" Margin="614,115,0,0" HorizontalAlignment="Left" TextElement.FontWeight="DemiBold" Content="Number of guests:"/>
-        <Button x:Name="Search" FontWeight="Bold" IsEnabled="{Binding Path=IsInputValid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0,236,49,0" Width="100" HorizontalAlignment="Right" Height="35" Command="{Binding SearchCommand}"  VerticalAlignment="Top" FontSize="18" Grid.Row="1" BorderBrush="#FF22301A" BorderThickness="3,3,3,3">
+        <Button x:Name="Search" FontWeight="Bold" IsEnabled="{Binding Path=IsInputValid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0,236,44,0" Width="100" HorizontalAlignment="Right" Height="35" Command="{Binding SearchCommand}"  VerticalAlignment="Top" FontSize="18" Grid.Row="1" BorderBrush="#FF22301A" BorderThickness="3,3,3,3">
             <Grid Background="#8c9d75" Width="100"  HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -206,7 +213,7 @@
             </Grid>
         </Button>
 
-        <DataGrid x:Name="SuggestedReservationsDataGrid" VerticalContentAlignment="Center" Margin="42,0,42,0" HorizontalAlignment="Center" VerticalAlignment="Top" ItemsSource="{Binding Path=SuggestedReservations,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SuggestedReservation}" Height="300" Width="Auto" Grid.Row="2">
+        <DataGrid x:Name="SuggestedReservationsDataGrid" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Top" ItemsSource="{Binding Path=SuggestedReservations,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SuggestedReservation}" Height="300" Width="984" Grid.Row="2">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Width="2*" Binding="{Binding Accommodation.Name}">
                     <DataGridTextColumn.ElementStyle>
@@ -215,13 +222,42 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Super-owner" Width="2.5*" Binding="{Binding Accommodation.Location}">
-                    <DataGridTextColumn.ElementStyle>
-                        <Style TargetType="{x:Type TextBlock}">
-                            <Setter Property="ToolTip" Value="{Binding Accommodation.Location}" />
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                </DataGridTextColumn>
+                <DataGridTemplateColumn Header="Super-owner" Width="2*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="/Resources/Images/super11.png" Height="27" Width="27" VerticalAlignment="Center" Margin="0,0,0,0" HorizontalAlignment="Center">
+                                <Image.Style>
+                                    <Style TargetType="Image">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Accommodation.Owner.IsSuperOwner}" Value="True">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Image.Style>
+                            </Image>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Renovated" Width="1.6*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="/Resources/Images/renovate1.png" Height="27" Width="27" VerticalAlignment="Center" Margin="0,0,0,0" HorizontalAlignment="Center">
+                                <Image.Style>
+                                    <Style TargetType="Image">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Accommodation.IsRenovated}" Value="True">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Image.Style>
+                            </Image>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTextColumn Header="Location" Width="2.5*" Binding="{Binding Accommodation.Location}">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="{x:Type TextBlock}">
@@ -244,18 +280,18 @@
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
 
-                <DataGridTemplateColumn x:Name="Details" Header="Details" Width="2.2*">
+                <DataGridTemplateColumn x:Name="Details" Header="Details" Width="94">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Name="Details" Background="#c99585"  VerticalAlignment="Center" FontWeight="Bold" Width="Auto" FontSize="16" Command="{Binding DataContext.RescheduleReservationCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}">
-                                <Grid Background="#c99585" Width="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" >
+                            <Button Name="Details" Background="#c99585" Padding="0"  VerticalAlignment="Center" FontWeight="Bold" Width="Auto" FontSize="16" Command="{Binding DataContext.DetailsCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}">
+                                <Grid Background="#c99585" Width="94" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" >
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto"/>
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
-                                    <Image Source="/Resources/Images/changedate.png" VerticalAlignment="Center" HorizontalAlignment="Right"  Margin="0,0,5,0" Width="Auto" Height="22" Grid.Column="1" RenderTransformOrigin="0.5,0.5">
+                                    <Image Source="/Resources/Images/info.png" VerticalAlignment="Center" HorizontalAlignment="Right"  Margin="0,0,2,0" Width="20" Height="22" Grid.Column="1" RenderTransformOrigin="0.5,0.5">
                                     </Image>
-                                    <TextBlock Text="Details" Grid.Column="0" VerticalAlignment="Center" FontSize="16"  Foreground="#22301a" Margin="5,0,0,0" FontWeight="Bold" HorizontalAlignment="Left" Width="Auto"/>
+                                    <TextBlock Text="Details" Grid.Column="0" VerticalAlignment="Center" FontSize="16"  Foreground="#22301a" Margin="10,0,0,0" FontWeight="Bold" HorizontalAlignment="Left" Width="55"/>
                                 </Grid>
                             </Button>
                         </DataTemplate>
@@ -264,15 +300,23 @@
                 <DataGridTemplateColumn x:Name="Reserve" Header="Reserve" Width="94">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Name="Cancel" VerticalContentAlignment="Center" VerticalAlignment="Center" FontSize="16" Background="#c99585" Command="{Binding DataContext.CancelReservationCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" FontWeight="Bold">
+                            <Button Name="Reserve" VerticalContentAlignment="Center" VerticalAlignment="Center" FontSize="16" Background="#c99585" Command="{Binding DataContext.ReserveCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" FontWeight="Bold">
                                 <Grid Background="#c99585" Width="94" HorizontalAlignment="Center" Height="35" VerticalAlignment="Center" >
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto"/>
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
-                                    <Image Source="/Resources/Images/cancel.png" VerticalAlignment="Center" HorizontalAlignment="Right"  Margin="5,0,5,0" Width="Auto" Height="22" Grid.Column="1" RenderTransformOrigin="0.5,0.5">
+                                    <Image Source="/Resources/Images/back.png" VerticalAlignment="Center" HorizontalAlignment="Right"  Margin="0,0,5,0" Width="20" Height="22" Grid.Column="1" RenderTransformOrigin="0.5,0.5">
+                                        <Image.RenderTransform>
+                                            <TransformGroup>
+                                                <ScaleTransform/>
+                                                <SkewTransform/>
+                                                <RotateTransform Angle="180"/>
+                                                <TranslateTransform/>
+                                            </TransformGroup>
+                                        </Image.RenderTransform>
                                     </Image>
-                                    <TextBlock Text="Reserve" Grid.Column="0" VerticalAlignment="Center" FontSize="16"  Foreground="#22301a" Margin="10,0,0,0" FontWeight="Bold" HorizontalAlignment="Left" Width="Auto"/>
+                                    <TextBlock Text="Reserve" Grid.Column="0" VerticalAlignment="Center" FontSize="16"  Foreground="#22301a" Margin="5,0,0,0" FontWeight="Bold" HorizontalAlignment="Left" Width="60"/>
                                 </Grid>
                             </Button>
                         </DataTemplate>

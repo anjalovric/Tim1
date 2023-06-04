@@ -196,10 +196,11 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             if (IsYesClicked)
             {
                 Forum currentForum = forumService.GetByLocation(LocationCountry, LocationCity);
-                currentForum = forumService.Open(currentForum);
+                currentForum = forumService.Open(currentForum, guest1);
                 ForumComment newComment = new ForumComment(currentForum, guest1, DateTime.Now, FirstComment);
                 forumCommentService.Add(newComment);
                 forumService.IncrementCommentsNumber(currentForum);
+                currentForum = forumService.SetIsVeryUseful(currentForum);
                 ForumDetailsView details = new ForumDetailsView(guest1, currentForum);
                 Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = details;
             }
@@ -218,6 +219,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                 ForumComment newComment = new ForumComment(currentForum, guest1, DateTime.Now, FirstComment);
                 forumCommentService.Add(newComment);
                 forumService.IncrementCommentsNumber(currentForum);
+                currentForum = forumService.SetIsVeryUseful(currentForum);
                 ForumDetailsView details = new ForumDetailsView(guest1, currentForum);
                 Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = details;
             }

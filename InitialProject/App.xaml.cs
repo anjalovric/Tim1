@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 
 namespace InitialProject
@@ -73,5 +74,6 @@ namespace InitialProject
                 TranslationSource.Instance.CurrentCulture = new System.Globalization.CultureInfo("sr-LATN");
             }
         }
+      
     }
 }

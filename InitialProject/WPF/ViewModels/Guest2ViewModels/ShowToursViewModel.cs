@@ -45,6 +45,8 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
                 }
             }
         }
+       
+
         private ObservableCollection<TourImage> TourImages;
         private ObservableCollection<TourReservation> TourReservations;
         private TourRepository tourRepository;

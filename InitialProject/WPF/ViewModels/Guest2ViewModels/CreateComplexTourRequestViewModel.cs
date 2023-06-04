@@ -252,7 +252,6 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
                 MaxGuests = changedDaysNumber.ToString();
             }
         }
-
         private void Confirm_Executed(object sender)
         {
             LocationService locationService = new LocationService();

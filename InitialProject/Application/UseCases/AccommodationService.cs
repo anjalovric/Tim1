@@ -154,5 +154,10 @@ namespace InitialProject.Service
                 Accommodations.Remove(accommodation);
             return Accommodations;
         }
+        public bool HasAccommodationOnLocation(String username, Location location)
+        {
+            return accommodations.Find(r => r.Location.Id == location.Id && r.Owner.Username == username) != null;
+
+        }
     }
 }

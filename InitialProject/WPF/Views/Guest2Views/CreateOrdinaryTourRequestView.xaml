@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:val="clr-namespace:InitialProject.WPF.Validations.Guest2Validations" 
+        xmlns:properties="clr-namespace:InitialProject.Properties"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:local="clr-namespace:InitialProject.WPF.Views.Guest2Views"
         xmlns:tk="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit.NET5" 
@@ -328,7 +329,7 @@
                 </Validation.ErrorTemplate>
             </ComboBox>
             <Label Content="It is necessary to fill in all the specified fields." FontSize="18" Margin="40,15,237,0" Grid.Column="0" Grid.Row="1" Foreground="Black" Grid.ColumnSpan="2"/>
-            <Button HorizontalAlignment="Left" Grid.Row="10" VerticalAlignment="Center"  Height="34" Width="118" FontWeight="Bold" FontSize="18" Command="{Binding ConfirmCommand}" Margin="20,0,0,0" Grid.Column="1" BorderBrush="Transparent">
+            <Button HorizontalAlignment="Left" Grid.Row="10" VerticalAlignment="Center"  Height="34" Width="118" FontWeight="Bold" FontSize="18" Command="{Binding ConfirmCommand}" Margin="20,0,0,0" Grid.Column="1" BorderBrush="Transparent" ToolTipService.ShowDuration="5000" ToolTipService.IsEnabled="{Binding Source={x:Static properties:Settings.Default}, Path=IsToolTipEnabled}">
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">
                         <Setter Property="IsEnabled" Value="False"/>
@@ -361,10 +362,17 @@
                     <Image Source="/Resources/Images/doneNew.png" VerticalAlignment="Top" HorizontalAlignment="Left" Width="26" Height="25" RenderTransformOrigin="0.5,0.5" Margin="10,3,0,0" Grid.RowSpan="2"/>
                     <TextBlock Background="#ffba00" Foreground="Black" Text="Confirm" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" Width="77" Height="29" Margin="4,3,0,0" Grid.RowSpan="2" Grid.Column="1"/>
                 </Grid>
-
+                <Button.ToolTip>
+                    <ToolTip>
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold">Creating request of the tour</TextBlock>
+                            <TextBlock FontWeight="Bold">This request will be created.</TextBlock>
+                        </StackPanel>
+                    </ToolTip>
+                </Button.ToolTip>
             </Button>
 
-            <Button HorizontalAlignment="Left" Grid.Row="10" VerticalAlignment="Center"  Height="34" Width="118" FontWeight="Bold" FontSize="18" Command="{Binding CancelCommand}" Margin="156,0,0,0" Grid.Column="1" BorderBrush="#FF9E98FF">
+            <Button HorizontalAlignment="Left" Grid.Row="10" VerticalAlignment="Center"  Height="34" Width="118" FontWeight="Bold" FontSize="18" Command="{Binding CancelCommand}" Margin="156,0,0,0" Grid.Column="1" BorderBrush="#FF9E98FF" ToolTipService.ShowDuration="5000" ToolTipService.IsEnabled="{Binding Source={x:Static properties:Settings.Default}, Path=IsToolTipEnabled}">
                 <Grid Background="White" Width="144" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="16*"/>
@@ -377,6 +385,14 @@
                     <Image Source="/Resources/Images/close.png" VerticalAlignment="Top" HorizontalAlignment="Left" Width="26" Height="25" RenderTransformOrigin="0.5,0.5" Margin="10,3,0,0" Grid.RowSpan="2"/>
                     <TextBlock Background="White" Text="Cancel" Foreground="Black" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" Width="69" Height="29" Margin="10,3,0,0" Grid.RowSpan="2" Grid.Column="1"/>
                 </Grid>
+                <Button.ToolTip>
+                    <ToolTip>
+                        <StackPanel>
+                           
+                            <TextBlock FontWeight="Bold">This request won't be created.</TextBlock>
+                        </StackPanel>
+                    </ToolTip>
+                </Button.ToolTip>
             </Button>
             <Border  BorderThickness="0 0 0 1" BorderBrush="LightGray" Height="33" VerticalAlignment="Top" Grid.ColumnSpan="2" Margin="40,26,47,0" Grid.RowSpan="2"/>
         </Grid>

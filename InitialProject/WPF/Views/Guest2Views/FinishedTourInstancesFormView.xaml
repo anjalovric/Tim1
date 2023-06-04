@@ -3,10 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:properties="clr-namespace:InitialProject.Properties"
+             xmlns:l="clr-namespace:InitialProject.Help"
              xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Royale" xmlns:System="clr-namespace:System;assembly=netstandard" xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:local="clr-namespace:InitialProject.View"
+             Loaded="Page_Loaded"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="668" Width="668" Height="600">
+             d:DesignHeight="600" d:DesignWidth="668" Width="668" Height="600" l:ShowToursHelp.HelpKey="finishedTours" Focusable="True">
+    <UserControl.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Help" Executed="CommandBinding_Executed"/>
+    </UserControl.CommandBindings>
     <UserControl.Resources>
         <Style x:Key="DataGridRowStyle2" TargetType="{x:Type DataGridRow}">
             <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
@@ -103,7 +109,7 @@
                 <DataGridTemplateColumn x:Name="rate" Header="Rate" Width="0.9*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button FontWeight="Bold" FontSize="18" Width="65" Height="30" Background="#ffba00" BorderBrush="#ffba00" BorderThickness="2" Command="{Binding Path=DataContext.RateCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}">
+                            <Button FontWeight="Bold" FontSize="18" Width="65" Height="30" Background="#ffba00" BorderBrush="#ffba00" BorderThickness="2" Command="{Binding Path=DataContext.RateCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" ToolTipService.ShowDuration="5000" ToolTipService.IsEnabled="{Binding Source={x:Static properties:Settings.Default}, Path=IsToolTipEnabled}">
                                 <Grid Background="#ffba00" HorizontalAlignment="Left" VerticalAlignment="Top">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="15*"/>
@@ -117,7 +123,13 @@
 
                                     <TextBlock Background="#ffba00" Text="Rate" VerticalAlignment="Top" FontSize="12" FontWeight="Bold" HorizontalAlignment="Left" Width="65" Height="29" Margin="5,3,0,0" Grid.RowSpan="2" Grid.Column="1"/>
                                 </Grid>
-
+                                <Button.ToolTip>
+                                    <ToolTip>
+                                        <StackPanel>
+                                            <TextBlock FontWeight="Bold">Review form will be opened.</TextBlock>
+                                        </StackPanel>
+                                    </ToolTip>
+                                </Button.ToolTip>
                             </Button>
 
                         </DataTemplate>

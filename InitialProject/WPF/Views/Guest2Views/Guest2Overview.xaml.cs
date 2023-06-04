@@ -24,6 +24,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using InitialProject.WPF.ViewModels.Guest2ViewModels;
 using InitialProject.Service;
+using InitialProject.Properties;
 
 namespace InitialProject.WPF.Views.Guest2Views
 {
@@ -38,6 +39,22 @@ namespace InitialProject.WPF.Views.Guest2Views
             InitializeComponent();
             this.user = user;
             DataContext = new Guest2OverviewViewModel(user,CC);
+        }
+
+        private void button_Checked(object sender, RoutedEventArgs e)
+        {
+            //pristupiti settings fajlu, procitati vrijednost iistooltipenabled i sacuvati settings fajl nakon toga
+            //u svakom xamlu binding
+            if (Settings.Default.IsToolTipEnabled)
+            {
+                Settings.Default.IsToolTipEnabled=false;
+                Settings.Default.Save();
+            }
+            else
+            {
+                Settings.Default.IsToolTipEnabled = true;
+                Settings.Default.Save();
+            }
         }
     }
 }

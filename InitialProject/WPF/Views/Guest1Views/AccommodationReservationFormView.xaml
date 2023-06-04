@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:InitialProject.WPF.Views.Guest1Views"
         mc:Ignorable="d"
         Title="AccommodationReservationForm" Height="522" Background="Transparent" Width="660" AllowsTransparency="True"  WindowStartupLocation="CenterScreen" WindowStyle="None">
@@ -66,6 +67,9 @@
             <Label Content="Departure date*" Margin="44,0,0,0" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" TextElement.FontWeight="DemiBold"></Label>
 
             <Calendar x:Name="CalendarStart" Height="Auto"  HorizontalAlignment="Left" Width="185" VerticalAlignment="Top" Margin="114,0,0,0" SelectedDate="{Binding Path=Arrival, Mode=TwoWay}" Grid.Column="0" Grid.Row="2">
+                <Calendar.BlackoutDates>
+                    <CalendarDateRange Start="1900-01-01" End="{x:Static sys:DateTime.Today}" />
+                </Calendar.BlackoutDates>
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="PreviewMouseUp">
                         <i:InvokeCommandAction Command="{Binding OnPreviewMouseUpCommand}"/>
@@ -74,6 +78,9 @@
             </Calendar>
             
             <Calendar x:Name="CalendarEnd" Height="Auto" SelectedDate="{Binding Path=Departure, Mode=TwoWay}" VerticalAlignment="Top" Margin="0,0,114,0" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="2">
+                <Calendar.BlackoutDates>
+                    <CalendarDateRange Start="1900-01-01" End="{x:Static sys:DateTime.Today}" />
+                </Calendar.BlackoutDates>
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="PreviewMouseUp">
                         <i:InvokeCommandAction Command="{Binding OnPreviewMouseUpCommand}"/>
