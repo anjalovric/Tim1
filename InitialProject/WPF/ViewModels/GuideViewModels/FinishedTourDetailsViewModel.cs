@@ -1,9 +1,12 @@
 ﻿using InitialProject.Domain.Model;
 using InitialProject.Model;
+using InitialProject.ReportPatterns;
 using InitialProject.Service;
 using LiveCharts;
 using LiveCharts.Wpf;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -15,6 +18,7 @@ namespace InitialProject.WPF.ViewModels
     {
         public string Header { get; set; }
         private SeriesCollection totalAttendance;
+        private List<Guest2> guests=new List<Guest2>(); 
         public SeriesCollection TotalAttendance
         {
             get { return totalAttendance; }
@@ -55,6 +59,11 @@ namespace InitialProject.WPF.ViewModels
             selectedInstance = selected;          
             CheckPointInformations = new ObservableCollection<CheckPointInformation>();
             UnitReport(selected);
+            GenerateReportCommand = new RelayCommand(GenerateReport_Executed, CanExecute);
+        }
+        private bool CanExecute(object sender)
+        {
+            return true;
         }
         public void UnitReport(TourInstance selected)
         {
@@ -82,6 +91,7 @@ namespace InitialProject.WPF.ViewModels
             }
         }
         public RelayCommand OkToastCommand { get; set; }
+        public RelayCommand GenerateReportCommand { get; set; } 
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -146,6 +156,8 @@ namespace InitialProject.WPF.ViewModels
                 {
                     Guest2 presentGuest = detailsService.guest2Service.GetById(alert.Guest2Id);
                     pointInformation.guest2s.Add(presentGuest);
+                    if(!guests.Contains(presentGuest))  
+                        guests.Add(presentGuest);
                 }
             }
         }
@@ -161,5 +173,12 @@ namespace InitialProject.WPF.ViewModels
                 Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#A8A8A8"))
             });
         }  
+
+        private void GenerateReport_Executed(object sender)
+        {
+            TourDetailsService detailsService = new TourDetailsService();
+            ReportGenerator reportGenerator = new ReportPatterns.GuideReportPattern(selectedInstance, guests, Math.Round(detailsService.MakeUnder18Precentage(selectedInstance.Id), 2), Math.Round(detailsService.MakeBetween18And50Precentage(selectedInstance.Id), 2), Math.Round(detailsService.MakeOver50Precentage(selectedInstance.Id), 2), Math.Round(detailsService.MakeWithVoucherPrecentage(selectedInstance.Id), 2), Math.Round(detailsService.MakeWithoutVoucherPrecentage(selectedInstance.Id), 2), Math.Round(detailsService.MakeAttendancePrecentage(selectedInstance.Id), 2));
+            reportGenerator.GenerateReport();
+        }
     }
 }

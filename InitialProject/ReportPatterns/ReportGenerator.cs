@@ -67,7 +67,7 @@ namespace InitialProject.ReportPatterns
 
         private void InsertImage(PdfPage page)
         {
-            PdfImage image = PdfImage.FromFile("/Resources/Images/LOGO (2).jpg");
+            PdfImage image = PdfImage.FromFile("Resources/Images/logoMyTravel.png");
             RectangleF bounds = new RectangleF(170, 12, 150, 50);
             page.Graphics.DrawImage(image, bounds);
         }

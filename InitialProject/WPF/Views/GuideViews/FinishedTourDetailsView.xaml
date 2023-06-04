@@ -151,7 +151,7 @@
         <Grid Margin="0,0,0,612" Style="{DynamicResource BackgroundHeader}">
             <Label Content="{Binding Header}" Style="{DynamicResource Header}" VerticalAlignment="Center" VerticalContentAlignment="Center" Width="646" Height="61" HorizontalAlignment="Center" HorizontalContentAlignment="Center" />
             <Image Width="200" Source="/Resources/Images/LOGO (2).jpg" Margin="1,0,899,0" />
-            <Button Style="{DynamicResource ButtonTable}" HorizontalAlignment="Left" Margin="873,0,0,0" VerticalAlignment="Center" Width="187" Height="42">
+            <Button Style="{DynamicResource ButtonTable}" HorizontalAlignment="Left" Margin="873,0,0,0" VerticalAlignment="Center" Width="187" Height="42" Command="{Binding GenerateReportCommand}">
                 <Button.Content>
                     <Grid>
                         <Image Source="/Resources/Images/pdf.png" HorizontalAlignment="Left" Width="28" Margin="-7,0,0,0"/>
