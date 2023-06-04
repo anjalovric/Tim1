@@ -54,7 +54,7 @@
             <ColumnDefinition Width="2.5*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid Style="{DynamicResource BackgroundHeader }" Grid.Column="0" Grid.ColumnSpan="6" Grid.Row="0"  >
-            <Label Style="{DynamicResource Header}" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">MY PROFILE</Label>
+            <Label Style="{DynamicResource Header}" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Content="{ns:Loc MyProfile}"></Label>
             <Image HorizontalAlignment="Left"  VerticalAlignment="Center"  Source="/Resources/Images/LOGO (2).jpg" Width="253" Height="120"   />
 
         </Grid>

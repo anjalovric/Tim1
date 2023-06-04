@@ -381,6 +381,9 @@
   <data name="MonthlyStatistic" xml:space="preserve">
     <value>Monthly requests statistic by language</value>
   </data>
+  <data name="MyProfile" xml:space="preserve">
+    <value>MY PROFILE</value>
+  </data>
   <data name="Name" xml:space="preserve">
     <value>Name</value>
   </data>

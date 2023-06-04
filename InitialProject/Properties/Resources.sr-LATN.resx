@@ -381,6 +381,9 @@
   <data name="MonthlyStatistic" xml:space="preserve">
     <value>Mesečna statistika zahteva spram jezika</value>
   </data>
+  <data name="MyProfile" xml:space="preserve">
+    <value>MOJ PROFIL</value>
+  </data>
   <data name="Name" xml:space="preserve">
     <value>Naziv</value>
   </data>
