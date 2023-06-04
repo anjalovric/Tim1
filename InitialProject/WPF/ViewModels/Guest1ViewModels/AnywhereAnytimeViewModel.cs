@@ -217,7 +217,10 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         private void Details_Executed(object sender)
         {
             Accommodation currentAccommodation = (((Button)sender).DataContext as SuggestedReservationViewModel).Accommodation;
-            AccommodationDetailsView details = new AccommodationDetailsView(currentAccommodation, guest1);
+            DateTime arrival = (((Button)sender).DataContext as SuggestedReservationViewModel).Arrival;
+            DateTime departure = (((Button)sender).DataContext as SuggestedReservationViewModel).Departure;
+
+            AccommodationDetailsView details = new AccommodationDetailsView(currentAccommodation, guest1, arrival, departure);
             Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = details;
  
         }

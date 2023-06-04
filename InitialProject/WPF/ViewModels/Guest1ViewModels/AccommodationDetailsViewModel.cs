@@ -20,11 +20,15 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 {
     public class AccommodationDetailsViewModel :INotifyPropertyChanged
     {
+        private AccommodationReservationService accommodationReservationService;
+        private SuperGuestTitleService superGuestTitleService;
         public Func<double, string> YAxisLabelFormatter => value => value.ToString("N1");
         private Guest1 guest1;
         private DateTime currentDate;
         private int currentCounter = 0;
         private List<AccommodationImage> images;
+        private DateTime arrival;
+        private DateTime departure;
         public Accommodation SelectedAccommodation { get; set; }
         public int AverageRating { get; set; }
         public int ReviewsNumber { get; set; }
@@ -59,11 +63,14 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 
         public RelayCommand NextPhotoCommand { get; set; }
         public RelayCommand PreviousPhotoCommand { get; set; }
-        public AccommodationDetailsViewModel(Accommodation currentAccommodation, Guest1 guest1)
+
+        public AccommodationDetailsViewModel(Accommodation currentAccommodation, Guest1 guest1, DateTime arrival = default, DateTime departure = default)
         {
             this.guest1 = guest1;
             SelectedAccommodation = currentAccommodation;
             currentDate = DateTime.Now;
+            this.arrival = arrival;
+            this.departure = departure;
             SetChartData();
             Initialize();
             MakeCommands();
@@ -73,6 +80,8 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             SetFirstImage();
             SetRating();
             SetButtonEnableProperty();
+            accommodationReservationService = new AccommodationReservationService();
+            superGuestTitleService = new SuperGuestTitleService();
         }
         private void SetChartData()
         {
@@ -120,11 +129,50 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             PreviousPhotoCommand = new RelayCommand(PreviousPhoto_Executed, CanExecute);
             ReserveCommand = new RelayCommand(Reserve_Executed, CanExecute);
         }
-        private void Reserve_Executed(object sender)
+        private async void Reserve_Executed(object sender)
         {
-            AccommodationReservationFormView accommodationReservationForm = new AccommodationReservationFormView(SelectedAccommodation, guest1);
-            accommodationReservationForm.Owner = Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault();
-            accommodationReservationForm.ShowDialog();
+            if (arrival == DateTime.MinValue && departure == DateTime.MinValue)
+            {
+                AccommodationReservationFormView accommodationReservationForm = new AccommodationReservationFormView(SelectedAccommodation, guest1);
+                accommodationReservationForm.Owner = Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault();
+                accommodationReservationForm.ShowDialog();
+            }
+            else
+            {
+                Task<bool> result = ConfirmReservationMessageBox();
+                bool IsYesClicked = await result;
+                if (IsYesClicked)
+                    MakeNewReservation();
+            }
+           
+        }
+        private void ShowMessageBoxForSentReservation()
+        {
+            Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("Successfully done!", "/Resources/Images/done.png");
+            messageBox.Owner = Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault();
+            messageBox.ShowDialog();
+        }
+        private void DecrementSuperGuestPoints()
+        {
+            superGuestTitleService.DecrementPoints(guest1);
+        }
+        private void MakeNewReservation()
+        {
+            AccommodationReservation newReservation = new AccommodationReservation(guest1, SelectedAccommodation, arrival, departure);
+            accommodationReservationService.Add(newReservation);
+            DecrementSuperGuestPoints();
+            AnywhereAnytimeView view = new AnywhereAnytimeView(guest1);
+            Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = view;
+            ShowMessageBoxForSentReservation();
+        }
+        public async Task<bool> ConfirmReservationMessageBox()
+        {
+            var result = new TaskCompletionSource<bool>();
+            Guest1YesNoMessageBoxView messageBox = new Guest1YesNoMessageBoxView("Do you want to make a reservation for " + arrival + " - " + departure + "?", "/Resources/Images/qm.png", result);
+            messageBox.Owner = Application.Current.Windows.OfType<DatesForAccommodationReservationView>().FirstOrDefault();
+            messageBox.ShowDialog();
+            var returnedResult = await result.Task;
+            return returnedResult;
         }
         private bool CanExecute(object sender)
         {

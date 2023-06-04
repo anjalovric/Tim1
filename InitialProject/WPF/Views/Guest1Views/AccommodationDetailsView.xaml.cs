@@ -27,10 +27,10 @@ namespace InitialProject.WPF.Views.Guest1Views
     {
         private AccommodationDetailsViewModel accommodationDetailsViewModel;
         
-        public AccommodationDetailsView(Accommodation currentAccommodation, Guest1 guest1)
+        public AccommodationDetailsView(Accommodation currentAccommodation, Guest1 guest1, DateTime arrival = default, DateTime departure = default)
         {
             InitializeComponent();
-            accommodationDetailsViewModel = new AccommodationDetailsViewModel(currentAccommodation, guest1);
+            accommodationDetailsViewModel = new AccommodationDetailsViewModel(currentAccommodation, guest1, arrival, departure);
             this.DataContext = accommodationDetailsViewModel;
         }
     }

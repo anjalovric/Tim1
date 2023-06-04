@@ -49,7 +49,7 @@
                 </Grid.RowDefinitions>
                 <Image Grid.Row="0" Source="{Binding Image, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Height="66" Width="40" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="20,40,0,0"/>
 
-                <TextBlock Grid.Row="0" Text="{Binding Path=Text}" FontWeight="Bold" Margin="0,0,0,0" Height="Auto" Width="218" VerticalAlignment="Center" FontFamily="Verdana" TextAlignment="Center" FontSize="19" HorizontalAlignment="Center" Background="Transparent" TextWrapping="Wrap" Foreground="#22301a" />
+                <TextBlock Grid.Row="0" Text="{Binding Path=Text}" FontWeight="Medium" Margin="0,0,0,0" Height="Auto" Width="218" VerticalAlignment="Center" FontFamily="Verdana" TextAlignment="Center" FontSize="16" HorizontalAlignment="Center" Background="Transparent" TextWrapping="Wrap" Foreground="#22301a" />
 
                 <Button Name="OkButton" Content="OK" Grid.Row="1"  Command="{Binding OkCommand}" Background="BlanchedAlmond"  FontWeight="Bold" FontSize="20">
                     <Button.Resources>

@@ -18,7 +18,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
     {
         private Guest1 guest1;
         private Accommodation currentAccommodation;
-        AccommodationReservationService accommodationReservationService;
+        private AccommodationReservationService accommodationReservationService;
         public ObservableCollection<AvailableDatesForAccommodation> AvailableDatesForAccommodations { get; set; }
         private AvailableDatesForAccommodation selectedDateRange;
         public AvailableDatesForAccommodation SelectedDateRange
