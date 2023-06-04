@@ -46,12 +46,21 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         public Guest1ReviewsViewModel(Guest1 guest1)
         {
             this.guest1 = guest1;
+            Initialize();
+            SetChartData();
+            SetRatings();
+            MakeCommands();   
+        }
+
+        private void Initialize()
+        {
             guestReviewService = new GuestReviewService();
             Guest1Reviews = new ObservableCollection<GuestReview>(guestReviewService.GetAllToDisplay(guest1));
             currentDate = DateTime.Now;
-            SetChartData();
-            SetRatings();
-            ShowReviewDetailsCommand = new RelayCommand(ShowReviewDetails_Executed, CanExecute);     
+        }
+        private void MakeCommands()
+        {
+            ShowReviewDetailsCommand = new RelayCommand(ShowReviewDetails_Executed, CanExecute);
         }
         private void SetChartData()
         {

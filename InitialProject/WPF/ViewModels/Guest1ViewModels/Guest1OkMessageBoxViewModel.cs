@@ -20,6 +20,10 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         {
             Text = messageText;
             Image = new BitmapImage(new Uri(path, UriKind.Relative));
+            MakeCommands();
+        }
+        private void MakeCommands()
+        {
             OkCommand = new RelayCommand(Ok_Executed, CanExecute);
         }
 

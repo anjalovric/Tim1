@@ -24,6 +24,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         public RelayCommand GuestReviewsCommand { get; set; }
         public RelayCommand MyRenovationsCommand { get; set; }
         public RelayCommand MyForumsCommand { get; set; }
+        public RelayCommand SuggestionCommand { get; set; }
         public MenuViewModel(Owner owner)
         {
             this.owner = owner;
@@ -40,6 +41,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             GuestReviewsCommand = new RelayCommand(GuestReviews_Executed, CanExecute);
             MyRenovationsCommand = new RelayCommand(MyRenovations_Executed, CanExecute);
             MyForumsCommand = new RelayCommand(MyForums_Executed, CanExecute);
+            SuggestionCommand = new RelayCommand(Suggestion_Executed, CanExecute);
         }
         private bool CanExecute(object sender)
         {
@@ -73,29 +75,31 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         private void MyRequests_Executed(object sender)
         {
-
             ReservationReschedulingView reschedulingView = new ReservationReschedulingView(owner);
             Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = reschedulingView;
         }
 
         private void GuestReviews_Executed(object sender)
         {
-
             GuestReviewView guestReviewView = new GuestReviewView(owner);
             Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = guestReviewView;
         }
 
         private void MyRenovations_Executed(object sender)
         {
-
             MyRenovationsView myRenovationsView = new MyRenovationsView(owner);
             Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = myRenovationsView;
         }
         private void MyForums_Executed(object sender)
         {
-
             ForumsView forumsView = new ForumsView(owner);
             Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = forumsView;
+        }
+
+        private void Suggestion_Executed(object sender)
+        {
+            LocationSuggestionsView suggestionsView = new LocationSuggestionsView(owner);
+            Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = suggestionsView;
         }
     }
 }

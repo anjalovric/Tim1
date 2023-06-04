@@ -18,8 +18,8 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
     {
         private Guest1 guest1;
         private Accommodation currentAccommodation;
-        AccommodationReservationService accommodationReservationService;
-        public ObservableCollection<AvailableDatesForAccommodation> availableDatesForAccommodations { get; set; }
+        private AccommodationReservationService accommodationReservationService;
+        public ObservableCollection<AvailableDatesForAccommodation> AvailableDatesForAccommodations { get; set; }
         private AvailableDatesForAccommodation selectedDateRange;
         public AvailableDatesForAccommodation SelectedDateRange
         {
@@ -40,10 +40,18 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         {
             this.guest1 = guest1;
             this.currentAccommodation = currentAccommodation;
-            accommodationReservationService = new AccommodationReservationService();
-            availableDatesForAccommodations = new ObservableCollection<AvailableDatesForAccommodation>(availableDates);
+            AvailableDatesForAccommodations = new ObservableCollection<AvailableDatesForAccommodation>(availableDates);
+            Initialize();
+            MakeCommands();
+        }
+        private void MakeCommands()
+        {
             ChooseDateCommand = new RelayCommand(ChooseDate_Executed, CanExecute);
             BackCommand = new RelayCommand(Back_Executed, CanExecute);
+        }
+        private void Initialize()
+        {
+            accommodationReservationService = new AccommodationReservationService();
             superGuestTitleService = new SuperGuestTitleService();
         }
         private void Back_Executed(object sender)

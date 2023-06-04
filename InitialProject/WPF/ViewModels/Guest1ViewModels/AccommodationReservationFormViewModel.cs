@@ -63,7 +63,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             this.guest1 = guest1;
             this.guest1 = guest1;
             this.currentAccommodation = currentAccommodation;
-            InitializeForm();
+            Initialize();
             MakeCommands();
         }
         private bool CanExecute(object sender)
@@ -75,7 +75,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             Application.Current.Windows.OfType<AccommodationReservationFormView>().FirstOrDefault().Close();
         }
 
-        private void InitializeForm()
+        private void Initialize()
         {
             NumberOfDays = 1;
             NumberOfGuests = 1;
@@ -124,41 +124,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             NumberOfGuests = changedDaysNumber;
         }
 
-        //Validation - date input (calendars and num. of days)
-        private bool IsValidDateInput()
-        {
-            return (Arrival <= Departure && Convert.ToInt32(lengthOfStay.TotalDays) >= (NumberOfDays - 1) && Arrival.Date > DateTime.Now && Arrival != null && Departure != null);
-        }
-        //Validation - owner-s conditions for min. num. of days
-        private bool IsEnteredCorrectDateRange()
-        {
-            return ((Convert.ToInt32(lengthOfStay.TotalDays) + 1) >= currentAccommodation.MinDaysForReservation && NumberOfDays >= currentAccommodation.MinDaysForReservation);
-        }
-        //Validation owner's conditions for capacity
-        private bool IsEnteredCorrectGuestsNumber()
-        {
-            return NumberOfGuests <= currentAccommodation.Capacity;
-        }
-
-        //Validation Message boxes
-        private void ShowMessageBoxForInvalidDateInput()
-        {
-            Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("Invalid input, please enter values again!", "/Resources/Images/exclamation.png");
-            messageBox.Owner = Application.Current.Windows.OfType<AccommodationReservationFormView>().FirstOrDefault();
-            messageBox.ShowDialog();
-        }
-        private void ShowMessageBoxForIncorrectDateRange()
-        {
-            Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("The minimum number of days for booking this accommodation is " + currentAccommodation.MinDaysForReservation.ToString() + ".", "/Resources/Images/exclamation.png");
-            messageBox.Owner = Application.Current.Windows.OfType<AccommodationReservationFormView>().FirstOrDefault();
-            messageBox.ShowDialog();
-        }
-        private void ShowMessageBoxForIncorrectGuestsNumber()
-        {
-            Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("The maximum number of guests for this accommodation is " + currentAccommodation.Capacity.ToString() + ".", "/Resources/Images/exclamation.png");
-            messageBox.Owner = Application.Current.Windows.OfType<AccommodationReservationFormView>().FirstOrDefault();
-            messageBox.ShowDialog();
-        }
         private void Next_Executed(object sender)
         {
             lengthOfStay = Departure.Subtract(Arrival);
@@ -194,6 +159,41 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             {
                 Mouse.Capture(null);
             }
+        }
+        //Validation - date input (calendars and num. of days)
+        private bool IsValidDateInput()
+        {
+            return (Arrival <= Departure && Convert.ToInt32(lengthOfStay.TotalDays) >= (NumberOfDays - 1) && Arrival.Date > DateTime.Now && Arrival != null && Departure != null);
+        }
+        //Validation - owner-s conditions for min. num. of days
+        private bool IsEnteredCorrectDateRange()
+        {
+            return ((Convert.ToInt32(lengthOfStay.TotalDays) + 1) >= currentAccommodation.MinDaysForReservation && NumberOfDays >= currentAccommodation.MinDaysForReservation);
+        }
+        //Validation owner's conditions for capacity
+        private bool IsEnteredCorrectGuestsNumber()
+        {
+            return NumberOfGuests <= currentAccommodation.Capacity;
+        }
+
+        //Validation Message boxes
+        private void ShowMessageBoxForInvalidDateInput()
+        {
+            Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("Invalid input, please enter values again!", "/Resources/Images/exclamation.png");
+            messageBox.Owner = Application.Current.Windows.OfType<AccommodationReservationFormView>().FirstOrDefault();
+            messageBox.ShowDialog();
+        }
+        private void ShowMessageBoxForIncorrectDateRange()
+        {
+            Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("The minimum number of days for booking this accommodation is " + currentAccommodation.MinDaysForReservation.ToString() + ".", "/Resources/Images/exclamation.png");
+            messageBox.Owner = Application.Current.Windows.OfType<AccommodationReservationFormView>().FirstOrDefault();
+            messageBox.ShowDialog();
+        }
+        private void ShowMessageBoxForIncorrectGuestsNumber()
+        {
+            Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("The maximum number of guests for this accommodation is " + currentAccommodation.Capacity.ToString() + ".", "/Resources/Images/exclamation.png");
+            messageBox.Owner = Application.Current.Windows.OfType<AccommodationReservationFormView>().FirstOrDefault();
+            messageBox.ShowDialog();
         }
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

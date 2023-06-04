@@ -79,7 +79,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             }
         }
 
-        //za prikaz svih foruma
 
         private ObservableCollection<Forum> forums;
         public ObservableCollection<Forum> Forums
@@ -101,14 +100,17 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         {
             this.guest1 = guest1;
             GetLocations();
-            forumService = new ForumService();
-            forumCommentService = new ForumCommentService();
-            locationService = new LocationService();
-            Forums = new ObservableCollection<Forum>(forumService.GetAll());
-            Forums = new ObservableCollection<Forum>(Forums.Reverse());
+            Initialize();
             MakeCommands();
         }
 
+        private void Initialize()
+        {
+            forumService = new ForumService();
+            forumCommentService = new ForumCommentService();
+            Forums = new ObservableCollection<Forum>(forumService.GetAll());
+            Forums = new ObservableCollection<Forum>(Forums.Reverse());
+        }
         private void MakeCommands()
         {
             CountryInputSelectionChangedCommand = new RelayCommand(CountryInputSelectionChanged_Executed, CanExecute);
@@ -129,7 +131,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         private void GetLocations()
         {
             IsCityComboBoxEnabled = false;
-            LocationService locationService = new LocationService();
+            locationService = new LocationService();
             Countries = new ObservableCollection<string>(locationService.GetAllCountries());
             CitiesByCountry = new ObservableCollection<string>();
         }
@@ -183,12 +185,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             IsCityComboBoxEnabled = false;
         }
 
-        private void ShowMessageBoxForInvalidInput()
-        {
-            Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("You must fill all fields!", "/Resources/Images/exclamation.png");
-            messageBox.Owner = Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault();
-            messageBox.ShowDialog();
-        }
         private async void ShowMessageBoxForClosedForum()
         {
             Task<bool> result = ConfirmCommentingLockedForumMessageBox();
@@ -204,8 +200,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                 ForumDetailsView details = new ForumDetailsView(guest1, currentForum);
                 Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = details;
             }
-
-
                
         }
 
@@ -260,6 +254,13 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         {
             ForumComment comment = new ForumComment(newForum, guest1, DateTime.Now, FirstComment);
             forumCommentService.Add(comment);
+        }
+        //Message box - not all fields filled
+        private void ShowMessageBoxForInvalidInput()
+        {
+            Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("You must fill all fields!", "/Resources/Images/exclamation.png");
+            messageBox.Owner = Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault();
+            messageBox.ShowDialog();
         }
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

@@ -181,6 +181,11 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         public AnywhereAnytimeViewModel(Guest1 guest1)
         {
             this.guest1 = guest1;
+            Initialize();
+            MakeCommands();
+        }
+        private void Initialize()
+        {
             NumberOfDays = "";
             NumberOfGuests = "";
             IsInputValid = true;
@@ -189,9 +194,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             anywhereAnytimeSuggestedReservationService = new AnywhereAnytimeSuggestedReservationService();
             accommodationReservationService = new AccommodationReservationService();
             superGuestTitleService = new SuperGuestTitleService();
-            MakeCommands();
         }
-
 
         private void MakeCommands()
         {
@@ -213,9 +216,12 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 
         private void Details_Executed(object sender)
         {
-                Accommodation currentAccommodation = (((Button)sender).DataContext as SuggestedReservationViewModel).Accommodation;
-                AccommodationDetailsView details = new AccommodationDetailsView(currentAccommodation, guest1);
-                Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = details;
+            Accommodation currentAccommodation = (((Button)sender).DataContext as SuggestedReservationViewModel).Accommodation;
+            DateTime arrival = (((Button)sender).DataContext as SuggestedReservationViewModel).Arrival;
+            DateTime departure = (((Button)sender).DataContext as SuggestedReservationViewModel).Departure;
+
+            AccommodationDetailsView details = new AccommodationDetailsView(currentAccommodation, guest1, arrival, departure);
+            Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = details;
  
         }
         private async void Reserve_Executed(object sender)
@@ -337,23 +343,15 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                 {
                     lengthOfStay = Departure.Subtract(Arrival);
                     if (IsValidDateInput())  //all fields are filled
-                    {
                         UpdateSuggestedReservations();
-                    }
                     else
-                    {
                         ShowMessageBoxForInvalidDateInput();
-                    }
                 }
                 else //only textbox input 
-                {
                     UpdateSuggestedReservationsNoInputDates();
-                }
             }
             else
-            {
                 ShowMessageBoxForInvalidInput();
-            }
 
         }
 
@@ -395,15 +393,15 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         //Validation - date input (calendars and num. of days)
         private bool IsValidDateInput() //if only calendar are filled (treba prije poziva ove metode provjera da li je bar 1 kalendar selektovan)
         {
-            return (Arrival != null && Departure != null && Arrival <= Departure && Arrival.Date > DateTime.Now && Convert.ToInt32(lengthOfStay.TotalDays) >= (Convert.ToInt32(NumberOfDays) - 1));
+            return (Arrival != DateTime.MinValue && Departure != DateTime.MinValue && Arrival <= Departure && Arrival.Date > DateTime.Now && Convert.ToInt32(lengthOfStay.TotalDays) >= (Convert.ToInt32(NumberOfDays) - 1));
         }
-        //Validation - all fields are empty
+        //Validation - all textboxes are empty
         private bool AreTextboxesDataValid()
         {
             return NumberOfGuests != "" && NumberOfDays != "";
         }
 
-        //Message box - all fields are empty
+        //Message box - all textboxes are empty
         private void ShowMessageBoxForInvalidInput()
         {
             Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("Please enter number of days and guests (and/or choose dates)!", "/Resources/Images/exclamation.png");
