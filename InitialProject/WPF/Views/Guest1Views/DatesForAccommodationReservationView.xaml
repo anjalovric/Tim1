@@ -95,7 +95,7 @@
             <Label Content="SELECT DESIRED DATE" Foreground="#22301a" Height="Auto" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" Margin="0,25,0,0" FontWeight="Bold" FontFamily="Baskerville Old Face" TextElement.FontSize="24"></Label>
             
             <!-- SUGGESTED DATES FOR SELECTED ACCOMMODATION -->
-            <DataGrid x:Name="AvailableDates" VerticalContentAlignment="Center" SelectedItem="{Binding SelectedDateRange, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" ItemsSource="{Binding Path=availableDatesForAccommodations,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"  Margin="0,20,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Height="320" Width="520">
+            <DataGrid x:Name="AvailableDates" VerticalContentAlignment="Center" SelectedItem="{Binding SelectedDateRange, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" ItemsSource="{Binding Path=AvailableDatesForAccommodations,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"  Margin="0,20,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Height="320" Width="520">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Arrival date" Width="2*" Binding="{Binding Arrival, Mode=OneWay}"/>
                     <DataGridTextColumn Header="Departure date" Width="2*" Binding="{Binding Departure, Mode=OneWay}"/>

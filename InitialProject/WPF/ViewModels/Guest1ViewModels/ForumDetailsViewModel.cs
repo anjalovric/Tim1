@@ -133,32 +133,37 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         {
             this.guest1 = guest1;
             this.Forum = forum;
-            IsVeryUseful = forum.IsVeryUseful;
+            Initialize();
+            MakeCommands();
+        }
+        private void Initialize()
+        {
+            NewComment = "";
+            IsVeryUseful = Forum.IsVeryUseful;
             IsCommentingEnabled = Forum.Opened;
-            if(guest1.Id!=Forum.Guest1.Id)
+            if (guest1.Id != Forum.Guest1.Id)
                 IsClosingEnabled = false;
             else if (Forum.Opened == true)
                 IsClosingEnabled = true;
+            SetButtonsVisibility();
+            forumCommentService = new ForumCommentService();
+            forumService = new ForumService();
+            Comments = new ObservableCollection<ForumComment>(forumCommentService.GetAllByForumId(Forum.Id));
+            Comments = new ObservableCollection<ForumComment>(Comments.Reverse());
+        }
+        private void SetButtonsVisibility()
+        {
             if (Forum.Opened == true)
             {
                 IsClosingVisible = Visibility.Visible;
                 IsOpeningVisible = Visibility.Hidden;
 
             }
-               
             else
             {
                 IsClosingVisible = Visibility.Hidden;
                 IsOpeningVisible = Visibility.Visible;
             }
-            forumCommentService = new ForumCommentService();
-            NewComment = "";
-
-            MakeCommands();
-            forumService = new ForumService();
-            Comments = new ObservableCollection<ForumComment>(forumCommentService.GetAllByForumId(Forum.Id));
-            Comments = new ObservableCollection<ForumComment>(Comments.Reverse());
-
         }
         private void OpenForum_Executed(object sender)
         {
@@ -171,8 +176,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             else
                 IsClosingEnabled=true;
             ShowMessageBoxForSuccessfullOpening();
-
-
         }
         private void AddComment_Executed(object sender)
         {
@@ -183,14 +186,17 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                 forumService.IncrementCommentsNumber(Forum);
                 Forum = forumService.SetIsVeryUseful(Forum);
                 IsVeryUseful = Forum.IsVeryUseful;
-                Comments = new ObservableCollection<ForumComment>(forumCommentService.GetAllByForumId(Forum.Id));
-                Comments = new ObservableCollection<ForumComment>(Comments.Reverse());
-                NewComment = "";
-
+                UpdateComments();
             }
             else
                 ShowMessageBoxForInvalidCommenting();
 
+        }
+        private void UpdateComments()
+        {
+            Comments = new ObservableCollection<ForumComment>(forumCommentService.GetAllByForumId(Forum.Id));
+            Comments = new ObservableCollection<ForumComment>(Comments.Reverse());
+            NewComment = "";
         }
 
         private void Back_Executed(object sender)
@@ -231,6 +237,8 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             messageBox.ShowDialog();
         }
 
+
+        //Message box - no comment entered
         private void ShowMessageBoxForInvalidCommenting()
         {
             Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("You must enter a comment text!", "/Resources/Images/exclamation.png");

@@ -28,20 +28,18 @@ namespace InitialProject.APPLICATION.UseCases
             foreach (Accommodation accommodation in storedAccommodations)
             {
                 if(accommodation.Capacity>=numberOfGuests)
-                {
-                    List<AvailableDatesForAccommodation> availableDatesForAccommodations = suggestedDatesForAccommodationReservationService.GetAvailableDatesForAnywhereSearch(accommodation);
-                    if (availableDatesForAccommodations != null)    //if returned null -> no available dates for this accommodation
-                    {
-                        foreach (AvailableDatesForAccommodation date in availableDatesForAccommodations)
-                        {
-                            retDates.Add(Tuple.Create(accommodation, date));
-                        }
-                    }
-                }
-                
+                    FillDateRanges(accommodation, retDates);             
             }
-
             return retDates;
+        }
+        private void FillDateRanges(Accommodation accommodation, List<Tuple<Accommodation, AvailableDatesForAccommodation>> retDates)
+        {
+            List<AvailableDatesForAccommodation> availableDatesForAccommodations = suggestedDatesForAccommodationReservationService.GetAvailableDatesForAnywhereSearch(accommodation);
+            if (availableDatesForAccommodations != null)    //if returned null -> no available dates for this accommodation
+            {
+                foreach (AvailableDatesForAccommodation date in availableDatesForAccommodations)
+                    retDates.Add(Tuple.Create(accommodation, date));
+            }
         }
         public List<Tuple<Accommodation, AvailableDatesForAccommodation>> GetAvailableDatesNoInputDates(int numberOfDays, int numberOfGuests)
         {
@@ -51,19 +49,15 @@ namespace InitialProject.APPLICATION.UseCases
             foreach (Accommodation accommodation in storedAccommodations)
             {
                 if (accommodation.Capacity >= numberOfGuests)
-                {
-                    List<AvailableDatesForAccommodation> availableDatesForAccommodations = suggestedDatesForAccommodationReservationService.GetAvailableDatesForAnywhereSearchNoInputDates(accommodation, numberOfDays, numberOfGuests);
-                        foreach (AvailableDatesForAccommodation date in availableDatesForAccommodations)
-                        {
-                            retDates.Add(Tuple.Create(accommodation, date));
-                        }
-                    
-                }
-
+                    FillDateRangesNoInputDates(accommodation, retDates, numberOfDays, numberOfGuests);
             }
-
             return retDates;
         }
-
+        private void FillDateRangesNoInputDates(Accommodation accommodation, List<Tuple<Accommodation, AvailableDatesForAccommodation>> retDates, int numberOfDays, int numberOfGuests)
+        {
+            List<AvailableDatesForAccommodation> availableDatesForAccommodations = suggestedDatesForAccommodationReservationService.GetAvailableDatesForAnywhereSearchNoInputDates(accommodation, numberOfDays, numberOfGuests);
+            foreach (AvailableDatesForAccommodation date in availableDatesForAccommodations)
+                retDates.Add(Tuple.Create(accommodation, date));
+        }
     }
 }

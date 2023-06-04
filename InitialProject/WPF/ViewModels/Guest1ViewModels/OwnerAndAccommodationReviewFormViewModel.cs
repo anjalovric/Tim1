@@ -102,15 +102,15 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         private AccommodationRenovationSuggestionService accommodationRenovationSuggestionService;
         public OwnerAndAccommodationReviewFormViewModel(Guest1 guest1,AccommodationReservation SelectedCompletedReservation)
         {
-            accommodationRenovationSuggestionService = new AccommodationRenovationSuggestionService();
             this.reservation = SelectedCompletedReservation;
             this.guest1 = guest1;
-            images = new List<AccommodationReviewImage>();
-            InitializaPage();
+            Initialize();
             MakeCommands();
         }
-        private void InitializaPage()
+        private void Initialize()
         {
+            accommodationRenovationSuggestionService = new AccommodationRenovationSuggestionService();
+            images = new List<AccommodationReviewImage>();
             LevelOfUrgencyIndex = -1;
             AccommodationCleanliness = 1;
             OwnerCorrectness = 1;
