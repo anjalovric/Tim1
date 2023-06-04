@@ -135,7 +135,7 @@
                 </Style>
             </Button.Resources>
         </Button>
-        <Button  HorizontalContentAlignment="Left" HorizontalAlignment="Center" Margin="0,417,0,0" VerticalAlignment="Top" Width="350" Height="45">
+        <Button Command="{Binding SuggestionCommand}" HorizontalContentAlignment="Left" HorizontalAlignment="Center" Margin="0,417,0,0" VerticalAlignment="Top" Width="350" Height="45">
             <Button.Content>
                 <StackPanel Orientation="Horizontal" Width="234">
                     <Label Width="20"></Label>
