@@ -100,6 +100,8 @@
 
     <None Remove="Resources\Images\exclamation.png" />
 
+    <None Remove="Resources\Images\firstPlace.png" />
+
     <None Remove="Resources\Images\flag.png" />
 
     <None Remove="Resources\Images\flowers.jpg" />
@@ -215,6 +217,7 @@
     <None Remove="Resources\Images\satisfaction %281%29.png" />
     <None Remove="Resources\Images\satisfaction.png" />
     <None Remove="Resources\Images\search.png" />
+    <None Remove="Resources\Images\secondPlace.png" />
     <None Remove="Resources\Images\sent2.png" />
     <None Remove="Resources\Images\sent51.png" />
     <None Remove="Resources\Images\signout.png" />
@@ -256,6 +259,7 @@
     <None Remove="Resources\Images\sent.png" />
     <None Remove="Resources\Images\signout.png" />
     <None Remove="Resources\Images\star.png" />
+    <None Remove="Resources\Images\thirdPlace.png" />
     <None Remove="Resources\Images\toolImage.png" />
     <None Remove="Resources\Images\tools.png" />
     <None Remove="Resources\Images\tour.jpg" />
@@ -325,6 +329,9 @@
     <Content Include="Resources\Images\declineImage.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Images\firstPlace.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
 
     <Content Include="Resources\Images\Kalemegdan.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -337,6 +344,9 @@
 
     </Content>
     <Content Include="Resources\Images\location.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\medal.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\newDelete.png">
@@ -362,6 +372,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\RubbishStreet.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\secondPlace.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\thirdPlace.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\touristicGroup.jpg">
@@ -756,9 +772,6 @@
     </Resource>
     <Resource Include="Resources\Images\lock.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Images\medal.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\nature1.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

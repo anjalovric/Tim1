@@ -13,8 +13,8 @@
             <Border Background="LightGray" BorderBrush="DarkGray" BorderThickness="0.5" Margin="0,0,0,0" >
                 <Grid Margin="0, 0, 0, 0">
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="2*"/>
-                        <ColumnDefinition Width="2.5*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
@@ -27,7 +27,31 @@
                         <Run Text=", "/>
                         <Run Text="{Binding Path=Location.Country}" />
                     </TextBlock>
-                    <Button Command="{Binding Path=DataContext.RemoveCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" Name="RemoveButton" Content="Remove"  Grid.Column="2"  Height="20" HorizontalContentAlignment="Center" Style="{StaticResource DataTemplateButton}" Margin="0, 0, 2,0"></Button>
+                    <Button Command="{Binding Path=DataContext.RemoveCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" Name="RemoveButton" Content="Remove" Width="50"  Grid.Column="2"  Height="20" HorizontalContentAlignment="Center" Style="{StaticResource DataTemplateButton}" Margin="0, 0, 2,0"></Button>
+                </Grid>
+            </Border>
+
+        </DataTemplate>
+
+        <DataTemplate x:Key="mostPopularLocation">
+            <Border Background="LightGray" BorderBrush="DarkGray" BorderThickness="0.5" Margin="0,0,0,0" >
+                <Grid Margin="0, 0, 0, 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.5*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                    </Grid.RowDefinitions>
+                    <Image Source="/Resources/Images/medal.png" Margin="5, 0, 0, 0" Height="40" Width="40" Grid.Column="0" HorizontalAlignment="Left"/>
+                    <TextBlock Grid.Column="1" Margin="0, 0, 0, 0" VerticalAlignment="Center" HorizontalAlignment="Left">
+                        <Run Text="Location:" />
+                        <Run Text="{Binding Path=City}" />
+                        <Run Text=", "/>
+                        <Run Text="{Binding Path=Country}" />
+                    </TextBlock>
+                    <Button Command="{Binding Path=DataContext.NewAccommodationCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" Name="AddButton" Content="Add" Width="50" Grid.Column="2"  Height="20" HorizontalContentAlignment="Center" Style="{StaticResource DataTemplateButton}" Margin="0, 0, 2,0"></Button>
                 </Grid>
             </Border>
 
@@ -46,21 +70,16 @@
         </Grid.RowDefinitions>
 
         <Label Content="Most popular locations" FontSize="15" Grid.Row="0" VerticalContentAlignment="Bottom"/>
-        <ListBox Grid.Row="1" Style="{StaticResource ListBoxStyle}">
-            <ListBox.ItemContainerStyle>
+        <ListBox Grid.Row="1"  Style="{StaticResource ListBoxStyle}" ItemsSource="{Binding Path=MostPopularLocations}" ItemTemplate="{StaticResource mostPopularLocation}" IsSynchronizedWithCurrentItem="True" SelectedItem="{Binding SelectedLocation, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" SelectionMode="Single" HorizontalContentAlignment="Stretch">
+            <ListBox.Resources>
                 <Style TargetType="ListBoxItem">
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="ListBoxItem">
-                                <StackPanel Orientation="Horizontal">
-                                    <Image Source="/Resources/Images/star.png" Width="16" Height="16" Margin="0,0,5,0" VerticalAlignment="Center"/>
-                                    <ContentPresenter/>
-                                </StackPanel>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver"  Value="True">
+                            <Setter Property="IsSelected" Value="True"/>
+                        </Trigger>
+                    </Style.Triggers>
                 </Style>
-            </ListBox.ItemContainerStyle>
+            </ListBox.Resources>
         </ListBox>
         <Label Content="Your accommodation in least popular locations" FontSize="15" Grid.Row="2" VerticalContentAlignment="Bottom"/>
         <ListBox Style="{StaticResource ListBoxStyle}" Grid.Row="3" ItemsSource="{Binding Path=LeastPopularAccommodations}" ItemTemplate="{StaticResource leastPopularLocation}" IsSynchronizedWithCurrentItem="True" SelectedItem="{Binding SelectedAccommodation, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" SelectionMode="Single" HorizontalContentAlignment="Stretch">
