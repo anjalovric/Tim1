@@ -19,12 +19,14 @@ namespace InitialProject.APPLICATION.UseCases
         private OwnerService ownerService;
         private AccommodationReservationService accommodationReservationService;
         private AccommodationService accommodationService;
+        private CommentReportService commentReportService;
         public ForumCommentService()
         {
             guest1Service = new Guest1Service();
             ownerService = new OwnerService();
             accommodationReservationService = new AccommodationReservationService();
             accommodationService = new AccommodationService();
+            commentReportService = new CommentReportService();
         }
 
         public List<ForumComment> GetAll()
@@ -63,6 +65,17 @@ namespace InitialProject.APPLICATION.UseCases
         {
             List<ForumComment> storedForumComments = new List<ForumComment>(forumCommentRepository.GetAllByForumId(id));
             SetUsers(storedForumComments);
+            SetReportNumber(storedForumComments);
+
+            return storedForumComments;
+        }
+
+        public List<ForumComment> GetAllByForumIdForOwner(Owner owner, int id)
+        {
+            List<ForumComment> storedForumComments = new List<ForumComment>(forumCommentRepository.GetAllByForumId(id));
+            SetUsers(storedForumComments);
+            SetReportNumber(storedForumComments);
+            IsAlreadyReportedByThisOwner(owner, storedForumComments);
 
             return storedForumComments;
         }
@@ -97,5 +110,30 @@ namespace InitialProject.APPLICATION.UseCases
             return total;
         }
 
+        private void SetReportNumber(List<ForumComment> comments)
+        {
+            foreach(ForumComment comment in comments)
+            {
+                comment.ReportsNumber = commentReportService.GetReportNumber(comment);
+            }
+        }
+
+        private void IsAlreadyReportedByThisOwner(Owner owner, List<ForumComment> comments)
+        {
+            foreach (ForumComment comment in comments)
+            {
+                comment.IsAlreadyReportedByThisOwner = commentReportService.IsAlreadyReported(owner,comment);
+            }
+        }
+
+        public void Report(ForumComment comment, Owner owner)
+        {
+            CommentReport report = new CommentReport();
+            comment.ReportsNumber++;
+            report.Owner = owner;
+            report.ForumComment = comment;
+            commentReportService.Add(report);
+            forumCommentRepository.Report(comment);
+        }
     }
 }
