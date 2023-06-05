@@ -20,6 +20,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
     public class ForumViewModel : INotifyPropertyChanged
     {
         private Guest1 guest1;
+        private OwnerNotificationsService ownerNotificationsService;
         public ObservableCollection<string> Countries { get; set; }
         public ObservableCollection<string> CitiesByCountry { get; set; }
         public RelayCommand CountryInputSelectionChangedCommand { get; set; }
@@ -110,6 +111,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             forumCommentService = new ForumCommentService();
             Forums = new ObservableCollection<Forum>(forumService.GetAll());
             Forums = new ObservableCollection<Forum>(Forums.Reverse());
+            ownerNotificationsService = new OwnerNotificationsService();
         }
         private void MakeCommands()
         {
@@ -197,6 +199,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                 forumCommentService.Add(newComment);
                 forumService.IncrementCommentsNumber(currentForum);
                 currentForum = forumService.SetIsVeryUseful(currentForum);
+                ownerNotificationsService.AddNewForumNotification(currentForum.Location);
                 ForumDetailsView details = new ForumDetailsView(guest1, currentForum);
                 Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = details;
             }
@@ -214,6 +217,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                 forumCommentService.Add(newComment);
                 forumService.IncrementCommentsNumber(currentForum);
                 currentForum = forumService.SetIsVeryUseful(currentForum);
+                ownerNotificationsService.AddNewForumNotification(currentForum.Location);
                 ForumDetailsView details = new ForumDetailsView(guest1, currentForum);
                 Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = details;
             }
