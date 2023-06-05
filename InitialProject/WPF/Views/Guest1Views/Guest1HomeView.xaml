@@ -6,7 +6,7 @@
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:local="clr-namespace:InitialProject.WPF.Views.Guest1Views"
         mc:Ignorable="d"
-        Title="Guest1Home" d:DesignHeight="768" d:DesignWidth="1024" Height="768" Width="1024" WindowStartupLocation="CenterScreen">
+        Title="My travel" d:DesignHeight="768" d:DesignWidth="1024" Height="768" Width="1024" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Style TargetType="MenuItem" x:Key="SubMenuItem">
             <Setter Property="Background">
