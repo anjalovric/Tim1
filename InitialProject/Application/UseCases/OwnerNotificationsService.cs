@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Documents;
+using InitialProject.APPLICATION.UseCases;
 using InitialProject.Domain;
 using InitialProject.Domain.Model;
 using InitialProject.Domain.RepositoryInterfaces;
@@ -10,10 +11,12 @@ namespace InitialProject.Service
     public class OwnerNotificationsService
     {
         private OwnerService ownerService;
+        private LocationSuggestionsService suggestionsService;
         private IOwnerNotificationRepository notificationRepository = Injector.CreateInstance<IOwnerNotificationRepository>();
         public OwnerNotificationsService()
         {
             ownerService = new OwnerService();
+            suggestionsService = new LocationSuggestionsService();
         }
 
         public void Add(OwnerNotificationType type, Owner owner)
@@ -73,6 +76,11 @@ namespace InitialProject.Service
             {
                 notificationRepository.Add(OwnerNotificationType.FORUM_ADDED, owner);
             }
+        }
+
+        public bool HasLocationSuggestion(Owner owner)
+        {
+            return suggestionsService.GetMostPopularLocations(owner).Count !=0 || suggestionsService.GetLeastPopularAccommodations(owner).Count != 0;
         }
 
     }
