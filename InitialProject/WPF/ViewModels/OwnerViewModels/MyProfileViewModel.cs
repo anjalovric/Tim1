@@ -12,6 +12,7 @@ using InitialProject.Model;
 using InitialProject.ReportPatterns;
 using InitialProject.Service;
 using InitialProject.WPF.Views;
+using InitialProject.WPF.Views.OwnerViews;
 
 namespace InitialProject.WPF.ViewModels.OwnerViewModels
 {
@@ -64,8 +65,10 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         private void GenerateReport_Executed(object sender)
         {
-            ReportGenerator generator = new OwnerReportPattern();
+            ReportGenerator generator = new OwnerReportPattern(ProfileOwner);
             generator.GenerateReport();
+            PDFPreviewView previewView = new PDFPreviewView();
+            Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = previewView;
         }
         public double AverageRate
         {
