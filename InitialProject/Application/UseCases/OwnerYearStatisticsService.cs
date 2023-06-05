@@ -38,7 +38,7 @@ namespace InitialProject.Service
             }
             return result;
         }
-        private List<int> GetAllYears(Accommodation accommodation)
+        public List<int> GetAllYears(Accommodation accommodation)
         {
             HashSet<int> years = new HashSet<int>();
             AvailableDatesForAccommodationService datesService = new AvailableDatesForAccommodationService();
@@ -52,7 +52,7 @@ namespace InitialProject.Service
             return years.OrderByDescending(x => x).ToList();
         }
 
-        private int GetReservationNumberByYear(Accommodation accommodation, int year)
+        public int GetReservationNumberByYear(Accommodation accommodation, int year)
         {
             int counter=0;
             foreach (var reservation in reservationService.GetAll().FindAll(n => n.Accommodation.Id == accommodation.Id))
