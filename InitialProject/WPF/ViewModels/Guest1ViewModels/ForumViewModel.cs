@@ -217,7 +217,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                 forumCommentService.Add(newComment);
                 forumService.IncrementCommentsNumber(currentForum);
                 currentForum = forumService.SetIsVeryUseful(currentForum);
-                ownerNotificationsService.AddNewForumNotification(currentForum.Location);
                 ForumDetailsView details = new ForumDetailsView(guest1, currentForum);
                 Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = details;
             }
