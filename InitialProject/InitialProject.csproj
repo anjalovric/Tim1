@@ -63,6 +63,8 @@
 
     <None Remove="Resources\Images\clock.png" />
     <None Remove="Resources\Images\close.png" />
+    <None Remove="Resources\Images\cloud.png" />
+    <None Remove="Resources\Images\cloud1.png" />
     <None Remove="Resources\Images\congratulations.png" />
     <None Remove="Resources\Images\congratulations2.png" />
     <None Remove="Resources\Images\congratulations3.png" />
@@ -154,6 +156,7 @@
     <None Remove="Resources\Images\logo.jpg" />
     <None Remove="Resources\Images\logoMyTravel.png" />
     <None Remove="Resources\Images\medal.png" />
+    <None Remove="Resources\Images\medal1.png" />
     <None Remove="Resources\Images\minus.png" />
     <None Remove="Resources\Images\month.png" />
     <None Remove="Resources\Images\museum.jpg" />
@@ -184,6 +187,7 @@
 
     <None Remove="Resources\Images\picture.png" />
     <None Remove="Resources\Images\plus.png" />
+    <None Remove="Resources\Images\premium.png" />
     <None Remove="Resources\Images\pro.png" />
     <None Remove="Resources\Images\profile.png" />
     <None Remove="Resources\Images\profile11.png" />
@@ -415,6 +419,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\changedate.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\cloud1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\cottage1.jpg">
@@ -778,6 +785,9 @@
     <Resource Include="Resources\Images\lock.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\Images\medal1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Images\nature1.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
@@ -808,6 +818,9 @@
     </Resource>
     <Resource Include="Resources\Images\padlock.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\premium.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\pro.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

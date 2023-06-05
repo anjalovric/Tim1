@@ -5,35 +5,41 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject"
         mc:Ignorable="d"
-        Title="Sign in" Height="250" Width="450" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
-    <Grid>
+        Title="Sign in" Height="300" Width="450" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="Transparent">
 
-        <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-            <RowDefinition Height="150"></RowDefinition>
-            <RowDefinition Height="60"></RowDefinition>
-        </Grid.RowDefinitions>
+    <Border BorderThickness="2" Padding="0" BorderBrush="Black">
+        <Grid Background="white">
 
-        <Grid Grid.Row="1" Grid.Column="0" Width="300" Height="100">
+
             <Grid.RowDefinitions>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-                
+                <RowDefinition Height="2*"></RowDefinition>
+                <RowDefinition Height="130"></RowDefinition>
+                <RowDefinition Height="60"></RowDefinition>
             </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="100"></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-            </Grid.ColumnDefinitions>
 
-            <Label Grid.Row="0" Grid.Column="0" Height="30">Username:</Label>
-            <Label Grid.Row="1" Grid.Column="0" Height="30">Password:</Label>
-            
-            <TextBox Grid.Row="0" Text="{Binding Path=Username, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Height="25" TextWrapping="Wrap" VerticalAlignment="Center"/>
-            <PasswordBox Name="txtPassword" Grid.Row="1" Grid.Column="1" Height="25" VerticalAlignment="Center"/>
-            
+            <Image Source="/Resources/Images/LOGO (2).jpg" Opacity="1" Stretch="Fill" Grid.RowSpan="2" HorizontalAlignment="Center" Height="140" VerticalAlignment="Top" Margin="0,-17,0,0" Width="278"></Image>
+
+            <Grid Grid.Row="1" Grid.Column="0" Width="300" Height="100">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Row="0" Grid.Column="0" Height="30" FontWeight="Medium" FontSize="16">Username:</Label>
+                <Label Grid.Row="1" Grid.Column="0" Height="30" FontWeight="Medium" FontSize="16">Password:</Label>
+
+                <TextBox Grid.Row="0" FontSize="16"  BorderBrush="Black" Text="{Binding Path=Username, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Height="25" TextWrapping="Wrap" VerticalAlignment="Center"/>
+                <PasswordBox Name="txtPassword" FontSize="16" BorderBrush="Black" Grid.Row="1" Grid.Column="1" Height="25" VerticalAlignment="Center"/>
+
+            </Grid>
+
+            <Button Grid.Row="2" Click="SignIn" FontSize="16" BorderBrush="Black" Content="Sign in" HorizontalAlignment="Center" FontWeight="Medium" VerticalAlignment="Top" Height="30" Width="70" Margin="0,10,0,0"/>
+
         </Grid>
-        
-        <Button Grid.Row="2" Click="SignIn" Content="Sign in" HorizontalAlignment="Center" VerticalAlignment="Center" Height="20" Width="60"/>
-
-    </Grid>
+    </Border>
 </Window>
