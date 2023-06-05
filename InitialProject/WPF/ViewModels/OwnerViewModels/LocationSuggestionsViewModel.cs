@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using InitialProject.APPLICATION.UseCases;
+using InitialProject.Domain.Model;
 using InitialProject.Model;
 using InitialProject.WPF.Views;
 using InitialProject.WPF.Views.OwnerViews;
@@ -12,14 +13,14 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 {
     public class LocationSuggestionsViewModel : INotifyPropertyChanged
     {
-        public ObservableCollection<Location> MostPopularLocations { get; set; }
-        public ObservableCollection<Accommodation> LeastPopularAccommodations { get; set; }
+        public ObservableCollection<MostPopularLocation> MostPopularLocations { get; set; }
+        public ObservableCollection<LeastPopularLocation> LeastPopularAccommodations { get; set; }
         private LocationSuggestionsService locationSuggestionsService;
         public Owner Owner { get; set; }
         public RelayCommand RemoveCommand { get; set; }
         public RelayCommand NewAccommodationCommand { get; set; }
-        private Location selectedLocation;
-        private Accommodation selectedAccommodation;
+        private MostPopularLocation selectedLocation;
+        private LeastPopularLocation selectedAccommodation;
         public event PropertyChangedEventHandler? PropertyChanged;
         public LocationSuggestionsViewModel(Owner owner)
         {
@@ -32,8 +33,8 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         private void MakeObservableCollections()
         {
-            MostPopularLocations = new ObservableCollection<Location>(locationSuggestionsService.GetMostPopularLocations(Owner));
-            LeastPopularAccommodations = new ObservableCollection<Accommodation>(locationSuggestionsService.GetLeastPopularAccommodations(Owner));
+            MostPopularLocations = new ObservableCollection<MostPopularLocation>(locationSuggestionsService.GetMostPopularLocations(Owner));
+            LeastPopularAccommodations = new ObservableCollection<LeastPopularLocation>(locationSuggestionsService.GetLeastPopularAccommodations(Owner));
             InitializeSelectedItems();
         }
 
@@ -49,7 +50,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             if (LeastPopularAccommodations.Count() > 0)
                 SelectedAccommodation = LeastPopularAccommodations[0];
         }
-        public Accommodation SelectedAccommodation
+        public LeastPopularLocation SelectedAccommodation
         {
             get { return selectedAccommodation; }
             set
@@ -62,7 +63,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
         }
 
-        public Location SelectedLocation
+        public MostPopularLocation SelectedLocation
         {
             get { return selectedLocation; }
             set
@@ -84,7 +85,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         {
             if (SelectedAccommodation != null)
             {
-                DeletingAccommodationView deletingView = new DeletingAccommodationView(SelectedAccommodation);
+                DeletingAccommodationView deletingView = new DeletingAccommodationView(SelectedAccommodation.Accommodation);
                 deletingView.Show();
             }
         }
@@ -93,11 +94,11 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             if(SelectedLocation != null)
             {
                 AccommodationInputFormView accommodationInputFormView = new AccommodationInputFormView(Owner);
-                accommodationInputFormView.formViewModel.Location.Country = SelectedLocation.Country;
+                accommodationInputFormView.formViewModel.Location.Country = SelectedLocation.Location.Country;
                 accommodationInputFormView.formViewModel.EnableCityCommand.Execute(null);
                 foreach(var city in accommodationInputFormView.formViewModel.CitiesByCountry)
                 {
-                    if(city.Equals(SelectedLocation.City))
+                    if(city.Equals(SelectedLocation.Location.City))
                         accommodationInputFormView.formViewModel.Location.City = city;
                 }
                 Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = accommodationInputFormView;
