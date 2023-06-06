@@ -107,7 +107,7 @@ namespace InitialProject.ReportPatterns
 
         public override void SavePdf()
         {
-            Document.Save("../Reports/GuideReport.pdf");
+            Document.Save("../../../Resources/Reports/GuideReport.pdf");
             Document.Close(true);
           
         }

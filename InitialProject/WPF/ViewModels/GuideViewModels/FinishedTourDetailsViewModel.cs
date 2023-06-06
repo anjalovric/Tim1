@@ -2,13 +2,16 @@
 using InitialProject.Model;
 using InitialProject.ReportPatterns;
 using InitialProject.Service;
+using InitialProject.WPF.Views.GuideViews;
 using LiveCharts;
 using LiveCharts.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Windows;
 using System.Windows.Media;
 
 namespace InitialProject.WPF.ViewModels
@@ -184,6 +187,10 @@ namespace InitialProject.WPF.ViewModels
             TourDetailsService detailsService = new TourDetailsService();
             ReportGenerator reportGenerator = new ReportPatterns.GuideReportPattern(selectedInstance, guests, Math.Round(detailsService.MakeUnder18Precentage(selectedInstance.Id), 2), Math.Round(detailsService.MakeBetween18And50Precentage(selectedInstance.Id), 2), Math.Round(detailsService.MakeOver50Precentage(selectedInstance.Id), 2), Math.Round(detailsService.MakeWithVoucherPrecentage(selectedInstance.Id), 2), Math.Round(detailsService.MakeWithoutVoucherPrecentage(selectedInstance.Id), 2), Math.Round(detailsService.MakeAttendancePrecentage(selectedInstance.Id), 2));
             reportGenerator.GenerateReport();
+
+            PdfPreviewView pdfPreviewView = new PdfPreviewView();
+            Application.Current.Windows.OfType<GuideWindow>().FirstOrDefault().Main.Content = pdfPreviewView;
+
         }
     }
 }
