@@ -47,15 +47,12 @@ namespace InitialProject.WPF.Converters
         private void AccommodationInput_Executed(object sender)
         {
             AccommodationInputDemo accommodationInputDemo = new AccommodationInputDemo();
-            Thread thread = new Thread(accommodationInputDemo.PlayDemo);
-            thread.Start();
+            accommodationInputDemo.PlayDemo();
         }
 
         private void ScheduleRenovation_Executed(object sender)
         {
             ScheduleRenovationDemo scheduleRenovationDemo = new ScheduleRenovationDemo();
-            //Thread thread = new Thread(scheduleRenovationDemo.PlayDemo);
-            //thread.Start();
             scheduleRenovationDemo.PlayDemo();
         }
     }

@@ -15,7 +15,7 @@
         <Grid Height="800" >
             <Label Content="Name*" Margin="20,39,179,729"/>
 
-            <TextBox HorizontalAlignment="Center" Margin="0,71,0,0" TextWrapping="Wrap" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="357" Height="31">
+            <TextBox Name="Name" HorizontalAlignment="Center" Margin="0,71,0,0" TextWrapping="Wrap" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="357" Height="31">
                 <Binding Path="Name" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True">
                     <Binding.ValidationRules>
                         <val:StringValidationRule ValidationStep="RawProposedValue"/>

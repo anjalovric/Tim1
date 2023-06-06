@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Threading;
 using DotLiquid.Tags;
 using InitialProject.Model;
@@ -14,19 +17,27 @@ using InitialProject.Service;
 using InitialProject.WPF.ViewModels.OwnerViewModels;
 using InitialProject.WPF.Views;
 using InitialProject.WPF.Views.OwnerViews;
+using Xceed.Wpf.Toolkit;
 
 namespace InitialProject.WPF.Demo
 {
     public class ScheduleRenovationDemo : INotifyPropertyChanged
     {
         private ScheduleRenovationViewModel viewModel;
+        private ScheduleRenovationView scheduleRenovationView;
         private int increment = -1;
+        private Timer timer;
+        private string fullText = "";
+        private int currentIndex = 0;
+        private WatermarkTextBox textBox;
+        private Button button;
         public ScheduleRenovationDemo()
         {
             OwnerService ownerService = new OwnerService();
             Owner owner = ownerService.GetAll()[0];
-            ScheduleRenovationView scheduleRenovationView = new ScheduleRenovationView(owner);
+            scheduleRenovationView = new ScheduleRenovationView(owner);
             viewModel = scheduleRenovationView.viewModel;
+            timer = new Timer(TimerLetters, null, 0, 200);
             Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = scheduleRenovationView;
         }
 
@@ -53,13 +64,24 @@ namespace InitialProject.WPF.Demo
                 viewModel.EndDate = DateTime.Now.AddDays(6);
             if(Increment == 6)
                 viewModel.Duration = 2;
-            if(Increment == 10)
+            if(Increment == 8)
             {
                 viewModel.SelectedDateRange = viewModel.DatesSuggestions[0];
-                viewModel.ConfirmCommand.Execute(null);
             }
-            if(Increment == 8)
-                viewModel.Description = "new renovation";
+            if(Increment == 9)
+            {
+                textBox = scheduleRenovationView.Description;
+                fullText = "renovation description";
+                timer.Start();
+            }
+            if(Increment == 12)
+            {
+                button = scheduleRenovationView.ConfirmButton;
+                button.IsEnabled = true;
+            }
+            if(Increment == 13)
+                button.Foreground = new SolidColorBrush(Colors.Gray);
+
         }
 
         public int Increment
@@ -79,5 +101,20 @@ namespace InitialProject.WPF.Demo
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        private void TimerLetters(object state)
+        {
+            if (currentIndex < fullText.Length)
+            {
+                currentIndex++;
+                textBox.Dispatcher.Invoke(() =>
+                {
+                    textBox.Text = fullText.Substring(0, currentIndex);
+                });
+            }
+            else
+            {
+                timer.Dispose(); // Stop the timer when the entire text has been displayed
+            }
+        }
     }
 }
