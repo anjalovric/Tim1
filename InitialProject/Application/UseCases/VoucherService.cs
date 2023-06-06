@@ -1,14 +1,8 @@
 ﻿using InitialProject.Domain;
 using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Model;
-using InitialProject.Repository;
-using InitialProject.Serializer;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace InitialProject.Service
 {
@@ -108,7 +102,16 @@ namespace InitialProject.Service
             voucher.Used = false;
             voucher.Type = VoucherType.DISMISSAL_GUIDE;
             Save(voucher);
+        }
 
+        public void ChangeAssignedGuide(int guideId)
+        {
+            foreach (Voucher voucher in GetAll())
+                if (voucher.GuestId == guideId && voucher.Used == false && voucher.Type==VoucherType.CANCELED_TOUR)
+                {
+                    voucher.GuideId = -1;
+                    Update(voucher);
+                }
         }
     }
 }
