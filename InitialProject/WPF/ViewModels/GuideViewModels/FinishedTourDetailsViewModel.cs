@@ -5,7 +5,6 @@ using InitialProject.Service;
 using LiveCharts;
 using LiveCharts.Wpf;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -156,7 +155,13 @@ namespace InitialProject.WPF.ViewModels
                 {
                     Guest2 presentGuest = detailsService.guest2Service.GetById(alert.Guest2Id);
                     pointInformation.guest2s.Add(presentGuest);
-                    if(!guests.Contains(presentGuest))  
+                    bool contain = true;
+                    foreach(Guest2 guest2 in guests)
+                    {
+                        if(guest2.Id==presentGuest.Id)
+                            contain = false;
+                    }
+                    if(contain)
                         guests.Add(presentGuest);
                 }
             }

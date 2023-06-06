@@ -67,5 +67,18 @@ namespace InitialProject.Service
                 counter += reservation.Capacity;
             return counter;
         }
+
+        public int CountReservationForTour(TourInstance tourInstance)
+        {
+            int count = 0;
+            foreach(TourReservation tourReservation in GetAll())
+            {
+                if(tourReservation.TourInstanceId== tourInstance.Id)
+                {
+                    count++;
+                }
+            }
+            return count;
+        }
     }
 }
