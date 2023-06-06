@@ -42,6 +42,16 @@ namespace InitialProject.Help
             ActiveToursHelpForm hh = new ActiveToursHelpForm(key, originator);
             hh.Show();
         }
+        public static void ShowHelpForCreateComplexRequest(string key, CreateComplexTourRequestView originator)
+        {
+            ComplexTourRequestHelpForm hh = new ComplexTourRequestHelpForm(key, originator);
+            hh.Show();
+        }
+        public static void ShowHelpForCreateOrdinaryRequest(string key, CreateOrdinaryTourRequestView originator)
+        {
+            OrdinaryTourRequestHelpForm hh = new OrdinaryTourRequestHelpForm(key, originator);
+            hh.Show();
+        }
         public static void ShowHelpForVouchers(string key, VoucherFormView originator)
         {
             VouchersHelpForm hh = new VouchersHelpForm(key, originator);
@@ -55,6 +65,41 @@ namespace InitialProject.Help
         public static void ShowHelpForRequests(string key, MyRequestsFormView originator)
         {
             RequestsHelpForm hh = new RequestsHelpForm(key, originator);
+            hh.Show();
+        }
+        public static void ShowHelpForParts(string key, PartsOfComplexRequestTour originator)
+        {
+            PartsOfComplexRequestHelpForm hh = new PartsOfComplexRequestHelpForm(key, originator);
+            hh.Show();
+        }
+        public static void ShowHelpForDetails(string key, TourDetailsView originator)
+        {
+            TourDetailsHelpForm hh = new TourDetailsHelpForm(key, originator);
+            hh.Show();
+        }
+        public static void ShowHelpForGrading(string key, GuideAndTourReviewFormView originator)
+        {
+            GuideAndTourReviewHelpForm hh = new GuideAndTourReviewHelpForm(key, originator);
+            hh.Show();
+        }
+        public static void ShowHelpForReservation(string key, TourReservationFormView originator)
+        {
+            TourReservationHelpForm hh = new TourReservationHelpForm(key, originator);
+            hh.Show();
+        }
+        public static void ShowHelpForStatistics(string key, TourRequestStatisticsView originator)
+        {
+            TourRequestStatisticsHelpForm hh = new TourRequestStatisticsHelpForm(key, originator);
+            hh.Show();
+        }
+        public static void ShowHelpForOrdinaryDetails(string key, OrdinaryTourRequestDetailsForm originator)
+        {
+            OrdinaryTourRequestDetailsHelpForm hh = new OrdinaryTourRequestDetailsHelpForm(key, originator);
+            hh.Show();
+        }
+        public static void ShowHelpForStatistic(string key, StatisticForChosenYearFormView originator)
+        {
+            StatisticForChosenYearHelpForm hh = new StatisticForChosenYearHelpForm(key, originator);
             hh.Show();
         }
     }

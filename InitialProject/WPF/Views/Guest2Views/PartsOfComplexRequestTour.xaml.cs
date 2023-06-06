@@ -24,7 +24,11 @@ namespace InitialProject.WPF.Views.Guest2Views
         public PartsOfComplexRequestTour(ComplexTourRequests complex)
         {
             InitializeComponent();
-            DataContext = new PartsOfComplexRequestTourViewModel(complex);
+            DataContext = new PartsOfComplexRequestTourViewModel(complex,this);
+        }
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            FocusManager.SetFocusedElement(this, this);
         }
     }
 }

@@ -4,8 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.WPF.Views.Guest2Views"
+        xmlns:l="clr-namespace:InitialProject.Help"
         mc:Ignorable="d"
-        Title="StatisticForChoosenYear"  d:DesignHeight="400" d:DesignWidth="500" Width="500" Height="400" WindowStartupLocation="CenterScreen" WindowStyle="None">
+        Loaded="Page_Loaded"
+        Title="StatisticForChoosenYear"  d:DesignHeight="400" d:DesignWidth="500" Width="500" Height="400" WindowStartupLocation="CenterScreen" WindowStyle="None" l:ShowToursHelp.HelpKey="statisticForChosenYear">
+    <Window.InputBindings>
+        <KeyBinding Key="F1" Command="{Binding HelpCommandInViewModel}" />
+    </Window.InputBindings>
     <Window.Resources>
         <Style x:Key="FontStyle" TargetType="TextBlock">
             <Setter Property="FontWeight" Value="Bold"/>

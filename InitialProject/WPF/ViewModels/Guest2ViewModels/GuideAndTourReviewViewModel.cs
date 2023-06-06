@@ -19,6 +19,9 @@ using System.Runtime.CompilerServices;
 using System.ComponentModel;
 using InitialProject.WPF.Views.Guest1Views;
 using System.Collections.ObjectModel;
+using InitialProject.Help;
+using NPOI.SS.Formula.Functions;
+using System.Windows.Input;
 
 namespace InitialProject.WPF.ViewModels.Guest2ViewModels
 {
@@ -106,12 +109,15 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-        public GuideAndTourReviewViewModel(TourInstance tourInstance, Guest2 guest2)
+        public ICommand HelpCommandInViewModel { get; }
+        private GuideAndTourReviewFormView org;
+        public GuideAndTourReviewViewModel(TourInstance tourInstance, Guest2 guest2, GuideAndTourReviewFormView org)
         {
             reviewId = -1;
             guideAndTourReviewRepository = new GuideAndTourReviewRepository();
             tourReviewImageService = new TourReviewImageService();
             this.guest2 = guest2;
+            this.org = org;
             CurrentTourInstance = tourInstance;
             images = new List<TourReviewImage>();
             MakeCommands();
@@ -120,6 +126,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             InterestingFacts = "1";
             Comment = "";
             tourReviewImage = new TourReviewImage();
+            HelpCommandInViewModel = new RelayCommand(CommandBinding_Executed);
         }
         private void MakeCommands()
         {
@@ -367,7 +374,15 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
                 ImageSource = null;
             }
         }
-
+        private void CommandBinding_Executed(object sender)
+        {
+            IInputElement focusedControl = FocusManager.GetFocusedElement(Application.Current.Windows[0]);
+            if (focusedControl is DependencyObject)
+            {
+                string str = ShowToursHelp.GetHelpKey((DependencyObject)focusedControl);
+                ShowToursHelp.ShowHelpForGrading(str, org);
+            }
+        }
 
     }
 }

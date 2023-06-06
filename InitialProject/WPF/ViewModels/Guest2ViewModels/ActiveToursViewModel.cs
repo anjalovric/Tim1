@@ -1,4 +1,5 @@
-﻿using InitialProject.Model;
+﻿using InitialProject.Help;
+using InitialProject.Model;
 using InitialProject.Service;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,9 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using System.Windows;
+using InitialProject.WPF.Views.Guest2Views;
 
 namespace InitialProject.WPF.ViewModels.Guest2ViewModels
 {
@@ -45,12 +49,19 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         private LocationService locationService;
         private CheckPointService checkPointService;
         private TourInstance tourInstance;
+        private ActiveToursFormView org;
+        //public RelayCommand Command { get; set; }
+        public ICommand HelpCommandInViewModel { get; }
 
-        public ActiveToursViewModel(Guest2 guest2)
+
+        public ActiveToursViewModel(Guest2 guest2,ActiveToursFormView org)
         {
             this.Guest2 = guest2;
             AllPoints = new List<CheckPoint>();
             tourService = new TourService();
+            //Command = new RelayCommand(CommandBinding_Executed, CanExecute);
+            HelpCommandInViewModel = new RelayCommand(CommandBinding_Executed);
+            this.org = org;
             tourInstanceService = new TourInstanceService();
             checkPointService = new CheckPointService();
             alertGuest2Service = new AlertGuest2Service();
@@ -64,6 +75,10 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             SetTourInstances(TourInstances);
             locationService = new LocationService();
             SetTours(tourInstance);
+        }
+        private bool CanExecute(object sender)
+        {
+            return true;
         }
         private void SetTourInstances(ObservableCollection<TourInstance> TourInstances)
         {
@@ -165,5 +180,15 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+        private void CommandBinding_Executed(object sender)
+        {
+            IInputElement focusedControl = FocusManager.GetFocusedElement(Application.Current.Windows[0]);
+            if (focusedControl is DependencyObject)
+            {
+                string str = ShowToursHelp.GetHelpKey((DependencyObject)focusedControl);
+                ShowToursHelp.ShowHelpForActive(str, org);
+            }
+        }
+        
     }
 }

@@ -1,4 +1,5 @@
-﻿using InitialProject.Model;
+﻿using InitialProject.Help;
+using InitialProject.Model;
 using InitialProject.Service;
 using InitialProject.WPF.Views.Guest2Views;
 using System;
@@ -11,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace InitialProject.WPF.ViewModels.Guest2ViewModels
 {
@@ -42,14 +44,18 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
 
         }
         public RelayCommand RateCommand { get; set; }
+        public ICommand HelpCommandInViewModel { get; }
         private GuideAndTourReviewService guideAndTourReviewService;
-        public FinishedTourInstancesViewModel(Guest2 guest2)
+        private FinishedTourInstancesFormView org;
+        public FinishedTourInstancesViewModel(Guest2 guest2,FinishedTourInstancesFormView org)
         {
             CompletedTours = new ObservableCollection<TourInstance>();
             this.guest2 = guest2;
+            this.org = org;
             guideAndTourReviewService = new GuideAndTourReviewService();
             guideAndTourReviewService.SetTourInstances(CompletedTours, guest2);
             RateCommand = new RelayCommand(Rate_Executed, CanExecute);
+            HelpCommandInViewModel = new RelayCommand(CommandBinding_Executed);
         }
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -69,6 +75,15 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             }
             GuideAndTourReviewFormView guideAndTourReview = new GuideAndTourReviewFormView(Selected, guest2);
             guideAndTourReview.Show();
+        }
+        private void CommandBinding_Executed(object sender)
+        {
+            IInputElement focusedControl = FocusManager.GetFocusedElement(Application.Current.Windows[0]);
+            if (focusedControl is DependencyObject)
+            {
+                string str = ShowToursHelp.GetHelpKey((DependencyObject)focusedControl);
+                ShowToursHelp.ShowHelpForFinished(str, org);
+            }
         }
     }
 }

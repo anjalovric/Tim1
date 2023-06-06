@@ -7,9 +7,13 @@
         xmlns:properties="clr-namespace:InitialProject.Properties"
         xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Royale" xmlns:System="clr-namespace:System;assembly=netstandard" xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:InitialProject.View"
+        xmlns:l="clr-namespace:InitialProject.Help"
         mc:Ignorable="d"
-        
+        Loaded="Page_Loaded"
         Title="TourReservationForm" Height="650" Width="668" d:DesignHeight="650" d:DesignWidth="668" Padding="0" Background="Transparent" AllowsTransparency="True" WindowStartupLocation="CenterScreen" WindowStyle="None">
+    <Window.InputBindings>
+        <KeyBinding Key="F1" Command="{Binding HelpCommandInViewModel}" />
+    </Window.InputBindings>
     <Window.Resources>
         <Style x:Key="DataGridRowStyle2" TargetType="{x:Type DataGridRow}">
             <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
