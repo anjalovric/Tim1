@@ -9,6 +9,7 @@ using System.Windows;
 using InitialProject.APPLICATION.UseCases;
 using InitialProject.Domain.Model;
 using InitialProject.Model;
+using InitialProject.Service;
 using InitialProject.WPF.Views;
 using InitialProject.WPF.Views.OwnerViews;
 
@@ -20,6 +21,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         public Owner Owner { get; set; }
         public RelayCommand ConfirmCommand { get; set; }
         private string commentText;
+        private OwnerNotificationsService notificationsService;
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -27,6 +29,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         {
             Forum = forum;
             Owner = owner;
+            notificationsService = new OwnerNotificationsService();
             ConfirmCommand = new RelayCommand(Confirm_Executed, CanExecute);
         }
 
@@ -55,6 +58,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         private void Confirm_Executed(object sender)
         {
             SaveComment();
+            Forum.OwnerComments++;
             ForumCommentsView forumCommentsView = new ForumCommentsView(Forum, Owner);
             Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = forumCommentsView;
         }
@@ -71,6 +75,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             comment.CreatingDate = DateTime.Now;
             ForumCommentService forumCommentService = new ForumCommentService();
             forumCommentService.Add(comment);
+            notificationsService.Add(OwnerNotificationType.COMMENT_ADDED, Owner);
         }
     }
 }

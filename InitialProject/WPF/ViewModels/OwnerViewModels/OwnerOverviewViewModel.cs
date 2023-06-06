@@ -21,10 +21,12 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         public RelayCommand RequestsCommand { get; set; }
         public RelayCommand ReviewGuestCommand { get; set; }
         public RelayCommand SuggestionsCommand { get; set; }
+        public RelayCommand ForumCommand { get; set; }
         private OwnerNotificationsService notificationsService;
         private double guestReviewsHeight = 0;
         private double reschedulingRequestsHeight = 0;
         private double suggestionsHeight = 0;
+        private double forumHeight = 0;
 
         public OwnerOverviewViewModel(Owner owner)
         {
@@ -32,6 +34,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             RequestsCommand = new RelayCommand(Request_Executed, CanExecute);
             ReviewGuestCommand = new RelayCommand(ReviewGuest_Executed, CanExecute);
             SuggestionsCommand = new RelayCommand(Suggestion_Executed, CanExecute);
+            ForumCommand = new RelayCommand(Forum_Executed, CanExecute);
             notificationsService = new OwnerNotificationsService();
         }
 
@@ -53,6 +56,11 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         private void Suggestion_Executed(object sender)
         {
             Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = new LocationSuggestionsView(ProfileOwner);
+        }
+
+        private void Forum_Executed(object sender)
+        {
+            Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = new ForumsView(ProfileOwner);
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -117,5 +125,23 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
         }
 
+        public double ForumHeight
+        {
+            get
+            {
+                if (notificationsService.HasNewForum(ProfileOwner))
+                    return 54;
+                else
+                    return 0;
+            }
+            set
+            {
+                if (value != forumHeight)
+                {
+                    forumHeight = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
     }
 }

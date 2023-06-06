@@ -71,7 +71,7 @@ namespace InitialProject.Service
 
         public void AddNewForumNotification(Location location)
         {
-            List<Owner> owners = ownerService.getAllByLocation(location);
+            List<Owner> owners = ownerService.GetAllByLocation(location);
             foreach(Owner owner in owners)
             {
                 notificationRepository.Add(OwnerNotificationType.FORUM_ADDED, owner);
@@ -83,5 +83,19 @@ namespace InitialProject.Service
             return suggestionsService.GetMostPopularLocations(owner).Count !=0 || suggestionsService.GetLeastPopularAccommodations(owner).Count != 0;
         }
 
+        public bool HasNewForum(Owner owner)
+        {
+            return notificationRepository.GetAll().Find(n => n.Owner.Id == owner.Id && n.Type.Equals(OwnerNotificationType.FORUM_ADDED)) != null;
+        }
+
+        public bool IsCommentAdded(Owner owner)
+        {
+            return notificationRepository.GetAll().Find(n => n.Owner.Id == owner.Id && n.Type.Equals(OwnerNotificationType.COMMENT_ADDED)) != null;
+        }
+
+        public bool IsCommentReported(Owner owner)
+        {
+            return notificationRepository.GetAll().Find(n => n.Owner.Id == owner.Id && n.Type.Equals(OwnerNotificationType.COMMENT_REPORTED)) != null;
+        }
     }
 }

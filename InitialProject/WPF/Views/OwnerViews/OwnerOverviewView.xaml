@@ -90,7 +90,7 @@
                         </Style>
                     </Button.Resources>
                 </Button>
-                <Button HorizontalContentAlignment="Left" Name="ForumButton" Height="0" BorderBrush="DarkGray">
+                <Button Command="{Binding ForumCommand}" HorizontalContentAlignment="Left" Name="ForumButton" Height="{Binding Path=ForumHeight, UpdateSourceTrigger=PropertyChanged}" BorderBrush="DarkGray">
                     <Button.Content>
                         <StackPanel Orientation="Horizontal" Width="300">
                             <Label Width="20"></Label>

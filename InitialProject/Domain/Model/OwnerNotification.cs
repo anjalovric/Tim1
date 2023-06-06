@@ -8,7 +8,7 @@ using InitialProject.Serializer;
 
 namespace InitialProject.Domain.Model
 {
-    public enum OwnerNotificationType { ACCOMMODATION_ADDED, ACCOMMODATION_DELETED, SUPEROWNER, RENOVATION_SCHEDULED, RENOVATION_CANCELLED, FORUM_ADDED }
+    public enum OwnerNotificationType { ACCOMMODATION_ADDED, ACCOMMODATION_DELETED, SUPEROWNER, RENOVATION_SCHEDULED, RENOVATION_CANCELLED, FORUM_ADDED, COMMENT_ADDED, COMMENT_REPORTED }
     public class OwnerNotification : ISerializable
     {
         public int Id { get; set; }

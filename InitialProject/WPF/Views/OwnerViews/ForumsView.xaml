@@ -27,7 +27,7 @@
                                 <Setter Property="Source" Value="/Resources/Images/location.png"/>
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding OwnerHasLocation}" Value="True">
-                                        <Setter Property="Source" Value="/Resources/Images/location.jpg"/>
+                                        <Setter Property="Source" Value="/Resources/Images/myLocation.png"/>
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
