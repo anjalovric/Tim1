@@ -28,7 +28,11 @@ namespace InitialProject.WPF.Views.Guest2Views
         public TourRequestStatisticsView(Model.Guest2 guest2)
         {
             InitializeComponent();
-            DataContext = new TourRequestStatisticsViewModel(guest2);
+            DataContext = new TourRequestStatisticsViewModel(guest2,this);
+        }
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            FocusManager.SetFocusedElement(this, this);
         }
     }
 }

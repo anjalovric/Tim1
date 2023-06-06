@@ -1,4 +1,5 @@
 ﻿using InitialProject.Domain.Model;
+using InitialProject.Help;
 using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.Service;
@@ -16,6 +17,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Media.Animation;
 
 namespace InitialProject.WPF.ViewModels.Guest2ViewModels
 {
@@ -140,13 +143,15 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
                 OnPropertyChanged(nameof(SelectedTabIndex));
             }
         }
-       
+        public ICommand HelpCommandInViewModel { get; }
         public RelayCommand ViewCommand { get; set; }
-        public MyRequestsViewModel(Model.Guest2 guest2)
+        private MyRequestsFormView org;
+        public MyRequestsViewModel(Model.Guest2 guest2,MyRequestsFormView org)
         {
             Guest2 = guest2;
             ordinaryTourRequestsService = new OrdinaryTourRequestsService();
             ListSource = new ObservableCollection<string>();
+            this.org = org;
             complexTourRequestsService = new APPLICATION.UseCases.ComplexTourRequestsService();
             Requests = new ObservableCollection<OrdinaryTourRequests>(ordinaryTourRequestsService.GetOrdinaryTourRequestsForComplexRequest(Guest2.Id));
             OrdinaryTourRequests = new ObservableCollection<OrdinaryTourRequests>(ordinaryTourRequestsService.GetOnlyOrdinaryRequestsByGuestId(Guest2.Id));
@@ -155,6 +160,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             CreateCommand = new RelayCommand(Create_Executed, CanExecute);
             StatisticsCommand = new RelayCommand(Statistics_Executed, CanExecute);
             ViewCommand = new RelayCommand(View_Executed, CanExecute);
+            HelpCommandInViewModel = new RelayCommand(CommandBinding_Executed);
             InvalidStatus();
             
         }
@@ -211,6 +217,10 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             {
                 CreateComplexTourRequestView createComplexTourRequest = new CreateComplexTourRequestView(Guest2,ComplexTourRequests);
                 createComplexTourRequest.Show();
+                Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    createComplexTourRequest.Activate(); // Aktivirajte drugi prozor
+                }));
             }  
         }
         private void View_Executed(object sender)
@@ -233,6 +243,15 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
                     request.Status = Domain.Model.Status.INVALID;
                     ordinaryTourRequestsService.Update(request);
                 }
+            }
+        }
+        private void CommandBinding_Executed(object sender)
+        {
+            IInputElement focusedControl = FocusManager.GetFocusedElement(Application.Current.Windows[0]);
+            if (focusedControl is DependencyObject)
+            {
+                string str = ShowToursHelp.GetHelpKey((DependencyObject)focusedControl);
+                ShowToursHelp.ShowHelpForRequests(str, org);
             }
         }
     }

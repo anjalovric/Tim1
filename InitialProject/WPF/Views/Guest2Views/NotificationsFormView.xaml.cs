@@ -30,17 +30,9 @@ namespace InitialProject.WPF.Views.Guest2Views
         public NotificationsFormView(Guest2 guest2)
         {
             InitializeComponent();
-            DataContext = new NotificationsViewModel(guest2);
+            DataContext = new NotificationsViewModel(guest2,this);
         }
-        private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            IInputElement focusedControl = FocusManager.GetFocusedElement(Application.Current.Windows[0]);
-            if (focusedControl is DependencyObject)
-            {
-                string str = ShowToursHelp.GetHelpKey((DependencyObject)focusedControl);
-                ShowToursHelp.ShowHelpForNotification(str, this);
-            }
-        }
+        
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             FocusManager.SetFocusedElement(this, this);

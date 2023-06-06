@@ -35,5 +35,9 @@ namespace InitialProject.Model
             string[] csvValues = { Id.ToString(), Name, LastName, Username,Email,Age.ToString(),Active.ToString() };
             return csvValues;
         }
+        public string ToString()
+        {
+            return Name + " " + LastName;
+        }
     }
 }

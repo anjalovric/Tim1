@@ -13,6 +13,8 @@ using System.Windows;
 using InitialProject.Repository;
 using Org.BouncyCastle.Asn1.Ocsp;
 using System.Security.Cryptography.Xml;
+using InitialProject.Help;
+using System.Windows.Input;
 
 namespace InitialProject.WPF.ViewModels.Guest2ViewModels
 {
@@ -29,12 +31,15 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         public TourService tourService;
         private Guest2 guest2;
         public RelayCommand ViewCommand { get; set; }
+        public ICommand HelpCommandInViewModel { get;}
         public RelayCommand DeleteCommand { get; set; }
-        public NotificationsViewModel(Guest2 guest2)
+        private NotificationsFormView org;
+        public NotificationsViewModel(Guest2 guest2, NotificationsFormView org)
         {
             this.guest2 = guest2;
             notificationService = new NewTourNotificationService();
             tourService = new TourService();
+            this.org = org;
             ordinaryTourRequestsService = new OrdinaryTourRequestsService();
             OrdinaryTourRequests = new List<OrdinaryTourRequests>(ordinaryTourRequestsService.GetAll());
             Alerts = new List<AlertGuest2>();
@@ -46,6 +51,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             SetNotifications();
             ViewCommand = new RelayCommand(View_Executed, CanExecute);
             DeleteCommand=new RelayCommand(Delete_Executed,CanExecute);
+            HelpCommandInViewModel = new RelayCommand(CommandBinding_Executed);
         }
         private void MakeNotifications()
         {
@@ -175,6 +181,15 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             {
                 if(!guest2Notification.Deleted)
                     Notifications.Add(guest2Notification);
+            }
+        }
+        private void CommandBinding_Executed(object sender)
+        {
+            IInputElement focusedControl = FocusManager.GetFocusedElement(Application.Current.Windows[0]);
+            if (focusedControl is DependencyObject)
+            {
+                string str = ShowToursHelp.GetHelpKey((DependencyObject)focusedControl);
+                ShowToursHelp.ShowHelpForNotification(str, org);
             }
         }
     }

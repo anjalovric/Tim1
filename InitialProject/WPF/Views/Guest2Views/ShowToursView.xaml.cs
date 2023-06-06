@@ -35,18 +35,10 @@ namespace InitialProject.WPF.Views.Guest2Views
         public ShowToursView(Guest2 guest2)
         {
             InitializeComponent();
-            viewModel=new ShowToursViewModel(guest2);
+            viewModel=new ShowToursViewModel(guest2,this);
             DataContext = viewModel;
         }
-        private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            IInputElement focusedControl = FocusManager.GetFocusedElement(Application.Current.Windows[0]);
-            if (focusedControl is DependencyObject)
-            {
-                string str = ShowToursHelp.GetHelpKey((DependencyObject)focusedControl);
-                ShowToursHelp.ShowHelp(str, this);
-            }
-        }
+        
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {

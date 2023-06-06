@@ -34,7 +34,11 @@ namespace InitialProject.WPF.Views.Guest2Views
         public TourReservationFormView(TourInstance currentTourInstance, Guest2 guest2, ObservableCollection<TourInstance> TourInstance, TourInstanceRepository tourInstanceRepository, string label)
         {
             InitializeComponent();
-            DataContext = new TourReservationViewModel(currentTourInstance, guest2, TourInstance, tourInstanceRepository, label);
+            DataContext = new TourReservationViewModel(currentTourInstance, guest2, TourInstance, tourInstanceRepository, label,this);
+        }
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            FocusManager.SetFocusedElement(this, this);
         }
     }
 }

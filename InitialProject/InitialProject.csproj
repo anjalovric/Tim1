@@ -967,6 +967,10 @@
     <None Update="Help\activeTours.htm">
       <Generator>MSBuild:Compile</Generator>
     </None>
+
+    <None Update="Help\creatingComplex.htm">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
     <None Update="Help\finishedTours.htm">
       <Generator>MSBuild:Compile</Generator>
     </None>

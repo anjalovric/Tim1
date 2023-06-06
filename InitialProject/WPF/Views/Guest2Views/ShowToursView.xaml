@@ -14,9 +14,9 @@
              mc:Ignorable="d" 
              Loaded="Page_Loaded"
              d:DesignHeight="600" d:DesignWidth="668" Width="668" Height="600" l:ShowToursHelp.HelpKey="showTours" Focusable="True">
-    <UserControl.CommandBindings>
-        <CommandBinding Command="ApplicationCommands.Help" Executed="CommandBinding_Executed"/>
-    </UserControl.CommandBindings>
+    <UserControl.InputBindings>
+        <KeyBinding Key="F1" Command="{Binding HelpCommandInViewModel}" />
+    </UserControl.InputBindings>
     <UserControl.Resources>
         
 
@@ -136,7 +136,7 @@
                 <DataGridTemplateColumn x:Name="reservation" Header="Reservation"  Width="1.2*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button BorderBrush="#ffba00" Background="#ffba00" BorderThickness="3" FontWeight="Bold" FontSize="12" Width="70" Height="30" Command="{Binding Path=DataContext.ReserveCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" ToolTipService.IsEnabled="{Binding Source={x:Static properties:Settings.Default}, Path=IsToolTipEnabled}">
+                            <Button BorderBrush="#ffba00" Background="#ffba00" BorderThickness="3" FontWeight="Bold" FontSize="12" Width="70" Height="30" Command="{Binding Path=DataContext.ReserveCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" ToolTipService.IsEnabled="{Binding Source={x:Static properties:Settings.Default}, Path=IsToolTipEnabled}" l:ShowToursHelp.HelpKey="reservation">
                                 <Grid Background="#ffba00" HorizontalAlignment="Left" VerticalAlignment="Top">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="16*"/>
@@ -173,7 +173,7 @@
                 <DataGridTemplateColumn x:Name="detailsView" Header="Details" Width="0.9*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button FontWeight="Bold" BorderBrush="#ffba00" Background="#ffba00" BorderThickness="3" FontSize="12" Width="70" Height="30" Command="{Binding Path=DataContext.ViewDetailsCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" ToolTipService.ShowDuration="5000" ToolTipService.IsEnabled="{Binding Source={x:Static properties:Settings.Default}, Path=IsToolTipEnabled}">
+                            <Button FontWeight="Bold" BorderBrush="#ffba00" Background="#ffba00" BorderThickness="3" FontSize="12" Width="70" Height="30" Command="{Binding Path=DataContext.ViewDetailsCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" ToolTipService.ShowDuration="5000" ToolTipService.IsEnabled="{Binding Source={x:Static properties:Settings.Default}, Path=IsToolTipEnabled}" l:ShowToursHelp.HelpKey="details">
                                 <Grid Background="#ffba00" HorizontalAlignment="Left" VerticalAlignment="Top">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="16*"/>
@@ -211,7 +211,7 @@
 
 
         </DataGrid>
-        <ComboBox x:Name="cityInput" Grid.Column="1"  BorderBrush="#7166f9" BorderThickness="3,3,3,3" ItemsSource="{Binding CitiesByCountry}" SelectedItem="{Binding City}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" HorizontalAlignment="Center" Margin="0,130,0,0" VerticalAlignment="Top" Width="134" Height="22" IsEnabled="{Binding IsComboBoxCityEnabled}"/>
+        <ComboBox x:Name="cityInput" Grid.Column="1"  BorderBrush="#7166f9" BorderThickness="3,3,3,3" ItemsSource="{Binding CitiesByCountry}" SelectedItem="{Binding City}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" HorizontalAlignment="Center" Margin="0,130,0,0" VerticalAlignment="Top" Width="134" Height="22" IsEnabled="{Binding IsComboBoxCityEnabled}"  l:ShowToursHelp.HelpKey="showTours"/>
 
         <TextBox x:Name="durationInput" Grid.Column="1" Background="LightGray"  Style="{StaticResource BorderStyle}" HorizontalAlignment="Left" Margin="414,130,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="143" Height="22" RenderTransformOrigin="0.496,0.294" Grid.ColumnSpan="2" l:ShowToursHelp.HelpKey="duration">
 
@@ -240,9 +240,9 @@
                 </ControlTemplate>
             </Validation.ErrorTemplate>
         </TextBox>
-        <ComboBox x:Name="languageInput" Grid.Column="1"  BorderBrush="LightGray" ItemsSource="{Binding Languages}" SelectedItem="{Binding SelectedLanguage}" BorderThickness="3,3,3,3" Background="LightGray" HorizontalAlignment="Left" Margin="0,201,0,0" VerticalAlignment="Top" Width="134" Height="22" RenderTransformOrigin="-0.983,1.416"/>
+        <ComboBox x:Name="languageInput" Grid.Column="1"  BorderBrush="LightGray" ItemsSource="{Binding Languages}" SelectedItem="{Binding SelectedLanguage}" BorderThickness="3,3,3,3" Background="LightGray" HorizontalAlignment="Left" Margin="0,201,0,0" VerticalAlignment="Top" Width="134" Height="22" RenderTransformOrigin="-0.983,1.416"  l:ShowToursHelp.HelpKey="showTours"/>
         <Border BorderBrush="LightGray" Grid.Column="1"  BorderThickness="3,3,3,3" Margin="236,201,236,377">
-            <TextBox x:Name="capacityNumber" Grid.Column="1"  Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="81" TextAlignment="Center" Height="22" Background="LightGray">
+            <TextBox x:Name="capacityNumber" Grid.Column="1"  Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="81" TextAlignment="Center" Height="22" Background="LightGray"  l:ShowToursHelp.HelpKey="showTours">
                 <TextBox.Text>
                     <Binding Path="MaxGuests" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay" NotifyOnValidationError="True">
                         <Binding.ValidationRules>
@@ -275,7 +275,7 @@
         <Label Content="Duration" Grid.Column="1"  Grid.Row="0" Margin="414,90,0,0" Style="{StaticResource LabelStyle}" Foreground="#b46617" Width="98"/>
         <Label Content="Language" Grid.Column="1"  Margin="0,170,0,0" RenderTransformOrigin="0.413,0.366" Style="{StaticResource LabelStyle}" Foreground="#b46617"/>
         <Label Content="Capacity" Grid.Column="1"  Margin="211,170,0,0" Style="{StaticResource LabelStyle}" Foreground="#b46617"/>
-        <ComboBox x:Name="countryInput"  ItemsSource="{Binding Countries}" BorderBrush="#7166f9" BorderThickness="3,3,3,3" SelectedItem="{Binding Country}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" HorizontalAlignment="Left" Margin="55,130,0,0" VerticalAlignment="Top" Width="134" Height="22" Grid.ColumnSpan="2">
+        <ComboBox x:Name="countryInput"  ItemsSource="{Binding Countries}" BorderBrush="#7166f9" BorderThickness="3,3,3,3" SelectedItem="{Binding Country}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" HorizontalAlignment="Left" Margin="55,130,0,0" VerticalAlignment="Top" Width="134" Height="22" Grid.ColumnSpan="2"  l:ShowToursHelp.HelpKey="showTours">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
                     <i:InvokeCommandAction Command="{Binding CountryInputSelectionChangedCommand}"/>
@@ -283,9 +283,9 @@
             </i:Interaction.Triggers>
         </ComboBox>
         <Label Content="Country"  Margin="55,90,0,0" Style="{StaticResource LabelStyle}" Foreground="#b46617" Grid.ColumnSpan="2"/>
-        <Button x:Name="decrementCapacityNumber" Grid.Column="1"  Style="{StaticResource borderStyle}" Content="-" Margin="211,201,0,0" Width="20" Command="{Binding DecrementCommand}" Height="22"/>
-        <Button x:Name="incrementCapacityNumber" Grid.Column="1"  Style="{StaticResource borderStyle}" Content="+" Margin="325,201,0,0" Width="20" Command="{Binding IncrementCommand}" RenderTransformOrigin="-1.284,0.612" Height="22"/>
-        <Button x:Name="Search" FontWeight="Bold" Grid.Column="1"  Margin="494,201,0,0" Height="22" Command="{Binding SearchCommand}" Background="#ffba00" BorderBrush="#ffba00" Width="62" ToolTipService.IsEnabled="{Binding Source={x:Static properties:Settings.Default}, Path=IsToolTipEnabled}">
+        <Button x:Name="decrementCapacityNumber" Grid.Column="1"  Style="{StaticResource borderStyle}" Content="-" Margin="211,201,0,0" Width="20" Command="{Binding DecrementCommand}" Height="22"  l:ShowToursHelp.HelpKey="showTours"/>
+        <Button x:Name="incrementCapacityNumber" Grid.Column="1"  Style="{StaticResource borderStyle}" Content="+" Margin="325,201,0,0" Width="20" Command="{Binding IncrementCommand}" RenderTransformOrigin="-1.284,0.612" Height="22"  l:ShowToursHelp.HelpKey="showTours"/>
+        <Button x:Name="Search" FontWeight="Bold" Grid.Column="1"  Margin="494,201,0,0" Height="22" Command="{Binding SearchCommand}" Background="#ffba00" BorderBrush="#ffba00" Width="62" ToolTipService.IsEnabled="{Binding Source={x:Static properties:Settings.Default}, Path=IsToolTipEnabled}" l:ShowToursHelp.HelpKey="showTours">
             <Grid Background="#ffba00" HorizontalAlignment="Left" VerticalAlignment="Top" Height="15">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="16*"/>
@@ -330,7 +330,7 @@
         <Label Grid.Row="0" Grid.Column="1"  Foreground="White" Content="{Binding Path=Label,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" FontSize="20" Margin="0,261,0,0" Height="71" Style="{StaticResource LabelStyle}" >
             
         </Label>
-        <Button x:Name="Restart" Background="#ffba00" Grid.Column="1" BorderBrush="#ffba00"  Style="{StaticResource borderStyle}" Width="62" Margin="414,201,0,0" TextElement.FontWeight="Bold" Command="{Binding RestartCommand}" Height="22" ToolTipService.ShowDuration="5000" ToolTipService.IsEnabled="{Binding Source={x:Static properties:Settings.Default}, Path=IsToolTipEnabled}">
+        <Button x:Name="Restart" Background="#ffba00" Grid.Column="1" BorderBrush="#ffba00"  Style="{StaticResource borderStyle}" Width="62" Margin="414,201,0,0" TextElement.FontWeight="Bold" Command="{Binding RestartCommand}" Height="22" ToolTipService.ShowDuration="5000" ToolTipService.IsEnabled="{Binding Source={x:Static properties:Settings.Default}, Path=IsToolTipEnabled}" l:ShowToursHelp.HelpKey="showTours">
             <Grid Background="#ffba00" HorizontalAlignment="Left" VerticalAlignment="Top" Height="15">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="16*"/>

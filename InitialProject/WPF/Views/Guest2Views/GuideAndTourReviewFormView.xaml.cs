@@ -30,9 +30,12 @@ namespace InitialProject.WPF.Views.Guest2Views
         public GuideAndTourReviewFormView(TourInstance tourInstance, Guest2 guest2)
         {
             InitializeComponent();
-            DataContext = new GuideAndTourReviewViewModel(tourInstance, guest2);
+            DataContext = new GuideAndTourReviewViewModel(tourInstance, guest2,this);
+        }
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            FocusManager.SetFocusedElement(this, this);
         }
 
-        
     }
 }

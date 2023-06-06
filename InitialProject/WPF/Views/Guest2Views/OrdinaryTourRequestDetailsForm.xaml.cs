@@ -28,7 +28,7 @@ namespace InitialProject.WPF.Views.Guest2Views
         public OrdinaryTourRequestDetailsForm(NewTourNotification notification,Model.Guest2 guest2)
         {
             InitializeComponent();
-            DataContext = new OrdinaryTourRequestDetailsViewModel(notification, guest2);
+            DataContext = new OrdinaryTourRequestDetailsViewModel(notification, guest2,this);
         }
     }
 }
