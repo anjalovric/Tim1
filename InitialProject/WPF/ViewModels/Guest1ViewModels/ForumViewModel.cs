@@ -20,12 +20,13 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
     public class ForumViewModel : INotifyPropertyChanged
     {
         private Guest1 guest1;
+        private OwnerNotificationsService ownerNotificationsService;
         public ObservableCollection<string> Countries { get; set; }
         public ObservableCollection<string> CitiesByCountry { get; set; }
         public RelayCommand CountryInputSelectionChangedCommand { get; set; }
         public RelayCommand NextCommand { get; set; }
         public RelayCommand ResetCommand { get; set; }
-        public RelayCommand OpenCommand { get; set; }
+        public RelayCommand ViewCommand { get; set; }
         private bool isCityComboBoxEnabled;
         public bool IsCityComboBoxEnabled
         {
@@ -110,15 +111,16 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             forumCommentService = new ForumCommentService();
             Forums = new ObservableCollection<Forum>(forumService.GetAll());
             Forums = new ObservableCollection<Forum>(Forums.Reverse());
+            ownerNotificationsService = new OwnerNotificationsService();
         }
         private void MakeCommands()
         {
             CountryInputSelectionChangedCommand = new RelayCommand(CountryInputSelectionChanged_Executed, CanExecute);
             NextCommand = new RelayCommand(Next_Executed, CanExecute);
             ResetCommand = new RelayCommand(Reset_Executed, CanExecute);
-            OpenCommand = new RelayCommand(Open_Executed, CanExecute);  
+            ViewCommand = new RelayCommand(View_Executed, CanExecute);  
         }
-        private void Open_Executed(object sender)
+        private void View_Executed(object sender)
         {
             Forum currentForum = ((Button)sender).DataContext as Forum;
             ForumDetailsView details = new ForumDetailsView(guest1, currentForum);
@@ -197,6 +199,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                 forumCommentService.Add(newComment);
                 forumService.IncrementCommentsNumber(currentForum);
                 currentForum = forumService.SetIsVeryUseful(currentForum);
+                ownerNotificationsService.AddNewForumNotification(currentForum.Location);
                 ForumDetailsView details = new ForumDetailsView(guest1, currentForum);
                 Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = details;
             }

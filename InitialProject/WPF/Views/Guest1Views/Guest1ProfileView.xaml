@@ -280,7 +280,7 @@
                 <Style TargetType="Image">
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding IsSuperGuest}" Value="True">
-                            <Setter Property="Source" Value="/Resources/Images/medal.png" />
+                            <Setter Property="Source" Value="/Resources/Images/medal1.png" />
                         </DataTrigger>
                         <DataTrigger Binding="{Binding IsSuperGuest}" Value="False">
                             <Setter Property="Source" Value="/Resources/Images/delete.png" />

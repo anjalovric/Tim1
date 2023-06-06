@@ -11,16 +11,18 @@ namespace InitialProject.Service
     public class ForumService
     {
         private IForumRepository forumRepository = Injector.CreateInstance<IForumRepository>();
-        LocationService locationService;
-        Guest1Service guest1Service;
-        ForumCommentService forumCommentService;
-        OwnerService ownerService;
+        private LocationService locationService;
+        private Guest1Service guest1Service;
+        private ForumCommentService forumCommentService;
+        private OwnerService ownerService;
+        private OwnerNotificationsService ownerNotificationsService;
         public ForumService()
         {
             locationService = new LocationService();
             guest1Service = new Guest1Service();
             forumCommentService = new ForumCommentService();
             ownerService = new OwnerService();
+            ownerNotificationsService = new OwnerNotificationsService();
         }
         private void SetGuests(List<Forum> forums)
         {
@@ -54,6 +56,7 @@ namespace InitialProject.Service
         {
             forum.IsNewForOwner = true;
             forumRepository.Add(forum);
+            ownerNotificationsService.AddNewForumNotification(forum.Location);
         }
 
        public Forum GetById(int id)

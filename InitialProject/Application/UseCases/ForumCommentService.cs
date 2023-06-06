@@ -37,6 +37,10 @@ namespace InitialProject.APPLICATION.UseCases
         {
             if(!forumComment.IsOwnerComment)
                 forumComment.WasOnLocation = accommodationReservationService.IsGuestCommentSpecial(((Guest1)forumComment.User), forumComment.Forum.Location.Id, forumComment.CreatingDate);
+            else
+            {
+                forumComment.WasOnLocation = true;
+            }
             forumCommentRepository.Add(forumComment);
         }
 

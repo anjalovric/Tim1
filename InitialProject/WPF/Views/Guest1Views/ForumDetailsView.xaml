@@ -138,7 +138,7 @@
         <TextBlock Foreground="#d9c7b3" VerticalAlignment="Center" FontWeight="Bold"  Background="Transparent" Grid.Row="0" FontSize="24" Margin="0,25,0,0" FontFamily="Baskerville Old Face" HorizontalAlignment="Center">
             <Run Text="FORUM - "/>    
             <Run Text="{Binding Forum.Location.City}"/>
-            <Image Source="/Resources/Images/flag.png" Height="Auto" Width="30" Margin="10,0,0,0" VerticalAlignment="Center">
+            <Image Source="/Resources/Images/premium.png" Height="Auto" Width="30" Margin="10,0,0,0" VerticalAlignment="Center">
                 <Image.Style>
                     <Style TargetType="Image">
                         <Setter Property="Visibility" Value="Collapsed"/>
@@ -207,7 +207,7 @@
             </Grid>
         </Button>
 
-        <ListBox x:Name="commentsList" ScrollViewer.VerticalScrollBarVisibility="Visible" IsSynchronizedWithCurrentItem="True" SelectionMode="Single" ItemsSource="{Binding Path=Comments,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" ItemTemplate="{StaticResource commentTemplate}" Margin="42,0,42,0" VerticalAlignment="Center" Background="#37492d" BorderThickness="5,5,5,5"  BorderBrush="#8c9d75" Height="300" Grid.Row="1">
+        <ListBox x:Name="commentsList" ScrollViewer.VerticalScrollBarVisibility="Visible" IsSynchronizedWithCurrentItem="True" SelectionMode="Single" ItemsSource="{Binding Path=Comments,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" ItemTemplate="{StaticResource commentTemplate}" Margin="42,0,42,0" VerticalAlignment="Center" Background="#37492d" BorderThickness="5,5,5,5"  BorderBrush="#8c9d75" Height="316" Grid.Row="1">
             <ListBox.Resources>
                 <Style TargetType="ListViewItem">
                     <Style.Triggers>
