@@ -715,7 +715,7 @@
     <PackageReference Include="NPOI" Version="2.6.0" />
     <PackageReference Include="Syncfusion.DocIO.Wpf" Version="21.2.8" />
     <PackageReference Include="Syncfusion.DocToPDFConverter.Wpf" Version="21.2.8" />
-    <PackageReference Include="Syncfusion.Licensing" Version="21.2.8" />
+    <PackageReference Include="Syncfusion.Licensing" Version="21.2.9" />
     <PackageReference Include="Syncfusion.Pdf.Wpf" Version="21.2.8" />
     <PackageReference Include="Syncfusion.PdfViewer.WPF" Version="21.2.8" />
     <PackageReference Include="System.Windows.Interactivity.WPF" Version="2.0.20525" />
