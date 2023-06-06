@@ -7,6 +7,9 @@
         xmlns:properties="clr-namespace:InitialProject.Properties"
         mc:Ignorable="d"
         Title="Details" Height="600" Width="700" WindowStartupLocation="CenterScreen" Background="Transparent" AllowsTransparency="True" WindowStyle="None">
+    <Window.InputBindings>
+        <KeyBinding Key="F1" Command="{Binding HelpCommandInViewModel}" />
+    </Window.InputBindings>
     <Window.Resources>
         <Style x:Key="button" TargetType="Button">
             <Setter Property="FontSize" Value="14"/>

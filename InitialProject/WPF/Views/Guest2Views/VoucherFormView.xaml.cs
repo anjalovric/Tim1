@@ -32,17 +32,9 @@ namespace InitialProject.WPF.Views.Guest2Views
         {
             InitializeComponent();
             this.guest2 = guest;
-            DataContext = new VoucherViewModel(guest2);
+            DataContext = new VoucherViewModel(guest2,this);
         }
-        private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            IInputElement focusedControl = FocusManager.GetFocusedElement(Application.Current.Windows[0]);
-            if (focusedControl is DependencyObject)
-            {
-                string str = ShowToursHelp.GetHelpKey((DependencyObject)focusedControl);
-                ShowToursHelp.ShowHelpForVouchers(str, this);
-            }
-        }
+        
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             FocusManager.SetFocusedElement(this, this);

@@ -10,9 +10,9 @@
              Loaded="Page_Loaded"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="668" Width="668" Height="600" l:ShowToursHelp.HelpKey="finishedTours" Focusable="True">
-    <UserControl.CommandBindings>
-        <CommandBinding Command="ApplicationCommands.Help" Executed="CommandBinding_Executed"/>
-    </UserControl.CommandBindings>
+    <UserControl.InputBindings>
+        <KeyBinding Key="F1" Command="{Binding HelpCommandInViewModel}" />
+    </UserControl.InputBindings>
     <UserControl.Resources>
         <Style x:Key="DataGridRowStyle2" TargetType="{x:Type DataGridRow}">
             <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
@@ -109,7 +109,7 @@
                 <DataGridTemplateColumn x:Name="rate" Header="Rate" Width="0.9*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button FontWeight="Bold" FontSize="18" Width="65" Height="30" Background="#ffba00" BorderBrush="#ffba00" BorderThickness="2" Command="{Binding Path=DataContext.RateCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" ToolTipService.ShowDuration="5000" ToolTipService.IsEnabled="{Binding Source={x:Static properties:Settings.Default}, Path=IsToolTipEnabled}">
+                            <Button FontWeight="Bold" FontSize="18" Width="65" Height="30" Background="#ffba00" BorderBrush="#ffba00" BorderThickness="2" Command="{Binding Path=DataContext.RateCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" ToolTipService.ShowDuration="5000" ToolTipService.IsEnabled="{Binding Source={x:Static properties:Settings.Default}, Path=IsToolTipEnabled}" l:ShowToursHelp.HelpKey="rating">
                                 <Grid Background="#ffba00" HorizontalAlignment="Left" VerticalAlignment="Top">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="15*"/>

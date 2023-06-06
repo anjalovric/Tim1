@@ -1,5 +1,8 @@
-﻿using InitialProject.Model;
+﻿using InitialProject.Help;
+using InitialProject.Model;
 using InitialProject.Service;
+using InitialProject.WPF.Views.Guest2Views;
+using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,6 +10,8 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
 using System.Windows.Media.Imaging;
 
 namespace InitialProject.WPF.ViewModels.Guest2ViewModels
@@ -39,12 +44,16 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         public RelayCommand PreviousPhotoCommand { get; set; }
         public RelayCommand CancelCommand { get; set; }
         public Action CloseAction { get; set; }
-        public TourDetailsViewModel(TourInstance currentTourInstance, Guest2 guest2)
+        public ICommand HelpCommandInViewModel { get; }
+        private TourDetailsView org;
+        public TourDetailsViewModel(TourInstance currentTourInstance, Guest2 guest2,TourDetailsView org)
         {
             Selected = currentTourInstance;
             this.guest2 = guest2;
+            this.org = org;
             SetFirstImage();
             MakeCommands();
+            HelpCommandInViewModel = new RelayCommand(CommandBinding_Executed);
         }
 
         private void MakeCommands()
@@ -81,6 +90,15 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             if (currentCounter >= images.Count)
                 currentCounter = 0;
             ImageSource = new BitmapImage(new Uri("/" + images[currentCounter].Url, UriKind.Relative));
+        }
+        private void CommandBinding_Executed(object sender)
+        {
+            IInputElement focusedControl = FocusManager.GetFocusedElement(Application.Current.Windows[0]);
+            if (focusedControl is DependencyObject)
+            {
+                string str = ShowToursHelp.GetHelpKey((DependencyObject)focusedControl);
+                ShowToursHelp.ShowHelpForDetails(str, org);
+            }
         }
 
     }

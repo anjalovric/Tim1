@@ -1,4 +1,5 @@
 ﻿using InitialProject.Domain.Model;
+using InitialProject.Help;
 using InitialProject.Model;
 using InitialProject.Service;
 using InitialProject.WPF.Views.Guest2Views;
@@ -10,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 
 namespace InitialProject.WPF.ViewModels.Guest2ViewModels
 {
@@ -25,11 +27,14 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         public double averageNumberOfPeople { get; set; }
         public int chosenYear { get; set; }
         public RelayCommand CloseCommand { get; set; }
-        public StatisticForChosenYearViewModel(Model.Guest2 guest2, string year)
+        private StatisticForChosenYearFormView org;
+        public ICommand HelpCommandInViewModel { get; }
+        public StatisticForChosenYearViewModel(Model.Guest2 guest2, string year,StatisticForChosenYearFormView org)
         {
             Year = Convert.ToInt32(year);
             chosenYear = Convert.ToInt32(year);    
             Guest2 = guest2;
+            this.org = org;
             CloseCommand = new RelayCommand(Close_Executed,CanExecute);
             acceptedRequest = 0;
             invalidRequest = 0;
@@ -37,6 +42,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             requestStatisticsService = new YearlyRequestStatisticsService();
             ordinaryTourRequestsService = new OrdinaryTourRequestsService();
             ordinaryTours = new List<OrdinaryTourRequests>();
+            HelpCommandInViewModel = new RelayCommand(CommandBinding_Executed);
             StatisticsForChoosenYear();
         }
         private bool CanExecute(object sender)
@@ -52,6 +58,15 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             acceptedRequest = requestStatisticsService.ProcentOfAcceptedRequest(chosenYear, Guest2).Round(2);
             invalidRequest = requestStatisticsService.ProcentOfInvalidRequest(chosenYear, Guest2).Round(2);
             averageNumberOfPeople = requestStatisticsService.AverageNumberOfPeopleInAcceptedRequests(chosenYear, Guest2).Round(2);
+        }
+        private void CommandBinding_Executed(object sender)
+        {
+            IInputElement focusedControl = FocusManager.GetFocusedElement(Application.Current.Windows[0]);
+            if (focusedControl is DependencyObject)
+            {
+                string str = ShowToursHelp.GetHelpKey((DependencyObject)focusedControl);
+                ShowToursHelp.ShowHelpForStatistic(str, org);
+            }
         }
     }
 }

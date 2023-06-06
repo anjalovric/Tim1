@@ -9,7 +9,10 @@
         xmlns:local="clr-namespace:InitialProject.WPF.Views.Guest2Views"
         xmlns:tk="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit.NET5" 
         mc:Ignorable="d"
-        Title="CreateOrdinaryTourRequest" Height="600" Width="668" d:DesignHeight="600" d:DesignWidth="668" Background="Transparent" AllowsTransparency="True" WindowStartupLocation="CenterScreen" WindowStyle="None">
+        Title="CreateOrdinaryTourRequest" Height="600" Width="668" d:DesignHeight="600" d:DesignWidth="668" Background="Transparent" AllowsTransparency="True" WindowStartupLocation="CenterScreen" WindowStyle="None" Focusable="True">
+    <Window.InputBindings>
+        <KeyBinding Key="F1" Command="{Binding HelpCommandInViewModel}" />
+    </Window.InputBindings>
     <Window.Resources>
         <ControlTemplate x:Key="ValidationTemplate">
             <StackPanel>
