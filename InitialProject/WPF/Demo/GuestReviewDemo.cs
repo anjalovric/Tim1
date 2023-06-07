@@ -1,22 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Threading;
-using DotLiquid.Tags;
 using InitialProject.Model;
 using InitialProject.Service;
 using InitialProject.WPF.ViewModels.OwnerViewModels;
 using InitialProject.WPF.Views;
 using InitialProject.WPF.Views.OwnerViews;
-using Xceed.Wpf.Toolkit;
 
 namespace InitialProject.WPF.Demo
 {

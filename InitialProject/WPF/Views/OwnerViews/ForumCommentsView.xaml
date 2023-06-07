@@ -7,7 +7,7 @@
       mc:Ignorable="d" 
        d:DesignHeight="630" d:DesignWidth="430"
       Title="Forum" Background="#b3cee5">
-
+    
     <Page.Resources>
         <DataTemplate x:Key="comment">
             <Border Background="LightGray" BorderBrush="DarkGray" BorderThickness="0.5" Margin="0,0,0,0" >
@@ -153,6 +153,9 @@
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding OwnerHasLocation}" Value="False">
                             <Setter Property="IsEnabled" Value="False"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding IsAddNewCommentPressedInDemo, UpdateSourceTrigger=PropertyChanged}" Value="True">
+                            <Setter Property="Background" Value="AliceBlue"></Setter>
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>

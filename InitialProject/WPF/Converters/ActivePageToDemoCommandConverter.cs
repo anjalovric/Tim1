@@ -17,6 +17,7 @@ namespace InitialProject.WPF.Converters
         public RelayCommand ScheduleRenovationCommand { get; set; }
         public RelayCommand GuestReviewCommand { get; set; }
         public RelayCommand ForumReportCommentCommand { get; set; }
+        public RelayCommand NewCommentCommand { get; set; }
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             MakeCommands();
@@ -30,6 +31,8 @@ namespace InitialProject.WPF.Converters
                     return GuestReviewCommand;
                 if(activePage.Title.Equals("Forums"))
                     return ForumReportCommentCommand;
+                if(activePage.Title.Equals("Forum"))
+                    return NewCommentCommand;
             }
             return null;
         }
@@ -45,6 +48,7 @@ namespace InitialProject.WPF.Converters
             ScheduleRenovationCommand = new RelayCommand(ScheduleRenovation_Executed, CanExecute);
             GuestReviewCommand = new RelayCommand(GuestReviw_Executed, CanExecute);
             ForumReportCommentCommand = new RelayCommand(ForumReportComment_Executed, CanExecute);
+            NewCommentCommand = new RelayCommand(NewComment_Executed, CanExecute);
         }
 
         private bool CanExecute(object sender)
@@ -74,6 +78,12 @@ namespace InitialProject.WPF.Converters
         {
             ForumReportCommentDemo reportCommentDemo = new ForumReportCommentDemo();
             reportCommentDemo.PlayDemo();
+        }
+
+        private void NewComment_Executed(object sender)
+        {
+            NewCommentDemo newCommentDemo = new NewCommentDemo();
+            newCommentDemo.PlayDemo();
         }
     }
 }

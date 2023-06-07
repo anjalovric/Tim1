@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using DotLiquid.Tags;
+using System.Windows.Threading;
 using InitialProject.Model;
 using InitialProject.WPF.ViewModels.OwnerViewModels;
 
@@ -22,12 +24,37 @@ namespace InitialProject.WPF.Views.OwnerViews
     /// </summary>
     public partial class AddCommentView : Page
     {
-        public AddCommentViewModel viewModel { get; set; }
+        public AddCommentViewModel ViewModel { get; set; }
+        private string fullText = "";
+        private int currentIndex = 0;
+        private int increment;
         public AddCommentView(OneForumViewModel forum, Owner owner)
         {
             InitializeComponent();
-            viewModel = new AddCommentViewModel(forum, owner);
-            this.DataContext = viewModel;
+            ViewModel = new AddCommentViewModel(forum, owner);
+            this.DataContext = ViewModel;
+        }
+
+        public void InputCommentInDemo()
+        {
+            fullText = "Very nice location!";
+            DispatcherTimer dispatcherTimer = new DispatcherTimer();
+            dispatcherTimer.Interval = TimeSpan.FromMilliseconds(500);
+            dispatcherTimer.Tick += new EventHandler(Timer_Tick);
+            dispatcherTimer.Start();
+        }
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            DispatcherTimer timer = (DispatcherTimer)sender;
+            increment++;
+            if (currentIndex < fullText.Length)
+            {
+                currentIndex++;
+                Comment.Dispatcher.Invoke(() =>
+                {
+                    Comment.Text = fullText.Substring(0, currentIndex);
+                });
+            }
         }
     }
 }
