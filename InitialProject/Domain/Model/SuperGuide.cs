@@ -9,6 +9,8 @@ namespace InitialProject.Domain.Model
         public string Language { get; set; }
         public int guideId { get; set; }
 
+        public DateTime CreateDate { get; set; }    
+
         public SuperGuide() { }
 
         public void FromCSV(string[] values)
@@ -16,11 +18,12 @@ namespace InitialProject.Domain.Model
             Id = Convert.ToInt32(values[0]);
             Language = values[1];
             guideId = Convert.ToInt32(values[2]);
+            CreateDate = Convert.ToDateTime(values[3]);
         }
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), Language, guideId.ToString() };
+            string[] csvValues = { Id.ToString(), Language, guideId.ToString(), CreateDate.ToString() };
             return csvValues;
         }
 
