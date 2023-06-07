@@ -63,7 +63,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         //Validation for input dates
         private bool IsValidDateInput()
         {
-            return (Arrival <= Departure && Arrival.Date > DateTime.Now && Arrival != null && Departure != null);
+            return (Arrival <= Departure && Arrival.Date > DateTime.Now && Arrival != DateTime.MinValue && Departure != DateTime.MinValue);
         }
 
         //Message boxes for validation

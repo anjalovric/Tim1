@@ -163,7 +163,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         //Validation - date input (calendars and num. of days)
         private bool IsValidDateInput()
         {
-            return (Arrival <= Departure && Convert.ToInt32(lengthOfStay.TotalDays) >= (NumberOfDays - 1) && Arrival.Date > DateTime.Now && Arrival != null && Departure != null);
+            return (Arrival <= Departure && Convert.ToInt32(lengthOfStay.TotalDays) >= (NumberOfDays - 1) && Arrival.Date > DateTime.Now && Arrival != DateTime.MinValue && Departure != DateTime.MinValue);
         }
         //Validation - owner-s conditions for min. num. of days
         private bool IsEnteredCorrectDateRange()
