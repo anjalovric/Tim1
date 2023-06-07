@@ -29,6 +29,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         private OwnerNotificationsService notificationsService;
         private string stackPanelVisibility;
         private string stackPanelMessage;
+        private bool isOkPressedInDemo;
         public ForumCommentsViewModel(OneForumViewModel forum, Owner owner)
         {
             notificationsService = new OwnerNotificationsService();
@@ -86,6 +87,18 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
         }
 
+        public bool IsOkPressedInDemo
+        {
+            get { return isOkPressedInDemo; }
+            set
+            {
+                if (value != isOkPressedInDemo)
+                {
+                    isOkPressedInDemo = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         public ForumComment SelectedComment
         {
             get { return selectedComment; }

@@ -150,7 +150,7 @@
                 </Style>
             </Label.Style>
         </Label>
-        <tk:WatermarkTextBox Text="{Binding Path= Description, UpdateSourceTrigger=PropertyChanged}" Watermark="Enter description here" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="9"/>
+        <tk:WatermarkTextBox Name="Description" Text="{Binding Path= Description, UpdateSourceTrigger=PropertyChanged}" Watermark="Enter description here" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="9"/>
         <Button Command="{Binding CancelCommand}" Content="Cancel" Grid.Column="0" Grid.Row="11" Height="41" Width="136" HorizontalAlignment="Left" Style="{StaticResource CancelButton}"/>
         <Button Command="{Binding ConfirmCommand}" Name="ConfirmButton" Content="Confirm" Grid.Column="1" Grid.Row="11" Height="41" Width="136" HorizontalAlignment="Right" Style="{StaticResource BasicButton}"/>
         <Label Content="Duration is out of date range" Visibility="{Binding Path=DurationOutOfRangeVisibility, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True}" Foreground="Red" HorizontalContentAlignment="Left" Grid.Row="5" VerticalAlignment="Center" Width="188" Height="32" Grid.Column="1"/>

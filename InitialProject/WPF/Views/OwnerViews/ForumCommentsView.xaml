@@ -178,7 +178,18 @@
                     <Image Grid.Column="0" Height="30" Source="/Resources/Images/success.png" />
                     <Label Grid.Column="1" Content="{Binding Path=StackPanelMessage, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center"  FontSize="15"/>
                 </Grid>
-                <Button Command="{Binding OKCommand}" Content="OK" Grid.Row="2" Grid.Column="1" Margin="0,0,31,0" Style="{StaticResource DataTemplateButton}" />
+                <Button Command="{Binding OKCommand}" Content="OK" Grid.Row="2" Grid.Column="1" Margin="0,0,31,0">
+                    <Button.Style>
+                        <Style TargetType="Button" BasedOn="{StaticResource DataTemplateButton}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Path = IsOkPressedInDemo, UpdateSourceTrigger=PropertyChanged}" Value="True">
+                                    <Setter Property="Foreground" Value="Gray" />
+                                    <Setter Property="Background" Value="AliceBlue" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
             </Grid>
         </StackPanel>
     </Grid>

@@ -23,6 +23,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         public RelayCommand SelectCleanlinessCommand { get; set; }
         public RelayCommand SelectRulesFollowingCommand { get; set; }
         public RelayCommand ConfirmCommand { get; set; }
+        public bool isConfirmPressedInDemo { get; set; }
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -33,6 +34,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             GuestReview = new GuestReview();
             GuestReview.Reservation = reservationToReview;
             MakeCommands();
+            IsConfirmPressedInDemo = false;
         }
 
         private void MakeCommands()
@@ -47,6 +49,19 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        public bool IsConfirmPressedInDemo
+        {
+            get => isConfirmPressedInDemo;
+            set
+            {
+                if (value != isConfirmPressedInDemo)
+                {
+                    isConfirmPressedInDemo = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         public bool IsOkButtonEnabled
         {
             get => isOkButtonEnabled;
@@ -59,7 +74,6 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
                 }
             }
         }
-
 
         private bool CanExecute(object sender)
         {

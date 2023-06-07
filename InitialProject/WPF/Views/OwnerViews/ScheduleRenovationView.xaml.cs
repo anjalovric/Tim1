@@ -22,10 +22,12 @@ namespace InitialProject.WPF.Views.OwnerViews
     /// </summary>
     public partial class ScheduleRenovationView : Page
     {
+        public ScheduleRenovationViewModel ViewModel { get; set; }
         public ScheduleRenovationView(Owner owner)
         {
             InitializeComponent();
-            DataContext = new ScheduleRenovationViewModel(owner);
+            ViewModel = new ScheduleRenovationViewModel(owner);
+            this.DataContext = ViewModel;
         }
     }
 }

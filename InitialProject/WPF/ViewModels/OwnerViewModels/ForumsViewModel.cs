@@ -17,7 +17,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 {
     public class ForumsViewModel : INotifyPropertyChanged
     {
-        private Owner profileOwner;
+        public Owner profileOwner;
         private ForumService forumService;
 
         public event PropertyChangedEventHandler? PropertyChanged;

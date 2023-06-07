@@ -10,10 +10,12 @@ namespace InitialProject.WPF.Views.OwnerViews
     /// </summary>
     public partial class GuestReviewView : Page
     {
+        public GuestReviewViewModel ViewModel { get; set; }
         public GuestReviewView(Owner owner)
         {
             InitializeComponent();
-            DataContext = new GuestReviewViewModel(owner);
+            ViewModel = new GuestReviewViewModel(owner);
+            DataContext = ViewModel;
         }
     }
 }
