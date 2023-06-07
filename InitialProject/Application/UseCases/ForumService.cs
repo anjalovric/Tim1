@@ -121,12 +121,13 @@ namespace InitialProject.Service
             return GetAllForOwnerDisplay(owner).FindAll(n => n.Forum.IsNewForOwner == true && ownerService.HasAccommodationOnLocation(owner, n.Forum.Location));
         }
 
-        public void MakeForumsOld(List<OneForumViewModel> forumViewModels)
+        public void MakeForumsOld(List<OneForumViewModel> forumViewModels, Owner owner)
         {
             foreach(var forum in forumViewModels)
             {
                 forum.Forum.IsNewForOwner = false;
                 forumRepository.Update(forum.Forum);
+                ownerNotificationsService.Delete(OwnerNotificationType.FORUM_ADDED, owner);
             }
         }
 

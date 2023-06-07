@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
+using System.Text;
 using InitialProject.APPLICATION.UseCases;
 using InitialProject.Model;
 using Syncfusion.Pdf.Graphics;
@@ -12,6 +13,7 @@ namespace InitialProject.ReportPatterns
         private List<Accommodation> accommodations;
         private OwnerReviewReportService reportService;
         private Graphics graphics;
+        private int numberOfLines = 0;
         public OwnerReportPattern(Owner owner)
         {
             this.owner = owner;
@@ -20,11 +22,26 @@ namespace InitialProject.ReportPatterns
         }
         public override void GenerateConclusion()
         {
-           
+            Font = new PdfStandardFont(PdfFontFamily.Helvetica, 9);
+            StringBuilder stringBuilder1 = new StringBuilder("Owner " + owner.ToString() + " has " + accommodations.Count
+                + " accommodations registrated in My Travel system. Average grade for owner by all categoriesis " + reportService.GetAverageRate(owner) + " and");
+            StringBuilder stringBuilder2 = new StringBuilder("total number of reviews made by guests is "+ reportService.GetNumberOfReviews(owner) + ".");
+            Graphics.DrawString(stringBuilder1.ToString(), Font, PdfBrushes.Black, new PointF(0, 250 + numberOfLines*10));
+            Graphics.DrawString(stringBuilder2.ToString(), Font, PdfBrushes.Black, new Point(0, 260 + numberOfLines*10));
         }
 
         public override void GenerateContent()
         {
+            Font = new PdfStandardFont(PdfFontFamily.Helvetica, 9);
+            StringBuilder stringBuilder = new StringBuilder("");
+            stringBuilder.Append("This report is generated on request made by ").Append(owner.ToString()).Append(" in this system registated as OWNER.")
+                .Append(" Report shows average grades");
+            StringBuilder stringBuilder2 = new StringBuilder("by categories for each accommodation registated by this owner.");
+
+
+
+            Graphics.DrawString(stringBuilder.ToString(), Font, PdfBrushes.Black, new PointF(0, 140));
+            Graphics.DrawString(stringBuilder2.ToString(), Font, PdfBrushes.Black, new PointF(0, 150));
         }
 
         public override void GenerateTableContent()
@@ -41,6 +58,7 @@ namespace InitialProject.ReportPatterns
                 Table.Rows.Add(new string[] {accommodation.Name, accommodation.Location.ToString(), 
                                              reportService.GetAverageCleanlinessByAccommodation(accommodation).ToString(),
                                              reportService.GetAverageCorrectnessByAccommodation(accommodation).ToString()});
+                numberOfLines++;
             }
         }
 
