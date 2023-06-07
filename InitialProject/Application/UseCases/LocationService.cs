@@ -61,7 +61,7 @@ namespace InitialProject.Service
             return countries;
         }
 
-        public Location GetByCityAndCountry(string city, string country)
+        public Location GetByCityAndCountry(string country, string city)
         {
             return locationRepository.GetAll().Find(n => n.City.Equals(city) && n.Country.Equals(country));
         }

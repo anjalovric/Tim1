@@ -25,7 +25,7 @@ namespace InitialProject.Service
         }
         public void Add(Accommodation accommodation)
         {
-            accommodation.Location = locationService.GetByCityAndCountry(accommodation.Location.City, accommodation.Location.Country);
+            accommodation.Location = locationService.GetByCityAndCountry(accommodation.Location.Country, accommodation.Location.City);
             accommodationRepository.Add(accommodation);
         }
         public Accommodation GetById(int id)
