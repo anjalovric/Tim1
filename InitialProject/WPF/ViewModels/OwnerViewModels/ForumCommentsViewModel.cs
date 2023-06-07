@@ -10,6 +10,7 @@ using System.Windows;
 using InitialProject.APPLICATION.UseCases;
 using InitialProject.Domain.Model;
 using InitialProject.Model;
+using InitialProject.Service;
 using InitialProject.WPF.Views;
 using InitialProject.WPF.Views.OwnerViews;
 
@@ -22,16 +23,23 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         private ForumComment selectedComment;
         public RelayCommand ReportCommand { get; set;}
         public RelayCommand NewCommentCommand { get; set; }
+        public RelayCommand OKCommand { get; set; }
         public Owner Owner { get; set; }
         private ForumCommentService forumCommentService;
+        private OwnerNotificationsService notificationsService;
+        private string stackPanelVisibility;
+        private string stackPanelMessage;
         public ForumCommentsViewModel(OneForumViewModel forum, Owner owner)
         {
+            notificationsService = new OwnerNotificationsService();
             Forum = forum;
             Owner = owner;
             SelectedComment = new ForumComment();
             MakeComments();
-            ReportCommand = new RelayCommand(Report_Executed, ReportCanExecute);
+            ReportCommand = new RelayCommand(Report_Executed, CanExecute);
             NewCommentCommand = new RelayCommand(NewComment_Executed, CanExecute);
+            OKCommand = new RelayCommand(OK_Executed, CanExecute);
+            DisplayNotificationPanel();
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -40,6 +48,31 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        public string StackPanelMessage
+        {
+            get { return stackPanelMessage; }
+            set
+            {
+                if (value != stackPanelMessage)
+                {
+                    stackPanelMessage = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public string StackPanelVisibility
+        {
+            get { return stackPanelVisibility; }
+            set
+            {
+                if (value != stackPanelVisibility)
+                {
+                    stackPanelVisibility = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         public OneForumViewModel Forum
         {
             get { return forum; }
@@ -83,18 +116,20 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         {
             return true;
         }
-
-        private bool ReportCanExecute(object sender)
-        {
-            return SelectedComment != null && !SelectedComment.IsAlreadyReportedByThisOwner && Forum.OwnerHasLocation && !SelectedComment.WasOnLocation;
-        }
         private void Report_Executed(object sender)
         {
             if(SelectedComment != null && SelectedComment.Id!=0)
             {
-                forumCommentService.Report(SelectedComment, Owner);
+                ReportingCommentView reportingCommentView = new ReportingCommentView(SelectedComment, Owner, Forum);
+                reportingCommentView.Show();
                 UpdateComments();
             }
+            DisplayNotificationPanel();
+        }
+
+        private void OK_Executed(object sender)
+        {
+            StackPanelVisibility = "Hidden";
         }
 
         private void NewComment_Executed(object sender)
@@ -111,6 +146,26 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
                 Comments.Add(comment);
             }
             InitializeSelectedComment();
+        }
+
+        private void DisplayNotificationPanel()
+        {
+            if (notificationsService.IsCommentAdded(Owner))
+            {
+                StackPanelMessage = "New comment successfully added!";
+                StackPanelVisibility = "Visible";
+                notificationsService.Delete(Domain.Model.OwnerNotificationType.COMMENT_ADDED, Owner);
+            }
+            else if (notificationsService.IsCommentReported(Owner))
+            {
+                StackPanelMessage = "Comment successfully reported!";
+                StackPanelVisibility = "Visible";
+                notificationsService.Delete(Domain.Model.OwnerNotificationType.COMMENT_REPORTED, Owner);
+            }
+            else
+            {
+                StackPanelVisibility = "Hidden";
+            }
         }
     }
 }

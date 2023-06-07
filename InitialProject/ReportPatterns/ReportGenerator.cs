@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using System.Drawing;
 using Syncfusion.Pdf;
 using Syncfusion.Pdf.Graphics;
@@ -62,16 +63,17 @@ namespace InitialProject.ReportPatterns
         private void InsertImage(PdfPage page)
         {
             PdfImage image = PdfImage.FromFile("Resources/Images/logoMyTravel.png");
-            RectangleF bounds = new RectangleF(170, 12, 150, 50);
+            RectangleF bounds = new RectangleF(400, 12, 100, 50);
             page.Graphics.DrawImage(image, bounds);
         }
 
         private void GenerateHeader()
         {
-            Graphics.DrawString("Adresa: Trg Dositeja Obradovica 6", Font, PdfBrushes.Black, new PointF(0, 19));
-            Graphics.DrawString("21000 Novi Sad, Srbija", Font, PdfBrushes.Black, new PointF(12, 27));
-            Graphics.DrawString("Kontakt telefon: 021021021", Font, PdfBrushes.Black, new PointF(0, 36));
-            Graphics.DrawString("E-mail adresa: mytravel@gmail.com", Font, PdfBrushes.Black, new PointF(0, 44));
+            Graphics.DrawString("Address: Trg Dositeja Obradovica 6", Font, PdfBrushes.Black, new PointF(0, 19));
+            Graphics.DrawString("21000 Novi Sad, Serbia", Font, PdfBrushes.Black, new PointF(0, 27));
+            Graphics.DrawString("Contact: 021021021", Font, PdfBrushes.Black, new PointF(0, 36));
+            Graphics.DrawString("E-mail address: mytravel@gmail.com", Font, PdfBrushes.Black, new PointF(0, 44));
+            Graphics.DrawString("Report generated on: " + DateTime.Now, Font, PdfBrushes.Black, new PointF(0, 53));
         }
 
         private void InitializeGraphics(PdfPage page)

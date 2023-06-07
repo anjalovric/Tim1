@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using InitialProject.APPLICATION.UseCases;
 using InitialProject.Model;
 using InitialProject.Service;
 using InitialProject.WPF.Views;
@@ -19,15 +20,21 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         public Owner ProfileOwner { get; set; }
         public RelayCommand RequestsCommand { get; set; }
         public RelayCommand ReviewGuestCommand { get; set; }
+        public RelayCommand SuggestionsCommand { get; set; }
+        public RelayCommand ForumCommand { get; set; }
         private OwnerNotificationsService notificationsService;
         private double guestReviewsHeight = 0;
         private double reschedulingRequestsHeight = 0;
+        private double suggestionsHeight = 0;
+        private double forumHeight = 0;
 
         public OwnerOverviewViewModel(Owner owner)
         {
             ProfileOwner = owner;
             RequestsCommand = new RelayCommand(Request_Executed, CanExecute);
             ReviewGuestCommand = new RelayCommand(ReviewGuest_Executed, CanExecute);
+            SuggestionsCommand = new RelayCommand(Suggestion_Executed, CanExecute);
+            ForumCommand = new RelayCommand(Forum_Executed, CanExecute);
             notificationsService = new OwnerNotificationsService();
         }
 
@@ -44,6 +51,16 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         private void ReviewGuest_Executed(object sender)
         {
             Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = new GuestReviewView(ProfileOwner);
+        }
+
+        private void Suggestion_Executed(object sender)
+        {
+            Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = new LocationSuggestionsView(ProfileOwner);
+        }
+
+        private void Forum_Executed(object sender)
+        {
+            Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = new ForumsView(ProfileOwner);
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -89,6 +106,42 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
         }
 
+        public double SuggestionsHeight
+        {
+            get
+            {
+                if (notificationsService.HasLocationSuggestion(ProfileOwner))
+                    return 54;
+                else
+                    return 0;
+            }
+            set
+            {
+                if (value != suggestionsHeight)
+                {
+                    suggestionsHeight = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
+        public double ForumHeight
+        {
+            get
+            {
+                if (notificationsService.HasNewForum(ProfileOwner))
+                    return 54;
+                else
+                    return 0;
+            }
+            set
+            {
+                if (value != forumHeight)
+                {
+                    forumHeight = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
     }
 }

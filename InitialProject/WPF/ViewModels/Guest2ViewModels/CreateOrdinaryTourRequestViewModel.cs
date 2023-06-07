@@ -1,7 +1,9 @@
 ﻿using InitialProject.Domain.Model;
+using InitialProject.Help;
 using InitialProject.Repository;
 using InitialProject.Service;
 using InitialProject.WPF.Views.Guest2Views;
+using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -10,6 +12,7 @@ using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace InitialProject.WPF.ViewModels.Guest2ViewModels
 {
@@ -165,12 +168,15 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             }
         }
         public ObservableCollection<OrdinaryTourRequests> OrdinaryTourRequests { get; set; }
-        public CreateOrdinaryTourRequestViewModel(Model.Guest2 guest2, ObservableCollection<OrdinaryTourRequests> ordinaryTourRequests)
+        private CreateOrdinaryTourRequestView org;
+        public ICommand HelpCommandInViewModel { get; }
+        public CreateOrdinaryTourRequestViewModel(Model.Guest2 guest2, ObservableCollection<OrdinaryTourRequests> ordinaryTourRequests, CreateOrdinaryTourRequestView org)
         {
             MaxGuests = "";
             NowDate = DateTime.Now;
             StartDate = NowDate; ;
             EndDate = NowDate;
+            this.org = org;
             Guest2 = guest2;
             OrdinaryTourRequests = ordinaryTourRequests;
             MakeCommands();
@@ -179,7 +185,8 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             Countries = new ObservableCollection<string>(locationRepository.GetAllCountries());
             CitiesByCountry = new ObservableCollection<string>();
             IsComboBoxCityEnabled = false;
-            OrdinaryTourRequests = ordinaryTourRequests;    
+            OrdinaryTourRequests = ordinaryTourRequests;
+            HelpCommandInViewModel = new RelayCommand(CommandBinding_Executed);
         }
         private void MakeCommands()
         {
@@ -267,6 +274,15 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
                     CitiesByCountry.Add(city);
                 }
                 IsComboBoxCityEnabled = true;
+            }
+        }
+        private void CommandBinding_Executed(object sender)
+        {
+            IInputElement focusedControl = FocusManager.GetFocusedElement(Application.Current.Windows[0]);
+            if (focusedControl is DependencyObject)
+            {
+                string str = ShowToursHelp.GetHelpKey((DependencyObject)focusedControl);
+                ShowToursHelp.ShowHelpForCreateOrdinaryRequest(str, org);
             }
         }
     }

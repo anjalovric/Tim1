@@ -31,7 +31,7 @@ namespace InitialProject.WPF.Views.Guest2Views
         public CreateOrdinaryTourRequestView(Model.Guest2 guest2,ObservableCollection<OrdinaryTourRequests> ordinaryTourRequests)
         {
             InitializeComponent();
-            viewModel = new CreateOrdinaryTourRequestViewModel(guest2, ordinaryTourRequests);
+            viewModel = new CreateOrdinaryTourRequestViewModel(guest2, ordinaryTourRequests,this);
             DataContext = viewModel;
         }
     }

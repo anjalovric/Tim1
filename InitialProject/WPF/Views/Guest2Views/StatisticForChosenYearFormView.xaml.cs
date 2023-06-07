@@ -26,8 +26,11 @@ namespace InitialProject.WPF.Views.Guest2Views
         public StatisticForChosenYearFormView(Model.Guest2 guest2,string year)
         {
             InitializeComponent();
-            DataContext = new StatisticForChosenYearViewModel(guest2,year);
+            DataContext = new StatisticForChosenYearViewModel(guest2,year,this);
         }
-
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            FocusManager.SetFocusedElement(this, this);
+        }
     }
 }

@@ -20,11 +20,13 @@ namespace InitialProject.APPLICATION.UseCases
         private AccommodationReservationService accommodationReservationService;
         private AccommodationService accommodationService;
         private CommentReportService commentReportService;
+        private OwnerNotificationsService notificationsService;
         public ForumCommentService()
         {
             guest1Service = new Guest1Service();
             ownerService = new OwnerService();
             accommodationReservationService = new AccommodationReservationService();
+            notificationsService = new OwnerNotificationsService();
             accommodationService = new AccommodationService();
             commentReportService = new CommentReportService();
         }
@@ -138,6 +140,7 @@ namespace InitialProject.APPLICATION.UseCases
             report.ForumComment = comment;
             commentReportService.Add(report);
             forumCommentRepository.Report(comment);
+            notificationsService.Add(OwnerNotificationType.COMMENT_REPORTED, owner);
         }
     }
 }

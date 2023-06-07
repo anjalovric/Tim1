@@ -30,16 +30,7 @@ namespace InitialProject.WPF.Views.Guest2Views
         public MyRequestsFormView(Model.Guest2 guest2)
         {
             InitializeComponent();
-            this.DataContext = new MyRequestsViewModel(guest2);
-        }
-        private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            IInputElement focusedControl = FocusManager.GetFocusedElement(Application.Current.Windows[0]);
-            if (focusedControl is DependencyObject)
-            {
-                string str = ShowToursHelp.GetHelpKey((DependencyObject)focusedControl);
-                ShowToursHelp.ShowHelpForRequests(str, this);
-            }
+            this.DataContext = new MyRequestsViewModel(guest2,this);
         }
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {

@@ -160,6 +160,7 @@
     <None Remove="Resources\Images\minus.png" />
     <None Remove="Resources\Images\month.png" />
     <None Remove="Resources\Images\museum.jpg" />
+    <None Remove="Resources\Images\myLocation.png" />
     <None Remove="Resources\Images\nature1.jpg" />
     <None Remove="Resources\Images\nature2.png" />
     <None Remove="Resources\Images\nature3.jpeg" />
@@ -351,6 +352,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\medal.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\myLocation.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\newDelete.png">
@@ -961,6 +965,10 @@
   <ItemGroup>
 
     <None Update="Help\activeTours.htm">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+
+    <None Update="Help\creatingComplex.htm">
       <Generator>MSBuild:Compile</Generator>
     </None>
     <None Update="Help\finishedTours.htm">

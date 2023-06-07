@@ -24,10 +24,14 @@ namespace InitialProject.WPF.Views.Guest2Views
         public TourDetailsView(TourInstance tourInstance,Guest2 guest2)
         {
             InitializeComponent();
-            TourDetailsViewModel tourDetailsViewModel= new TourDetailsViewModel(tourInstance, guest2);
+            TourDetailsViewModel tourDetailsViewModel= new TourDetailsViewModel(tourInstance, guest2,this);
             this.DataContext = tourDetailsViewModel;
             if (tourDetailsViewModel.CloseAction == null)
                 tourDetailsViewModel.CloseAction = new Action(this.Close);
+        }
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            FocusManager.SetFocusedElement(this, this);
         }
     }
 }

@@ -13,6 +13,8 @@ using System.Windows;
 using System.ComponentModel;
 using InitialProject.Domain.Model;
 using InitialProject.Service;
+using InitialProject.Help;
+using System.Windows.Input;
 
 namespace InitialProject.WPF.ViewModels.Guest2ViewModels
 {
@@ -168,12 +170,15 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         public RelayCommand IncrementCommand { get; set; }
         public RelayCommand DecrementCommand { get; set; }
         public RelayCommand ViewDetailsCommand { get; set; }
-        public ShowToursViewModel(Guest2 guest2)
+        public ICommand HelpCommandInViewModel { get;}
+        private ShowToursView org;
+        public ShowToursViewModel(Guest2 guest2,ShowToursView org)
         {
             AddLanguages();
             Duration = "";
             MaxGuests = "";
             tourRepository = new TourRepository();
+            this.org = org;
             this.guest2 = guest2;
             Label = "Showing all tours: ";
             MakeCommands();
@@ -194,6 +199,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             Countries = new ObservableCollection<string>(locationRepository.GetAllCountries());
             CitiesByCountry = new ObservableCollection<string>();
             IsComboBoxCityEnabled = false;
+            HelpCommandInViewModel = new RelayCommand(CommandBinding_Executed);
         }
         private bool CanExecute(object sender)
         {
@@ -207,7 +213,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             IncrementCommand=new RelayCommand(IncrementCapacityNumber_Executed,CanExecute);
             DecrementCommand=new RelayCommand(DecrementCapacityNumber_Executed, CanExecute);
             ViewDetailsCommand=new RelayCommand(ViewDetails_Executed,CanExecute);
-            CountryInputSelectionChangedCommand = new RelayCommand(CountryInputSelectionChanged_Executed, CanExecute);
+            CountryInputSelectionChangedCommand = new RelayCommand(CountryInputSelectionChanged_Executed, CanExecute);  
         }
         private void SetTourInstances(ObservableCollection<TourInstance> TourInstances)
         {
@@ -377,7 +383,9 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         private void ViewDetails_Executed(object sender)
         {
             TourDetailsView details = new TourDetailsView(Selected, guest2);
+            Keyboard.ClearFocus();
             details.Show();
+            //details.Activate();
         }
         private void GetImagesUrls(List<string> imagesUrls, TourInstance currentTourInstance)
         {
@@ -469,6 +477,15 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
                 }
             }
 
+        }
+        private void CommandBinding_Executed(object sender)
+        {
+            IInputElement focusedControl = FocusManager.GetFocusedElement(Application.Current.Windows[0]);
+            if (focusedControl is DependencyObject)
+            {
+                string str = ShowToursHelp.GetHelpKey((DependencyObject)focusedControl);
+                ShowToursHelp.ShowHelp(str, org);
+            }
         }
     }
 }

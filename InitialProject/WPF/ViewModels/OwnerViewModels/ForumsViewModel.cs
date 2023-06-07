@@ -41,9 +41,9 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         private void MakeForums()
         {
             forumService = new ForumService();
-            Forums = new ObservableCollection<OneForumViewModel>(forumService.getAllForOwnerDisplay(profileOwner));
-            NewForums = new ObservableCollection<OneForumViewModel>(forumService.getNewForOwnerDisplay(profileOwner));
-            forumService.MakeForumsOld(forumService.getNewForOwnerDisplay(profileOwner));
+            Forums = new ObservableCollection<OneForumViewModel>(forumService.GetAllForOwnerDisplay(profileOwner));
+            NewForums = new ObservableCollection<OneForumViewModel>(forumService.GetNewForOwnerDisplay(profileOwner));
+            forumService.MakeForumsOld(forumService.GetNewForOwnerDisplay(profileOwner), profileOwner);
         }
 
         public OneForumViewModel SelectedForum

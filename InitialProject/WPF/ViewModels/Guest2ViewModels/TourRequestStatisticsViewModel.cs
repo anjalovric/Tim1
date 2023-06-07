@@ -1,6 +1,8 @@
 ﻿using InitialProject.Domain.Model;
+using InitialProject.Help;
 using InitialProject.Service;
 using InitialProject.WPF.Views.Guest2Views;
+using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +11,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace InitialProject.WPF.ViewModels.Guest2ViewModels
 {
@@ -24,16 +27,20 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         public RelayCommand SearchCommand { get; set; }
         public RelayCommand CloseCommand { get; set; }
         public string Year { get; set; }
-        public TourRequestStatisticsViewModel(Model.Guest2 guest2)
+        public ICommand HelpCommandInViewModel { get; }
+        private TourRequestStatisticsView org;
+        public TourRequestStatisticsViewModel(Model.Guest2 guest2, TourRequestStatisticsView org)
         {
             Guest2 = guest2;
             MakeCommand();
+            this.org = org;
             requestStatisticsService = new RequestStatisticsService();
             ordinaryTourRequestsService = new OrdinaryTourRequestsService();
             OrdinaryTourRequests = new List<OrdinaryTourRequests>(ordinaryTourRequestsService.GetByGuestId(guest2.Id));
             acceptedRequest = requestStatisticsService.ProcentOfAcceptedRequest( Guest2);
             invalidRequest = requestStatisticsService.ProcentOfInvalidRequest( Guest2);
             averageNumberOfPeople = requestStatisticsService.AverageNumberOfPeopleInAcceptedRequests( Guest2);
+            HelpCommandInViewModel = new RelayCommand(CommandBinding_Executed);
         }
         private void MakeCommand()
         {
@@ -46,6 +53,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         }
         private void Search_Executed(object sender)
         {
+            //Keyboard.ClearFocus();
             StatisticForChosenYearFormView statisticForChoosenYearFormView = new StatisticForChosenYearFormView(Guest2,Year);
             statisticForChoosenYearFormView.Show();
            
@@ -53,6 +61,15 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         private void Close_Executed(object sender)
         {
             Application.Current.Windows.OfType<TourRequestStatisticsView>().FirstOrDefault().Close();
+        }
+        private void CommandBinding_Executed(object sender)
+        {
+            IInputElement focusedControl = FocusManager.GetFocusedElement(Application.Current.Windows[0]);
+            if (focusedControl is DependencyObject)
+            {
+                string str = ShowToursHelp.GetHelpKey((DependencyObject)focusedControl);
+                ShowToursHelp.ShowHelpForStatistics(str, org);
+            }
         }
     }
 }

@@ -58,14 +58,14 @@ namespace InitialProject.Service
             }
         }
 
-        public List<Owner> getAllByLocation(Location location)
+        public List<Owner> GetAllByLocation(Location location)
         {
             List<Owner> ownersByLocation = new List<Owner>();
             AccommodationService accommodationService = new AccommodationService();
             foreach(Accommodation accommodation in accommodationService.GetAll())
             {
                 bool isAlreadyInList = ownersByLocation.Find(n => n.Id == accommodation.Owner.Id) != null;
-                if (accommodation.Location == location && !isAlreadyInList)
+                if (accommodation.Location.Id == location.Id && !isAlreadyInList)
                     ownersByLocation.Add(accommodation.Owner);
             }
             return ownersByLocation;

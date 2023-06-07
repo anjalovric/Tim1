@@ -99,7 +99,7 @@ namespace InitialProject.Service
             return forumRepository.GetAll().Find(n => n.Location.Id == location.Id);
         }
      
-        public List<OneForumViewModel> getAllForOwnerDisplay(Owner owner)
+        public List<OneForumViewModel> GetAllForOwnerDisplay(Owner owner)
         {
             List<Forum> forums = GetAll();
             List<OneForumViewModel> result = new List<OneForumViewModel>();
@@ -116,17 +116,18 @@ namespace InitialProject.Service
             return result;
         }
     
-        public List<OneForumViewModel> getNewForOwnerDisplay(Owner owner)
+        public List<OneForumViewModel> GetNewForOwnerDisplay(Owner owner)
         {
-            return getAllForOwnerDisplay(owner).FindAll(n => n.Forum.IsNewForOwner == true);
+            return GetAllForOwnerDisplay(owner).FindAll(n => n.Forum.IsNewForOwner == true && ownerService.HasAccommodationOnLocation(owner, n.Forum.Location));
         }
 
-        public void MakeForumsOld(List<OneForumViewModel> forumViewModels)
+        public void MakeForumsOld(List<OneForumViewModel> forumViewModels, Owner owner)
         {
             foreach(var forum in forumViewModels)
             {
                 forum.Forum.IsNewForOwner = false;
                 forumRepository.Update(forum.Forum);
+                ownerNotificationsService.Delete(OwnerNotificationType.FORUM_ADDED, owner);
             }
         }
 

@@ -6,8 +6,13 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 using InitialProject.Domain.Model;
+using InitialProject.Help;
 using InitialProject.Service;
+using InitialProject.WPF.Views.Guest2Views;
 
 namespace InitialProject.WPF.ViewModels.Guest2ViewModels
 {
@@ -42,15 +47,48 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
                 }
             }
         }
+        public bool IsEnabled { get; set; }
+        public RelayCommand ViewCommand { get; set; }
+        public ICommand HelpCommandInViewModel { get;}
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-        public PartsOfComplexRequestTourViewModel(ComplexTourRequests complex)
+        private PartsOfComplexRequestTour org;
+        public PartsOfComplexRequestTourViewModel(ComplexTourRequests complex,PartsOfComplexRequestTour org)
         {
             requestsService = new OrdinaryTourRequestsService();
+            this.org = org;
             OrdinaryTourRequests = new ObservableCollection<OrdinaryTourRequests>(requestsService.GetOrdinaryTourRequestsByComplex(complex.Id));
+            ViewCommand = new RelayCommand(View_Executed, CanExecute);
+            HelpCommandInViewModel = new RelayCommand(CommandBinding_Executed);
+        }
+        private bool CanExecute(object sender)
+        {
+            return true;
+        }
+        private void View_Executed(object sender)
+        {
+            OrdinaryTourRequests current = ((Button)sender).DataContext as OrdinaryTourRequests;
+            if (current.TourInstanceId != -1)
+            {
+                DetailsFormView details = new DetailsFormView(current);
+                details.Show();
+            }
+            else
+            {
+                MessageBox.Show("Ova tura nije jos prihvacena da biste mogli vidjeti detalje.");
+            }
+        }
+        private void CommandBinding_Executed(object sender)
+        {
+            IInputElement focusedControl = FocusManager.GetFocusedElement(Application.Current.Windows[0]);
+            if (focusedControl is DependencyObject)
+            {
+                string str = ShowToursHelp.GetHelpKey((DependencyObject)focusedControl);
+                ShowToursHelp.ShowHelpForParts(str, org);
+            }
         }
     }
 }

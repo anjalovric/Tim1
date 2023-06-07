@@ -5,9 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:tk="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit.NET5" 
         xmlns:properties="clr-namespace:InitialProject.Properties"
+        xmlns:l="clr-namespace:InitialProject.Help"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
-        Title="RateTourAndGuide" Height="600" Width="890" d:Width="890" WindowStartupLocation="CenterScreen" Background="Transparent" AllowsTransparency="True" WindowStyle="None">
+        Loaded="Page_Loaded"
+        Title="RateTourAndGuide" Height="600" Width="890" d:Width="890" WindowStartupLocation="CenterScreen" Background="Transparent" AllowsTransparency="True" WindowStyle="None" Focusable="True">
+    <Window.InputBindings>
+        <KeyBinding Key="F1" Command="{Binding HelpCommandInViewModel}" />
+    </Window.InputBindings>
     <Window.Resources>
         <Style x:Key="ButtonForImages" TargetType="Button">
             <Setter Property="Background" Value="Transparent" />

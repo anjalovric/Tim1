@@ -16,6 +16,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Input;
+using InitialProject.Help;
 
 namespace InitialProject.WPF.ViewModels.Guest2ViewModels
 {
@@ -100,17 +102,19 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
                 OnPropertyChanged("Vouchers");
             }
         }
-        public TourReservationViewModel(TourInstance currentTourInstance, Guest2 guest2, ObservableCollection<TourInstance> TourInstance, TourInstanceRepository tourInstanceRepository,string label)
+        public ICommand HelpCommandInViewModel { get; }
+        private TourReservationFormView org;
+        public TourReservationViewModel(TourInstance currentTourInstance, Guest2 guest2, ObservableCollection<TourInstance> TourInstance, TourInstanceRepository tourInstanceRepository,string label, TourReservationFormView org)
         {
             CurrentTourInstance = currentTourInstance;
             this.TourInstances = TourInstance;
             withVoucher = false;
             MakeCommands();
             Capacity = "";
+            this.org = org;
             this.tourInstanceRepository = tourInstanceRepository;
             tourReservationRepository = new TourReservationRepository();
             tourReservations = tourReservationRepository.GetAll();
-            ShowTours = new ShowToursViewModel(guest2);
             this.guest2 = guest2;
             GuestId = guest2.Id;
             Label = "Showing available tours";
@@ -119,6 +123,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             vouchers = new ObservableCollection<Voucher>();
             Vouchers = new ObservableCollection<Voucher>(voucherService.FindAllVouchers(guest2));
             VoucherValidity(Vouchers);
+            HelpCommandInViewModel = new RelayCommand(CommandBinding_Executed);
         }
         
         private void VoucherValidity(ObservableCollection<Voucher> Vouchers)
@@ -258,6 +263,15 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             Vouchers.Clear();
             foreach (Voucher voucher in voucherService.FindAllVouchers(guest2))
                 Vouchers.Add(voucher);
+        }
+        private void CommandBinding_Executed(object sender)
+        {
+            IInputElement focusedControl = FocusManager.GetFocusedElement(Application.Current.Windows[0]);
+            if (focusedControl is DependencyObject)
+            {
+                string str = ShowToursHelp.GetHelpKey((DependencyObject)focusedControl);
+                ShowToursHelp.ShowHelpForReservation(str, org);
+            }
         }
     }
 }

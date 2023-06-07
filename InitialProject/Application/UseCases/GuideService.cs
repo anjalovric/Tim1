@@ -31,5 +31,16 @@ namespace InitialProject.Service
         {
             return guideRepository.Update(guide);
         }
+
+        public void SetGuide(TourInstance tourInstance)
+        {
+            foreach(Guide guide in guideRepository.GetAll())
+            {
+                if(tourInstance.Guide.Id == guide.Id)
+                {
+                    tourInstance.Guide = guide;
+                }
+            }
+        }
     }
 }

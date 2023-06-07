@@ -70,5 +70,14 @@ namespace InitialProject.Service
         {
             return locationRepository.GetById(id);
         }    
+
+        public void SetLocation(TourInstance tourInstance)
+        {
+            foreach(Location location in GetAll())
+            {
+                if(tourInstance.Tour.Location.Id==location.Id)
+                    tourInstance.Tour.Location=location;
+            }
+        }
     }
 }

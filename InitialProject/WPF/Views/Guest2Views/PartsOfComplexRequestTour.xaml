@@ -4,9 +4,27 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.WPF.Views.Guest2Views"
+        xmlns:l="clr-namespace:InitialProject.Help"
         mc:Ignorable="d"
-        Title="PartsOfComplexRequestTour" Height="399" Width="556" WindowStartupLocation="CenterScreen">
+        Loaded="Page_Loaded"
+        Title="PartsOfComplexRequestTour" Height="399" Width="556" WindowStartupLocation="CenterScreen" Focusable="True" l:ShowToursHelp.HelpKey="activeTours">
+    <Window.InputBindings>
+        <KeyBinding Key="F1" Command="{Binding HelpCommandInViewModel}" />
+    </Window.InputBindings>
     <Window.Resources>
+        <Style x:Key="LinkButton" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="Blue"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <TextBlock Text="{TemplateBinding Content}" TextDecorations="Underline"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
         <DataTemplate x:Key="requestsTemplate" x:Name="requestsCard">
             <Border BorderBrush="#0C3B2E" Background="#0C3B2E" BorderThickness="3" CornerRadius="10"  Margin="1" HorizontalAlignment="Center" Width="530" Height="80">
                 <Grid HorizontalAlignment="Center" Grid.ColumnSpan="3" Height="80" Width="530" VerticalAlignment="Center" Background="#FF14503F">
@@ -28,19 +46,30 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Width="530" Height="30" Grid.ColumnSpan="2" Foreground="White" Grid.Row="0" Margin="3,0,0,0">
                     </TextBlock>
-                    <Label Content="Name:" FontWeight="Medium" HorizontalAlignment="Left" Width="67" VerticalAlignment="Center" VerticalContentAlignment="Center" Grid.Row="0" Grid.Column="0"/>
-                    <Label Content="Status:" FontWeight="Medium" HorizontalAlignment="Left" Width="67" VerticalAlignment="Center" VerticalContentAlignment="Center" Grid.Row="1" Grid.Column="0"/>
-                    <TextBlock Text="{Binding Path=Name}" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Width="Auto" Height="20" HorizontalAlignment="Left"/>
-                    <TextBlock Text="{Binding Path=Status}" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Width="Auto" Height="20" HorizontalAlignment="Left"/>
+                    <Label Content="Name:" FontSize="14" FontWeight="Medium" HorizontalAlignment="Left" Width="67" VerticalAlignment="Center" VerticalContentAlignment="Center" Grid.Row="0" Grid.Column="0"/>
+                    <Label Content="Status:" FontSize="14" FontWeight="Medium" HorizontalAlignment="Left" Width="67" VerticalAlignment="Center" VerticalContentAlignment="Center" Grid.Row="1" Grid.Column="0"/>
+                    <TextBlock Text="{Binding Path=Name}" FontSize="14" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Width="Auto" Height="20" HorizontalAlignment="Left"/>
+                    <TextBlock Text="{Binding Path=Status}" FontSize="14" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Width="Auto" Height="20" HorizontalAlignment="Left"/>
+                    <Button x:Name="View" Content="Details" Command="{Binding Path=DataContext.ViewCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}"  FontWeight="Bold" Grid.Row="1" FontSize="14" Grid.Column="2"  VerticalAlignment="Center" Width="45" Height="30" ClickMode="Press" Style="{StaticResource LinkButton}" Margin="0,0,0,0" ToolTipService.ShowDuration="5000">
+                        <Button.ToolTip>
+                            <ToolTip>
+                                <StackPanel>
+                                    <TextBlock FontWeight="Bold">Tour details.</TextBlock>
+                                </StackPanel>
+                            </ToolTip>
+                        </Button.ToolTip>
+                    </Button>
+                    
                 </Grid>
             </Border>
         </DataTemplate>
     </Window.Resources>
     <Grid>
-        <ListBox x:Name="ordinaryList" IsSynchronizedWithCurrentItem="True" SelectionMode="Single" HorizontalAlignment="Center" ItemsSource="{Binding Path=OrdinaryTourRequests,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" ItemTemplate="{StaticResource requestsTemplate}" VerticalAlignment="Center" Width="556" Background="WhiteSmoke" BorderThickness="5,5,5,5"  BorderBrush="#8c9d75" Height="363">
+        <ListBox x:Name="ordinaryList" IsSynchronizedWithCurrentItem="True" SelectionMode="Single" HorizontalAlignment="Center" ItemsSource="{Binding Path=OrdinaryTourRequests,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" ItemTemplate="{StaticResource requestsTemplate}" VerticalAlignment="Center" Width="536" Background="WhiteSmoke" BorderThickness="5,5,5,5"  BorderBrush="#8c9d75" Height="363">
             <ListBox.Resources>
                 <Style TargetType="ListViewItem">
                     <Style.Triggers>
