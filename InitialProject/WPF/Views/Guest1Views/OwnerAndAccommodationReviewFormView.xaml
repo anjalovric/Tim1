@@ -9,21 +9,24 @@
       Title="OwnerAndAccommodationReviewForm" d:DesignHeight="696" d:DesignWidth="1024">
     <Page.Resources>
         <Style TargetType="Grid">
-            <Setter Property="Background" Value="#c99585"></Setter>
-        </Style>
-        <Style TargetType="Label">
-            <Setter Property="Foreground" Value="#37492d"></Setter>
-            <Setter Property="FontWeight" Value="Medium"></Setter>
-            <Setter Property="FontSize" Value="18"></Setter>
+            <Setter Property="Background" Value="#37492d"></Setter>
         </Style>
         <Style TargetType="TextBox">
-            <Setter Property="Background" Value="#dbc9ab"></Setter>
+            <Setter Property="Background" Value="#FFFCECB9"></Setter>
             <Setter Property="BorderBrush" Value="#22301a"></Setter>
             <Setter Property="BorderThickness" Value="3"></Setter>
-            <Setter Property="TextWrapping" Value="Wrap"></Setter>
-            <Setter Property="VerticalContentAlignment" Value="Top"></Setter>
+            <Setter Property="Foreground" Value="#22301a"></Setter>
             <Setter Property="FontSize" Value="18"></Setter>
             <Setter Property="FontWeight" Value="Medium"></Setter>
+            <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="Foreground" Value="#d9c7b3"></Setter>
+            <Setter Property="FontWeight" Value="Medium"></Setter>
+            <Setter Property="FontSize" Value="18"></Setter>
+        </Style>
+        <Style TargetType="ScrollBar">
+            <Setter Property="Background" Value="#FFFCECB9"></Setter>
         </Style>
         <Style TargetType="Button">
             <Setter Property="Padding" Value="0"></Setter>
@@ -33,20 +36,14 @@
             <Setter Property="FontSize" Value="20"></Setter>
             <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
             <Setter Property="BorderBrush" Value="#22301a"></Setter>
-            <Setter Property="BorderThickness" Value="3"></Setter>
+            <Setter Property="BorderThickness" Value="3,3,3,3"></Setter>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Cursor" Value="Hand"/>
                 </Trigger>
-                <Trigger Property="IsEnabled" Value="False">
-                    <Setter Property="Opacity" Value="0.5"/>
-                </Trigger>
             </Style.Triggers>
         </Style>
-        <Style TargetType="TextBlock">
-            <Setter Property="Foreground" Value="#dbc9ab"></Setter>
-            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
-        </Style>
+      
     </Page.Resources>
 
     
@@ -61,38 +58,36 @@
 
         <!-- BORDER FOR FIRST COLUMN -->
         <Border Grid.Column="0" Width="495" BorderThickness="3" BorderBrush="#22301a" CornerRadius="20 20 20 20" HorizontalAlignment="Center" Height="660" VerticalAlignment="Center">
-            
             <Border.Effect>
-                <DropShadowEffect ShadowDepth="0" BlurRadius="50"/>
+                <DropShadowEffect ShadowDepth="0" BlurRadius="10"/>
             </Border.Effect>
             <Border.Background>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                    <GradientStop Color="#FFB58578" Offset="0"/>
-                    <GradientStop Color="#FFB58578" Offset="0.1"></GradientStop>
-                    <GradientStop Color="#c99585" Offset="0.4"/>
-                    <GradientStop Color="#c99585" Offset="0.5"/>
-                    <GradientStop Color="#c99585" Offset="0.6"/>
-                    <GradientStop Color="#FFB58578" Offset="0.9"></GradientStop>
-                    <GradientStop Color="#FFB58578" Offset="1"/>
+                    <GradientStop Color="#FF2A3922" Offset="0"/>
+                    <GradientStop Color="#37492d" Offset="0.1"></GradientStop>
+                    <GradientStop Color="#37492d" Offset="0.4"/>
+                    <GradientStop Color="#37492d" Offset="0.5"/>
+                    <GradientStop Color="#37492d" Offset="0.6"/>
+                    <GradientStop Color="#37492d" Offset="0.9"></GradientStop>
+                    <GradientStop Color="#FF2A3922" Offset="1"/>
                 </LinearGradientBrush>
             </Border.Background>
         </Border>
 
         <!-- BORDER FOR SECOND COLUMN -->
         <Border Grid.Column="1" Width="495" BorderThickness="3" BorderBrush="#22301a" CornerRadius="20 20 20 20" HorizontalAlignment="Center" Height="660" VerticalAlignment="Center">
-            
             <Border.Effect>
-                <DropShadowEffect ShadowDepth="0" BlurRadius="50"/>
+                <DropShadowEffect ShadowDepth="0" BlurRadius="10"/>
             </Border.Effect>
             <Border.Background>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                    <GradientStop Color="#FFB58578" Offset="0"/>
-                    <GradientStop Color="#FFB58578" Offset="0.1"></GradientStop>
-                    <GradientStop Color="#c99585" Offset="0.4"/>
-                    <GradientStop Color="#c99585" Offset="0.5"/>
-                    <GradientStop Color="#c99585" Offset="0.6"/>
-                    <GradientStop Color="#FFB58578" Offset="0.9"></GradientStop>
-                    <GradientStop Color="#FFB58578" Offset="1"/>
+                    <GradientStop Color="#FF2A3922" Offset="0"/>
+                    <GradientStop Color="#37492d" Offset="0.1"></GradientStop>
+                    <GradientStop Color="#37492d" Offset="0.4"/>
+                    <GradientStop Color="#37492d" Offset="0.5"/>
+                    <GradientStop Color="#37492d" Offset="0.6"/>
+                    <GradientStop Color="#37492d" Offset="0.9"></GradientStop>
+                    <GradientStop Color="#FF2A3922" Offset="1"/>
                 </LinearGradientBrush>
             </Border.Background>
         </Border>
@@ -100,7 +95,7 @@
         <!-- FIRST COLUMN - RATE FORM -->
         <Grid Grid.Column="0" Grid.Row="0" Background="Transparent">
             <Grid.RowDefinitions>
-                <RowDefinition Height="2*"></RowDefinition>
+                <RowDefinition Height="2.5*"></RowDefinition>
                 <RowDefinition Height="1*"></RowDefinition>
                 <RowDefinition Height="1*"></RowDefinition>
                 <RowDefinition Height="5*"></RowDefinition>
@@ -112,7 +107,8 @@
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <Label HorizontalAlignment="Center" Margin="0,25,0,0" Width="Auto" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Top" Height="Auto" FontFamily="Baskerville Old Face"  FontSize="24" FontWeight="Bold">RATE RESERVATION</Label>
+            <Label Margin="0,25,0,0" Width="Auto" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Top" Height="Auto" FontFamily="Baskerville Old Face"  FontSize="24" FontWeight="Bold" Content="RATE" HorizontalContentAlignment="Center" HorizontalAlignment="Center"/>
+            <Label Margin="0,55,0,0" Width="Auto" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Top" Height="Auto" FontFamily="Baskerville Old Face"  FontSize="24" FontWeight="Bold" Content="RESERVATION" HorizontalContentAlignment="Center" HorizontalAlignment="Center"/>
 
             <!-- BACK BUTTON -->
             <Button Height="35" Width="100" FontSize="16" IsEnabled="True" FontWeight="Bold" Grid.Column="0" Grid.Row="0" Margin="20,25,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Command="NavigationCommands.BrowseBack">
@@ -155,31 +151,47 @@
             </Slider>
             
             <TextBlock Text="{Binding ElementName=CleanlinessSlider,Path=Value}" Grid.Row="1" Grid.Column="1" Height="24" VerticalAlignment="Center" Width="40" FontSize="18" FontWeight="Medium" HorizontalAlignment="Right" Margin="0,0,65,0"  TextAlignment="Center" Foreground="#22301a">
-                <TextBlock.Background>
-                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                        <GradientStop Color="#c99585" Offset="0"/>
-                        <GradientStop Color="#c99585" Offset="0.1"></GradientStop>
-                        <GradientStop Color="#dbc9ab" Offset="0.4"/>
-                        <GradientStop Color="#dbc9ab" Offset="0.5"/>
-                        <GradientStop Color="#dbc9ab" Offset="0.6"/>
-                        <GradientStop Color="#c99585" Offset="0.9"></GradientStop>
-                        <GradientStop Color="#c99585" Offset="1"/>
-                    </LinearGradientBrush>
-                </TextBlock.Background>
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Foreground" Value="#22301a"></Setter>
+                        <Setter Property="FontWeight" Value="Medium"></Setter>
+                        <Setter Property="Background">
+                            <Setter.Value>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                    <GradientStop Color="#37492d" Offset="0"/>
+                                    <GradientStop Color="#37492d" Offset="0.1"></GradientStop>
+                                    <GradientStop Color="#dbc9ab" Offset="0.4"/>
+                                    <GradientStop Color="#dbc9ab" Offset="0.5"/>
+                                    <GradientStop Color="#dbc9ab" Offset="0.6"/>
+                                    <GradientStop Color="#37492d" Offset="0.9"></GradientStop>
+                                    <GradientStop Color="#37492d" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </TextBlock.Style>
             </TextBlock>
             
             <TextBlock Text="{Binding ElementName=CorrectnessSlider,Path=Value}"  Grid.Row="2" FontWeight="Medium" Grid.Column="1" Height="24" VerticalAlignment="Center" Width="40" HorizontalAlignment="Right" FontSize="18" Margin="0,0,65,0" TextAlignment="Center" Foreground="#22301a">
-                <TextBlock.Background>
-                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                        <GradientStop Color="#c99585" Offset="0"/>
-                        <GradientStop Color="#c99585" Offset="0.1"></GradientStop>
-                        <GradientStop Color="#dbc9ab" Offset="0.4"/>
-                        <GradientStop Color="#dbc9ab" Offset="0.5"/>
-                        <GradientStop Color="#dbc9ab" Offset="0.6"/>
-                        <GradientStop Color="#c99585" Offset="0.9"></GradientStop>
-                        <GradientStop Color="#c99585" Offset="1"/>
-                    </LinearGradientBrush>
-                </TextBlock.Background>
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Foreground" Value="#22301a"></Setter>
+                        <Setter Property="FontWeight" Value="Medium"></Setter>
+                        <Setter Property="Background">
+                            <Setter.Value>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                    <GradientStop Color="#37492d" Offset="0"/>
+                                    <GradientStop Color="#37492d" Offset="0.1"></GradientStop>
+                                    <GradientStop Color="#dbc9ab" Offset="0.4"/>
+                                    <GradientStop Color="#dbc9ab" Offset="0.5"/>
+                                    <GradientStop Color="#dbc9ab" Offset="0.6"/>
+                                    <GradientStop Color="#37492d" Offset="0.9"></GradientStop>
+                                    <GradientStop Color="#37492d" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </TextBlock.Style>
             </TextBlock>
             
             <Label HorizontalContentAlignment="Left" Grid.Column="0" Grid.Row="3" Width="Auto" Height="Auto" VerticalContentAlignment="Top" VerticalAlignment="Top" Margin="65,58,0,0" Content="Add photos*"/>
@@ -222,7 +234,7 @@
             </Border>
 
             <!-- NEXT PHOTO BUTTON -->
-            <Button Command="{Binding NextPhotoCommand}" IsEnabled="{Binding Path=IsNextEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="50" Margin="0,20,18,0" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1" Grid.Row="3">
+            <Button Command="{Binding NextPhotoCommand}" IsEnabled="{Binding Path=IsNextEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="50" Margin="0,25,18,0" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1" Grid.Row="3">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid>
@@ -256,7 +268,7 @@
             </Button>
 
             <!-- PREVIOUS PHOTO BUTTON -->
-            <Button Command="{Binding PreviousPhotoCommand}" IsEnabled="{Binding Path=IsNextEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="50"  Margin="0,20,224,0" HorizontalAlignment="Right" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2" Grid.Row="3">
+            <Button Command="{Binding PreviousPhotoCommand}" IsEnabled="{Binding Path=IsNextEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="50"  Margin="0,25,224,0" HorizontalAlignment="Right" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2" Grid.Row="3">
                 <Button.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -358,11 +370,11 @@
 
             <Label HorizontalAlignment="Center" Margin="0,47,0,0" Grid.Row="0" Grid.Column="0"  VerticalAlignment="Top" Height="Auto"  FontSize="16" FontWeight="Medium">(optional)</Label>
 
-            <Label  Margin="20,0,0,0"  Grid.Row="1" Height="Auto" FontSize="18" Grid.Column="0"  VerticalAlignment="Center" HorizontalContentAlignment="Left" HorizontalAlignment="Left">Condition of accommodation:</Label>
+            <Label  Margin="20,0,0,0"  Grid.Row="1" Height="Auto" FontSize="18" Grid.Column="0"  VerticalAlignment="Center" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Content="Condition of accommodation*"/>
 
-            <TextBox Text="{Binding Path=ConditionsOfAccommodation}" Width="466" Height="150" Margin="0,0,0,0"  Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <TextBox Text="{Binding Path=ConditionsOfAccommodation}" Width="466" Height="150" Margin="0,0,0,0"  Grid.Row="2" HorizontalAlignment="Center" VerticalContentAlignment="Top" VerticalAlignment="Top"/>
 
-            <Label  Margin="20,0,0,0"  Grid.Row="3" Height="Auto" FontSize="18" Grid.Column="0"  VerticalAlignment="Center" HorizontalContentAlignment="Left" HorizontalAlignment="Left">Level of urgency:</Label>
+            <Label  Margin="20,0,0,0"  Grid.Row="3" Height="Auto" FontSize="18" Grid.Column="0"  VerticalAlignment="Center" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Content="Level of urgency*"/>
 
             <ComboBox Height="50" FontSize="16" VerticalContentAlignment="Center" Width="466" FontWeight="Medium" Grid.Row="4" HorizontalAlignment="Center" SelectedValuePath="Content" Grid.Column="0" VerticalAlignment="Top" Margin="20,0,20,0" SelectedValue="{Binding LevelOfUrgency}" SelectedIndex="{Binding LevelOfUrgencyIndex, Mode=TwoWay}" DisplayMemberPath="">
                 <i:Interaction.Triggers>
@@ -385,7 +397,7 @@
                 </ComboBox.Style>
                 <ComboBox.ItemContainerStyle>
                     <Style TargetType="ComboBoxItem">
-                        <Setter Property="Width" Value="472"></Setter>
+                        <Setter Property="Width" Value="465"></Setter>
                         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                         <Setter Property="VerticalContentAlignment" Value="Stretch"/>
                         <Setter Property="ContentTemplate">

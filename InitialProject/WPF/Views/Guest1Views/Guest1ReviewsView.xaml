@@ -141,16 +141,16 @@
 
             <Border Grid.Row="0" Grid.RowSpan="9" Grid.Column="0" Width="470" BorderBrush="#22301a" BorderThickness="3"  CornerRadius="20 20 20 20" HorizontalAlignment="Center" Margin="0,10,0,10">
                 <Border.Effect>
-                    <DropShadowEffect ShadowDepth="0" BlurRadius="50"/>
+                    <DropShadowEffect ShadowDepth="0" BlurRadius="10"/>
                 </Border.Effect>
                 <Border.Background>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
                         <GradientStop Color="#FF2A3922" Offset="0"/>
-                        <GradientStop Color="#37492d" Offset="0.2"></GradientStop>
+                        <GradientStop Color="#37492d" Offset="0.1"></GradientStop>
                         <GradientStop Color="#37492d" Offset="0.4"/>
                         <GradientStop Color="#37492d" Offset="0.5"/>
                         <GradientStop Color="#37492d" Offset="0.6"/>
-                        <GradientStop Color="#37492d" Offset="0.8"></GradientStop>
+                        <GradientStop Color="#37492d" Offset="0.9"></GradientStop>
                         <GradientStop Color="#FF2A3922" Offset="1"/>
                     </LinearGradientBrush>
                 </Border.Background>
@@ -254,7 +254,7 @@
             <Label FontSize="18" Grid.Row="6" Width="Auto" Height="35" HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Margin="70,0,0,0">Average ratings report:</Label>
 
             <!-- GENERATE REPORT BUTTON -->
-            <Button Grid.Row="6" HorizontalAlignment="Left" VerticalAlignment="Center" Height="35" Width="100" FontWeight="Bold" Margin="342,0,0,0" FontSize="18">
+            <Button Grid.Row="6" HorizontalAlignment="Left" VerticalAlignment="Center" Height="35" Width="100" FontWeight="Bold" Margin="342,0,0,0" FontSize="18" Command="{Binding GenerateReportCommand}">
                 <Grid Background="#8c9d75" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -318,16 +318,16 @@
 
             <Border Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Width="470" BorderBrush="#22301a" BorderThickness="3"  CornerRadius="20 20 20 20" HorizontalAlignment="Center" Margin="0,10,0,10">
                 <Border.Effect>
-                    <DropShadowEffect ShadowDepth="0" BlurRadius="50"/>
+                    <DropShadowEffect ShadowDepth="0" BlurRadius="10"/>
                 </Border.Effect>
                 <Border.Background>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
                         <GradientStop Color="#FF2A3922" Offset="0"/>
-                        <GradientStop Color="#37492d" Offset="0.2"></GradientStop>
+                        <GradientStop Color="#37492d" Offset="0.1"></GradientStop>
                         <GradientStop Color="#37492d" Offset="0.4"/>
                         <GradientStop Color="#37492d" Offset="0.5"/>
                         <GradientStop Color="#37492d" Offset="0.6"/>
-                        <GradientStop Color="#37492d" Offset="0.8"></GradientStop>
+                        <GradientStop Color="#37492d" Offset="0.9"></GradientStop>
                         <GradientStop Color="#FF2A3922" Offset="1"/>
                     </LinearGradientBrush>
                 </Border.Background>
