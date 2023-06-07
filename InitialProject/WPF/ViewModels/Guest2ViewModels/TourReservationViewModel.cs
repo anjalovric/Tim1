@@ -117,7 +117,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             tourReservations = tourReservationRepository.GetAll();
             this.guest2 = guest2;
             GuestId = guest2.Id;
-            Label = "Showing available tours";
+            Label = "SHOWING AVAILABLE TOURS: ";
             capacityOfThisTour = currentTourInstance.Tour.MaxGuests;
             voucherService = new VoucherService();
             vouchers = new ObservableCollection<Voucher>();
@@ -223,7 +223,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             }
             else if (IsTourCompleted())
             {
-                label = "Showing available tours:";
+                label = "SHOWING AVAILABLE TOURS: ";
                 return;
             }
             TourReservation newTourReservation = new TourReservation(CurrentTourInstance.Id, GuestsNumber, GuestId, Convert.ToDouble(Age), Convert.ToInt32(Capacity), withVoucher);

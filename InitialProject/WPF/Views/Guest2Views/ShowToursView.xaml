@@ -354,7 +354,7 @@
             </Button.ToolTip>
         </Button>
 
-        <Label Content="Searching tours" Grid.Column="1" FontSize="20" Foreground="White" Margin="0,36,0,0" Style="{StaticResource LabelStyle}"/>
+        <Label Content="SEARCHING TOURS" Grid.Column="1" FontSize="20" Foreground="White" Margin="0,36,0,0" Style="{StaticResource LabelStyle}"/>
 
 
     </Grid>

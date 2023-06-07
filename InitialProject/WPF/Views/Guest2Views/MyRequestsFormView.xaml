@@ -217,7 +217,7 @@
             </TabItem>
         </TabControl>
 
-        <Label Content="My requests" Grid.Column="1" Foreground="White" Margin="0,36,0,0" Height="46" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="20" FontWeight="Bold" Width="135"/>
+        <Label Content="MY REQUESTS" Grid.Column="1" Foreground="White" Margin="0,36,0,0" Height="46" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="20" FontWeight="Bold" Width="172"/>
         <Button HorizontalAlignment="Left" Grid.Column="1" VerticalAlignment="Top" Height="34" Width="172" FontWeight="Bold" Margin="0,499,0,0" FontSize="18" Command="{Binding CreateCommand}" ToolTipService.ShowDuration="5000" ToolTipService.IsEnabled="{Binding Source={x:Static properties:Settings.Default}, Path=IsToolTipEnabled}" l:ShowToursHelp.HelpKey="creatingComplex">
             <Grid Background="#ffba00" Width="172" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35">
                 <Grid.RowDefinitions>
@@ -239,7 +239,7 @@
                 </ToolTip>
             </Button.ToolTip>
         </Button>
-        <Button HorizontalAlignment="Center" Grid.Column="1" VerticalAlignment="Top" Height="34" Width="182" FontWeight="Bold" FontSize="18" Margin="0,499,0,0">
+        <Button HorizontalAlignment="Center" Grid.Column="1" VerticalAlignment="Top" Height="34" Width="182" FontWeight="Bold" FontSize="18" Margin="0,499,0,0" Command="{Binding GenerateReportCommand}">
             <Grid Background="#ffba00" Width="177" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="16*"/>
