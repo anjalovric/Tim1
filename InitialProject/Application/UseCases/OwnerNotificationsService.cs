@@ -12,11 +12,13 @@ namespace InitialProject.Service
     {
         private OwnerService ownerService;
         private LocationSuggestionsService suggestionsService;
+        private NewForumNotificationService forumNotificationService;
         private IOwnerNotificationRepository notificationRepository = Injector.CreateInstance<IOwnerNotificationRepository>();
         public OwnerNotificationsService()
         {
             ownerService = new OwnerService();
             suggestionsService = new LocationSuggestionsService();
+            forumNotificationService = new NewForumNotificationService();
         }
 
         public void Add(OwnerNotificationType type, Owner owner)
@@ -75,6 +77,7 @@ namespace InitialProject.Service
             foreach(Owner owner in owners)
             {
                 notificationRepository.Add(OwnerNotificationType.FORUM_ADDED, owner);
+                forumNotificationService.Add(owner, location);
             }
         }
 
@@ -96,6 +99,11 @@ namespace InitialProject.Service
         public bool IsCommentReported(Owner owner)
         {
             return notificationRepository.GetAll().Find(n => n.Owner.Id == owner.Id && n.Type.Equals(OwnerNotificationType.COMMENT_REPORTED)) != null;
+        }
+
+        public bool IsNewForumForOwner(Owner owner, Location location)
+        {
+            return forumNotificationService.GetByOwnerAndLocation(owner, location) != null;
         }
     }
 }

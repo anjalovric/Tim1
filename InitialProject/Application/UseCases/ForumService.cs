@@ -16,6 +16,7 @@ namespace InitialProject.Service
         private ForumCommentService forumCommentService;
         private OwnerService ownerService;
         private OwnerNotificationsService ownerNotificationsService;
+        private NewForumNotificationService newForumNotificationService;
         public ForumService()
         {
             locationService = new LocationService();
@@ -23,6 +24,7 @@ namespace InitialProject.Service
             forumCommentService = new ForumCommentService();
             ownerService = new OwnerService();
             ownerNotificationsService = new OwnerNotificationsService();
+            newForumNotificationService = new NewForumNotificationService();
         }
         private void SetGuests(List<Forum> forums)
         {
@@ -103,6 +105,7 @@ namespace InitialProject.Service
         {
             List<Forum> forums = GetAll();
             List<OneForumViewModel> result = new List<OneForumViewModel>();
+            SetAreNewForOwner(owner, forums);
             foreach(Forum forum in forums)
             {
                 OneForumViewModel forumViewModel = new OneForumViewModel();
@@ -118,7 +121,7 @@ namespace InitialProject.Service
     
         public List<OneForumViewModel> GetNewForOwnerDisplay(Owner owner)
         {
-            return GetAllForOwnerDisplay(owner).FindAll(n => n.Forum.IsNewForOwner == true && ownerService.HasAccommodationOnLocation(owner, n.Forum.Location));
+            return GetAllForOwnerDisplay(owner).FindAll(n => n.Forum.IsNewForOwner == true && ownerService.HasAccommodationOnLocation(owner, n.Forum.Location) && ownerNotificationsService.IsNewForumForOwner(owner, n.Forum.Location));
         }
 
         public void MakeForumsOld(List<OneForumViewModel> forumViewModels, Owner owner)
@@ -128,6 +131,7 @@ namespace InitialProject.Service
                 forum.Forum.IsNewForOwner = false;
                 forumRepository.Update(forum.Forum);
                 ownerNotificationsService.Delete(OwnerNotificationType.FORUM_ADDED, owner);
+                newForumNotificationService.Delete(owner, forum.Forum.Location);
             }
         }
 
@@ -135,7 +139,7 @@ namespace InitialProject.Service
         {
             int ownerComments = forumCommentService.GetNumberOfOwnerComments(forum);
             int guestComments = forumCommentService.GetNumberOfGuestComments(forum);
-            return ownerComments >= 10 || guestComments >= 20;          //promijeniti na &&     !!!!!!!!!!!!!!!!!!!!!!!!!!
+            return ownerComments >= 10 && guestComments >= 20;          //promijeniti na &&     !!!!!!!!!!!!!!!!!!!!!!!!!!
         }
         public Forum SetIsVeryUseful(Forum forum)
         {
@@ -149,5 +153,12 @@ namespace InitialProject.Service
                 forum.IsVeryUseful = IsVeryUseful(forum);
         }
 
+        private void SetAreNewForOwner(Owner owner, List<Forum> forums)
+        {
+            foreach(var forum in forums)
+            {
+                forum.IsNewForOwner = ownerNotificationsService.IsNewForumForOwner(owner, forum.Location);
+            }
+        }
     }
 }
