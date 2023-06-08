@@ -98,7 +98,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Border Background="#0C3B2E" Grid.ColumnSpan="3" BorderBrush="#0C3B2E" CornerRadius="25 25 25 25" BorderThickness="4,4,4,4"/>
-        <Label Content="All vouchers" Grid.Column="1" Foreground="White" FontWeight="Bold" FontSize="20" HorizontalAlignment="Left" Margin="0,36,0,0" VerticalAlignment="Top" Width="228"/>
+        <Label Content="ALL VOUCHERS" Grid.Column="1" Foreground="White" FontWeight="Bold" FontSize="20" HorizontalAlignment="Left" Margin="0,36,0,0" VerticalAlignment="Top" Width="228"/>
         <Rectangle Fill="White" RadiusX="10" RadiusY="10" Margin="0,156,0,74" Grid.Column="1"/>
         <DataGrid x:Name="VouchersDataGrid" Grid.Column="1" BorderBrush="Transparent" ItemsSource="{Binding Path=Vouchers, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=Selected}" IsReadOnly="True" AutoGenerateColumns="False" VerticalAlignment="Top" HorizontalAlignment="Center" Height="370" Width="536" Margin="0,156,0,0" HorizontalScrollBarVisibility="Hidden" GridLinesVisibility="None" ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle2}" CellStyle="{StaticResource DataGridCellStyle2}" Style="{StaticResource DataGridStyle}" RowStyle="{StaticResource DataGridRowStyle2}" RenderTransformOrigin="0.5,0.5">
 

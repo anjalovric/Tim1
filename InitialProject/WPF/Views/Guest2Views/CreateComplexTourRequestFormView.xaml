@@ -96,7 +96,7 @@
                 <RowDefinition Height="5*"/>
             </Grid.RowDefinitions>
 
-            <Label Content="CREATING REQUEST OF THE TOUR" FontSize="30" FontWeight="Bold" Foreground="Black" Margin="40,0,205,0" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4"/>
+            <Label Content="CREATING REQUEST OF THE TOUR" FontSize="30" FontWeight="Bold" Foreground="Black" Margin="40,0,205,36" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4" Grid.RowSpan="2"/>
             <Label Grid.Row="2" Grid.Column="0" Content="Name" Margin="40,10,239,36" Style="{StaticResource LabelStyle}" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
             <Label Content="Country" Grid.Row="3" Grid.Column="0" Margin="40,10,88,0" Style="{StaticResource LabelStyle}" RenderTransformOrigin="0.5,0.5"/>
             <Label Content="Language" Grid.Row="5" Grid.Column="0" Margin="40,10,0,0" Style="{StaticResource LabelStyle}"/>
@@ -336,7 +336,7 @@
                     </ControlTemplate>
                 </Validation.ErrorTemplate>
             </ComboBox>
-            <Label Content="Complex tour request name" FontSize="18" Margin="40,15,181,37" Grid.Column="0" Grid.Row="1" Foreground="Black" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+            <Label Content="Complex tour request name" FontSize="18" Margin="40,10,181,37" Grid.Column="0" Grid.Row="1" Foreground="Black" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
             <TextBox x:Name="NameC" Foreground="#555557" BorderBrush="#FFAEAEC1" Grid.Column="1" Grid.Row="1" Margin="120,18,0,0" BorderThickness="0,0,0,3" Grid.ColumnSpan="2">
 
                 <TextBox.Text>
@@ -364,7 +364,7 @@
                     </ControlTemplate>
                 </Validation.ErrorTemplate>
             </TextBox>
-            <Button HorizontalAlignment="Left" Grid.Row="6" VerticalAlignment="Top"  Height="34" Width="118" FontWeight="Bold" FontSize="18" Command="{Binding ConfirmCommand}" Margin="104,10,0,0" Grid.Column="3" BorderBrush="Transparent" ToolTipService.ShowDuration="5000" ToolTipService.IsEnabled="{Binding Source={x:Static properties:Settings.Default}, Path=IsToolTipEnabled}">
+            <Button HorizontalAlignment="Left" Grid.Row="6" VerticalAlignment="Top"  Height="32" Width="118" FontWeight="Bold" FontSize="18" Command="{Binding ConfirmCommand}" Margin="104,10,0,0" Grid.Column="3" BorderBrush="Transparent" ToolTipService.ShowDuration="5000" ToolTipService.IsEnabled="{Binding Source={x:Static properties:Settings.Default}, Path=IsToolTipEnabled}" Grid.RowSpan="2">
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">
                         <Setter Property="IsEnabled" Value="False"/>
@@ -385,7 +385,7 @@
                         </Style.Triggers>
                     </Style>
                 </Button.Style>
-                <Grid Background="#ffba00" Width="144" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35">
+                <Grid Background="#ffba00" Width="118" HorizontalAlignment="Left" VerticalAlignment="Center" Height="29">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="16*"/>
                         <RowDefinition Height="19*"/>
@@ -408,15 +408,14 @@
 
 
             <Border  BorderThickness="0 0 0 1" BorderBrush="LightGray" Height="33" VerticalAlignment="Top" Grid.ColumnSpan="4" Margin="40,19,14,0" Grid.RowSpan="2"/>
-            <DataGrid Grid.ColumnSpan="4" AutoGenerateColumns="False" IsReadOnly="True"  Grid.Row="7" Margin="10,33,18,171" ItemsSource="{Binding Path=OrdinaryTourRequests,UpdateSourceTrigger=PropertyChanged}" Grid.RowSpan="5">
+            <DataGrid Grid.ColumnSpan="4" AutoGenerateColumns="False" IsReadOnly="True"  Grid.Row="7" Margin="10,33,18,97" ItemsSource="{Binding Path=OrdinaryTourRequests,UpdateSourceTrigger=PropertyChanged}" Grid.RowSpan="5">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Name" Width="1*" Binding="{Binding Name}"/>
                     <DataGridTextColumn Header="Status" Width="1*" Binding="{Binding Status}"/>
                 </DataGrid.Columns>
             </DataGrid>
-            <Button Grid.Column="2" Margin="208,87,140,87" Grid.Row="11" Command="{Binding DodajCommand}" ToolTipService.ShowDuration="5000" ToolTipService.IsEnabled="{Binding Source={x:Static properties:Settings.Default}, Path=IsToolTipEnabled}" Grid.ColumnSpan="2">
-
-                <Grid Background="#ffba00" Width="122" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35">
+            <Button Grid.Column="3" Grid.Row="11" Height="34" Width="118" Margin="-50,110,110,0">
+                <Grid Background="#ffba00" Width="114" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="16*"/>
                         <RowDefinition Height="19*"/>
@@ -438,8 +437,8 @@
                     </ToolTip>
                 </Button.ToolTip>
             </Button>
-            <Button HorizontalAlignment="Left" Grid.Row="11" VerticalAlignment="Center"  Height="34" Width="118" FontWeight="Bold" FontSize="18" Command="{Binding CancelCommand}" Margin="104,0,0,0" Grid.Column="3" BorderBrush="#FF9E98FF" ToolTipService.ShowDuration="5000" ToolTipService.IsEnabled="{Binding Source={x:Static properties:Settings.Default}, Path=IsToolTipEnabled}">
-                <Grid Background="White" Width="144" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35">
+            <Button HorizontalAlignment="Left" Grid.Row="11" VerticalAlignment="Top"  Height="34" Width="118" FontWeight="Bold" FontSize="18" Command="{Binding CancelCommand}" Margin="102,137,0,0" Grid.Column="3" BorderBrush="#FF9E98FF" ToolTipService.ShowDuration="5000" ToolTipService.IsEnabled="{Binding Source={x:Static properties:Settings.Default}, Path=IsToolTipEnabled}">
+                <Grid Background="White" Width="118" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="16*"/>
                         <RowDefinition Height="19*"/>

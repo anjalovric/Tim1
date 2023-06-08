@@ -62,12 +62,12 @@
         </Grid.ColumnDefinitions>
         <Grid.Background>
             <LinearGradientBrush StartPoint="0,1" EndPoint="1,1">
-                <GradientStop Color="#FFD4979B" Offset="0"/>
+                <GradientStop Color="#247158" Offset="0"/>
 
-                <GradientStop Color="#FFD2AAAD" Offset="0.3"/>
-                <GradientStop Color="#FFD2AAAD" Offset="0.5"/>
-                <GradientStop Color="#FFD2AAAD" Offset="0.7"/>
-                <GradientStop Color="#FFD4979B" Offset="1"/>
+                <GradientStop Color="#6ab29b" Offset="0.4"/>
+                <GradientStop Color="#6ab29b" Offset="0.5"/>
+                <GradientStop Color="#6ab29b" Offset="0.6"/>
+                <GradientStop Color="#247158" Offset="1"/>
             </LinearGradientBrush>
         </Grid.Background>
 
@@ -101,7 +101,7 @@
 
         <Label Content="Description:" Margin="28,415,0,0" RenderTransformOrigin="0.044,0.541" Style="{StaticResource LabelStyle}"/>
         <Label Content="Photos" Margin="28,97,0,0" Style="{StaticResource LabelStyle}"/>
-        <Label Content="DETAILS" FontSize="30" FontFamily="Baskerville Old Face" Margin="28,15,0,0" Style="{StaticResource LabelStyle}" Width="172"/>
+        <Label Content="DETAILS" FontWeight="Bold" FontSize="30" Margin="28,15,0,0" Style="{StaticResource LabelStyle}" Width="172"/>
         <TextBlock HorizontalAlignment="Left" Margin="32,450,0,0" FontSize="20" FontWeight="DemiBold" TextWrapping="Wrap" VerticalAlignment="Top" Height="159" Width="292" Text="{Binding Path=Selected.Tour.Description,UpdateSourceTrigger=PropertyChanged}"/>
         <Label Content="Location:" Margin="48,97,0,0" Grid.Column="1" Width="95" Style="{StaticResource LabelStyle}"/>
         <Label Content="Duration:" Margin="48,176,0,0" Grid.Column="1" Width="119" Style="{StaticResource LabelStyle}"/>

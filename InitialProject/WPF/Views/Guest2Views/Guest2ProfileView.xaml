@@ -45,7 +45,7 @@
         </TextBlock>
 
         <Image Grid.Row="1" Source="{Binding ImageSource, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Margin="52,49,63,49" Grid.RowSpan="4"></Image>
-        <Label Grid.Row="1" Grid.Column="1" Content="CONTACT INFORMATION" Foreground="White" FontSize="18" FontWeight="Bold"/>
+        <Label Grid.Row="1" Grid.Column="1" Content="CONTACT INFORMATION" Foreground="White" FontSize="20" FontWeight="Bold" Grid.ColumnSpan="2" Margin="0,0,194,0"/>
         <Label Grid.Row="2" Grid.Column="1" Content="First name" Style="{StaticResource LabelStyle}"/>
         <TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding Guest2.Name}" FontWeight="Bold" Foreground="#b46617" FontSize="15" Margin="0,10,0,0"/>
         <Label Grid.Row="3" Grid.Column="1" Content="Last name" Style="{StaticResource LabelStyle}"/>

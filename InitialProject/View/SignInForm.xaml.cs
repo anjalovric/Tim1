@@ -91,6 +91,8 @@ namespace InitialProject
                     {
                         Guest2Overview guest2Overview = new Guest2Overview(user);
                         guest2Overview.Show();
+                        Help.Wizard wizard = new Help.Wizard();
+                        wizard.Show();
                     Close();
                 } 
 

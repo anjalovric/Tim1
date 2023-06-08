@@ -82,6 +82,7 @@ namespace InitialProject.ReportPatterns
 
 
         public override void GenerateTableContent() { }
+        public override void GenerateTable1Content() { }
 
         public override void GenerateTitle()
         {

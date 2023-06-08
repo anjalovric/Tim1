@@ -26,8 +26,8 @@
             </Setter>
         </Style>
         <DataTemplate x:Key="requestsTemplate" x:Name="requestsCard">
-            <Border BorderBrush="#0C3B2E" Background="#0C3B2E" BorderThickness="3" CornerRadius="10"  Margin="1" HorizontalAlignment="Center" Width="530" Height="80">
-                <Grid HorizontalAlignment="Center" Grid.ColumnSpan="3" Height="80" Width="530" VerticalAlignment="Center" Background="#FF14503F">
+            <Border BorderBrush="#B8B8B0" Background="#B8B8B0" BorderThickness="3" CornerRadius="10"  Margin="1" HorizontalAlignment="Center" Width="510" Height="80">
+                <Grid HorizontalAlignment="Center" Grid.ColumnSpan="3" Height="80" Width="510" VerticalAlignment="Center" Background="#B8B8B0">
 
                     <Grid.Resources>
                         <Style TargetType="Label">
@@ -54,7 +54,7 @@
                     <Label Content="Status:" FontSize="14" FontWeight="Medium" HorizontalAlignment="Left" Width="67" VerticalAlignment="Center" VerticalContentAlignment="Center" Grid.Row="1" Grid.Column="0"/>
                     <TextBlock Text="{Binding Path=Name}" FontSize="14" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Width="Auto" Height="20" HorizontalAlignment="Left"/>
                     <TextBlock Text="{Binding Path=Status}" FontSize="14" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Width="Auto" Height="20" HorizontalAlignment="Left"/>
-                    <Button x:Name="View" Content="Details" Command="{Binding Path=DataContext.ViewCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}"  FontWeight="Bold" Grid.Row="1" FontSize="14" Grid.Column="2"  VerticalAlignment="Center" Width="45" Height="30" ClickMode="Press" Style="{StaticResource LinkButton}" Margin="0,0,0,0" ToolTipService.ShowDuration="5000">
+                    <Button x:Name="View" Content="Details" Command="{Binding Path=DataContext.ViewCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}"  FontWeight="Bold" Grid.Row="1" FontSize="14" Grid.Column="2"  VerticalAlignment="Center" Width="45" Height="30" ClickMode="Press" Style="{StaticResource LinkButton}" Margin="0,0,0,0" HorizontalAlignment="Right" ToolTipService.ShowDuration="5000">
                         <Button.ToolTip>
                             <ToolTip>
                                 <StackPanel>

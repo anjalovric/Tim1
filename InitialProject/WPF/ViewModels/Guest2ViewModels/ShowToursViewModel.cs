@@ -180,7 +180,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             tourRepository = new TourRepository();
             this.org = org;
             this.guest2 = guest2;
-            Label = "Showing all tours: ";
+            Label = "SHOWING ALL TOURS: ";
             MakeCommands();
             tourInstanceRepository = new TourInstanceRepository();
             tourReservationRepository = new TourReservationRepository();
@@ -316,7 +316,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             {
                 SearchByInputParameters(tourInstance);
             }
-            Label = "Showing searching tours: ";
+            Label = "SHOWING SEARCHING TOURS: ";
         }
         private void SearchByInputParameters(TourInstance tourInstance)
         {
@@ -409,7 +409,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
                     SetTours(TourInstances);
                 }
             }
-            Label = "Showing all tours: ";
+            Label = "SHOWING ALL TOURS: ";
             ResetAllFields();
         }
         private void ResetAllFields()
