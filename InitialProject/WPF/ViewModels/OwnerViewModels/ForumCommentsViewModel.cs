@@ -161,6 +161,8 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         private void NewComment_Executed(object sender)
         {
             AddCommentView addCommentView = new AddCommentView(Forum, Owner);
+            ForumService forumService = new ForumService();
+            forumService.IncrementCommentsNumber(Forum.Forum);
             Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = addCommentView;
         }
 

@@ -19,17 +19,16 @@ namespace InitialProject.WPF.Demo
         private AccommodationInputFormViewModel viewModel;
         private AccommodationInputFormView accommodationInputFormView;
         private int increment = -1;
-        private Timer timer;
-        private string fullText = "";
-        private int currentIndex = 0;
-        private TextBox textBox;
+        private Accommodation accommodation;
+        private AccommodationView accommodationView;
+        private AccommodationViewModel accommodationViewModel;
         public AccommodationInputDemo()
         {
             OwnerService ownerService = new OwnerService();
             Owner owner = ownerService.GetAll()[0];
+            accommodation = new Accommodation();
             accommodationInputFormView = new AccommodationInputFormView(owner);
             viewModel = accommodationInputFormView.formViewModel;
-            timer = new Timer(TimerLetters, null, 0, 300);
             Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = accommodationInputFormView;
         }
 
@@ -52,41 +51,73 @@ namespace InitialProject.WPF.Demo
 
             if (Increment == 1)
             {
-                fullText = "My accommodation";
-                currentIndex = 0;
-                textBox = (TextBox)Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.FindName("Name");
-                timer.Start();
+                accommodation.Name = "My accommodation";
+                accommodationInputFormView.InputName();
             }
-
-            viewModel.Name = "My accommodation";
             if (Increment == 5)
             {
-                viewModel.Location.Country = viewModel.Countries[0];
+                accommodationInputFormView.SelectCountry();
                 viewModel.IsCityComboBoxEnabled = true;
                 viewModel.EnableCityCommand.Execute(null);
+                accommodation.Location = new Location();
+                accommodation.Location.Country = "Turkey";
             }
             if (Increment == 7)
-                viewModel.Location.City = viewModel.CitiesByCountry[0];
+            {
+                accommodationInputFormView.SelectCity();
+                accommodation.Location.City = "Istanbul";
+            }
             if (Increment == 8)
+            {
                 viewModel.Type = viewModel.AccommodationTypes[0];
+                accommodation.Type = viewModel.Type;
+            }
             if (Increment == 10)
+            {
                 viewModel.MinDaysForReservation = 2;
+                accommodation.MinDaysForReservation = 2;
+            }
             if (Increment == 12)
+            {
                 viewModel.MinDaysToCancel = 2;
+                accommodation.MinDaysToCancel = 2;
+            }
             if (Increment == 14)
             {
-                Button buttonImage = accommodationInputFormView.AddImageButton;
-                buttonImage.Foreground = new SolidColorBrush(Colors.Gray);
+                accommodationInputFormView.PressAddImageButton();
             }
             if (Increment == 15)
             {
+                accommodationInputFormView.LetAddImageButton();
                 viewModel.Images.Add(imageService.GetAll()[0]);
                 viewModel.ImageUrl = imageService.GetAll()[0].Url;
+                accommodation.CoverImage = viewModel.Images[0];
             }
             if(Increment == 16)
             {
-                Button buttonImage = accommodationInputFormView.OkButton;
-                buttonImage.SetValue(Button.BackgroundProperty, new SolidColorBrush(Colors.Gray));
+                accommodationInputFormView.PressConfirmButton();
+            }
+            if(Increment == 18)
+            {
+                accommodationView = new AccommodationView(viewModel.owner);
+                Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = accommodationView;
+                accommodationViewModel = accommodationView.ViewModel;
+                accommodationViewModel.Accommodations.Add(accommodation);
+                accommodationViewModel.StackPanelMessage = "New accommodation successfully added!";
+                accommodationViewModel.StackPanelVisibility = "Visible";
+            }
+            if(Increment ==20)
+            {
+                accommodationViewModel.IsOkPressedInDemo = true;
+            }
+            if(Increment == 22)
+            {
+                accommodationViewModel.IsOkPressedInDemo = false;
+                accommodationViewModel.StackPanelVisibility = "Hidden";
+            }
+            if(Increment == 24)
+            {
+                accommodationViewModel.Accommodations.Remove(accommodation);
             }
         }
 
@@ -107,20 +138,6 @@ namespace InitialProject.WPF.Demo
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private void TimerLetters(object state)
-        {
-            if (currentIndex < fullText.Length)
-            {
-                currentIndex++;
-                textBox.Dispatcher.Invoke(() =>
-                {
-                    textBox.Text = fullText.Substring(0, currentIndex);
-                });
-            }
-            else
-            {
-                timer.Dispose(); // Stop the timer when the entire text has been displayed
-            }
-        }
+        
     }
 }

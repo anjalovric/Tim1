@@ -18,11 +18,13 @@ namespace InitialProject.WPF.Views
     public partial class AccommodationView : Page
     {
         private Owner owner;
+        public AccommodationViewModel ViewModel { get; set; }
         public AccommodationView(Owner owner)
         {
             InitializeComponent();
             this.owner = owner;
-            DataContext = new AccommodationViewModel(owner);
+            ViewModel = new AccommodationViewModel(owner);
+            DataContext = ViewModel;
         }
     }
 }

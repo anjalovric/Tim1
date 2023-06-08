@@ -14,7 +14,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 {
     public class AccommodationInputFormViewModel : INotifyPropertyChanged
     {
-        private Owner owner;
+        public Owner owner;
         private Location location;
         private string name;
         private AccommodationType type;
@@ -71,7 +71,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             return true;
         }
 
-        private bool OKCanExecute(object sender)
+        public bool OKCanExecute(object sender)
         {
             if(!string.IsNullOrEmpty(Name) && !string.IsNullOrEmpty(Location.City) && Type.Id!=0 && Images.Count > 0)
             {
