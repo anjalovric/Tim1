@@ -59,5 +59,37 @@
             </DataGrid.Columns>
         </DataGrid>
 
+        <StackPanel Margin="0,0,0,525" Background="LightGray" Visibility="{Binding Path=StackPanelVisibility, UpdateSourceTrigger=PropertyChanged}">
+            <Grid Height="100">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="0.5*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="5*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="0" Height="30" Source="/Resources/Images/success.png" />
+                    <Label Grid.Column="1" Content="{Binding Path=StackPanelMessage, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center"  FontSize="15"/>
+                </Grid>
+                <Button Command="{Binding OKCommand}" Content="OK" Grid.Row="2" Grid.Column="1" Margin="0,0,31,0">
+                    <Button.Style>
+                        <Style TargetType="Button" BasedOn="{StaticResource DataTemplateButton}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Path= IsOkPressedInDemo, UpdateSourceTrigger=PropertyChanged}" Value="True">
+                                    <Setter Property="Background" Value="AliceBlue"></Setter>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </Grid>
+        </StackPanel>
     </Grid>
 </Page>

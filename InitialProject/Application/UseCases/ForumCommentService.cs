@@ -93,7 +93,7 @@ namespace InitialProject.APPLICATION.UseCases
             int total = 0;
             foreach(ForumComment comment in forumComments)
             {
-                if(comment.User.Role==Role.GUEST1 && accommodationReservationService.HadReservationOnLocation(comment.User.Username, forum.Location))
+                if(comment.User.Role==Role.GUEST1)
                 {
                     total++;
                 }
@@ -108,7 +108,7 @@ namespace InitialProject.APPLICATION.UseCases
             int total = 0;
             foreach (ForumComment comment in forumComments)
             {
-                if (comment.User.Role == Role.OWNER && accommodationService.HasAccommodationOnLocation(comment.User.Username, forum.Location))
+                if (comment.User.Role == Role.OWNER)
                 {
                     total++;
                 }

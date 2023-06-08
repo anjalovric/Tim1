@@ -53,6 +53,15 @@ namespace InitialProject.Service
             return requestService.GetPendingRequests(owner).Count != 0;
         }
 
+        public bool IsRequestAccepted(Owner owner)
+        {
+            return notificationRepository.GetAll().Find(n => n.Type.Equals(OwnerNotificationType.REQUEST_ACCEPPTED) && n.Owner.Id == owner.Id) != null;
+        }
+
+        public bool IsRequestDeclined(Owner owner)
+        {
+            return notificationRepository.GetAll().Find(n => n.Type.Equals(OwnerNotificationType.REQUEST_DECLINED) && n.Owner.Id == owner.Id) != null;
+        }
         public bool IsNewSuperOwner(Owner owner)
         {
             OwnerNotification notification = notificationRepository.GetAll().Find(n => n.Type == OwnerNotificationType.SUPEROWNER && n.Owner.Id == owner.Id);
@@ -79,6 +88,11 @@ namespace InitialProject.Service
                 notificationRepository.Add(OwnerNotificationType.FORUM_ADDED, owner);
                 forumNotificationService.Add(owner, location);
             }
+        }
+
+        public bool IsGuestReviewed(Owner owner)
+        {
+            return notificationRepository.GetAll().Find(n => n.Type.Equals(OwnerNotificationType.GUEST_REVIEWED) && n.Owner.Id == owner.Id) != null;
         }
 
         public bool HasLocationSuggestion(Owner owner)

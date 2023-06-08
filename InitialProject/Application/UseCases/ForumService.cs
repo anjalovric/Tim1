@@ -108,17 +108,22 @@ namespace InitialProject.Service
             SetAreNewForOwner(owner, forums);
             foreach(Forum forum in forums)
             {
-                OneForumViewModel forumViewModel = new OneForumViewModel();
-                forumViewModel.Forum = forum;
-                forumViewModel.Forum.IsVeryUseful = IsVeryUseful(forumViewModel.Forum);
-                forumViewModel.GuestComments = forumCommentService.GetNumberOfGuestComments(forum);
-                forumViewModel.OwnerComments = forumCommentService.GetNumberOfOwnerComments(forum);
-                forumViewModel.OwnerHasLocation = ownerService.HasAccommodationOnLocation(owner, forum.Location);
-                result.Add(forumViewModel);
+                MakeAndAddForum(owner, result, forum);
             }
             return result;
         }
-    
+
+        private void MakeAndAddForum(Owner owner, List<OneForumViewModel> result, Forum forum)
+        {
+            OneForumViewModel forumViewModel = new OneForumViewModel();
+            forumViewModel.Forum = forum;
+            forumViewModel.Forum.IsVeryUseful = IsVeryUseful(forumViewModel.Forum);
+            forumViewModel.GuestComments = forumCommentService.GetNumberOfGuestComments(forum);
+            forumViewModel.OwnerComments = forumCommentService.GetNumberOfOwnerComments(forum);
+            forumViewModel.OwnerHasLocation = ownerService.HasAccommodationOnLocation(owner, forum.Location);
+            result.Add(forumViewModel);
+        }
+
         public List<OneForumViewModel> GetNewForOwnerDisplay(Owner owner)
         {
             return GetAllForOwnerDisplay(owner).FindAll(n => n.Forum.IsNewForOwner == true && ownerService.HasAccommodationOnLocation(owner, n.Forum.Location) && ownerNotificationsService.IsNewForumForOwner(owner, n.Forum.Location));

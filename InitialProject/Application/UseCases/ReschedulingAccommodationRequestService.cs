@@ -72,9 +72,19 @@ namespace InitialProject.Service
             ReschedulingAccommodationRequest updatedRequest = requests.Find(n => n.Id == request.Id);
             updatedRequest.state = newState;
             updatedRequest.OwnerExplanationForDeclining = request.OwnerExplanationForDeclining;
+            MakeNotification(request.Reservation.Accommodation.Owner, newState);
             if(newState == State.Approved)
                 UpdateReservationDates(request);
             return requestRepository.Update(updatedRequest);
+        }
+
+        private void MakeNotification(Owner owner, State state)
+        {
+            OwnerNotificationsService notificationService = new OwnerNotificationsService();
+            if (state == State.Approved)
+                notificationService.Add(Domain.Model.OwnerNotificationType.REQUEST_ACCEPPTED, owner);
+            if (state == State.Declined)
+                notificationService.Add(Domain.Model.OwnerNotificationType.REQUEST_DECLINED, owner);
         }
         private bool IsReservationCancelled(AccommodationReservation reservation)
         {

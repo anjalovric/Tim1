@@ -84,17 +84,22 @@ namespace InitialProject.APPLICATION.UseCases
 
             if (locationListByReservationNumber[0].Key == locationListByBusinest[0].Key && locationListByBusinest[0].Value != 0)
             {
-                foreach(var accommodation in GetAccommodationsByLocationId(locationListByReservationNumber[0].Key, owner))
-                {
-                    LeastPopularLocation leastPopularLocation = new LeastPopularLocation(accommodation, false, false, true);
-                    leastPopularLocations.Add(leastPopularLocation);
-
-                }
-                return leastPopularLocations;
+                return GetLeastPopularLocation(owner, leastPopularLocations, locationListByReservationNumber);
             }
-            if(locationListByBusinest[0].Value != 0 || locationListByBusinest[0].Value!=0)
+            if (locationListByBusinest[0].Value != 0 || locationListByBusinest[0].Value!=0)
             MakeLeastPopularList(leastPopularLocations, locationListByReservationNumber, locationListByBusinest, owner);
 
+            return leastPopularLocations;
+        }
+
+        private List<LeastPopularLocation> GetLeastPopularLocation(Owner owner, List<LeastPopularLocation> leastPopularLocations, List<KeyValuePair<int, int>> locationListByReservationNumber)
+        {
+            foreach (var accommodation in GetAccommodationsByLocationId(locationListByReservationNumber[0].Key, owner))
+            {
+                LeastPopularLocation leastPopularLocation = new LeastPopularLocation(accommodation, false, false, true);
+                leastPopularLocations.Add(leastPopularLocation);
+
+            }
             return leastPopularLocations;
         }
 

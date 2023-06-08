@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Data;
-using InitialProject.Model;
 using InitialProject.WPF.Demo;
 
 namespace InitialProject.WPF.Converters

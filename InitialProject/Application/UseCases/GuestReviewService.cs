@@ -12,10 +12,12 @@ namespace InitialProject.Service
         private IGuestReviewRepository guestReviewRepository = Injector.CreateInstance<IGuestReviewRepository>();
         private List<GuestReview> guestReviews;
         private OwnerReviewService ownerReviewService;
+        private OwnerNotificationsService notificationsService;
         public GuestReviewService()
         {
             ownerReviewService = new OwnerReviewService();
             guestReviews = new List<GuestReview>(guestReviewRepository.GetAll());
+            notificationsService = new OwnerNotificationsService();
             SetReservations();
         }
         private void SetReservations()
@@ -69,6 +71,7 @@ namespace InitialProject.Service
         public void Add(GuestReview guestReview)
         {
             guestReviewRepository.Add(guestReview);
+            notificationsService.Add(Domain.Model.OwnerNotificationType.GUEST_REVIEWED, guestReview.Reservation.Accommodation.Owner);
         }
         public bool IsReservationForReview(AccommodationReservation reservation, Owner owner)
         {
