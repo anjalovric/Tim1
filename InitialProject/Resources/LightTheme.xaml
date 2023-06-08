@@ -117,7 +117,7 @@
         <Setter Property="Foreground" Value="DarkBlue"/>
         <Setter Property="FontFamily" Value="Yu Gothic"/>
         <Setter Property="FontWeight" Value="Bold"/>
-        <Setter Property="Background" Value="{StaticResource ListBoxBackground}"/>
+        <Setter Property="Background" Value="LightBlue"/>
     </Style>
 
     <Style x:Key="Labels" TargetType="Label">
@@ -132,7 +132,7 @@
 
     <Style x:Key="ListBoxComment" TargetType="ListBox">
         <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="Background" Value="{StaticResource ListBoxBackground}"/>
+        <Setter Property="Background" Value="LightBlue"/>
         <Setter Property="FontFamily" Value="Yu Gothic"/>
         <Setter Property="FontWeight" Value="Bold"/>
         <Setter Property="Foreground" Value="DarkBlue"/>

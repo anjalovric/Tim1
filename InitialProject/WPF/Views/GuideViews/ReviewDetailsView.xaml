@@ -25,7 +25,7 @@
         </Grid.RowDefinitions>
 
         <!--LEFT GRID-->
-        <Grid Grid.Row="1" Style="{DynamicResource InnerGrid}" Grid.ColumnSpan="3" Margin="33,0,33,0" Grid.RowSpan="2">
+        <Grid Grid.Row="1" Style="{DynamicResource InerInerGrid}" Grid.ColumnSpan="3" Margin="33,0,33,0" Grid.RowSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="1.5*"></RowDefinition>
@@ -54,11 +54,11 @@
             <Label x:Name="Language" Grid.Row="3" Grid.Column="1" Style="{DynamicResource Labels}" Content="{Binding Language}"/>
             <Label x:Name="Date" Grid.Row="4" Grid.Column="1" Style="{DynamicResource Labels}" Width="200" Content="{Binding StartDate}"/>
 
-            <ListBox x:Name="Points" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="6" Height="150" Width="200" Style="{DynamicResource ListBoxComment}" ItemsSource="{Binding Points}"></ListBox>
+            <ListBox x:Name="Points" HorizontalAlignment="Left" Grid.Row="5" Width="200" Style="{DynamicResource ListBoxComment}" ItemsSource="{Binding Points}" Grid.ColumnSpan="2" Margin="219,22,0,0"/>
         </Grid>
 
         <!--RIGHT GRID-->
-        <Grid Style="{DynamicResource InnerGrid}" Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="3" Margin="33,0,33,0" Grid.RowSpan="2">
+        <Grid Style="{DynamicResource InerInerGrid}" Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="3" Margin="33,0,33,0" Grid.RowSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="1.5*"></RowDefinition>
@@ -145,7 +145,7 @@
 
         <Grid Style="{DynamicResource BackgroundHeader}" Grid.ColumnSpan="5" Margin="0,0,0,30">
             <Label Content="{Binding Guest}" Style="{DynamicResource Header}" FontSize="25"  Width="394" Margin="500,16,0,4" HorizontalAlignment="Left"/>
-            <Image Source="/Resources/Images/LOGO (2).jpg" Margin="0,0,804,-13"/>
+            <Image Source="/Resources/Images/LOGO (2).jpg" Margin="-21,-6,825,-6"/>
             <Label HorizontalAlignment="Left" Content="{ns:Loc ReviewFrom}" Style="{DynamicResource Label}" FontSize="25" FontFamily="Yu Gothic" FontWeight="Bold" VerticalContentAlignment="Center" Margin="324,0,0,0" VerticalAlignment="Center" Width="228" Height="60"/>
         </Grid>
         <Button Content="⬅" HorizontalAlignment="Left" Command="NavigationCommands.BrowseBack" Margin="10,88,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Style="{DynamicResource Button}" Width="43" Height="22"/>

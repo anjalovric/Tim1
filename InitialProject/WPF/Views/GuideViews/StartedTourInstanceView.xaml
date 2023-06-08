@@ -105,7 +105,7 @@
             <Label Content="{Binding Title}" Style="{DynamicResource Header}"  VerticalAlignment="Center" Width="516" Height="52" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
             <Image Source="/Resources/Images/LOGO (2).jpg" Margin="0,0,908,0"/>
         </Grid>
-        <Label Content="{ns:Loc ifYouWantToFinishTour}" Style="{DynamicResource StatisticLabel}" FontWeight="Heavy" HorizontalAlignment="Left" Margin="780,215,0,0" VerticalAlignment="Top" Width="241" Height="43"/>
-        <Label Content="{ns:Loc BeforeRegularEnd}" Style="{DynamicResource StatisticLabel}" HorizontalAlignment="Left" FontWeight="Heavy" Margin="780,258,0,0" VerticalAlignment="Top" Width="241" Height="46"/>
+        <Label Content="{ns:Loc ifYouWantToFinishTour}" Style="{DynamicResource StatisticLabel}" FontWeight="Heavy" HorizontalAlignment="Left" Margin="780,210,0,0" VerticalAlignment="Top" Width="241" Height="43"/>
+        <Label Content="{ns:Loc BeforeRegularEnd}" Style="{DynamicResource StatisticLabel}" HorizontalAlignment="Left" FontWeight="Heavy" Margin="780,253,0,0" VerticalAlignment="Top" Width="241" Height="46"/>
     </Grid>
 </Page>
