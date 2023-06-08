@@ -66,21 +66,12 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             Initialize();
             MakeCommands();
         }
-        private bool CanExecute(object sender)
-        {
-            return true;
-        }
-        private void Back_Executed(object sender)
-        {
-            Application.Current.Windows.OfType<AccommodationReservationFormView>().FirstOrDefault().Close();
-        }
-
         private void Initialize()
         {
             NumberOfDays = 1;
             NumberOfGuests = 1;
             AccommodationReservationService accommodationReservationService = new AccommodationReservationService();
-            this.reservations = new List<AccommodationReservation>(accommodationReservationService.GetAll());  
+            this.reservations = new List<AccommodationReservation>(accommodationReservationService.GetAll());
         }
         private void MakeCommands()
         {
@@ -92,6 +83,12 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             BackCommand = new RelayCommand(Back_Executed, CanExecute);
             OnPreviewMouseUpCommand = new RelayCommand(OnPreviewMouseUp_Executed, CanExecute);
         }
+        
+        //execute commands
+        private void Back_Executed(object sender)
+        {
+            Application.Current.Windows.OfType<AccommodationReservationFormView>().FirstOrDefault().Close();
+        }        
         private void DecrementDaysNumber_Executed(object sender)
         {
             int changedDaysNumber;
@@ -139,7 +136,9 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                 
             else
                 OpenWindowWithAvailableDates();                 
-        }        
+        }
+        
+        //other methods
         private void OpenWindowWithAvailableDates()
         {
             SuggestedDatesForAccommodationReservationService suggestedDatesForAccommodationReservationService = new SuggestedDatesForAccommodationReservationService();
@@ -199,6 +198,10 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        private bool CanExecute(object sender)
+        {
+            return true;
         }
     }
 }

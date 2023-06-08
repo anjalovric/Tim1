@@ -39,10 +39,8 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             SendCommand = new RelayCommand(Send_Executed, CanExecute);
             OnPreviewMouseUpCommand = new RelayCommand(OnPreviewMouseUp_Executed, CanExecute);
         }
-        private bool CanExecute(object sender)
-        {
-            return true;
-        }
+        
+        //execute commands
         private void Back_Executed(object sender)
         {
             Application.Current.Windows.OfType<ReschedulingAccommodationReservationFormView>().FirstOrDefault().Close();
@@ -58,6 +56,26 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             }
             else
                 ShowMessageBoxForInvalidDates();
+        }
+        private void OnPreviewMouseUp_Executed(Object sender)
+        {
+            OnPreviewMouseUp(null);
+        }
+        private void OnPreviewMouseUp(MouseButtonEventArgs e)
+        {
+            if (Mouse.Captured is CalendarItem)
+            {
+                Mouse.Capture(null);
+            }
+        }
+
+        //other methods
+        private void StoreRequest()
+        {
+            Service.ReschedulingAccommodationRequestService requestService;
+            requestService = new Service.ReschedulingAccommodationRequestService();
+            Model.ReschedulingAccommodationRequest newRequest = new Model.ReschedulingAccommodationRequest(Reservation, Arrival, Departure, Reason);
+            requestService.Add(newRequest);
         }
 
         //Validation for input dates
@@ -79,23 +97,11 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             messageBox.Owner = Application.Current.Windows.OfType<ReschedulingAccommodationReservationFormView>().FirstOrDefault();
             messageBox.ShowDialog();
         }
-        private void StoreRequest()
+        
+       
+        private bool CanExecute(object sender)
         {
-            Service.ReschedulingAccommodationRequestService requestService;
-            requestService = new Service.ReschedulingAccommodationRequestService();
-            Model.ReschedulingAccommodationRequest newRequest = new Model.ReschedulingAccommodationRequest(Reservation, Arrival, Departure, Reason);
-            requestService.Add(newRequest);
-        }
-        private void OnPreviewMouseUp_Executed(Object sender)
-        {
-            OnPreviewMouseUp(null);
-        }
-        private void OnPreviewMouseUp(MouseButtonEventArgs e)
-        {
-            if (Mouse.Captured is CalendarItem)
-            {
-                Mouse.Capture(null);
-            }
+            return true;
         }
 
     }

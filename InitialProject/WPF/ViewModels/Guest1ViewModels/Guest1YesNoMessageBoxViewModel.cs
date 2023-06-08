@@ -29,10 +29,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             YesCommand = new RelayCommand(Yes_Executed, CanExecute);
             NoCommand = new RelayCommand(No_Executed, CanExecute);
         }
-        private bool CanExecute(object sender)
-        {
-            return true;
-        }
         private void Yes_Executed(object sender)
         {
             _result.SetResult(true);
@@ -42,6 +38,10 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         {
             _result.SetResult(false);
             Application.Current.Windows.OfType<Guest1YesNoMessageBoxView>().FirstOrDefault().Close();
+        }
+        private bool CanExecute(object sender)
+        {
+            return true;
         }
     }
 }

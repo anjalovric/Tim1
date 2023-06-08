@@ -87,10 +87,23 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             SetChartData();
             MakeCommands();
         }
-        private bool CanExecute(object sender)
+        private void Initialize()
         {
-            return true;
+            accommodationReservationService = new AccommodationReservationService();
+            cancelledAccommodationReservationService = new CancelledAccommodationReservationService();
+            CompletedReservations = new ObservableCollection<AccommodationReservation>(accommodationReservationService.GetCompletedReservations(guest1));
+            NotCompletedReservations = new ObservableCollection<AccommodationReservation>(accommodationReservationService.GetNotCompletedReservations(guest1));
+            NotCompletedReservations = new ObservableCollection<AccommodationReservation>(NotCompletedReservations.OrderByDescending(x => x.Arrival > DateTime.Now).ToList());    //group: first will be shown reservations which haven't started yet
+            currentDate = DateTime.Now;
         }
+        private void MakeCommands()
+        {
+            RateOwnerAndAccommodationCommand = new RelayCommand(RateOwnerAndAccommodation_Executed, CanExecute);
+            CancelReservationCommand = new RelayCommand(CancelReservation_Executed, CanExecute);
+            RescheduleReservationCommand = new RelayCommand(RescheduleReservation_Executed, CanExecute);
+        }
+
+        //methods for diagram
         private void SetChartData()
         {
             LastYearAccommodationReservationsService lastYearAccommodationReservationsService = new LastYearAccommodationReservationsService();
@@ -120,58 +133,14 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             SeriesCollection.Add(columnSeries);
         }
 
-        private void Initialize()
-        {
-            accommodationReservationService = new AccommodationReservationService();
-            cancelledAccommodationReservationService = new CancelledAccommodationReservationService();
-            CompletedReservations = new ObservableCollection<AccommodationReservation>(accommodationReservationService.GetCompletedReservations(guest1));
-            NotCompletedReservations = new ObservableCollection<AccommodationReservation>(accommodationReservationService.GetNotCompletedReservations(guest1));
-            NotCompletedReservations = new ObservableCollection<AccommodationReservation>(NotCompletedReservations.OrderByDescending(x => x.Arrival > DateTime.Now).ToList());    //group: first will be shown reservations which haven't started yet
-            currentDate = DateTime.Now;
-        }
-        private void MakeCommands()
-        {
-            RateOwnerAndAccommodationCommand = new RelayCommand(RateOwnerAndAccommodation_Executed, CanExecute);
-            CancelReservationCommand = new RelayCommand(CancelReservation_Executed, CanExecute);
-            RescheduleReservationCommand = new RelayCommand(RescheduleReservation_Executed, CanExecute);
-        }
-        private void RateOwnerAndAccommodation_Executed(object sender)
-        {
-            OwnerReviewService ownerReviewService = new OwnerReviewService();
-            if (ownerReviewService.HasReview(SelectedCompletedReservation))         //Validation- if reservation has review - can't be reviewed again
-            {
-                ShowMessageBoxForReviewedReservation();
-                return;
-            }
-            if (!IsReservationValidToReview())                                      //if 5 days have passed - can't review
-            {
-                ShowMessageBoxForInvalidReview();
-                return;
-            }
-            ShowReviewForm();
-        }    
+   
+        //other commands 
         private void ShowReviewForm()
         {
             OwnerAndAccommodationReviewFormView ownerAndAccommodationReviewForm = new OwnerAndAccommodationReviewFormView(guest1, SelectedCompletedReservation);
             Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = ownerAndAccommodationReviewForm;
         }       
-        private async void CancelReservation_Executed(object sender)
-        {
-            if(HasReservationStarted())
-            {
-                ShowMessageBoxForStaredReservationCancellation();
-                return;
-            }
-            if (!IsCancellationAllowed())
-            {
-                ShowMessageBoxForExpiredCancellationPeriod();
-                return;
-            }            
-            Task<bool> result = ConfirmCancellationMessageBox();
-            bool IsYesClicked = await result;
-            if (IsYesClicked)
-                ConfirmCancellation();
-        }
+        
         public async Task<bool> ConfirmCancellationMessageBox()
         {
             var result = new TaskCompletionSource<bool>();
@@ -187,6 +156,22 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             accommodationReservationService.Delete(SelectedNotCompletedReservation);
             NotCompletedReservations.Remove(SelectedNotCompletedReservation);
         }
+        //execute commands
+        private void RateOwnerAndAccommodation_Executed(object sender)
+        {
+            OwnerReviewService ownerReviewService = new OwnerReviewService();
+            if (ownerReviewService.HasReview(SelectedCompletedReservation))         //Validation- if reservation has review - can't be reviewed again
+            {
+                ShowMessageBoxForReviewedReservation();
+                return;
+            }
+            if (!IsReservationValidToReview())                                      //if 5 days have passed - can't review
+            {
+                ShowMessageBoxForInvalidReview();
+                return;
+            }
+            ShowReviewForm();
+        }
         private void RescheduleReservation_Executed(object sender)
         {
             if (HasReservationStarted())
@@ -197,6 +182,23 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                 form.Owner = Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault();
                 form.ShowDialog();
             }       
+        }
+        private async void CancelReservation_Executed(object sender)
+        {
+            if (HasReservationStarted())
+            {
+                ShowMessageBoxForStaredReservationCancellation();
+                return;
+            }
+            if (!IsCancellationAllowed())
+            {
+                ShowMessageBoxForExpiredCancellationPeriod();
+                return;
+            }
+            Task<bool> result = ConfirmCancellationMessageBox();
+            bool IsYesClicked = await result;
+            if (IsYesClicked)
+                ConfirmCancellation();
         }
         // Validation for review (5 days)
         public bool IsReservationValidToReview()
@@ -249,6 +251,10 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-       
+        private bool CanExecute(object sender)
+        {
+            return true;
+        }
+
     }
 }
