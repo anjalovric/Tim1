@@ -1,9 +1,11 @@
 ﻿using InitialProject.Domain.Model;
 using InitialProject.Help;
 using InitialProject.Model;
+using InitialProject.ReportPatterns;
 using InitialProject.Repository;
 using InitialProject.Service;
 using InitialProject.WPF.Views.Guest2Views;
+using InitialProject.WPF.Views.GuideViews;
 using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections.Generic;
@@ -121,6 +123,21 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
                 OnPropertyChanged(nameof(IsDropDownOpen));
             }
         }
+        int tCounter = 0;
+        int sCounter = 0;
+        int rCounter = 0;
+        int aCounter = 0;
+        int gCounter = 0;
+        int hCounter = 0;
+        int iCounter = 0;
+        int bCounter = 0;
+        int srbCounter = 0;
+        int rusCounter = 0;
+        int spCounter = 0;
+        int engCounter = 0;
+        int itCounter = 0;
+        int arabCounter = 0;
+        
         public string Status { get; set; }
         public string Name { get; set; }
         private OrdinaryTourRequestsService ordinaryTourRequestsService { get; set; }
@@ -145,6 +162,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         }
         public ICommand HelpCommandInViewModel { get; }
         public RelayCommand ViewCommand { get; set; }
+        public RelayCommand GenerateReportCommand { get; set; }
         private MyRequestsFormView org;
         public MyRequestsViewModel(Model.Guest2 guest2,MyRequestsFormView org)
         {
@@ -161,8 +179,10 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             StatisticsCommand = new RelayCommand(Statistics_Executed, CanExecute);
             ViewCommand = new RelayCommand(View_Executed, CanExecute);
             HelpCommandInViewModel = new RelayCommand(CommandBinding_Executed);
+            GenerateReportCommand = new RelayCommand(GenerateReport_Executed, CanExecute);
             InvalidStatus();
-            
+            FindLocation();
+            FindLanguage();
         }
         private void setListSource(ComplexTourRequests SelectedItem)
         {
@@ -219,7 +239,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
                 createComplexTourRequest.Show();
                 Application.Current.Dispatcher.BeginInvoke(new Action(() =>
                 {
-                    createComplexTourRequest.Activate(); // Aktivirajte drugi prozor
+                    createComplexTourRequest.Activate(); 
                 }));
             }  
         }
@@ -253,6 +273,59 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
                 string str = ShowToursHelp.GetHelpKey((DependencyObject)focusedControl);
                 ShowToursHelp.ShowHelpForRequests(str, org);
             }
+        }
+        public void FindLocation()
+        {
+            
+            LocationService locationService = new LocationService();
+            foreach (var o in OrdinaryTourRequests)
+            {
+                foreach (Model.Location location in locationService.GetAll())
+                {
+                    if (location.Country == "Turkey" && location.Id == o.Location.Id)
+                        tCounter++;
+                    else if (location.Country == "Serbia" && location.Id == o.Location.Id)
+                        sCounter++;
+                    else if (location.Country == "Russia" && location.Id == o.Location.Id)
+                        rCounter++;
+                    else if (location.Country == "Austria" && location.Id == o.Location.Id)
+                        aCounter++;
+                    else if (location.Country == "Greece" && location.Id == o.Location.Id)
+                        gCounter++;
+                    else if (location.Country == "Hungary" && location.Id == o.Location.Id)
+                        hCounter++;
+                    else if (location.Country == "Italy" && location.Id == o.Location.Id)
+                        iCounter++;
+                    else if (location.Country == "BiH" && location.Id == o.Location.Id)
+                        bCounter++;
+                }
+            }
+        }
+        private void FindLanguage()
+        {
+            foreach (var o in OrdinaryTourRequests)
+            {
+                if (o.Language == "serbian")
+                    srbCounter++;
+                else if (o.Language == "russian")
+                    rusCounter++;
+                else if (o.Language == "arabic")
+                    arabCounter++;
+                else if (o.Language == "italian")
+                    itCounter++;
+                else if (o.Language == "english")
+                    engCounter++;
+                else if (o.Language == "spanish")
+                    spCounter++;
+            }
+
+        }
+        private void GenerateReport_Executed(object sender)
+        {
+            ReportGenerator reportGenerator = new ReportPatterns.Guest2ReportPattern(Guest2, tCounter, sCounter, rCounter, aCounter, gCounter, hCounter, iCounter, bCounter,itCounter,spCounter,srbCounter,engCounter,arabCounter,rusCounter);
+            reportGenerator.GenerateReport();
+            PDFPreviewView pdfPreviewView = new PDFPreviewView();
+            Application.Current.Windows.OfType<Guest2Overview>().FirstOrDefault().Content = pdfPreviewView;
         }
     }
 }

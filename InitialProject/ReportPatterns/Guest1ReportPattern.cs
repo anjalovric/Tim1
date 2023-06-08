@@ -45,7 +45,7 @@ namespace InitialProject.ReportPatterns
             Font = new PdfStandardFont(PdfFontFamily.Helvetica, 14);
             
             StringBuilder stringBuilder1 = new StringBuilder("");
-            stringBuilder1.Append("The report shows the average ratings that the guest received from the owner for");
+            stringBuilder1.Append("The report shows the average ratings that the guest received from the Owner for");
 
             StringBuilder stringBuilder2 = new StringBuilder("");
             stringBuilder2.Append("each of the categories.");
@@ -82,6 +82,7 @@ namespace InitialProject.ReportPatterns
 
 
         public override void GenerateTableContent() { }
+        public override void GenerateTable1Content() { }
 
         public override void GenerateTitle()
         {

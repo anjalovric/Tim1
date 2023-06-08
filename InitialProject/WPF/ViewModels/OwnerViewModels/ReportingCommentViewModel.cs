@@ -1,19 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
+using System.Windows.Threading;
+using DotLiquid.Tags;
 using InitialProject.APPLICATION.UseCases;
 using InitialProject.Domain.Model;
 using InitialProject.Model;
 using InitialProject.Service;
 using InitialProject.WPF.Views;
 using InitialProject.WPF.Views.OwnerViews;
+using Syncfusion.XPS;
+using SolidColorBrush = System.Windows.Media.SolidColorBrush;
 
 namespace InitialProject.WPF.ViewModels.OwnerViewModels
 {
-    public class ReportingCommentViewModel
+    public class ReportingCommentViewModel : INotifyPropertyChanged
     {
         public RelayCommand CancelCommand { get; set; }
         public RelayCommand DeleteCommand { get; set; }
@@ -29,11 +36,16 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             DeleteCommand = new RelayCommand(Report_Executed, CanExecute);
         }
 
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
         private bool CanExecute(object sender)
         {
             return true;
         }
-
         private void Cancel_Executed(object sender)
         {
             Application.Current.Windows.OfType<ReportingCommentView>().FirstOrDefault().Close();
@@ -48,5 +60,6 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             ForumCommentsView forumCommentsView = new ForumCommentsView(forum, Owner);
             Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = forumCommentsView;
         }
+
     }
 }

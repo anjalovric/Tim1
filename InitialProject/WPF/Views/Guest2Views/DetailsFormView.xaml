@@ -59,15 +59,15 @@
         </Grid.ColumnDefinitions>
         <Grid.Background>
             <LinearGradientBrush StartPoint="0,1" EndPoint="1,1">
-                <GradientStop Color="#FFD4979B" Offset="0"/>
+                <GradientStop Color="#247158" Offset="0"/>
 
-                <GradientStop Color="#FFD2AAAD" Offset="0.3"/>
-                <GradientStop Color="#FFD2AAAD" Offset="0.5"/>
-                <GradientStop Color="#FFD2AAAD" Offset="0.7"/>
-                <GradientStop Color="#FFD4979B" Offset="1"/>
+                <GradientStop Color="#6ab29b" Offset="0.4"/>
+                <GradientStop Color="#6ab29b" Offset="0.5"/>
+                <GradientStop Color="#6ab29b" Offset="0.6"/>
+                <GradientStop Color="#247158" Offset="1"/>
             </LinearGradientBrush>
         </Grid.Background>
-        <Label Content="INFORMATION" FontFamily="Baskerville Old Face" Margin="106,30,333,19" FontSize="30" FontWeight="DemiBold" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
+        <Label Content="INFORMATION" Margin="106,30,333,19" FontSize="30" FontWeight="DemiBold" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
         <Label Content="Location:" FontWeight="DemiBold" Grid.Row="2" Grid.Column="0" Margin="62,10,0,54" FontSize="20" Grid.RowSpan="2"/>
         <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Path=TourInstance.Tour.Location}" Margin="10,10,65,10" FontSize="20" FontWeight="DemiBold"/>
         <Label Content="Language:" FontWeight="DemiBold" Grid.Row="4" Grid.Column="0" Margin="62,10,0,43" Grid.RowSpan="2" FontSize="20"/>
