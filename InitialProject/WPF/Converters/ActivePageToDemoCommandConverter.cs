@@ -18,6 +18,7 @@ namespace InitialProject.WPF.Converters
         public RelayCommand GuestReviewCommand { get; set; }
         public RelayCommand ForumReportCommentCommand { get; set; }
         public RelayCommand NewCommentCommand { get; set; }
+        public RelayCommand MyProfileCommand { get; set; }
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             MakeCommands();
@@ -33,6 +34,8 @@ namespace InitialProject.WPF.Converters
                     return ForumReportCommentCommand;
                 if(activePage.Title.Equals("Forum"))
                     return NewCommentCommand;
+                if (activePage.Title.Equals("My Profile"))
+                    return MyProfileCommand;
             }
             return null;
         }
@@ -49,6 +52,7 @@ namespace InitialProject.WPF.Converters
             GuestReviewCommand = new RelayCommand(GuestReviw_Executed, CanExecute);
             ForumReportCommentCommand = new RelayCommand(ForumReportComment_Executed, CanExecute);
             NewCommentCommand = new RelayCommand(NewComment_Executed, CanExecute);
+            MyProfileCommand = new RelayCommand(MyProfile_Executed, CanExecute);
         }
 
         private bool CanExecute(object sender)
@@ -84,6 +88,12 @@ namespace InitialProject.WPF.Converters
         {
             NewCommentDemo newCommentDemo = new NewCommentDemo();
             newCommentDemo.PlayDemo();
+        }
+
+        private void MyProfile_Executed(object sender)
+        {
+            MyProfileDemo profileDemo = new MyProfileDemo();
+            profileDemo.PlayDemo();
         }
     }
 }

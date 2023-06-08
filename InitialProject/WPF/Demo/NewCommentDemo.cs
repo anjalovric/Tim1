@@ -85,10 +85,11 @@ namespace InitialProject.WPF.Demo
             if(Increment ==18)
             {
                 commentsView.ViewModel.StackPanelVisibility = "Hidden";
+            }
+            if(Increment == 20)
+            {
                 commentsView.ViewModel.Comments.Remove(comment);
             }
-
-
 
         }
 
