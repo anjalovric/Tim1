@@ -24,7 +24,7 @@ namespace InitialProject.ReportPatterns
         {
             Font = new PdfStandardFont(PdfFontFamily.Helvetica, 9);
             StringBuilder stringBuilder1 = new StringBuilder("Owner " + owner.ToString() + " has " + accommodations.Count
-                + " accommodations registrated in My Travel system. Average grade for owner by all categoriesis " + reportService.GetAverageRate(owner) + " and");
+                + " accommodations registrated in My Travel system. Average grade for Owner by all categoriesis " + reportService.GetAverageRate(owner) + " and");
             StringBuilder stringBuilder2 = new StringBuilder("total number of reviews made by guests is "+ reportService.GetNumberOfReviews(owner) + ".");
             Graphics.DrawString(stringBuilder1.ToString(), Font, PdfBrushes.Black, new PointF(0, 250 + numberOfLines*10));
             Graphics.DrawString(stringBuilder2.ToString(), Font, PdfBrushes.Black, new Point(0, 260 + numberOfLines*10));
@@ -36,7 +36,7 @@ namespace InitialProject.ReportPatterns
             StringBuilder stringBuilder = new StringBuilder("");
             stringBuilder.Append("This report is generated on request made by ").Append(owner.ToString()).Append(" in this system registated as OWNER.")
                 .Append(" Report shows average grades");
-            StringBuilder stringBuilder2 = new StringBuilder("by categories for each accommodation registated by this owner.");
+            StringBuilder stringBuilder2 = new StringBuilder("by categories for each accommodation registated by this Owner.");
 
 
 
@@ -65,7 +65,7 @@ namespace InitialProject.ReportPatterns
         public override void GenerateTitle()
         {
             Font = new PdfStandardFont(PdfFontFamily.Helvetica, 20);
-            Graphics.DrawString("Average owner grade report", Font, PdfBrushes.Black, new PointF(170, 100));
+            Graphics.DrawString("Average Owner grade report", Font, PdfBrushes.Black, new PointF(170, 100));
         }
 
         public override void SavePdf()

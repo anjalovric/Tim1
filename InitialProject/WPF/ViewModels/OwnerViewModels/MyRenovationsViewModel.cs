@@ -17,7 +17,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 {
     public class MyRenovationsViewModel : INotifyPropertyChanged
     {
-        private Owner owner;
+        public Owner Owner { get; set; }
         private AccommodationRenovationService renovationService;
         private int upcomingRenovations;
         private int renovatedObjects;
@@ -32,9 +32,10 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         public RelayCommand CancelCommand { get; set; }
         public RelayCommand RenovationDetailsCommand { get; set; }
         public RelayCommand OKCommand { get; set; }
+        private bool isDemoOn;
         public MyRenovationsViewModel(Owner owner)
         {
-            this.owner = owner;
+            this.Owner = owner;
             renovationService = new AccommodationRenovationService();
             Renovations = new ObservableCollection<AccommodationRenovation>(renovationService.GetAllByOwner(owner));
             MakeCommands();
@@ -60,7 +61,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         private void NewRenovation_Executed(object sender)
         {
-            ScheduleRenovationView scheduleRenovationView = new ScheduleRenovationView(owner);
+            ScheduleRenovationView scheduleRenovationView = new ScheduleRenovationView(Owner);
             Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = scheduleRenovationView;
         }
 
@@ -77,7 +78,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         }
         public int UpcomingRenovations
         {
-            get => renovationService.CountUpcomingRenovations(owner);
+            get => renovationService.CountUpcomingRenovations(Owner);
             set
             {
                 if (value != upcomingRenovations)
@@ -88,9 +89,22 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
         }
 
+        public int UpcomingRenovationsDemo
+        {
+            get => renovationService.CountUpcomingRenovations(Owner) + 1;
+            set
+            {
+                if (value != upcomingRenovations+1)
+                {
+                    upcomingRenovations = value -1;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         public int RenovatedObjects
         {
-            get => renovationService.CountRenovatedObjects(owner);
+            get => renovationService.CountRenovatedObjects(Owner);
             set
             {
                 if (value != renovatedObjects)
@@ -147,21 +161,34 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         private void DisplayNotificationPanel()
         {
             OwnerNotificationsService notificationsService = new OwnerNotificationsService();
-            if (notificationsService.IsRenovationScheduled(owner))
+            if (notificationsService.IsRenovationScheduled(Owner))
             {
                 StackPanelMessage = "New renovation successfully scheduled!";
                 StackPanelVisibility = "Visible";
-                notificationsService.Delete(OwnerNotificationType.RENOVATION_SCHEDULED, owner);
+                notificationsService.Delete(OwnerNotificationType.RENOVATION_SCHEDULED, Owner);
             }
-            else if (notificationsService.IsRenovationCancelled(owner))
+            else if (notificationsService.IsRenovationCancelled(Owner))
             {
                 StackPanelMessage = "Renovation successfully cancelled!";
                 StackPanelVisibility = "Visible";
-                notificationsService.Delete(OwnerNotificationType.RENOVATION_CANCELLED, owner);
+                notificationsService.Delete(OwnerNotificationType.RENOVATION_CANCELLED, Owner);
             }
             else
             {
                 StackPanelVisibility = "Hidden";
+            }
+        }
+
+        public bool IsDemoOn
+        {
+            get { return isDemoOn; }
+            set
+            {
+                if (value != isDemoOn)
+                {
+                    isDemoOn = value;
+                    OnPropertyChanged();
+                }
             }
         }
     }

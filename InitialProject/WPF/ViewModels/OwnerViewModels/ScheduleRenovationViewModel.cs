@@ -14,7 +14,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 {
     public class ScheduleRenovationViewModel : INotifyPropertyChanged
     {
-        private Owner owner;
+        public Owner owner;
         private Accommodation selectedAccommodation;
         private DateTime startDate;
         private DateTime endDate;
@@ -176,13 +176,12 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
                 }
             }
         }
-
         private bool CanExecute(object sender)
         {
             return true;
         }
 
-        private bool CanExecuteConfirm(object sender)
+        public bool CanExecuteConfirm(object sender)
         {
             if (SelectedDateRange != null)
                 return true;

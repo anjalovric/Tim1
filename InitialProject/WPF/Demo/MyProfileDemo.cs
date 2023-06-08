@@ -118,7 +118,7 @@ namespace InitialProject.WPF.Demo
             review.Reservation.Guest.LastName = "Ducic";
             review.Cleanliness = 5;
             review.Correctness = 5;
-            review.Comment = "Great accommodation and polite owner. I enjoyed my visit!";
+            review.Comment = "Great accommodation and polite Owner. I enjoyed my visit!";
             review.Reservation.Arrival = DateTime.Now;
             review.Reservation.Accommodation.Name = "My accommodation";
             review.Id = 0;
