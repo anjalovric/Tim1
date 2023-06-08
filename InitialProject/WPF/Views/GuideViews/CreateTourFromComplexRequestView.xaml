@@ -469,7 +469,7 @@
             <Button Style="{DynamicResource  ButtonToast}" Command="NavigationCommands.BrowseBack" Content="OK"/>
         </StackPanel>
         <StackPanel x:Name="ToastCant" HorizontalAlignment="Left"  Margin="700,458,0,0" VerticalAlignment="Top" Visibility="{Binding ToastAvailability}" Grid.Column="1" Grid.Row="1" Style="{DynamicResource  Toast}" Grid.ColumnSpan="2" Grid.RowSpan="2">
-            <Label Style="{DynamicResource  LabelToast}" Content="{ns:Loc AlreadyExitsTourAtThisTime}"/>
+            <Label Style="{DynamicResource  LabelToast}" Content="{ns:Loc SelectOtherTime}"/>
             <Button Style="{DynamicResource  ButtonToast}" Command="{Binding CloceToastAvailability}" Content="OK"/>
         </StackPanel>
     </Grid>
