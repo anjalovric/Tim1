@@ -29,6 +29,8 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         private OwnerNotificationsService notificationsService;
         private string stackPanelVisibility;
         private string stackPanelMessage;
+        private bool isOkPressedInDemo;
+        private bool isAddNewCommentPressedInDemo;
         public ForumCommentsViewModel(OneForumViewModel forum, Owner owner)
         {
             notificationsService = new OwnerNotificationsService();
@@ -61,6 +63,18 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
         }
 
+        public bool IsAddNewCommentPressedInDemo
+        {
+            get { return isAddNewCommentPressedInDemo; }
+            set
+            {
+                if (value != isAddNewCommentPressedInDemo)
+                {
+                    isAddNewCommentPressedInDemo = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         public string StackPanelVisibility
         {
             get { return stackPanelVisibility; }
@@ -86,6 +100,18 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
         }
 
+        public bool IsOkPressedInDemo
+        {
+            get { return isOkPressedInDemo; }
+            set
+            {
+                if (value != isOkPressedInDemo)
+                {
+                    isOkPressedInDemo = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         public ForumComment SelectedComment
         {
             get { return selectedComment; }
@@ -135,6 +161,8 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         private void NewComment_Executed(object sender)
         {
             AddCommentView addCommentView = new AddCommentView(Forum, Owner);
+            ForumService forumService = new ForumService();
+            forumService.IncrementCommentsNumber(Forum.Forum);
             Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = addCommentView;
         }
 

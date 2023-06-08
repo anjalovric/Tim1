@@ -51,7 +51,12 @@
                             </Style>
                         </Image.Style>
                     </Image>
-                    <Button Command="{Binding Path=DataContext.ViewCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" Name="ViewButton" Content="View"  Grid.Column="3" Grid.Row="0" Height="20" Width="50" HorizontalContentAlignment="Center" Style="{StaticResource DataTemplateButton}" Margin="0, 0, 2,0"></Button>
+                    <Button Command="{Binding Path=DataContext.ViewCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" Name="ViewButton" Content="View"  Grid.Column="3" Grid.Row="0" Height="20" Width="50" HorizontalContentAlignment="Center" Margin="0, 0, 2,0">
+                        <Button.Style>
+                            <Style TargetType="Button" BasedOn="{StaticResource DataTemplateButton}">
+                            </Style>
+                        </Button.Style>
+                    </Button>
                 </Grid>
             </Border>
 
@@ -89,7 +94,7 @@
                 </Style>
             </ListBox.Resources>
         </ListBox>
-        <ListBox Grid.Row="3" ItemsSource="{Binding Path=Forums}" ItemTemplate="{StaticResource forum}" IsSynchronizedWithCurrentItem="True" SelectedItem="{Binding SelectedForum, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" SelectionMode="Single" HorizontalContentAlignment="Stretch" Style="{StaticResource ListBoxStyle}">
+        <ListBox x:Name="AllForumsListBox" Grid.Row="3" ItemsSource="{Binding Path=Forums}" ItemTemplate="{StaticResource forum}" IsSynchronizedWithCurrentItem="True" SelectedItem="{Binding SelectedForum, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" SelectionMode="Single" HorizontalContentAlignment="Stretch" Style="{StaticResource ListBoxStyle}">
             <ListBox.Resources>
                 <Style TargetType="ListBoxItem">
                     <Style.Triggers>

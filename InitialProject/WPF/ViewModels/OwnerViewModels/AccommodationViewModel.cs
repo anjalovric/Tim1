@@ -29,6 +29,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         private Accommodation selectedAccommodation;
         private string stackPanelVisibility;
         private string stackPanelMessage;
+        private bool isOkPressedInDemo;
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -85,6 +86,19 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
                 if (value != stackPanelVisibility)
                 {
                     stackPanelVisibility = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public bool IsOkPressedInDemo
+        {
+            get { return isOkPressedInDemo; }
+            set
+            {
+                if (value != isOkPressedInDemo)
+                {
+                    isOkPressedInDemo = value;
                     OnPropertyChanged();
                 }
             }
