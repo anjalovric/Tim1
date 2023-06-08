@@ -81,7 +81,17 @@
                 </Style>
             </DataGrid.CellStyle>
         </DataGrid>
-        <Button Command="{Binding NewRenovationCommand}" Grid.Row="3" Height="41" Style="{StaticResource BasicButton}">New Renovation</Button>
+        <Button Content="New Renovation" Command="{Binding NewRenovationCommand}" Grid.Row="3" Height="41">
+            <Button.Style>
+                <Style TargetType="Button" BasedOn="{StaticResource BasicButton}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsNewRenovationPressedInDemo, UpdateSourceTrigger=PropertyChanged}" Value="True">
+                            <Setter Property="Background" Value="AliceBlue"></Setter>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
         <StackPanel Margin="-29.5,-30,-29.5,75" Background="LightGray" Visibility="{Binding Path=StackPanelVisibility, UpdateSourceTrigger=PropertyChanged}">
             <Grid Height="100">
                 <Grid.ColumnDefinitions>

@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Data;
+using InitialProject.Model;
 using InitialProject.WPF.Demo;
 
 namespace InitialProject.WPF.Converters
@@ -19,6 +20,8 @@ namespace InitialProject.WPF.Converters
         public RelayCommand ForumReportCommentCommand { get; set; }
         public RelayCommand NewCommentCommand { get; set; }
         public RelayCommand MyProfileCommand { get; set; }
+        public RelayCommand AccommodationCommand { get; set; }
+        public RelayCommand RenovationCommand { get; set; }
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             MakeCommands();
@@ -36,6 +39,10 @@ namespace InitialProject.WPF.Converters
                     return NewCommentCommand;
                 if (activePage.Title.Equals("My Profile"))
                     return MyProfileCommand;
+                if (activePage.Title.Equals("My Accommodation"))
+                    return AccommodationCommand;
+                if(activePage.Title.Equals("My Renovations"))
+                    return RenovationCommand;
             }
             return null;
         }
@@ -53,6 +60,8 @@ namespace InitialProject.WPF.Converters
             ForumReportCommentCommand = new RelayCommand(ForumReportComment_Executed, CanExecute);
             NewCommentCommand = new RelayCommand(NewComment_Executed, CanExecute);
             MyProfileCommand = new RelayCommand(MyProfile_Executed, CanExecute);
+            AccommodationCommand = new RelayCommand(Accommodation_Executed, CanExecute);
+            RenovationCommand = new RelayCommand(Renovation_Executed, CanExecute);
         }
 
         private bool CanExecute(object sender)
@@ -94,6 +103,18 @@ namespace InitialProject.WPF.Converters
         {
             MyProfileDemo profileDemo = new MyProfileDemo();
             profileDemo.PlayDemo();
+        }
+
+        private void Accommodation_Executed(object sender)
+        {
+            AccommodationDemo accommodationDemo = new AccommodationDemo();
+            accommodationDemo.PlayDemo();
+        }
+
+        private void Renovation_Executed(object sender)
+        {
+            RenovationDemo renovationDemo = new RenovationDemo();
+            renovationDemo.PlayDemo();
         }
     }
 }

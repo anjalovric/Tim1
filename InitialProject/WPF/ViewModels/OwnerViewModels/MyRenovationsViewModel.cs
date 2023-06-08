@@ -33,6 +33,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         public RelayCommand RenovationDetailsCommand { get; set; }
         public RelayCommand OKCommand { get; set; }
         private bool isDemoOn;
+        private bool isNewRenovationPressedInDemo;
         public MyRenovationsViewModel(Owner owner)
         {
             this.Owner = owner;
@@ -187,6 +188,19 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
                 if (value != isDemoOn)
                 {
                     isDemoOn = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public bool IsNewRenovationPressedInDemo
+        {
+            get { return isNewRenovationPressedInDemo; }
+            set
+            {
+                if (value != isNewRenovationPressedInDemo)
+                {
+                    isNewRenovationPressedInDemo = value;
                     OnPropertyChanged();
                 }
             }
