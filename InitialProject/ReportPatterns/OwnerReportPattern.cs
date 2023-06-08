@@ -43,7 +43,10 @@ namespace InitialProject.ReportPatterns
                                              reportService.GetAverageCorrectnessByAccommodation(accommodation).ToString()});
             }
         }
-
+        public override void GenerateTable1Content()
+        {
+            
+        }
         public override void GenerateTitle()
         {
             Font = new PdfStandardFont(PdfFontFamily.Helvetica, 20);

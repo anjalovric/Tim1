@@ -14,11 +14,13 @@ namespace InitialProject.ReportPatterns
         public PdfDocument Document { get; set; }
         public PdfLightTable PdfLightTable { get; set; }
         public DataTable Table { get; set; }
+        public DataTable Table1 { get; set; }
 
         public ReportGenerator()
         {
             PdfLightTable = new PdfLightTable();
             Table = new DataTable();
+            Table1 = new DataTable();
             Document = new PdfDocument();
         }
 
@@ -37,6 +39,8 @@ namespace InitialProject.ReportPatterns
 
                 GenerateTableContent();
                 GenerateTable(page);
+                GenerateTable1Content();
+                GenerateTable1(page);
                 GenerateConclusion();
 
                 SavePdf();
@@ -46,6 +50,7 @@ namespace InitialProject.ReportPatterns
         public abstract void GenerateConclusion();
 
         public abstract void GenerateTableContent();
+        public abstract void GenerateTable1Content();
 
         public abstract void GenerateContent();
 
@@ -53,6 +58,11 @@ namespace InitialProject.ReportPatterns
         {
             PdfLightTable.DataSource = Table;
             PdfLightTable.Draw(page, new PointF(0, 185));
+        }
+        private void GenerateTable1(PdfPage page)
+        {
+            PdfLightTable.DataSource = Table1;
+            PdfLightTable.Draw(page, new PointF(0, 300));
         }
 
         public abstract void SavePdf();

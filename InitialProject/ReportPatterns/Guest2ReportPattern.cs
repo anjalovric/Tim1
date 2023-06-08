@@ -10,6 +10,9 @@ using InitialProject.Service;
 using static Xceed.Wpf.Toolkit.Calculator;
 using Org.BouncyCastle.Asn1.Ocsp;
 using InitialProject.WPF.Views.Guest2Views;
+using Syncfusion.Pdf.Grid;
+using Syncfusion.Pdf;
+using Syncfusion.Pdf.Tables;
 
 namespace InitialProject.ReportPatterns
 {
@@ -72,6 +75,7 @@ namespace InitialProject.ReportPatterns
             stringBuilder = new StringBuilder("");
             stringBuilder.Append("accepted tours, we have determined that the average number of people in those tours is ").Append(requestStatisticsService.AverageNumberOfPeopleInAcceptedRequests(guest2)).Append(".");
             Graphics.DrawString(stringBuilder.ToString(), Font, PdfBrushes.Black, new PointF(0, 170));
+            
             stringBuilder = new StringBuilder("");
             stringBuilder.Append(DateTime.Now.ToString());
             Graphics.DrawString(stringBuilder.ToString(), Font, PdfBrushes.Black, new PointF(0, 750));
@@ -89,8 +93,22 @@ namespace InitialProject.ReportPatterns
             Table.Rows.Add("arabic", arabCounter);
             Table.Rows.Add("spain", spCounter);
         }
- 
-        
+        public override void GenerateTable1Content()
+        {
+            Table1.Columns.Add("Locations");
+            Table1.Columns.Add("Number of requests by locations");
+            Table1.Rows.Add(new string[] { "Location", "Number of requests by locations" });
+            Table1.Rows.Add("Turkey", tCounter);
+            Table1.Rows.Add("Serbia", sCounter);
+            Table1.Rows.Add("Russia", rCounter);
+            Table1.Rows.Add("Greece", gCounter);
+            Table1.Rows.Add("Italy", iCounter);
+            Table1.Rows.Add("Hungary", hCounter);
+            Table1.Rows.Add("Austria", aCounter);
+            Table1.Rows.Add("BiH", bCounter);
+        }
+
+
 
         public override void GenerateTitle()
         {
