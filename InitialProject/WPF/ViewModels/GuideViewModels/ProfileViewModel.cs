@@ -146,6 +146,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             guideService.Update(loggedGuide);
 
             voucherService.SendVoucher(loggedGuide.Id);
+            voucherService.ChangeAssignedGuide(loggedGuide.Id);
 
             GuideWindowViewModel guideWindowViewModel=new GuideWindowViewModel(loggedUser);
             guideWindowViewModel.SignOut();

@@ -12,10 +12,12 @@ namespace InitialProject.Service
         private IAccommodationRepository accommodationRepository = Injector.CreateInstance<IAccommodationRepository>();
         private List<Accommodation> accommodations;
         private List<Accommodation> Accommodations;//for search
+        private LocationService locationService;
         public AccommodationService()
         {
             MakeAccommodations();
-            Accommodations = new List<Accommodation>(accommodations);   
+            Accommodations = new List<Accommodation>(accommodations);
+            locationService = new LocationService();
         }
         public List<Accommodation> GetAll()
         {
@@ -23,6 +25,7 @@ namespace InitialProject.Service
         }
         public void Add(Accommodation accommodation)
         {
+            accommodation.Location = locationService.GetByCityAndCountry(accommodation.Location.Country, accommodation.Location.City);
             accommodationRepository.Add(accommodation);
         }
         public Accommodation GetById(int id)

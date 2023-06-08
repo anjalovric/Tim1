@@ -9,7 +9,9 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Imaging;
 using InitialProject.Model;
+using InitialProject.ReportPatterns;
 using InitialProject.Service;
+using InitialProject.WPF.Views;
 using InitialProject.WPF.Views.Guest1Views;
 using LiveCharts;
 using LiveCharts.Wpf;
@@ -43,6 +45,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         }
         public GuestReview SelectedReview { get; set; }
         public RelayCommand ShowReviewDetailsCommand { get; set; }
+        public RelayCommand GenerateReportCommand { get; set; }
         public Guest1ReviewsViewModel(Guest1 guest1)
         {
             this.guest1 = guest1;
@@ -61,6 +64,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         private void MakeCommands()
         {
             ShowReviewDetailsCommand = new RelayCommand(ShowReviewDetails_Executed, CanExecute);
+            GenerateReportCommand = new RelayCommand(GenerateReport_Executed, CanExecute);
         }
         private void SetChartData()
         {
@@ -109,6 +113,14 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             AverageRating = guestAverageReviewService.GetAverageRating(guest1);
             AverageCleanliness = Math.Round(AverageCleanliness, 1);
             AverageFollowingRules = Math.Round(AverageFollowingRules, 1);
+        }
+
+        private void GenerateReport_Executed(object sender)
+        {
+            ReportGenerator generator = new Guest1ReportPattern(guest1);
+            generator.GenerateReport();
+            PdfPreviewView previewView = new PdfPreviewView();
+            Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = previewView;
         }
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

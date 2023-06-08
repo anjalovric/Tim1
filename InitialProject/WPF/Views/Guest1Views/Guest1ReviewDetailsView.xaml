@@ -62,18 +62,18 @@
                 <RowDefinition Height="3*"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <Border Grid.Row="0" Grid.RowSpan="7" Grid.Column="0" Width="490" BorderBrush="#22301a" BorderThickness="3"  CornerRadius="20 20 20 20" HorizontalAlignment="Center" Margin="0,10,0,10">
+            <Border Grid.Row="0" Grid.RowSpan="7" Grid.Column="0" Width="470" BorderBrush="#22301a" BorderThickness="3"  CornerRadius="20 20 20 20" HorizontalAlignment="Center" Margin="0,10,0,10">
                 <Border.Effect>
-                    <DropShadowEffect ShadowDepth="0" BlurRadius="50"/>
+                    <DropShadowEffect ShadowDepth="0" BlurRadius="10"/>
                 </Border.Effect>
                 <Border.Background>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
                         <GradientStop Color="#FF2A3922" Offset="0"/>
-                        <GradientStop Color="#37492d" Offset="0.2"></GradientStop>
+                        <GradientStop Color="#37492d" Offset="0.1"></GradientStop>
                         <GradientStop Color="#37492d" Offset="0.4"/>
                         <GradientStop Color="#37492d" Offset="0.5"/>
                         <GradientStop Color="#37492d" Offset="0.6"/>
-                        <GradientStop Color="#37492d" Offset="0.8"></GradientStop>
+                        <GradientStop Color="#37492d" Offset="0.9"></GradientStop>
                         <GradientStop Color="#FF2A3922" Offset="1"/>
                     </LinearGradientBrush>
                 </Border.Background>
@@ -113,25 +113,25 @@
             </Grid.RowDefinitions>
 
 
-            <Border Grid.Row="0" Grid.RowSpan="9" Grid.Column="0" Width="490" BorderBrush="#22301a" BorderThickness="3"  CornerRadius="20 20 20 20" HorizontalAlignment="Center" Margin="0,10,0,10">
+            <Border Grid.Row="0" Grid.RowSpan="9" Grid.Column="0" Width="470" BorderBrush="#22301a" BorderThickness="3"  CornerRadius="20 20 20 20" HorizontalAlignment="Center" Margin="0,10,0,10">
                 <Border.Effect>
-                    <DropShadowEffect ShadowDepth="0" BlurRadius="50"/>
+                    <DropShadowEffect ShadowDepth="0" BlurRadius="10"/>
                 </Border.Effect>
                 <Border.Background>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
                         <GradientStop Color="#FF2A3922" Offset="0"/>
-                        <GradientStop Color="#37492d" Offset="0.2"></GradientStop>
+                        <GradientStop Color="#37492d" Offset="0.1"></GradientStop>
                         <GradientStop Color="#37492d" Offset="0.4"/>
                         <GradientStop Color="#37492d" Offset="0.5"/>
                         <GradientStop Color="#37492d" Offset="0.6"/>
-                        <GradientStop Color="#37492d" Offset="0.8"></GradientStop>
+                        <GradientStop Color="#37492d" Offset="0.9"></GradientStop>
                         <GradientStop Color="#FF2A3922" Offset="1"/>
                     </LinearGradientBrush>
                 </Border.Background>
             </Border>
 
             <!-- BACK BUTTON -->
-            <Button Height="35" Width="100" FontSize="16" IsEnabled="True" FontWeight="Bold" Grid.Column="0" Grid.Row="0" Margin="20,25,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Command="NavigationCommands.BrowseBack">
+            <Button Height="35" Width="100" FontSize="16" IsEnabled="True" FontWeight="Bold" Grid.Column="0" Grid.Row="0" Margin="35,25,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Command="NavigationCommands.BrowseBack">
                 <Grid Background="#8c9d75" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -142,7 +142,7 @@
                 </Grid>
             </Button>
 
-            <Label HorizontalAlignment="Center" VerticalAlignment="Top" HorizontalContentAlignment="Center" Grid.Row="0" FontFamily="Baskerville Old Face" FontSize="24" FontWeight="Bold" Margin="0,50,0,0">REVIEW DETAILS</Label>
+            <Label HorizontalAlignment="Center" VerticalAlignment="Top" HorizontalContentAlignment="Center" Grid.Row="0" FontFamily="Baskerville Old Face" FontSize="24" FontWeight="Bold" Margin="0,50,0,0">REVIEW</Label>
 
             <!-- REVIEW DETAILS -->
             <Label HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Center" Grid.Row="1"  Margin="70,0,0,0">Cleanliness:</Label>

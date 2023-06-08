@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using System.Drawing;
 using Syncfusion.Pdf;
 using Syncfusion.Pdf.Graphics;
@@ -68,10 +69,11 @@ namespace InitialProject.ReportPatterns
 
         private void GenerateHeader()
         {
-            Graphics.DrawString("Adresa: Trg Dositeja Obradovica 6", Font, PdfBrushes.Black, new PointF(0, 19));
-            Graphics.DrawString("21000 Novi Sad, Srbija", Font, PdfBrushes.Black, new PointF(0, 27));
-            Graphics.DrawString("Kontakt telefon: 021021021", Font, PdfBrushes.Black, new PointF(0, 36));
-            Graphics.DrawString("E-mail adresa: mytravel@gmail.com", Font, PdfBrushes.Black, new PointF(0, 44));
+            Graphics.DrawString("Address: Trg Dositeja Obradovica 6", Font, PdfBrushes.Black, new PointF(0, 19));
+            Graphics.DrawString("21000 Novi Sad, Serbia", Font, PdfBrushes.Black, new PointF(0, 27));
+            Graphics.DrawString("Contact: 021021021", Font, PdfBrushes.Black, new PointF(0, 36));
+            Graphics.DrawString("E-mail address: mytravel@gmail.com", Font, PdfBrushes.Black, new PointF(0, 44));
+            Graphics.DrawString("Report generated on: " + DateTime.Now, Font, PdfBrushes.Black, new PointF(0, 53));
         }
 
         private void InitializeGraphics(PdfPage page)

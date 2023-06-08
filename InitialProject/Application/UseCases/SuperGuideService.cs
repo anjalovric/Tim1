@@ -77,8 +77,33 @@ namespace InitialProject.APPLICATION.UseCases
             }
 
             return CheckIsSuperGuide(tourCount, averageGrade,reviews);
-        }    
-        
+        }
+
+
+        public bool getGradesForFutureTours(string language, Guide guide, DateTime createDate)
+        {
+            int tourCount = 0;
+            double averageGrade = 0;
+            int reviews = 0;
+            List<double> grades = new List<double>();
+            DateTime oneYearFromCreateDate = createDate.AddYears(1);
+            foreach (TourInstance tourInstance in tourInstanceService.GetAll())
+            {
+                tourService.SetTour(tourInstance);
+                if (tourInstance.Tour.Language.Equals(language) && tourInstance.Finished && tourInstance.Guide.Id == guide.Id && tourInstance.StartDate >= createDate && tourInstance.StartDate <= oneYearFromCreateDate)
+                {
+                    tourCount++;
+                    GuideAndTourReview guideAndTourReview = guideAndTourReviewService.GetReviewsByGuide(guide.Id).Find(x => x.TourInstance.Id == tourInstance.Id);
+                    if (guideAndTourReview != null)
+                    {
+                        reviews++;
+                        averageGrade += Convert.ToDouble(Convert.ToDouble(guideAndTourReview.Language + guideAndTourReview.InterestingFacts + guideAndTourReview.Knowledge) / Convert.ToDouble(3));
+                    }
+                }
+            }
+
+            return CheckIsSuperGuide(tourCount, averageGrade, reviews);
+        }
         public bool CheckIsSuperGuide(int tourCount, double averageGrade,int reviews)
         {
             if ((tourCount>=2) && ((averageGrade/reviews) >= 4))
@@ -98,7 +123,8 @@ namespace InitialProject.APPLICATION.UseCases
                         SuperGuide superGuide = new SuperGuide();
                         superGuide.Language = language;
                         superGuide.guideId = guide.Id;
-                        if (GetAll().Find(x => x.Language == language) == null)
+                        superGuide.CreateDate=DateTime.Now;
+                        if (GetById(guide.Id).Find(x => x.Language == language) == null)
                             Save(superGuide);
                     }
                 }
@@ -115,11 +141,20 @@ namespace InitialProject.APPLICATION.UseCases
                 break;
             }
        }
-
+     
+     public void CheckFutureSuperGuideStatus(Guide guide)
+        {
+            foreach (SuperGuide superGuide in GetById(guide.Id))
+            {
+               if(((DateTime.Now.Date - superGuide.CreateDate.Date).TotalDays/365) >=1)
+                    if(getGradesForFutureTours(superGuide.Language,guide,superGuide.CreateDate)==false)
+                        Delete(superGuide);
+            }
+        }
         public List<SuperGuide> UpdateSuperGuideStatus(Guide guide)
         {
             CheckSuperGuideStatus(guide);
-            CheckLostOfTitle(guide);
+            CheckFutureSuperGuideStatus(guide);
             return GetById(guide.Id);
         }
 

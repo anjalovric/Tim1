@@ -48,5 +48,15 @@ namespace InitialProject.APPLICATION.UseCases
                 return sum / allReviews.Count();
             return 0;
         }
+
+        public double GetNumberOfReviews(Owner owner)
+        {
+            return ownerReviewService.GetNumberOfReviewsByOwner(owner);
+        }
+
+        public double GetAverageRate(Owner owner)
+        {
+            return ownerReviewService.CalculateAverageRateByOwner(owner);
+        }
     }
 }

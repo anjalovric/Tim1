@@ -51,11 +51,11 @@ namespace InitialProject.ReportPatterns
                
             Graphics.DrawString(stringBuilder.ToString(), Font, PdfBrushes.Black, new PointF(30, 350));
             StringBuilder stringBuilder1 = new StringBuilder("");
-            stringBuilder1.Append("old was ").Append(ageUnder18).Append("%. ").Append
-                ("Percent of guests that are between 18 and 50 years old was ").Append(ageBetween18And50).Append("% and percent of guests that are over 50 years old ");
+            stringBuilder1.Append("old were ").Append(ageUnder18).Append("%. ").Append
+                ("Percent of guests that are between 18 and 50 years old were ").Append(ageBetween18And50).Append("% and percent of guests that are over 50 years old ");
             Graphics.DrawString(stringBuilder1.ToString(), Font, PdfBrushes.Black, new PointF(0, 365));
             StringBuilder stringBuilder2 = new StringBuilder("");
-            stringBuilder2.Append("was ").Append(ageOver50).Append(" %.").Append
+            stringBuilder2.Append("was ").Append(ageOver50).Append(" %.").Append("With vocher there were ").Append(withVoucherPercent).Append("% and without ").Append(withoutVoucherPercent).Append("% of guests").Append
             (" Everything was held regulary as planned. ");
 
             Graphics.DrawString(stringBuilder2.ToString(), Font, PdfBrushes.Black, new PointF(0, 380));

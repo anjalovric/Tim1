@@ -51,8 +51,8 @@
             <Image Source="/Resources/Images/locations.png" Opacity="0.1"  Stretch="Fill"></Image>
 
             <!-- INPUT FORM -->
-            <Label FontSize="24" HorizontalAlignment="Center" FontWeight="Bold" FontFamily="Baskerville Old Face"  VerticalAlignment="Top" Height="Auto" Width="Auto" Margin="0,25,0,0">CHANGING RESERVATION DATE</Label>
-            
+            <Label FontSize="24" HorizontalAlignment="Center" FontWeight="Bold" FontFamily="Baskerville Old Face"  VerticalAlignment="Top" Height="Auto" Width="Auto" Margin="0,25,0,0" Content="RESCHEDULING RESERVATION"/>
+
             <Label HorizontalAlignment="Left" Margin="154,84,0,384" Height="35" Width="Auto">Arrival date*</Label>
 
             <Label Height="35" HorizontalAlignment="Right" Width="Auto" Margin="0,84,142,383" Content="Departure date*"/>

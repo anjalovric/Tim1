@@ -49,7 +49,8 @@ namespace InitialProject.Domain
         { typeof(IForumCommentRepository), new ForumCommentRepository() },
         {typeof(ISuperGuideRepository), new SuperGuideRepository() },
         { typeof(IComplexTourRequestsRepository), new ComplexTourRequestsRepository()},
-        { typeof(ICommentReportRepository), new CommentReportRepository()}
+        { typeof(ICommentReportRepository), new CommentReportRepository()},
+        { typeof(INewForumNotificationRepository), new NewForumNotificationRepository() }
 
         };
 

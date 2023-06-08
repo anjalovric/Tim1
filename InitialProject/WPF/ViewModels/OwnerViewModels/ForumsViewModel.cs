@@ -43,7 +43,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             forumService = new ForumService();
             Forums = new ObservableCollection<OneForumViewModel>(forumService.GetAllForOwnerDisplay(profileOwner));
             NewForums = new ObservableCollection<OneForumViewModel>(forumService.GetNewForOwnerDisplay(profileOwner));
-            forumService.MakeForumsOld(forumService.GetNewForOwnerDisplay(profileOwner));
+            forumService.MakeForumsOld(forumService.GetNewForOwnerDisplay(profileOwner), profileOwner);
         }
 
         public OneForumViewModel SelectedForum
