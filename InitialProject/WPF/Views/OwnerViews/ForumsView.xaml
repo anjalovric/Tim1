@@ -44,7 +44,7 @@
                             <Style TargetType="Image">
                                 <Setter Property="Visibility" Value="Hidden"/>
                                 <Style.Triggers>
-                                    <DataTrigger Binding="{Binding IsVeryUseful}" Value="True">
+                                    <DataTrigger Binding="{Binding Forum.IsVeryUseful}" Value="True">
                                         <Setter Property="Visibility" Value="Visible"/>
                                     </DataTrigger>
                                 </Style.Triggers>

@@ -143,7 +143,7 @@ namespace InitialProject.Service
         private bool IsVeryUseful(Forum forum)
         {
             int ownerComments = forumCommentService.GetNumberOfOwnerComments(forum);
-            int guestComments = forumCommentService.GetNumberOfGuestComments(forum);
+            int guestComments = forumCommentService.GetNumberOfGuestOnLocationComments(forum);
             return ownerComments >= 10 && guestComments >= 20;          //promijeniti na &&     !!!!!!!!!!!!!!!!!!!!!!!!!!
         }
         public Forum SetIsVeryUseful(Forum forum)

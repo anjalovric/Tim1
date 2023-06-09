@@ -16,6 +16,7 @@ namespace InitialProject.WPF.Converters
         public RelayCommand MyProfileCommand { get; set; }
         public RelayCommand AccommodationCommand { get; set; }
         public RelayCommand RenovationCommand { get; set; }
+        public RelayCommand DecliningRequestCommand { get; set; }
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             MakeCommands();
@@ -37,6 +38,8 @@ namespace InitialProject.WPF.Converters
                     return AccommodationCommand;
                 if(activePage.Title.Equals("My Renovations"))
                     return RenovationCommand;
+                if (activePage.Title.Equals("Requests For Rescheduling"))
+                    return DecliningRequestCommand;
             }
             return null;
         }
@@ -56,6 +59,7 @@ namespace InitialProject.WPF.Converters
             MyProfileCommand = new RelayCommand(MyProfile_Executed, CanExecute);
             AccommodationCommand = new RelayCommand(Accommodation_Executed, CanExecute);
             RenovationCommand = new RelayCommand(Renovation_Executed, CanExecute);
+            DecliningRequestCommand = new RelayCommand(DecliningRequest_Executed, CanExecute);
         }
 
         private bool CanExecute(object sender)
@@ -109,6 +113,12 @@ namespace InitialProject.WPF.Converters
         {
             RenovationDemo renovationDemo = new RenovationDemo();
             renovationDemo.PlayDemo();
+        }
+
+        private void DecliningRequest_Executed(object sender)
+        {
+            DecliningRequestDemo requestDemo = new DecliningRequestDemo();
+            requestDemo.PlayDemo();
         }
     }
 }

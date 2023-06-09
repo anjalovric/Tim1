@@ -17,6 +17,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         public ReschedulingAccommodationRequest ReschedulingAccommodationRequest { get; set; }
         private string explanation { get; set; }
         public RelayCommand ConfirmCommand { get; set; }
+        private bool isConfirmPressedInDemo;
         public DecliningRequestViewModel(ReschedulingAccommodationRequest request)
         {
             ReschedulingAccommodationRequest = request;
@@ -33,6 +34,19 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         private bool CanExecute(object sender)
         {
             return true;
+        }
+
+        public bool IsConfirmPressedInDemo
+        {
+            get { return isConfirmPressedInDemo; }
+            set
+            {
+                if (value != isConfirmPressedInDemo)
+                {
+                    isConfirmPressedInDemo = value;
+                    OnPropertyChanged();
+                }
+            }
         }
 
         private void Confirm_Executed(object sender)

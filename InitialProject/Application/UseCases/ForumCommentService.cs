@@ -86,6 +86,20 @@ namespace InitialProject.APPLICATION.UseCases
             return storedForumComments;
         }
 
+        public int GetNumberOfGuestOnLocationComments(Forum forum)
+        {
+            List<ForumComment> forumComments = forumCommentRepository.GetAllByForumId(forum.Id);
+            SetUsers(forumComments);
+            int total = 0;
+            foreach (ForumComment comment in forumComments)
+            {
+                if (comment.User.Role == Role.GUEST1 && accommodationReservationService.HadReservationOnLocation(comment.User.Username, forum.Location))
+                {
+                    total++;
+                }
+            }
+            return total;
+        }
         public int GetNumberOfGuestComments(Forum forum)
         {
             List<ForumComment> forumComments = forumCommentRepository.GetAllByForumId(forum.Id);

@@ -20,6 +20,8 @@ namespace InitialProject.WPF.Demo
 
         private GuestReviewFormViewModel form;
         private GuestReviewFormView formView;
+        private AccommodationReservation guestToReview;
+        private GuestReview review;
         public GuestReviewDemo()
         {
             OwnerService ownerService = new OwnerService();
@@ -51,36 +53,79 @@ namespace InitialProject.WPF.Demo
         {
             DispatcherTimer timer = (DispatcherTimer)sender;
             Increment++;
-            Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = formView;
-
-            if (Increment == 1)
+            MakeGuestToReview();
+            if(Increment == 1)
+            {
+                viewModel.ReservationsToReview.Add(guestToReview);
+                viewModel.SelectedReservation = viewModel.ReservationsToReview[viewModel.ReservationsToReview.Count - 1];
+            }
+            if(Increment == 2)
+            {
+                Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = formView;
+            }
+            if (Increment == 3)
             {
                 formView.Cleanliness3.IsChecked = true;
                 form.GuestReview.Cleanliness = 3;
             }
-            if(Increment == 2)
+            if(Increment == 4)
             {
                 formView.RulesFollowing4.IsChecked = true;
                 form.GuestReview.RulesFollowing = 4;
             }
-            if(Increment == 3)
+            if(Increment == 5)
             {
                 formView.InputCommentInDemo();
             }
-            if(Increment == 11)
+            if(Increment == 13)
             {
                 form.IsOkButtonEnabled = true;
             }
-            if(Increment == 12)
+            if(Increment == 14)
             {
                 form.IsConfirmPressedInDemo = true;
             }
-            if(Increment == 13)
+            if(Increment == 15)
             {
+                MakeGuestReview();
                 Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = view;
+                viewModel.GuestReviews.Add(review);
+                viewModel.StackPanelMessage = "Guest successfully reviewed!";
+                viewModel.StackPanelVisibility = "Visible";
+            }
+            if(Increment == 16)
+            {
+                viewModel.IsOkPressedInDemo = true;
+            }
+            if(Increment == 17)
+            {
+                viewModel.IsOkPressedInDemo = false;
+                viewModel.StackPanelVisibility = "Hidden";
+            }
+            if(Increment == 18)
+            {
+                viewModel.ReservationsToReview.Remove(guestToReview);
+                viewModel.GuestReviews.Remove(review);
             }
         }
 
+        private void MakeGuestToReview()
+        {
+            guestToReview = new AccommodationReservation();
+            guestToReview.Accommodation.Name = "My Accommodation";
+            LocationService locationService = new LocationService();
+            guestToReview.Accommodation.Location = locationService.GetAll()[0];
+            Guest1Service guest1Service = new Guest1Service();
+            guestToReview.Guest = guest1Service.GetById(1);
+        }
+
+        private void MakeGuestReview()
+        {
+            review = new GuestReview();
+            review.Reservation = guestToReview;
+            review.Cleanliness = 3;
+            review.RulesFollowing = 4;
+        }
         public int Increment
         {
             get { return increment; }

@@ -23,6 +23,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         public RelayCommand OKCommand { get; set; }
         private string stackPanelVisibility;
         private string stackPanelMessage;
+        private bool isOkPressedInDemo;
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -155,6 +156,18 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             RefreshRequests();
         }
 
+        public bool IsOkPressedInDemo
+        {
+            get { return isOkPressedInDemo; }
+            set
+            {
+                if (value != isOkPressedInDemo)
+                {
+                    isOkPressedInDemo = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         private void DisplayNotificationPanel()
         {
             OwnerNotificationsService notificationsService = new OwnerNotificationsService();

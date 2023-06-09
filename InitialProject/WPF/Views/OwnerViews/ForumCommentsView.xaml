@@ -7,7 +7,7 @@
       mc:Ignorable="d" 
        d:DesignHeight="630" d:DesignWidth="430"
       Title="Forum" Background="#b3cee5">
-    
+
     <Page.Resources>
         <DataTemplate x:Key="comment">
             <Border Background="LightGray" BorderBrush="DarkGray" BorderThickness="0.5" Margin="0,0,0,0" >
@@ -119,6 +119,22 @@
                         <Run Text=", " />
                         <Run Text="{Binding Path=Forum.Forum.Location.Country, UpdateSourceTrigger=PropertyChanged}" />
                     </TextBlock>
+                    <TextBlock Grid.Row="2" Margin="20, 0, 0, 0" FontWeight="SemiBold" HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.ColumnSpan="2" Width="183" Height="26">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Path=Forum.Forum.Opened}" Value="True">
+                                        <Setter Property="Text" Value="opened" />
+                                        <Setter Property="Foreground" Value="LawnGreen"></Setter>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Path=Forum.Forum.Opened}" Value="False">
+                                        <Setter Property="Text" Value="closed" />
+                                        <Setter Property="Foreground" Value="Red"></Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
                 </Grid>
 
                 <Grid Grid.Column="1">
@@ -133,6 +149,7 @@
                     <Label Content="{Binding Path=Forum.OwnerComments, UpdateSourceTrigger=PropertyChanged}" FontWeight="Bold" FontSize="30"  Foreground="LightGray" VerticalContentAlignment="Top" Grid.Row="1" VerticalAlignment="Top" Margin="0, 0, 0, 0"/>
                     <Label Content="{Binding Path=Forum.GuestComments, UpdateSourceTrigger=PropertyChanged}" FontWeight="Bold" FontSize="30"  Foreground="LightGray" VerticalContentAlignment="Top" Grid.Row="3" VerticalAlignment="Top" Margin="0, 0, 0, 0"/>
                 </Grid>
+
             </Grid>
         </Border>
         <ListBox Grid.Row="2" Name="CommentsListBox" ItemsSource="{Binding Path=Comments}" ItemTemplate="{StaticResource comment}" IsSynchronizedWithCurrentItem="True" SelectedItem="{Binding Path=SelectedComment, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" SelectionMode="Single" HorizontalContentAlignment="Stretch" Style="{StaticResource ListBoxStyle}" >
@@ -151,11 +168,14 @@
                 <Style TargetType="Button" BasedOn="{StaticResource BasicButton}">
                     <Setter Property="IsEnabled" Value="True"/>
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding OwnerHasLocation}" Value="False">
+                        <DataTrigger Binding="{Binding Forum.OwnerHasLocation}" Value="False">
                             <Setter Property="IsEnabled" Value="False"/>
                         </DataTrigger>
                         <DataTrigger Binding="{Binding IsAddNewCommentPressedInDemo, UpdateSourceTrigger=PropertyChanged}" Value="True">
                             <Setter Property="Background" Value="AliceBlue"></Setter>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Forum.Forum.Opened}" Value="False">
+                            <Setter Property="IsEnabled" Value="False"/>
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>

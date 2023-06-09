@@ -27,6 +27,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         public RelayCommand OKCommand { get; set; }
         private string stackPanelVisibility;
         private string stackPanelMessage;
+        private bool isOkPressedInDemo;
         public GuestReviewViewModel(Owner owner)
         {
             profileOwner = owner;
@@ -66,6 +67,18 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
         }
 
+        public bool IsOkPressedInDemo
+        {
+            get { return isOkPressedInDemo; }
+            set
+            {
+                if (value != isOkPressedInDemo)
+                {
+                    isOkPressedInDemo = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         public string StackPanelMessage
         {
             get { return stackPanelMessage; }
