@@ -44,7 +44,7 @@
             <Setter Property="BorderBrush" Value="Transparent"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Foreground" Value="#555557"/>
-            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontSize" Value="12"/>
             <Setter Property="Padding" Value="30"/>
             <Setter Property="Template">
                 <Setter.Value>
@@ -98,7 +98,7 @@
         <Style x:Key="DataGridColumnHeaderStyle2" TargetType="{x:Type DataGridColumnHeader}">
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontSize" Value="12"/>
             <Setter Property="Foreground" Value="Black"/>
             <Setter Property="Margin" Value="0, 0, 0, 0"/>
             <Setter Property="Template">
@@ -129,6 +129,24 @@
         </Rectangle>
         <DataGrid x:Name="TourListDataGrid" FontWeight="DemiBold" Background="Transparent" RowHeight="{x:Static sys:Double.NaN}"  BorderBrush="Transparent" ItemsSource="{Binding Path=TourInstances,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=Selected}" IsReadOnly="True" AutoGenerateColumns="False" VerticalAlignment="Top" HorizontalAlignment="Center" Height="235" Width="558" Margin="0,337,0,0" HorizontalScrollBarVisibility="Hidden" GridLinesVisibility="None" ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle2}" CellStyle="{StaticResource DataGridCellStyle2}" Style="{StaticResource DataGridStyle}" RowStyle="{StaticResource DataGridRowStyle2}" Grid.Column="1">
             <DataGrid.Columns>
+                <DataGridTemplateColumn Header="" Width="0.6*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image x:Name="myImage" Width="20" Height="20" Source="/Resources/Images/super11.png">
+                                <Image.Style>
+                                    <Style TargetType="Image">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Guide.IsSuperGuide}" Value="True">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Image.Style>
+                            </Image>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTextColumn Header="Location" Width="1*" Binding="{Binding Tour.Location.City}"/>
                 <DataGridTextColumn Header="Duration" Width="1*" Binding="{Binding Tour.Duration}"/>
                 <DataGridTextColumn Header="Language" Width="1*" Binding="{Binding Tour.Language}"/>
@@ -170,7 +188,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn x:Name="detailsView" Header="Details" Width="0.9*">
+                <DataGridTemplateColumn x:Name="detailsView" Header="Details" Width="1*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button FontWeight="Bold" BorderBrush="#ffba00" Background="#ffba00" BorderThickness="3" FontSize="12" Width="70" Height="30" Command="{Binding Path=DataContext.ViewDetailsCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" ToolTipService.ShowDuration="5000" ToolTipService.IsEnabled="{Binding Source={x:Static properties:Settings.Default}, Path=IsToolTipEnabled}" l:ShowToursHelp.HelpKey="details">

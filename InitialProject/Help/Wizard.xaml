@@ -22,7 +22,6 @@
                 </Grid>
             </xctk:WizardPage>
             <xctk:WizardPage x:Name="Page" PageType="Interior" 
-                                   Title="Page"
                                    NextPage="{Binding ElementName=Page1}"
                                    PreviousPage="{Binding ElementName=IntroPage}">
                 <Grid>
@@ -32,8 +31,7 @@
                 </Grid>
             </xctk:WizardPage>
             <xctk:WizardPage x:Name="Page1" PageType="Interior"
-                                   Title="Page 1"
-                                   Description="This is the first page in the process."
+
                                    NextPage="{Binding ElementName=Page2}"
                                    PreviousPage="{Binding ElementName=Page}">
                 <Grid>
@@ -43,8 +41,7 @@
                 </Grid>
             </xctk:WizardPage>
             <xctk:WizardPage x:Name="Page2" PageType="Interior"
-                                   Title="Page 2"
-                                   Description="This is the second page in the process"
+                                   
                                    NextPage="{Binding ElementName=Page3}"
                                    PreviousPage="{Binding ElementName=Page1}">
                 <Grid>
@@ -54,8 +51,7 @@
                 </Grid>
             </xctk:WizardPage>
             <xctk:WizardPage x:Name="Page3" PageType="Interior"
-                                   Title="Page 3"
-                                   Description="This is the third page in the process"
+                                  
                                    NextPage="{Binding ElementName=Page4}"
                                    PreviousPage="{Binding ElementName=Page2}">
                 <Grid>
@@ -65,8 +61,7 @@
                 </Grid>
             </xctk:WizardPage>
             <xctk:WizardPage x:Name="Page4" PageType="Interior"
-                                   Title="Page 4"
-                                   Description="This is the third page in the process"
+                                  
                                    NextPage="{Binding ElementName=Page5}"
                                    PreviousPage="{Binding ElementName=Page3}">
                 <Grid>
@@ -76,8 +71,7 @@
                 </Grid>
             </xctk:WizardPage>
             <xctk:WizardPage x:Name="Page5" PageType="Interior"
-                                   Title="Page 5"
-                                   Description="This is the third page in the process"
+                                   
                                    NextPage="{Binding ElementName=Page6}"
                                    PreviousPage="{Binding ElementName=Page4}">
                 <Grid>
@@ -87,8 +81,7 @@
                 </Grid>
             </xctk:WizardPage>
             <xctk:WizardPage x:Name="Page6" PageType="Interior"
-                                   Title="Page 6"
-                                   Description="This is the third page in the process"
+                                   
                                    NextPage="{Binding ElementName=Page7}"
                                    PreviousPage="{Binding ElementName=Page5}">
                 <Grid>
@@ -98,8 +91,7 @@
                 </Grid>
             </xctk:WizardPage>
             <xctk:WizardPage x:Name="Page7" PageType="Interior"
-                                   Title="Page 7"
-                                   Description="This is the third page in the process"
+                                   
                                    NextPage="{Binding ElementName=LastPage}"
                                    PreviousPage="{Binding ElementName=Page6}">
                 <Grid>

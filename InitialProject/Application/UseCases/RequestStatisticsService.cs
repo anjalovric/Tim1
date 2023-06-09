@@ -17,7 +17,7 @@ namespace InitialProject.Service
         {
             int counter = 0;
             double averageNumberOfPeople = 0;
-            List<OrdinaryTourRequests> ordinaryTours=new List<OrdinaryTourRequests>(ordinaryTourRequestsService.GetByGuestId(Guest2.Id));
+            List<OrdinaryTourRequests> ordinaryTours=new List<OrdinaryTourRequests>(ordinaryTourRequestsService.GetOnlyOrdinaryRequestsByGuestId(Guest2.Id));
             foreach (OrdinaryTourRequests request in ordinaryTours)
             {
                 if (request.Status == Status.ACCEPTED && request.GuestId == Guest2.Id)
@@ -33,7 +33,7 @@ namespace InitialProject.Service
         public double ProcentOfInvalidRequest(Guest2 Guest2)
         {
             double invalidRequest = 0;
-            List<OrdinaryTourRequests> ordinaryTours = new List<OrdinaryTourRequests>(ordinaryTourRequestsService.GetByGuestId(Guest2.Id));
+            List<OrdinaryTourRequests> ordinaryTours = new List<OrdinaryTourRequests>(ordinaryTourRequestsService.GetOnlyOrdinaryRequestsByGuestId(Guest2.Id));
             foreach (OrdinaryTourRequests request in ordinaryTours)
             {
                 if (request.Status == Status.INVALID && request.GuestId == Guest2.Id)
@@ -49,7 +49,7 @@ namespace InitialProject.Service
         public double ProcentOfAcceptedRequest(Guest2 Guest2)
         {
             double acceptedRequest = 0;
-            List<OrdinaryTourRequests> ordinaryTours = new List<OrdinaryTourRequests>(ordinaryTourRequestsService.GetByGuestId(Guest2.Id));
+            List<OrdinaryTourRequests> ordinaryTours = new List<OrdinaryTourRequests>(ordinaryTourRequestsService.GetOnlyOrdinaryRequestsByGuestId(Guest2.Id));
             foreach (OrdinaryTourRequests request in ordinaryTours)
             {
                 if (request.Status == Status.ACCEPTED && request.GuestId == Guest2.Id)
