@@ -1,4 +1,6 @@
-﻿using InitialProject.Domain;
+﻿using InitialProject.APPLICATION.UseCases;
+using InitialProject.Domain;
+using InitialProject.Domain.Model;
 using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Model;
 using InitialProject.Repository;
@@ -14,6 +16,7 @@ namespace InitialProject.Service
     public class GuideService
     {
         private IGuideRepository guideRepository=Injector.CreateInstance<IGuideRepository>();
+        private SuperGuideService superGuideService = new SuperGuideService();
         public GuideService() 
         { }
         public Guide GetByUsername(string username)
@@ -39,6 +42,26 @@ namespace InitialProject.Service
                 if(tourInstance.Guide.Id == guide.Id)
                 {
                     tourInstance.Guide = guide;
+                }
+            }
+            SetIfSuperGuide();
+        }
+        public void SetIfSuperGuide()
+        {
+            foreach (Guide guide in guideRepository.GetAll())
+            {
+                foreach(SuperGuide superGuide in superGuideService.GetAll())
+                {
+                    if (guide.Id == superGuide.Id)
+                    {
+                        guide.IsSuperGuide = true;
+                        Update(guide);
+                    }
+                    else if(guide.IsSuperGuide==true)
+                    {
+                        guide.IsSuperGuide = false;
+                        Update(guide);
+                    }
                 }
             }
         }

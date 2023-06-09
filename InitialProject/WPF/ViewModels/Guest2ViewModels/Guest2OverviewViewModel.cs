@@ -21,6 +21,22 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
     public class Guest2OverviewViewModel:INotifyPropertyChanged
     {
         public Model.Guest2 WindowGuest2 { get; set; }
+        private bool buttonIsChecked;
+        public bool ButtonIsChecked
+        {
+            get
+            {
+                buttonIsChecked = Properties.Settings.Default.IsToolTipEnabled;
+                return buttonIsChecked;
+            }
+            set
+            {
+                Properties.Settings.Default.IsToolTipEnabled = value;
+                Properties.Settings.Default.Save();
+                buttonIsChecked = value;
+                OnPropertyChanged("ButtonIsChecked");
+            }
+        }
         public Guest2 guest2 { get; set; }
         private Guest2Repository guest2Repository;
         public RelayCommand ShowCommand { get; set; }

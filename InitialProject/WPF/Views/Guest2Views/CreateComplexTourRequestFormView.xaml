@@ -104,7 +104,7 @@
             <Label Content="Capacity" Grid.Row="3" Grid.Column="2" Margin="40,10,0,0" Style="{StaticResource LabelStyle}"/>
             <Label Content="Start Date" Grid.Row="4" Grid.Column="2" Margin="40,10,0,41" Style="{StaticResource LabelStyle}" Grid.RowSpan="2"/>
             <Label Content="End Date" Grid.Row="5" Grid.Column="2" Margin="40,10,0,0" Style="{StaticResource LabelStyle}"/>
-            <TextBox x:Name="NameT" Foreground="#555557" BorderBrush="#FFAEAEC1" Grid.Column="1" Grid.Row="2" Margin="20,12,10,16" BorderThickness="0,0,0,3">
+            <TextBox x:Name="NameT" Foreground="#555557" BorderBrush="#FFAEAEC1" Grid.Column="1" Grid.Row="2" Margin="20,5,10,13" BorderThickness="0,0,0,3">
 
                 <TextBox.Text>
                     <Binding Path="Name" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
@@ -414,7 +414,7 @@
                     <DataGridTextColumn Header="Status" Width="1*" Binding="{Binding Status}"/>
                 </DataGrid.Columns>
             </DataGrid>
-            <Button Grid.Column="3" Grid.Row="11" Height="34" Width="118" Margin="-50,110,110,0">
+            <Button Grid.Column="3" Grid.Row="11" Height="34" Width="118" Margin="-50,110,110,0" ToolTipService.ShowDuration="5000" Command="{Binding DodajCommand}" ToolTipService.IsEnabled="{Binding Source={x:Static properties:Settings.Default}, Path=IsToolTipEnabled}">
                 <Grid Background="#ffba00" Width="114" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="16*"/>

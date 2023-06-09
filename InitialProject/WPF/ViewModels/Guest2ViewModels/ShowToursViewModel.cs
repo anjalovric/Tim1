@@ -15,6 +15,8 @@ using InitialProject.Domain.Model;
 using InitialProject.Service;
 using InitialProject.Help;
 using System.Windows.Input;
+using InitialProject.APPLICATION.UseCases;
+using System.Security.Cryptography.Xml;
 
 namespace InitialProject.WPF.ViewModels.Guest2ViewModels
 {
@@ -47,8 +49,6 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
                 }
             }
         }
-       
-
         private ObservableCollection<TourImage> TourImages;
         private ObservableCollection<TourReservation> TourReservations;
         private TourRepository tourRepository;
@@ -172,6 +172,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         public RelayCommand ViewDetailsCommand { get; set; }
         public ICommand HelpCommandInViewModel { get;}
         private ShowToursView org;
+        private GuideService guideService;
         public ShowToursViewModel(Guest2 guest2,ShowToursView org)
         {
             AddLanguages();
@@ -182,6 +183,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             this.guest2 = guest2;
             Label = "SHOWING ALL TOURS: ";
             MakeCommands();
+            guideService = new GuideService();
             tourInstanceRepository = new TourInstanceRepository();
             tourReservationRepository = new TourReservationRepository();
             alertGuest2Repository = new AlertGuest2Repository();
@@ -200,6 +202,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             CitiesByCountry = new ObservableCollection<string>();
             IsComboBoxCityEnabled = false;
             HelpCommandInViewModel = new RelayCommand(CommandBinding_Executed);
+            SortToursBySuperGuides();
         }
         private bool CanExecute(object sender)
         {
@@ -222,7 +225,11 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             foreach (TourInstance tourInstance in tourInstances)
             {
                 if (!tourInstance.Finished && !tourInstance.Canceled)
+                {
+                    guideService.SetGuide(tourInstance);
                     TourInstances.Add(tourInstance);
+                }
+                    
             }
         }
         private void AddLanguages()
@@ -253,6 +260,11 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             }
 
         }
+        private void SortToursBySuperGuides()
+        {
+            TourInstances = new ObservableCollection<TourInstance>(TourInstances.OrderByDescending(x => x.Guide.IsSuperGuide).ToList());
+        }
+       
         public void SetTours(ObservableCollection<TourInstance> TourInstances)
         {
             List<Tour> tours = tourRepository.GetAll();

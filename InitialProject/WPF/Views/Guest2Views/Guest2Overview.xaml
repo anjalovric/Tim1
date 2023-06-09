@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:InitialProject.View"
         xmlns:views="clr-namespace:InitialProject.WPF.Views.Guest2Views"
         xmlns:l="clr-namespace:InitialProject.Help"
+        xmlns:properties="clr-namespace:InitialProject.Properties"
         mc:Ignorable="d"
         Title="Booking" Height="768" Width="1024" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" xmlns:HelpProvider.HelpKey="Forma">
     <Window.InputBindings>
@@ -15,6 +16,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="3*"/>
+
 
 
 
@@ -33,48 +35,118 @@
                 </ItemsPanelTemplate>
             </Menu.ItemsPanel>
 
-            <MenuItem Header="Profile" Foreground="White" FontSize="20" FontWeight="Bold" Command="{Binding ProfileCommand}" >
+            <MenuItem Header="Profile" Foreground="White" FontSize="20" FontWeight="Bold" Command="{Binding ProfileCommand}" ToolTipService.ShowDuration="5000" ToolTipService.IsEnabled="{Binding Source={x:Static properties:Settings.Default}, Path=IsToolTipEnabled}">
                 <MenuItem.Icon>
                     <Image Source="/Resources/Images/profile.png" Height="15" Width="20"/>
                 </MenuItem.Icon>
+                <MenuItem.ToolTip>
+                    <ToolTip>
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold">See profile.</TextBlock>
+                        </StackPanel>
+                    </ToolTip>
+                </MenuItem.ToolTip>
             </MenuItem>
 
 
-            <MenuItem Header="Show" Foreground="White" FontSize="20" FontWeight="Bold">
-                <MenuItem Header="All tours" Background="#FF14503F" Command="{Binding ShowCommand}"/>
-                <MenuItem Header="Active tours" Background="#FF14503F" Command="{Binding ActiveToursCommand}"/>
+            <MenuItem Header="Show" Foreground="White" FontSize="20" FontWeight="Bold" ToolTipService.ShowDuration="5000" ToolTipService.IsEnabled="{Binding Source={x:Static properties:Settings.Default}, Path=IsToolTipEnabled}">
+                <MenuItem Header="All tours" Background="#FF14503F" Command="{Binding ShowCommand}" ToolTipService.ShowDuration="5000" ToolTipService.IsEnabled="{Binding Source={x:Static properties:Settings.Default}, Path=IsToolTipEnabled}">
+                    <MenuItem.ToolTip>
+                        <ToolTip>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold">See all tours.</TextBlock>
+                            </StackPanel>
+                        </ToolTip>
+                    </MenuItem.ToolTip>
+                </MenuItem>
+                <MenuItem Header="Active tours" Background="#FF14503F" Command="{Binding ActiveToursCommand}" ToolTipService.ShowDuration="5000" ToolTipService.IsEnabled="{Binding Source={x:Static properties:Settings.Default}, Path=IsToolTipEnabled}">
+                    <MenuItem.ToolTip>
+                        <ToolTip>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold">See active tours.</TextBlock>
+                            </StackPanel>
+                        </ToolTip>
+                    </MenuItem.ToolTip>
+                </MenuItem>
                 <MenuItem.Icon>
                     <Image Source="/Resources/Images/home.png" Height="15" Width="20"/>
                 </MenuItem.Icon>
+                <MenuItem.ToolTip>
+                    <ToolTip>
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold">See tours.</TextBlock>
+                        </StackPanel>
+                    </ToolTip>
+                </MenuItem.ToolTip>
             </MenuItem>
-            <MenuItem Header="Grade tours and guide" Foreground="White" FontSize="20" FontWeight="Bold" Command="{Binding FinishedToursCommand}" Width="302">
+            <MenuItem Header="Grade tours and guide" Foreground="White" FontSize="20" FontWeight="Bold" Command="{Binding FinishedToursCommand}" Width="302" ToolTipService.ShowDuration="5000" ToolTipService.IsEnabled="{Binding Source={x:Static properties:Settings.Default}, Path=IsToolTipEnabled}">
                 <MenuItem.Icon>
                     <Image Source="/Resources/Images/icons8-christmas-star-96.png" Height="15" Width="20"/>
                 </MenuItem.Icon>
+                <MenuItem.ToolTip>
+                    <ToolTip>
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold">See finished tours.</TextBlock>
+                        </StackPanel>
+                    </ToolTip>
+                </MenuItem.ToolTip>
             </MenuItem>
-            <MenuItem Header="Notifications" Foreground="White" FontSize="20" FontWeight="Bold" Command="{Binding NotificationsCommand}">
+            <MenuItem Header="Notifications" Foreground="White" FontSize="20" FontWeight="Bold" Command="{Binding NotificationsCommand}" ToolTipService.ShowDuration="5000" ToolTipService.IsEnabled="{Binding Source={x:Static properties:Settings.Default}, Path=IsToolTipEnabled}">
                 <MenuItem.Icon>
                     <Image Source="/Resources/Images/bell.png" Height="15" Width="20"/>
                 </MenuItem.Icon>
+                <MenuItem.ToolTip>
+                    <ToolTip>
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold">See all notifications.</TextBlock>
+                        </StackPanel>
+                    </ToolTip>
+                </MenuItem.ToolTip>
             </MenuItem>
-            <MenuItem Header="My requests" Foreground="White" FontSize="20" FontWeight="Bold" Command="{Binding RequestsCommand}">
+            <MenuItem Header="My requests" Foreground="White" FontSize="20" FontWeight="Bold" Command="{Binding RequestsCommand}" ToolTipService.ShowDuration="5000" ToolTipService.IsEnabled="{Binding Source={x:Static properties:Settings.Default}, Path=IsToolTipEnabled}">
                 <MenuItem.Icon>
                     <Image Source="/Resources/Images/tasks.png" Height="15" Width="20"/>
                 </MenuItem.Icon>
+                <MenuItem.ToolTip>
+                    <ToolTip>
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold">See requests.</TextBlock>
+                        </StackPanel>
+                    </ToolTip>
+                </MenuItem.ToolTip>
             </MenuItem>
-            <MenuItem Header="Vouchers" Foreground="White" FontSize="20" FontWeight="Bold" Command="{Binding VouchersCommand}">
+            <MenuItem Header="Vouchers" Foreground="White" FontSize="20" FontWeight="Bold" Command="{Binding VouchersCommand}" ToolTipService.ShowDuration="5000" ToolTipService.IsEnabled="{Binding Source={x:Static properties:Settings.Default}, Path=IsToolTipEnabled}">
                 <MenuItem.Icon>
                     <Image Source="/Resources/Images/voucher.png" Height="15" Width="20"/>
                 </MenuItem.Icon>
+                <MenuItem.ToolTip>
+                    <ToolTip>
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold">See all vouchers.</TextBlock>
+                        </StackPanel>
+                    </ToolTip>
+                </MenuItem.ToolTip>
             </MenuItem>
-            <MenuItem Header="Sign out" Foreground="White" FontSize="20" FontWeight="Bold" Command="{Binding SignOutCommand}">
+            <MenuItem Header="Sign out" Foreground="White" FontSize="20" FontWeight="Bold" Command="{Binding SignOutCommand}" ToolTipService.ShowDuration="5000" ToolTipService.IsEnabled="{Binding Source={x:Static properties:Settings.Default}, Path=IsToolTipEnabled}">
                 <MenuItem.Icon>
                     <Image Source="/Resources/Images/signout.png" Height="15" Width="20"/>
                 </MenuItem.Icon>
+                <MenuItem.ToolTip>
+                    <ToolTip>
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold">Sign out.</TextBlock>
+                        </StackPanel>
+                    </ToolTip>
+                </MenuItem.ToolTip>
             </MenuItem>
 
         </Menu>
-        <Button x:Name="button" Content="ON/OFF" FontSize="13" Click="button_Checked" Margin="10,291,161,167" Grid.Column="0" Grid.Row="1" />
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,278,0,0" Grid.Column="0" Grid.Row="1" Width="124">
+            <Label  Content="OFF" Foreground="White" Style="{DynamicResource Label}" HorizontalContentAlignment="Right" Width="36"/>
+            <CheckBox  x:Name="themeCheckBox" Style="{DynamicResource CheckBoxStyle1}" IsChecked="{Binding ButtonIsChecked}" Width="61" Height="30" />
+            <Label Content="ON" Foreground="White" Style="{DynamicResource Label}" Width="47"/>
+        </StackPanel>
+        <!--<Button x:Name="button" Content="ON/OFF" FontSize="13" Click="button_Checked" Margin="10,375,161,83" Grid.Column="0" Grid.Row="1" /><!-->
         <Button Margin="75,229,75,10" Background="#FF14503F" BorderBrush="#FF14503F" Command="{Binding ProfileCommand}"/>
         <TextBlock FontSize="20" Height="35" Width="Auto" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,231,0,0" Foreground="White" FontWeight="Bold" Grid.RowSpan="2" >
             <TextBlock.Text>

@@ -70,7 +70,7 @@ namespace InitialProject.Service
         public List<OrdinaryTourRequests> GetRequestsForChosenYear(int year, Guest2 guest)
         {
             List<OrdinaryTourRequests> ordinaryTours = new List<OrdinaryTourRequests>();
-            foreach (OrdinaryTourRequests request in ordinaryTourRequestsService.GetByGuestId(guest.Id))
+            foreach (OrdinaryTourRequests request in ordinaryTourRequestsService.GetOnlyOrdinaryRequestsByGuestId(guest.Id))
             {
                 if (request.StartDate.Year == year)
                     ordinaryTours.Add(request);
