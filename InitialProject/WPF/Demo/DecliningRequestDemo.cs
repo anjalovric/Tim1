@@ -63,6 +63,10 @@ namespace InitialProject.WPF.Demo
                 decliningView = new DecliningRequestView(request.Request);
                 Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = decliningView;
                 decliningViewModel = decliningView.decliningRequestViewModel;
+                decliningViewModel.ReschedulingAccommodationRequest = new ReschedulingAccommodationRequest();
+                decliningViewModel.ReschedulingAccommodationRequest.Reservation = new AccommodationReservation();
+                Guest1Service guest1Service = new Guest1Service();
+                decliningViewModel.ReschedulingAccommodationRequest.Reservation.Guest = guest1Service.GetById(1);
             }
             if (Increment == 5)
             {
