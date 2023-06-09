@@ -69,13 +69,13 @@ namespace InitialProject.WPF.Converters
 
         private void AccommodationInput_Executed(object sender)
         {
-            AccommodationInputDemo accommodationInputDemo = new AccommodationInputDemo();
+            AccommodationInputDemo accommodationInputDemo = new AccommodationInputDemo(true);
             accommodationInputDemo.PlayDemo();
         }
 
         private void ScheduleRenovation_Executed(object sender)
         {
-            ScheduleRenovationDemo scheduleRenovationDemo = new ScheduleRenovationDemo();
+            ScheduleRenovationDemo scheduleRenovationDemo = new ScheduleRenovationDemo(true);
             scheduleRenovationDemo.PlayDemo();
         }
 

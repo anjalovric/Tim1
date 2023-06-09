@@ -1,17 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using DotLiquid.Tags;
-using InitialProject.Model;
-using InitialProject.Service;
+using System.Windows;
 using System.Windows.Threading;
 using InitialProject.WPF.ViewModels.OwnerViewModels;
 using InitialProject.WPF.Views;
-using System.Windows;
+using InitialProject.WPF.Views.OwnerViews;
 
 namespace InitialProject.WPF.Demo
 {
@@ -20,6 +15,7 @@ namespace InitialProject.WPF.Demo
         private AccommodationView accommodationView;
         private AccommodationViewModel accommodationViewModel;
         private int increment = -1;
+        private DemoIsOnView demoIsOnView;
         public AccommodationDemo()
         {
             accommodationView = (AccommodationView?)Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content;
@@ -41,13 +37,19 @@ namespace InitialProject.WPF.Demo
             Increment++;
             if(Increment == 1)
             {
+                demoIsOnView = new DemoIsOnView();
+                demoIsOnView.Show();
+            }
+            if(Increment == 2)
+            {
+                demoIsOnView.Close();
                 accommodationViewModel.IsNewAccommodationPressedInDemo = true;
             }
             if(Increment == 3)
             {
                 accommodationViewModel.IsNewAccommodationPressedInDemo = false;
                 timer.Stop();
-                AccommodationInputDemo inputDemo = new AccommodationInputDemo();
+                AccommodationInputDemo inputDemo = new AccommodationInputDemo(false);
                 inputDemo.PlayDemo();
             }
 

@@ -10,6 +10,7 @@ using InitialProject.Model;
 using InitialProject.Service;
 using InitialProject.WPF.ViewModels.OwnerViewModels;
 using InitialProject.WPF.Views;
+using InitialProject.WPF.Views.OwnerViews;
 using Timer = System.Threading.Timer;
 
 namespace InitialProject.WPF.Demo
@@ -22,8 +23,12 @@ namespace InitialProject.WPF.Demo
         private Accommodation accommodation;
         private AccommodationView accommodationView;
         private AccommodationViewModel accommodationViewModel;
-        public AccommodationInputDemo()
+        private bool showDemoMessage;
+        private DemoIsOnView demoIsOnView;
+        private DemoIsOffView demoIsOffView;
+        public AccommodationInputDemo(bool showDemoMessage)
         {
+            this.showDemoMessage = showDemoMessage;
             OwnerService ownerService = new OwnerService();
             Owner owner = ownerService.GetAll()[0];
             accommodation = new Accommodation();
@@ -48,13 +53,22 @@ namespace InitialProject.WPF.Demo
             DispatcherTimer timer = (DispatcherTimer)sender;
             AccommodationImageService imageService = new AccommodationImageService();
             Increment++;
-
-            if (Increment == 1)
+            if(Increment == 1)
             {
+                if(showDemoMessage)
+                {
+                    demoIsOnView = new DemoIsOnView();
+                    demoIsOnView.Show();
+                }
+            }
+            if (Increment == 3)
+            {
+                if (showDemoMessage)
+                    demoIsOnView.Close();
                 accommodation.Name = "My accommodation";
                 accommodationInputFormView.InputName();
             }
-            if (Increment == 5)
+            if (Increment == 7)
             {
                 accommodationInputFormView.SelectCountry();
                 viewModel.IsCityComboBoxEnabled = true;
@@ -62,42 +76,42 @@ namespace InitialProject.WPF.Demo
                 accommodation.Location = new Location();
                 accommodation.Location.Country = "Turkey";
             }
-            if (Increment == 7)
+            if (Increment == 9)
             {
                 accommodationInputFormView.SelectCity();
                 accommodation.Location.City = "Istanbul";
             }
-            if (Increment == 8)
+            if (Increment == 10)
             {
                 viewModel.Type = viewModel.AccommodationTypes[0];
                 accommodation.Type = viewModel.Type;
             }
-            if (Increment == 10)
+            if (Increment == 12)
             {
                 viewModel.MinDaysForReservation = 2;
                 accommodation.MinDaysForReservation = 2;
             }
-            if (Increment == 12)
+            if (Increment == 14)
             {
                 viewModel.MinDaysToCancel = 2;
                 accommodation.MinDaysToCancel = 2;
             }
-            if (Increment == 14)
+            if (Increment == 16)
             {
                 accommodationInputFormView.PressAddImageButton();
             }
-            if (Increment == 15)
+            if (Increment == 17)
             {
                 accommodationInputFormView.LetAddImageButton();
                 viewModel.Images.Add(imageService.GetAll()[0]);
                 viewModel.ImageUrl = imageService.GetAll()[0].Url;
                 accommodation.CoverImage = viewModel.Images[0];
             }
-            if(Increment == 16)
+            if(Increment == 18)
             {
                 accommodationInputFormView.PressConfirmButton();
             }
-            if(Increment == 18)
+            if(Increment == 20)
             {
                 accommodationView = new AccommodationView(viewModel.owner);
                 Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = accommodationView;
@@ -106,18 +120,24 @@ namespace InitialProject.WPF.Demo
                 accommodationViewModel.StackPanelMessage = "New accommodation successfully added!";
                 accommodationViewModel.StackPanelVisibility = "Visible";
             }
-            if(Increment ==20)
+            if(Increment ==22)
             {
                 accommodationViewModel.IsOkPressedInDemo = true;
             }
-            if(Increment == 22)
+            if(Increment == 24)
             {
                 accommodationViewModel.IsOkPressedInDemo = false;
                 accommodationViewModel.StackPanelVisibility = "Hidden";
             }
-            if(Increment == 24)
+            if(Increment == 26)
             {
+                demoIsOffView = new DemoIsOffView();
+                demoIsOffView.Show();
                 accommodationViewModel.Accommodations.Remove(accommodation);
+            }
+            if(Increment == 28)
+            {
+                demoIsOffView.Close();
             }
         }
 

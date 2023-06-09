@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:InitialProject.WPF.Views.OwnerViews"
       mc:Ignorable="d" 
       d:DesignHeight="590" d:DesignWidth="430"
-      Title="Forum">
+      Title="Forum ">
 
     <Grid Margin="0, 20, 0, 20" Background="White">
         <Rectangle Fill="#005A9C" HorizontalAlignment="Center" Height="30" Stroke="LightGray" VerticalAlignment="Top" Width="430"/>

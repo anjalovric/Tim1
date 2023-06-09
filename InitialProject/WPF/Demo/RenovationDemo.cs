@@ -18,6 +18,8 @@ namespace InitialProject.WPF.Demo
         private MyRenovationsView view;
         private MyRenovationsViewModel viewModel;
         private int increment = -1;
+        private DemoIsOffView demoIsOffView;
+        private DemoIsOnView demoIsOnView;
         public RenovationDemo()
         {
             view = (MyRenovationsView?)Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content;
@@ -37,15 +39,21 @@ namespace InitialProject.WPF.Demo
         {
             DispatcherTimer timer = (DispatcherTimer)sender;
             Increment++;
-            if (Increment == 1)
+            if(Increment == 1)
             {
-                viewModel.IsNewRenovationPressedInDemo = true;
+                demoIsOnView = new DemoIsOnView();
+                demoIsOnView.Show();
             }
             if (Increment == 3)
             {
+                demoIsOnView.Close();
+                viewModel.IsNewRenovationPressedInDemo = true;
+            }
+            if (Increment == 5)
+            {
                 viewModel.IsNewRenovationPressedInDemo = false;
                 timer.Stop();
-                ScheduleRenovationDemo inputDemo = new ScheduleRenovationDemo();
+                ScheduleRenovationDemo inputDemo = new ScheduleRenovationDemo(false);
                 inputDemo.PlayDemo();
             }
 

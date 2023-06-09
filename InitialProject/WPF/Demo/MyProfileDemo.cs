@@ -11,6 +11,7 @@ using InitialProject.Model;
 using InitialProject.Service;
 using InitialProject.WPF.ViewModels.OwnerViewModels;
 using InitialProject.WPF.Views;
+using InitialProject.WPF.Views.OwnerViews;
 
 namespace InitialProject.WPF.Demo
 {
@@ -22,11 +23,12 @@ namespace InitialProject.WPF.Demo
         private OwnerReviewView ownerReviewView;
         private OwnerReviewViewModel ownerReviewViewModel;
         private OwnerReview review;
+        private DemoIsOffView demoIsOffView;
+        private DemoIsOnView demoIsOnView;
         public MyProfileDemo()
         {
             profileView = (MyProfileView?)Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content;
             profileViewModel = profileView.MyProfileViewModel;
-            MakeReview();
         }
 
         public int Increment
@@ -61,12 +63,19 @@ namespace InitialProject.WPF.Demo
         {
             DispatcherTimer timer = (DispatcherTimer)sender;
             Increment++;
-            if (Increment == 1)
+            if(Increment == 1)
             {
+                demoIsOnView = new DemoIsOnView();
+                demoIsOnView.Show();
+            }
+            if (Increment == 3)
+            {
+                demoIsOnView.Close();
+                MakeReview();
                 profileViewModel.SelectedOwnerReview = profileViewModel.OwnerReviews[profileViewModel.OwnerReviews.Count - 1];
                 profileViewModel.IsViewPressedInDemo = true;
             }
-            if(Increment == 4)
+            if(Increment == 6)
             {
                 profileViewModel.IsViewPressedInDemo = false;
                 ownerReviewView = new OwnerReviewView(review);
@@ -76,38 +85,48 @@ namespace InitialProject.WPF.Demo
                 ownerReviewViewModel.IsDemoOn = true;
                 ownerReviewViewModel.ImageUrl = "/Resources/Images/a1.jpg";
             }
-            if(Increment == 7)
+            if(Increment == 9)
             {
                 ownerReviewViewModel.IsNextPicturePressedInDemo = true;
                 ownerReviewView.PressButtons();
             }
-            if(Increment == 8)
+            if(Increment == 10)
             {
                 ownerReviewViewModel.IsNextPicturePressedInDemo = false;
                 ownerReviewView.PressButtons();
                 ownerReviewViewModel.ImageUrl = "/Resources/Images/a2.jpg";
             }
-            if(Increment == 10)
+            if(Increment == 12)
             {
                 ownerReviewViewModel.IsCancelPressedInDemo = true;
                 ownerReviewView.PressButtons();
             }
-            if(Increment == 13)
+            if(Increment == 15)
             {
                 Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = profileView;
             }
-            if(Increment == 15)
+            if(Increment == 17)
             {
                 profileViewModel.IsGeneratePressedInDemo = true;
             }
-            if(Increment == 16)
+            if(Increment == 18)
             {
                 profileViewModel.IsGeneratePressedInDemo = false;
                 profileViewModel.GenerateReportCommand.Execute(null);
             }
-            if(Increment==22)
+            if(Increment==24)
             {
                 Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = profileView;
+            }
+            if(Increment == 25)
+            {
+                profileViewModel.OwnerReviews.Remove(review);
+                demoIsOffView = new DemoIsOffView();
+                demoIsOffView.Show();
+            }
+            if(Increment == 26)
+            {
+                demoIsOffView.Close();
             }
         }
 

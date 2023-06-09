@@ -24,6 +24,8 @@ namespace InitialProject.WPF.Demo
         private DecliningRequestViewModel decliningViewModel;
         private DecliningRequestView decliningView;
         private RequestForReshcedulingViewModel request;
+        private DemoIsOffView demoIsOffView;
+        private DemoIsOnView demoIsOnView;
         public DecliningRequestDemo()
         {
             view = (ReservationReschedulingView?)Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content;
@@ -48,26 +50,29 @@ namespace InitialProject.WPF.Demo
 
             if (Increment == 1)
             {
-            }
-            if (Increment == 2)
-            {
-                viewModel.SelectedRequest = viewModel.Requests[viewModel.Requests.Count - 1];
+                demoIsOnView = new DemoIsOnView();
+                demoIsOnView.Show();
             }
             if (Increment == 3)
+            {
+                demoIsOnView.Close();
+                viewModel.SelectedRequest = viewModel.Requests[viewModel.Requests.Count - 1];
+            }
+            if (Increment == 4)
             {
                 decliningView = new DecliningRequestView(request.Request);
                 Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = decliningView;
                 decliningViewModel = decliningView.decliningRequestViewModel;
             }
-            if (Increment == 4)
+            if (Increment == 5)
             {
                 decliningView.InputExplanation();
             }
-            if (Increment == 9)
+            if (Increment == 10)
             {
                 decliningViewModel.IsConfirmPressedInDemo = true;
             }
-            if (Increment == 10)
+            if (Increment == 11)
             {
                 decliningViewModel.IsConfirmPressedInDemo = false;
                 Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = view;
@@ -75,14 +80,20 @@ namespace InitialProject.WPF.Demo
                 viewModel.StackPanelMessage = "Request successfully declined!";
                 viewModel.StackPanelVisibility = "Visible";
             }
-            if (Increment == 11)
+            if (Increment == 12)
             {
                 viewModel.IsOkPressedInDemo = true;
             }
-            if (Increment == 12)
+            if (Increment == 13)
             {
                 viewModel.IsOkPressedInDemo = false;
                 viewModel.StackPanelVisibility = "Hidden";
+                demoIsOffView = new DemoIsOffView();
+                demoIsOffView.Show();
+            }
+            if(Increment == 15)
+            {
+                demoIsOffView.Close();
             }
         }
 

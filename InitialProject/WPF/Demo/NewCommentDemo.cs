@@ -23,6 +23,8 @@ namespace InitialProject.WPF.Demo
         private AddCommentView view;
         private AddCommentViewModel viewModel;
         private ForumComment comment;
+        private DemoIsOffView demoIsOffView;
+        private DemoIsOnView demoIsOnView;
         public NewCommentDemo()
         {
             commentsView = (ForumCommentsView?)Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content;
@@ -55,22 +57,28 @@ namespace InitialProject.WPF.Demo
             Increment++;
             if(Increment == 1)
             {
+                demoIsOnView = new DemoIsOnView();
+                demoIsOnView.Show();
+            }
+            if(Increment == 3)
+            {
+                demoIsOnView.Close();
                 commentsView.ViewModel.IsAddNewCommentPressedInDemo = true;
             }
-            if(Increment == 2)
+            if(Increment == 4)
             {
                 Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = view;
                 commentsView.ViewModel.IsAddNewCommentPressedInDemo = false;
             }
-            if(Increment == 3)
+            if(Increment == 5)
             {
                 view.InputCommentInDemo();
             }
-            if(Increment == 14)
+            if(Increment == 16)
             {
                 viewModel.IsAddNewCommentPressedInDemo = true;
             }
-            if(Increment == 15)
+            if(Increment == 17)
             {
                 Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = commentsView;
                 commentsView.ViewModel.StackPanelMessage = "New comment successfully added!";
@@ -78,17 +86,23 @@ namespace InitialProject.WPF.Demo
                 
                 commentsView.ViewModel.Comments.Add(comment);
             }
-            if(Increment == 17)
+            if(Increment == 19)
             {
                 commentsView.ViewModel.IsOkPressedInDemo = true;
             }
-            if(Increment ==18)
+            if(Increment ==20)
             {
                 commentsView.ViewModel.StackPanelVisibility = "Hidden";
             }
-            if(Increment == 20)
+            if(Increment == 22)
             {
                 commentsView.ViewModel.Comments.Remove(comment);
+                demoIsOffView = new DemoIsOffView();
+                demoIsOffView.Show();
+            }
+            if(Increment == 24)
+            {
+                demoIsOffView.Close();
             }
 
         }

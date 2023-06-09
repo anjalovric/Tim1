@@ -25,7 +25,10 @@ namespace InitialProject.WPF.Demo
         private MyRenovationsViewModel myRenovationsViewModel;
         private AccommodationRenovation renovation;
         private int increment = -1;
-        public ScheduleRenovationDemo()
+        private bool showDemoMessage;
+        private DemoIsOffView demoIsOffView;
+        private DemoIsOnView demoIsOnView;
+        public ScheduleRenovationDemo(bool showDemoMessage)
         {
             OwnerService ownerService = new OwnerService();
             Owner owner = ownerService.GetAll()[0];
@@ -34,6 +37,7 @@ namespace InitialProject.WPF.Demo
             scheduleRenovationView = new ScheduleRenovationView(owner);
             viewModel = scheduleRenovationView.ViewModel;
             Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = scheduleRenovationView;
+            this.showDemoMessage = showDemoMessage;
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -52,37 +56,48 @@ namespace InitialProject.WPF.Demo
             Increment++;
             if(Increment == 1)
             {
-                viewModel.SelectedAccommodation = viewModel.Accommodations[0];
-                renovation.Accommodation = viewModel.SelectedAccommodation;
+                if(showDemoMessage)
+                {
+                    demoIsOnView = new DemoIsOnView();
+                    demoIsOnView.Show();
+                }
             }
             if(Increment == 3)
             {
-                viewModel.StartDate = DateTime.Now.AddDays(1);
+                if (showDemoMessage)
+                    demoIsOnView.Close();
+
+                viewModel.SelectedAccommodation = viewModel.Accommodations[0];
+                renovation.Accommodation = viewModel.SelectedAccommodation;
             }
-            if(Increment == 4)
+            if(Increment == 5)
             {
-                viewModel.EndDate = DateTime.Now.AddDays(6);
+                viewModel.StartDate = DateTime.Now.AddDays(1);
             }
             if(Increment == 6)
             {
-                viewModel.Duration = 2;
+                viewModel.EndDate = DateTime.Now.AddDays(6);
             }
             if(Increment == 8)
+            {
+                viewModel.Duration = 2;
+            }
+            if(Increment == 10)
             {
                 viewModel.SelectedDateRange = viewModel.DatesSuggestions[0];
                 renovation.StartDate = viewModel.SelectedDateRange.Arrival;
                 renovation.EndDate = viewModel.SelectedDateRange.Departure;
             }
-            if(Increment == 9)
+            if(Increment == 11)
             {
                 scheduleRenovationView.InputDescription();
                 renovation.Description = "New renovation";
             }
-            if (Increment == 15)
+            if (Increment == 17)
             {
                 scheduleRenovationView.PressConfirm();
             }
-            if(Increment == 16)
+            if(Increment == 18)
             {
                 myRenovationsView = new MyRenovationsView(viewModel.owner);
                 Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = myRenovationsView;
@@ -92,18 +107,24 @@ namespace InitialProject.WPF.Demo
                 myRenovationsViewModel.StackPanelMessage = "New renovation successfully scheduled!";
                 myRenovationsViewModel.StackPanelVisibility = "Visible";
             }
-            if(Increment == 17)
+            if(Increment == 19)
             {
                 myRenovationsView.PressOkInDemo();
             }
-            if(Increment==18)
+            if(Increment== 20)
             {
                 myRenovationsViewModel.StackPanelVisibility = "Hidden";
             }
-            if(Increment == 20)
+            if(Increment == 22)
             {
                 myRenovationsViewModel.IsDemoOn = false;
                 myRenovationsViewModel.Renovations.Remove(renovation);
+                demoIsOffView = new DemoIsOffView();
+                demoIsOffView.Show();
+            }
+            if(Increment == 24)
+            {
+                demoIsOffView.Close();
             }
 
         }

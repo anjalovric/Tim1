@@ -22,6 +22,9 @@ namespace InitialProject.WPF.Demo
         private GuestReviewFormView formView;
         private AccommodationReservation guestToReview;
         private GuestReview review;
+
+        private DemoIsOffView demoIsOffView;
+        private DemoIsOnView demoIsOnView;
         public GuestReviewDemo()
         {
             OwnerService ownerService = new OwnerService();
@@ -56,36 +59,42 @@ namespace InitialProject.WPF.Demo
             MakeGuestToReview();
             if(Increment == 1)
             {
+                demoIsOnView = new DemoIsOnView();
+                demoIsOnView.Show();
+            }
+            if(Increment == 3)
+            {
+                demoIsOnView.Close();
                 viewModel.ReservationsToReview.Add(guestToReview);
                 viewModel.SelectedReservation = viewModel.ReservationsToReview[viewModel.ReservationsToReview.Count - 1];
             }
-            if(Increment == 2)
+            if(Increment == 4)
             {
                 Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = formView;
             }
-            if (Increment == 3)
+            if (Increment == 5)
             {
                 formView.Cleanliness3.IsChecked = true;
                 form.GuestReview.Cleanliness = 3;
             }
-            if(Increment == 4)
+            if(Increment == 6)
             {
                 formView.RulesFollowing4.IsChecked = true;
                 form.GuestReview.RulesFollowing = 4;
             }
-            if(Increment == 5)
+            if(Increment == 7)
             {
                 formView.InputCommentInDemo();
             }
-            if(Increment == 13)
+            if(Increment == 15)
             {
                 form.IsOkButtonEnabled = true;
             }
-            if(Increment == 14)
+            if(Increment == 16)
             {
                 form.IsConfirmPressedInDemo = true;
             }
-            if(Increment == 15)
+            if(Increment == 17)
             {
                 MakeGuestReview();
                 Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = view;
@@ -93,19 +102,25 @@ namespace InitialProject.WPF.Demo
                 viewModel.StackPanelMessage = "Guest successfully reviewed!";
                 viewModel.StackPanelVisibility = "Visible";
             }
-            if(Increment == 16)
+            if(Increment == 18)
             {
                 viewModel.IsOkPressedInDemo = true;
             }
-            if(Increment == 17)
+            if(Increment == 19)
             {
                 viewModel.IsOkPressedInDemo = false;
                 viewModel.StackPanelVisibility = "Hidden";
             }
-            if(Increment == 18)
+            if(Increment == 20)
             {
                 viewModel.ReservationsToReview.Remove(guestToReview);
                 viewModel.GuestReviews.Remove(review);
+                demoIsOffView = new DemoIsOffView();
+                demoIsOffView.Show();
+            }
+            if(Increment == 22)
+            {
+                demoIsOffView.Close();
             }
         }
 

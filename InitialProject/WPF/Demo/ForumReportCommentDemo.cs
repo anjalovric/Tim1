@@ -25,6 +25,8 @@ namespace InitialProject.WPF.Demo
 
         private ForumCommentsView commentsView;
         private ForumCommentsViewModel commentsViewModel;
+        private DemoIsOffView demoIsOffView;
+        private DemoIsOnView demoIsOnView;
         public ForumReportCommentDemo()
         {
             OwnerService ownerService = new OwnerService();
@@ -53,48 +55,63 @@ namespace InitialProject.WPF.Demo
         {
             DispatcherTimer timer = (DispatcherTimer)sender;
             Increment++;
-            if(Increment == 1)
+            if(Increment ==1)
             {
+                demoIsOnView = new DemoIsOnView();
+                demoIsOnView.Show();
+            }
+            if(Increment == 3)
+            {
+                demoIsOnView.Close();
                 viewModel.SelectedForum = viewModel.Forums[0];
             }
-            if(Increment == 2)
+            if(Increment == 4)
             {
                 commentsView = new ForumCommentsView(viewModel.SelectedForum, viewModel.profileOwner);
                 Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = commentsView;
                 commentsViewModel = commentsView.ViewModel;
             }
-            if(Increment == 3)
+            if(Increment == 5)
             {
                 commentsViewModel.SelectedComment = commentsViewModel.Comments[2];
             }
-            if(Increment == 4)
+            if(Increment == 6)
             {
                 ReportingCommentView reportingCommentView = new ReportingCommentView(commentsViewModel.SelectedComment, commentsViewModel.Owner, commentsViewModel.Forum);
                 reportingCommentView.Show();
                 reportingCommentView.PressYesInDemo();
             }
-            if(Increment == 9)
+            if(Increment == 11)
             {
                 commentsViewModel.SelectedComment.ReportsNumber++;
             }
-            if(Increment == 10)
+            if(Increment == 12)
             {
                 commentsViewModel.StackPanelMessage = "Comment successfully reported!";
                 commentsViewModel.StackPanelVisibility = "Visible";
             }
-            if(Increment == 11)
+            if(Increment == 13)
             {
                 commentsViewModel.IsOkPressedInDemo = true;
             }
-            if(Increment == 12)
+            if(Increment == 15)
             {
                 commentsViewModel.IsOkPressedInDemo = false;
                 commentsViewModel.StackPanelVisibility = "Hidden";
             }
-            if(Increment == 13)
+            if(Increment == 17)
             {
                 Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = view;
                 commentsViewModel.SelectedComment.ReportsNumber--;
+            }
+            if(Increment == 18)
+            {
+                demoIsOffView = new DemoIsOffView();
+                demoIsOffView.Show();
+            }
+            if(Increment == 20)
+            {
+                demoIsOffView.Close();
             }
         }
 
