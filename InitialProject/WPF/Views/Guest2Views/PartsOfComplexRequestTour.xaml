@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.WPF.Views.Guest2Views"
         xmlns:l="clr-namespace:InitialProject.Help"
+        xmlns:properties="clr-namespace:InitialProject.Properties"
         mc:Ignorable="d"
         Loaded="Page_Loaded"
         Title="PartsOfComplexRequestTour" Height="399" Width="556" WindowStartupLocation="CenterScreen" Focusable="True" l:ShowToursHelp.HelpKey="activeTours">
@@ -52,9 +53,9 @@
                     </TextBlock>
                     <Label Content="Name:" FontSize="14" FontWeight="Medium" HorizontalAlignment="Left" Width="67" VerticalAlignment="Center" VerticalContentAlignment="Center" Grid.Row="0" Grid.Column="0"/>
                     <Label Content="Status:" FontSize="14" FontWeight="Medium" HorizontalAlignment="Left" Width="67" VerticalAlignment="Center" VerticalContentAlignment="Center" Grid.Row="1" Grid.Column="0"/>
-                    <TextBlock Text="{Binding Path=Name}" FontSize="14" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Width="Auto" Height="20" HorizontalAlignment="Left"/>
-                    <TextBlock Text="{Binding Path=Status}" FontSize="14" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Width="Auto" Height="20" HorizontalAlignment="Left"/>
-                    <Button x:Name="View" Content="Details" Command="{Binding Path=DataContext.ViewCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}"  FontWeight="Bold" Grid.Row="1" FontSize="14" Grid.Column="2"  VerticalAlignment="Center" Width="45" Height="30" ClickMode="Press" Style="{StaticResource LinkButton}" Margin="0,0,0,0" HorizontalAlignment="Right" ToolTipService.ShowDuration="5000">
+                    <TextBlock Text="{Binding Path=Name}" FontSize="14" Grid.Row="0" FontWeight="Medium" Grid.Column="1" VerticalAlignment="Center" Width="Auto" Height="20" HorizontalAlignment="Left"/>
+                    <TextBlock Text="{Binding Path=Status}" FontSize="14" Grid.Row="1" FontWeight="Medium" Grid.Column="1" VerticalAlignment="Center" Width="Auto" Height="20" HorizontalAlignment="Left"/>
+                    <Button x:Name="View" Content="Details" Command="{Binding Path=DataContext.ViewCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" Grid.Row="1" FontSize="14" Grid.Column="2"  VerticalAlignment="Center" Width="45" Height="30" ClickMode="Press" Style="{StaticResource LinkButton}" Margin="0,0,0,15" HorizontalAlignment="Left" ToolTipService.ShowDuration="5000" ToolTipService.IsEnabled="{Binding Source={x:Static properties:Settings.Default}, Path=IsToolTipEnabled}">
                         <Button.ToolTip>
                             <ToolTip>
                                 <StackPanel>
@@ -69,7 +70,7 @@
         </DataTemplate>
     </Window.Resources>
     <Grid>
-        <ListBox x:Name="ordinaryList" IsSynchronizedWithCurrentItem="True" SelectionMode="Single" HorizontalAlignment="Center" ItemsSource="{Binding Path=OrdinaryTourRequests,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" ItemTemplate="{StaticResource requestsTemplate}" VerticalAlignment="Center" Width="536" Background="WhiteSmoke" BorderThickness="5,5,5,5"  BorderBrush="#8c9d75" Height="363">
+        <ListBox x:Name="ordinaryList" IsSynchronizedWithCurrentItem="True" SelectionMode="Single" HorizontalAlignment="Center" ItemsSource="{Binding Path=OrdinaryTourRequests,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" ItemTemplate="{StaticResource requestsTemplate}" VerticalAlignment="Center" Width="536" Background="WhiteSmoke" BorderThickness="5,5,5,5"  BorderBrush="#B8B8B0" Height="363">
             <ListBox.Resources>
                 <Style TargetType="ListViewItem">
                     <Style.Triggers>

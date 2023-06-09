@@ -30,6 +30,18 @@ namespace InitialProject.Service
         {
             return ordinaryTourRequestsRepository.GetAll();
         }
+        public List<OrdinaryTourRequests> GetOnlyOrdinary()
+        {
+            List<OrdinaryTourRequests> requests = new List<OrdinaryTourRequests>();
+            foreach (OrdinaryTourRequests request in GetAll())
+            {
+                if (request.ComplexId == -1)
+                {
+                    requests.Add(request);
+                }
+            }
+            return requests;
+        }
         public List<OrdinaryTourRequests> GetByGuestId(int id)
         {
             return ordinaryTourRequestsRepository.GetByGuestId(id);

@@ -170,8 +170,14 @@
         <Border BorderBrush="#0C3B2E" Grid.ColumnSpan="3" Background="#0C3B2E" BorderThickness="4,4,4,4" CornerRadius="25 25 25 25" />
         <TabControl x:Name="TabControl" Margin="0,151,0,106" Style="{DynamicResource TabControlStyle}" Grid.Column="1" SelectedIndex="{Binding SelectedTabIndex, Mode=TwoWay}">
 
-            <TabItem x:Name="Ordinary" Header="Ordinary" l:ShowToursHelp.HelpKey="requests">
-
+            <TabItem x:Name="Ordinary" Header="Ordinary" l:ShowToursHelp.HelpKey="requests" ToolTipService.ShowDuration="5000" ToolTipService.IsEnabled="{Binding Source={x:Static properties:Settings.Default}, Path=IsToolTipEnabled}">
+                <TabItem.ToolTip>
+                    <ToolTip>
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold">See ordinary tour requests.</TextBlock>
+                        </StackPanel>
+                    </ToolTip>
+                </TabItem.ToolTip>
                 <Grid Background="White" Height="259" Margin="0,0,5,0">
 
                     <DataGrid ItemsSource="{Binding Path=OrdinaryTourRequests,UpdateSourceTrigger=PropertyChanged}" BorderBrush="Transparent" IsReadOnly="True" AutoGenerateColumns="False" HorizontalScrollBarVisibility="Hidden" GridLinesVisibility="None" ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle2}" CellStyle="{StaticResource DataGridCellStyle2}" Style="{StaticResource DataGridStyle}" RowStyle="{StaticResource DataGridRowStyle2}" Margin="0,-17,0,0">
@@ -182,7 +188,14 @@
                     </DataGrid>
                 </Grid>
             </TabItem>
-            <TabItem x:Name="Complex" Header="Complex" l:ShowToursHelp.HelpKey="requests">
+            <TabItem x:Name="Complex" Header="Complex" l:ShowToursHelp.HelpKey="requests" ToolTipService.ShowDuration="5000" ToolTipService.IsEnabled="{Binding Source={x:Static properties:Settings.Default}, Path=IsToolTipEnabled}">
+                <TabItem.ToolTip>
+                    <ToolTip>
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold">See complex tour requests.</TextBlock>
+                        </StackPanel>
+                    </ToolTip>
+                </TabItem.ToolTip>
                 <Grid Background="White" Height="428" Margin="0,0,5,0">
                     <DataGrid ItemsSource="{Binding Path=ComplexTourRequests,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedItem,Mode=TwoWay}" BorderBrush="Transparent" IsReadOnly="True" AutoGenerateColumns="False" HorizontalScrollBarVisibility="Hidden" GridLinesVisibility="None" ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle2}" CellStyle="{StaticResource DataGridCellStyle2}" Style="{StaticResource DataGridStyle}" RowStyle="{StaticResource DataGridRowStyle2}" Margin="0,0,0,129">
                         <DataGrid.Columns>
@@ -191,7 +204,7 @@
                             <DataGridTemplateColumn x:Name="rate" Header="Parts" Width="0.9*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button FontWeight="Bold" FontSize="18" Width="65" Height="30" Background="#ffba00" BorderBrush="#ffba00" BorderThickness="2" Command="{Binding Path=DataContext.ViewCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" l:ShowToursHelp.HelpKey="requests">
+                                        <Button FontWeight="Bold" FontSize="18" Width="65" Height="30" Background="#ffba00" BorderBrush="#ffba00" BorderThickness="2" Command="{Binding Path=DataContext.ViewCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" l:ShowToursHelp.HelpKey="requests"  ToolTipService.ShowDuration="5000" ToolTipService.IsEnabled="{Binding Source={x:Static properties:Settings.Default}, Path=IsToolTipEnabled}">
                                             <Grid Background="#ffba00" HorizontalAlignment="Left" VerticalAlignment="Top">
                                                 <Grid.RowDefinitions>
                                                     <RowDefinition Height="15*"/>
@@ -205,7 +218,13 @@
 
                                                 <TextBlock Background="#ffba00" Text="Parts" VerticalAlignment="Top" FontSize="12" FontWeight="Bold" HorizontalAlignment="Left" Width="65" Height="29" Margin="5,3,0,0" Grid.RowSpan="2" Grid.Column="1"/>
                                             </Grid>
-                                            
+                                            <Button.ToolTip>
+                                                <ToolTip>
+                                                    <StackPanel>
+                                                        <TextBlock FontWeight="Bold">See parts of complex tour request.</TextBlock>
+                                                    </StackPanel>
+                                                </ToolTip>
+                                            </Button.ToolTip>
                                         </Button>
 
                                     </DataTemplate>
@@ -239,7 +258,7 @@
                 </ToolTip>
             </Button.ToolTip>
         </Button>
-        <Button HorizontalAlignment="Center" Grid.Column="1" VerticalAlignment="Top" Height="34" Width="182" FontWeight="Bold" FontSize="18" Margin="0,499,0,0" Command="{Binding GenerateReportCommand}">
+        <Button HorizontalAlignment="Center" Grid.Column="1" VerticalAlignment="Top" Height="34" Width="182" FontWeight="Bold" FontSize="18" Margin="0,499,0,0" Command="{Binding GenerateReportCommand}" ToolTipService.ShowDuration="5000" ToolTipService.IsEnabled="{Binding Source={x:Static properties:Settings.Default}, Path=IsToolTipEnabled}">
             <Grid Background="#ffba00" Width="177" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="16*"/>
@@ -252,6 +271,13 @@
                 <Image Source="/Resources/Images/report.png" VerticalAlignment="Top" HorizontalAlignment="Left" Width="26" Height="25" RenderTransformOrigin="0.5,0.5" Margin="10,3,0,0" Grid.RowSpan="2"/>
                 <TextBlock Background="#ffba00" Text="Generate report" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" Width="145" Height="29" Margin="37,3,0,0" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
             </Grid>
+            <Button.ToolTip>
+                <ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold">Generate report for statistics.</TextBlock>
+                    </StackPanel>
+                </ToolTip>
+            </Button.ToolTip>
         </Button>
         <Label Content="You can view all your requests for tours as well as their status." FontSize="15" Grid.Column="1" FontWeight="DemiBold" Foreground="#b46617" Margin="0,100,0,0" Height="46" VerticalAlignment="Top" HorizontalAlignment="Left"/>
         <Button HorizontalAlignment="Left" Grid.Column="1" VerticalAlignment="Top" Height="34" Width="172" FontWeight="Bold" FontSize="18" Command="{Binding StatisticsCommand}" Margin="384,499,0,0" ToolTipService.ShowDuration="5000" ToolTipService.IsEnabled="{Binding Source={x:Static properties:Settings.Default}, Path=IsToolTipEnabled}" l:ShowToursHelp.HelpKey="statistics">
