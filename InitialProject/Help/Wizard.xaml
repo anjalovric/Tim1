@@ -23,7 +23,8 @@
             </xctk:WizardPage>
             <xctk:WizardPage x:Name="Page" PageType="Interior" 
                                    NextPage="{Binding ElementName=Page1}"
-                                   PreviousPage="{Binding ElementName=IntroPage}">
+                                   PreviousPage="{Binding ElementName=IntroPage}"
+                                   Title="Showing, searhcing tours and tour reservation">
                 <Grid>
                     <Image Source="/Resources/Images/showTours.png" HorizontalAlignment="Left"/>
                     <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Margin="440,0,0,0" RenderTransformOrigin="0.5,0.5" Width="255" Text="This is the page for displaying all tours. On this page, you can search for tours, book a specific tour, and view details about each available tour. If you want to reserve tour, clicking the button will bring up the following form. By filling in the fields and clicking the Confirm button, you will create a new reservation. Clicking Cancel will cancel the tour reservation."/>
@@ -31,7 +32,7 @@
                 </Grid>
             </xctk:WizardPage>
             <xctk:WizardPage x:Name="Page1" PageType="Interior"
-
+                                   Title="Active tours"         
                                    NextPage="{Binding ElementName=Page2}"
                                    PreviousPage="{Binding ElementName=Page}">
                 <Grid>
@@ -41,7 +42,7 @@
                 </Grid>
             </xctk:WizardPage>
             <xctk:WizardPage x:Name="Page2" PageType="Interior"
-                                   
+                                   Title="Showing all notifications"
                                    NextPage="{Binding ElementName=Page3}"
                                    PreviousPage="{Binding ElementName=Page1}">
                 <Grid>
@@ -51,7 +52,7 @@
                 </Grid>
             </xctk:WizardPage>
             <xctk:WizardPage x:Name="Page3" PageType="Interior"
-                                  
+                                   Title="Finished tours, guide and tour review"
                                    NextPage="{Binding ElementName=Page4}"
                                    PreviousPage="{Binding ElementName=Page2}">
                 <Grid>
@@ -61,7 +62,7 @@
                 </Grid>
             </xctk:WizardPage>
             <xctk:WizardPage x:Name="Page4" PageType="Interior"
-                                  
+                                   Title="Showing vouchers"
                                    NextPage="{Binding ElementName=Page5}"
                                    PreviousPage="{Binding ElementName=Page3}">
                 <Grid>
@@ -71,7 +72,7 @@
                 </Grid>
             </xctk:WizardPage>
             <xctk:WizardPage x:Name="Page5" PageType="Interior"
-                                   
+                                   Title="Showing and creating ordinary tour request"
                                    NextPage="{Binding ElementName=Page6}"
                                    PreviousPage="{Binding ElementName=Page4}">
                 <Grid>
@@ -81,17 +82,17 @@
                 </Grid>
             </xctk:WizardPage>
             <xctk:WizardPage x:Name="Page6" PageType="Interior"
-                                   
+                                   Title="Showing and creating complex tour request"
                                    NextPage="{Binding ElementName=Page7}"
                                    PreviousPage="{Binding ElementName=Page5}">
                 <Grid>
                     <Image Source="/Resources/Images/complex.png" HorizontalAlignment="Left"/>
                     <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" Margin="440,0,0,0" RenderTransformOrigin="0.5,0.5" Width="255" Text="This is the page for displaying all compelx requests for tour.  If you want to create a new request, clicking the button will bring up the following form. By filling in the fields and clicking the Add button, you will create a ordinary request. Clicking Confirm you will create a complex request. Clicking Cancel will cancel the request creation."/>
-                    
+                    <Image Source="/Resources/Images/creatingComplex.png" HorizontalAlignment="Left" Margin="440,140,0,0"/>
                 </Grid>
             </xctk:WizardPage>
             <xctk:WizardPage x:Name="Page7" PageType="Interior"
-                                   
+                                   Title="Showing tour request statistics"
                                    NextPage="{Binding ElementName=LastPage}"
                                    PreviousPage="{Binding ElementName=Page6}">
                 <Grid>

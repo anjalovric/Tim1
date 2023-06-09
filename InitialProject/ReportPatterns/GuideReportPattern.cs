@@ -98,10 +98,8 @@ namespace InitialProject.ReportPatterns
                 Table.Rows.Add(new string[] { guest.ToString() });
             }
         }
-        public override void GenerateTable1Content()
-        {
-
-        }
+        public override void GenerateTable1Content() { }
+        public override void GenerateTable2Content() { }
         public override void GenerateTitle()
         {
             Font = new PdfStandardFont(PdfFontFamily.Helvetica, 20);

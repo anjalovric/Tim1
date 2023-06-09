@@ -61,10 +61,8 @@ namespace InitialProject.ReportPatterns
                 numberOfLines++;
             }
         }
-        public override void GenerateTable1Content()
-        {
-            
-        }
+        public override void GenerateTable1Content() { }
+        public override void GenerateTable2Content() { }
         public override void GenerateTitle()
         {
             Font = new PdfStandardFont(PdfFontFamily.Helvetica, 20);

@@ -66,35 +66,47 @@ namespace InitialProject.ReportPatterns
             RequestStatisticsService requestStatisticsService = new RequestStatisticsService();
             Font = new PdfStandardFont(PdfFontFamily.Helvetica, 9);
             StringBuilder stringBuilder = new StringBuilder("");
-            stringBuilder.Append("Here is the report on the tour request statistics for guest ").Append(guest2.Name).Append(" ").Append(guest2.LastName).Append(" Based on the calculation of tour request statistics, we can conclude that ");
-            Graphics.DrawString(stringBuilder.ToString(), Font, PdfBrushes.Black, new PointF(30, 140));
+            stringBuilder.Append("Guest: ").Append(guest2.Name).Append(" ").Append(guest2.LastName);
+            Graphics.DrawString(stringBuilder.ToString(), Font, PdfBrushes.Black, new PointF(0, 140));
             stringBuilder = new StringBuilder("");
-            stringBuilder.Append(requestStatisticsService.ProcentOfAcceptedRequest(guest2)).Append("%").Append(" of tour requests have been accepted, while ").Append(requestStatisticsService.ProcentOfInvalidRequest(guest2)).Append("% have been invalid.")
-                         .Append("Additionally, based on the number of people in the ");
+            stringBuilder.Append("Precent of accepted tour requests: ").Append(requestStatisticsService.ProcentOfAcceptedRequest(guest2)).Append("\n");
             Graphics.DrawString(stringBuilder.ToString(), Font, PdfBrushes.Black, new PointF(0, 155));
             stringBuilder = new StringBuilder("");
-            stringBuilder.Append("accepted tours, we have determined that the average number of people in those tours is ").Append(requestStatisticsService.AverageNumberOfPeopleInAcceptedRequests(guest2)).Append(".");
+            stringBuilder.Append("Precent of invalid tour requests: ").Append(requestStatisticsService.ProcentOfInvalidRequest(guest2));
+            
             Graphics.DrawString(stringBuilder.ToString(), Font, PdfBrushes.Black, new PointF(0, 170));
             
             stringBuilder = new StringBuilder("");
-            stringBuilder.Append(DateTime.Now.ToString());
-            Graphics.DrawString(stringBuilder.ToString(), Font, PdfBrushes.Black, new PointF(0, 750));
+            stringBuilder.Append("Average number of people in accepted requests: ").Append(requestStatisticsService.AverageNumberOfPeopleInAcceptedRequests(guest2)).Append("\n");
+            Graphics.DrawString(stringBuilder.ToString(), Font, PdfBrushes.Black, new PointF(0, 185));
+
+            stringBuilder = new StringBuilder("");
+            stringBuilder.Append("There is number of requests by languages");
+
+            Graphics.DrawString(stringBuilder.ToString(), Font, PdfBrushes.Black, new PointF(0, 210));
+            stringBuilder = new StringBuilder("");
+            stringBuilder.Append("There is number of requests by locations");
+
+            Graphics.DrawString(stringBuilder.ToString(), Font, PdfBrushes.Black, new PointF(0, 310));
         }
 
-        public override void GenerateTableContent()
+        public override void GenerateTable2Content()
         {
-            Table.Columns.Add("Languages");
-            Table.Columns.Add("Number of requests by languages");
-            Table.Rows.Add(new string[] { "Languages", "Number of requests by languages" });
-            Table.Rows.Add("english", engCounter);
-            Table.Rows.Add("serbian", srbCounter);
-            Table.Rows.Add("russian", rusCounter);
-            Table.Rows.Add("italian", itCounter);
-            Table.Rows.Add("arabic", arabCounter);
-            Table.Rows.Add("spain", spCounter);
+            
+            Table2.Columns.Add("Languages");
+            Table2.Columns.Add("Number of requests by languages");
+            Table2.Rows.Add(new string[] { "Languages", "Number of requests by languages" });
+            Table2.Rows.Add("english", engCounter);
+            Table2.Rows.Add("serbian", srbCounter);
+            Table2.Rows.Add("russian", rusCounter);
+            Table2.Rows.Add("italian", itCounter);
+            Table2.Rows.Add("arabic", arabCounter);
+            Table2.Rows.Add("spain", spCounter);
         }
+        public override void GenerateTableContent() { }
         public override void GenerateTable1Content()
         {
+            
             Table1.Columns.Add("Locations");
             Table1.Columns.Add("Number of requests by locations");
             Table1.Rows.Add(new string[] { "Location", "Number of requests by locations" });

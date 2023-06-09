@@ -51,8 +51,7 @@
             </Setter>
             <Style.Triggers>
                 <Trigger Property="IsSelected" Value="True">
-                    <Setter Property="Background" Value="Transparent"/>
-                    <Setter Property="Foreground" Value="Blue"/>
+                    <Setter Property="Background" Value="#FFF1EBEB"/>
                     <Setter Property="BorderBrush" Value="Transparent"/>
                 </Trigger>
                 <Trigger Property="IsKeyboardFocusWithin" Value="True">
@@ -130,6 +129,11 @@
                                         </StackPanel>
                                     </ToolTip>
                                 </Button.ToolTip>
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Setter Property="Cursor" Value="Hand"/>
+                                    </Style>
+                                </Button.Style>
                             </Button>
 
                         </DataTemplate>
@@ -140,6 +144,6 @@
 
         </DataGrid>
         <Label Content="FINISHED TOURS" Grid.Column="1" Foreground="White" FontWeight="Bold" FontSize="20" HorizontalAlignment="Left" Margin="0,36,0,0" VerticalAlignment="Top" Width="228"/>
-        <TextBlock Foreground="#b46617" FontWeight="DemiBold" Grid.Column="1" FontSize="15" HorizontalAlignment="Left" Margin="0,100,0,0" VerticalAlignment="Top" Width="507" Height="57"><Run Text="Below you can see all the tours that have ended and for which you have"/><LineBreak/><Run Text="signed up. You can rate the same tours."/></TextBlock>
+        <TextBlock Foreground="#FFF58E26" FontWeight="DemiBold" Grid.Column="1" FontSize="15" HorizontalAlignment="Left" Margin="0,100,0,0" VerticalAlignment="Top" Width="507" Height="57"><Run Text="Below you can see all the tours that have ended and for which you have"/><LineBreak/><Run Text="signed up. You can rate the same tours."/></TextBlock>
     </Grid>
 </UserControl>

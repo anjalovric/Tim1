@@ -349,6 +349,7 @@
                                     <Condition Binding="{Binding ElementName=Capacity, Path=(Validation.HasError)}" Value="false"/>
                                 </MultiDataTrigger.Conditions>
                                 <Setter Property="IsEnabled" Value="true" />
+                                <Setter Property="Cursor" Value="Hand"/>
                             </MultiDataTrigger>
                         </Style.Triggers>
                     </Style>
@@ -396,6 +397,11 @@
                         </StackPanel>
                     </ToolTip>
                 </Button.ToolTip>
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Cursor" Value="Hand"/>
+                    </Style>
+                </Button.Style>
             </Button>
             <Border  BorderThickness="0 0 0 1" BorderBrush="LightGray" Height="33" VerticalAlignment="Top" Grid.ColumnSpan="2" Margin="40,26,47,0" Grid.RowSpan="2"/>
         </Grid>
