@@ -286,6 +286,15 @@ namespace InitialProject.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to CHANGE VALIDITY.
+        /// </summary>
+        internal static string CHANGEVALIDITY {
+            get {
+                return ResourceManager.GetString("CHANGEVALIDITY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Checked.
         /// </summary>
         internal static string Checked {

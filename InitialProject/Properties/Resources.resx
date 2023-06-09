@@ -189,6 +189,9 @@
   <data name="Capacity" xml:space="preserve">
     <value>Capacity</value>
   </data>
+  <data name="CHANGEVALIDITY" xml:space="preserve">
+    <value>CHANGE VALIDITY</value>
+  </data>
   <data name="Checked" xml:space="preserve">
     <value>Checked</value>
   </data>

@@ -189,6 +189,9 @@
   <data name="Capacity" xml:space="preserve">
     <value>Kapacitet</value>
   </data>
+  <data name="CHANGEVALIDITY" xml:space="preserve">
+    <value>PROMENA VALIDNOSTI</value>
+  </data>
   <data name="Checked" xml:space="preserve">
     <value>Posećena</value>
   </data>

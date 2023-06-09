@@ -54,7 +54,7 @@
             <Label x:Name="Language" Grid.Row="3" Grid.Column="1" Style="{DynamicResource Labels}" Content="{Binding Language}"/>
             <Label x:Name="Date" Grid.Row="4" Grid.Column="1" Style="{DynamicResource Labels}" Width="200" Content="{Binding StartDate}"/>
 
-            <ListBox x:Name="Points" HorizontalAlignment="Left" Grid.Row="5" Width="200" Style="{DynamicResource ListBoxComment}" ItemsSource="{Binding Points}" Grid.ColumnSpan="2" Margin="219,22,0,0"/>
+            <ListBox x:Name="Points" HorizontalAlignment="Left" Grid.Row="5" Width="194" Style="{DynamicResource ListBoxComment}" ItemsSource="{Binding Points}" Margin="6,22,0,0" Grid.Column="1"/>
         </Grid>
 
         <!--RIGHT GRID-->
@@ -76,15 +76,15 @@
             <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource Label}" Width="150" Content="{ns:Loc Guidesknowledge}"></Label>
             <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource Label}" Width="150" Content="{ns:Loc LanguageKnowledge}"></Label>
             <Label Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource Label}"  Width="150" Content="{ns:Loc TourInterestigness}"></Label>
-            <Label Grid.Row="4" Grid.Column="0" Width="70" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource Label}" Content="{ns:Loc Comment}"></Label>
-            <Label Grid.Row="5" Grid.Column="0" Width="210" Height="200" Style="{DynamicResource LabelComent}" VerticalAlignment="Top"/>
+            <Label Grid.Row="4" Grid.Column="0" Width="150" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource Label}" Content="{ns:Loc Comment}"></Label>
+            <Label Grid.Row="4" Grid.Column="0" Height="211" Style="{DynamicResource LabelComent}" VerticalAlignment="Top" Margin="41,66,10,0" Grid.RowSpan="2"/>
 
 
             <Label x:Name="Guide" Grid.Row="1" Grid.Column="1" Style="{DynamicResource Labels}" Content="{Binding Guide}"/>
             <Label x:Name="LangugaeKnowledge" Grid.Row="2" Grid.Column="1" Style="{DynamicResource Labels}" Content="{Binding LanguageKnowledge}"/>
             <Label x:Name="Interestigness" Grid.Row="3" Grid.Column="1" Style="{DynamicResource Labels}" Content="{Binding Interestigness}"/>
-            <Label x:Name="Images" Grid.Row="4" Content="{ns:Loc Images}" Grid.Column="1" Style="{DynamicResource Label}" VerticalAlignment="Center" Width="70"/>
-            <Label  Grid.Column="0" Grid.Row="5" Width="210" Style="{DynamicResource LabelComentStatistic}" >
+            <Label x:Name="Images" Grid.Row="4" Content="{ns:Loc Imagess}" Grid.Column="1" Style="{DynamicResource Label}" VerticalAlignment="Center" Margin="78,0,78,0"/>
+            <Label  Grid.Column="0" Grid.Row="4" Style="{DynamicResource LabelComentStatistic}" Margin="41,66,10,10" Grid.RowSpan="2" >
                 <TextBlock TextWrapping="Wrap" Text="{Binding  Comment}">
 
                 </TextBlock>
@@ -117,6 +117,7 @@
                         </ControlTemplate>
                     </Button.Template>
 
+
                 </Button>
                 <Button  Height="45" Grid.Column="2" Command="{Binding GoForwardCommand}">
                     <Button.Template>
@@ -132,14 +133,15 @@
                 </Button>
             </Grid>
 
-            <Border Style="{DynamicResource Border}" Grid.RowSpan="6" Grid.ColumnSpan="2" />
+            <Border Style="{DynamicResource Border}" Grid.RowSpan="6" Grid.ColumnSpan="2" >
+            </Border>
 
         </Grid>
         <Border Grid.Row="1"  Style="{DynamicResource Border}" Grid.ColumnSpan="3" Margin="33,0,33,0" Grid.RowSpan="2"/>
 
-        <Button Content="CHANGE VALIDITY" Height="35" Style="{DynamicResource Button}" HorizontalAlignment="Left" Grid.Column="3" Grid.Row="3" VerticalAlignment="Center" Width="195" Command="{Binding ValidCommand}" Grid.ColumnSpan="2" Margin="268,0,0,0"/>
+        <Button Content="{ns:Loc CHANGEVALIDITY}" Height="35" Style="{DynamicResource Button}" HorizontalAlignment="Left" Grid.Column="3" Grid.Row="3" VerticalAlignment="Top" Width="210" Command="{Binding ValidCommand}" Grid.ColumnSpan="2" Margin="295,8,0,0"/>
         <StackPanel x:Name="Toast" Margin="146,38,0,0"  Visibility="{Binding ToastVisibility}" Grid.Column="3" Grid.ColumnSpan="2" Grid.RowSpan="2" Grid.Row="2" Style="{DynamicResource Toast}" >
-            <Label Content="{ns:Loc ValidityChanged}" Width="186" Height="46" Style="{StaticResource LabelToast}" FontWeight="Heavy" HorizontalAlignment="Center"/>
+            <Label HorizontalContentAlignment="Center" Content="{ns:Loc ValidityChanged}" Width="308" Height="46" Style="{StaticResource LabelToast}" FontWeight="Heavy" HorizontalAlignment="Center"/>
             <Button Command="NavigationCommands.BrowseBack" Style="{DynamicResource ButtonToast}">OK</Button>
         </StackPanel>
 
