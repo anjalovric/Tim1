@@ -98,7 +98,7 @@
         <Rectangle HorizontalAlignment="Left" Height="467" Margin="699,122,0,0" Style="{DynamicResource  Rectangle}"/>
 
         <Grid Style="{DynamicResource  BackgroundHeader}" Margin="0,0,0,605">
-            <Label Content="{Binding Title}" Style="{DynamicResource  Header}" HorizontalContentAlignment="Center" VerticalAlignment="Center" Width="606" HorizontalAlignment="Center" />
+            <Label Content="{Binding Title}" Style="{DynamicResource  Header}" HorizontalContentAlignment="Center" VerticalAlignment="Center" Width="716" />
             <Image Source="/Resources/Images/LOGO (2).jpg" Margin="0,0,908,0"/>
 
         </Grid>
@@ -106,7 +106,7 @@
 
         </Label>
         <Label Content="{ns:Loc ifYouWantToFinishTour}" Style="{DynamicResource StatisticLabel}" FontWeight="Heavy" HorizontalAlignment="Left" Margin="780,215,0,0" VerticalAlignment="Top" Width="241" Height="43"/>
-        <Label Content="{ns:Loc BeforeRegularEnd}" Style="{DynamicResource StatisticLabel}" HorizontalAlignment="Left" FontWeight="Heavy" Margin="780,258,0,0" VerticalAlignment="Top" Width="241" Height="46"/>
+        <Label Content="{ns:Loc BeforeRegularEnd}" Style="{DynamicResource StatisticLabel}" HorizontalAlignment="Left" FontWeight="Heavy" Margin="780,253,0,0" VerticalAlignment="Top" Width="241" Height="46"/>
 
     </Grid>
 </Page>

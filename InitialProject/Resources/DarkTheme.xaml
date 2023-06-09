@@ -16,8 +16,16 @@
         <SolidColorBrush x:Key="MenuBlue">#203354</SolidColorBrush>
         <SolidColorBrush x:Key="InerIner">#296d98</SolidColorBrush>
      <SolidColorBrush x:Key="GridBlue">#1F456E</SolidColorBrush>
-
-
+    <Style x:Key="ListBox1" TargetType="ListBox">
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Background" Value="{StaticResource BackgroundBlue}"/>
+        <Setter Property="Foreground" Value="{StaticResource CalendarBlue}"></Setter>
+    </Style>
+    <Style x:Key="Run2" TargetType="Run">
+        <Setter Property="Foreground" Value="{StaticResource CalendarBlue}"/>
+        <Setter Property="FontFamily" Value="Yu Gothic"/>
+        <Setter Property="FontSize" Value="13"/>
+    </Style>
 
     <Style x:Key="ButtonDismissal" TargetType="Button">
         <Setter Property="Background" Value="{StaticResource TableBorder}"/>
@@ -295,8 +303,8 @@
 
         <Style x:Key="Cards" TargetType="Border">
             <Setter Property="BorderThickness" Value="1.5"/>
-            <Setter Property="BorderBrush" Value="AliceBlue" />
-            <Setter Property="Background" Value="{StaticResource RoyalBlue}"/>
+            <Setter Property="BorderBrush" Value="RoyalBlue" />
+            <Setter Property="Background" Value="{StaticResource BackgroundBlue}"/>
         </Style>
 
     <Style x:Key="ListBox" TargetType="ListBox">
