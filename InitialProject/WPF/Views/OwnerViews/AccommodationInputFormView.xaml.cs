@@ -61,7 +61,6 @@ namespace InitialProject.WPF.Views
         {
             OkButton.Background = new SolidColorBrush(Colors.AliceBlue);
         }
-
         public void SelectCountry()
         {
             ComboBoxCountry.SelectedItem = "Turkey";

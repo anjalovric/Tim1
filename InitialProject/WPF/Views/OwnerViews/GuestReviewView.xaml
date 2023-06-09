@@ -37,7 +37,7 @@
 
     <Grid>
         <Label Content="Guest left to review" FontSize="15" HorizontalAlignment="Left" Margin="30,10,0,0" VerticalAlignment="Top" Width="141"/>
-        <ListBox ItemsSource="{Binding ReservationsToReview}" ItemTemplate="{StaticResource guestToReview}" IsSynchronizedWithCurrentItem="True" SelectedItem="{Binding SelectedReservation, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" Margin="30,45,30,315">
+        <ListBox Name="GuestReviewsListBox" ItemsSource="{Binding ReservationsToReview}" ItemTemplate="{StaticResource guestToReview}" IsSynchronizedWithCurrentItem="True" SelectedItem="{Binding SelectedReservation, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" Margin="30,45,30,315">
             <ListBox.Resources>
                 <Style TargetType="ListBoxItem">
                     <Style.Triggers>

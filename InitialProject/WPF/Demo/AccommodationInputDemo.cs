@@ -106,6 +106,7 @@ namespace InitialProject.WPF.Demo
                 viewModel.Images.Add(imageService.GetAll()[0]);
                 viewModel.ImageUrl = imageService.GetAll()[0].Url;
                 accommodation.CoverImage = viewModel.Images[0];
+                viewModel.IsDemoOn = true;
             }
             if(Increment == 18)
             {

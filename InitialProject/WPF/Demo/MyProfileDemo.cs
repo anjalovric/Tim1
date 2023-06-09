@@ -73,6 +73,7 @@ namespace InitialProject.WPF.Demo
                 demoIsOnView.Close();
                 MakeReview();
                 profileViewModel.SelectedOwnerReview = profileViewModel.OwnerReviews[profileViewModel.OwnerReviews.Count - 1];
+                profileView.ReviewsListBox.SelectedItem = profileViewModel.SelectedOwnerReview;
                 profileViewModel.IsViewPressedInDemo = true;
             }
             if(Increment == 6)

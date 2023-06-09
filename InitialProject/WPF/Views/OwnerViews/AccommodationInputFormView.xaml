@@ -190,7 +190,7 @@
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <Button Command="{Binding CancelCommand}" Grid.Column="0" Name="CancelButton" Content="Cancel" Margin="30, 0, 0, 0" HorizontalAlignment="Left" Width="136" Height="41" Style="{StaticResource CancelButton}"/>
-                <Button Command="{Binding OkCommand}" Grid.Column="1" Name="OkButton" Content="OK" Margin="0, 0, 25, 0" HorizontalAlignment="Right" Width="136" Height="41" Style="{StaticResource BasicButton}"/>
+                <Button Command="{Binding OkCommand}" Grid.Column="1" Name="OkButton" Content="Confirm" Margin="0, 0, 25, 0" HorizontalAlignment="Right" Width="136" Height="41" Style="{StaticResource BasicButton}"/>
             </Grid>
             <Label Content="*Required field!" Foreground="red" HorizontalAlignment="Left" Margin="24,625,0,0" VerticalAlignment="Center" Width="188">
                 <Label.Style>

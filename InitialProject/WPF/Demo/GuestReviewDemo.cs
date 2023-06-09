@@ -67,58 +67,59 @@ namespace InitialProject.WPF.Demo
                 demoIsOnView.Close();
                 viewModel.ReservationsToReview.Add(guestToReview);
                 viewModel.SelectedReservation = viewModel.ReservationsToReview[viewModel.ReservationsToReview.Count - 1];
+                view.GuestReviewsListBox.SelectedItem = viewModel.SelectedReservation;
             }
-            if(Increment == 4)
+            if(Increment == 5)
             {
                 Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = formView;
             }
-            if (Increment == 5)
+            if (Increment == 6)
             {
                 formView.Cleanliness3.IsChecked = true;
                 form.GuestReview.Cleanliness = 3;
             }
-            if(Increment == 6)
+            if(Increment == 7)
             {
                 formView.RulesFollowing4.IsChecked = true;
                 form.GuestReview.RulesFollowing = 4;
             }
-            if(Increment == 7)
+            if(Increment == 8)
             {
                 formView.InputCommentInDemo();
             }
-            if(Increment == 15)
+            if(Increment == 16)
             {
                 form.IsOkButtonEnabled = true;
             }
-            if(Increment == 16)
+            if(Increment == 17)
             {
                 form.IsConfirmPressedInDemo = true;
             }
-            if(Increment == 17)
+            if(Increment == 18)
             {
                 MakeGuestReview();
                 Application.Current.Windows.OfType<OwnerMainWindowView>().FirstOrDefault().FrameForPages.Content = view;
                 viewModel.GuestReviews.Add(review);
                 viewModel.StackPanelMessage = "Guest successfully reviewed!";
                 viewModel.StackPanelVisibility = "Visible";
+                viewModel.ReservationsToReview.Remove(viewModel.ReservationsToReview[viewModel.ReservationsToReview.Count-1]);
             }
-            if(Increment == 18)
+            if(Increment == 19)
             {
                 viewModel.IsOkPressedInDemo = true;
             }
-            if(Increment == 19)
+            if(Increment == 20)
             {
                 viewModel.IsOkPressedInDemo = false;
                 viewModel.StackPanelVisibility = "Hidden";
             }
-            if(Increment == 20)
+            if(Increment == 21)
             {
-                viewModel.ReservationsToReview.Remove(guestToReview);
                 viewModel.GuestReviews.Remove(review);
                 demoIsOffView = new DemoIsOffView();
                 demoIsOffView.Show();
             }
-            if(Increment == 22)
+            if(Increment == 23)
             {
                 demoIsOffView.Close();
             }

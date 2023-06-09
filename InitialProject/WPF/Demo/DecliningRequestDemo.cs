@@ -57,6 +57,7 @@ namespace InitialProject.WPF.Demo
             {
                 demoIsOnView.Close();
                 viewModel.SelectedRequest = viewModel.Requests[viewModel.Requests.Count - 1];
+                view.RequestsListBox.SelectedItem = viewModel.SelectedRequest;
             }
             if (Increment == 4)
             {

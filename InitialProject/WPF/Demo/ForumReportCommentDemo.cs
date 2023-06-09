@@ -64,6 +64,7 @@ namespace InitialProject.WPF.Demo
             {
                 demoIsOnView.Close();
                 viewModel.SelectedForum = viewModel.Forums[0];
+                view.AllForumsListBox.SelectedItem = viewModel.SelectedForum;
             }
             if(Increment == 4)
             {
@@ -74,6 +75,7 @@ namespace InitialProject.WPF.Demo
             if(Increment == 5)
             {
                 commentsViewModel.SelectedComment = commentsViewModel.Comments[2];
+                commentsView.CommentsListBox.SelectedItem = commentsViewModel.SelectedComment;
             }
             if(Increment == 6)
             {

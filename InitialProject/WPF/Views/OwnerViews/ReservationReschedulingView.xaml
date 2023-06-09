@@ -126,7 +126,7 @@
     
     
     <Grid Margin="0,0,0,0">
-        <ListBox ItemsSource="{Binding Path= Requests}" ItemTemplate="{StaticResource requests}" IsSynchronizedWithCurrentItem="True" SelectedValue="{Binding Path=SelectedRequest, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" Margin="10,40,10,40" Style="{StaticResource ListBoxStyle}">
+        <ListBox Name="RequestsListBox" ItemsSource="{Binding Path= Requests}" ItemTemplate="{StaticResource requests}" IsSynchronizedWithCurrentItem="True" SelectedValue="{Binding Path=SelectedRequest, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" Margin="10,40,10,40" Style="{StaticResource ListBoxStyle}">
             <ListBox.Resources>
                 <Style TargetType="ListBoxItem">
                     <Style.Triggers>

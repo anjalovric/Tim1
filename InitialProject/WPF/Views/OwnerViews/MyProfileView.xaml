@@ -32,7 +32,7 @@
                         <Button.Style>
                             <Style TargetType="Button" BasedOn="{StaticResource DataTemplateButton}">
                                 <Style.Triggers>
-                                    <DataTrigger Binding="{Binding IsViewPressedInDemo, UpdateSourceTrigger=PropertyChanged}" Value="True">
+                                    <DataTrigger Binding="{Binding DataContext.IsViewPressedInDemo, UpdateSourceTrigger=PropertyChanged}" Value="True">
                                         <Setter Property="Background" Value="AliceBlue"></Setter>
                                     </DataTrigger>
                                 </Style.Triggers>
