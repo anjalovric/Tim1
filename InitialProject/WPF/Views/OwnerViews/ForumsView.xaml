@@ -13,10 +13,10 @@
             <Border Background="LightGray" BorderBrush="DarkGray" BorderThickness="0.5" Margin="0,0,0,0" >
                 <Grid Margin="0, 0, 0, 0">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="3.5*"/>
-                        <ColumnDefinition />
-                        <ColumnDefinition Width="1.5*"/>
+                        <ColumnDefinition Width="30"/>
+                        <ColumnDefinition Width="190"/>
+                        <ColumnDefinition Width="30"/>
+                        <ColumnDefinition Width="80"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="40"/>
@@ -35,9 +35,9 @@
                     </Image>
                     <TextBlock Grid.Row="0" Grid.Column="1" VerticalAlignment="Center">
                         <Run Text="Location: "/>
-                        <Run Text="{Binding Path=Forum.Location.City}" FontSize="15"/>
+                        <Run Text="{Binding Path=Forum.Location.City}" FontSize="15" FontWeight="SemiBold"/>
                         <Run Text=", " FontSize="15"/>
-                        <Run Text="{Binding Path=Forum.Location.Country}" FontSize="15"/>
+                        <Run Text="{Binding Path=Forum.Location.Country}" FontSize="15" FontWeight="SemiBold"/>
                     </TextBlock>
                     <Image Source="/Resources/Images/star.png" Height="20" Width="20" Grid.Column="2" >
                         <Image.Style>

@@ -41,7 +41,7 @@
                         <Run Text=":" />
                     </TextBlock>
                     <TextBlock Text="{Binding Path=Text, UpdateSourceTrigger=PropertyChanged}" ToolTip="{Binding Path=Text, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" VerticalAlignment="Center" Margin="5, 0, 0,0" Grid.Column="1" Grid.ColumnSpan="2"  Grid.Row="1"></TextBlock>
-                    <TextBlock Grid.Column="2" Grid.Row="0" VerticalAlignment="Bottom" Foreground="Red">
+                    <TextBlock Grid.Column="2" Grid.Row="0" VerticalAlignment="Bottom" Foreground="Red" FontWeight="SemiBold">
                         <Run Text="Reports: " />
                         <Run Text="{Binding Path=ReportsNumber, UpdateSourceTrigger=PropertyChanged}" />
                         <TextBlock.Style>
