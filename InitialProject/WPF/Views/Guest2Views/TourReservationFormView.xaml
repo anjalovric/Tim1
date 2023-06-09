@@ -219,7 +219,7 @@
                     <DataGridTemplateColumn x:Name="reservation" Header="Activation"  Width="1.2*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button FontWeight="Bold" Width="85" Height="30" Background="#ffba00" HorizontalAlignment="Left" FontSize="18" Command="{Binding Path=DataContext.ActivateCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" ToolTipService.ShowDuration="5000">
+                                <Button FontWeight="Bold" Width="85" Height="30" Background="#ffba00" HorizontalAlignment="Left" FontSize="18" Command="{Binding Path=DataContext.ActivateCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" ToolTipService.ShowDuration="5000" ToolTipService.IsEnabled="{Binding Source={x:Static properties:Settings.Default}, Path=IsToolTipEnabled}">
                                     <Grid Background="#ffba00" HorizontalAlignment="Left" VerticalAlignment="Top">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="16*"/>
@@ -239,7 +239,7 @@
                                                 </TransformGroup>
                                             </Image.RenderTransform>
                                         </Image>
-                                        <TextBlock Background="#ffba00" Text="Activate" VerticalAlignment="Top" FontSize="12" FontWeight="Bold" HorizontalAlignment="Left" Width="85" Height="30" Margin="3,3,0,0" Grid.RowSpan="2" Grid.Column="1"/>
+                                        <TextBlock Background="#ffba00" Text="Activate" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" HorizontalAlignment="Left" Width="85" Height="30" Margin="3,3,0,0" Grid.RowSpan="2" Grid.Column="1"/>
                                     </Grid>
                                     <Button.ToolTip>
                                         <ToolTip>
@@ -248,6 +248,11 @@
                                             </StackPanel>
                                         </ToolTip>
                                     </Button.ToolTip>
+                                    <Button.Style>
+                                        <Style TargetType="{x:Type Button}">
+                                            <Setter Property="Cursor" Value="Hand"/>
+                                        </Style>
+                                    </Button.Style>
                                 </Button>
 
                             </DataTemplate>
@@ -271,6 +276,7 @@
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">
                         <Setter Property="IsEnabled" Value="false"/>
+                        <Setter Property="Cursor" Value="Hand"/>
                         <Style.Triggers>
                             <MultiDataTrigger>
                                 <MultiDataTrigger.Conditions>
@@ -307,6 +313,11 @@
                         </StackPanel>
                     </ToolTip>
                 </Button.ToolTip>
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Cursor" Value="Hand"/>
+                    </Style>
+                </Button.Style>
             </Button>
             <Border Grid.Row="5" BorderBrush="LightGray" BorderThickness="0 0 0 1" Margin="10,0,12,54" Grid.Column="1" Grid.ColumnSpan="2"/>
             <TextBlock HorizontalAlignment="Left" TextElement.FontSize="15" Margin="15,69,0,0" Grid.Row="5" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Column="1" Grid.ColumnSpan="3" Width="530" FontWeight="Bold" Height="29"><Run Text="Here are all the vouchers that you can use for your reservation."/></TextBlock>

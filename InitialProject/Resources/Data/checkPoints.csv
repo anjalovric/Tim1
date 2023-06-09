@@ -1,23 +1,21 @@
-1|Parthenon|False|1|1
-2|Acropolis|False|1|2
-3|Acropolis|False|2|1
-4|Hotel|False|2|2
-5|Hotel|True|3|1
-6|River|True|3|2
-7|Colloseum|True|4|1
-8|Vatican|True|4|2
-9|Grand canal|True|5|1
-10|Boat|True|5|2
-11|Vatican|False|6|1
-12|Colloseo|False|6|2
-13|Grand canal|False|7|1
-14|Santa Maria del la Salute|False|7|2
-15|Senbrun|True|8|1
-16|Belvedere|True|8|2
-17|St Sava's church|False|9|1
-18|St Marc's church|False|9|2
-19|Kalemegdan|False|9|3
-20|Acropolis|False|10|1
-21|Parthenon|False|10|2
-22|Bascarsija|False|11|1
-23|Vrelo Bosne|False|11|2
+1|Stari most|False|1|1
+2|Spanski trg|False|1|2
+3|Centar|False|2|1
+4|Petrovaradin|False|2|2
+5|Senbrun|False|3|1
+6|Prater|False|3|2
+7|Aja Sofija|True|4|1
+8|Kapali|True|4|2
+9|Dolmabahce|False|4|3
+10|a1|False|5|1
+11|a2|False|5|2
+12|v1|False|6|1
+13|v2|False|6|2
+14|a1|True|7|1
+15|s2|False|7|2
+16|s2|True|8|1
+17|s2|False|8|2
+18|z1|True|9|1
+19|z3|False|9|2
+20|q1|True|10|1
+21|q2|False|10|2

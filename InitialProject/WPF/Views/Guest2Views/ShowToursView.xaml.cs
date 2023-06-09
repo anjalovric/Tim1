@@ -40,7 +40,7 @@ namespace InitialProject.WPF.Views.Guest2Views
         }
         
 
-        private void Page_Loaded(object sender, RoutedEventArgs e)
+        public void Page_Loaded(object sender, RoutedEventArgs e)
         {
             FocusManager.SetFocusedElement(this, this);
         }

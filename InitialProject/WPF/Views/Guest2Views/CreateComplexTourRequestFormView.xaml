@@ -10,7 +10,7 @@
         xmlns:properties="clr-namespace:InitialProject.Properties"
         Loaded="Page_Loaded"
         mc:Ignorable="d"
-        Title="CreateComplexTourRequestView" Height="700" Width="1000" d:Height="700" d:Width="1000" WindowStartupLocation="CenterScreen" Focusable="True" l:ShowToursHelp.HelpKey="creatingComplex">
+        Title="CreateComplexTourRequestView" Height="700" Width="1000" d:Height="700" d:Width="1000" WindowStartupLocation="CenterScreen" Focusable="True" l:ShowToursHelp.HelpKey="creatingComplex" Background="Transparent" AllowsTransparency="True" WindowStyle="None">
 
     <Window.InputBindings>
         <KeyBinding Key="F1" Command="{Binding HelpCommandInViewModel}" />
@@ -72,7 +72,7 @@
         </Style>
     </Window.Resources>
 
-    <Border BorderThickness="4" Padding="6" CornerRadius="25" BorderBrush="White" Background="White">
+    <Border BorderThickness="4" Padding="6" CornerRadius="25" BorderBrush="White" Background="White" >
 
         <Grid Margin="22,0,0,0">
             <Grid.ColumnDefinitions>
@@ -96,15 +96,15 @@
                 <RowDefinition Height="5*"/>
             </Grid.RowDefinitions>
 
-            <Label Content="CREATING REQUEST OF THE TOUR" FontSize="30" FontWeight="Bold" Foreground="Black" Margin="40,0,205,36" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4" Grid.RowSpan="2"/>
-            <Label Grid.Row="2" Grid.Column="0" Content="Name" Margin="40,10,239,36" Style="{StaticResource LabelStyle}" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
-            <Label Content="Country" Grid.Row="3" Grid.Column="0" Margin="40,10,88,0" Style="{StaticResource LabelStyle}" RenderTransformOrigin="0.5,0.5"/>
-            <Label Content="Language" Grid.Row="5" Grid.Column="0" Margin="40,10,0,0" Style="{StaticResource LabelStyle}"/>
-            <Label Content="Description" Grid.Row="2" Grid.Column="2" Margin="40,10,0,41" Style="{StaticResource LabelStyle}" Grid.RowSpan="2"/>
-            <Label Content="Capacity" Grid.Row="3" Grid.Column="2" Margin="40,10,0,0" Style="{StaticResource LabelStyle}"/>
-            <Label Content="Start Date" Grid.Row="4" Grid.Column="2" Margin="40,10,0,41" Style="{StaticResource LabelStyle}" Grid.RowSpan="2"/>
-            <Label Content="End Date" Grid.Row="5" Grid.Column="2" Margin="40,10,0,0" Style="{StaticResource LabelStyle}"/>
-            <TextBox x:Name="NameT" Foreground="#555557" BorderBrush="#FFAEAEC1" Grid.Column="1" Grid.Row="2" Margin="20,5,10,13" BorderThickness="0,0,0,3">
+            <Label Content="CREATING COMPLEX REQUEST OF THE TOUR" FontSize="30" FontWeight="Bold" Foreground="Black" Margin="40,0,205,37" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4" Grid.RowSpan="2"/>
+            <Label Grid.Row="3" Grid.Column="0" Content="Name" Margin="40,10,239,36" Style="{StaticResource LabelStyle}" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+            <Label Content="Country" Grid.Row="4" Grid.Column="0" Margin="40,10,88,0" Style="{StaticResource LabelStyle}" RenderTransformOrigin="0.5,0.5"/>
+            <Label Content="Language" Grid.Row="6" Grid.Column="0" Margin="40,10,0,0" Style="{StaticResource LabelStyle}"/>
+            <Label Content="Description" Grid.Row="3" Grid.Column="2" Margin="40,10,0,41" Style="{StaticResource LabelStyle}" Grid.RowSpan="2"/>
+            <Label Content="Capacity" Grid.Row="4" Grid.Column="2" Margin="40,10,0,0" Style="{StaticResource LabelStyle}"/>
+            <Label Content="Start Date" Grid.Row="5" Grid.Column="2" Margin="40,10,0,41" Style="{StaticResource LabelStyle}" Grid.RowSpan="2"/>
+            <Label Content="End Date" Grid.Row="6" Grid.Column="2" Margin="40,10,0,39" Style="{StaticResource LabelStyle}" Grid.RowSpan="2"/>
+            <TextBox x:Name="NameT" Foreground="#555557" BorderBrush="#FFAEAEC1" Grid.Column="1" Grid.Row="3" Margin="20,10,10,9" BorderThickness="0,0,0,3">
 
                 <TextBox.Text>
                     <Binding Path="Name" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
@@ -131,7 +131,7 @@
                     </ControlTemplate>
                 </Validation.ErrorTemplate>
             </TextBox>
-            <ComboBox x:Name="CityT" BorderThickness="0,0,0,3" IsEditable="True" ItemsSource="{Binding CitiesByCountry}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Center" Width="208" Height="25" Grid.Column="1" Grid.Row="4" IsEnabled="{Binding IsComboBoxCityEnabled}" Foreground="#555557" BorderBrush="#FFAEAEC1" Background="#F8F9FE">
+            <ComboBox x:Name="CityT" BorderThickness="0,0,0,3" IsEditable="True" ItemsSource="{Binding CitiesByCountry}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Center" Width="208" Height="25" Grid.Column="1" Grid.Row="5" IsEnabled="{Binding IsComboBoxCityEnabled}" Foreground="#555557" BorderBrush="#FFAEAEC1" Background="#F8F9FE">
 
                 <ComboBox.SelectedItem>
                     <Binding Path="City" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
@@ -158,7 +158,7 @@
                     </ControlTemplate>
                 </Validation.ErrorTemplate>
             </ComboBox>
-            <ComboBox x:Name="LanguageT" Grid.Column="1" ItemsSource="{Binding Languages}" IsEditable="True" Width="208" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" Grid.Row="5" Margin="20,0,0,0" Foreground="#555557" Height="27" BorderBrush="#FFAEAEC1" Background="#F8F9FE" BorderThickness="0,0,0,3" HorizontalAlignment="Left" VerticalAlignment="Center">
+            <ComboBox x:Name="LanguageT" Grid.Column="1" ItemsSource="{Binding Languages}" IsEditable="True" Width="208" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" Grid.Row="6" Margin="20,10,0,0" Foreground="#555557" Height="25" BorderBrush="#FFAEAEC1" Background="#F8F9FE" BorderThickness="0,0,0,3" HorizontalAlignment="Left" VerticalAlignment="Center">
 
                 <ComboBox.SelectedItem>
                     <Binding Path="SelectedLanguage" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
@@ -185,7 +185,7 @@
                     </ControlTemplate>
                 </Validation.ErrorTemplate>
             </ComboBox>
-            <TextBox x:Name="DescriptionT"  Foreground="#555557" BorderBrush="#FFAEAEC1" Grid.Column="3" Grid.Row="1" HorizontalAlignment="Center" Width="202" Height="27" VerticalAlignment="Top" BorderThickness="0,0,0,3" Margin="0,40,0,0" Grid.RowSpan="2">
+            <TextBox x:Name="DescriptionT"  Foreground="#555557" BorderBrush="#FFAEAEC1" Grid.Column="3" Grid.Row="3" HorizontalAlignment="Center" Width="208" Height="25" VerticalAlignment="Top" BorderThickness="0,0,0,3" Margin="0,10,0,0" Grid.RowSpan="2">
 
                 <TextBox.Text>
                     <Binding Path="Description" UpdateSourceTrigger="PropertyChanged">
@@ -215,7 +215,7 @@
 
 
 
-            <TextBox x:Name="Capacity" Grid.Column="3" Grid.Row="3"  Margin="0,3,0,0" HorizontalAlignment="Center" Width="201" Height="26" VerticalAlignment="Top" TextAlignment="Center" Foreground="#555557" BorderBrush="#FFAEAEC1" BorderThickness="0,0,0,3">
+            <TextBox x:Name="Capacity" Grid.Column="3" Grid.Row="4"  Margin="0,10,0,0" HorizontalAlignment="Center" Width="160" Height="25" VerticalAlignment="Top" TextAlignment="Center" Foreground="#555557" BorderBrush="#FFAEAEC1" BorderThickness="0,0,0,3">
 
                 <TextBox.Text>
                     <Binding Path="MaxGuests" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
@@ -242,8 +242,8 @@
                     </ControlTemplate>
                 </Validation.ErrorTemplate>
             </TextBox>
-            <Button Grid.Row="7" Margin="2,12,424,6" Content="-" TextElement.FontSize="30" Command="{Binding DecrementCommand}" BorderBrush="Transparent" Background="Transparent" BorderThickness="0,0,0,0" Grid.Column="1"/>
-            <DatePicker FontSize="9" x:Name="Start" Grid.Column="3" DisplayDateStart="{Binding Path=NowDate, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="4" Foreground="#555557" BorderBrush="#FFAEAEC1" BorderThickness="0,0,0,3" Height="25" Width="201">
+            <Button Grid.Row="4" Margin="6,0,205,4" Content="-" TextElement.FontSize="30" Command="{Binding DecrementCommand}" BorderBrush="Transparent" Background="Transparent" BorderThickness="0,0,0,0" Grid.Column="3"/>
+            <DatePicker FontSize="9" x:Name="Start" Grid.Column="3" DisplayDateStart="{Binding Path=NowDate, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="5" Foreground="#555557" BorderBrush="#FFAEAEC1" BorderThickness="0,0,0,3" Height="35" Width="208">
 
                 <DatePicker.SelectedDate>
                     <Binding Path="StartDate" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True" NotifyOnValidationError="True">
@@ -271,7 +271,7 @@
                 </Validation.ErrorTemplate>
             </DatePicker>
 
-            <DatePicker FontSize="9" x:Name="End" Grid.Column="3" DisplayDateStart="{Binding ElementName=Start, Path=SelectedDate, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" Width="201" Height="27" VerticalAlignment="Center" Grid.Row="5" Foreground="#555557" BorderBrush="#FFAEAEC1" BorderThickness="0,0,0,3">
+            <DatePicker FontSize="9" x:Name="End" Grid.Column="3" DisplayDateStart="{Binding ElementName=Start, Path=SelectedDate, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" Width="208" Height="30" VerticalAlignment="Top" Grid.Row="6" Foreground="#555557" BorderBrush="#FFAEAEC1" BorderThickness="0,0,0,3" Margin="0,9,0,0">
 
                 <DatePicker.SelectedDate>
                     <Binding Path="EndDate" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True" NotifyOnValidationError="True">
@@ -298,9 +298,9 @@
                     </ControlTemplate>
                 </Validation.ErrorTemplate>
             </DatePicker>
-            <Button x:Name="increment" Grid.Column="1" Grid.Row="7" Margin="396,6,47,6" Content="+" TextElement.FontSize="30" Command="{Binding IncrementCommand}" BorderBrush="Transparent" Background="Transparent" BorderThickness="0,0,0,0"/>
-            <Label Content="City" Grid.Row="4" Grid.Column="0" Margin="40,12,239,36" RenderTransformOrigin="0.5,0.5" Style="{StaticResource LabelStyle}" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
-            <ComboBox x:Name="CountryT" IsEditable="True" ItemsSource="{Binding Countries}" Foreground="#555557" BorderBrush="#FFAEAEC1" Background="#F8F9FE" BorderThickness="0,0,0,3" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" HorizontalAlignment="Left" Margin="20,0,0,10" VerticalAlignment="Bottom" Width="208" Height="31" Grid.Column="1" Grid.Row="3">
+            <Button x:Name="increment" Grid.Column="3" Grid.Row="3" Margin="200,40,10,10" Content="+" TextElement.FontSize="30" Command="{Binding IncrementCommand}" BorderBrush="Transparent" Background="Transparent" BorderThickness="0,0,0,0" Grid.RowSpan="2"/>
+            <Label Content="City" Grid.Row="5" Grid.Column="0" Margin="40,10,239,36" RenderTransformOrigin="0.5,0.5" Style="{StaticResource LabelStyle}" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+            <ComboBox x:Name="CountryT" IsEditable="True" ItemsSource="{Binding Countries}" Foreground="#555557" BorderBrush="#FFAEAEC1" Background="#F8F9FE" BorderThickness="0,0,0,3" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" HorizontalAlignment="Left" Margin="20,10,0,10" VerticalAlignment="Bottom" Width="208" Height="25" Grid.Column="1" Grid.Row="4">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">
                         <i:InvokeCommandAction Command="{Binding CountryInputSelectionChangedCommand}"/>
@@ -336,8 +336,8 @@
                     </ControlTemplate>
                 </Validation.ErrorTemplate>
             </ComboBox>
-            <Label Content="Complex tour request name" FontSize="18" Margin="40,10,181,37" Grid.Column="0" Grid.Row="1" Foreground="Black" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
-            <TextBox x:Name="NameC" Foreground="#555557" BorderBrush="#FFAEAEC1" Grid.Column="1" Grid.Row="1" Margin="120,18,0,0" BorderThickness="0,0,0,3" Grid.ColumnSpan="2">
+            <Label Content="Tour request name" FontSize="18" FontWeight="DemiBold" Margin="40,10,181,37" Grid.Column="0" Grid.Row="1" Foreground="Black" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+            <TextBox x:Name="NameC" Foreground="#555557" BorderBrush="#FFAEAEC1" Grid.Column="1" Grid.Row="1" Margin="20,10,11,7" BorderThickness="0,0,0,3">
 
                 <TextBox.Text>
                     <Binding Path="ComplexName" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
@@ -364,7 +364,7 @@
                     </ControlTemplate>
                 </Validation.ErrorTemplate>
             </TextBox>
-            <Button HorizontalAlignment="Left" Grid.Row="6" VerticalAlignment="Top"  Height="32" Width="118" FontWeight="Bold" FontSize="18" Command="{Binding ConfirmCommand}" Margin="104,10,0,0" Grid.Column="3" BorderBrush="Transparent" ToolTipService.ShowDuration="5000" ToolTipService.IsEnabled="{Binding Source={x:Static properties:Settings.Default}, Path=IsToolTipEnabled}" Grid.RowSpan="2">
+            <Button HorizontalAlignment="Left" Grid.Row="7" VerticalAlignment="Top"  Height="28" Width="118" FontWeight="Bold" FontSize="18" Command="{Binding ConfirmCommand}" Margin="102,3,0,0" Grid.Column="3" BorderBrush="Transparent" ToolTipService.ShowDuration="5000" ToolTipService.IsEnabled="{Binding Source={x:Static properties:Settings.Default}, Path=IsToolTipEnabled}">
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">
                         <Setter Property="IsEnabled" Value="False"/>
@@ -381,21 +381,23 @@
                                     <Condition Binding="{Binding ElementName=Capacity, Path=(Validation.HasError)}" Value="false"/>
                                 </MultiDataTrigger.Conditions>
                                 <Setter Property="IsEnabled" Value="true" />
+                                <Setter Property="Cursor" Value="Hand" />
                             </MultiDataTrigger>
                         </Style.Triggers>
                     </Style>
                 </Button.Style>
-                <Grid Background="#ffba00" Width="118" HorizontalAlignment="Left" VerticalAlignment="Center" Height="29">
+                <Grid Background="#ffba00" Width="118" HorizontalAlignment="Left" VerticalAlignment="Center" Height="25">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="16*"/>
                         <RowDefinition Height="19*"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="3.167"/>
+                        <ColumnDefinition Width="32.833"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <Image Source="/Resources/Images/doneNew.png" VerticalAlignment="Top" HorizontalAlignment="Left" Width="26" Height="25" RenderTransformOrigin="0.5,0.5" Margin="10,3,0,0" Grid.RowSpan="2"/>
-                    <TextBlock Background="#ffba00" Foreground="Black" Text="Add" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" Width="77" Height="29" Margin="4,3,0,0" Grid.RowSpan="2" Grid.Column="1"/>
+                    <Image Source="/Resources/Images/doneNew.png" VerticalAlignment="Top" HorizontalAlignment="Left" Width="26" Height="25" RenderTransformOrigin="0.5,0.5" Margin="8,0,0,0" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="2"/>
+                    <TextBlock Background="#ffba00" Foreground="Black" Text="Add" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" Width="77" Height="29" Margin="4,0,0,0" Grid.RowSpan="2" Grid.Column="2"/>
                 </Grid>
                 <Button.ToolTip>
                     <ToolTip>
@@ -408,13 +410,13 @@
 
 
             <Border  BorderThickness="0 0 0 1" BorderBrush="LightGray" Height="33" VerticalAlignment="Top" Grid.ColumnSpan="4" Margin="40,19,14,0" Grid.RowSpan="2"/>
-            <DataGrid Grid.ColumnSpan="4" AutoGenerateColumns="False" IsReadOnly="True"  Grid.Row="7" Margin="10,33,18,97" ItemsSource="{Binding Path=OrdinaryTourRequests,UpdateSourceTrigger=PropertyChanged}" Grid.RowSpan="5">
+            <DataGrid Grid.ColumnSpan="4" AutoGenerateColumns="False" IsReadOnly="True"  Grid.Row="7" Margin="40,41,17,75" ItemsSource="{Binding Path=OrdinaryTourRequests,UpdateSourceTrigger=PropertyChanged}" Grid.RowSpan="5">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Name" Width="1*" Binding="{Binding Name}"/>
                     <DataGridTextColumn Header="Status" Width="1*" Binding="{Binding Status}"/>
                 </DataGrid.Columns>
             </DataGrid>
-            <Button Grid.Column="3" Grid.Row="11" Height="34" Width="118" Margin="-50,110,110,0" ToolTipService.ShowDuration="5000" Command="{Binding DodajCommand}" ToolTipService.IsEnabled="{Binding Source={x:Static properties:Settings.Default}, Path=IsToolTipEnabled}">
+            <Button Grid.Column="3" Grid.Row="11" Height="34" Width="118" Margin="-50,108,110,0" ToolTipService.ShowDuration="5000" Command="{Binding DodajCommand}" ToolTipService.IsEnabled="{Binding Source={x:Static properties:Settings.Default}, Path=IsToolTipEnabled}">
                 <Grid Background="#ffba00" Width="114" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="16*"/>
@@ -427,7 +429,11 @@
                     <Image Source="/Resources/Images/doneNew.png" VerticalAlignment="Top" HorizontalAlignment="Left" Width="26" Height="25" RenderTransformOrigin="0.5,0.5" Margin="10,3,0,0" Grid.RowSpan="2"/>
                     <TextBlock Background="#ffba00" Foreground="Black" Text="Confirm" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" Width="77" Height="29" Margin="4,3,0,0" Grid.RowSpan="2" Grid.Column="1"/>
                 </Grid>
-
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Cursor" Value="Hand"/>
+                    </Style>
+                </Button.Style>
                 <Button.ToolTip>
                     <ToolTip>
                         <StackPanel>
@@ -437,7 +443,12 @@
                     </ToolTip>
                 </Button.ToolTip>
             </Button>
-            <Button HorizontalAlignment="Left" Grid.Row="11" VerticalAlignment="Top"  Height="34" Width="118" FontWeight="Bold" FontSize="18" Command="{Binding CancelCommand}" Margin="102,137,0,0" Grid.Column="3" BorderBrush="#FF9E98FF" ToolTipService.ShowDuration="5000" ToolTipService.IsEnabled="{Binding Source={x:Static properties:Settings.Default}, Path=IsToolTipEnabled}">
+            <Button HorizontalAlignment="Left" Grid.Row="11" VerticalAlignment="Top"  Height="34" Width="118" FontWeight="Bold" FontSize="18" Command="{Binding CancelCommand}" Margin="102,143,0,0" Grid.Column="3" BorderBrush="#FF9E98FF" ToolTipService.ShowDuration="5000" ToolTipService.IsEnabled="{Binding Source={x:Static properties:Settings.Default}, Path=IsToolTipEnabled}">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Cursor" Value="Hand"/>
+                    </Style>
+                </Button.Style>
                 <Grid Background="White" Width="118" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="16*"/>

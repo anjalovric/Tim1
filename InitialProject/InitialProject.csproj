@@ -86,6 +86,8 @@
 
     <None Remove="Resources\Images\cottage3.jpeg" />
 
+    <None Remove="Resources\Images\creatingComplex.png" />
+
     <None Remove="Resources\Images\creatingRequest.png" />
 
     <None Remove="Resources\Images\dates.png" />
@@ -209,6 +211,8 @@
 
     <None Remove="Resources\Images\padlock.png" />
 
+    <None Remove="Resources\Images\part.png" />
+
     <None Remove="Resources\Images\pdf.png" />
 
     <None Remove="Resources\Images\picture.png" />
@@ -315,6 +319,10 @@
     <None Remove="Resources\Images\user.jpg" />
     <None Remove="Resources\Images\User_icon_2.svg.png" />
     <None Remove="Resources\Images\vacation1.png" />
+    <None Remove="Resources\Images\validComplexRequestForm.png" />
+    <None Remove="Resources\Images\validFormForOrdinaryRequest.png" />
+    <None Remove="Resources\Images\validRating.png" />
+    <None Remove="Resources\Images\validReservation.png" />
     <None Remove="Resources\Images\venecija.jpg" />
     <None Remove="Resources\Images\view.png" />
     <None Remove="Resources\Images\voucher.png" />
@@ -379,6 +387,9 @@
     <Content Include="Resources\Images\congratulations2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Images\creatingComplex.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Images\creatingRequest.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -426,6 +437,9 @@
     <Content Include="Resources\Images\ordinary.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Images\part.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Images\pdf.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -467,6 +481,18 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\vacation1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\validComplexRequestForm.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\validFormForOrdinaryRequest.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\validRating.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\validReservation.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\vouchers.png">
