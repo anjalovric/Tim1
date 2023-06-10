@@ -269,13 +269,14 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             DateTime createDate = DateTime.Now;
             if (End < StartDate)
             {
-                MessageBox.Show("Niste dobro popunili polja!");
+                MessageBox.Show("Invalid!");
                 return;
             }
             OrdinaryTourRequests request = new OrdinaryTourRequests(Name, Guest2.Id, Convert.ToInt32(MaxGuests), newLocation, Description, SelectedLanguage, Convert.ToDateTime(Start), Convert.ToDateTime(End), Status.ONWAITING, Start.ToString().Split(" ")[0], End.ToString().Split(" ")[0], -1, createDate, false, -1,TourRequests.Count+1);
             OrdinaryTourRequests savedRequest = requestService.Save(request);
             OrdinaryTourRequests.Add(request);
             ResetAllFields();
+            MessageBox.Show("The request has been added to the list of requests.");
         }
         private void ResetAllFields()
         {
@@ -292,8 +293,10 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         {
             ComplexTourRequests request = new ComplexTourRequests(ComplexName, Guest2, Type.ONWAITING);
             ComplexTourRequests savedRequest = ComplexTourRequestsService.Save(request);
+            MessageBox.Show("Request is created.");
             Application.Current.Windows.OfType<CreateComplexTourRequestView>().FirstOrDefault().Close();
             SetTourRequests();
+            
         }
         private void SetTourRequests()
         {

@@ -252,6 +252,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             OrdinaryRequestNotification requestNotification = new OrdinaryRequestNotification(savedRequest.Id);
             RequestNotificationService requestNotificationService = new RequestNotificationService();
             requestNotificationService.Save(requestNotification);
+            MessageBox.Show("Request is created.");
             Application.Current.Windows.OfType<CreateOrdinaryTourRequestView>().FirstOrDefault().Close();
             SetTourRequests();
         }
