@@ -468,6 +468,11 @@
                                     <AdornedElementPlaceholder  x:Name="textBox"/>
                                     <TextBlock Margin="-65,-7,0,0" Text="{ns:Loc AtLeast1ImageIsRequired}" Foreground="Red"/>
                                 </Grid>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter  Property="Cursor" Value="Hand" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
                             </ControlTemplate>
                         </Validation.ErrorTemplate>
                     </Image>
@@ -476,10 +481,15 @@
                             <ControlTemplate TargetType="Button">
                                 <Grid>
                                     <StackPanel Orientation="Horizontal">
-                                        <Rectangle Width="30" Height="14" Stroke="black" Fill="black"/>
-                                        <Polygon Points= "0,15 15,22 0,30" Stroke="black" Fill="black" Height="45" Width="35" />
+                                        <Rectangle Width="30" Height="14" Style="{DynamicResource Rectangle1}"/>
+                                        <Polygon Points= "0,15 15,22 0,30" Style="{DynamicResource Polygon1}" Height="45" Width="35" />
                                     </StackPanel>
                                 </Grid>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter  Property="Cursor" Value="Hand" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
@@ -496,10 +506,15 @@
                             <ControlTemplate TargetType="Button">
                                 <Grid>
                                     <StackPanel Orientation="Horizontal">
-                                        <Rectangle Width="30" Height="14" Stroke="black" Fill="black"/>
-                                        <Polygon Points= "0,15 15,22 0,30" Stroke="black" Fill="black" Height="45" Width="30" />
+                                        <Rectangle Width="30" Height="14" Style="{DynamicResource Rectangle1}"/>
+                                        <Polygon Points= "0,15 15,22 0,30" Style="{DynamicResource Polygon1}" Height="45" Width="30" />
                                     </StackPanel>
                                 </Grid>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter  Property="Cursor" Value="Hand" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
                             </ControlTemplate>
                         </Button.Template>
                     </Button>

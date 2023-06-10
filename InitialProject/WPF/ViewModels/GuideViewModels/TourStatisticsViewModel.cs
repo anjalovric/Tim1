@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Text.RegularExpressions;
 using System.Windows;
 
 namespace InitialProject.WPF.ViewModels
@@ -109,7 +110,10 @@ namespace InitialProject.WPF.ViewModels
         }
         public void MostVisitedForYearExecuted(object sender)
         {
-            if (Year != null && Year != "")
+            var regex = @"^[0-9]+$";
+            string year=Year.ToString();
+            var match = Regex.Match(year, regex, RegexOptions.IgnoreCase);
+            if (Year != null && Year != "" && match.Success)
             {
                 if (instanceService.FindMostVisitedForChosenYear(Convert.ToInt32(Year), guideService.GetByUsername(loggedUser.Username)) != null)
                 {

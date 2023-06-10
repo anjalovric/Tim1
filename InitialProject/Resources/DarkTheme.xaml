@@ -16,6 +16,18 @@
         <SolidColorBrush x:Key="MenuBlue">#203354</SolidColorBrush>
         <SolidColorBrush x:Key="InerIner">#296d98</SolidColorBrush>
      <SolidColorBrush x:Key="GridBlue">#1F456E</SolidColorBrush>
+
+
+    <Style x:Key="Polygon1" TargetType="Polygon">
+        <Setter Property="Stroke" Value="White"></Setter>
+        <Setter Property="Fill" Value="White"></Setter>
+    </Style>
+
+    <Style x:Key="Rectangle1" TargetType="Rectangle">
+        <Setter Property="Stroke" Value="White"></Setter>
+        <Setter Property="Fill" Value="White"></Setter>
+    </Style>
+
     <Style x:Key="ListBox1" TargetType="ListBox">
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Background" Value="{StaticResource BackgroundBlue}"/>
@@ -624,4 +636,7 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+
+
 </ResourceDictionary>

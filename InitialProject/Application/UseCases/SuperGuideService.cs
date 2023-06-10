@@ -22,6 +22,7 @@ namespace InitialProject.APPLICATION.UseCases
             tourInstanceService=new TourInstanceService();
             tourService=new TourService();
             guideAndTourReviewService=new GuideAndTourReviewService();
+
         }
 
         public SuperGuide Save(SuperGuide superGuide)
@@ -64,6 +65,7 @@ namespace InitialProject.APPLICATION.UseCases
             foreach (TourInstance tourInstance in tourInstanceService.GetAll())
             {
                 tourService.SetTour(tourInstance);
+                
                 if (tourInstance.Tour.Language.Equals(language) && tourInstance.Finished && tourInstance.Guide.Id == guide.Id && tourInstance.StartDate >= Convert.ToDateTime(yearago) && tourInstance.StartDate<=DateTime.Now)
                 {
                     tourCount++;
