@@ -114,7 +114,7 @@
 
                     <Image Source="/Resources/Images/location.png" Height="40" Width="40" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10, 0, 0, 0"/>
                     <Label Content="Location:" Foreground="LightGray" Grid.Row="0" Grid.Column="1" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Left" Margin="0,0,0,54" Grid.RowSpan="2"/>
-                    <TextBlock FontWeight="Bold" TextWrapping="Wrap" FontSize="15"  Foreground="LightGray" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="5,0,0,0" Height="40">
+                    <TextBlock FontWeight="SemiBold" TextWrapping="Wrap" FontSize="15"  Foreground="LightGray" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="5,0,0,0" Height="40">
                         <Run Text="{Binding Path=Forum.Forum.Location.City, UpdateSourceTrigger=PropertyChanged}" />
                         <Run Text=", " />
                         <Run Text="{Binding Path=Forum.Forum.Location.Country, UpdateSourceTrigger=PropertyChanged}" />

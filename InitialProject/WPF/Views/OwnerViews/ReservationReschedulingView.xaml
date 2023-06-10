@@ -27,12 +27,12 @@
                         <RowDefinition Height="40"/>
                         <RowDefinition Height="40"/>
                     </Grid.RowDefinitions>
-                    <TextBlock Padding="2, 0, 0, 0" VerticalAlignment="Bottom" Grid.Column="0" Grid.Row="0">Guest:</TextBlock>
-                    <TextBlock Padding="2, 0, 0, 0" Grid.Column="0" Grid.Row="1" Text="{Binding Path=AccommodationReservation.Guest}" FontSize="15" FontWeight="SemiBold"></TextBlock>
+                    <TextBlock Padding="5, 0, 0, 0" VerticalAlignment="Bottom" Grid.Column="0" Grid.Row="0">Guest:</TextBlock>
+                    <TextBlock Padding="5, 0, 0, 0" Grid.Column="0" Grid.Row="1" Text="{Binding Path=AccommodationReservation.Guest}" FontSize="15" FontWeight="SemiBold"></TextBlock>
 
-                    <TextBlock Padding="2, 0, 0, 0" VerticalAlignment="Bottom" Grid.Column="0" Grid.Row="2">Accommodation:</TextBlock>
-                    <TextBlock Padding="2, 0, 0, 0" Grid.Column="0" Grid.Row="3" Text="{Binding Path=AccommodationReservation.Accommodation.Name}" FontSize="15" FontWeight="SemiBold"></TextBlock>
-                    <TextBlock Padding="2, 0, 0, 0" Grid.Column="0" Grid.Row="4" Text="{Binding Path= AccommodationReservation.Accommodation.Location}" FontWeight="SemiBold"></TextBlock>
+                    <TextBlock Padding="5, 0, 0, 0" VerticalAlignment="Bottom" Grid.Column="0" Grid.Row="2">Accommodation:</TextBlock>
+                    <TextBlock Padding="5, 0, 0, 0" Grid.Column="0" Grid.Row="3" Text="{Binding Path=AccommodationReservation.Accommodation.Name}" FontSize="15" FontWeight="SemiBold"></TextBlock>
+                    <TextBlock Padding="5, 0, 0, 0" Grid.Column="0" Grid.Row="4" Text="{Binding Path= AccommodationReservation.Accommodation.Location}" FontWeight="SemiBold"></TextBlock>
 
                     <TextBlock VerticalAlignment="Bottom" Grid.Column="1" Grid.Row="0" Text="Old date range"></TextBlock>
                     <TextBlock VerticalAlignment="Bottom" Grid.Column="1" Grid.Row="2" Text="New date range"></TextBlock>
@@ -78,7 +78,7 @@
                         </Border>
                     </Grid>
 
-                    <TextBlock Padding="2, 0, 0, 0" Grid.Row="5" Grid.Column="0" Text="{Binding Path=Availability}" FontWeight="SemiBold" >
+                    <TextBlock Padding="5, 0, 0, 0" Grid.Row="5" Grid.Column="0" Text="{Binding Path=Availability}" FontWeight="SemiBold" >
                         <TextBlock.Style>
                             <Style TargetType="{x:Type TextBlock}">
                                 <Style.Triggers>

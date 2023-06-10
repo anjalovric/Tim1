@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:InitialProject.WPF.Views.OwnerViews"
         mc:Ignorable="d"
         Title="Delete Accommodation" Height="200" Width="300" AllowsTransparency="True" Background="Transparent" WindowStyle="None" WindowStartupLocation="CenterOwner">
-    <Border BorderBrush="LightGray" BorderThickness="0.5" CornerRadius="20" Background="White">
+    <Border BorderBrush="Black" BorderThickness="0.5" CornerRadius="20" Background="White">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
