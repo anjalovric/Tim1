@@ -26,15 +26,15 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         {
             OkCommand = new RelayCommand(Ok_Executed, CanExecute);
         }
-
-        private bool CanExecute(object sender)
-        {
-            return true;
-        }
         private void Ok_Executed(object sender)
         {
             Application.Current.Windows.OfType<Guest1OkMessageBoxView>().FirstOrDefault().Close();
         }
+        private bool CanExecute(object sender)
+        {
+            return true;
+        }
+        
 
     }
 }

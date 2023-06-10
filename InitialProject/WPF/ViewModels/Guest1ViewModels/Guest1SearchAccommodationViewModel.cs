@@ -283,29 +283,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             IsNumberOfGuestsValid = true;
             GetAllAccommodation();
         }
-
-        private void GetAllAccommodation()
-        {
-            accommodationService = new AccommodationService();
-            AccommodationRenovationService accommodationRenovationService = new AccommodationRenovationService();
-            List<Accommodation> storedAccommodation = new List<Accommodation>(accommodationService.GetAll());
-            accommodationRenovationService.AreRenovated(storedAccommodation);
-            Accommodations = new ObservableCollection<Accommodation>(storedAccommodation);
-        }
-        private Match CreateValidationNumberRegex(string content)
-        {
-            var regex = "^([1-9][0-9]*)$";
-            Match match = Regex.Match(content, regex, RegexOptions.IgnoreCase);
-            return match;
-        }
-        private void SortAccommodationBySuperOwners()
-        {
-            Accommodations = new ObservableCollection<Accommodation>(Accommodations.OrderByDescending(x => x.Owner.IsSuperOwner).ToList());
-        }
-        private bool CanExecute(object sender)
-        {
-            return true;
-        }
         private void MakeCommands()
         {
             SearchCommand = new RelayCommand(Search_Executed, CanExecute);
@@ -318,13 +295,18 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             DecrementGuestsNumberCommand = new RelayCommand(DecrementGuestsNumber_Executed, CanExecute);
             CountryInputSelectionChangedCommand = new RelayCommand(CountryInputSelectionChanged_Executed, CanExecute);
         }
-        private void SetAccommodationCoverImages()
+        //other methods
+        private void SortAccommodationBySuperOwners()
         {
-            AccommodationImageService accommodationImageService = new AccommodationImageService();
-            foreach (Accommodation accommodation in Accommodations)
-            {
-                accommodation.CoverImage = accommodationImageService.GetCoverImage(accommodation);
-            }
+            Accommodations = new ObservableCollection<Accommodation>(Accommodations.OrderByDescending(x => x.Owner.IsSuperOwner).ToList());
+        }
+        private void GetAllAccommodation()
+        {
+            accommodationService = new AccommodationService();
+            AccommodationRenovationService accommodationRenovationService = new AccommodationRenovationService();
+            List<Accommodation> storedAccommodation = new List<Accommodation>(accommodationService.GetAll());
+            accommodationRenovationService.AreRenovated(storedAccommodation);
+            Accommodations = new ObservableCollection<Accommodation>(storedAccommodation);
         }
         private void GetLocations()
         {
@@ -333,6 +315,32 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             Countries = new ObservableCollection<string>(locationService.GetAllCountries());
             CitiesByCountry = new ObservableCollection<string>();
         }
+        
+        private void SearchByInputParameters(Accommodation accommodation)
+        {
+            Accommodations = new ObservableCollection<Accommodation>(accommodationService.SearchName(accommodation, Name));
+            Accommodations = new ObservableCollection<Accommodation>(accommodationService.SearchCity(accommodation, LocationCity));
+            Accommodations = new ObservableCollection<Accommodation>(accommodationService.SearchCountry(accommodation, LocationCountry));
+            Accommodations = new ObservableCollection<Accommodation>(accommodationService.SearchType(accommodation, ApartmentChecked, HouseChecked, CottageChecked));
+            Accommodations = new ObservableCollection<Accommodation>(accommodationService.SearchNumberOfGuests(accommodation, NumberOfGuests));
+            Accommodations = new ObservableCollection<Accommodation>(accommodationService.SearchNumberOfDays(accommodation, NumberOfDays));
+        }     
+        private void ResetAllSearchingFields()
+        {
+            Name = "";
+            LocationCountry = null;
+            LocationCity = null;
+            IsCityComboBoxEnabled = false;
+            ApartmentChecked = false;
+            HouseChecked = false;
+            CottageChecked = false;
+            NumberOfDays = "";
+            NumberOfGuests = "";
+            IsInputValid = true;
+            IsNumberOfDaysValid = true;
+            IsNumberOfGuestsValid = true;
+        }
+        //execute commands
         private void CountryInputSelectionChanged_Executed(object sender)
         {
             LocationService locationService = new LocationService();
@@ -361,15 +369,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             }
             SortAccommodationBySuperOwners();
         }
-        private void SearchByInputParameters(Accommodation accommodation)
-        {
-            Accommodations = new ObservableCollection<Accommodation>(accommodationService.SearchName(accommodation, Name));
-            Accommodations = new ObservableCollection<Accommodation>(accommodationService.SearchCity(accommodation, LocationCity));
-            Accommodations = new ObservableCollection<Accommodation>(accommodationService.SearchCountry(accommodation, LocationCountry));
-            Accommodations = new ObservableCollection<Accommodation>(accommodationService.SearchType(accommodation, ApartmentChecked, HouseChecked, CottageChecked));
-            Accommodations = new ObservableCollection<Accommodation>(accommodationService.SearchNumberOfGuests(accommodation, NumberOfGuests));
-            Accommodations = new ObservableCollection<Accommodation>(accommodationService.SearchNumberOfDays(accommodation, NumberOfDays));
-        }
         private void ShowAll_Executed(object sender)
         {
             Accommodations.Clear();
@@ -378,21 +377,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 
             ResetAllSearchingFields();
             SortAccommodationBySuperOwners();
-        }
-        private void ResetAllSearchingFields()
-        {
-            Name = "";
-            LocationCountry = null;
-            LocationCity = null;
-            IsCityComboBoxEnabled = false;
-            ApartmentChecked = false;
-            HouseChecked = false;
-            CottageChecked = false;
-            NumberOfDays = "";
-            NumberOfGuests = "";
-            IsInputValid = true;
-            IsNumberOfDaysValid = true;
-            IsNumberOfGuestsValid = true;
         }
         private void DecrementGuestsNumber_Executed(object sender)
         {
@@ -448,11 +432,21 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             accommodationReservationForm.Owner = Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault();
             accommodationReservationForm.ShowDialog();
         }
-       
+        //validation regex
+        private Match CreateValidationNumberRegex(string content)
+        {
+            var regex = "^([1-9][0-9]*)$";
+            Match match = Regex.Match(content, regex, RegexOptions.IgnoreCase);
+            return match;
+        }
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        private bool CanExecute(object sender)
+        {
+            return true;
         }
     }
 }

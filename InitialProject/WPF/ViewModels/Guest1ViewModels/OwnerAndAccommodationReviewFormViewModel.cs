@@ -118,16 +118,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             IsNextEnabled = false;
             IsDeleteEnabled = false;
         }
-        private void ResetComboBox_Executed(object sender)
-        {
-            LevelOfUrgencyIndex = -1;
-            LevelOfUrgency = null;
-            IsResetEnabled=false;
-        }
-        private bool CanExecute(object sender)
-        {
-            return true;
-        }       private void MakeCommands()
+        private void MakeCommands()
         {
             SendCommand = new RelayCommand(Send_Executed, CanExecute);
             AddPhotoCommand = new RelayCommand(AddPhoto_Executed, CanExecute);
@@ -137,6 +128,15 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             ResetComboBoxCommand = new RelayCommand(ResetComboBox_Executed, CanExecute);
             UrgencySelectionChangedCommand = new RelayCommand(UrgencySelectionChanged_Executed, CanExecute);
         }
+
+        //execute commands
+        private void ResetComboBox_Executed(object sender)
+        {
+            LevelOfUrgencyIndex = -1;
+            LevelOfUrgency = null;
+            IsResetEnabled=false;
+        }
+        
         private void UrgencySelectionChanged_Executed(object sender)
         {
             if (LevelOfUrgencyIndex != -1)
@@ -158,90 +158,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                 ShowMessageBoxForSentReview();
                 Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = new MyAccommodationReservationsView(guest1);
             }
-        }
-        private void StoreRenovationSuggestion()
-        {
-            if(ConditionsOfAccommodation!=null && ConditionsOfAccommodation!="" && LevelOfUrgency!=null) //else, dont store renovation suggestion (doesnt exist)
-            { 
-                if (ConditionsOfAccommodation == null)
-                    ConditionsOfAccommodation = "";
-                if (LevelOfUrgency == null)
-                    LevelOfUrgency = "";
-
-                AccommodationRenovationSuggestion suggestion = new AccommodationRenovationSuggestion(reservation,LevelOfUrgencyIndex+1,ConditionsOfAccommodation);
-                accommodationRenovationSuggestionService.Add(suggestion);
-            }
-        }
-        private void StoreImages()
-        {
-            AccommodationReviewImageService accommodationReviewImageService = new AccommodationReviewImageService();
-            foreach (AccommodationReviewImage image in images)
-            {
-                accommodationReviewImageService.Add(image);
-            }
-        }
-        private void StoreReview()
-        {
-            OwnerReviewService ownerReviewService = new OwnerReviewService();
-            OwnerReview ownerReview = new OwnerReview(reservation, AccommodationCleanliness, OwnerCorrectness, Comments);
-            ownerReviewService.Add(ownerReview);
-        }
-
-        private void AddPhoto_Executed(object sender)
-        {
-            OpenFileDialog openFileDialog = MakeOpenFileDialog();
-            if (openFileDialog.ShowDialog() == true)
-            {
-                String relative = MakeRelativePath(openFileDialog);
-                RelativeUri = new Uri("/" + relative, UriKind.Relative);
-                ImageSource = new BitmapImage(new Uri("/" + relative, UriKind.Relative));
-                AccommodationReviewImage accommodationReviewImage = new AccommodationReviewImage(reservation, relative);
-                images.Add(accommodationReviewImage);
-            }
-            EnableButtonsForPhotos();
-        }
-        private String MakeRelativePath(OpenFileDialog openFileDialog)
-        {
-            Uri resource = new Uri(openFileDialog.FileName);
-            String absolutePath = resource.ToString();
-            int relativeIndex = absolutePath.IndexOf("Resources");
-            String relative = absolutePath.Substring(relativeIndex);
-            return relative;
-        }
-        private OpenFileDialog MakeOpenFileDialog()
-        {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Image files|*.bmp;*.jpg;*.png";
-            openFileDialog.FilterIndex = 1;
-            return openFileDialog;
-        }
-        
-        private void DeletePhoto_Executed(object sender)
-        {
-            if (images.Count != 0)
-            {
-                for (int i = 0; i < images.Count; i++)
-                {
-                    if (ImageSource.ToString().Contains(images[i].RelativeUri))
-                    {
-                        AccommodationReviewImage image = images[i];
-                        images.Remove(image);
-                        RemoveImage(i);
-                    }
-                }
-            }
-            EnableButtonsForPhotos();
-        }
-        private void EnableButtonsForPhotos()
-        {
-            if (images.Count >= 2)
-                IsNextEnabled = true;
-            else
-                IsNextEnabled = false;
-            if (images.Count >= 1)
-                IsDeleteEnabled = true;
-            else
-                IsDeleteEnabled = false;
         }
         private void NextPhoto_Executed(object sender)
         {
@@ -287,6 +203,93 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 
             }
         }
+        private void AddPhoto_Executed(object sender)
+        {
+            OpenFileDialog openFileDialog = MakeOpenFileDialog();
+            if (openFileDialog.ShowDialog() == true)
+            {
+                String relative = MakeRelativePath(openFileDialog);
+                RelativeUri = new Uri("/" + relative, UriKind.Relative);
+                ImageSource = new BitmapImage(new Uri("/" + relative, UriKind.Relative));
+                AccommodationReviewImage accommodationReviewImage = new AccommodationReviewImage(reservation, relative);
+                images.Add(accommodationReviewImage);
+            }
+            EnableButtonsForPhotos();
+        }
+        private void DeletePhoto_Executed(object sender)
+        {
+            if (images.Count != 0)
+            {
+                for (int i = 0; i < images.Count; i++)
+                {
+                    if (ImageSource.ToString().Contains(images[i].RelativeUri))
+                    {
+                        AccommodationReviewImage image = images[i];
+                        images.Remove(image);
+                        RemoveImage(i);
+                    }
+                }
+            }
+            EnableButtonsForPhotos();
+        }
+
+        //other methods
+        private void StoreRenovationSuggestion()
+        {
+            if(ConditionsOfAccommodation!=null && ConditionsOfAccommodation!="" && LevelOfUrgency!=null) //else, dont store renovation suggestion (doesnt exist)
+            { 
+                if (ConditionsOfAccommodation == null)
+                    ConditionsOfAccommodation = "";
+                if (LevelOfUrgency == null)
+                    LevelOfUrgency = "";
+
+                AccommodationRenovationSuggestion suggestion = new AccommodationRenovationSuggestion(reservation,LevelOfUrgencyIndex+1,ConditionsOfAccommodation);
+                accommodationRenovationSuggestionService.Add(suggestion);
+            }
+        }
+        private void StoreImages()
+        {
+            AccommodationReviewImageService accommodationReviewImageService = new AccommodationReviewImageService();
+            foreach (AccommodationReviewImage image in images)
+            {
+                accommodationReviewImageService.Add(image);
+            }
+        }
+        private void StoreReview()
+        {
+            OwnerReviewService ownerReviewService = new OwnerReviewService();
+            OwnerReview ownerReview = new OwnerReview(reservation, AccommodationCleanliness, OwnerCorrectness, Comments);
+            ownerReviewService.Add(ownerReview);
+        }
+        private String MakeRelativePath(OpenFileDialog openFileDialog)
+        {
+            Uri resource = new Uri(openFileDialog.FileName);
+            String absolutePath = resource.ToString();
+            int relativeIndex = absolutePath.IndexOf("Resources");
+            String relative = absolutePath.Substring(relativeIndex);
+            return relative;
+        }
+        private OpenFileDialog MakeOpenFileDialog()
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image files|*.bmp;*.jpg;*.png";
+            openFileDialog.FilterIndex = 1;
+            return openFileDialog;
+        }
+        
+        
+        private void EnableButtonsForPhotos()
+        {
+            if (images.Count >= 2)
+                IsNextEnabled = true;
+            else
+                IsNextEnabled = false;
+            if (images.Count >= 1)
+                IsDeleteEnabled = true;
+            else
+                IsDeleteEnabled = false;
+        }
+        
         private void RemoveImage(int i)
         {
             if (images.Count > 0)
@@ -347,6 +350,10 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        private bool CanExecute(object sender)
+        {
+            return true;
         }
     }
 }

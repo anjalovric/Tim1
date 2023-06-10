@@ -171,7 +171,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         public RelayCommand ResetCommand { get; set; }
         public RelayCommand SearchCommand { get; set; }
         public RelayCommand IncrementGuestsNumberCommand { get; set; }
-
         public RelayCommand IncrementDaysNumberCommand { get; set; }
         public RelayCommand DecrementGuestsNumberCommand { get; set; }
         public RelayCommand DecrementDaysNumberCommand { get; set; }
@@ -209,11 +208,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             DetailsCommand = new RelayCommand(Details_Executed, CanExecute);
         }
 
-        private void SortSuggestedReservationsBySuperOwners()
-        {
-            SuggestedReservations = new ObservableCollection<SuggestedReservationViewModel>(SuggestedReservations.OrderByDescending(x => x.Accommodation.Owner.IsSuperOwner).ToList());
-        }
-
+        //execute commands
         private void Details_Executed(object sender)
         {
             Accommodation currentAccommodation = (((Button)sender).DataContext as SuggestedReservationViewModel).Accommodation;
@@ -242,35 +237,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             }
             
         }
-        public async Task<bool> ConfirmReservationMessageBox()
-        {
-            var result = new TaskCompletionSource<bool>();
-            Guest1YesNoMessageBoxView messageBox = new Guest1YesNoMessageBoxView("Do you want to make a reservation?", "/Resources/Images/qm.png", result);
-            messageBox.Owner = Application.Current.Windows.OfType<DatesForAccommodationReservationView>().FirstOrDefault();
-            messageBox.ShowDialog();
-            var returnedResult = await result.Task;
-            return returnedResult;
-        }
-
-
-        private void ShowMessageBoxForSentReservation()
-        {
-            Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("Successfully done!", "/Resources/Images/done.png");
-            messageBox.Owner = Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault();
-            messageBox.ShowDialog();
-        }
-
-        private void MakeNewReservation(Accommodation currentAccommodation, DateTime arrival, DateTime departure)
-        {
-            AccommodationReservation newReservation = new AccommodationReservation(guest1, currentAccommodation, arrival, departure);
-            accommodationReservationService.Add(newReservation);
-            DecrementSuperGuestPoints();
-        }
-        private void DecrementSuperGuestPoints()
-        {
-            superGuestTitleService.DecrementPoints(guest1);
-        }
-
         private void OnPreviewMouseUp_Executed(Object sender)
         {
             OnPreviewMouseUp(null);
@@ -281,11 +247,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             {
                 Mouse.Capture(null);
             }
-        }
-
-        private bool CanExecute(object sender)
-        {
-            return true;
         }
         private void DecrementGuestsNumber_Executed(object sender)
         {
@@ -339,7 +300,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         {
             if (AreTextboxesDataValid())
             {
-                if(Arrival!=DateTime.MinValue || Departure!=DateTime.MinValue)    //if calendar is selected
+                if(Arrival!=DateTime.MinValue || Departure!=DateTime.MinValue)//if calendar is selected
                 {
                     lengthOfStay = Departure.Subtract(Arrival);
                     if (IsValidDateInput())  //all fields are filled
@@ -352,9 +313,34 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             }
             else
                 ShowMessageBoxForInvalidInput();
-
         }
 
+        //other methods
+        private void SortSuggestedReservationsBySuperOwners()
+        {
+            SuggestedReservations = new ObservableCollection<SuggestedReservationViewModel>(SuggestedReservations.OrderByDescending(x => x.Accommodation.Owner.IsSuperOwner).ToList());
+        }
+        public async Task<bool> ConfirmReservationMessageBox()
+        {
+            var result = new TaskCompletionSource<bool>();
+            Guest1YesNoMessageBoxView messageBox = new Guest1YesNoMessageBoxView("Do you want to make a reservation?", "/Resources/Images/qm.png", result);
+            messageBox.Owner = Application.Current.Windows.OfType<DatesForAccommodationReservationView>().FirstOrDefault();
+            messageBox.ShowDialog();
+            var returnedResult = await result.Task;
+            return returnedResult;
+        }
+        private void ShowMessageBoxForSentReservation()
+        {
+            Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("Successfully done!", "/Resources/Images/done.png");
+            messageBox.Owner = Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault();
+            messageBox.ShowDialog();
+        }
+        private void MakeNewReservation(Accommodation currentAccommodation, DateTime arrival, DateTime departure)
+        {
+            AccommodationReservation newReservation = new AccommodationReservation(guest1, currentAccommodation, arrival, departure);
+            accommodationReservationService.Add(newReservation);
+            superGuestTitleService.DecrementPoints(guest1);
+        }
         private void UpdateSuggestedReservationsNoInputDates()
         {
             SuggestedReservations = new ObservableCollection<SuggestedReservationViewModel>();
@@ -366,9 +352,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             }
             SortSuggestedReservationsBySuperOwners();
         }
-    
-        
-
         private void UpdateSuggestedReservations()
         {
             SuggestedReservations = new ObservableCollection<SuggestedReservationViewModel>();
@@ -422,7 +405,9 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
-
+        private bool CanExecute(object sender)
+        {
+            return true;
+        }
     }
 }
