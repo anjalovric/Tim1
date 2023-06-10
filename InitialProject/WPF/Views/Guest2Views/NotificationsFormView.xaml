@@ -50,7 +50,7 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Text="{Binding Text}" Width="530" Height="120" Grid.ColumnSpan="2" Foreground="White" Grid.Row="0" Margin="3,0,0,0">
+                    <TextBlock Text="{Binding Text}" Width="530" Height="120" Grid.ColumnSpan="2" Foreground="Black" Grid.Row="0" Margin="3,0,0,0">
 
                     </TextBlock>
                     <Button x:Name="View" Content="View" Command="{Binding Path=DataContext.ViewCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}"  FontWeight="Bold" Grid.Row="1" FontSize="10" Grid.Column="1"  VerticalAlignment="Center" Width="33" Height="20" ClickMode="Press" Style="{StaticResource LinkButton}" Margin="0,0,0,0" ToolTipService.ShowDuration="5000" ToolTipService.IsEnabled="{Binding Source={x:Static properties:Settings.Default}, Path=IsToolTipEnabled}" l:ShowToursHelp.HelpKey="details">

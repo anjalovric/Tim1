@@ -126,17 +126,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             ForumDetailsView details = new ForumDetailsView(guest1, currentForum);
             Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = details;
         }
-        private bool CanExecute(object sender)
-        {
-            return true;
-        }
-        private void GetLocations()
-        {
-            IsCityComboBoxEnabled = false;
-            locationService = new LocationService();
-            Countries = new ObservableCollection<string>(locationService.GetAllCountries());
-            CitiesByCountry = new ObservableCollection<string>();
-        }
         private void CountryInputSelectionChanged_Executed(object sender)
         {
             LocationService locationService = new LocationService();
@@ -149,10 +138,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                 }
                 IsCityComboBoxEnabled = true;
             }
-        }
-        private bool IsInputValid()
-        {
-            return LocationCity != null && LocationCountry != null && FirstComment != null && FirstComment != "";
         }
         private void Next_Executed(object sender)
         {
@@ -173,12 +158,12 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             else
                 ShowMessageBoxForInvalidInput();
         }
-
-
         private void Reset_Executed(object sender)
         {
             ResetAllFields();
         }
+
+        //other methods
         private void ResetAllFields()
         {
             LocationCity = null;
@@ -202,8 +187,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                 ownerNotificationsService.AddNewForumNotification(currentForum.Location);
                 ForumDetailsView details = new ForumDetailsView(guest1, currentForum);
                 Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = details;
-            }
-               
+            }   
         }
 
         private async void ShowMessageBoxForOpenedForum()
@@ -220,9 +204,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                 ForumDetailsView details = new ForumDetailsView(guest1, currentForum);
                 Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = details;
             }
-
-
-
         }
         public async Task<bool> ConfirmCommentingLockedForumMessageBox()
         {
@@ -258,6 +239,18 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             ForumComment comment = new ForumComment(newForum, guest1, DateTime.Now, FirstComment);
             forumCommentService.Add(comment);
         }
+        private void GetLocations()
+        {
+            IsCityComboBoxEnabled = false;
+            locationService = new LocationService();
+            Countries = new ObservableCollection<string>(locationService.GetAllCountries());
+            CitiesByCountry = new ObservableCollection<string>();
+        }
+        //validation for input
+        private bool IsInputValid()
+        {
+            return LocationCity != null && LocationCountry != null && FirstComment != null && FirstComment != "";
+        }
         //Message box - not all fields filled
         private void ShowMessageBoxForInvalidInput()
         {
@@ -269,6 +262,10 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        private bool CanExecute(object sender)
+        {
+            return true;
         }
     }
 }

@@ -29,15 +29,14 @@ namespace InitialProject.ReportPatterns
         }
         public override void GenerateConclusion()
         {
-            double averageRating = guestAverageReviewService.GetAverageRating(guest);
+            
             int reviewsNumber = guestAverageReviewService.GetReviewsNumberByGuest(guest);
             Font = new PdfStandardFont(PdfFontFamily.Helvetica, 14);
 
-            StringBuilder stringBuilder1 = new StringBuilder("Average rating for both categories is " + Math.Round(averageRating, 2) + ".");
-            Graphics.DrawString(stringBuilder1.ToString(), Font, PdfBrushes.Black, new PointF(0, 370));
+            
 
-            StringBuilder stringBuilder2 = new StringBuilder("Reviews number by owners is " + reviewsNumber.ToString() + ".");
-            Graphics.DrawString(stringBuilder2.ToString(), Font, PdfBrushes.Black, new Point(0, 390));
+            StringBuilder stringBuilder2 = new StringBuilder("Total number of reviews from owners: " + reviewsNumber.ToString() + ".");
+            Graphics.DrawString(stringBuilder2.ToString(), Font, PdfBrushes.Black, new Point(0, 330));
         }
 
         public override void GenerateContent()
@@ -45,14 +44,14 @@ namespace InitialProject.ReportPatterns
             Font = new PdfStandardFont(PdfFontFamily.Helvetica, 14);
             
             StringBuilder stringBuilder1 = new StringBuilder("");
-            stringBuilder1.Append("The report shows the average ratings that the guest received from the Owner for");
+            stringBuilder1.Append("The report shows the average ratings that the guest received from the owners for");
 
             StringBuilder stringBuilder2 = new StringBuilder("");
             stringBuilder2.Append("each of the categories.");
 
 
             StringBuilder stringBuilder3 = new StringBuilder("");
-            stringBuilder3.Append("Generated on request made by ").Append(guest.Name + " " + guest.LastName).Append(" (GUEST1).");
+            stringBuilder3.Append("Guest: ").Append(guest.Name + " " + guest.LastName);
 
 
             Graphics.DrawString(stringBuilder1.ToString(), Font, PdfBrushes.Black, new PointF(0, 160));
@@ -65,16 +64,21 @@ namespace InitialProject.ReportPatterns
             averageCleanliness = guestAverageReviewService.GetAverageCleanlinessReview(guest);
             averageFollowingRules = guestAverageReviewService.GetAverageFollowingRulesReview(guest);
 
+            Font = new PdfStandardFont(PdfFontFamily.Helvetica, 14, PdfFontStyle.Bold);
+
             StringBuilder stringBuilder4 = new StringBuilder("");
             stringBuilder4.Append("Cleanliness - average rating: " + Math.Round(averageCleanliness, 2));
 
             StringBuilder stringBuilder5 = new StringBuilder("");
             stringBuilder5.Append("Following rules - average rating: " + Math.Round(averageFollowingRules, 2));
 
-            Font = new PdfStandardFont(PdfFontFamily.Helvetica, 18);
+            Graphics.DrawString(stringBuilder4.ToString(), Font, PdfBrushes.Black, new PointF(0, 250));
+            Graphics.DrawString(stringBuilder5.ToString(), Font, PdfBrushes.Black, new PointF(0, 270));
 
-            Graphics.DrawString(stringBuilder4.ToString(), Font, PdfBrushes.Black, new PointF(0, 270));
-            Graphics.DrawString(stringBuilder5.ToString(), Font, PdfBrushes.Black, new PointF(0, 300));
+
+            double averageRating = guestAverageReviewService.GetAverageRatingForReport(guest);
+            StringBuilder stringBuilder6 = new StringBuilder("Average rating for both categories: " + Math.Round(averageRating, 2));
+            Graphics.DrawString(stringBuilder6.ToString(), Font, PdfBrushes.Black, new PointF(0, 290));
 
 
         }
@@ -83,6 +87,7 @@ namespace InitialProject.ReportPatterns
 
         public override void GenerateTableContent() { }
         public override void GenerateTable1Content() { }
+        public override void GenerateTable2Content() { }
 
         public override void GenerateTitle()
         {

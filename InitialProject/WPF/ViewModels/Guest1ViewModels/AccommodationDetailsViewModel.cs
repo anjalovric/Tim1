@@ -22,13 +22,13 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
     {
         private AccommodationReservationService accommodationReservationService;
         private SuperGuestTitleService superGuestTitleService;
-        public Func<double, string> YAxisLabelFormatter => value => value.ToString("N1");
         private Guest1 guest1;
         private DateTime currentDate;
         private int currentCounter = 0;
         private List<AccommodationImage> images;
         private DateTime arrival;
         private DateTime departure;
+        public Func<double, string> YAxisLabelFormatter => value => value.ToString("N1");
         public Accommodation SelectedAccommodation { get; set; }
         public int AverageRating { get; set; }
         public int ReviewsNumber { get; set; }
@@ -60,7 +60,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 
         }
         public RelayCommand ReserveCommand { get; set; }
-
         public RelayCommand NextPhotoCommand { get; set; }
         public RelayCommand PreviousPhotoCommand { get; set; }
 
@@ -83,6 +82,14 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             accommodationReservationService = new AccommodationReservationService();
             superGuestTitleService = new SuperGuestTitleService();
         }
+        private void MakeCommands()
+        {
+            NextPhotoCommand = new RelayCommand(NextPhoto_Executed, CanExecute);
+            PreviousPhotoCommand = new RelayCommand(PreviousPhoto_Executed, CanExecute);
+            ReserveCommand = new RelayCommand(Reserve_Executed, CanExecute);
+        }
+
+        //methods for diagram
         private void SetChartData()
         {
             LastYearAccommodationReservationsService lastYearAccommodationReservationsService = new LastYearAccommodationReservationsService();
@@ -97,6 +104,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             }
             SetSeriesCollection(values);
         }
+
         private void SetSeriesCollection(List<int> values)
         {
             SeriesCollection = new SeriesCollection();
@@ -110,6 +118,8 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             }
             SeriesCollection.Add(columnSeries);
         }
+
+        //other methods
         private void SetButtonEnableProperty()
         {
             if (images.Count >= 2)
@@ -123,11 +133,54 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             AverageRating = accommodationAverageReviewService.GetAverageRating(SelectedAccommodation);
             ReviewsNumber = accommodationAverageReviewService.GetReviewsNumberByAccommodation(SelectedAccommodation);
         }
-        private void MakeCommands()
+        private void ShowMessageBoxForSentReservation()
         {
-            NextPhotoCommand = new RelayCommand(NextPhoto_Executed, CanExecute);
-            PreviousPhotoCommand = new RelayCommand(PreviousPhoto_Executed, CanExecute);
-            ReserveCommand = new RelayCommand(Reserve_Executed, CanExecute);
+            Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("Successfully done!", "/Resources/Images/done.png");
+            messageBox.Owner = Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault();
+            messageBox.ShowDialog();
+        }
+       
+        private void MakeNewReservation()
+        {
+            AccommodationReservation newReservation = new AccommodationReservation(guest1, SelectedAccommodation, arrival, departure);
+            accommodationReservationService.Add(newReservation);
+            superGuestTitleService.DecrementPoints(guest1);
+            AnywhereAnytimeView view = new AnywhereAnytimeView(guest1);
+            Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = view;
+            ShowMessageBoxForSentReservation();
+        }
+        public async Task<bool> ConfirmReservationMessageBox()
+        {
+            var result = new TaskCompletionSource<bool>();
+            Guest1YesNoMessageBoxView messageBox = new Guest1YesNoMessageBoxView("Do you want to make a reservation for " + arrival + " - " + departure + "?", "/Resources/Images/qm.png", result);
+            messageBox.Owner = Application.Current.Windows.OfType<DatesForAccommodationReservationView>().FirstOrDefault();
+            messageBox.ShowDialog();
+            var returnedResult = await result.Task;
+            return returnedResult;
+        }
+        
+        private void SetFirstImage()
+        {
+            AccommodationImageService accommodationImageService = new AccommodationImageService();
+            images = new List<AccommodationImage>(accommodationImageService.GetAllByAccommodation(SelectedAccommodation));
+            ImageSource = new BitmapImage(new Uri(images[0].Url, UriKind.Relative));
+        }
+
+
+        //execute commands
+        private void PreviousPhoto_Executed(object sender)
+        {
+            currentCounter = currentCounter - 1;
+            if (currentCounter < 0)
+                currentCounter = images.Count - 1;
+            ImageSource = new BitmapImage(new Uri(images[currentCounter].Url, UriKind.Relative));
+        }
+        private void NextPhoto_Executed(object sender)
+        {
+            currentCounter++;
+            if (currentCounter >= images.Count)
+                currentCounter = 0;
+            ImageSource = new BitmapImage(new Uri(images[currentCounter].Url, UriKind.Relative));
         }
         private async void Reserve_Executed(object sender)
         {
@@ -144,66 +197,16 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                 if (IsYesClicked)
                     MakeNewReservation();
             }
-           
-        }
-        private void ShowMessageBoxForSentReservation()
-        {
-            Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("Successfully done!", "/Resources/Images/done.png");
-            messageBox.Owner = Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault();
-            messageBox.ShowDialog();
-        }
-        private void DecrementSuperGuestPoints()
-        {
-
-            superGuestTitleService.DecrementPoints(guest1);
-        }
-        private void MakeNewReservation()
-        {
-            AccommodationReservation newReservation = new AccommodationReservation(guest1, SelectedAccommodation, arrival, departure);
-            accommodationReservationService.Add(newReservation);
-            DecrementSuperGuestPoints();
-            AnywhereAnytimeView view = new AnywhereAnytimeView(guest1);
-            Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = view;
-            ShowMessageBoxForSentReservation();
-        }
-        public async Task<bool> ConfirmReservationMessageBox()
-        {
-            var result = new TaskCompletionSource<bool>();
-            Guest1YesNoMessageBoxView messageBox = new Guest1YesNoMessageBoxView("Do you want to make a reservation for " + arrival + " - " + departure + "?", "/Resources/Images/qm.png", result);
-            messageBox.Owner = Application.Current.Windows.OfType<DatesForAccommodationReservationView>().FirstOrDefault();
-            messageBox.ShowDialog();
-            var returnedResult = await result.Task;
-            return returnedResult;
-        }
-        private bool CanExecute(object sender)
-        {
-            return true;
         }
 
-        private void SetFirstImage()
-        {
-            AccommodationImageService accommodationImageService = new AccommodationImageService();
-            images = new List<AccommodationImage>(accommodationImageService.GetAllByAccommodation(SelectedAccommodation));
-            ImageSource = new BitmapImage(new Uri(images[0].Url, UriKind.Relative));
-        }
-        private void PreviousPhoto_Executed(object sender)
-        {
-            currentCounter = currentCounter - 1;
-            if (currentCounter < 0)
-                currentCounter = images.Count - 1;
-            ImageSource = new BitmapImage(new Uri(images[currentCounter].Url, UriKind.Relative));
-        }
-        private void NextPhoto_Executed(object sender)
-        {
-            currentCounter++;
-            if (currentCounter >= images.Count)
-                currentCounter = 0;
-            ImageSource = new BitmapImage(new Uri(images[currentCounter].Url, UriKind.Relative));
-        }
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        private bool CanExecute(object sender)
+        {
+            return true;
         }
     }
 }

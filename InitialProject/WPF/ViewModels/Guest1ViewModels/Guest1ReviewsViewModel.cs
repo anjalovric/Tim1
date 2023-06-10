@@ -66,6 +66,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             ShowReviewDetailsCommand = new RelayCommand(ShowReviewDetails_Executed, CanExecute);
             GenerateReportCommand = new RelayCommand(GenerateReport_Executed, CanExecute);
         }
+        //methods for diagram
         private void SetChartData()
         {
             GuestAverageReviewService guestAverageReviewService = new GuestAverageReviewService();
@@ -94,16 +95,8 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             }
             SeriesCollection.Add(columnSeries);
         }
-        private bool CanExecute(object sender)
-        {
-            return true;
-        }
-        private void ShowReviewDetails_Executed(object sender)
-        {
-            Guest1ReviewDetailsView view = new Guest1ReviewDetailsView(guest1, SelectedReview);
-            Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = view;
 
-        }
+        //other methods
         private void SetRatings()
         {
             GuestAverageReviewService guestAverageReviewService = new GuestAverageReviewService();
@@ -114,7 +107,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             AverageCleanliness = Math.Round(AverageCleanliness, 1);
             AverageFollowingRules = Math.Round(AverageFollowingRules, 1);
         }
-
+        //execute commands
         private void GenerateReport_Executed(object sender)
         {
             ReportGenerator generator = new Guest1ReportPattern(guest1);
@@ -122,10 +115,20 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             PdfPreviewView previewView = new PdfPreviewView();
             Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = previewView;
         }
+        private void ShowReviewDetails_Executed(object sender)
+        {
+            Guest1ReviewDetailsView view = new Guest1ReviewDetailsView(guest1, SelectedReview);
+            Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = view;
+
+        }
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        private bool CanExecute(object sender)
+        {
+            return true;
         }
     }
 }

@@ -224,7 +224,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             {
                 int id = StoreReview().Id;
                 StoreImages(id);
-                MessageBox.Show("Review successfully sent!");
+                MessageBox.Show("Review successfully sent.");
                 Application.Current.Windows.OfType<GuideAndTourReviewFormView>().FirstOrDefault().Close();
             }
             else

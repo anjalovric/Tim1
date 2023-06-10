@@ -95,7 +95,7 @@
         <!-- FIRST COLUMN - RATE FORM -->
         <Grid Grid.Column="0" Grid.Row="0" Background="Transparent">
             <Grid.RowDefinitions>
-                <RowDefinition Height="2.5*"></RowDefinition>
+                <RowDefinition Height="3*"></RowDefinition>
                 <RowDefinition Height="1*"></RowDefinition>
                 <RowDefinition Height="1*"></RowDefinition>
                 <RowDefinition Height="5*"></RowDefinition>
@@ -197,7 +197,7 @@
             <Label HorizontalContentAlignment="Left" Grid.Column="0" Grid.Row="3" Width="Auto" Height="Auto" VerticalContentAlignment="Top" VerticalAlignment="Top" Margin="65,58,0,0" Content="Add photos*"/>
             
             <!-- ADD PHOTO BUTTON -->
-            <Button Content="+" Command="{Binding AddPhotoCommand}" FontSize="21" Height="45" Grid.Row="3" Width="45" Margin="0,20,50,0" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="0">
+            <Button Content="+" Command="{Binding AddPhotoCommand}" FontSize="21" Height="45" Grid.Row="3" Width="45" Margin="0,30,40,0" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="0">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
                         <Grid>
@@ -234,7 +234,7 @@
             </Border>
 
             <!-- NEXT PHOTO BUTTON -->
-            <Button Command="{Binding NextPhotoCommand}" IsEnabled="{Binding Path=IsNextEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="50" Margin="0,25,18,0" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1" Grid.Row="3">
+            <Button Command="{Binding NextPhotoCommand}" IsEnabled="{Binding Path=IsNextEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="50" Margin="0,35,18,0" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1" Grid.Row="3">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid>
@@ -268,7 +268,7 @@
             </Button>
 
             <!-- PREVIOUS PHOTO BUTTON -->
-            <Button Command="{Binding PreviousPhotoCommand}" IsEnabled="{Binding Path=IsNextEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="50"  Margin="0,25,224,0" HorizontalAlignment="Right" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2" Grid.Row="3">
+            <Button Command="{Binding PreviousPhotoCommand}" IsEnabled="{Binding Path=IsNextEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="50"  Margin="0,35,224,0" HorizontalAlignment="Right" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2" Grid.Row="3">
                 <Button.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -351,14 +351,14 @@
 
             <Label HorizontalContentAlignment="Left" Grid.Row="4" Grid.Column="0"  VerticalAlignment="Center" FontSize="18" Margin="65,0,0,0" Content="Comments:"/>
 
-            <TextBox x:Name="Comments" Margin="65,10,65,46" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Path=Comments}"/>
+            <TextBox x:Name="Comments" Margin="65,10,65,46" Grid.Row="5" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Path=Comments}"/>
        
         </Grid>
         
         <!-- SECOND COLUMN - RENOVATION SUGGESTION FORM -->
         <Grid Grid.Column="1" Grid.Row="0" Background="Transparent">
             <Grid.RowDefinitions>
-                <RowDefinition Height="2*"></RowDefinition>
+                <RowDefinition Height="2.5*"></RowDefinition>
                 <RowDefinition Height="1*"></RowDefinition>
                 <RowDefinition Height="3.5*"></RowDefinition>
                 <RowDefinition Height="1*"></RowDefinition>
@@ -429,7 +429,7 @@
             <Border BorderBrush="#22301a" BorderThickness="3" Width="466" Height="50" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,0,0,0"></Border>
 
             <!-- RESET COMBOBOX BUTTON -->
-            <Button Grid.Column="0" Grid.Row="4" Width="94" Height="35" IsEnabled="{Binding Path=IsResetEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontWeight="Bold" Margin="0,0,0,10" Command="{Binding ResetComboBoxCommand}">
+            <Button Grid.Column="0" Grid.Row="4" Width="94" Height="35" IsEnabled="{Binding Path=IsResetEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontWeight="Bold" Margin="0,0,0,0" Command="{Binding ResetComboBoxCommand}">
                 <Grid Background="#8c9d75" Width="94" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>

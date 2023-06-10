@@ -68,16 +68,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = guest1SearchAccommodationView;
             StoredNotifications = new ObservableCollection<MenuItem>();
         }
-        private void ShowSuperGuest()
-        {
-            superGuestTitleService.DeleteTitleIfNeeded(guest1);
-            if (superGuestTitleService.IsAlreadySuperGuest(guest1))
-            {
-                superGuestTitleService.ProlongSuperGuestTitle(guest1);  //add new or delete previous title.
-            }
-            superGuestTitleService.MakeNewSuperGuest(guest1);
-            superGuestTitleService.IsAlreadySuperGuest(guest1);
-        }
 
         private void MakeCommands()
         {
@@ -92,11 +82,8 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             AnywhereAnytimeCommand = new RelayCommand(AnywhereAnytime_Executed, CanExecute);
             ForumCommand = new RelayCommand(Forum_Executed, CanExecute);    
         }
-        private bool CanExecute(object sender)
-        {
-            return true;
-        }
 
+        //execute commands
         private void AnywhereAnytime_Executed(object sender)
         {
             AnywhereAnytimeView anywhereAnytimeView = new AnywhereAnytimeView(guest1);
@@ -172,30 +159,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                         StoredNotifications.Add(new MenuItem { Header = link,  FontWeight = FontWeights.SemiBold, IsCheckable = false, Width = 300,Background = new LinearGradientBrush(new GradientStopCollection(){new GradientStop(Color.FromRgb(240, 128, 128), 0.9),new GradientStop(Color.FromRgb(252, 236, 185), 0.1),},  new Point(0, 0),new Point(1, 1)), BorderBrush = System.Windows.Media.Brushes.Black, BorderThickness = new Thickness(3), Margin = new Thickness(1), Icon = new Image { Source = new BitmapImage(new Uri("/Resources/Images/delete.png", UriKind.Relative)), Margin = new Thickness(0, -10, -7, -3), VerticalAlignment = System.Windows.VerticalAlignment.Bottom } });
             }
         }
-
-        private System.Windows.Documents.Hyperlink CreateHyperlinkNotification(String notification, String state)
-        {
-            System.Windows.Documents.Hyperlink link = new System.Windows.Documents.Hyperlink();
-            link.IsEnabled = true;
-            link.Inlines.Add(notification);
-            SetCommandToLink(ref link, state);
-            return link;
-        }
-
-        private void SetCommandToLink(ref System.Windows.Documents.Hyperlink link, String state)
-        {
-            if (state.Equals("Approved"))
-            {
-                link.Command = new RelayCommand(NavigateToApprovedRequests_Executed, CanExecute);
-                link.Tag = 0;
-
-            }
-            else if (state.Equals("Declined"))
-            {
-                link.Command = new RelayCommand(NavigateToDeclinedRequests_Executed, CanExecute);
-                link.Tag = 1;
-            }
-        }
         private void NavigateToApprovedRequests_Executed(object sender)
         {
             SentAccommodationReservationRequestsView sentAccommodationReservationRequestsView = new SentAccommodationReservationRequestsView(guest1);
@@ -209,6 +172,40 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             sentAccommodationReservationRequestsView.RequestsTabControl.SelectedIndex = 2;
             Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = sentAccommodationReservationRequestsView;
             Keyboard.ClearFocus(); //to highlight other controls when mouse on it
+        }
+
+        //other methods
+        private void ShowSuperGuest()
+        {
+            superGuestTitleService.DeleteTitleIfNeeded(guest1);
+            if (superGuestTitleService.IsAlreadySuperGuest(guest1))
+            {
+                superGuestTitleService.ProlongSuperGuestTitle(guest1);  //add new or delete previous title.
+            }
+            superGuestTitleService.MakeNewSuperGuest(guest1);
+            superGuestTitleService.IsAlreadySuperGuest(guest1);
+        }
+        private System.Windows.Documents.Hyperlink CreateHyperlinkNotification(String notification, String state)
+        {
+            System.Windows.Documents.Hyperlink link = new System.Windows.Documents.Hyperlink();
+            link.IsEnabled = true;
+            link.Inlines.Add(notification);
+            SetCommandToLink(ref link, state);
+            return link;
+        }
+        private void SetCommandToLink(ref System.Windows.Documents.Hyperlink link, String state)
+        {
+            if (state.Equals("Approved"))
+            {
+                link.Command = new RelayCommand(NavigateToApprovedRequests_Executed, CanExecute);
+                link.Tag = 0;
+
+            }
+            else if (state.Equals("Declined"))
+            {
+                link.Command = new RelayCommand(NavigateToDeclinedRequests_Executed, CanExecute);
+                link.Tag = 1;
+            }
         }
         private System.Windows.Documents.Hyperlink[] MakeNotifications()
         {
@@ -235,6 +232,10 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        private bool CanExecute(object sender)
+        {
+            return true;
         }
     }
 }

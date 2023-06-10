@@ -49,6 +49,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         }
         public bool IsEnabled { get; set; }
         public RelayCommand ViewCommand { get; set; }
+        public RelayCommand CloseCommand { get; set; }
         public ICommand HelpCommandInViewModel { get;}
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -62,6 +63,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             this.org = org;
             OrdinaryTourRequests = new ObservableCollection<OrdinaryTourRequests>(requestsService.GetOrdinaryTourRequestsByComplex(complex.Id));
             ViewCommand = new RelayCommand(View_Executed, CanExecute);
+            CloseCommand = new RelayCommand(Close_Executed, CanExecute);
             HelpCommandInViewModel = new RelayCommand(CommandBinding_Executed);
         }
         private bool CanExecute(object sender)
@@ -78,8 +80,12 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             }
             else
             {
-                MessageBox.Show("Ova tura nije jos prihvacena da biste mogli vidjeti detalje.");
+                MessageBox.Show("This tour has not yet been accepted to view details.");
             }
+        }
+        private void Close_Executed(object sender)
+        {
+            Application.Current.Windows.OfType<PartsOfComplexRequestTour>().FirstOrDefault().Close();
         }
         private void CommandBinding_Executed(object sender)
         {

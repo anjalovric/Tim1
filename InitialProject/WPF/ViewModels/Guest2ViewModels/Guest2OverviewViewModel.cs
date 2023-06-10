@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Runtime.CompilerServices;
 using System.ComponentModel;
 using System.Windows.Controls.Primitives;
+using System.Windows.Input;
 
 namespace InitialProject.WPF.ViewModels.Guest2ViewModels
 {
@@ -123,7 +124,6 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         private void ActiveTours_Executed(object sender)
         {
             ContentControl.Content = new ActiveToursFormView(guest2);
-
         }
         private void SignOut_Executed(object sender)
         {
@@ -134,7 +134,6 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         private void ShowFinished_Executed(object sender)
         {
             ContentControl.Content = new FinishedTourInstancesFormView(guest2);
-
         }
         private void GetGuest2ByUser(User user)
         {

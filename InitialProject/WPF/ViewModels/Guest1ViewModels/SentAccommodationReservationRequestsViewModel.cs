@@ -76,6 +76,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             currentDate = DateTime.Now;
         }
 
+        //methods for diagram
         private void SetChartData()
         {
             RequestForReschedulingService requestForReschedulingService = new RequestForReschedulingService();
@@ -105,13 +106,13 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         }
 
         public event PropertyChangedEventHandler PropertyChanged;  
-        private bool CanExecute(object sender)
-        {
-            return true;
-        }
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        private bool CanExecute(object sender)
+        {
+            return true;
         }
     }
 }

@@ -151,6 +151,15 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             Comments = new ObservableCollection<ForumComment>(forumCommentService.GetAllByForumId(Forum.Id));
             Comments = new ObservableCollection<ForumComment>(Comments.Reverse());
         }
+        private void MakeCommands()
+        {
+            CloseForumCommand = new RelayCommand(CloseForum_Executed, CanExecute);
+            BackCommand = new RelayCommand(Back_Executed, CanExecute);
+            AddCommentCommand = new RelayCommand(AddComment_Executed, CanExecute);
+            OpenForumCommand = new RelayCommand(OpenForum_Executed, CanExecute);
+        }
+
+        //other methods
         private void SetButtonsVisibility()
         {
             if (Forum.Opened == true)
@@ -165,9 +174,29 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                 IsOpeningVisible = Visibility.Visible;
             }
         }
+        private void UpdateComments()
+        {
+            Comments = new ObservableCollection<ForumComment>(forumCommentService.GetAllByForumId(Forum.Id));
+            Comments = new ObservableCollection<ForumComment>(Comments.Reverse());
+            NewComment = "";
+        }
+        private void ShowMessageBoxForSuccessfullClosing()
+        {
+            Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("Forum successfully closed!", "/Resources/Images/lock.png");
+            messageBox.Owner = Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault();
+            messageBox.ShowDialog();
+        }
+        private void ShowMessageBoxForSuccessfullOpening()
+        {
+            Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("Forum successfully opened!", "/Resources/Images/padlock-unlock.png");
+            messageBox.Owner = Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault();
+            messageBox.ShowDialog();
+        }
+
+        //execute commands
         private void OpenForum_Executed(object sender)
         {
-            Forum=forumService.Open(forum, guest1);  //provjeriti       
+            Forum=forumService.Open(forum, guest1);       
             IsClosingVisible = Visibility.Visible;
             IsOpeningVisible = Visibility.Hidden;
             IsCommentingEnabled = Forum.Opened;
@@ -192,27 +221,12 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                 ShowMessageBoxForInvalidCommenting();
 
         }
-        private void UpdateComments()
-        {
-            Comments = new ObservableCollection<ForumComment>(forumCommentService.GetAllByForumId(Forum.Id));
-            Comments = new ObservableCollection<ForumComment>(Comments.Reverse());
-            NewComment = "";
-        }
 
         private void Back_Executed(object sender)
         {
             ForumView forumView = new ForumView(guest1);
             Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault().Main.Content = forumView;
-        }
-
-
-        private void MakeCommands()
-        {
-            CloseForumCommand = new RelayCommand(CloseForum_Executed, CanExecute);
-            BackCommand = new RelayCommand(Back_Executed, CanExecute);  
-            AddCommentCommand = new RelayCommand(AddComment_Executed, CanExecute); 
-            OpenForumCommand = new RelayCommand(OpenForum_Executed, CanExecute);
-        }
+        } 
         private void CloseForum_Executed(object sender)
         {
             if(guest1.Id == Forum.Guest1.Id)    //ako je to gost koji je i napravio forum
@@ -223,20 +237,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                 ShowMessageBoxForSuccessfullClosing();
             }
         }
-        
-        private void ShowMessageBoxForSuccessfullClosing()
-        {
-            Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("Forum successfully closed!", "/Resources/Images/lock.png");
-            messageBox.Owner = Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault();
-            messageBox.ShowDialog();
-        }
-        private void ShowMessageBoxForSuccessfullOpening()
-        {
-            Guest1OkMessageBoxView messageBox = new Guest1OkMessageBoxView("Forum successfully opened!", "/Resources/Images/padlock-unlock.png");
-            messageBox.Owner = Application.Current.Windows.OfType<Guest1HomeView>().FirstOrDefault();
-            messageBox.ShowDialog();
-        }
-
 
         //Message box - no comment entered
         private void ShowMessageBoxForInvalidCommenting()

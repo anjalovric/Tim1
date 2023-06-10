@@ -36,6 +36,8 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         {
             this.guest2 = guest;
             this.org = org;
+            WinningAVoucher winningAVoucher = new WinningAVoucher(guest2.Id);
+            winningAVoucher.CountOfTours();
             voucherService = new VoucherService();
             vouchers = new ObservableCollection<Voucher>();
             Vouchers = new ObservableCollection<Voucher>(voucherService.FindAllVouchers(guest2));

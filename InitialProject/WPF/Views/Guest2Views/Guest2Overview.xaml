@@ -8,7 +8,7 @@
         xmlns:l="clr-namespace:InitialProject.Help"
         xmlns:properties="clr-namespace:InitialProject.Properties"
         mc:Ignorable="d"
-        Title="Booking" Height="768" Width="1024" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" xmlns:HelpProvider.HelpKey="Forma">
+        Title="Booking" Height="800" Width="1100" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" xmlns:HelpProvider.HelpKey="Forma">
     <Window.InputBindings>
         <KeyBinding Key="F1" Command="{Binding HelpCommandInViewModel}" />
     </Window.InputBindings>
@@ -22,13 +22,14 @@
 
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="2*"/>
+            <RowDefinition Height="251*"/>
+            <RowDefinition Height="381*"/>
+            <RowDefinition Height="121*"/>
         </Grid.RowDefinitions>
-        <Border Grid.Column="0" Grid.Row="0" BorderBrush="Black" Background="#FF14503F" Margin="0,0,0,501" Grid.RowSpan="2"/>
-        <Image Source="{Binding ImageSource, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Grid.Row="0" Height="171" Width="247"/>
-        <Border Grid.Column="0" Grid.Row="1" BorderBrush="Black" Background="#FF14503F"/>
-        <Menu HorizontalAlignment="Center" Width="256" Background="#FF14503F" Grid.Row="1">
+        <Border Grid.Column="0" Grid.Row="0" BorderBrush="Black" Background="#FF14503F" Margin="0,0,0,380" Grid.RowSpan="2"/>
+        <Image Source="{Binding ImageSource, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Grid.Row="0" Height="171" Width="247" Margin="4,40,4,40"/>
+        <Border Grid.Column="0" Grid.Row="1" BorderBrush="Black" Background="#FF14503F" Grid.RowSpan="2"/>
+        <Menu HorizontalAlignment="Center" Width="256" Background="#FF14503F" Grid.Row="1" Grid.RowSpan="2">
             <Menu.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel Width="NaN" Margin="3,70,1,0" Background="#FF14503F" />
@@ -141,7 +142,8 @@
             </MenuItem>
 
         </Menu>
-        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,278,0,0" Grid.Column="0" Grid.Row="1" Width="124">
+        <Label Grid.Row="1" Grid.Column="0" Margin="10,380,102,90" Foreground="White" FontSize="20" FontWeight="Bold" Grid.RowSpan="2">Tooltips</Label>
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,31,0,0" Grid.Column="0" Grid.Row="2" Width="124">
             <Label  Content="OFF" Foreground="White" Style="{DynamicResource Label}" HorizontalContentAlignment="Right" Width="36"/>
             <CheckBox  x:Name="themeCheckBox" Style="{DynamicResource CheckBoxStyle1}" IsChecked="{Binding ButtonIsChecked}" Width="61" Height="30" />
             <Label Content="ON" Foreground="White" Style="{DynamicResource Label}" Width="47"/>
@@ -156,6 +158,6 @@
                 </MultiBinding>
             </TextBlock.Text>
         </TextBlock>
-        <ContentControl x:Name="CC" Grid.Column="1" Background="#FF14503F" Grid.RowSpan="2"/>
+        <ContentControl x:Name="CC" Grid.Column="1" Background="#FF14503F" Grid.RowSpan="3"/>
     </Grid>
 </Window>
