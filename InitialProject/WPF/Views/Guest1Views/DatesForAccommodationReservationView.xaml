@@ -90,8 +90,7 @@
         
         <Grid>
 
-            <Image Source="/Resources/Images/locations.png" Opacity="0.1" Stretch="Fill"></Image>
-
+           
             <Label Content="SELECT DESIRED DATE" Foreground="#22301a" Height="Auto" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" Margin="0,25,0,0" FontWeight="Bold" FontFamily="Baskerville Old Face" TextElement.FontSize="24"></Label>
             
             <!-- SUGGESTED DATES FOR SELECTED ACCOMMODATION -->

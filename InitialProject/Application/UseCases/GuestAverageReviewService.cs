@@ -29,7 +29,7 @@ namespace InitialProject.Service
                 }
             }
             if (counter == 0)
-                return 1;
+                return 0;
             return sumCleanlinessReview / counter;
         }
 
@@ -47,7 +47,7 @@ namespace InitialProject.Service
                 }
             }
             if (counter == 0)
-                return 1;
+                return 0;
             return sumFollowingRulesReview / counter;
         }
         public int GetReviewsNumberByGuest(Guest1 guest1)
@@ -67,6 +67,11 @@ namespace InitialProject.Service
         public int GetAverageRating(Guest1 guest1)
         {
             return Convert.ToInt32((GetAverageCleanlinessReview(guest1) + GetAverageFollowingRulesReview(guest1)) / 2);
+        }
+
+        public double GetAverageRatingForReport(Guest1 guest1)
+        {
+            return (GetAverageCleanlinessReview(guest1) + GetAverageFollowingRulesReview(guest1)) / 2;
         }
 
         public double GetAverageRatingByMonth(DateTime date, Guest1 guest1, DateTime current)
