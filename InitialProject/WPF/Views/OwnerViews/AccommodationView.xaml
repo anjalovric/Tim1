@@ -75,7 +75,19 @@
                 </Style>
             </ListBox.Resources>
         </ListBox>
-        <Button Command="{Binding NewAccommodationCommand}" Name="NewAccommodationButton" Content="New Accommodation" HorizontalAlignment="Center" Margin="31,474,31,0"  Width="354" Height="43" VerticalAlignment="Top" Style="{StaticResource BasicButton}"/>
+       
+        <Button Command="{Binding NewAccommodationCommand}" Name="NewAccommodationButton" Content="New Accommodation" HorizontalAlignment="Center" Margin="31,474,31,0"  Width="354" Height="43" VerticalAlignment="Top">
+            <Button.Style>
+                <Style TargetType="Button" BasedOn="{StaticResource BasicButton}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsNewAccommodationPressedInDemo, UpdateSourceTrigger=PropertyChanged}" Value="True">
+                            <Setter Property="Background" Value="AliceBlue" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        
         <Button Command="{Binding MyRenovationsCommand}" Content="My Renovations" HorizontalAlignment="Center" Margin="31,540,31,0"  Width="354" Height="43" VerticalAlignment="Top" Style="{StaticResource BasicButton}"/>
         <StackPanel Margin="0,0,0,525" Background="LightGray" Visibility="{Binding Path=StackPanelVisibility, UpdateSourceTrigger=PropertyChanged}">
             <Grid Height="100">
@@ -96,7 +108,17 @@
                     <Image Grid.Column="0" Height="30" Source="/Resources/Images/success.png" />
                     <Label Grid.Column="1" Content="{Binding Path=StackPanelMessage, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center"  FontSize="15"/>
                 </Grid>
-                <Button Command="{Binding OKCommand}" Content="OK" Grid.Row="2" Grid.Column="1" Margin="0,0,31,0" Style="{StaticResource DataTemplateButton}" />
+                <Button Command="{Binding OKCommand}" Content="OK" Grid.Row="2" Grid.Column="1" Margin="0,0,31,0">
+                    <Button.Style>
+                        <Style TargetType="Button" BasedOn="{StaticResource DataTemplateButton}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Path= IsOkPressedInDemo, UpdateSourceTrigger=PropertyChanged}" Value="True">
+                                    <Setter Property="Background" Value="AliceBlue"></Setter>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
             </Grid>
         </StackPanel>
     </Grid>

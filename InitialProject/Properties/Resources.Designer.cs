@@ -286,6 +286,15 @@ namespace InitialProject.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to CHANGE VALIDITY.
+        /// </summary>
+        internal static string CHANGEVALIDITY {
+            get {
+                return ResourceManager.GetString("CHANGEVALIDITY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Checked.
         /// </summary>
         internal static string Checked {
@@ -574,7 +583,7 @@ namespace InitialProject.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to FINISH TOUR 🏁.
+        ///   Looks up a localized string similar to 🏁 FINISH TOUR.
         /// </summary>
         internal static string FINISHTOUR {
             get {
@@ -1123,6 +1132,24 @@ namespace InitialProject.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Selected time point is already taken.
+        /// </summary>
+        internal static string SelectOtherTime {
+            get {
+                return ResourceManager.GetString("SelectOtherTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🔎 SHOW.
+        /// </summary>
+        internal static string SHOW {
+            get {
+                return ResourceManager.GetString("SHOW", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to START.
         /// </summary>
         internal static string START {
@@ -1170,9 +1197,9 @@ namespace InitialProject.Properties {
         /// <summary>
         ///   Looks up a localized string similar to The most visited tour.
         /// </summary>
-        internal static string TheMostVisitedTour {
+        internal static string TheMostVistedTour {
             get {
-                return ResourceManager.GetString("TheMostVisitedTour", resourceCulture);
+                return ResourceManager.GetString("TheMostVistedTour", resourceCulture);
             }
         }
         

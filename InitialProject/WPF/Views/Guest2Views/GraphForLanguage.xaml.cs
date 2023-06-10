@@ -26,7 +26,7 @@ namespace InitialProject.WPF.Views.Guest2Views
         public GraphForLanguage()
         {
             requestsService = new OrdinaryTourRequestsService();
-            OrdinaryTourRequests = new List<OrdinaryTourRequests>(requestsService.GetAll());
+            OrdinaryTourRequests = new List<OrdinaryTourRequests>(requestsService.GetOnlyOrdinary());
             FindLangauge();
             Values = new ChartValues<int>();
             SeriesCollection = new SeriesCollection

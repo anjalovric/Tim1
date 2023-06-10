@@ -164,12 +164,12 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         {
             return (Arrival <= Departure && Convert.ToInt32(lengthOfStay.TotalDays) >= (NumberOfDays - 1) && Arrival.Date > DateTime.Now && Arrival != DateTime.MinValue && Departure != DateTime.MinValue);
         }
-        //Validation - owner-s conditions for min. num. of days
+        //Validation - Owner-s conditions for min. num. of days
         private bool IsEnteredCorrectDateRange()
         {
             return ((Convert.ToInt32(lengthOfStay.TotalDays) + 1) >= currentAccommodation.MinDaysForReservation && NumberOfDays >= currentAccommodation.MinDaysForReservation);
         }
-        //Validation owner's conditions for capacity
+        //Validation Owner's conditions for capacity
         private bool IsEnteredCorrectGuestsNumber()
         {
             return NumberOfGuests <= currentAccommodation.Capacity;

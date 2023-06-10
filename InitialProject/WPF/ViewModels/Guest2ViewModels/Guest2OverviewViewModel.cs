@@ -15,12 +15,29 @@ using System.Windows.Media;
 using System.Runtime.CompilerServices;
 using System.ComponentModel;
 using System.Windows.Controls.Primitives;
+using System.Windows.Input;
 
 namespace InitialProject.WPF.ViewModels.Guest2ViewModels
 {
     public class Guest2OverviewViewModel:INotifyPropertyChanged
     {
         public Model.Guest2 WindowGuest2 { get; set; }
+        private bool buttonIsChecked;
+        public bool ButtonIsChecked
+        {
+            get
+            {
+                buttonIsChecked = Properties.Settings.Default.IsToolTipEnabled;
+                return buttonIsChecked;
+            }
+            set
+            {
+                Properties.Settings.Default.IsToolTipEnabled = value;
+                Properties.Settings.Default.Save();
+                buttonIsChecked = value;
+                OnPropertyChanged("ButtonIsChecked");
+            }
+        }
         public Guest2 guest2 { get; set; }
         private Guest2Repository guest2Repository;
         public RelayCommand ShowCommand { get; set; }
@@ -107,7 +124,6 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         private void ActiveTours_Executed(object sender)
         {
             ContentControl.Content = new ActiveToursFormView(guest2);
-
         }
         private void SignOut_Executed(object sender)
         {
@@ -118,7 +134,6 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         private void ShowFinished_Executed(object sender)
         {
             ContentControl.Content = new FinishedTourInstancesFormView(guest2);
-
         }
         private void GetGuest2ByUser(User user)
         {

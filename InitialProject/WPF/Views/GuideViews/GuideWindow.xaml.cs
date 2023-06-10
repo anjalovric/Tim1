@@ -14,6 +14,5 @@ namespace InitialProject.WPF.Views.GuideViews
             InitializeComponent();
             DataContext = new GuideWindowViewModel(user);
         }
-
     }
 }

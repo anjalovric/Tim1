@@ -16,7 +16,7 @@ namespace InitialProject.Model
         public string Email { get; set; }
         public int Age { get; set; }
         public Boolean Active { get; set; }
-
+        public Boolean IsSuperGuide { get; set; }
 
         public Guide() { }
         public void FromCSV(string[] values)
@@ -28,11 +28,12 @@ namespace InitialProject.Model
             Email= values[4];
             Age = Convert.ToInt32(values[5]);
             Active = Convert.ToBoolean(values[6]);
+            IsSuperGuide = Convert.ToBoolean(values[7]);
         }
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), Name, LastName, Username,Email,Age.ToString(),Active.ToString() };
+            string[] csvValues = { Id.ToString(), Name, LastName, Username,Email,Age.ToString(),Active.ToString(), IsSuperGuide.ToString()};
             return csvValues;
         }
         public string ToString()

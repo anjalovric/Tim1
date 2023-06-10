@@ -29,7 +29,18 @@
                 </Grid.RowDefinitions>
                 <Label Content="Upcoming renovations" Foreground="LightGray" Grid.Column="0" Grid.Row="0" VerticalAlignment="Bottom" Margin="10, 0, 0, 0"/>
                 <Label Content="Renovated objects" Foreground="LightGray" Grid.Column="1" Grid.Row="0" VerticalAlignment="Bottom" Margin="20, 0, 0, 0"/>
-                <Label Content="{Binding Path=UpcomingRenovations, UpdateSourceTrigger=PropertyChanged}" FontWeight="Bold" FontSize="42"  Foreground="LightGray" Grid.Column="0" Grid.Row="1" VerticalAlignment="Top" Margin="10, 0, 0, 0"/>
+                <Label FontWeight="Bold" FontSize="42"  Foreground="LightGray" Grid.Column="0" Grid.Row="1" VerticalAlignment="Top" Margin="10, 0, 0, 0">
+                    <Label.Style>
+                        <Style TargetType="Label">
+                            <Setter Property="Content" Value="{Binding Path=UpcomingRenovations, UpdateSourceTrigger=PropertyChanged}"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Path= IsDemoOn, UpdateSourceTrigger=PropertyChanged}" Value="True">
+                                    <Setter Property="Content" Value="{Binding Path=UpcomingRenovationsDemo, UpdateSourceTrigger=PropertyChanged}" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Label.Style>
+                </Label>
                 <Label Content="{Binding Path=RenovatedObjects, UpdateSourceTrigger=PropertyChanged}" FontWeight="Bold" FontSize="42"  Foreground="LightGray" Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" Margin="20, 0, 0, 0"/>
             </Grid>
         </Border>
@@ -70,7 +81,17 @@
                 </Style>
             </DataGrid.CellStyle>
         </DataGrid>
-        <Button Command="{Binding NewRenovationCommand}" Grid.Row="3" Height="41" Style="{StaticResource BasicButton}">New Renovation</Button>
+        <Button Content="New Renovation" Command="{Binding NewRenovationCommand}" Grid.Row="3" Height="41">
+            <Button.Style>
+                <Style TargetType="Button" BasedOn="{StaticResource BasicButton}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsNewRenovationPressedInDemo, UpdateSourceTrigger=PropertyChanged}" Value="True">
+                            <Setter Property="Background" Value="AliceBlue"></Setter>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
         <StackPanel Margin="-29.5,-30,-29.5,75" Background="LightGray" Visibility="{Binding Path=StackPanelVisibility, UpdateSourceTrigger=PropertyChanged}">
             <Grid Height="100">
                 <Grid.ColumnDefinitions>
@@ -90,7 +111,7 @@
                     <Image Grid.Column="0" Height="30" Source="/Resources/Images/success.png" />
                     <Label Grid.Column="1" Content="{Binding Path=StackPanelMessage, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center"  FontSize="15"/>
                 </Grid>
-                <Button Command="{Binding OKCommand}" Grid.Row="2" Grid.Column="1" Content="OK" Margin="0,0,31,0" Style="{StaticResource DataTemplateButton}"/>
+                <Button Name="OkButton" Command="{Binding OKCommand}" Grid.Row="2" Grid.Column="1" Content="OK" Margin="0,0,31,0" Style="{StaticResource DataTemplateButton}"/>
             </Grid>
         </StackPanel>
 

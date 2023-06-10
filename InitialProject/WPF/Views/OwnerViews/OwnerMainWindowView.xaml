@@ -9,6 +9,7 @@
         Title="OwnerMainWindowView" Height="750" Width="430" Background="#b3cee5" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <converters:ActivePageTitleConverter x:Key="ActivePageTitleConverter" />
+        <converters:ActivePageToDemoCommandConverter x:Key="ActivePateToDemoCommandConverter" />
     </Window.Resources>
 
     <Grid>
@@ -49,7 +50,7 @@
                     <Image Source="/Resources/Images/home.png" Margin="0,-5,-58,-6" />
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Width="83" Height="30"  HorizontalContentAlignment="Center" BorderBrush="LightGray">
+            <MenuItem Width="83" Height="30" Command="{Binding ElementName=FrameForPages, Path=Content, Converter={StaticResource ActivePateToDemoCommandConverter}}"  HorizontalContentAlignment="Center" BorderBrush="LightGray">
                 <MenuItem.Icon>
                     <Image Source="/Resources/Images/question_mark.png" Margin="0,-6,-57,-7" />
                 </MenuItem.Icon>

@@ -74,6 +74,6 @@ namespace InitialProject
                 TranslationSource.Instance.CurrentCulture = new System.Globalization.CultureInfo("sr-LATN");
             }
         }
-      
+
+        }
     }
-}

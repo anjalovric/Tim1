@@ -17,11 +17,14 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         public OwnerReview OwnerReview { get; set; }
 
         private string imageUrl;
-        private List<AccommodationReviewImage> Images { get; set; }
+        public List<AccommodationReviewImage> Images { get; set; }
         private int imageCounter;
         public RelayCommand NextImageCommand { get; set; }
         public RelayCommand PreviousImageCommand { get; set; }
         public DateOnly Arrival { get; set; }
+        private bool isCancelPressedInDemo = false;
+        private bool isNextPicturePressedInDemo = false;
+        private bool isDemoOn = false;
 
         public event PropertyChangedEventHandler? PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -105,6 +108,45 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             else
                 imageCounter = 0;
             ImageUrl = "/" + Images[imageCounter].RelativeUri;
+        }
+
+        public bool IsCancelPressedInDemo
+        {
+            get => isCancelPressedInDemo;
+            set
+            {
+                if (value != isCancelPressedInDemo)
+                {
+                    isCancelPressedInDemo = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public bool IsNextPicturePressedInDemo
+        {
+            get => isNextPicturePressedInDemo;
+            set
+            {
+                if (value != isNextPicturePressedInDemo)
+                {
+                    isNextPicturePressedInDemo = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public bool IsDemoOn
+        {
+            get => isDemoOn;
+            set
+            {
+                if (value != isDemoOn)
+                {
+                    isDemoOn = value;
+                    OnPropertyChanged();
+                }
+            }
         }
     }
 }

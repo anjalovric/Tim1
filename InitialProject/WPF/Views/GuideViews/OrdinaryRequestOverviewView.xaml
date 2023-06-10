@@ -65,7 +65,7 @@
             <Label Grid.Column="5" Content="{ns:Loc StartTime}" Style="{DynamicResource StatisticLabel}" HorizontalAlignment="Left" Margin="10,32,0,0" VerticalAlignment="Top" Height="36" Grid.RowSpan="2"/>
             <DatePicker  Grid.Column="5" Text="{Binding End,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" HorizontalAlignment="Left" Margin="84,0,0,0" Grid.Row="1" VerticalAlignment="Center" Width="125" Height="30"/>
             <Label Content="{ns:Loc EndTime}" Style="{DynamicResource StatisticLabel}" Grid.Column="5" Grid.Row="1" Height="30" Width="82" HorizontalAlignment="Left" Margin="10,18,0,0" VerticalAlignment="Top"/>
-            <Label Content="{ns:Loc SelectFilters}" Style="{DynamicResource Labels}" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="43" Width="226" Margin="10,0,0,0"/>
+            <Label Content="{ns:Loc SelectFilters}" Style="{DynamicResource Label}" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="43" Width="226" Margin="10,0,0,0"/>
             <Button Content="▼" Command="{Binding SearchCommand}" FontSize="20" Style="{DynamicResource Button}" Grid.Column="7" Grid.Row="1" Height="37" Width="59" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             <Button Content="↻" Command="{Binding ResetCommand}" Style="{DynamicResource Button}" FontSize="20" Grid.Column="8" Grid.Row="1" Height="37" Width="60" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>
@@ -145,7 +145,7 @@
             </DataGrid.CellStyle>
         </DataGrid>
         <TextBox TextWrapping="Wrap"   Style="{DynamicResource TextBox}"  Grid.Row="4" Grid.Column="1"  HorizontalAlignment="Center" FontSize="14" FontWeight="Medium" Text="{Binding Description}" VerticalAlignment="Top" Width="964" Height="100" Margin="0,279,0,0"/>
-        <Label Grid.Column="1" Content="{ns:Loc RequestsList}" Style="{DynamicResource Labels}" FontSize="16" HorizontalAlignment="Left" Grid.Row="3" VerticalAlignment="Top" Width="268"/>
-        <Label Grid.Column="1" Content="{ns:Loc Description}" Style="{DynamicResource Labels}" FontSize="16" Margin="4,244,0,0" Grid.Row="4" VerticalAlignment="Top" Width="168" Height="35"/>
+        <Label Grid.Column="1" Content="{ns:Loc RequestsList}" Style="{DynamicResource Label}" FontSize="16" HorizontalAlignment="Left" Grid.Row="3" VerticalAlignment="Top" Width="268"/>
+        <Label Grid.Column="1" Content="{ns:Loc Description}" Style="{DynamicResource Label}" FontSize="16" Margin="0,244,822,0" Grid.Row="4" VerticalAlignment="Top" Width="168" Height="35"/>
     </Grid>
 </Page>

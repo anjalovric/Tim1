@@ -189,6 +189,9 @@
   <data name="Capacity" xml:space="preserve">
     <value>Kapacitet</value>
   </data>
+  <data name="CHANGEVALIDITY" xml:space="preserve">
+    <value>PROMENA VALIDNOSTI</value>
+  </data>
   <data name="Checked" xml:space="preserve">
     <value>Posećena</value>
   </data>
@@ -286,7 +289,7 @@
     <value>Održane ture:</value>
   </data>
   <data name="FINISHTOUR" xml:space="preserve">
-    <value>ZAVRŠI TURU 🏁</value>
+    <value>🏁 ZAVRŠI TURU</value>
   </data>
   <data name="FirstName" xml:space="preserve">
     <value>Ime</value>
@@ -471,6 +474,12 @@
   <data name="SelectFilters" xml:space="preserve">
     <value>Odaberite filtere:</value>
   </data>
+  <data name="SelectOtherTime" xml:space="preserve">
+    <value>Odabrana satnica je već zauzeta</value>
+  </data>
+  <data name="SHOW" xml:space="preserve">
+    <value>🔎 PRIKAŽI</value>
+  </data>
   <data name="START" xml:space="preserve">
     <value>POČNI</value>
   </data>
@@ -486,11 +495,11 @@
   <data name="themost" xml:space="preserve">
     <value>na najpoželjnijem</value>
   </data>
-  <data name="TheMostVisitedTour" xml:space="preserve">
+  <data name="TheMostVistedTour" xml:space="preserve">
     <value>Najposećenija tura</value>
   </data>
   <data name="TheMostVistedTourYear" xml:space="preserve">
-    <value>za izabranu godinu</value>
+    <value>za odabranu godinu</value>
   </data>
   <data name="Themostwanted" xml:space="preserve">
     <value>Najpoželjniji</value>

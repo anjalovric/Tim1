@@ -98,7 +98,13 @@
             <Button x:Name="dekrementNumber2" Content="-" HorizontalAlignment="Left" Command="{Binding Knowledge_Decrement_Command}" Margin="10,0,0,0" VerticalAlignment="Center" Width="30"  Height="28" BorderBrush="#FFCAC1C1" Background="#FFEDEDED" BorderThickness="1" Grid.Column="2" Grid.Row="1"/>
             <Label Content="Add comment" Foreground="Black" FontWeight="Bold" FontSize="20" Margin="10,29,176,216" Grid.Row="4" Grid.Column="1" Grid.RowSpan="2"/>
             <Label Content="Add photos" Foreground="Black" FontWeight="Bold" FontSize="20" Margin="10,29,176,223" Grid.Column="2" Grid.Row="4" Grid.RowSpan="2"/>
-            <tk:WatermarkTextBox x:Name="comment" Text="{Binding Path=Comment, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Margin="10,15,30,15" Grid.Column="1" Watermark="Enter comment here" BorderBrush="#FFCAC1C1" BorderThickness="0,0,0,2" Grid.Row="5" Background="#FFEDEDED"/>
+            <tk:WatermarkTextBox x:Name="comment" Text="{Binding Path=Comment, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Margin="10,15,30,15" Grid.Column="1" Watermark="Enter comment here" BorderBrush="#FFCAC1C1" BorderThickness="0,0,0,2" Grid.Row="5" Background="#FFEDEDED">
+                <tk:WatermarkTextBox.Style>
+                    <Style TargetType="{x:Type tk:WatermarkTextBox}">
+                        <Setter Property="Cursor" Value="IBeam"/>
+                    </Style>
+                </tk:WatermarkTextBox.Style>
+            </tk:WatermarkTextBox>
             <Button HorizontalAlignment="Left" Grid.Row="6" VerticalAlignment="Top"  Height="34" Width="132" FontWeight="Bold" FontSize="18" Command="{Binding ConfirmCommand}" Margin="84,10,0,0" Grid.Column="2" Background="#ffba00" ToolTipService.ShowDuration="5000" ToolTipService.IsEnabled="{Binding Source={x:Static properties:Settings.Default}, Path=IsToolTipEnabled}">
                 <Grid Background="#ffba00" Width="144" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35">
                     <Grid.RowDefinitions>
@@ -119,6 +125,11 @@
                         </StackPanel>
                     </ToolTip>
                 </Button.ToolTip>
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Cursor" Value="Hand"/>
+                    </Style>
+                </Button.Style>
             </Button>
             <Button HorizontalAlignment="Left" Grid.Row="6" VerticalAlignment="Top" BorderBrush="#FF9E98FF" Height="34" Width="132" FontWeight="Bold" FontSize="18" Command="{Binding CancelCommand}" Margin="221,10,0,0" Grid.Column="2" ToolTipService.ShowDuration="5000" ToolTipService.IsEnabled="{Binding Source={x:Static properties:Settings.Default}, Path=IsToolTipEnabled}">
                 <Grid Background="White" Width="144" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35">
@@ -140,6 +151,11 @@
                         </StackPanel>
                     </ToolTip>
                 </Button.ToolTip>
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Cursor" Value="Hand"/>
+                    </Style>
+                </Button.Style>
             </Button>
             <Border Background="Transparent" BorderBrush="#FFCAC1C1" BorderThickness="2,2,2,2" Margin="10,15,10,15" Visibility="Visible" Grid.Column="2" Grid.Row="5"/>
 

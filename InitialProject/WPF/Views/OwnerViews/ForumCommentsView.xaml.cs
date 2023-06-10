@@ -22,12 +22,12 @@ namespace InitialProject.WPF.Views.OwnerViews
     /// </summary>
     public partial class ForumCommentsView : Page
     {
-        public ForumCommentsViewModel viewModel { get; set; }
+        public ForumCommentsViewModel ViewModel { get; set; }
         public ForumCommentsView(OneForumViewModel forum, Owner owner)
         {
             InitializeComponent();
-            viewModel = new ForumCommentsViewModel(forum, owner);
-            this.DataContext = viewModel;
+            ViewModel = new ForumCommentsViewModel(forum, owner);
+            this.DataContext = ViewModel;
         }
     }
 }

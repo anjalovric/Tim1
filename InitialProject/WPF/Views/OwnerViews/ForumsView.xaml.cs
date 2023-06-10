@@ -12,8 +12,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using DotLiquid.Tags;
+using System.Windows.Threading;
 using InitialProject.Model;
 using InitialProject.WPF.ViewModels.OwnerViewModels;
+using NPOI.SS.Formula.Functions;
 
 namespace InitialProject.WPF.Views.OwnerViews
 {
@@ -22,12 +25,13 @@ namespace InitialProject.WPF.Views.OwnerViews
     /// </summary>
     public partial class ForumsView : Page
     {
-        public ForumsViewModel viewModel { get; set; }
+        public ForumsViewModel ViewModel { get; set; }
         public ForumsView(Owner owner)
         {
             InitializeComponent();
-            viewModel = new ForumsViewModel(owner);
-            this.DataContext = viewModel;
+            ViewModel = new ForumsViewModel(owner);
+            this.DataContext = ViewModel;
         }
+        
     }
 }
