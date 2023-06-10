@@ -23,12 +23,28 @@ namespace InitialProject.WPF.Views
     /// </summary>
     public partial class OwnerReviewView : Page
     {
-        private OwnerReviewViewModel ownerReviewViewModel;
+        public OwnerReviewViewModel OwnerReviewViewModel { get; set; }
         public OwnerReviewView(OwnerReview ownerReview)
         {
             InitializeComponent();
-            ownerReviewViewModel = new OwnerReviewViewModel(ownerReview);
-            DataContext = ownerReviewViewModel;
+            OwnerReviewViewModel = new OwnerReviewViewModel(ownerReview);
+            DataContext = OwnerReviewViewModel;
+        }
+
+        public void PressButtons()
+        {
+            if(OwnerReviewViewModel.IsCancelPressedInDemo)
+            {
+                ExitButton.Background = new SolidColorBrush(Colors.LightBlue);
+            }
+            if(OwnerReviewViewModel.IsNextPicturePressedInDemo)
+            {
+                PreviousImageButton.Background = new SolidColorBrush(Colors.LightBlue);
+            }
+            else
+            {
+                PreviousImageButton.Background = new SolidColorBrush(Colors.Transparent);
+            }
         }
     }
 }

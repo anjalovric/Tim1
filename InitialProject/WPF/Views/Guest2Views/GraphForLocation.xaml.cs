@@ -28,7 +28,7 @@ namespace InitialProject.WPF.Views.Guest2Views
         public GraphForLocation()
         {
             requestsService = new OrdinaryTourRequestsService();
-            OrdinaryTourRequests = new List<Domain.Model.OrdinaryTourRequests>(requestsService.GetAll());
+            OrdinaryTourRequests = new List<Domain.Model.OrdinaryTourRequests>(requestsService.GetOnlyOrdinary());
             locationService = new LocationService();
             locations = new List<Model.Location>(locationService.GetAll());
             FindLocation();

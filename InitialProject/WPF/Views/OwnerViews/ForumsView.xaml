@@ -13,10 +13,10 @@
             <Border Background="LightGray" BorderBrush="DarkGray" BorderThickness="0.5" Margin="0,0,0,0" >
                 <Grid Margin="0, 0, 0, 0">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="3.5*"/>
-                        <ColumnDefinition />
-                        <ColumnDefinition Width="1.5*"/>
+                        <ColumnDefinition Width="30"/>
+                        <ColumnDefinition Width="190"/>
+                        <ColumnDefinition Width="30"/>
+                        <ColumnDefinition Width="80"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="40"/>
@@ -35,23 +35,28 @@
                     </Image>
                     <TextBlock Grid.Row="0" Grid.Column="1" VerticalAlignment="Center">
                         <Run Text="Location: "/>
-                        <Run Text="{Binding Path=Forum.Location.City}" FontSize="15"/>
+                        <Run Text="{Binding Path=Forum.Location.City}" FontSize="15" FontWeight="SemiBold"/>
                         <Run Text=", " FontSize="15"/>
-                        <Run Text="{Binding Path=Forum.Location.Country}" FontSize="15"/>
+                        <Run Text="{Binding Path=Forum.Location.Country}" FontSize="15" FontWeight="SemiBold"/>
                     </TextBlock>
                     <Image Source="/Resources/Images/star.png" Height="20" Width="20" Grid.Column="2" >
                         <Image.Style>
                             <Style TargetType="Image">
                                 <Setter Property="Visibility" Value="Hidden"/>
                                 <Style.Triggers>
-                                    <DataTrigger Binding="{Binding IsVeryUseful}" Value="True">
+                                    <DataTrigger Binding="{Binding Forum.IsVeryUseful}" Value="True">
                                         <Setter Property="Visibility" Value="Visible"/>
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
                         </Image.Style>
                     </Image>
-                    <Button Command="{Binding Path=DataContext.ViewCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" Name="ViewButton" Content="View"  Grid.Column="3" Grid.Row="0" Height="20" Width="50" HorizontalContentAlignment="Center" Style="{StaticResource DataTemplateButton}" Margin="0, 0, 2,0"></Button>
+                    <Button Command="{Binding Path=DataContext.ViewCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" Name="ViewButton" Content="View"  Grid.Column="3" Grid.Row="0" Height="20" Width="50" HorizontalContentAlignment="Center" Margin="0, 0, 2,0">
+                        <Button.Style>
+                            <Style TargetType="Button" BasedOn="{StaticResource DataTemplateButton}">
+                            </Style>
+                        </Button.Style>
+                    </Button>
                 </Grid>
             </Border>
 
@@ -89,7 +94,7 @@
                 </Style>
             </ListBox.Resources>
         </ListBox>
-        <ListBox Grid.Row="3" ItemsSource="{Binding Path=Forums}" ItemTemplate="{StaticResource forum}" IsSynchronizedWithCurrentItem="True" SelectedItem="{Binding SelectedForum, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" SelectionMode="Single" HorizontalContentAlignment="Stretch" Style="{StaticResource ListBoxStyle}">
+        <ListBox x:Name="AllForumsListBox" Grid.Row="3" ItemsSource="{Binding Path=Forums}" ItemTemplate="{StaticResource forum}" IsSynchronizedWithCurrentItem="True" SelectedItem="{Binding SelectedForum, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" SelectionMode="Single" HorizontalContentAlignment="Stretch" Style="{StaticResource ListBoxStyle}">
             <ListBox.Resources>
                 <Style TargetType="ListBoxItem">
                     <Style.Triggers>

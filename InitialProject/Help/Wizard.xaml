@@ -1,0 +1,111 @@
+﻿<Window x:Class="InitialProject.Help.Wizard"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InitialProject.Help"
+        xmlns:xctk="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit.NET5" 
+        mc:Ignorable="d"
+        Title="Wizard" Height="530" Width="800" WindowStartupLocation="CenterScreen">
+
+    <Grid>
+        <xctk:Wizard FinishButtonClosesWindow="True" HelpButtonVisibility="Hidden">
+
+            <xctk:WizardPage x:Name="IntroPage" 
+                                   Title="Welcome to my Wizard"
+                                   Description="Thank you for using this application. This Wizard will walk you though how to do something.">
+                <Grid>
+                    
+                    <Label Margin="0,217,0,23">To continue, click Next.</Label>
+                    <Image Source="/Resources/Images/Wizard .png" Margin="-180,-73,605,-14"/>
+                    
+                </Grid>
+            </xctk:WizardPage>
+            <xctk:WizardPage x:Name="Page" PageType="Interior" 
+                                   NextPage="{Binding ElementName=Page1}"
+                                   PreviousPage="{Binding ElementName=IntroPage}"
+                                   Title="Showing, searhcing tours and tour reservation">
+                <Grid>
+                    <Image Source="/Resources/Images/showTours.png" HorizontalAlignment="Left"/>
+                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Margin="440,0,0,0" RenderTransformOrigin="0.5,0.5" Width="255" Text="This is the page for displaying all tours. On this page, you can search for tours, book a specific tour, and view details about each available tour. If you want to reserve tour, clicking the button will bring up the following form. By filling in the fields and clicking the Confirm button, you will create a new reservation. Clicking Cancel will cancel the tour reservation."/>
+                    <Image Source="/Resources/Images/reservation.png" HorizontalAlignment="Left" Margin="440,140,0,0"/>
+                </Grid>
+            </xctk:WizardPage>
+            <xctk:WizardPage x:Name="Page1" PageType="Interior"
+                                   Title="Active tours"         
+                                   NextPage="{Binding ElementName=Page2}"
+                                   PreviousPage="{Binding ElementName=Page}">
+                <Grid>
+                    <Image Source="/Resources/Images/activeTours.png" HorizontalAlignment="Left"/>
+                    <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" Margin="440,0,0,0" RenderTransformOrigin="0.5,0.5" Width="255" Text="This is the page for displaying all active tours that you have booked."/>
+
+                </Grid>
+            </xctk:WizardPage>
+            <xctk:WizardPage x:Name="Page2" PageType="Interior"
+                                   Title="Showing all notifications"
+                                   NextPage="{Binding ElementName=Page3}"
+                                   PreviousPage="{Binding ElementName=Page1}">
+                <Grid>
+                    <Image Source="/Resources/Images/notifications.png" HorizontalAlignment="Left"/>
+                    <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" Margin="440,0,0,0" RenderTransformOrigin="0.5,0.5" Width="255" Text="This is the page for notifications. The View button is used to display the details of a notification, while the Delete button is used to remove the notification from the list of all notifications."/>
+
+                </Grid>
+            </xctk:WizardPage>
+            <xctk:WizardPage x:Name="Page3" PageType="Interior"
+                                   Title="Finished tours, guide and tour review"
+                                   NextPage="{Binding ElementName=Page4}"
+                                   PreviousPage="{Binding ElementName=Page2}">
+                <Grid>
+                    <Image Source="/Resources/Images/finishedTours.png" HorizontalAlignment="Left"/>
+                    <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" Margin="440,0,0,0" RenderTransformOrigin="0.5,0.5" Width="255" Text="This is the page for displaying all completed tours that you can rate by clicking on the Rate button.  If you want to rate tour, clicking the button will bring up the following form. By filling in the fields and clicking the Confirm button, you will rate tour. Clicking Cancel you will cancel the tour rating."/>
+                    <Image Source="/Resources/Images/rateTours.png" HorizontalAlignment="Left" Margin="440,160,0,0"/>
+                </Grid>
+            </xctk:WizardPage>
+            <xctk:WizardPage x:Name="Page4" PageType="Interior"
+                                   Title="Showing vouchers"
+                                   NextPage="{Binding ElementName=Page5}"
+                                   PreviousPage="{Binding ElementName=Page3}">
+                <Grid>
+                    <Image Source="/Resources/Images/vouchers.png" HorizontalAlignment="Left"/>
+                    <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" Margin="440,0,0,0" RenderTransformOrigin="0.5,0.5" Width="255" Text="This is the page for displaying all vouchers that you won."/>
+
+                </Grid>
+            </xctk:WizardPage>
+            <xctk:WizardPage x:Name="Page5" PageType="Interior"
+                                   Title="Showing and creating ordinary tour request"
+                                   NextPage="{Binding ElementName=Page6}"
+                                   PreviousPage="{Binding ElementName=Page4}">
+                <Grid>
+                    <Image Source="/Resources/Images/ordinary.png" HorizontalAlignment="Left"/>
+                    <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" Margin="440,0,0,0" RenderTransformOrigin="0.5,0.5" Width="255" Text="This is the page for displaying all ordinary requests for tour. If you want to create a new request, clicking the button will bring up the following form. By filling in the fields and clicking the Confirm button, you will create a new request. Clicking Cancel will cancel the request creation."/>
+                    <Image Source="/Resources/Images/creatingRequest.png" HorizontalAlignment="Left" Margin="440,115,0,0"/>
+                </Grid>
+            </xctk:WizardPage>
+            <xctk:WizardPage x:Name="Page6" PageType="Interior"
+                                   Title="Showing and creating complex tour request"
+                                   NextPage="{Binding ElementName=Page7}"
+                                   PreviousPage="{Binding ElementName=Page5}">
+                <Grid>
+                    <Image Source="/Resources/Images/complex.png" HorizontalAlignment="Left"/>
+                    <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" Margin="440,0,0,0" RenderTransformOrigin="0.5,0.5" Width="255" Text="This is the page for displaying all compelx requests for tour.  If you want to create a new request, clicking the button will bring up the following form. By filling in the fields and clicking the Add button, you will create a ordinary request. Clicking Confirm you will create a complex request. Clicking Cancel will cancel the request creation."/>
+                    <Image Source="/Resources/Images/creatingComplex.png" HorizontalAlignment="Left" Margin="440,140,0,0"/>
+                </Grid>
+            </xctk:WizardPage>
+            <xctk:WizardPage x:Name="Page7" PageType="Interior"
+                                   Title="Showing tour request statistics"
+                                   NextPage="{Binding ElementName=LastPage}"
+                                   PreviousPage="{Binding ElementName=Page6}">
+                <Grid>
+                    <Image Source="/Resources/Images/statisticsss.png" HorizontalAlignment="Left" Width="420"/>
+                    <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" Margin="440,0,0,0" RenderTransformOrigin="0.5,0.5" Width="255" Text="This is the page for displaying statistics. If you want to see statistic for one year, input year in field and click button Search. A window with statistics for the desired year will be displayed in the following format: "/>
+                    <Image Source="/Resources/Images/forYear.png" HorizontalAlignment="Left" Margin="440,115,0,0"/>
+                </Grid>
+            </xctk:WizardPage>
+            <xctk:WizardPage x:Name="LastPage" PageType="Interior"
+                                   Title="Last Page"
+                                   Description="This is the last page in the process. Thank you. To finish, click Finish."
+                                   CanFinish="True"/>
+        </xctk:Wizard>
+
+    </Grid>
+</Window>

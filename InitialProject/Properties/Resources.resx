@@ -189,6 +189,9 @@
   <data name="Capacity" xml:space="preserve">
     <value>Capacity</value>
   </data>
+  <data name="CHANGEVALIDITY" xml:space="preserve">
+    <value>CHANGE VALIDITY</value>
+  </data>
   <data name="Checked" xml:space="preserve">
     <value>Checked</value>
   </data>
@@ -286,7 +289,7 @@
     <value>Finished tours:</value>
   </data>
   <data name="FINISHTOUR" xml:space="preserve">
-    <value>FINISH TOUR 🏁</value>
+    <value>🏁 FINISH TOUR</value>
   </data>
   <data name="FirstName" xml:space="preserve">
     <value>First Name</value>
@@ -471,6 +474,12 @@
   <data name="SelectFilters" xml:space="preserve">
     <value>Select filters:</value>
   </data>
+  <data name="SelectOtherTime" xml:space="preserve">
+    <value>Selected time point is already taken</value>
+  </data>
+  <data name="SHOW" xml:space="preserve">
+    <value>🔎 SHOW</value>
+  </data>
   <data name="START" xml:space="preserve">
     <value>START</value>
   </data>
@@ -486,7 +495,7 @@
   <data name="themost" xml:space="preserve">
     <value>on the most wanted</value>
   </data>
-  <data name="TheMostVisitedTour" xml:space="preserve">
+  <data name="TheMostVistedTour" xml:space="preserve">
     <value>The most visited tour</value>
   </data>
   <data name="TheMostVistedTourYear" xml:space="preserve">

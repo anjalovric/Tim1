@@ -36,6 +36,8 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         {
             this.guest2 = guest;
             this.org = org;
+            WinningAVoucher winningAVoucher = new WinningAVoucher(guest2.Id);
+            winningAVoucher.CountOfTours();
             voucherService = new VoucherService();
             vouchers = new ObservableCollection<Voucher>();
             Vouchers = new ObservableCollection<Voucher>(voucherService.FindAllVouchers(guest2));
@@ -48,8 +50,10 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             {
                 if (voucher.Type == VoucherType.CANCELED_TOUR)
                     voucher.CreateDate = voucher.CreateDate.AddYears(1);
-                else
+                else if(voucher.Type == VoucherType.VISITED_TOUR)
                     voucher.CreateDate = voucher.CreateDate.AddMonths(6);
+                else
+                    voucher.CreateDate = voucher.CreateDate.AddYears(2);
             }
         }
         public event PropertyChangedEventHandler PropertyChanged;

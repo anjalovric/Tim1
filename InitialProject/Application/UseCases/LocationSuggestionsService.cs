@@ -79,22 +79,28 @@ namespace InitialProject.APPLICATION.UseCases
         private List<LeastPopularLocation> GetLeastPopularLocationList(Dictionary<int, int> locationReservationNumbers, Dictionary<int, double> locationBusinest, Owner owner)
         {
             List<LeastPopularLocation> leastPopularLocations = new List<LeastPopularLocation>();
-            List<KeyValuePair<int, int>> locationListByReservationNumber = locationReservationNumbers.OrderBy(x => x.Value).ToList();
-            List<KeyValuePair<int, double>> locationListByBusinest = locationBusinest.OrderBy(x => x.Value).ToList();
+            int numberOfLocations = locationReservationNumbers.Count;
+            List<KeyValuePair<int, int>> locationListByReservationNumber = locationReservationNumbers.OrderByDescending(x => x.Value).ToList();
+            List<KeyValuePair<int, double>> locationListByBusinest = locationBusinest.OrderByDescending(x => x.Value).ToList();
 
-            if (locationListByReservationNumber[0].Key == locationListByBusinest[0].Key && locationListByBusinest[0].Value != 0)
+            if (locationListByReservationNumber[numberOfLocations-1].Key == locationListByBusinest[numberOfLocations-1].Key)
             {
-                foreach(var accommodation in GetAccommodationsByLocationId(locationListByReservationNumber[0].Key, owner))
-                {
-                    LeastPopularLocation leastPopularLocation = new LeastPopularLocation(accommodation, false, false, true);
-                    leastPopularLocations.Add(leastPopularLocation);
-
-                }
-                return leastPopularLocations;
+                return GetLeastPopularLocation(owner, leastPopularLocations, locationListByReservationNumber);
             }
-            if(locationListByBusinest[0].Value != 0 || locationListByBusinest[0].Value!=0)
+            if (locationListByBusinest[numberOfLocations-1].Value != 0 || locationListByBusinest[numberOfLocations-1].Value!=0)
             MakeLeastPopularList(leastPopularLocations, locationListByReservationNumber, locationListByBusinest, owner);
 
+            return leastPopularLocations;
+        }
+
+        private List<LeastPopularLocation> GetLeastPopularLocation(Owner owner, List<LeastPopularLocation> leastPopularLocations, List<KeyValuePair<int, int>> locationListByReservationNumber)
+        {
+            foreach (var accommodation in GetAccommodationsByLocationId(locationListByReservationNumber[locationListByReservationNumber.Count-1].Key, owner))
+            {
+                LeastPopularLocation leastPopularLocation = new LeastPopularLocation(accommodation, false, false, true);
+                leastPopularLocations.Add(leastPopularLocation);
+
+            }
             return leastPopularLocations;
         }
 

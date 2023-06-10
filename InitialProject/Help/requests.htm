@@ -4,14 +4,18 @@
     <title>Novo</title>
 </head>
 <body>
-    <h1>Zahtjevi</h1>
-    Ovdje su prikazani svi Vasi zahtjevi kako za obicnu tako i za slozenu turu. Razlika izmedju te dvije ture je sto se slozena tura samo sastoji od vise obicnih. 
-    U tabu <b>ORDINARY</b> ce biti prikazani samo oni zahtjevi koji su oznaceni kao obicni, ali ne i oni koji ulaze u sastav slozene. Pored naziva, mozete vidjeti i status tog zahtjeva.<br />
-    <b>ACCEPTED</b>-ako je prihvacen<br />
-    <b>ONWAITING</b>-ako je na cekanju<br />
-    <b>INVALID</b>-ako nije prihvacen a rok je istekao.<br />
-    U tabu <b>COMPLEX</b> ce biti prikazane slozene ture i njihov status. Status je kao kod obicnih s tim da bi imala status <b>ACCEPTED</b>, svi dijelovi tog zahtjeva moraju biti prihvaceni.
-    Imate i polje parts, koje vam nudi mogucnost da vidite dijelove slozene ture. Ako je neki dio prihvacen moci cete vidjeti i termin koji je vodic zadao kao pocetak ture, u suprotnom ce vam
-    iskociti poruka da je zahtjev jos na cekanju. 
+    <h1>Requests</h1>
+    Here, you can see all your requests for both regular and complex tours. The difference between these two types is that a complex tour consists of multiple regular tours.
+
+    In the <b>Ordinary</b> tab, only the requests marked as regular will be displayed, excluding those that are part of a complex tour. Besides the name of the tour, you can also see the status of each request.</br>
+    In the <b>Ordinary</b> tab, the status of a request can be one of the following:
+
+    <b>ACCEPTED</b>: if the request has been accepted.
+    <b>ON WAITING</b>: if the request is still pending.
+    <b>INVALID</b>: if the request has not been accepted, and the deadline has passed.
+    In the <b>Complex</b> tab, you will find the complex tours and their status. The status follows the same criteria as for regular tours, but for a complex tour to have the status <b>ACCEPTED</b>, all its parts must be accepted.
+
+    You also have the <b>PARTS</b> field, which allows you to view the individual parts of a complex tour. If a part has been accepted, you will be able to see the scheduled start time set by the guide. Otherwise, you will see a message indicating that the request is still pending.
+    
 </body>
 </html>

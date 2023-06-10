@@ -9,7 +9,7 @@
              xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf" xmlns:local1="clr-namespace:InitialProject.WPF.Views.Guest2Views"
         mc:Ignorable="d" 
              Title="Statistics"
-              d:DesignHeight="800" d:DesignWidth="1024" Width="1024" Height="800" WindowStartupLocation="CenterScreen" WindowStyle="None" Focusable="True">
+              d:DesignHeight="768" d:DesignWidth="980" Width="1024" Height="768" WindowStartupLocation="CenterScreen" WindowStyle="None" Focusable="True">
     <Window.InputBindings>
         <KeyBinding Key="F1" Command="{Binding HelpCommandInViewModel}" />
     </Window.InputBindings>
@@ -72,14 +72,14 @@
         </Grid.RowDefinitions>
         <Label Content="Tour request statistics" Grid.Row="0" Grid.Column="0" Foreground="White" FontWeight="Bold" FontSize="30" HorizontalAlignment="Left" Margin="66,25,0,0" VerticalAlignment="Top" Width="361" Grid.ColumnSpan="2" Height="52" RenderTransformOrigin="0.5,0.5"/>
 
-        <TextBlock TextWrapping="Wrap" Background="#0C3B2E" Text="Here you can see the statistics of requests for tours in general for all time. Among them are accepted and rejected requests, as well as the average number of people in accepted requests." Foreground="#b46617" FontSize="18" HorizontalAlignment="Left" Margin="66,24,0,0" VerticalAlignment="Top" Width="866" Height="78" Grid.ColumnSpan="3" Grid.Row="1"/>
+        <TextBlock TextWrapping="Wrap" Background="#0C3B2E" Text="Here you can see the statistics of requests for tours in general for all time. Among them are accepted and rejected requests, as well as the average number of people in accepted requests." Foreground="#FFF58E26" FontSize="18" HorizontalAlignment="Left" Margin="66,24,0,0" VerticalAlignment="Top" Width="866" Height="78" Grid.ColumnSpan="3" Grid.Row="1"/>
         <Border BorderBrush="#6d9773" BorderThickness="2,2,2,2" Margin="66,5,10,119" CornerRadius="25,25,25,25" Grid.Row="2"/>
         <TextBlock Text="PERCENT OF ACCEPTED REQUESTS" Margin="90,12,26,170" Grid.Row="2" Style="{StaticResource FontStyle}"/>
         <Border BorderBrush="#6d9773" BorderThickness="2,2,2,2" Margin="7,5,69,119" CornerRadius="25,25,25,25" Grid.Column="1" Grid.Row="2"/>
         <TextBlock Text="PERCENT OF INVALID REQUESTS" Margin="35,10,85,170" Grid.Column="1" Grid.Row="2" Style="{StaticResource FontStyle}"/>
         <Border BorderBrush="#6d9773" BorderThickness="2,2,2,2" Margin="66,120,69,0" CornerRadius="25,25,25,25" Grid.Row="2" Grid.ColumnSpan="2"/>
         <TextBlock Text="AVERAGE NUMBER OF PEOPLE IN ACCEPTED REQUESTS" Margin="90,125,85,69" Grid.Row="2" Style="{StaticResource FontStyle}" Grid.ColumnSpan="2"/>
-        <Label Content="If you want to see for a certain year, fill in the text field and go to the next page." Foreground="#b46617" FontSize="18" HorizontalAlignment="Left" Margin="60,57,0,0" VerticalAlignment="Top" Width="900" Height="55" Grid.ColumnSpan="3" Grid.Row="3"/>
+        <Label Content="If you want to see for a certain year, fill in the text field and go to the next page." Foreground="#FFF58E26" FontSize="18" HorizontalAlignment="Left" Margin="60,57,0,0" VerticalAlignment="Top" Width="900" Height="55" Grid.ColumnSpan="3" Grid.Row="3"/>
         <TextBox x:Name="year" TextWrapping="Wrap" Margin="66,28,26,56" Grid.Row="4" l:ShowToursHelp.HelpKey="statisticForChosenYear">
             <TextBox.Text>
                 <Binding Path="Year" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay" NotifyOnValidationError="True">
@@ -106,7 +106,7 @@
                 </ControlTemplate>
             </Validation.ErrorTemplate>
         </TextBox>
-        <Label Content="Enter the year: " Foreground="#b46617" FontSize="15" HorizontalAlignment="Left" Margin="60,111,0,0" VerticalAlignment="Top" Width="900" Height="43" Grid.ColumnSpan="3" Grid.RowSpan="2" Grid.Row="3"/>
+        <Label Content="Enter the year: " Foreground="#FFF58E26" FontSize="15" HorizontalAlignment="Left" Margin="60,111,0,0" VerticalAlignment="Top" Width="900" Height="43" Grid.ColumnSpan="3" Grid.RowSpan="2" Grid.Row="3"/>
 
         <Button Grid.Row="4" HorizontalAlignment="Left" BorderBrush="#ffba00" BorderThickness="1" Background="#ffba00" VerticalAlignment="Top" Height="35" Width="90" FontWeight="Bold" Margin="7,26,0,0" FontSize="18" Grid.Column="1" Command="{Binding SearchCommand}" l:ShowToursHelp.HelpKey="statisticForChosenYear">
             <Grid Background="#ffba00" Width="90" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35">
@@ -120,6 +120,7 @@
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="IsEnabled" Value="false" />
+                    <Setter Property="Cursor" Value="Hand"/>
                     <Style.Triggers>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
@@ -131,16 +132,16 @@
                 </Style>
             </Button.Style>
         </Button>
-        <Border BorderBrush="#6d9773" BorderThickness="2,2,2,2" Margin="208,5,306,5" CornerRadius="25,25,25,25" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"/>
-        <TextBlock Text="NUMBER OF REQUEST BY LANGUAGE" Margin="10,10,362,172" Grid.Row="2" Style="{StaticResource FontStyle}" Grid.Column="2"/>
-        <Border BorderBrush="#6d9773" BorderThickness="2,2,2,2" Margin="218,5,30,5" CornerRadius="25,25,25,25" Grid.Row="2" Grid.Column="2"/>
-        <TextBlock Text="NUMBER OF REQUESTS BY LOCATION" Margin="270,10,92,175" Grid.Row="2" Grid.Column="2" Style="{StaticResource FontStyle}"/>
+        <Border BorderBrush="#6d9773" BorderThickness="2,2,2,2" Margin="208,5,306,110" CornerRadius="25,25,25,25" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+        <TextBlock Text="NUMBER OF REQUEST BY LANGUAGE" Margin="10,10,351,158" Grid.Row="2" Style="{StaticResource FontStyle}" Grid.Column="2"/>
+        <Border BorderBrush="#6d9773" BorderThickness="2,2,2,2" Margin="218,5,46,110" CornerRadius="25,25,25,25" Grid.Row="2" Grid.Column="2" Grid.RowSpan="2"/>
+        <TextBlock Text="NUMBER OF REQUESTS BY LOCATION" Margin="270,10,83,172" Grid.Row="2" Grid.Column="2" Style="{StaticResource FontStyle}"/>
         <TextBlock TextWrapping="Wrap" Margin="100,49,60,119" Grid.Row="2" Text="{Binding Path=acceptedRequest}" Style="{StaticResource TextStyle}"/>
         <TextBlock TextWrapping="Wrap" Margin="49,49,111,119" Grid.Row="2" Grid.Column="1" Text="{Binding Path=invalidRequest}" Style="{StaticResource TextStyle}"/>
         <TextBlock TextWrapping="Wrap" Margin="370,49,46,124" Grid.Row="2" Grid.Column="2" Style="{StaticResource TextStyle}"/>
         <TextBlock Margin="210,155,206,20" Grid.Row="2" Text="{Binding Path=averageNumberOfPeople}" Style="{StaticResource TextStyle}" Grid.ColumnSpan="2"/>
         <local1:GraphForLanguage Grid.Column="1" Margin="224,55,320,10" Grid.Row="2" Grid.ColumnSpan="2"/>
-        <local1:GraphForLocation Margin="233,56,46,10" Grid.Column="2" Grid.Row="2"/>
+        <local1:GraphForLocation Margin="233,56,69,10" Grid.Column="2" Grid.Row="2"/>
         <Button HorizontalAlignment="Left" Background="#0C3B2E" BorderBrush="#0C3B2E" VerticalAlignment="Top"  Height="41" Width="39" FontWeight="Bold" FontSize="18" Command="{Binding CloseCommand}" Margin="463,25,0,0" Grid.Column="2">
 
             <Grid Background="#0C3B2E" Width="30" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25">

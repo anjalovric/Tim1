@@ -29,6 +29,8 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         private Accommodation selectedAccommodation;
         private string stackPanelVisibility;
         private string stackPanelMessage;
+        private bool isOkPressedInDemo;
+        private bool isNewAccommodationPressedInDemo;
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -51,6 +53,18 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             Accommodations = new ObservableCollection<Accommodation>(accommodations);
         }
 
+        public bool IsNewAccommodationPressedInDemo
+        {
+            get { return isNewAccommodationPressedInDemo; }
+            set
+            {
+                if (value != isNewAccommodationPressedInDemo)
+                {
+                    isNewAccommodationPressedInDemo = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         public Accommodation SelectedAccommodation
         {
             get { return selectedAccommodation; }
@@ -85,6 +99,19 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
                 if (value != stackPanelVisibility)
                 {
                     stackPanelVisibility = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public bool IsOkPressedInDemo
+        {
+            get { return isOkPressedInDemo; }
+            set
+            {
+                if (value != isOkPressedInDemo)
+                {
+                    isOkPressedInDemo = value;
                     OnPropertyChanged();
                 }
             }

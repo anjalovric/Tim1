@@ -22,6 +22,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         public RelayCommand ConfirmCommand { get; set; }
         private string commentText;
         private OwnerNotificationsService notificationsService;
+        private bool isAddNewCommentPressedInDemo;
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -50,6 +51,18 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        public bool IsAddNewCommentPressedInDemo
+        {
+            get { return isAddNewCommentPressedInDemo; }
+            set
+            {
+                if (value != isAddNewCommentPressedInDemo)
+                {
+                    isAddNewCommentPressedInDemo = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         private bool CanExecute(object sender)
         {
             return true;

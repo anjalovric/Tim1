@@ -30,6 +30,8 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         public RelayCommand ViewCommand { get; set; }
         public RelayCommand OKCommand { get; set; }
         public RelayCommand GenerateReportCommand { get; set; }
+        private bool isGeneratePressedInDemo;
+        private bool isViewPressedInDemo;
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -204,6 +206,32 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
             else
                 StackPanelVisibility = "Hidden";
+        }
+
+        public bool IsViewPressedInDemo
+        {
+            get => isViewPressedInDemo;
+            set
+            {
+                if (value != isViewPressedInDemo)
+                {
+                    isViewPressedInDemo = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public bool IsGeneratePressedInDemo
+        {
+            get => isGeneratePressedInDemo;
+            set
+            {
+                if (value != isGeneratePressedInDemo)
+                {
+                    isGeneratePressedInDemo = value;
+                    OnPropertyChanged();
+                }
+            }
         }
     }
 }

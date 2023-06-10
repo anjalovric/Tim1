@@ -28,7 +28,17 @@
                     <TextBlock Text="Owner's correctness" Grid.Column="2" Grid.Row="1"></TextBlock>
                     <TextBlock Text="{Binding Path=Cleanliness}" Grid.Column="3" Grid.Row="0"></TextBlock>
                     <TextBlock Text="{Binding Path=Correctness}" Grid.Column="3" Grid.Row="1" ></TextBlock>
-                    <Button Command="{Binding Path=DataContext.ViewCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" Name="ViewButton" Content="View"  Grid.Column="4" Grid.Row="0" Grid.RowSpan="2" Height="20" HorizontalContentAlignment="Center" Style="{StaticResource DataTemplateButton}" Margin="0, 0, 2,0"></Button>
+                    <Button Command="{Binding Path=DataContext.ViewCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" Name="ViewButton" Content="View"  Grid.Column="4" Grid.Row="0" Grid.RowSpan="2" Height="20" HorizontalContentAlignment="Center" Margin="0, 0, 2,0">
+                        <Button.Style>
+                            <Style TargetType="Button" BasedOn="{StaticResource DataTemplateButton}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding DataContext.IsViewPressedInDemo, UpdateSourceTrigger=PropertyChanged}" Value="True">
+                                        <Setter Property="Background" Value="AliceBlue"></Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
                 </Grid>
             </Border>
 
@@ -89,7 +99,18 @@
             </ListBox.Resources>
         </ListBox>
 
-        <Button Command="{Binding GenerateReportCommand}" Content="Generate average review pdf report" HorizontalAlignment="Center" Margin="30,539,30,0" VerticalAlignment="Top" Height="43" Width="355" Style="{StaticResource BasicButton}"/>
+        <Button Command="{Binding GenerateReportCommand}" Content="Generate average review pdf report" HorizontalAlignment="Center" Margin="30,539,30,0" VerticalAlignment="Top" Height="43" Width="355">
+            <Button.Style>
+                <Style TargetType="Button" BasedOn="{StaticResource BasicButton}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsGeneratePressedInDemo, UpdateSourceTrigger=PropertyChanged}" Value="True">
+                            <Setter Property="Background" Value="AliceBlue"></Setter>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        
         <Label Content="My Reviews" FontSize="15" Margin="30,204,170,380"/>
 
         <StackPanel Margin="0,0,0,525" Background="LightGray" Visibility="{Binding Path=StackPanelVisibility, UpdateSourceTrigger=PropertyChanged}">

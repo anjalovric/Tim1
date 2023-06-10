@@ -36,7 +36,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             this.org = org;
             requestStatisticsService = new RequestStatisticsService();
             ordinaryTourRequestsService = new OrdinaryTourRequestsService();
-            OrdinaryTourRequests = new List<OrdinaryTourRequests>(ordinaryTourRequestsService.GetByGuestId(guest2.Id));
+            OrdinaryTourRequests = new List<OrdinaryTourRequests>(ordinaryTourRequestsService.GetOnlyOrdinaryRequestsByGuestId(guest2.Id));
             acceptedRequest = requestStatisticsService.ProcentOfAcceptedRequest( Guest2);
             invalidRequest = requestStatisticsService.ProcentOfInvalidRequest( Guest2);
             averageNumberOfPeople = requestStatisticsService.AverageNumberOfPeopleInAcceptedRequests( Guest2);

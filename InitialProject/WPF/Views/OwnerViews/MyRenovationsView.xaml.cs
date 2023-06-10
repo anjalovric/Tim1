@@ -22,10 +22,17 @@ namespace InitialProject.WPF.Views.OwnerViews
     /// </summary>
     public partial class MyRenovationsView : Page
     {
+        public MyRenovationsViewModel ViewModel { get; set; }
         public MyRenovationsView(Owner owner)
         {
             InitializeComponent();
-            DataContext = new MyRenovationsViewModel(owner);
+            ViewModel = new MyRenovationsViewModel(owner);
+            DataContext = ViewModel;
+        }
+
+        public void PressOkInDemo()
+        {
+            OkButton.Background = new SolidColorBrush(Colors.AliceBlue);
         }
     }
 }

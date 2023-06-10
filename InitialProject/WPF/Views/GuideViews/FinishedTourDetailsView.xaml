@@ -27,17 +27,17 @@
                     <TextBlock Grid.Row="0" Grid.Column="0" >
                 <Run Text="{ns:Loc Checkpoints}" Style="{DynamicResource Run}"/>
 
-                <Run Text="{Binding Path=CheckPoint.Name}" Style="{DynamicResource Run}" />
+                <Run Text="{Binding Path=CheckPoint.Name}" Style="{DynamicResource Run2}" />
                     </TextBlock>
                     <TextBlock Grid.Column="0" Grid.Row="2">
                          <Run Text="{ns:Loc GuestsReservations}" Style="{DynamicResource Run}"/>
                     </TextBlock>
-                    <ListBox Grid.Column="0" Grid.Row="3" Style="{DynamicResource ListBox}" ItemsSource="{Binding Path= guest2s}">
+                    <ListBox Grid.Column="0" Grid.Row="3" Style="{DynamicResource ListBox1}" ItemsSource="{Binding Path= guest2s}">
 
                     </ListBox>
                     <TextBlock Grid.Row="1" Grid.Column="0" >
                 <Run Text="{ns:Loc NumberOfGuests}" Style="{DynamicResource Run}" />
-                <Run Text="{Binding Path=countGuests}" />
+                <Run Text="{Binding Path=countGuests}" Style="{DynamicResource Run2}" />
                     </TextBlock>
                 </Grid>
             </Border>

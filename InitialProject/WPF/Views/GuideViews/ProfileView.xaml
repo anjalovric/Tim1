@@ -61,7 +61,7 @@
         <ListBox Grid.Row="2" x:Name="list" Style="{DynamicResource ListBoxOut}"  ItemsSource="{Binding supreGuideTitles}" ItemTemplate="{StaticResource titles}"  Grid.ColumnSpan="3" Margin="43,42,42,45"  />
         <Grid Style="{DynamicResource InerInerGrid}" Grid.Row="2" Grid.Column="3"  Height="500">
             <Border Style="{DynamicResource Border}"></Border>
-            <Label Style="{DynamicResource Labels}" Content="👤" FontSize="25" HorizontalContentAlignment="Center" Width="136" Height="54" Margin="174,10,0,0" VerticalAlignment="Top"/>
+            <Label Style="{DynamicResource Label}" Content="👤" FontSize="25" HorizontalContentAlignment="Center" Width="136" Height="54" Margin="174,10,38,0" VerticalAlignment="Top"/>
 
             <Grid Margin="34,63,30,38">
                 <Grid.ColumnDefinitions>
@@ -75,11 +75,11 @@
                     <RowDefinition></RowDefinition>
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
-                <Label Grid.Row="0" Grid.Column="0" Content="{ns:Loc FirstName}" HorizontalContentAlignment="Left" Style="{DynamicResource Labels}"></Label>
-                <Label Grid.Row="1" Grid.Column="0" Content="{ns:Loc LastName}" HorizontalContentAlignment="Left" Style="{DynamicResource Labels}"></Label>
-                <Label Grid.Row="2" Grid.Column="0" Content="{ns:Loc Username}" HorizontalContentAlignment="Left" Style="{DynamicResource Labels}"></Label>
-                <Label Grid.Row="3" Grid.Column="0" Content="{ns:Loc Age}" HorizontalContentAlignment="Left" Style="{DynamicResource Labels}"></Label>
-                <Label Grid.Row="4" Grid.Column="0" Content="{ns:Loc Email}" HorizontalContentAlignment="Left" Style="{DynamicResource Labels}"></Label>
+                <Label Grid.Row="0" Grid.Column="0" Content="{ns:Loc FirstName}" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Style="{DynamicResource Label}"></Label>
+                <Label Grid.Row="1" Grid.Column="0" Content="{ns:Loc LastName}" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Style="{DynamicResource Label}"></Label>
+                <Label Grid.Row="2" Grid.Column="0" Content="{ns:Loc Username}" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Style="{DynamicResource Label}"></Label>
+                <Label Grid.Row="3" Grid.Column="0" Content="{ns:Loc Age}" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Style="{DynamicResource Label}"></Label>
+                <Label Grid.Row="4" Grid.Column="0" Content="{ns:Loc Email}" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Style="{DynamicResource Label}"></Label>
                 <Label Grid.Row="0" Grid.Column="1" Content="{Binding Name}" HorizontalContentAlignment="Left" Style="{DynamicResource Labels}"></Label>
                 <Label Grid.Row="1" Grid.Column="1" Content="{Binding Surname}" HorizontalContentAlignment="Left" Style="{DynamicResource Labels}"></Label>
                 <Label Grid.Row="2" Grid.Column="1" Content="{Binding Username}" HorizontalContentAlignment="Left" Style="{DynamicResource Labels}"></Label>
@@ -98,7 +98,7 @@
             <Border Style="{DynamicResource Border}">
 
             </Border>
-            <Label Style="{DynamicResource LabelToast}" HorizontalAlignment="Center"  Content="⚠️" Margin="0,5,0,127"/>
+            <Label Style="{DynamicResource LabelToast}" HorizontalAlignment="Center" Foreground="Red" Content="⚠️" Margin="0,5,0,127"/>
             <TextBlock HorizontalAlignment="Center" FontSize="15" Style="{DynamicResource TextBlock}" TextWrapping="Wrap" Text="{ns:Loc Alert}" Margin="0,43,0,66"/>
             <Button Command="{Binding YesCommand}" Content="{ns:Loc YES}" Style="{DynamicResource Button}" Width="60" Height="30" Margin="22,112,182,19"></Button>
             <Button Command="{Binding NoCommand}" Content="{ns:Loc NO}" Style="{DynamicResource Button}" Width="60" Height="30" Margin="173,112,31,19"></Button>

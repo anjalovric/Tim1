@@ -34,10 +34,21 @@
         <Label Content="Following the rules*" HorizontalAlignment="Left" Margin="17,238,0,0" VerticalAlignment="Top" Width="128"/>
         <Label Content="Additional comment" HorizontalAlignment="Left" Margin="16,0,0,0" VerticalAlignment="Center" Width="128"/>
         <Label Content="(Optional)" HorizontalAlignment="Left" Margin="275,0,0,0" VerticalAlignment="Center" Width="128" HorizontalContentAlignment="Right"/>
-        <tk:WatermarkTextBox HorizontalAlignment="Center" Margin="2,323,0,0" TextWrapping="Wrap" Text="{Binding Path = GuestReview.Comment}" Watermark="Enter comment here" VerticalAlignment="Top" Width="382" Height="161">
+        <tk:WatermarkTextBox Name="Comment" HorizontalAlignment="Center" Margin="2,323,0,0" TextWrapping="Wrap" Text="{Binding Path = GuestReview.Comment}" Watermark="Enter comment here" VerticalAlignment="Top" Width="382" Height="161">
         </tk:WatermarkTextBox>
         <Button Command="NavigationCommands.BrowseBack" Content="Cancel" HorizontalAlignment="Left" Margin="20,546,0,0" VerticalAlignment="Top" Height="41" Width="140" Style="{StaticResource CancelButton}"/>
-        <Button Command="{Binding ConfirmCommand}" Name="ConfirmButton" Content="Confirm" IsEnabled="{Binding Path= IsOkButtonEnabled}" HorizontalAlignment="Left" Margin="260,546,0,0" VerticalAlignment="Top" Height="41" Width="140" Style="{StaticResource BasicButton}"/>
+        <Button Command="{Binding ConfirmCommand}" Name="ConfirmButton" Content="Confirm" IsEnabled="{Binding Path= IsOkButtonEnabled}" HorizontalAlignment="Left" Margin="260,546,0,0" VerticalAlignment="Top" Height="41" Width="140">
+            <Button.Style>
+                <Style TargetType="Button" BasedOn="{StaticResource BasicButton}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Path = IsConfirmPressedInDemo, UpdateSourceTrigger=PropertyChanged}" Value="True">
+                            <Setter Property="Foreground" Value="Gray" />
+                            <Setter Property="Background" Value="AliceBlue" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
 
         <RadioButton Command="{Binding SelectCleanlinessCommand}" CommandParameter="1" GroupName="Cleanliness" Name="Cleanliness1" Content="1" HorizontalAlignment="Left" Margin="200,200,0,0" VerticalAlignment="Top" Height="21" Width="34" FontSize="16"/>
         <RadioButton Command="{Binding SelectCleanlinessCommand}"  CommandParameter="2" GroupName="Cleanliness" Name="Cleanliness2" Content="2" HorizontalAlignment="Left" Margin="240,200,0,0" VerticalAlignment="Top" Height="21" Width="34" FontSize="16"/>

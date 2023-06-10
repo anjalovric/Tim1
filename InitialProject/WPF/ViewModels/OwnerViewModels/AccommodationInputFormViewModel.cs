@@ -14,7 +14,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 {
     public class AccommodationInputFormViewModel : INotifyPropertyChanged
     {
-        private Owner owner;
+        public Owner owner;
         private Location location;
         private string name;
         private AccommodationType type;
@@ -25,6 +25,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         private bool isCityComboBoxEnabled;
         private AccommodationService accommodationService;
         private int imageCounter = 0;
+        private bool isDemoOn;
         public List<AccommodationType> AccommodationTypes { get; set; }
         public ObservableCollection<AccommodationImage> Images { get; set; }
         public ObservableCollection<string> Countries { get; set; }
@@ -71,8 +72,10 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             return true;
         }
 
-        private bool OKCanExecute(object sender)
+        public bool OKCanExecute(object sender)
         {
+            if (IsDemoOn)
+                return true;
             if(!string.IsNullOrEmpty(Name) && !string.IsNullOrEmpty(Location.City) && Type.Id!=0 && Images.Count > 0)
             {
                 return true;
@@ -338,6 +341,19 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
                 string relative = absolutePath.Substring(relativeIndex);
                 ImageUrl = "/" + relative;
                 MakeAndAddImage();
+            }
+        }
+
+        public bool IsDemoOn
+        {
+            get { return isDemoOn; }
+            set
+            {
+                if (value != isDemoOn)
+                {
+                    isDemoOn = value;
+                    OnPropertyChanged();
+                }
             }
         }
 

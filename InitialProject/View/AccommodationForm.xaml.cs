@@ -41,7 +41,7 @@ namespace InitialProject.View.Owner
             accommodationImageRepository = new AccommodationImageRepository();
             accommodationTypeRepository = new AccommodationTypeRepository();
             accommodation = new Accommodation();
-            accommodations = oldAccommodations;                                  //for owner overview list
+            accommodations = oldAccommodations;                                  //for Owner overview list
             AccommodationTypes = accommodationTypeRepository.GetAll();
             locationRepository = new LocationRepository();
             location = new Location();

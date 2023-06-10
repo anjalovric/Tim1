@@ -21,6 +21,7 @@
     <None Remove="Resources\Images\account.png" />
     <None Remove="Resources\Images\account1.png" />
     <None Remove="Resources\Images\Acropolis.jpg" />
+    <None Remove="Resources\Images\activeTours.png" />
     <None Remove="Resources\Images\add-new.png" />
     <None Remove="Resources\Images\add.png" />
     <None Remove="Resources\Images\addBW.png" />
@@ -69,6 +70,8 @@
     <None Remove="Resources\Images\close.png" />
     <None Remove="Resources\Images\cloud.png" />
     <None Remove="Resources\Images\cloud1.png" />
+    <None Remove="Resources\Images\comment.png" />
+    <None Remove="Resources\Images\complex.png" />
     <None Remove="Resources\Images\congratulations.png" />
     <None Remove="Resources\Images\congratulations2.png" />
     <None Remove="Resources\Images\congratulations3.png" />
@@ -84,6 +87,10 @@
 
     <None Remove="Resources\Images\cottage3.jpeg" />
 
+    <None Remove="Resources\Images\creatingComplex.png" />
+
+    <None Remove="Resources\Images\creatingRequest.png" />
+
     <None Remove="Resources\Images\dates.png" />
 
     <None Remove="Resources\Images\datetime.png" />
@@ -91,6 +98,10 @@
     <None Remove="Resources\Images\decline.jpg" />
 
     <None Remove="Resources\Images\declineImage.jpg" />
+
+    <None Remove="Resources\Images\demoOff.png" />
+
+    <None Remove="Resources\Images\demoOn.png" />
 
     <None Remove="Resources\Images\done.png" />
 
@@ -106,6 +117,8 @@
 
     <None Remove="Resources\Images\exclamation.png" />
 
+    <None Remove="Resources\Images\finishedTours.png" />
+
     <None Remove="Resources\Images\firstPlace.png" />
 
     <None Remove="Resources\Images\flag.png" />
@@ -113,6 +126,8 @@
     <None Remove="Resources\Images\flowers.jpg" />
 
     <None Remove="Resources\Images\forum.png" />
+
+    <None Remove="Resources\Images\forYear.png" />
 
     <None Remove="Resources\Images\goldStar.png" />
 
@@ -181,7 +196,11 @@
     <None Remove="Resources\Images\noPhoto.png" />
     <None Remove="Resources\Images\notes.png" />
     <None Remove="Resources\Images\nothing.png" />
+
     <None Remove="Resources\Images\noviSad.png" />
+
+    <None Remove="Resources\Images\notifications.png" />
+
 
     <None Remove="Resources\Images\ok.png" />
 
@@ -191,9 +210,13 @@
 
     <None Remove="Resources\Images\orange.jpg" />
 
+    <None Remove="Resources\Images\ordinary.png" />
+
     <None Remove="Resources\Images\padlock-unlock.png" />
 
     <None Remove="Resources\Images\padlock.png" />
+
+    <None Remove="Resources\Images\part.png" />
 
     <None Remove="Resources\Images\pdf.png" />
 
@@ -207,6 +230,7 @@
     <None Remove="Resources\Images\rain.jpg" />
     <None Remove="Resources\Images\raining.jpg" />
     <None Remove="Resources\Images\rate.png" />
+    <None Remove="Resources\Images\rateTours.png" />
     <None Remove="Resources\Images\rating.png" />
     <None Remove="Resources\Images\Red-incorrect-icon-design-on-transparent-background-PNG.png" />
     <None Remove="Resources\Images\red.jpg" />
@@ -224,7 +248,9 @@
     <None Remove="Resources\Images\renovation2.jpg" />
     <None Remove="Resources\Images\report.png" />
     <None Remove="Resources\Images\request.png" />
+    <None Remove="Resources\Images\request1.jpg" />
     <None Remove="Resources\Images\reschedule.png" />
+    <None Remove="Resources\Images\reservation.png" />
     <None Remove="Resources\Images\reserve.png" />
     <None Remove="Resources\Images\reset.png" />
     <None Remove="Resources\Images\reviewImage.jpg" />
@@ -239,16 +265,23 @@
     <None Remove="Resources\Images\secondPlace.png" />
     <None Remove="Resources\Images\sent2.png" />
     <None Remove="Resources\Images\sent51.png" />
+    <None Remove="Resources\Images\showTours.png" />
     <None Remove="Resources\Images\signout.png" />
     <None Remove="Resources\Images\signOut21.png" />
     <None Remove="Resources\Images\signOutIcon.png" />
     <None Remove="Resources\Images\sky.jpg" />
     <None Remove="Resources\Images\stars.png" />
     <None Remove="Resources\Images\star_yellow.png" />
+
     <None Remove="Resources\Images\subotica.jpeg" />
+
+    <None Remove="Resources\Images\statistics.png" />
+    <None Remove="Resources\Images\statisticsss.png" />
+
     <None Remove="Resources\Images\success.png" />
     <None Remove="Resources\Images\star1.png" />
     <None Remove="Resources\Images\stars2.jpeg" />
+    <None Remove="Resources\Images\suggestion.jpg" />
     <None Remove="Resources\Images\suggestion.png" />
     <None Remove="Resources\Images\super11.png" />
     <None Remove="Resources\Images\superOwner.png" />
@@ -292,13 +325,19 @@
     <None Remove="Resources\Images\user.jpg" />
     <None Remove="Resources\Images\User_icon_2.svg.png" />
     <None Remove="Resources\Images\vacation1.png" />
+    <None Remove="Resources\Images\validComplexRequestForm.png" />
+    <None Remove="Resources\Images\validFormForOrdinaryRequest.png" />
+    <None Remove="Resources\Images\validRating.png" />
+    <None Remove="Resources\Images\validReservation.png" />
     <None Remove="Resources\Images\venecija.jpg" />
     <None Remove="Resources\Images\view.png" />
     <None Remove="Resources\Images\voucher.png" />
+    <None Remove="Resources\Images\vouchers.png" />
     <None Remove="Resources\Images\wish1.jpeg" />
     <None Remove="Resources\Images\wish2.jpg" />
     <None Remove="Resources\Images\wish3.jpg" />
     <None Remove="Resources\Images\wish4.jpg" />
+    <None Remove="Resources\Images\Wizard .png" />
     <None Remove="Resources\Images\yearly.png" />
   </ItemGroup>
 
@@ -308,6 +347,9 @@
     </Content>
     <Content Include="Resources\Images\Acropolis.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\activeTours.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\add-new.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -341,6 +383,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 
     </Content>
+    <Content Include="Resources\Images\comment.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\complex.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
 
     <Content Include="Resources\Images\congratulations.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -348,11 +396,29 @@
     <Content Include="Resources\Images\congratulations2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Images\creatingComplex.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\creatingRequest.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Images\declineImage.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\demoOff.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\demoOn.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\finishedTours.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\firstPlace.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\forYear.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
 
     <Content Include="Resources\Images\Kalemegdan.png">
@@ -380,6 +446,15 @@
     <Content Include="Resources\Images\noPhoto.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Images\notifications.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\ordinary.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\part.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Images\pdf.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -393,6 +468,15 @@
     <Content Include="Resources\Images\raining.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Images\rateTours.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\request1.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\reservation.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Images\reviewImage.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -402,6 +486,12 @@
     <Content Include="Resources\Images\secondPlace.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Images\statisticsss.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\suggestion.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Images\thirdPlace.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -409,6 +499,24 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\vacation1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\validComplexRequestForm.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\validFormForOrdinaryRequest.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\validRating.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\validReservation.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\vouchers.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\Wizard .png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Resource Include="Resources\Images\account1.png">
@@ -744,7 +852,7 @@
     <PackageReference Include="NPOI" Version="2.6.0" />
     <PackageReference Include="Syncfusion.DocIO.Wpf" Version="21.2.8" />
     <PackageReference Include="Syncfusion.DocToPDFConverter.Wpf" Version="21.2.8" />
-    <PackageReference Include="Syncfusion.Licensing" Version="21.2.8" />
+    <PackageReference Include="Syncfusion.Licensing" Version="21.2.9" />
     <PackageReference Include="Syncfusion.Pdf.Wpf" Version="21.2.8" />
     <PackageReference Include="Syncfusion.PdfViewer.WPF" Version="21.2.8" />
     <PackageReference Include="System.Windows.Interactivity.WPF" Version="2.0.20525" />
@@ -953,6 +1061,9 @@
     <Resource Include="Resources\Images\sent51.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Content Include="Resources\Images\showTours.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Resource Include="Resources\Images\signout.png" />
     <Resource Include="Resources\Images\signOut21.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
