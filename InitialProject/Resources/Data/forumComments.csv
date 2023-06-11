@@ -1,7 +1,7 @@
 1|1|a|6/11/2023 6:55:28 PM|Tell me more about Istanbul|True|0
 2|1|Lovric|6/11/2023 6:56:38 PM|I have accommodation on this location. Great!|True|0
-3|1|masa|6/11/2023 6:57:34 PM|What is you accommodation?|False|0
-4|1|masa|6/11/2023 6:58:20 PM|Can other guests tell mora about their experiences on this location, please? It would be great if they could|False|0
+3|1|masa|6/11/2023 6:57:34 PM|What is you accommodation?|False|1
+4|1|masa|6/11/2023 6:58:20 PM|Can other guests tell mora about their experiences on this location, please? It would be great if they could|False|2
 5|1|a|6/11/2023 6:58:42 PM|I have never been here.|True|0
 6|1|a|6/11/2023 6:58:50 PM|New comment|True|0
 7|1|a|6/11/2023 6:58:56 PM|New comment 123|True|0
@@ -37,3 +37,4 @@
 37|1|Lovric|6/11/2023 8:19:32 PM|8|True|0
 38|1|Lovric|6/11/2023 8:19:44 PM|Isprobavanje superkorisnog foruma!|True|0
 39|1|a|6/11/2023 8:19:59 PM|Great forum|True|0
+40|1|a|6/11/2023 8:38:33 PM|novii|True|0
