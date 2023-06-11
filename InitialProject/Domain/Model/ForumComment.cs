@@ -28,6 +28,7 @@ namespace InitialProject.Domain.Model
             User = user;
             CreatingDate = creatingDate;
             Text = text;
+            ReportsNumber = 0;
          }
 
         public void FromCSV(string[] values)
