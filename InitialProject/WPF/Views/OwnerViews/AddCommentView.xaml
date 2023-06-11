@@ -31,13 +31,13 @@
                 <RowDefinition />
             </Grid.RowDefinitions>
 
-            <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FontSize="15" VerticalAlignment="Bottom" Margin="35, 0, 0, 0">
+            <TextBlock Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center" Margin="35,0,0,0">
                 <Run Text="Location: " />
                 <Run Text="{Binding Path=Forum.Forum.Location.City, UpdateSourceTrigger=PropertyChanged}" FontSize="15" FontWeight="SemiBold"/>
                 <Run Text=", " FontSize="15" FontWeight="SemiBold"/>
                 <Run Text="{Binding Path=Forum.Forum.Location.Country, UpdateSourceTrigger=PropertyChanged}" FontSize="15" FontWeight="SemiBold"/>
             </TextBlock>
-            <TextBox Name="Comment" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" HorizontalAlignment="Center" Text="{Binding Path= CommentText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top" Height="200" Width="348" BorderThickness="1" BorderBrush="DarkGray" Margin="0,50,0,0"/>
+            <TextBox Name="Comment" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" HorizontalAlignment="Left" Text="{Binding Path= CommentText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top" Height="233" Width="348" BorderThickness="1" BorderBrush="DarkGray" Margin="41,10,0,0"/>
             <Button Grid.Column="1" Grid.Row="1" Command="{Binding ConfirmCommand}" Name="ConfirmButton" Content="Confirm" HorizontalAlignment="Left" VerticalAlignment="Top" Width="124" Height="41" Margin="50,367,0,0" Grid.RowSpan="2">
                 <Button.Style>
                     <Style TargetType="Button" BasedOn="{StaticResource BasicButton}">
@@ -49,7 +49,7 @@
                     </Style>
                 </Button.Style>
             </Button>
-            <Image Source="/Resources/Images/comment.png" HorizontalAlignment="Left" Height="123" Margin="2,279,0,0" Grid.Row="1" VerticalAlignment="Top" Width="250" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
+            <Image Source="/Resources/Images/comment.png" HorizontalAlignment="Left" Margin="2,249,0,0" Grid.Row="1" Width="250" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
         </Grid>
     </Grid>
 </Page>

@@ -61,7 +61,7 @@
         <ListBox Grid.Row="2" x:Name="list" Style="{DynamicResource ListBoxOut}"  ItemsSource="{Binding supreGuideTitles}" ItemTemplate="{StaticResource titles}"  Grid.ColumnSpan="3" Margin="43,42,42,45"  />
         <Grid Style="{DynamicResource InerInerGrid}" Grid.Row="2" Grid.Column="3"  Height="500">
             <Border Style="{DynamicResource Border}"></Border>
-            <Label Style="{DynamicResource Label}" Content="👤" FontSize="25" HorizontalContentAlignment="Center" Width="136" Height="54" Margin="174,10,38,0" VerticalAlignment="Top"/>
+            <Label Style="{DynamicResource Label}" Content="👤" FontSize="25" HorizontalContentAlignment="Center" Width="136" Height="54" Margin="106,10,106,0" VerticalAlignment="Top"/>
 
             <Grid Margin="34,63,30,38">
                 <Grid.ColumnDefinitions>

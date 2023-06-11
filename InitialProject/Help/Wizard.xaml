@@ -9,16 +9,20 @@
         Title="Wizard" Height="530" Width="800" WindowStartupLocation="CenterScreen">
 
     <Grid>
-        <xctk:Wizard FinishButtonClosesWindow="True" HelpButtonVisibility="Hidden">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="227*"/>
+            <ColumnDefinition Width="573*"/>
+        </Grid.ColumnDefinitions>
+        <xctk:Wizard FinishButtonClosesWindow="True" HelpButtonVisibility="Hidden" Grid.ColumnSpan="2">
 
             <xctk:WizardPage x:Name="IntroPage" 
                                    Title="Welcome to my Wizard"
                                    Description="Thank you for using this application. This Wizard will walk you though how to do something.">
                 <Grid>
-                    
+
                     <Label Margin="0,217,0,23">To continue, click Next.</Label>
                     <Image Source="/Resources/Images/Wizard .png" Margin="-180,-73,605,-14"/>
-                    
+
                 </Grid>
             </xctk:WizardPage>
             <xctk:WizardPage x:Name="Page" PageType="Interior" 
@@ -47,8 +51,7 @@
                                    PreviousPage="{Binding ElementName=Page1}">
                 <Grid>
                     <Image Source="/Resources/Images/notifications.png" HorizontalAlignment="Left"/>
-                    <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" Margin="440,0,0,0" RenderTransformOrigin="0.5,0.5" Width="255" Text="This is the page for notifications. The View button is used to display the details of a notification, while the Delete button is used to remove the notification from the list of all notifications."/>
-
+                    <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" Margin="440,0,0,0" RenderTransformOrigin="0.5,0.5" Width="255" Text="This is the page for notifications. The View button is used to display the details of a notification, while the Delete button is used to remove the notification from the list of all notifications. There are two groups: one related to tour attendance confirmation and the other related to accepted tour requests."/>
                 </Grid>
             </xctk:WizardPage>
             <xctk:WizardPage x:Name="Page3" PageType="Interior"
@@ -98,7 +101,7 @@
                 <Grid>
                     <Image Source="/Resources/Images/statisticsss.png" HorizontalAlignment="Left" Width="420"/>
                     <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" Margin="440,0,0,0" RenderTransformOrigin="0.5,0.5" Width="255" Text="This is the page for displaying statistics. If you want to see statistic for one year, input year in field and click button Search. A window with statistics for the desired year will be displayed in the following format: "/>
-                    <Image Source="/Resources/Images/forYear.png" HorizontalAlignment="Left" Margin="440,115,0,0"/>
+                    <Image Source="/Resources/Images/forYear.png" HorizontalAlignment="Left" Margin="440,93,0,0" Width="230" Height="230"/>
                 </Grid>
             </xctk:WizardPage>
             <xctk:WizardPage x:Name="LastPage" PageType="Interior"

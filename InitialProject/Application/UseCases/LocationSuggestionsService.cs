@@ -59,7 +59,7 @@ namespace InitialProject.APPLICATION.UseCases
                 mostPopularLocations.Add(mostPopularLocation);
                 return mostPopularLocations;
             }
-            if(locationListByBusinest[0].Value!=0 || locationListByBusinest[0].Value != 0)
+            if(locationListByReservationNumber[0].Value!=0 || locationListByBusinest[0].Value != 0)
                 MakeMostPopularList(mostPopularLocations, locationListByReservationNumber, locationListByBusinest);
 
             return mostPopularLocations;
@@ -87,7 +87,6 @@ namespace InitialProject.APPLICATION.UseCases
             {
                 return GetLeastPopularLocation(owner, leastPopularLocations, locationListByReservationNumber);
             }
-            if (locationListByBusinest[numberOfLocations-1].Value != 0 || locationListByBusinest[numberOfLocations-1].Value!=0)
             MakeLeastPopularList(leastPopularLocations, locationListByReservationNumber, locationListByBusinest, owner);
 
             return leastPopularLocations;
@@ -99,27 +98,25 @@ namespace InitialProject.APPLICATION.UseCases
             {
                 LeastPopularLocation leastPopularLocation = new LeastPopularLocation(accommodation, false, false, true);
                 leastPopularLocations.Add(leastPopularLocation);
-
             }
             return leastPopularLocations;
         }
 
         private void MakeLeastPopularList(List<LeastPopularLocation> leastPopularLocations, List<KeyValuePair<int, int>> locationListByReservationNumber, List<KeyValuePair<int, double>> locationListByBusinest, Owner owner)
         {
-            Location locationByReservationNumber = locationService.GetById(locationListByReservationNumber[0].Key);
-            foreach (var accommodation in GetAccommodationsByLocationId(locationListByReservationNumber[0].Key, owner))
+            int numberOfLocations = locationListByReservationNumber.Count;
+            Location locationByReservationNumber = locationService.GetById(locationListByReservationNumber[numberOfLocations-1].Key);
+            foreach (var accommodation in GetAccommodationsByLocationId(locationListByReservationNumber[numberOfLocations-1].Key, owner))
             {
                 LeastPopularLocation leastPopularLocation = new LeastPopularLocation(accommodation, true, false, false);
                 leastPopularLocations.Add(leastPopularLocation);
-
             }
 
-            Location locationByBusinest = locationService.GetById(locationListByBusinest[0].Key);
-            foreach (var accommodation in GetAccommodationsByLocationId(locationListByReservationNumber[0].Key, owner))
+            Location locationByBusinest = locationService.GetById(locationListByBusinest[numberOfLocations-1].Key);
+            foreach (var accommodation in GetAccommodationsByLocationId(locationListByBusinest[numberOfLocations-1].Key, owner))
             {
                 LeastPopularLocation leastPopularLocation = new LeastPopularLocation(accommodation, false, true, false);
                 leastPopularLocations.Add(leastPopularLocation);
-
             }
         }
         private void CalculateReservationNumber(Dictionary<int, int> locations, Accommodation accommodation)

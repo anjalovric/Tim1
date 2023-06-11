@@ -218,6 +218,8 @@
 
     <None Remove="Resources\Images\part.png" />
 
+    <None Remove="Resources\Images\parts.png" />
+
     <None Remove="Resources\Images\pdf.png" />
 
     <None Remove="Resources\Images\picture.png" />
@@ -453,6 +455,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\part.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\parts.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\pdf.png">

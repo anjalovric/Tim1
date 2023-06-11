@@ -228,6 +228,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             }
             TourReservation newTourReservation = new TourReservation(CurrentTourInstance.Id, GuestsNumber, GuestId, Convert.ToDouble(Age), Convert.ToInt32(Capacity), withVoucher);
             tourReservationRepository.Save(newTourReservation);
+            MessageBox.Show("Tour is reserved.");
             Application.Current.Windows.OfType<TourReservationFormView>().FirstOrDefault().Close();
         }
         private Boolean IsTourAvailable()

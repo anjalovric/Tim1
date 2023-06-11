@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:InitialProject.WPF.Views.OwnerViews"
         mc:Ignorable="d"
         Title="Demo" Height="200" Width="300" AllowsTransparency="True" Background="Transparent" WindowStyle="None" WindowStartupLocation="CenterOwner">
-    <Border BorderBrush="LightGray" BorderThickness="0.5" CornerRadius="20" Background="White">
+    <Border BorderBrush="Black" BorderThickness="0.5" CornerRadius="20" Background="White">
         <Grid>
             <TextBlock Text="Demo mode for this page&#x0a;is finished!" Foreground="Red" FontWeight="Bold" VerticalAlignment="Center" FontSize="15" HorizontalAlignment="Center" Padding="10, 0,0,0"/>
             <Image Source="/Resources/Images/demoOff.png" HorizontalAlignment="Left" Height="56" Margin="170,119,0,0" VerticalAlignment="Top" Width="79"/>

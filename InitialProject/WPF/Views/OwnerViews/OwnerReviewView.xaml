@@ -18,7 +18,7 @@
             <RowDefinition Height="0.3*"/>
             <RowDefinition Height="0.2*"/>
             <RowDefinition Height="0.2*"/>
-            <RowDefinition Height="0.4*"/>
+            <RowDefinition Height="0.5*"/>
             <RowDefinition Height="0.2*"/>
             <RowDefinition />
             <RowDefinition />
@@ -30,8 +30,8 @@
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="100"/>
                     </Style>
-                        <Style TargetType="Button" BasedOn="{StaticResource CancelButton}">
-                        </Style>
+                    <Style TargetType="Button" BasedOn="{StaticResource CancelButton}">
+                    </Style>
                 </Button.Resources>
             </Button>
             <Label Content="Review" Foreground="LightGray" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" RenderTransformOrigin="0,0.401" Width="134" Height="28" VerticalContentAlignment="Center">
@@ -41,8 +41,8 @@
 
         <Label Content="{Binding Path=OwnerReview.Reservation.Guest, Mode=OneWay}" VerticalContentAlignment="Center" Grid.Row="1" Grid.Column="0" FontSize="15" FontWeight="SemiBold" HorizontalAlignment="Left" Width="250" Margin="20,0,0,20" Grid.ColumnSpan="2" />
         <TextBlock Padding="3, 0, 0, 0" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center" TextWrapping="Wrap" Margin="20,0,20,0" >
-        <Run Text="Accommodation: " />
-        <Run Text="{Binding Path= OwnerReview.Reservation.Accommodation.Name}" />
+        <Run Text="Accommodation:        " />
+        <Run Text="{Binding Path= OwnerReview.Reservation.Accommodation.Name}"/>
         </TextBlock>
         <Grid Grid.Column="0" Grid.Row="3" Margin="20,0,29,0" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
@@ -50,7 +50,7 @@
                 <ColumnDefinition Width="96*" />
             </Grid.ColumnDefinitions>
             <Label Content="Date:" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Margin="-2, 0, 0, 0" Grid.Column="0"/>
-            <Grid Grid.Column="1">
+            <Grid Grid.Column="1" Margin="27,0,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />
@@ -60,13 +60,13 @@
                 </Grid.RowDefinitions>
                 <Image  Grid.Column="1" Grid.Row="0" Source="/Resources/Images/calendarIcon.png"  HorizontalAlignment="Right" Width="21" >
                 </Image>
-                <Border Grid.Column="0" BorderBrush="DarkGray" BorderThickness="0.5" Height="33" VerticalAlignment="Center" Margin="10,0,26,0" Grid.ColumnSpan="2">
-                    <TextBlock Text="{Binding Path=Arrival}" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="0,3, 0, 0" Height="25" Width="146" Margin="10,0,0,0"/>
+                <Border Grid.Column="0" BorderBrush="DarkGray" BorderThickness="0.5" Height="31" VerticalAlignment="Center" Margin=" 5,0,26,0" Grid.ColumnSpan="2">
+                    <TextBlock Text="{Binding Path=Arrival}" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="0,3, 0, 0" Height="25" Width="146" Margin="5,0,0,0"/>
                 </Border>
             </Grid>
         </Grid>
-        <TextBlock Padding="3, 0, 0, 0" HorizontalAlignment="left" Grid.Row="4" TextWrapping="Wrap" Margin="20,0,0,49" Grid.RowSpan="2" Width="176" VerticalAlignment="Center"><Run Text="Cleanliness: " /><Run Text=" "/><Run Text="{Binding OwnerReview.Cleanliness}" FontWeight="SemiBold" FontSize="15"/></TextBlock>
-        <TextBlock HorizontalAlignment="Left" Grid.Row="4" Grid.Column="1" TextWrapping="Wrap" Padding="3, 0, 0, 0" Margin="0,0,0,49" Grid.RowSpan="2" Width="186" VerticalAlignment="Center"><Run Text="Owner's correctness: " /><Run Text=" "/><Run Text="{Binding OwnerReview.Correctness}" FontWeight="SemiBold" FontSize="15" /></TextBlock>
+        <TextBlock Padding="3, 0, 0, 0" HorizontalAlignment="Left" Grid.Row="4" TextWrapping="Wrap" Margin="20,11,0,0" Grid.RowSpan="2" Width="185" VerticalAlignment="Top"><Run Text="Cleanliness:     " /><Run Text="             "/><Run Text="{Binding OwnerReview.Cleanliness}" FontWeight="SemiBold" FontSize="15"/></TextBlock>
+        <TextBlock HorizontalAlignment="Left" Grid.Row="4" TextWrapping="Wrap" Padding="3, 0, 0, 0" Margin="19,41,0,0" Grid.RowSpan="2" Width="186" VerticalAlignment="Top"><Run Text="Owner's correctness: " /><Run Text="   "/><Run Text="{Binding OwnerReview.Correctness}" FontWeight="SemiBold" FontSize="15" /></TextBlock>
         <Label Content="Comment:"  HorizontalAlignment="Left" Grid.Row="5" Grid.ColumnSpan="2" Width="350" Margin="18,0,0,5"/>
         <Border Background="White" BorderBrush="DarkGray" BorderThickness="1" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Margin="20,30,20,29" Grid.RowSpan="2">
             <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding Path=OwnerReview.Comment}" Width="370" Margin="0,-1,0,10"/>

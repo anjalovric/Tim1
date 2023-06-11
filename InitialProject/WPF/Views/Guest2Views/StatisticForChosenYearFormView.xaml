@@ -7,7 +7,7 @@
         xmlns:l="clr-namespace:InitialProject.Help"
         mc:Ignorable="d"
         Loaded="Page_Loaded"
-        Title="StatisticForChoosenYear"  d:DesignHeight="400" d:DesignWidth="500" Width="500" Height="400" WindowStartupLocation="CenterScreen" WindowStyle="None" l:ShowToursHelp.HelpKey="statisticForChosenYear">
+        Title="StatisticForChoosenYear"  d:DesignHeight="600" d:DesignWidth="600" Width="600" Height="600" WindowStartupLocation="CenterScreen" WindowStyle="None" l:ShowToursHelp.HelpKey="statisticForChosenYear" Background="Transparent" AllowsTransparency="True">
     <Window.InputBindings>
         <KeyBinding Key="F1" Command="{Binding HelpCommandInViewModel}" />
     </Window.InputBindings>
@@ -15,42 +15,63 @@
         <Style x:Key="FontStyle" TargetType="TextBlock">
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="TextWrapping" Value="Wrap"/>
-            <Setter Property="Background" Value="#0C3B2E"/>
-            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="Black"/>
         </Style>
         <Style x:Key="TextStyle" TargetType="TextBlock">
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="TextAlignment" Value="Center"/>
             <Setter Property="FontSize" Value="30"/>
-            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Foreground" Value="Black"/>
         </Style>
     </Window.Resources>
-    <Grid Background="#0C3B2E">
-        <Border BorderBrush="#6d9773" BorderThickness="2,2,2,2" Margin="57,114,251,171" CornerRadius="25,25,25,25"/>
-        <TextBlock Text="PERCENT OF ACCEPTED REQUESTS" Margin="90,124,267,218" Style="{StaticResource FontStyle}"/>
-        <Border BorderBrush="#6d9773" BorderThickness="2,2,2,2" Margin="57,251,51,45" CornerRadius="25,25,25,25"/>
-        <TextBlock Text="PERCENT OF INVALID REQUESTS" Margin="300,124,69,218" Style="{StaticResource FontStyle}"/>
-        <Border BorderBrush="#6d9773" BorderThickness="2,2,2,2" Margin="266,113,51,171" CornerRadius="25,25,25,25"/>
-        <TextBlock Text="AVERAGE NUMBER OF PEOPLE IN ACCEPTED REQUESTS" Margin="90,261,91,88" Style="{StaticResource FontStyle}"/>
-        <TextBlock TextWrapping="Wrap" Margin="90,164,276,183" Text="{Binding acceptedRequest}" Style="{StaticResource TextStyle}"/>
-        <TextBlock TextWrapping="Wrap" Margin="296,164,74,183" Text="{Binding invalidRequest}" Style="{StaticResource TextStyle}"/>
-        <TextBlock Margin="184,287,184,65" Text="{Binding averageNumberOfPeople}" Style="{StaticResource TextStyle}"/>
-        <Label Content="STATISTICS FOR" Margin="92,34,94,292" Foreground="White" FontWeight="Bold" FontSize="30"/>
-        <Label Content="{Binding Path=chosenYear}" Margin="322,34,30,292" Foreground="White" FontWeight="Bold" FontSize="30"/>
-        <Button HorizontalAlignment="Left" Background="#0C3B2E" BorderBrush="#0C3B2E" VerticalAlignment="Top"  Height="29" Width="39" FontWeight="Bold" FontSize="18" Command="{Binding CloseCommand}" Margin="451,44,0,0">
+    <Border BorderThickness="4" Padding="6" CornerRadius="25" BorderBrush="White" Background="White" >
+        <Grid Background="White">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="9*"/>
+                <ColumnDefinition Width="281*"/>
+            </Grid.ColumnDefinitions>
+            <Border BorderBrush="Black" BorderThickness="2,2,2,2" Margin="39,114,300,280" CornerRadius="25,25,25,25" Grid.Column="1"/>
+            <TextBlock Text="PERCENT OF ACCEPTED REQUESTS" Margin="72,124,326,425" Style="{StaticResource FontStyle}" Grid.Column="1"/>
+            <Border BorderBrush="Black" BorderThickness="2,2,2,2" Margin="39,343,51,88" CornerRadius="25,25,25,25" Grid.Column="1"/>
+            <TextBlock Text="PERCENT OF INVALID REQUESTS" Margin="332,124,69,425" Style="{StaticResource FontStyle}" Grid.Column="1"/>
+            <Border BorderBrush="Black" BorderThickness="2,2,2,2" Margin="290,113,51,280" CornerRadius="25,25,25,25" Grid.Column="1"/>
+            <TextBlock Text="AVERAGE NUMBER OF PEOPLE IN ACCEPTED REQUESTS" Margin="74,363,91,200" Style="{StaticResource FontStyle}" Grid.Column="1"/>
+            <TextBlock TextWrapping="Wrap" Margin="88,200,342,290" Text="{Binding acceptedRequest}" Style="{StaticResource TextStyle}" Grid.Column="1"/>
+            <TextBlock TextWrapping="Wrap" Margin="343,200,98,290" Text="{Binding invalidRequest}" Style="{StaticResource TextStyle}" RenderTransformOrigin="0.576,0.619" Grid.Column="1">
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform AngleY="-0.341"/>
+                        <RotateTransform/>
+                        <TranslateTransform Y="0.639"/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+            <TextBlock Margin="166,400,184,117" Text="{Binding averageNumberOfPeople}" Style="{StaticResource TextStyle}" Grid.Column="1"/>
+            <Label Content="STATISTICS FOR" Margin="74,34,236,491" Foreground="Black" FontWeight="Bold" FontSize="30" Grid.Column="1"/>
+            <Label Content="{Binding Path=chosenYear}" Margin="311,34,30,492" Foreground="Black" FontWeight="Bold" FontSize="30" Grid.Column="1"/>
+            <Button HorizontalAlignment="Left" Background="White" BorderBrush="#0C3B2E" VerticalAlignment="Top"  Height="34" Width="132" FontWeight="Bold" FontSize="18" Command="{Binding CloseCommand}" Margin="397,542,0,0" Grid.Column="1">
 
-            <Grid Background="#0C3B2E" Width="30" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="16*"/>
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Cursor" Value="Hand"/>
+                    </Style>
+                </Button.Style>
+                <Grid Width="90" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="16*"/>
+                        <RowDefinition Height="19*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="/Resources/Images/close.png" VerticalAlignment="Top" HorizontalAlignment="Left" Width="20" Height="20" RenderTransformOrigin="0.5,0.5" Margin="0,6,0,0" Grid.RowSpan="2"/>
+                    <TextBlock Foreground="Black" Text="Close" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" HorizontalAlignment="Left" Width="68" Height="28" Margin="25,2,0,0" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
+                </Grid>
 
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <Image Source="/Resources/Images/close.png" VerticalAlignment="Center" HorizontalAlignment="Left" Width="28" Height="30"  Margin="1,0,0,0"/>
-
-            </Grid>
-
-        </Button>
-    </Grid>
+            </Button>
+        </Grid>
+    </Border>
 </Window>

@@ -26,7 +26,7 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Border Grid.Column="0" Grid.Row="0" Margin="10, 10, 30, 10" BorderBrush="LightGray" BorderThickness="0, 0, 0, 0.5">
-                    <Label VerticalContentAlignment="Bottom" HorizontalContentAlignment="Left" Content="{Binding Path=Accommodation.Name}" Foreground="LightGray" FontSize="13" FontWeight="SemiBold"/>
+                    <Label VerticalContentAlignment="Bottom" HorizontalContentAlignment="Left" Content="{Binding Path=Accommodation.Name}" Foreground="LightGray" FontSize="15" FontWeight="SemiBold"/>
                 </Border>
                 <Border Grid.Column="0" Grid.Row="1" Margin="10, 10, 30, 35" BorderBrush="LightGray" BorderThickness="0, 0, 0, 0.5">
                     <Label VerticalContentAlignment="Bottom" HorizontalContentAlignment="Left" Content="{Binding Path=Accommodation.Location}" Foreground="LightGray" FontSize="13"/>
@@ -41,7 +41,7 @@
                         <RowDefinition />
                     </Grid.RowDefinitions>
                     <Image Source="/Resources/Images/star.png" Grid.Column="0" Grid.Row="0" Height="30" VerticalAlignment="Bottom"/>
-                    <Label Foreground="LightGray" Content="Busiest year" Grid.Column="1"  Grid.Row="0" VerticalContentAlignment="Bottom" />
+                    <Label Foreground="LightGray" Content="Busiest year" FontSize="13" Grid.Column="1"  Grid.Row="0" VerticalContentAlignment="Bottom" />
                     <Label Foreground="LightGray" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" FontSize="32" FontWeight="Bold">
                         <Label.Style>
                             <Style TargetType="Label">

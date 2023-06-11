@@ -248,7 +248,7 @@
         </DataGrid>
         <ComboBox x:Name="cityInput" Grid.Column="1"  BorderBrush="#7166f9" BorderThickness="3,3,3,3" ItemsSource="{Binding CitiesByCountry}" SelectedItem="{Binding City}" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" HorizontalAlignment="Center" Margin="0,130,0,0" VerticalAlignment="Top" Width="134" Height="22" IsEnabled="{Binding IsComboBoxCityEnabled}"  l:ShowToursHelp.HelpKey="showTours"/>
 
-        <TextBox x:Name="durationInput" Grid.Column="1" Background="LightGray"  Style="{StaticResource BorderStyle}" HorizontalAlignment="Left" Margin="414,130,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="143" Height="22" RenderTransformOrigin="0.496,0.294" Grid.ColumnSpan="2" l:ShowToursHelp.HelpKey="duration">
+        <TextBox x:Name="durationInput" Grid.Column="1" Background="LightGray"  Style="{StaticResource BorderStyle}" HorizontalAlignment="Left" Margin="414,130,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="143" Height="22" RenderTransformOrigin="0.496,0.294" Grid.ColumnSpan="2" l:ShowToursHelp.HelpKey="showTours">
 
             <TextBox.Text>
                 <Binding Path="Duration" UpdateSourceTrigger="PropertyChanged">

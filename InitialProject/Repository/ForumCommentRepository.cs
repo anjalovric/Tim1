@@ -59,7 +59,7 @@ namespace InitialProject.Repository
         public void Report(ForumComment comment)
         {
             ForumComment commentToReport = _comments.Find(n => n.Id == comment.Id);
-            commentToReport.ReportsNumber++;
+            commentToReport.ReportsNumber = comment.ReportsNumber;
             _serializer.ToCSV(FilePath, _comments);
         }
 

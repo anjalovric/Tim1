@@ -24,7 +24,7 @@ namespace InitialProject.ReportPatterns
         {
             Font = new PdfStandardFont(PdfFontFamily.Helvetica, 9);
             StringBuilder stringBuilder1 = new StringBuilder("Owner " + owner.ToString() + " has " + accommodations.Count
-                + " accommodations registrated in My Travel system. Average grade for Owner by all categoriesis " + reportService.GetAverageRate(owner) + " and");
+                + " accommodations registrated in My Travel system. Average grade for owner by all categories " + reportService.GetAverageRate(owner) + " and");
             StringBuilder stringBuilder2 = new StringBuilder("total number of reviews made by guests is "+ reportService.GetNumberOfReviews(owner) + ".");
             Graphics.DrawString(stringBuilder1.ToString(), Font, PdfBrushes.Black, new PointF(0, 250 + numberOfLines*10));
             Graphics.DrawString(stringBuilder2.ToString(), Font, PdfBrushes.Black, new Point(0, 260 + numberOfLines*10));
@@ -66,7 +66,7 @@ namespace InitialProject.ReportPatterns
         public override void GenerateTitle()
         {
             Font = new PdfStandardFont(PdfFontFamily.Helvetica, 20);
-            Graphics.DrawString("Average Owner grade report", Font, PdfBrushes.Black, new PointF(170, 100));
+            Graphics.DrawString("Average Owner grade report", Font, PdfBrushes.Black, new PointF(130, 100));
         }
 
         public override void SavePdf()

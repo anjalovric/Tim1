@@ -35,9 +35,9 @@
                     </Image>
                     <TextBlock Grid.Row="0" Grid.Column="1" VerticalAlignment="Center">
                         <Run Text="Location: "/>
-                        <Run Text="{Binding Path=Forum.Location.City}" FontSize="15" FontWeight="SemiBold"/>
+                        <Run Text="{Binding Path=Forum.Location.City}" FontSize="15"/>
                         <Run Text=", " FontSize="15"/>
-                        <Run Text="{Binding Path=Forum.Location.Country}" FontSize="15" FontWeight="SemiBold"/>
+                        <Run Text="{Binding Path=Forum.Location.Country}" FontSize="15"/>
                     </TextBlock>
                     <Image Source="/Resources/Images/star.png" Height="20" Width="20" Grid.Column="2" >
                         <Image.Style>
