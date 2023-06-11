@@ -273,6 +273,8 @@
                             <Setter Property="FontWeight" Value="Bold"/>
                             <Setter Property="FontFamily" Value="Yu Gothic"/>
                             <Setter Property="Foreground" Value="Black"/>
+                            <Setter Property="Cursor" Value="Hand"></Setter>
+
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
@@ -325,6 +327,8 @@
                             <Setter Property="FontWeight" Value="Bold"/>
                             <Setter Property="FontFamily" Value="Yu Gothic"/>
                             <Setter Property="Foreground" Value="Black"/>
+                            <Setter Property="Cursor" Value="Hand"></Setter>
+
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">

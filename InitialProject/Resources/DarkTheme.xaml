@@ -45,6 +45,7 @@
         <Setter Property="BorderBrush" Value="{StaticResource InnerBlue}"/>
         <Setter Property="FontWeight" Value="Bold"/>
         <Setter Property="FontFamily" Value="Yu Gothic"/>
+        <Setter Property="Cursor" Value="Hand"></Setter>
     </Style>
     <Style x:Key="Tab" TargetType="TabItem">
         <Setter Property="Background" Value="{StaticResource RoyalBlue}"/>
@@ -145,6 +146,7 @@
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="Background" Value="{StaticResource MenuBlue}"/>
+        <Setter Property="Cursor" Value="Hand"></Setter>
         </Style>
         <!--HEADER-->
         <Style x:Key="Header" TargetType="Label">
@@ -292,6 +294,7 @@
             <Setter Property="BorderBrush" Value="{StaticResource CalendarBlue}"/>
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="FontFamily" Value="Yu Gothic"/>
+        <Setter Property="Cursor" Value="Hand"></Setter>
         </Style>
 
     <Style x:Key="Run1" TargetType="Run">
@@ -392,6 +395,7 @@
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="FontFamily" Value="Yu Gothic"/>
             <Setter Property="Foreground" Value="white"/>
+        <Setter Property="Cursor" Value="Hand"></Setter>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">

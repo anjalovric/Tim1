@@ -17,10 +17,10 @@
                 </StackPanel>
                 <DockPanel  Width="500" HorizontalAlignment="Left">
                     <Menu DockPanel.Dock="Top" Width="500" Height="40" HorizontalAlignment="Left" Style="{DynamicResource Menu}">
-                        <MenuItem Header="{ns:Loc Home}"  Height="33" Width="100"  Command="{Binding HomeCommand}" >
+                        <MenuItem Header="{ns:Loc Home}"  Height="33" Width="100"  Command="{Binding HomeCommand}" Cursor="Hand" >
 
                         </MenuItem>
-                        <MenuItem Header="{ns:Loc Tours}" Height="33" Width="100" >
+                        <MenuItem Header="{ns:Loc Tours}" Height="33" Width="100" Cursor="Hand" >
                             <MenuItem Header="{ns:Loc Add}" Height="33" Width="150"  Command="{Binding AddCommand}" Style="{DynamicResource MenuItem}">
                                 <MenuItem.Icon>
                                     <Image Source="/Resources/Images/add.png" Stretch="Fill"/>
@@ -40,7 +40,7 @@
 
                             </MenuItem>
                         </MenuItem>
-                        <MenuItem Header="{ns:Loc Statistics}" Height="33" Width="100"  >
+                        <MenuItem Header="{ns:Loc Statistics}" Height="33" Width="100" Cursor="Hand" >
                             <MenuItem Header="{ns:Loc Tours}" Height="33" Width="160" Command="{Binding TourStatisticsCommand}" Style="{DynamicResource MenuItem}">
                                 <MenuItem.Icon>
                                     <Image Source="/Resources/Images/tour.jpg"/>
@@ -52,10 +52,10 @@
                                 </MenuItem.Icon>
                             </MenuItem>
                         </MenuItem>
-                        <MenuItem Header="{ns:Loc Reviews}" Height="33" Width="100"  Command="{Binding ReviewCommand}">
+                        <MenuItem Header="{ns:Loc Reviews}" Height="33" Width="100"  Command="{Binding ReviewCommand}" Cursor="Hand">
 
                         </MenuItem>
-                        <MenuItem Header="{ns:Loc Requests}" Height="33" Width="100"  >
+                        <MenuItem Header="{ns:Loc Requests}" Height="33" Width="100" Cursor="Hand"  >
                             <MenuItem Header="{ns:Loc Regular}" Height="33" Width="150" Command="{Binding OrdinaryRequestCommand}" Style="{DynamicResource MenuItem}">
                                 <MenuItem.Icon>
                                     <Image Source="/Resources/Images/RR.png"/>
