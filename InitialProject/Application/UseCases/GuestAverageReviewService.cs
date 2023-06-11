@@ -80,7 +80,7 @@ namespace InitialProject.Service
             List<double> averageRatings = new List<double>();
             foreach(GuestReview review in reviewsByMonth)
             {
-                averageRatings.Add((review.Cleanliness + review.RulesFollowing) / 2);
+                averageRatings.Add((review.Cleanliness + review.RulesFollowing) / 2.0);
             }
             if (averageRatings.Count == 0)
                 return 0;
