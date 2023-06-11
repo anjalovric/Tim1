@@ -26,7 +26,7 @@ namespace InitialProject.Repository
 
         public List<CommentReport> GetAll()
         {
-            return reports;
+            return _serializer.FromCSV(FilePath);
         }
 
         public int NextId()
@@ -40,17 +40,20 @@ namespace InitialProject.Repository
         }
         public void Add(CommentReport report)
         {
+            List<CommentReport> reports = new List<CommentReport>(_serializer.FromCSV(FilePath));
             reports.Add(report);
             _serializer.ToCSV(FilePath, reports);
         }
 
         public void Delete(CommentReport report)
         {
+            List<CommentReport> reports = new List<CommentReport>(_serializer.FromCSV(FilePath));
             CommentReport reportForDeleting = reports.Find(n => n.Owner.Id == report.Owner.Id && n.ForumComment.Id == report.ForumComment.Id);
             if(reportForDeleting != null)
             {
                 reports.Remove(reportForDeleting);
             }
+            _serializer.ToCSV(FilePath, reports);
         }
         public CommentReport GetById(int id)
         {
@@ -59,12 +62,12 @@ namespace InitialProject.Repository
 
         public bool IsAlreadyReported(Owner owner, ForumComment comment)
         {
-            return reports.Find(n => n.Owner.Id == owner.Id && n.ForumComment.Id == comment.Id) != null;
+            return _serializer.FromCSV(FilePath).Find(n => n.Owner.Id == owner.Id && n.ForumComment.Id == comment.Id) != null;
         }
 
         public int GetReportNumber(ForumComment comment)
         {
-            return reports.FindAll(n => n.ForumComment.Id == comment.Id).Count();
+            return _serializer.FromCSV(FilePath).FindAll(n => n.ForumComment.Id == comment.Id).Count();
         }
     }
 }

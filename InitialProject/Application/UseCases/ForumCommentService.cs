@@ -119,6 +119,7 @@ namespace InitialProject.APPLICATION.UseCases
         public int GetNumberOfOwnerComments(Forum forum)
         {
             List<ForumComment> forumComments = forumCommentRepository.GetAllByForumId(forum.Id);
+            SetUsers(forumComments);
             int total = 0;
             foreach (ForumComment comment in forumComments)
             {

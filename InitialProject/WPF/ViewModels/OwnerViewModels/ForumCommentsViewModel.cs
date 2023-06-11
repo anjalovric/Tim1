@@ -38,7 +38,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             Owner = owner;
             SelectedComment = new ForumComment();
             MakeComments();
-            ReportCommand = new RelayCommand(Report_Executed, CanExecute);
+            ReportCommand = new RelayCommand(Report_Executed, ReportCanExecute);
             NewCommentCommand = new RelayCommand(NewComment_Executed, CanExecute);
             OKCommand = new RelayCommand(OK_Executed, CanExecute);
             DisplayNotificationPanel();
@@ -141,6 +141,11 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         private bool CanExecute(object sender)
         {
             return true;
+        }
+
+        private bool ReportCanExecute(object sender)
+        {
+            return Forum.OwnerHasLocation;
         }
         private void Report_Executed(object sender)
         {

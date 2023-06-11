@@ -69,10 +69,10 @@
                                     <DataTrigger Binding="{Binding IsAlreadyReportedByThisOwner, UpdateSourceTrigger=PropertyChanged}" Value="True">
                                         <Setter Property="IsEnabled" Value="False"/>
                                     </DataTrigger>
-                                    <DataTrigger Binding="{Binding OwnerHasLocation, UpdateSourceTrigger=PropertyChanged}" Value="True">
+                                    <DataTrigger Binding="{Binding Path=DataContext.Forum.OwnerHasLocation, UpdateSourceTrigger=PropertyChanged}" Value="False">
                                         <Setter Property="IsEnabled" Value="False"/>
                                     </DataTrigger>
-                                    <DataTrigger Binding="{Binding WasOnLocation, UpdateSourceTrigger=PropertyChanged}" Value="True">
+                                    <DataTrigger Binding="{Binding WasOnLocation, UpdateSourceTrigger=PropertyChanged}" Value="False">
                                         <Setter Property="IsEnabled" Value="False"/>
                                     </DataTrigger>
                                 </Style.Triggers>
