@@ -121,7 +121,7 @@ namespace InitialProject.Service
         }  
         public DateTime GetProlongActivationDate(Guest1 guest1, DateTime activationDate)
         {
-            List<AccommodationReservation> completedReservations = reservations.FindAll(n => n.Guest.Id == guest1.Id && n.Departure > activationDate && n.Departure <= activationDate.AddYears(1));//number of reservations in next year from activationDate
+            List<AccommodationReservation> completedReservations = reservations.FindAll(n => n.Guest.Id == guest1.Id && n.Departure > activationDate && n.Departure <= activationDate.AddYears(1) && n.Departure <= DateTime.Now);//number of reservations in next year from activationDate
             int counter = completedReservations.Count;
             if(counter >= 10)
             {
